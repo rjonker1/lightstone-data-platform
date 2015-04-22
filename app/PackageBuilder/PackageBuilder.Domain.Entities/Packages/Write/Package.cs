@@ -164,14 +164,15 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
             var dataProviderNames = package.DataProviders.Select(s => s.Name).ToArray();
 
-            var request = new LicensePlateRequest(
-                new User(userId, userName, firstName),new Vehicle(string.Empty,searchTerm,string.Empty,string.Empty,string.Empty,string.Empty),
-                new Contract(contractVersion, accountNumber, contractId),
-                new RequestPackage("License plate search", dataProviderNames, package.Id, package.Name, (long)package.DisplayVersion),
-                new RequestContext(requestId,fromDevice,fromIpAddress,osVersion,system),
-                DateTime.UtcNow);
+            //var request = new LicensePlateRequest(
+            //    new User(userId, userName, firstName),new Vehicle(string.Empty,searchTerm,string.Empty,string.Empty,string.Empty,string.Empty),
+            //    new Contract(contractVersion, accountNumber, contractId),
+            //    new RequestPackage("License plate search", dataProviderNames, package.Id, package.Name, (long)package.DisplayVersion),
+            //    new RequestContext(requestId,fromDevice,fromIpAddress,osVersion,system),
+            //    DateTime.UtcNow);
 
-            return request;
+            //return request;
+            return null;
         }
 
         private IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders)

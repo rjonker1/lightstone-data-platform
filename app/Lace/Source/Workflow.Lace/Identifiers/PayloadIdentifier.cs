@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Workflow.Lace.Identifiers
 {
+    [Serializable]
     [DataContract]
     public class PayloadIdentifier
     {

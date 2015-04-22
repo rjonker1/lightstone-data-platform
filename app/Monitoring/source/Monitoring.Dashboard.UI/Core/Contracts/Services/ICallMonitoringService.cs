@@ -5,6 +5,7 @@ namespace Monitoring.Dashboard.UI.Core.Contracts.Services
 {
     public interface ICallMonitoringService
     {
-        IEnumerable<MonitoringDataProviderView> GetMonitoringForDataProviders();
+        IEnumerable<DataProviderView> GetMonitoringForDataProviders();
+        IEnumerable<DataProviderStatisticsView> GetDataProviderStatistics();
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
+using Lace.Shared.Extensions;
 using Monitoring.Domain;
 using Monitoring.Domain.Identifiers;
 using Monitoring.Domain.Repository;
 using NServiceBus;
-using Shared.BuildingBlocks.AdoNet.Repository;
 using Workflow.Billing.Messages;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Events;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Workflow.Transactions.Read.Service.Handlers
 {
@@ -45,7 +46,8 @@ namespace Workflow.Transactions.Read.Service.Handlers
         {
             var response =
                 new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(Guid.NewGuid(), message.Date,
-                    new SearchIdentifier(message.RequestContext.Type, message.RequestContext.SearchTerm, message.Payload.MetaData,
+                    new SearchIdentifier(message.RequestContext.Type, message.RequestContext.SearchTerm,
+                        message.Payload.MetaData.JsonToObject<StopWatchResults>().ElapsedTime.ToString(),
                         message.RequestId, "Lace"),
                     new MonitoringActionIdentifier(DataProviderAction.Response.ToString())));
             _monitoring.Add(response);

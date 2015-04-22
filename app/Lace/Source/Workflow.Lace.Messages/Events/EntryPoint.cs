@@ -6,7 +6,7 @@ using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Events
 {
-    
+    [Serializable]
     [DataContract]
     public class EntryPointReceivedRequest : IPublishableMessage
     {
@@ -20,12 +20,12 @@ namespace Workflow.Lace.Messages.Events
         public DateTime Date { get; private set; }
 
         [DataMember]
-        public PayloadIdentifier Payload { get; private set; }
+        public PayloadObjectIdentifier Payload { get; private set; }
 
         [DataMember]
         public SearchRequestIndentifier Request { get; private set; }
 
-        public EntryPointReceivedRequest(Guid id, DateTime date, Guid requestId, PayloadIdentifier payload,
+        public EntryPointReceivedRequest(Guid id, DateTime date, Guid requestId, PayloadObjectIdentifier payload,
             SearchRequestIndentifier request)
         {
             Id = id;
@@ -36,7 +36,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    
+    [Serializable]
     [DataContract]
     public class EntryPointReturnedResponse : IPublishableMessage
     {
@@ -50,7 +50,7 @@ namespace Workflow.Lace.Messages.Events
         public DateTime Date { get; private set; }
 
         [DataMember]
-        public PayloadIdentifier Payload { get; private set; }
+        public PayloadObjectIdentifier Payload { get; private set; }
 
         [DataMember]
         public StateIdentifier State { get; private set; }
@@ -58,7 +58,7 @@ namespace Workflow.Lace.Messages.Events
         [DataMember]
         public SearchRequestIndentifier RequestContext { get; private set; }
 
-        public EntryPointReturnedResponse(Guid id, Guid requestId, DateTime date, PayloadIdentifier payload,
+        public EntryPointReturnedResponse(Guid id, Guid requestId, DateTime date, PayloadObjectIdentifier payload,
             StateIdentifier state,SearchRequestIndentifier request)
         {
             Id = id;

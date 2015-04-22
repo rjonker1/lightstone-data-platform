@@ -63,7 +63,7 @@
     <Compile Include="Contracts\IAmRequesterPhoneRequestField.cs" />
     <Compile Include="Contracts\IAmRequestField.cs" />
     <Compile Include="Contracts\IAmRequestReferenceRequestField.cs" />
-    <Compile Include="Contracts\IAmDataProviderStandardIvidRequest.cs" />
+    <Compile Include="Contracts\IAmStandardIvidRequest.cs" />
     <Compile Include="Contracts\IAmVinField.cs" />
     <Compile Include="Contracts\IAmVinRequestField.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />

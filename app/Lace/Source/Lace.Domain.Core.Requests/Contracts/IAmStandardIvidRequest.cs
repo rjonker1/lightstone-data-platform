@@ -1,6 +1,6 @@
 ﻿namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IAmDataProviderStandardIvidRequest : IAmDataProviderRequest
+    public interface IAmStandardIvidRequest : IAmDataProviderRequest
     {
         IAmRequesterNameRequestField RequesterName { get; }
         IAmRequesterPhoneRequestField RequesterPhone { get; }

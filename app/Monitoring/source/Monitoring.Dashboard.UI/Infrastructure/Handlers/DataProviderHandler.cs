@@ -10,14 +10,14 @@ using Monitoring.Domain.Repository;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
 {
-    public class MonitoringHandler : IHandleMonitoringCommands
+    public class DataProviderHandler : IHandleMonitoringCommands
     {
         private readonly IMonitoringRepository _monitoring;
         private readonly ICommitRepository _commit;
         private readonly ILog _log;
-        public IEnumerable<MonitoringDataProviderView> MonitoringResponse { get; private set; }
+        public IEnumerable<DataProviderView> MonitoringResponse { get; private set; }
 
-        public MonitoringHandler(IMonitoringRepository monitoring, ICommitRepository commit)
+        public DataProviderHandler(IMonitoringRepository monitoring, ICommitRepository commit)
         {
             _monitoring = monitoring;
             _commit = commit;
@@ -29,18 +29,28 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             try
             {
                 var requests =
-                    _monitoring.Items<MonitoringDataProvider>(SelectStatements.GetDataProviderRequestResponses).ToList();
+                    _monitoring.Items<DataProvider>(SelectStatements.GetDataProviderRequestResponses).ToList();
 
-                var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForManyRequestId,
-                    new {@RequestIds = requests.FirstOrDefault().RequestId});
+                if (!requests.Any())
+                    return;
+
+                var payloads = new List<Commit>();
+
+                requests.ForEach(
+                    f =>
+                        payloads.AddRange(_commit.Items<Commit>(SelectStatements.GetCommitForRequestId,
+                            new {@RequestId = f.RequestId}).ToArray()));
+
+                //var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForRequestId,
+                //    new {@RequestIds = requests.FirstOrDefault().RequestId});
 
                 MonitoringResponse =
                     requests.Select(
                         s =>
-                            new MonitoringDataProviderView(s.RequestId, payloads
+                            new DataProviderView(s.RequestId, payloads
                                 .Where(f => f.StreamIdOriginal == s.RequestId.ToString())
                                 .Select(c => new SerializedPayload(c.Payload, c.CommitSequence)).ToList(), s.Date, false,
-                                s.ElapsedTime, s.SearchType, s.SearchTerm).GetResults().DeserializePayload());
+                                s.ElapsedTime, s.SearchType, s.SearchTerm).DeserializePayload());
             }
             catch (Exception ex)
             {

@@ -5,7 +5,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders
 {
     public interface IProvideDataFromIvid : IPointToLaceProvider
     {
-        IAmDataProviderStandardIvidRequest Request { get; }
+        IAmStandardIvidRequest Request { get; }
         IProvideVehicleSpecificInformation SpecificInformation { get; }
 
         string StatusMessage { get; }

@@ -5,11 +5,11 @@ using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Events
 {
-    
+    [Serializable]
     [DataContract]
     public class ResponseFromDataProvider : IPublishableMessage
     {
-        public ResponseFromDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload)
+        public ResponseFromDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, PayloadObjectIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
@@ -35,7 +35,7 @@ namespace Workflow.Lace.Messages.Events
         public ConnectionTypeIdentifier Connection { get; private set; }
 
         [DataMember]
-        public PayloadIdentifier Payload { get; private set; }
+        public PayloadObjectIdentifier Payload { get; private set; }
 
     }
 }
