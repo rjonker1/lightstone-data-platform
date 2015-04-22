@@ -24,24 +24,24 @@ namespace Billing.Scheduler.Modules
             {
                 var runType = parameters.runType;
 
-                if (runType == "StageBilling") new MessageSchedule().Send(new BillingMessage() { RunType = runType });//bus.SendDynamic(new BillingMessage() {RunType = runType});
+                if (runType == "StageBilling") new MessageSchedule().Send(new BillingMessage() { RunType = runType });
                 
                 return Response.AsJson(new { data = "Required type: StageBilling" });
             };
 
             Post["/Schedules/BillingRun/Schedule/{runType}"] = parameters =>
             {
-                var runType = parameters.runType;
-                var dateTime = this.Request.Query["schedule_time"];
+                //var runType = parameters.runType;
+                //var dateTime = this.Request.Query["schedule_time"];
 
-                var test = DateTime.Now.AddMinutes(1);
-                var billRun = new BillingMessage()
-                {
-                    RunType = "Stage",
-                    Schedule = null
-                };
+                //var test = DateTime.Now.AddMinutes(1);
+                //var billRun = new BillingMessage()
+                //{
+                //    RunType = "Stage",
+                //    Schedule = null
+                //};
 
-                if (runType == "StageBilling") BackgroundJob.Schedule<MessageSchedule>(x => x.Send(billRun), test);
+                //if (runType == "StageBilling") BackgroundJob.Schedule<MessageSchedule>(x => x.Send(billRun), test);
 
                 return null;
             };
@@ -68,6 +68,7 @@ namespace Billing.Scheduler.Modules
         }
     }
 
+    //Class required to provide DI for TransactionBus functionality
     public class MessageSchedule
     {
         IAdvancedBus _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
