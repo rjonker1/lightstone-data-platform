@@ -54,15 +54,15 @@
                 </div>
             </div>
 
-            <div class="col-md-1"></div>
+            <!--<div class="col-md-1"></div>-->
 
             <div ng-show="provider.fieldLevelCostPriceOverride == true">
                 <label class="col-md-2">Cost:</label>
 
                 <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
-                       value="{{totalChildren(dataField, dataField.dataFields)}}" readonly/>
+                       value="{{totalChildren(dataField, dataField.dataFields)}}" readonly />
 
-                <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="dataField.price" readonly/>
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="dataField.price" readonly />
             </div>
         </div>
     </div>
@@ -99,9 +99,9 @@
                 <label class="col-md-2">Cost:</label>
 
                 <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
-                       value="{{totalChildren(dataField, dataField.dataFields)}}" readonly/>
+                       value="{{totalChildren(dataField, dataField.dataFields)}}" readonly />
 
-                <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="dataField.price" readonly/>
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="dataField.price" readonly />
             </div>
         </div>
     </div>
@@ -115,11 +115,8 @@
 
     <ol data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: !collapsed}">
         <li style="cursor:default; border: none;" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields">
-
-
             <div style="cursor:default" class=" angular-ui-tree-handle" data-nodrag>
                 <div style="margin-left: -15px; margin-right: 0;" class="row">
-
                     <div class="col-md-6">
                         <a ng-if="subDF.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                             <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
@@ -135,13 +132,12 @@
                         <label class="col-md-2">Cost:</label>
 
                         <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
-                               value="{{totalChildren(subDF, subDF.dataFields)}}" readonly/>
+                               value="{{totalChildren(subDF, subDF.dataFields)}}" readonly />
 
-                        <input ng-if="subDF.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="subDF.price" readonly/>
+                        <input ng-if="subDF.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="subDF.price" readonly />
                     </div>
                 </div>
             </div>
-
         </li>
     </ol>
 
@@ -156,9 +152,7 @@
                 <div class="widget wblue">
                     <div id="title" data-cc-widget-header title="{{title}}"></div>
                     <div class="widget-content user">
-
                         <div id="info" class="row">
-
                             <div id="1" class="col-lg-3 col-md-6">
                                 <div>
                                     <label>Name:</label>
@@ -179,6 +173,11 @@
                                         <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvsPkg.Package.description"></textarea>
                                     </div>
                                 </div>
+                                <br />
+                                <div>
+                                    <button type="button" class="btn btn-danger" style="margin-left: 0;" ng-click="cancel()">Cancel</button>
+                                    <button type="button" class="btn btn-success" ng-click="editPackage(dataProvsPkg.Package[0])">Save Package</button>
+                                </div>
                             </div>
 
                             <div id="2" class="col-lg-3 col-md-6">
@@ -187,7 +186,6 @@
                                     <div>
                                         <select id="state_selection" class="form-control" ng-model="dataProvsPkg.Package.state" ng-options="state.name for state in states">
                                             <!--<option ng-repeat="state in states" value="{{state.id}}">{{state.alias}}</option>-->
-
                                         </select>
                                     </div>
                                 </div>
@@ -249,63 +247,38 @@
                                     </div>
 
                                 </div>
-
-
+                            </div>
+                        </div> <!--End Info-->
+                        <br />
+                        <!-- DataProvider -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3>Data Providers</h3>
+                            </div>
+                            <div class="col-lg-12">
+                                <div ui-tree ng-model="dataProvsPkg">
+                                    <div ng-repeat="providers in dataProvsPkg.Package">
+                                        <ol ui-tree-nodes="" ng-model="providers">
+                                            <li ng-repeat="provider in providers" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
 
-
-                            <!-- DataProvider -->
-
-                            <div class="row">
-
-                                <div class="col-lg-4 col-md-6" style="padding-bottom: 20px;">
-                                    <div style="float: left;"><h3>Data Providers</h3></div>
+                            <!-- <div class="col-lg-6">
+                                <h3>Data binding</h3>
+                                <div class="info">
+                                    {{ info }}
                                 </div>
+                                <pre class="code">{{ dataProvsPkg | json }}</pre>
+                            </div>-->
 
-                                <div class="col-lg-4 col-md-8">
+                            <div class="col-lg-6">
+                                <div style="float: right;"></div>
 
-
-
-                                    <div ui-tree ng-model="dataProvsPkg">
-                                        <div ng-repeat="providers in dataProvsPkg.Package">
-                                            <ol ui-tree-nodes="" ng-model="providers">
-                                                <li ng-repeat="provider in providers" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
-                                            </ol>
-                                        </div>
-                                    </div>
-
-                                    <br />
-
-                                    <div style="float: right;">
-                                        <button id="btn_cancel" type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-                                        <button id="btn_save_package" type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)">Save Package</button>
-                                    </div>
-
-
-
-                                </div>
-
-                                <!-- <div class="col-lg-6">
-                                         <h3>Data binding</h3>
-                                         <div class="info">
-                                             {{ info }}
-                                         </div>
-                                         <pre class="code">{{ dataProvsPkg | json }}</pre>
-                                     </div>-->
-
-                                <div class="col-lg-6">
-                                    <div style="float: right;">
-
-
-
-
-                                    </div>
-
-                                </div>
-                            </div>  <!-- End DataProvider -->
-
-                        </div> <!--End Info-->
-
+                            </div>
+                        </div>
+                        <!-- End DataProvider -->
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>

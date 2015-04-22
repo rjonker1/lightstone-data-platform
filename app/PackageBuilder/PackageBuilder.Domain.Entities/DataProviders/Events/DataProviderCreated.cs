@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Core.Events;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
@@ -14,8 +15,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
         public readonly Type ResponseType;
         public readonly string Owner;
         public readonly DateTime CreatedDate;
+        public readonly IEnumerable<IAmRequestField> RequestFields;
         public readonly IEnumerable<IDataField> DataFields;
-        public DataProviderCreated(Guid id, DataProviderName name, string description, double costPrice, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> dataFields)
+        public DataProviderCreated(Guid id, DataProviderName name, string description, double costPrice, Type responseType, string owner, DateTime createdDate, IEnumerable<IAmRequestField> requestFields, IEnumerable<IDataField> dataFields)
         {
 			Id = id;
 			Name = name;
@@ -24,6 +26,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
             ResponseType = responseType;
             Owner = owner;
             CreatedDate = createdDate;
+            RequestFields = requestFields;
             DataFields = dataFields;
         }
     }

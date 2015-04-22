@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Entities.Requests;
+using Lace.Domain.Core.Entities.Requests.Fields;
 using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
@@ -15,15 +16,19 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
         {
             base.Observe();
 
-            _dataFields = Mapper.Map<IAmDataProviderRequest, IEnumerable<IAmRequestField>>(new IvidStandardRequest());
+            _dataFields =
+                Mapper.Map<IAmDataProviderRequest, IEnumerable<IAmRequestField>>(
+                    new IvidStandardRequest(new RequesterNameRequestField(), new RequesterPhoneRequestField(),
+                        new RequesterEmailRequestField(), new RequestReferenceRequestField(),
+                        new ApplicantNameRequestField(), new ReasonForApplicationRequestField(), new LabelRequestField(),
+                        new EngineNumberRequestField(), new RegisterNumberRequestField(),
+                        new LicenseNumberRequestField(), new MakeRequestField()));
         }
 
         [Observation]
         public void should_map_all_ivid_data_fields()
         {
-            _dataFields.Count().ShouldEqual(32);
-
-            
+            _dataFields.Count().ShouldEqual(11);
         }
     }
 }
