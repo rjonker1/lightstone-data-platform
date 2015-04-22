@@ -86,10 +86,17 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
                 var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
                 {
-                    var response = t.Result;
-                    var json = response.Content.ReadAsStringAsync();
-                    json.Wait();
-                    model = JsonConvert.DeserializeObject<DataProviderView[]>(json.Result);
+                    try
+                    {
+                        var response = t.Result;
+                        var json = response.Content.ReadAsStringAsync();
+                        json.Wait();
+                        model = JsonConvert.DeserializeObject<DataProviderView[]>(json.Result);
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.ErrorFormat("Error occurred in Monitoring refreshing the data provider log because of {0}", ex.Message);
+                    }
                 });
 
                 task.Wait();
@@ -132,10 +139,18 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
                 var task = client.GetAsync("dataProviders/freshenStatistics").ContinueWith(t =>
                 {
-                    var response = t.Result;
-                    var json = response.Content.ReadAsStringAsync();
-                    json.Wait();
-                    model = JsonConvert.DeserializeObject<DataProviderStatisticsView[]>(json.Result);
+                    try
+                    {
+                        var response = t.Result;
+                        var json = response.Content.ReadAsStringAsync();
+                        json.Wait();
+                        model = JsonConvert.DeserializeObject<DataProviderStatisticsView[]>(json.Result);
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.ErrorFormat("Error occurred in Monitoring refreshing the data provider stats because of {0}", ex.Message);
+                    }
+                  
                 });
 
                 task.Wait();
