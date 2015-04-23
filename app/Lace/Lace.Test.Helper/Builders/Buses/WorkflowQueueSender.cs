@@ -14,6 +14,7 @@ namespace Lace.Test.Helper.Builders.Buses
         private readonly DataProviderCommandSource _dataProvider;
         private DataProviderStopWatch _stopWatch;
         private DataProviderStopWatch _entryPointWatch;
+
         public WorkflowQueueSender(DataProviderCommandSource dataProvider)
         {
             _dataProvider = dataProvider;
@@ -48,16 +49,44 @@ namespace Lace.Test.Helper.Builders.Buses
             return this;
         }
 
-        public WorkflowQueueSender EntryPointRequest(ICollection<IPointToLaceRequest> request, DataProviderStopWatch watch)
+        public WorkflowQueueSender EntryPointRequest(ICollection<IPointToLaceRequest> request,
+            DataProviderStopWatch watch)
         {
             _workflow.EntryPointRequest(request, _entryPointWatch);
             return this;
         }
 
-        public WorkflowQueueSender EntryPointResponse(object payload, DataProviderState state, ICollection<IPointToLaceRequest> request, DataProviderStopWatch watch)
+        public WorkflowQueueSender EntryPointResponse(object payload, DataProviderState state,
+            ICollection<IPointToLaceRequest> request, DataProviderStopWatch watch)
         {
             _workflow.EntryPointResponse(payload, watch,
-                state,request);
+                state, request);
+            return this;
+        }
+
+        public WorkflowQueueSender Error()
+        {
+            _workflow.Send(CommandType.Fault, new Exception("An error occurred in the unit test").Message,
+                new {ErrorMessage = string.Format("Error calling {0} Data Provider", _dataProvider.ToString())},
+                _dataProvider);
+            return this;
+        }
+
+        public WorkflowQueueSender Transformation(object payload, object metaData)
+        {
+            _workflow.Send(CommandType.Transformation, payload, metaData, _dataProvider);
+            return this;
+        }
+
+        public WorkflowQueueSender Security(object payload, object metatadata)
+        {
+            _workflow.Send(CommandType.Security, payload, metatadata, _dataProvider);
+            return this;
+        }
+
+        public WorkflowQueueSender Configuration(object payload, object metatdata)
+        {
+            _workflow.Send(CommandType.Configuration, payload, metatdata, _dataProvider);
             return this;
         }
 

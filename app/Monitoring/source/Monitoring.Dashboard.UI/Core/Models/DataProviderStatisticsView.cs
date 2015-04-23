@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
@@ -19,6 +20,37 @@ namespace Monitoring.Dashboard.UI.Core.Models
             TotalRequests = totalRequests;
             TotalErrors = totalErrors;
             TotalResponses = totalResponses;
+        }
+       
+        public DataProviderStatisticsView DetermineSuccessRate()
+        {
+            SuccessRate = TotalRequests > 0 ? Math.Round(((TotalRequests - TotalErrors)/TotalRequests)*100, 2) : 0;
+            return this;
+        }
+
+
+        [DataMember]
+        public string AverageResponseTime { get; private set; }
+
+        [DataMember]
+        public double TotalRequests { get; private set; }
+
+        [DataMember]
+        public double TotalErrors { get; private set; }
+
+        [DataMember]
+        public double TotalResponses { get; private set; }
+
+        [DataMember]
+        public double SuccessRate { get; private set; }
+
+        [DataMember]
+        public string CurrentMonth
+        {
+            get
+            {
+                return DateTime.Now.ToString("MMMM");
+            }
         }
 
         //public DataProviderStatisticsView GetAverageResponseTime()
@@ -40,27 +72,6 @@ namespace Monitoring.Dashboard.UI.Core.Models
         //    return this;
         //}
 
-        public DataProviderStatisticsView DetermineSuccessRate()
-        {
-            SuccessRate = TotalRequests > 0 ? ((TotalRequests - TotalErrors)/TotalRequests)*100 : 0;
-            return this;
-        }
-
-
-        [DataMember]
-        public string AverageResponseTime { get; private set; }
-
-        [DataMember]
-        public double TotalRequests { get; private set; }
-
-        [DataMember]
-        public double TotalErrors { get; private set; }
-
-        [DataMember]
-        public double TotalResponses { get; private set; }
-
-        [DataMember]
-        public double SuccessRate { get; private set; }
 
     }
 }

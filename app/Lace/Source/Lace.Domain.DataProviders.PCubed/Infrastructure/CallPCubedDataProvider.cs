@@ -89,7 +89,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer,
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, null,
                 DataProviderCommandSource.PCubedFica);
 
             transformer.Result.HasBeenHandled();

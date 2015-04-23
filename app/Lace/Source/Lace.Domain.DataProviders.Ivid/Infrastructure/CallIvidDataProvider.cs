@@ -61,9 +61,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                         webService.RequestMessageProperty;
 
                     var request =
-                        new IvidRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User,
-                            _request.GetFromRequest<IPointToVehicleRequest>().Vehicle,
-                            _request.GetFromRequest<IPointToVehicleRequest>().Package.Name)
+                        new IvidRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>())
                             .HpiQueryRequest;
 
                     command.Workflow.Send(CommandType.Configuration, request, null, Provider);
@@ -130,7 +128,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer,Provider);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, null, Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

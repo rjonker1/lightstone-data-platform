@@ -114,7 +114,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer,Provider);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, null,Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

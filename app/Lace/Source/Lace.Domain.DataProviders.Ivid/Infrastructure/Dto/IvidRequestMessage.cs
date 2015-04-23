@@ -11,11 +11,11 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto
         private readonly IHaveUser _user;
         private readonly IHaveVehicle _vehicle;
 
-        public IvidRequestMessage(IHaveUser user, IHaveVehicle vehicle, string packageName)
+        public IvidRequestMessage(IPointToVehicleRequest request)
         {
-            _user = user;
-            _vehicle = vehicle;
-            BuildRequest(packageName);
+            _user = request.User;
+            _vehicle = request.Vehicle;
+            BuildRequest(request.Package.Name);
         }
 
         private void BuildRequest(string packageName)

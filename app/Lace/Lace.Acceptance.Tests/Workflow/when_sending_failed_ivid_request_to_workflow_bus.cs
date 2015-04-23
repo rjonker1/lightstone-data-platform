@@ -6,7 +6,7 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Workflow
 {
-    public class when_sending_request_for_data_provider_to_workflow_bus : Specification
+    public class when_sending_failed_ivid_request_to_workflow_bus : Specification
     {
         private readonly Guid _requestId;
         private readonly Guid _packageId;
@@ -18,7 +18,7 @@ namespace Lace.Acceptance.Tests.Workflow
         private Exception _exception;
         private readonly ISendWorkflowCommand _bus;
 
-        public when_sending_request_for_data_provider_to_workflow_bus()
+        public when_sending_failed_ivid_request_to_workflow_bus()
         {
             _requestId = Guid.NewGuid();
             _packageId = new Guid("E2E91BEA-B301-4CAD-A58A-425BC613C22C");
@@ -34,20 +34,17 @@ namespace Lace.Acceptance.Tests.Workflow
         {
             try
             {
-                new WorkflowCommandBuilder(_bus, _packageId, _contractId, _userId, _packageVersion, _requestId, _system, _accountNumber)
+                new WorkflowCommandBuilder(_bus, _packageId, _contractId, _userId, _packageVersion, _requestId, _system,
+                    _accountNumber)
                     .ForRequestReceived()
                     .Wait()
                     .ForIvidSecurity()
                     .ForIvidConfiguration()
                     .ForIvidTransformation()
-                    .ForSuccessfulCallIvid()
-                    .ForSuccessfulCallLightstoneAuto()
-                    .ForSuccessfulCallToIvidTitleHolder()
-                    .ForSuccessfulCallRgtVin()
-                    .ForSuccessfulCallRgt()
+                    .ForFailedCallIvid()
                     //.ForSuccessfulCallAudatex()
                     .Wait()
-                    .ForSuccessfulResponseToCaller();
+                    .ForFailedResponseToCaller();
             }
             catch (Exception ex)
             {
@@ -56,7 +53,7 @@ namespace Lace.Acceptance.Tests.Workflow
         }
 
         [Observation]
-        public void lace_worflow_commands_must_be_sent_worflow_bus()
+        public void lace_worflow_ivid_commands_must_be_sent_worflow_bus()
         {
             _exception.ShouldBeNull();
         }

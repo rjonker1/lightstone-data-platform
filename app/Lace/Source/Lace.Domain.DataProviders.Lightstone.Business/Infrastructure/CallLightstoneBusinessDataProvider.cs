@@ -114,7 +114,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
             }
 
             command.Workflow.Send(CommandType.Transformation,
-                transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), transformer,Provider);
+                transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), null,Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);
