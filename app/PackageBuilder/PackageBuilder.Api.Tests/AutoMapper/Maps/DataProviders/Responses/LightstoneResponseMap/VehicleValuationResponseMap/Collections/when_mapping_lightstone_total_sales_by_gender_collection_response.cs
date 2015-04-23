@@ -25,20 +25,20 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         public void should_map_total_sales_by_gender_data_fields()
         {
             _dataField.Name.ShouldEqual("TotalSalesByGender");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithTotalSalesByGenderModel>));
+            _dataField.Type.ShouldEqual(typeof(List<IRespondWithTotalSalesByGenderModel>).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(3);
 
             dataFields.FirstOrDefault(x => x.Name == "CarType").Name.ShouldEqual("CarType");
-            dataFields.FirstOrDefault(x => x.Name == "CarType").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "CarType").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Band").Name.ShouldEqual("Band");
-            dataFields.FirstOrDefault(x => x.Name == "Band").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "Band").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double));
+            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double).ToString());
         }
     }
 }

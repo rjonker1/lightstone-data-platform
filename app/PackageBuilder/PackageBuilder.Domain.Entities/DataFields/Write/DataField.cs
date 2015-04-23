@@ -33,7 +33,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         [DataMember]
         public int Order { get; internal set; }
         [DataMember]
-        public Type Type { get; internal set; }
+        public string Type { get; internal set; }
         [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
         public IEnumerable<IDataField> DataFields { get; internal set; }
 
@@ -42,7 +42,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         {
         }
 
-        public DataField(string name, Type type, IEnumerable<Industry> industries, string value = "")
+        public DataField(string name, string type, IEnumerable<Industry> industries, string value = "")
         {
             Name = name;
             Type = type;
@@ -50,7 +50,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
             Value = value;
         }
 
-        public DataField(string name, Type type, IEnumerable<IDataField> dataFields)
+        public DataField(string name, string type, IEnumerable<IDataField> dataFields)
         {
             Name = name;
             Type = type;

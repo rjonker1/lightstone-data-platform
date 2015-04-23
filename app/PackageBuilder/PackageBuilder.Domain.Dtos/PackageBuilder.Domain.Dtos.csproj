@@ -47,10 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PackageBuilder.Domain.Entities.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.928\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -73,6 +69,10 @@
     <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
       <Project>{15EA3113-E3A9-4BAA-8746-A92973E7D3C0}</Project>
       <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
+      <Project>{90905013-b92b-44b2-8099-eb31042ee399}</Project>
+      <Name>PackageBuilder.Domain.Entities.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{AF32C137-D01E-4243-8DE5-6920113CFC6A}</Project>

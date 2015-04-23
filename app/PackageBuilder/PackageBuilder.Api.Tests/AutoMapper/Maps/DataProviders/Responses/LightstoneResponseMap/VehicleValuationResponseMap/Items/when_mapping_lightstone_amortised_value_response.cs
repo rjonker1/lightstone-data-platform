@@ -27,10 +27,10 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
             _dataField.Count().ShouldEqual(2);
 
             _dataField.FirstOrDefault(x => x.Name == "Year").Name.ShouldEqual("Year");
-            _dataField.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(string));
+            _dataField.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(string).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            _dataField.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(decimal));
+            _dataField.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(decimal).ToString());
         }
     }
 }

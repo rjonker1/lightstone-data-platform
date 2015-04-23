@@ -4,6 +4,7 @@ using AutoMapper;
 using Lace.Domain.Core.Entities.Requests;
 using Lace.Domain.Core.Entities.Requests.Fields;
 using Lace.Domain.Core.Requests.Contracts;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
@@ -11,13 +12,13 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
 {
     public class when_mapping_ivid_request : when_not_persisting_entities
     {
-        private IEnumerable<IAmRequestField> _dataFields;
+        private IEnumerable<IDataField> _dataFields;
         public override void Observe()
         {
             base.Observe();
 
             _dataFields =
-                Mapper.Map<IAmDataProviderRequest, IEnumerable<IAmRequestField>>(
+                Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(
                     new IvidStandardRequest(new RequesterNameRequestField(), new RequesterPhoneRequestField(),
                         new RequesterEmailRequestField(), new RequestReferenceRequestField(),
                         new ApplicantNameRequestField(), new ReasonForApplicationRequestField(), new LabelRequestField(),

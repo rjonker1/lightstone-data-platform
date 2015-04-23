@@ -26,17 +26,17 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         public void should_map_total_sales_by_age_data_fields()
         {
             _dataField.Name.ShouldEqual("TotalSalesByAge");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithTotalSalesByAgeModel>));
+            _dataField.Type.ShouldEqual(typeof(List<IRespondWithTotalSalesByAgeModel>).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(2);
 
             dataFields.FirstOrDefault(x => x.Name == "Band").Name.ShouldEqual("Band");
-            dataFields.FirstOrDefault(x => x.Name == "Band").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "Band").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Values").Name.ShouldEqual("Values");
-            dataFields.FirstOrDefault(x => x.Name == "Values").Type.ShouldEqual(typeof(IPair<string, double>[]));
+            dataFields.FirstOrDefault(x => x.Name == "Values").Type.ShouldEqual(typeof(IPair<string, double>[]).ToString());
         }
     }
 }

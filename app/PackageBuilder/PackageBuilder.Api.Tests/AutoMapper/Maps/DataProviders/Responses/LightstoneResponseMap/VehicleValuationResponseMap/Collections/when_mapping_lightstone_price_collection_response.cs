@@ -25,17 +25,17 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         public void should_map_price_data_fields()
         {
             _dataField.Name.ShouldEqual("Prices");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithPriceModel>));
+            _dataField.Type.ShouldEqual(typeof(List<IRespondWithPriceModel>).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(2);
 
             dataFields.FirstOrDefault(x => x.Name == "Name").Name.ShouldEqual("Name");
-            dataFields.FirstOrDefault(x => x.Name == "Name").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "Name").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(decimal));
+            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(decimal).ToString());
         }
     }
 }

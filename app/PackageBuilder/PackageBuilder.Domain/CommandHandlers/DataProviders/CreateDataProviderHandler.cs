@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using AutoMapper;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
-using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
@@ -36,7 +36,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 return;
             }
 
-            var requestFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<IAmRequestField>)) as IEnumerable<IAmRequestField>;
+            var requestFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
             var dataFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>;
 
             var entity = new DataProvider(command.Id, command.Name,
