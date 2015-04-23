@@ -1,9 +1,9 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
-
-namespace Lace.Domain.Core.Entities.Requests.Fields
+﻿namespace Lace.Domain.Core.Entities.Requests.Fields
 {
-    public class ReasonForApplicationRequestField : IAmReasonForApplicationRequestField
+    public class ReasonForApplicationRequestField : RequestField
     {
-        public string Field { get; private set; }
+        public ReasonForApplicationRequestField(string field) : base(field)
+        {
+        }
     }
 }

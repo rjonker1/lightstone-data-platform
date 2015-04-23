@@ -20,7 +20,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
             _dataFields =
                 Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(
                     new IvidStandardRequest(new RequesterNameRequestField(), new RequesterPhoneRequestField(),
-                        new RequesterEmailRequestField(), new RequestReferenceRequestField(),
+                        new RequesterEmailRequestField(), new RequestReferenceRequestField("sdfsdf"),
                         new ApplicantNameRequestField(), new ReasonForApplicationRequestField(), new LabelRequestField(),
                         new EngineNumberRequestField(), new RegisterNumberRequestField(),
                         new LicenseNumberRequestField(), new MakeRequestField()));
@@ -30,6 +30,8 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
         public void should_map_all_ivid_data_fields()
         {
             _dataFields.Count().ShouldEqual(11);
+
+            var test = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(_dataFields);
         }
     }
 }

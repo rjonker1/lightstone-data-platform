@@ -1,9 +1,9 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
-
-namespace Lace.Domain.Core.Entities.Requests.Fields
+﻿namespace Lace.Domain.Core.Entities.Requests.Fields
 {
-    public class EngineNumberRequestField : IAmEngineNumberRequestField
+    public class EngineNumberRequestField : RequestField
     {
-        public string Field { get; private set; }
+        public EngineNumberRequestField(string field) : base(field)
+        {
+        }
     }
 }

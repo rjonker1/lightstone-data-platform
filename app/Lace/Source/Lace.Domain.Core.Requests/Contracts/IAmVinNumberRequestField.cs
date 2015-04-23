@@ -1,6 +1,6 @@
 ﻿namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IAmVinRequestField : IAmRequestField
+    public interface IAmVinNumberRequestField : IAmRequestField
     {
 
     }

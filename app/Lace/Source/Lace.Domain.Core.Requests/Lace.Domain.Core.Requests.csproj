@@ -65,7 +65,7 @@
     <Compile Include="Contracts\IAmRequestReferenceRequestField.cs" />
     <Compile Include="Contracts\IAmStandardIvidRequest.cs" />
     <Compile Include="Contracts\IAmVinField.cs" />
-    <Compile Include="Contracts\IAmVinRequestField.cs" />
+    <Compile Include="Contracts\IAmVinNumberRequestField.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
     <Compile Include="Contracts\IHaveBusiness.cs" />
     <Compile Include="Contracts\IHaveCarInformation.cs" />
