@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using Hangfire.Logging.LogProviders;
 using Hangfire.SqlServer;
 using Microsoft.Owin;
 using Owin;
@@ -11,13 +12,12 @@ namespace Billing.Scheduler
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseHangfire(config =>
-            {
-                config.UseSqlServerStorage("Server=.; Database=Hangfire.Test; Integrated Security=SSPI;");
-                config.UseServer();
-            });
+            GlobalConfiguration.Configuration
+            .UseLogProvider(new ColouredConsoleLogProvider())
+            .UseSqlServerStorage(@"Server=.;Database=Hangfire.Test; Integrated Security=SSPI;");
 
-           // new ApiSchedule(userManagementApiClient);
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
         }
     }
 }
