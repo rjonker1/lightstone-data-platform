@@ -27,13 +27,13 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
             _dataField.Count().ShouldEqual(3);
 
             _dataField.FirstOrDefault(x => x.Name == "Municipality").Name.ShouldEqual("Municipality");
-            _dataField.FirstOrDefault(x => x.Name == "Municipality").Type.ShouldEqual(typeof(string));
+            _dataField.FirstOrDefault(x => x.Name == "Municipality").Type.ShouldEqual(typeof(string).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "Index").Name.ShouldEqual("Index");
-            _dataField.FirstOrDefault(x => x.Name == "Index").Type.ShouldEqual(typeof(int));
+            _dataField.FirstOrDefault(x => x.Name == "Index").Type.ShouldEqual(typeof(int).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            _dataField.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double));
+            _dataField.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double).ToString());
         }
     }
 }

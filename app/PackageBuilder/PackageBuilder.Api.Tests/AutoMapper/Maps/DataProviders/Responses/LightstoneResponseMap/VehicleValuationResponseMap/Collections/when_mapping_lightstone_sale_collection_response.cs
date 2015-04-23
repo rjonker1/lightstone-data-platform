@@ -25,20 +25,20 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         public void should_map_sale_data_fields()
         {
             _dataField.Name.ShouldEqual("LastFiveSales");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithSaleModel>));
+            _dataField.Type.ShouldEqual(typeof(List<IRespondWithSaleModel>).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(3);
 
             dataFields.FirstOrDefault(x => x.Name == "SalesDate").Name.ShouldEqual("SalesDate");
-            dataFields.FirstOrDefault(x => x.Name == "SalesDate").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "SalesDate").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "LicensingDistrict").Name.ShouldEqual("LicensingDistrict");
-            dataFields.FirstOrDefault(x => x.Name == "LicensingDistrict").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "LicensingDistrict").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "SalesPrice").Name.ShouldEqual("SalesPrice");
-            dataFields.FirstOrDefault(x => x.Name == "SalesPrice").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "SalesPrice").Type.ShouldEqual(typeof(string).ToString());
         }
     }
 }

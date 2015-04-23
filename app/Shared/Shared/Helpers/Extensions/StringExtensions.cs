@@ -71,5 +71,10 @@ namespace DataPlatform.Shared.Helpers.Extensions
         {
             return string.Format(CultureInfo.InvariantCulture, format ?? string.Empty, args);
         }
+
+        public static string SplitCamelCase(this string camelCaseString)
+        {
+            return Regex.Replace(camelCaseString, "([A-Z])", " $1", RegexOptions.Compiled).Trim();
+        }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
@@ -11,12 +10,10 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write
     {
         public void CreateMaps()
         {
-            //Mapper.CreateMap<IEnumerable<IDataProvider>, IEnumerable<DataProviderDto>>()
-            //    .ConvertUsing(s => s != null ? s.Select(Mapper.Map<IDataProvider, DataProviderDto>) : Enumerable.Empty<DataProviderDto>());
             Mapper.CreateMap<IDataProvider, DataProviderDto>()
                 //.ForMember(d => d.CostOfSale, opt => opt.ResolveUsing(new DataProviderCostPriceResolver()))
                 //.ForMember(d => d.FieldLevelCostPriceOverride, opt => opt.ResolveUsing(new DataProviderCostPriceOverrideResolver()))
-                .ForMember(d => d.RequestFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(x.DataFields)))
+                .ForMember(d => d.RequestFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(x.RequestFields)))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(x.DataFields)));
             //.BeforeMap((src, dest) =>
             //{

@@ -28,28 +28,28 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
             _dataFields.Count().ShouldEqual(9);
 
             _dataFields.FirstOrDefault(x => x.Name == "CarId").Name.ShouldEqual("CarId");
-            _dataFields.FirstOrDefault(x => x.Name == "CarId").Type.ShouldEqual(typeof(int?));
+            _dataFields.FirstOrDefault(x => x.Name == "CarId").Type.ShouldEqual(typeof(int?).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "Year").Name.ShouldEqual("Year");
-            _dataFields.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(int?));
+            _dataFields.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(int?).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "Vin").Name.ShouldEqual("Vin");
-            _dataFields.FirstOrDefault(x => x.Name == "Vin").Type.ShouldEqual(typeof(string));
+            _dataFields.FirstOrDefault(x => x.Name == "Vin").Type.ShouldEqual(typeof(string).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "ImageUrl").Name.ShouldEqual("ImageUrl");
-            _dataFields.FirstOrDefault(x => x.Name == "ImageUrl").Type.ShouldEqual(typeof(string));
+            _dataFields.FirstOrDefault(x => x.Name == "ImageUrl").Type.ShouldEqual(typeof(string).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "Quarter").Name.ShouldEqual("Quarter");
-            _dataFields.FirstOrDefault(x => x.Name == "Quarter").Type.ShouldEqual(typeof(string));
+            _dataFields.FirstOrDefault(x => x.Name == "Quarter").Type.ShouldEqual(typeof(string).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "CarFullname").Name.ShouldEqual("CarFullname");
-            _dataFields.FirstOrDefault(x => x.Name == "CarFullname").Type.ShouldEqual(typeof(string));
+            _dataFields.FirstOrDefault(x => x.Name == "CarFullname").Type.ShouldEqual(typeof(string).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "Model").Name.ShouldEqual("Model");
-            _dataFields.FirstOrDefault(x => x.Name == "Model").Type.ShouldEqual(typeof(string));
+            _dataFields.FirstOrDefault(x => x.Name == "Model").Type.ShouldEqual(typeof(string).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "VehicleValuation").Name.ShouldEqual("VehicleValuation");
-            _dataFields.FirstOrDefault(x => x.Name == "VehicleValuation").Type.ShouldEqual(typeof(Valuation));
+            _dataFields.FirstOrDefault(x => x.Name == "VehicleValuation").Type.ShouldEqual(typeof(Valuation).ToString());
         }
     }
 }

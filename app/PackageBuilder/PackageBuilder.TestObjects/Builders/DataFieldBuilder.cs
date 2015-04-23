@@ -19,7 +19,7 @@ namespace PackageBuilder.TestObjects.Builders
 
         public IDataField Build()
         {
-            return new DataField(_name, _type, _dataFields)
+            return new DataField(_name, _type.ToString(), _dataFields)
             {
                 Label = _label,
                 Definition = _definition,

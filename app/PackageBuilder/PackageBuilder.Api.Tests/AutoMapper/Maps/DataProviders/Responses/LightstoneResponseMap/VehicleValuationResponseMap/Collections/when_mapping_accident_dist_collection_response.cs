@@ -25,17 +25,17 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         public void should_map_accident_distribution_data_fields()
         {
             _dataField.Name.ShouldEqual("AccidentDistribution");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithAccidentDistributionModel>));
+            _dataField.Type.ShouldEqual(typeof(List<IRespondWithAccidentDistributionModel>).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(2);
 
             dataFields.FirstOrDefault(x => x.Name == "Band").Name.ShouldEqual("Band");
-            dataFields.FirstOrDefault(x => x.Name == "Band").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "Band").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double));
+            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double).ToString());
         }
     }
 }

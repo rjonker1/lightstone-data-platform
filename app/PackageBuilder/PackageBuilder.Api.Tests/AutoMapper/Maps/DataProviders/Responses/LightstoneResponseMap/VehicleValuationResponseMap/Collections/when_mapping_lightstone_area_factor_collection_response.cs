@@ -25,20 +25,20 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         public void should_map_area_factor_data_fields()
         {
             _dataField.Name.ShouldEqual("AreaFactors");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithAreaFactorModel>));
+            _dataField.Type.ShouldEqual(typeof(List<IRespondWithAreaFactorModel>).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(3);
 
             dataFields.FirstOrDefault(x => x.Name == "Municipality").Name.ShouldEqual("Municipality");
-            dataFields.FirstOrDefault(x => x.Name == "Municipality").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "Municipality").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Index").Name.ShouldEqual("Index");
-            dataFields.FirstOrDefault(x => x.Name == "Index").Type.ShouldEqual(typeof(int));
+            dataFields.FirstOrDefault(x => x.Name == "Index").Type.ShouldEqual(typeof(int).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double));
+            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double).ToString());
         }
     }
 }

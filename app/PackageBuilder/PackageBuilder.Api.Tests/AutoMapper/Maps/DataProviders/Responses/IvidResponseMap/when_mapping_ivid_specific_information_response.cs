@@ -25,32 +25,32 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.IvidR
         public void should_map_specific_information_data_fields()
         {
             _dataField.Name.ShouldEqual("SpecificInformation");
-            _dataField.Type.ShouldEqual(typeof(VehicleSpecificInformation));
+            _dataField.Type.ShouldEqual(typeof(VehicleSpecificInformation).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(8);
 
             dataFields.FirstOrDefault(x => x.Name == "Odometer").Name.ShouldEqual("Odometer");
-            dataFields.FirstOrDefault(x => x.Name == "Odometer").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "Odometer").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Colour").Name.ShouldEqual("Colour");
-            dataFields.FirstOrDefault(x => x.Name == "Colour").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "Colour").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "RegistrationNumber").Name.ShouldEqual("RegistrationNumber");
-            dataFields.FirstOrDefault(x => x.Name == "RegistrationNumber").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "RegistrationNumber").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "VinNumber").Name.ShouldEqual("VinNumber");
-            dataFields.FirstOrDefault(x => x.Name == "VinNumber").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "VinNumber").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "LicenseNumber").Name.ShouldEqual("LicenseNumber");
-            dataFields.FirstOrDefault(x => x.Name == "LicenseNumber").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "LicenseNumber").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "EngineNumber").Name.ShouldEqual("EngineNumber");
-            dataFields.FirstOrDefault(x => x.Name == "EngineNumber").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "EngineNumber").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "CategoryDescription").Name.ShouldEqual("CategoryDescription");
-            dataFields.FirstOrDefault(x => x.Name == "CategoryDescription").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "CategoryDescription").Type.ShouldEqual(typeof(string).ToString());
         }
     }
 }

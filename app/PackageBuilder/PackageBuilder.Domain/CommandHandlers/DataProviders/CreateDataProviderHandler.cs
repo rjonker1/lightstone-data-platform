@@ -5,6 +5,7 @@ using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
@@ -35,11 +36,12 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 return;
             }
 
+            var requestFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
             var dataFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>;
 
             var entity = new DataProvider(command.Id, command.Name,
                 command.Description, command.CostOfSale, command.ResponseType,
-                command.Owner, command.CreatedDate, dataFields);
+                command.Owner, command.CreatedDate, requestFields, dataFields);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

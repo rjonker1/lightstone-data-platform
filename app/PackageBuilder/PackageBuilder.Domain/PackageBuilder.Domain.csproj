@@ -64,6 +64,10 @@
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.886\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.973, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.973\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.886\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
@@ -125,7 +129,7 @@
       <Name>PackageBuilder.Domain.Entities.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
-      <Project>{90905013-B92B-44B2-8099-EB31042EE399}</Project>
+      <Project>{90905013-b92b-44b2-8099-eb31042ee399}</Project>
       <Name>PackageBuilder.Domain.Entities.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">

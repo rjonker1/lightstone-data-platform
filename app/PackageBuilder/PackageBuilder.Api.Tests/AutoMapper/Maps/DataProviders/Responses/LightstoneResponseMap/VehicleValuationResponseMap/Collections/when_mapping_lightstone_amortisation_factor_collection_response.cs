@@ -25,17 +25,17 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         public void should_map_amortisation_factor_data_fields()
         {
             _dataField.Name.ShouldEqual("AmortisationFactors");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithAmortisationFactorModel>));
+            _dataField.Type.ShouldEqual(typeof(List<IRespondWithAmortisationFactorModel>).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(2);
 
             dataFields.FirstOrDefault(x => x.Name == "Year").Name.ShouldEqual("Year");
-            dataFields.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(int));
+            dataFields.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(int).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double));
+            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double).ToString());
         }
     }
 }

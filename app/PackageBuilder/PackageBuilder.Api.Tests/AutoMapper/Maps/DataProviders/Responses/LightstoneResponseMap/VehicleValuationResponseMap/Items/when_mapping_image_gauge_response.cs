@@ -27,19 +27,19 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
             _dataField.Count().ShouldEqual(5);
 
             _dataField.FirstOrDefault(x => x.Name == "MinValue").Name.ShouldEqual("MinValue");
-            _dataField.FirstOrDefault(x => x.Name == "MinValue").Type.ShouldEqual(typeof(double?));
+            _dataField.FirstOrDefault(x => x.Name == "MinValue").Type.ShouldEqual(typeof(double?).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "MaxValue").Name.ShouldEqual("MaxValue");
-            _dataField.FirstOrDefault(x => x.Name == "MaxValue").Type.ShouldEqual(typeof(double?));
+            _dataField.FirstOrDefault(x => x.Name == "MaxValue").Type.ShouldEqual(typeof(double?).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            _dataField.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double?));
+            _dataField.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double?).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "Quarter").Name.ShouldEqual("Quarter");
-            _dataField.FirstOrDefault(x => x.Name == "Quarter").Type.ShouldEqual(typeof(double?));
+            _dataField.FirstOrDefault(x => x.Name == "Quarter").Type.ShouldEqual(typeof(double?).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "GaugeName").Name.ShouldEqual("GaugeName");
-            _dataField.FirstOrDefault(x => x.Name == "GaugeName").Type.ShouldEqual(typeof(string));
+            _dataField.FirstOrDefault(x => x.Name == "GaugeName").Type.ShouldEqual(typeof(string).ToString());
         }
     }
 }
