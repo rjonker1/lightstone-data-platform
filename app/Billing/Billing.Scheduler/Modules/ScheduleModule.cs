@@ -5,6 +5,7 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
 using Hangfire;
+using Hangfire.Storage;
 using Nancy;
 using RestSharp;
 using Workflow.BuildingBlocks;
@@ -15,11 +16,9 @@ namespace Billing.Scheduler.Modules
 {
     public class ScheduleModule : NancyModule
     {
+
         public ScheduleModule()
         {
-            //IAdvancedBus _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
-            //var bus = new TransactionBus(_bus);
-
             Post["/Schedules/BillingRun/Execute/{runType}"] = parameters =>
             {
                 var runType = parameters.runType;
@@ -29,21 +28,19 @@ namespace Billing.Scheduler.Modules
                 return Response.AsJson(new { data = "Required type: StageBilling" });
             };
 
-            Post["/Schedules/BillingRun/Schedule/{runType}"] = parameters =>
+            Get["/Schedules/BillingRun/Schedule/Daily"] = parameters =>
             {
-                //var runType = parameters.runType;
-                //var dateTime = this.Request.Query["schedule_time"];
+                var cronExpression = "* * * * *";
 
-                //var test = DateTime.Now.AddMinutes(1);
-                //var billRun = new BillingMessage()
-                //{
-                //    RunType = "Stage",
-                //    Schedule = null
-                //};
+                using (var job = JobStorage.Current.GetConnection())
+                {
+                    foreach (var recurringJob in job.GetRecurringJobs())
+                    {
+                        if(recurringJob.Id == "StageBilling Run") cronExpression = recurringJob.Cron;
+                    }
+                }
 
-                //if (runType == "StageBilling") BackgroundJob.Schedule<MessageSchedule>(x => x.Send(billRun), test);
-
-                return null;
+                return Response.AsJson(new {data = cronExpression});
             };
 
             Post["/Schedules/BillingRun/Daily/{runType}"] = parameters =>
@@ -65,6 +62,14 @@ namespace Billing.Scheduler.Modules
 
                 return null;
             };
+
+            //CORS for Module
+            After.AddItemToEndOfPipeline(nancyContext =>
+            {
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+            });
         }
     }
 
@@ -80,3 +85,16 @@ namespace Billing.Scheduler.Modules
         }
     }
 }
+
+
+//var runType = parameters.runType;
+//var dateTime = this.Request.Query["schedule_time"];
+
+//var test = DateTime.Now.AddMinutes(1);
+//var billRun = new BillingMessage()
+//{
+//    RunType = "Stage",
+//    Schedule = null
+//};
+
+//if (runType == "StageBilling") BackgroundJob.Schedule<MessageSchedule>(x => x.Send(billRun), test);

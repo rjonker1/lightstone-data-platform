@@ -455,6 +455,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery2.1.3.min.js" />
+    <Content Include="Scripts\Later\Later.js" />
     <Content Include="Scripts\less-1.4.1.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.az.js" />

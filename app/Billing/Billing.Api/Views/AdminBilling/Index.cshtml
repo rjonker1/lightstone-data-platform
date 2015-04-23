@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class='input-group date' id='dailyBillingRun'>
-                                        <input type='text' class="form-control" />
+                                        <input id='dailyBillingRun-input' type='text' class="form-control" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time">
                                             </span>
@@ -152,34 +152,34 @@
                                 </div>
                             </div>
                             
-                            
                         </div>
                     </div>
                     <script type="text/javascript">
 
                         $(function () {
-                            $('#dailyBillingRun').datetimepicker({
-                                format: 'HH:mm'
+
+                            later.date.localTime();
+
+                            $.get("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily", function (response) {
+
+                                var schedule = later.parse.cron(''+response.data, false);
+                                var result = later.schedule(schedule).next(1);
+
+                                $('#dailyBillingRun').datetimepicker({
+                                    format: 'HH:mm',
+                                    defaultDate: moment(result)
+                                });
+
+                                //console.log($('#dailyBillingRun-input').val());
                             });
+
 
                             $('#monthlyBillingRun').datetimepicker({
                                 format: 'DD [of each Month at] HH:mm'
                             });
-
                         });
                     </script>
                 </div>
-
-                <div class="container">
-
-                </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker3').datetimepicker({
-                            pickDate: false
-                        });
-                    });
-                </script>
 
             </div>
             <div class="modal-footer">
