@@ -43,9 +43,9 @@ namespace Billing.Scheduler.Modules
                 return Response.AsJson(new {data = cronExpression});
             };
 
-            Post["/Schedules/BillingRun/Daily/{runType}"] = parameters =>
+            Post["/Schedules/BillingRun/Schedule/Daily"] = parameters =>
             {
-                var runType = parameters.runType;
+                var runType = "StageBilling";
                 string dailyTime = Request.Query["daily_time"];
 
                 var billRun = new BillingMessage()

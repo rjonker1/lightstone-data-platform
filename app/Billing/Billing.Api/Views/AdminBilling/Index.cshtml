@@ -10,7 +10,7 @@
                 <span class="info-box-text">Billing Run</span>
                 <br />
                 <span class="info-box-text">
-                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Automated</button>
+                    <button id="automated_run" type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Automated</button>
                 </span>
             </div>
         </div>
@@ -160,22 +160,33 @@
 
                             later.date.localTime();
 
-                            $.get("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily", function (response) {
-
-                                var schedule = later.parse.cron(''+response.data, false);
-                                var result = later.schedule(schedule).next(1);
-
-                                $('#dailyBillingRun').datetimepicker({
-                                    format: 'HH:mm',
-                                    defaultDate: moment(result)
-                                });
-
-                                //console.log($('#dailyBillingRun-input').val());
-                            });
-
-
                             $('#monthlyBillingRun').datetimepicker({
                                 format: 'DD [of each Month at] HH:mm'
+                            });
+
+                            $('#automated_run').click(function() {
+
+                                $.get("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily", function (response) {
+
+                                    var schedule = later.parse.cron('' + response.data, false);
+                                    var result = later.schedule(schedule).next(1);
+
+                                    $('#dailyBillingRun').datetimepicker({
+                                        format: 'HH:mm',
+                                        defaultDate: moment(result)
+                                    });
+                                });
+                            });
+
+                            $('#btn_submit').click(function () {
+
+                                var time = $('#dailyBillingRun-input').val().split(":");
+                                var dailySchedule = moment().hour(time[0]).minutes(time[1]).format('DD-MM-YYYY HH:mm');
+
+                                $.post("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily?daily_time=" + dailySchedule, function (response) {
+
+                                    console.log("Schedule Posted!!");
+                                });
                             });
                         });
                     </script>
@@ -184,7 +195,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button id="btn_submit" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
