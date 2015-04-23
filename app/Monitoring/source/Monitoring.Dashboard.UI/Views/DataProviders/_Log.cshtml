@@ -2,13 +2,13 @@
     <div class="row">
         <div ng-controller="DataProviderStatisticsController">
 
-            <div ng-repeat="response in dataProviderStatistics">
+            @*<div ng-repeat="response in dataProviderStatistics">*@
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>{{response.AverageResponseTime}}</h3>
-                            <p>Average Response Time<sup style="font-size: 10px"> for {{response.CurrentMonth}}</sup></p>
+                            <h3>{{statistics.AverageResponseTime}}</h3>
+                            <p>Average Response Time<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup></p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-clock-o"></i>
@@ -18,11 +18,11 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>{{response.SuccessRate}}<sup style="font-size: 20px">%</sup></h3>
-                            <p>Success Rate<sup style="font-size: 10px"> for {{response.CurrentMonth}}</sup></p>
+                            <h3>{{statistics.SuccessRate}}<sup style="font-size: 20px">%</sup></h3>
+                            <p>Success Rate<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup></p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                            <i class="fa fa-check"></i>
                         </div>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                     <!-- small box -->
                     <div class="small-box bg-blue">
                         <div class="inner">
-                            <h3>{{response.TotalRequests}}</h3>
-                            <p>Total Requests<sup style="font-size: 10px"> for {{response.CurrentMonth}}</sup></p>
+                            <h3>{{statistics.TotalRequests}}</h3>
+                            <p>Total Requests<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -42,15 +42,15 @@
                     <!-- small box -->
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>{{response.TotalErrors}}</h3>
-                            <p>Total Errors<sup style="font-size: 10px"> for {{response.CurrentMonth}}</sup></p>
+                            <h3>{{statistics.TotalErrors}}</h3>
+                            <p>Total Errors<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup></p>
                         </div>
                         <div class="icon">
-                            <i class="fa fa-exclamation-triangle"></i>
+                            <i class="fa fa-ambulance"></i>
                         </div>
                     </div>
                 </div>
-            </div>
+            @*</div>*@
         </div>
         <div ng-controller="DataProviderController">
             <div class="col-md-4">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
@@ -23,7 +24,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
        
         public DataProviderStatisticsView DetermineSuccessRate()
         {
-            SuccessRate = TotalRequests > 0 ? ((TotalRequests - TotalErrors)/TotalRequests)*100 : 0;
+            SuccessRate = TotalRequests > 0 ? Math.Round(((TotalRequests - TotalErrors)/TotalRequests)*100, 2) : 0;
             return this;
         }
 

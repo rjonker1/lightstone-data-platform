@@ -110,7 +110,6 @@ namespace Monitoring.Dashboard.UI.Core.Models
                 {
                     foreach (var nested in payload)
                     {
-                        Debug.WriteLine(payload.ToString(Formatting.None));
                         dynamic request = JsonConvert.DeserializeObject(nested.ToString(Formatting.None));
                         UpdateNestedPayload(request);
                         UpdateNestedMetaData(request);
