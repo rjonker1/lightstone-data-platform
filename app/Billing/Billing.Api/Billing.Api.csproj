@@ -365,8 +365,6 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
-    <Content Include="Content\less\bootstrap-datetimepicker-build.less" />
-    <Content Include="Content\less\_bootstrap-datetimepicker.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\core.js" />
