@@ -9,6 +9,7 @@ using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.SqlStatements;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Domain.DataProviders.Rgt.Repositories
 {

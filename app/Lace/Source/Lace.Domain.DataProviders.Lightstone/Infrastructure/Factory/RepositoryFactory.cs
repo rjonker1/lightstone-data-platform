@@ -21,21 +21,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory
             return new BandsRepository(_connection,_redisClient);
         }
 
-        public Core.IReadOnlyRepository<Car> CarRepository()
-        {
-            return new CarRepository(_connection, _redisClient);
-        }
-
-        public Core.IReadOnlyRepository<CarType> CarTypeRepository()
-        {
-            return new CarTypeRepository(_connection, _redisClient);
-        }
-
-        public Core.IReadOnlyRepository<CarVendor> CarVendorRepository()
-        {
-            return new CarVendorRepository(_connection,_redisClient);
-        }
-
         public Core.IReadOnlyRepository<Make> MakeRepository()
         {
             return new MakeRepository(_connection,_redisClient);

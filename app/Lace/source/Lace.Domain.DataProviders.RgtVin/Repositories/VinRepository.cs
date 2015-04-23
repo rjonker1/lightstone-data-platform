@@ -8,6 +8,7 @@ using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.SqlStatements;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Domain.DataProviders.RgtVin.Repositories
 {

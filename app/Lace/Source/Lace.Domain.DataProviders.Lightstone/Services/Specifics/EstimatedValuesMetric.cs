@@ -42,10 +42,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
         private void SetRetailEstimatedValues(IRespondWithEstimatedValueModel model)
         {
-            var estimatedPrice = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.RetailEstimatedPrice);
-            var salePriceHigh = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.RetailPriceHigh);
-            var salePriceLow = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.RetailPriceLow);
-            var confidence = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.RetailConfidence);
+            var estimatedPrice = _gauges.FirstOrDefault(w => w.MetricId == (int) MetricTypes.RetailEstimatedPrice);
+            var salePriceHigh = _gauges.FirstOrDefault(w => w.MetricId == (int)MetricTypes.RetailPriceHigh);
+            var salePriceLow = _gauges.FirstOrDefault(w => w.MetricId == (int)MetricTypes.RetailPriceLow);
+            var confidence = _gauges.FirstOrDefault(w => w.MetricId == (int)MetricTypes.RetailConfidence);
 
 
             if (estimatedPrice == null || salePriceHigh == null || salePriceLow == null || confidence == null) return;
@@ -60,10 +60,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
         private void SetTradeEstimatedValues(IRespondWithEstimatedValueModel model)
         {
-            var estimatedPrice = _gauges.FirstOrDefault(w => w.Metric_ID == (int)MetricTypes.TradeEstimatedPrice);
-            var salePriceHigh = _gauges.FirstOrDefault(w => w.Metric_ID == (int)MetricTypes.TradePriceHigh);
-            var salePriceLow = _gauges.FirstOrDefault(w => w.Metric_ID == (int)MetricTypes.TradePriceLow);
-            var confidence = _gauges.FirstOrDefault(w => w.Metric_ID == (int)MetricTypes.TradeConfidence);
+            var estimatedPrice = _gauges.FirstOrDefault(w => w.MetricId == (int)MetricTypes.TradeEstimatedPrice);
+            var salePriceHigh = _gauges.FirstOrDefault(w => w.MetricId == (int)MetricTypes.TradePriceHigh);
+            var salePriceLow = _gauges.FirstOrDefault(w => w.MetricId == (int)MetricTypes.TradePriceLow);
+            var confidence = _gauges.FirstOrDefault(w => w.MetricId == (int)MetricTypes.TradeConfidence);
 
 
             if (estimatedPrice == null || salePriceHigh == null || salePriceLow == null || confidence == null) return;
@@ -81,7 +81,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
             if (!_request.CarId.HasValue) return new List<Statistic>();
 
             return Statistics
-                .Where(w => w.Car_ID == _request.CarId && w.Year_ID == _request.Year)
+                .Where(w => w.CarId == _request.CarId && w.YearId == _request.Year)
                 .ToList();
         }
 

@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         private void GetGauges(int metricId)
         {
             _gauges = Statistics
-                .Where(w => w.Metric_ID == metricId && w.Year_ID.HasValue && w.Year_ID.Value == _request.Year)
+                .Where(w => w.MetricId == metricId && w.YearId.HasValue && w.YearId.Value == _request.Year)
                 .ToList();
         }
 
@@ -48,8 +48,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         {
             foreach (var gauge in _gauges)
             {
-                MetricResult.Add(new RepairIndexModel(gauge.Year_ID.HasValue ? gauge.Year_ID.Value : 0,
-                    GetBandName(gauge.Band_ID),
+                MetricResult.Add(new RepairIndexModel(gauge.YearId.HasValue ? gauge.YearId.Value : 0,
+                    GetBandName(gauge.BandId),
                     gauge.FloatValue.HasValue ? gauge.FloatValue.Value : 0.00));
             }
         }

@@ -4,9 +4,9 @@ using System.Data;
 using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure.SqlStatements;
-using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.CrossCutting.DataProvider.Car.Repositories
 {

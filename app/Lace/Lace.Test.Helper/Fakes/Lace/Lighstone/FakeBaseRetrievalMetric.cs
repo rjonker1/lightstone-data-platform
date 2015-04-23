@@ -18,7 +18,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         private IGetBands _getBands;
         private IGetMuncipalities _getMuncipalities;
         private IGetMakes _getMakes;
-        private IGetCarType _getCarType;
         private IGetSales _getSales;
 
         private readonly IHaveCarInformation _request;
@@ -37,7 +36,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             _getBands = new BandUnitOfWork(new FakeBandsRepository());
             _getMuncipalities = new MuncipalityUnitOfWork(new FakeMunicipalityRepository());
             _getMakes = new MakeUnitOfWork(new FakeMakeRepository());
-            _getCarType = new CarTypeUnitOfWork(new FakeCarTypeRepository());
             _getSales = new SaleUnitOfWork(new FakeSaleRepository());
 
             return this;
@@ -71,7 +69,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             _getBands.GetBands(_request);
             _getMuncipalities.GetMunicipalities(_request);
             _getMakes.GetMakes(_request);
-            _getCarType.GetCarTypes(_request);
             _getSales.GetSales(_request);
 
             return this;
@@ -90,7 +87,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         private IEnumerable<IRespondWithTotalSalesByGenderModel> GetTotalSalesByGender()
         {
             return
-                new TotalSalesByGenderMetric(_request, _getStatistics.Statistics, _getBands.Bands, _getCarType.CarTypes)
+                new TotalSalesByGenderMetric(_request, _getStatistics.Statistics, _getBands.Bands)
                     .Get()
                     .MetricResult;
         }
@@ -98,7 +95,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         private IEnumerable<IRespondWithTotalSalesByAgeModel> GetTotalSalesByAge()
         {
             return
-                new TotalSalesByAgeMetric(_request, _getStatistics.Statistics, _getBands.Bands, _getCarType.CarTypes)
+                new TotalSalesByAgeMetric(_request, _getStatistics.Statistics, _getBands.Bands)
                     .Get()
                     .MetricResult;
         }

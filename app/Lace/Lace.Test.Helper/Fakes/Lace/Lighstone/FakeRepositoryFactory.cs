@@ -34,21 +34,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
            return new FakeBandsRepository();
         }
 
-        public IReadOnlyRepository<Car> CarRepository()
-        {
-            return new FakeCarRepository();
-        }
-
-        public IReadOnlyRepository<CarType> CarTypeRepository()
-        {
-            return  new FakeCarTypeRepository();
-        }
-
-        public IReadOnlyRepository<CarVendor> CarVendorRepository()
-        {
-            throw new NotImplementedException();
-        }
-
         public IReadOnlyRepository<Make> MakeRepository()
         {
             return new FakeMakeRepository();

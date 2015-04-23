@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
-using Lace.Domain.DataProviders.Lightstone.Services;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Domain.DataProviders.Lightstone.Repositories
 {
     public class BandsRepository : IReadOnlyRepository<Band>
     {
+        //SelectStatements.GetAllTheBands
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
@@ -27,14 +24,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             _cacheClient = cacheClient;
         }
         
-        public IEnumerable<Band> FindAllWithRequest(IHaveCarInformation request)
+
+        public IEnumerable<Band> Get(string sql, object param)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Band> GetAll()
+        public IEnumerable<Band> GetAll(string sql)
         {
-            //using (_connection)
             using (_cacheClient)
             {
                 var cacheBands = _cacheClient.As<Band>();
@@ -44,7 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                     return response;
 
                 var dbResponse = _connection
-                    .Query<Band>(SelectStatements.GetAllTheBands)
+                    .Query<Band>(sql)
                     .ToList();
 
                 if (!response.CanAddItemsToCache().HasValue)
@@ -55,27 +52,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 
                 return dbResponse;
             }
-
-        }
-
-        public IEnumerable<Band> FindByMake(int makeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Band> FindByCarIdAndYear(int? carId, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Band> FindByVin(string vinNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Band> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
-        {
-            throw new NotImplementedException();
         }
     }
 }

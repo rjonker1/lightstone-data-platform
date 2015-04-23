@@ -35,7 +35,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         private void GetGauges(int metricId)
         {
             _gauges = Statistics
-                .Where(w => w.Metric_ID == metricId)
+                .Where(w => w.MetricId == metricId)
                 .ToList();
         }
 
@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         {
             foreach (var gauge in _gauges)
             {
-                MetricResult.Add(new AccidentDistributionModel(GetBandName(gauge.Band_ID), gauge.FloatValue.HasValue ? gauge.FloatValue.Value : 0.00));
+                MetricResult.Add(new AccidentDistributionModel(GetBandName(gauge.BandId), gauge.FloatValue.HasValue ? gauge.FloatValue.Value : 0.00));
             }
         }
 

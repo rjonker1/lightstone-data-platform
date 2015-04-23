@@ -63,13 +63,6 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
             getMakes.GetMakes(RequestForCarId107483);
             return getMakes.Makes;
         }
-
-        public static IEnumerable<CarType> GetCarTypes()
-        {
-            var repository = new FakeCarTypeRepository();
-            var getCarTypes = new CarTypeUnitOfWork(repository);
-            getCarTypes.GetCarTypes(RequestForCarId107483);
-            return getCarTypes.CarTypes;
-        }
+      
     }
 }

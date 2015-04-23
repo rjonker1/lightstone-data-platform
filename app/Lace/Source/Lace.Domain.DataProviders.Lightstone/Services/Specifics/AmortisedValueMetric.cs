@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         {
             foreach (var gauge in _gauges)
             {
-                MetricResult.Add(new AmortisedValueModel(GetBandName(gauge.Band_ID),
+                MetricResult.Add(new AmortisedValueModel(GetBandName(gauge.BandId),
                     gauge.MoneyValue.HasValue ? gauge.MoneyValue.Value : 0.00M));
             }
         }
@@ -51,11 +51,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
             if (!_request.CarId.HasValue || !_request.Year.HasValue) return 0;
 
             var statisic =
-                Statistics.FirstOrDefault(w => w.Car_ID == _request.CarId && w.Year_ID == _request.Year);
+                Statistics.FirstOrDefault(w => w.CarId == _request.CarId && w.YearId == _request.Year);
 
             if (statisic == null) return 0;
 
-            return statisic.Make_ID ?? 0;
+            return statisic.MakeId ?? 0;
         }
 
         private void GetGauges(int metricId)
@@ -64,7 +64,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
             _gauges = makeId == 0
                 ? new List<Statistic>()
-                : Statistics.Where(w => w.Make_ID == makeId && w.Metric_ID == metricId).ToList();
+                : Statistics.Where(w => w.MakeId == makeId && w.MetricId == metricId).ToList();
         }
 
         private string GetBandName(int bandId)

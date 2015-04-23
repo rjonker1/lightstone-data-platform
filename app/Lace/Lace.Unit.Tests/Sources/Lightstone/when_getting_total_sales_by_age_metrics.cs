@@ -14,12 +14,11 @@ namespace Lace.Unit.Tests.Sources.Lightstone
 
         public when_getting_total_sales_by_age_metrics()
         {
-            var request = LaceRequestCarInformationRequestBuilder.ForCarId_110490();
-            var stats = StatisticsData.ForMetricId_6_TotalSalesByAge(); //MetricsBuilder.GetStatistics();
+            var request = LaceRequestCarInformationRequestBuilder.ForCarId_107483();
+            var stats = StatisticsData.ForCarId(); //MetricsBuilder.GetStatistics();
             var bands = MetricsBuilder.GetBands();
-            var carTypes = MetricsBuilder.GetCarTypes();
 
-            _metric = new TotalSalesByAgeMetric(request, stats, bands, carTypes);
+            _metric = new TotalSalesByAgeMetric(request, stats, bands);
         }
 
         public override void Observe()

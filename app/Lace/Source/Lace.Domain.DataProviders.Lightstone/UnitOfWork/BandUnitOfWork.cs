@@ -5,6 +5,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
 
 namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
@@ -24,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Bands = _repository.GetAll();
+                Bands = _repository.GetAll(SelectStatements.GetAllTheBands);
             }
             catch (Exception ex)
             {

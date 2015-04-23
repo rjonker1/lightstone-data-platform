@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
@@ -16,7 +15,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
         private IGetBands _getBands;
         private IGetMuncipalities _getMuncipalities;
         private IGetMakes _getMakes;
-        private IGetCarType _getCarType;
+        //private IGetCarType _getCarType;
         private IGetSales _getSales;
 
         private readonly IHaveCarInformation _request;
@@ -40,7 +39,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
             _getBands = new BandUnitOfWork(_repositories.BandRepository());
             _getMuncipalities = new MuncipalityUnitOfWork(_repositories.MuncipalityRepository());
             _getMakes = new MakeUnitOfWork(_repositories.MakeRepository());
-            _getCarType = new CarTypeUnitOfWork(_repositories.CarTypeRepository());
+            //_getCarType = new CarTypeUnitOfWork(_getStatistics.Statistics);
             _getSales = new SaleUnitOfWork(_repositories.SaleRepository());
 
             return this;
@@ -53,7 +52,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
             _getBands.GetBands(_request);
             _getMuncipalities.GetMunicipalities(_request);
             _getMakes.GetMakes(_request);
-            _getCarType.GetCarTypes(_request);
+            //_getCarType.GetCarTypes(_request);
             _getSales.GetSales(_request);
 
             return this;
@@ -94,14 +93,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
         private IEnumerable<IRespondWithTotalSalesByGenderModel> GetTotalSalesByGender()
         {
             return
-                new TotalSalesByGenderMetric(_request, _getStatistics.Statistics, _getBands.Bands, _getCarType.CarTypes).Get()
+                new TotalSalesByGenderMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get()
                     .MetricResult;
         }
 
         private IEnumerable<IRespondWithTotalSalesByAgeModel> GetTotalSalesByAge()
         {
             return
-                new TotalSalesByAgeMetric(_request, _getStatistics.Statistics, _getBands.Bands, _getCarType.CarTypes).Get()
+                new TotalSalesByAgeMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get()
                     .MetricResult;
         }
 

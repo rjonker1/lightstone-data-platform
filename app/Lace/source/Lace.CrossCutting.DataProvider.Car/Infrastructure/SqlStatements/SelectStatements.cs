@@ -1,10 +1,14 @@
-﻿namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.SqlStatements
+﻿using System;
+
+namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.SqlStatements
 {
     public class SelectStatements
     {
+         [Obsolete]
         public const string GetCarInformationById =
             @"SELECT c.Car_ID as CarId, 0 as [Year], c.ImageUrl, 'Not Available' as [Quarter],c.CarFullName, c.CarModel from Car c where Car_ID = @CarId";
 
+        [Obsolete]
         public const string GetCarInformationByVin =
             @"SELECT v.Car_ID as CarId, v.Year_ID as [Year],c.ImageUrl, case when v.Period = 'First' then '1st Quarter' when v.Period = 'Second' then '2nd Quarter' when v.Period = 'Third' then '3rd Quarter' when v.Period = 'Fourth' then '4th Quarter' else 'Not Available' end as [Quarter], c.CarFullName, c.CarModel from Car c join Vin v on c.Car_ID = v.Car_ID where v.VIN = @Vin and c.Car_ID is not null and v.Year_ID is not null";
 

@@ -5,6 +5,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
 
 namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
@@ -25,7 +26,8 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Sales = _repository.FindByCarIdAndYear(request.CarId, request.Year.HasValue ? request.Year.Value : 0);
+                Sales = _repository.Get(SelectStatements.GetTopFiveSalesForCarIdAndYear,
+                    new {request.CarId, @Year = request.Year.HasValue ? request.Year.Value : 0});
             }
             catch (Exception ex)
             {

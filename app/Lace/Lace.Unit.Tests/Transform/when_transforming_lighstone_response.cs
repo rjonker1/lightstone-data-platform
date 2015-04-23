@@ -65,13 +65,13 @@ namespace Lace.Unit.Tests.Transform
         [Observation]
         public void lighstone_transformer_vechicle_valuation_must_have_amortised_values()
         {
-            _transform.Result.VehicleValuation.AmortisedValues.Count().ShouldEqual(4);
+            _transform.Result.VehicleValuation.AmortisedValues.Count().ShouldEqual(120);
         }
 
         [Observation]
         public void lighstone_transformer_vechicle_valuation_must_have_area_factors()
         {
-            _transform.Result.VehicleValuation.AreaFactors.Count().ShouldEqual(104);
+            _transform.Result.VehicleValuation.AreaFactors.Count().ShouldEqual(121);
         }
 
         [Observation]
@@ -83,7 +83,7 @@ namespace Lace.Unit.Tests.Transform
         [Observation]
         public void lighstone_transformer_vechicle_valuation_must_have_image_gauges()
         {
-            _transform.Result.VehicleValuation.ImageGauges.Count().ShouldEqual(5);
+            _transform.Result.VehicleValuation.ImageGauges.Count().ShouldEqual(6);
         }
 
         [Observation]
