@@ -1,9 +1,14 @@
-﻿namespace Lace.Domain.Core.Entities.Requests.Fields
+﻿using Lace.Domain.Core.Requests.Contracts;
+
+namespace Lace.Domain.Core.Entities.Requests.Fields
 {
-    public class VinNumberRequestField : RequestField
+    public class VinNumberRequestField : IAmVinNumberRequestField
     {
-        public VinNumberRequestField(string field) : base(field)
+        public string Field { get; private set; }
+
+        public VinNumberRequestField(string field)
         {
+            Field = field;
         }
     }
 }

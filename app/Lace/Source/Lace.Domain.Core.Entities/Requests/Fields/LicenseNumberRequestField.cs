@@ -1,9 +1,14 @@
-﻿namespace Lace.Domain.Core.Entities.Requests.Fields
+﻿using Lace.Domain.Core.Requests.Contracts;
+
+namespace Lace.Domain.Core.Entities.Requests.Fields
 {
-    public class LicenseNumberRequestField : RequestField
+    public class LicenseNumberRequestField : IAmLicenseNumberRequestField
     {
-        public LicenseNumberRequestField(string field) : base(field)
+        public string Field { get; private set; }
+
+        public LicenseNumberRequestField(string field)
         {
+            Field = field;
         }
     }
 }

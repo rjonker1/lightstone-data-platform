@@ -1,9 +1,14 @@
-﻿namespace Lace.Domain.Core.Entities.Requests.Fields
+﻿using Lace.Domain.Core.Requests.Contracts;
+
+namespace Lace.Domain.Core.Entities.Requests.Fields
 {
-    public class RequesterEmailRequestField : RequestField
+    public class RequesterEmailRequestField : IAmRequesterEmailRequestField
     {
-        public RequesterEmailRequestField(string field) : base(field)
+        public string Field { get; private set; }
+
+        public RequesterEmailRequestField(string field)
         {
+            Field = field;
         }
     }
 }

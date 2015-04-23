@@ -1,9 +1,14 @@
-﻿namespace Lace.Domain.Core.Entities.Requests.Fields
+﻿using Lace.Domain.Core.Requests.Contracts;
+
+namespace Lace.Domain.Core.Entities.Requests.Fields
 {
-    public class MakeRequestField : RequestField
+    public class MakeRequestField : IAmMakeRequestField
     {
-        public MakeRequestField(string field) : base(field)
+        public string Field { get; private set; }
+
+        public MakeRequestField(string field)
         {
+            Field = field;
         }
     }
 }
