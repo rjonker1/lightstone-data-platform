@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Configuration;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using NServiceBus;
-using Shared.BuildingBlocks.AdoNet.Repository;
 using Shared.Messaging.Billing.Helpers;
 using Workflow.Billing.Messages;
 using Workflow.Billing.Messages.Publishable;
-using Workflow.BuildingBlocks;
 
 namespace Workflow.Transactions.Read.Service.Handlers
 {
@@ -25,9 +22,6 @@ namespace Workflow.Transactions.Read.Service.Handlers
         {
             _transaction = transaction;
             _bus = bus;
-           // _bus =
-            //   BusFactory.CreateAdvancedBus(
-            //        ConfigurationManager.ConnectionStrings["NServiceBus/Transport"].ConnectionString);
         }
 
         public void Handle(BillTransactionMessage message)

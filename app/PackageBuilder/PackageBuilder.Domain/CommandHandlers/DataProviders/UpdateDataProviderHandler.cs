@@ -34,7 +34,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 
             entity.CreateDataProviderRevision(command.Id, command.Name, command.Description, command.CostOfSale,
                 command.ResponseType, command.FieldLevelCostPriceOverride, entity.Version,
-                command.Owner, command.CreatedDate, command.EditedDate, command.DataFields);
+                command.Owner, command.CreatedDate, command.EditedDate, null, command.DataFields);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

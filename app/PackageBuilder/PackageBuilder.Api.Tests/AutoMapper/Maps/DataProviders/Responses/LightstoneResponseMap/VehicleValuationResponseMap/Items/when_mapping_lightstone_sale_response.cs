@@ -27,13 +27,13 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
             _dataField.Count().ShouldEqual(3);
 
             _dataField.FirstOrDefault(x => x.Name == "SalesDate").Name.ShouldEqual("SalesDate");
-            _dataField.FirstOrDefault(x => x.Name == "SalesDate").Type.ShouldEqual(typeof(string));
+            _dataField.FirstOrDefault(x => x.Name == "SalesDate").Type.ShouldEqual(typeof(string).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "LicensingDistrict").Name.ShouldEqual("LicensingDistrict");
-            _dataField.FirstOrDefault(x => x.Name == "LicensingDistrict").Type.ShouldEqual(typeof(string));
+            _dataField.FirstOrDefault(x => x.Name == "LicensingDistrict").Type.ShouldEqual(typeof(string).ToString());
 
             _dataField.FirstOrDefault(x => x.Name == "SalesPrice").Name.ShouldEqual("SalesPrice");
-            _dataField.FirstOrDefault(x => x.Name == "SalesPrice").Type.ShouldEqual(typeof(string));
+            _dataField.FirstOrDefault(x => x.Name == "SalesPrice").Type.ShouldEqual(typeof(string).ToString());
         }
     }
 }

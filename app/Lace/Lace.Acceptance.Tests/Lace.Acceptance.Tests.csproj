@@ -125,6 +125,7 @@
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_signio_drivers_license_decryption.cs" />
     <Compile Include="Requests\when_sending_property_request_to_lace_entry_point.cs" />
     <Compile Include="Requests\when_sending_request_to_lace_entry_point.cs" />
+    <Compile Include="Workflow\when_sending_failed_ivid_request_to_workflow_bus.cs" />
     <Compile Include="Workflow\when_sending_request_for_data_provider_to_workflow_bus.cs" />
   </ItemGroup>
   <ItemGroup>

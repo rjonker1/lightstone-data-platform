@@ -110,7 +110,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             }
 
             command.Workflow.Send(Workflow.Lace.Messages.Core.CommandType.Transformation,
-                transformer.Result ?? new LightstonePropertyResponse(new List<PropertyModel>()), transformer,Provider);
+                transformer.Result ?? new LightstonePropertyResponse(new List<PropertyModel>()), null,Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

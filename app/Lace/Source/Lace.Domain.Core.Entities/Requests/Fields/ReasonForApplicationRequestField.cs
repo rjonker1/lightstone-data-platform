@@ -5,5 +5,10 @@ namespace Lace.Domain.Core.Entities.Requests.Fields
     public class ReasonForApplicationRequestField : IAmReasonForApplicationRequestField
     {
         public string Field { get; private set; }
+
+        public ReasonForApplicationRequestField(string field)
+        {
+            Field = field;
+        }
     }
 }

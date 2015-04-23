@@ -6,26 +6,25 @@ using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Repository
 {
-    public interface ICommitRepository
+    public interface ITransactionRepository
     {
         IList<TItem> Items<TItem>(string sql) where TItem : class;
         IList<TItem> Items<TItem>(string sql, object param) where TItem : class;
     }
 
-    public class CommitRepository : ICommitRepository
+    public class BillingTransactionRepository : ITransactionRepository
     {
         private readonly IDbConnection _connection;
 
-        public CommitRepository()
+        public BillingTransactionRepository()
         {
-            _connection = ConnectionFactory.ForCommandsDatabase();
+            _connection = ConnectionFactory.ForBillingDatabase();  
         }
 
         public IList<TItem> Items<TItem>(string sql) where TItem : class
         {
             return _connection.Query<TItem>(sql).ToList();
         }
-
 
         public IList<TItem> Items<TItem>(string sql, object param) where TItem : class
         {

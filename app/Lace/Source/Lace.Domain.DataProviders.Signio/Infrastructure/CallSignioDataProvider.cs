@@ -106,7 +106,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             }
 
             command.Workflow.Send(CommandType.Transformation,
-                transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), transformer, Provider);
+                transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), null, Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

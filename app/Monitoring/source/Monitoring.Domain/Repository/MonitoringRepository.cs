@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Shared.BuildingBlocks.AdoNet.Repository;
@@ -31,9 +32,9 @@ namespace Monitoring.Domain.Repository
             mapping.Insert(_connection, instance);
         }
 
-        public IQueryable<TItem> Items<TItem>(string sql) where TItem : class
+        public IList<TItem> Items<TItem>(string sql) where TItem : class
         {
-            return _connection.Query<TItem>(sql).ToList().AsQueryable();
+            return _connection.Query<TItem>(sql).ToList();
         }
     }
 }

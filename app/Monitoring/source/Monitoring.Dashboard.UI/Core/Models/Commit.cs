@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Text;
-using Monitoring.Dashboard.UI.Core.Extensions;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {

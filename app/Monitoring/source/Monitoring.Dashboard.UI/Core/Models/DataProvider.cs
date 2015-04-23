@@ -37,4 +37,14 @@ namespace Monitoring.Dashboard.UI.Core.Models
         [DataMember]
         public string Name { get; set; }
     }
+
+    [DataContract]
+    public class DataProviderError
+    {
+        [DataMember]
+        public Guid RequestId { get; set; }
+
+        [DataMember]
+        public int ErrorCount { get; set; }
+    }
 }

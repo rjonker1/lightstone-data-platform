@@ -84,6 +84,7 @@
     <Compile Include="RepairIndexModel.cs" />
     <Compile Include="Requests\Fields\ApplicantNameRequestField.cs" />
     <Compile Include="Requests\Fields\EngineNumberRequestField.cs" />
+    <Compile Include="Requests\Fields\VinNumberRequestField.cs" />
     <Compile Include="Requests\IvidStandardRequest.cs" />
     <Compile Include="Requests\Fields\RequesterNameRequestField.cs" />
     <Compile Include="Requests\Fields\LabelRequestField.cs" />

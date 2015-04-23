@@ -111,12 +111,12 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             };
         });
     }).controller("DataProviderStatisticsController", function ($scope, dataProviderSignalRService, $rootScope) {
-        $scope.dataProviderStatistics = [];
+        $scope.statistics = {};
         dataProviderSignalRService.init();
 
         $scope.$parent.$on("dataProviderStatisticsInfo", function(e, result) {
             $scope.$apply(function() {
-                $scope.dataProviderStatistics = result;
+                $scope.statistics = result[0];
             });
 
             $scope.ReInitializeService = function() {

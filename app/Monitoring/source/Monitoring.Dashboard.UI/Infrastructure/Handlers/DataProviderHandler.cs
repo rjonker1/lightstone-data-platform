@@ -14,13 +14,16 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     {
         private readonly IMonitoringRepository _monitoring;
         private readonly ICommitRepository _commit;
+        private readonly ITransactionRepository _billing;
         private readonly ILog _log;
         public IEnumerable<DataProviderView> MonitoringResponse { get; private set; }
 
-        public DataProviderHandler(IMonitoringRepository monitoring, ICommitRepository commit)
+        public DataProviderHandler(IMonitoringRepository monitoring, ICommitRepository commit,
+            ITransactionRepository billing)
         {
             _monitoring = monitoring;
             _commit = commit;
+            _billing = billing;
             _log = LogManager.GetLogger(GetType());
         }
 
@@ -29,20 +32,24 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             try
             {
                 var requests =
-                    _monitoring.Items<DataProvider>(SelectStatements.GetDataProviderRequestResponses).ToList();
+                    _monitoring.Items<DataProvider>(SelectStatements.GetDataProviderRequestResponses).ToArray();
 
                 if (!requests.Any())
                     return;
 
-                var payloads = new List<Commit>();
+                var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForManyRequestId,
+                    new {@RequestIds = requests.Select(s => s.RequestId).ToArray()})
+                    .OrderBy(o => o.StreamIdOriginal)
+                    .ThenBy(o => o.CommitSequence)
+                    .ToArray();
 
-                requests.ForEach(
-                    f =>
-                        payloads.AddRange(_commit.Items<Commit>(SelectStatements.GetCommitForRequestId,
-                            new {@RequestId = f.RequestId}).ToArray()));
+                var errors = _billing.Items<DataProviderError>(
+                    SelectStatements.GetNumberOfErrorsPerRequest,
+                    new {@RequestIds = requests.Select(s => s.RequestId).ToArray()}).ToArray();
 
-                //var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForRequestId,
-                //    new {@RequestIds = requests.FirstOrDefault().RequestId});
+                if (!errors.Any())
+                    errors = new DataProviderError[] {};
+
 
                 MonitoringResponse =
                     requests.Select(
@@ -50,12 +57,19 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                             new DataProviderView(s.RequestId, payloads
                                 .Where(f => f.StreamIdOriginal == s.RequestId.ToString())
                                 .Select(c => new SerializedPayload(c.Payload, c.CommitSequence)).ToList(), s.Date, false,
-                                s.ElapsedTime, s.SearchType, s.SearchTerm).DeserializePayload());
+                                s.ElapsedTime, s.SearchType, s.SearchTerm).DeserializePayload()
+                                .SetState(GetErrorCount(errors.FirstOrDefault(f => f.RequestId == s.RequestId)))).ToList();
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("An error occurred in the Monitoirng Handler because of {0}", ex.Message);
             }
         }
+
+        private static int GetErrorCount(DataProviderError error)
+        {
+            return error == null ? 0 : error.ErrorCount;
+        }
+
     }
 }

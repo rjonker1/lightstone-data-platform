@@ -5,5 +5,10 @@ namespace Lace.Domain.Core.Entities.Requests.Fields
     public class RequesterEmailRequestField : IAmRequesterEmailRequestField
     {
         public string Field { get; private set; }
+
+        public RequesterEmailRequestField(string field)
+        {
+            Field = field;
+        }
     }
 }

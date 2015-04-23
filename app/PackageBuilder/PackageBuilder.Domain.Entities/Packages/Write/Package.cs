@@ -18,7 +18,6 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Events;
-using PackageBuilder.Domain.Entities.Requests;
 using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Domain.Entities.Packages.Write

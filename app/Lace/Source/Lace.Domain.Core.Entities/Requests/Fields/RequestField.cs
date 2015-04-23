@@ -2,11 +2,11 @@
 
 namespace Lace.Domain.Core.Entities.Requests.Fields
 {
-    public class RequesterPhoneRequestField : IAmRequesterPhoneRequestField
+    public abstract class RequestField : IAmRequestField
     {
         public string Field { get; private set; }
 
-        public RequesterPhoneRequestField(string field)
+        protected RequestField(string field)
         {
             Field = field;
         }

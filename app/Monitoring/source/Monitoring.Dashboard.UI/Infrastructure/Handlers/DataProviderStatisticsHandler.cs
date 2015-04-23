@@ -33,13 +33,15 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                 StatisticsResponse =
                     statistics.Select(
                         s =>
-                            new DataProviderStatisticsView(s.AvgerageRequestTime, s.TotalRequests, s.TotalResponses, 0)
+                            new DataProviderStatisticsView(s.AvgerageRequestTime, s.TotalRequests, s.TotalResponses,
+                                s.TotalErrors)
                                 .DetermineSuccessRate());
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("An error occurred in the Monitoirng Data Provider Statistics Handler because of {0}",
                     ex.Message);
+                StatisticsResponse = new[] {new DataProviderStatisticsView("00:00:00", 0, 0, 0)};
             }
         }
 

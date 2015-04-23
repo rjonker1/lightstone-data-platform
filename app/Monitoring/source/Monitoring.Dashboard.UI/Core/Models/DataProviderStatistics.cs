@@ -19,5 +19,8 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         [DataMember]
         public double TotalResponses { get; set; }
+
+        [DataMember]
+        public double TotalErrors { get; set; }
     }
 }

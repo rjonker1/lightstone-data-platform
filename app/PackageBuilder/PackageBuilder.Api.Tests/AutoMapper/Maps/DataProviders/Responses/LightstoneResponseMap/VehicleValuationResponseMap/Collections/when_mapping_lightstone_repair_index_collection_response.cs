@@ -25,20 +25,20 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         public void should_map_repair_index_data_fields()
         {
             _dataField.Name.ShouldEqual("RepairIndex");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithRepairIndexModel>));
+            _dataField.Type.ShouldEqual(typeof(List<IRespondWithRepairIndexModel>).ToString());
 
             var dataFields = _dataField.DataFields;
 
             dataFields.Count().ShouldEqual(3);
 
             dataFields.FirstOrDefault(x => x.Name == "Year").Name.ShouldEqual("Year");
-            dataFields.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(int));
+            dataFields.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(int).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Band").Name.ShouldEqual("Band");
-            dataFields.FirstOrDefault(x => x.Name == "Band").Type.ShouldEqual(typeof(string));
+            dataFields.FirstOrDefault(x => x.Name == "Band").Type.ShouldEqual(typeof(string).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double));
+            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double).ToString());
         }
     }
 }

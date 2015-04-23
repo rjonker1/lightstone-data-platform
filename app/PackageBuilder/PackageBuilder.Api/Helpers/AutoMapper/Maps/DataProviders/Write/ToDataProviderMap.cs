@@ -15,6 +15,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write
             Mapper.CreateMap<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>()
                 .ConvertUsing(s => s != null ? s.Select(Mapper.Map<DataProviderDto, DataProvider>).ToList() : Enumerable.Empty<DataProvider>());
             Mapper.CreateMap<DataProviderDto, DataProvider>()
+                .ForMember(d => d.RequestFields, opt => opt.MapFrom(x => x.DataFields == null ? Enumerable.Empty<DataField>() : Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(x.RequestFields)))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields == null ? Enumerable.Empty<DataField>() : Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(x.DataFields)));
 
             Mapper.CreateMap<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>()

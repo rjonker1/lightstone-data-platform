@@ -212,6 +212,7 @@
     <Compile Include="Infrastructure\Handlers\DataProviderStatisticsHandler.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderHandler.cs" />
     <Compile Include="Infrastructure\Repository\ICommitRepository.cs" />
+    <Compile Include="Infrastructure\Repository\ITransactionRepository.cs" />
     <Compile Include="Infrastructure\Services\DataProviderMonitoringService.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />

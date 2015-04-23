@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
 
@@ -15,7 +14,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataFields.Write
         double CostOfSale { get; }
         bool? IsSelected { get; }
         int Order { get; }
-        Type Type { get; }
+        string Type { get; }
         IEnumerable<IDataField> DataFields { get; }
         void OverrideValuesFromPackage(double costPrice, bool? selected);
     }

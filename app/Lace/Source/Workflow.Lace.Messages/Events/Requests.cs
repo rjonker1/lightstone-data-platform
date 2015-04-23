@@ -9,7 +9,7 @@ namespace Workflow.Lace.Messages.Events
     [DataContract]
     public class RequestToDataProvider : IPublishableMessage
     {
-        public RequestToDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, PayloadObjectIdentifier payload)
+        public RequestToDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
@@ -35,7 +35,7 @@ namespace Workflow.Lace.Messages.Events
         public ConnectionTypeIdentifier Connection { get; private set; }
 
         [DataMember]
-        public PayloadObjectIdentifier Payload { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
     }
 
     [Serializable]
