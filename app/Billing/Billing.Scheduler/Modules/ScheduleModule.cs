@@ -61,7 +61,6 @@ namespace Billing.Scheduler.Modules
 
                 var cronExpression = ""+dt.Minute+" "+dt.Hour+" * * *";
 
-                //if (runType == "StageBilling") RecurringJob.AddOrUpdate("Test", () => new MessageSchedule().Send(billRun), cronExpression, TimeZoneInfo.Local);
                 if (runType == "StageBilling") RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
 
                 return null;
