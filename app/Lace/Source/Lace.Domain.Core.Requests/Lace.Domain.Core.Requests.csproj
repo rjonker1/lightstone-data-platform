@@ -43,29 +43,51 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Contracts\IAmApplicantNameRequestField.cs" />
-    <Compile Include="Contracts\IAmBusinessRequest.cs" />
-    <Compile Include="Contracts\IAmChassisField.cs" />
+    <Compile Include="Contracts\Requests\IAmAnprRequest.cs" />
+    <Compile Include="Contracts\RequestFields\IAmApplicantNameRequestField.cs" />
+    <Compile Include="Contracts\Requests\IAmBusinessRequest.cs" />
+    <Compile Include="Contracts\RequestFields\IAmCarIdRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmChassisRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmCompanyNameRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmCompanyRegistrationNumberRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmCompanyVatNumberRequestField.cs" />
     <Compile Include="Contracts\IAmDataProvider.cs" />
-    <Compile Include="Contracts\IAmDriversLicenseRequest.cs" />
-    <Compile Include="Contracts\IAmEngineNumberRequestField.cs" />
-    <Compile Include="Contracts\IAmJisRequest.cs" />
-    <Compile Include="Contracts\IAmLabelRequestField.cs" />
-    <Compile Include="Contracts\IAmLicenseNumberRequestField.cs" />
-    <Compile Include="Contracts\IAmLicensePlateRequest.cs" />
+    <Compile Include="Contracts\Requests\IAmDriversLicenseRequest.cs" />
+    <Compile Include="Contracts\RequestFields\IAmEngineNumberRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmFirstNameRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmIdentityNumberRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmImageRequestField.cs" />
+    <Compile Include="Contracts\Requests\IAmIvidTitleholderRequest.cs" />
+    <Compile Include="Contracts\Requests\IAmJisRequest.cs" />
+    <Compile Include="Contracts\RequestFields\IAmLabelRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmLastNameRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmLicenseNumberRequestField.cs" />
+    <Compile Include="Contracts\Requests\IAmLicensePlateRequest.cs" />
+    <Compile Include="Contracts\Requests\IAmLightstoneAutoRequest.cs" />
+    <Compile Include="Contracts\Requests\IAmLightstonePropertyRequest.cs" />
     <Compile Include="Contracts\IAmMakeRequest.cs" />
-    <Compile Include="Contracts\IAmMakeRequestField.cs" />
-    <Compile Include="Contracts\IAmReasonForApplicationRequestField.cs" />
-    <Compile Include="Contracts\IAmRegisterNumberRequestField.cs" />
-    <Compile Include="Contracts\IAmDataProviderRequest.cs" />
-    <Compile Include="Contracts\IAmRequesterEmailRequestField.cs" />
-    <Compile Include="Contracts\IAmRequesterNameRequestField.cs" />
-    <Compile Include="Contracts\IAmRequesterPhoneRequestField.cs" />
-    <Compile Include="Contracts\IAmRequestField.cs" />
-    <Compile Include="Contracts\IAmRequestReferenceRequestField.cs" />
-    <Compile Include="Contracts\IAmStandardIvidRequest.cs" />
+    <Compile Include="Contracts\RequestFields\IAmMakeRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmMaxRowsToReturnRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmReasonForApplicationRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmRegisterNumberRequestField.cs" />
+    <Compile Include="Contracts\Requests\IAmDataProviderRequest.cs" />
+    <Compile Include="Contracts\RequestFields\IAmRequesterEmailRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmRequesterNameRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmRequesterPhoneRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmRequestReferenceRequestField.cs" />
+    <Compile Include="Contracts\Requests\IAmRgtRequest.cs" />
+    <Compile Include="Contracts\Requests\IAmRgtVinRequest.cs" />
+    <Compile Include="Contracts\Requests\IAmSignioDriversLicenseDecryptionRequest.cs" />
+    <Compile Include="Contracts\Requests\IAmStandardIvidRequest.cs" />
+    <Compile Include="Contracts\RequestFields\IAmTrackingNumberRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmUserIdRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmUsernameRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmUserTokenRequestField.cs" />
     <Compile Include="Contracts\IAmVinField.cs" />
-    <Compile Include="Contracts\IAmVinNumberRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmVinNumberRequestField.cs" />
+    <Compile Include="Contracts\IAmVinRequest.cs" />
+    <Compile Include="Contracts\RequestFields\IAmYearRequestField.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
     <Compile Include="Contracts\IHaveBusiness.cs" />
     <Compile Include="Contracts\IHaveCarInformation.cs" />
@@ -75,7 +97,7 @@
     <Compile Include="Contracts\IHaveFica.cs" />
     <Compile Include="Contracts\IHaveJisInformation.cs" />
     <Compile Include="Contracts\IHavePackageForRequest.cs" />
-    <Compile Include="Contracts\IAmPropertyRequest.cs" />
+    <Compile Include="Contracts\Requests\IAmPropertyRequest.cs" />
     <Compile Include="Contracts\IHaveProperty.cs" />
     <Compile Include="Contracts\IHaveUser.cs" />
     <Compile Include="Contracts\IHaveVehicle.cs" />
@@ -87,6 +109,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

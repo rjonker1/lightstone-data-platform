@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Core.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Mothers.Packages

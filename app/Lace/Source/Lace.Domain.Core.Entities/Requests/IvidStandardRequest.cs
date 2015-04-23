@@ -1,4 +1,5 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using Lace.Domain.Core.Requests.Contracts.RequestFields;
+using Lace.Domain.Core.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities.Requests
 {
@@ -11,6 +12,8 @@ namespace Lace.Domain.Core.Entities.Requests
         public IAmApplicantNameRequestField ApplicantName { get; private set; }
         public IAmReasonForApplicationRequestField ReasonForApplication { get; private set; }
         public IAmLabelRequestField Label { get; private set; }
+        public IAmVinNumberRequestField VinNumber { get; private set; }
+        public IAmChassisRequestField ChassisNumber { get; private set; }
         public IAmEngineNumberRequestField EngineNumber { get; private set; }
         public IAmRegisterNumberRequestField RegisterNumber { get; private set; }
         public IAmLicenseNumberRequestField LicenseNumber { get; private set; }

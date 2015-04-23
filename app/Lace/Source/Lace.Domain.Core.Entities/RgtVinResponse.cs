@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Core.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -31,6 +33,8 @@ namespace Lace.Domain.Core.Entities
             CarFullname = string.Format("{0} {1}", VehicleMake, VehicleModel);
         }
 
+        [DataMember]
+        public IAmRgtVinRequest Request { get; private set; }
         [DataMember]
         public string Vin { get; private set; }
         [DataMember]

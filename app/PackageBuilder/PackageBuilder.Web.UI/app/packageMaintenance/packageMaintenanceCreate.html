@@ -12,6 +12,16 @@
                     {{provider.name}}
                 </div>
             </div>
+            <div class="col-md-2">
+                <div multi-select
+                     input-model="provider.requestFields"
+                     button-label="name"
+                     item-label="name maker"
+                     max-labels="1"
+                     tick-property="isSelected"
+                     output-model="selectedRequestFields">
+                </div>
+            </div>
             <div class="col-md-3" ng-show="provider.fieldLevelCostPriceOverride == false">
                 Cost Of Sale: R {{provider.costOfSale}}
             </div>

@@ -1,0 +1,14 @@
+﻿using Lace.Domain.Core.Requests.Contracts.RequestFields;
+
+namespace Lace.Domain.Core.Entities.RequestFields
+{
+    public class RegisterNumberRequestField : IAmRegisterNumberRequestField
+    {
+        public string Field { get; private set; }
+
+        public RegisterNumberRequestField(string field)
+        {
+            Field = field;
+        }
+    }
+}

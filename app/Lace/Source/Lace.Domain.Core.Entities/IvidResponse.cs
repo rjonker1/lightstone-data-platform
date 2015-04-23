@@ -5,6 +5,7 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Models;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Core.Requests.Contracts.Requests;
 using Newtonsoft.Json;
 
 namespace Lace.Domain.Core.Entities
