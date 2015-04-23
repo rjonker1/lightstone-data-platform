@@ -44,17 +44,17 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                 .ConvertUsing(s =>
                 {
                     var request = s.Request ?? new IvidStandardRequest(
-                                                    new RequesterNameRequestField(),
-                                                    new RequesterPhoneRequestField(),
-                                                    new RequesterEmailRequestField(),
+                                                    new RequesterNameRequestField(""),
+                                                    new RequesterPhoneRequestField(""),
+                                                    new RequesterEmailRequestField(""),
                                                     new RequestReferenceRequestField(""),
-                                                    new ApplicantNameRequestField(),
-                                                    new ReasonForApplicationRequestField(), 
-                                                    new LabelRequestField(),
-                                                    new EngineNumberRequestField(),
-                                                    new RegisterNumberRequestField(),
-                                                    new LicenseNumberRequestField(),
-                                                    new MakeRequestField());
+                                                    new ApplicantNameRequestField(""),
+                                                    new ReasonForApplicationRequestField(""),
+                                                    new LabelRequestField(""),
+                                                    new EngineNumberRequestField(""),
+                                                    new RegisterNumberRequestField(""),
+                                                    new LicenseNumberRequestField(""),
+                                                    new MakeRequestField(""));
                     return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
                 });
             Mapper.CreateMap<IProvideDataFromIvidTitleHolder, IEnumerable<IDataField>>()
@@ -118,29 +118,29 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             switch (requestType)
             {
                 case RequestFieldType.ApplicantName:
-                    return new ApplicantNameRequestField();
+                    return new ApplicantNameRequestField(source.Value);
                 case RequestFieldType.EngineNumber:
-                    return new EngineNumberRequestField();
+                    return new EngineNumberRequestField(source.Value);
                 case RequestFieldType.Label:
-                    return new LabelRequestField();
+                    return new LabelRequestField(source.Value);
                 case RequestFieldType.LicenseNumber:
-                    return new LicenseNumberRequestField();
+                    return new LicenseNumberRequestField(source.Value);
                 case RequestFieldType.Make:
-                    return new MakeRequestField();
+                    return new MakeRequestField(source.Value);
                 case RequestFieldType.ReasonForApplication:
-                    return new ReasonForApplicationRequestField();
+                    return new ReasonForApplicationRequestField(source.Value);
                 case RequestFieldType.RegisterNumber:
-                    return new RegisterNumberRequestField();
+                    return new RegisterNumberRequestField(source.Value);
                 case RequestFieldType.RequestReference:
                     return new RequestReferenceRequestField(source.Value);
                 case RequestFieldType.RequesterEmail:
-                    return new RequesterEmailRequestField();
+                    return new RequesterEmailRequestField(source.Value);
                 case RequestFieldType.RequesterName:
-                    return new RequesterNameRequestField();
+                    return new RequesterNameRequestField(source.Value);
                 case RequestFieldType.RequesterPhone:
-                    return new RequesterPhoneRequestField();
-                //case RequestFieldType.VinNumber:
-                //    return new VinNumer();
+                    return new RequesterPhoneRequestField(source.Value);
+                case RequestFieldType.VinNumber:
+                    return new VinNumberRequestField(source.Value);
             }
 
             return null;

@@ -9,7 +9,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         public DataProviderDto()
         {
             DataFields = Enumerable.Empty<DataProviderFieldItemDto>();
-            RequestFields = new[]{new DataProviderFieldItemDto {Name = "Vin"}, new DataProviderFieldItemDto {Name = "Lic"}};
+            RequestFields = Enumerable.Empty<DataProviderFieldItemDto>();
         }
 
         public Guid Id { get; set; }
