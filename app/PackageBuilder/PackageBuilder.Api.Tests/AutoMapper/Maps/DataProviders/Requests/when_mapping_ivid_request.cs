@@ -20,19 +20,56 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
 
             _dataFields =
                 Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(
-                    new IvidStandardRequest(new RequesterNameRequestField(""), new RequesterPhoneRequestField(""),
-                        new RequesterEmailRequestField(""), new RequestReferenceRequestField(""),
-                        new ApplicantNameRequestField(""), new ReasonForApplicationRequestField(""), new LabelRequestField(""),
-                        new EngineNumberRequestField(""), new RegisterNumberRequestField(""),
-                        new LicenseNumberRequestField(""), new MakeRequestField("")));
+                    new IvidStandardRequest(
+                        new RequesterNameRequestField(""), 
+                        new RequesterPhoneRequestField(""),
+                        new RequesterEmailRequestField(""), 
+                        new RequestReferenceRequestField(""),
+                        new ApplicantNameRequestField(""), 
+                        new ReasonForApplicationRequestField(""), 
+                        new LabelRequestField(""), 
+                        new VinNumberRequestField(""), 
+                        new ChassisNumberRequestField(""),
+                        new EngineNumberRequestField(""), 
+                        new RegisterNumberRequestField(""),
+                        new LicenseNumberRequestField(""), 
+                        new MakeRequestField("")));
         }
 
         [Observation]
         public void should_map_all_ivid_data_fields()
         {
-            _dataFields.Count().ShouldEqual(11);
+            _dataFields.Count().ShouldEqual(13);
+            _dataFields.FirstOrDefault(x => x.Name == "Requester Name").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Requester Phone").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Requester Email").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Request Reference").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Applicant Name").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Reason For Application").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Label").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Vin Number").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Chassis Number").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Register Number").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "License Number").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Make").ShouldNotBeNull();
 
-            var test = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(_dataFields);
+            var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(_dataFields);
+
+            var types = requestFields.Select(x => x.GetType());
+            types.Count().ShouldEqual(13);
+            types.ShouldContain(typeof(RequesterNameRequestField));
+            types.ShouldContain(typeof(RequesterPhoneRequestField));
+            types.ShouldContain(typeof(RequesterEmailRequestField));
+            types.ShouldContain(typeof(RequestReferenceRequestField));
+            types.ShouldContain(typeof(ApplicantNameRequestField));
+            types.ShouldContain(typeof(ReasonForApplicationRequestField));
+            types.ShouldContain(typeof(LabelRequestField));
+            types.ShouldContain(typeof(VinNumberRequestField));
+            types.ShouldContain(typeof(ChassisNumberRequestField));
+            types.ShouldContain(typeof(EngineNumberRequestField));
+            types.ShouldContain(typeof(RegisterNumberRequestField));
+            types.ShouldContain(typeof(LicenseNumberRequestField));
+            types.ShouldContain(typeof(MakeRequestField));
         }
     }
 }
