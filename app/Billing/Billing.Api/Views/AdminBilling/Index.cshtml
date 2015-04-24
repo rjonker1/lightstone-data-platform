@@ -121,10 +121,13 @@
                         <div class="form-group">
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label>Daily Run:</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-3">
+                                    <input id="dailyRunFlag" type="checkbox" checked>
+                                </div>
+                                <div class="col-md-6">
                                     <div class='input-group date' id='dailyBillingRun'>
                                         <input id='dailyBillingRun-input' type='text' class="form-control" />
                                         <span class="input-group-addon">
@@ -134,14 +137,17 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <br />
-                            
+
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label>Monthly Run:</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-3">
+                                    <input id="monthlyRunFlag" type="checkbox" checked>
+                                </div>
+                                <div class="col-md-6">
                                     <div class='input-group date' id='monthlyBillingRun'>
                                         <input type='text' class="form-control" />
                                         <span class="input-group-addon">
@@ -151,7 +157,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -160,11 +166,13 @@
 
                             later.date.localTime();
 
+                            $('#monthlyRunFlag').bootstrapSwitch('state', true, true);
+
                             $('#monthlyBillingRun').datetimepicker({
                                 format: 'DD [of each Month at] HH:mm'
                             });
 
-                            $('#automated_run').click(function() {
+                            $('#automated_run').click(function () {
 
                                 $.get("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily", function (response) {
 
@@ -175,6 +183,13 @@
                                         format: 'HH:mm',
                                         defaultDate: moment(result)
                                     });
+
+                                    if (response.data == '* * * * *') {
+                                        $('#dailyRunFlag').bootstrapSwitch('state', false, true);
+                                        return;
+                                    }
+
+                                    $('#dailyRunFlag').bootstrapSwitch('state', true, true);
                                 });
                             });
 
@@ -183,9 +198,9 @@
                                 var time = $('#dailyBillingRun-input').val().split(":");
                                 var dailySchedule = moment().hour(time[0]).minutes(time[1]).format('DD-MM-YYYY HH:mm');
 
-                                $.post("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily?daily_time=" + dailySchedule, function (response) {
+                                $.post("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily?daily_time=" + dailySchedule +
+                                        "&disable_schedule=" + $('#dailyRunFlag').bootstrapSwitch('state'), function (response) {
 
-                                    console.log("Schedule Posted!!");
                                 });
                             });
                         });

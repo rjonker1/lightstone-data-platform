@@ -10,7 +10,7 @@ using Nancy;
 using RestSharp;
 using Workflow.BuildingBlocks;
 
-using  CronExpressionDescriptor;
+using CronExpressionDescriptor;
 
 namespace Billing.Scheduler.Modules
 {
@@ -21,51 +21,59 @@ namespace Billing.Scheduler.Modules
         {
             Post["/Schedules/BillingRun/Execute/{runType}"] = parameters =>
             {
+
                 var runType = parameters.runType;
 
                 if (runType == "StageBilling") new MessageSchedule().Send(new BillingMessage() { RunType = runType });
-                
+
                 return Response.AsJson(new { data = "Required type: StageBilling" });
             };
 
             Get["/Schedules/BillingRun/Schedule/Daily"] = parameters =>
             {
+
                 var cronExpression = "* * * * *";
 
                 using (var job = JobStorage.Current.GetConnection())
                 {
+
                     foreach (var recurringJob in job.GetRecurringJobs())
                     {
-                        if(recurringJob.Id == "StageBilling Run") cronExpression = recurringJob.Cron;
+                        if (recurringJob.Id == "StageBilling Run") cronExpression = recurringJob.Cron;
                     }
                 }
 
-                return Response.AsJson(new {data = cronExpression});
+                return Response.AsJson(new { data = cronExpression });
             };
 
             Post["/Schedules/BillingRun/Schedule/Daily"] = parameters =>
             {
-                string dailyTime = Request.Query["daily_time"];
-                string runFlag = Request.Query["run_schedule"];
 
-                if (runFlag == "false")
+                DateTime dt;
+                string dailyTime = Request.Query["daily_time"];
+                string disableFlag = Request.Query["disable_schedule"];
+
+                if (disableFlag == "false")
                 {
                     RecurringJob.RemoveIfExists("StageBilling Run");
-                    return Response.AsJson(new { message = "Schedule removed" });
+                    return Response.AsJson(new { data = "Schedule removed" });
                 }
 
-                var billRun = new BillingMessage()
+                try
                 {
-                    RunType = "Stage",
-                    Schedule = null
-                };
+                    dt = DateTime.ParseExact(dailyTime, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
+                }
+                catch (Exception e)
+                {
+                    return Response.AsJson(new { data = "Error while parsing DateTime variable" });
+                }
 
-                DateTime dt = DateTime.ParseExact(dailyTime, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
-                var cronExpression = ""+dt.Minute+" "+dt.Hour+" * * *";
+                var billRun = new BillingMessage() { RunType = "Stage",Schedule = null };
+                var cronExpression = "" + dt.Minute + " " + dt.Hour + " * * *";
 
                 RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
 
-                return Response.AsJson(new {message = "Schedule Added/Updated"});
+                return Response.AsJson(new { data = "Schedule Added/Updated" });
             };
 
             //CORS for Module
@@ -86,7 +94,7 @@ namespace Billing.Scheduler.Modules
         public void Send(BillingMessage message)
         {
             var bus = new TransactionBus(_bus);
-            bus.SendDynamic(new BillingMessage() {RunType = message.RunType, Schedule = message.Schedule});
+            bus.SendDynamic(new BillingMessage() { RunType = message.RunType, Schedule = message.Schedule });
         }
     }
 }
