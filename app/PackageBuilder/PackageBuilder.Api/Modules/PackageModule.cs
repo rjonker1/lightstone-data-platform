@@ -123,8 +123,7 @@ namespace PackageBuilder.Api.Modules
             Post["/Packages"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
-                var dProviders =
-                    Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
+                var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
 
                 publisher.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale,
                     dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Owner, DateTime.UtcNow, null,

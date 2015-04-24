@@ -153,9 +153,8 @@
 
 </script>
 
-
 <section class="mainbar" data-ng-controller="packageMaintenanceCreate">
-    <!--{{dataProvsPkg}}-->
+    <!--{{dataProvsPkg.Package}}-->
     <section class="matter">
         <div class="container">
             <div class="row">
@@ -186,7 +185,7 @@
                                 <br />
                                 <div>
                                     <button type="button" class="btn btn-danger" style="margin-left: 0;" ng-click="cancel()">Cancel</button>
-                                    <button type="button" class="btn btn-success" ng-click="editPackage(dataProvsPkg.Package[0])">Save Package</button>
+                                    <button type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)">Save Package</button>
                                 </div>
                             </div>
 
