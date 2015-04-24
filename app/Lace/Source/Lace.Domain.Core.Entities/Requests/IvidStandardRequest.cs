@@ -19,9 +19,7 @@ namespace Lace.Domain.Core.Entities.Requests
         public IAmLicenseNumberRequestField LicenseNumber { get; private set; }
         public IAmMakeRequestField Make { get; private set; }
 
-        public IvidStandardRequest(IAmRequesterNameRequestField requesterName, IAmRequesterPhoneRequestField requesterPhone, IAmRequesterEmailRequestField requesterEmail, 
-            IAmRequestReferenceRequestField requestReference, IAmApplicantNameRequestField applicantName, IAmReasonForApplicationRequestField reasonForApplication, 
-            IAmLabelRequestField label, IAmEngineNumberRequestField engineNumber, IAmRegisterNumberRequestField registerNumber, IAmLicenseNumberRequestField licenseNumber, IAmMakeRequestField make)
+        public IvidStandardRequest(IAmRequesterNameRequestField requesterName, IAmRequesterPhoneRequestField requesterPhone, IAmRequesterEmailRequestField requesterEmail, IAmRequestReferenceRequestField requestReference, IAmApplicantNameRequestField applicantName, IAmReasonForApplicationRequestField reasonForApplication, IAmLabelRequestField label, IAmVinNumberRequestField vinNumber, IAmChassisRequestField chassisNumber, IAmEngineNumberRequestField engineNumber, IAmRegisterNumberRequestField registerNumber, IAmLicenseNumberRequestField licenseNumber, IAmMakeRequestField make)
         {
             RequesterName = requesterName;
             RequesterPhone = requesterPhone;
@@ -30,6 +28,8 @@ namespace Lace.Domain.Core.Entities.Requests
             ApplicantName = applicantName;
             ReasonForApplication = reasonForApplication;
             Label = label;
+            VinNumber = vinNumber;
+            ChassisNumber = chassisNumber;
             EngineNumber = engineNumber;
             RegisterNumber = registerNumber;
             LicenseNumber = licenseNumber;

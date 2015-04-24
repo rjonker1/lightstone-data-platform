@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
-using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Core.Requests.Contracts.Requests;
 using PackageBuilder.Core.Helpers.Extensions;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;

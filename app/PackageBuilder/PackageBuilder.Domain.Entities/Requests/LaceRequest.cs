@@ -1,5 +1,6 @@
 ﻿using System;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Core.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Domain.Entities.Requests
