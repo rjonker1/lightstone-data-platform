@@ -84,6 +84,7 @@
     <Compile Include="RepairIndexModel.cs" />
     <Compile Include="RequestFields\ApplicantNameRequestField.cs" />
     <Compile Include="RequestFields\CarIdRequestField.cs" />
+    <Compile Include="RequestFields\ChassisNumberRequestField.cs" />
     <Compile Include="RequestFields\EngineNumberRequestField.cs" />
     <Compile Include="RequestFields\ImageRequestField.cs" />
     <Compile Include="RequestFields\UsernameRequestField.cs" />

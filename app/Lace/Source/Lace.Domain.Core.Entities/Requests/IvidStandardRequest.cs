@@ -13,13 +13,13 @@ namespace Lace.Domain.Core.Entities.Requests
         public IAmReasonForApplicationRequestField ReasonForApplication { get; private set; }
         public IAmLabelRequestField Label { get; private set; }
         public IAmVinNumberRequestField VinNumber { get; private set; }
-        public IAmChassisRequestField ChassisNumber { get; private set; }
+        public IAmChassisNumberRequestField ChassisNumberNumber { get; private set; }
         public IAmEngineNumberRequestField EngineNumber { get; private set; }
         public IAmRegisterNumberRequestField RegisterNumber { get; private set; }
         public IAmLicenseNumberRequestField LicenseNumber { get; private set; }
         public IAmMakeRequestField Make { get; private set; }
 
-        public IvidStandardRequest(IAmRequesterNameRequestField requesterName, IAmRequesterPhoneRequestField requesterPhone, IAmRequesterEmailRequestField requesterEmail, IAmRequestReferenceRequestField requestReference, IAmApplicantNameRequestField applicantName, IAmReasonForApplicationRequestField reasonForApplication, IAmLabelRequestField label, IAmVinNumberRequestField vinNumber, IAmChassisRequestField chassisNumber, IAmEngineNumberRequestField engineNumber, IAmRegisterNumberRequestField registerNumber, IAmLicenseNumberRequestField licenseNumber, IAmMakeRequestField make)
+        public IvidStandardRequest(IAmRequesterNameRequestField requesterName, IAmRequesterPhoneRequestField requesterPhone, IAmRequesterEmailRequestField requesterEmail, IAmRequestReferenceRequestField requestReference, IAmApplicantNameRequestField applicantName, IAmReasonForApplicationRequestField reasonForApplication, IAmLabelRequestField label, IAmVinNumberRequestField vinNumber, IAmChassisNumberRequestField chassisNumberNumber, IAmEngineNumberRequestField engineNumber, IAmRegisterNumberRequestField registerNumber, IAmLicenseNumberRequestField licenseNumber, IAmMakeRequestField make)
         {
             RequesterName = requesterName;
             RequesterPhone = requesterPhone;
@@ -29,7 +29,7 @@ namespace Lace.Domain.Core.Entities.Requests
             ReasonForApplication = reasonForApplication;
             Label = label;
             VinNumber = vinNumber;
-            ChassisNumber = chassisNumber;
+            ChassisNumberNumber = chassisNumberNumber;
             EngineNumber = engineNumber;
             RegisterNumber = registerNumber;
             LicenseNumber = licenseNumber;

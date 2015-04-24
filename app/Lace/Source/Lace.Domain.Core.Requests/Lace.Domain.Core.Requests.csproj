@@ -47,7 +47,7 @@
     <Compile Include="Contracts\RequestFields\IAmApplicantNameRequestField.cs" />
     <Compile Include="Contracts\Requests\IAmBusinessRequest.cs" />
     <Compile Include="Contracts\RequestFields\IAmCarIdRequestField.cs" />
-    <Compile Include="Contracts\RequestFields\IAmChassisRequestField.cs" />
+    <Compile Include="Contracts\RequestFields\IAmChassisNumberRequestField.cs" />
     <Compile Include="Contracts\RequestFields\IAmCompanyNameRequestField.cs" />
     <Compile Include="Contracts\RequestFields\IAmCompanyRegistrationNumberRequestField.cs" />
     <Compile Include="Contracts\RequestFields\IAmCompanyVatNumberRequestField.cs" />
