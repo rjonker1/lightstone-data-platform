@@ -11,14 +11,20 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
     public class FakeCarRepositioryFactory : ISetupCarRepository
     {
-        public IReadOnlyCarRepository<CarInfo> CarInfoRepository()
+        private readonly string _vin;
+        public FakeCarRepositioryFactory(string vin)
+        {
+            _vin = vin;
+        }
+
+        public IReadOnlyCarRepository<CarInformation> CarInformationRepository()
         {
             return new FakeCarInfoRepository();
         }
 
-        public IReadOnlyCarRepository<CarInfo> Vin12CarInfoRepository()
+        public IReadOnlyCarRepository<CarInformation> Vin12CarInformationRepository()
         {
-            return new FakeVin12CarInfoRepository();
+            return new FakeVin12CarInfoRepository(_vin);
         }
 
         public void Dispose()

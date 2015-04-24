@@ -4,6 +4,6 @@ namespace Lace.Domain.DataProviders.RgtVin.Core.Contracts
 {
     public interface IReadOnlyRepository<T>
     {
-        IEnumerable<T> FindWith(string vin);
+        IEnumerable<T> Get(string sql, object param);
     }
 }

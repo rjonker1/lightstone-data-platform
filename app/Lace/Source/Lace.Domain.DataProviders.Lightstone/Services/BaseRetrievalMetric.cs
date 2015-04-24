@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
@@ -48,6 +50,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
         public IRetrieveValuationFromMetrics GenerateData()
         {
             _getStatistics.GetStatistics(_request);
+
+            if (!_getStatistics.Statistics.Any())
+                throw new Exception(
+                    string.Format("Statistics data Lightstone Auto for Car id {0} could not be generated",
+                        _request.CarId));
+
             _getMetrics.GetMetrics(_request);
             _getBands.GetBands(_request);
             _getMuncipalities.GetMunicipalities(_request);

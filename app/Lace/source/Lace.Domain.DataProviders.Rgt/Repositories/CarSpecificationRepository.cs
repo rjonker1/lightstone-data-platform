@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
-using Lace.Domain.DataProviders.Rgt.Infrastructure.SqlStatements;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -26,12 +23,12 @@ namespace Lace.Domain.DataProviders.Rgt.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<CarSpecification> FindWithRequest(IHaveCarInformation request)
+        public IEnumerable<CarSpecification> Get(string sql, object param)
         {
-            using (_connection)
+            //using (_connection)
             using (_cacheClient)
             {
-                var key = string.Format(CarSpecificationsKey, request.CarId);
+                var key = string.Format(CarSpecificationsKey, param);
                 var cachedSpecifications = _cacheClient.As<CarSpecification>();
                 var response = cachedSpecifications.Lists[key];
 
@@ -39,8 +36,7 @@ namespace Lace.Domain.DataProviders.Rgt.Repositories
                     return response;
 
                 var dbResponse =
-                    _connection.Query<CarSpecification>(SelectStatements.GetCarSpecifications,
-                        new {@CarId = request.CarId}).ToList();
+                    _connection.Query<CarSpecification>(sql, param).ToList();
 
                 if (!response.CanAddItemsToCache().HasValue)
                     return dbResponse;
@@ -51,5 +47,6 @@ namespace Lace.Domain.DataProviders.Rgt.Repositories
                 return dbResponse;
             }
         }
+      
     }
 }

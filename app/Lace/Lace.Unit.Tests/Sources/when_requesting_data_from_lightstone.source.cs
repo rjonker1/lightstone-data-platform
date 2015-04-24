@@ -6,6 +6,7 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
@@ -27,10 +28,11 @@ namespace Lace.Unit.Tests.Sources
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneSource();
-            _request = new LicensePlateRequestBuilder().ForLightstone();
+           // _request = new LicensePlateRequestBuilder().ForLightstoneLicensePlate();
+            _request = new LicensePlateRequestBuilder().ForLightstoneVinNumber();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _callTheSource = new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),
-                new FakeCarRepositioryFactory());
+                new FakeCarRepositioryFactory(_request.GetFromRequest<IPointToVehicleRequest>().Vehicle.Vin));
         }
 
         public override void Observe()
@@ -91,7 +93,10 @@ namespace Lace.Unit.Tests.Sources
         [Observation]
         public void lace_lighstone_response_vehicleValuation_amortised_values_count_must_be_correct()
         {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AmortisedValues.Distinct().Count().ShouldEqual(120);
+            _response.OfType<IProvideDataFromLightstoneAuto>()
+                .First()
+                .VehicleValuation.AmortisedValues.Count()
+                .ShouldEqual(4);
         }
 
 

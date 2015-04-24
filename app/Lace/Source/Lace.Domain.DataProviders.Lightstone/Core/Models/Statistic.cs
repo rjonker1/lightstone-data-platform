@@ -8,9 +8,9 @@
         }
 
         public Statistic(int statisticId, int metricId, int bandId, int? makeId, int? carTypeId, int carId, int? yearId,
-            int? saleYearId, int? muncipalityId, int? intValue, double? floatValue, decimal? moneyValue, int vinYear,
+            int? saleYearId, int? muncipalityId, int? intValue, double? floatValue, decimal? moneyValue,
             string imageUrl,
-            string period, string carFullName, string carModel, string carTypeName, string quarter, string bodyShape,
+            string carFullName, string carModel, string carTypeName, string bodyShape,
             string fuelType, string market, string transmissionType, string imageUrlSmall, string imageSource)
         {
             StatisticsId = statisticId;
@@ -25,13 +25,13 @@
             IntValue = intValue;
             FloatValue = floatValue;
             MoneyValue = moneyValue;
-            VinYear = vinYear;
+            //VinYear = vinYear;
             ImageUrl = imageUrl;
-            Period = period;
+            //Period = period;
             CarFullName = carFullName;
             CarModel = carModel;
             CarTypeName = carTypeName;
-            Quarter = quarter;
+            //Quarter = quarter;
             BodyShape = bodyShape;
             FuelType = fuelType;
             Market = market;
@@ -52,13 +52,13 @@
         public int? IntValue { get; set; }
         public double? FloatValue { get; set; }
         public decimal? MoneyValue { get; set; }
-        public int VinYear { get; set; }
+        //public int VinYear { get; set; }
         public string ImageUrl { get; set; }
-        public string Period { get; set; }
+        //public string Period { get; set; }
         public string CarFullName { get; set; }
         public string CarModel { get; set; }
         public string CarTypeName { get; set; }
-        public string Quarter { get; set; }
+        //public string Quarter { get; set; }
         public string BodyShape { get; set; }
         public string FuelType { get; set; }
         public string Market { get; set; }

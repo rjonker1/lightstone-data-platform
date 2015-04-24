@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string StatisticsKey = "urn:Auto_Carstats:Statistics:{0}:{1}:{2}";
+        private const string StatisticsKey = "urn:Auto_Carstats:Statistics:{0}";
 
         public StatisticsRepository(IDbConnection connection, IRedisClient cacheClient)
         {
@@ -35,7 +35,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var response = cachedStatistics.Lists[key];
 
                 if (response.DoesExistInTheCache())
-                    return response;
+                    return response.ToList();
 
                 IEnumerable<Statistic> dbResponse =
                     _connection.Query<Statistic>(sql, param).ToList();

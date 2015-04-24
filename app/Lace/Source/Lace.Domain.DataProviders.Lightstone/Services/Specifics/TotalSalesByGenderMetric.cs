@@ -58,7 +58,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
         private int GetMakeIdFromStatistics()
         {
-            if (!_request.CarId.HasValue || !_request.Year.HasValue) return 0;
+            if (!_request.HasValidCarIdAndYear()) return 0;
 
             var statisic =
                 Statistics.FirstOrDefault(w => w.CarId == _request.CarId && w.YearId == _request.Year);

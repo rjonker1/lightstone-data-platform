@@ -40,7 +40,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             var zeroGauge = _metric.MetricResult.FirstOrDefault(w => w.Year == "0");
             zeroGauge.ShouldNotBeNull();
-            zeroGauge.Value.ShouldEqual(87300M);
+            zeroGauge.Value.ShouldEqual(88100M);
         }
 
         [Observation]
@@ -48,7 +48,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             var oneGauge = _metric.MetricResult.FirstOrDefault(w => w.Year == "1");
             oneGauge.ShouldNotBeNull();
-            oneGauge.Value.ShouldEqual(76100);
+            oneGauge.Value.ShouldEqual(77600M);
         }
 
         [Observation]
@@ -56,7 +56,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             var twoGauge = _metric.MetricResult.FirstOrDefault(w => w.Year == "2");
             twoGauge.ShouldNotBeNull();
-            twoGauge.Value.ShouldEqual(65600);
+            twoGauge.Value.ShouldEqual(67700M);
         }
 
         [Observation]

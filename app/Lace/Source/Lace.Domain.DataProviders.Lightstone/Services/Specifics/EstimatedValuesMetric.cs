@@ -78,7 +78,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
         private IList<Statistic> GetGauges()
         {
-            if (!_request.CarId.HasValue) return new List<Statistic>();
+            if (!_request.HasValidCarId()) return new List<Statistic>();
 
             return Statistics
                 .Where(w => w.CarId == _request.CarId && w.YearId == _request.Year)

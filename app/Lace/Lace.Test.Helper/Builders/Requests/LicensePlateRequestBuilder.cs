@@ -46,9 +46,15 @@ namespace Lace.Test.Helper.Builders.Requests
             return _request;
         }
 
-        public ICollection<IPointToLaceRequest> ForLightstone()
+        public ICollection<IPointToLaceRequest> ForLightstoneLicensePlate()
         {
             _request = new[] {new LicensePlateNumberLightstoneOnlyRequest()};
+            return _request;
+        }
+
+        public ICollection<IPointToLaceRequest> ForLightstoneVinNumber()
+        {
+            _request = new[] { new VinNumberLighstoneOnlyRequest(),  };
             return _request;
         }
 

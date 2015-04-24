@@ -84,7 +84,6 @@
     <Compile Include="Core\Models\CarSpecification.cs" />
     <Compile Include="Infrastructure\HandleRgtDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtResponse.cs" />
-    <Compile Include="Infrastructure\Providers\CacheConnectionFactory.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtSource.cs" />
     <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
     <Compile Include="Repositories\CarSpecificationRepository.cs" />

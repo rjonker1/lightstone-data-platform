@@ -3,40 +3,38 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Models;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure.SqlStatements;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.CrossCutting.DataProvider.Car.Repositories
 {
-    public class CarInfoRepository : IReadOnlyCarRepository<CarInfo>
+    public class CarInformationRepository : IReadOnlyCarRepository<CarInformation>
     {
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string CarKey = "urn:Auto_Carstats:CarInfo:{0}:{1}";
+        private const string CarKey = "urn:Auto_Carstats:CarInformation:{0}";
 
-        public CarInfoRepository(IDbConnection connection, IRedisClient cacheClient)
+        public CarInformationRepository(IDbConnection connection, IRedisClient cacheClient)
         {
             _connection = connection;
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<CarInfo> FindByCarIdAndYear(int? carId, int year)
+        public IEnumerable<CarInformation> Get(string sql, object param)
         {
-            //using (_connection)
             using (_cacheClient)
             {
-                var key = string.Format(CarKey, carId, year);
-                var cachedCar = _cacheClient.As<CarInfo>();
+                var key = string.Format(CarKey, param);
+                var cachedCar = _cacheClient.As<CarInformation>();
                 var response = cachedCar.Lists[key];
 
                 if (response.DoesExistInTheCache())
-                    return response;
+                    return response.ToList();
 
                 var dbResponse =
-                    _connection.Query<CarInfo>(SelectStatements.GetCarInformationById, new {@CarId = carId})
+                    _connection.Query<CarInformation>(sql, param)
                         .ToList();
 
                 if (!response.CanAddItemsToCache().HasValue)
@@ -48,28 +46,26 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories
             }
         }
 
-        public IEnumerable<CarInfo> FindByVin(string vinNumber)
+        public IEnumerable<CarInformation> GetAll(string sql)
         {
-            //using (_connection)
             using (_cacheClient)
             {
-                var key = string.Format(CarKey, vinNumber, 0);
-                var cachedCar = _cacheClient.As<CarInfo>();
+                var key = string.Format(CarKey, "all");
+                var cachedCar = _cacheClient.As<CarInformation>();
                 var response = cachedCar.Lists[key];
 
                 if (response.DoesExistInTheCache())
-                    return response;
+                    return response.ToList();
 
                 var dbResponse =
-                    _connection.Query<CarInfo>(SelectStatements.GetCarInformationByVin, new {@Vin = vinNumber})
+                    _connection.Query<CarInformation>(sql)
                         .ToList();
 
-                if (!response.CanAddItemsToCache().HasValue) 
+                if (!response.CanAddItemsToCache().HasValue)
                     return dbResponse;
 
                 dbResponse.ForEach(f => response.Add(f));
                 dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
-                
                 return dbResponse;
             }
         }

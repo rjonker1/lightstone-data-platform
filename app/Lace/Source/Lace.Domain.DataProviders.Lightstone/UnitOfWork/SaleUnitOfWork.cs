@@ -27,7 +27,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             try
             {
                 Sales = _repository.Get(SelectStatements.GetTopFiveSalesForCarIdAndYear,
-                    new {request.CarId, @Year = request.Year.HasValue ? request.Year.Value : 0});
+                    new {request.CarId, request.Year});
             }
             catch (Exception ex)
             {

@@ -12,7 +12,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 {
     public class BandsRepository : IReadOnlyRepository<Band>
     {
-        //SelectStatements.GetAllTheBands
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 

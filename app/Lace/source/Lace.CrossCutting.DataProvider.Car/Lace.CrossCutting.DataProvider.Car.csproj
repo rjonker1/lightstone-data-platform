@@ -71,13 +71,13 @@
     <Compile Include="Core\Contracts\ISetupCarRepository.cs" />
     <Compile Include="Core\Models\CarInfo.cs" />
     <Compile Include="Infrastructure\Dto\CarInformationRequest.cs" />
-    <Compile Include="Infrastructure\GetCarInformationWithVin.cs" />
+    <Compile Include="Infrastructure\GetCarInformation.cs" />
     <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
-    <Compile Include="Repositories\CarInfoRepository.cs" />
+    <Compile Include="Repositories\CarInformationRepository.cs" />
     <Compile Include="Repositories\Factory\RepositoryFactory.cs" />
     <Compile Include="Repositories\IReadOnlyRepository.cs" />
     <Compile Include="Repositories\Vin12CarInfoRepository.cs" />
-    <Compile Include="UnitOfWork\CarInfoUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\CarInformationUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

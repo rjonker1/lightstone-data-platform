@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Core.Models;
-using Lace.Domain.DataProviders.RgtVin.Infrastructure.SqlStatements;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -24,13 +22,13 @@ namespace Lace.Domain.DataProviders.RgtVin.Repositories
             _connection = connection;
             _cacheClient = cacheClient;
         }
-
-        public IEnumerable<Vin> FindWith(string vin)
+        
+        public IEnumerable<Vin> Get(string sql, object param)
         {
-            using (_connection)
+            // using (_connection)
             using (_cacheClient)
             {
-                var key = string.Format(CarSpecificationsKey, vin);
+                var key = string.Format(CarSpecificationsKey, param);
                 var cachedVins = _cacheClient.As<Vin>();
                 var response = cachedVins.Lists[key];
 
@@ -38,8 +36,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Repositories
                     return response;
 
                 var dbResponse =
-                    _connection.Query<Vin>(SelectStatements.GetVehicleVin,
-                        new {@Vin = vin}).ToList();
+                    _connection.Query<Vin>(sql, param).ToList();
 
                 if (!response.CanAddItemsToCache().HasValue)
                     return dbResponse;
