@@ -45,8 +45,14 @@ namespace Billing.Scheduler.Modules
 
             Post["/Schedules/BillingRun/Schedule/Daily"] = parameters =>
             {
-                var runType = "StageBilling";
                 string dailyTime = Request.Query["daily_time"];
+                string runFlag = Request.Query["run_schedule"];
+
+                if (runFlag == "false")
+                {
+                    RecurringJob.RemoveIfExists("StageBilling Run");
+                    return Response.AsJson(new { message = "Schedule removed" });
+                }
 
                 var billRun = new BillingMessage()
                 {
@@ -55,12 +61,11 @@ namespace Billing.Scheduler.Modules
                 };
 
                 DateTime dt = DateTime.ParseExact(dailyTime, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
-
                 var cronExpression = ""+dt.Minute+" "+dt.Hour+" * * *";
 
-                if (runType == "StageBilling") RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
+                RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
 
-                return null;
+                return Response.AsJson(new {message = "Schedule Added/Updated"});
             };
 
             //CORS for Module
