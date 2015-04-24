@@ -103,6 +103,7 @@
     <Compile Include="RequestFields\RequestReferenceRequestField.cs" />
     <Compile Include="Requests\IvidTitleholderRequest.cs" />
     <Compile Include="Requests\LightstoneAutoRequest.cs" />
+    <Compile Include="Requests\LightstonePropertyRequest.cs" />
     <Compile Include="Requests\RgtRequest.cs" />
     <Compile Include="Requests\RgtVinRequest.cs" />
     <Compile Include="RgtResponse.cs" />
