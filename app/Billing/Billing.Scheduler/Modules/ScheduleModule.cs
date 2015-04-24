@@ -46,6 +46,12 @@ namespace Billing.Scheduler.Modules
                 return Response.AsJson(new { data = cronExpression });
             };
 
+            Post["/Schedules/BillingRun/Force"] = parameters =>
+            {
+                BackgroundJob.Enqueue(() => new MessageSchedule().Send(new BillingMessage() { RunType = "Stage",Schedule = null }));
+                return Response.AsJson(new { data = "StageBilling Run Executed" });
+            };
+
             Post["/Schedules/BillingRun/Schedule/Daily"] = parameters =>
             {
 
