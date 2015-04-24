@@ -114,7 +114,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private void GetCarInformation()
         {
             _carInformation =
-                new GetCarInformationWithVin(_vinNumber,
+                new GetCarInformation(_vinNumber,
                     _carRepository)
                     .SetupDataSources()
                     .GenerateData()

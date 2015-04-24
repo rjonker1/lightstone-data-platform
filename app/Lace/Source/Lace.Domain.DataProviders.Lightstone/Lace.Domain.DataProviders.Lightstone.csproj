@@ -42,6 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.942\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.982\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -76,9 +79,6 @@
     </Compile>
     <Compile Include="Core\IReadOnlyRepository.cs" />
     <Compile Include="Core\Models\Band.cs" />
-    <Compile Include="Core\Models\Car.cs" />
-    <Compile Include="Core\Models\CarType.cs" />
-    <Compile Include="Core\Models\CarVendor.cs" />
     <Compile Include="Core\Models\Make.cs" />
     <Compile Include="Core\Models\Metric.cs" />
     <Compile Include="Core\Models\Municipality.cs" />
@@ -92,9 +92,6 @@
     <Compile Include="Infrastructure\RequestDataFromLightstoneSource.cs" />
     <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
     <Compile Include="Repositories\BandsRepository.cs" />
-    <Compile Include="Repositories\CarRepository.cs" />
-    <Compile Include="Repositories\CarTypeRepository.cs" />
-    <Compile Include="Repositories\CarVendorRepository.cs" />
     <Compile Include="Repositories\MakeRepository.cs" />
     <Compile Include="Repositories\MetricRepository.cs" />
     <Compile Include="Repositories\MunicipalityRepository.cs" />
@@ -116,9 +113,7 @@
     <Compile Include="Services\Specifics\TotalSalesByGenderMetric.cs" />
     <Compile Include="LightstoneDataProvider.cs" />
     <Compile Include="UnitOfWork\BandUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\CarTypeUnitOfWork.cs" />
     <Compile Include="Core\Contracts\IGetBands.cs" />
-    <Compile Include="Core\Contracts\IGetCarType.cs" />
     <Compile Include="Core\Contracts\IGetMakes.cs" />
     <Compile Include="Core\Contracts\IGetMetrics.cs" />
     <Compile Include="Core\Contracts\IGetMuncipalities.cs" />
@@ -171,7 +166,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Core\Contracts\IGetCarVendor.cs.old" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

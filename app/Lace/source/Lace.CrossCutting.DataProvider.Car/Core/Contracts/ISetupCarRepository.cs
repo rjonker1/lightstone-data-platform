@@ -5,8 +5,8 @@ namespace Lace.CrossCutting.DataProvider.Car.Core.Contracts
 {
     public interface ISetupCarRepository
     {
-        IReadOnlyCarRepository<CarInfo> CarInfoRepository();
-        IReadOnlyCarRepository<CarInfo> Vin12CarInfoRepository();
+        IReadOnlyCarRepository<CarInformation> CarInformationRepository();
+        IReadOnlyCarRepository<CarInformation> Vin12CarInformationRepository();
         void Dispose();
     }
 }

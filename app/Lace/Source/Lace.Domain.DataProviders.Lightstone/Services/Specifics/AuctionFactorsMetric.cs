@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         {
             foreach (var gauge in _gauges)
             {
-                MetricResult.Add(new AuctionFactorModel(GetMakeName(gauge.Make_ID),
+                MetricResult.Add(new AuctionFactorModel(GetMakeName(gauge.MakeId),
                     gauge.FloatValue.HasValue ? (decimal) gauge.FloatValue.Value : 0.0M));
             }
         }
@@ -50,19 +50,19 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
             _gauges = makeId == 0
                 ? new List<Statistic>()
-                : Statistics.Where(w => w.Make_ID == makeId && w.Metric_ID == metricId).ToList();
+                : Statistics.Where(w => w.MakeId == makeId && w.MakeId == metricId).ToList();
         }
 
         private int GetMakeIdFromStatistics()
         {
-            if (!_request.CarId.HasValue || !_request.Year.HasValue) return 0;
+            if (!_request.HasValidCarIdAndYear()) return 0;
 
             var statisic =
-                Statistics.FirstOrDefault(w => w.Car_ID == _request.CarId && w.Year_ID == _request.Year);
+                Statistics.FirstOrDefault(w => w.CarId == _request.CarId && w.YearId == _request.Year);
 
             if (statisic == null) return 0;
 
-            return statisic.Make_ID ?? 0;
+            return statisic.MakeId ?? 0;
         }
 
         private string GetMakeName(int? makeId)

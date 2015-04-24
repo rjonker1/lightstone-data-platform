@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
-using Lace.Domain.DataProviders.Lightstone.Services;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Domain.DataProviders.Lightstone.Repositories
 {
@@ -18,7 +15,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string SaleKey = "urn:Auto_Carstats:Sale:{0}:{1}";
+        private const string SaleKey = "urn:Auto_Carstats:Sale:{0}";
 
         public SaleRepository(IDbConnection connection, IRedisClient cacheClient)
         {
@@ -26,43 +23,44 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<Sale> FindAllWithRequest(IHaveCarInformation request)
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<Sale> GetAll()
+        public IEnumerable<Sale> Get(string sql, object param)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Sale> FindByMake(int makeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Sale> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Sale> FindByCarIdAndYear(int? carId, int year)
-        {
-            if (carId == null) return new List<Sale>();
-
-            //using (_connection)
             using (_cacheClient)
             {
-                var key = string.Format(SaleKey, carId, year);
+                var key = string.Format(SaleKey, param);
                 var cachedSale = _cacheClient.As<Sale>();
                 var response = cachedSale.Lists[key];
 
+                if (response.DoesExistInTheCache())
+                    return response;
+
+                 var dbResponse = _connection
+                    .Query<Sale>(sql, param)
+                    .ToList();
+
+                 if (!response.CanAddItemsToCache().HasValue)
+                     return dbResponse;
+
+                 dbResponse.ForEach(f => response.Add(f));
+                 dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+                 return dbResponse;
+            }
+        }
+
+        public IEnumerable<Sale> GetAll(string sql)
+        {
+            using (_cacheClient)
+            {
+                var key = string.Format(SaleKey, sql);
+                var cachedSale = _cacheClient.As<Sale>();
+                var response = cachedSale.Lists[key];
 
                 if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse = _connection
-                    .Query<Sale>(SelectStatements.GetTopFiveSalesForCarIdAndYear, new {@CarId = carId, @YearId = year})
+                    .Query<Sale>(sql)
                     .ToList();
 
                 if (!response.CanAddItemsToCache().HasValue)
@@ -74,9 +72,36 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             }
         }
 
-        public IEnumerable<Sale> FindByVin(string vinNumber)
-        {
-            throw new NotImplementedException();
-        }
+        //public IEnumerable<Sale> FindByCarIdAndYear(int? carId, int year)
+        //{
+        //    if (carId == null) return new List<Sale>();
+
+        //    //using (_connection)
+        //    using (_cacheClient)
+        //    {
+        //        var key = string.Format(SaleKey, carId, year);
+        //        var cachedSale = _cacheClient.As<Sale>();
+        //        var response = cachedSale.Lists[key];
+
+
+        //        if (response.DoesExistInTheCache())
+        //            return response;
+
+        //        var dbResponse = _connection
+        //            .Query<Sale>(SelectStatements.GetTopFiveSalesForCarIdAndYear, new {@CarId = carId, @YearId = year})
+        //            .ToList();
+
+        //        if (!response.CanAddItemsToCache().HasValue)
+        //            return dbResponse;
+
+        //        dbResponse.ForEach(f => response.Add(f));
+        //        dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+        //        return dbResponse;
+        //    }
+        //}
+
+
+
+        
     }
 }

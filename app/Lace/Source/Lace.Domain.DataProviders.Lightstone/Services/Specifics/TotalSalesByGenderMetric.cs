@@ -13,17 +13,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
         private static readonly MetricTypes[] Metrics = { MetricTypes.TotalSalesByGender };
         private readonly IEnumerable<Band> _bands;
-        private readonly IEnumerable<CarType> _carTypes;
         private readonly IHaveCarInformation _request;
 
         private IList<Statistic> _gauges;
 
         public TotalSalesByGenderMetric(IHaveCarInformation request, IEnumerable<Statistic> statistics,
-            IEnumerable<Band> bands,
-            IEnumerable<CarType> carTypes)
+            IEnumerable<Band> bands)
         {
             Statistics = statistics;
-            _carTypes = carTypes;
             _bands = bands;
             _request = request;
             MetricResult = new List<TotalSalesByGenderModel>();
@@ -44,7 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
             var result =
                 _gauges.Select(
                     s =>
-                        new TotalSalesByGenderModel(GetCarTypeName(s.CarType_ID), GetBandName(s.Band_ID),
+                        new TotalSalesByGenderModel(GetCarTypeName(s.CarTypeId), GetBandName(s.BandId),
                             s.FloatValue.HasValue ? s.FloatValue.Value : 0));
 
             MetricResult.AddRange(result);
@@ -56,27 +53,25 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
             _gauges = makeId == 0
                 ? new List<Statistic>()
-                : Statistics.Where(w => w.Make_ID == makeId && w.Metric_ID == metricId).ToList();
+                : Statistics.Where(w => w.MakeId == makeId && w.MetricId == metricId).ToList();
         }
 
         private int GetMakeIdFromStatistics()
         {
-            if (!_request.CarId.HasValue || !_request.Year.HasValue) return 0;
+            if (!_request.HasValidCarIdAndYear()) return 0;
 
             var statisic =
-                Statistics.FirstOrDefault(w => w.Car_ID == _request.CarId && w.Year_ID == _request.Year);
+                Statistics.FirstOrDefault(w => w.CarId == _request.CarId && w.YearId == _request.Year);
 
             if (statisic == null) return 0;
 
-            return statisic.Make_ID ?? 0;
+            return statisic.MakeId ?? 0;
         }
 
 
         private string GetCarTypeName(int? carTypeId)
         {
-            if (!_carTypes.Any()) return string.Empty;
-
-            var carType = _carTypes.FirstOrDefault(w => w.CarType_ID == carTypeId);
+            var carType = Statistics.FirstOrDefault(w => w.CarTypeId == carTypeId);
             return carType != null ? carType.CarTypeName : string.Empty;
         }
 

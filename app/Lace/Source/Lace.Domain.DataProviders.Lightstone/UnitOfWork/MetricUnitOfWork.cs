@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
 
 namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Metrics = _repository.GetAll();
+                Metrics = _repository.GetAll(SelectStatements.GetAllTheMetricTypes);
             }
             catch (Exception ex)
             {

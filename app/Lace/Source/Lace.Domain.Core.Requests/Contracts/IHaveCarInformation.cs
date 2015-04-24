@@ -2,16 +2,18 @@
 {
     public interface IHaveCarInformation
     {
-        int? CarId { get; }
+        int CarId { get; }
         string Make { get; }
         string Model { get; }
         string Vin { get; }
         string Username { get; }
         string Password { get; }
-        int? Year { get; }
+        int Year { get; }
         int MakeId { get; }
         bool IsVin12 { get; }
 
-        void SetCarModelYear(int? carId, string model, int? year);
+        void SetCarModelYearMake(int? carId, string model, int? year, int makeId);
+        bool HasValidCarIdAndYear();
+        bool HasValidCarId();
     }
 }

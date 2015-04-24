@@ -37,6 +37,11 @@
         TradePriceHigh = 36,
         TradeConfidence = 38,
         RetailAdjustment = 43,
-        TradeAdjustment = 44
+        TradeAdjustment = 44,
+        CostLow = 39,
+        CostHigh = 40,
+        CostEstimate = 41,
+        CostConfidence = 42,
+        AuctionEstimate = 45
     }
 }

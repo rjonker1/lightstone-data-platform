@@ -7,16 +7,16 @@ using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 {
-    public class GetCarInformationWithVin : IRetrieveCarInformation
+    public class GetCarInformation : IRetrieveCarInformation
     {
         public bool IsSatisfied { get; private set; }
-        public CarInfo CarInformation { get; private set; }
+        public CarInformation CarInformation { get; private set; }
         public IHaveCarInformation CarInformationRequest { get; private set; }
 
-        private IGetCarInfo _getCarInformation;
+        private IGetCarInformation _getCarInformation;
         private readonly ISetupCarRepository _repositories;
 
-        public GetCarInformationWithVin(string vinNumber, ISetupCarRepository repositories)
+        public GetCarInformation(string vinNumber, ISetupCarRepository repositories)
         {
             _repositories = repositories;
             CarInformationRequest = new CarInformationRequest(vinNumber);
@@ -24,8 +24,8 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 
         public IRetrieveCarInformation SetupDataSources()
         {
-            _getCarInformation = new CarInfoUnitOfWork(_repositories.CarInfoRepository(),
-                _repositories.Vin12CarInfoRepository());
+            _getCarInformation = new CarInformationUnitOfWork(_repositories.CarInformationRepository(),
+                _repositories.Vin12CarInformationRepository());
             return this;
         }
 
@@ -33,13 +33,13 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
         {
             IsSatisfied = _getCarInformation.Cars.Any();
 
-            CarInformation = IsSatisfied ? _getCarInformation.Cars.FirstOrDefault() : new CarInfo();
+            CarInformation = IsSatisfied ? _getCarInformation.Cars.FirstOrDefault() : new CarInformation();
             return this;
         }
 
         public IRetrieveCarInformation GenerateData()
         {
-            _getCarInformation.GetCarInfo(CarInformationRequest);
+            _getCarInformation.GetCarInformation(CarInformationRequest);
             return this;
         }
 
@@ -47,7 +47,7 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
         {
             if (CarInformation == null) return this;
 
-            CarInformationRequest.SetCarModelYear(CarInformation.CarId, CarInformation.CarModel, CarInformation.Year);
+            CarInformationRequest.SetCarModelYearMake(CarInformation.CarId, CarInformation.CarModel, CarInformation.Year, CarInformation.MakeId);
             return this;
         }
     }

@@ -1,4 +1,5 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using System;
+using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
@@ -79,7 +80,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 
         private void SetMake(string make)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void SetVinNumber(string vinNumber)

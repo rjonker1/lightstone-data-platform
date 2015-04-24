@@ -60,38 +60,38 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         private IList<Statistic> GetGauges(int metricId)
         {
             return Statistics
-                .Where(w => w.Metric_ID == metricId)
+                .Where(w => w.MetricId == metricId)
                 .ToList();
         }
 
         private Statistic GetLowStat()
         {
             return _gauges
-                .FirstOrDefault(w => w.Band_ID == LowBand);
+                .FirstOrDefault(w => w.BandId == LowBand);
         }
 
         private Statistic GetSubjectStat()
         {
             return _gauges
-                .FirstOrDefault(w => w.Band_ID == SubjectBand);
+                .FirstOrDefault(w => w.BandId == SubjectBand);
         }
 
         private Statistic GetMaxStat()
         {
             return _gauges
-                .FirstOrDefault(w => w.Band_ID == HighBand);
+                .FirstOrDefault(w => w.BandId == HighBand);
         }
 
         private Statistic GetQuarterStat()
         {
             return _gauges
-                .FirstOrDefault(w => w.Band_ID == QuarterBand);
+                .FirstOrDefault(w => w.BandId == QuarterBand);
         }
 
         private string GetGaugeName()
         {
             return _gauges.FirstOrDefault() != null
-                ? _metricsData.FirstOrDefault(w => w.Metric_ID == _gauges.FirstOrDefault().Metric_ID).MetricName
+                ? _metricsData.FirstOrDefault(w => w.Metric_ID == _gauges.FirstOrDefault().MetricId).MetricName
                 : string.Empty;
         }
     }

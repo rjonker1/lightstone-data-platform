@@ -10,10 +10,5 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
         {
             return StatisticsData.ForCarId();
         }
-
-        public static IEnumerable<Statistic> ForMakeId_4()
-        {
-            return StatisticsData.ForMakeId();
-        }
     }
 }

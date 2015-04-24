@@ -6,6 +6,6 @@ namespace Lace.Domain.DataProviders.RgtVin.Core.Contracts
     public interface IGetVehicleFromVin
     {
         IEnumerable<Vin> Vins { get; }
-        void GetVin(string vinNumber);
+        void GetVin(string vin);
     }
 }

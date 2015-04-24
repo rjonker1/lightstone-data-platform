@@ -133,7 +133,7 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForLightstone(), 20, 40)
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForLightstoneLicensePlate(), 20, 40)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
                     DataProviderState.Successful,
@@ -151,7 +151,7 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForLightstone(), 20, 40)
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForLightstoneLicensePlate(), 20, 40)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
                     DataProviderState.Failed, null, 20, 40);

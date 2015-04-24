@@ -7,6 +7,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
@@ -38,7 +39,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             else
             {
                 var consumer = new ConsumeSource(new FakeHandleLighstoneSourceCall(),
-                    new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),new FakeCarRepositioryFactory()));
+                    new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),new FakeCarRepositioryFactory(_request.GetFromRequest<IPointToVehicleRequest>().Vehicle.Vin)));
                 consumer.ConsumeExternalSource(response, _command);
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() || response.OfType<IProvideDataFromLightstoneAuto>().First() == null)

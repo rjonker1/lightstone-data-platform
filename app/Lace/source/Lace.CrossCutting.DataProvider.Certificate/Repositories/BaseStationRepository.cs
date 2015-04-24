@@ -4,6 +4,7 @@ using System.Linq;
 using Lace.CrossCutting.DataProvider.Certificate.Core.Models;
 using Lace.CrossCutting.Infrastructure.Orm;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.CrossCutting.DataProvider.Certificate.Repositories
 {
@@ -23,7 +24,7 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Repositories
 
         public BaseStation Find(double latitude, double longitude)
         {
-            using (_connection)
+           // using (_connection)
             using (_cacheClient)
             {
                 var key = string.Format(CertificateKey, latitude, longitude);

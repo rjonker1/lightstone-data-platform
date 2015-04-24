@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Common.Logging;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
+using Lace.Domain.DataProviders.Rgt.Infrastructure.SqlStatements;
 
 namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
 {
@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
         {
             try
             {
-                CarSpecifications = _repository.FindWithRequest(request);
+                CarSpecifications = _repository.Get(SelectStatements.GetCarSpecifications, new {request.CarId});
             }
             catch (Exception ex)
             {

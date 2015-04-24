@@ -16,12 +16,12 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories.Factory
             _redisClient = redisClient;
         }
 
-        public IReadOnlyCarRepository<CarInfo> CarInfoRepository()
+        public IReadOnlyCarRepository<CarInformation> CarInformationRepository()
         {
-            return new CarInfoRepository(_connection, _redisClient);
+            return new CarInformationRepository(_connection, _redisClient);
         }
 
-        public IReadOnlyCarRepository<CarInfo> Vin12CarInfoRepository()
+        public IReadOnlyCarRepository<CarInformation> Vin12CarInformationRepository()
         {
             return new Vin12CarInfoRepository(_connection, _redisClient);
         }

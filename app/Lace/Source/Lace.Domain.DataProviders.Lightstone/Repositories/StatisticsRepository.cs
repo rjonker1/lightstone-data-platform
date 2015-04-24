@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
-using Lace.Domain.DataProviders.Lightstone.Services;
 using ServiceStack.Common.Extensions;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Domain.DataProviders.Lightstone.Repositories
 {
     public class StatisticsRepository : IReadOnlyRepository<Statistic>
     {
+        //SelectStatements.GetStatistics
+
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string StatisticsKey = "urn:Auto_Carstats:Statistics:{0}:{1}:{2}";
+        private const string StatisticsKey = "urn:Auto_Carstats:Statistics:{0}";
 
         public StatisticsRepository(IDbConnection connection, IRedisClient cacheClient)
         {
@@ -27,27 +26,19 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<Statistic> FindAllWithRequest(IHaveCarInformation request)
+        public IEnumerable<Statistic> Get(string sql, object param)
         {
-            //using (_connection)
             using (_cacheClient)
             {
-                var key = string.Format(StatisticsKey, request.CarId, request.MakeId, request.Year);
+                var key = string.Format(StatisticsKey, param);
                 var cachedStatistics = _cacheClient.As<Statistic>();
                 var response = cachedStatistics.Lists[key];
 
                 if (response.DoesExistInTheCache())
-                    return response;
+                    return response.ToList();
 
                 IEnumerable<Statistic> dbResponse =
-                    _connection.Query<Statistic>(SelectStatements.GetStatistics,
-                        new
-                        {
-                            @CarId = request.CarId,
-                            @MakeId = request.MakeId,
-                            @YearId = request.Year
-
-                        }).ToList();
+                    _connection.Query<Statistic>(sql, param).ToList();
 
                 if (!response.CanAddItemsToCache().HasValue)
                     return dbResponse;
@@ -59,59 +50,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             }
         }
 
-        public IEnumerable<Statistic> GetAll()
+        public IEnumerable<Statistic> GetAll(string sql)
         {
             throw new NotImplementedException();
         }
-
-        private static readonly Func<MetricTypes[],string> ConcatenateMetrics = (metricTypes) =>
-        {
-            var metrics = String.Join(", ", metricTypes.Select(s => s.ToString()));
-            return metrics;
-        };
-
-
-        public IEnumerable<Statistic> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
-        {
-            //using (_connection)
-            using (_cacheClient)
-            {
-                var key = string.Format(StatisticsKey, makeId, 0, 0);
-                var cachedMakeStats = _cacheClient.As<Statistic>();
-                var response = cachedMakeStats.Lists[key];
-
-                if (response.DoesExistInTheCache())
-                    return response;
-
-                var dbResponse =
-                    _connection.Query<Statistic>(SelectStatements.GetStatisticsByMake,
-                        new {@Metrics = ConcatenateMetrics(metricTypes), @MakeId = makeId}).ToList();
-
-                if (!response.CanAddItemsToCache().HasValue)
-                    return dbResponse;
-
-                dbResponse.ForEach(f => response.Add(f));
-                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
-                return dbResponse;
-            }
-        }
-
-
-        public IEnumerable<Statistic> FindByMake(int makeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Statistic> FindByCarIdAndYear(int? carId, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Statistic> FindByVin(string vinNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-
     }
 }

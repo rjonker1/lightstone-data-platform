@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
-using Lace.Domain.DataProviders.Lightstone.Services;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Domain.DataProviders.Lightstone.Repositories
 {
     public class MakeRepository : IReadOnlyRepository<Make>
     {
+        //SelectStatements.GetAllTheMakes
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
@@ -26,14 +24,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<Make> FindAllWithRequest(IHaveCarInformation request)
+        public IEnumerable<Make> Get(string sql, object param)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Make> GetAll()
+        public IEnumerable<Make> GetAll(string sql)
         {
-            //using (_connection)
             using (_cacheClient)
             {
                 var makes = _cacheClient.As<Make>();
@@ -43,7 +40,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                     return response;
 
                 var dbResponse = _connection
-                    .Query<Make>(SelectStatements.GetAllTheMakes)
+                    .Query<Make>(sql)
                     .ToList();
 
                 if (!response.CanAddItemsToCache().HasValue)
@@ -53,27 +50,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 dbResponse.AddItemsToCache(_cacheClient, MakeKey, DateTime.UtcNow.AddDays(1));
                 return dbResponse;
             }
-        }
-
-
-        public IEnumerable<Make> FindByMake(int makeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Make> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Make> FindByCarIdAndYear(int? carId, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Make> FindByVin(string vinNumber)
-        {
-            throw new NotImplementedException();
         }
     }
 }

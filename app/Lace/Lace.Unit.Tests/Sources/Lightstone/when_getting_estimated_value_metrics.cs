@@ -42,37 +42,37 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         [Observation]
         public void lightstone_retail_estimated_high_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().RetailEstimatedHigh.ShouldEqual("R 98 700,00");
+            _metric.MetricResult.FirstOrDefault().RetailEstimatedHigh.ShouldEqual("R 96 900,00");
         }
 
         [Observation]
         public void lightstone_retail_estimated_low_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().RetailEstimatedLow.ShouldEqual("R 80 600,00");
+            _metric.MetricResult.FirstOrDefault().RetailEstimatedLow.ShouldEqual("R 79 300,00");
         }
 
         [Observation]
         public void lightstone_retail_estimated_value_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().RetailEstimatedValue.ShouldEqual("R 89 200,00");
+            _metric.MetricResult.FirstOrDefault().RetailEstimatedValue.ShouldEqual("R 88 100,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().TradeEstimatedValue.ShouldEqual("R 79 600,00");
+            _metric.MetricResult.FirstOrDefault().TradeEstimatedValue.ShouldEqual("R 78 600,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_low_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().TradeEstimatedLow.ShouldEqual("R 100,00");
+            _metric.MetricResult.FirstOrDefault().TradeEstimatedLow.ShouldEqual("R 70 800,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_high_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().TradeEstimatedHigh.ShouldEqual("R 1 000 000,00");
+            _metric.MetricResult.FirstOrDefault().TradeEstimatedHigh.ShouldEqual("R 86 500,00");
         }
     }
 }

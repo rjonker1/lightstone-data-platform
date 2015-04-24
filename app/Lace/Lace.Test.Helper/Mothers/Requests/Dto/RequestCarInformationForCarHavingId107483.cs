@@ -6,7 +6,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
     public class RequestCarInformationForCarHavingId107483 : IHaveCarInformation
     {
-        public int? CarId
+        public int CarId
         {
             get
             {
@@ -18,7 +18,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         {
             get
             {
-                return "4";
+                return "98";
             }
         }
 
@@ -54,7 +54,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             }
         }
 
-        public int? Year
+        public int Year
         {
             get
             {
@@ -78,11 +78,22 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             }
 
         }
-
-
-        public void SetCarModelYear(int? carId, string model, int? year)
+        public void SetCarModelYearMake(int? carId, string model, int? year, int makeId)
         {
-           throw new NotImplementedException();
+            //CarId = carId.HasValue ? carId.Value : 0;
+            //Model = model;
+            //Year = year.HasValue ? year.Value : 0;
+            //MakeId = makeId;
+        }
+
+        public bool HasValidCarIdAndYear()
+        {
+            return CarId > 0 && Year > 0;
+        }
+
+        public bool HasValidCarId()
+        {
+            return CarId > 0;
         }
     }
 }

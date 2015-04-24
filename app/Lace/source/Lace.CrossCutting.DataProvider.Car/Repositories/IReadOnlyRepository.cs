@@ -4,7 +4,7 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories
 {
     public interface IReadOnlyCarRepository<T>
     {
-        IEnumerable<T> FindByCarIdAndYear(int? carId, int year);
-        IEnumerable<T> FindByVin(string vinNumber);
+        IEnumerable<T> Get(string sql, object param);
+        IEnumerable<T> GetAll(string sql);
     }
 }

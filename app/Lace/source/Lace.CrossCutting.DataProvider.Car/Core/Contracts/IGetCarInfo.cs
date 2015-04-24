@@ -4,9 +4,9 @@ using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.CrossCutting.DataProvider.Car.Core.Contracts
 {
-    public interface IGetCarInfo
+    public interface IGetCarInformation
     {
-        IEnumerable<CarInfo> Cars { get; }
-        void GetCarInfo(IHaveCarInformation request);
+        IEnumerable<CarInformation> Cars { get; }
+        void GetCarInformation(IHaveCarInformation request);
     }
 }
