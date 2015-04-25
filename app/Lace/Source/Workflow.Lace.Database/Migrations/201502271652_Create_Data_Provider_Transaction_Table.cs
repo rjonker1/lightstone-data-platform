@@ -2,6 +2,7 @@
 
 namespace Workflow.Lace.Database.Migrations
 {
+    [Tags("Billing")]
     [Migration(201502271652)]
     public class Create_Data_Provider_Transaction_Table : Migration
     {

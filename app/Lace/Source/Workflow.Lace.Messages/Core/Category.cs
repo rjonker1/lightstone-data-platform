@@ -41,20 +41,6 @@ namespace Workflow.Lace.Messages.Core
 
     }
 
-    [DataContract]
-    public enum DisplayOrder
-    {
-        [EnumMember]
-        FirstThing = 1,
-        [EnumMember]
-        InTheBegining = 2,
-        [EnumMember]
-        InTheMiddle = 3,
-        [EnumMember]
-        AtTheEnd = 4,
-        [EnumMember]
-        StoneLast = 5,
-    }
 
     [DataContract]
     public enum ExecutionOrder
