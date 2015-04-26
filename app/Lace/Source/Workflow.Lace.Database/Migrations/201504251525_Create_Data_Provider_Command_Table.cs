@@ -3,13 +3,13 @@ using FluentMigrator;
 
 namespace Workflow.Lace.Database.Migrations
 {
-    [Tags("DataProviderCommands")]
+    [Tags("DataProvider")]
     [Migration(201504251525)]
     public class Create_Data_Provider_Command_Table : Migration
     {
         public override void Up()
         {
-            Create.Table("Commands")
+            Create.Table("CommandLog")
                 .WithColumn("Id").AsGuid().NotNullable().Indexed()
                 .WithColumn("CommitNumber").AsInt64().Identity().PrimaryKey()
                 .WithColumn("CommitSequence").AsInt32().NotNullable()
@@ -26,7 +26,7 @@ namespace Workflow.Lace.Database.Migrations
 
         public override void Down()
         {
-            Delete.Table("Commands");
+            Delete.Table("CommandLog");
         }
     }
 }

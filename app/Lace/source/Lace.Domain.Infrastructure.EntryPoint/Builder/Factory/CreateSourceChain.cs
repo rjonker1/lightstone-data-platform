@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Specification;
-using NServiceBus;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
 {
@@ -36,7 +36,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
                     w => w.Key.Equals(_package.Action, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid> SourceChain
+        public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> SourceChain
         {
             get;
             private set; }

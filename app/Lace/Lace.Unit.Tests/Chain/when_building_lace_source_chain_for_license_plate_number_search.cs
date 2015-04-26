@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -12,7 +13,6 @@ using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace;
 using Lace.Test.Helper.Fakes.Lace.Builder;
-using NServiceBus;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Chain
@@ -23,7 +23,7 @@ namespace Lace.Unit.Tests.Chain
         private IBootstrap _initialize;
 
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly IBus _bus;
+        private readonly IAdvancedBus _bus;
         private Dictionary<Type, Func<IPointToLaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
 
         private readonly IBuildSourceChain _buildSourceChain;

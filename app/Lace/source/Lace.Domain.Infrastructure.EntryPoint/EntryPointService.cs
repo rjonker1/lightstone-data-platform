@@ -4,12 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
-using NServiceBus;
+using Workflow.Lace.Domain;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 using Workflow.Lace.Messages.Shared;
@@ -20,7 +21,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private readonly ILog _log;
-        private readonly IBus _bus;
+        private readonly IAdvancedBus _bus;
         private ISendCommandToBus _command;
         private ISendWorkflowCommand _workflow;
         private IBuildSourceChain _dataProviderChain;
@@ -28,7 +29,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.EntryPoint;
 
-        public EntryPointService(IBus bus)
+        public EntryPointService(IAdvancedBus bus)
         {
             _log = LogManager.GetLogger(GetType());
             _bus = bus;

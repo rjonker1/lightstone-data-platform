@@ -90,22 +90,12 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Command.cs" />
-    <Compile Include="ConsumerTypes\CommandConsumer.cs" />
-    <Compile Include="ConsumerTypes\EventConsumer.cs" />
-    <Compile Include="Consumer\DataProviderService.cs" />
-    <Compile Include="Consumer\IDataProviderService.cs" />
+    <Compile Include="Consumer\DataProviderCommandProcessor.cs" />
+    <Compile Include="Consumer\IProcessDataProviderCommands.cs" />
     <Compile Include="Consumer\Installers\BusInstaller.cs" />
     <Compile Include="Consumer\Installers\ConsumerInstaller.cs" />
     <Compile Include="Consumer\Installers\RepositoryInstaller.cs" />
     <Compile Include="Consumer\Installers\WindsorInstaller.cs" />
-    <Compile Include="Domain\DataProviderCommand.cs" />
-    <Compile Include="Domain\Indentifiers\CommandIndentifier.cs" />
-    <Compile Include="Domain\Indentifiers\CommandPayloadIndetifier.cs" />
-    <Compile Include="Domain\Mappers\DataProviderCommandMapper.cs" />
-    <Compile Include="Domain\Publisher\DataProviderEventBus.cs" />
-    <Compile Include="Domain\Repository\CommandRepository.cs" />
-    <Compile Include="Domain\Repository\ICommandRepository.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +104,25 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+      <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
+      <Name>Lace.Shared.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
       <Name>Workflow.Lace.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Lace\Workflow.Lace.csproj">
+      <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
+      <Name>Workflow.Lace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Transactions.Receiver.Service\Workflow.Transactions.Receiver.Service.csproj">
+      <Project>{a05da7c2-75a1-49fa-8dae-da7054635a58}</Project>
+      <Name>Workflow.Transactions.Receiver.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Transactions.Sender.Service\Workflow.Transactions.Sender.Service.csproj">
+      <Project>{ef81a8d8-1704-42e1-969b-eac7a8277e78}</Project>
+      <Name>Workflow.Transactions.Sender.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

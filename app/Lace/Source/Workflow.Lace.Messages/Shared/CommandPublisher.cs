@@ -1,26 +1,39 @@
 ﻿using System;
 using Common.Logging;
-using NServiceBus;
+using EasyNetQ;
+using EasyNetQ.Topology;
 using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Shared
 {
     public class WorkflowCommandPublisher : IPublishCommandMessages
     {
-        private readonly IBus _bus;
+        // private readonly IBus _bus;
+        private readonly IAdvancedBus _bus;
+        private readonly IExchange _exchange;
+        private readonly IQueue _queue;
         private readonly ILog _log;
 
-        public WorkflowCommandPublisher(IBus bus, ILog log)
+        private const string Exchange = "DataPlatform.DataProvider.Sender";
+        private const string QueueName = "DataPlatform.DataProvider.Sender";
+
+
+        public WorkflowCommandPublisher(IAdvancedBus bus)
         {
             _bus = bus;
-            _log = log;
+            _exchange = _bus.ExchangeDeclare(Exchange,
+                ExchangeType.Fanout);
+            _queue = _bus.QueueDeclare(QueueName);
+            _bus.Bind(_exchange, _queue, "");
+            _log = LogManager.GetLogger(GetType());
         }
 
         public void SendToBus<T>(T message) where T : class
         {
             try
             {
-                _bus.Send(message);
+                _bus.Publish<T>(_exchange, "", true, false, new Message<T>(message));
+                // _bus.Send("DataPlatform.DataProvider.Sender", message);
             }
             catch (Exception ex)
             {

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Fakes.Lace.Builder;
-using NServiceBus;
 
 namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 {
@@ -15,7 +15,7 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private IBuildSourceChain _buildSourceChain;
-        private readonly IBus _bus;
+        private readonly IAdvancedBus _bus;
         private IBootstrap _bootstrap;
 
         public FakeEntryPoint()

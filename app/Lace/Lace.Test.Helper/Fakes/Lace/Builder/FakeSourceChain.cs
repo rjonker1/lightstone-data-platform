@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
@@ -29,7 +30,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                     w => w.Key.Equals(_action.Action, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ICollection<IPointToLaceRequest>, NServiceBus.IBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; private set; }
+        public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; private set; }
 
 
     }

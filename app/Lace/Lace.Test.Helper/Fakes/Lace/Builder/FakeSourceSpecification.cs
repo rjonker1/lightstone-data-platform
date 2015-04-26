@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Fakes.Lace.Consumer;
-using NServiceBus;
+using Workflow.Lace.Domain;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
     public class FakeSourceSpecification
     {
-        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             _licenseNumberRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -34,7 +35,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                             .CallSource(response);
 
 
-        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             _driversLicenseDecryptionRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -42,7 +43,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                             MonitoirngCommandSenderBuilder.ForSignioCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
 
 
-        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             _ficaRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -54,13 +55,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
             IEnumerable
                 <
                     KeyValuePair
-                        <string, Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>>
+                        <string, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>>
             Specifications
         {
             get
             {
                 return new Dictionary
-                    <string, Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>()
+                    <string, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>()
                 {
                     {
                         "License plate search", _licenseNumberRequestSpecification()

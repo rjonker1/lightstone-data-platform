@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
+using EasyNetQ;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Shared.Extensions;
-using NServiceBus;
+using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Core;
@@ -21,11 +22,11 @@ namespace Workflow.Lace.Messages.Shared
         private readonly ILog _log;
         private readonly Guid _requestId;
 
-        public SendWorkflowCommands(IBus bus, Guid requestId)
+        public SendWorkflowCommands(IAdvancedBus bus, Guid requestId)
         {
             _requestId = requestId;
             _log = LogManager.GetLogger(GetType());
-            _publisher = new WorkflowCommandPublisher(bus, _log);
+            _publisher = new WorkflowCommandPublisher(bus);
         }
 
         public void DataProviderRequest(DataProviderIdentifier dataProvider,

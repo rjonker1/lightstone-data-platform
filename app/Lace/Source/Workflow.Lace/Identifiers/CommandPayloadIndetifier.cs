@@ -1,8 +1,8 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Domain;
 
-namespace Workflow.DataProvider.Bus.Domain.Indentifiers
+namespace Workflow.Lace.Identifiers
 {
     public class CommandPayloadIndentifier
     {
@@ -31,7 +31,7 @@ namespace Workflow.DataProvider.Bus.Domain.Indentifiers
         {
             get
             {
-                return Type == null ? string.Empty : Type.Assembly.FullName;
+                return Type == null ? string.Empty : Type.AssemblyQualifiedName;
             }
         }
     }

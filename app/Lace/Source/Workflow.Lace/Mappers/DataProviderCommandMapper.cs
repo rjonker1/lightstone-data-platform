@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Shared.BuildingBlocks.AdoNet.Mapping;
 using Shared.BuildingBlocks.AdoNet.Repository;
+using Workflow.Lace.Domain;
 
-namespace Workflow.DataProvider.Bus.Domain.Mappers
+namespace Workflow.Lace.Mappers
 {
     public class DataProviderCommandMapper : TypeMapper
     {
@@ -38,14 +39,14 @@ namespace Workflow.DataProvider.Bus.Domain.Mappers
                 DataProviderId = command.Command.Payload.DataProviderId,
                 CommandType = command.Command.Payload.CommandType,
                 CommandTypeId = command.Command.Payload.CommandTypeId,
-                Type = command.Command.Payload.Type
+                Type = command.Command.Payload.TypeStringValue
             };
             connection.Execute(sql, values);
         }
 
         protected override string TableName
         {
-            get { return "DataProviderCommands"; }
+            get { return "Commands"; }
         }
     }
 }

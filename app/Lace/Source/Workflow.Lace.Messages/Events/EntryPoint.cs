@@ -2,11 +2,12 @@
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Identifiers;
 using DataPlatform.Shared.Messaging;
+using EasyNetQ;
 using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Events
 {
-    [Serializable]
+    [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class EntryPointReceivedRequest : IPublishableMessage
     {
@@ -36,7 +37,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class EntryPointReturnedResponse : IPublishableMessage
     {

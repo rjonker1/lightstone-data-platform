@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using DataPlatform.Shared.Enums;
+using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;

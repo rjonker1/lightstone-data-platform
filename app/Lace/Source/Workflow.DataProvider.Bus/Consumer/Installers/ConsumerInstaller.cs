@@ -2,7 +2,8 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
-using Workflow.DataProvider.Bus.ConsumerTypes;
+using Workflow.Transactions.Receiver.Service.Handlers;
+using Workflow.Transactions.Sender.Service.Handlers;
 
 namespace Workflow.DataProvider.Bus.Consumer.Installers
 {
@@ -13,11 +14,15 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             _log = LogManager.GetLogger(GetType());
-            _log.InfoFormat("Installing Data Provider Consumer");
+            _log.InfoFormat("Installing Consumers");
 
             container.Register(
-                Component.For<CommandConsumer>().ImplementedBy<CommandConsumer>(),
-                Component.For<EventConsumer>().ImplementedBy<EventConsumer>());
+                Component.For<ContextSenderConsumers>().ImplementedBy<ContextSenderConsumers>(),
+                Component.For<RequestSenderConsumers>().ImplementedBy<RequestSenderConsumers>(),
+                Component.For<ContextReceiver>().ImplementedBy<ContextReceiver>(),
+                Component.For<RequestsReceiver>().ImplementedBy<RequestsReceiver>(),
+                Component.For<ResponsesReceiver>().ImplementedBy<ResponsesReceiver>(),
+                Component.For<TransactionReceiver>().ImplementedBy<TransactionReceiver>());
         }
     }
 }

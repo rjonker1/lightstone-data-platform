@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
-namespace Workflow.DataProvider.Bus.Domain.Repository
+namespace Workflow.Lace.Persistence
 {
     public class CommandRepository : ICommandRepository
     {
@@ -37,6 +37,12 @@ namespace Workflow.DataProvider.Bus.Domain.Repository
         public IList<TItem> Items<TItem>(string sql, object param) where TItem : class
         {
             return _connection.Query<TItem>(sql, param).ToList();
+        }
+
+        public TItem Item<TItem>(string sql, object param) where TItem : class
+        {
+            return _connection.Query<TItem>(sql, param).FirstOrDefault();
+            
         }
     }
 }

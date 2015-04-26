@@ -1,13 +1,14 @@
 ﻿
 using System.Collections.Generic;
 using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using NServiceBus;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Requests
@@ -17,18 +18,16 @@ namespace Lace.Acceptance.Tests.Requests
         private readonly ICollection<IPointToLaceRequest> _request;
         private ICollection<IPointToLaceProvider> _responses;
         private readonly IEntryPoint _entryPoint;
-        private readonly IBus _bus;
+        private readonly IAdvancedBus _bus;
 
         public when_sending_property_request_to_lace_entry_point()
         {
-            var assembliesToScan =
-                AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.command.Monitoring.Messages")
-                    .And("NServiceBus.NHibernate")
-                    .And("NServiceBus.Transports.RabbitMQ");
+            //var assembliesToScan =
+            //    AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.command.Monitoring.Messages")
+            //        .And("NServiceBus.NHibernate")
+            //        .And("NServiceBus.Transports.RabbitMQ");
 
-            _bus =
-                new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("command.Monitoring.Messages.Commands", assembliesToScan,
-                    "DataPlatform.command.Monitoring.Host").CreateBusWithNHibernatePersistence();
+            _bus = BusFactory.WorkflowBus();
 
             _request = new LicensePlateRequestBuilder().ForPropertySources();
             _entryPoint = new EntryPointService(_bus);

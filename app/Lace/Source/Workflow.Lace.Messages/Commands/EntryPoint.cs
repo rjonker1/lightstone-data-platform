@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Identifiers;
+using EasyNetQ;
 using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Commands
 {
-    
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
     [DataContract]
     public class ReceiveEntryPointRequest
     {
@@ -36,7 +37,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
     [DataContract]
     public class ReturnEntryPointResponse
     {

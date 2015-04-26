@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -11,7 +12,6 @@ using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using NServiceBus;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources
@@ -19,7 +19,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_ivid_request : Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly IBus _command;
+        private readonly IAdvancedBus _command;
         private readonly IBootstrap _initialize;
         private ICollection<IPointToLaceProvider> _response;
         private readonly IBuildSourceChain _buildSourceChain;

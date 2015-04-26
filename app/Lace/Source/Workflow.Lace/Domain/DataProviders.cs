@@ -11,4 +11,13 @@ namespace Workflow.Lace.Domain
 
         public DataProviderTransactionIdentifier Transaction { get; private set; }
     }
+
+    public class DataProviderCommand
+    {
+        public DataProviderCommand(CommandIndentifier command)
+        {
+            Command = command;
+        }
+        public CommandIndentifier Command { get; private set; }
+    }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Workflow.Lace.Messages.Core
+namespace Workflow.Lace.Domain
 {
     [DataContract]
     public enum Category

@@ -66,10 +66,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Workflow.Lace.Domain\Workflow.Lace.Domain.csproj">
-      <Project>{3d0d59f5-b89e-44ab-8230-abf950a09760}</Project>
-      <Name>Workflow.Lace.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
       <Name>Workflow.Lace.Messages</Name>
@@ -79,6 +75,7 @@
       <Name>Workflow.Lace</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

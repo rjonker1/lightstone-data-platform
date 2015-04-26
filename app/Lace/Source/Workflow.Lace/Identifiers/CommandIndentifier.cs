@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Workflow.DataProvider.Bus.Domain.Indentifiers
+
+namespace Workflow.Lace.Identifiers
 {
     public class CommandIndentifier
     {

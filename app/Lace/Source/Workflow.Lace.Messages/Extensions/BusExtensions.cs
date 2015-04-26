@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Common.Logging;
-using DataPlatform.Shared.Enums;
-using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Extensions

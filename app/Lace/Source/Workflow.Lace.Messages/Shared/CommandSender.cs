@@ -1,6 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using NServiceBus;
+using EasyNetQ;
 using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Shared
@@ -14,7 +14,7 @@ namespace Workflow.Lace.Messages.Shared
             Workflow = workflow;
         }
 
-        public static CommandSender InitCommandSender(IBus bus, Guid requestId,
+        public static CommandSender InitCommandSender(IAdvancedBus bus, Guid requestId,
             DataProviderCommandSource dataProvider)
         {
             return new CommandSender(new SendWorkflowCommands(bus, requestId));

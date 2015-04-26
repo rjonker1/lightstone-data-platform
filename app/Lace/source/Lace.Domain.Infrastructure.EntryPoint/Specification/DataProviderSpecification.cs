@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.Audatex;
 using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Domain.DataProviders.Lightstone;
@@ -12,14 +12,13 @@ using Lace.Domain.DataProviders.PCubed;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
 using Lace.Domain.DataProviders.Signio.DriversLicense;
-using NServiceBus;
 using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 {
     public class DataProviderSpecification
     {
-        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             _defaultLicenseNumberRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -39,7 +38,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                             CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Ivid))
                             .CallSource(response);
 
-        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             _driversLicenseDecryptionRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -47,7 +46,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                             CommandSender.InitCommandSender(bus, requestId,
                                 DataProviderCommandSource.SignioDecryptDriversLicense)).CallSource(response);
 
-        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             _propertyRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -56,7 +55,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                             .CallSource(
                                 response);
 
-        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             _ficaRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -68,14 +67,14 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
             IEnumerable
                 <
                     KeyValuePair
-                        <string, Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>
+                        <string, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>
                             >>
             Specifications
         {
             get
             {
                 return new Dictionary
-                    <string, Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>()
+                    <string, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>()
                 {
                     {
                         "License plate search", _defaultLicenseNumberRequestSpecification()

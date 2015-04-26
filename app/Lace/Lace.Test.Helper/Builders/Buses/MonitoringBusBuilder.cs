@@ -1,6 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using NServiceBus;
+using EasyNetQ;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Shared;
 
@@ -65,28 +65,20 @@ namespace Lace.Test.Helper.Builders.Buses
 
     public class BusFactory
     {
-        //public static IBus MonitoringBus()
-        //{
 
-        //    var assembliesToScan =
-        //        AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.command.Monitoring.Messages")
-        //            .And("NServiceBus.NHibernate")
-        //            .And("NServiceBus.Transports.RabbitMQ");
-        //    return
-        //        new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Monitoring.Messages.Commands", assembliesToScan,
-        //            "DataPlatform.command.Monitoring.Host").CreateBusWithNHibernatePersistence();
-        //}
-
-        public static IBus WorkflowBus()
+        public static IAdvancedBus WorkflowBus()
         {
-            var assembliesToScan =
-                AllAssemblies.Matching("Lightstone.DataPlatform.Workflow.Lace.Messages")
-                    .And("NServiceBus.NHibernate")
-                    .And("NServiceBus.Transports.RabbitMQ");
-            return
-                new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Workflow.Lace.Messages.Commands",
-                    assembliesToScan,
-                    "DataPlatform.Transactions.Host.Write").CreateBusWithNHibernatePersistence();
+
+            return Workflow.BuildingBlocks.BusFactory.CreateAdvancedBus("workflow/dataprovider/queue");
+
+            //var assembliesToScan =
+            //    AllAssemblies.Matching("Lightstone.DataPlatform.Workflow.Lace.Messages")
+            //        .And("NServiceBus.NHibernate")
+            //        .And("NServiceBus.Transports.RabbitMQ");
+            //return
+            //    new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Workflow.Lace.Messages.Commands",
+            //        assembliesToScan,
+            //        "DataPlatform.Transactions.Host.Write").CreateBusWithNHibernatePersistence();
         }
     }
 }

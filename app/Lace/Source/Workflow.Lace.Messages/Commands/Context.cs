@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
-using Workflow.Lace.Messages.Core;
+using EasyNetQ;
+using Workflow.Lace.Domain;
 
 namespace Workflow.Lace.Messages.Commands
 {
-    
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
     [DataContract]
     public class RaisingSecurityFlagCommand
     {
@@ -48,7 +49,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
     [DataContract]
     public class ConfiguringDataProviderCommand
     {
@@ -91,7 +92,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
     [DataContract]
     public class TransformingDataProviderResponseCommand
     {
@@ -134,7 +135,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
     [DataContract]
     public class ErrorInDataProviderCommand
     {
@@ -177,7 +178,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
     [DataContract]
     public class StartingCallCommand
     {
@@ -220,7 +221,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
     [DataContract]
     public class EndingCallCommand
     {

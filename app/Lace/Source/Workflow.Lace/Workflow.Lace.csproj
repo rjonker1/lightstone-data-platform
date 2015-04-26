@@ -72,16 +72,23 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Domain\DataProviderRequest.cs" />
+    <Compile Include="Domain\Category.cs" />
+    <Compile Include="Domain\DataProviders.cs" />
     <Compile Include="Identifiers\ActionIdentifier.cs" />
+    <Compile Include="Identifiers\CommandIndentifier.cs" />
+    <Compile Include="Identifiers\CommandPayloadIndetifier.cs" />
     <Compile Include="Identifiers\DataProviderIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderRequestIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderResponseIdentifier.cs" />
     <Compile Include="Identifiers\ConnectionTypeIdentifier.cs" />
     <Compile Include="Identifiers\PayloadIdentifier.cs" />
     <Compile Include="Identifiers\SearchRequestIndentifier.cs" />
+    <Compile Include="Mappers\DataProviderCommandMapper.cs" />
     <Compile Include="Mappers\DataProviderTransactionTypeMapper.cs" />
+    <Compile Include="Mappers\MappingDataProviderTypes.cs" />
     <Compile Include="Mappers\MappingForTypes.cs" />
+    <Compile Include="Persistence\CommandRepository.cs" />
+    <Compile Include="Persistence\ICommandRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
