@@ -18,7 +18,7 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
     {
         private readonly ITransactionRepository _transaction;
         private readonly IMonitoringRepository _monitoring;
-        private RequestsReceiver(ITransactionRepository transaction, IMonitoringRepository monitoring)
+        public RequestsReceiver(ITransactionRepository transaction, IMonitoringRepository monitoring)
         {
             _transaction = transaction;
             _monitoring = monitoring;

@@ -20,9 +20,10 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             _log.InfoFormat("Installing Repositories");
-            container.Register(Component.For<ICommandRepository>().UsingFactoryMethod(() => new CommandRepository( new SqlConnection(
-                                    ConfigurationManager.ConnectionStrings["workflow/dataprovider/database"]
-                                        .ConnectionString), new RepositoryMapper(new MappingDataProviderTypes()))));
+            container.Register(
+                Component.For<ICommandRepository>().UsingFactoryMethod(() => new CommandRepository(new SqlConnection(
+                    ConfigurationManager.ConnectionStrings["workflow/dataprovider/database"]
+                        .ConnectionString), new RepositoryMapper(new MappingDataProviderTypes()))));
             container.Register(
                 Component.For<ITransactionRepository>()
                     .UsingFactoryMethod(
@@ -37,9 +38,9 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
                     .UsingFactoryMethod(
                         () =>
                             new MonitoringRepository(
-                        new SqlConnection(
-                            ConfigurationManager.ConnectionStrings["workflow/monitoring/database"]
-                                .ConnectionString), new RepositoryMapper(new MappingForMonitoringTypes()))));
+                                new SqlConnection(
+                                    ConfigurationManager.ConnectionStrings["workflow/monitoring/database"]
+                                        .ConnectionString), new RepositoryMapper(new MappingForMonitoringTypes()))));
 
             container.Register(Component.For<IRepositoryMapper>().ImplementedBy<RepositoryMapper>());
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>());

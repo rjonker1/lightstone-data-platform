@@ -58,7 +58,6 @@ namespace Workflow.DataProvider.Bus.Consumer
                     (message, info) => new SenderConsumers<StartingCallCommand>(message, container))
                 .Add<EndingCallCommand>((message, info) => new SenderConsumers<EndingCallCommand>(message, container)));
 
-
             _bus.Consume(receiverQueue, x => x
                 .Add<RequestToDataProvider>(
                     (message, info) => new ReceiverConsumers<RequestToDataProvider>(message, container))
@@ -69,7 +68,19 @@ namespace Workflow.DataProvider.Bus.Consumer
                 .Add<EntryPointReturnedResponse>(
                     (message, info) => new ReceiverConsumers<EntryPointReturnedResponse>(message, container))
                 .Add<BillTransactionMessage>(
-                    (message, info) => new ReceiverConsumers<BillTransactionMessage>(message, container)));
+                    (message, info) => new ReceiverConsumers<BillTransactionMessage>(message, container))
+                .Add<SecurityFlagRaised>(
+                    (message, info) => new ReceiverConsumers<SecurityFlagRaised>(message, container))
+                .Add<DataProviderCallEnded>(
+                    (message, info) => new ReceiverConsumers<DataProviderCallEnded>(message, container))
+                .Add<DataProviderCallStarted>(
+                    (message, info) => new ReceiverConsumers<DataProviderCallStarted>(message, container))
+                .Add<DataProviderError>(
+                    (message, info) => new ReceiverConsumers<DataProviderError>(message, container))
+                .Add<DataProviderResponseTransformed>(
+                    (message, info) => new ReceiverConsumers<DataProviderResponseTransformed>(message, container))
+                .Add<DataProviderConfigured>(
+                    (message, info) => new ReceiverConsumers<DataProviderConfigured>(message, container)));
 
             _log.DebugFormat("Data Provider Command Processor Service Started");
         }

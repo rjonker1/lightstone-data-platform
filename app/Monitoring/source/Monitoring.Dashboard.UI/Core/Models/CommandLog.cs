@@ -5,10 +5,10 @@ namespace Monitoring.Dashboard.UI.Core.Models
 {
     [Serializable]
     [DataContract]
-    public class Commit
+    public class CommandLog
     {
         [DataMember]
-        public string StreamIdOriginal { get; set; }
+        public Guid Id { get; set; }
 
         [DataMember]
         public byte[] Payload { get; set; }
@@ -17,7 +17,10 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public int CommitSequence { get; set; }
 
         [DataMember]
+        public long CommitNumber { get; set; }
+
+        [DataMember]
         public DateTime CommitStamp { get; set; }
-       
+
     }
 }

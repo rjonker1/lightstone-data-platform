@@ -17,9 +17,9 @@ namespace Workflow.Transactions.Sender.Service.Handlers
     public class ContextSenderConsumers
     {
         private readonly ICommandRepository _repository;
-        private readonly IPublishCommandMessages _publisher;
+        private readonly IPublishEventMessages _publisher;
 
-        public ContextSenderConsumers(ICommandRepository repository, IPublishCommandMessages publish)
+        public ContextSenderConsumers(ICommandRepository repository, IPublishEventMessages publish)
         {
             _repository = repository;
             _publisher = publish;
@@ -38,7 +38,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
             _repository.Add(
                 new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(request.ObjectToJson()),
+                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource) request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -59,7 +59,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
             _repository.Add(
                 new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(request.ObjectToJson()),
+                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -80,7 +80,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
             _repository.Add(
                 new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(request.ObjectToJson()),
+                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -101,7 +101,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
             _repository.Add(
                 new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(request.ObjectToJson()),
+                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -122,7 +122,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
             _repository.Add(
                 new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(request.ObjectToJson()),
+                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -144,7 +144,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
             _repository.Add(
                 new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(request.ObjectToJson()),
+                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource) request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));

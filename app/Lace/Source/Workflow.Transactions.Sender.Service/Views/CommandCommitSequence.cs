@@ -10,7 +10,7 @@ namespace Workflow.Transactions.Sender.Service.Views
         public static string SelectStatement()
         {
             return
-                @"SELECT Id, MAX(CommitSequence) + 1 AS NextCommitSequence FROM CommandLog WHERE (Id = @RequestId) GROUP BY Id, CommitNumber, CommitSequence";
+                @"SELECT Id, MAX(CommitSequence) + 1 AS NextCommitSequence FROM CommandLog WHERE (Id = @RequestId) GROUP BY Id";
 
         }
 

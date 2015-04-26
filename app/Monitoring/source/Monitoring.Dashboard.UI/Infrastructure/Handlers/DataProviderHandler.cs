@@ -37,10 +37,8 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                 if (!requests.Any())
                     return;
 
-                var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForManyRequestId,
+                var payloads = _commit.Items<CommandLog>(SelectStatements.GetCommitForManyRequestId,
                     new {@RequestIds = requests.Select(s => s.RequestId).ToArray()})
-                    .OrderBy(o => o.StreamIdOriginal)
-                    .ThenBy(o => o.CommitSequence)
                     .ToArray();
 
                 var errors = _billing.Items<DataProviderError>(
@@ -55,10 +53,11 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                     requests.Select(
                         s =>
                             new DataProviderView(s.RequestId, payloads
-                                .Where(f => f.StreamIdOriginal == s.RequestId.ToString())
+                                .Where(f => f.Id == s.RequestId)
                                 .Select(c => new SerializedPayload(c.Payload, c.CommitSequence)).ToList(), s.Date, false,
                                 s.ElapsedTime, s.SearchType, s.SearchTerm).DeserializePayload()
-                                .SetState(GetErrorCount(errors.FirstOrDefault(f => f.RequestId == s.RequestId)))).ToList();
+                                .SetState(GetErrorCount(errors.FirstOrDefault(f => f.RequestId == s.RequestId))))
+                        .ToList();
             }
             catch (Exception ex)
             {

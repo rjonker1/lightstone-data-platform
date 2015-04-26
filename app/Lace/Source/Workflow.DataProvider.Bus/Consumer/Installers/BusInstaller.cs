@@ -36,6 +36,13 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
                       () =>
                           new BillingPublisher(
                               BusFactory.CreateAdvancedBus("workflow/dataprovider/queue"))));
+
+            container.Register(
+            Component.For<IPublishEventMessages>()
+                .UsingFactoryMethod(
+                    () =>
+                        new EventPublisher(
+                            BusFactory.CreateAdvancedBus("workflow/dataprovider/queue"))));
         }
     }
 }

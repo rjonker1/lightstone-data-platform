@@ -20,6 +20,19 @@ namespace Workflow.Transactions.Receiver.Service
             if (message is IMessage<EntryPointReturnedResponse>)
                 container.Resolve<ResponsesReceiver>().Consume((IMessage<EntryPointReturnedResponse>)message);
 
+            if (message is IMessage<SecurityFlagRaised>)
+                container.Resolve<ContextReceiver>().Consume((IMessage<SecurityFlagRaised>)message);
+            if (message is IMessage<DataProviderConfigured>)
+                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderConfigured>)message);
+            if (message is IMessage<DataProviderCallEnded>)
+                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderCallEnded>)message);
+            if (message is IMessage<DataProviderCallStarted>)
+                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderCallStarted>)message);
+            if (message is IMessage<DataProviderError>)
+                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderError>)message);
+            if (message is IMessage<DataProviderResponseTransformed>)
+                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderResponseTransformed>)message);
+
             if (message is IMessage<BillTransactionMessage>)
                 container.Resolve<Handlers.TransactionReceiver>().Consume((IMessage<BillTransactionMessage>)message);
         }

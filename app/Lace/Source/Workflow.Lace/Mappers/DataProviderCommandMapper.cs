@@ -46,7 +46,7 @@ namespace Workflow.Lace.Mappers
 
         protected override string TableName
         {
-            get { return "Commands"; }
+            get { return "CommandLog"; }
         }
     }
 }

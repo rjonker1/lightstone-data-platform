@@ -26,7 +26,7 @@ namespace Lace.Unit.Tests.Workflow
                 new DataProviderIdentifier((int) DataProviderCommandSource.Ivid,
                     DataProviderCommandSource.Ivid.ToString(), 55, 100,
                     DataProviderAction.Request, DataProviderState.Successful), DateTime.UtcNow,
-                new ConnectionTypeIdentifier("test"),
+                new ConnectionTypeIdentifier("test.co.za", "API"),
                 new PayloadIdentifier(new MetadataContainer().ObjectToJson(),
                     new IvidRequestMessage(new LicensePlateNumberIvidOnlyRequest()).ObjectToJson(),
                     "testing message to bus"));
