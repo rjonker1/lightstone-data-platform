@@ -62,7 +62,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="RestIntegrationModule.cs" />
-    <None Include="Setup.cs.delete" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
