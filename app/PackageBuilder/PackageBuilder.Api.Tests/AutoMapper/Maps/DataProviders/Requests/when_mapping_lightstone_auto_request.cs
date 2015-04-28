@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Lace.Domain.Core.Entities.RequestFields;
-using Lace.Domain.Core.Entities.Requests;
-using Lace.Domain.Core.Requests.Contracts.RequestFields;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Requests;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Fields;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
+using IAmDataProviderRequest = Lace.Domain.Core.Requests.Contracts.Requests.IAmDataProviderRequest;
 
 namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
 {
@@ -18,7 +18,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
         {
             base.Observe();
 
-            _dataFields = Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(new LightstoneAutoRequest(new CarIdRequestField(""), new YearRequestField(""), new MakeRequestField(""), new VinNumberRequestField("")));
+            //_dataFields = Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(new LightstoneAutoRequest(new CarIdRequestField(""), new YearRequestField(""), new MakeRequestField(""), new VinNumberRequestField("")));
         }
 
         [Observation]

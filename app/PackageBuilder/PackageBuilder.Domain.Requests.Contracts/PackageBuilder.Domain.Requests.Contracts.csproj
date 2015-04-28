@@ -52,7 +52,7 @@
     <Compile Include="RequestFields\IAmImageRequestField.cs" />
     <Compile Include="RequestFields\IAmLabelRequestField.cs" />
     <Compile Include="RequestFields\IAmLastNameRequestField.cs" />
-    <Compile Include="RequestFields\IAmLicenseNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmLicenceNumberRequestField.cs" />
     <Compile Include="RequestFields\IAmMakeRequestField.cs" />
     <Compile Include="RequestFields\IAmMaxRowsToReturnRequestField.cs" />
     <Compile Include="RequestFields\IAmReasonForApplicationRequestField.cs" />
@@ -76,7 +76,7 @@
     <Compile Include="Requests\IAmRgtRequest.cs" />
     <Compile Include="Requests\IAmRgtVinRequest.cs" />
     <Compile Include="Requests\IAmSignioDriversLicenseDecryptionRequest.cs" />
-    <Compile Include="Requests\IAmStandardIvidRequest.cs" />
+    <Compile Include="Requests\IAmIvidStandardRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

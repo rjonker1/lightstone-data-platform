@@ -1,9 +1,9 @@
 ﻿using System;
 using AutoMapper;
-using Lace.Domain.Core.Entities.RequestFields;
-using Lace.Domain.Core.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Enums.Requests;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Fields;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
@@ -23,7 +23,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                 case RequestFieldType.Label:
                     return new LabelRequestField(source.Value);
                 case RequestFieldType.LicenseNumber:
-                    return new LicenseNumberRequestField(source.Value);
+                    return new LicenceNumberRequestField(source.Value);
                 case RequestFieldType.Make:
                     return new MakeRequestField(source.Value);
                 case RequestFieldType.CarId:

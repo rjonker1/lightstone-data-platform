@@ -2,7 +2,7 @@
 
 namespace PackageBuilder.Domain.Requests.Contracts.Requests
 {
-    public interface IAmStandardIvidRequest : IAmDataProviderRequest
+    public interface IAmIvidStandardRequest : IAmDataProviderRequest
     {
         IAmRequesterNameRequestField RequesterName { get; }
         IAmRequesterPhoneRequestField RequesterPhone { get; }
@@ -12,8 +12,10 @@ namespace PackageBuilder.Domain.Requests.Contracts.Requests
         IAmReasonForApplicationRequestField ReasonForApplication { get; }
         IAmLabelRequestField Label { get; }
         IAmEngineNumberRequestField EngineNumber { get; }
+        IAmChassisNumberRequestField ChassisNumber { get; }
+        IAmVinNumberRequestField VinNumber { get; }
+        IAmLicenceNumberRequestField LicenceNumber { get; }
         IAmRegisterNumberRequestField RegisterNumber { get; }
-        IAmLicenseNumberRequestField LicenseNumber { get; }
         IAmMakeRequestField Make { get; }
     }
 }

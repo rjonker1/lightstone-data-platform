@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
-using Lace.Domain.Core.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.Enums.Requests;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
 {
@@ -27,7 +27,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IAmChassisNumberRequestField, DataField>()
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.ChassisNumber));
-            Mapper.CreateMap<IAmLicenseNumberRequestField, DataField>()
+            Mapper.CreateMap<IAmLicenceNumberRequestField, DataField>()
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.LicenseNumber));
             Mapper.CreateMap<IAmMakeRequestField, DataField>()
@@ -60,7 +60,6 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
 
             Mapper.CreateMap<IDataField, IAmRequestField>()
                 .ConvertUsing<ITypeConverter<IDataField, IAmRequestField>>();
-
         }
     }
 }
