@@ -38,6 +38,9 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts">
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.992\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.942, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.942\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -82,30 +85,6 @@
     <Compile Include="PriceModel.cs" />
     <Compile Include="PropertyModel.cs" />
     <Compile Include="RepairIndexModel.cs" />
-    <Compile Include="RequestFields\ApplicantNameRequestField.cs" />
-    <Compile Include="RequestFields\CarIdRequestField.cs" />
-    <Compile Include="RequestFields\ChassisNumberRequestField.cs" />
-    <Compile Include="RequestFields\EngineNumberRequestField.cs" />
-    <Compile Include="RequestFields\ImageRequestField.cs" />
-    <Compile Include="RequestFields\UsernameRequestField.cs" />
-    <Compile Include="RequestFields\VinNumberRequestField.cs" />
-    <Compile Include="RequestFields\YearRequestField.cs" />
-    <Compile Include="Requests\AnprRequest.cs" />
-    <Compile Include="Requests\IvidStandardRequest.cs" />
-    <Compile Include="RequestFields\RequesterNameRequestField.cs" />
-    <Compile Include="RequestFields\LabelRequestField.cs" />
-    <Compile Include="RequestFields\LicenseNumberRequestField.cs" />
-    <Compile Include="RequestFields\MakeRequestField.cs" />
-    <Compile Include="RequestFields\ReasonForApplicationRequestField.cs" />
-    <Compile Include="RequestFields\RegisterNumberRequestField.cs" />
-    <Compile Include="RequestFields\RequesterEmailRequestField.cs" />
-    <Compile Include="RequestFields\RequesterPhoneRequestField.cs" />
-    <Compile Include="RequestFields\RequestReferenceRequestField.cs" />
-    <Compile Include="Requests\IvidTitleholderRequest.cs" />
-    <Compile Include="Requests\LightstoneAutoRequest.cs" />
-    <Compile Include="Requests\LightstonePropertyRequest.cs" />
-    <Compile Include="Requests\RgtRequest.cs" />
-    <Compile Include="Requests\RgtVinRequest.cs" />
     <Compile Include="RgtResponse.cs" />
     <Compile Include="RgtVinResponse.cs" />
     <Compile Include="SaleModel.cs" />
