@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using AutoMapper;
 using DataPlatform.Shared.ExceptionHandling;
 using Lace.Domain.Infrastructure.Core.Contracts;
@@ -25,6 +26,55 @@ using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
 {
+    [DataContract]
+    public class ApiRequestDto
+    {
+        [DataMember]
+        public Guid UserId { get; private set; }
+        [DataMember]
+        public Guid ContractId { get; private set; }
+        [DataMember]
+        public Guid PackageId { get; private set; }
+        [DataMember]
+        public Guid SourceId { get; private set; }
+        [DataMember]
+        public string SearchTerm { get; private set; }
+        [DataMember]
+        public string Username { get; set; }
+        [DataMember]
+        public IEnumerable<RequestField> RequestFields { get; private set; }
+        public ApiRequestDto()
+        {
+
+        }
+
+        public ApiRequestDto(Guid userId, Guid contractId, Guid packageId, Guid sourceId, string searchTerm, string username, IEnumerable<RequestField> requestFields)
+        {
+            UserId = userId;
+            ContractId = contractId;
+            PackageId = packageId;
+            SourceId = sourceId;
+            SearchTerm = searchTerm;
+            Username = username;
+            RequestFields = requestFields;
+        }
+
+        public bool IsValid()
+        {
+            return ContractId != Guid.Empty && SourceId != Guid.Empty && !string.IsNullOrEmpty(SearchTerm) &&
+                   !string.IsNullOrEmpty(Username);
+        }
+    }
+
+    [DataContract]
+    public class RequestField
+    {
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public string Value { get; set; }
+    }
+
     public class PackageModule : NancyModule// : SecureModule
     {
         private static int _defaultJsonMaxLength;
@@ -104,6 +154,12 @@ namespace PackageBuilder.Api.Modules
                 //return Response.AsJson(model);
 
                 return responses;
+            };
+
+            Post["/Packages/Execute"] = parameters =>
+            {
+                var apiRequest = this.Bind<ApiRequestDto>();
+                return Response.AsJson(apiRequest);
             };
 
             //TODO: This route must be removed. Data Provider pacakges should all come through /Packages/DataProvider/{id

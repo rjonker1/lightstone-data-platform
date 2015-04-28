@@ -161,19 +161,22 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, Lace.Domain.Core.Requests.DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
         {
-            var package = this;
-            package.DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
+            if (DataProviders == null)
+                return null;
 
-            var dataProviders = package.DataProviders.Select(x =>
+            var dataProviders = DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
+            var laceProviders = new List<IAmDataProvider>();
+            foreach (var dataProvider in dataProviders.ToList())
             {
-                var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(x.RequestFields);
-                return new LaceDataProvider(x.Name, requestFields, x.CostOfSale, RecommendedSalePrice);
-            }).ToArray();
+                var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true);
+                var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(selectedfields);
+                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice));
+            }
 
             var request = new LicensePlateRequest(
                 new User(userId, userName, firstName), new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty, string.Empty),
                 new Contract(contractVersion, accountNumber, contractId),
-                new RequestPackage("License plate search",  dataProviders, package.Id, package.Name, (long)package.DisplayVersion),
+                new RequestPackage("License plate search",  laceProviders.ToArray(), Id, Name, (long)DisplayVersion),
                 new RequestContext(requestId, fromDevice, fromIpAddress, osVersion, system),
                 DateTime.UtcNow);
 
