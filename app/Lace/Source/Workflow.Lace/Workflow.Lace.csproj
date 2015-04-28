@@ -41,9 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.944, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.997, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.944\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.997\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.942, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

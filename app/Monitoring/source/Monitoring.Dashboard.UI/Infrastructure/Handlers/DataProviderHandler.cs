@@ -43,7 +43,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
 
                 var errors = _billing.Items<DataProviderError>(
                     DataProviderError.SelectStatement(),
-                    new {@RequestIds = requests.Select(s => s).ToArray()}).ToArray();
+                    new {@RequestIds = requests.Select(s => s.RequestId).ToArray()}).ToArray();
 
                 if (!errors.Any())
                     errors = new DataProviderError[] {};
