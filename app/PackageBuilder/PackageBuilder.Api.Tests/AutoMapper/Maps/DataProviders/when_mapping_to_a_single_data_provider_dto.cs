@@ -35,7 +35,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
             _dto.SourceConfigurationIsApiConfiguration.ShouldBeTrue();
             _dto.SourceConfigurationUrl.ShouldEqual("IvidUrlTest");
             _dto.SourceConfigurationUsername.ShouldEqual("IvidUsernameTest");
-            _dto.CostOfSale.ShouldEqual(10d);
+            _dto.CostOfSale.ShouldEqual(10m);
             _dto.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _dto.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.AddDays(1).Date);
             _dto.FieldLevelCostPriceOverride.ShouldBeTrue();

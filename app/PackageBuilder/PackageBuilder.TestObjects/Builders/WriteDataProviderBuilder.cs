@@ -10,7 +10,7 @@ namespace PackageBuilder.TestObjects.Builders
     {
         private DataProviderName _name;
         private string _description;
-        private double _costOfSale;
+        private decimal _costOfSale;
         private Type _responseType;
         private bool _fieldLevelCostPriceOverride;
         private string _owner;
@@ -46,7 +46,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public WriteDataProviderBuilder With(double costOfSale)
+        public WriteDataProviderBuilder With(decimal costOfSale)
         {
             _costOfSale = costOfSale;
             return this;

@@ -30,7 +30,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.CommandStore
                 Guid.NewGuid(), 
                 DataProviderName.Rgt,
                 DataProviderName.Rgt.ToString(), 
-                0d, 
+                0m, 
                 typeof (IProvideDataFromRgt), 
                 "Owner", 
                 DateTime.UtcNow);

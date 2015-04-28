@@ -53,7 +53,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
         [Observation]
         public void should_override_data_provider_cost()
         {
-            _dataProvider.CostOfSale.ShouldEqual(20d);
+            _dataProvider.CostOfSale.ShouldEqual(20m);
         }
 
         [Observation]

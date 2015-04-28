@@ -9,7 +9,7 @@ namespace PackageBuilder.TestObjects.Builders
     public class DataProviderOverrideBuilder
     {
         private Guid _id;
-        private double _costOfSale;
+        private decimal _costOfSale;
         private IEnumerable<IDataFieldOverride> _dataFieldOverrides;
 
         public IDataProviderOverride Build()
@@ -28,7 +28,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public DataProviderOverrideBuilder With(double costOfSale)
+        public DataProviderOverrideBuilder With(decimal costOfSale)
         {
             _costOfSale = costOfSale;
             return this;

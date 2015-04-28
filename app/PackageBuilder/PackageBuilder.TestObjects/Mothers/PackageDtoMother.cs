@@ -16,7 +16,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(StateMother.Published, "Owner")
                     .With(1)
                     .With(0.1m)
-                    .With(10d, 20d)
+                    .With(10m, 20m)
                     .With(DateTime.UtcNow)
                     .With(IndustryMother.Automotive)
                     .With(DataProviderDtoMother.Ivid, DataProviderDtoMother.IvidTitleHolder)

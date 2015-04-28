@@ -13,8 +13,8 @@ namespace PackageBuilder.Domain.Entities.Contracts.Packages.Write
         Guid Id { get; }
         int Version { get; }
         string Description { get; }
-        double CostOfSale { get; }
-        double RecommendedSalePrice { get; }
+        decimal CostOfSale { get; }
+        decimal RecommendedSalePrice { get; }
         IAction Action { get; set; }
         string Notes { get; }
         IEnumerable<IIndustry> Industries { get; }

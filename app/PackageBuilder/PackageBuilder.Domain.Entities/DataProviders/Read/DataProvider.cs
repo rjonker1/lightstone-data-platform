@@ -11,7 +11,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Read
         [DomainSignature]
         public virtual DataProviderName Name { get; protected set; }
         public virtual string Description { get; protected set; }
-        public virtual double CostPrice { get; protected set; }
+        public virtual decimal CostPrice { get; protected set; }
         [DomainSignature]
         public virtual int? Version { get; protected set; }
         public virtual string Owner { get; protected set; }
@@ -20,7 +20,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Read
 
         protected DataProvider() { }
 
-        public DataProvider(Guid dataProviderId, DataProviderName name, string description, double costPrice, int version, string owner, DateTime createdDate, DateTime? editedDate)
+        public DataProvider(Guid dataProviderId, DataProviderName name, string description, decimal costPrice, int version, string owner, DateTime createdDate, DateTime? editedDate)
             : base(Guid.NewGuid())
         {
             DataProviderId = dataProviderId;

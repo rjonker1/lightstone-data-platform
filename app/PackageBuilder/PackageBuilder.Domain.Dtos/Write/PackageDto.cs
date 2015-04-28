@@ -18,8 +18,8 @@ namespace PackageBuilder.Domain.Dtos.Write
         public DateTime CreatedDate { get; set; }
         public DateTime EditedDate { get; set; }
         public string Owner { get; set; }
-        public double CostOfSale { get; set; }
-        public double RecommendedSalePrice { get; set; }
+        public decimal CostOfSale { get; set; }
+        public decimal RecommendedSalePrice { get; set; }
         public IEnumerable<DataProviderDto> DataProviders { get; set; }
     }
 }

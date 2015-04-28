@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Core.Requests.Contracts.Requests;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using DataProviderName = DataPlatform.Shared.Enums.DataProviderName;
 
 namespace PackageBuilder.Domain.Entities.Requests
 {
@@ -228,6 +231,22 @@ namespace PackageBuilder.Domain.Entities.Requests
         public Guid ContractId { get; private set; }
 
         public long ContractVersion { get; private set; }
+    }
+
+    public class LaceDataProvider : IAmDataProvider
+    {
+        public DataProviderName Name { get; private set; }
+        public IEnumerable<IAmRequestField> RequestFields { get; private set; }
+        public decimal CostPrice { get; private set; }
+        public decimal RecommendedPrice { get; private set; }
+
+        public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice)
+        {
+            Name = name;
+            RequestFields = requestFields;
+            CostPrice = costPrice;
+            RecommendedPrice = recommendedPrice;
+        }
     }
 
     public class RequestPackage : IHavePackageForRequest

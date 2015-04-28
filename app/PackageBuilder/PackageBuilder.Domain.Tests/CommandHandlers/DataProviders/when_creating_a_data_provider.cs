@@ -22,7 +22,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         {
             base.Observe();
 
-            var command = new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, typeof(IvidResponse), "User", DateTime.UtcNow);
+            var command = new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, "Description", 10m, typeof(IvidResponse), "User", DateTime.UtcNow);
             _handler = new CreateDataProviderHandler(_writeRepository.Object, _readRepository.Object);
             _handler.Handle(command);
         }

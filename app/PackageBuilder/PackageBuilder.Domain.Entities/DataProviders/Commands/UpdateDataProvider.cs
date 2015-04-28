@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
     {
         public readonly DataProviderName Name;
         public readonly string Description;
-        public readonly double CostOfSale;
+        public readonly decimal CostOfSale;
         public readonly Type ResponseType;
         public bool FieldLevelCostPriceOverride;
         public readonly State State;
@@ -27,7 +27,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
         public readonly IEnumerable<IDataField> DataFields;
 
-        public UpdateDataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields) : base(id)
+        public UpdateDataProvider(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
+            : base(id)
         {
             Name = name;
             Description = description;
