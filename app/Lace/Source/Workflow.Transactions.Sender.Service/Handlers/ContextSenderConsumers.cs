@@ -16,10 +16,10 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 {
     public class ContextSenderConsumers
     {
-        private readonly ICommandRepository _repository;
+        private readonly IEventRepository _repository;
         private readonly IPublishEventMessages _publisher;
 
-        public ContextSenderConsumers(ICommandRepository repository, IPublishEventMessages publish)
+        public ContextSenderConsumers(IEventRepository repository, IPublishEventMessages publish)
         {
             _repository = repository;
             _publisher = publish;
@@ -37,8 +37,8 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     request.Date, request.CommandType,request.Payload);
 
             _repository.Add(
-                new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
+                new DataProviderEvent(new EventIndentifier(request.RequestId,
+                    new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource) request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -58,8 +58,8 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     request.Date, request.CommandType, request.Payload);
 
             _repository.Add(
-                new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
+                new DataProviderEvent(new EventIndentifier(request.RequestId,
+                    new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -79,8 +79,8 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     request.Date, request.CommandType, request.Payload);
 
             _repository.Add(
-                new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
+                new DataProviderEvent(new EventIndentifier(request.RequestId,
+                    new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -100,8 +100,8 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     request.Date, request.CommandType, request.Payload);
 
             _repository.Add(
-                new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
+                new DataProviderEvent(new EventIndentifier(request.RequestId,
+                    new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -121,8 +121,8 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     request.Date, request.CommandType, request.Payload);
 
             _repository.Add(
-                new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
+                new DataProviderEvent(new EventIndentifier(request.RequestId,
+                    new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -143,8 +143,8 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     request.Date, request.CommandType, request.Payload);
 
             _repository.Add(
-                new DataProviderCommand(new CommandIndentifier(request.RequestId,
-                    new CommandPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
+                new DataProviderEvent(new EventIndentifier(request.RequestId,
+                    new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource) request.DataProvider.Id,
                         request.CommandType, @event.GetType()))));
@@ -154,8 +154,8 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
         private int GetNextSequence(Guid requestId)
         {
-            var current = _repository.Item<CommandCommitSequence>(CommandCommitSequence.SelectStatement(),
-                new { @RequestId = requestId }) ?? CommandCommitSequence.NewSequence();
+            var current = _repository.Item<EventCommitSequence>(EventCommitSequence.SelectStatement(),
+                new { @RequestId = requestId }) ?? EventCommitSequence.NewSequence();
             return current.NextCommitSequence;
         }
     }

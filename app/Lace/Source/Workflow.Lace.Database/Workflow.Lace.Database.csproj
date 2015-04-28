@@ -47,13 +47,7 @@
     <None Include="connections.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="migrate_data_provider_command_down.bat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="migrate_down.bat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="migrate_data_provider_command_up.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="migrate_up.bat">
@@ -65,7 +59,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Migrations\201504251525_Create_Data_Provider_Command_Table.cs" />
+    <Compile Include="Migrations\201504251525_Create_Data_Provider_Event_Table.cs" />
     <Compile Include="Migrations\201502271652_Create_Data_Provider_Transaction_Table.cs" />
   </ItemGroup>
   <ItemGroup>

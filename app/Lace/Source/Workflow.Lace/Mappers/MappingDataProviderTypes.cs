@@ -13,7 +13,7 @@ namespace Workflow.Lace.Mappers
         {
             Mappings = new Dictionary<Type, TypeMapper>()
             {
-                {typeof (DataProviderCommand), new DataProviderCommandMapper()}
+                {typeof (DataProviderEvent), new DataProviderCommandMapper()}
             };
         }
     }

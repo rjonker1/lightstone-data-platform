@@ -4,7 +4,6 @@ using System.Linq;
 using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Models;
-using Monitoring.Dashboard.UI.Infrastructure.Repository;
 using Monitoring.Domain.Repository;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
@@ -25,7 +24,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             try
             {
                 var statistics =
-                    _monitoring.Items<DataProviderStatistics>(SelectStatements.GetDataProviderStatistics).ToList();
+                    _monitoring.Items<DataProviderStatistics>(DataProviderStatistics.SelectStatement()).ToList();
 
                 if (!statistics.Any())
                     return;

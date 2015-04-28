@@ -2,20 +2,20 @@
 
 namespace Workflow.Lace.Identifiers
 {
-    public class CommandIndentifier
+    public class EventIndentifier
     {
-        public CommandIndentifier()
+        public EventIndentifier()
         {
             
         }
 
-        public CommandIndentifier(Guid requestId, CommandPayloadIndentifier payload)
+        public EventIndentifier(Guid requestId, EventPayloadIndentifier payload)
         {
             Id = requestId;
             Payload = payload;
         }
 
         public Guid Id { get; private set; }
-        public CommandPayloadIndentifier Payload { get; private set; }
+        public EventPayloadIndentifier Payload { get; private set; }
     }
 }

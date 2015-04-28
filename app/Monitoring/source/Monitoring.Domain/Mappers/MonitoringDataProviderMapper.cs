@@ -56,7 +56,7 @@ namespace Monitoring.Domain.Mappers
 
         protected override string TableName
         {
-            get { return "MonitoringDataProvider"; }
+            get { return "DataProviderMonitoring"; }
         }
     }
 }

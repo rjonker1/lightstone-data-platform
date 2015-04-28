@@ -4,10 +4,10 @@ using Workflow.Lace.Domain;
 
 namespace Workflow.Lace.Identifiers
 {
-    public class CommandPayloadIndentifier
+    public class EventPayloadIndentifier
     {
 
-        public CommandPayloadIndentifier(byte[] payload, int commitSequence, DataProviderCommandSource dataProvider,
+        public EventPayloadIndentifier(byte[] payload, int commitSequence, DataProviderCommandSource dataProvider,
             CommandType commandType, Type type)
         {
             Payload = payload;

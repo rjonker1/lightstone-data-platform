@@ -217,7 +217,6 @@
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Infrastructure\Repository\Framework\Connection\ConnectionFactory.cs" />
-    <Compile Include="Infrastructure\Repository\SelectStatements.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
