@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.DataProviders;
@@ -10,8 +11,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure;
-
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Jis

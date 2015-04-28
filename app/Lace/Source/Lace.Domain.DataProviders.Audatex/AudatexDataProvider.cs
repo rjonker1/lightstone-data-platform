@@ -10,7 +10,6 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
-using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.Audatex
 {

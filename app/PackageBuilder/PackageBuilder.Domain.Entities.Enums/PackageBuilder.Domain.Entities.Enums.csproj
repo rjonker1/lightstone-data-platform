@@ -33,7 +33,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProviders\DataProviderName.cs" />
     <Compile Include="Requests\RequestFieldType.cs" />
     <Compile Include="States\StateName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

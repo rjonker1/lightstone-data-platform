@@ -1,7 +1,7 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Mothers.Packages;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Builders.Property
 {

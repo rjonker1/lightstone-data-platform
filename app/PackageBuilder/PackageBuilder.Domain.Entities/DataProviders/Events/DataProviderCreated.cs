@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Events;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Events
 {

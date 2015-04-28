@@ -14,7 +14,6 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;

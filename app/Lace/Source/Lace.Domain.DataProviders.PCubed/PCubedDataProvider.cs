@@ -10,7 +10,6 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.PCubed.Infrastructure;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
-using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.PCubed
 {

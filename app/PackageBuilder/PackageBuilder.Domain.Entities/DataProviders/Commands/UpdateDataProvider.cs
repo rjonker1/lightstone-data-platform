@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Helpers.Json;
 using Newtonsoft.Json;
 using PackageBuilder.Core.Commands;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Commands

@@ -1,10 +1,10 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Moq;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 using PackageBuilder.Domain.Entities.DataProviders.Read;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.EventHandlers.DataProviders;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;

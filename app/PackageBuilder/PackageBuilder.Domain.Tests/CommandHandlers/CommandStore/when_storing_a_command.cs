@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using MemBus;
@@ -8,7 +9,6 @@ using PackageBuilder.Domain.CommandHandlers.CommandStore;
 using PackageBuilder.Domain.Entities.CommandStore;
 using PackageBuilder.Domain.Entities.CommandStore.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 

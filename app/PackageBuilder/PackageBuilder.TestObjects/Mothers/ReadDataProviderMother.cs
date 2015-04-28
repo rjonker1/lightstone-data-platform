@@ -1,6 +1,6 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataProviders.Read;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers

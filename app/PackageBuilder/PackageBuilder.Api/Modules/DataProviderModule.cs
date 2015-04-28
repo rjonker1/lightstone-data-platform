@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
@@ -13,10 +14,8 @@ using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.Repositories;
-using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Read.DataProviderDto;
 
 namespace PackageBuilder.Api.Modules

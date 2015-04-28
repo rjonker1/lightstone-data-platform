@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
@@ -8,7 +8,6 @@ using Lace.Domain.Core.Contracts.DataProviders.Property;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {

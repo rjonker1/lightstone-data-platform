@@ -2,11 +2,11 @@
 using System.Linq;
 using AutoMapper;
 using Castle.Windsor;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;

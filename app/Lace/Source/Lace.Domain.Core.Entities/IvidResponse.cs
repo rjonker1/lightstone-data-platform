@@ -116,7 +116,7 @@ namespace Lace.Domain.Core.Entities
         }
 
         [DataMember]
-        public IAmStandardIvidRequest Request { get; set; }
+        public IAmIvidStandardRequest Request { get; set; }
 
         [DataMember, JsonConverter(typeof(JsonTypeResolverConverter))]
         public IProvideVehicleSpecificInformation SpecificInformation { get; private set; }

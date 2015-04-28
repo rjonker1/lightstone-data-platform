@@ -1,5 +1,5 @@
-﻿using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+﻿using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Entities.Tests.DataProviders

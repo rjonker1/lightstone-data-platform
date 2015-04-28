@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Write
 {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -10,7 +11,6 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer

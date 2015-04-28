@@ -1,6 +1,5 @@
 ﻿using System;
 using Lace.Domain.Core.Requests.Contracts;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Mothers.Packages
 {
