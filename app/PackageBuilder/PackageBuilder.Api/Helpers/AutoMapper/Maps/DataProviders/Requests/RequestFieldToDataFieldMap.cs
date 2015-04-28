@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Api.Modules;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
@@ -62,7 +63,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IDataField, IAmRequestField>()
                 .ConvertUsing<ITypeConverter<IDataField, IAmRequestField>>();
 
-            Mapper.CreateMap<RequestField, DataField>();
+            Mapper.CreateMap<RequestFieldDto, DataField>();
         }
     }
 }

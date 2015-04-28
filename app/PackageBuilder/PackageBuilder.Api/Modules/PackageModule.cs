@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using AutoMapper;
+using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.ExceptionHandling;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Nancy;
@@ -26,59 +27,6 @@ using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
 {
-    [DataContract]
-    public class ApiRequestDto
-    {
-        [DataMember]
-        public Guid UserId { get; private set; }
-        [DataMember]
-        public Guid ContractId { get; private set; }
-        [DataMember]
-        public Guid PackageId { get; private set; }
-        [DataMember]
-        public Guid RequestId { get; private set; }
-        [DataMember]
-        public Guid SourceId { get; private set; }
-        [DataMember]
-        public string SearchTerm { get; private set; }
-        [DataMember]
-        public string Username { get; set; }
-        [DataMember]
-        public IEnumerable<RequestField> RequestFields { get; private set; }
-        public ApiRequestDto()
-        {
-
-        }
-
-        public ApiRequestDto(Guid userId, Guid contractId, Guid packageId, Guid sourceId, string searchTerm, string username, IEnumerable<RequestField> requestFields)
-        {
-            UserId = userId;
-            ContractId = contractId;
-            PackageId = packageId;
-            SourceId = sourceId;
-            SearchTerm = searchTerm;
-            Username = username;
-            RequestFields = requestFields;
-        }
-
-        public bool IsValid()
-        {
-            return ContractId != Guid.Empty && SourceId != Guid.Empty && !string.IsNullOrEmpty(SearchTerm) &&
-                   !string.IsNullOrEmpty(Username);
-        }
-    }
-
-    [DataContract]
-    public class RequestField
-    {
-        [DataMember]
-        public string Name { get; set; }
-        [DataMember]
-        public string Value { get; set; }
-        [DataMember]
-        public string Type { get; set; }
-    }
-
     public class PackageModule : NancyModule// : SecureModule
     {
         private static int _defaultJsonMaxLength;
@@ -126,45 +74,45 @@ namespace PackageBuilder.Api.Modules
                         Response = new[]{Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
                     });
 
-            Get["/Packages/Execute/{id}/{userId}/{searchTerm}/{requestId}"] = parameters =>
-            {
-                //Guid id = (Guid) parameters.id;
-                var package = writeRepo.GetById(parameters.id);
-                // Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+            //Get["/Packages/Execute/{id}/{userId}/{searchTerm}/{requestId}"] = parameters =>
+            //{
+            //    //Guid id = (Guid) parameters.id;
+            //    var package = writeRepo.GetById(parameters.id);
+            //    // Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
-                if (package == null)
-                    throw new LightstoneAutoException("Package could not be found");
+            //    if (package == null)
+            //        throw new LightstoneAutoException("Package could not be found");
 
-                //var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
-                //dto.SetDataProviders(package);
+            //    //var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
+            //    //dto.SetDataProviders(package);
 
-                //var request = package.FormLaceRequest(parameters.userId, parameters.username, parameters.searchTerm, "", parameters.requestId);
+            //    //var request = package.FormLaceRequest(parameters.userId, parameters.username, parameters.searchTerm, "", parameters.requestId);
 
-                //var responses = entryPoint.GetResponsesFromLace(request);
+            //    //var responses = entryPoint.GetResponsesFromLace(request);
 
-                //TODO: Get these values from request or user management
-                var contractId = new Guid("713669a9-1506-42aa-88a6-80edb14757dc");
-                const string accountNumber = "ACC00000";
-                const long contractVersion = (long) 1.0;
-                const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
-                const string fromIpAddress = "127.0.0.1";
-                const string osVersion = "";
-                const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
+            //    //TODO: Get these values from request or user management
+            //    var contractId = new Guid("713669a9-1506-42aa-88a6-80edb14757dc");
+            //    const string accountNumber = "ACC00000";
+            //    const long contractVersion = (long) 1.0;
+            //    const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
+            //    const string fromIpAddress = "127.0.0.1";
+            //    const string osVersion = "";
+            //    const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
 
 
-                var responses = ((Package)package).Execute(entryPoint, parameters.userId, parameters.username,
-                    parameters.searchTerm, "", parameters.requestId, accountNumber, contractId, contractVersion,
-                    fromDevice, fromIpAddress, osVersion, systemType);
-                //return Response.AsJson(model);
+            //    var responses = ((Package)package).Execute(entryPoint, parameters.userId, parameters.username,
+            //        parameters.searchTerm, "", parameters.requestId, accountNumber, contractId, contractVersion,
+            //        fromDevice, fromIpAddress, osVersion, systemType);
+            //    //return Response.AsJson(model);
 
-                return responses;
-            };
+            //    return responses;
+            //};
 
             Post["/Packages/Execute"] = parameters =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
 
-                var package = writeRepo.GetById(parameters.id);
+                var package = writeRepo.GetById(apiRequest.PackageId);
                 // Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
                 if (package == null)
@@ -189,7 +137,7 @@ namespace PackageBuilder.Api.Modules
 
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, "",
                     parameters.searchTerm, "", apiRequest.RequestId, accountNumber, apiRequest.ContractId, contractVersion,
-                    fromDevice, fromIpAddress, osVersion, systemType);
+                    fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
                 return responses;
             };

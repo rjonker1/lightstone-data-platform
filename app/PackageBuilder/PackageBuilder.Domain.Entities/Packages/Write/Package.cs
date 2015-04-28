@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using AutoMapper;
 using CommonDomain.Core;
+using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests;
@@ -15,6 +16,7 @@ using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.Domain.Entities.Contracts.States.Read;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
@@ -159,17 +161,19 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
         }
 
-        private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
+        private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos)
         {
             if (DataProviders == null)
                 return null;
 
             var dataProviders = DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
             var laceProviders = new List<IAmDataProvider>();
+            var fields = Mapper.Map<IEnumerable<RequestFieldDto>, IEnumerable<DataField>>(requestFieldsDtos);
+
             foreach (var dataProvider in dataProviders.ToList())
             {
-                var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true);
-                var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(selectedfields);
+                //var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true); // todo: Validate & compare to api request fields 
+                var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(fields);
                 laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice));
             }
 
@@ -197,10 +201,10 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId,
-            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
+            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos)
         {
             var request = FormLaceRequest(userId, userName, searchTerm, firstName, requestId, accountNumber, contractId,
-                contractVersion, fromDevice, fromIpAddress, osVersion, system);
+                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos);
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
 
             return MapLaceResponses(responses).ToList();

@@ -1,62 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Api.Domain.Infrastructure.Dto
 {
-    [DataContract]
-    public class ApiRequestDto
-    {
-        [DataMember]
-        public Guid UserId { get; private set; }
-        [DataMember]
-        public Guid ContractId { get; private set; }
-        [DataMember]
-        public Guid PackageId { get; private set; }
-        [DataMember]
-        public Guid RequestId { get; private set; }
-        [DataMember]
-        public Guid SourceId { get; private set; }
-        [DataMember]
-        public string SearchTerm { get; private set; }
-        [DataMember]
-        public string Username { get; set; }
-        [DataMember]
-        public IEnumerable<RequestField> RequestFields { get; private set; }
-        public ApiRequestDto()
-        {
-
-        }
-
-        public ApiRequestDto(Guid userId, Guid contractId, Guid packageId, Guid sourceId, string searchTerm, string username, IEnumerable<RequestField> requestFields)
-        {
-            UserId = userId;
-            ContractId = contractId;
-            PackageId = packageId;
-            SourceId = sourceId;
-            SearchTerm = searchTerm;
-            Username = username;
-            RequestFields = requestFields;
-        }
-
-        public bool IsValid()
-        {
-            return ContractId != Guid.Empty && SourceId != Guid.Empty && !string.IsNullOrEmpty(SearchTerm) &&
-                   !string.IsNullOrEmpty(Username);
-        }
-    }
-
-    [DataContract]
-    public class RequestField
-    {
-        [DataMember]
-        public string Name { get; set; }
-        [DataMember]
-        public string Value { get; set; }
-        [DataMember]
-        public string Type { get; set; }
-    }
-
     public class ApiPropertyRequest
     {
         public string TrackingNumber { get; private set; }
