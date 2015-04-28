@@ -14,6 +14,8 @@ namespace Api.Domain.Infrastructure.Dto
         [DataMember]
         public Guid PackageId { get; private set; }
         [DataMember]
+        public Guid RequestId { get; private set; }
+        [DataMember]
         public Guid SourceId { get; private set; }
         [DataMember]
         public string SearchTerm { get; private set; }
@@ -51,6 +53,8 @@ namespace Api.Domain.Infrastructure.Dto
         public string Name { get; set; }
         [DataMember]
         public string Value { get; set; }
+        [DataMember]
+        public string Type { get; set; }
     }
 
     public class ApiPropertyRequest

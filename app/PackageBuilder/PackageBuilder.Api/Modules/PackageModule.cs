@@ -36,6 +36,8 @@ namespace PackageBuilder.Api.Modules
         [DataMember]
         public Guid PackageId { get; private set; }
         [DataMember]
+        public Guid RequestId { get; private set; }
+        [DataMember]
         public Guid SourceId { get; private set; }
         [DataMember]
         public string SearchTerm { get; private set; }
@@ -73,6 +75,8 @@ namespace PackageBuilder.Api.Modules
         public string Name { get; set; }
         [DataMember]
         public string Value { get; set; }
+        [DataMember]
+        public string Type { get; set; }
     }
 
     public class PackageModule : NancyModule// : SecureModule
@@ -159,7 +163,35 @@ namespace PackageBuilder.Api.Modules
             Post["/Packages/Execute"] = parameters =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
-                return Response.AsJson(apiRequest);
+
+                var package = writeRepo.GetById(parameters.id);
+                // Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+
+                if (package == null)
+                    throw new LightstoneAutoException("Package could not be found");
+
+                //var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
+                //dto.SetDataProviders(package);
+
+                //var request = package.FormLaceRequest(parameters.userId, parameters.username, parameters.searchTerm, "", parameters.requestId);
+
+                //var responses = entryPoint.GetResponsesFromLace(request);
+
+                //TODO: Get these values from request or user management
+                var contractId = new Guid("713669a9-1506-42aa-88a6-80edb14757dc");
+                const string accountNumber = "ACC00000";
+                const long contractVersion = (long)1.0;
+                const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
+                const string fromIpAddress = "127.0.0.1";
+                const string osVersion = "";
+                const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
+
+
+                var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, "",
+                    parameters.searchTerm, "", apiRequest.RequestId, accountNumber, apiRequest.ContractId, contractVersion,
+                    fromDevice, fromIpAddress, osVersion, systemType);
+
+                return responses;
             };
 
             //TODO: This route must be removed. Data Provider pacakges should all come through /Packages/DataProvider/{id

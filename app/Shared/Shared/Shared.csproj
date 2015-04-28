@@ -54,11 +54,13 @@
     </Compile>
     <Compile Include="Dtos\Action.cs" />
     <Compile Include="Dtos\ApiMetaData.cs" />
+    <Compile Include="Dtos\ApiRequest.cs" />
     <Compile Include="Dtos\Criteria.cs" />
     <Compile Include="Dtos\DataFieldDto.cs" />
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
+    <Compile Include="Dtos\RequestFieldDto.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\INamedEntity.cs" />
     <Compile Include="Entities\IProvideType.cs" />
