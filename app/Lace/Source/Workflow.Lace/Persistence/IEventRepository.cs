@@ -3,7 +3,7 @@ using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Workflow.Lace.Persistence
 {
-    public interface ICommandRepository : IRepository
+    public interface IEventRepository : IRepository
     {
         IList<TItem> Items<TItem>(string sql) where TItem : class;
         IList<TItem> Items<TItem>(string sql, object param) where TItem : class;

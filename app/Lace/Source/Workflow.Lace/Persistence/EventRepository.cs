@@ -6,12 +6,12 @@ using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Workflow.Lace.Persistence
 {
-    public class CommandRepository : ICommandRepository
+    public class EventRepository : IEventRepository
     {
         private readonly IDbConnection _connection;
         private readonly IRepositoryMapper _mapper;
 
-        public CommandRepository(IDbConnection connection, IRepositoryMapper mapper)
+        public EventRepository(IDbConnection connection, IRepositoryMapper mapper)
         {
             _mapper = mapper;
             _connection = connection;

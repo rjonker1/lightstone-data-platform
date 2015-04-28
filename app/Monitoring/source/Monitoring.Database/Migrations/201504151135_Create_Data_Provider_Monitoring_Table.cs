@@ -8,14 +8,14 @@ namespace Monitoring.Database.Migrations
     {
         public override void Down()
         {
-            Delete.Table("MonitoringDataProvider");
+            Delete.Table("DataProviderMonitoring");
         }
 
         public override void Up()
         {
-            Create.Table("MonitoringDataProvider")
+            Create.Table("DataProviderMonitoring")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
-                .WithColumn("RequestId").AsGuid().NotNullable()
+                .WithColumn("RequestId").AsGuid().Indexed().NotNullable()
                 .WithColumn("SearchType").AsString().NotNullable()
                 .WithColumn("SearchTerm").AsString()
                 .WithColumn("ElapsedTime").AsString().NotNullable()

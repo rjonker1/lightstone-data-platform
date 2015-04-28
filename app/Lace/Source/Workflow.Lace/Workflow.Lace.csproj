@@ -75,8 +75,8 @@
     <Compile Include="Domain\Category.cs" />
     <Compile Include="Domain\DataProviders.cs" />
     <Compile Include="Identifiers\ActionIdentifier.cs" />
-    <Compile Include="Identifiers\CommandIndentifier.cs" />
-    <Compile Include="Identifiers\CommandPayloadIndetifier.cs" />
+    <Compile Include="Identifiers\EventIndentifier.cs" />
+    <Compile Include="Identifiers\EventPayloadIndetifier.cs" />
     <Compile Include="Identifiers\DataProviderIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderRequestIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderResponseIdentifier.cs" />
@@ -87,8 +87,8 @@
     <Compile Include="Mappers\DataProviderTransactionTypeMapper.cs" />
     <Compile Include="Mappers\MappingDataProviderTypes.cs" />
     <Compile Include="Mappers\MappingForTypes.cs" />
-    <Compile Include="Persistence\CommandRepository.cs" />
-    <Compile Include="Persistence\ICommandRepository.cs" />
+    <Compile Include="Persistence\EventRepository.cs" />
+    <Compile Include="Persistence\IEventRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">

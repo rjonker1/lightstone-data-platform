@@ -75,7 +75,7 @@
     <Compile Include="Handlers\ContextSenderConsumers.cs" />
     <Compile Include="SenderConsumers.cs" />
     <Compile Include="Handlers\RequestSenderConsumers.cs" />
-    <Compile Include="Views\CommandCommitSequence.cs" />
+    <Compile Include="Views\EventCommitSequence.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

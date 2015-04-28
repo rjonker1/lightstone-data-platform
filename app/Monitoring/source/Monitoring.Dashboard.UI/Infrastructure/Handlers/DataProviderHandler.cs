@@ -13,16 +13,15 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     public class DataProviderHandler : IHandleMonitoringCommands
     {
         private readonly IMonitoringRepository _monitoring;
-        private readonly ICommitRepository _commit;
+        //  private readonly ICommitRepository _commit;
         private readonly ITransactionRepository _billing;
         private readonly ILog _log;
         public IEnumerable<DataProviderView> MonitoringResponse { get; private set; }
 
-        public DataProviderHandler(IMonitoringRepository monitoring, ICommitRepository commit,
+        public DataProviderHandler(IMonitoringRepository monitoring,
             ITransactionRepository billing)
         {
             _monitoring = monitoring;
-            _commit = commit;
             _billing = billing;
             _log = LogManager.GetLogger(GetType());
         }
@@ -32,22 +31,22 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             try
             {
                 var requests =
-                    _monitoring.Items<DataProvider>(SelectStatements.GetDataProviderRequestResponses).ToArray();
+                    _monitoring.Items<DataProvider>(DataProvider.SelectStatement()).ToArray();
 
                 if (!requests.Any())
                     return;
 
-                var payloads = _commit.Items<CommandLog>(SelectStatements.GetCommitForManyRequestId,
-                    new {@RequestIds = requests.Select(s => s.RequestId).ToArray()})
-                    .ToArray();
+                var payloads = _monitoring.Items<DataProviderEventLog>(DataProviderEventLog.SelectStatement()).ToArray();
+
+                if (!payloads.Any())
+                    return;
 
                 var errors = _billing.Items<DataProviderError>(
-                    SelectStatements.GetNumberOfErrorsPerRequest,
-                    new {@RequestIds = requests.Select(s => s.RequestId).ToArray()}).ToArray();
+                    DataProviderError.SelectStatement(),
+                    new {@RequestIds = requests.Select(s => s).ToArray()}).ToArray();
 
                 if (!errors.Any())
                     errors = new DataProviderError[] {};
-
 
                 MonitoringResponse =
                     requests.Select(

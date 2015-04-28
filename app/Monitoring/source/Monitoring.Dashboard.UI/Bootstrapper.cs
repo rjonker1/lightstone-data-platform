@@ -23,7 +23,6 @@ namespace Monitoring.Dashboard.UI
             container.Register<IRepositoryMapper, RepositoryMapper>();
             container.Register<IHaveTypeMappings, MappingForMonitoringTypes>();
             container.Register<IMonitoringRepository, MonitoringRepository>();
-            container.Register<ICommitRepository, CommitRepository>();
             container.Register<ITransactionRepository, BillingTransactionRepository>();
 
             container.Register<IHandleMonitoringCommands, DataProviderHandler>();

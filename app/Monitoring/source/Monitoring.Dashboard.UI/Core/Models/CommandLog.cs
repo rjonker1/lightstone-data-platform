@@ -5,8 +5,12 @@ namespace Monitoring.Dashboard.UI.Core.Models
 {
     [Serializable]
     [DataContract]
-    public class CommandLog
+    public class DataProviderEventLog
     {
+        private const string GetEventsForRequests =
+            @"select Id, Payload, CommitNumber, CommitSequence,[CommitStamp] from DataProviderEventLog where Id in (select top 100 RequestId from DataProviderMonitoring where [action] = 'response' order by [date] desc) order by CommitNumber, CommitSequence";
+
+
         [DataMember]
         public Guid Id { get; set; }
 
@@ -21,6 +25,12 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         [DataMember]
         public DateTime CommitStamp { get; set; }
+
+        public static string SelectStatement()
+        {
+            return
+                GetEventsForRequests;
+        }
 
     }
 }

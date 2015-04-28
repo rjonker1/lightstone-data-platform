@@ -27,7 +27,7 @@ namespace Workflow.Lace.Mappers
 
         public override void Insert(System.Data.IDbConnection connection, object instance)
         {
-            var command = instance as DataProviderCommand;
+            var command = instance as DataProviderEvent;
             var sql = GenerateInsertStatement();
 
             var values = new
@@ -46,7 +46,7 @@ namespace Workflow.Lace.Mappers
 
         protected override string TableName
         {
-            get { return "CommandLog"; }
+            get { return "DataProviderEventLog"; }
         }
     }
 }
