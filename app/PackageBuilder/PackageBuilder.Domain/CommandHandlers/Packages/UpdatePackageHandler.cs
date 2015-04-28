@@ -22,6 +22,9 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
 
         public override void Handle(UpdatePackage command)
         {
+            if (command.Name == null)
+                throw new LightstoneAutoException("Package name was not specified.");
+
             var exists = _readRepo.Exists(command.Id, command.Name);
             if (exists)
             {

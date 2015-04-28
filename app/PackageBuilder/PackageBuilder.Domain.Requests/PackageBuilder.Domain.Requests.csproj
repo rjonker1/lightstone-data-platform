@@ -55,7 +55,6 @@
     <Compile Include="Fields\RequestReferenceRequestField.cs" />
     <Compile Include="Fields\VinNumberRequestField.cs" />
     <Compile Include="Fields\YearRequestField.cs" />
-    <Compile Include="IAmDataProviderRequest.cs" />
     <Compile Include="IvidStandardRequest.cs" />
     <Compile Include="IvidTitleholderRequest.cs" />
     <Compile Include="LightstoneAutoRequest.cs" />

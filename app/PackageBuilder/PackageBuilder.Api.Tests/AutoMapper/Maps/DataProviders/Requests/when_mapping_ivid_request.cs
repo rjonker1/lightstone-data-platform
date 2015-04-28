@@ -4,10 +4,10 @@ using AutoMapper;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Requests;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Requests.Fields;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
-using IAmDataProviderRequest = Lace.Domain.Core.Requests.Contracts.Requests.IAmDataProviderRequest;
 
 namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
 {
@@ -18,22 +18,22 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
         {
             base.Observe();
 
-        //    _dataFields =
-        //        Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(
-        //            new IvidStandardRequest(
-        //                new RequesterNameRequestField(""), 
-        //                new RequesterPhoneRequestField(""),
-        //                new RequesterEmailRequestField(""), 
-        //                new RequestReferenceRequestField(""),
-        //                new ApplicantNameRequestField(""), 
-        //                new ReasonForApplicationRequestField(""), 
-        //                new LabelRequestField(""), 
-        //                new VinNumberRequestField(""), 
-        //                new ChassisNumberRequestField(""),
-        //                new EngineNumberRequestField(""), 
-        //                new RegisterNumberRequestField(""),
-        //                new LicenceNumberRequestField(""), 
-        //                new MakeRequestField("")));
+            _dataFields =
+                Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(
+                    new IvidStandardRequest(
+                        new RequesterNameRequestField(""),
+                        new RequesterPhoneRequestField(""),
+                        new RequesterEmailRequestField(""),
+                        new RequestReferenceRequestField(""),
+                        new ApplicantNameRequestField(""),
+                        new ReasonForApplicationRequestField(""),
+                        new LabelRequestField(""),
+                        new EngineNumberRequestField(""),
+                        new ChassisNumberRequestField(""),
+                        new VinNumberRequestField(""),
+                        new LicenceNumberRequestField(""),
+                        new RegisterNumberRequestField(""),
+                        new MakeRequestField("")));
         }
 
         [Observation]
@@ -50,7 +50,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
             _dataFields.FirstOrDefault(x => x.Name == "Vin Number").ShouldNotBeNull();
             _dataFields.FirstOrDefault(x => x.Name == "Chassis Number").ShouldNotBeNull();
             _dataFields.FirstOrDefault(x => x.Name == "Register Number").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "License Number").ShouldNotBeNull();
+            _dataFields.FirstOrDefault(x => x.Name == "Licence Number").ShouldNotBeNull();
             _dataFields.FirstOrDefault(x => x.Name == "Make").ShouldNotBeNull();
 
             var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(_dataFields);
