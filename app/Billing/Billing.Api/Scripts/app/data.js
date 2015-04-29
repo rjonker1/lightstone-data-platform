@@ -120,10 +120,26 @@ function previewInvoiceFormatter(value, row, index) {
 window.invoiceActionEvents = {
     'click .invoice-view': function (e, value, row, index) {
 
-        $.get("http://localhost:8856/templates/N190datG", function (response) {
-            $('.modal-body').html(response);
-            $('.wrapper').css("background: none repeat scroll 0 0 #ffffff; !importnant;");
+        var data = '{'+
+        '"template": { "shortid" : "N190datG" },'+
+        '"data" : {'+
+            '"items": [ '+
+    			'{"ItemCode": "1000/200/002", "ItemDescription": "From Post API", "QuantityUnit": 1.00, "Price": 16314.67, "Vat": 2284.00, "Total": 18598.72},'+
+    			'{"ItemCode": "1000/200/002", "ItemDescription": "From Post API 2", "QuantityUnit": 1.00, "Price": 16314.67, "Vat": 2284.00, "Total": 18598.72},'+
+    			'{"ItemCode": "1000/200/002", "ItemDescription": "From Post API 2", "QuantityUnit": 1.00, "Price": 16314.67, "Vat": 2284.00, "Total": 18598.72}'+
+           ' ]  '+
+           ' }'+
+        '}';
+
+        //$.get("http://localhost:8856/templates/N190datG", function (response) {
+        //    $('.modal-body').html(response);
+        //});
+
+        $.post("http://localhost:12116/ReportHTML", data)
+            .done(function (response) {
+                $('.modal-body').html(response);
         });
+           
     }
 };
 
