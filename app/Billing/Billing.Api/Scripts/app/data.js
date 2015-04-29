@@ -109,6 +109,24 @@ window.packageGridActionEvents = {
     }
 };
 
+function previewInvoiceFormatter(value, row, index) {
+    return [
+        '<button type="button" class="invoice-view btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">' +
+            'Preview Invoice' +
+            '</button>'
+    ].join('');
+}
+
+window.invoiceActionEvents = {
+    'click .invoice-view': function (e, value, row, index) {
+
+        $.get("http://localhost:8856/templates/N190datG", function (response) {
+            $('.modal-body').html(response);
+            $('.wrapper').css("background: none repeat scroll 0 0 #ffffff; !importnant;");
+        });
+    }
+};
+
 function packageResponseHandler(res) {
 
     return res.data[0].dataProviders;
