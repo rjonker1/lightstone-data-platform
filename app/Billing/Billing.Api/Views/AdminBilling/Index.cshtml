@@ -10,7 +10,7 @@
                 <span class="info-box-text">Billing Run</span>
                 <br />
                 <span class="info-box-text">
-                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Automated</button>
+                    <button id="automated_run" type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Automated</button>
                 </span>
             </div>
         </div>
@@ -121,12 +121,15 @@
                         <div class="form-group">
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label>Daily Run:</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-3">
+                                    <input id="dailyRunFlag" data-on-color="success" data-off-color="warning" type="checkbox" checked>
+                                </div>
+                                <div class="col-md-6">
                                     <div class='input-group date' id='dailyBillingRun'>
-                                        <input type='text' class="form-control" />
+                                        <input id='dailyBillingRun-input' type='text' class="form-control" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time">
                                             </span>
@@ -134,14 +137,17 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <br />
-                            
+
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label>Monthly Run:</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-3">
+                                    <input id="monthlyRunFlag" data-on-color="success" data-off-color="warning" type="checkbox" checked>
+                                </div>
+                                <div class="col-md-6">
                                     <div class='input-group date' id='monthlyBillingRun'>
                                         <input type='text' class="form-control" />
                                         <span class="input-group-addon">
@@ -151,40 +157,60 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
                         </div>
                     </div>
                     <script type="text/javascript">
 
                         $(function () {
-                            $('#dailyBillingRun').datetimepicker({
-                                format: 'HH:mm'
-                            });
+
+                            later.date.localTime();
+
+                            $('#monthlyRunFlag').bootstrapSwitch('state', true, true);
 
                             $('#monthlyBillingRun').datetimepicker({
                                 format: 'DD [of each Month at] HH:mm'
                             });
 
+                            $('#automated_run').click(function () {
+
+                                $.get("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily", function (response) {
+
+                                    var schedule = later.parse.cron('' + response.data, false);
+                                    var result = later.schedule(schedule).next(1);
+
+                                    $('#dailyBillingRun').datetimepicker({
+                                        format: 'HH:mm',
+                                        defaultDate: moment(result)
+                                    });
+
+                                    if (response.data == '* * * * *') {
+                                        $('#dailyRunFlag').bootstrapSwitch('state', false, true);
+                                        return;
+                                    }
+
+                                    $('#dailyRunFlag').bootstrapSwitch('state', true, true);
+                                });
+                            });
+
+                            $('#btn_submit').click(function () {
+
+                                var time = $('#dailyBillingRun-input').val().split(":");
+                                var dailySchedule = moment().hour(time[0]).minutes(time[1]).format('DD-MM-YYYY HH:mm');
+
+                                $.post("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily?daily_time=" + dailySchedule +
+                                        "&disable_schedule=" + $('#dailyRunFlag').bootstrapSwitch('state'), function (response) {
+
+                                });
+                            });
                         });
                     </script>
                 </div>
 
-                <div class="container">
-
-                </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker3').datetimepicker({
-                            pickDate: false
-                        });
-                    });
-                </script>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button id="btn_submit" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
