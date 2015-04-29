@@ -69,7 +69,11 @@ namespace DataPlatform.Shared.Messaging.Billing.Helpers
         public void SendDynamic<T>(T message) where T : class
         {
             var publishToExchange = BuildMessageQueueExchange(message);
-            advancedBus.Publish<T>(publishToExchange, "", true, false, new Message<T>(message));
+
+            var persistentMessage = new Message<T>(message);
+            persistentMessage.Properties.DeliveryMode = 2;
+
+            advancedBus.Publish<T>(publishToExchange, "", true, false, persistentMessage);
         }
 
         public void Send<T>(T message, string exchangeName, string queueName) where T : class
@@ -78,7 +82,10 @@ namespace DataPlatform.Shared.Messaging.Billing.Helpers
             queue = advancedBus.QueueDeclare(queueName.Length > 0 ? queueName : "DEFAULTED_NAME");
             advancedBus.Bind(exchange, queue, "");
 
-            advancedBus.Publish<T>(exchange, "", true, false, new Message<T>(message));
+            var persistentMessage = new Message<T>(message);
+            persistentMessage.Properties.DeliveryMode = 2;
+
+            advancedBus.Publish<T>(exchange, "", true, false, persistentMessage);
         }
     }
 }
