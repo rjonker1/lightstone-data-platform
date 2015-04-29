@@ -41,9 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.944, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.997, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.944\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.997\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.942, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -72,16 +72,23 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Domain\DataProviderRequest.cs" />
+    <Compile Include="Domain\Category.cs" />
+    <Compile Include="Domain\DataProviders.cs" />
     <Compile Include="Identifiers\ActionIdentifier.cs" />
+    <Compile Include="Identifiers\EventIndentifier.cs" />
+    <Compile Include="Identifiers\EventPayloadIndetifier.cs" />
     <Compile Include="Identifiers\DataProviderIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderRequestIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderResponseIdentifier.cs" />
     <Compile Include="Identifiers\ConnectionTypeIdentifier.cs" />
     <Compile Include="Identifiers\PayloadIdentifier.cs" />
     <Compile Include="Identifiers\SearchRequestIndentifier.cs" />
+    <Compile Include="Mappers\DataProviderCommandMapper.cs" />
     <Compile Include="Mappers\DataProviderTransactionTypeMapper.cs" />
+    <Compile Include="Mappers\MappingDataProviderTypes.cs" />
     <Compile Include="Mappers\MappingForTypes.cs" />
+    <Compile Include="Persistence\EventRepository.cs" />
+    <Compile Include="Persistence\IEventRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">

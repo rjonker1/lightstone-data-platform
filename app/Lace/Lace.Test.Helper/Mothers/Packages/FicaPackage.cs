@@ -1,5 +1,5 @@
 ﻿using System;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using DataPlatform.Shared.Enums;
 
 namespace Lace.Test.Helper.Mothers.Packages
 {

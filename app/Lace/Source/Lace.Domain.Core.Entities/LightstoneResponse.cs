@@ -4,6 +4,7 @@ using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Newtonsoft.Json;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -27,6 +28,8 @@ namespace Lace.Domain.Core.Entities
             VehicleValuation = vehicleValuation;
         }
 
+        [DataMember]
+        public IAmLightstoneAutoRequest Request { get; private set; }
         [DataMember]
         public int? CarId { get; private set; }
         [DataMember]

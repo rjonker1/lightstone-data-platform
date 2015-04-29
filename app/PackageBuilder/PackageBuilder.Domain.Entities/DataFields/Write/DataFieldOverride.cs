@@ -23,6 +23,8 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         [DataMember]
         public bool? IsSelected { get; internal set; }
         [DataMember]
+        public string Type { get; internal set; }
+        [DataMember]
         public int Order { get; internal set; }
         [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataFieldOverride>>))]
         public IEnumerable<IDataFieldOverride> RequestFieldOverrides { get; set; }

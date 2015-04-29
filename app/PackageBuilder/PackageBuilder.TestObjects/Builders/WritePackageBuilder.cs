@@ -12,8 +12,8 @@ namespace PackageBuilder.TestObjects.Builders
     {
         private string _name;
         private string _description;
-        private double _costOfSale;
-        private double _recommendedSalePrice;
+        private decimal _costOfSale;
+        private decimal _recommendedSalePrice;
         private IAction _action;
         private string _notes;
         private IEnumerable<Industry> _industries;
@@ -52,7 +52,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public WritePackageBuilder With(double costOfSale = 0d, double recommendedSalePrice = 0d)
+        public WritePackageBuilder With(decimal costOfSale = 0m, decimal recommendedSalePrice = 0m)
         {
             _costOfSale = costOfSale;
             _recommendedSalePrice = recommendedSalePrice;

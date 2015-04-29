@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
@@ -10,11 +9,10 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>()
-                .ConvertUsing(s => s != null ? s.Select(Mapper.Map<DataProviderFieldItemDto, DataFieldOverride>) : Enumerable.Empty<DataFieldOverride>());
             Mapper.CreateMap<DataProviderFieldItemDto, DataFieldOverride>()
                 .ForMember(d => d.CostOfSale, opt => opt.MapFrom(x => x.Price))
                 .ForMember(d => d.IsSelected, opt => opt.MapFrom(x => x.IsSelected))
+                .ForMember(d => d.RequestFieldOverrides, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>(x.RequestFields)))
                 .ForMember(d => d.DataFieldOverrides, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>(x.DataFields)));
         }
     }

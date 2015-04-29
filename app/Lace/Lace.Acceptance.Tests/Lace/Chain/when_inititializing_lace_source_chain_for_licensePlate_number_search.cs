@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -13,7 +14,6 @@ using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using NServiceBus;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Chain
@@ -23,7 +23,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         private IBootstrap _initialize;
 
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly IBus _command;
+        private readonly IAdvancedBus _command;
         private Dictionary<Type, Func<IPointToLaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
 
         private readonly IBuildSourceChain _buildSourceChain;
@@ -47,7 +47,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public void lace_data_providers_for_VVI_product_must_be_handled_loaded_correclty()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(6);
+            _initialize.DataProviderResponses.Count.ShouldEqual(5);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
@@ -64,8 +64,8 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
 
-            _initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
-            _initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
+            //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
+            //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
 
         }
     }

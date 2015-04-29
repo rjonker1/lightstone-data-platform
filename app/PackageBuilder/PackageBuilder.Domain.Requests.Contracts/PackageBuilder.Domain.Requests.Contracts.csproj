@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{203ED1E3-44CA-4CE5-95BF-94BAB8516019}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PackageBuilder.Domain.Requests.Contracts</RootNamespace>
+    <AssemblyName>Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestFields\IAmApplicantNameRequestField.cs" />
+    <Compile Include="RequestFields\IAmCarIdRequestField.cs" />
+    <Compile Include="RequestFields\IAmChassisNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmCompanyNameRequestField.cs" />
+    <Compile Include="RequestFields\IAmCompanyRegistrationNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmCompanyVatNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmEngineNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmFirstNameRequestField.cs" />
+    <Compile Include="RequestFields\IAmIdentityNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmImageRequestField.cs" />
+    <Compile Include="RequestFields\IAmLabelRequestField.cs" />
+    <Compile Include="RequestFields\IAmLastNameRequestField.cs" />
+    <Compile Include="RequestFields\IAmLicenceNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmMakeRequestField.cs" />
+    <Compile Include="RequestFields\IAmMaxRowsToReturnRequestField.cs" />
+    <Compile Include="RequestFields\IAmReasonForApplicationRequestField.cs" />
+    <Compile Include="RequestFields\IAmRegisterNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmRequesterEmailRequestField.cs" />
+    <Compile Include="RequestFields\IAmRequesterNameRequestField.cs" />
+    <Compile Include="RequestFields\IAmRequesterPhoneRequestField.cs" />
+    <Compile Include="RequestFields\IAmRequestField.cs" />
+    <Compile Include="RequestFields\IAmRequestReferenceRequestField.cs" />
+    <Compile Include="RequestFields\IAmTrackingNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmUserIdRequestField.cs" />
+    <Compile Include="RequestFields\IAmUsernameRequestField.cs" />
+    <Compile Include="RequestFields\IAmUserTokenRequestField.cs" />
+    <Compile Include="RequestFields\IAmVinNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmYearRequestField.cs" />
+    <Compile Include="Requests\IAmAnprRequest.cs" />
+    <Compile Include="Requests\IAmDataProviderRequest.cs" />
+    <Compile Include="Requests\IAmIvidTitleholderRequest.cs" />
+    <Compile Include="Requests\IAmLightstoneAutoRequest.cs" />
+    <Compile Include="Requests\IAmLightstonePropertyRequest.cs" />
+    <Compile Include="Requests\IAmRgtRequest.cs" />
+    <Compile Include="Requests\IAmRgtVinRequest.cs" />
+    <Compile Include="Requests\IAmSignioDriversLicenseDecryptionRequest.cs" />
+    <Compile Include="Requests\IAmIvidStandardRequest.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

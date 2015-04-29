@@ -15,8 +15,8 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
     {
         public readonly string Name;
         public readonly string Description;
-        public readonly double CostPrice;
-        public readonly double SalePrice;
+        public readonly decimal CostPrice;
+        public readonly decimal SalePrice;
         public readonly string Notes;
         public readonly IEnumerable<Industry> Industries;
         public readonly State State;
@@ -26,7 +26,8 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
         [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataProviderOverride>>))]
         public readonly IEnumerable<IDataProviderOverride> DataProviderValueOverrides;
 
-        public CreatePackage(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides) : base(id)
+        public CreatePackage(Guid id, string name, string description, decimal costPrice, decimal salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
+            : base(id)
         {
             Name = name;
             Description = description;

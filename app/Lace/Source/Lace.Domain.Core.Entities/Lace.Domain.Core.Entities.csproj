@@ -38,6 +38,10 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1000\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.942, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.942\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -82,19 +86,6 @@
     <Compile Include="PriceModel.cs" />
     <Compile Include="PropertyModel.cs" />
     <Compile Include="RepairIndexModel.cs" />
-    <Compile Include="Requests\Fields\ApplicantNameRequestField.cs" />
-    <Compile Include="Requests\Fields\EngineNumberRequestField.cs" />
-    <Compile Include="Requests\Fields\VinNumberRequestField.cs" />
-    <Compile Include="Requests\IvidStandardRequest.cs" />
-    <Compile Include="Requests\Fields\RequesterNameRequestField.cs" />
-    <Compile Include="Requests\Fields\LabelRequestField.cs" />
-    <Compile Include="Requests\Fields\LicenseNumberRequestField.cs" />
-    <Compile Include="Requests\Fields\MakeRequestField.cs" />
-    <Compile Include="Requests\Fields\ReasonForApplicationRequestField.cs" />
-    <Compile Include="Requests\Fields\RegisterNumberRequestField.cs" />
-    <Compile Include="Requests\Fields\RequesterEmailRequestField.cs" />
-    <Compile Include="Requests\Fields\RequesterPhoneRequestField.cs" />
-    <Compile Include="Requests\Fields\RequestReferenceRequestField.cs" />
     <Compile Include="RgtResponse.cs" />
     <Compile Include="RgtVinResponse.cs" />
     <Compile Include="SaleModel.cs" />

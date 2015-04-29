@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4E41EAD6-C182-4921-99B0-0F74E2E76321}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PackageBuilder.Domain.Requests</RootNamespace>
+    <AssemblyName>PackageBuilder.Domain.Requests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fields\ApplicantNameRequestField.cs" />
+    <Compile Include="Fields\CarIdRequestField.cs" />
+    <Compile Include="Fields\ChassisNumberRequestField.cs" />
+    <Compile Include="Fields\EngineNumberRequestField.cs" />
+    <Compile Include="Fields\IdentityNumberRequestField.cs" />
+    <Compile Include="Fields\LabelRequestField.cs" />
+    <Compile Include="Fields\LicenceNumberRequestField.cs" />
+    <Compile Include="Fields\MakeRequestField.cs" />
+    <Compile Include="Fields\ReasonForApplicationRequestField.cs" />
+    <Compile Include="Fields\RegisterNumberRequestField.cs" />
+    <Compile Include="Fields\RequesterEmailRequestField.cs" />
+    <Compile Include="Fields\RequesterNameRequestField.cs" />
+    <Compile Include="Fields\RequesterPhoneRequestField.cs" />
+    <Compile Include="Fields\RequestReferenceRequestField.cs" />
+    <Compile Include="Fields\VinNumberRequestField.cs" />
+    <Compile Include="Fields\YearRequestField.cs" />
+    <Compile Include="IvidStandardRequest.cs" />
+    <Compile Include="IvidTitleholderRequest.cs" />
+    <Compile Include="LightstoneAutoRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RgtRequest.cs" />
+    <Compile Include="RgtVinRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageBuilder.Domain.Requests.Contracts\PackageBuilder.Domain.Requests.Contracts.csproj">
+      <Project>{203ED1E3-44CA-4CE5-95BF-94BAB8516019}</Project>
+      <Name>PackageBuilder.Domain.Requests.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

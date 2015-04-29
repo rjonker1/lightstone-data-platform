@@ -24,7 +24,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         public when_initializing_lace_handlers_for_lightstone()
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
-            _request = new LicensePlateRequestBuilder().ForLightstone();
+            _request = new LicensePlateRequestBuilder().ForLightstoneLicensePlate();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _dataProvider = new LightstoneDataProvider(_request, null, null, _command);
         }
@@ -35,15 +35,99 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         }
 
         [Observation]
-        public void lace_rgt_response_should_be_handled()
+        public void lace_lightstone_response_should_be_handled()
         {
             _response.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
-        public void lace_rgt_response_should_not_be_null()
+        public void lace_lightstone_response_should_not_be_null()
         {
             _response.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_AccidentDistribution_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AccidentDistribution.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_AmortisationFactors_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AmortisationFactors.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_AmortisedValues_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AmortisedValues.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_AreaFactors_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AreaFactors.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_AuctionFactors_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AuctionFactors.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_EstimatedValue_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_Frequency_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.Frequency.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_ImageGauges_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.ImageGauges.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_LastFiveSales_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.LastFiveSales.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_Prices_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.Prices.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_RepairIndex_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.RepairIndex.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_TotalSalesByAge_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.TotalSalesByAge.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_lightstone_response_vehicle_valuation_TotalSalesByGender_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.TotalSalesByGender.ShouldNotBeNull();
         }
     }
 }

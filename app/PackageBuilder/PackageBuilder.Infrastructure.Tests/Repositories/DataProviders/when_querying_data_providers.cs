@@ -1,5 +1,5 @@
 ﻿using System;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;

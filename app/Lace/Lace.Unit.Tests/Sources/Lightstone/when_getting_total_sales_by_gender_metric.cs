@@ -15,11 +15,10 @@ namespace Lace.Unit.Tests.Sources.Lightstone
 
         public when_getting_total_sales_by_gender_metric()
         {
-            var request = LaceRequestCarInformationRequestBuilder.ForCarId_113018();
-            var stats = StatisticsData.ForMetricId_7_TotalSalesByGender();
+            var request = LaceRequestCarInformationRequestBuilder.ForCarId_107483();
+            var stats = StatisticsData.ForCarId();
             var bands = MetricsBuilder.GetBands();
-            var carTypes = MetricsBuilder.GetCarTypes();
-            _metric = new TotalSalesByGenderMetric(request, stats, bands, carTypes);
+            _metric = new TotalSalesByGenderMetric(request, stats, bands);
         }
 
 

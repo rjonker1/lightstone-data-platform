@@ -9,7 +9,7 @@ namespace PackageBuilder.TestObjects.Builders
         private Guid _id;
         private string _name;
         private string _description;
-        private double _costOfSale;
+        private decimal _costOfSale;
         //private bool _sourceConfigurationIsApiConfiguration;
         //private string _sourceConfigurationUrl;
         //private string _sourceConfigurationUsername;
@@ -57,7 +57,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public DataProviderDtoBuilder With(double costOfSale)
+        public DataProviderDtoBuilder With(decimal costOfSale)
         {
             _costOfSale = costOfSale;
             return this;

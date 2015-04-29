@@ -1,0 +1,20 @@
+﻿2015-04-28 10:45:25.058 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Disconnected from RabbitMQ Broker, reason: AMQP close-reason, initiated by Application, code=541, text="Domain Unload", classId=0, methodId=0, cause= , going to reconnect
+2015-04-28 10:45:25.060 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Connected to RabbitMQ. Broker: 'localhost', Port: 5672, VHost: '/'
+2015-04-28 10:45:25.061 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Disconnected from RabbitMQ Broker, reason: AMQP close-reason, initiated by Library, code=0, text="End of stream", classId=0, methodId=0, cause=System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   at System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   at RabbitMQ.Client.Impl.ConnectionBase.HeartbeatWriteLoop() , going to reconnect
+2015-04-28 10:45:35.123 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Connected to RabbitMQ. Broker: 'localhost', Port: 5672, VHost: '/'
+2015-04-28 10:45:45.236 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Disconnected from RabbitMQ Broker, reason: AMQP close-reason, initiated by Application, code=541, text="Domain Unload", classId=0, methodId=0, cause= , going to reconnect
+2015-04-28 10:45:45.239 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Connected to RabbitMQ. Broker: 'localhost', Port: 5672, VHost: '/'
+2015-04-28 10:45:45.240 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Disconnected from RabbitMQ Broker, reason: AMQP close-reason, initiated by Library, code=0, text="End of stream", classId=0, methodId=0, cause=System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   at System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   at RabbitMQ.Client.Impl.ConnectionBase.HeartbeatWriteLoop() , going to reconnect
+2015-04-28 10:45:55.289 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Connected to RabbitMQ. Broker: 'localhost', Port: 5672, VHost: '/'
+2015-04-28 10:46:05.320 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Disconnected from RabbitMQ Broker, reason: AMQP close-reason, initiated by Application, code=541, text="Domain Unload", classId=0, methodId=0, cause= , going to reconnect
+2015-04-28 10:46:05.322 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Connected to RabbitMQ. Broker: 'localhost', Port: 5672, VHost: '/'
+2015-04-28 10:46:05.324 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Disconnected from RabbitMQ Broker, reason: AMQP close-reason, initiated by Library, code=0, text="End of stream", classId=0, methodId=0, cause=System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   at System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   at RabbitMQ.Client.Impl.ConnectionBase.HeartbeatWriteLoop() , going to reconnect

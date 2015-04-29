@@ -31,7 +31,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
         public void should_map_all_fields()
         {
             _dto.Id.ShouldNotBeNull();;
-            _dto.CostOfSale.ShouldEqual(10d);
+            _dto.CostOfSale.ShouldEqual(10m);
             _dto.DataFieldOverrides.Count().ShouldEqual(2);
             _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "CarFullname").Name.ShouldNotBeNull();
             _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.Count().ShouldEqual(6);

@@ -87,8 +87,8 @@ namespace Monitoring.Dashboard.UI.Core.Models
                 var jarray = new JArray();
                 SerializedPayloads.OrderBy(o => o.CommitSequence)
                     .ToList()
-                    .ForEach(f => jarray.Add(JArray.Parse(Encoding.UTF8.GetString(f.Payload).Substring(1))));
-
+                    .ForEach(f => jarray.Add(JArray.Parse("[" + Encoding.UTF8.GetString(f.Payload) + "]")));
+              
                 return DersializeNestedPayload(jarray.ToString(Formatting.None));
             }
             catch (Exception ex)
@@ -130,38 +130,38 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         private static void UpdateNestedPayload(dynamic request)
         {
-            if (request.Body.Payload == null || request.Body.Payload.Payload == null || !IsJson(request.Body.Payload.Payload.ToString()))
+            if (request.Payload == null || request.Payload.Payload == null || !IsJson(request.Payload.Payload.ToString()))
                 return;
 
 
-            var token = JToken.Parse(request.Body.Payload.Payload.ToString());
+            var token = JToken.Parse(request.Payload.Payload.ToString());
             if (token is JArray)
             {
-                var payload = JArray.Parse(request.Body.Payload.Payload.ToString());
-                request.Body.Payload.Payload = payload;
+                var payload = JArray.Parse(request.Payload.Payload.ToString());
+                request.Payload.Payload = payload;
             }
             else
             {
-                var payload = JObject.Parse(request.Body.Payload.Payload.ToString());
-                request.Body.Payload.Payload = payload;
+                var payload = JObject.Parse(request.Payload.Payload.ToString());
+                request.Payload.Payload = payload;
             }
         }
 
         private static void UpdateNestedMetaData(dynamic request)
         {
-            if (request.Body.Payload == null || request.Body.Payload.MetaData == null || !IsJson(request.Body.Payload.Payload.ToString()))
+            if (request.Payload == null || request.Payload.MetaData == null || !IsJson(request.Payload.Payload.ToString()))
                 return;
 
-            var token = JToken.Parse(request.Body.Payload.MetaData.ToString());
+            var token = JToken.Parse(request.Payload.MetaData.ToString());
             if (token is JArray)
             {
-                var metaData = JArray.Parse(request.Body.Payload.MetaData.ToString());
-                request.Body.Payload.MetaData = metaData;
+                var metaData = JArray.Parse(request.Payload.MetaData.ToString());
+                request.Payload.MetaData = metaData;
             }
             else
             {
-                var metaData = JObject.Parse(request.Body.Payload.MetaData.ToString());
-                request.Body.Payload.MetaData = metaData;
+                var metaData = JObject.Parse(request.Payload.MetaData.ToString());
+                request.Payload.MetaData = metaData;
             }
         }
 

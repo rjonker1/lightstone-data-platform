@@ -1,9 +1,11 @@
 ﻿using Lace.Domain.Core.Contracts.Requests;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
     public interface IProvideDataFromRgt : IPointToLaceProvider
     {
+        IAmRgtRequest Request { get; set; }
         string Manufacturer { get; }
         int ModelYear { get; }
         string ModelType { get; }

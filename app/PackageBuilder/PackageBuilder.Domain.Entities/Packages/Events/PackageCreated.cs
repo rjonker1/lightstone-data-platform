@@ -11,8 +11,8 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
     {
         public readonly string Name;
         public readonly string Description;
-        public readonly double CostPrice;
-        public readonly double SalePrice;
+        public readonly decimal CostPrice;
+        public readonly decimal SalePrice;
         public string Notes;
         public readonly IEnumerable<Industry> Industries;
         public readonly State State;
@@ -22,7 +22,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
         public readonly DateTime? EditedDate;
         public readonly IEnumerable<IDataProviderOverride> DataProviderValueOverrides;
 
-        public PackageCreated(Guid id, string name, string description, double costPrice, double salePrice, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
+        public PackageCreated(Guid id, string name, string description, decimal costPrice, decimal salePrice, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
         {
             Id = id;
             Name = name;

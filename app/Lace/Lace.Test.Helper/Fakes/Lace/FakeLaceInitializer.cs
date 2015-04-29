@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Shared.Extensions;
-using NServiceBus;
 
 namespace Lace.Test.Helper.Fakes.Lace
 {
@@ -14,9 +13,9 @@ namespace Lace.Test.Helper.Fakes.Lace
 
         private readonly IBuildSourceChain _buildSourceChain;
 
-        private readonly IBus _bus;
+        private readonly IAdvancedBus _bus;
 
-        public FakeLaceInitializer(ICollection<IPointToLaceProvider> response, ICollection<IPointToLaceRequest> request, IBus bus,
+        public FakeLaceInitializer(ICollection<IPointToLaceProvider> response, ICollection<IPointToLaceRequest> request, IAdvancedBus bus,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;

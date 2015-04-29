@@ -4,11 +4,11 @@ using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders.Metric;
-using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Core.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.Industries.Read;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {

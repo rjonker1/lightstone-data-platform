@@ -12,7 +12,6 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
-
 {
     public class CreateDataProviderHandler : AbstractMessageHandler<CreateDataProvider>
     {

@@ -9,6 +9,7 @@ using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Core.Requests.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Management;

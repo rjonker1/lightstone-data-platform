@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
@@ -8,7 +8,6 @@ using Lace.Domain.Core.Contracts.DataProviders.Property;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {
@@ -26,32 +25,32 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             this.Info(() => "Attempting to import data providers");
 
             _publisher.Publish(new CreateDataProvider(DefaultIvidResponse(), Guid.NewGuid(), DataProviderName.Ivid,
-                DataProviderName.Ivid.ToString(), 0d, typeof (IProvideDataFromIvid), "Owner", DateTime.UtcNow));
+                DataProviderName.Ivid.ToString(), 0m, typeof (IProvideDataFromIvid), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(new IvidTitleHolderResponse(), Guid.NewGuid(),
-                DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0d,
+                DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0m,
                 typeof (IProvideDataFromIvidTitleHolder), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(DefaultLightstoneResponse(), Guid.NewGuid(),
-                DataProviderName.LightstoneAuto, DataProviderName.LightstoneAuto.ToString(), 0d,
+                DataProviderName.LightstoneAuto, DataProviderName.LightstoneAuto.ToString(), 0m,
                 typeof (IProvideDataFromLightstoneAuto), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(new RgtResponse(), Guid.NewGuid(), DataProviderName.Rgt,
-                DataProviderName.Rgt.ToString(), 0d, typeof (IProvideDataFromRgt), "Owner", DateTime.UtcNow));
+                DataProviderName.Rgt.ToString(), 0m, typeof(IProvideDataFromRgt), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(new RgtVinResponse(), Guid.NewGuid(), DataProviderName.RgtVin,
-                DataProviderName.RgtVin.ToString(), 0d, typeof (IProvideDataFromRgtVin), "Owner", DateTime.UtcNow));
+                DataProviderName.RgtVin.ToString(), 0m, typeof(IProvideDataFromRgtVin), "Owner", DateTime.UtcNow));
 
             _publisher.Publish(new CreateDataProvider(DefaultAudatexResponse(), Guid.NewGuid(), DataProviderName.Audatex,
-                DataProviderName.Audatex.ToString(), 0d, typeof (IProvideDataFromAudatex), "Owner", DateTime.UtcNow));
+                DataProviderName.Audatex.ToString(), 0m, typeof(IProvideDataFromAudatex), "Owner", DateTime.UtcNow));
 
             _publisher.Publish(new CreateDataProvider(new PCubedFicaVerficationResponse(), Guid.NewGuid(),
                 DataProviderName.PCubedFica,
-                DataProviderName.PCubedFica.ToString(), 0d, typeof (IProvideDataFromPCubedFicaVerfication), "Owner",
+                DataProviderName.PCubedFica.ToString(), 0m, typeof(IProvideDataFromPCubedFicaVerfication), "Owner",
                 DateTime.UtcNow));
 
             _publisher.Publish(new CreateDataProvider(DefaultSignioDriversLicenseDecryptionResponse(), Guid.NewGuid(),
                 DataProviderName.SignioDecryptDriversLicense, DataProviderName.SignioDecryptDriversLicense.ToString(),
-                0d, typeof (IProvideDataFromSignioDriversLicenseDecryption), "Owner", DateTime.UtcNow));
+                0m, typeof(IProvideDataFromSignioDriversLicenseDecryption), "Owner", DateTime.UtcNow));
 
             _publisher.Publish(new CreateDataProvider(DefaultLightstonePropertyResponse(), Guid.NewGuid(),
-                DataProviderName.LightstoneProperty, DataProviderName.LightstoneProperty.ToString(), 0d,
+                DataProviderName.LightstoneProperty, DataProviderName.LightstoneProperty.ToString(), 0m,
                 typeof (IProvideDataFromLightstoneProperty), "Owner", DateTime.UtcNow));
 
             //_publisher.Publish(new CreateDataProvider(DefaultLightstoneBusinessResponse(), Guid.NewGuid(),

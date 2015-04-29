@@ -22,6 +22,14 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 
             dataProvider.OverrideCostValuesFromPackage(source.CostOfSale);
 
+            var currentRequestFields = dataProvider.RequestFields.Traverse().ToList();
+            foreach (var requestFieldOverrides in source.RequestFieldOverrides.Traverse())
+            {
+                var requestField = currentRequestFields.FirstOrDefault(fld => fld.Namespace.Trim().ToLower() == requestFieldOverrides.Namespace.Trim().ToLower());
+                if (requestField != null)
+                    requestField.OverrideValuesFromPackage(requestFieldOverrides.CostOfSale, requestFieldOverrides.IsSelected);
+            }
+
             var currentDataFields = dataProvider.DataFields.Traverse().ToList();
             foreach (var dataFieldValueOverride in source.DataFieldOverrides.Traverse())
             {

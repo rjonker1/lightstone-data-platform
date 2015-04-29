@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public double CostOfSale { get; set; }
+        public decimal CostOfSale { get; set; }
         public bool SourceConfigurationIsApiConfiguration { get; set; }
         public string SourceConfigurationUrl { get; set; }
         public string SourceConfigurationUsername { get; set; }

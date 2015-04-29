@@ -20,6 +20,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         public double Price { get; set; }
         public bool? IsSelected { get; set; }
         public int Order { get; set; }
+        public IEnumerable<DataProviderFieldItemDto> RequestFields { get; set; }
         public IEnumerable<DataProviderFieldItemDto> DataFields { get; set; }
     }
 }

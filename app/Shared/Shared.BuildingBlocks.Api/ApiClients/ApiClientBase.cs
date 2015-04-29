@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using RestSharp;
 using Shared.Configuration;
 
@@ -68,8 +70,11 @@ namespace Shared.BuildingBlocks.Api.ApiClients
             //request.AddHeader("Authorization", "ApiKey " + token);
             foreach (var valuePair in headers)
                 request.AddHeader(valuePair.Key, valuePair.Value);
+            var contentType = headers.FirstOrDefault(x => (x.Key + "").Trim().ToLower() == "content-type").Value;
+            if (contentType != null && contentType.Contains("json"))
+                request.RequestFormat = DataFormat.Json;
             if (body != null)
-                request.AddObject(body);
+                request.AddBody(body);
 
             return request;
         }

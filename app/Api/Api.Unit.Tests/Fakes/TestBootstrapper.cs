@@ -17,7 +17,7 @@ namespace Api.Unit.Tests.Fakes
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
             AutoMapperConfiguration.Init();
-            container.Register(Component.For<IAuthenticateUser>().Instance(new TestAuthenticator(_username)));
+            //container.Register(Component.For<IAuthenticateUser>().Instance(new TestAuthenticator(_username)));
         }
     }
 }

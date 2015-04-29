@@ -54,16 +54,19 @@
     </Compile>
     <Compile Include="Dtos\Action.cs" />
     <Compile Include="Dtos\ApiMetaData.cs" />
+    <Compile Include="Dtos\ApiRequest.cs" />
     <Compile Include="Dtos\Criteria.cs" />
     <Compile Include="Dtos\DataFieldDto.cs" />
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
+    <Compile Include="Dtos\RequestFieldDto.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\INamedEntity.cs" />
     <Compile Include="Entities\IProvideType.cs" />
     <Compile Include="Enums\DataProviderAction.cs" />
     <Compile Include="Enums\DataProviderCommandSource.cs" />
+    <Compile Include="Enums\DataProviderName.cs" />
     <Compile Include="Enums\DataProviderState.cs" />
     <Compile Include="Enums\DeviceTypes.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />

@@ -1,5 +1,5 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+﻿using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Domain.DataProviders.Core.Contracts
 {

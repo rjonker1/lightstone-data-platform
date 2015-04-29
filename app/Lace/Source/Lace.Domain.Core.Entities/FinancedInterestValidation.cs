@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Lace.Models.IvidTitleHolder
+namespace Lace.Domain.Core.Entities
 {
     public class FinancedInterestValidation
     {

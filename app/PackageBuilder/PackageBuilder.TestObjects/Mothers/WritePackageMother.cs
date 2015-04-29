@@ -12,7 +12,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new WritePackageBuilder()
                     .With("License plate search")
-                    .With(10d, 20d)
+                    .With(10m, 20m)
                     .With(ActionMother.LicensePlateSearchAction)
                     .With(IndustryMother.Finance, IndustryMother.Automotive)
                     .With(StateMother.Published)

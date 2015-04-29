@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CommonDomain.Core;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.Attributes;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Write
 {
@@ -25,7 +25,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         [DataMember]
         public string Description { get; internal set; }
         [DataMember, MapToCurrentValue]
-        public double CostOfSale { get; internal set; }
+        public decimal CostOfSale { get; internal set; }
         public ISourceConfiguration SourceConfiguration
         {
             get
@@ -48,7 +48,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         [DataMember]
         public IEnumerable<IDataField> DataFields { get; set; }
         [DataMember]
-        public int Version { get; internal set; }
+        public int Version
+        {
+            get { return base.Version; }
+            internal set { base.Version = value; }
+        }
 
         private DataProvider(Guid id)
         {
@@ -60,7 +64,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         {
         }
 
-        public DataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
+        public DataProvider(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
             : this(id)
         {
             Name = name;
@@ -74,18 +78,18 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             DataFields = dataFields;
         }
 
-        public DataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields) 
+        public DataProvider(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields) 
             : this(id)
         {
             RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, responseType, owner, createdDate, requestFields, dataFields));
         }
 
-        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields)
+        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields)
         {
             RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, responseType, fieldLevelCostPriceOverride, version, owner, createdDate, editedDate, requestFields, dataFields));
         }
 
-        public void OverrideCostValuesFromPackage(double costOfSale)
+        public void OverrideCostValuesFromPackage(decimal costOfSale)
         {
             CostOfSale = costOfSale;
         }

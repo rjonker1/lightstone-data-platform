@@ -72,17 +72,17 @@ namespace Workflow.Lace.Identifiers
 
         private static void DetermineRequestSearchType(ICollection<IPointToLaceRequest> request)
         {
-            if (request.OfType<IPointToVehicleRequest>().First() != null &&
-                request.OfType<IPointToVehicleRequest>().First().Vehicle != null)
-            {
-                _searchType = IsVinRequest(request.OfType<IPointToVehicleRequest>().First())
-                    ? SearchType.VinSearch
-                    : IsLicenseRequest(request.OfType<IPointToVehicleRequest>().First())
-                        ? SearchType.LicenseSearch
-                        : IsRegRequest(request.OfType<IPointToVehicleRequest>().First())
-                            ? SearchType.RegSearch
-                            : SearchType.Undefined;
-            }
+            if (!IsVehicleRequestType(request))
+                return;
+
+            _searchType = IsVinRequest(request.OfType<IPointToVehicleRequest>().First())
+                ? SearchType.VinSearch
+                : IsLicenseRequest(request.OfType<IPointToVehicleRequest>().First())
+                    ? SearchType.LicenseSearch
+                    : IsRegRequest(request.OfType<IPointToVehicleRequest>().First())
+                        ? SearchType.RegSearch
+                        : SearchType.Undefined;
+
         }
 
         private static string GetSerchTerm(IEnumerable<IPointToLaceRequest> request)
@@ -98,6 +98,20 @@ namespace Workflow.Lace.Identifiers
                 default:
                     return "not available";
             }
+        }
+
+        private static bool IsVehicleRequestType(ICollection<IPointToLaceRequest> request)
+        {
+            try
+            {
+                return request.OfType<IPointToVehicleRequest>().First() != null &&
+                   request.OfType<IPointToVehicleRequest>().First().Vehicle != null;
+            }
+            catch
+            {
+               
+            }
+            return false;
         }
     }
 }

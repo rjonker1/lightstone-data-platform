@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Messaging;
+using EasyNetQ;
 using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Events
 {
-    [Serializable]
+    [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class RequestToDataProvider : IPublishableMessage
     {
-        public RequestToDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload)
+        public RequestToDataProvider()
+        {
+            
+        }
+        public RequestToDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection)
         {
             Id = id;
             RequestId = requestId;
             DataProvider = dataProvider;
             Date = date;
             Connection = connection;
-            Payload = payload;
+           // Payload = payload;
         }
 
         [DataMember]
@@ -34,11 +39,11 @@ namespace Workflow.Lace.Messages.Events
         [DataMember]
         public ConnectionTypeIdentifier Connection { get; private set; }
 
-        [DataMember]
-        public PayloadIdentifier Payload { get; private set; }
+        //[DataMember]
+        //public PayloadIdentifier Payload { get; private set; }
     }
 
-    [Serializable]
+    [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class RequestReceived : IPublishableMessage
     {

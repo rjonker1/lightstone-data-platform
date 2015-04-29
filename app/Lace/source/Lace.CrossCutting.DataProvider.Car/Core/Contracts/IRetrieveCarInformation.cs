@@ -6,7 +6,7 @@ namespace Lace.CrossCutting.DataProvider.Car.Core.Contracts
     public interface IRetrieveCarInformation
     {
         bool IsSatisfied { get; }
-        CarInfo CarInformation { get; }
+        CarInformation CarInformation { get; }
         IHaveCarInformation CarInformationRequest { get; }
         IRetrieveCarInformation SetupDataSources();
         IRetrieveCarInformation BuildCarInformation();

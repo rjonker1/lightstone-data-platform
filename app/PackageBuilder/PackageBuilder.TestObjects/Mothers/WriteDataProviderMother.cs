@@ -1,8 +1,8 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers
@@ -20,7 +20,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DateTime.UtcNow)
                     .With((DateTime?) DateTime.UtcNow.AddDays(1))
                     .With(true)
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromIvid))
                     .With(DataFieldMother.CarFullname, DataFieldMother.CategoryCode, DataFieldMother.CategoryDescription,
                         DataFieldMother.ColourCode, DataFieldMother.CategoryDescription,
@@ -36,7 +36,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.IvidTitleHolder)
                     .With("IvidTitleHolder")
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromIvidTitleHolder))
                     .Build();
             }
@@ -49,7 +49,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.RgtVin)
                     .With("RgtVin")
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromRgtVin))
                     .Build();
             }
@@ -62,7 +62,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.Rgt)
                     .With("Rgt")
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromRgt))
                     .Build();
             }
@@ -75,7 +75,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.Audatex)
                     .With("Audatex")
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromAudatex))
                     .Build();
             }
@@ -88,7 +88,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.LightstoneAuto)
                     .With("Lightstone")
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromLightstoneAuto))
                     .Build();
             }
@@ -101,7 +101,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.SignioDecryptDriversLicense)
                     .With("Signio")
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromSignioDriversLicenseDecryption))
                     .Build();
             }
@@ -114,7 +114,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.PCubedFica)
                     .With("PCubed")
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromPCubedFicaVerfication))
                     .Build();
             }
@@ -127,7 +127,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.LightstoneProperty)
                     .With("LightstoneProperty")
-                    .With(10d)
+                    .With(10m)
                     .With(typeof (IProvideDataFromLightstoneProperty))
                     .Build();
             }

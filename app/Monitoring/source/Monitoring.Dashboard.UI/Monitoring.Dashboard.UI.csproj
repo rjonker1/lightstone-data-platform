@@ -201,7 +201,7 @@
     <Compile Include="Core\Contracts\Handlers\IHandleMonitoringCommands.cs" />
     <Compile Include="Core\Contracts\Services\ICallMonitoringService.cs" />
     <Compile Include="Core\Extensions\JsonExtensions.cs" />
-    <Compile Include="Core\Models\Commit.cs" />
+    <Compile Include="Core\Models\CommandLog.cs" />
     <Compile Include="Core\Models\DataProviderStatistics.cs" />
     <Compile Include="Core\Models\DataProviderStatisticsView.cs" />
     <Compile Include="Core\Models\DataProviderView.cs" />
@@ -217,7 +217,6 @@
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Infrastructure\Repository\Framework\Connection\ConnectionFactory.cs" />
-    <Compile Include="Infrastructure\Repository\SelectStatements.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -35,8 +35,8 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
             _package.Id.ShouldNotBeNull();
             _package.Name.ShouldEqual("VVi");
             _package.Description.ShouldEqual("Description");
-            _package.CostOfSale.ShouldEqual(10d);
-            _package.RecommendedSalePrice.ShouldEqual(20d);
+            _package.CostOfSale.ShouldEqual(10m);
+            _package.RecommendedSalePrice.ShouldEqual(20m);
             _package.Notes.ShouldEqual("Notes");
             _package.Industries.Count().ShouldEqual(1);
             _package.State.Name.ShouldEqual(StateName.Published);

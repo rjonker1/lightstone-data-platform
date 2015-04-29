@@ -39,6 +39,9 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos, Version=1.0.0.906, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Billing.Api.Dtos.1.0.0.906\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
@@ -52,14 +55,11 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.942\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="NEventStore">
-      <HintPath>..\..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\..\..\packages\NServiceBus.5.2.0\lib\net45\NServiceBus.Core.dll</HintPath>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,8 +74,9 @@
     <Compile Include="Commands\Requests.cs" />
     <Compile Include="Commands\Responses.cs" />
     <Compile Include="Commands\Transactions.cs" />
-    <Compile Include="Core\Category.cs" />
     <Compile Include="Core\Constants.cs" />
+    <Compile Include="Core\IPublishBillingMessages.cs" />
+    <Compile Include="Core\IPublishEventMessages.cs" />
     <Compile Include="Core\IPublishCommandMessages.cs" />
     <Compile Include="Core\ISendCommandToBus.cs" />
     <Compile Include="Core\ISendWorflowCommand.cs" />
@@ -88,7 +89,9 @@
     <Compile Include="Infrastructure\Metadata.cs" />
     <Compile Include="Infrastructure\StopWatchFactory.cs" />
     <Compile Include="Infrastructure\StopWatchResults.cs" />
+    <Compile Include="Shared\BillingPublisher.cs" />
     <Compile Include="Shared\CommandSender.cs" />
+    <Compile Include="Shared\EventPublisher.cs" />
     <Compile Include="Shared\SendWorkflowCommands.cs" />
     <Compile Include="Shared\CommandPublisher.cs" />
   </ItemGroup>

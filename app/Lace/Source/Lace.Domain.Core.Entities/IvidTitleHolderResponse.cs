@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Models.IvidTitleHolder;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -62,6 +62,8 @@ namespace Lace.Domain.Core.Entities
 
         }
 
+        [DataMember]
+        public IAmIvidTitleholderRequest Request { get; private set; }
         [DataMember]
         public string BankName { get; private set; }
         [DataMember]

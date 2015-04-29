@@ -1,11 +1,11 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Entities;
 using Moq;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
@@ -22,7 +22,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         {
             base.Observe();
 
-            var command = new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, typeof(IvidResponse), "User", DateTime.UtcNow);
+            var command = new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, "Description", 10m, typeof(IvidResponse), "User", DateTime.UtcNow);
             _handler = new CreateDataProviderHandler(_writeRepository.Object, _readRepository.Object);
             _handler.Handle(command);
         }

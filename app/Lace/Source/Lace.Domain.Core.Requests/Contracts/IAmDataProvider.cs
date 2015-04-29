@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 
 namespace Lace.Domain.Core.Requests.Contracts
 {

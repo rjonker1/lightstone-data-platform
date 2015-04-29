@@ -1,10 +1,10 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Moq;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 using PackageBuilder.Domain.Entities.DataProviders.Read;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.EventHandlers.DataProviders;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
@@ -18,7 +18,7 @@ namespace PackageBuilder.Domain.Tests.EventHandlers.DataProviders
 
         public override void Observe()
         {
-            var command = new DataProviderUpdated(Guid.NewGuid(), DataProviderName.Ivid, "Ivid", 10d, typeof(IProvideDataFromIvid), false, 1, "Owner", DateTime.UtcNow, null, null, new []{ DataFieldMother.LicenseField });
+            var command = new DataProviderUpdated(Guid.NewGuid(), DataProviderName.Ivid, "Ivid", 10m, typeof(IProvideDataFromIvid), false, 1, "Owner", DateTime.UtcNow, null, null, new []{ DataFieldMother.LicenseField });
             _handler = new DataProviderUpdatedHandler(_repository.Object);
             _handler.Handle(command);
         }

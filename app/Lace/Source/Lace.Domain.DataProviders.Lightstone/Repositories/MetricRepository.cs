@@ -2,20 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
-using Lace.Domain.DataProviders.Lightstone.Services;
 using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Domain.DataProviders.Lightstone.Repositories
 {
     public class MetricRepository : IReadOnlyRepository<Metric>
     {
-
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
@@ -26,15 +22,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             _connection = connection;
             _cacheClient = cacheClient;
         }
-        
-        public IEnumerable<Metric> FindAllWithRequest(IHaveCarInformation request)
+
+        public IEnumerable<Metric> Get(string sql, object param)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Metric> GetAll()
+        public IEnumerable<Metric> GetAll(string sql)
         {
-            //using (_connection)
             using (_cacheClient)
             {
                 var cacheMetric = _cacheClient.As<Metric>();
@@ -44,7 +39,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                     return response;
 
                 var dbResponse = _connection
-                    .Query<Metric>(SelectStatements.GetAllTheMetricTypes)
+                    .Query<Metric>(sql)
                     .ToList();
 
                 if (!response.CanAddItemsToCache().HasValue)
@@ -54,26 +49,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 dbResponse.AddItemsToCache(_cacheClient, MetricKey, DateTime.UtcNow.AddDays(1));
                 return dbResponse;
             }
-        }
-
-        public IEnumerable<Metric> FindByMake(int makeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Metric> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Metric> FindByCarIdAndYear(int? carId, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Metric> FindByVin(string vinNumber)
-        {
-            throw new NotImplementedException();
         }
     }
 }

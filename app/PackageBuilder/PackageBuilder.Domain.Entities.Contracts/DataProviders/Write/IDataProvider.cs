@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
 {
@@ -10,7 +10,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
         Guid Id { get; }
         DataProviderName Name { get; }
         string Description { get; }
-        double CostOfSale { get; }
+        decimal CostOfSale { get; }
         ISourceConfiguration SourceConfiguration { get; }
         Type ResponseType { get; }
         bool FieldLevelCostPriceOverride { get; }
@@ -21,6 +21,6 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
         IEnumerable<IDataField> RequestFields { get; }
         IEnumerable<IDataField> DataFields { get; }
 
-        void OverrideCostValuesFromPackage(double costOfSale);
+        void OverrideCostValuesFromPackage(decimal costOfSale);
     }
 }

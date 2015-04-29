@@ -29,12 +29,12 @@ namespace Api.Modules
                 return Response.AsJson(metaData);
             };
 
-            //TODO: Refactor!!!! This looks crap
             Post["/action/LicensePlateNumberSearch"] = parameters =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var responses = packageBuilderApi.Get("", string.Format("/Packages/Execute/{0}/{1}/{2}/{3}", apiRequest.PackageId, apiRequest.UserId, apiRequest.SearchTerm, Guid.NewGuid()), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
+                var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), new KeyValuePair<string, string>("Content-Type", "application/json"), });
+                //var responses = packageBuilderApi.Get("", string.Format("/Packages/Execute/{0}/{1}/{2}/{3}", apiRequest.PackageId, apiRequest.UserId, apiRequest.SearchTerm, Guid.NewGuid()), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
                 return responses;
             };
         }

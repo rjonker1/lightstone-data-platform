@@ -13,7 +13,6 @@ using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Configuration
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Management;
 using Lace.Shared.Extensions;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
@@ -48,7 +47,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                     .Map()
                     .Validate();
 
-                command.Workflow.Send(Workflow.Lace.Messages.Core.CommandType.Configuration, request, null, Provider);
+                command.Workflow.Send(Workflow.Lace.Domain.CommandType.Configuration, request, null, Provider);
 
 
                 if (!request.RequestIsValid)
@@ -86,7 +85,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Property Data Provider {0}", ex.Message);
-                command.Workflow.Send(Workflow.Lace.Messages.Core.CommandType.Fault, ex.Message,
+                command.Workflow.Send(Workflow.Lace.Domain.CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling Lightstone Property Data Provider"}, Provider);
                 LightstonePropertyResponseFailed(response);
             }
@@ -109,7 +108,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(Workflow.Lace.Messages.Core.CommandType.Transformation,
+            command.Workflow.Send(Workflow.Lace.Domain.CommandType.Transformation,
                 transformer.Result ?? new LightstonePropertyResponse(new List<PropertyModel>()), null,Provider);
 
             transformer.Result.HasBeenHandled();

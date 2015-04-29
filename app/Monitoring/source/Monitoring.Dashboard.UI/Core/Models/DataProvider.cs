@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Monitoring.Dashboard.UI.Core.Extensions;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
-    [Serializable]
     [DataContract]
     public class DataProvider
     {
+        private const string GetRequests =
+           @"select top 100 RequestId, SearchType, SearchTerm, ElapsedTime, Action, Date from DataProviderMonitoring where [action] = 'response' order by [date] desc";
+
+
+        public static string SelectStatement()
+        {
+            return GetRequests;
+        }
+
         [DataMember]
         public Guid RequestId { get; set; }
 
@@ -41,6 +48,13 @@ namespace Monitoring.Dashboard.UI.Core.Models
     [DataContract]
     public class DataProviderError
     {
+        private const string GetErrors = @"select count([state]) ErrorCount, RequestId from [Billing].[dbo].[DataProviderTransaction] where ([State] <> 'Successful') and RequestId in @RequestIds group by RequestId";
+
+        public static string SelectStatement()
+        {
+            return GetErrors;
+        }
+
         [DataMember]
         public Guid RequestId { get; set; }
 

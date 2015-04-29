@@ -13,16 +13,15 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     public class DataProviderHandler : IHandleMonitoringCommands
     {
         private readonly IMonitoringRepository _monitoring;
-        private readonly ICommitRepository _commit;
+        //  private readonly ICommitRepository _commit;
         private readonly ITransactionRepository _billing;
         private readonly ILog _log;
         public IEnumerable<DataProviderView> MonitoringResponse { get; private set; }
 
-        public DataProviderHandler(IMonitoringRepository monitoring, ICommitRepository commit,
+        public DataProviderHandler(IMonitoringRepository monitoring,
             ITransactionRepository billing)
         {
             _monitoring = monitoring;
-            _commit = commit;
             _billing = billing;
             _log = LogManager.GetLogger(GetType());
         }
@@ -32,33 +31,32 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             try
             {
                 var requests =
-                    _monitoring.Items<DataProvider>(SelectStatements.GetDataProviderRequestResponses).ToArray();
+                    _monitoring.Items<DataProvider>(DataProvider.SelectStatement()).ToArray();
 
                 if (!requests.Any())
                     return;
 
-                var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForManyRequestId,
-                    new {@RequestIds = requests.Select(s => s.RequestId).ToArray()})
-                    .OrderBy(o => o.StreamIdOriginal)
-                    .ThenBy(o => o.CommitSequence)
-                    .ToArray();
+                var payloads = _monitoring.Items<DataProviderEventLog>(DataProviderEventLog.SelectStatement()).ToArray();
+
+                if (!payloads.Any())
+                    return;
 
                 var errors = _billing.Items<DataProviderError>(
-                    SelectStatements.GetNumberOfErrorsPerRequest,
+                    DataProviderError.SelectStatement(),
                     new {@RequestIds = requests.Select(s => s.RequestId).ToArray()}).ToArray();
 
                 if (!errors.Any())
                     errors = new DataProviderError[] {};
 
-
                 MonitoringResponse =
                     requests.Select(
                         s =>
                             new DataProviderView(s.RequestId, payloads
-                                .Where(f => f.StreamIdOriginal == s.RequestId.ToString())
+                                .Where(f => f.Id == s.RequestId)
                                 .Select(c => new SerializedPayload(c.Payload, c.CommitSequence)).ToList(), s.Date, false,
                                 s.ElapsedTime, s.SearchType, s.SearchTerm).DeserializePayload()
-                                .SetState(GetErrorCount(errors.FirstOrDefault(f => f.RequestId == s.RequestId)))).ToList();
+                                .SetState(GetErrorCount(errors.FirstOrDefault(f => f.RequestId == s.RequestId))))
+                        .ToList();
             }
             catch (Exception ex)
             {

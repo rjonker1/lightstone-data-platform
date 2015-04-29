@@ -20,8 +20,8 @@ namespace PackageBuilder.TestObjects.Builders
         private DateTime _createdDate;
         private DateTime _editedDate;
         private string _owner;
-        private double _costOfSale;
-        private double _recommendedSalePrice;
+        private decimal _costOfSale;
+        private decimal _recommendedSalePrice;
         private IEnumerable<DataProviderDto> _dataProviderDtos;
         public PackageDto Build()
         {
@@ -90,7 +90,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public PackageDtoBuilder With(double costOfSale, double recommendedSalePrice = 0d)
+        public PackageDtoBuilder With(decimal costOfSale, decimal recommendedSalePrice = 0m)
         {
             _costOfSale = costOfSale;
             _recommendedSalePrice = recommendedSalePrice;

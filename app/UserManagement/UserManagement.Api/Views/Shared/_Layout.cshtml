@@ -118,8 +118,16 @@
         // Configure Toastr
         toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
+        
+        $.ajaxSetup({ cache: false });
 
         $(document).ajaxStart(function () {
+            var t = $.cookie('token');
+            
+            if (t == undefined || t == "") {
+                window.location.href = "http://dev.cia.lightstone.com";
+                return;
+            }
             //$.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
             $.blockUI();
             preloader.active(true);

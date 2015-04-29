@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
+using EasyNetQ;
 
 namespace Workflow.Lace.Messages.Commands
 {
+    [Queue("DataPlatform.DataProvider.Sender", ExchangeName = "DataPlatform.DataProvider.Sender")]
+    [DataContract]
     public class CreateTransactionCommand
     {
         [DataMember]

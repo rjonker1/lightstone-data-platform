@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Domain.DataProviders.Core.Consumer
 {

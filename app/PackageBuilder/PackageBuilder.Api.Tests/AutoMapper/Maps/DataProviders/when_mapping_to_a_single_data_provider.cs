@@ -2,11 +2,11 @@
 using System.Linq;
 using AutoMapper;
 using Castle.Windsor;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
@@ -37,7 +37,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
             _dataProvider.SourceConfiguration.IsApiConfiguration.ShouldBeTrue();
             _dataProvider.SourceConfiguration.Url.ShouldEqual("IvidUrlTest");
             _dataProvider.SourceConfiguration.Username.ShouldEqual("IvidUsernameTest");
-            _dataProvider.CostOfSale.ShouldEqual(10d);
+            _dataProvider.CostOfSale.ShouldEqual(10m);
             _dataProvider.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _dataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.AddDays(1).Date);
             _dataProvider.FieldLevelCostPriceOverride.ShouldBeTrue();

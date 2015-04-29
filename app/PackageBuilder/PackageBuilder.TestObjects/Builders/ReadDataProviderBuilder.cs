@@ -1,6 +1,6 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataProviders.Read;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.TestObjects.Builders
 {
@@ -9,7 +9,7 @@ namespace PackageBuilder.TestObjects.Builders
         private Guid _id;
         private DataProviderName _name;
         private string _description;
-        private double _costPrice;
+        private decimal _costPrice;
         private int _version;
         private string _owner;
         private DateTime _createdDate;
@@ -31,7 +31,7 @@ namespace PackageBuilder.TestObjects.Builders
             _description = name.ToString();
             return this;
         }
-        public ReadDataProviderBuilder With(double costPrice)
+        public ReadDataProviderBuilder With(decimal costPrice)
         {
             _costPrice = costPrice;
             return this;

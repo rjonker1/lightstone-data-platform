@@ -4,21 +4,26 @@ using System.Linq;
 using System.Runtime.Serialization;
 using AutoMapper;
 using CommonDomain.Core;
+using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.Domain.Entities.Contracts.States.Read;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Events;
+using PackageBuilder.Domain.Entities.Requests;
 using PackageBuilder.Domain.Entities.States.Read;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 
 namespace PackageBuilder.Domain.Entities.Packages.Write
 {
@@ -43,9 +48,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         [DataMember]
         public string Description { get; internal set; }
         [DataMember]
-        public double CostOfSale { get; internal set; }
+        public decimal CostOfSale { get; internal set; }
         [DataMember]
-        public double RecommendedSalePrice { get; internal set; }
+        public decimal RecommendedSalePrice { get; internal set; }
         [DataMember]
         public IAction Action { get; set; }
         [DataMember]
@@ -93,13 +98,13 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             DataProviders = dataProviders;
         }
 
-        public Package(Guid id, string name, string description, IEnumerable<Industry> industries, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
+        public Package(Guid id, string name, string description, IEnumerable<Industry> industries, decimal costPrice, decimal salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
             : this(id)
         {
             RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, industries, state, displayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, decimal costPrice, decimal salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
         {
             if (state.Name == StateName.Published) 
                 DisplayVersion = Math.Ceiling(DisplayVersion);
@@ -156,22 +161,30 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
         }
 
-        private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, Lace.Domain.Core.Requests.DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
+        private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos)
         {
-            var package = this;
-            package.DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
+            if (DataProviders == null)
+                return null;
 
-            var dataProviderNames = package.DataProviders.Select(s => s.Name).ToArray();
+            var dataProviders = DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
+            var laceProviders = new List<IAmDataProvider>();
+            var fields = Mapper.Map<IEnumerable<RequestFieldDto>, IEnumerable<DataField>>(requestFieldsDtos);
 
-            //var request = new LicensePlateRequest(
-            //    new User(userId, userName, firstName),new Vehicle(string.Empty,searchTerm,string.Empty,string.Empty,string.Empty,string.Empty),
-            //    new Contract(contractVersion, accountNumber, contractId),
-            //    new RequestPackage("License plate search", dataProviderNames, package.Id, package.Name, (long)package.DisplayVersion),
-            //    new RequestContext(requestId,fromDevice,fromIpAddress,osVersion,system),
-            //    DateTime.UtcNow);
+            foreach (var dataProvider in dataProviders.ToList())
+            {
+                //var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true); // todo: Validate & compare to api request fields 
+                var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(fields);
+                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice));
+            }
 
-            //return request;
-            return null;
+            var request = new LicensePlateRequest(
+                new User(userId, userName, firstName), new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty, string.Empty),
+                new Contract(contractVersion, accountNumber, contractId),
+                new RequestPackage("License plate search",  laceProviders.ToArray(), Id, Name, (long)DisplayVersion),
+                new RequestContext(requestId, fromDevice, fromIpAddress, osVersion, system),
+                DateTime.UtcNow);
+
+            return request;
         }
 
         private IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders)
@@ -188,10 +201,10 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId,
-            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
+            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos)
         {
             var request = FormLaceRequest(userId, userName, searchTerm, firstName, requestId, accountNumber, contractId,
-                contractVersion, fromDevice, fromIpAddress, osVersion, system);
+                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos);
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
 
             return MapLaceResponses(responses).ToList();

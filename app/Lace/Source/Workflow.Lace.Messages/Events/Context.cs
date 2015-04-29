@@ -2,12 +2,14 @@
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Messaging;
+using EasyNetQ;
+using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Events
 {
-    [Serializable]
+   [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class SecurityFlagRaised : IPublishableMessage
     {
@@ -41,7 +43,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class DataProviderConfigured : IPublishableMessage
     {
@@ -74,7 +76,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class DataProviderResponseTransformed : IPublishableMessage
     {
@@ -107,7 +109,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class DataProviderError : IPublishableMessage
     {
@@ -140,7 +142,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class DataProviderCallStarted : IPublishableMessage
     {
@@ -174,7 +176,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+   [Queue("DataPlatform.DataProvider.Receiver", ExchangeName = "DataPlatform.DataProvider.Receiver")]
     [DataContract]
     public class DataProviderCallEnded : IPublishableMessage
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -40,6 +41,8 @@ namespace Lace.Domain.Core.Entities
             CarType = carType;
         }
 
+        [DataMember]
+        public IAmRgtRequest Request { get; set; }
         [DataMember]
         public string Manufacturer { get; private set; }
         [DataMember]

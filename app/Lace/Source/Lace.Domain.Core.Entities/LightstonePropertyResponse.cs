@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Property;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -19,6 +20,9 @@ namespace Lace.Domain.Core.Entities
         {
             PropertyInformation = properties;
         }
+
+        [DataMember]
+        public IAmLightstonePropertyRequest Request { get; private set; }
 
         [DataMember]
         public IEnumerable<IRespondWithProperty> PropertyInformation { get; private set; }

@@ -34,8 +34,8 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
             _packageDto.Id.ShouldNotBeNull();
             _packageDto.Name.ShouldEqual("Full verification");
             _packageDto.Description.ShouldEqual("");
-            _packageDto.CostOfSale.ShouldEqual(0d);
-            _packageDto.RecommendedSalePrice.ShouldEqual(0d);
+            _packageDto.CostOfSale.ShouldEqual(0m);
+            _packageDto.RecommendedSalePrice.ShouldEqual(0m);
             _packageDto.Notes.ShouldEqual("");
             _packageDto.Industries.Count().ShouldEqual(2);
             _packageDto.State.Alias.ShouldEqual("Published");

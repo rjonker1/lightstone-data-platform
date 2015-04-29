@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using NServiceBus;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
@@ -17,10 +17,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         private readonly IBuildSourceChain _buildSourceChain;
 
-        private readonly IBus _bus;
+        private readonly IAdvancedBus _bus;
 
         public Initialize(ICollection<IPointToLaceProvider> responses, ICollection<IPointToLaceRequest> request,
-            IBus bus,
+            IAdvancedBus bus,
             IBuildSourceChain buildSourceChain)
         {
             _log = LogManager.GetLogger(GetType());

@@ -1,5 +1,4 @@
 ﻿using System;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;

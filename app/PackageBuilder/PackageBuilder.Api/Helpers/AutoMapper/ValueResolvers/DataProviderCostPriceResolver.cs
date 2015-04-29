@@ -7,9 +7,9 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.ValueResolvers
 {
-    public class DataProviderCostPriceResolver : ValueResolver<IDataProvider, double>
+    public class DataProviderCostPriceResolver : ValueResolver<IDataProvider, decimal>
     {
-        protected override double ResolveCore(IDataProvider source)
+        protected override decimal ResolveCore(IDataProvider source)
         {
             var dataProvider = ServiceLocator.Current.GetInstance<INEventStoreRepository<DataProvider>>().GetById(source.Id);
             return dataProvider != null ? dataProvider.CostOfSale : source.CostOfSale;

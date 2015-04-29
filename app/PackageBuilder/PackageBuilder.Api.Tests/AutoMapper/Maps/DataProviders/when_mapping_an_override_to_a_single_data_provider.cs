@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
@@ -53,7 +53,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
         [Observation]
         public void should_override_data_provider_cost()
         {
-            _dataProvider.CostOfSale.ShouldEqual(20d);
+            _dataProvider.CostOfSale.ShouldEqual(20m);
         }
 
         [Observation]

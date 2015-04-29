@@ -13,7 +13,6 @@
             <input class="form-control" ng-model="dField.order" type="text" readonly />
         </td>
         <td>
-
             <div multi-select
                  input-model="dField.industries"
                  button-label="name"
@@ -22,19 +21,15 @@
                  tick-property="isSelected"
                  is-disabled="true">
             </div>
-
         </td>
-        
         <td ng-show="switch == true">
             <input ng-show="(dField.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" readonly/>
         </td>
-
     </tr>
 
     <tr ng-repeat-start="subDF in dField.dataFields">
         <td><b>{{subDF.name}}</b></td>
         <td></td>
-
         <td>
             <input class="form-control" ng-model="subDF.label" type="text" readonly/>
         </td>
@@ -45,7 +40,6 @@
             <input class="form-control" ng-model="subDF.order" type="text" readonly />
         </td>
         <td>
-
             <div multi-select
                  input-model="subDF.industries"
                  button-label="name"
@@ -54,13 +48,10 @@
                  tick-property="isSelected"
                  is-disabled="true">
             </div>
-
         </td>
-
         <td ng-show="switch == true">
             <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subDF.price" readonly/>
         </td>
-
     </tr>
     <tr ng-repeat-end ng-repeat-start="subChildDF in subDF.dataFields">
         <td>{{subChildDF.name}}</td>
@@ -75,7 +66,6 @@
             <input class="form-control" ng-model="subChildDF.order" readonly />
         </td>
         <td>
-
             <div multi-select
                  input-model="subChildDF.industries"
                  button-label="name"
@@ -86,13 +76,11 @@
 
             </div>
         </td>
-
         <td ng-show="switch == true">
             <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subChildDF.price" readonly/>
         </td>
     </tr>
     <tr ng-repeat-end></tr>
-
 
 </script>
 
@@ -107,12 +95,9 @@
         <div class="container">
             <div class="row">
                 <div class="widget wblue">
-                    <div id="title" data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
+                    <div id="title" data-cc-widget-header title="{{title}}" allow-collapse="true"></div>
                     <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
-
-
                         <div class="row" id="info">
-
                             <div id="1" class="col-md-3">
                                 <div>
                                     <label>Name:</label>
@@ -132,10 +117,12 @@
                                         <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProv.description" readonly></textarea>
                                     </div>
                                 </div>
+                                <br/>
+                                <div>
+                                    <button type="button" class="btn btn-info" ng-click="cancel()">Return to Data Providers</button>
+                                </div>
                             </div>
-
                             <div id="2" class="col-md-3">
-
                                 <div ng-if="switch == false">
                                     <label>COS Per Request:</label>
                                     <div>
@@ -148,23 +135,17 @@
                                         <input type="number" class="form-control" value="{{total()}}" readonly />
                                     </div>
                                 </div>
-
                                 <br />
-
                                 <div>
                                     <label>Created Date:</label>
                                     <div>{{dataProv.createdDate}}</div>
                                 </div>
-
                                 <br />
-
                                 <div>
                                     <label>Edited Date: </label>
                                     <div current-date-time="format"></div>
                                 </div>
-
                                 <br />
-
                                 <div>
                                     <label>Owner:</label>
                                     <div>
@@ -174,44 +155,26 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div id="3" class="col-md-4">
                                 <div>
                                     <label>Override Data Provider Cost: {{switchAlternate}}</label>
                                     <div>
                                         <div class="toggle-bg toggle-alternate {{switch}}">
-
                                             <label class="{{switch}}">{{switchAlternate}}</label>
                                             <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle( true )">
                                             <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle( false )">
                                             <span class=" switch {{switch}} "></span>
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
-                            <div id="4" class="col-md-4">
-                                <div>
-
-                                    <div style="float: right;">
-                                        <button type="button" class="btn btn-info" ng-click="cancel()">Return to Data Providers</button>
-                                    </div>
-
-                                </div>
-                            </div>
-
                         </div> <!--End Info-->
-
                         <br />
-
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="widget wblue">
-                                    <div id="field_table_title" data-cc-widget-header title="{{title}} : Request - Data Fields" allow-collapse="true"></div>
+                                    <div id="field_table_title" data-cc-widget-header title="Response Fields" allow-collapse="true"></div>
                                     <div class="widget-content text-left text-info">
-
                                         <table class="table" style="padding-top: 20px;">
                                             <thead>
                                                 <tr>
@@ -224,9 +187,7 @@
                                                     <th ng-show="switch == true">Price</th>
                                                 </tr>
                                             </thead>
-
                                             <tbody ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'">
-                                                
                                                 <!-- <tr ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'"></tr>-->
                                             </tbody>
 
@@ -250,19 +211,13 @@
 
                                             </tbody>-->
                                         </table>
-
                                     </div>
                                     <!--<div class="widget-foot">
                                         <div class="clearfix"></div>
                                     </div>-->
                                 </div>
-
                             </div>
                         </div>
-
-
-
-
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>
@@ -276,7 +231,7 @@
         <div class="container">
             <div class="row">
                 <div class="widget worange">
-                    <div id="connection_details" data-cc-widget-header title="{{title}} : Response" allow-collapse="true"></div>
+                    <div id="connection_details" data-cc-widget-header title="Configuration" allow-collapse="true"></div>
                     <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
                         <div class="row">
                             <div id="1" class="col-md-3">
@@ -286,14 +241,12 @@
                                         <input type="textbox" class="form-control" ng-model="dataProv.sourceConfigurationUsername" readonly />
                                     </div>
                                 </div>
-
                                 <label>Configuration URL:</label>
                                 <div>
                                     <input type="textbox" class="form-control" ng-model="dataProv.sourceConfigurationUrl" readonly />
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>

@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -20,6 +21,9 @@ namespace Lace.Domain.Core.Entities
             LicensePlateNumber = licensePlateNumber;
             TransactionToken = transactionToken;
         }
+
+        [DataMember]
+        public IAmAnprRequest Request { get; private set; }
 
         [DataMember]
         public string ProcessedImage { get; private set; }

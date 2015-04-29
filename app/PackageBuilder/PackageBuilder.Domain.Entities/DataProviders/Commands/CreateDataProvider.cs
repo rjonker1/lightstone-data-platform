@@ -1,10 +1,10 @@
 using System;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts.Requests;
 using Newtonsoft.Json;
 using PackageBuilder.Core.Commands;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Commands
@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public IPointToLaceProvider DataProvider { get; set; }
         public readonly DataProviderName Name;
         public readonly string Description;
-        public readonly double CostOfSale;
+        public readonly decimal CostOfSale;
         public readonly Type ResponseType;
         public readonly State State;
         public readonly string Owner;
@@ -23,7 +23,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly DateTime? EditedDate;
         public readonly Type DataProviderType;
 
-        public CreateDataProvider(IPointToLaceProvider dataProvider, Guid id, DataProviderName name, string description, double costOfSale, Type responseType, string owner, DateTime createdDate) : base(id)
+        public CreateDataProvider(IPointToLaceProvider dataProvider, Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, string owner, DateTime createdDate)
+            : base(id)
         {
             DataProvider = dataProvider;
 			Name = name;

@@ -1,11 +1,11 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Entities;
 using Moq;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
@@ -22,7 +22,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         {
             base.Observe();
 
-            var command = new UpdateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, typeof(IvidResponse), false, StateMother.Published, 1, "Owner", DateTime.UtcNow, null, new []{ DataFieldMother.LicenseField });
+            var command = new UpdateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, "Description", 10m, typeof(IvidResponse), false, StateMother.Published, 1, "Owner", DateTime.UtcNow, null, new []{ DataFieldMother.LicenseField });
             _handler = new UpdateDataProviderHandler(_writeRepository.Object, _readRepository.Object);
 
             _writeRepository.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(WriteDataProviderMother.Ivid);
