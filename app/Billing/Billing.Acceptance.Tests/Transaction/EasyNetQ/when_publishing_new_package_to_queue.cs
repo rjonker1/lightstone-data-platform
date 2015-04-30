@@ -20,7 +20,7 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
         {
             var bus = new TransactionBus(_bus);
 
-            var packageId = new Guid("F7533F64-1FC1-4656-924C-C3B31D56F072");
+            var packageId = new Guid("E2E91BEA-B301-4CAD-A58A-425BC613C22C");
 
             var client = new PackageMessage()
             {
