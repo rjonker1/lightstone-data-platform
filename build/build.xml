@@ -218,7 +218,6 @@
         <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
         <dependency id="Lightstone.DataPlatform.Workflow.Billing.Messages" />
         <dependency id="Newtonsoft.Json" version="6.0.5" />
-        <dependency id="NEventStore" version="5.1.0" />
       </dependencies>
     </nuget>
 
@@ -278,8 +277,8 @@
 			</includes>
 			<dependencies>
 				<dependency id="Common.Logging" version="3.0.0.0" />
-        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums" />
         <dependency id="EasyNetQ" />
+        <dependency id="Lightstone.DataPlatform.Shared" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->
