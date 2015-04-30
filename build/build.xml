@@ -278,9 +278,8 @@
 			</includes>
 			<dependencies>
 				<dependency id="Common.Logging" version="3.0.0.0" />
-        <dependency id="NServiceBus" version="5.0.1" />
-        <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
         <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums" />
+        <dependency id="EasyNetQ" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->
