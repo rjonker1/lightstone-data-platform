@@ -120,7 +120,7 @@ namespace Billing.Api.Modules
                                                     RecommendedPrice = x.RecommendedPrice,
 
                                                     PackageId = x.PackageId,
-                                                    PackageName = "Package123"
+                                                    PackageName = x.PackageName
 
                                                 }).Distinct();
 
@@ -128,6 +128,7 @@ namespace Billing.Api.Modules
                     var package = new PackageDto()
                     {
                         PackageId = transaction.PackageId,
+                        PackageName = transaction.PackageName,
                         DataProviders = dataProviderList
                     };
 
@@ -165,7 +166,7 @@ namespace Billing.Api.Modules
     public class PackageDto
     {
         public Guid PackageId { get; set; }
-        public Guid PackageName { get; set; }
+        public string PackageName { get; set; }
         public IEnumerable<DataProviderDto> DataProviders { get; set; }
     }
 
