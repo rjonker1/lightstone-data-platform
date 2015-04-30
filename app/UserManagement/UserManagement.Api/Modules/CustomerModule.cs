@@ -84,7 +84,7 @@ namespace UserManagement.Api.Modules
                 ////RabbitMQ
                 var metaEntity = Mapper.Map(entity, new CustomerMessage());
                 var advancedBus = new TransactionBus(eBus);
-                advancedBus.SendDynamic(metaEntity);
+                advancedBus.SendDynamic(metaEntity);           
 
                 return null;
             };

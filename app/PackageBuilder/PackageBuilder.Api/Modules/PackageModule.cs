@@ -188,6 +188,11 @@ namespace PackageBuilder.Api.Modules
                     dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Version, dto.Owner,
                     dto.CreatedDate, DateTime.UtcNow, dProviders));
 
+                ////RabbitMQ
+                var metaEntity = Mapper.Map(dto, new PackageMessage());
+                var advancedBus = new TransactionBus(eBus);
+                advancedBus.SendDynamic(metaEntity);
+
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " edited"});
             };
 
