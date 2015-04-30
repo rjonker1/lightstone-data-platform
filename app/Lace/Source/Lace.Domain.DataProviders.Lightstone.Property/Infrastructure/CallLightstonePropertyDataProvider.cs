@@ -26,6 +26,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneProperty;
         private DataSet _result;
+        private readonly ISendCommandToBus command;
 
         public CallLightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request)
         {
@@ -34,8 +35,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                         .ForWebApiType(), new {_result},
                     _stopWatch);
 
-                TransformResponse(response, command);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
@@ -98,8 +98,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             response.Add(lightstonePropertyResponse);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformLightstonePropertyResponse(_result);
 

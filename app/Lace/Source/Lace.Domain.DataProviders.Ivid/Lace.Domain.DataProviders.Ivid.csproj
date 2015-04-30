@@ -64,6 +64,7 @@
     <Compile Include="Infrastructure\HandleIvidSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromIvidSource.cs" />
+    <Compile Include="Infrastructure\Workflow\WorkflowBase.cs" />
     <Compile Include="IvidDataProvider.cs" />
     <Compile Include="Service References\IvidServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>

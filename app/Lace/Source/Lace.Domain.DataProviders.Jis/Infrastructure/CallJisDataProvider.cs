@@ -31,6 +31,8 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         private DataStoreResult _jisResponse;
         private SightingUpdateResult _sightingUpdate;
 
+        private readonly ISendCommandToBus command; //TODO:remove
+
         public CallJisDataProvider(ICollection<IPointToLaceRequest> request, ISetupCertificateRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
@@ -38,7 +40,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -72,7 +74,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
 
                 proxy.Close();
 
-                TransformResponse(response, command);
+                TransformResponse(response);
 
             }
             catch (Exception ex)
@@ -83,7 +85,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformJisResponse(_jisResponse,_sightingUpdate);
 

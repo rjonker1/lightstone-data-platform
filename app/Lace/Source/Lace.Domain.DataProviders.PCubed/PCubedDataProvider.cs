@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.PCubed
                 _command.Workflow.Begin(new {_request}, stopWatch, DataProviderCommandSource.PCubedFica);
 
                 var consumer = new ConsumeSource(new HandlePCubedSourceCall(), new CallPCubedDataProvider(_request));
-                consumer.ConsumeExternalSource(response, _command);
+                consumer.ConsumeDataProvider(response);
 
                 _command.Workflow.End(response, stopWatch, DataProviderCommandSource.PCubedFica);
 

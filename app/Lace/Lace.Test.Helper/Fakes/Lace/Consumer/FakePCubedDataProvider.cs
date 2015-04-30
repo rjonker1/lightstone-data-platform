@@ -36,7 +36,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             else
             {
                 var consumer = new ConsumeSource(new HandlePCubedSourceCall(), new FakeCallingPCubedDataProvider());
-                consumer.ConsumeExternalSource(response, _command);
+                consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromPCubedFicaVerfication>().Any() ||
                     response.OfType<IProvideDataFromPCubedFicaVerfication>().First() == null)

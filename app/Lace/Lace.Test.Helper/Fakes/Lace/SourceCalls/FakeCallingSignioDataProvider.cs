@@ -3,7 +3,6 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Management;
-using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
@@ -11,16 +10,16 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     {
         private string _resonse;
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+
+
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
 
             _resonse = new SourceResponseBuilder().ForSignioDriversLicenseDecryptedResponse();
-            TransformResponse(response, command);
+            TransformResponse(response);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer =
                 new TransformSignioResponse(

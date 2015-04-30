@@ -37,7 +37,7 @@ namespace Lace.Unit.Tests.Sources
 
         public override void Observe()
         {
-            _requestDataFromSource.FetchDataFromSource(_response, _callTheSource, _command);
+            _requestDataFromSource.FetchDataFromSource(_response, _callTheSource);
         }
 
         [Observation]

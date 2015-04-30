@@ -8,7 +8,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
-using Lace.Shared.Extensions;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -40,8 +39,8 @@ namespace Lace.Domain.DataProviders.Ivid
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Ivid);
                 _command.Workflow.Begin(new {_request }, stopWatch, DataProviderCommandSource.Ivid);
 
-                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid)));
-                consumer.ConsumeExternalSource(response, _command);
+                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid),_command));
+                consumer.ConsumeDataProvider(response);
 
                 _command.Workflow.End(response, stopWatch, DataProviderCommandSource.Ivid);
 

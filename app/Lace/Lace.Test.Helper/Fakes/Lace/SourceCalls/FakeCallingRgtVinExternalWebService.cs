@@ -13,15 +13,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         private IEnumerable<Vin> _vin;
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             _vin = new SourceResponseBuilder().ForRgtVin();
-            TransformResponse(response, command);
+            TransformResponse(response);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformRgtVinResponse(_vin);
 

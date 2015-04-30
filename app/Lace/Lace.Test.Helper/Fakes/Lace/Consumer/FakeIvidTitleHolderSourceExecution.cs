@@ -38,7 +38,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             {
                 var consumer = new ConsumeSource(new FakeHandleIvidTitleHolderServiceCall(),
                     new FakeCallingIvidTitleHolderExternalWebService());
-                consumer.ConsumeExternalSource(response, _command);
+                consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromIvidTitleHolder>().Any() ||
                     response.OfType<IProvideDataFromIvid>().First() == null)

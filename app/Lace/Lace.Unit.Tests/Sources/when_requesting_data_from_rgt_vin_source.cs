@@ -31,7 +31,7 @@ namespace Lace.Unit.Tests.Sources
         
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromSource(_response, _externalWebServiceCall, _laceEvent);
+            _requestDataFromService.FetchDataFromSource(_response, _externalWebServiceCall);
         }
 
 

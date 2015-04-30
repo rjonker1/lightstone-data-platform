@@ -8,10 +8,9 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
     public class RequestDataFromIvidSource : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalSource,
-            ISendCommandToBus command)
+        public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalSource)
         {
-            externalSource.CallTheDataProvider(response, command);
+            externalSource.CallTheDataProvider(response);
         }
     }
 }

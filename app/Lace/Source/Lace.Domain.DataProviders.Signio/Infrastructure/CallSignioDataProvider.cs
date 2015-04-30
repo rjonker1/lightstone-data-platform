@@ -25,6 +25,8 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
         private const DataProviderCommandSource Provider = DataProviderCommandSource.SignioDecryptDriversLicense;
         private ConfigureSignioClient _client;
 
+        private readonly ISendCommandToBus command; //TODO:remove
+
         public CallSignioDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
@@ -32,8 +34,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -77,7 +78,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                             NoRequestReceived = "No response received from Signio's Drivers License Decryptions Service"
                         }, Provider);
 
-                TransformResponse(response, command);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
@@ -95,8 +96,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             response.Add(signioDriversLicenseDecryptionResponse);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformSignioResponse(_client.Resonse);
 

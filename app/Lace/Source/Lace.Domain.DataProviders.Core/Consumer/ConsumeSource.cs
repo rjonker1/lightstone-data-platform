@@ -8,22 +8,22 @@ namespace Lace.Domain.DataProviders.Core.Consumer
 {
     public class ConsumeSource : IConsumeDataProviderSource
     {
-        private readonly ICallTheDataProviderSource _externalWebSourceCall;
-        private readonly IHandleDataProviderSourceCall _handleServiceCall;
+        private readonly ICallTheDataProviderSource _dataProviderCall;
+        private readonly IHandleDataProviderSourceCall _handleDataProviderCall;
 
 
-        public ConsumeSource(IHandleDataProviderSourceCall handleServiceCall,
-            ICallTheDataProviderSource externalSourceCall)
+        public ConsumeSource(IHandleDataProviderSourceCall handleDataProviderCall,
+            ICallTheDataProviderSource dataProviderCall)
         {
-            _handleServiceCall = handleServiceCall;
-            _externalWebSourceCall = externalSourceCall;
+            _handleDataProviderCall = handleDataProviderCall;
+            _dataProviderCall = dataProviderCall;
         }
 
-        public void ConsumeExternalSource(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void ConsumeDataProvider(ICollection<IPointToLaceProvider> response)
         {
-            _handleServiceCall
+            _handleDataProviderCall
                 .Request(c =>
-                    c.FetchDataFromSource(response, _externalWebSourceCall, command));
+                    c.FetchDataFromSource(response, _dataProviderCall));
         }
     }
 }

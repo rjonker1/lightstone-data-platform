@@ -45,7 +45,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
 
                 var consumer = new ConsumeSource(new HandleLightstonePropertyCall(),
                     new CallLightstonePropertyDataProvider(_request));
-                consumer.ConsumeExternalSource(response, _command);
+                consumer.ConsumeDataProvider(response);
 
                 _command.Workflow.End(new {response}, stopWatch, DataProviderCommandSource.LightstoneProperty);
 

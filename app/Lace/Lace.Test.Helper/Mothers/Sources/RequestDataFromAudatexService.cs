@@ -7,9 +7,9 @@ namespace Lace.Test.Helper.Mothers.Sources
 {
     public class RequestDataFromAudatexService : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalWebService, ISendCommandToBus command)
+        public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalWebService)
         {
-            externalWebService.CallTheDataProvider(response, command);
+            externalWebService.CallTheDataProvider(response);
         }
     }
 }

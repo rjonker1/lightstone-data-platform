@@ -6,7 +6,9 @@ namespace Lace.Domain.DataProviders.Core.Contracts
 {
     public interface ICallTheDataProviderSource
     {
-        void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendCommandToBus command);
-        void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command);
+       // void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendCommandToBus command);
+        void CallTheDataProvider(ICollection<IPointToLaceProvider> response);
+        void TransformResponse(ICollection<IPointToLaceProvider> response);
+        //void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command);
     }
 }

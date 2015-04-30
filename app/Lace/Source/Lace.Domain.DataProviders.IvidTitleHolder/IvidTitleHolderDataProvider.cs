@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
 
                 var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
                     new CallIvidTitleHolderDataProvider(_request));
-                consumer.ConsumeExternalSource(response, _command);
+                consumer.ConsumeDataProvider(response);
 
                 _command.Workflow.End(response, stopWatch, DataProviderCommandSource.IvidTitleHolder);
 

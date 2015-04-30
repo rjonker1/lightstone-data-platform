@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Jis
                             CacheConnectionFactory.LocalClient(),
                             ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"
                                 ].ConnectionString)));
-                consumer.ConsumeExternalSource(response, _command);
+                consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromJis>().Any() || response.OfType<IProvideDataFromJis>().First() == null)
                     CallFallbackSource(response, _command);

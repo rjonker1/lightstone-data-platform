@@ -33,6 +33,8 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         private IList<Vin> _vins;
 
 
+        private readonly ISendCommandToBus command; //TODO:remove
+
         public CallRgtVinDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
@@ -41,8 +43,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -74,7 +75,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                     command.Workflow.Send(CommandType.Fault, new {VinNumber = vin},
                         new {ErrorMessage = "No VINs were received"}, Provider);
 
-                TransformResponse(response, command);
+                TransformResponse(response);
 
             }
             catch (Exception ex)
@@ -86,8 +87,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformRgtVinResponse(_vins);
 

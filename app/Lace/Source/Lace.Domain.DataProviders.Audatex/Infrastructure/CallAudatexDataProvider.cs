@@ -27,6 +27,8 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Audatex;
 
+        private readonly ISendCommandToBus command; //TODO:remove
+
         public CallAudatexDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
@@ -34,8 +36,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -79,7 +80,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                     command.Workflow.Send(CommandType.Fault, _request,
                         new {NoRequestReceived = "No response received from Audatex Data Provider"}, Provider);
 
-                TransformResponse(response, command);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
@@ -107,7 +108,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             };
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformAudatexResponse(_response, response, _request.GetFromRequest<IHaveVehicle>());
 

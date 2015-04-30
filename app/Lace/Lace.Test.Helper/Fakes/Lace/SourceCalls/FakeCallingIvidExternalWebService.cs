@@ -11,13 +11,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     public class FakeCallingIvidExternalWebService : ICallTheDataProviderSource
     {
         private HpiStandardQueryResponse _ividResponse;
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             _ividResponse = new SourceResponseBuilder().ForIvid();
-            TransformResponse(response, command);
+            TransformResponse(response);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformIvidResponse(_ividResponse);
 

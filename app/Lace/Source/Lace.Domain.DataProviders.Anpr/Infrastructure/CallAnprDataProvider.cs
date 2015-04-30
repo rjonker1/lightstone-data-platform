@@ -25,6 +25,8 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
         private IProvideCertificate _certificate;
         private AnprResComplexType _anprResponse;
 
+        private readonly ISendCommandToBus command; //TODO:remove
+
         public CallAnprDataProvider(ICollection<IPointToLaceRequest> request, ISetupCertificateRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
@@ -32,7 +34,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -54,7 +56,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 
                 proxy.Close();
 
-                TransformResponse(response, command);
+                TransformResponse(response);
 
             }
             catch (Exception ex)
@@ -64,7 +66,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformAnprResponse(_anprResponse, _request.GetFromRequest<IPointToVehicleRequest>().Request.RequestId);
             if (transformer.Continue)

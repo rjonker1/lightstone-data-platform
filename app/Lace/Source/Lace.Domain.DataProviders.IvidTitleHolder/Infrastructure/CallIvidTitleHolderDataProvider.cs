@@ -29,6 +29,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.IvidTitleHolder;
 
+        private readonly ISendCommandToBus command; //TODO:remove
+
         public CallIvidTitleHolderDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
@@ -36,8 +38,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -85,7 +86,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                             new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"},
                             Provider);
 
-                    TransformResponse(response, command);
+                    TransformResponse(response);
                 }
             }
             catch (Exception ex)
@@ -104,8 +105,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             response.Add(ividTitleHolderResponse);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformIvidTitleHolderResponse(_response);
 

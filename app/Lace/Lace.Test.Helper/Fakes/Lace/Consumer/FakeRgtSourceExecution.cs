@@ -37,8 +37,8 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             else
             {
                 var consumer = new ConsumeSource(new FakeHandleRgtVinServiceCall(),
-                    new FakeCallingRgtDataProvider());
-                consumer.ConsumeExternalSource(response, _command);
+                    new FakeCallingRgtDataProvider(_command));
+                consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromRgt>().Any() || response.OfType<IProvideDataFromRgt>().First() == null)
                     CallFallbackSource(response, _command);

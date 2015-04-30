@@ -28,12 +28,12 @@ namespace Lace.Unit.Tests.Sources
             _requestDataFromSource = new RequestDataFromAudatexSource();
             _audatexRequest = new LicensePlateRequestBuilder().ForAudatex();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
-            _externalWebServiceCall = new FakeCallingAudatexExternalWebService(_audatexRequest);
+            _externalWebServiceCall = new FakeCallingAudatexExternalWebService(_audatexRequest,_command);
         }
 
         public override void Observe()
         {
-            _requestDataFromSource.FetchDataFromSource(_response, _externalWebServiceCall, _command);
+            _requestDataFromSource.FetchDataFromSource(_response, _externalWebServiceCall);
         }
 
         [Observation]

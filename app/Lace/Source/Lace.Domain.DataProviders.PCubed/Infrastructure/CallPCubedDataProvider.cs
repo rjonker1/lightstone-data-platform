@@ -21,6 +21,8 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
         private const DataProviderCommandSource Provider = DataProviderCommandSource.PCubedFica;
         private string _response;
 
+        private readonly ISendCommandToBus command; //TODO:Remove
+
         public CallPCubedDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
@@ -28,8 +30,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -63,7 +64,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
                             NoRequestReceived = "No response received from PCubed Fica Service"
                         }, DataProviderCommandSource.PCubedFica);
 
-                TransformResponse(response, command);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
@@ -81,7 +82,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
             response.Add(ficaVerficationResponse);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformPCubedResponse(_response);
 

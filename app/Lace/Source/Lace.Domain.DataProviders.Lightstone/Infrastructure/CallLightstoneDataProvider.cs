@@ -34,6 +34,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private readonly ISetupRepository _repositories;
         private readonly ISetupCarRepository _carRepository;
 
+        private readonly ISendCommandToBus command; //TODO:remove
+
         private string _vinNumber;
 
         public CallLightstoneDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repositories,
@@ -46,8 +48,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -71,7 +72,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                         .ForDatabaseType(), new { _carInformation, _metrics },
                     _stopWatch);
 
-                TransformResponse(response, command);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
@@ -88,8 +89,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             _repositories.Dispose();
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformLightstoneResponse(_metrics, _carInformation);
 

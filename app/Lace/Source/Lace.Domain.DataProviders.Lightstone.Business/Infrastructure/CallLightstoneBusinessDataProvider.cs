@@ -33,6 +33,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
         private readonly string _username = Credentials.LightstoneBusinessApiEmail();
         private readonly string _password = Credentials.LightstoneBusinessApiPassword();
 
+        private readonly ISendCommandToBus command; //Todo:remove
+
         //public readonly string UserToken;
 
         public CallLightstoneBusinessDataProvider(ICollection<IPointToLaceRequest> request)
@@ -42,8 +44,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -85,7 +86,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                     new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result},
                     _stopWatch);
 
-                TransformResponse(response, command);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
@@ -103,8 +104,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
             response.Add(lightstoneBusinessResponse);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformLightstoneBusinessResponse(_result);
 

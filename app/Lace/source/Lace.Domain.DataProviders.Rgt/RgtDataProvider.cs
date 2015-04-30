@@ -50,7 +50,7 @@ namespace Lace.Domain.DataProviders.Rgt
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient())));
 
-                consumer.ConsumeExternalSource(response, _command);
+                consumer.ConsumeDataProvider(response);
 
                 _command.Workflow.End(response, stopWatch, DataProviderCommandSource.Rgt);
 

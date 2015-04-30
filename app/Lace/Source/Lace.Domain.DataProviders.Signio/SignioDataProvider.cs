@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
                 _command.Workflow.Begin(new { _request }, stopWatch, DataProviderCommandSource.SignioDecryptDriversLicense);
 
                 var consumer = new ConsumeSource(new HandleSignioSourceCall(), new CallSignioDataProvider(_request));
-                consumer.ConsumeExternalSource(response, _command);
+                consumer.ConsumeDataProvider(response);
 
                 _command.Workflow.End(response, stopWatch, DataProviderCommandSource.SignioDecryptDriversLicense);
 

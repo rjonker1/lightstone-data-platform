@@ -37,6 +37,8 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         private string _vinNumber;
 
+        private readonly ISendCommandToBus command; //TODO: remove
+
         public CallRgtDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repository,
             ISetupCarRepository carRepository)
         {
@@ -47,8 +49,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
@@ -99,7 +100,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                         }, Provider);
                 }
 
-                TransformResponse(response, command);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
@@ -110,8 +111,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             }
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformRgtResponse(_carSpecifications);
 

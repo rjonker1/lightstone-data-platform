@@ -14,21 +14,21 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     {
         private GetDataResult _audatexResponse;
         private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly ISendCommandToBus _command;
 
-        public FakeCallingAudatexExternalWebService(ICollection<IPointToLaceRequest> request)
+        public FakeCallingAudatexExternalWebService(ICollection<IPointToLaceRequest> request,  ISendCommandToBus command)
         {
             _request = request;
+            _command = command;
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
-            TransformResponse(response, command);
+            TransformResponse(response);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendCommandToBus command)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request.GetFromRequest<IPointToVehicleRequest>().Vehicle);
 

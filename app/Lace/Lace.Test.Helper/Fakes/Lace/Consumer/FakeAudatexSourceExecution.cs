@@ -37,8 +37,8 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             else
             {
                 var consumer = new ConsumeSource(new FakeHandleAudatexServiceCall(),
-                    new FakeCallingAudatexExternalWebService(_request));
-                consumer.ConsumeExternalSource(response, _command);
+                    new FakeCallingAudatexExternalWebService(_request,_command));
+                consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromAudatex>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
                     CallFallbackSource(response, _command);
