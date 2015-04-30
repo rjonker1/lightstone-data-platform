@@ -33,33 +33,33 @@ namespace Workflow.Lace.Identifiers
         {
             
         }
-
-        private static bool IsLicenseRequest(IPointToVehicleRequest request)
+        //TODO: Need to redefine based on package requesets
+        private static bool IsLicenseRequest(IPointToLaceRequest request)
         {
             if (request == null)
                 return false;
 
-            return !string.IsNullOrEmpty(request.Vehicle.LicenceNo);
+            return true; // !string.IsNullOrEmpty(request.Vehicle.LicenceNo);
             //return !string.IsNullOrEmpty(request.Vehicle.RequestField.Field) &&
             //       (request.Vehicle.RequestField.GetType().IsInstanceOfType(typeof (IAmLicenseNumberRequestField)));
         }
 
-        private static bool IsVinRequest(IPointToVehicleRequest request)
+        private static bool IsVinRequest(IPointToLaceRequest request)
         {
             if (request == null)
                 return false;
 
-            return !string.IsNullOrEmpty(request.Vehicle.Vin);
+            return false; // !string.IsNullOrEmpty(request.Vehicle.Vin);
             //return !string.IsNullOrEmpty(request.Vehicle.RequestField.Field) &&
             //       (request.Vehicle.RequestField.GetType().IsInstanceOfType(typeof(IAmVinNumberRequest)));
         }
 
-        private static bool IsRegRequest(IPointToVehicleRequest request)
+        private static bool IsRegRequest(IPointToLaceRequest request)
         {
             if (request == null)
                 return false;
 
-            return !string.IsNullOrEmpty(request.Vehicle.RegisterNo);
+            return false; // !string.IsNullOrEmpty(request.Vehicle.RegisterNo);
             //return string.IsNullOrEmpty(request.Vehicle.RequestField.Field) &&
             //       (request.Vehicle.RequestField.GetType().IsInstanceOfType(typeof(IAmRegisterNumberRequestField)));
         }
@@ -67,51 +67,52 @@ namespace Workflow.Lace.Identifiers
         public static SearchRequestIndentifier GetSearchRequest(ICollection<IPointToLaceRequest> request)
         {
             DetermineRequestSearchType(request);
-            return new SearchRequestIndentifier((int) _searchType, _searchType.ToString(), GetSerchTerm(request));
+            return new SearchRequestIndentifier((int) _searchType, _searchType.ToString(), string.Empty); // GetSerchTerm(request));
         }
 
         private static void DetermineRequestSearchType(ICollection<IPointToLaceRequest> request)
         {
-            if (!IsVehicleRequestType(request))
-                return;
-
-            _searchType = IsVinRequest(request.OfType<IPointToVehicleRequest>().First())
-                ? SearchType.VinSearch
-                : IsLicenseRequest(request.OfType<IPointToVehicleRequest>().First())
-                    ? SearchType.LicenseSearch
-                    : IsRegRequest(request.OfType<IPointToVehicleRequest>().First())
-                        ? SearchType.RegSearch
-                        : SearchType.Undefined;
+            _searchType = SearchType.LicenseSearch;
+            //if (!IsVehicleRequestType(request))
+            //    return;
+            
+            //_searchType = IsVinRequest(request.OfType<IPointToLaceRequest>().First())
+            //    ? SearchType.VinSearch
+            //    : IsLicenseRequest(request.OfType<IPointToLaceRequest>().First())
+            //        ? SearchType.LicenseSearch
+            //        : IsRegRequest(request.OfType<IPointToLaceRequest>().First())
+            //            ? SearchType.RegSearch
+            //            : SearchType.Undefined;
 
         }
 
-        private static string GetSerchTerm(IEnumerable<IPointToLaceRequest> request)
-        {
-            switch (_searchType)
-            {
-                case SearchType.LicenseSearch:
-                    return request.OfType<IPointToVehicleRequest>().First().Vehicle.LicenceNo;
-                case SearchType.RegSearch:
-                    return request.OfType<IPointToVehicleRequest>().First().Vehicle.RegisterNo;
-                case SearchType.VinSearch:
-                    return request.OfType<IPointToVehicleRequest>().First().Vehicle.Vin;
-                default:
-                    return "not available";
-            }
-        }
+        //private static string GetSerchTerm(IEnumerable<IPointToLaceRequest> request)
+        //{
+        //    switch (_searchType)
+        //    {
+        //        case SearchType.LicenseSearch:
+        //            return request.OfType<IPointToLaceRequest>().First().Vehicle.LicenceNo;
+        //        case SearchType.RegSearch:
+        //            return request.OfType<IPointToLaceRequest>().First().Vehicle.RegisterNo;
+        //        case SearchType.VinSearch:
+        //            return request.OfType<IPointToLaceRequest>().First().Vehicle.Vin;
+        //        default:
+        //            return "not available";
+        //    }
+        //}
 
-        private static bool IsVehicleRequestType(ICollection<IPointToLaceRequest> request)
-        {
-            try
-            {
-                return request.OfType<IPointToVehicleRequest>().First() != null &&
-                   request.OfType<IPointToVehicleRequest>().First().Vehicle != null;
-            }
-            catch
-            {
+        //private static bool IsVehicleRequestType(ICollection<IPointToLaceRequest> request)
+        //{
+        //    try
+        //    {
+        //        return request.OfType<IPointToVehicleRequest>().First() != null &&
+        //           request.OfType<IPointToVehicleRequest>().First().Vehicle != null;
+        //    }
+        //    catch
+        //    {
                
-            }
-            return false;
-        }
+        //    }
+        //    return false;
+        //}
     }
 }

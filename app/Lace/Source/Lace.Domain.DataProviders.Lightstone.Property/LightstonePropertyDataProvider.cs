@@ -7,9 +7,9 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure;
 using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property
 {
@@ -18,10 +18,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
 
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
+        private ILogComandTypes _logComand;
+        private IAmDataProvider _dataProvider;
 
-        public LightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request,
-            IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
+        public LightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request,IExecuteTheDataProviderSource nextSource,IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -37,17 +37,17 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
             }
             else
             {
-                var stopWatch =
-                    new StopWatchFactory().StopWatchForDataProvider(
-                        DataProviderCommandSource.LightstoneProperty);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneProperty);
+                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.LightstoneProperty, _dataProvider);
 
-                _command.Workflow.Begin(new {_request}, stopWatch, DataProviderCommandSource.LightstoneProperty);
+
+                _logComand.LogBegin(new {_dataProvider});
 
                 var consumer = new ConsumeSource(new HandleLightstonePropertyCall(),
-                    new CallLightstonePropertyDataProvider(_request));
+                    new CallLightstonePropertyDataProvider(_dataProvider, _logComand));
                 consumer.ConsumeDataProvider(response);
 
-                _command.Workflow.End(new {response}, stopWatch, DataProviderCommandSource.LightstoneProperty);
+                _logComand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromLightstoneProperty>().Any() ||
                     response.OfType<IProvideDataFromLightstoneProperty>().First() == null)

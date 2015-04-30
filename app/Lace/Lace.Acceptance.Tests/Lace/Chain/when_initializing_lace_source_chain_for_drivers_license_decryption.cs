@@ -5,7 +5,6 @@ using EasyNetQ;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
@@ -27,7 +26,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         {
             _command = BusFactory.WorkflowBus();
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
-            _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IAmDriversLicenseRequest>().Package);
+            _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
             _buildSourceChain.Build();
         }
 

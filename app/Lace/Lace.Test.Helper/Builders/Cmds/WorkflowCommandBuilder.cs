@@ -99,7 +99,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                 .Configuration(
                     new IvidRequestMessage(
                         new LicensePlateRequestBuilder().ForIvid()
-                            .GetFromRequest<IPointToVehicleRequest>()
+                            .GetFromRequest<IPointToLaceRequest>()
                             .Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>())
                         .HpiQueryRequest, null);
             return this;

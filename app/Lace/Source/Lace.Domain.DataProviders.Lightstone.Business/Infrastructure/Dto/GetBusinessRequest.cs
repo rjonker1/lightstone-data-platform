@@ -1,24 +1,23 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
-
-namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto
+﻿namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto
 {
     public class GetBusinessRequest
     {
-        private readonly IHaveBusiness _request;
+        //TODO: Uncomment after updating package builder request contracts
+        //private readonly IAmLightstoneBusinessRequest _request;
 
         public bool RequestIsValid { get; private set; }
 
-        public GetBusinessRequest(IHaveBusiness request)
-        {
-            _request = request;
-        }
+        //public GetBusinessRequest(IAmLightstoneBusinessRequest request)
+        //{
+        //    _request = request;
+        //}
 
         public GetBusinessRequest Map()
         {
-            UserToken = _request.UserToken;
-            CompanyName = _request.CompanyName;
-            CompanyRegnum = _request.CompanyRegNumber;
-            CompanyVatnumber = _request.CompanyVatNumber;
+            //UserToken = _request.UserToken.Field;
+            //CompanyName = _request.CompanyName.Field;
+            //CompanyRegnum = _request.CompanyRegistrationNumber.Field;
+            //CompanyVatnumber = _request.CompanyVatNumber.Field;
             return this;
         }
 

@@ -57,25 +57,11 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Contracts\Requests\IAmBusinessRequest.cs" />
     <Compile Include="Contracts\IAmDataProvider.cs" />
-    <Compile Include="Contracts\Requests\IAmDriversLicenseRequest.cs" />
-    <Compile Include="Contracts\Requests\IAmJisRequest.cs" />
-    <Compile Include="Contracts\Requests\IAmSignioDriversLicenseDecryptionRequest.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
-    <Compile Include="Contracts\IHaveBusiness.cs" />
-    <Compile Include="Contracts\IHaveCarInformation.cs" />
     <Compile Include="Contracts\IHaveContract.cs" />
-    <Compile Include="Contracts\IHaveCoOrdinates.cs" />
-    <Compile Include="Contracts\IHaveDriversLicense.cs" />
-    <Compile Include="Contracts\IHaveFica.cs" />
-    <Compile Include="Contracts\IHaveJisInformation.cs" />
     <Compile Include="Contracts\IHavePackageForRequest.cs" />
-    <Compile Include="Contracts\Requests\IAmPropertyRequest.cs" />
-    <Compile Include="Contracts\IHaveProperty.cs" />
     <Compile Include="Contracts\IHaveUser.cs" />
-    <Compile Include="Contracts\IHaveVehicle.cs" />
-    <Compile Include="Contracts\IPointToVehicleRequest.cs" />
     <Compile Include="Contracts\IPointToLaceRequest.cs" />
     <Compile Include="Enums.cs" />
   </ItemGroup>

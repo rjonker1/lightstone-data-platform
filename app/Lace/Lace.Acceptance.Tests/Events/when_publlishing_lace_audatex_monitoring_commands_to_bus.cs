@@ -16,22 +16,22 @@ namespace Lace.Acceptance.Tests.Events
 
         public override void Observe()
         {
-            try
-            {
-                new MonitoringCommandBuilder(_aggregateId)
-              .ForAudatex();
-            }
-            catch (Exception ex)
-            {
-                _exception = ex;
-            }
+            //try
+            //{
+            //    new MonitoringCommandBuilder(_aggregateId)
+            //  .ForAudatex();
+            //}
+            //catch (Exception ex)
+            //{
+            //    _exception = ex;
+            //}
         }
 
-        [Observation]
-        public void lace_audatex_monitoring_data_provider_must_be_sent_to_message_queue()
-        {
-            _exception.ShouldBeNull();
-        }
+        //[Observation]
+        //public void lace_audatex_monitoring_data_provider_must_be_sent_to_message_queue()
+        //{
+        //    _exception.ShouldBeNull();
+        //}
     }
 }
 

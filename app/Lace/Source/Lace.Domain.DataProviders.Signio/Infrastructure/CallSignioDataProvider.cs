@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -10,81 +9,62 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Management;
 using Lace.Shared.Extensions;
-using Workflow.Lace.Domain;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 {
     public class CallSignioDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.SignioDecryptDriversLicense;
+        private readonly IAmDataProvider _dataProvider;
+        private readonly ILogComandTypes _logComand;
         private ConfigureSignioClient _client;
 
-        private readonly ISendCommandToBus command; //TODO:remove
-
-        public CallSignioDataProvider(ICollection<IPointToLaceRequest> request)
+        public CallSignioDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
         {
             _log = LogManager.GetLogger(GetType());
-            _request = request;
-            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _dataProvider = dataProvider;
+            _logComand = logComand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
-                _client = new ConfigureSignioClient(_request.GetFromRequest<IHaveDriversLicense>());
-
-                command.Workflow.Send(CommandType.Configuration,
-                    new
+                _client = new ConfigureSignioClient(_dataProvider.GetRequest<IAmSignioDriversLicenseDecryptionRequest>());
+                _logComand.LogConfiguration(new
+                {
+                    Configuration = new
                     {
-                        Configuration =
-                            new
-                            {
-                                _client.Url,
-                                _client.Username,
-                                _client.Password,
-                                _client.XAuthToken,
-                                _client.Operation
-                            }
-                    },
-                    new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"},
-                    Provider);
+                        _client.Url,
+                        _client.Username,
+                        _client.Password,
+                        _client.XAuthToken,
+                        _client.Operation
+                    }
+                },
+                    new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"});
 
 
-                command.Workflow.DataProviderRequest(
-                   new DataProviderIdentifier(Provider, DataProviderAction.Request, DataProviderState.Successful)
-                       .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(s => s.Name == DataProviderName.SignioDecryptDriversLicense)),
-                   new ConnectionTypeIdentifier(_client.Operation)
-                       .ForWebApiType(), _client.Operation, _stopWatch);
+                _logComand.LogRequest(new ConnectionTypeIdentifier(_client.Operation).ForWebApiType(), _client.Operation);
 
                 _client.Run();
 
-                command.Workflow.DataProviderResponse(
-                   new DataProviderIdentifier(Provider, DataProviderAction.Request, _client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed)
-                       .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(s => s.Name == DataProviderName.SignioDecryptDriversLicense)),
-                   new ConnectionTypeIdentifier(_client.Operation)
-                       .ForWebApiType(),  _client.Resonse, _stopWatch);
+                _logComand.LogResponse(_client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed,
+                    new ConnectionTypeIdentifier(_client.Operation).ForWebApiType(), new {_client.Resonse});
+
 
                 if (string.IsNullOrWhiteSpace(_client.Resonse))
-                    command.Workflow.Send(CommandType.Fault, _request,
-                        new
-                        {
-                            NoRequestReceived = "No response received from Signio's Drivers License Decryptions Service"
-                        }, Provider);
+                    _logComand.LogFault(new {_dataProvider},
+                        new {NoRequestReceived = "No response received from Signio's Drivers License Decryptions Service"});
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Signio Drivers License Data Provider {0}", ex.Message);
-                command.Workflow.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Signio Drivers License Decryption"}, Provider);
+                _logComand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling Signio Drivers License Decryption"});
                 SignioResponseFailed(response);
             }
         }
@@ -105,8 +85,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation,
-                transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), null, Provider);
+            _logComand.LogTransformation(transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

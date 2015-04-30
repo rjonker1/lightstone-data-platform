@@ -1,10 +1,9 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
+
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    class RequestFicaInformation : IHaveFica
+    class RequestFicaInformation
     {
         public int FicaTransactionId { get; private set; }
 

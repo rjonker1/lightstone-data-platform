@@ -1,23 +1,22 @@
 ﻿using System;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
 
-    public class VinNumberLighstoneOnlyRequest : IPointToVehicleRequest
+    public class VinNumberLighstoneOnlyRequest : IPointToLaceRequest
     {
         public IHaveUser User
         {
             get { return new RequestUserInformation(); }
         }
 
-        public IHaveVehicle Vehicle
-        {
-            get { return RequestVehicleInformation.WithVin("SB1KV58E40F039277"); }
-        }
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithVin("SB1KV58E40F039277"); }
+        //}
 
         public IHaveRequestContext Request
         {
@@ -42,17 +41,17 @@ namespace Lace.Test.Helper.Mothers.Requests
     }
 
 
-    public class LicensePlateNumberLightstoneOnlyRequest : IPointToVehicleRequest
+    public class LicensePlateNumberLightstoneOnlyRequest : IPointToLaceRequest
     {
         public IHaveUser User
         {
             get { return new RequestUserInformation(); }
         }
 
-        public IHaveVehicle Vehicle
-        {
-            get { return RequestVehicleInformation.WithLicensePlate("XMC167GP"); }
-        }
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithLicensePlate("XMC167GP"); }
+        //}
 
         public IHaveRequestContext Request
         {

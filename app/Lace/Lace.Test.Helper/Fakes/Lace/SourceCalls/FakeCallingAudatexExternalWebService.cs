@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
@@ -30,15 +31,16 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformAudatexResponse(_audatexResponse, response, _request.GetFromRequest<IPointToVehicleRequest>().Vehicle);
+            throw new Exception("Audatex transformation has not been updated to reference package builder requests...");
+            //var transformer = new TransformAudatexResponse(_audatexResponse, response, _request.GetFromRequest<IPointToLaceRequest>());
 
-            if (transformer.Continue)
-            {
-                transformer.Transform();
-            }
+            //if (transformer.Continue)
+            //{
+            //    transformer.Transform();
+            //}
 
-            transformer.Result.HasBeenHandled();
-            response.Add(transformer.Result);
+            //transformer.Result.HasBeenHandled();
+            //response.Add(transformer.Result);
         }
     }
 }

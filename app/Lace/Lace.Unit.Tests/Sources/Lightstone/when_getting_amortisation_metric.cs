@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Entities;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Test.Helper.Builders.Requests;

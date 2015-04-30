@@ -5,5 +5,7 @@ namespace PackageBuilder.Domain.Requests.Contracts.Requests
     public interface IAmAnprRequest : IAmDataProviderRequest
     {
         IAmImageRequestField Image { get; }
+        IAmLatitudeRequestField Latitude { get; }
+        IAmLatitudeRequestField Longitude { get; }
     }
 }

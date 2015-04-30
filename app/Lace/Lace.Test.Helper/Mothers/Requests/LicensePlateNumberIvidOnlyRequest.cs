@@ -1,13 +1,11 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberIvidOnlyRequest : IPointToVehicleRequest
+    public class LicensePlateNumberIvidOnlyRequest : IPointToLaceRequest
     {
         public IHavePackageForRequest Package
         {
@@ -22,10 +20,10 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return new RequestUserInformation(); }
         }
 
-        public IHaveVehicle Vehicle
-        {
-            get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
-        }
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
+        //}
 
         public IHaveRequestContext Request
         {

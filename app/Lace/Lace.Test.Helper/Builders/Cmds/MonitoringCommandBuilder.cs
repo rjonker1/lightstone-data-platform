@@ -25,37 +25,37 @@ namespace Lace.Test.Helper.Builders.Cmds
         }
 
 
-        public MonitoringCommandBuilder ForAudatex()
-        {
-            var queue = new MonitoirngQueueSender(DataProviderCommandSource.Audatex, _aggregateId);
-            queue.InitQueue(MonitoringBusBuilder.ForAudatexCommands(_aggregateId))
-                .InitStopWatch()
-                .StartingExecution(new LicensePlateRequestBuilder().ForAudatex())
-                .Configuration(
-                    new ConfigureRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
-                        .AudatexRequest, null)
-                .StartCall(
-                    new ConfigureRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
-                        .AudatexRequest, null)
-                .Error(new {NoRequestReceived = "No response received from Audatex Data Provider"}, null)
-                .EndCall(FakeAudatexWebResponseData.GetAudatextWebServiceResponse())
-                .Transform(
-                    new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
-                        new LaceResponseBuilder().WithIvidResponseHandled(),
-                        new LicensePlateRequestBuilder().ForAudatex()
-                            .GetFromRequest<IPointToVehicleRequest>().Vehicle).Result,
-                    new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
-                        new LaceResponseBuilder().WithIvidResponseHandled(),
-                        new LicensePlateRequestBuilder().ForAudatex()
-                            .GetFromRequest<IPointToVehicleRequest>().Vehicle))
-                .EndExecution(
-                    new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
-                        new LaceResponseBuilder().WithIvidResponseHandled(),
-                        new LicensePlateRequestBuilder().ForAudatex()
-                            .GetFromRequest<IPointToVehicleRequest>().Vehicle).Result);
+        //public MonitoringCommandBuilder ForAudatex()
+        //{
+        //    var queue = new MonitoirngQueueSender(DataProviderCommandSource.Audatex, _aggregateId);
+        //    queue.InitQueue(MonitoringBusBuilder.ForAudatexCommands(_aggregateId))
+        //        .InitStopWatch()
+        //        .StartingExecution(new LicensePlateRequestBuilder().ForAudatex())
+        //        .Configuration(
+        //            new ConfigureRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
+        //                .AudatexRequest, null)
+        //        .StartCall(
+        //            new ConfigureRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
+        //                .AudatexRequest, null)
+        //        .Error(new {NoRequestReceived = "No response received from Audatex Data Provider"}, null)
+        //        .EndCall(FakeAudatexWebResponseData.GetAudatextWebServiceResponse())
+        //        .Transform(
+        //            new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
+        //                new LaceResponseBuilder().WithIvidResponseHandled(),
+        //                new LicensePlateRequestBuilder().ForAudatex()
+        //                    .GetFromRequest<IPointToVehicleRequest>().Vehicle).Result,
+        //            new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
+        //                new LaceResponseBuilder().WithIvidResponseHandled(),
+        //                new LicensePlateRequestBuilder().ForAudatex()
+        //                    .GetFromRequest<IPointToVehicleRequest>().Vehicle))
+        //        .EndExecution(
+        //            new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
+        //                new LaceResponseBuilder().WithIvidResponseHandled(),
+        //                new LicensePlateRequestBuilder().ForAudatex()
+        //                    .GetFromRequest<IPointToVehicleRequest>().Vehicle).Result);
 
-            return this;
-        }
+        //    return this;
+        //}
 
         public MonitoringCommandBuilder ForIvid()
         {

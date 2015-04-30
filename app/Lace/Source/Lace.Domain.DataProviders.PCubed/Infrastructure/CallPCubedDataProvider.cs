@@ -1,33 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
-using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.PCubed.Infrastructure.Management;
-using Workflow.Lace.Domain;
-using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 {
     public class CallPCubedDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.PCubedFica;
+        private readonly IAmDataProvider _dataProvider;
+        private readonly ILogComandTypes _logComand;
+       
         private string _response;
 
-        private readonly ISendCommandToBus command; //TODO:Remove
-
-        public CallPCubedDataProvider(ICollection<IPointToLaceRequest> request)
+        public CallPCubedDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
         {
             _log = LogManager.GetLogger(GetType());
-            _request = request;
-            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _dataProvider = dataProvider;
+            _logComand = logComand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -57,20 +51,16 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 
                 _response = string.Empty;
 
+
                 if (string.IsNullOrWhiteSpace(_response))
-                    command.Workflow.Send(CommandType.Fault, _request,
-                        new
-                        {
-                            NoRequestReceived = "No response received from PCubed Fica Service"
-                        }, DataProviderCommandSource.PCubedFica);
+                    _logComand.LogFault(_dataProvider, new { NoRequestReceived = "No response received from PCubed Fica Service" });
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex.Message);
-                command.Workflow.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling PCubed Fica Data Provider"}, DataProviderCommandSource.PCubedFica);
+                _logComand.LogFault(ex.Message, new { ErrorMessage = "Error calling PCubed Fica Data Provider" });
                 SignioResponseFailed(response);
             }
         }
@@ -91,8 +81,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation, transformer.Result, null,
-                DataProviderCommandSource.PCubedFica);
+            _logComand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

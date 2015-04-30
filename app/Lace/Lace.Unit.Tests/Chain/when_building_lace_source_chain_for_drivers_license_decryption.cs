@@ -7,9 +7,7 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Scans;
 using Lace.Test.Helper.Fakes.Lace;
@@ -31,7 +29,7 @@ namespace Lace.Unit.Tests.Chain
         {
             _bus = Lace.Test.Helper.Builders.Buses.BusFactory.WorkflowBus();
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
-            _buildSourceChain = new FakeSourceChain(_request.GetFromRequest<IAmDriversLicenseRequest>().Package);
+            _buildSourceChain = new FakeSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
             _buildSourceChain.Build();
         }
 

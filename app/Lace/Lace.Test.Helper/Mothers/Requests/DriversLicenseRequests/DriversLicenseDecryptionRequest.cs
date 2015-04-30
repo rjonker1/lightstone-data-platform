@@ -1,18 +1,12 @@
 ﻿using System;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using Lace.Test.Helper.Builders.Scans;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
 {
-    public class DriversLicenseDecryptionRequest : IAmDriversLicenseRequest
+    public class DriversLicenseDecryptionRequest : IPointToLaceRequest
     {
-        public IHaveDriversLicense DriversLicense
-        {
-            get { return new RequestDriversLicenseInformation(); }
-        }
-
         public DateTime RequestDate
         {
             get { return DateTime.Now; }

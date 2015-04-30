@@ -1,25 +1,24 @@
 ﻿using System;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest : IPointToVehicleRequest
+    public class LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest : IPointToLaceRequest
     {
         public IHaveUser User
         {
             get { return new RequestUserInformation(); }
         }
 
-        public IHaveVehicle Vehicle
-        {
-            get
-            {
-                return IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.WithLicensePlate("NRB891W");
-            }
-        }
+        //public IHaveVehicle Vehicle
+        //{
+        //    get
+        //    {
+        //        return IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.WithLicensePlate("NRB891W");
+        //    }
+        //}
 
         public IHaveRequestContext Request
         {

@@ -10,9 +10,10 @@ namespace Lace.Test.Helper.Builders.Scans
     {
         public static IHavePackageForRequest DriversLicenseDecryptionPackage()
         {
+            //TODO: need to get signio request from package builder contracts..
             return
                 new DriversLicensePackage(
-                    new IAmDataProvider[] {new DataProvider(DataProviderName.SignioDecryptDriversLicense, 10, 20, new SignioDriversLicenseRequest())},
+                    new IAmDataProvider[] {new DataProvider(DataProviderName.SignioDecryptDriversLicense, 10, 20, null)},
                     Guid.NewGuid());
         }
     }

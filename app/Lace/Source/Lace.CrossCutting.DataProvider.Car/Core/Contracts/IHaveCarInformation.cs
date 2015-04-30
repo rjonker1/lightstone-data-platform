@@ -1,4 +1,4 @@
-﻿namespace Lace.Domain.Core.Requests.Contracts
+﻿namespace Lace.CrossCutting.DataProvider.Car.Core.Contracts
 {
     public interface IHaveCarInformation
     {

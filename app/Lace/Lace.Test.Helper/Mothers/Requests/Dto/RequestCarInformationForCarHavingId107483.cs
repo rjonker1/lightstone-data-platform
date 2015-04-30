@@ -1,6 +1,5 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {

@@ -1,36 +1,36 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
 {
     public class GetPropertyRequest
     {
-        private readonly IHaveProperty _request;
+        private readonly IAmLightstonePropertyRequest _request;
 
         public bool RequestIsValid { get; private set; }
 
-        public GetPropertyRequest(IHaveProperty request)
+        public GetPropertyRequest(IAmLightstonePropertyRequest request)
         {
             _request = request;
         }
 
         public GetPropertyRequest Map()
         {
-            UserId = _request.UserId;
-            Municipality = _request.Municipality;
-            DeedTown = _request.DeedTown;
-            ErfNumber = _request.ErfNumber;
-            Province = _request.Province;
-            Portion = _request.Portion;
-            SectionalTitle = _request.SectionalTitle;
-            Unit = _request.Unit;
-            Suburb = _request.Municipality;
-            Street = _request.Street;
-            StreetNumber = _request.StreetNumber;
-            OwnerName = _request.OwnerName;
-            IdCkOfOwner = _request.IdCkOfOwner;
-            EstateName = _request.EstateName;
-            MaxRowsToReturn = _request.MaxRowsToReturn == 0 ? 1 : _request.MaxRowsToReturn;
-            TrackingNumber = _request.TrackingNumber;
+            UserId = _request.UserId.Field;
+            //Municipality = _request.Municipality.Field;
+            //DeedTown = _request.DeedTown.Field;
+            //ErfNumber = _request.ErfNumber.Field;
+            //Province = _request.Province.Field;
+            //Portion = _request.Portion.Field;
+            //SectionalTitle = _request.SectionalTitle.Field;
+            //Unit = _request.Unit.Field;
+            //Suburb = _request.Municipality.Field;
+            //Street = _request.Street.Field;
+            //StreetNumber = _request.StreetNumber.Field;
+            //OwnerName = _request.OwnerName.Field;
+            IdCkOfOwner = _request.IdentityNumber.Field;
+            //EstateName = _request.EstateName.Field;
+            MaxRowsToReturn = _request.MaxRowsToReturn.Field == "0" ? 1 : int.Parse(_request.MaxRowsToReturn.Field);
+            TrackingNumber = _request.TrackingNumber.Field;
             return this;
         }
 

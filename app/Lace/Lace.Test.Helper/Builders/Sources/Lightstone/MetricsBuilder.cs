@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
-using Lace.Test.Helper.Mothers.Sources.Lightstone;
 
 
 namespace Lace.Test.Helper.Builders.Sources.Lightstone

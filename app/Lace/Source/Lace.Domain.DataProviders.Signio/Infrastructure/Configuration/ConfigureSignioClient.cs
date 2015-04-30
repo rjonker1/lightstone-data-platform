@@ -1,8 +1,6 @@
-﻿using System;
-using System.Net;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
+﻿using System.Net;
 using Lace.Domain.DataProviders.Core.Shared;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configuration
 {
@@ -19,10 +17,11 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configu
         public bool IsSuccessful { get; private set; }
         public string Resonse { get; private set; }
 
-        public ConfigureSignioClient(IHaveDriversLicense request)
+        public ConfigureSignioClient(IAmSignioDriversLicenseDecryptionRequest request)
         {
-            Operation = string.Format("{0}/{1}", Credentials.DecryptyDriversLicenseApiOperation(), request.UserId);
-            Content = request.ScanData;
+            //TODO: Uncomment after updating nuget PackageBuilder.Domain.Requests.Contracts.Requests;
+            //Operation = string.Format("{0}/{1}", Credentials.DecryptyDriversLicenseApiOperation(), request.UserId);
+            //Content = request.ScanData;
         }
 
         public void Run()

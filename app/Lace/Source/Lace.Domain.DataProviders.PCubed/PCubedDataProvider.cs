@@ -7,9 +7,9 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.PCubed.Infrastructure;
 using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.PCubed
 {
@@ -17,6 +17,8 @@ namespace Lace.Domain.DataProviders.PCubed
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
+        private ILogComandTypes _logComand;
+        private IAmDataProvider _dataProvider;
 
         public PCubedDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
@@ -35,15 +37,15 @@ namespace Lace.Domain.DataProviders.PCubed
             }
             else
             {
-                var stopWatch =
-                    new StopWatchFactory().StopWatchForDataProvider(
-                        DataProviderCommandSource.PCubedFica);
-                _command.Workflow.Begin(new {_request}, stopWatch, DataProviderCommandSource.PCubedFica);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedFica);
+                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.PCubedFica, _dataProvider);
 
-                var consumer = new ConsumeSource(new HandlePCubedSourceCall(), new CallPCubedDataProvider(_request));
+                _logComand.LogBegin(new {_request});
+
+                var consumer = new ConsumeSource(new HandlePCubedSourceCall(), new CallPCubedDataProvider(_dataProvider, _logComand));
                 consumer.ConsumeDataProvider(response);
 
-                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.PCubedFica);
+                _logComand.LogBegin(new {response});
 
                 if (!response.OfType<IProvideDataFromPCubedFicaVerfication>().Any() ||
                     response.OfType<IProvideDataFromPCubedFicaVerfication>().First() == null)

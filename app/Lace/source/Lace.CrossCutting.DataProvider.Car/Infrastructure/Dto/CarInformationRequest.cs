@@ -1,4 +1,5 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto
 {

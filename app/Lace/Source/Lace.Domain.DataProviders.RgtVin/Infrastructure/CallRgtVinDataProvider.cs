@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -42,18 +43,22 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             {
                 var vin = new RgtVinRequestMessage(_dataProvider.GetRequest<IAmRgtVinRequest>(), response).Vin;
 
-                _logComand.LogConfiguration(new { VinNumber = vin }, null);
+                _logComand.LogConfiguration(new {VinNumber = vin}, null);
                 _logComand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
-                        .ForDatabaseType(), new { VinNumber = vin });
+                    .ForDatabaseType(), new {VinNumber = vin});
 
                 GetListOfVin(vin);
 
                 _logComand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
-                        .ForDatabaseType(), new { _vins });
-              
+                    .ForDatabaseType(), new {_vins});
+
                 if (_vins == null || !_vins.Any())
                     _logComand.LogFault(new {VinNumber = vin},
                         new {ErrorMessage = "No VINs were received"});
+
+                _logComand.LogResponse(_vins != null && _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                        .ForDatabaseType(), new {_vins});
 
                 TransformResponse(response);
 
@@ -61,7 +66,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex.Message);
-                _logComand.LogFault(new { ex.Message }, new { ErrorMessage = "Error calling RGT Vin Data Provider" });
+                _logComand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling RGT Vin Data Provider"});
                 RgtVinResponseFailed(response);
             }
         }

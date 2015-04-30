@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -13,26 +12,24 @@ using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Configuration
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Management;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 {
     public class CallLightstonePropertyDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneProperty;
+        private readonly IAmDataProvider _dataProvider;
+        private readonly ILogComandTypes _logComand;
+      
         private DataSet _result;
-        private readonly ISendCommandToBus command;
 
-        public CallLightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request)
+        public CallLightstonePropertyDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
         {
             _log = LogManager.GetLogger(GetType());
-            _request = request;
-            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _dataProvider = dataProvider;
+            _logComand = logComand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -43,12 +40,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                 if (webService.Client.State == CommunicationState.Closed)
                     webService.Client.Open();
 
-                var request = new GetPropertyRequest(_request.GetFromRequest<IHaveProperty>())
+                var request = new GetPropertyRequest(_dataProvider.GetRequest<IAmLightstonePropertyRequest>())
                     .Map()
                     .Validate();
 
-                command.Workflow.Send(Workflow.Lace.Domain.CommandType.Configuration, request, null, Provider);
-
+                _logComand.LogConfiguration(new { request },null);
 
                 if (!request.RequestIsValid)
                     throw new Exception(
@@ -56,12 +52,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                             "Minimum requirements for Lightstone Property request has not been met with User id {0} and  Id or CK {1} and Max Rows to Return {2} and Tracking Number {3}",
                             request.UserId, request.IdCkOfOwner, request.MaxRowsToReturn, request.TrackingNumber));
 
-                command.Workflow.DataProviderRequest(new DataProviderIdentifier(Provider, DataProviderAction.Request,
-                    DataProviderState.Successful).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                        .Single(s => s.Name == DataProviderName.LightstoneProperty)),
-                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(),
-                    new {request},
-                    _stopWatch);
+                _logComand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new { request });
 
                 _result = webService.Client.ReturnProperties(request.UserId, request.Province, request.Municipality,
                     request.DeedTown,
@@ -72,21 +63,16 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 
                 webService.CloseSource();
 
-                command.Workflow.DataProviderResponse(new DataProviderIdentifier(Provider, DataProviderAction.Response,
-                     _result != null ? DataProviderState.Successful : DataProviderState.Failed)
-                    .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                        .Single(s => s.Name == DataProviderName.LightstoneProperty)),
-                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                        .ForWebApiType(), new {_result},
-                    _stopWatch);
+                _logComand.LogResponse(_result != null ? DataProviderState.Successful : DataProviderState.Failed,new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
+                        .ForWebApiType(), new {_result});
 
+           
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Property Data Provider {0}", ex.Message);
-                command.Workflow.Send(Workflow.Lace.Domain.CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Lightstone Property Data Provider"}, Provider);
+                _logComand.LogFault(new { ex.Message}, new {ErrorMessage = "Error calling Lightstone Property Data Provider"});
                 LightstonePropertyResponseFailed(response);
             }
         }
@@ -106,9 +92,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             {
                 transformer.Transform();
             }
-
-            command.Workflow.Send(Workflow.Lace.Domain.CommandType.Transformation,
-                transformer.Result ?? new LightstonePropertyResponse(new List<PropertyModel>()), null,Provider);
+            _logComand.LogTransformation(transformer.Result ?? new LightstonePropertyResponse(new List<PropertyModel>()), null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

@@ -7,9 +7,9 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure;
 using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense
 {
@@ -18,6 +18,8 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
 
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
+        private ILogComandTypes _logComand;
+        private IAmDataProvider _dataProvider;
 
         public SignioDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
@@ -36,16 +38,15 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
             }
             else
             {
-                var stopWatch =
-                    new StopWatchFactory().StopWatchForDataProvider(
-                        DataProviderCommandSource.SignioDecryptDriversLicense);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.SignioDecryptDriversLicense);
+                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.SignioDecryptDriversLicense, _dataProvider);
 
-                _command.Workflow.Begin(new { _request }, stopWatch, DataProviderCommandSource.SignioDecryptDriversLicense);
+                _logComand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleSignioSourceCall(), new CallSignioDataProvider(_request));
+                var consumer = new ConsumeSource(new HandleSignioSourceCall(), new CallSignioDataProvider(_dataProvider, _logComand));
                 consumer.ConsumeDataProvider(response);
 
-                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.SignioDecryptDriversLicense);
+                _logComand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().Any() ||
                     response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First() == null)

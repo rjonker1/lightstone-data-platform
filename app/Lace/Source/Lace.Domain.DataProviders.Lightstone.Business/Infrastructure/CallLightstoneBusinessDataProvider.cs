@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -13,11 +12,7 @@ using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Management;
-using Lace.Shared.Extensions;
-using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 using DataSet = System.Data.DataSet;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
@@ -25,23 +20,20 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
     public class CallLightstoneBusinessDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneBusiness;
+        private readonly IAmDataProvider _dataProvider;
+        private readonly ILogComandTypes _logComand;
+
+
         private DataSet _result;
 
         private readonly string _username = Credentials.LightstoneBusinessApiEmail();
         private readonly string _password = Credentials.LightstoneBusinessApiPassword();
 
-        private readonly ISendCommandToBus command; //Todo:remove
-
-        //public readonly string UserToken;
-
-        public CallLightstoneBusinessDataProvider(ICollection<IPointToLaceRequest> request)
+        public CallLightstoneBusinessDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
         {
             _log = LogManager.GetLogger(GetType());
-            _request = request;
-            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _dataProvider = dataProvider;
+            _logComand = logComand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -57,42 +49,34 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
                 var token = webService.Client.authenticateUser(_username, _password);
 
-                var request = new GetBusinessRequest(_request.GetFromRequest<IHaveBusiness>())
-                    .Map()
-                    .Validate();
+                var request =
+                    new GetBusinessRequest()
+                        //TODO: uncomment after updating package builder requests nuget new GetBusinessRequest(_dataProvider.GetRequest<IAmBusinessRequest>)
+                        .Map()
+                        .Validate();
+                _logComand.LogConfiguration(new {request}, null);
 
-                command.Workflow.Send(CommandType.Configuration, request, null, Provider);
-                
                 if (!request.RequestIsValid)
                     throw new Exception(
                         string.Format(
                             "Minimum requirements for Lightstone Business request has not been met with user_token {0} ",
                             request.UserToken));
 
-                command.Workflow.DataProviderRequest(new DataProviderIdentifier(Provider, DataProviderAction.Request,
-                    DataProviderState.Successful).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                        .Single(s => s.Name == DataProviderName.LightstoneBusiness)),
-                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request},
-                    _stopWatch);
+                _logComand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});
 
                 _result = webService.Client.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum,
                     request.CompanyVatnumber);
 
                 webService.CloseSource();
-
-                command.Workflow.DataProviderResponse(new DataProviderIdentifier(Provider, DataProviderAction.Response,
-                    _result != null ? DataProviderState.Successful : DataProviderState.Failed).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                        .Single(s => s.Name == DataProviderName.LightstoneBusiness)),
-                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result},
-                    _stopWatch);
+                _logComand.LogResponse(_result != null ? DataProviderState.Successful : DataProviderState.Failed,
+                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result});
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Business Data Provider {0}", ex.Message);
-                command.Workflow.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Lightstone Business Data Provider"}, Provider);
+                _logComand.LogFault(ex.Message, new {ErrorMessage = "Error calling Lightstone Business Data Provider"});
                 LightstoneBusinessResponseFailed(response);
             }
         }
@@ -113,8 +97,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation,
-                transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), null,Provider);
+            _logComand.LogTransformation(transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

@@ -67,6 +67,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Core\Contracts\IGetCarInfo.cs" />
+    <Compile Include="Core\Contracts\IHaveCarInformation.cs" />
     <Compile Include="Core\Contracts\IRetrieveCarInformation.cs" />
     <Compile Include="Core\Contracts\ISetupCarRepository.cs" />
     <Compile Include="Core\Models\CarInformation.cs" />

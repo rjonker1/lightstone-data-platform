@@ -5,17 +5,17 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberRgtOnlyRequest : IPointToVehicleRequest
+    public class LicensePlateNumberRgtOnlyRequest : IPointToLaceRequest
     {
         public IHaveUser User
         {
             get { return new RequestUserInformation(); }
         }
 
-        public IHaveVehicle Vehicle
-        {
-            get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
-        }
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
+        //}
 
         public IHaveRequestContext Request
         {
