@@ -1,6 +1,6 @@
 ﻿namespace PackageBuilder.Domain.Requests.Contracts.Requests
 {
-    public interface IAmSignioDriversLicenseDecryptionRequest
+    public interface IAmSignioDriversLicenseDecryptionRequest : IAmDataProviderRequest
     {
          
     }

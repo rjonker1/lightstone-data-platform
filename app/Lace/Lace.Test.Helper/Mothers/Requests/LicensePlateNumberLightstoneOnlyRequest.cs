@@ -31,7 +31,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return LicensePlateNumberLightstoneSourcePackage.LicenseNumberPackage(); }
+            get { return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(0,0); } //return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(107483,2008)
         }
 
 
@@ -66,8 +66,8 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return LicensePlateNumberLightstoneSourcePackage.LicenseNumberPackage(); }
-        }
+            get { return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(0,0); } //return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(107483,2008)
+        } 
 
 
         public IHaveContract Contract

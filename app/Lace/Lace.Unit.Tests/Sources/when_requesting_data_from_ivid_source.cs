@@ -8,6 +8,8 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
+using Lace.Test.Helper.Mothers.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
@@ -25,7 +27,8 @@ namespace Lace.Unit.Tests.Sources
         {
             //var bus = new FakeBus();
             //var publisher = new Workflow.RabbitMQ.Publisher(bus);
-           
+
+        
             _requestDataFromService = new RequestDataFromIvidSource();
             _ividRequest = new LicensePlateRequestBuilder().ForIvid();
             _laceResponse = new Collection<IPointToLaceProvider>();

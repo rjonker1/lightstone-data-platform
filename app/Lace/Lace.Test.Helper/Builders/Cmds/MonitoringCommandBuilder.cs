@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration;
@@ -10,6 +11,7 @@ using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Responses;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Test.Helper.Builders.Cmds
 {
@@ -75,7 +77,9 @@ namespace Lace.Test.Helper.Builders.Cmds
                     },
                     new {ContextMessage = "Ivid Data Provider Credentials"})
                 .StartCall(
-                    new IvidRequestMessage(request.GetFromRequest<IPointToVehicleRequest>()).HpiQueryRequest, null)
+                    new IvidRequestMessage(
+                        request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>())
+                        .HpiQueryRequest, null)
                 .Error(new {NoRequestReceived = "No response received from Ivid Data Provider"}, null)
                 .EndCall(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp())
                 .Transform(

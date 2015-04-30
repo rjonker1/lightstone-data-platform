@@ -14,6 +14,7 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
@@ -25,14 +26,15 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
     {
         private HpiStandardQueryResponse _response;
         private readonly ILog _log;
-        private readonly ICollection<IPointToLaceRequest> _request;
+        //private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly IAmDataProvider _dataProvider;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Ivid;
 
-        public CallIvidDataProvider(ICollection<IPointToLaceRequest> request)
+        public CallIvidDataProvider(IAmDataProvider dataProvider)
         {
             _log = LogManager.GetLogger(GetType());
-            _request = request;
+            _dataProvider = dataProvider;
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
@@ -61,16 +63,14 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                         webService.RequestMessageProperty;
 
                     var request =
-                        new IvidRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>())
+                        new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>())
                             .HpiQueryRequest;
 
                     command.Workflow.Send(CommandType.Configuration, request, null, Provider);
 
                     command.Workflow.DataProviderRequest(
                         new DataProviderIdentifier(Provider, DataProviderAction.Request, DataProviderState.Successful)
-                            .SetPrice(
-                                _request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                                    .Single(s => s.Name == DataProviderName.Ivid)),
+                            .SetPrice(_dataProvider),
                         new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
                             .ForWebApiType(), request, _stopWatch);
 
@@ -83,13 +83,12 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                     command.Workflow.DataProviderResponse(
                         new DataProviderIdentifier(Provider, DataProviderAction.Response, CheckState())
                             .SetPrice(
-                                _request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                                    .Single(s => s.Name == DataProviderName.Ivid)),
+                                _dataProvider),
                         new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
                             .ForWebApiType(), _response ?? new HpiStandardQueryResponse(), _stopWatch);
 
                     if (_response == null)
-                        command.Workflow.Send(CommandType.Fault, _request,
+                        command.Workflow.Send(CommandType.Fault, _dataProvider,
                             new {NoRequestReceived = "No response received from Ivid Data Provider"}, Provider);
 
                     TransformResponse(response, command);

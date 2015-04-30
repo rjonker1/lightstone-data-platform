@@ -33,7 +33,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return LicensePlateNumberIvidTitleHolderRequestPackage.LicenseNumberPackage(); }
+            get { return LicensePlateNumberIvidTitleHolderRequestPackage.LicenseNumberPackage(null); }
         }
 
 

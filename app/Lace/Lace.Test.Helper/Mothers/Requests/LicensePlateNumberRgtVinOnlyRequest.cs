@@ -31,7 +31,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return LicensePlateNumberRgtVinRequestPackage.LicenseNumberPackage(); }
+            get { return LicensePlateNumberRgtVinRequestPackage.LicenseNumberPackage(null); } //return LicensePlateNumberRgtVinRequestPackage.LicenseNumberPackage("W0LPC6EC8DG072314");
         }
 
         public IHaveContract Contract

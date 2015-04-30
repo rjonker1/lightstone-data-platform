@@ -16,7 +16,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHaveVehicle Vehicle
         {
-            get { return IvidTitleHolderRequestVehicleInformation.WithLicensePlate("XMC167GP"); }
+            get { return IvidTitleHolderRequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
         }
 
         public IHaveRequestContext Request
@@ -31,7 +31,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return LicensePlateNumberIvidTitleHolderRequestPackage.LicenseNumberPackage(); }
+            get { return LicensePlateNumberIvidTitleHolderRequestPackage.LicenseNumberPackage(null); } //return LicensePlateNumberIvidTitleHolderRequestPackage.LicenseNumberPackage("W0LPC6EC8DG072314");
         }
 
 

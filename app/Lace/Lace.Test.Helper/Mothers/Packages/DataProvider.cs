@@ -2,6 +2,7 @@
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Test.Helper.Mothers.Packages
 {
@@ -10,20 +11,21 @@ namespace Lace.Test.Helper.Mothers.Packages
         private readonly DataProviderName _name;
         private readonly decimal _cost;
         private readonly decimal _rsp;
+        private readonly IAmDataProviderRequest _request;
 
-        public DataProvider(DataProviderName name, decimal cost, decimal rsp)
+        //public DataProvider(DataProviderName name, decimal cost, decimal rsp)
+        //{
+        //    _name = name;
+        //    _cost = cost;
+        //    _rsp = rsp;
+        //}
+
+        public DataProvider(DataProviderName name, decimal cost, decimal rsp, IAmDataProviderRequest request)
         {
             _name = name;
             _cost = cost;
             _rsp = rsp;
-        }
-
-        public DataProvider(DataProviderName name, decimal cost, decimal rsp, IEnumerable<IAmRequestField> requestFields)
-        {
-            _name = name;
-            _cost = cost;
-            _rsp = rsp;
-            RequestFields = requestFields;
+            _request = request;
         }
 
         public DataProviderName Name
@@ -31,7 +33,7 @@ namespace Lace.Test.Helper.Mothers.Packages
             get { return _name; }
         }
 
-        public IEnumerable<IAmRequestField> RequestFields { get; private set; }
+       // public IEnumerable<IAmRequestField> RequestFields { get; private set; }
 
         public decimal CostPrice
         {
@@ -41,6 +43,24 @@ namespace Lace.Test.Helper.Mothers.Packages
         public decimal RecommendedPrice
         {
             get { return _rsp; }
+        }
+
+
+        //public IAmDataProviderRequest Request
+        //{
+        //    get
+        //    {
+        //        return _request;
+        //    }
+        //}
+
+
+        public ICollection<IAmDataProviderRequest> Request
+        {
+            get
+            {
+                return new[] {_request};
+            }
         }
     }
 }

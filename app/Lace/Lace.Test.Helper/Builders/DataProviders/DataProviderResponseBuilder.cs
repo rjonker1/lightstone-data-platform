@@ -5,15 +5,16 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Test.Helper.Builders.DataProviders
 {
     public class DataProviderResponseBuilder
     {
-        public static HpiStandardQueryRequest IvidHpiStandardQueryRequest(ICollection<IPointToLaceRequest> request)
+        public static HpiStandardQueryRequest IvidHpiStandardQueryRequest(IAmDataProvider dataProviders)
         {
             return
-                new IvidRequestMessage(request.GetFromRequest<IPointToVehicleRequest>())
+                new IvidRequestMessage(dataProviders.GetRequest<IAmIvidStandardRequest>())
                     .HpiQueryRequest;
         }
     }

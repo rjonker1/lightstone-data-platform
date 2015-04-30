@@ -54,11 +54,11 @@
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1000\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1009\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.999, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1009, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.999\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1009\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.993\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
@@ -157,6 +157,14 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingSignioDataProvider.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakePCubedDataProvider.cs" />
+    <Compile Include="Fakes\RequestTypes\AudatexRequestTypes.cs" />
+    <Compile Include="Fakes\RequestTypes\IvidStandardRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\IvidTitleHolderRequestType.cs" />
+    <Compile Include="Fakes\RequestTypes\LighstonePropertyRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\LightstoneAutoRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\RgtRequestType.cs" />
+    <Compile Include="Fakes\RequestTypes\RgtVinRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\SignioDriversLicenseReqeust.cs" />
     <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeLightstonePropertyResponse.cs" />
@@ -172,6 +180,7 @@
     <Compile Include="Mothers\Packages\FicaPackage.cs" />
     <Compile Include="Mothers\Packages\LicensePlateNumberPackage.cs" />
     <Compile Include="Mothers\Packages\PropertyPackage.cs" />
+    <Compile Include="Mothers\RequestFields\RequestFields.cs" />
     <Compile Include="Mothers\Requests\DriversLicenseRequests\DriversLicenseDecryptionRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequesCompanyInformation.cs" />

@@ -13,7 +13,7 @@ namespace Lace.Test.Helper.Mothers.Requests
         {
             get
             {
-                return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage();
+                return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage("CL49CTGP", "VVi+");
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto
 {
@@ -8,30 +10,33 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto
     {
         public HpiStandardQueryRequest HpiQueryRequest { get; private set; }
 
-        private readonly IHaveUser _user;
-        private readonly IHaveVehicle _vehicle;
+        private readonly IAmIvidStandardRequest _request;
 
-        public IvidRequestMessage(IPointToVehicleRequest request)
+        public IvidRequestMessage(IAmIvidStandardRequest request)
         {
-            _user = request.User;
-            _vehicle = request.Vehicle;
-            BuildRequest(request.Package.Name);
+            _request = request;
+            BuildRequest();
         }
 
-        private void BuildRequest(string packageName)
+        private void BuildRequest()
         {
             HpiQueryRequest = new HpiStandardQueryRequest()
             {
-                ApplicantName = _user.UserName ?? string.Empty,
-                EngineNo = _vehicle.EngineNo ?? string.Empty,
+                ApplicantName = GetValue(_request.ApplicantName),
+                EngineNo = GetValue(_request.EngineNumber),
                 HpiRequestReference = Guid.NewGuid().ToString().Split('-')[0],
-                Label = packageName ?? string.Empty,
-                LicenceNo = _vehicle.LicenceNo ?? string.Empty,
-                Make = _vehicle.Make ?? string.Empty,
+                Label = GetValue(_request.Label),
+                LicenceNo = GetValue(_request.LicenceNumber),
+                Make = GetValue(_request.Make),
                 ReasonForApplication = string.Empty,
-                RegisterNo = _vehicle.RegisterNo ?? string.Empty,
-                VinOrChassis = _vehicle.VinOrChassis ?? string.Empty
+                RegisterNo = GetValue(_request.RegisterNumber),
+                VinOrChassis = GetValue(_request.VinNumber)
             };
+        }
+
+        private static string GetValue(IAmRequestField field)
+        {
+            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
         }
     }
 }

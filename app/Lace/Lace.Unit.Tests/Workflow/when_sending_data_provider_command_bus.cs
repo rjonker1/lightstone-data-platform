@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using DataPlatform.Shared.Enums;
 using EasyNetQ;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Mothers.Requests;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Infrastructure;
@@ -28,7 +30,9 @@ namespace Lace.Unit.Tests.Workflow
                     DataProviderAction.Request, DataProviderState.Successful), DateTime.UtcNow,
                 new ConnectionTypeIdentifier("test.co.za", "API"),
                 new PayloadIdentifier(new MetadataContainer().ObjectToJson(),
-                    new IvidRequestMessage(new LicensePlateNumberIvidOnlyRequest()).ObjectToJson(),
+                    new IvidRequestMessage(
+                        new LicensePlateNumberIvidOnlyRequest().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid)
+                            .GetRequest<IAmIvidStandardRequest>()).ObjectToJson(),
                     "testing message to bus"));
             _bus = BusFactory.CreateAdvancedBus("workflow/dataprovider/queue");
         }

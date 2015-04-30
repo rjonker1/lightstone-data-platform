@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -16,6 +17,7 @@ using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Responses;
 using Lace.Test.Helper.Mothers.Requests.Dto;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -96,7 +98,9 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .Configuration(
                     new IvidRequestMessage(
-                        new LicensePlateRequestBuilder().ForIvid().GetFromRequest<IPointToVehicleRequest>())
+                        new LicensePlateRequestBuilder().ForIvid()
+                            .GetFromRequest<IPointToVehicleRequest>()
+                            .Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>())
                         .HpiQueryRequest, null);
             return this;
         }

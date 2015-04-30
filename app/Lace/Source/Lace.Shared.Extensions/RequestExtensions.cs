@@ -16,9 +16,14 @@ namespace Lace.Shared.Extensions
             return request.OfType<T>().First();
         }
 
-        //public static T[] GetAllFromRequest<T>(this ICollection<IPointToLaceRequest> request)
+        //public static T GetFromDataProvider<T>(this IAmDataProvider[] dataprovider)
         //{
-        //  return request.OfType<T>().ToArray();
+        //    return dataprovider.OfType<T>().First();
         //}
+
+        public static T GetRequest<T>(this IAmDataProvider dataprovider)
+        {
+            return dataprovider.Request.OfType<T>().First();
+        }
     }
 }

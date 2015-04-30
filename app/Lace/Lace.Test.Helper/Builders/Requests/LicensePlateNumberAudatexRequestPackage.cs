@@ -1,6 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Test.Helper.Fakes.RequestTypes;
 using Lace.Test.Helper.Mothers.Packages;
 
 namespace Lace.Test.Helper.Builders.Requests
@@ -12,7 +13,7 @@ namespace Lace.Test.Helper.Builders.Requests
 
             return
                 new LicensePlateNumberPackage(
-                    new IAmDataProvider[] {new DataProvider(DataProviderName.Audatex, 16, 32.1M)}, Guid.NewGuid());
+                    new IAmDataProvider[] {new DataProvider(DataProviderName.Audatex, 16, 32.1M, new AudatexRequestTypes() )}, Guid.NewGuid());
         }
     }
 }
