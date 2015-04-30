@@ -15,12 +15,13 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
         private readonly IRepository<Customer> _customerAccounts;
         private readonly IRepository<Client> _clientAccounts;
         private readonly IRepository<UserMeta> _users;
+        private readonly IRepository<PackageMeta> _pacakges;
         private readonly IRepository<PreBilling> _preBillingRepository;
         private readonly IRepository<DataProviderTransaction> _dataProviderTransactions;
 
         public InvoiceTransactionConsumer(IRepository<Transaction> transactions, IRepository<UserMeta> users, IRepository<PreBilling> preBillingRepository, 
                                             IRepository<DataProviderTransaction> dataProviderTransactions, IRepository<Customer> customerAccounts, 
-                                            IRepository<Client> clientAccounts)
+                                            IRepository<Client> clientAccounts, IRepository<PackageMeta> pacakges)
         {
             _transactions = transactions;
             _users = users;
@@ -28,6 +29,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
             _dataProviderTransactions = dataProviderTransactions;
             _customerAccounts = customerAccounts;
             _clientAccounts = clientAccounts;
+            _pacakges = pacakges;
         }
 
         public void Consume(IMessage<InvoiceTransactionCreated> message)
@@ -52,6 +54,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
                 var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId);
                 var user = Mapper.Map<UserMeta, User>(_users.Get(transaction.UserId));
+                var package = Mapper.Map<PackageMeta, Package>(_pacakges.Get(transaction.PackageId));
 
                 //Billing transaction recorded per product invoked
                 foreach (var product in products)
@@ -72,8 +75,8 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         UserId = transaction.UserId,
                         Username = user.Username,
                         TransactionId = transaction.Id,
-                        PackageId = transaction.PackageId,
-                        //PackageName = package.PackageName
+                        PackageId = package.PackageId,
+                        PackageName = package.PackageName,
                         RequestId = transaction.RequestId,
                         DataProviderId = product.Id,
                         DataProviderName = product.DataProviderName,
