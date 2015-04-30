@@ -13,12 +13,10 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
     public class CustomerConsumer
     {
         private readonly IRepository<Customer> _accountRepository;
-        private ISession _session;
 
-        public CustomerConsumer(IRepository<Customer> accountRepository, ISession session)
+        public CustomerConsumer(IRepository<Customer> accountRepository)
         {
             _accountRepository = accountRepository;
-            _session = session;
         }
 
         public void Consume(IMessage<CustomerMessage> message)

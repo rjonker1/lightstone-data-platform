@@ -61,7 +61,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1008\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1011\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -92,6 +92,7 @@
     <Compile Include="Domain\Entities\Client.cs" />
     <Compile Include="Domain\Entities\Customer.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
+    <Compile Include="Domain\Entities\PackageMeta.cs" />
     <Compile Include="Domain\Entities\UserTransaction.cs" />
     <Compile Include="Domain\Entities\Package.cs" />
     <Compile Include="Domain\Entities\PreBilling.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\CustomerMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviderMaps.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\PackageMetaMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\StageBillingMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\UserMetaMaps.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
