@@ -7,7 +7,7 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 namespace Lace.Test.Helper.Mothers.Requests
 {
 
-    public class VinNumberLighstoneOnlyRequest : IAmVinNumberRequest
+    public class VinNumberLighstoneOnlyRequest : IPointToVehicleRequest
     {
         public IHaveUser User
         {
@@ -31,7 +31,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(0,0); } //return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(107483,2008)
+            get { return VinNumberLightstoneAutoPackage.VinNumberPackage("SB1KV58E40F039277"); } //return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(107483,2008)
         }
 
 
@@ -42,7 +42,7 @@ namespace Lace.Test.Helper.Mothers.Requests
     }
 
 
-    public class LicensePlateNumberLightstoneOnlyRequest : IAmLicensePlateRequest
+    public class LicensePlateNumberLightstoneOnlyRequest : IPointToVehicleRequest
     {
         public IHaveUser User
         {

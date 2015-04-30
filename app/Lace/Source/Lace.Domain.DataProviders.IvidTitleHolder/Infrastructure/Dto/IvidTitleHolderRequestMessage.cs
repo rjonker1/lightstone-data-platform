@@ -2,19 +2,20 @@
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
 {
     public class IvidTitleHolderRequestMessage
     {
-        private readonly IHaveUser _request;
+        private readonly IAmIvidTitleholderRequest _request;
         private readonly ICollection<IPointToLaceProvider> _response;
         public TitleholderQueryRequest TitleholderQueryRequest { get; private set; }
 
 
-        public IvidTitleHolderRequestMessage(IHaveUser request, ICollection<IPointToLaceProvider> response)
+        public IvidTitleHolderRequestMessage(IAmIvidTitleholderRequest request, ICollection<IPointToLaceProvider> response)
         {
             _request = request;
             _response = response;
@@ -36,15 +37,25 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
             {
                 requesterDetails = new RequesterDetailsElement()
                 {
-                    requesterEmail = _request.UserName ?? string.Empty,
-                    requesterName = _request.UserFirstName ?? string.Empty,
-                    requesterPhone = string.Empty
+                    requesterEmail = GetValue(_request.RequesterEmail),
+                    requesterName = GetValue(_request.RequesterName),
+                    requesterPhone = GetValue(_request.RequesterPhone)
                 },
 
-                vin = CanContinue
-                    ? _response.OfType<IProvideDataFromIvid>().First().Vin
-                    : string.Empty
+                vin = GetVinNumber()
             };
+        }
+
+        private static string GetValue(IAmRequestField field)
+        {
+            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
+        }
+
+        private string GetVinNumber()
+        {
+            return string.IsNullOrEmpty(GetValue(_request.VinNumber))
+                ? CanContinue ? _response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
+                : GetValue(_request.VinNumber);
         }
     }
 }

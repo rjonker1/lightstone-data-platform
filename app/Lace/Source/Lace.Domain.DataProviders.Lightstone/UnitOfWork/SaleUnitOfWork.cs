@@ -5,7 +5,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
 
 namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
@@ -26,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Sales = _repository.Get(SelectStatements.GetTopFiveSalesForCarIdAndYear,
+                Sales = _repository.Get(Sale.GetTopFiveUsingCarIdAndYear(),
                     new {request.CarId, request.Year});
             }
             catch (Exception ex)

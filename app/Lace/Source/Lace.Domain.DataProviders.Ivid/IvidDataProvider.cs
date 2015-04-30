@@ -7,9 +7,9 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Ivid
 {
@@ -17,9 +17,10 @@ namespace Lace.Domain.DataProviders.Ivid
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
+        private ILogComandTypes _logComand;
+        private IAmDataProvider _dataProvider;
 
-        public IvidDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
+        public IvidDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -36,22 +37,22 @@ namespace Lace.Domain.DataProviders.Ivid
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Ivid);
-                _command.Workflow.Begin(new {_request }, stopWatch, DataProviderCommandSource.Ivid);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid);
+                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.Ivid, _dataProvider);
 
-                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid),_command));
+                _logComand.LogBegin(new {_dataProvider});
+
+                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_dataProvider, _logComand));
                 consumer.ConsumeDataProvider(response);
 
-                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.Ivid);
+                _logComand.LogEnd(new {response});
 
-               if(!response.OfType<IProvideDataFromIvid>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
-                   CallFallbackSource(response, _command);
+                if (!response.OfType<IProvideDataFromIvid>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
+                    CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);
         }
-
-
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
             var ividResponse = new IvidResponse();

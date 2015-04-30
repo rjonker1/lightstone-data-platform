@@ -15,70 +15,57 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Shared.Extensions;
-using Workflow.Lace.Domain;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
-    public class CallLightstoneDataProvider : ICallTheDataProviderSource
+    public class CallLightstoneAutoDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneAuto;
+        private readonly IAmDataProvider _dataProvider;
+        private readonly ILogComandTypes _logComand;
         private IRetrieveValuationFromMetrics _metrics;
         private IRetrieveCarInformation _carInformation;
 
         private readonly ISetupRepository _repositories;
         private readonly ISetupCarRepository _carRepository;
 
-        private readonly ISendCommandToBus command; //TODO:remove
-
         private string _vinNumber;
 
-        public CallLightstoneDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repositories,
-            ISetupCarRepository carRepository)
+        public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, ISetupRepository repositories,
+            ISetupCarRepository carRepository, ILogComandTypes logComand)
         {
             _log = LogManager.GetLogger(GetType());
-            _request = request;
+            _dataProvider = dataProvider;
             _repositories = repositories;
             _carRepository = carRepository;
-            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _logComand = logComand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
-                GetVinFromResponse(response);
+                _vinNumber = GetVinNumber(response.ToList(), _dataProvider.GetRequest<IAmLightstoneAutoRequest>());
 
-                command.Workflow.DataProviderRequest(new DataProviderIdentifier(Provider, DataProviderAction.Request,
-                    DataProviderState.Successful).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                        .Single(s => s.Name == DataProviderName.LightstoneAuto)),
-                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
-                        .ForDatabaseType(), new {_request},
-                    _stopWatch);
+                _logComand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                    .ForDatabaseType(), new { _dataProvider });
 
                 GetCarInformation();
                 GetMetrics();
                 Dispose();
 
-                command.Workflow.DataProviderResponse(new DataProviderIdentifier(Provider, DataProviderAction.Response,
-                    response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed)
-                    .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(s => s.Name == DataProviderName.LightstoneAuto)),
-                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
-                        .ForDatabaseType(), new { _carInformation, _metrics },
-                    _stopWatch);
+                _logComand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                        .ForDatabaseType(), new { _carInformation, _metrics });
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex.Message);
-                command.Workflow.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Lightstone Data Provider"}, Provider);
+                _logComand.LogFault(ex.Message, new { ErrorMessage = "Error calling Lightstone Data Provider" });
                 LightstoneResponseFailed(response);
             }
         }
@@ -98,7 +85,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation, transformer.Result, null, Provider);
+            _logComand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);
@@ -132,12 +119,22 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     .BuildValuation();
         }
 
-        private void GetVinFromResponse(IEnumerable<IPointToLaceProvider> response)
+        private static string GetVinNumber(IList<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
         {
-            var ividResponse = response.OfType<IProvideDataFromIvid>().First();
-            _vinNumber = ividResponse != null
-                ? ividResponse.Vin
-                : _request.GetFromRequest<IPointToVehicleRequest>().Vehicle.Vin;
+            return string.IsNullOrEmpty(GetValue(request.VinNumber))
+                ? CanContinue(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
+                : GetValue(request.VinNumber);
+        }
+
+        private static string GetValue(IAmRequestField field)
+        {
+            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
+        }
+
+        private static bool CanContinue(IList<IPointToLaceProvider> response)
+        {
+            return response.OfType<IProvideDataFromIvid>().First() != null &&
+                       response.OfType<IProvideDataFromIvid>().First().Handled;
         }
 
     }

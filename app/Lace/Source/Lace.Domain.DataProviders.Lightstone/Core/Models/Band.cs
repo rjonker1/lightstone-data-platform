@@ -2,6 +2,7 @@
 {
     public class Band
     {
+        private const string SelectAll = @"SELECT * FROM Band";
         public Band()
         {
 
@@ -14,6 +15,12 @@
             Metric_ID = metricId;
             OrderBy = orderBy;
         }
+
+        public static string GetAll()
+        {
+            return SelectAll;
+        }
+        
 
         public int Band_ID { get; set; }
         public string BandName { get; set; }

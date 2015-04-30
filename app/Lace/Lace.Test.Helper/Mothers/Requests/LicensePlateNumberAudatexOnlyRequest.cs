@@ -6,7 +6,7 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberAudatexOnlyRequest : IAmLicensePlateRequest
+    public class LicensePlateNumberAudatexOnlyRequest : IPointToVehicleRequest
     {
         public IHaveUser User
         {

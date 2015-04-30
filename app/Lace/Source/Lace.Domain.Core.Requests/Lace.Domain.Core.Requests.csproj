@@ -61,8 +61,6 @@
     <Compile Include="Contracts\IAmDataProvider.cs" />
     <Compile Include="Contracts\Requests\IAmDriversLicenseRequest.cs" />
     <Compile Include="Contracts\Requests\IAmJisRequest.cs" />
-    <Compile Include="Contracts\Requests\IAmLicensePlateRequest.cs" />
-    <Compile Include="Contracts\IAmMakeRequest.cs" />
     <Compile Include="Contracts\Requests\IAmSignioDriversLicenseDecryptionRequest.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
     <Compile Include="Contracts\IHaveBusiness.cs" />
@@ -78,7 +76,6 @@
     <Compile Include="Contracts\IHaveUser.cs" />
     <Compile Include="Contracts\IHaveVehicle.cs" />
     <Compile Include="Contracts\IPointToVehicleRequest.cs" />
-    <Compile Include="Contracts\IAmVinNumberRequest.cs" />
     <Compile Include="Contracts\IPointToLaceRequest.cs" />
     <Compile Include="Enums.cs" />
   </ItemGroup>

@@ -9,10 +9,10 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Rgt.Infrastructure;
 using Lace.Domain.DataProviders.Rgt.Repositories.Factory;
 using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Rgt
 {
@@ -20,6 +20,8 @@ namespace Lace.Domain.DataProviders.Rgt
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
+        private IAmDataProvider _dataProvider;
+        private ILogComandTypes _logComand;
 
         public RgtDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
@@ -39,20 +41,21 @@ namespace Lace.Domain.DataProviders.Rgt
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
-                _command.Workflow.Begin(new {_request, IvidResponse = response.OfType<IProvideDataFromIvid>().First()},
-                    stopWatch, DataProviderCommandSource.Rgt);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Rgt);
+                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.Rgt, _dataProvider);
+
+                _logComand.LogBegin(new {_dataProvider, IvidResponse = response.OfType<IProvideDataFromIvid>().First()});
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
-                    new CallRgtDataProvider(_request,
+                    new CallRgtDataProvider(_dataProvider,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()),
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
-                            CacheConnectionFactory.LocalClient())));
+                            CacheConnectionFactory.LocalClient()), _logComand));
 
                 consumer.ConsumeDataProvider(response);
 
-                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.Rgt);
+                _logComand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromRgt>().Any() ||
                     response.OfType<IProvideDataFromRgt>().First() == null)

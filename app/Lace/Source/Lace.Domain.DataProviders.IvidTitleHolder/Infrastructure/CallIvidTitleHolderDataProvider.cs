@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
@@ -14,10 +13,8 @@ using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Shared.Extensions;
-using Workflow.Lace.Domain;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
@@ -25,76 +22,58 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
     {
         private readonly ILog _log;
         private TitleholderQueryResponse _response;
-        private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.IvidTitleHolder;
+        private readonly IAmDataProvider _dataProvider;
+        private readonly ILogComandTypes _logComand;
 
-        private readonly ISendCommandToBus command; //TODO:remove
-
-        public CallIvidTitleHolderDataProvider(ICollection<IPointToLaceRequest> request)
+        public CallIvidTitleHolderDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
         {
             _log = LogManager.GetLogger(GetType());
-            _request = request;
-            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _dataProvider = dataProvider;
+            _logComand = logComand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
-                var webService = new ConfigureIvidTitleHolder();
-
-                using (
-                    var scope = new OperationContextScope(webService.Client.InnerChannel))
-                {
-                    OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
-                        webService.RequestMessageProperty;
-
-                    var request =
-                        new IvidTitleHolderRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User,
-                            response)
-                            .TitleholderQueryRequest;
-
-                    command.Workflow.Send(CommandType.Configuration, request, null, Provider);
-
-                    command.Workflow.DataProviderRequest(
-                        new DataProviderIdentifier(Provider, DataProviderAction.Request, DataProviderState.Successful)
-                            .SetPrice(
-                                _request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                                    .Single(s => s.Name == DataProviderName.IvidTitleHolder)),
-                        new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                            .ForWebApiType(), request, _stopWatch);
-
-                    _response = webService
-                        .Client
-                        .TitleholderQuery(request);
-
-                    webService
-                        .CloseWebService();
-
-                    command.Workflow.DataProviderResponse(
-                        new DataProviderIdentifier(Provider, DataProviderAction.Response,
-                            _response == null ? DataProviderState.Failed : DataProviderState.Successful)
-                            .SetPrice(
-                                _request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
-                                    .Single(s => s.Name == DataProviderName.IvidTitleHolder)),
-                        new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                            .ForWebApiType(), _response ?? new TitleholderQueryResponse(), _stopWatch);
-
-                    if (_response == null)
-                        command.Workflow.Send(CommandType.Fault, _request,
-                            new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"},
-                            Provider);
-
-                    TransformResponse(response);
-                }
+                GetResponse(response);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
-                command.Workflow.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"}, Provider);
+                _logComand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"});
                 IvidTitleHolderResponseFailed(response);
+            }
+        }
+
+        private void GetResponse(ICollection<IPointToLaceProvider> response)
+        {
+            var webService = new ConfigureIvidTitleHolder();
+
+            using (var scope = new OperationContextScope(webService.Client.InnerChannel))
+            {
+                OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
+                    webService.RequestMessageProperty;
+
+                var request =
+                    new IvidTitleHolderRequestMessage(_dataProvider.GetRequest<IAmIvidTitleholderRequest>(), response).TitleholderQueryRequest;
+
+                _logComand.LogConfiguration(new {request}, null);
+                _logComand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});
+
+                _response = webService
+                    .Client
+                    .TitleholderQuery(request);
+
+                webService.Close();
+
+                _logComand.LogResponse(_response == null ? DataProviderState.Failed : DataProviderState.Successful,
+                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
+                        .ForWebApiType(), _response ?? new TitleholderQueryResponse());
+
+                if (_response == null)
+                    _logComand.LogFault(new {_dataProvider}, new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"});
             }
         }
 
@@ -114,7 +93,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation, transformer.Result, null,Provider);
+            _logComand.LogTransformation(new { transformer.Result }, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

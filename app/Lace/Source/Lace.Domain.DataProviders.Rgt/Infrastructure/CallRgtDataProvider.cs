@@ -15,20 +15,16 @@ using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.UnitOfWork;
-using Lace.Shared.Extensions;
-using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 {
     public class CallRgtDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ICollection<IPointToLaceRequest> _request;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.Rgt;
-        private readonly DataProviderStopWatch _stopWatch;
+        private readonly IAmDataProvider _dataProvider;
+        private readonly ILogComandTypes _logComand;
+      
         private readonly ISetupRepository _repository;
         private readonly ISetupCarRepository _carRepository;
 
@@ -37,16 +33,14 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         private string _vinNumber;
 
-        private readonly ISendCommandToBus command; //TODO: remove
-
-        public CallRgtDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repository,
-            ISetupCarRepository carRepository)
+        public CallRgtDataProvider(IAmDataProvider dataProvider, ISetupRepository repository,
+            ISetupCarRepository carRepository, ILogComandTypes logComand)
         {
             _log = LogManager.GetLogger(GetType());
-            _request = request;
+            _dataProvider = dataProvider;
             _repository = repository;
             _carRepository = carRepository;
-            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _logComand = logComand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -54,61 +48,51 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             try
             {
 
-                GetVinFromResponse(response);
+                _vinNumber = GetVinNumber(response.ToList());
 
-                command.Workflow.DataProviderRequest(
-                    new DataProviderIdentifier(Provider, DataProviderAction.Request, DataProviderState.Successful)
-                        .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(s => s.Name == DataProviderName.Rgt)),
-                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
-                        .ForDatabaseType(), _request, _stopWatch);
+                _logComand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                    .ForDatabaseType(), new {_dataProvider});
 
                 GetCarInformation();
-                var carUow =
-                    new CarSpecificationsUnitOfWork(_repository.CarSpecificationRepository());
-                carUow.GetCarSpecifications(
-                    _carInformation.CarInformationRequest);
-                _carSpecifications = carUow.CarSpecifications != null
-                    ? carUow.CarSpecifications.ToList()
-                    : new List<CarSpecification>();
+                GetCarSpecifics();
 
-                command.Workflow.DataProviderResponse(
-                    new DataProviderIdentifier(Provider, DataProviderAction.Response, _carSpecifications.Any()
-                        ? DataProviderState.Successful
-                        : DataProviderState.Failed)
-                        .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(s => s.Name == DataProviderName.Rgt)),
+                _logComand.LogResponse(_carSpecifications.Any() ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
-                        .ForDatabaseType(), _carSpecifications, _stopWatch);
+                        .ForDatabaseType(), new {_carSpecifications});
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {
-                    _log.ErrorFormat("Could not generate Car information request");
-                    command.Workflow.Send(CommandType.Fault, _request,
-                        new {NoRequestReceived = "No car specifications received from RGT Data Provider"}, Provider);
+                    _logComand.LogFault(new {_dataProvider}, new {NoRequestReceived = "No car specifications received from RGT Data Provider"});
                     RgtResponseFailed(response);
                 }
 
                 if (!_carSpecifications.Any())
-                {
-                    _log.ErrorFormat("Could not get car information for Car id {0} Vin {1}",
-                        _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin);
-
-                    command.Workflow.Send(CommandType.Fault, _request,
+                    _logComand.LogFault(new {_dataProvider},
                         new
                         {
-                            NoRequestReceived = string.Format("Could not get car information for Car id {0} Vin {1}",
-                                _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin)
-                        }, Provider);
-                }
+                            NoRequestReceived =
+                                string.Format("Could not get car information for Car id {0} Vin {1}", _carInformation.CarInformationRequest.CarId,
+                                    _carInformation.CarInformationRequest.Vin)
+                        });
+
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling RGT Data Provider {0}", ex.Message);
-                command.Workflow.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling RGT Data Provider"}, Provider);
+                _logComand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling RGT Data Provider"});
                 RgtResponseFailed(response);
             }
+        }
+
+        private void GetCarSpecifics()
+        {
+            var carUow = new CarSpecificationsUnitOfWork(_repository.CarSpecificationRepository());
+            carUow.GetCarSpecifications(_carInformation.CarInformationRequest);
+            _carSpecifications = carUow.CarSpecifications != null
+                ? carUow.CarSpecifications.ToList()
+                : new List<CarSpecification>();
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
@@ -120,7 +104,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 transformer.Transform();
             }
 
-            command.Workflow.Send(CommandType.Transformation, transformer.Result, null, Provider);
+            _logComand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);
@@ -144,12 +128,15 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     .BuildCarInformationRequest();
         }
 
-        private void GetVinFromResponse(IEnumerable<IPointToLaceProvider> response)
+        private static string GetVinNumber(IList<IPointToLaceProvider> response)
         {
-            var ividResponse = response.OfType<IProvideDataFromIvid>().First();
-            _vinNumber = ividResponse != null
-                ? ividResponse.Vin
-                : _request.GetFromRequest<IPointToVehicleRequest>().Vehicle.Vin;
+            return CanContinue(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty;
+        }
+
+        private static bool CanContinue(IList<IPointToLaceProvider> response)
+        {
+            return response.OfType<IProvideDataFromIvid>().First() != null &&
+                       response.OfType<IProvideDataFromIvid>().First().Handled;
         }
     }
 }

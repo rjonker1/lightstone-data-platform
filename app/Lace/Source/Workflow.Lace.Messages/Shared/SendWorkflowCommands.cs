@@ -64,10 +64,12 @@ namespace Workflow.Lace.Messages.Shared
                 payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
                 new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance).SendToBus(
                     _publisher, _log);
+            stopWatch.Start();
         }
 
         public void End(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider)
         {
+            stopWatch.Stop();
             new EndingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.EndExecutionDescription(dataProvider),
                 payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
                 new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance).SendToBus(

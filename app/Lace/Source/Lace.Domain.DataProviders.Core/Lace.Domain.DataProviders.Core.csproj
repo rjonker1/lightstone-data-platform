@@ -69,12 +69,14 @@
     <Compile Include="Contracts\IHandleDataProviderSourceCall.cs" />
     <Compile Include="Contracts\ILogEvent.cs" />
     <Compile Include="Contracts\IRequestDataFromDataProviderSource.cs" />
+    <Compile Include="Contracts\ILogComandTypes.cs" />
     <Compile Include="Contracts\ITransformResponseFromDataProvider.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="Shared\AppSettings.cs" />
     <Compile Include="Shared\AuthenticationHeaders.cs" />
     <Compile Include="Shared\CheckThePackageDataSource.cs" />
     <Compile Include="Shared\Credentials.cs" />
+    <Compile Include="Shared\LogCommandTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
@@ -88,6 +90,10 @@
     <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
       <Name>Workflow.Lace.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Lace\Workflow.Lace.csproj">
+      <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
+      <Name>Workflow.Lace</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

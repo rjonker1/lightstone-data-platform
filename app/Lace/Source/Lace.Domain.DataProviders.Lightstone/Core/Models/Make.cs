@@ -2,6 +2,8 @@
 {
     public class Make
     {
+        private const string SelectAll = @"SELECT * FROM Make";
+
         public Make()
         {
              
@@ -11,6 +13,11 @@
         {
             Make_ID = makeId;
             MakeName = makeName;
+        }
+
+        public static string GetAll()
+        {
+            return SelectAll;
         }
 
         public int Make_ID { get; set; }

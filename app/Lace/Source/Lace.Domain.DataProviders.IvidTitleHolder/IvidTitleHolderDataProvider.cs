@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
@@ -17,6 +18,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
+        private ILogComandTypes _logComand;
+        private IAmDataProvider _dataProvider;
 
         public IvidTitleHolderDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
@@ -36,15 +39,15 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             }
             else
             {
-                var stopWatch =
-                    new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.IvidTitleHolder);
-                _command.Workflow.Begin(new { _request, IvidResponse = response.OfType<IProvideDataFromIvid>().First() }, stopWatch, DataProviderCommandSource.IvidTitleHolder);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IvidTitleHolder);
+                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.IvidTitleHolder, _dataProvider);
 
-                var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
-                    new CallIvidTitleHolderDataProvider(_request));
+                _logComand.LogBegin(new { _dataProvider });
+
+                var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(), new CallIvidTitleHolderDataProvider(_dataProvider, _logComand));
                 consumer.ConsumeDataProvider(response);
 
-                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.IvidTitleHolder);
+                _logComand.LogEnd(new { response });
 
                 if (!response.OfType<IProvideDataFromIvidTitleHolder>().Any() || response.OfType<IProvideDataFromIvidTitleHolder>().First() == null)
                     CallFallbackSource(response, _command);

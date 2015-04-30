@@ -17,7 +17,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
         private IGetBands _getBands;
         private IGetMuncipalities _getMuncipalities;
         private IGetMakes _getMakes;
-        //private IGetCarType _getCarType;
         private IGetSales _getSales;
 
         private readonly IHaveCarInformation _request;

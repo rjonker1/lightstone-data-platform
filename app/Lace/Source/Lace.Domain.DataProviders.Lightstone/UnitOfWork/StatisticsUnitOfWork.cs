@@ -5,8 +5,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
-using ServiceStack.Redis;
 
 namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
@@ -27,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Statistics = _repository.Get(SelectStatements.GetStatisticsView,
+                Statistics = _repository.Get(Statistic.GetStatisticsForCarIdMakeYear(),
                     new {request.CarId, request.Year, request.MakeId});
             }
             catch (Exception ex)

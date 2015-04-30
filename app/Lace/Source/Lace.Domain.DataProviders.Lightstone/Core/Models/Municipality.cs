@@ -2,6 +2,7 @@
 {
     public class Municipality
     {
+        private const string SelectAll = @"SELECT * FROM Municipality";
         public Municipality()
         {
 
@@ -11,6 +12,11 @@
         {
             Municipality_ID = muncipalityId;
             MunicipalityName = muncipalityName;
+        }
+
+        public static string GetAll()
+        {
+            return SelectAll;
         }
 
         public int Municipality_ID { get; set; }

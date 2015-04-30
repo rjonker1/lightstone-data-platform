@@ -7,7 +7,7 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberIvidOnlyRequest : IAmLicensePlateRequest
+    public class LicensePlateNumberIvidOnlyRequest : IPointToVehicleRequest
     {
         public IHavePackageForRequest Package
         {

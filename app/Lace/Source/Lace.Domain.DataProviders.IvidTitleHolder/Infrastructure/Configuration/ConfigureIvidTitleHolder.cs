@@ -34,7 +34,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Configuration
                     Credentials.IvidTitleHolderServiceUserName(), Credentials.IvidTitleHolderServiceUserPassword());
         }
 
-        public void CloseWebService()
+        public void Close()
         {
             if (Client == null) return;
 

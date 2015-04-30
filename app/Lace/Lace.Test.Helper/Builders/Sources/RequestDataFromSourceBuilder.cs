@@ -42,7 +42,7 @@ namespace Lace.Test.Helper.Builders.Sources
 
         public IRequestDataFromDataProviderSource ForLightstone()
         {
-            _requestDataFromSource = new RequestDataFromLightstoneSource();
+            _requestDataFromSource = new RequestDataFromLightstoneAuto();
             return _requestDataFromSource;
         }
 

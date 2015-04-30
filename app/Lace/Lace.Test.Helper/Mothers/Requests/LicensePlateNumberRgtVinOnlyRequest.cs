@@ -1,13 +1,11 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberRgtVinOnlyRequest : IAmLicensePlateRequest
+    public class LicensePlateNumberRgtVinOnlyRequest : IPointToVehicleRequest
     {
         public IHaveUser User
         {

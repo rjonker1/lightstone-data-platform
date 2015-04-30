@@ -19,4 +19,18 @@ namespace Lace.Test.Helper.Builders.Requests
                     }, Guid.NewGuid());
         }
     }
+
+    public class VinNumberLightstoneAutoPackage
+    {
+        public static IHavePackageForRequest VinNumberPackage(string vinNumber)
+        {
+            return
+                new LicensePlateNumberPackage(
+                    new IAmDataProvider[]
+                    {
+                        new DataProvider(DataProviderName.LightstoneAuto, 90, 92,
+                            LightstoneAutoRequest.WithVin(vinNumber))
+                    }, Guid.NewGuid());
+        }
+    }
 }

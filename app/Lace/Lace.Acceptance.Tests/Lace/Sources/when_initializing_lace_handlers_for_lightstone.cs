@@ -26,7 +26,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForLightstoneLicensePlate();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
-            _dataProvider = new LightstoneDataProvider(_request, null, null, _command);
+            _dataProvider = new LightstoneAutoDataProvider(_request, null, null, _command);
         }
 
         public override void Observe()

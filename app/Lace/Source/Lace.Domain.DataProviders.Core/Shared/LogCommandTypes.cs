@@ -3,27 +3,33 @@ using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Contracts;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
-namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Workflow
+namespace Lace.Domain.DataProviders.Core.Shared
 {
-    public class WorkflowBase
+    public class LogCommandTypes : ILogComandTypes
     {
         private readonly ISendCommandToBus _commands;
         private readonly DataProviderCommandSource _dataProviderName;
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
+        private readonly DataProviderStopWatch _executeWatch;
+        private readonly DataProviderStopWatch _requestWatch;
 
-        public WorkflowBase(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,
+
+        public LogCommandTypes(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,
             IAmDataProvider dataProvider)
         {
             _commands = commands;
             _dataProviderName = dataProviderName;
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
+            _executeWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
+            _requestWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
         }
 
         public void LogSecurity(object payload, object metadata)
@@ -46,23 +52,74 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Workflow
             SendAsyc(CommandType.Fault, payload, metadata);
         }
 
-        public void LogRequest(ConnectionTypeIdentifier connection, DataProviderStopWatch stopWatch, object payload)
+        public void LogRequest(ConnectionTypeIdentifier connection, object payload)
         {
             SendRequestAsync(
                 new DataProviderIdentifier(_dataProviderName, DataProviderAction.Request, DataProviderState.Successful)
-                    .SetPrice(_dataProvider), connection, payload, stopWatch);
+                    .SetPrice(_dataProvider), connection, payload, _requestWatch);
 
         }
 
-        public void LogResponse(DataProviderState state, ConnectionTypeIdentifier connection,
-            DataProviderStopWatch stopWatch, object payload)
+        public void LogResponse(DataProviderState state, ConnectionTypeIdentifier connection, object payload)
         {
             SendResponseAsync(new DataProviderIdentifier(_dataProviderName, DataProviderAction.Response, state)
                 .SetPrice(
-                    _dataProvider), connection, payload, stopWatch);
+                    _dataProvider), connection, payload, _requestWatch);
         }
 
-       
+        public void LogBegin(object paylod)
+        {
+            SendBeginAsyc(paylod, _executeWatch);
+        }
+
+        public void LogEnd(object paylod)
+        {
+            SendEndAsyc(paylod, _executeWatch);
+        }
+
+        private void SendBeginAsyc(object payload,DataProviderStopWatch stopWatch)
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        _commands.Workflow.Begin(payload,stopWatch,_dataProviderName);
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+            }
+        }
+
+        private void SendEndAsyc(object payload, DataProviderStopWatch stopWatch)
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        _commands.Workflow.End(payload, stopWatch, _dataProviderName);
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+            }
+        }
 
 
         private void SendAsyc(CommandType commandType, object payload, object metadata)

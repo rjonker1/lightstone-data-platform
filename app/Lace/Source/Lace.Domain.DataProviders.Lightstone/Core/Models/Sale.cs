@@ -3,6 +3,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Models
 {
     public class Sale
     {
+        private const string SelectTopFiveSalesForCarIdAndYear =
+            @"SELECT TOP 5 s.* from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID where s.Car_ID = @CarId and s.Year_ID = @Year order by SaleDateTime desc";
+
 
         public Sale()
         {
@@ -20,6 +23,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Models
             SalePrice = salePrice;
             Municipality_ID = muncipalityId;
         }
+
+        public static string GetTopFiveUsingCarIdAndYear()
+        {
+            return SelectTopFiveSalesForCarIdAndYear;
+        }
+
 
         public int Sale_ID { get; set; }
         public int Car_ID { get; set; }

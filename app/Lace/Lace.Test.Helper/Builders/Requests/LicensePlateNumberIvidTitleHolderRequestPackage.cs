@@ -15,7 +15,7 @@ namespace Lace.Test.Helper.Builders.Requests
                     new IAmDataProvider[]
                     {
                         new DataProvider(DataProviderName.IvidTitleHolder, 18, 36,
-                            IvidTitleHolderRequest.WithVin(vinNumber, "murrayw@lightstone.co.za", "Murra Woolfson"))
+                            IvidTitleHolderRequest.WithVin(vinNumber, "murrayw@lightstone.co.za", "Murray Woolfson"))
                     },
                     Guid.NewGuid());
         }

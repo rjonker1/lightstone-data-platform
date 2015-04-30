@@ -9,19 +9,21 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Lightstone
 {
-    public class LightstoneDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public class LightstoneAutoDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
+        private ILogComandTypes _logComand;
+        private IAmDataProvider _dataProvider;
 
-        public LightstoneDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
+        public LightstoneAutoDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
@@ -39,19 +41,21 @@ namespace Lace.Domain.DataProviders.Lightstone
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.LightstoneAuto);
-                _command.Workflow.Begin(new {_request}, stopWatch, DataProviderCommandSource.LightstoneAuto);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
+                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
-                var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),
-                    new CallLightstoneDataProvider(_request,
+                _logComand.LogBegin(new { _dataProvider });
+
+                var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
+                    new CallLightstoneAutoDataProvider(_dataProvider,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()),
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
-                            CacheConnectionFactory.LocalClient())));
+                            CacheConnectionFactory.LocalClient()),_logComand));
 
                 consumer.ConsumeDataProvider(response);
 
-                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.LightstoneAuto);
+                _logComand.LogEnd(new { response });
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
                     response.OfType<IProvideDataFromLightstoneAuto>().First() == null)

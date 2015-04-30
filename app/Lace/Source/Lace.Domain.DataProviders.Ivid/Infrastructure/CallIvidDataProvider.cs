@@ -11,30 +11,25 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Workflow;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
-    public class CallIvidDataProvider : WorkflowBase, ICallTheDataProviderSource
+    public class CallIvidDataProvider : ICallTheDataProviderSource
     {
         private HpiStandardQueryResponse _response;
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.Ivid;
+        private readonly ILogComandTypes _logComand;
 
-        public CallIvidDataProvider(IAmDataProvider dataProvider, ISendCommandToBus command)
-            : base(command, Provider, dataProvider)
+        public CallIvidDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
-            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _logComand = logComand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -47,7 +42,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Ivid Data Provider {0}", ex.Message);
-                LogFault(ex.Message, new {ErrorMessage = "Error calling Ivid Data Provider"});
+                _logComand.LogFault(ex.Message, new { ErrorMessage = "Error calling Ivid Data Provider" });
                 IvidResponseFailed(response);
             }
         }
@@ -70,7 +65,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         {
             var webService = new ConfigureIvid();
 
-            LogSecurity(
+            _logComand.LogSecurity(
                 new
                 {
                     Credentials =
@@ -91,9 +86,9 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                     new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>())
                         .HpiQueryRequest;
 
-                LogConfiguration(request, null);
-                LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                    .ForWebApiType(), _stopWatch, request);
+                _logComand.LogConfiguration(request, null);
+                _logComand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
+                    .ForWebApiType(), request);
 
                 _response = webService
                     .Client
@@ -101,12 +96,12 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 
                 webService.CloseWebService();
 
-                LogResponse(CheckState(),
+                _logComand.LogResponse(CheckState(),
                     new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                        .ForWebApiType(), _stopWatch, _response ?? new HpiStandardQueryResponse());
+                        .ForWebApiType(), _response ?? new HpiStandardQueryResponse());
 
                 if (_response == null)
-                    LogFault(_dataProvider,
+                    _logComand.LogFault(_dataProvider,
                         new {NoRequestReceived = "No response received from Ivid Data Provider"});
             }
         }
@@ -120,7 +115,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 transformer.Transform();
             }
 
-            LogTransformation(transformer.Result, null);
+            _logComand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

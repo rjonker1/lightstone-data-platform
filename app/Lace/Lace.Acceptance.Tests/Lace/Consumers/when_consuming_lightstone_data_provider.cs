@@ -18,7 +18,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private readonly ICollection<IPointToLaceProvider> _response;
-        private LightstoneDataProvider _consumer;
+        private LightstoneAutoDataProvider _consumer;
 
         public when_consuming_lightstone_data_provider()
         {
@@ -29,7 +29,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public override void Observe()
         {
-            _consumer = new LightstoneDataProvider(_request, null, null,_command);
+            _consumer = new LightstoneAutoDataProvider(_request, null, null,_command);
             _consumer.CallSource(_response);
         }
 

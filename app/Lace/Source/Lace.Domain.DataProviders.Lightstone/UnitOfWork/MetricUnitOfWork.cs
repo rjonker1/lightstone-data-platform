@@ -5,7 +5,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
 
 namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
@@ -25,7 +24,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Metrics = _repository.GetAll(SelectStatements.GetAllTheMetricTypes);
+                Metrics = _repository.GetAll(Metric.GetAll());
             }
             catch (Exception ex)
             {

@@ -2,6 +2,7 @@
 {
     public class Metric
     {
+        private const string SelectAll = @"SELECT * FROM Metric";
         public Metric()
         {
             
@@ -20,6 +21,12 @@
             HasYear = hasYear;
             HasMunicipality = hasMuncipality;
         }
+
+        public static string GetAll()
+        {
+            return SelectAll;
+        }
+
 
         public int Metric_ID { get; set; }
         public int DataType_ID { get; set; }

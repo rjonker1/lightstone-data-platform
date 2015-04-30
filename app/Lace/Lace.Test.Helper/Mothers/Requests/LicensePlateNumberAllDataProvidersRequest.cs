@@ -8,7 +8,7 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 namespace Lace.Test.Helper.Mothers.Requests
 {
 
-    public class LicensePlateNumberAllDataProvidersRequest : IAmLicensePlateRequest
+    public class LicensePlateNumberAllDataProvidersRequest : IPointToVehicleRequest
     {
         private readonly IHaveRequestContext _aggregation;
         private readonly DateTime _requestDate;

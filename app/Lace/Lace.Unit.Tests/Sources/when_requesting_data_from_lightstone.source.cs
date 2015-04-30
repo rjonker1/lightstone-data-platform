@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
@@ -23,16 +27,24 @@ namespace Lace.Unit.Tests.Sources
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendCommandToBus _command;
         private readonly ICallTheDataProviderSource _callTheSource;
+        private ILogComandTypes _logComand;
+        private IAmDataProvider _dataProvider;
 
         public when_requesting_data_from_lightstone_source()
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
-            _requestDataFromSource = new RequestDataFromLightstoneSource();
+            _requestDataFromSource = new RequestDataFromLightstoneAuto();
            // _request = new LicensePlateRequestBuilder().ForLightstoneLicensePlate();
             _request = new LicensePlateRequestBuilder().ForLightstoneVinNumber();
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
-            _callTheSource = new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),
-                new FakeCarRepositioryFactory(_request.GetFromRequest<IPointToVehicleRequest>().Vehicle.Vin));
+           // _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new Collection<IPointToLaceProvider>();
+
+            _dataProvider = _request.GetFromRequest<IPointToLaceRequest>()
+                .Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
+            _logComand = new LogCommandTypes(_command,DataProviderCommandSource.LightstoneAuto,_dataProvider);
+
+            _callTheSource = new CallLightstoneAutoDataProvider(_dataProvider, new FakeRepositoryFactory(),
+                new FakeCarRepositioryFactory(_dataProvider.GetRequest<IAmLightstoneAutoRequest>().VinNumber.Field), _logComand);
         }
 
         public override void Observe()

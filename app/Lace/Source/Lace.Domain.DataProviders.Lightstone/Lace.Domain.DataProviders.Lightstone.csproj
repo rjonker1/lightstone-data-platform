@@ -38,6 +38,10 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1011\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1009, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1009\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -80,13 +84,12 @@
     <Compile Include="Core\Models\Municipality.cs" />
     <Compile Include="Core\Models\Sale.cs" />
     <Compile Include="Core\Models\Statistic.cs" />
-    <Compile Include="Infrastructure\CallLightstoneDataProvider.cs" />
+    <Compile Include="Infrastructure\CallLightstoneAutoDataProvider.cs" />
     <Compile Include="Infrastructure\Factory\ISetupRepository.cs" />
     <Compile Include="Infrastructure\Factory\RepositoryFactory.cs" />
-    <Compile Include="Infrastructure\HandleLightstoneSourceCall.cs" />
+    <Compile Include="Infrastructure\HandleLightstoneAutoSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />
-    <Compile Include="Infrastructure\RequestDataFromLightstoneSource.cs" />
-    <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
+    <Compile Include="Infrastructure\RequestDataFromLightstoneAuto.cs" />
     <Compile Include="Repositories\BandsRepository.cs" />
     <Compile Include="Repositories\MakeRepository.cs" />
     <Compile Include="Repositories\MetricRepository.cs" />
@@ -107,7 +110,7 @@
     <Compile Include="Services\Specifics\RepairIndexMetric.cs" />
     <Compile Include="Services\Specifics\TotalSalesByAgeMetric.cs" />
     <Compile Include="Services\Specifics\TotalSalesByGenderMetric.cs" />
-    <Compile Include="LightstoneDataProvider.cs" />
+    <Compile Include="LightstoneAutoDataProvider.cs" />
     <Compile Include="UnitOfWork\BandUnitOfWork.cs" />
     <Compile Include="Core\Contracts\IGetBands.cs" />
     <Compile Include="Core\Contracts\IGetMakes.cs" />

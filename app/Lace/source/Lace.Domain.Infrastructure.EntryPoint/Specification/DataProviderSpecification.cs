@@ -23,7 +23,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                 () =>
                     (request, bus, response, requestId) =>
                         new IvidDataProvider(request,
-                            new LightstoneDataProvider(request,
+                            new LightstoneAutoDataProvider(request,
                                 new IvidTitleHolderDataProvider(request,
                                     new RgtVinDataProvider(request,
                                         new RgtDataProvider(request,null,null,
