@@ -169,6 +169,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1005\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1011\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1011\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
@@ -269,6 +272,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Read\ToDataProviderDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Requests\RequestFieldToDataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Messages\MessageMaps.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataToRequestFieldConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Requests\IvidRequestMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LaceResponseMap.cs" />
