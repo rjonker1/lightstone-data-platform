@@ -6,6 +6,9 @@ using System.Runtime.Serialization;
 using AutoMapper;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.ExceptionHandling;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
+using DataPlatform.Shared.Messaging.Billing.Messages;
+using EasyNetQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Nancy;
 using Nancy.Json;
@@ -32,7 +35,7 @@ namespace PackageBuilder.Api.Modules
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -159,11 +162,18 @@ namespace PackageBuilder.Api.Modules
             Post["/Packages"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
+                dto.Id = Guid.NewGuid();
+
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
 
-                publisher.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale,
+                publisher.Publish(new CreatePackage(dto.Id, dto.Name, dto.Description, dto.CostOfSale,
                     dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Owner, DateTime.UtcNow, null,
                     dProviders));
+
+                ////RabbitMQ
+                var metaEntity = Mapper.Map(dto, new PackageMessage());
+                var advancedBus = new TransactionBus(eBus);
+                advancedBus.SendDynamic(metaEntity);
 
                 return Response.AsJson(new {msg = "Success"});
             };
@@ -177,6 +187,11 @@ namespace PackageBuilder.Api.Modules
                 publisher.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale,
                     dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Version, dto.Owner,
                     dto.CreatedDate, DateTime.UtcNow, dProviders));
+
+                ////RabbitMQ
+                var metaEntity = Mapper.Map(dto, new PackageMessage());
+                var advancedBus = new TransactionBus(eBus);
+                advancedBus.SendDynamic(metaEntity);
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " edited"});
             };

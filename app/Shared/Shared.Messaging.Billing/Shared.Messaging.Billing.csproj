@@ -74,6 +74,7 @@
     <Compile Include="Messages\EntityMessage.cs" />
     <Compile Include="Helpers\IEntity.cs" />
     <Compile Include="Messages\InvoiceTransactionCreated.cs" />
+    <Compile Include="Messages\PackageMessage.cs" />
     <Compile Include="Messages\UserMessage.cs" />
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
