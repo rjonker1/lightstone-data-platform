@@ -118,6 +118,7 @@
     <Compile Include="Fixtures\RebuildBillingEnvironment.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_client_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_customer_to_queue.cs" />
+    <Compile Include="Transaction\EasyNetQ\when_publishing_new_package_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_transaction_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_stage_bill_run.cs" />
     <Compile Include="Transaction\EasyNetQ\when_registering_multiple_exchanges_queues_for_message_types.cs" />
