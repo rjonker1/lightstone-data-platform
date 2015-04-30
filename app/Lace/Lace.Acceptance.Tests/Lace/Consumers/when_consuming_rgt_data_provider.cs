@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Test.Helper.Builders.Buses;
-using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Mothers.Requests;
 using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
@@ -25,7 +25,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         {
             _command = MonitoringBusBuilder.ForRgtCommands(Guid.NewGuid());
             _request = new[] {new LicensePlateNumberRgtOnlyRequest()};
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new Collection<IPointToLaceProvider>(); //new LaceResponseBuilder().WithIvidResponseHandled();
         }
 
         public override void Observe()

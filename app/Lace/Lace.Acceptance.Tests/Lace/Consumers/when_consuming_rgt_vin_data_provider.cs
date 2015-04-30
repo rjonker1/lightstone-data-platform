@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -25,7 +26,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         {
             _command = MonitoringBusBuilder.ForRgtVinCommands(Guid.NewGuid());
             _request = new[] {new LicensePlateNumberRgtVinOnlyRequest()};
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new Collection<IPointToLaceProvider>(); //new LaceResponseBuilder().WithIvidResponseHandled();
         }
 
         public override void Observe()

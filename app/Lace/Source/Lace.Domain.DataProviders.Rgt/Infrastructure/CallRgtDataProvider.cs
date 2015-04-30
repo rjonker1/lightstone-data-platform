@@ -13,8 +13,11 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
+using Lace.Domain.DataProviders.Rgt.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.UnitOfWork;
+using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure
@@ -31,8 +34,6 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         private IRetrieveCarInformation _carInformation;
         private IList<CarSpecification> _carSpecifications;
 
-        private string _vinNumber;
-
         public CallRgtDataProvider(IAmDataProvider dataProvider, ISetupRepository repository,
             ISetupCarRepository carRepository, ILogComandTypes logComand)
         {
@@ -47,11 +48,17 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         {
             try
             {
-
-                _vinNumber = GetVinNumber(response.ToList());
+                var request = new RgtRequest(_dataProvider.GetRequest<IAmRgtRequest>(), response, _carRepository);
+                if (!request.IsValid)
+                {
+                    _logComand.LogFault(new { _dataProvider, response }, new { InvalidRequest = "Cannot continue with RGT as the request is invalid" });
+                    throw new Exception("Cannot continue with RGT as the request is invalid");
+                }
 
                 _logComand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
                     .ForDatabaseType(), new {_dataProvider});
+
+                _carInformation = request.CarInformation;
 
                 GetCarInformation();
                 GetCarSpecifics();
@@ -119,24 +126,13 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         private void GetCarInformation()
         {
-            _carInformation =
-                new GetCarInformation(_vinNumber,
-                    _carRepository)
-                    .SetupDataSources()
-                    .GenerateData()
-                    .BuildCarInformation()
-                    .BuildCarInformationRequest();
+            _carInformation
+                .SetupDataSources()
+                .GenerateData()
+                .BuildCarInformation()
+                .BuildCarInformationRequest();
         }
 
-        private static string GetVinNumber(IList<IPointToLaceProvider> response)
-        {
-            return CanContinue(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty;
-        }
 
-        private static bool CanContinue(IList<IPointToLaceProvider> response)
-        {
-            return response.OfType<IProvideDataFromIvid>().First() != null &&
-                       response.OfType<IProvideDataFromIvid>().First().Handled;
-        }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Common.Logging;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Core.Models;
-using Lace.Domain.DataProviders.RgtVin.Infrastructure.SqlStatements;
 
 namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
 {
@@ -24,7 +23,7 @@ namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
         {
             try
             {
-                Vins = _repository.Get(SelectStatements.GetVehicleVin, new { @Vin = vin });
+                Vins = _repository.Get(Vin.GetWithVin(), new { @Vin = vin });
             }
             catch (Exception ex)
             {

@@ -2,6 +2,8 @@
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto
 {
@@ -9,22 +11,36 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto
     {
         public string Vin { get; private set; }
         private readonly ICollection<IPointToLaceProvider> _response;
+        private readonly IAmRgtVinRequest _request;
 
-        public RgtVinRequestMessage(ICollection<IPointToLaceProvider> response)
+        public RgtVinRequestMessage(IAmRgtVinRequest request, ICollection<IPointToLaceProvider> response)
         {
             _response = response;
+            _request = request;
+            Build();
         }
 
-        public RgtVinRequestMessage Build()
+        private void Build()
         {
+            Vin = GetVinNumber();
+        }
 
+        private bool ContinueWithIvid()
+        {
+            return _response.OfType<IProvideDataFromIvid>().Any() && _response.OfType<IProvideDataFromIvid>().First() != null &&
+                   _response.OfType<IProvideDataFromIvid>().First().Handled;
+        }
 
-            Vin = _response.OfType<IProvideDataFromIvid>().First() != null &&
-                  _response.OfType<IProvideDataFromIvid>().First().Handled
-                ? _response.OfType<IProvideDataFromIvid>().First().Vin
-                : string.Empty;
+        private static string GetValue(IAmRequestField field)
+        {
+            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
+        }
 
-            return this;
+        private string GetVinNumber()
+        {
+            return string.IsNullOrEmpty(GetValue(_request.VinNumber))
+                ? ContinueWithIvid() ? _response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
+                : GetValue(_request.VinNumber);
         }
     }
 }

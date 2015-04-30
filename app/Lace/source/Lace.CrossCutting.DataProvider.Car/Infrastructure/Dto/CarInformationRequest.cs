@@ -14,6 +14,11 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto
             Vin = vin;
         }
 
+        public CarInformationRequest(int carId)
+        {
+            CarId = carId;
+        }
+
         public CarInformationRequest(int? carId, string make, string model, string vin, string userName, string password,
             int? year, int makeId, bool isVin12)
         {

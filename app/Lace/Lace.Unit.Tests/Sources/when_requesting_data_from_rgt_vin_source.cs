@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -25,7 +26,7 @@ namespace Lace.Unit.Tests.Sources
         {
             _requestDataFromService = new RequestDataFromIvidSource();
             _rgtVinRequest = new LicensePlateRequestBuilder().ForRgtVin();
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new Collection<IPointToLaceProvider>(); //new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
         }
         

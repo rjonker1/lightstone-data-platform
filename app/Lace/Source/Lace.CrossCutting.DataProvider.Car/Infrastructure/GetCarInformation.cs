@@ -22,9 +22,15 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
             CarInformationRequest = new CarInformationRequest(vinNumber);
         }
 
+        public GetCarInformation(int carId, ISetupCarRepository repositories)
+        {
+            _repositories = repositories;
+            CarInformationRequest = new CarInformationRequest(carId);
+        }
+
         public IRetrieveCarInformation SetupDataSources()
         {
-            _getCarInformation = new CarInformationUnitOfWork(_repositories.CarInformationRepository(),
+            _getCarInformation = new CarInformationWorker(_repositories.CarInformationRepository(),
                 _repositories.Vin12CarInformationRepository());
             return this;
         }

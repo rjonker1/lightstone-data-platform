@@ -8,12 +8,20 @@ namespace Lace.Test.Helper.Builders.Requests
 {
     public class LicensePlateNumberRgtVinRequestPackage
     {
-        public static IHavePackageForRequest LicenseNumberPackage(string vinNumber)
+        public static IHavePackageForRequest LicenseNumberPackage()
         {
             return
                 new LicensePlateNumberPackage(
                     new IAmDataProvider[]
-                    {new DataProvider(DataProviderName.RgtVin, 5, 10, RgtVinRequest.WithVin(vinNumber))},
+                    {new DataProvider(DataProviderName.RgtVin, 5, 10, RgtVinRequest.WithVin(null))},
+                    Guid.NewGuid());
+        }
+
+        public static IHavePackageForRequest VinNumberPackage(string vinNumber)
+        {
+            return
+                new LicensePlateNumberPackage(
+                    new IAmDataProvider[] {new DataProvider(DataProviderName.RgtVin, 5, 10, RgtVinRequest.WithVin(vinNumber))},
                     Guid.NewGuid());
         }
     }

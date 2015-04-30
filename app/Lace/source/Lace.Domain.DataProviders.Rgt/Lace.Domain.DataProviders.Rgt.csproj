@@ -82,10 +82,10 @@
     <Compile Include="Core\Models\Manufacturer.cs" />
     <Compile Include="Infrastructure\CallRgtDataProvider.cs" />
     <Compile Include="Core\Models\CarSpecification.cs" />
+    <Compile Include="Infrastructure\Dto\RgtRequest.cs" />
     <Compile Include="Infrastructure\HandleRgtDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtSource.cs" />
-    <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
     <Compile Include="Repositories\CarSpecificationRepository.cs" />
     <Compile Include="Core\Contracts\ISetupRepository.cs" />
     <Compile Include="Repositories\Factory\RepositoryFactory.cs" />

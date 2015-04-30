@@ -4,7 +4,6 @@ using Common.Logging;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
-using Lace.Domain.DataProviders.Rgt.Infrastructure.SqlStatements;
 
 namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
 {
@@ -25,7 +24,7 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
         {
             try
             {
-                CarSpecifications = _repository.Get(SelectStatements.GetCarSpecifications, new {request.CarId});
+                CarSpecifications = _repository.Get(CarSpecification.GetForCarId(), new {request.CarId});
             }
             catch (Exception ex)
             {

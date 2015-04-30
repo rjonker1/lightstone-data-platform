@@ -22,11 +22,11 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
             BuildRequest();
         }
 
-        private bool CanContinue
+        private bool ContinueWithIvid
         {
             get
             {
-                return _response.OfType<IProvideDataFromIvid>().First() != null &&
+                return _response.OfType<IProvideDataFromIvid>().Any() && _response.OfType<IProvideDataFromIvid>().First() != null &&
                        _response.OfType<IProvideDataFromIvid>().First().Handled;
             }
         }
@@ -54,7 +54,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
         private string GetVinNumber()
         {
             return string.IsNullOrEmpty(GetValue(_request.VinNumber))
-                ? CanContinue ? _response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
+                ? ContinueWithIvid ? _response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
                 : GetValue(_request.VinNumber);
         }
     }

@@ -122,7 +122,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private static string GetVinNumber(IList<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
         {
             return string.IsNullOrEmpty(GetValue(request.VinNumber))
-                ? CanContinue(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
+                ? ContinueWithIvid(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
                 : GetValue(request.VinNumber);
         }
 
@@ -131,9 +131,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
         }
 
-        private static bool CanContinue(IList<IPointToLaceProvider> response)
+        private static bool ContinueWithIvid(IList<IPointToLaceProvider> response)
         {
-            return response.OfType<IProvideDataFromIvid>().First() != null &&
+            return response.OfType<IProvideDataFromIvid>().Any() && response.OfType<IProvideDataFromIvid>().First() != null &&
                        response.OfType<IProvideDataFromIvid>().First().Handled;
         }
 

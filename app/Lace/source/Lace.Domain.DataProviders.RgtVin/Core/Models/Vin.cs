@@ -2,6 +2,7 @@
 {
     public class Vin
     {
+        private const string SelectVehicleUsingVin = "select v.* from Vin v where v.VIN = @Vin";
         public Vin()
         {
              
@@ -21,6 +22,11 @@
             Colour = colour;
             Source = source;
 
+        }
+
+        public static string GetWithVin()
+        {
+            return SelectVehicleUsingVin;
         }
 
         public int Vin_ID { get; set; }

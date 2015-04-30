@@ -44,7 +44,7 @@ namespace Lace.Domain.DataProviders.Rgt
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Rgt);
                 _logComand = new LogCommandTypes(_command, DataProviderCommandSource.Rgt, _dataProvider);
 
-                _logComand.LogBegin(new {_dataProvider, IvidResponse = response.OfType<IProvideDataFromIvid>().First()});
+                _logComand.LogBegin(new {_dataProvider, IvidResponse = response.OfType<IProvideDataFromIvid>()});
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_dataProvider,
@@ -57,8 +57,7 @@ namespace Lace.Domain.DataProviders.Rgt
 
                 _logComand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromRgt>().Any() ||
-                    response.OfType<IProvideDataFromRgt>().First() == null)
+                if (!response.OfType<IProvideDataFromRgt>().Any() || response.OfType<IProvideDataFromRgt>().First() == null)
                     CallFallbackSource(response, _command);
             }
 
