@@ -21,11 +21,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
       
         private DataSet _result;
 
-        public CallLightstonePropertyDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
+        public CallLightstonePropertyDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

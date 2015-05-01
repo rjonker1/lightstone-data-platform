@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -11,7 +12,7 @@ using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Core.Shared
 {
-    public class LogCommandTypes : ILogComandTypes
+    public class LogCommandTypes : ILogCommandTypes
     {
         private readonly ISendCommandToBus _commands;
         private readonly DataProviderCommandSource _dataProviderName;
@@ -21,7 +22,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
         private readonly DataProviderStopWatch _requestWatch;
 
 
-        public LogCommandTypes(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,
+        private LogCommandTypes(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,
             IAmDataProvider dataProvider)
         {
             _commands = commands;
@@ -30,6 +31,26 @@ namespace Lace.Domain.DataProviders.Core.Shared
             _dataProvider = dataProvider;
             _executeWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
             _requestWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
+        }
+
+        private LogCommandTypes(ISendCommandToBus commands, DataProviderCommandSource dataProviderName)
+        {
+            _commands = commands;
+            _dataProviderName = dataProviderName;
+            _log = LogManager.GetLogger(GetType());
+            _executeWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
+            _requestWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
+        }
+
+        public static LogCommandTypes ForDataProvider(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,
+            IAmDataProvider dataProvider)
+        {
+            return new LogCommandTypes(commands,dataProviderName,dataProvider);
+        }
+
+        public static LogCommandTypes ForEntryPoint(ISendCommandToBus commands)
+        {
+            return new LogCommandTypes(commands, DataProviderCommandSource.EntryPoint);
         }
 
         public void LogSecurity(object payload, object metadata)
@@ -67,6 +88,17 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     _dataProvider), connection, payload, _requestWatch);
         }
 
+        public void LogEntryPointRequest(ICollection<IPointToLaceRequest> request)
+        {
+            SendEntryPointRequestAsync(request, _requestWatch);
+        }
+
+        public void LogEntryPointResponse(object payload, DataProviderState state,
+            ICollection<IPointToLaceRequest> request)
+        {
+            SendEntryPointResponseAsync(payload, _requestWatch, state, request);
+        }
+
         public void LogBegin(object paylod)
         {
             SendBeginAsyc(paylod, _executeWatch);
@@ -77,7 +109,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             SendEndAsyc(paylod, _executeWatch);
         }
 
-        private void SendBeginAsyc(object payload,DataProviderStopWatch stopWatch)
+        private void SendBeginAsyc(object payload, DataProviderStopWatch stopWatch)
         {
             try
             {
@@ -85,7 +117,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.Begin(payload,stopWatch,_dataProviderName);
+                        _commands.Workflow.Begin(payload, stopWatch, _dataProviderName);
                     }
                     catch (Exception ex)
                     {
@@ -189,6 +221,51 @@ namespace Lace.Domain.DataProviders.Core.Shared
             catch (Exception ex)
             {
                 _log.ErrorFormat("An error occured sending a response to the bus because of {0}", ex.Message);
+            }
+        }
+
+        private void SendEntryPointRequestAsync(ICollection<IPointToLaceRequest> request, DataProviderStopWatch stopWatch)
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        _commands.Workflow.EntryPointRequest(request, stopWatch);
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex.Message);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex.Message);
+            }
+        }
+
+        private void SendEntryPointResponseAsync(object payload, DataProviderStopWatch stopWatch, DataProviderState state,
+            ICollection<IPointToLaceRequest> request)
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        _commands.Workflow.EntryPointResponse(payload, stopWatch, state, request);
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex.Message);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex.Message);
             }
         }
     }

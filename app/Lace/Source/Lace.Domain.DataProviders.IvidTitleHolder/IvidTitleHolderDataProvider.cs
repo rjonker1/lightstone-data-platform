@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logCommand;
+        private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public IvidTitleHolderDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IvidTitleHolder);
-                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.IvidTitleHolder, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IvidTitleHolder, _dataProvider);
 
                 _logCommand.LogBegin(new { _dataProvider });
 

@@ -18,6 +18,12 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 {
     public class DataProviderSpecification
     {
+
+        //private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
+        //    _defaultSpecification = () => (request, bus, response, requestId) =>
+        //                new IvidDataProvider(request, new LightstoneAutoDataProvider(request, new IvidTitleHolderDataProvider(request,new RgtVinDataProvider(request,new RgtDataProvider(request, null, null,CommandSender.InitCommandSender(bus, requestId,DataProviderCommandSource.Rgt)), null,CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin)),null,CommandSender.InitCommandSender(bus, requestId,DataProviderCommandSource.IvidTitleHolder)), null,CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneAuto)),null,CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Ivid)).CallSource(response);
+
+
         private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             _defaultLicenseNumberRequestSpecification =
                 () =>

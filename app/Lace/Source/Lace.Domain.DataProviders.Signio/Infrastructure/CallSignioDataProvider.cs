@@ -18,10 +18,10 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
         private ConfigureSignioClient _client;
 
-        public CallSignioDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
+        public CallSignioDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

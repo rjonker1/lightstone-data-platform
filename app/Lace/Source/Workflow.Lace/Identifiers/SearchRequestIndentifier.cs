@@ -7,10 +7,35 @@ using Lace.Domain.Core.Requests.Contracts;
 
 namespace Workflow.Lace.Identifiers
 {
-    [Serializable]
     [DataContract]
     public class SearchRequestIndentifier
     {
+
+        private SearchRequestIndentifier(int dataProvider, string package, long packageVersion)
+        {
+            NumberOfDataProviders = dataProvider;
+            PackageName = package;
+            PackageVersion = packageVersion;
+        }
+
+        public static SearchRequestIndentifier Determine(ICollection<IPointToLaceRequest> request)
+        {
+            return new SearchRequestIndentifier(request.First().Package.DataProviders.Count(), request.First().Package.Name,
+                request.First().Package.Version);
+        }
+
+
+        [DataMember]
+        public int NumberOfDataProviders { get; private set; }
+
+        [DataMember]
+        public string PackageName { get; private set; }
+
+        [DataMember]
+        public long PackageVersion { get; private set; }
+
+
+
         private static SearchType _searchType = SearchType.Undefined;
 
         [DataMember]
@@ -31,7 +56,7 @@ namespace Workflow.Lace.Identifiers
 
         public SearchRequestIndentifier()
         {
-            
+
         }
         //TODO: Need to redefine based on package requesets
         private static bool IsLicenseRequest(IPointToLaceRequest request)
@@ -67,7 +92,7 @@ namespace Workflow.Lace.Identifiers
         public static SearchRequestIndentifier GetSearchRequest(ICollection<IPointToLaceRequest> request)
         {
             DetermineRequestSearchType(request);
-            return new SearchRequestIndentifier((int) _searchType, _searchType.ToString(), string.Empty); // GetSerchTerm(request));
+            return new SearchRequestIndentifier((int)_searchType, _searchType.ToString(), string.Empty); // GetSerchTerm(request));
         }
 
         private static void DetermineRequestSearchType(ICollection<IPointToLaceRequest> request)
@@ -75,7 +100,7 @@ namespace Workflow.Lace.Identifiers
             _searchType = SearchType.LicenseSearch;
             //if (!IsVehicleRequestType(request))
             //    return;
-            
+
             //_searchType = IsVinRequest(request.OfType<IPointToLaceRequest>().First())
             //    ? SearchType.VinSearch
             //    : IsLicenseRequest(request.OfType<IPointToLaceRequest>().First())
@@ -110,7 +135,7 @@ namespace Workflow.Lace.Identifiers
         //    }
         //    catch
         //    {
-               
+
         //    }
         //    return false;
         //}

@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
       
         private readonly ISetupRepository _repository;
         private readonly ISetupCarRepository _carRepository;
@@ -35,7 +35,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         private IList<CarSpecification> _carSpecifications;
 
         public CallRgtDataProvider(IAmDataProvider dataProvider, ISetupRepository repository,
-            ISetupCarRepository carRepository, ILogComandTypes logCommand)
+            ISetupCarRepository carRepository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

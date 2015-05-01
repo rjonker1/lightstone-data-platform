@@ -17,7 +17,7 @@ namespace Lace.Domain.DataProviders.PCubed
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logCommand;
+        private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public PCubedDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -38,7 +38,7 @@ namespace Lace.Domain.DataProviders.PCubed
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedFica);
-                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.PCubedFica, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedFica, _dataProvider);
 
                 _logCommand.LogBegin(new {_request});
 

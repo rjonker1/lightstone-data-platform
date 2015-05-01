@@ -1,10 +1,11 @@
-﻿using DataPlatform.Shared.Enums;
+﻿using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Requests.Contracts;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Core.Contracts
 {
-    public interface ILogComandTypes
+    public interface ILogCommandTypes
     {
         void LogBegin(object paylod);
         void LogEnd(object paylod);
@@ -14,5 +15,7 @@ namespace Lace.Domain.DataProviders.Core.Contracts
         void LogFault(object payload, object metadata);
         void LogRequest(ConnectionTypeIdentifier connection, object payload);
         void LogResponse(DataProviderState state, ConnectionTypeIdentifier connection, object payload);
+        void LogEntryPointRequest(ICollection<IPointToLaceRequest> request);
+        void LogEntryPointResponse(object payload, DataProviderState state,ICollection<IPointToLaceRequest> request);
     }
 }

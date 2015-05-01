@@ -17,7 +17,7 @@ namespace Lace.Domain.DataProviders.Anpr
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
 
-        private ILogComandTypes _logCommand;
+        private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
         public AnprDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
@@ -37,7 +37,7 @@ namespace Lace.Domain.DataProviders.Anpr
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Anpr);
-                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.Anpr, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.Anpr, _dataProvider);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

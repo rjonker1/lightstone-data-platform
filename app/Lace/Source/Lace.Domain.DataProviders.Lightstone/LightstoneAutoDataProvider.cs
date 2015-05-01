@@ -20,7 +20,7 @@ namespace Lace.Domain.DataProviders.Lightstone
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logCommand;
+        private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public LightstoneAutoDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.Lightstone
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
-                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
                 _logCommand.LogBegin(new { _dataProvider });
 

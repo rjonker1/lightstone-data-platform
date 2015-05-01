@@ -24,12 +24,12 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
         private readonly ISetupCertificateRepository _repository;
         private IProvideCertificate _certificate;
         private AnprResComplexType _anprResponse;
 
-        public CallAnprDataProvider(IAmDataProvider dataProvider, ISetupCertificateRepository repository, ILogComandTypes logCommand)
+        public CallAnprDataProvider(IAmDataProvider dataProvider, ISetupCertificateRepository repository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

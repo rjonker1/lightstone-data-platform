@@ -13,11 +13,11 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
        
         private string _response;
 
-        public CallPCubedDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
+        public CallPCubedDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

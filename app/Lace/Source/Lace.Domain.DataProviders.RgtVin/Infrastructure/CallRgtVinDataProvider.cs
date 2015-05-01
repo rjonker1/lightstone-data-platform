@@ -24,12 +24,12 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         private readonly ILog _log;
 
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
 
         private readonly ISetupRepository _repository;
         private IList<Vin> _vins;
 
-        public CallRgtVinDataProvider(IAmDataProvider dataProvider, ISetupRepository repository, ILogComandTypes logCommand)
+        public CallRgtVinDataProvider(IAmDataProvider dataProvider, ISetupRepository repository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

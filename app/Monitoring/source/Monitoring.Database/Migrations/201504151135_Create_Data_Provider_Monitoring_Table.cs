@@ -1,5 +1,4 @@
-﻿using System;
-using FluentMigrator;
+﻿using FluentMigrator;
 
 namespace Monitoring.Database.Migrations
 {
@@ -16,13 +15,12 @@ namespace Monitoring.Database.Migrations
             Create.Table("DataProviderMonitoring")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
                 .WithColumn("RequestId").AsGuid().Indexed().NotNullable()
-                .WithColumn("SearchType").AsString().NotNullable()
-                .WithColumn("SearchTerm").AsString()
+                .WithColumn("PackageName").AsString().NotNullable()
+                .WithColumn("PackageVersion").AsInt64().NotNullable().WithDefaultValue(0)
                 .WithColumn("ElapsedTime").AsString().NotNullable()
-                .WithColumn("BucketId").AsString().NotNullable()
+                .WithColumn("DataProviderCount").AsInt32().WithDefaultValue(0)
                 .WithColumn("Action").AsString().NotNullable()
                 .WithColumn("Date").AsDateTime().NotNullable();
-
         }
     }
 }

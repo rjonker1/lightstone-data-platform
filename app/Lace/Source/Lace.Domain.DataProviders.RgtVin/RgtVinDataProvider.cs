@@ -19,7 +19,7 @@ namespace Lace.Domain.DataProviders.RgtVin
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logCommand;
+        private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public RgtVinDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.RgtVin
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.RgtVin);
-                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.RgtVin, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.RgtVin, _dataProvider);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

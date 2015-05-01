@@ -23,9 +23,9 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
         private readonly ILog _log;
         private TitleholderQueryResponse _response;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
 
-        public CallIvidTitleHolderDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
+        public CallIvidTitleHolderDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

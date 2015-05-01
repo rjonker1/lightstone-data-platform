@@ -27,7 +27,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendCommandToBus _command;
         private readonly ICallTheDataProviderSource _callTheSource;
-        private ILogComandTypes _logCommand;
+        private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public when_requesting_data_from_lightstone_source()
@@ -41,7 +41,7 @@ namespace Lace.Unit.Tests.Sources
 
             _dataProvider = _request.GetFromRequest<IPointToLaceRequest>()
                 .Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
-            _logCommand = new LogCommandTypes(_command,DataProviderCommandSource.LightstoneAuto,_dataProvider);
+            _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
             _callTheSource = new CallLightstoneAutoDataProvider(_dataProvider, new FakeRepositoryFactory(),
                 new FakeCarRepositioryFactory(_dataProvider.GetRequest<IAmLightstoneAutoRequest>().VinNumber.Field), _logCommand);

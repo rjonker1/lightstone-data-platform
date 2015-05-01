@@ -69,7 +69,7 @@
     <Compile Include="Contracts\IHandleDataProviderSourceCall.cs" />
     <Compile Include="Contracts\ILogEvent.cs" />
     <Compile Include="Contracts\IRequestDataFromDataProviderSource.cs" />
-    <Compile Include="Contracts\ILogComandTypes.cs" />
+    <Compile Include="Contracts\ILogCommandTypes.cs" />
     <Compile Include="Contracts\ITransformResponseFromDataProvider.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="Shared\AppSettings.cs" />

@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
         private IRetrieveValuationFromMetrics _metrics;
         private IRetrieveCarInformation _carInformation;
 
@@ -35,7 +35,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private string _vinNumber;
 
         public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, ISetupRepository repositories,
-            ISetupCarRepository carRepository, ILogComandTypes logCommand)
+            ISetupCarRepository carRepository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

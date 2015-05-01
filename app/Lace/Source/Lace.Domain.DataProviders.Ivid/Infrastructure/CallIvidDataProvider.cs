@@ -23,9 +23,9 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         private HpiStandardQueryResponse _response;
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
 
-        public CallIvidDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
+        public CallIvidDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

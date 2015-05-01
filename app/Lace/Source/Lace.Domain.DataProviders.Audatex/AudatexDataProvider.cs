@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Audatex
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logCommand;
+        private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public AudatexDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Audatex
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Audatex);
-                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.Ivid, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.Ivid, _dataProvider);
 
                 _logCommand.LogBegin(new { _request, IvidResponse = response.OfType<IProvideDataFromIvid>().First() });
 

@@ -21,7 +21,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
 
 
         private DataSet _result;
@@ -29,7 +29,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
         private readonly string _username = Credentials.LightstoneBusinessApiEmail();
         private readonly string _password = Credentials.LightstoneBusinessApiPassword();
 
-        public CallLightstoneBusinessDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
+        public CallLightstoneBusinessDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;

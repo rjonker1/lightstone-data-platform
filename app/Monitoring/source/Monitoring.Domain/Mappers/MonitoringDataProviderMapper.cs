@@ -16,7 +16,7 @@ namespace Monitoring.Domain.Mappers
             {
                 return new[]
                 {
-                    "Id", "RequestId", "SearchType", "SearchTerm", "ElapsedTime", "BucketId", "Date", "Action"
+                    "Id", "RequestId", "PackageName", "PackageVersion", "ElapsedTime", "DataProviderCount", "Date", "Action"
                 };
             }
         }
@@ -32,8 +32,8 @@ namespace Monitoring.Domain.Mappers
 
             return
                 new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(match.Id, match.Date,
-                    new SearchIdentifier(match.SearchType, match.SearchTerm, match.ElapsedTime, match.RequestId,
-                        match.BucketId), new MonitoringActionIdentifier(match.Action)));
+                    new SearchIdentifier(match.PackageName, match.PackageVersion, match.ElapsedTime, match.RequestId,
+                        match.DataProviderCount), new MonitoringActionIdentifier(match.Action)));
         }
 
         public override void Insert(IDbConnection connection, object instance)
@@ -44,10 +44,10 @@ namespace Monitoring.Domain.Mappers
             {
                 Id = transaction.Monitoring.Id,
                 RequestId = transaction.Monitoring.DataProviderSearch.RequestId,
-                SearchType = transaction.Monitoring.DataProviderSearch.SearchType,
-                SearchTerm = transaction.Monitoring.DataProviderSearch.SearchTerm,
+                PackageName = transaction.Monitoring.DataProviderSearch.PackageName,
+                PackageVersion = transaction.Monitoring.DataProviderSearch.PackageVersion,
                 ElapsedTime = transaction.Monitoring.DataProviderSearch.ElapsedTime,
-                BucketId = transaction.Monitoring.DataProviderSearch.BucketId,
+                DataProviderCount = transaction.Monitoring.DataProviderSearch.DataProviderCount,
                 Date = transaction.Monitoring.Date,
                 Action = transaction.Monitoring.Action.Name
             };

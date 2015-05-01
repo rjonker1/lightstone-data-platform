@@ -3,30 +3,29 @@ using System.Runtime.Serialization;
 
 namespace Monitoring.Domain.Identifiers
 {
-    [Serializable]
     [DataContract]
     public class SearchIdentifier
     {
         public SearchIdentifier() { }
 
-        public SearchIdentifier(string searchType, string searchTerm, string elapsedTime, Guid requestId, string bucketId)
+        public SearchIdentifier(string packageName, long packageVersion, string elapsedTime, Guid requestId, int dataProviderCount)
         {
-            SearchType = searchType;
-            SearchTerm = searchTerm;
+            PackageName = packageName;
+            PackageVersion = packageVersion;
             ElapsedTime = elapsedTime;
             RequestId = requestId;
-            BucketId = bucketId;
+            DataProviderCount = dataProviderCount;
         }
 
         [DataMember]
         public Guid RequestId { get; private set; }
         [DataMember]
-        public string BucketId { get; private set; }
+        public string PackageName { get; private set; }
         [DataMember]
-        public string SearchType { get; private set; }
-        [DataMember]
-        public string SearchTerm { get; private set; }
+        public long PackageVersion { get; private set; }
         [DataMember]
         public string ElapsedTime { get; private set; }
+        [DataMember]
+        public int DataProviderCount { get; private set; }
     }
 }

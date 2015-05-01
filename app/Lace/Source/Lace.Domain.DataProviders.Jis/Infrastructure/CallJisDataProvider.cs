@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
 
        
         private readonly ISetupCertificateRepository _repository;
@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         private DataStoreResult _jisResponse;
         private SightingUpdateResult _sightingUpdate;
 
-        public CallJisDataProvider(IAmDataProvider dataProvider, ISetupCertificateRepository repository, ILogComandTypes logCommand)
+        public CallJisDataProvider(IAmDataProvider dataProvider, ISetupCertificateRepository repository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _repository = repository;

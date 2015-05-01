@@ -19,9 +19,9 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
         private readonly ILog _log;
         private GetDataResult _response;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
 
-        public CallAudatexDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
+        public CallAudatexDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
