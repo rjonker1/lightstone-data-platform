@@ -17,7 +17,7 @@ namespace Lace.Domain.DataProviders.Ivid
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logComand;
+        private ILogComandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public IvidDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
@@ -38,14 +38,14 @@ namespace Lace.Domain.DataProviders.Ivid
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid);
-                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.Ivid, _dataProvider);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.Ivid, _dataProvider);
 
-                _logComand.LogBegin(new {_dataProvider});
+                _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_dataProvider, _logComand));
+                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_dataProvider, _logCommand));
                 consumer.ConsumeDataProvider(response);
 
-                _logComand.LogEnd(new {response});
+                _logCommand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromIvid>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
                     CallFallbackSource(response, _command);

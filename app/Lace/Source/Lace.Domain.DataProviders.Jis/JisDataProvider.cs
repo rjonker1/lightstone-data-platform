@@ -20,7 +20,7 @@ namespace Lace.Domain.DataProviders.Jis
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logComand;
+        private ILogComandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public JisDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
@@ -41,14 +41,14 @@ namespace Lace.Domain.DataProviders.Jis
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Jis);
-                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.Jis, _dataProvider);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.Jis, _dataProvider);
 
                 var consumer = new ConsumeSource(new HandleJisSourceCall(),
                     new CallJisDataProvider(_dataProvider,
                         new RepositoryFactory(ConnectionFactory.ForLsCorporateAutoDatabase(),
                             CacheConnectionFactory.LocalClient(),
                             ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"
-                                ].ConnectionString),_logComand));
+                                ].ConnectionString),_logCommand));
                 consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromJis>().Any() || response.OfType<IProvideDataFromJis>().First() == null)

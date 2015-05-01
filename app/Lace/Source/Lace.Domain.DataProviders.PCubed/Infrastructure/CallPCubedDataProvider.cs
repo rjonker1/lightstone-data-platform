@@ -13,15 +13,15 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
        
         private string _response;
 
-        public CallPCubedDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
+        public CallPCubedDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -53,14 +53,14 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 
 
                 if (string.IsNullOrWhiteSpace(_response))
-                    _logComand.LogFault(_dataProvider, new { NoRequestReceived = "No response received from PCubed Fica Service" });
+                    _logCommand.LogFault(_dataProvider, new { NoRequestReceived = "No response received from PCubed Fica Service" });
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex.Message);
-                _logComand.LogFault(ex.Message, new { ErrorMessage = "Error calling PCubed Fica Data Provider" });
+                _logCommand.LogFault(ex.Message, new { ErrorMessage = "Error calling PCubed Fica Data Provider" });
                 SignioResponseFailed(response);
             }
         }
@@ -81,7 +81,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
                 transformer.Transform();
             }
 
-            _logComand.LogTransformation(transformer.Result, null);
+            _logCommand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

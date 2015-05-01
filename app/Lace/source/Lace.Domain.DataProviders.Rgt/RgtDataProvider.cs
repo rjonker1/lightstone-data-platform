@@ -21,7 +21,7 @@ namespace Lace.Domain.DataProviders.Rgt
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private IAmDataProvider _dataProvider;
-        private ILogComandTypes _logComand;
+        private ILogComandTypes _logCommand;
 
         public RgtDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
@@ -42,20 +42,20 @@ namespace Lace.Domain.DataProviders.Rgt
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Rgt);
-                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.Rgt, _dataProvider);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.Rgt, _dataProvider);
 
-                _logComand.LogBegin(new {_dataProvider, IvidResponse = response.OfType<IProvideDataFromIvid>()});
+                _logCommand.LogBegin(new {_dataProvider, IvidResponse = response.OfType<IProvideDataFromIvid>()});
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_dataProvider,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()),
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
-                            CacheConnectionFactory.LocalClient()), _logComand));
+                            CacheConnectionFactory.LocalClient()), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
-                _logComand.LogEnd(new {response});
+                _logCommand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromRgt>().Any() || response.OfType<IProvideDataFromRgt>().First() == null)
                     CallFallbackSource(response, _command);

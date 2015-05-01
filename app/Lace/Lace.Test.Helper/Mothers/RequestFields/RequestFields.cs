@@ -212,4 +212,49 @@ namespace Lace.Test.Helper.Mothers.RequestFields
 
         public string Field { get; private set; }
     }
+
+    public class UsernameRequestField : IAmUsernameRequestField
+    {
+        private UsernameRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmUsernameRequestField Get(string field)
+        {
+            return new UsernameRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
+    public class RegistrationCodeRequestField : IAmRegistrationCodeRequestField
+    {
+        private RegistrationCodeRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmRegistrationCodeRequestField Get(string field)
+        {
+            return new RegistrationCodeRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
+    public class ScanDataRequestField : IAmScanDataRequestField
+    {
+        private ScanDataRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmScanDataRequestField Get(string field)
+        {
+            return new ScanDataRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
 }

@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Anpr
@@ -15,6 +16,9 @@ namespace Lace.Domain.DataProviders.Anpr
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
+
+        private ILogComandTypes _logCommand;
+        private IAmDataProvider _dataProvider;
         public AnprDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
@@ -32,6 +36,11 @@ namespace Lace.Domain.DataProviders.Anpr
             }
             else
             {
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Anpr);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.Anpr, _dataProvider);
+
+                _logCommand.LogBegin(new {_dataProvider});
+
                 //TODO: System.Data issue on the build server causes an error
                 //var consumer = new ConsumeSource(new HandleAnprSourceCall(),
                 //    new CallAnprExternalSource(_request,
@@ -39,6 +48,8 @@ namespace Lace.Domain.DataProviders.Anpr
                 //            CacheConnectionFactory.LocalClient(), ConfigurationManager.ConnectionStrings["lace/source/database/anpr/certificates/configuration"].ConnectionString)));
 
                 //consumer.ConsumeExternalSource(response, laceEvent);
+
+                _logCommand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromAnpr>().Any() || response.OfType<IProvideDataFromAnpr>().First() == null)
                     CallFallbackSource(response, _command);

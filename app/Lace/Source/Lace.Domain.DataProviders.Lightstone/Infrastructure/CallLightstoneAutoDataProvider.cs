@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
         private IRetrieveValuationFromMetrics _metrics;
         private IRetrieveCarInformation _carInformation;
 
@@ -35,13 +35,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private string _vinNumber;
 
         public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, ISetupRepository repositories,
-            ISetupCarRepository carRepository, ILogComandTypes logComand)
+            ISetupCarRepository carRepository, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repositories = repositories;
             _carRepository = carRepository;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -50,14 +50,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             {
                 _vinNumber = GetVinNumber(response.ToList(), _dataProvider.GetRequest<IAmLightstoneAutoRequest>());
 
-                _logComand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
                     .ForDatabaseType(), new { _dataProvider });
 
                 GetCarInformation();
                 GetMetrics();
                 Dispose();
 
-                _logComand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
                         .ForDatabaseType(), new { _carInformation, _metrics });
 
                 TransformResponse(response);
@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex.Message);
-                _logComand.LogFault(ex.Message, new { ErrorMessage = "Error calling Lightstone Data Provider" });
+                _logCommand.LogFault(ex.Message, new { ErrorMessage = "Error calling Lightstone Data Provider" });
                 LightstoneResponseFailed(response);
             }
         }
@@ -85,7 +85,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 transformer.Transform();
             }
 
-            _logComand.LogTransformation(transformer.Result, null);
+            _logCommand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

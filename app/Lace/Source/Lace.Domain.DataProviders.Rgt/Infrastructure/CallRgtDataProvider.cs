@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
       
         private readonly ISetupRepository _repository;
         private readonly ISetupCarRepository _carRepository;
@@ -35,13 +35,13 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         private IList<CarSpecification> _carSpecifications;
 
         public CallRgtDataProvider(IAmDataProvider dataProvider, ISetupRepository repository,
-            ISetupCarRepository carRepository, ILogComandTypes logComand)
+            ISetupCarRepository carRepository, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repository = repository;
             _carRepository = carRepository;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -51,11 +51,11 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 var request = new RgtRequest(_dataProvider.GetRequest<IAmRgtRequest>(), response, _carRepository);
                 if (!request.IsValid)
                 {
-                    _logComand.LogFault(new { _dataProvider, response }, new { InvalidRequest = "Cannot continue with RGT as the request is invalid" });
+                    _logCommand.LogFault(new { _dataProvider, response }, new { InvalidRequest = "Cannot continue with RGT as the request is invalid" });
                     throw new Exception("Cannot continue with RGT as the request is invalid");
                 }
 
-                _logComand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
                     .ForDatabaseType(), new {_dataProvider});
 
                 _carInformation = request.CarInformation;
@@ -63,18 +63,18 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 GetCarInformation();
                 GetCarSpecifics();
 
-                _logComand.LogResponse(_carSpecifications.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
                         .ForDatabaseType(), new {_carSpecifications});
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {
-                    _logComand.LogFault(new {_dataProvider}, new {NoRequestReceived = "No car specifications received from RGT Data Provider"});
+                    _logCommand.LogFault(new {_dataProvider}, new {NoRequestReceived = "No car specifications received from RGT Data Provider"});
                     RgtResponseFailed(response);
                 }
 
                 if (!_carSpecifications.Any())
-                    _logComand.LogFault(new {_dataProvider},
+                    _logCommand.LogFault(new {_dataProvider},
                         new
                         {
                             NoRequestReceived =
@@ -88,7 +88,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling RGT Data Provider {0}", ex.Message);
-                _logComand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling RGT Data Provider"});
+                _logCommand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling RGT Data Provider"});
                 RgtResponseFailed(response);
             }
         }
@@ -111,7 +111,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 transformer.Transform();
             }
 
-            _logComand.LogTransformation(transformer.Result, null);
+            _logCommand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

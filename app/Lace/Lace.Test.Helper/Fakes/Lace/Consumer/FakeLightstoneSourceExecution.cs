@@ -21,7 +21,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logComand;
+        private ILogComandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public FakeLightstoneSourceExecution(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -43,11 +43,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
-                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
                 var consumer = new ConsumeSource(new FakeHandleLighstoneSourceCall(),
                     new CallLightstoneAutoDataProvider(_dataProvider, new FakeRepositoryFactory(),
-                        new FakeCarRepositioryFactory(_dataProvider.GetRequest<IAmLightstoneAutoRequest>().VinNumber.Field), _logComand));
+                        new FakeCarRepositioryFactory(_dataProvider.GetRequest<IAmLightstoneAutoRequest>().VinNumber.Field), _logCommand));
                 consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() || response.OfType<IProvideDataFromLightstoneAuto>().First() == null)

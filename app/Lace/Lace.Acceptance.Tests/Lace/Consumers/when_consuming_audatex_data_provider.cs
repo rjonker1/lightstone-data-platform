@@ -59,10 +59,10 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
             _consumer.FallBack.ShouldBeNull();
         }
 
-        [Observation]
-        public void audatex_consumer_accident_claims_should_not_be_zero()
-        {
-            _response.OfType<IProvideDataFromAudatex>().First().AccidentClaims.Count.ShouldNotEqual(0);
-        }
+        //[Observation]
+        //public void audatex_consumer_accident_claims_should_not_be_zero()
+        //{
+        //    _response.OfType<IProvideDataFromAudatex>().First().AccidentClaims.Count.ShouldNotEqual(0);
+        //}
     }
 }

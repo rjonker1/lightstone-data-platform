@@ -14,6 +14,9 @@ using Lace.Domain.DataProviders.Jis.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Management;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
+using Workflow.Lace.Identifiers;
 
 
 namespace Lace.Domain.DataProviders.Jis.Infrastructure
@@ -22,7 +25,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
 
        
         private readonly ISetupCertificateRepository _repository;
@@ -30,48 +33,54 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         private DataStoreResult _jisResponse;
         private SightingUpdateResult _sightingUpdate;
 
-        public CallJisDataProvider(IAmDataProvider dataProvider, ISetupCertificateRepository repository, ILogComandTypes logComand)
+        public CallJisDataProvider(IAmDataProvider dataProvider, ISetupCertificateRepository repository, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _repository = repository;
             _dataProvider = dataProvider;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
             try
             {
-                //TODO: Uncomment and update with IAmJisRequest from PacakgeBuilder Request Contracts
-                //_certificate =
-                //    new CoOrdinateCertificateFactory(
-                //        new CoOrdinateCertificateRequest(_dataProvider.GetRequest<IAmJisRequest>().Latitude, _request.GetFromRequest<IAmJisRequest>().Jis.Longitude),
-                //        _repository);
+                _certificate =
+                    new CoOrdinateCertificateFactory(
+                        new CoOrdinateCertificateRequest(GetValidLatitudeCoordinate(_dataProvider.GetRequest<IAmJisRequest>().Latitude),
+                            GetValidLongitudeCoordinate(_dataProvider.GetRequest<IAmJisRequest>().Latitude)),
+                        _repository);
 
-                //if (!_certificate.IsSuccessfull || _certificate.Certificate == null ||
-                //    string.IsNullOrEmpty(_certificate.Certificate.Endpoint))
-                //    JisResponseFailed(response);
+                _logCommand.LogConfiguration(new {Certficate = _certificate}, null);
 
-                //var proxy = new JisWsInterfaceSoapClient(_certificate.Certificate.Endpoint);
-                //if (proxy.State == CommunicationState.Closed)
-                //    proxy.Open();
+                if (!_certificate.IsSuccessfull || _certificate.Certificate == null || string.IsNullOrEmpty(_certificate.Certificate.Endpoint))
+                    throw new Exception("Certificate for JIS request could not be generated");
 
-                //proxy.Connect();
+                var proxy = new JisWsInterfaceSoapClient(_certificate.Certificate.Endpoint);
+                if (proxy.State == CommunicationState.Closed)
+                    proxy.Open();
 
-                //var session = new SessionManager(proxy, _log, _request.GetFromRequest<IHaveUser>()).Build().SessionManagement;
+                proxy.Connect();
 
-                //_jisResponse = proxy.DataStoreQuery(session.Id, new BuildJisRequest(_request.GetFromRequest<IHaveJisInformation>()).JisRequest,
-                //    _request.GetFromRequest<IHaveUser>().UserName);
+                var session = new SessionManager(proxy, _log, _dataProvider.GetRequest<IAmJisRequest>()).Build().SessionManagement;
+                var request = new BuildJisRequest(_dataProvider.GetRequest<IAmJisRequest>()).JisRequest;
 
-                //if (_jisResponse.IsHot)
-                //{
-                //    _sightingUpdate =
-                //        new SightingUpdate(_request.GetFromRequest<IHaveUser>(), _jisResponse).BuildRequest()
-                //            .Update(proxy, session)
-                //            .SightingUpdateResult;
-                //}
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(proxy.Endpoint.Address.Uri.ToString()).ForWebApiType(), new {request, session});
 
-                //proxy.Close();
+                _jisResponse = proxy.DataStoreQuery(session.Id, request, _dataProvider.GetRequest<IAmJisRequest>().UserName.Field);
+
+                if (_jisResponse.IsHot)
+                {
+                    _sightingUpdate =
+                        new SightingUpdate(_dataProvider.GetRequest<IAmJisRequest>(), _jisResponse).BuildRequest()
+                            .Update(proxy, session)
+                            .SightingUpdateResult;
+                }
+
+                proxy.Close();
+
+                _logCommand.LogResponse(_jisResponse != null ? DataProviderState.Successful : DataProviderState.Failed,
+                    new ConnectionTypeIdentifier(proxy.Endpoint.Address.Uri.ToString()).ForWebApiType(), new {_jisResponse});
 
                 TransformResponse(response);
 
@@ -79,6 +88,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Jis Web Service {0}", ex.Message);
+                _logCommand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling JIS Web Service"});
                 JisResponseFailed(response);
             }
         }
@@ -91,7 +101,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             {
                 transformer.Transform();
             }
-
+            _logCommand.LogTransformation(transformer.Result, null);
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);
         }
@@ -101,6 +111,32 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             var jisResponse = new JisResponse();
             jisResponse.HasBeenHandled();
             response.Add(jisResponse);
+        }
+
+        private static double GetValidLatitudeCoordinate(IAmRequestField coordinate)
+        {
+            if (coordinate == null || string.IsNullOrEmpty(coordinate.Field))
+                return 0;
+
+            double latitude;
+
+            double.TryParse(coordinate.Field, out latitude);
+
+            return 90 >= latitude && latitude >= -90 ? latitude : 0;
+
+        }
+
+        private static double GetValidLongitudeCoordinate(IAmRequestField coordinate)
+        {
+            if (coordinate == null || string.IsNullOrEmpty(coordinate.Field))
+                return 0;
+
+            double longitude;
+
+            double.TryParse(coordinate.Field, out longitude);
+
+            return 180 >= longitude && longitude >= -180 ? longitude : 0;
+
         }
     }
 }

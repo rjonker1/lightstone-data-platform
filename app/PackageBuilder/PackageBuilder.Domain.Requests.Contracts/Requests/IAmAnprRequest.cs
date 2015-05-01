@@ -6,6 +6,6 @@ namespace PackageBuilder.Domain.Requests.Contracts.Requests
     {
         IAmImageRequestField Image { get; }
         IAmLatitudeRequestField Latitude { get; }
-        IAmLatitudeRequestField Longitude { get; }
+        IAmLongitudeReqeustField Longitude { get; }
     }
 }

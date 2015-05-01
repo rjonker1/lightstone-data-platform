@@ -19,7 +19,7 @@ namespace Lace.Domain.DataProviders.RgtVin
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logComand;
+        private ILogComandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public RgtVinDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -41,17 +41,17 @@ namespace Lace.Domain.DataProviders.RgtVin
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.RgtVin);
-                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.RgtVin, _dataProvider);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.RgtVin, _dataProvider);
 
-                _logComand.LogBegin(new {_dataProvider});
+                _logCommand.LogBegin(new {_dataProvider});
 
                 var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
                     new CallRgtVinDataProvider(_dataProvider,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
-                            CacheConnectionFactory.LocalClient()), _logComand));
+                            CacheConnectionFactory.LocalClient()), _logCommand));
                 consumer.ConsumeDataProvider(response);
 
-                _logComand.LogEnd(new {response});
+                _logCommand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromRgtVin>().Any() || response.OfType<IProvideDataFromRgtVin>().First() == null)
                     CallFallbackSource(response, _command);

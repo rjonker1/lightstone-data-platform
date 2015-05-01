@@ -18,14 +18,14 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
         private ConfigureSignioClient _client;
 
-        public CallSignioDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
+        public CallSignioDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             try
             {
                 _client = new ConfigureSignioClient(_dataProvider.GetRequest<IAmSignioDriversLicenseDecryptionRequest>());
-                _logComand.LogConfiguration(new
+                _logCommand.LogConfiguration(new
                 {
                     Configuration = new
                     {
@@ -47,16 +47,16 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                     new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"});
 
 
-                _logComand.LogRequest(new ConnectionTypeIdentifier(_client.Operation).ForWebApiType(), _client.Operation);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(_client.Operation).ForWebApiType(), _client.Operation);
 
                 _client.Run();
 
-                _logComand.LogResponse(_client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(_client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(_client.Operation).ForWebApiType(), new {_client.Resonse});
 
 
                 if (string.IsNullOrWhiteSpace(_client.Resonse))
-                    _logComand.LogFault(new {_dataProvider},
+                    _logCommand.LogFault(new {_dataProvider},
                         new {NoRequestReceived = "No response received from Signio's Drivers License Decryptions Service"});
 
                 TransformResponse(response);
@@ -64,7 +64,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Signio Drivers License Data Provider {0}", ex.Message);
-                _logComand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling Signio Drivers License Decryption"});
+                _logCommand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling Signio Drivers License Decryption"});
                 SignioResponseFailed(response);
             }
         }
@@ -85,7 +85,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                 transformer.Transform();
             }
 
-            _logComand.LogTransformation(transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), null);
+            _logCommand.LogTransformation(transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

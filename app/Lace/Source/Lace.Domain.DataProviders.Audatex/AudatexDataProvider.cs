@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Audatex
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logComand;
+        private ILogComandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public AudatexDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -40,14 +40,14 @@ namespace Lace.Domain.DataProviders.Audatex
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Audatex);
-                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.Ivid, _dataProvider);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.Ivid, _dataProvider);
 
-                _logComand.LogBegin(new { _request, IvidResponse = response.OfType<IProvideDataFromIvid>().First() });
+                _logCommand.LogBegin(new { _request, IvidResponse = response.OfType<IProvideDataFromIvid>().First() });
 
-                var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexDataProvider(_dataProvider,_logComand));
+                var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexDataProvider(_dataProvider,_logCommand));
                 consumer.ConsumeDataProvider(response);
 
-                _logComand.LogEnd(new { response });
+                _logCommand.LogEnd(new { response });
 
                 if (!response.OfType<IProvideDataFromAudatex>().Any() || response.OfType<IProvideDataFromAudatex>().First() == null)
                     CallFallbackSource(response, _command);

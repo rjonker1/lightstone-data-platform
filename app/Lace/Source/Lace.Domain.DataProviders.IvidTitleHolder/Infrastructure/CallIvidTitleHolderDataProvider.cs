@@ -23,13 +23,13 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
         private readonly ILog _log;
         private TitleholderQueryResponse _response;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
 
-        public CallIvidTitleHolderDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
+        public CallIvidTitleHolderDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
-                _logComand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"});
+                _logCommand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"});
                 IvidTitleHolderResponseFailed(response);
             }
         }
@@ -59,8 +59,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                 var request =
                     new IvidTitleHolderRequestMessage(_dataProvider.GetRequest<IAmIvidTitleholderRequest>(), response).TitleholderQueryRequest;
 
-                _logComand.LogConfiguration(new {request}, null);
-                _logComand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});
+                _logCommand.LogConfiguration(new {request}, null);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});
 
                 _response = webService
                     .Client
@@ -68,12 +68,12 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 
                 webService.Close();
 
-                _logComand.LogResponse(_response == null ? DataProviderState.Failed : DataProviderState.Successful,
+                _logCommand.LogResponse(_response == null ? DataProviderState.Failed : DataProviderState.Successful,
                     new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
                         .ForWebApiType(), _response ?? new TitleholderQueryResponse());
 
                 if (_response == null)
-                    _logComand.LogFault(new {_dataProvider}, new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"});
+                    _logCommand.LogFault(new {_dataProvider}, new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"});
             }
         }
 
@@ -93,7 +93,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                 transformer.Transform();
             }
 
-            _logComand.LogTransformation(new { transformer.Result }, null);
+            _logCommand.LogTransformation(new { transformer.Result }, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

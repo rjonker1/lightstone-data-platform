@@ -21,7 +21,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
 
 
         private DataSet _result;
@@ -29,11 +29,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
         private readonly string _username = Credentials.LightstoneBusinessApiEmail();
         private readonly string _password = Credentials.LightstoneBusinessApiPassword();
 
-        public CallLightstoneBusinessDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
+        public CallLightstoneBusinessDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -54,7 +54,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                         //TODO: uncomment after updating package builder requests nuget new GetBusinessRequest(_dataProvider.GetRequest<IAmBusinessRequest>)
                         .Map()
                         .Validate();
-                _logComand.LogConfiguration(new {request}, null);
+                _logCommand.LogConfiguration(new {request}, null);
 
                 if (!request.RequestIsValid)
                     throw new Exception(
@@ -62,13 +62,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                             "Minimum requirements for Lightstone Business request has not been met with user_token {0} ",
                             request.UserToken));
 
-                _logComand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});
 
                 _result = webService.Client.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum,
                     request.CompanyVatnumber);
 
                 webService.CloseSource();
-                _logComand.LogResponse(_result != null ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(_result != null ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result});
 
                 TransformResponse(response);
@@ -76,7 +76,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Business Data Provider {0}", ex.Message);
-                _logComand.LogFault(ex.Message, new {ErrorMessage = "Error calling Lightstone Business Data Provider"});
+                _logCommand.LogFault(ex.Message, new {ErrorMessage = "Error calling Lightstone Business Data Provider"});
                 LightstoneBusinessResponseFailed(response);
             }
         }
@@ -97,7 +97,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 transformer.Transform();
             }
 
-            _logComand.LogTransformation(transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), null);
+            _logCommand.LogTransformation(transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

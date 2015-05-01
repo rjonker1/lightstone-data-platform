@@ -54,8 +54,8 @@ namespace Lace.Acceptance.Tests.Requests
             _response.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
             _response.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
 
-            _response.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
-            _response.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
+            //_response.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
+            //_response.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
         }
     }
 }

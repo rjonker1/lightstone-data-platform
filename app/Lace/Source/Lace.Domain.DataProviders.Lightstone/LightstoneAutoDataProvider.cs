@@ -20,7 +20,7 @@ namespace Lace.Domain.DataProviders.Lightstone
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logComand;
+        private ILogComandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public LightstoneAutoDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -42,20 +42,20 @@ namespace Lace.Domain.DataProviders.Lightstone
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
-                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
-                _logComand.LogBegin(new { _dataProvider });
+                _logCommand.LogBegin(new { _dataProvider });
 
                 var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
                     new CallLightstoneAutoDataProvider(_dataProvider,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()),
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
-                            CacheConnectionFactory.LocalClient()),_logComand));
+                            CacheConnectionFactory.LocalClient()),_logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
-                _logComand.LogEnd(new { response });
+                _logCommand.LogEnd(new { response });
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
                     response.OfType<IProvideDataFromLightstoneAuto>().First() == null)

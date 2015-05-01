@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
 
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
-        private ILogComandTypes _logComand;
+        private ILogComandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
         public SignioDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
@@ -39,14 +39,14 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.SignioDecryptDriversLicense);
-                _logComand = new LogCommandTypes(_command, DataProviderCommandSource.SignioDecryptDriversLicense, _dataProvider);
+                _logCommand = new LogCommandTypes(_command, DataProviderCommandSource.SignioDecryptDriversLicense, _dataProvider);
 
-                _logComand.LogBegin(new {_dataProvider});
+                _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleSignioSourceCall(), new CallSignioDataProvider(_dataProvider, _logComand));
+                var consumer = new ConsumeSource(new HandleSignioSourceCall(), new CallSignioDataProvider(_dataProvider, _logCommand));
                 consumer.ConsumeDataProvider(response);
 
-                _logComand.LogEnd(new {response});
+                _logCommand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().Any() ||
                     response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First() == null)

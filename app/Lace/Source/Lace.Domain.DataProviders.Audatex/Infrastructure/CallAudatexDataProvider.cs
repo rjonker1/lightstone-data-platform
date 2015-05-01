@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -11,10 +10,7 @@ using Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
-using Lace.Shared.Extensions;
-using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 {
@@ -23,13 +19,13 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
         private readonly ILog _log;
         private GetDataResult _response;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
 
-        public CallAudatexDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
+        public CallAudatexDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -43,27 +39,27 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                     .Build()
                     .AudatexRequest;
 
-                _logComand.LogConfiguration(new { EndPoint = new { webService.Client.Endpoint, webService.Client.State }}, request);
+                _logCommand.LogConfiguration(new { EndPoint = new { webService.Client.Endpoint, webService.Client.State }}, request);
 
-                _logComand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), request);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), request);
 
                 _response = webService
                     .Client
                     .GetDataEx(GetCredentials(), request.MessageType, request.Message, 0);
 
-                _logComand.LogResponse(_response != null ? DataProviderState.Successful : DataProviderState.Failed, new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(),response);
+                _logCommand.LogResponse(_response != null ? DataProviderState.Successful : DataProviderState.Failed, new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(),response);
                 
                 webService.Close();
 
                 if (_response == null)
-                    _logComand.LogFault(_dataProvider,  new {NoRequestReceived = "No response received from Audatex Data Provider"});
+                    _logCommand.LogFault(_dataProvider,  new {NoRequestReceived = "No response received from Audatex Data Provider"});
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Audatex Data Provider {0}", ex.Message);
-                _logComand.LogFault(ex.Message, new {ErrorMessage = "Error calling Audatex Data Provider"});
+                _logCommand.LogFault(ex.Message, new {ErrorMessage = "Error calling Audatex Data Provider"});
                 AudatexResponseFailed(response);
             }
         }
@@ -93,7 +89,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             {
                 transformer.Transform();
             }
-            _logComand.LogTransformation(transformer.Result, null);
+            _logCommand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

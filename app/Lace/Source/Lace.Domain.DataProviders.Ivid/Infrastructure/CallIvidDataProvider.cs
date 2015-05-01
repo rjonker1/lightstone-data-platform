@@ -23,13 +23,13 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         private HpiStandardQueryResponse _response;
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
-        private readonly ILogComandTypes _logComand;
+        private readonly ILogComandTypes _logCommand;
 
-        public CallIvidDataProvider(IAmDataProvider dataProvider, ILogComandTypes logComand)
+        public CallIvidDataProvider(IAmDataProvider dataProvider, ILogComandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
-            _logComand = logComand;
+            _logCommand = logCommand;
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Ivid Data Provider {0}", ex.Message);
-                _logComand.LogFault(ex.Message, new { ErrorMessage = "Error calling Ivid Data Provider" });
+                _logCommand.LogFault(ex.Message, new { ErrorMessage = "Error calling Ivid Data Provider" });
                 IvidResponseFailed(response);
             }
         }
@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         {
             var webService = new ConfigureIvid();
 
-            _logComand.LogSecurity(
+            _logCommand.LogSecurity(
                 new
                 {
                     Credentials =
@@ -86,8 +86,8 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                     new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>())
                         .HpiQueryRequest;
 
-                _logComand.LogConfiguration(request, null);
-                _logComand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
+                _logCommand.LogConfiguration(request, null);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
                     .ForWebApiType(), request);
 
                 _response = webService
@@ -96,12 +96,12 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 
                 webService.CloseWebService();
 
-                _logComand.LogResponse(CheckState(),
+                _logCommand.LogResponse(CheckState(),
                     new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
                         .ForWebApiType(), _response ?? new HpiStandardQueryResponse());
 
                 if (_response == null)
-                    _logComand.LogFault(_dataProvider,
+                    _logCommand.LogFault(_dataProvider,
                         new {NoRequestReceived = "No response received from Ivid Data Provider"});
             }
         }
@@ -115,7 +115,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 transformer.Transform();
             }
 
-            _logComand.LogTransformation(transformer.Result, null);
+            _logCommand.LogTransformation(transformer.Result, null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);
