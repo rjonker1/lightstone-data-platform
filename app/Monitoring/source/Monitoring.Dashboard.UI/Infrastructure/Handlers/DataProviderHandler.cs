@@ -54,7 +54,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                             new DataProviderView(s.RequestId, payloads
                                 .Where(f => f.Id == s.RequestId)
                                 .Select(c => new SerializedPayload(c.Payload, c.CommitSequence)).ToList(), s.Date, false,
-                                s.ElapsedTime, s.SearchType, s.SearchTerm).DeserializePayload()
+                                s.ElapsedTime, s.PackageVersion,s.PackageName, s.DataProviderCount).DeserializePayload()
                                 .SetState(GetErrorCount(errors.FirstOrDefault(f => f.RequestId == s.RequestId))))
                         .ToList();
             }

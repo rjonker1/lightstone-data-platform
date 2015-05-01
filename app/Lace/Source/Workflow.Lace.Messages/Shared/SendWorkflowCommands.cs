@@ -88,7 +88,7 @@ namespace Workflow.Lace.Messages.Shared
         public void EntryPointRequest(ICollection<IPointToLaceRequest> request, DataProviderStopWatch stopWatch)
         {
             new ReceiveEntryPointRequest(Guid.NewGuid(), _requestId, DateTime.UtcNow,
-                SearchRequestIndentifier.GetSearchRequest(request),
+                SearchRequestIndentifier.Determine(request),
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), request.ObjectToJson(),
                     CommandDescriptions.ReceiveEntryPointRequestDescription()))
                 .SendToBus(_publisher, _log);
@@ -102,7 +102,7 @@ namespace Workflow.Lace.Messages.Shared
                 new StateIdentifier((int) state, state.ToString()),
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
                     payload.ObjectToJson(),
-                    CommandDescriptions.ReturnEntryPointResponseDescription()),SearchRequestIndentifier.GetSearchRequest(request))
+                    CommandDescriptions.ReturnEntryPointResponseDescription()),SearchRequestIndentifier.Determine(request))
                 .SendToBus(_publisher, _log);
 
         }

@@ -7,7 +7,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
     public class DataProvider
     {
         private const string GetRequests =
-           @"select top 100 RequestId, SearchType, SearchTerm, ElapsedTime, Action, Date from DataProviderMonitoring where [action] = 'response' order by [date] desc";
+           @"select top 100 RequestId, PackageName, PackageVersion, ElapsedTime, Action, Date,DataProviderCount from DataProviderMonitoring where [action] = 'response' order by [date] desc";
 
 
         public static string SelectStatement()
@@ -19,10 +19,10 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public Guid RequestId { get; set; }
 
         [DataMember]
-        public string SearchType { get; set; }
+        public string PackageName { get; set; }
 
         [DataMember]
-        public string SearchTerm { get; set; }
+        public long PackageVersion { get; set; }
 
         [DataMember]
         public string ElapsedTime { get; set; }
@@ -32,6 +32,9 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         [DataMember]
         public DateTime Date { get; set; }
+
+        [DataMember]
+        public int DataProviderCount { get; set; } 
       
     }
 

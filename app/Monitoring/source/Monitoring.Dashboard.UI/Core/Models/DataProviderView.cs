@@ -20,10 +20,10 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public Guid Id { get; private set; }
 
         [DataMember]
-        public string SearchTerm { get; private set; }
+        public string PackageName { get; private set; }
 
         [DataMember]
-        public string SearchType { get; private set; }
+        public long PackageVersion { get; private set; }
 
         [DataMember]
         public string Payload { get; private set; }
@@ -41,6 +41,9 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public string State { get; private set; }
 
         [DataMember]
+        public int DataProviderCount { get; private set; }
+
+        [DataMember]
         public IEnumerable<SerializedPayload> SerializedPayloads { get; private set; }
 
         [DataMember]
@@ -53,15 +56,16 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         public DataProviderView(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date,
             bool hasErrors,
-            string elapsedTime, string searchType, string searchTerm)
+            string elapsedTime, long packageVersion, string packageName, int dataProviderCount)
         {
             Id = id;
             SerializedPayloads = serializedPayloads;
             Date = date;
             HasErrors = hasErrors;
             ElapsedTime = elapsedTime;
-            SearchTerm = searchTerm;
-            SearchType = searchType;
+            PackageName = packageName;
+            PackageVersion = packageVersion;
+            DataProviderCount = dataProviderCount;
         }
 
         public DataProviderView SetState(int errorCount)
