@@ -64,7 +64,7 @@
     </nuget>
     <nuget deploy="true">
       <name>Lightstone.DataPlatform.Monitoring.Dashboard.UI</name>
-      <folder>app/Monitoring/source/PackageBuilder.Web.UI</folder>
+      <folder>app/Monitoring/source/Monitoring.Dashboard.UI</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Monitoring.Dashboard.UI</description>
       <deploymentProject>LighstoneDataPlatform</deploymentProject>
