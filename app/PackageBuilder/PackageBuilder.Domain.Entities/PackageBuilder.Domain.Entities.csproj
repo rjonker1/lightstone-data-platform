@@ -201,7 +201,7 @@
     <Compile Include="Packages\Write\Package.cs" />
     <Compile Include="Packages\Commands\CreatePackage.cs" />
     <Compile Include="DataFields\Write\DataField.cs" />
-    <Compile Include="Requests\BastardRequestsTypesToBeRemoved.cs" />
+    <Compile Include="Requests\RequestsTypesToBeRemoved.cs" />
     <Compile Include="Requests\LaceRequest.cs" />
     <Compile Include="States\Commands\CreateState.cs" />
     <Compile Include="States\Commands\ImportState.cs" />
