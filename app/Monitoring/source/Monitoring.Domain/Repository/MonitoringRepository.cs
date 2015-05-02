@@ -19,22 +19,19 @@ namespace Monitoring.Domain.Repository
 
         public TType Get<TType>(Guid id) where TType : class
         {
-            var mapping = _mapper.GetMapping(typeof (TType));
-
+            var mapping = _mapper.GetMapping(typeof(TType));
             return mapping.Get(_connection, id) as TType;
-
         }
 
         public void Add<TType>(TType instance)
         {
             var mapping = _mapper.GetMapping(instance);
-
             mapping.Insert(_connection, instance);
         }
 
         public IList<TItem> Items<TItem>(string sql) where TItem : class
         {
-            return _connection.Query<TItem>(sql).ToList();
+           return _connection.Query<TItem>(sql).ToList();
         }
     }
 }
