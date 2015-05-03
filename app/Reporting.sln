@@ -3,13 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporting.Api", "Reporting\Reporting.Api.csproj", "{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{47C6ABE1-C702-4438-83B8-1603D6F62831}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{577F341C-C986-45F7-A518-615C71E726AA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Reporting.Consumer", "Reporting\Workflow.Reporting.Consumer\Workflow.Reporting.Consumer\Workflow.Reporting.Consumer.csproj", "{A257A8BE-4D51-4984-BF14-8268A913D675}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporting", "Reporting\Reporting.csproj", "{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,16 +15,8 @@ Global
 		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A257A8BE-4D51-4984-BF14-8268A913D675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A257A8BE-4D51-4984-BF14-8268A913D675}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A257A8BE-4D51-4984-BF14-8268A913D675}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A257A8BE-4D51-4984-BF14-8268A913D675}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD} = {577F341C-C986-45F7-A518-615C71E726AA}
-		{A257A8BE-4D51-4984-BF14-8268A913D675} = {47C6ABE1-C702-4438-83B8-1603D6F62831}
 	EndGlobalSection
 EndGlobal
