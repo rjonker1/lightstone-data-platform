@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Workflow.Repporting.Consumer
+namespace Workflow.Reporting.Consumer
 {
     class Program
     {
