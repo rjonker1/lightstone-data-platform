@@ -20,7 +20,8 @@ namespace Workflow.Reporting.Consumer
 
             var container = new WindsorContainer().Install(
                 new WindsorInstaller(),
-                new BusInstaller());
+                new BusInstaller(),
+                new ConsumerInstaller());
 
             advancedBus = container.Resolve<IAdvancedBus>();
             var q = advancedBus.QueueDeclare("DataPlatform.Reports.Billing");
