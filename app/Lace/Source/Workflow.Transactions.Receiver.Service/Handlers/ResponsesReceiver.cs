@@ -35,8 +35,8 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
                 new DataProviderTransaction(new DataProviderTransactionIdentifier(Guid.NewGuid(), message.Body.Id,
                     message.Body.Date, new RequestIdentifier(message.Body.Id, null),
                     message.Body.DataProvider, message.Body.Connection,
-                    new ActionIdentifier((int)message.Body.DataProvider.Action, message.Body.DataProvider.Action.ToString()),
-                    new StateIdentifier((int)message.Body.DataProvider.State, message.Body.DataProvider.State.ToString())));
+                    new ActionIdentifier((int) message.Body.DataProvider.Action, message.Body.DataProvider.Action.ToString()),
+                    new StateIdentifier((int) message.Body.DataProvider.State, message.Body.DataProvider.State.ToString())));
             _transaction.Add(response);
         }
 
@@ -45,7 +45,7 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
             var response =
                 new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(Guid.NewGuid(), message.Body.Date,
                     new SearchIdentifier(message.Body.RequestContext.PackageName, message.Body.RequestContext.PackageVersion,
-                        message.Body.Payload.MetaData.JsonToObject<StopWatchResults>().ElapsedTime.ToString(),
+                        message.Body.Payload.MetaData.JsonToObject<PerformanceMetadata>().Results.ElapsedTime.ToString(),
                         message.Body.RequestId, message.Body.RequestContext.NumberOfDataProviders),
                     new MonitoringActionIdentifier(DataProviderAction.Response.ToString())));
             _monitoring.Add(response);

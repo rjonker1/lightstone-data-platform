@@ -4,9 +4,7 @@ using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -87,8 +85,8 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling RGT Data Provider {0}", ex.Message);
-                _logCommand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling RGT Data Provider"});
+                _log.ErrorFormat("Error calling RGT Data Provider {0}", ex);
+                _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling RGT Data Provider"});
                 RgtResponseFailed(response);
             }
         }

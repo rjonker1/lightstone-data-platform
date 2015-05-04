@@ -59,8 +59,8 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex.Message);
-                _logCommand.LogFault(ex.Message, new { ErrorMessage = "Error calling PCubed Fica Data Provider" });
+                _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex);
+                _logCommand.LogFault(ex, new { ErrorMessage = "Error calling PCubed Fica Data Provider" });
                 SignioResponseFailed(response);
             }
         }

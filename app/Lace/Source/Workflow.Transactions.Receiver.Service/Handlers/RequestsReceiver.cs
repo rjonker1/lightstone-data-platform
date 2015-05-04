@@ -40,7 +40,7 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
             var request =
                 new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(Guid.NewGuid(), message.Body.Date,
                     new SearchIdentifier(message.Body.Request.PackageName, message.Body.Request.PackageVersion,
-                        message.Body.Payload.MetaData.JsonToObject<StopWatchResults>().ElapsedTime.ToString(),
+                        message.Body.Payload.MetaData.JsonToObject<PerformanceMetadata>().Results.ElapsedTime.ToString(),
                         message.Body.RequestId, message.Body.Request.NumberOfDataProviders),
                     new MonitoringActionIdentifier(DataProviderAction.Request.ToString())));
 

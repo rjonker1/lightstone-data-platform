@@ -90,26 +90,26 @@ namespace Lace.Domain.DataProviders.Core.Shared
 
         public void LogEntryPointRequest(ICollection<IPointToLaceRequest> request)
         {
-            SendEntryPointRequestAsync(request, _requestWatch);
+            SendEntryPointRequestAsync(request);
         }
 
         public void LogEntryPointResponse(object payload, DataProviderState state,
             ICollection<IPointToLaceRequest> request)
         {
-            SendEntryPointResponseAsync(payload, _requestWatch, state, request);
+            SendEntryPointResponseAsync(payload, state, request);
         }
 
-        public void LogBegin(object paylod)
+        public void LogBegin(object payload)
         {
-            SendBeginAsyc(paylod, _executeWatch);
+            SendBeginAsyc(payload);
         }
 
-        public void LogEnd(object paylod)
+        public void LogEnd(object payload)
         {
-            SendEndAsyc(paylod, _executeWatch);
+            SendEndAsyc(payload);
         }
 
-        private void SendBeginAsyc(object payload, DataProviderStopWatch stopWatch)
+        private void SendBeginAsyc(object payload)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.Begin(payload, stopWatch, _dataProviderName);
+                        _commands.Workflow.Begin(payload, _executeWatch, _dataProviderName);
                     }
                     catch (Exception ex)
                     {
@@ -131,7 +131,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendEndAsyc(object payload, DataProviderStopWatch stopWatch)
+        private void SendEndAsyc(object payload)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.End(payload, stopWatch, _dataProviderName);
+                        _commands.Workflow.End(payload, _executeWatch, _dataProviderName);
                     }
                     catch (Exception ex)
                     {
@@ -224,7 +224,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendEntryPointRequestAsync(ICollection<IPointToLaceRequest> request, DataProviderStopWatch stopWatch)
+        private void SendEntryPointRequestAsync(ICollection<IPointToLaceRequest> request)
         {
             try
             {
@@ -232,7 +232,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.EntryPointRequest(request, stopWatch);
+                        _commands.Workflow.EntryPointRequest(request, _requestWatch);
                     }
                     catch (Exception ex)
                     {
@@ -246,7 +246,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendEntryPointResponseAsync(object payload, DataProviderStopWatch stopWatch, DataProviderState state,
+        private void SendEntryPointResponseAsync(object payload, DataProviderState state,
             ICollection<IPointToLaceRequest> request)
         {
             try
@@ -255,7 +255,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.EntryPointResponse(payload, stopWatch, state, request);
+                        _commands.Workflow.EntryPointResponse(payload, _requestWatch, state, request);
                     }
                     catch (Exception ex)
                     {

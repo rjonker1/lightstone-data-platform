@@ -9,6 +9,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests;
 using Lace.Domain.Core.Requests.Contracts;
+//using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
@@ -205,10 +206,17 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId,
-            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos)
+            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
+            IEnumerable<RequestFieldDto> requestFieldsDtos)
         {
             var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
                 contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos);
+
+            if (request == null)
+                throw new Exception(string.Format("Request cannot be build to Contract with Id {0}", contractId));
+
+            var requests = new[] {request}; 
+
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
 
             return MapLaceResponses(responses).ToList();
