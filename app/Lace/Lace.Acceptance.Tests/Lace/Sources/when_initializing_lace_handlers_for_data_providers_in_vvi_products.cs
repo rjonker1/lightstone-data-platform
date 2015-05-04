@@ -27,8 +27,9 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         {
             _command = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
-            _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
-            _buildSourceChain.Build();
+            //_buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
+            //_buildSourceChain.Build();
+            _buildSourceChain = new CreateSourceChain();
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command,
                 _buildSourceChain);
         }
@@ -43,7 +44,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         public void lace_ivid_response_for_vvi_product_should_not_be_null()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(5);
+            _initialize.DataProviderResponses.Count.ShouldEqual(7);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
@@ -59,6 +60,9 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
+
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneProperty>().First().Handled.ShouldBeFalse();
 
             //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
             //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();

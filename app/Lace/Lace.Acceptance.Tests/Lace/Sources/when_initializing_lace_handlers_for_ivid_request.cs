@@ -28,8 +28,9 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         {
             _command = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForIvid();
-            _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
-            _buildSourceChain.Build();
+            _buildSourceChain = new CreateSourceChain();
+            //_buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
+            //_buildSourceChain.Build();
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(),  _request, _command, _buildSourceChain);
         }
 
@@ -43,7 +44,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         [Observation]
         public void lace_response_to_be_returned_should_be_one()
         {
-            _response.Count.ShouldEqual(5);
+            _response.Count.ShouldEqual(7);
         }
 
         [Observation]

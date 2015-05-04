@@ -42,7 +42,7 @@ namespace Lace.Acceptance.Tests.Requests
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_property_sources()
         {
             _responses.ShouldNotBeNull();
-            _responses.Count.ShouldEqual(1);
+            _responses.Count.ShouldEqual(7);
 
 
             _responses.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();

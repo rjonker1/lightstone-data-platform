@@ -37,9 +37,9 @@ namespace Lace.Test.Helper.Mothers.Packages
             get { return "LicensePlatePackage"; }
         }
 
-        public string Action
-        {
-            get { return "License plate search"; }
-        }
+        //public string Action
+        //{
+        //    get { return "License plate search"; }
+        //}
     }
 }

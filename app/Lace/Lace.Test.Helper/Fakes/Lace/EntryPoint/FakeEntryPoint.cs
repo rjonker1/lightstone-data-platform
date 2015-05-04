@@ -26,8 +26,8 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 
         public ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request)
         {
-            _buildSourceChain = new FakeSourceChain(request.First().Package);
-            _buildSourceChain.Build();
+            _buildSourceChain = new FakeSourceChain();
+            //_buildSourceChain.Build();
 
             if (_checkForDuplicateRequests.IsRequestDuplicated(request.First())) return null;
 

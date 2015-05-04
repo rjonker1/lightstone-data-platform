@@ -8,7 +8,7 @@ namespace Lace.Domain.Infrastructure.Core.Contracts
 {
     public interface IBuildSourceChain
     {
-        void Build();
+        //void Build();
         Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; }
     }
 }

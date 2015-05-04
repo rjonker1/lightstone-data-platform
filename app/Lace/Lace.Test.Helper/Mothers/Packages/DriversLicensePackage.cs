@@ -37,9 +37,9 @@ namespace Lace.Test.Helper.Mothers.Packages
             get { return "DriversLicensePackage"; }
         }
 
-        public string Action
-        {
-            get { return "License Scan"; }
-        }
+        //public string Action
+        //{
+        //    get { return "License Scan"; }
+        //}
     }
 }

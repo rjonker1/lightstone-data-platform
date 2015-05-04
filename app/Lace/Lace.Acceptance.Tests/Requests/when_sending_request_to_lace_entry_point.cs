@@ -3,10 +3,8 @@ using System.Linq;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
@@ -37,7 +35,7 @@ namespace Lace.Acceptance.Tests.Requests
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_all_sources()
         {
             _response.ShouldNotBeNull();
-            _response.Count.ShouldEqual(5);
+            _response.Count.ShouldEqual(7);
             
             _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
             _response.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
@@ -54,8 +52,11 @@ namespace Lace.Acceptance.Tests.Requests
             _response.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
             _response.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
 
-            //_response.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
-            //_response.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
+            _response.OfType<IProvideDataFromLightstoneProperty>().First().Handled.ShouldBeFalse();
+
+            _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
+            _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeFalse();
         }
     }
 }

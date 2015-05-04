@@ -53,9 +53,9 @@ namespace Lace.Test.Helper.Builders.Property
             get { return "Property Package"; }
         }
 
-        public string Action
-        {
-            get { return "Property Search"; }
-        }
+        //public string Action
+        //{
+        //    get { return "Property Search"; }
+        //}
     }
 }

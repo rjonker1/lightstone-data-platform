@@ -32,8 +32,9 @@ namespace Lace.Unit.Tests.Chain
         {
             _bus = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
-            _buildSourceChain = new FakeSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
-            _buildSourceChain.Build();
+            _buildSourceChain = new FakeSourceChain();
+            //_buildSourceChain = new FakeSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
+            //_buildSourceChain.Build();
         }
 
         public override void Observe()
@@ -64,6 +65,9 @@ namespace Lace.Unit.Tests.Chain
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
+
+            _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeFalse();
 
             //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
             //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();

@@ -103,21 +103,17 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber);
         }
 
-        //private  void RequestHasId(bool requestIdIsEmpty)
-        //{
-        //    if (requestIdIsEmpty)
-        //        _log.ErrorFormat("Request Id for Aggregation is required. Cannot complete request");
-        //}
-
         private bool ChainIsNotAvailable(IEnumerable<IPointToLaceRequest> request)
         {
-            _dataProviderChain = new CreateSourceChain(request.First().Package);
-            _dataProviderChain.Build();
+            //_dataProviderChain = new CreateSourceChain(request.First().Package);
+            //_dataProviderChain.Build();
+
+            _dataProviderChain = new CreateSourceChain();
 
             if (_dataProviderChain.SourceChain != null)
                 return false;
 
-            _logCommand.LogFault(request, new { ChainBuilderError = "Source chain could not be built" });
+            _logCommand.LogFault(request, new {ChainBuilderError = "Source chain could not be built"});
             _logCommand.LogEnd(request);
             return true;
         }
