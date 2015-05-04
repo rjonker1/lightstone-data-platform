@@ -65,8 +65,8 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex.Message);
-                _logCommand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling RGT Vin Data Provider"});
+                _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex);
+                _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling RGT Vin Data Provider"});
                 RgtVinResponseFailed(response);
             }
         }

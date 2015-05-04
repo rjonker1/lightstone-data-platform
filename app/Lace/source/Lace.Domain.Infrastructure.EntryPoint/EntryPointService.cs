@@ -39,7 +39,11 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         {
             try
             {
-                RequestHasId(request.First().Request.RequestId == Guid.Empty);
+                if (request.First().Request.RequestId == Guid.Empty)
+                {
+                    _log.ErrorFormat("Request Id for Aggregation is required. Cannot complete request");
+                    return EmptyResponse;
+                }
 
                 Init(request.First().Request.RequestId);
 
@@ -79,8 +83,6 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             _workflow  = new SendWorkflowCommands(_bus,requestId);
         }
 
-      
-
         private void LogResponse(ICollection<IPointToLaceRequest> request)
         {
             _logCommand.LogEntryPointResponse(_bootstrap.DataProviderResponses ?? EmptyResponse,
@@ -101,11 +103,11 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber);
         }
 
-        private static void RequestHasId(bool requestIdIsEmpty)
-        {
-            if (requestIdIsEmpty)
-                throw new Exception("Request Id for Aggregation is required. Cannot complete request");
-        }
+        //private  void RequestHasId(bool requestIdIsEmpty)
+        //{
+        //    if (requestIdIsEmpty)
+        //        _log.ErrorFormat("Request Id for Aggregation is required. Cannot complete request");
+        //}
 
         private bool ChainIsNotAvailable(IEnumerable<IPointToLaceRequest> request)
         {

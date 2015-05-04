@@ -62,6 +62,20 @@
         <include pattern="Web.config" to="content"/>
       </includes>
     </nuget>
+    <nuget deploy="true">
+      <name>Lightstone.DataPlatform.Monitoring.Dashboard.UI</name>
+      <folder>app/Monitoring/source/Monitoring.Dashboard.UI</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Monitoring.Dashboard.UI</description>
+      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="bin\" to="content\bin"/>
+        <include pattern="assets\" to="content\assets"/>        
+        <include pattern="Scripts\" to="content\Scripts"/>
+        <include pattern="Views\" to="content\Views"/>
+        <include pattern="*.config" to="content"/>
+      </includes>
+    </nuget>
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Api</name>
       <folder>app/Billing/Billing.Api</folder>
@@ -279,6 +293,7 @@
 				<dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="EasyNetQ" />
         <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->

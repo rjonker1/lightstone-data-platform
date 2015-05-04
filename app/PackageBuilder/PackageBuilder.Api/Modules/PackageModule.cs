@@ -139,7 +139,7 @@ namespace PackageBuilder.Api.Modules
 
 
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, "",
-                    parameters.searchTerm, "", apiRequest.RequestId, accountNumber, apiRequest.ContractId, contractVersion,
+                    parameters.searchTerm, "", Guid.NewGuid(), accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
                 return responses;

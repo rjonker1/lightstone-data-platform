@@ -90,7 +90,6 @@
     <Compile Include="Identifiers\SystemIdentifier.cs" />
     <Compile Include="Identifiers\UserIdentifier.cs" />
     <Compile Include="Identifiers\VersionIdentifier.cs" />
-    <Compile Include="Messaging\Events\IMonitorEvent.cs" />
     <Compile Include="Messaging\IPublishableMessage.cs" />
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />

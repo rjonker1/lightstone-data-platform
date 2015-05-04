@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Core.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using DataProviderName = DataPlatform.Shared.Enums.DataProviderName;
 
 namespace PackageBuilder.Domain.Entities.Requests
 {
-    public class LicensePlateRequest : IAmLicensePlateRequest
+    public class VechicleRequest : IPointToLaceRequest
     {
 
-        public LicensePlateRequest(IHaveUser user, IHaveVehicle vehicle, IHaveContract contract,
+        public VechicleRequest(IHaveUser user, IHaveContract contract,
             IHavePackageForRequest package, IHaveRequestContext context, DateTime requestDate)
         {
             User = user;
-            Vehicle = vehicle;
             Contract = contract;
             Package = package;
             Request = context;
@@ -23,8 +22,6 @@ namespace PackageBuilder.Domain.Entities.Requests
         }
         public IHaveUser User { get; private set; }
 
-        public IHaveVehicle Vehicle { get; private set; }
-
         public IHaveContract Contract { get; private set; }
 
         public IHavePackageForRequest Package { get; private set; }
@@ -33,64 +30,6 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public DateTime RequestDate { get; private set; }
 
-    }
-
-    public class BusinessRequest : IAmBusinessRequest
-    {
-        public IHaveBusiness Business { get; private set; }
-
-        public IHaveUser User { get; private set; }
-
-        public IHaveContract Contract { get; private set; }
-
-        public IHavePackageForRequest Package { get; private set; }
-
-        public IHaveRequestContext Request { get; private set; }
-
-        public DateTime RequestDate { get; private set; }
-    }
-
-    public class PropertyRequest : IAmPropertyRequest
-    {
-        public PropertyRequest(IHaveProperty property, IHaveUser user, IHaveContract contract,
-            IHavePackageForRequest package, IHaveRequestContext request, DateTime requestDate)
-        {
-            Property = property;
-            User = user;
-            Contract = contract;
-            Package = package;
-            Request = request;
-            RequestDate = requestDate;
-        }
-
-        public IHaveProperty Property { get; private set; }
-
-        public IHaveUser User { get; private set; }
-
-        public IHaveContract Contract { get; private set; }
-
-        public IHavePackageForRequest Package { get; private set; }
-
-        public IHaveRequestContext Request { get; private set; }
-
-        public DateTime RequestDate { get; private set; }
-
-
-    }
-
-    public class DriversLicenseRequest : IAmDriversLicenseRequest
-    {
-
-        public IHaveDriversLicense DriversLicense { get; private set; }
-
-        public IHaveContract Contract { get; private set; }
-        public IHaveUser User { get; private set; }
-
-        public IHavePackageForRequest Package { get; private set; }
-
-        public IHaveRequestContext Request { get; private set; }
-
-        public DateTime RequestDate { get; private set; }
     }
 
     public class User : IHaveUser
@@ -133,91 +72,6 @@ namespace PackageBuilder.Domain.Entities.Requests
         public Lace.Domain.Core.Requests.SystemType System { get; private set; }
     }
 
-    public class Vehicle : IHaveVehicle
-    {
-        public Vehicle()
-        {
-
-        }
-
-        public Vehicle(string engineNumber, string licenseNumber, string make, string registrationNumber,
-            string vinNumber, string vinOrChassisNumber)
-        {
-            EngineNo = engineNumber;
-            LicenceNo = licenseNumber;
-            Make = make;
-            RegisterNo = registrationNumber;
-            Vin = vinNumber;
-            VinOrChassis = vinOrChassisNumber;
-        }
-
-        public string EngineNo { get; private set; }
-
-        public string LicenceNo { get; private set; }
-
-        public string Make { get; private set; }
-
-        public string RegisterNo { get; private set; }
-
-        public string Vin { get; private set; }
-
-        public string VinOrChassis { get; private set; }
-
-
-        public void SetLicenseNo(string licenceNo)
-        {
-            LicenceNo = licenceNo;
-        }
-
-        public void SetMake(string make)
-        {
-            Make = make;
-        }
-
-        public void SetVinNumber(string vinNumber)
-        {
-            Vin = vinNumber;
-        }
-    }
-
-    public class DriversLicense : IHaveDriversLicense
-    {
-        public DriversLicense(string registrationCode, string scanData, Guid userId, string userName)
-        {
-            RegistrationCode = registrationCode;
-            ScanData = scanData;
-            UserId = userId;
-            Username = userName;
-        }
-
-        public string RegistrationCode { get; private set; }
-
-        public string ScanData { get; private set; }
-
-        public Guid UserId { get; private set; }
-
-        public string Username { get; private set; }
-    }
-
-    public class Fica : IHaveFica
-    {
-        public Fica(int ficaTransactionId, long idNumber, Guid transactionToken, string username)
-        {
-            FicaTransactionId = ficaTransactionId;
-            IdNumber = idNumber;
-            TransactionToken = transactionToken;
-            Username = username;
-        }
-
-        public int FicaTransactionId { get; private set; }
-
-        public long IdNumber { get; private set; }
-
-        public Guid TransactionToken { get; private set; }
-
-        public string Username { get; private set; }
-    }
-
     public class Contract : IHaveContract
     {
         public Contract(long contractVersion, string accountNumber, Guid contractId)
@@ -233,20 +87,71 @@ namespace PackageBuilder.Domain.Entities.Requests
         public long ContractVersion { get; private set; }
     }
 
+    //TODO: this needs some work. Some confusion about the requests to be sent to lace...
     public class LaceDataProvider : IAmDataProvider
     {
         public DataProviderName Name { get; private set; }
-        public IEnumerable<IAmRequestField> RequestFields { get; private set; }
+        //public IEnumerable<IAmRequestField> RequestFields { get; private set; }
         public decimal CostPrice { get; private set; }
         public decimal RecommendedPrice { get; private set; }
 
-        public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice)
+        public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice,
+            IHaveUser user, string packageName)
         {
             Name = name;
-            RequestFields = requestFields;
+            Request = new[] {RequestTypes.FirstOrDefault(w => w.Key == name).Value(requestFields.ToList(), user, packageName)};
             CostPrice = costPrice;
             RecommendedPrice = recommendedPrice;
         }
+
+        public ICollection<IAmDataProviderRequest> Request { get; private set; }
+
+        private IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>>
+            RequestTypes
+        {
+            get
+            {
+                return new Dictionary<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>()
+                {
+                    {
+                        DataProviderName.Ivid, _ivid
+                    },
+                    {
+                        DataProviderName.LightstoneAuto, _lightstoneAuto
+                    },
+                    {
+                        DataProviderName.IvidTitleHolder, _ividTitleHolder
+                    },
+                    {
+                        DataProviderName.Rgt, _rgt
+                    }
+                    ,
+                    {
+                        DataProviderName.RgtVin, _rgtVin
+                    }
+                };
+            }
+        }
+
+        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _ivid =
+            (requests, user, packageName) =>
+                new IvidLaceRequest(requests, packageName, user);
+
+        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _lightstoneAuto =
+            (requests, user, packageName) =>
+                new LightstoneAutoLaceReqeust(requests);
+
+        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _ividTitleHolder =
+            (requests, user, packageName) =>
+                new IvidTitleHolderLaceRequest(requests, user);
+
+        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _rgt =
+            (requests, user, packageName) =>
+                new RgtLaceRequest(requests);
+
+        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _rgtVin =
+            (requests, user, packageName) =>
+                new RgtVinLaceReqeust(requests);
     }
 
     public class RequestPackage : IHavePackageForRequest
@@ -269,49 +174,5 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public long Version { get; private set; }
     }
-
-    public class Property : IHaveProperty
-    {
-        public Property(string trackingNumber, int maxNumberOfRows, Guid userid, string idNumber)
-        {
-            IdCkOfOwner = idNumber;
-            TrackingNumber = trackingNumber;
-            MaxRowsToReturn = maxNumberOfRows;
-            UserId = userid.ToString();
-        }
-
-        public string DeedTown { get; private set; }
-
-        public string ErfNumber { get; private set; }
-
-        public string EstateName { get; private set; }
-
-        public string FarmName { get; private set; }
-
-        public string IdCkOfOwner { get; private set; }
-
-        public int MaxRowsToReturn { get; private set; }
-
-        public string Municipality { get; private set; }
-
-        public string OwnerName { get; private set; }
-
-        public string Portion { get; private set; }
-
-        public string Province { get; private set; }
-
-        public string SectionalTitle { get; private set; }
-
-        public string Street { get; private set; }
-
-        public string StreetNumber { get; private set; }
-
-        public string Suburb { get; private set; }
-
-        public string TrackingNumber { get; private set; }
-
-        public string Unit { get; private set; }
-
-        public string UserId { get; private set; }
-    }
+    
 }

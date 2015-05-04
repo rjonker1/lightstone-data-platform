@@ -7,8 +7,8 @@ namespace Lace.Domain.DataProviders.Core.Contracts
 {
     public interface ILogCommandTypes
     {
-        void LogBegin(object paylod);
-        void LogEnd(object paylod);
+        void LogBegin(object payload);
+        void LogEnd(object payload);
         void LogSecurity(object payload, object metadata);
         void LogConfiguration(object payload, object metadata);
         void LogTransformation(object payload, object metadata);

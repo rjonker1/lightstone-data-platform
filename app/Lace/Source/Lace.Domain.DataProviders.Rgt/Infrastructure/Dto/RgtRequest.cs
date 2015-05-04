@@ -36,7 +36,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Dto
                 return;
 
             var vinNumber = GetVinNumber();
-            IsValid = string.IsNullOrEmpty(vinNumber);
+            IsValid = !string.IsNullOrEmpty(vinNumber);
 
             if (!IsValid)
                 return;
@@ -46,7 +46,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Dto
 
         private void GetWithCarId()
         {
-            if (string.IsNullOrEmpty(_request.CarId.Field))
+            if (_request.CarId == null || string.IsNullOrEmpty(_request.CarId.Field))
                 return;
 
             int carId;

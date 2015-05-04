@@ -9,6 +9,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests;
 using Lace.Domain.Core.Requests.Contracts;
+//using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
@@ -161,7 +162,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
         }
 
-        private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos)
+        private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string firstName, Guid requestId, string accountNumber,
+            Guid contractId, long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
+            IEnumerable<RequestFieldDto> requestFieldsDtos)
         {
             if (DataProviders == null)
                 return null;
@@ -170,17 +173,19 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             var laceProviders = new List<IAmDataProvider>();
             var fields = Mapper.Map<IEnumerable<RequestFieldDto>, IEnumerable<DataField>>(requestFieldsDtos);
 
+            var user = new User(userId, userName, firstName);
+
             foreach (var dataProvider in dataProviders.ToList())
             {
                 //var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true); // todo: Validate & compare to api request fields 
                 var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(fields);
-                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice));
+                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice, user, Name));
             }
 
-            var request = new LicensePlateRequest(
-                new User(userId, userName, firstName), new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty, string.Empty),
+            var request = new VechicleRequest(
+                user,
                 new Contract(contractVersion, accountNumber, contractId),
-                new RequestPackage("License plate search",  laceProviders.ToArray(), Id, Name, (long)DisplayVersion),
+                new RequestPackage("License plate search", laceProviders.ToArray(), Id, Name, (long) DisplayVersion),
                 new RequestContext(requestId, fromDevice, fromIpAddress, osVersion, system),
                 DateTime.UtcNow);
 
@@ -201,10 +206,15 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId,
-            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos)
+            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
+            IEnumerable<RequestFieldDto> requestFieldsDtos)
         {
-            var request = FormLaceRequest(userId, userName, searchTerm, firstName, requestId, accountNumber, contractId,
+            var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
                 contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos);
+
+            if (request == null)
+                throw new Exception(string.Format("Request cannot be build to Contract with Id {0}", contractId));
+
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
 
             return MapLaceResponses(responses).ToList();
