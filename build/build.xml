@@ -63,6 +63,24 @@
       </includes>
     </nuget>
     <nuget deploy="true">
+      <name>Lightstone.DataPlatform.CentralInterfuseApplication.Api</name>
+      <folder>app/CentralInterfuseApplication/CentralInterfuseApplication.Api</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.CentralInterfuseApplication.Api</description>
+      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="bin\" to="content\bin"/>
+        <include pattern="Content\" to="content\Content"/>
+        <include pattern="font-awesome\" to="content\font-awesome"/>
+        <include pattern="fonts\" to="content\fonts"/>
+        <include pattern="Scripts\" to="content\Scripts"/>
+        <include pattern="Template\" to="content\Template"/>
+        <include pattern="Views\" to="content\Views"/>
+        <include pattern="packages.config" to="content"/>
+        <include pattern="Web.config" to="content"/>
+      </includes>
+    </nuget>
+    <nuget deploy="true">
       <name>Lightstone.DataPlatform.Monitoring.Dashboard.UI</name>
       <folder>app/Monitoring/source/Monitoring.Dashboard.UI</folder>
       <author>CustomApp</author>

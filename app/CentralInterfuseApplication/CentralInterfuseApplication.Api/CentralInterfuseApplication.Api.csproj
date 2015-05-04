@@ -172,6 +172,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\CIA.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\fastclick\fastclick.js" />
     <Content Include="Scripts\fastclick\fastclick.min.js" />
