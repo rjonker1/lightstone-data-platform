@@ -76,8 +76,7 @@
         <include pattern="Scripts\" to="content\Scripts"/>
         <include pattern="Template\" to="content\Template"/>
         <include pattern="Views\" to="content\Views"/>
-        <include pattern="packages.config" to="content"/>
-        <include pattern="Web.config" to="content"/>
+        <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
     <nuget deploy="true">
