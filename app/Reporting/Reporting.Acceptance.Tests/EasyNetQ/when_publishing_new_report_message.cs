@@ -51,7 +51,7 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
             var report = new ReportMessage()
             {
                 Id = Guid.NewGuid(),
-                //reportBody = JsonConvert.SerializeObject(data);
+                ReportBody = JsonConvert.SerializeObject(data)
             };
 
             bus.SendDynamic(report);

@@ -1,7 +1,11 @@
 ﻿using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
+using RabbitMQ.Client.Framing.Impl;
 using Workflow.Reporting.Consumer.Installers;
+using Workflow.Reporting.Consumers;
+using Workflow.Reporting.Consumers.ConsumerTypes;
 
 namespace Workflow.Reporting.Consumer
 {
@@ -16,9 +20,14 @@ namespace Workflow.Reporting.Consumer
 
             var container = new WindsorContainer().Install(
                 new WindsorInstaller(),
-                new BusInstaller());
+                new BusInstaller(),
+                new ConsumerInstaller());
 
             advancedBus = container.Resolve<IAdvancedBus>();
+            var q = advancedBus.QueueDeclare("DataPlatform.Reports.Billing");
+
+            advancedBus.Consume(q, x => x
+                .Add<ReportMessage>((message, info) => new TransactionConsumer<ReportMessage>(message, container)));
         }
 
         public void Stop()
