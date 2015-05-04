@@ -293,6 +293,7 @@
 				<dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="EasyNetQ" />
         <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->

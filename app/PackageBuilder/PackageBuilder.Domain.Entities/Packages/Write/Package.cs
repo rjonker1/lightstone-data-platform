@@ -215,8 +215,6 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             if (request == null)
                 throw new Exception(string.Format("Request cannot be build to Contract with Id {0}", contractId));
 
-            var requests = new[] {request}; 
-
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
 
             return MapLaceResponses(responses).ToList();

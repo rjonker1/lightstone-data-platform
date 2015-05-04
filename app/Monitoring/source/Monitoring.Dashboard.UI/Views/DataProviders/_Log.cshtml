@@ -67,7 +67,7 @@
                                 <th>Status</th>
                             </tr>
                             <tr ng-repeat="response in dataProviderMonitoring" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
-                                <td ng-click="Toggle($index,'log-formatted-json');" style="cursor: pointer;" ><span style="font-size: 12px">{{response.Id}}</span>&nbsp;{{response.PackageName}}&nbsp;v{{response.PackageVersion}}&nbsp;{{response.ElapsedTime}}</td>
+                                <td ng-click="Toggle($index,'log-formatted-json');" style="cursor: pointer;" ><span style="font-size: 12px">{{response.Id}}&nbsp;{{response.PackageName}}&nbsp;v{{response.PackageVersion}}</span>&nbsp;{{response.ElapsedTime}}</td>
                                 <td>
                                     <span ng-class="{'label label-danger':response.HasErrors, 'label label-success' : !response.HasErrors}">{{response.State}}</span>
                                     <div style="display: none;" id="toggle-{{$index}}">
