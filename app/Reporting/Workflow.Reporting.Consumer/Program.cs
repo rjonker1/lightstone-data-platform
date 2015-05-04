@@ -1,12 +1,19 @@
-﻿using Shared.Configuration;
+﻿using System;
+using System.Timers;
+using Castle.Windsor;
+using DataPlatform.Shared.Helpers.Extensions;
+using EasyNetQ;
+using Shared.Configuration;
 using Topshelf;
+using Workflow.Reporting.Consumer.Installers;
 
 namespace Workflow.Reporting.Consumer
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+
             var appSettings = new AppSettings();
 
             HostFactory.Run(x =>
@@ -15,9 +22,8 @@ namespace Workflow.Reporting.Consumer
                 {
                     s.ConstructUsing(name => new ReportingService());
                     s.WhenStarted(rs => rs.Start());
-                    s.WhenStarted(rs => rs.Stop());
+                    s.WhenStopped(rs => rs.Stop());
                 });
-
                 x.RunAsLocalSystem();
 
                 x.SetDescription(appSettings.Service.Description);
@@ -26,4 +32,5 @@ namespace Workflow.Reporting.Consumer
             });
         }
     }
+
 }
