@@ -1,0 +1,1 @@
+﻿Workflow.Reporting.Consumer install

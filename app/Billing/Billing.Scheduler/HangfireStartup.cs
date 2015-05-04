@@ -14,7 +14,7 @@ namespace Billing.Scheduler
         {
             GlobalConfiguration.Configuration
             .UseLogProvider(new ColouredConsoleLogProvider())
-            .UseSqlServerStorage(@"Server=.;Database=Hangfire.Test; Integrated Security=SSPI;");
+            .UseSqlServerStorage(@"Server=.;Database=Billing.Scheduler; Integrated Security=SSPI;");
 
             app.UseHangfireServer();
             app.UseHangfireDashboard();
