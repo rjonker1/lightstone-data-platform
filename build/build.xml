@@ -331,6 +331,48 @@
         <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
 			</dependencies>
 		</nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Workflow.DataProvider.Bus</name>
+      <folder>app/Lace/source/Workflow.DataProvider.Bus</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Workflow.DataProvider.Bus</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Workflow.DataProvider.Bus.exe" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.Domain.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.Domain.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.Messages.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.Messages.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.Domain.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.Domain.pdb" to="lib\net45"/>
+        <include pattern="Workflow.Transactions.Receiver.Service.dll" to="lib\net45"/>
+        <include pattern="Workflow.Transactions.Receiver.Service.pdb" to="lib\net45"/>
+        <include pattern="Workflow.Transactions.Sender.Service.dll" to="lib\net45"/>
+        <include pattern="Workflow.Transactions.Sender.Service.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Castle.Core" version="3.3.3" targetFramework="net45" />
+        <dependency id="Castle.Windsor" version="3.3.0" targetFramework="net45" />
+        <dependency id="Common.Logging" version="3.0.0" targetFramework="net45" />
+        <dependency id="Common.Logging.Core" version="3.0.0" targetFramework="net45" />
+        <dependency id="EasyNetQ" version="0.47.10.380" targetFramework="net45" />
+        <dependency id="Lightstone.DataPlatform.Monitoring.Domain" />
+        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts" />
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
+        <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
+        <dependency id="Lightstone.DataPlatform.Workflow.Billing.Messages" />
+        <dependency id="Lightstone.DataPlatform.Workflow.BuildingBlocks" />
+        <dependency id="Newtonsoft.Json" version="6.0.8" targetFramework="net45" />
+        <dependency id="RabbitMQ.Client" version="3.4.3" targetFramework="net45" />
+        <dependency id="Topshelf" version="3.1.4" targetFramework="net45" />
+      </dependencies>
+    </nuget>
 		<!-- LACE END -->
 
 
