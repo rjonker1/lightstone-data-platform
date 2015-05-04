@@ -76,15 +76,39 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="false">
+    <nuget deploy="true">
       <name>Lightstone.DataPlatform.Billing.Api</name>
       <folder>app/Billing/Billing.Api</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Billing.Api</description>
       <deploymentProject>LighstoneDataPlatform</deploymentProject>
       <includes>
-        <include pattern="bin\*.dll" to="content\bin"/>
-        <include pattern="bin\*.pdb" to="content\bin"/>
+       <include pattern="bin\" to="content\bin"/>
+        <include pattern="Content\" to="content\Content"/>
+        <include pattern="font-awesome\" to="content\font-awesome"/>
+        <include pattern="fonts\" to="content\fonts"/>
+        <include pattern="Scripts\" to="content\Scripts"/>
+        <include pattern="Template\" to="content\Template"/>
+        <include pattern="Views\" to="content\Views"/>
+        <include pattern="favicon.ico" to="content"/>
+        <include pattern="*.config" to="content"/>
+      </includes>
+    </nuget>
+    <nuget deploy="true">
+      <name>Lightstone.DataPlatform.Billing.Scheduler</name>
+      <folder>app/Billing/Billing.Scheduler</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Billing.Scheduler</description>
+      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <includes>
+       <include pattern="bin\" to="content\bin"/>
+        <include pattern="Content\" to="content\Content"/>
+        <include pattern="font-awesome\" to="content\font-awesome"/>
+        <include pattern="fonts\" to="content\fonts"/>
+        <include pattern="Scripts\" to="content\Scripts"/>
+        <include pattern="Template\" to="content\Template"/>
+        <include pattern="Views\" to="content\Views"/>
+        <include pattern="favicon.ico" to="content"/>
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
