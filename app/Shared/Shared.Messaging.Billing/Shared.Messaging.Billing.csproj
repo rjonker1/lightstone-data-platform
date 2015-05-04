@@ -56,6 +56,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -75,6 +78,7 @@
     <Compile Include="Helpers\IEntity.cs" />
     <Compile Include="Messages\InvoiceTransactionCreated.cs" />
     <Compile Include="Messages\PackageMessage.cs" />
+    <Compile Include="Messages\ReportMessage.cs" />
     <Compile Include="Messages\UserMessage.cs" />
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
