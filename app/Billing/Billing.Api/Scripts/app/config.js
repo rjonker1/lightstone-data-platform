@@ -1,0 +1,1 @@
+﻿var reportingApi = "http://dev.reporting.api.lightstone.com/";

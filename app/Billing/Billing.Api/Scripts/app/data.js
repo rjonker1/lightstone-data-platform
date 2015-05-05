@@ -126,10 +126,10 @@ window.invoiceActionEvents = {
             var data = '{' +
                 '"template": { "shortid" : "N190datG" },' +
                 '"data" : {' +
-                    '"customer": { ' +
-                       ' "name": "' + row.customerName + '",' +
-                        '"taxRegistration": 4190195679,' +
-                        '"packages" : [ ' +
+                    '"Customer": { ' +
+                       ' "Name": "' + row.customerName + '",' +
+                        '"TaxRegistration": 4190195679,' +
+                        '"Packages" : [ ' +
                             '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": 1.00, "Price": 16314.67, "Vat": 2284.00, "Total": 18598.72}' +
                         ']  ' +
                     '} ' +
@@ -139,7 +139,7 @@ window.invoiceActionEvents = {
             //    $('.modal-body').html(response);
             //});
 
-            $.post("http://localhost:12116/ReportHTML", data)
+            $.post(reportingApi + "/ReportHTML", data)
                 .done(function (response) {
                     $('.modal-body').html(response);
                 });
