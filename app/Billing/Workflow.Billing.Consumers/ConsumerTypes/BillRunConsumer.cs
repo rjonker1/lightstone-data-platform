@@ -59,36 +59,75 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 foreach (var transaction in _finalBillingRepository)
                 {
 
-                    var packagesList = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
-                        .Select(x => new ReportPackage
-                        {
-                            ItemCode = "1000/200/002",
-                            ItemDescription = x.PackageName,
-                            QuantityUnit = 1,
-                            Price = 16314.67,
-                            Vat = 2284,
-                            Total = 18598.72
-                        }).Distinct();
-
-                    var reportData = new ReportDto()
+                    //Customer
+                    if (transaction.CustomerId != new Guid())
                     {
-                        Template = new ReportTemplate {ShortId = "VJGAd9OM"},
-                        Data = new ReportData
-                        {
-                            Customer = new ReportCustomer
+                        var packagesList = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                            .Select(x => new ReportPackage
                             {
-                                Name = transaction.CustomerName,
-                                TaxRegistration = 4190195679,
-                                Packages = packagesList.ToList()
+                                ItemCode = "1000/200/002",
+                                ItemDescription = x.PackageName,
+                                QuantityUnit = 1,
+                                Price = 16314.67,
+                                Vat = 2284,
+                                Total = 18598.72
+                            }).Distinct();
+
+                        var reportData = new ReportDto()
+                        {
+                            Template = new ReportTemplate {ShortId = "VJGAd9OM"},
+                            Data = new ReportData
+                            {
+                                Customer = new ReportCustomer
+                                {
+                                    Name = transaction.CustomerName,
+                                    TaxRegistration = 4190195679,
+                                    Packages = packagesList.ToList()
+                                }
                             }
-                        }
-                    };
+                        };
 
-                    //Report Index
-                    var reportIndex = reportList.FindIndex(x => x.Data.Customer.Name == transaction.CustomerName);
+                        //Report Index
+                        var reportIndex = reportList.FindIndex(x => x.Data.Customer.Name == transaction.CustomerName);
 
-                    //Index restriction for new record
-                    if (reportIndex < 0) reportList.Add(reportData);
+                        //Index restriction for new record
+                        if (reportIndex < 0) reportList.Add(reportData);
+                    }
+
+                    //Client
+                    if (transaction.ClientId != new Guid())
+                    {
+                        var packagesList = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                            .Select(x => new ReportPackage
+                            {
+                                ItemCode = "1000/200/002",
+                                ItemDescription = x.PackageName,
+                                QuantityUnit = 1,
+                                Price = 16314.67,
+                                Vat = 2284,
+                                Total = 18598.72
+                            }).Distinct();
+
+                        var reportData = new ReportDto()
+                        {
+                            Template = new ReportTemplate { ShortId = "VJGAd9OM" },
+                            Data = new ReportData
+                            {
+                                Customer = new ReportCustomer
+                                {
+                                    Name = transaction.ClientName,
+                                    TaxRegistration = 4190195679,
+                                    Packages = packagesList.ToList()
+                                }
+                            }
+                        };
+
+                        //Report Index
+                        var reportIndex = reportList.FindIndex(x => x.Data.Customer.Name == transaction.ClientName);
+
+                        //Index restriction for new record
+                        if (reportIndex < 0) reportList.Add(reportData);
+                    }
                 }
 
                 foreach (var report in reportList)
