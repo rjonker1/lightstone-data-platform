@@ -92,6 +92,7 @@
     <Compile Include="Domain\Entities\Client.cs" />
     <Compile Include="Domain\Entities\Customer.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
+    <Compile Include="Domain\Entities\FinalBilling.cs" />
     <Compile Include="Domain\Entities\PackageMeta.cs" />
     <Compile Include="Domain\Entities\UserTransaction.cs" />
     <Compile Include="Domain\Entities\Package.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Helpers\AutoMapper\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ClientMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\CustomerMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\FinalBIllingMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviderMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PackageMetaMaps.cs" />

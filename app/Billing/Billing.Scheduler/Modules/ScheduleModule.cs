@@ -46,6 +46,23 @@ namespace Billing.Scheduler.Modules
                 return Response.AsJson(new { data = cronExpression });
             };
 
+            Get["/Schedules/BillingRun/Schedule/Monthly"] = parameters =>
+            {
+
+                var cronExpression = "* * * * *";
+
+                using (var job = JobStorage.Current.GetConnection())
+                {
+
+                    foreach (var recurringJob in job.GetRecurringJobs())
+                    {
+                        if (recurringJob.Id == "FinalBilling Run") cronExpression = recurringJob.Cron;
+                    }
+                }
+
+                return Response.AsJson(new { data = cronExpression });
+            };
+
             Post["/Schedules/BillingRun/Force"] = parameters =>
             {
                 BackgroundJob.Enqueue(() => new MessageSchedule().Send(new BillingMessage() { RunType = "Stage",Schedule = null }));
@@ -78,6 +95,36 @@ namespace Billing.Scheduler.Modules
                 var cronExpression = "" + dt.Minute + " " + dt.Hour + " * * *";
 
                 RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
+
+                return Response.AsJson(new { data = "Schedule Added/Updated" });
+            };
+
+            Post["/Schedules/BillingRun/Schedule/Monthly"] = parameters =>
+            {
+
+                DateTime dt;
+                string monthlyDateTime = Request.Query["monthly_dateTime"];
+                string disableFlag = Request.Query["disable_schedule"];
+
+                if (disableFlag == "false")
+                {
+                    RecurringJob.RemoveIfExists("FinalBilling Run");
+                    return Response.AsJson(new { data = "Schedule removed" });
+                }
+
+                try
+                {
+                    dt = DateTime.ParseExact(monthlyDateTime, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
+                }
+                catch (Exception e)
+                {
+                    return Response.AsJson(new { data = "Error while parsing DateTime variable" });
+                }
+
+                var billRun = new BillingMessage() { RunType = "Final", Schedule = null };
+                var cronExpression = "" + dt.Minute + " " + dt.Hour + " "+dt.Day+" * *";
+
+                RecurringJob.AddOrUpdate<MessageSchedule>("FinalBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
 
                 return Response.AsJson(new { data = "Schedule Added/Updated" });
             };

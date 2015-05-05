@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class='input-group date' id='monthlyBillingRun'>
-                                        <input type='text' class="form-control" />
+                                        <input id='monthlyBillingRun-input' type='text' class="form-control" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar">
                                             </span>
@@ -161,20 +161,18 @@
                         </div>
                     </div>
                     <script type="text/javascript">
-
+                        
                         $(function () {
 
                             later.date.localTime();
+                            var monthlySchedule = moment().format('DD-MM-YYYY HH:mm');
 
                             $('#monthlyRunFlag').bootstrapSwitch('state', true, true);
 
-                            $('#monthlyBillingRun').datetimepicker({
-                                format: 'DD [of each Month at] HH:mm'
-                            });
-
                             $('#automated_run').click(function () {
 
-                                $.get("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily", function (response) {
+                                //Daily
+                                $.get(schedulerApi + "/Schedules/BillingRun/Schedule/Daily", function (response) {
 
                                     var schedule = later.parse.cron('' + response.data, false);
                                     var result = later.schedule(schedule).next(1);
@@ -191,17 +189,46 @@
 
                                     $('#dailyRunFlag').bootstrapSwitch('state', true, true);
                                 });
+
+                                //Monthly
+                                $.get(schedulerApi + "/Schedules/BillingRun/Schedule/Monthly", function (response) {
+
+                                    var schedule = later.parse.cron('' + response.data, false);
+                                    var result = later.schedule(schedule).next();
+
+                                    $('#monthlyBillingRun').datetimepicker({
+                                        format: 'DD [of each Month at] HH:mm',
+                                        defaultDate: moment(result)
+
+                                    }).on('dp.change',function(e) {
+                                        monthlySchedule = moment(e.date).format('DD-MM-YYYY HH:mm');
+                                    });
+
+
+                                    if (response.data == '* * * * *') {
+                                        $('#monthlyRunFlag').bootstrapSwitch('state', false, true);
+                                        return;
+                                    }
+
+                                    $('#monthlyRunFlag').bootstrapSwitch('state', true, true);
+                                });
                             });
 
+                            //Update Schedules
                             $('#btn_submit').click(function () {
 
-                                var time = $('#dailyBillingRun-input').val().split(":");
-                                var dailySchedule = moment().hour(time[0]).minutes(time[1]).format('DD-MM-YYYY HH:mm');
+                                var dailyTime = $('#dailyBillingRun-input').val().split(":");
+                                var dailySchedule = moment().hour(dailyTime[0]).minutes(dailyTime[1]).format('DD-MM-YYYY HH:mm');
 
-                                $.post("http://dev.billing.scheduler.lightstone.com/Schedules/BillingRun/Schedule/Daily?daily_time=" + dailySchedule +
-                                        "&disable_schedule=" + $('#dailyRunFlag').bootstrapSwitch('state'), function (response) {
+                                $.post(schedulerApi + "/Schedules/BillingRun/Schedule/Daily?daily_time=" + dailySchedule +
+                                    "&disable_schedule=" + $('#dailyRunFlag').bootstrapSwitch('state'), function (response) {
 
-                                });
+                                    });
+
+                                $.post(schedulerApi + "/Schedules/BillingRun/Schedule/Monthly?monthly_dateTime=" + monthlySchedule +
+                                    "&disable_schedule=" + $('#monthlyRunFlag').bootstrapSwitch('state'), function (response) {
+
+                                    });
                             });
                         });
                     </script>
