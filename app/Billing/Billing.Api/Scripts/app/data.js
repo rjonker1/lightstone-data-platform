@@ -120,7 +120,7 @@ function previewInvoiceFormatter(value, row, index) {
 window.invoiceActionEvents = {
     'click .invoice-view': function (e, value, row, index) {
 
-        $.get('/PreBilling/Customer/' + row.id + '/Packages', function (response) {
+        $.get('/StageBilling/Customer/' + row.id + '/Packages', function (response) {
 
             console.log(response.data[0]);
             var data = '{' +

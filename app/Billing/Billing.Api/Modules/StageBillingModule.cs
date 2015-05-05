@@ -31,14 +31,30 @@ namespace Billing.Api.Modules
                     var customerPackagesTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
+                    var customer = new StageBillingDto(); 
                     //Customer
-                    var customer = new StageBillingDto
+                    if (transaction.ClientId == new Guid())
                     {
-                        Id = transaction.CustomerId,
-                        CustomerName = transaction.CustomerName,
-                        Transactions = customerTransactionsTotal,
-                        Products = customerPackagesTotal
-                    };
+                        customer = new StageBillingDto
+                        {
+                            Id = transaction.CustomerId,
+                            CustomerName = transaction.CustomerName,
+                            Transactions = customerTransactionsTotal,
+                            Products = customerPackagesTotal
+                        };
+                    }
+
+                    //Client
+                    if (transaction.CustomerId == new Guid())
+                    {
+                        customer = new StageBillingDto
+                        {
+                            Id = transaction.ClientId,
+                            CustomerName = transaction.ClientName,
+                            Transactions = customerTransactionsTotal,
+                            Products = customerPackagesTotal
+                        };
+                    }
 
                     //Customer user
                     var user = new User
@@ -103,10 +119,10 @@ namespace Billing.Api.Modules
                 var customerSearchId = new Guid(param.customerId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == customerSearchId))
+                foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == customerSearchId || x.ClientId == customerSearchId))
                 {
 
-                    var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == customerSearchId)
+                    var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == customerSearchId || x.ClientId == customerSearchId)
                                             .Select(x =>
                                                 new DataProviderDto()
                                                 {
@@ -116,7 +132,7 @@ namespace Billing.Api.Modules
                                                     RecommendedPrice = x.RecommendedPrice,
 
                                                     PackageId = x.PackageId,
-                                                    PackageName = "Package123"
+                                                    PackageName = x.PackageName
 
                                                 }).Distinct();
 
@@ -124,6 +140,7 @@ namespace Billing.Api.Modules
                     var package = new PackageDto()
                     {
                         PackageId = transaction.PackageId,
+                        PackageName = transaction.PackageName,
                         DataProviders = dataProviderList
                     };
 
