@@ -189,11 +189,24 @@
         <dependency id="Newtonsoft.Json" version="6.0.5" />
       </dependencies>
     </nuget>
-
-
-
-
     <!-- BILLING END -->
+
+    <!-- REPORTING START -->
+    <nuget deploy="true">
+      <name>Lightstone.DataPlatform.Workflow.Reporting</name>
+      <folder>app/Reporting/Workflow.Reporting</folder>
+      <author>CustomApp</author>
+      <description>Workflow.Reporting</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Workflow.Reporting.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Reporting.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.DataPlatform.Shared.Messaging.Billing" />
+      </dependencies>
+    </nuget>
+    <!-- REPORTING END -->
 
 
     <!-- LACE START -->
