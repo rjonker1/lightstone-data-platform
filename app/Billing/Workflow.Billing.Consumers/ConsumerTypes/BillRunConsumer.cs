@@ -34,27 +34,27 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
         {
 
             var bus = new TransactionBus(_bus);
+            var reportList = new List<ReportDto>();
 
-
+            #region Map PreBilling - Stage & Final
             foreach (var preBilling in _preBillingrRepository)
             {
                 var stageEntity = Mapper.Map(preBilling, new StageBilling());
                 var finalEntity = Mapper.Map(preBilling, new FinalBilling());
 
-
-                //StageBilling
+                #region StageBilling
                 if (message.Body.RunType == "Stage")
                     if (!_stageBillingRepository.Any(x => x.PreBillingId == stageEntity.PreBillingId))
                         _stageBillingRepository.SaveOrUpdate(stageEntity);
 
-                //FinalBilling
+                #endregion
+
+                #region FinalBilling
                 if (message.Body.RunType == "Final")
                 {
 
                     if (!_finalBillingRepository.Any(x => x.PreBillingId == finalEntity.PreBillingId))
                         _finalBillingRepository.SaveOrUpdate(finalEntity);
-
-                    var reportList = new List<ReportDto>();
 
                     foreach (var transaction in _finalBillingRepository)
                     {
@@ -131,18 +131,23 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         }
                     }
 
-                    foreach (var report in reportList)
-                    {
-
-                        bus.SendDynamic(new ReportMessage
-                        {
-                            Id = Guid.NewGuid(),
-                            ReportBody = JsonConvert.SerializeObject(report)
-                        });
-                    }
-
-                } //Final BIlling
+                }
+                #endregion
             }
+            #endregion
+
+            #region Report Queue
+            foreach (var report in reportList)
+            {
+
+                bus.SendDynamic(new ReportMessage
+                {
+                    Id = Guid.NewGuid(),
+                    ReportBody = JsonConvert.SerializeObject(report)
+                });
+            }
+            #endregion
+
         }
     }
 }
