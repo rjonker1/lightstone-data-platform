@@ -25,7 +25,7 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
             var bus = new TransactionBus(_bus);
 
             var packagesList = new List<ReportPackage>();
-            packagesList.Add(new ReportPackage()
+            packagesList.Add(new ReportPackage
             {
                 ItemCode = "1000/200/002",
                 ItemDescription = "PackageName",
@@ -35,12 +35,12 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
                 Total = 18598.72
             });
 
-            var data = new ReportDto()
+            var data = new ReportDto
             {
-                Template = new ReportTemplate() { ShortId = "VJGAd9OM" },
-                Data = new ReportData()
+                Template = new ReportTemplate { ShortId = "VJGAd9OM" },
+                Data = new ReportData
                 {
-                    Customer = new ReportCustomer()
+                    Customer = new ReportCustomer
                     {
                         Name = "Customer 1",
                         TaxRegistration = 4190195679,
