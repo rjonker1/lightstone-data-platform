@@ -10,7 +10,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
     {
         public void Consume(IMessage<ReportMessage> message)
         {
-            var dataString = JsonConvert.SerializeObject(message.Body);
+            var dataString = JsonConvert.SerializeObject(message.Body.ReportBody);
 
             var _reportingService = new ReportingService("http://localhost:8856");
 

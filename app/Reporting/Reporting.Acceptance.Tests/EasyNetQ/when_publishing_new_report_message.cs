@@ -5,6 +5,8 @@ using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Newtonsoft.Json;
 using Workflow.BuildingBlocks;
+using Workflow.Reporting.Dtos;
+using Workflow.Reporting.Entities;
 using Xunit.Extensions;
 
 namespace Reporting.Acceptance.Tests.EasyNetQ
@@ -22,8 +24,8 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
         {
             var bus = new TransactionBus(_bus);
 
-            var packagesList = new List<Package>();
-            packagesList.Add(new Package()
+            var packagesList = new List<ReportPackage>();
+            packagesList.Add(new ReportPackage()
             {
                 ItemCode = "1000/200/002",
                 ItemDescription = "PackageName",
@@ -33,16 +35,16 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
                 Total = 18598.72
             });
 
-            var data = new RootObject()
+            var data = new ReportDto()
             {
-                template = new Template() {shortid = "N190datG"},
-                data = new Data()
+                template = new ReportTemplate() { shortid = "VJGAd9OM" },
+                data = new ReportData()
                 {
-                    customer = new Customer()
+                    Customer = new ReportCustomer()
                     {
-                        name = "Customer 1",
-                        taxRegistration = 4190195679,
-                        packages = packagesList
+                        Name = "Customer 1",
+                        TaxRegistration = 4190195679,
+                        Packages = packagesList
                     }
                 }
             };
@@ -62,38 +64,5 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
         {
             _bus.ShouldNotBeNull();
         }
-    }
-
-    public class Template
-    {
-        public string shortid { get; set; }
-    }
-
-    public class Package
-    {
-        public string ItemCode { get; set; }
-        public string ItemDescription { get; set; }
-        public int QuantityUnit { get; set; }
-        public double Price { get; set; }
-        public int Vat { get; set; }
-        public double Total { get; set; }
-    }
-
-    public class Customer
-    {
-        public string name { get; set; }
-        public long taxRegistration { get; set; }
-        public List<Package> packages { get; set; }
-    }
-
-    public class Data
-    {
-        public Customer customer { get; set; }
-    }
-
-    public class RootObject
-    {
-        public Template template { get; set; }
-        public Data data { get; set; }
     }
 }
