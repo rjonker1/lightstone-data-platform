@@ -74,7 +74,7 @@ window.packageGridActionEvents = {
         $('#detail-table-header').text('DataProviders Detail For Customer: ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/PreBilling/Customer/' + row.id + '/Packages',
+            url: '/StageBilling/Customer/' + row.id + '/Packages',
             responseHandler: packageResponseHandler,
             cache: false,
             search: true,
@@ -152,6 +152,7 @@ window.invoiceActionEvents = {
 
 function packageResponseHandler(res) {
 
+    console.log(res);
     return res.data[0].dataProviders;
 }
 
