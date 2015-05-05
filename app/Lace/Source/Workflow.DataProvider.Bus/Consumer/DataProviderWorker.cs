@@ -11,9 +11,9 @@ using Workflow.Transactions.Sender.Service;
 
 namespace Workflow.DataProvider.Bus.Consumer
 {
-    public class DataProviderCommandProcessor : IProcessDataProviderCommands
+    public class DataProviderWorker : IDataProviderWorker
     {
-        private readonly ILog _log = LogManager.GetLogger<DataProviderCommandProcessor>();
+        private readonly ILog _log = LogManager.GetLogger<DataProviderWorker>();
         private IAdvancedBus _bus;
 
         public void Start()

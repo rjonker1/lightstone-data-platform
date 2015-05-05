@@ -77,9 +77,6 @@
     </Compile>
     <Compile Include="Core\Contracts\IGetCarSpecifications.cs" />
     <Compile Include="Core\Contracts\IReadOnlyRepository.cs" />
-    <Compile Include="Core\Models\Car.cs" />
-    <Compile Include="Core\Models\CarType.cs" />
-    <Compile Include="Core\Models\Manufacturer.cs" />
     <Compile Include="Infrastructure\CallRgtDataProvider.cs" />
     <Compile Include="Core\Models\CarSpecification.cs" />
     <Compile Include="Infrastructure\Dto\RgtRequest.cs" />

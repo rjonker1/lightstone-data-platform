@@ -96,8 +96,8 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Consumer\DataProviderCommandProcessor.cs" />
-    <Compile Include="Consumer\IProcessDataProviderCommands.cs" />
+    <Compile Include="Consumer\DataProviderWorker.cs" />
+    <Compile Include="Consumer\IDataProviderWorker.cs" />
     <Compile Include="Consumer\Installers\BusInstaller.cs" />
     <Compile Include="Consumer\Installers\ConsumerInstaller.cs" />
     <Compile Include="Consumer\Installers\RepositoryInstaller.cs" />

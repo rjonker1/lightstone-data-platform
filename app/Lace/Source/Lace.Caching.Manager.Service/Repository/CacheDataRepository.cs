@@ -1,0 +1,122 @@
+﻿using System;
+using System.Data;
+using System.Linq;
+using Common.Logging;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
+using Lace.Shared.DataProvider.Contracts;
+using ServiceStack.Redis;
+using Shared.BuildingBlocks.AdoNet.Repository;
+
+namespace Lace.Caching.Manager.Service.Repository
+{
+    public class CacheDataRepository : ICacheRepository
+    {
+        private readonly IDbConnection _connection;
+        private readonly IRedisClient _cacheClient;
+        private readonly ILog _log;
+
+
+        public CacheDataRepository(IDbConnection connection, IRedisClient cacheClient)
+        {
+            _connection = connection;
+            _cacheClient = cacheClient;
+            _log = LogManager.GetLogger(GetType());
+        }
+
+        public void AddItems<TItem>(string sql, string cacheKey) where TItem : class
+        {
+            try
+            {
+                using (_cacheClient)
+                {
+                    var cachedItem = _cacheClient.As<TItem>();
+                    var existing = cachedItem.Lists[cacheKey];
+
+                    if (existing.DoesExistInTheCache())
+                    {
+                        existing.Clear();
+                        existing.RemoveAll();
+                    }
+
+                    var dbResponse =
+                        _connection.Query<TItem>(sql)
+                            .ToList();
+
+                    dbResponse.ForEach(f => existing.Add(f));
+                    dbResponse.AddItemsToCache(_cacheClient, cacheKey, DateTime.UtcNow.AddDays(2));
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Cannot Add Items to Cache because of {0}", ex);
+            }
+
+        }
+
+        public void AddItem<TItem>(string sql, object param, string cacheKey) where TItem : class
+        {
+            try
+            {
+                using (_cacheClient)
+                {
+                    var cachedItem = _cacheClient.As<TItem>();
+                    var existing = cachedItem.Lists[cacheKey];
+
+                    if (existing.DoesExistInTheCache())
+                    {
+                        existing.Clear();
+                    }
+
+                    var dbResponse =
+                        _connection.Query<TItem>(sql, param)
+                            .ToList();
+
+                    dbResponse.ForEach(f => existing.Add(f));
+                    dbResponse.AddItemsToCache(_cacheClient, cacheKey, DateTime.UtcNow.AddDays(2));
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Cannot Add Item to Cache because of {0}", ex);
+            }
+
+        }
+
+        public void Clear<TItem>(string cacheKey) where TItem : class
+        {
+            try
+            {
+                using (_cacheClient)
+                {
+                    var cachedItem = _cacheClient.As<TItem>();
+                    var existing = cachedItem.Lists[cacheKey];
+
+                    if (!existing.DoesExistInTheCache())
+                        return;
+
+                    existing.Clear();
+                    existing.RemoveAll();
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Cannot Clear Item from Cache because of {0}", ex);
+            }
+        }
+
+        public void ClearAll()
+        {
+            try
+            {
+                using (_cacheClient)
+                {
+                    _cacheClient.FlushAll();
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Cannot Clear All the Items from the Cache becuse of {0}", ex);
+            }
+        }
+    }
+}

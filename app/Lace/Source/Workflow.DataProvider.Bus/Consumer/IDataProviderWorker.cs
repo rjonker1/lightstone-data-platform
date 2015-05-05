@@ -1,6 +1,6 @@
 ﻿namespace Workflow.DataProvider.Bus.Consumer
 {
-    public interface IProcessDataProviderCommands
+    public interface IDataProviderWorker
     {
         void Start();
         void Stop();

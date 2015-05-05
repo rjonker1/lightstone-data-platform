@@ -57,7 +57,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var response = cachedSale.Lists[key];
 
                 if (response.DoesExistInTheCache())
-                    return response;
+                    return response.ToList();
 
                 var dbResponse = _connection
                     .Query<Sale>(sql)
@@ -71,37 +71,5 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 return dbResponse;
             }
         }
-
-        //public IEnumerable<Sale> FindByCarIdAndYear(int? carId, int year)
-        //{
-        //    if (carId == null) return new List<Sale>();
-
-        //    //using (_connection)
-        //    using (_cacheClient)
-        //    {
-        //        var key = string.Format(SaleKey, carId, year);
-        //        var cachedSale = _cacheClient.As<Sale>();
-        //        var response = cachedSale.Lists[key];
-
-
-        //        if (response.DoesExistInTheCache())
-        //            return response;
-
-        //        var dbResponse = _connection
-        //            .Query<Sale>(SelectStatements.GetTopFiveSalesForCarIdAndYear, new {@CarId = carId, @YearId = year})
-        //            .ToList();
-
-        //        if (!response.CanAddItemsToCache().HasValue)
-        //            return dbResponse;
-
-        //        dbResponse.ForEach(f => response.Add(f));
-        //        dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
-        //        return dbResponse;
-        //    }
-        //}
-
-
-
-        
     }
 }

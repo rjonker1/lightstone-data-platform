@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
@@ -25,8 +26,14 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Sales = _repository.Get(Sale.GetTopFiveUsingCarIdAndYear(),
-                    new {request.CarId, request.Year});
+                Sales =
+                    _repository.GetAll(Sale.GetAllSales())
+                        .Where(w => w.Car_ID == request.CarId && w.Year_ID == request.Year)
+                        .OrderByDescending(o => o.SaleDateTime)
+                        .Take(5);
+
+                //Sales = _repository.Get(Sale.GetTopFiveUsingCarIdAndYear(),
+                //    new {request.CarId, request.Year});
             }
             catch (Exception ex)
             {

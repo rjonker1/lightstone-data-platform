@@ -1,0 +1,39 @@
+﻿using System.Collections.Generic;
+using Lace.Shared.DataProvider.Contracts;
+
+namespace Lace.Shared.DataProvider.Models
+{
+    public class Band : IAmCachable
+    {
+        private static readonly IDictionary<string, string> AllBands = new Dictionary<string, string> {{AllCacheKey, SelectAll}};
+
+        public const string SelectAll = @"SELECT * FROM Band";
+        public const string AllCacheKey = "urn:Auto_Carstats:Bands";
+        public Band()
+        {
+
+        }
+
+        public Band(int bandId, string bandName, int metricId, int orderBy)
+        {
+            Band_ID = bandId;
+            BandName = bandName;
+            Metric_ID = metricId;
+            OrderBy = orderBy;
+        }
+
+        public void AddToCache(ICacheRepository repository)
+        {
+            repository.AddItems<Band>(SelectAll, AllCacheKey);
+        }
+
+        public int Band_ID { get; set; }
+        public string BandName { get; set; }
+        public int Metric_ID { get; set; }
+        public int OrderBy { get; set; }
+        
+       
+
+        
+    }
+}
