@@ -8,10 +8,10 @@ using DataProviderName = DataPlatform.Shared.Enums.DataProviderName;
 
 namespace PackageBuilder.Domain.Entities.Requests
 {
-    public class VechicleRequest : IPointToLaceRequest
+    public class LaceRequest : IPointToLaceRequest
     {
 
-        public VechicleRequest(IHaveUser user, IHaveContract contract,
+        public LaceRequest(IHaveUser user, IHaveContract contract,
             IHavePackageForRequest package, IHaveRequestContext context, DateTime requestDate)
         {
             User = user;
@@ -48,7 +48,6 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public string UserName { get; private set; }
     }
-
 
     public class RequestContext : IHaveRequestContext
     {
@@ -92,80 +91,30 @@ namespace PackageBuilder.Domain.Entities.Requests
     {
         public DataProviderName Name { get; private set; }
         //public IEnumerable<IAmRequestField> RequestFields { get; private set; }
+        public ICollection<IAmDataProviderRequest> Request { get; private set; }
         public decimal CostPrice { get; private set; }
         public decimal RecommendedPrice { get; private set; }
 
         public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice,
-            IHaveUser user, string packageName)
+            IHaveUser user, string packageName, IBuildRequestTypes requestTypes)
         {
             Name = name;
-            Request = new[] {RequestTypes.FirstOrDefault(w => w.Key == name).Value(requestFields.ToList(), user, packageName)};
+            Request = new[] {requestTypes.RequestTypes.FirstOrDefault(w => w.Key == name).Value(requestFields.ToList(), user, packageName)};
             CostPrice = costPrice;
             RecommendedPrice = recommendedPrice;
         }
-
-        public ICollection<IAmDataProviderRequest> Request { get; private set; }
-
-        private IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>>
-            RequestTypes
-        {
-            get
-            {
-                return new Dictionary<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>()
-                {
-                    {
-                        DataProviderName.Ivid, _ivid
-                    },
-                    {
-                        DataProviderName.LightstoneAuto, _lightstoneAuto
-                    },
-                    {
-                        DataProviderName.IvidTitleHolder, _ividTitleHolder
-                    },
-                    {
-                        DataProviderName.Rgt, _rgt
-                    }
-                    ,
-                    {
-                        DataProviderName.RgtVin, _rgtVin
-                    }
-                };
-            }
-        }
-
-        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _ivid =
-            (requests, user, packageName) =>
-                new IvidLaceRequest(requests, packageName, user);
-
-        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _lightstoneAuto =
-            (requests, user, packageName) =>
-                new LightstoneAutoLaceReqeust(requests);
-
-        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _ividTitleHolder =
-            (requests, user, packageName) =>
-                new IvidTitleHolderLaceRequest(requests, user);
-
-        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _rgt =
-            (requests, user, packageName) =>
-                new RgtLaceRequest(requests);
-
-        private readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> _rgtVin =
-            (requests, user, packageName) =>
-                new RgtVinLaceReqeust(requests);
     }
 
     public class RequestPackage : IHavePackageForRequest
     {
-        public RequestPackage(string action, IAmDataProvider[] dataProviders, Guid id, string name, long version)
+        public RequestPackage(IAmDataProvider[] dataProviders, Guid id, string name, long version)
         {
-            Action = action;
+          
             DataProviders = dataProviders;
             Id = id;
             Name = name;
             Version = version;
         }
-
-        public string Action { get; private set; }
 
         public Guid Id { get; private set; }
 

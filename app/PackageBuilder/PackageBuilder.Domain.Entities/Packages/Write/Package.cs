@@ -174,18 +174,20 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             var fields = Mapper.Map<IEnumerable<RequestFieldDto>, IEnumerable<DataField>>(requestFieldsDtos);
 
             var user = new User(userId, userName, firstName);
+            var requestTypes = new RequestTypeBuilder();
 
             foreach (var dataProvider in dataProviders.ToList())
             {
                 //var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true); // todo: Validate & compare to api request fields 
                 var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(fields);
-                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice, user, Name));
+                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice, user, Name,
+                    requestTypes));
             }
 
-            var request = new VechicleRequest(
+            var request = new LaceRequest(
                 user,
                 new Contract(contractVersion, accountNumber, contractId),
-                new RequestPackage("License plate search", laceProviders.ToArray(), Id, Name, (long) DisplayVersion),
+                new RequestPackage(laceProviders.ToArray(), Id, Name, (long) DisplayVersion),
                 new RequestContext(requestId, fromDevice, fromIpAddress, osVersion, system),
                 DateTime.UtcNow);
 
@@ -205,7 +207,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         }
 
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
-            string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId,
+            string firstName, Guid requestId, string accountNumber, Guid contractId,
             long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
             IEnumerable<RequestFieldDto> requestFieldsDtos)
         {
