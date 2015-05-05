@@ -2,6 +2,6 @@
 {
     public class ReportTemplate
     {
-        public string shortid { get; set; }
+        public string ShortId { get; set; }
     }
 }

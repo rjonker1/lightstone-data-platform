@@ -37,8 +37,8 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
 
             var data = new ReportDto()
             {
-                template = new ReportTemplate() { shortid = "VJGAd9OM" },
-                data = new ReportData()
+                Template = new ReportTemplate() { ShortId = "VJGAd9OM" },
+                Data = new ReportData()
                 {
                     Customer = new ReportCustomer()
                     {
