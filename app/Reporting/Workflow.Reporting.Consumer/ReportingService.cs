@@ -2,10 +2,8 @@
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
-using RabbitMQ.Client.Framing.Impl;
 using Workflow.Reporting.Consumer.Installers;
 using Workflow.Reporting.Consumers;
-using Workflow.Reporting.Consumers.ConsumerTypes;
 
 namespace Workflow.Reporting.Consumer
 {

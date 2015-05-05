@@ -100,6 +100,7 @@
       <HintPath>..\..\packages\Simple.OData.Client.4.3.0\lib\net40\Simple.OData.Client.Net40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
