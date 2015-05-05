@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -7,6 +9,61 @@ using PackageBuilder.Domain.Requests.Fields;
 
 namespace PackageBuilder.Domain.Entities.Requests
 {
+    public interface IBuildRequestTypes
+    {
+        IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>>
+            RequestTypes { get; }
+    }
+
+    public class RequestTypeBuilder : IBuildRequestTypes
+    {
+        private readonly IDictionary<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>
+            _requestTypes = new Dictionary<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>()
+            {
+                {
+                    DataProviderName.Ivid, Ivid
+                },
+                {
+                    DataProviderName.LightstoneAuto, LightstoneAuto
+                },
+                {
+                    DataProviderName.IvidTitleHolder, IvidTitleHolder
+                },
+                {
+                    DataProviderName.Rgt, Rgt
+                }
+                ,
+                {
+                    DataProviderName.RgtVin, RgtVin
+                }
+            };
+
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> Ivid =
+            (requests, user, packageName) =>
+                new IvidLaceRequest(requests, packageName, user);
+
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> LightstoneAuto =
+            (requests, user, packageName) =>
+                new LightstoneAutoLaceReqeust(requests);
+
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> IvidTitleHolder =
+            (requests, user, packageName) =>
+                new IvidTitleHolderLaceRequest(requests, user);
+
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> Rgt =
+            (requests, user, packageName) =>
+                new RgtLaceRequest(requests);
+
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> RgtVin =
+            (requests, user, packageName) =>
+                new RgtVinLaceReqeust(requests);
+
+        public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes
+        {
+            get { return _requestTypes; }
+        }
+    }
+
     public class RgtVinLaceReqeust : IAmRgtVinRequest
     {
         public RgtVinLaceReqeust(ICollection<IAmRequestField> requestFields)
@@ -102,13 +159,11 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmMakeRequestField Make { get; private set; }
     }
 
-     public static class RequestFieldExtensions
+    public static class RequestFieldExtensions
     {
         public static T GetRequestField<T>(this ICollection<IAmRequestField> requestFields)
         {
             return requestFields.OfType<T>().Any() ? requestFields.OfType<T>().First() : default(T);
         }
     }
-
-    
 }
