@@ -591,7 +591,6 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Installers\ApiClientInstaller.cs" />
-    <Compile Include="Installers\CommandInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Modules\AdminBillingModule.cs" />
     <Compile Include="Modules\MIModule.cs" />
@@ -643,10 +642,6 @@
     <ProjectReference Include="..\Billing.Domain.Dtos\Billing.Domain.Dtos.csproj">
       <Project>{1F5E930A-B926-4E97-B512-6A9508293EA1}</Project>
       <Name>Billing.Domain.Dtos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Billing.Domain.Entities\Billing.Domain.Entities.csproj">
-      <Project>{8888CF49-7DCF-4984-A710-D2660F2CDBED}</Project>
-      <Name>Billing.Domain.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Billing.Domain\Billing.Domain.csproj">
       <Project>{3750C251-3AD8-4252-A75B-30D11C56B919}</Project>

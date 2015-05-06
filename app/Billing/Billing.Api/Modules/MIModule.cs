@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Linq;
 using Billing.Domain.Core.Repositories;
-using Billing.Domain.Entities;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using DataPlatform.Shared.Repositories;
 using Nancy;

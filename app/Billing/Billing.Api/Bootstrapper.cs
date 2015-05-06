@@ -23,7 +23,6 @@ namespace Billing.Api
             this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
 
-            //container.Resolve<IBus>().Publish(new CreateUpdateEntity(new PreBilling()));//.Publish(new CreateUpdateEntity(new PreBilling()));
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -34,7 +33,6 @@ namespace Billing.Api
             container.Install(
                 new NHibernateInstaller(),
                 new RepositoryInstaller(),
-                new CommandInstaller(),
                 new BusInstaller(),
                 new AutoMapperInstaller(),
                 new ApiClientInstaller()
@@ -62,9 +60,6 @@ namespace Billing.Api
                 return fromException;
             });
             pipelines.EnableCors(); // cross origin resource sharing
-            //pipelines.AddTransactionScope(container);
-
-            //AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());
 
             base.RequestStartup(container, pipelines, context);
         }

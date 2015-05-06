@@ -58,7 +58,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\CreateUpdateEntityHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,13 +65,12 @@
       <Project>{2A13D18D-B281-47CD-BF87-7415C857F2CD}</Project>
       <Name>Billing.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Billing.Domain.Entities\Billing.Domain.Entities.csproj">
-      <Project>{8888CF49-7DCF-4984-A710-D2660F2CDBED}</Project>
-      <Name>Billing.Domain.Entities</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
