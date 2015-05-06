@@ -25,7 +25,7 @@ window.userGridActionEvents = {
         $('#detail-table-header').text('Users Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/StageBilling/CustomerClient/' + row.id + '/Users',
+            url: '/FinalBilling/CustomerClient/' + row.id + '/Users',
             cache: false,
             search: true,
             showRefresh: true,
@@ -74,7 +74,7 @@ window.packageGridActionEvents = {
         $('#detail-table-header').text('DataProviders Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/StageBilling/CustomerClient/' + row.id + '/Packages',
+            url: '/FinalBilling/CustomerClient/' + row.id + '/Packages',
             responseHandler: packageResponseHandler,
             cache: false,
             search: true,
@@ -129,7 +129,7 @@ function invoiceFormatter(value, row, index) {
 window.invoiceActionEvents = {
     'click .invoice-view': function (e, value, row, index) {
 
-        $.get('/StageBilling/CustomerClient/' + row.id + '/Packages', function (response) {
+        $.get('/FinalBilling/CustomerClient/' + row.id + '/Packages', function (response) {
 
             var data = '{' +
                 '"template": { "shortid" : "N190datG" },' +
