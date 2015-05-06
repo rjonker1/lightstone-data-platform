@@ -14,7 +14,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IEnumerable<Statistic> GetAll(string sql, string cacheKey)
         {
-            throw new System.NotImplementedException();
+            return Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
         }
     }
 }

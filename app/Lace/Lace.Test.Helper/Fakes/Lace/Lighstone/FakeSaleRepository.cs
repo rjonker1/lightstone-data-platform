@@ -15,7 +15,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IEnumerable<Sale> GetAll(string sql, string cacheKey)
         {
-            throw new NotImplementedException();
+            return SaleDataBuilder.ForCarSalesOnCarId_107483();
         }
     }
 }
