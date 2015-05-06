@@ -112,14 +112,9 @@ window.packageGridActionEvents = {
 function invoiceFormatter(value, row, index) {
     return [
         '<div class="row">' +
-            '<div class="col-md-2">' +
-                '<button type="button" class="btn btn-warning">' +
-                    'Edit' +
-                '</button>' +
-            '</div>' +
             '<div class="col-md-4">' +
-                '<button type="button" class="invoice-view btn btn-primary btn-md" data-toggle="modal" data-target="#invoice-modal">' +
-                    'Preview Invoice' +
+                '<button type="button" class="invoice-view btn btn-success btn-md" data-toggle="modal" data-target="#invoice-modal">' +
+                    'View Invoice' +
                 '</button>' +
             '</div>' +
         '</div>'
