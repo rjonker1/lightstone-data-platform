@@ -9,9 +9,9 @@ namespace Workflow.DataProvider.Bus
         {
             HostFactory.Run(x =>
             {
-                x.Service<IProcessDataProviderCommands>(s =>
+                x.Service<IDataProviderWorker>(s =>
                 {
-                    s.ConstructUsing(name => new DataProviderCommandProcessor());
+                    s.ConstructUsing(name => new DataProviderWorker());
                     s.WhenStarted(tc => tc.Start());
                     s.WhenStopped(tc => tc.Stop());
                 });

@@ -1,4 +1,4 @@
-﻿using Lace.Domain.DataProviders.Rgt.Core.Models;
+﻿using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Domain.DataProviders.Rgt.Core.Contracts
 {

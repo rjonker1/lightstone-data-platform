@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
-using Lace.Domain.DataProviders.RgtVin.Core.Models;
+using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
 {
@@ -23,7 +24,11 @@ namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
         {
             try
             {
-                Vins = _repository.Get(Vin.GetWithVin(), new { @Vin = vin });
+                Vins = _repository.GetAll(Vin.SelectAll, Vin.CacheAllKey)
+                    .Where(w => w.VIN == vin);
+
+                if (!Vins.Any())
+                    Vins = _repository.Get(Vin.SelectWithVin, new {@Vin = vin}, Vin.CacheWithVinKey);
             }
             catch (Exception ex)
             {

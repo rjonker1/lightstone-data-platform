@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
-using Lace.Domain.DataProviders.RgtVin.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -14,21 +14,18 @@ namespace Lace.Domain.DataProviders.RgtVin.Repositories
     {
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
-
-        private const string CarSpecificationsKey = "urn:Auto_Carstats:Vin:{0}";
-
         public VinRepository(IDbConnection connection, IRedisClient cacheClient)
         {
             _connection = connection;
             _cacheClient = cacheClient;
         }
         
-        public IEnumerable<Vin> Get(string sql, object param)
+        
+        public IEnumerable<Vin> Get(string sql, object param, string cacheKey)
         {
-            // using (_connection)
             using (_cacheClient)
             {
-                var key = string.Format(CarSpecificationsKey, param);
+                var key = string.Format(cacheKey, param);
                 var cachedVins = _cacheClient.As<Vin>();
                 var response = cachedVins.Lists[key];
 
@@ -45,6 +42,16 @@ namespace Lace.Domain.DataProviders.RgtVin.Repositories
                 dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
 
                 return dbResponse;
+            }
+        }
+
+        public IEnumerable<Vin> GetAll(string sql, string cacheKey)
+        {
+            using (_cacheClient)
+            {
+                var cachedVins = _cacheClient.As<Vin>();
+                var response = cachedVins.Lists[cacheKey];
+                return response.DoesExistInTheCache() ? response.ToList() : new List<Vin>();
             }
         }
     }

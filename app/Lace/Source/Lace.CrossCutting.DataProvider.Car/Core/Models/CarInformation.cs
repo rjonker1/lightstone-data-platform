@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Lace.CrossCutting.DataProvider.Car.Core.Models
+﻿namespace Lace.CrossCutting.DataProvider.Car.Core.Models
 {
     public class CarInformation
     {

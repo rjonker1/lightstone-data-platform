@@ -1,8 +1,11 @@
-﻿namespace Lace.Domain.DataProviders.Lightstone.Core.Models
+﻿using Lace.Shared.DataProvider.Contracts;
+
+namespace Lace.Shared.DataProvider.Models
 {
-    public class Metric
+    public class Metric : IAmCachable
     {
-        private const string SelectAll = @"SELECT * FROM Metric";
+        public const string SelectAll = @"SELECT * FROM Metric";
+        public const string CacheAllKey = "urn:Auto_Carstats:Metric";
         public Metric()
         {
             
@@ -22,9 +25,9 @@
             HasMunicipality = hasMuncipality;
         }
 
-        public static string GetAll()
+        public void AddToCache(ICacheRepository repository)
         {
-            return SelectAll;
+            repository.AddItems<Metric>(SelectAll, CacheAllKey);
         }
 
 
@@ -38,5 +41,7 @@
         public int HasCar { get; set; }
         public int HasYear { get; set; }
         public int HasMunicipality { get; set; }
+
+      
     }
 }

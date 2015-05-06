@@ -4,6 +4,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Core.Contracts
 {
     public interface IReadOnlyRepository<T>
     {
-        IEnumerable<T> Get(string sql, object param);
+        IEnumerable<T> Get(string sql, object param, string cacheKey);
+        IEnumerable<T> GetAll(string sql, string cacheKey);
     }
 }

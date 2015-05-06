@@ -1,11 +1,18 @@
 ﻿using System;
-namespace Lace.Domain.DataProviders.Lightstone.Core.Models
+using Lace.Shared.DataProvider.Contracts;
+
+namespace Lace.Shared.DataProvider.Models
 {
-    public class Sale
+    public class Sale : IAmCachable
     {
-        private const string SelectTopFiveSalesForCarIdAndYear =
+        public const string SelectTopFiveSalesForCarIdAndYear =
             @"SELECT TOP 5 s.* from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID where s.Car_ID = @CarId and s.Year_ID = @Year order by SaleDateTime desc";
 
+        public const string SelectAllSales =
+            @"SELECT  s.* from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID";
+
+        public const string CacheSaleKey = "urn:Auto_Carstats:Sale:{0}";
+        public const string CacheAllKey = "urn:Auto_Carstats:Sale";
 
         public Sale()
         {
@@ -24,9 +31,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Models
             Municipality_ID = muncipalityId;
         }
 
-        public static string GetTopFiveUsingCarIdAndYear()
+        public void AddToCache(ICacheRepository repository)
         {
-            return SelectTopFiveSalesForCarIdAndYear;
+            repository.AddItems<Sale>(SelectAllSales, CacheAllKey);
         }
 
 
@@ -37,5 +44,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Models
         public bool IsNew { get; set; }
         public decimal SalePrice { get; set; }
         public int Municipality_ID { get; set; }
+
+       
     }
 }

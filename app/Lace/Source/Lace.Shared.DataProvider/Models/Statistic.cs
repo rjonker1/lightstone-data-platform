@@ -1,9 +1,19 @@
-﻿namespace Lace.Domain.DataProviders.Lightstone.Core.Models
+﻿using Lace.Shared.DataProvider.Contracts;
+
+namespace Lace.Shared.DataProvider.Models
 {
-    public class Statistic
+    public class Statistic : IAmCachable
     {
-        private const string SelectStatisticsForCarIdMakeYear =
+        public const string SelectForCarIdMakeYear =
             @"select s.Statistics_ID AS StatisticsId, s.Metric_ID AS MetricId, s.Band_ID AS BandId, s.Make_ID AS MakeId, s.CarType_ID AS CarTypeId, s.Car_ID AS CarId, s.Year_ID AS YearId, s.SaleYear_ID AS SaleYearId, s.Municipality_ID AS MunipalityId, s.IntValue, s.FloatValue, s.MoneyValue, dbo.Car.ImageUrl, dbo.Car.CarFullName, dbo.Car.CarModel, dbo.CarType.Make_ID, dbo.CarType.CarTypeName, dbo.Car.BodyShape, dbo.Car.FuelType, dbo.Car.Market, dbo.Car.TransmissionType, dbo.Car.ImageUrlSmall, dbo.Car.ImageSource from dbo.CarType INNER JOIN dbo.Car ON dbo.CarType.CarType_ID = dbo.Car.CarType_ID RIGHT OUTER JOIN dbo.[Statistics] AS s ON dbo.Car.Car_ID = s.Car_ID  where s.Metric_ID = 4 or (s.Metric_ID = 14 and s.Car_ID = @CarId and s.Year_ID = @Year) or (s.Metric_ID = 2) or (s.Metric_ID = 3 and s.Make_ID = @MakeId) or (s.Metric_ID = 5 and s.Year_ID = @Year) or (s.Metric_ID = 6 and s.Make_ID = @MakeId) or (s.Metric_ID = 7 and s.Make_ID = @MakeId) or (s.Metric_ID in (9, 10, 11, 13, 37, 35, 36, 38) and s.Car_ID = @CarId and s.Year_ID = @Year) or (s.Metric_ID in (23, 24, 25, 26, 27, 28) and s.Car_ID = @CarId)";
+
+        public const string SelectAll =
+            @"select s.Statistics_ID AS StatisticsId, s.Metric_ID AS MetricId, s.Band_ID AS BandId, s.Make_ID AS MakeId, s.CarType_ID AS CarTypeId, s.Car_ID AS CarId, s.Year_ID AS YearId, s.SaleYear_ID AS SaleYearId, s.Municipality_ID AS MunipalityId, s.IntValue, s.FloatValue, s.MoneyValue, dbo.Car.ImageUrl, dbo.Car.CarFullName, dbo.Car.CarModel, dbo.CarType.Make_ID, dbo.CarType.CarTypeName, dbo.Car.BodyShape, dbo.Car.FuelType, dbo.Car.Market, dbo.Car.TransmissionType, dbo.Car.ImageUrlSmall, dbo.Car.ImageSource from dbo.CarType INNER JOIN dbo.Car ON dbo.CarType.CarType_ID = dbo.Car.CarType_ID RIGHT OUTER JOIN dbo.[Statistics] AS s ON dbo.Car.Car_ID = s.Car_ID";
+
+        public const string CacheStatisticsKey = "urn:Auto_Carstats:Statistics:{0}";
+
+        public const string CacheAllKey = "urn:Auto_Carstats:Statistics";
+
 
         public Statistic()
         {
@@ -42,12 +52,12 @@
             ImageUrlSmall = imageUrlSmall;
             ImageSource = imageSource;
         }
-
-
-        public static string GetStatisticsForCarIdMakeYear()
+        public void AddToCache(ICacheRepository repository)
         {
-            return SelectStatisticsForCarIdMakeYear;
+            repository.AddItems<Statistic>(SelectAll, CacheAllKey);
         }
+
+       
 
         public int StatisticsId { get; set; }
         public int MetricId { get; set; }
@@ -74,6 +84,8 @@
         public string TransmissionType { get; set; }
         public string ImageUrlSmall { get; set; }
         public string ImageSource { get; set; }
+
+      
     }
     
 

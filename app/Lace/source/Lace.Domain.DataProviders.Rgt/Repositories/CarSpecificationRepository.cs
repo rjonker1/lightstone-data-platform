@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
-using Lace.Domain.DataProviders.Rgt.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -15,20 +15,17 @@ namespace Lace.Domain.DataProviders.Rgt.Repositories
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string CarSpecificationsKey = "urn:Auto_Carstats:CarSpecifications:{0}";
-
         public CarSpecificationRepository(IDbConnection connection, IRedisClient cacheClient)
         {
             _connection = connection;
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<CarSpecification> Get(string sql, object param)
+        public IEnumerable<CarSpecification> Get(string sql, object param, string cacheKey)
         {
-            //using (_connection)
             using (_cacheClient)
             {
-                var key = string.Format(CarSpecificationsKey, param);
+                var key = string.Format(cacheKey, param);
                 var cachedSpecifications = _cacheClient.As<CarSpecification>();
                 var response = cachedSpecifications.Lists[key];
 
@@ -47,6 +44,15 @@ namespace Lace.Domain.DataProviders.Rgt.Repositories
                 return dbResponse;
             }
         }
-      
+
+        public IEnumerable<CarSpecification> GetAll(string sql, string cacheKey)
+        {
+            using (_cacheClient)
+            {
+                var cachedSpecifications = _cacheClient.As<CarSpecification>();
+                var response = cachedSpecifications.Lists[cacheKey];
+                return response.DoesExistInTheCache() ? response.ToList() : new List<CarSpecification>();
+            }
+        }
     }
 }

@@ -1,8 +1,11 @@
-﻿namespace Lace.Domain.DataProviders.Lightstone.Core.Models
+﻿using Lace.Shared.DataProvider.Contracts;
+
+namespace Lace.Shared.DataProvider.Models
 {
-    public class Band
+    public class Band : IAmCachable
     {
-        private const string SelectAll = @"SELECT * FROM Band";
+        public const string SelectAll = @"SELECT * FROM Band";
+        public const string CacheAllKey = "urn:Auto_Carstats:Bands";
         public Band()
         {
 
@@ -16,15 +19,18 @@
             OrderBy = orderBy;
         }
 
-        public static string GetAll()
+        public void AddToCache(ICacheRepository repository)
         {
-            return SelectAll;
+            repository.AddItems<Band>(SelectAll, CacheAllKey);
         }
-        
 
         public int Band_ID { get; set; }
         public string BandName { get; set; }
         public int Metric_ID { get; set; }
         public int OrderBy { get; set; }
+        
+       
+
+        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
-using Lace.Domain.DataProviders.RgtVin.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Redis;
 
 namespace Lace.Domain.DataProviders.RgtVin.Repositories.Factory

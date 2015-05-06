@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -15,26 +15,23 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string MunicipalityKey = "urn:Auto_Carstats:Municipality";
-
-
         public MunicipalityRepository(IDbConnection connection, IRedisClient cacheClient)
         {
             _connection = connection;
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<Municipality> Get(string sql, object param)
+        public IEnumerable<Municipality> Get(string sql, object param, string cacheKey)
         {
            throw new NotImplementedException();
         }
 
-        public IEnumerable<Municipality> GetAll(string sql)
+        public IEnumerable<Municipality> GetAll(string sql, string cacheKey)
         {
             using (_cacheClient)
             {
                 var cacheMuncipalities = _cacheClient.As<Municipality>();
-                var response = cacheMuncipalities.Lists[MunicipalityKey];
+                var response = cacheMuncipalities.Lists[cacheKey];
 
                 if (response.DoesExistInTheCache())
                     return response;
@@ -47,7 +44,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                     return dbResponse;
 
                 dbResponse.ForEach(f => response.Add(f));
-                dbResponse.AddItemsToCache(_cacheClient, MunicipalityKey, DateTime.UtcNow.AddDays(1));
+                dbResponse.AddItemsToCache(_cacheClient, cacheKey, DateTime.UtcNow.AddDays(1));
                 return dbResponse;
             }
         }

@@ -152,7 +152,7 @@
         <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Common.Logging" version="3.1.0.0" />
         <dependency id="RestSharp" version="104.4.0.0" />
       </dependencies>
     </nuget>
@@ -167,7 +167,7 @@
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Common.Logging" version="3.1.0.0" />
         <dependency id="Newtonsoft.Json" version="6.0.5" />
         <dependency id="Lightstone.DataPlatform.Shared" />
         <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
@@ -185,7 +185,7 @@
       </includes>
       <dependencies>
         <dependency id="Lightstone.DataPlatform.Shared" />
-        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Common.Logging" version="3.1.0.0" />
         <dependency id="Newtonsoft.Json" version="6.0.5" />
       </dependencies>
     </nuget>
@@ -273,7 +273,7 @@
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Common.Logging" version="3.1.0.0" />
         <dependency id="Lightstone.DataPlatform.Billing.Api.Dtos" />
         <dependency id="Lightstone.DataPlatform.Shared" />
         <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
@@ -337,7 +337,7 @@
         <include pattern="ServiceStack.Text.dll" to="lib\net45" />
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="3.0.0.0" />
+				<dependency id="Common.Logging" version="3.1.0.0" />
         <dependency id="EasyNetQ" />
         <dependency id="Lightstone.DataPlatform.Shared" />
         <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
@@ -449,7 +449,7 @@
 				<include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-       <dependency id="Common.Logging" version="3.0.0"  />
+       <dependency id="Common.Logging" version="3.1.0"  />
        <dependency id="Newtonsoft.Json" version="6.0.5" />
 			</dependencies>
 		</nuget>
@@ -483,7 +483,7 @@
         <include pattern="Lightstone.DataPlatform.Shared.Messaging.Billing.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Common.Logging" version="3.0.0" />
+        <dependency id="Common.Logging" version="3.1.0" />
         <dependency id="Common.Logging.Core" version="3.0.0" />
         <dependency id="Lightstone.DataPlatform.Shared" />
         <dependency id="Newtonsoft.Json" version="6.0.5" />
@@ -511,7 +511,7 @@
 				<dependency id="Nancy.Authentication.Stateless" version="0.22.2" />
 				<dependency id="Newtonsoft.Json" version="6.0.3" />
 				<dependency id="RestSharp" version="104.4.0" />
-        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Common.Logging" version="3.1.0.0" />
 			</dependencies>
 		</nuget>
 
@@ -536,7 +536,7 @@
 				<include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="3.0.0.0" />
+				<dependency id="Common.Logging" version="3.1.0.0" />
 			</dependencies>
 		</nuget>
     <nuget deploy="false">
@@ -585,7 +585,7 @@
       <dependencies>
         <dependency id="Castle.Core" version="3.3.0" />
         <dependency id="Castle.Windsor" version="3.3.0" />
-        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Common.Logging" version="3.1.0.0" />
         <dependency id="EasyNetQ" version="0.28.3.229" />
         <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
       </dependencies>
@@ -602,7 +602,7 @@
 				<include pattern="Lightstone.DataPlatform.Workflow.RabbitMQ.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="3.0.0.0" />
+				<dependency id="Common.Logging" version="3.1.0.0" />
 				<dependency id="EasyNetQ" version="0.28.3.229" />
 				<dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
 				<dependency id="Lightstone.Dataplatform.Shared" />

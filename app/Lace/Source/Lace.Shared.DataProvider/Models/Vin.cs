@@ -1,8 +1,14 @@
-﻿namespace Lace.Domain.DataProviders.RgtVin.Core.Models
+﻿using Lace.Shared.DataProvider.Contracts;
+
+namespace Lace.Shared.DataProvider.Models
 {
-    public class Vin
+    public class Vin : IAmCachable
     {
-        private const string SelectVehicleUsingVin = "select v.* from Vin v where v.VIN = @Vin";
+        public const string SelectWithVin = "select v.* from Vin v where v.VIN = @Vin";
+        public const string SelectAll = "select v.* from Vin v";
+
+        public const string CacheWithVinKey = "urn:Auto_Carstats:Vin:{0}";
+        public const string CacheAllKey = "urn:Auto_Carstats:Vin";
         public Vin()
         {
              
@@ -24,9 +30,9 @@
 
         }
 
-        public static string GetWithVin()
+        public void AddToCache(ICacheRepository repository)
         {
-            return SelectVehicleUsingVin;
+            repository.AddItems<Vin>(SelectAll, CacheAllKey);
         }
 
         public int Vin_ID { get; set; }
@@ -40,5 +46,7 @@
         public int Month { get; set; }
         public string Colour { get; set; }
         public string Source { get; set; }
+
+       
     }
 }

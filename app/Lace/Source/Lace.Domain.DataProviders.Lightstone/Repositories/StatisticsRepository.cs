@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Common.Extensions;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
@@ -13,12 +13,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 {
     public class StatisticsRepository : IReadOnlyRepository<Statistic>
     {
-        //SelectStatements.GetStatistics
-
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
-
-        private const string StatisticsKey = "urn:Auto_Carstats:Statistics:{0}";
 
         public StatisticsRepository(IDbConnection connection, IRedisClient cacheClient)
         {
@@ -26,11 +22,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<Statistic> Get(string sql, object param)
+        public IEnumerable<Statistic> Get(string sql, object param, string cacheKey)
         {
             using (_cacheClient)
             {
-                var key = string.Format(StatisticsKey, param);
+                var key = string.Format(cacheKey, param);
                 var cachedStatistics = _cacheClient.As<Statistic>();
                 var response = cachedStatistics.Lists[key];
 
@@ -50,9 +46,15 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             }
         }
 
-        public IEnumerable<Statistic> GetAll(string sql)
+        public IEnumerable<Statistic> GetAll(string sql, string cacheKey)
         {
-            throw new NotImplementedException();
+            using (_cacheClient)
+            {
+                var cachedStatistics = _cacheClient.As<Statistic>();
+                var response = cachedStatistics.Lists[cacheKey];
+
+                return response.DoesExistInTheCache() ? response.ToList() : new List<Statistic>();
+            }
         }
     }
 }
