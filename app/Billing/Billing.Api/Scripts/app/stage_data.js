@@ -138,7 +138,7 @@ window.invoiceActionEvents = {
                        ' "Name": "' + row.customerName + '",' +
                         '"TaxRegistration": 4190195679,' +
                         '"Packages" : [ ' +
-                            '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": 1.00, "Price": 16314.67, "Vat": 2284.00, "Total": 18598.72}' +
+                            '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": "' + row.transactions + '", "Price": 16314.67, "Vat": 2284.00}' +
                         ']  ' +
                     '} ' +
                 '}';

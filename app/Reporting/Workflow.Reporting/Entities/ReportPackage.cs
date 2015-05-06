@@ -7,6 +7,5 @@
         public int QuantityUnit { get; set; }
         public double Price { get; set; }
         public int Vat { get; set; }
-        public double Total { get; set; }
     }
 }
