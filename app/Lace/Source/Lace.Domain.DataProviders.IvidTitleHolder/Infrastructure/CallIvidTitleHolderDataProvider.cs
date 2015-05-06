@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex);
+                _log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex,ex.Message);
                 _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"});
                 IvidTitleHolderResponseFailed(response);
             }

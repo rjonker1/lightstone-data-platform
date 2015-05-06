@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.CrossCutting.DataProvider.Car.Repositories;
+using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
@@ -16,7 +16,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         }
 
 
-        public IEnumerable<CarInformation> Get(string sql, object param)
+        public IEnumerable<CarInformation> Get(string sql, object param, string cacheKey)
         {
 
             return
@@ -30,9 +30,15 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                                 s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId));
         }
 
-        public IEnumerable<CarInformation> GetAll(string sql)
+        public IEnumerable<CarInformation> GetAll(string sql, string cacheKey)
         {
-            throw new NotImplementedException();
+            return
+                Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort().Select(
+                    s =>
+                        new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
+                            s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
+                            s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
+                            s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId));
         }
 
     }

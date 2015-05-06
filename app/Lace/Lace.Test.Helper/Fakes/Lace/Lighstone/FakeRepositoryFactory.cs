@@ -4,7 +4,6 @@ using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Shared.DataProvider.Models;
-using CarInformation = Lace.CrossCutting.DataProvider.Car.Core.Models.CarInformation;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {

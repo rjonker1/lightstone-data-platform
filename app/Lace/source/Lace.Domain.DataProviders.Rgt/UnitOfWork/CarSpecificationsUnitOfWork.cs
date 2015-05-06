@@ -28,11 +28,11 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
                 CarSpecifications = _repository.GetAll(CarSpecification.SelectAll, CarSpecification.CacheAllKey)
                     .Where(w => w.CarId == request.CarId);
 
-                CarSpecifications = _repository.Get(CarSpecification.CacheWithCarIdKey, new {request.CarId}, CarSpecification.CacheWithCarIdKey);
+                CarSpecifications = _repository.Get(CarSpecification.SelectWithCarId, new {request.CarId}, CarSpecification.CacheWithCarIdKey);
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Car Specification data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Car Specification data because of {0}", ex,ex.Message);
                 throw;
             }
         }

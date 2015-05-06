@@ -85,7 +85,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling RGT Data Provider {0}", ex);
+                _log.ErrorFormat("Error calling RGT Data Provider because of {0}", ex, ex.Message);
                 _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling RGT Data Provider"});
                 RgtResponseFailed(response);
             }

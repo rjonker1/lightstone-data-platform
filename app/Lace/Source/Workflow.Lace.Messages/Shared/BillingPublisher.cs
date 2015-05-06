@@ -36,7 +36,7 @@ namespace Workflow.Lace.Messages.Shared
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error sending message to Billing Transation Bus: {0}", ex.Message);
+                _log.ErrorFormat("Error sending message to Billing Transation Bus: {0}",ex, ex.Message);
             }
         }
     }

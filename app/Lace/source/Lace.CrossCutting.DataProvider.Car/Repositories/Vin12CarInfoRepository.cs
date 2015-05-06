@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -13,21 +13,19 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string CarKey = "urn:Auto_Carstats:Vin12CarInformation:{0}";
-
         public Vin12CarInfoRepository(IDbConnection connection, IRedisClient cacheClient)
         {
             _connection = connection;
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<CarInformation> Get(string sql, object param)
+        public IEnumerable<CarInformation> Get(string sql, object param, string cacheKey)
         {
             using (_connection)
             {
                 using (_cacheClient)
                 {
-                    var key = string.Format(CarKey, param);
+                    var key = string.Format(cacheKey, param);
                     var cachedCar = _cacheClient.As<CarInformation>();
                     var response = cachedCar.Lists[key];
 
@@ -45,9 +43,17 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories
             }
         }
 
-        public IEnumerable<CarInformation> GetAll(string sql)
+        public IEnumerable<CarInformation> GetAll(string sql, string cacheKey)
         {
-            throw new NotImplementedException();
+            using (_connection)
+            {
+                using (_cacheClient)
+                {
+                    var cachedCar = _cacheClient.As<CarInformation>();
+                    var response = cachedCar.Lists[cacheKey];
+                    return response != null && response.Any() ? response.ToList() : new List<CarInformation>();
+                }
+            }
         }
     }
 }

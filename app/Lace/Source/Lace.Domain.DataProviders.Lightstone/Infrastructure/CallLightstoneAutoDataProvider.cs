@@ -64,7 +64,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex);
+                _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex,ex.Message);
                 _logCommand.LogFault(ex, new { ErrorMessage = "Error calling Lightstone Data Provider" });
                 LightstoneResponseFailed(response);
             }

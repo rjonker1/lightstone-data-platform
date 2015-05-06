@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.CrossCutting.DataProvider.Car.Repositories;
+using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeCarInfoRepository : IReadOnlyCarRepository<CarInformation>
     {
-        public IEnumerable<CarInformation> Get(string sql, object param)
+        public IEnumerable<CarInformation> Get(string sql, object param, string cacheKey)
         {
             PropertyInfo[] props = param.GetType().GetProperties();
             var vin = props[0].GetValue(param);
@@ -29,7 +29,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             return data;
         }
 
-        public IEnumerable<CarInformation> GetAll(string sql)
+        public IEnumerable<CarInformation> GetAll(string sql, string cacheKey)
         {
             return Mothers.Sources.Lightstone.CarInfoData.CarInformation();
         }

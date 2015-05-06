@@ -10,6 +10,7 @@ namespace Lace.Caching.Manager.Service
     {
         static void Main(string[] args)
         {
+          
             var container = new WindsorContainer(new XmlInterpreter()).Install(FromAssembly.This());
             container.Kernel.Resolver.AddSubResolver(new ArrayResolver(container.Kernel));
 
@@ -17,7 +18,7 @@ namespace Lace.Caching.Manager.Service
             {
                 x.Service<ICacheWorker>(s =>
                 {
-                    s.ConstructUsing(name => container.Resolve<ICacheWorker>());
+                    s.ConstructUsing(name => new CacheWorker(container));
                     s.WhenStarted(tc => tc.Start());
                     s.WhenStopped(tc =>
                     {

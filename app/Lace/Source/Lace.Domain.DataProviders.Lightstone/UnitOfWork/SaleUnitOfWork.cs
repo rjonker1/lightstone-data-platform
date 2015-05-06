@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Sales data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Sales data because of {0}",ex, ex.Message);
             }
         }
     }

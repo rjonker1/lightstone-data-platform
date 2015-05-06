@@ -69,7 +69,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             {
                 _logCommand.LogFault(ex.Message, request);
                 _logCommand.LogEnd(request);
-                _log.ErrorFormat("Error occurred receiving request {0}",request.ObjectToJson());
+                _log.ErrorFormat("Error occurred receiving request {0}",ex,request.ObjectToJson());
                 LogResponse(request);
                 CreateTransaction(request, DataProviderState.Failed);
                 return EmptyResponse;

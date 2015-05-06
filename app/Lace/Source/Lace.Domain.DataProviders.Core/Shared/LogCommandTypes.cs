@@ -121,13 +121,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+                _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -143,13 +143,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+                _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -166,13 +166,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a command to the bus because of {0}", ex.Message);
+                        _log.ErrorFormat("An error occured sending a command to the bus because of {0}",ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a command to the bus because of {0}", ex.Message);
+                _log.ErrorFormat("An error occured sending a command to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -190,13 +190,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex.Message);
+                _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -214,13 +214,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a response to the bus because of {0}", ex.Message);
+                        _log.ErrorFormat("An error occured sending a response to the bus because of {0}",ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a response to the bus because of {0}", ex.Message);
+                _log.ErrorFormat("An error occured sending a response to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -236,13 +236,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex.Message);
+                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex.Message);
+                _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -259,13 +259,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex.Message);
+                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex.Message);
+                _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
             }
         }
     }

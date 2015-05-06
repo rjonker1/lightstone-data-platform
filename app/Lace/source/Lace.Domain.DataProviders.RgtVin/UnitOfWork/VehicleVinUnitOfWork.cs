@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Vin information because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Vin information because of {0}",ex, ex.Message);
                 throw;
             }
         }

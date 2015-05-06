@@ -53,14 +53,14 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 
 
                 if (string.IsNullOrWhiteSpace(_response))
-                    _logCommand.LogFault(_dataProvider, new { NoRequestReceived = "No response received from PCubed Fica Service" });
+                    _logCommand.LogFault(_dataProvider, new {NoRequestReceived = "No response received from PCubed Fica Service"});
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex);
-                _logCommand.LogFault(ex, new { ErrorMessage = "Error calling PCubed Fica Data Provider" });
+                _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex, ex.Message);
+                _logCommand.LogFault(ex, new {ErrorMessage = "Error calling PCubed Fica Data Provider"});
                 SignioResponseFailed(response);
             }
         }

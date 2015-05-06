@@ -99,7 +99,6 @@
     <Compile Include="Core\Contracts\IHaveCarInformation.cs" />
     <Compile Include="Core\Contracts\IRetrieveCarInformation.cs" />
     <Compile Include="Core\Contracts\ISetupCarRepository.cs" />
-    <Compile Include="Core\Models\CarInformation.cs" />
     <Compile Include="Infrastructure\Dto\CarInformationRequest.cs" />
     <Compile Include="Infrastructure\GetCarInformation.cs" />
     <Compile Include="Repositories\CarInformationRepository.cs" />
@@ -124,6 +123,10 @@
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared.DataProvider\Lace.Shared.DataProvider.csproj">
+      <Project>{b2049e92-cf9a-40d5-9ade-d9bfc8ecd00c}</Project>
+      <Name>Lace.Shared.DataProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

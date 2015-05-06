@@ -73,7 +73,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Anpr Web Service {0}", ex.Message);
+                _log.ErrorFormat("Error calling Anpr Web Service {0}",ex, ex.Message);
                 _logCommand.LogFault(new {ex.Message}, new {ErrorMessage = "Error calling Anpr Web Service"});
                 AnprResponseFailed(response);
             }

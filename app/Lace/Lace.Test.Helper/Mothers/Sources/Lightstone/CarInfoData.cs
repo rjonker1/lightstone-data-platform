@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Test.Helper.Mothers.Sources.Lightstone
 {

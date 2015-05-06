@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Ivid Data Provider {0}", ex);
+                _log.ErrorFormat("Error calling Ivid Data Provider {0}", ex,ex.Message);
                 _logCommand.LogFault(ex, new { ErrorMessage = "Error calling Ivid Data Provider" });
                 IvidResponseFailed(response);
             }
