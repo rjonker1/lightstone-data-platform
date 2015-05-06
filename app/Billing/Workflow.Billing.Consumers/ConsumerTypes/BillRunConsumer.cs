@@ -70,8 +70,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                         ItemDescription = x.PackageName,
                                         QuantityUnit = 1,
                                         Price = 16314.67,
-                                        Vat = 2284,
-                                        Total = 18598.72
+                                        Vat = 2284
                                     }).Distinct();
 
                             var reportData = new ReportDto()
