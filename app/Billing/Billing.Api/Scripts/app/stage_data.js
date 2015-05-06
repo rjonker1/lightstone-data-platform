@@ -109,11 +109,20 @@ window.packageGridActionEvents = {
     }
 };
 
-function previewInvoiceFormatter(value, row, index) {
+function invoiceFormatter(value, row, index) {
     return [
-        '<button type="button" class="invoice-view btn btn-primary btn-md" data-toggle="modal" data-target="#invoice-modal">' +
-            'Preview Invoice' +
-            '</button>'
+        '<div class="row">' +
+            '<div class="col-md-2">' +
+                '<button type="button" class="btn btn-warning">' +
+                    'Edit' +
+                '</button>' +
+            '</div>' +
+            '<div class="col-md-4">' +
+                '<button type="button" class="invoice-view btn btn-primary btn-md" data-toggle="modal" data-target="#invoice-modal">' +
+                    'Preview Invoice' +
+                '</button>' +
+            '</div>' +
+        '</div>'
     ].join('');
 }
 
