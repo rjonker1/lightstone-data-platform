@@ -10,8 +10,7 @@ namespace Billing.Api.Modules
 {
     public class StageBillingModule : NancyModule
     {
-        public StageBillingModule(//IPreBillingRepository preBilling, IServerPageRepo serverPageRepo,
-                                IRepository<StageBilling> stageBillingRepository)
+        public StageBillingModule(IRepository<StageBilling> stageBillingRepository)
         {
 
             Get["/StageBilling/"] = _ =>
@@ -31,7 +30,14 @@ namespace Billing.Api.Modules
                     var customerPackagesTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
-                    var customer = new StageBillingDto(); 
+                    //Transactions total for client
+                    var clientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                                                        .Select(x => x.TransactionId).Distinct().Count();
+                    //Products total for client
+                    var clientPackagesTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                                                        .Select(x => x.PackageId).Distinct().Count();
+
+                    var customer = new StageBillingDto();
                     //Customer
                     if (transaction.ClientId == new Guid())
                     {
@@ -51,8 +57,8 @@ namespace Billing.Api.Modules
                         {
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
-                            Transactions = customerTransactionsTotal,
-                            Products = customerPackagesTotal
+                            Transactions = clientTransactionsTotal,
+                            Products = clientPackagesTotal
                         };
                     }
 
@@ -84,13 +90,13 @@ namespace Billing.Api.Modules
             };
 
 
-            Get["/StageBilling/Customer/{customerId}/Users"] = param =>
+            Get["/StageBilling/CustomerClient/{searchId}/Users"] = param =>
             {
 
-                var customerSearchId = new Guid(param.customerId);
+                var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<User>();
 
-                foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == customerSearchId))
+                foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
                     //User
                     var user = new User
@@ -113,16 +119,16 @@ namespace Billing.Api.Modules
             };
 
 
-            Get["/StageBilling/Customer/{customerId}/Packages"] = param =>
+            Get["/StageBilling/CustomerClient/{searchId}/Packages"] = param =>
             {
 
-                var customerSearchId = new Guid(param.customerId);
+                var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == customerSearchId || x.ClientId == customerSearchId))
+                foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
 
-                    var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == customerSearchId || x.ClientId == customerSearchId)
+                    var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId)
                                             .Select(x =>
                                                 new DataProviderDto()
                                                 {
@@ -154,10 +160,6 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
 
-            //Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Products = products });
-
-            //Get["/PreBilling/Customers"] = _ => Response.AsJson(new { Customers = customersRepo });
-
         }
     }
 
@@ -175,42 +177,4 @@ namespace Billing.Api.Modules
         public int Total { get; set; }
     }
 
-    //public class PackageDto
-    //{
-    //    public Guid PackageId { get; set; }
-    //    public Guid PackageName { get; set; }
-    //    public IEnumerable<DataProviderDto> DataProviders { get; set; }
-    //}
-
-    //public class DataProviderDto
-    //{
-    //    public Guid DataProviderId { get; set; }
-    //    public string DataProviderName { get; set; }
-    //    public double CostPrice { get; set; }
-    //    public double RecommendedPrice { get; set; }
-
-    //    public Guid PackageId { get; set; }
-    //    public string PackageName { get; set; }
-    //}
-
-    ////Server side Paging
-    //public interface IServerPageRepo : IRepository<Transaction>
-    //{
-    //    PagedList<Transaction> Search(string searchValue, int pageIndex, int pageSize);
-    //}
-
-    //public class PreBillingDtoRepository : Repository<Transaction>, IServerPageRepo
-    //{
-    //    public PreBillingDtoRepository(ISession session)
-    //        : base(session)
-    //    {
-    //    }
-
-    //    public PagedList<Transaction> Search(string searchValue, int pageIndex, int pageSize)
-    //    {
-    //        var predicate = PredicateBuilder.False<Transaction>();
-    //        //predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-    //        return new PagedList<Transaction>(this, pageIndex, pageSize);
-    //    }
-    //}
 }

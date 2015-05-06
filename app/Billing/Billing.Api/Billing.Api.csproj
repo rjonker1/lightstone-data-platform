@@ -315,7 +315,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\app\config.js" />
-    <Content Include="Scripts\app\data.js" />
+    <Content Include="Scripts\app\pre_data.js" />
+    <Content Include="Scripts\app\stage_data.js" />
     <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-switch\bootstrap-switch.js" />

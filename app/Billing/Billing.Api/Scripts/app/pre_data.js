@@ -22,10 +22,10 @@ window.userGridActionEvents = {
 
         $('#detail').bootstrapTable('destroy');
 
-        $('#detail-table-header').text('Users Detail For Customer: ' + row.customerName);
+        $('#detail-table-header').text('Users Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/PreBilling/Customer/' + row.id + '/Users',
+            url: '/PreBilling/CustomerClient/' + row.id + '/Users',
             cache: false,
             search: true,
             showRefresh: true,
@@ -71,10 +71,10 @@ window.packageGridActionEvents = {
 
         $('#detail').bootstrapTable('destroy');
 
-        $('#detail-table-header').text('DataProviders Detail For Customer: ' + row.customerName);
+        $('#detail-table-header').text('DataProviders Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/StageBilling/Customer/' + row.id + '/Packages',
+            url: '/PreBilling/CustomerClient/' + row.id + '/Packages',
             responseHandler: packageResponseHandler,
             cache: false,
             search: true,
@@ -109,67 +109,14 @@ window.packageGridActionEvents = {
     }
 };
 
-function previewInvoiceFormatter(value, row, index) {
-    return [
-        '<button type="button" class="invoice-view btn btn-primary btn-md" data-toggle="modal" data-target="#invoice-modal">' +
-            'Preview Invoice' +
-            '</button>'
-    ].join('');
-}
-
-window.invoiceActionEvents = {
-    'click .invoice-view': function (e, value, row, index) {
-
-        $.get('/StageBilling/Customer/' + row.id + '/Packages', function (response) {
-
-            console.log(response.data[0]);
-            var data = '{' +
-                '"template": { "shortid" : "N190datG" },' +
-                '"data" : {' +
-                    '"Customer": { ' +
-                       ' "Name": "' + row.customerName + '",' +
-                        '"TaxRegistration": 4190195679,' +
-                        '"Packages" : [ ' +
-                            '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": 1.00, "Price": 16314.67, "Vat": 2284.00, "Total": 18598.72}' +
-                        ']  ' +
-                    '} ' +
-                '}';
-
-            //$.get("http://localhost:8856/templates/N190datG", function (response) {
-            //    $('.modal-body').html(response);
-            //});
-
-            $.post(reportingApi + "/ReportHTML", data)
-                .done(function (response) {
-                    $('.modal-body').html(response);
-                });
-        });
-
-
-
-    }
-};
-
 function packageResponseHandler(res) {
 
-    console.log(res);
     return res.data[0].dataProviders;
 }
 
 function gridTransactionsFormatter(value, row, index) {
 
-    //var count = 0;
-    //for (transaction in row.transactions) {
-
-    //    count++;
-    //}
-
     return [
         'Total Transactions: ( ' + value + ' ) '
     ].join('');
-};
-
-function gridCOSFormatter(value, row, index) {
-
-
 };

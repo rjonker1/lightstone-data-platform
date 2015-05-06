@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Billing.Domain.Core.Helpers;
-using Billing.Domain.Core.Repositories;
-using Billing.Infrastructure.Helpers;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
-using NHibernate;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules
 {
     public class PreBillingModule : NancyModule
     {
-        public PreBillingModule(//IPreBillingRepository preBilling, IServerPageRepo serverPageRepo,
-                                IRepository<PreBilling> preBillingRepository)
+        public PreBillingModule(IRepository<PreBilling> preBillingRepository)
         {
 
             Get["/PreBilling/"] = _ =>
@@ -35,14 +30,37 @@ namespace Billing.Api.Modules
                     var customerPackagesTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
+                    //Transactions total for client
+                    var clientTransactionsTotal = preBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                                                        .Select(x => x.TransactionId).Distinct().Count();
+                    //Products total for client
+                    var clientPackagesTotal = preBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                                                        .Select(x => x.PackageId).Distinct().Count();
+
+                    var customer = new PreBillingDto();
                     //Customer
-                    var customer = new PreBillingDto
+                    if (transaction.ClientId == new Guid())
                     {
-                        Id = transaction.CustomerId,
-                        CustomerName = transaction.CustomerName,
-                        Transactions = customerTransactionsTotal,
-                        Products = customerPackagesTotal
-                    };
+                        customer = new PreBillingDto
+                        {
+                            Id = transaction.CustomerId,
+                            CustomerName = transaction.CustomerName,
+                            Transactions = customerTransactionsTotal,
+                            Products = customerPackagesTotal
+                        };
+                    }
+
+                    //Client
+                    if (transaction.CustomerId == new Guid())
+                    {
+                        customer = new PreBillingDto
+                        {
+                            Id = transaction.ClientId,
+                            CustomerName = transaction.ClientName,
+                            Transactions = clientTransactionsTotal,
+                            Products = clientPackagesTotal
+                        };
+                    }
 
                     //Customer user
                     var user = new User
@@ -72,13 +90,13 @@ namespace Billing.Api.Modules
             };
 
 
-            Get["/PreBilling/Customer/{customerId}/Users"] = param =>
+            Get["/PreBilling/CustomerClient/{searchId}/Users"] = param =>
             {
 
-                var customerSearchId = new Guid(param.customerId);
+                var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<User>();
 
-                foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == customerSearchId))
+                foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
                     //User
                     var user = new User
@@ -101,16 +119,16 @@ namespace Billing.Api.Modules
             };
 
 
-            Get["/PreBilling/Customer/{customerId}/Packages"] = param =>
+            Get["/PreBilling/CustomerClient/{searchId}/Packages"] = param =>
             {
 
-                var customerSearchId = new Guid(param.customerId);
+                var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == customerSearchId))
+                foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
 
-                    var dataProviderList = preBillingRepository.Where(x => x.CustomerId == customerSearchId)
+                    var dataProviderList = preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId)
                                             .Select(x =>
                                                 new DataProviderDto()
                                                 {
