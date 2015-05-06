@@ -61,8 +61,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.982\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1044\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1047, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1047\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
