@@ -597,7 +597,6 @@
     <Compile Include="Modules\MIModule.cs" />
     <Compile Include="Modules\PackageModule.cs" />
     <Compile Include="Modules\PreBillingModule.cs" />
-    <Compile Include="Modules\Foo.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Ping.cs" />
     <Compile Include="Modules\StageBillingModule.cs" />
@@ -640,6 +639,10 @@
     <ProjectReference Include="..\Billing.Domain.Core\Billing.Domain.Core.csproj">
       <Project>{2A13D18D-B281-47CD-BF87-7415C857F2CD}</Project>
       <Name>Billing.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Billing.Domain.Dtos\Billing.Domain.Dtos.csproj">
+      <Project>{1F5E930A-B926-4E97-B512-6A9508293EA1}</Project>
+      <Name>Billing.Domain.Dtos</Name>
     </ProjectReference>
     <ProjectReference Include="..\Billing.Domain.Entities\Billing.Domain.Entities.csproj">
       <Project>{8888CF49-7DCF-4984-A710-D2660F2CDBED}</Project>

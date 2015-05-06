@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
@@ -165,38 +166,6 @@ namespace Billing.Api.Modules
             //Get["/PreBilling/Customers"] = _ => Response.AsJson(new { Customers = customersRepo });
 
         }
-    }
-
-    //DTO's
-    public class PreBillingDto
-    {
-        public Guid Id { get; set; }
-        public string CustomerName { get; set; }
-        public IEnumerable<User> Users { get; set; }
-        public string Type { get; set; }
-        public string Owner { get; set; }
-        public int Products { get; set; }
-        public int Transactions { get; set; }
-        public string UserType { get; set; }
-        public int Total { get; set; }
-    }
-
-    public class PackageDto
-    {
-        public Guid PackageId { get; set; }
-        public string PackageName { get; set; }
-        public IEnumerable<DataProviderDto> DataProviders { get; set; }
-    }
-
-    public class DataProviderDto
-    {
-        public Guid DataProviderId { get; set; }
-        public string DataProviderName { get; set; }
-        public double CostPrice { get; set; }
-        public double RecommendedPrice { get; set; }
-
-        public Guid PackageId { get; set; }
-        public string PackageName { get; set; }
     }
 
     ////Server side Paging

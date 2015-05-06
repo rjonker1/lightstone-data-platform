@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
@@ -161,20 +162,6 @@ namespace Billing.Api.Modules
             };
 
         }
-    }
-
-    //DTO's
-    public class StageBillingDto
-    {
-        public Guid Id { get; set; }
-        public string CustomerName { get; set; }
-        public IEnumerable<User> Users { get; set; }
-        public string Type { get; set; }
-        public string Owner { get; set; }
-        public int Products { get; set; }
-        public int Transactions { get; set; }
-        public string UserType { get; set; }
-        public int Total { get; set; }
     }
 
 }
