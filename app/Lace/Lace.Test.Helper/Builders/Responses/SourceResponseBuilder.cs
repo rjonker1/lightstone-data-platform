@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
-using Lace.Domain.DataProviders.RgtVin.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using Lace.Test.Helper.Fakes.Responses;
-using Microsoft.SqlServer.Server;
 
 namespace Lace.Test.Helper.Builders.Responses
 {

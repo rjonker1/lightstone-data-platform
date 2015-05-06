@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using Lace.Test.Helper.Mothers.Sources.Lightstone;
 
 namespace Lace.Test.Helper.Builders.Sources.Lightstone

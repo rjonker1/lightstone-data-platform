@@ -4,7 +4,7 @@ using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
@@ -24,7 +24,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Municipalities = _repository.GetAll(Municipality.GetAll());
+                Municipalities = _repository.GetAll(Municipality.SelectAll, Municipality.CacheAllKey);
             }
             catch (Exception ex)
             {

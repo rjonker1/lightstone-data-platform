@@ -1,8 +1,6 @@
 ﻿using System.Data;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
-using Lace.Domain.DataProviders.Rgt.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Redis;
 
 namespace Lace.Domain.DataProviders.Rgt.Repositories.Factory

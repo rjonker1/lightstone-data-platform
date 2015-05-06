@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
+using Lace.Shared.DataProvider.Models;
 using Lace.Test.Helper.Builders.Responses;
 using Xunit.Extensions;
 

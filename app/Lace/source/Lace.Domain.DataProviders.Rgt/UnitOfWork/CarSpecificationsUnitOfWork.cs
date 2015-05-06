@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
-using Lace.Domain.DataProviders.Rgt.Core.Models;
+using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
 {
@@ -24,7 +25,10 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
         {
             try
             {
-                CarSpecifications = _repository.Get(CarSpecification.GetForCarId(), new {request.CarId});
+                CarSpecifications = _repository.GetAll(CarSpecification.SelectAll, CarSpecification.CacheAllKey)
+                    .Where(w => w.CarId == request.CarId);
+
+                CarSpecifications = _repository.Get(CarSpecification.CacheWithCarIdKey, new {request.CarId}, CarSpecification.CacheWithCarIdKey);
             }
             catch (Exception ex)
             {

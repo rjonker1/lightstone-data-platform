@@ -1,13 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Services;
-using Lace.Test.Helper.Builders.Sources.Lightstone;
-
-namespace Lace.Test.Helper.Fakes.Lace.Lighstone
+﻿namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     //public class FakeCarRepository : IReadOnlyRepository<Car>
     //{

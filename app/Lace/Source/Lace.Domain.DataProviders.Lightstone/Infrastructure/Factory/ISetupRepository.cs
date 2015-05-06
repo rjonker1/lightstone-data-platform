@@ -1,5 +1,5 @@
 ﻿using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory
 {

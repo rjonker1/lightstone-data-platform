@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.Repositories;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Redis;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory

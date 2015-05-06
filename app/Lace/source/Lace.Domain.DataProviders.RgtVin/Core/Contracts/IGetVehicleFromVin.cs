@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.DataProviders.RgtVin.Core.Models;
+using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Domain.DataProviders.RgtVin.Core.Contracts
 {

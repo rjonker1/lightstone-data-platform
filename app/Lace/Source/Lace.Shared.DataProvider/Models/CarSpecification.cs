@@ -5,10 +5,10 @@ namespace Lace.Shared.DataProvider.Models
     public class CarSpecification : IAmCachable
     {
         public const string SelectWithCarId =
-            "select c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, c.RainSensorWindscreenWipers, c.HeadUpDisplay from Car c join Manufacturer m on m.Manufacturer_ID = c.Manufacturer_ID join CarType ct on ct.CarType_ID = c.CarType_ID where c.Car_ID = @CarId";
+            "select c.Car_ID as CarId, c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, c.RainSensorWindscreenWipers, c.HeadUpDisplay from Car c join Manufacturer m on m.Manufacturer_ID = c.Manufacturer_ID join CarType ct on ct.CarType_ID = c.CarType_ID where c.Car_ID = @CarId";
 
         public const string SelectAll =
-            @"select c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, c.RainSensorWindscreenWipers, c.HeadUpDisplay from Car c join Manufacturer m on m.Manufacturer_ID = c.Manufacturer_ID join CarType ct on ct.CarType_ID = c.CarType_ID";
+            @"select c.Car_ID as CarId, c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, c.RainSensorWindscreenWipers, c.HeadUpDisplay from Car c join Manufacturer m on m.Manufacturer_ID = c.Manufacturer_ID join CarType ct on ct.CarType_ID = c.CarType_ID";
 
         public const string CacheAllKey = "urn:Auto_Carstats:CarSpecifications";
         public const string CacheWithCarIdKey = "urn:Auto_Carstats:CarSpecifications:{0}";
@@ -51,7 +51,7 @@ namespace Lace.Shared.DataProvider.Models
         {
             repository.AddItems<CarSpecification>(SelectAll, CacheAllKey);
         }
-
+        public int CarId { get; set; }
         public string ManufacturerName { get; set; }
         public int? ModelYear { get; set; }
         public string CarTypeName { get; set; }

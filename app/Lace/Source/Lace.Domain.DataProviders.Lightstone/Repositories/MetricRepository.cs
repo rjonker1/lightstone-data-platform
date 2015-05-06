@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Shared.DataProvider.Models;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -23,12 +23,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<Metric> Get(string sql, object param)
+        public IEnumerable<Metric> Get(string sql, object param, string cacheKey)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Metric> GetAll(string sql)
+        public IEnumerable<Metric> GetAll(string sql, string cacheKey)
         {
             using (_cacheClient)
             {
