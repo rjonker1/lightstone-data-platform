@@ -61,6 +61,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                 catch (Exception e)
                 {
                     this.Error(() => "The process failed: " + e);
+                    throw;
                 }
             });
 
