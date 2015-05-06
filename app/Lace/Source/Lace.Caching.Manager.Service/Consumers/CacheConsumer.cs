@@ -1,15 +1,15 @@
 ﻿using EasyNetQ;
-using Lace.Caching.Manager.Service.Handlers;
+using Lace.Caching.BuildingBlocks.Handlers;
 using Lace.Caching.Messages;
 
 namespace Lace.Caching.Manager.Service.Consumers
 {
-    public class CacheCommandConsumer
+    public class CacheConsumer
     {
         private readonly IHandleClearingData _clear;
         private readonly IHandleRefreshingData _refresh;
 
-        public CacheCommandConsumer(IHandleClearingData clear, IHandleRefreshingData refresh)
+        public CacheConsumer(IHandleClearingData clear, IHandleRefreshingData refresh)
         {
             _clear = clear;
             _refresh = refresh;

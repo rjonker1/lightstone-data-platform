@@ -1,5 +1,5 @@
 ﻿using Common.Logging;
-using Lace.Caching.Manager.Service.Handlers;
+using Lace.Caching.BuildingBlocks.Handlers;
 using Quartz;
 
 namespace Lace.Caching.Manager.Service.Jobs

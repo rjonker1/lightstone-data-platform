@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Common.Logging;
@@ -7,7 +8,7 @@ using Lace.Shared.DataProvider.Contracts;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
-namespace Lace.Caching.Manager.Service.Repository
+namespace Lace.Caching.BuildingBlocks.Repository
 {
     public class CacheDataRepository : ICacheRepository
     {
@@ -32,7 +33,7 @@ namespace Lace.Caching.Manager.Service.Repository
                     var cachedItem = _cacheClient.As<TItem>();
                     var existing = cachedItem.Lists[cacheKey];
 
-                    if (existing.DoesExistInTheCache())
+                    if (existing != null && existing.Any())
                     {
                         existing.Clear();
                         existing.RemoveAll();
@@ -42,8 +43,12 @@ namespace Lace.Caching.Manager.Service.Repository
                         _connection.Query<TItem>(sql)
                             .ToList();
 
+                    _log.InfoFormat("Tring to add {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
+
                     dbResponse.ForEach(f => existing.Add(f));
-                    dbResponse.AddItemsToCache(_cacheClient, cacheKey, DateTime.UtcNow.AddDays(2));
+                    _cacheClient.Add(cacheKey, existing, DateTime.UtcNow.AddDays(1));
+
+                    _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
                 }
             }
             catch (Exception ex)
@@ -51,6 +56,16 @@ namespace Lace.Caching.Manager.Service.Repository
                 _log.ErrorFormat("Cannot Add Items to Cache because of {0}", ex);
             }
 
+        }
+
+        public IEnumerable<TItem> Get<TItem>(string cacheKey) where TItem : class
+        {
+            using (_cacheClient)
+            {
+                var cachedItem = _cacheClient.As<TItem>();
+                var existing = cachedItem.Lists[cacheKey];
+                return existing.DoesExistInTheCache() ? existing.ToList() : new List<TItem>();
+            }
         }
 
         public void AddItem<TItem>(string sql, object param, string cacheKey) where TItem : class
@@ -62,7 +77,7 @@ namespace Lace.Caching.Manager.Service.Repository
                     var cachedItem = _cacheClient.As<TItem>();
                     var existing = cachedItem.Lists[cacheKey];
 
-                    if (existing.DoesExistInTheCache())
+                    if (existing != null && existing.Any())
                     {
                         existing.Clear();
                     }
@@ -71,8 +86,12 @@ namespace Lace.Caching.Manager.Service.Repository
                         _connection.Query<TItem>(sql, param)
                             .ToList();
 
+                    _log.InfoFormat("Tring to add {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
+
                     dbResponse.ForEach(f => existing.Add(f));
-                    dbResponse.AddItemsToCache(_cacheClient, cacheKey, DateTime.UtcNow.AddDays(2));
+                    _cacheClient.Add(cacheKey, existing, DateTime.UtcNow.AddDays(1));
+
+                    _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
                 }
             }
             catch (Exception ex)

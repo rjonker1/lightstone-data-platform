@@ -2,7 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
-using Lace.Caching.Manager.Service.Repository;
+using Lace.Caching.BuildingBlocks.Repository;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Shared.DataProvider.Contracts;
 

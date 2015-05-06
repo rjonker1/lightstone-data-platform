@@ -1,4 +1,4 @@
-﻿namespace Lace.Caching.Manager.Service.Handlers
+﻿namespace Lace.Caching.BuildingBlocks.Handlers
 {
     public interface IHandleRefreshingData
     {

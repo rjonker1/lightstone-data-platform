@@ -102,6 +102,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Caching", "Lace\Source
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.DataProvider", "Lace\Source\Lace.Shared.DataProvider\Lace.Shared.DataProvider.csproj", "{B2049E92-CF9A-40D5-9ADE-D9BFC8ECD00C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Caching.BuildingBlocks", "Lace\Source\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj", "{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -252,6 +254,10 @@ Global
 		{B2049E92-CF9A-40D5-9ADE-D9BFC8ECD00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2049E92-CF9A-40D5-9ADE-D9BFC8ECD00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2049E92-CF9A-40D5-9ADE-D9BFC8ECD00C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -299,5 +305,6 @@ Global
 		{A05DA7C2-75A1-49FA-8DAE-DA7054635A58} = {5C2AA34A-3E24-41A2-9026-7453C4057F87}
 		{5C53C8CB-BAEC-44D7-A183-19FAED7035E7} = {45CC1CB7-CDC3-4502-BB60-85EEBCE0DD94}
 		{A38117CD-AFCD-4F1A-999C-0C390F6BE5AE} = {45CC1CB7-CDC3-4502-BB60-85EEBCE0DD94}
+		{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B} = {45CC1CB7-CDC3-4502-BB60-85EEBCE0DD94}
 	EndGlobalSection
 EndGlobal

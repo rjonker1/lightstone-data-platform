@@ -2,7 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
-using Lace.Caching.Manager.Service.Handlers;
+using Lace.Caching.BuildingBlocks.Handlers;
 
 namespace Lace.Caching.Manager.Service.Installers
 {

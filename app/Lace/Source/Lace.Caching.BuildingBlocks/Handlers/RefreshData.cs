@@ -2,9 +2,8 @@
 using Common.Logging;
 using Lace.Shared.DataProvider.Contracts;
 using Lace.Shared.DataProvider.Models;
-using ServiceStack.Common.Extensions;
 
-namespace Lace.Caching.Manager.Service.Handlers
+namespace Lace.Caching.BuildingBlocks.Handlers
 {
     public class RefreshData : IHandleRefreshingData
     {
@@ -20,23 +19,23 @@ namespace Lace.Caching.Manager.Service.Handlers
         public void Handle()
         {
             _log.Info("Adding Items to the Cache");
-            ItemsToCache.ForEach(f => f.AddToCache(_repository));
+            ItemsToCache.ForEach( f => f.AddToCache(_repository));
 
             _log.InfoFormat("{0} Items should have been added to the Cache", ItemsToCache.Count);
         }
 
 
-        private static readonly IList<IAmCachable> ItemsToCache = new List<IAmCachable>()
+        private static readonly List<IAmCachable> ItemsToCache = new List<IAmCachable>()
         {
-            new Band(),
-            new CarInformation(),
-            new CarSpecification(),
-            new Make(),
-            new Metric(),
-            new Municipality(),
-            new Sale(),
-            new Statistic(),
-            new Vin()
+            //new Band(),
+            //new CarSpecification(),
+            //new Make(),
+            //new Metric(),
+            //new Municipality(),
+            //new Sale(),
+            //new Statistic(),
+            new Vin() //,
+            //new CarInformation()
         };
     }
 }

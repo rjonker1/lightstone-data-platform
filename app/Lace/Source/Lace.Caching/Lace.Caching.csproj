@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lace.Caching</RootNamespace>
-    <AssemblyName>Lace.Caching</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Caching</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

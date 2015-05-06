@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using Lace.Shared.DataProvider.Contracts;
+﻿using Lace.Shared.DataProvider.Contracts;
 
 namespace Lace.Shared.DataProvider.Models
 {
     public class Band : IAmCachable
     {
-        private static readonly IDictionary<string, string> AllBands = new Dictionary<string, string> {{AllCacheKey, SelectAll}};
-
         public const string SelectAll = @"SELECT * FROM Band";
-        public const string AllCacheKey = "urn:Auto_Carstats:Bands";
+        public const string CacheAllKey = "urn:Auto_Carstats:Bands";
         public Band()
         {
 
@@ -24,7 +21,7 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<Band>(SelectAll, AllCacheKey);
+            repository.AddItems<Band>(SelectAll, CacheAllKey);
         }
 
         public int Band_ID { get; set; }

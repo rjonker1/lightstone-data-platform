@@ -1,7 +1,7 @@
 ﻿using Common.Logging;
 using Lace.Shared.DataProvider.Contracts;
 
-namespace Lace.Caching.Manager.Service.Handlers
+namespace Lace.Caching.BuildingBlocks.Handlers
 {
     public class ClearData : IHandleClearingData
     {
