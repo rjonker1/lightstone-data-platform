@@ -6,6 +6,7 @@
 
     initializePreBilling(sammy);
     initializeStageBilling(sammy);
+    initializeFinalBilling(sammy);
     intitializeMI(sammy);
     initializeAdminBilling(sammy);
 }
@@ -21,6 +22,13 @@ function initializeStageBilling(sammy) {
 
     sammy.get('#/StageBilling', function (context) {
         context.load('/StageBilling', { dataType: 'html', cache: false }).swap();
+    });
+}
+
+function initializeFinalBilling(sammy) {
+
+    sammy.get('#/FinalBilling', function (context) {
+        context.load('/FinalBilling', { dataType: 'html', cache: false }).swap();
     });
 }
 

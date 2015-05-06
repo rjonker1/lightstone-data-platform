@@ -593,6 +593,7 @@
     <Compile Include="Installers\ApiClientInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Modules\AdminBillingModule.cs" />
+    <Compile Include="Modules\FinalBillingModule.cs" />
     <Compile Include="Modules\MIModule.cs" />
     <Compile Include="Modules\PackageModule.cs" />
     <Compile Include="Modules\PreBillingModule.cs" />
@@ -623,6 +624,7 @@
     <Content Include="Views\MI\Index.cshtml" />
     <Content Include="Views\AdminBilling\Index.cshtml" />
     <Content Include="Views\StageBilling\Index.cshtml" />
+    <Content Include="Views\FinalBilling\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
