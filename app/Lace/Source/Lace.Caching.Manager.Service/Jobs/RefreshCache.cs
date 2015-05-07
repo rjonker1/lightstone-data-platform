@@ -19,6 +19,9 @@ namespace Lace.Caching.Manager.Service.Jobs
         public void Execute(IJobExecutionContext context)
         {
             _log.InfoFormat("Attempting to execute the refresh cache job");
+            _clear.Handle();
+            _refresh.Handle();
+            _log.InfoFormat("Executed the refresh cache job");
         }
     }
 }

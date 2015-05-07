@@ -1,20 +1,19 @@
-﻿using System.Collections.Generic;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Shared.DataProvider.Models;
+﻿using System.Linq;
+using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeStatisticsRepository : IReadOnlyRepository<Statistic>
+    public class FakeStatisticsRepository : IReadOnlyRepository
     {
-
-        public IEnumerable<Statistic> Get(string sql, object param, string cacheKey)
+        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
         {
-            return Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
+            return (IQueryable<TItem>)Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483().AsQueryable();
         }
 
-        public IEnumerable<Statistic> GetAll(string sql, string cacheKey)
+        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
         {
-            return Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
+            return (IQueryable<TItem>)Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483().AsQueryable();
         }
     }
+
 }

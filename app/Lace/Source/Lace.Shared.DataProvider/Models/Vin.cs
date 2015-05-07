@@ -1,17 +1,16 @@
-﻿using Lace.Shared.DataProvider.Contracts;
-
-namespace Lace.Shared.DataProvider.Models
+﻿namespace Lace.Shared.DataProvider.Models
 {
-    public class Vin : IAmCachable
+    public class Vin
     {
         public const string SelectWithVin = "select v.* from Vin v where v.VIN = @Vin";
-        public const string SelectAll = "select v.* from Vin v";
+        //public const string SelectAll = "select v.* from Vin v";
 
         public const string CacheWithVinKey = "urn:Auto_Carstats:Vin:{0}";
-        public const string CacheAllKey = "urn:Auto_Carstats:Vin";
+        //public const string CacheAllKey = "urn:Auto_Carstats:Vin";
+
         public Vin()
         {
-             
+
         }
 
         public Vin(string vin, int carId, string makeName, string carTypeName, string carModel, int yearId,
@@ -30,11 +29,6 @@ namespace Lace.Shared.DataProvider.Models
 
         }
 
-        public void AddToCache(ICacheRepository repository)
-        {
-            repository.AddItems<Vin>(SelectAll, CacheAllKey);
-        }
-
         public int Vin_ID { get; set; }
         public string VIN { get; set; }
         public int? Car_ID { get; set; }
@@ -47,6 +41,6 @@ namespace Lace.Shared.DataProvider.Models
         public string Colour { get; set; }
         public string Source { get; set; }
 
-       
+
     }
 }

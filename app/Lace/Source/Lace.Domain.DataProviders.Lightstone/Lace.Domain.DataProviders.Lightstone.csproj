@@ -101,19 +101,10 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Core\IReadOnlyRepository.cs" />
     <Compile Include="Infrastructure\CallLightstoneAutoDataProvider.cs" />
-    <Compile Include="Infrastructure\Factory\ISetupRepository.cs" />
-    <Compile Include="Infrastructure\Factory\RepositoryFactory.cs" />
     <Compile Include="Infrastructure\HandleLightstoneAutoSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneAuto.cs" />
-    <Compile Include="Repositories\BandsRepository.cs" />
-    <Compile Include="Repositories\MakeRepository.cs" />
-    <Compile Include="Repositories\MetricRepository.cs" />
-    <Compile Include="Repositories\MunicipalityRepository.cs" />
-    <Compile Include="Repositories\SaleRepository.cs" />
-    <Compile Include="Repositories\StatisticsRepository.cs" />
     <Compile Include="Services\BaseRetrievalMetric.cs" />
     <Compile Include="Services\IRetrieveATypeOfMetric.cs" />
     <Compile Include="Services\IRetrieveValuationFromMetrics.cs" />

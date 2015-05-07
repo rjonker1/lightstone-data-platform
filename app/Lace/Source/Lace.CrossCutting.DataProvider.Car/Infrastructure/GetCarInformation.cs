@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
-using Lace.Domain.Core.Requests.Contracts;
+using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 {
@@ -14,24 +14,23 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
         public IHaveCarInformation CarInformationRequest { get; private set; }
 
         private IGetCarInformation _getCarInformation;
-        private readonly ISetupCarRepository _repositories;
+        private readonly IReadOnlyRepository _repository;
 
-        public GetCarInformation(string vinNumber, ISetupCarRepository repositories)
+        public GetCarInformation(string vinNumber, IReadOnlyRepository repository)
         {
-            _repositories = repositories;
+            _repository = repository;
             CarInformationRequest = new CarInformationRequest(vinNumber);
         }
 
-        public GetCarInformation(int carId, ISetupCarRepository repositories)
+        public GetCarInformation(int carId, IReadOnlyRepository repository)
         {
-            _repositories = repositories;
+            _repository = repository;
             CarInformationRequest = new CarInformationRequest(carId);
         }
 
         public IRetrieveCarInformation SetupDataSources()
         {
-            _getCarInformation = new CarInformationWorker(_repositories.CarInformationRepository(),
-                _repositories.Vin12CarInformationRepository());
+            _getCarInformation = new CarInformationWorker(_repository);
             return this;
         }
 

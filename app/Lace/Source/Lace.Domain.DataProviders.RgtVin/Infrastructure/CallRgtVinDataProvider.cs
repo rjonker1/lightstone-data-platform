@@ -13,6 +13,7 @@ using Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
 using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
@@ -26,10 +27,10 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
 
-        private readonly ISetupRepository _repository;
+        private readonly IReadOnlyRepository _repository;
         private IList<Vin> _vins;
 
-        public CallRgtVinDataProvider(IAmDataProvider dataProvider, ISetupRepository repository, ILogCommandTypes logCommand)
+        public CallRgtVinDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
@@ -65,7 +66,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex);
+                _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex,ex.Message);
                 _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling RGT Vin Data Provider"});
                 RgtVinResponseFailed(response);
             }
@@ -73,7 +74,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
         private void GetListOfVin(string vin)
         {
-            var worker = new VehicleVinUnitOfWork(_repository.VinRepository());
+            var worker = new VehicleVinUnitOfWork(_repository);
             worker.GetVin(vin);
             _vins = worker.Vins != null ? worker.Vins.ToList() : new List<Vin>();
         }

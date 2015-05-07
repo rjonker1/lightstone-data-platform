@@ -42,7 +42,7 @@ namespace Lace.Caching.Manager.Service
 
 
             properties["quartz.plugin.xml.type"] = "Quartz.Plugin.Xml.XMLSchedulingDataProcessorPlugin, Quartz";
-            properties["quartz.plugin.xml.fileNames"] = "quartz_jobs.xml";
+            properties["quartz.plugin.xml.fileNames"] = "jobs.xml";
 
             ISchedulerFactory schedulerFactory = new StdSchedulerFactory(properties);
             _scheduler = schedulerFactory.GetScheduler();

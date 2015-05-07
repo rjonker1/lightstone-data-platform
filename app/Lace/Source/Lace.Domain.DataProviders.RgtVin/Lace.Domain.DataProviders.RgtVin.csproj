@@ -103,16 +103,12 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Core\Contracts\IGetVehicleFromVin.cs" />
-    <Compile Include="Core\Contracts\IReadOnlyRepository.cs" />
-    <Compile Include="Core\Contracts\ISetupRepository.cs" />
     <Compile Include="Infrastructure\CallRgtVinDataProvider.cs" />
     <Compile Include="Infrastructure\Dto\RgtVinRequestMessage.cs" />
     <Compile Include="UnitOfWork\VehicleVinUnitOfWork.cs" />
     <Compile Include="Infrastructure\HandleRgtVinDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtVinResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtVinSource.cs" />
-    <Compile Include="Repositories\VinRepository.cs" />
-    <Compile Include="Repositories\Factory\RepositoryFactory.cs" />
     <Compile Include="RgtVinDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>

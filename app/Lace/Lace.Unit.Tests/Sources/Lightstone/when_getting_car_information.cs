@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
-using Lace.Domain.Core.Requests.Contracts;
+using Lace.Shared.DataProvider.Repositories;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Xunit.Extensions;
@@ -12,8 +10,8 @@ namespace Lace.Unit.Tests.Sources.Lightstone
 {
     public class when_getting_car_information : Specification
     {
-        private readonly IReadOnlyCarRepository<CarInformation> _repository;
-        private readonly IReadOnlyCarRepository<CarInformation> _vin12Repository;
+        private readonly IReadOnlyRepository _repository;
+        private readonly IReadOnlyRepository _vin12Repository;
         private readonly IGetCarInformation _getCarInformation;
         private readonly IHaveCarInformation _request;
 
@@ -22,7 +20,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             _request = LaceRequestCarInformationRequestBuilder.ForCarId_107483_ButNoVin();
             _repository = new FakeCarInfoRepository();
             _vin12Repository = new FakeVin12CarInfoRepository(_request.Vin);
-            _getCarInformation = new CarInformationWorker(_repository, _vin12Repository);
+            _getCarInformation = new CarInformationWorker(_repository);
         }
 
         public override void Observe()

@@ -58,7 +58,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Audatex Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling Audatex Data Provider {0}",ex, ex.Message);
                 _logCommand.LogFault(ex.Message, new {ErrorMessage = "Error calling Audatex Data Provider"});
                 AudatexResponseFailed(response);
             }

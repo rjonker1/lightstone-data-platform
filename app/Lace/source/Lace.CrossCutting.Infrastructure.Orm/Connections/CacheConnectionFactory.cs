@@ -31,12 +31,12 @@ namespace Lace.CrossCutting.Infrastructure.Orm.Connections
             }
             catch (RedisException e)
             {
-                _log.ErrorFormat("An error occurred connecting to cache {0}", e.Message);
+                _log.ErrorFormat("An error occurred connecting to cache {0}", e, e.Message);
                 return false;
             }
             catch (Exception e)
             {
-                _log.ErrorFormat("An error occurred connecting to cache {0}", e.Message);
+                _log.ErrorFormat("An error occurred connecting to cache {0}",e, e.Message);
                 return false;
             }
         }
@@ -49,12 +49,12 @@ namespace Lace.CrossCutting.Infrastructure.Orm.Connections
             }
             catch (RedisException e)
             {
-                _log.ErrorFormat("An error occurred connecting to cache {0}", e.Message);
+                _log.ErrorFormat("An error occurred connecting to cache {0}",e, e.Message);
                 return null;
             }
             catch (Exception e)
             {
-                _log.ErrorFormat("An error occurred connecting to cache {0}", e.Message);
+                _log.ErrorFormat("An error occurred connecting to cache {0}",e, e.Message);
                 return null;
             }
         }
@@ -70,11 +70,11 @@ namespace Lace.CrossCutting.Infrastructure.Orm.Connections
                 }
                 catch (RedisException e)
                 {
-                    _log.ErrorFormat("An error occurred adding item to the cache cache {0}", e.Message);
+                    _log.ErrorFormat("An error occurred adding item to the cache cache {0}",e, e.Message);
                 }
                 catch (Exception e)
                 {
-                    _log.ErrorFormat("An error occurred connecting to cache {0}", e.Message);
+                    _log.ErrorFormat("An error occurred connecting to cache {0}",e, e.Message);
                 }
             });
         }

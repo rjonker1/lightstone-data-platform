@@ -10,7 +10,7 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure;
-using Lace.Domain.DataProviders.RgtVin.Repositories.Factory;
+using Lace.Shared.DataProvider.Repositories;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.RgtVin
@@ -47,7 +47,7 @@ namespace Lace.Domain.DataProviders.RgtVin
 
                 var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
                     new CallRgtVinDataProvider(_dataProvider,
-                        new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
+                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()), _logCommand));
                 consumer.ConsumeDataProvider(response);
 

@@ -101,15 +101,11 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Core\Contracts\IGetCarSpecifications.cs" />
-    <Compile Include="Core\Contracts\IReadOnlyRepository.cs" />
     <Compile Include="Infrastructure\CallRgtDataProvider.cs" />
     <Compile Include="Infrastructure\Dto\RgtRequest.cs" />
     <Compile Include="Infrastructure\HandleRgtDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtSource.cs" />
-    <Compile Include="Repositories\CarSpecificationRepository.cs" />
-    <Compile Include="Core\Contracts\ISetupRepository.cs" />
-    <Compile Include="Repositories\Factory\RepositoryFactory.cs" />
     <Compile Include="RgtDataProvider.cs" />
     <Compile Include="UnitOfWork\CarSpecificationsUnitOfWork.cs" />
   </ItemGroup>

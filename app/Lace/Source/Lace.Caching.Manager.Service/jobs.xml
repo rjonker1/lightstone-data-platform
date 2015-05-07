@@ -10,9 +10,10 @@
   <schedule>
     <job>
       <name>RefreshCache</name>
+      <group>RefreshCacheGroup</group>
       <description>Refresh the Data Provider Cache</description>
-      <job-type>Lace.Caching.Manager.Service.Jobs.RefreshCache, Lace.Caching.Manager.Service.Jobs</job-type>
-      <durable>false</durable>
+      <job-type>Lace.Caching.Manager.Service.Jobs.RefreshCache, Lightstone.DataPlatform.Lace.Caching.Manager.Service</job-type>
+      <durable>true</durable>
       <recover>false</recover>
     </job>
     <trigger>
@@ -20,15 +21,11 @@
         <name>RefreshCacheTrigger</name>
         <job-name>RefreshCache</job-name>
         <job-group>RefreshCacheGroup</job-group>
-        <!-- To run at 00:00 every day -->
-        <cron-expression>0 0 0 * * ?</cron-expression>
+         <!--To run at 20:00 every day -->
+        <cron-expression>0 0 20 * * ?</cron-expression>
+        <!--  Fire at 08:15am every day
+        <cron-expression>0 30 9 * * ?</cron-expression>-->
       </cron>
-      <!--<simple>
-        <name>RefreshCacheTrigger</name>
-        <job-name>RefreshCache</job-name>
-        <repeat-count>-1</repeat-count>
-        <repeat-interval>5000</repeat-interval>
-      </simple>-->
     </trigger>
   </schedule>
 
