@@ -9,14 +9,14 @@
             context.load('/login', { dataType: 'html', cache: false }).swap();
         });
         this.get('/logout', function (context) {
-            $.removeCookie('token', { domain: 'lightstone.com' });
+            $.removeCookie('token', { domain: 'lightstone.co.za' });
             context.redirect("/");
             //context.load('/logout', { dataType: 'html', cache: false }).swap();
         });
         this.post('/login', function (context) {
             $(context.target).ajaxSubmit({
                 success: function (data) {
-                    $.cookie('token', data, { domain: 'lightstone.com' });
+                    $.cookie('token', data, { domain: 'lightstone.co.za' });
                     context.redirect("/");
                 }
             });
