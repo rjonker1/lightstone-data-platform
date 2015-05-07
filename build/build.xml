@@ -343,6 +343,9 @@
         <dependency id="EasyNetQ" />
         <dependency id="Lightstone.DataPlatform.Shared" />
         <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
+        <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
+        <dependency id="Lightstone.DataPlatform.Workflow.BuildingBlocks" />
+        <dependency id="RabbitMQ.Client"  />
 			</dependencies>
 		</nuget>
     <nuget deploy="false">
