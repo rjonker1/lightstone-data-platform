@@ -330,6 +330,8 @@
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.Messages.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.DataProvider.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.DataProvider.pdb" to="lib\net45"/>
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
         <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
         <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
