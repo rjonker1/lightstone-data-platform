@@ -10,7 +10,7 @@ namespace Workflow.Billing.Helpers.AutoMapper.Maps
         {
             Mapper.CreateMap<PreBilling, FinalBilling>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(s => Guid.NewGuid()))
-                .ForMember(dest => dest.PreBillingId, opt => opt.MapFrom(s => s.Id));
+                .ForMember(dest => dest.StageBillingId, opt => opt.MapFrom(s => s.Id));
         }
     }
 }

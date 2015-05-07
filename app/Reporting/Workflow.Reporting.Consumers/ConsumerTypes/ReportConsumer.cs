@@ -8,11 +8,20 @@ using jsreport.Client;
 using Newtonsoft.Json;
 using Workflow.Reporting.Dtos;
 using System.Configuration;
+using Workflow.Reporting.NotificationSender;
 
 namespace Workflow.Reporting.Consumers.ConsumerTypes
 {
     public class ReportConsumer
     {
+
+        private readonly ISendNotifications<ReportDto> _send;
+
+        public ReportConsumer(ISendNotifications<ReportDto> send)
+        {
+            _send = send;
+        }
+
         public async Task Consume(IMessage<ReportMessage> message)
         {
 
@@ -45,10 +54,14 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
 
                         this.Info(() => "Report : " + dto.Data.Customer.Name + " - Invoice.pdf was created successfully");
                     }
+
+                    //Send Email
+                    _send.Send(dto);
                 }
                 catch (Exception e)
                 {
                     this.Error(() => "The process failed: " + e);
+                    throw;
                 }
             });
 

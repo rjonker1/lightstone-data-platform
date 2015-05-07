@@ -9,12 +9,12 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules
 {
-    public class StageBillingModule : NancyModule
+    public class FinalBillingModule : NancyModule
     {
-        public StageBillingModule(IRepository<StageBilling> stageBillingRepository)
+        public FinalBillingModule(IRepository<FinalBilling> stageBillingRepository)
         {
 
-            Get["/StageBilling/"] = _ =>
+            Get["/FinalBilling/"] = _ =>
             {
 
                 var customerList = new List<StageBillingDto>();
@@ -27,16 +27,12 @@ namespace Billing.Api.Modules
                     //Transactions total for customer
                     var customerTransactionsTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.TransactionId).Distinct().Count();
-                    var billedCustomerTransactionsTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
                     //Products total for customer
                     var customerPackagesTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
                     //Transactions total for client
                     var clientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
-                    var billedClientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId && x.IsBillable)
                                                         .Select(x => x.TransactionId).Distinct().Count();
                     //Products total for client
                     var clientPackagesTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
@@ -51,7 +47,6 @@ namespace Billing.Api.Modules
                             Id = transaction.CustomerId,
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactionsTotal,
-                            BilledTransactions = billedCustomerTransactionsTotal,
                             Products = customerPackagesTotal
                         };
                     }
@@ -64,7 +59,6 @@ namespace Billing.Api.Modules
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
                             Transactions = clientTransactionsTotal,
-                            BilledTransactions = billedClientTransactionsTotal,
                             Products = clientPackagesTotal
                         };
                     }
@@ -74,18 +68,20 @@ namespace Billing.Api.Modules
                     {
                         UserId = transaction.UserId,
                         Username = transaction.Username,
-                        HasTransactions = transaction.HasTransactions
+                        HasTransactions = true
                     };
 
                     //Indices
                     var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
                     var customerIndex = customerList.FindIndex(x => x.Id == customer.Id);
 
+
                     //Index restrictions for new records
-                    if (userIndex < 0 && user.HasTransactions) userList.Add(user);
+                    if (userIndex < 0) userList.Add(user);
 
                     customer.Users = userList;
-                    if (customerIndex < 0 && customer.Users.Any()) customerList.Add(customer);
+
+                    if (customerIndex < 0) customerList.Add(customer);
                 }
 
                 //return Response.AsJson(new { data = customerList });
@@ -95,43 +91,22 @@ namespace Billing.Api.Modules
             };
 
 
-            Get["/StageBilling/CustomerClient/{searchId}/Users"] = param =>
+            Get["/FinalBilling/CustomerClient/{searchId}/Users"] = param =>
             {
 
                 var searchId = new Guid(param.searchId);
-                var customerUsersDetailList = new List<UserDto>();
+                var customerUsersDetailList = new List<User>();
 
                 foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
-
-                    var userTransactionsList = new List<TransactionDto>();
-
-                    //Filter repo for user transaction; For specified customer | client
-                    var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId
-                        && (x.CustomerId == searchId || x.ClientId == searchId)
-                        && x.IsBillable)
-                                            .Select(x =>
-                                                new TransactionDto
-                                                {
-                                                    TransactionId = x.TransactionId
-                                                }).Distinct();
-
-                    foreach (var userTransaction in userTransactions)
-                    {
-
-                        //Index
-                        var userTransIndex = userTransactionsList.FindIndex(x => x.TransactionId == userTransaction.TransactionId);
-                        if (userTransIndex < 0) userTransactionsList.Add(userTransaction);
-                    }
-
                     //User
-                    var user = new UserDto
+                    var user = new User
                     {
                         UserId = transaction.UserId,
                         Username = transaction.Username,
                         FirstName = transaction.FirstName,
                         LastName = transaction.LastName,
-                        Transactions = userTransactionsList
+                        HasTransactions = true
                     };
 
                     //Index
@@ -145,7 +120,7 @@ namespace Billing.Api.Modules
             };
 
 
-            Get["/StageBilling/CustomerClient/{searchId}/Packages"] = param =>
+            Get["/FinalBilling/CustomerClient/{searchId}/Packages"] = param =>
             {
 
                 var searchId = new Guid(param.searchId);

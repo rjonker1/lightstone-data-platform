@@ -19,6 +19,7 @@ namespace Workflow.Reporting.Consumer
             var container = new WindsorContainer().Install(
                 new WindsorInstaller(),
                 new BusInstaller(),
+                new NotificationInstaller(),
                 new ConsumerInstaller());
 
             advancedBus = container.Resolve<IAdvancedBus>();

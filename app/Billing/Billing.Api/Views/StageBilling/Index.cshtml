@@ -36,7 +36,7 @@
                 events: userGridActionEvents
             }, {
                 field: 'type',
-                title: 'User Type',
+                title: 'Customer / Client Type',
                 sortable: true
             }, {
                 field: 'owner',
@@ -51,6 +51,10 @@
                 field: 'transactions',
                 title: '# Transactions',
                 formatter: gridTransactionsFormatter
+            }, {
+                field: 'billedTransactions',
+                title: '# Billed Transactions',
+                formatter: gridBilledTransactionsFormatter
             }, {
                 field: 'invoice',
                 formatter: invoiceFormatter,
@@ -68,6 +72,71 @@
         <div class="modal-content">
             
             <div class="modal-body"><div class="te"></div></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Package Edit Modal -->
+<div class="modal fade" id="packageEdit-modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                Package Edit
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User Transaction Edit Modal -->
+<div class="modal fade" id="userTransEdit-modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                
+                <table id="userTransEdit-table"></table>
+
+                <h2 id="detail-table-header"></h2>
+                <table id="detail"></table>
+
+                @*<script src="~/Scripts/app/stage_data.js"></script>*@
+
+                <script>
+
+                    $('#userTransEdit-table').bootstrapTable({
+                        url: '/StageBilling',
+                        search: true,
+                        showRefresh: true,
+                        showColumns: true,
+                        pagination: true,
+                        pageNumber: 1,
+                        pageSize: 10,
+                        pageList: [10, 25, 50, 100, 'All'],
+                        columns: [{
+                            field: 'transactionId',
+                            title: 'Transaction ID',
+                            visible: false
+                        }, {
+                            field: 'packageName',
+                            title: 'Package Name',
+                            sortable: true
+                        }, {
+                            field: 'isBillable',
+                            title: 'Is Billable',
+                        }, {
+                            field: 'edit',
+                        }]
+                    });
+
+                    Billing.overrideDataTablesStyling();
+                </script>
+
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>

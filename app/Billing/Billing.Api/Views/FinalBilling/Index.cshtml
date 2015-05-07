@@ -1,0 +1,76 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Final Billing", ""))
+
+<div class="box">
+
+    <table id="table"></table>
+
+    <h2 id="detail-table-header"></h2>
+    <table id="detail"></table>
+
+    <script src="~/Scripts/app/final_data.js"></script>
+
+    <script>
+
+        $('#table').bootstrapTable({
+            url: '/FinalBilling',
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'Customer ID',
+                visible: false
+            }, {
+                field: 'customerName',
+                title: 'Customer / Client Name',
+                sortable: true
+            }, {
+                field: 'users',
+                title: '# Users',
+                formatter: gridUsersFormatter,
+                events: userGridActionEvents
+            }, {
+                field: 'type',
+                title: 'User Type',
+                sortable: true
+            }, {
+                field: 'owner',
+                title: 'Owner',
+                sortable: true
+            }, {
+                field: 'products',
+                title: '# Packages',
+                formatter: gridPackagesFormatter,
+                events: packageGridActionEvents
+            }, {
+                field: 'transactions',
+                title: '# Transactions',
+                formatter: gridTransactionsFormatter
+            }, {
+                field: 'invoice',
+                formatter: invoiceFormatter,
+                events: invoiceActionEvents
+            }]
+        });
+
+        Billing.overrideDataTablesStyling();
+    </script>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="invoice-modal" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body"><div class="te"></div></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

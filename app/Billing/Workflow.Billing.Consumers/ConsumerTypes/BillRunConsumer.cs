@@ -36,24 +36,36 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
             var bus = new TransactionBus(_bus);
             var reportList = new List<ReportDto>();
 
-            #region Map PreBilling - Stage & Final
+            #region Map PreBilling - Stage
+
             foreach (var preBilling in _preBillingrRepository)
             {
                 var stageEntity = Mapper.Map(preBilling, new StageBilling());
-                var finalEntity = Mapper.Map(preBilling, new FinalBilling());
+                //var finalEntity = Mapper.Map(preBilling, new FinalBilling());
 
                 #region StageBilling
+
                 if (message.Body.RunType == "Stage")
                     if (!_stageBillingRepository.Any(x => x.PreBillingId == stageEntity.PreBillingId))
                         _stageBillingRepository.SaveOrUpdate(stageEntity);
 
                 #endregion
 
+            }
+            #endregion
+
+            #region Map StageBilling - Final
+
+            foreach (var stageBilling in _stageBillingRepository)
+            {
+                var finalEntity = Mapper.Map(stageBilling, new FinalBilling());
+
                 #region FinalBilling
+
                 if (message.Body.RunType == "Final")
                 {
 
-                    if (!_finalBillingRepository.Any(x => x.PreBillingId == finalEntity.PreBillingId))
+                    if (!_finalBillingRepository.Any(x => x.StageBillingId == finalEntity.StageBillingId))
                         _finalBillingRepository.SaveOrUpdate(finalEntity);
 
                     foreach (var transaction in _finalBillingRepository)
@@ -70,8 +82,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                         ItemDescription = x.PackageName,
                                         QuantityUnit = 1,
                                         Price = 16314.67,
-                                        Vat = 2284,
-                                        Total = 18598.72
+                                        Vat = 2284
                                     }).Distinct();
 
                             var reportData = new ReportDto()
