@@ -167,6 +167,7 @@
                             later.date.localTime();
                             var monthlySchedule = moment().format('DD-MM-YYYY HH:mm');
 
+                            $('#dailyRunFlag').bootstrapSwitch('state', true, true);
                             $('#monthlyRunFlag').bootstrapSwitch('state', true, true);
 
                             $('#automated_run').click(function () {
