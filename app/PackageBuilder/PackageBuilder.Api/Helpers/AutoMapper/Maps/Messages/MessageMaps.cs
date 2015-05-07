@@ -14,6 +14,6 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.PackageName, opt => opt.MapFrom(x => x.Name))
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => "dev.packagebuilder.web.lightstone.co.za"));
-        }const.za
+        }
     }
 }
