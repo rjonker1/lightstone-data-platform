@@ -13,6 +13,7 @@ namespace Billing.Domain.Dtos
         public string Owner { get; set; }
         public int Products { get; set; }
         public int Transactions { get; set; }
+        public int BilledTransactions { get; set; }
         public string UserType { get; set; }
         public int Total { get; set; } 
     }

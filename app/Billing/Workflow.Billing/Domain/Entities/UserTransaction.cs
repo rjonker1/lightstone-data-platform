@@ -6,5 +6,6 @@ namespace Workflow.Billing.Domain.Entities
     {
         public virtual Guid TransactionId { get; set; }
         public virtual Guid RequestId { get; set; }
+        public virtual bool IsBillable { get; set; }
     }
 }

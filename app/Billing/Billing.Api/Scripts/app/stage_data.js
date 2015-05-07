@@ -196,3 +196,10 @@ function gridTransactionsFormatter(value, row, index) {
         'Total Transactions: ( ' + value + ' ) '
     ].join('');
 };
+
+function gridBilledTransactionsFormatter(value, row, index) {
+
+    return [
+        'Total Transactions: ( ' + value + ' ) '
+    ].join('');
+};

@@ -52,6 +52,10 @@
                 title: '# Transactions',
                 formatter: gridTransactionsFormatter
             }, {
+                field: 'billedTransactions',
+                title: '# Billed Transactions',
+                formatter: gridBilledTransactionsFormatter
+            }, {
                 field: 'invoice',
                 formatter: invoiceFormatter,
                 events: invoiceActionEvents
@@ -94,7 +98,44 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
-                User Transaction Edit
+                
+                <table id="userTransEdit-table"></table>
+
+                <h2 id="detail-table-header"></h2>
+                <table id="detail"></table>
+
+                @*<script src="~/Scripts/app/stage_data.js"></script>*@
+
+                <script>
+
+                    $('#userTransEdit-table').bootstrapTable({
+                        url: '/StageBilling',
+                        search: true,
+                        showRefresh: true,
+                        showColumns: true,
+                        pagination: true,
+                        pageNumber: 1,
+                        pageSize: 10,
+                        pageList: [10, 25, 50, 100, 'All'],
+                        columns: [{
+                            field: 'transactionId',
+                            title: 'Transaction ID',
+                            visible: false
+                        }, {
+                            field: 'packageName',
+                            title: 'Package Name',
+                            sortable: true
+                        }, {
+                            field: 'isBillable',
+                            title: 'Is Billable',
+                        }, {
+                            field: 'edit',
+                        }]
+                    });
+
+                    Billing.overrideDataTablesStyling();
+                </script>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

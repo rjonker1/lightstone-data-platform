@@ -27,12 +27,16 @@ namespace Billing.Api.Modules
                     //Transactions total for customer
                     var customerTransactionsTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.TransactionId).Distinct().Count();
+                    var billedCustomerTransactionsTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable)
+                                                        .Select(x => x.TransactionId).Distinct().Count();
                     //Products total for customer
                     var customerPackagesTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
                     //Transactions total for client
                     var clientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                                                        .Select(x => x.TransactionId).Distinct().Count();
+                    var billedClientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId && x.IsBillable)
                                                         .Select(x => x.TransactionId).Distinct().Count();
                     //Products total for client
                     var clientPackagesTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
@@ -47,6 +51,7 @@ namespace Billing.Api.Modules
                             Id = transaction.CustomerId,
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactionsTotal,
+                            BilledTransactions = billedCustomerTransactionsTotal,
                             Products = customerPackagesTotal
                         };
                     }
@@ -59,6 +64,7 @@ namespace Billing.Api.Modules
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
                             Transactions = clientTransactionsTotal,
+                            BilledTransactions = billedClientTransactionsTotal,
                             Products = clientPackagesTotal
                         };
                     }
@@ -101,8 +107,10 @@ namespace Billing.Api.Modules
                     var userTransactionsList = new List<TransactionDto>();
 
                     //Filter repo for user transaction; For specified customer | client
-                    var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId && ( x.CustomerId == searchId || x.ClientId == searchId ))
-                                            .Select(x => 
+                    var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId
+                        && (x.CustomerId == searchId || x.ClientId == searchId)
+                        && x.IsBillable)
+                                            .Select(x =>
                                                 new TransactionDto
                                                 {
                                                     TransactionId = x.TransactionId

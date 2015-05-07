@@ -11,6 +11,7 @@ namespace Workflow.Billing.Domain.Entities
         public virtual string ClientName { get; set; }
 
         public virtual string AccountNumber { get; set; }
+        public virtual string BillingType { get; set; }
 
         public BillingTransaction() { }
     }
