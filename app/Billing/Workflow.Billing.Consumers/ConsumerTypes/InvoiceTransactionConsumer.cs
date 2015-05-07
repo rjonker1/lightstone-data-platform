@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
+using Billing.Domain.Dtos;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
@@ -52,7 +53,18 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 foreach (var account in _clientAccounts.Where(account => account.AccountNumber == transaction.AccountNumber))
                     client = account;
 
-                var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.StateId == 1 && x.Action == "Response");
+                //var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.StateId == 1 && x.Action == "Response");
+
+                var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.StateId == 1 && 
+                                                (x.Action == customer.BillingType || x.Action == client.BillingType))
+                                                .Select(x => new DataProviderTransactionDto
+                                                {
+                                                    Id = x.StreamId,
+                                                    DataProviderName = x.DataProviderName,
+                                                    CostPrice = x.CostPrice,
+                                                    RecommendedPrice = x.RecommendedPrice
+                                                });
+
                 var user = Mapper.Map<UserMeta, User>(_users.Get(transaction.UserId));
                 var package = Mapper.Map<PackageMeta, Package>(_pacakges.Get(transaction.PackageId));
 
