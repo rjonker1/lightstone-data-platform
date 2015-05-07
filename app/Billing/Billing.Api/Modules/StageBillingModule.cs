@@ -5,6 +5,7 @@ using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
+using NHibernate.Param;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules
@@ -184,6 +185,12 @@ namespace Billing.Api.Modules
                 }
 
                 return Response.AsJson(new { data = customerPackagesDetailList });
+            };
+
+            Post["/StageBilling/"] = parameters =>
+            {
+
+                return null;
             };
 
         }

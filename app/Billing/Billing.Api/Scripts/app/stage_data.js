@@ -118,7 +118,7 @@ window.packageGridActionEvents = {
                 title: 'Recommended Price',
                 sortable: true
             }, {
-                field: 'invoice',
+                field: 'packageEdit',
                 formatter: packageEditFormatter,
                 events: packageEditActionEvents
             }]
@@ -131,7 +131,7 @@ function packageEditFormatter(value, row, index) {
     return [
         '<div class="row">' +
             '<div class="col-md-4">' +
-                '<button type="button" class="invoice-view btn btn-warning btn-md" data-toggle="modal" data-target="#packageEdit-modal">' +
+                '<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#packageEdit-modal">' +
                     'Edit Item' +
                 '</button>' +
             '</div>' +
@@ -176,7 +176,7 @@ window.invoiceActionEvents = {
 
             $.post(reportingApi + "/ReportHTML", data)
                 .done(function (response) {
-                    $('.modal-body').html(response);
+                    $('.invoice-render').html(response);
                 });
         });
 
