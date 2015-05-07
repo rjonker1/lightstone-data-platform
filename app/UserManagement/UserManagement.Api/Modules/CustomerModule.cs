@@ -57,6 +57,7 @@ namespace UserManagement.Api.Modules
                     customer.CustomerAccountNumber.Customer = entity;
 
                     var metaEntity = Mapper.Map(customer, new CustomerMessage());
+                    metaEntity.BillingType = "Response"; //TODO: Map from Contract
                     var advancedBus = new TransactionBus(eBus);
                     advancedBus.SendDynamic(metaEntity);
 
@@ -83,6 +84,7 @@ namespace UserManagement.Api.Modules
 
                 ////RabbitMQ
                 var metaEntity = Mapper.Map(entity, new CustomerMessage());
+                metaEntity.BillingType = "Response"; //TODO: Map from Contract
                 var advancedBus = new TransactionBus(eBus);
                 advancedBus.SendDynamic(metaEntity);           
 
