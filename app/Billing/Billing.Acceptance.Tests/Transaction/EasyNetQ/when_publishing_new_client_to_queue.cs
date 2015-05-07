@@ -25,8 +25,9 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
                 Id = Guid.NewGuid(),
                 Created = DateTime.UtcNow,
                 AccountNumber = "UNITTESTCL001",
+                BillingType = "Response",
                 CreatedBy = "UNITTEST",
-                ClientId = Guid.NewGuid(),
+                ClientId = new Guid("45547DDC-6AB7-4C45-BF50-9F6066AB3EEF"),
                 ClientName = "Client 1"
             };
 
