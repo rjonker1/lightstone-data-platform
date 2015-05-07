@@ -49,11 +49,29 @@ window.userGridActionEvents = {
                 title: 'Last Name',
             }, {
                 field: 'transactions',
-                title: 'User Transactions (Total)',
+                title: '# Transactions',
+                formatter: userTransactionsFormatter
             }]
         });
 
     }
+};
+
+function userTransactionsFormatter(value, row, index) {
+
+    var count = 0;
+
+    for (var i = 0; i < row.transactions.length; i++) {
+
+        count++;
+    }
+
+    return [
+        'Total Transactions: ( ' + count + ' ) ' +
+        '<button type="button" class="view btn btn-warning btn-md" data-toggle="modal" data-target="#userTransEdit-modal">' +
+            'Edit Transactions' +
+            '</button>'
+    ].join('');
 };
 
 function gridPackagesFormatter(value, row, index) {
@@ -71,11 +89,11 @@ window.packageGridActionEvents = {
 
         $('#detail').bootstrapTable('destroy');
 
-        $('#detail-table-header').text('DataProviders Detail For : ' + row.customerName);
+        $('#detail-table-header').text('Packages Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
             url: '/StageBilling/CustomerClient/' + row.id + '/Packages',
-            responseHandler: packageResponseHandler,
+            //responseHandler: packageResponseHandler,
             cache: false,
             search: true,
             showRefresh: true,
@@ -84,16 +102,12 @@ window.packageGridActionEvents = {
             pageSize: 10,
             pageList: [10, 25, 50, 100, 'All'],
             columns: [{
-                field: 'dataProviderId',
-                title: 'DataProvider ID',
+                field: 'packageId',
+                title: 'Package ID',
                 visible: false
             }, {
                 field: 'packageName',
                 title: 'Package Name',
-                sortable: true
-            }, {
-                field: 'dataProviderName',
-                title: 'DataProvider Name',
                 sortable: true
             }, {
                 field: 'costPrice',
@@ -103,20 +117,33 @@ window.packageGridActionEvents = {
                 field: 'recommendedPrice',
                 title: 'Recommended Price',
                 sortable: true
+            }, {
+                field: 'invoice',
+                formatter: packageEditFormatter,
+                events: packageEditActionEvents
             }]
         });
 
     }
 };
 
+function packageEditFormatter(value, row, index) {
+    return [
+        '<div class="row">' +
+            '<div class="col-md-4">' +
+                '<button type="button" class="invoice-view btn btn-warning btn-md" data-toggle="modal" data-target="#packageEdit-modal">' +
+                    'Edit Item' +
+                '</button>' +
+            '</div>' +
+        '</div>'
+    ].join('');
+}
+
+window.packageEditActionEvents = {};
+
 function invoiceFormatter(value, row, index) {
     return [
         '<div class="row">' +
-            '<div class="col-md-2">' +
-                '<button type="button" class="btn btn-warning">' +
-                    'Edit' +
-                '</button>' +
-            '</div>' +
             '<div class="col-md-4">' +
                 '<button type="button" class="invoice-view btn btn-primary btn-md" data-toggle="modal" data-target="#invoice-modal">' +
                     'Preview Invoice' +
@@ -158,10 +185,10 @@ window.invoiceActionEvents = {
     }
 };
 
-function packageResponseHandler(res) {
+//function packageResponseHandler(res) {
 
-    return res.data[0].dataProviders;
-}
+//    return res.data[0].dataProviders;
+//}
 
 function gridTransactionsFormatter(value, row, index) {
 

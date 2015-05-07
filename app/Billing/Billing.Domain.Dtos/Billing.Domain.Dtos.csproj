@@ -69,6 +69,8 @@
     <Compile Include="PreBillingDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageBillingDto.cs" />
+    <Compile Include="TransactionDto.cs" />
+    <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Workflow.Billing\Workflow.Billing.csproj">

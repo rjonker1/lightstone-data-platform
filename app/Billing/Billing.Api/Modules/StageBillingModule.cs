@@ -68,20 +68,18 @@ namespace Billing.Api.Modules
                     {
                         UserId = transaction.UserId,
                         Username = transaction.Username,
-                        HasTransactions = true
+                        HasTransactions = transaction.HasTransactions
                     };
 
                     //Indices
                     var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
                     var customerIndex = customerList.FindIndex(x => x.Id == customer.Id);
 
-
                     //Index restrictions for new records
-                    if (userIndex < 0) userList.Add(user);
+                    if (userIndex < 0 && user.HasTransactions) userList.Add(user);
 
                     customer.Users = userList;
-
-                    if (customerIndex < 0) customerList.Add(customer);
+                    if (customerIndex < 0 && customer.Users.Any()) customerList.Add(customer);
                 }
 
                 //return Response.AsJson(new { data = customerList });
@@ -95,18 +93,37 @@ namespace Billing.Api.Modules
             {
 
                 var searchId = new Guid(param.searchId);
-                var customerUsersDetailList = new List<User>();
+                var customerUsersDetailList = new List<UserDto>();
 
                 foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
+
+                    var userTransactionsList = new List<TransactionDto>();
+
+                    //Filter repo for user transaction; For specified customer | client
+                    var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId && ( x.CustomerId == searchId || x.ClientId == searchId ))
+                                            .Select(x => 
+                                                new TransactionDto
+                                                {
+                                                    TransactionId = x.TransactionId
+                                                }).Distinct();
+
+                    foreach (var userTransaction in userTransactions)
+                    {
+
+                        //Index
+                        var userTransIndex = userTransactionsList.FindIndex(x => x.TransactionId == userTransaction.TransactionId);
+                        if (userTransIndex < 0) userTransactionsList.Add(userTransaction);
+                    }
+
                     //User
-                    var user = new User
+                    var user = new UserDto
                     {
                         UserId = transaction.UserId,
                         Username = transaction.Username,
                         FirstName = transaction.FirstName,
                         LastName = transaction.LastName,
-                        HasTransactions = true
+                        Transactions = userTransactionsList
                     };
 
                     //Index
