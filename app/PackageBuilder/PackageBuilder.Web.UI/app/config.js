@@ -29,7 +29,7 @@
     };
     
     if (config.apiUri.indexOf("Lightstone.dp.pb.api.url") > -1) {
-        config.apiUri = "http://dev.packagebuilder.api.lightstone.com";
+        config.apiUri = "http://dev.packagebuilder.api.lightstone.co.za";
     }
 
     app.value('config', config); //Global placeholder for config settings
