@@ -1,37 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeCarInfoRepository : IReadOnlyCarRepository<CarInformation>
+    public class FakeCarInfoRepository : IReadOnlyRepository
     {
-        public IEnumerable<CarInformation> Get(string sql, object param, string cacheKey)
+
+        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
+        {
+            return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformation().AsQueryable();
+        }
+
+        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
         {
             PropertyInfo[] props = param.GetType().GetProperties();
             var vin = props[0].GetValue(param);
 
-            //dynamic parameter = param;
-            //var vin = parameter[0].Vin;
-
-            var data = 
+            var data =
                 Mothers.Sources.Lightstone.CarInfoData.CarInformationWithVin().
-                Where(w => w.Key == vin.ToString())
+                    Where(w => w.Key == vin.ToString())
                     .Select(
                         s =>
                             new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
                                 s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
                                 s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
                                 s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).ToList();
-            return data;
-        }
 
-        public IEnumerable<CarInformation> GetAll(string sql, string cacheKey)
-        {
-            return Mothers.Sources.Lightstone.CarInfoData.CarInformation();
+            return (IQueryable<TItem>)data.AsQueryable();
         }
     }
 }

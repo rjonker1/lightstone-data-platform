@@ -9,11 +9,11 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.UnitOfWork;
 using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
@@ -26,14 +26,14 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
       
-        private readonly ISetupRepository _repository;
-        private readonly ISetupCarRepository _carRepository;
+        private readonly IReadOnlyRepository _repository;
+        private readonly IReadOnlyRepository _carRepository;
 
         private IRetrieveCarInformation _carInformation;
         private IList<CarSpecification> _carSpecifications;
 
-        public CallRgtDataProvider(IAmDataProvider dataProvider, ISetupRepository repository,
-            ISetupCarRepository carRepository, ILogCommandTypes logCommand)
+        public CallRgtDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository,
+            IReadOnlyRepository carRepository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
@@ -93,7 +93,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         private void GetCarSpecifics()
         {
-            var carUow = new CarSpecificationsUnitOfWork(_repository.CarSpecificationRepository());
+            var carUow = new CarSpecificationsUnitOfWork(_repository);
             carUow.GetCarSpecifications(_carInformation.CarInformationRequest);
             _carSpecifications = carUow.CarSpecifications != null
                 ? carUow.CarSpecifications.ToList()

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
 using ServiceStack.Common.Extensions;
 
 namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
@@ -13,14 +13,12 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
     {
         private readonly ILog _log;
         public IEnumerable<CarInformation> Cars { get; private set; }
-        private readonly IReadOnlyCarRepository<CarInformation> _repository;
-        private readonly IReadOnlyCarRepository<CarInformation> _vin12Repository;
+        private readonly IReadOnlyRepository _repository;
 
-        public CarInformationWorker(IReadOnlyCarRepository<CarInformation> repository, IReadOnlyCarRepository<CarInformation> vin12Repository)
+        public CarInformationWorker(IReadOnlyRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
             _repository = repository;
-            _vin12Repository = vin12Repository;
         }
 
         public void GetCarInformation(IHaveCarInformation request)
@@ -33,7 +31,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Car Information because of {0}",ex, ex.Message);
+                _log.ErrorFormat("Error getting Car Information because of {0}", ex, ex.Message);
             }
         }
 
@@ -57,16 +55,16 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             if (CannotGetWithVin(request.Vin))
                 return;
 
-            Cars = _repository.GetAll(CarInformation.SelectAllWithValidCarIdAndYear, CarInformation.CacheAllWithValidCarIdAndYearKey)
+            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear, CarInformation.CacheAllWithValidCarIdAndYearKey)
                 .Where(w => w.Vin == request.Vin);
 
             if (!Cars.Any())
-                Cars = _repository.Get(CarInformation.SelectWithVin, new {request.Vin}, CarInformation.CacheWithVinKey);
+                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin}, CarInformation.CacheWithVinKey);
 
             if (!ItMightBeAVin12())
                 return;
 
-            Cars = _vin12Repository.Get(CarInformation.SelectWithVin12, new {request.Vin}, CarInformation.CacheWithVin12Key).ToList();
+            Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin12, new { request.Vin }, CarInformation.CacheWithVin12Key).ToList();
             if (Cars.Any())
             {
                 Cars.ForEach(f => f.IsAVin12Car());
@@ -94,7 +92,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
                 return;
             }
 
-            Cars = _repository.GetAll(CarInformation.SelectAllWithValidCarIdAndYear, CarInformation.CacheAllWithValidCarIdAndYearKey)
+            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear, CarInformation.CacheAllWithValidCarIdAndYearKey)
                 .Where(w => w.CarId == request.CarId && w.Year == request.Year);
         }
 
@@ -109,11 +107,11 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
                 return;
             }
 
-            Cars = _repository.GetAll(CarInformation.SelectAllWithCarId, CarInformation.CacheAllWithCarIdKey)
+            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithCarId, CarInformation.CacheAllWithCarIdKey)
                 .Where(w => w.CarId == request.CarId);
 
             if (!Cars.Any())
-                Cars = _repository.Get(CarInformation.SelectWithCarId, new {request.CarId}, CarInformation.CacheWithCarIdKey);
+                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithCarId, new {request.CarId}, CarInformation.CacheWithCarIdKey);
         }
     }
 }

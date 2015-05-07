@@ -34,17 +34,17 @@ namespace Lace.Unit.Tests.Sources
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneAuto();
-           // _request = new LicensePlateRequestBuilder().ForLightstoneLicensePlate();
+            // _request = new LicensePlateRequestBuilder().ForLightstoneLicensePlate();
             _request = new LicensePlateRequestBuilder().ForLightstoneVinNumber();
-           // _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            // _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _response = new Collection<IPointToLaceProvider>();
 
             _dataProvider = _request.GetFromRequest<IPointToLaceRequest>()
                 .Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
             _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
-            _callTheSource = new CallLightstoneAutoDataProvider(_dataProvider, new FakeRepositoryFactory(),
-                new FakeCarRepositioryFactory(_dataProvider.GetRequest<IAmLightstoneAutoRequest>().VinNumber.Field), _logCommand);
+            _callTheSource = new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(),
+                new FakeCarInfoRepository(), _logCommand);
         }
 
         public override void Observe()

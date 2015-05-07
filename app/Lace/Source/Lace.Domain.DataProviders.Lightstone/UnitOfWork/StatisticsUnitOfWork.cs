@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
     public class StatisticsUnitOfWork : IGetStatistics
     {
         private readonly ILog _log;
-        private readonly IReadOnlyRepository<Statistic> _repository;
+        private readonly IReadOnlyRepository _repository;
 
         public IEnumerable<Statistic> Statistics { get; private set; }
 
-        public StatisticsUnitOfWork(IReadOnlyRepository<Statistic> repository)
+        public StatisticsUnitOfWork(IReadOnlyRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
             _repository = repository;
@@ -27,7 +27,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Statistics = _repository.GetAll(Statistic.SelectAll, Statistic.CacheAllKey)
+                Statistics = _repository.GetAll<Statistic>(Statistic.SelectAll, Statistic.CacheAllKey)
                     .Where(s => s.MetricId ==
                                 (int) MetricTypes.AccidentDistribution ||
                                 (s.MetricId == (int) MetricTypes.AmortisedValues && s.CarId == request.CarId && s.YearId == request.Year) ||
@@ -41,13 +41,13 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 
                 if (!Statistics.Any())
                 {
-                    Statistics = _repository.Get(Statistic.SelectForCarIdMakeYear,
+                    Statistics = _repository.Get<Statistic>(Statistic.SelectForCarIdMakeYear,
                         new {request.CarId, request.Year, request.MakeId}, Statistic.CacheStatisticsKey);
                 }
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Statistics data because of {0}",ex, ex.Message);
+                _log.ErrorFormat("Error getting Statistics data because of {0}", ex, ex.Message);
             }
         }
 

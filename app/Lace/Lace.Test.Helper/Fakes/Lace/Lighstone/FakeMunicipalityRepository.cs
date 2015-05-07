@@ -1,21 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Shared.DataProvider.Models;
+using System.Linq;
+using Lace.Shared.DataProvider.Repositories;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeMunicipalityRepository : IReadOnlyRepository<Municipality>
+    public class FakeMunicipalityRepository : IReadOnlyRepository
     {
-        public IEnumerable<Municipality> Get(string sql, object param, string cacheKey)
+        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
         {
-            throw new NotImplementedException();
+            return (IQueryable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable();
         }
 
-        public IEnumerable<Municipality> GetAll(string sql, string cacheKey)
+        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
         {
-            return MuncipalityDataBuilder.ForAllMunicipalities();
+            return (IQueryable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable();
         }
     }
+    //{
+    //    public IEnumerable<Municipality> Get(string sql, object param, string cacheKey)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public IEnumerable<Municipality> GetAll(string sql, string cacheKey)
+    //    {
+    //        return MuncipalityDataBuilder.ForAllMunicipalities();
+    //    }
+    //}
 }

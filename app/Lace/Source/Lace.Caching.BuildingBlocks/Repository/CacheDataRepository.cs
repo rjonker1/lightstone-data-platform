@@ -43,9 +43,11 @@ namespace Lace.Caching.BuildingBlocks.Repository
                         _connection.Query<TItem>(sql)
                             .ToList();
 
-                    _log.InfoFormat("Tring to add {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
+                    _log.InfoFormat("Trying to add {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
 
-                    dbResponse.ForEach(f => existing.Add(f));
+                    //_cacheClient.StoreAll(_connection.Query<TItem>(sql));
+
+                    _connection.Query<TItem>(sql).ToList().ForEach(f => existing.Add(f));
                     _cacheClient.Add(cacheKey, existing, DateTime.UtcNow.AddDays(1));
 
                     _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);

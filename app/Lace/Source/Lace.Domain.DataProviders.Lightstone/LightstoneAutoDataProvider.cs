@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -11,7 +10,7 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
+using Lace.Shared.DataProvider.Repositories;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Lightstone
@@ -48,9 +47,9 @@ namespace Lace.Domain.DataProviders.Lightstone
 
                 var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
                     new CallLightstoneAutoDataProvider(_dataProvider,
-                        new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
+                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()),
-                        new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
+                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()),_logCommand));
 
                 consumer.ConsumeDataProvider(response);

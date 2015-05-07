@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
+﻿using System.Linq;
 using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeVin12CarInfoRepository : IReadOnlyCarRepository<CarInformation>
+    public class FakeVin12CarInfoRepository : IReadOnlyRepository
     {
         private readonly string _vin;
 
@@ -15,31 +13,26 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             _vin = vin;
         }
 
-
-        public IEnumerable<CarInformation> Get(string sql, object param, string cacheKey)
+        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
         {
+            return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort().Select(
+                    s =>
+                        new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
+                            s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
+                            s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
+                            s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).AsQueryable();
+        }
 
-            return
-                Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort()
+        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
+        {
+            return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort()
                     .Where(w => w.Key == _vin)
                     .Select(
                         s =>
                             new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
                                 s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
                                 s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
-                                s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId));
+                                s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).AsQueryable();
         }
-
-        public IEnumerable<CarInformation> GetAll(string sql, string cacheKey)
-        {
-            return
-                Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort().Select(
-                    s =>
-                        new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
-                            s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
-                            s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
-                            s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId));
-        }
-
     }
 }

@@ -1,21 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Shared.DataProvider.Models;
+﻿using System.Linq;
+using Lace.Shared.DataProvider.Repositories;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeSaleRepository : IReadOnlyRepository<Sale>
+    public class FakeSaleRepository : IReadOnlyRepository
     {
-        public IEnumerable<Sale> Get(string sql, object param, string cacheKey)
+        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
         {
-            return SaleDataBuilder.ForCarSalesOnCarId_107483();
+            return (IQueryable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483().AsQueryable();
         }
 
-        public IEnumerable<Sale> GetAll(string sql, string cacheKey)
+        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
         {
-            return SaleDataBuilder.ForCarSalesOnCarId_107483();
+            return (IQueryable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483().AsQueryable();
         }
+    
+        //public IEnumerable<Sale> Get(string sql, object param, string cacheKey)
+        //{
+        //    return SaleDataBuilder.ForCarSalesOnCarId_107483();
+        //}
+
+        //public IEnumerable<Sale> GetAll(string sql, string cacheKey)
+        //{
+        //    return SaleDataBuilder.ForCarSalesOnCarId_107483();
+        //}
     }
 }

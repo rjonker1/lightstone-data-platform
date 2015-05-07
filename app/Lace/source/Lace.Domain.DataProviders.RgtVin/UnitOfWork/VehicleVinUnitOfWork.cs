@@ -4,6 +4,7 @@ using System.Linq;
 using Common.Logging;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
 using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
 {
@@ -12,9 +13,9 @@ namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
         public IEnumerable<Vin> Vins { get; private set; }
 
         private readonly ILog _log;
-        private readonly IReadOnlyRepository<Vin> _repository;
+        private readonly IReadOnlyRepository _repository;
 
-        public VehicleVinUnitOfWork(IReadOnlyRepository<Vin> repository)
+        public VehicleVinUnitOfWork(IReadOnlyRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
             _repository = repository;
@@ -24,16 +25,15 @@ namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
         {
             try
             {
-                Vins = _repository.GetAll(Vin.SelectAll, Vin.CacheAllKey)
+                Vins = _repository.GetAll<Vin>(Vin.SelectAll, Vin.CacheAllKey)
                     .Where(w => w.VIN == vin);
 
                 if (!Vins.Any())
-                    Vins = _repository.Get(Vin.SelectWithVin, new {@Vin = vin}, Vin.CacheWithVinKey);
+                    Vins = _repository.Get<Vin>(Vin.SelectWithVin, new {@Vin = vin}, Vin.CacheWithVinKey);
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Vin information because of {0}",ex, ex.Message);
-                throw;
+                _log.ErrorFormat("Error getting Vin information because of {0}", ex, ex.Message);
             }
         }
     }

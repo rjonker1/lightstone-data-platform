@@ -4,6 +4,7 @@ using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Shared.DataProvider.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Dto
@@ -13,16 +14,15 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Dto
 
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly IAmRgtRequest _request;
-        private readonly ISetupCarRepository _carRepository;
+        private readonly IReadOnlyRepository _carRepository;
 
-        public RgtRequest(IAmRgtRequest request, ICollection<IPointToLaceProvider> response, ISetupCarRepository carRepository)
+        public RgtRequest(IAmRgtRequest request, ICollection<IPointToLaceProvider> response, IReadOnlyRepository carRepository)
         {
             _request = request;
             _response = response;
             _carRepository = carRepository;
             Build();
         }
-
 
         private void Build()
         {

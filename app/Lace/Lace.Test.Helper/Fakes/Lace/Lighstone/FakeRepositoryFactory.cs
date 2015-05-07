@@ -1,72 +1,34 @@
 ﻿using System;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Shared.DataProvider.Models;
+using Lace.Shared.DataProvider.Repositories;
+using Lace.Test.Helper.Builders.Sources.Lightstone;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-
-    public class FakeCarRepositioryFactory : ISetupCarRepository
+    public class FakeDataProviderRepository : IReadOnlyRepository
     {
-        private readonly string _vin;
-        public FakeCarRepositioryFactory(string vin)
+        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
         {
-            _vin = vin;
+            var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
+            return (IQueryable<TItem>) data;
         }
 
-        public IReadOnlyCarRepository<CarInformation> CarInformationRepository()
+        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
         {
-            return new FakeCarInfoRepository();
+            var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
+            return (IQueryable<TItem>)data;
         }
 
-        public IReadOnlyCarRepository<CarInformation> Vin12CarInformationRepository()
+        private readonly Dictionary<Type, IQueryable<object>> _data = new Dictionary<Type, IQueryable<object>>()
         {
-            return new FakeVin12CarInfoRepository(_vin);
-        }
-
-        public void Dispose()
-        {
-
-        }
-    }
-
-    public class FakeRepositoryFactory : ISetupRepository
-    {
-        public IReadOnlyRepository<Band> BandRepository()
-        {
-           return new FakeBandsRepository();
-        }
-
-        public IReadOnlyRepository<Make> MakeRepository()
-        {
-            return new FakeMakeRepository();
-        }
-
-        public IReadOnlyRepository<Metric> MetricRepository()
-        {
-            return new FakeMetricRepository();
-        }
-
-        public IReadOnlyRepository<Municipality> MuncipalityRepository()
-        {
-            return new FakeMunicipalityRepository();
-        }
-
-        public IReadOnlyRepository<Sale> SaleRepository()
-        {
-            return new FakeSaleRepository();
-        }
-
-        public IReadOnlyRepository<Statistic> StatisticRepository()
-        {
-            return new FakeStatisticsRepository();
-        }
-
-        public void Dispose()
-        {
-            
-        }
+            {typeof(Band), BandsDataBuilder.ForAllBands().AsQueryable()},
+            {typeof(Make), MakeDataBuilder.ForAllMakes().AsQueryable()},
+            {typeof(Metric), MetricDataBuilder.ForAllMetrics().AsQueryable()},
+            {typeof(Municipality), MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable()},
+            {typeof(Sale), SaleDataBuilder.ForCarSalesOnCarId_107483().AsQueryable()},
+            {typeof(Statistic), StatisticsDataBuilder.ForCarId_107483().AsQueryable()},
+        };
     }
 }

@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Shared.DataProvider.Models;
+﻿using System.Linq;
+using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeBandsRepository : IReadOnlyRepository<Band>
+    public class FakeBandsRepository : IReadOnlyRepository
     {
-        public IEnumerable<Band> Get(string sql, object param, string cacheKey)
+        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
         {
-            throw new NotImplementedException();
+            return (IQueryable<TItem>)Builders.Sources.Lightstone.BandsDataBuilder.ForAllBands().AsQueryable();
         }
 
-        public IEnumerable<Band> GetAll(string sql, string cacheKey)
+        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
         {
-            return Builders.Sources.Lightstone.BandsDataBuilder.ForAllBands();
+            return (IQueryable<TItem>)Builders.Sources.Lightstone.BandsDataBuilder.ForAllBands().AsQueryable();
         }
     }
 }

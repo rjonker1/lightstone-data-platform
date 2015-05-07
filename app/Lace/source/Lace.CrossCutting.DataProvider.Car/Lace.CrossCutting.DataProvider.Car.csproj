@@ -98,13 +98,8 @@
     <Compile Include="Core\Contracts\IGetCarInfo.cs" />
     <Compile Include="Core\Contracts\IHaveCarInformation.cs" />
     <Compile Include="Core\Contracts\IRetrieveCarInformation.cs" />
-    <Compile Include="Core\Contracts\ISetupCarRepository.cs" />
     <Compile Include="Infrastructure\Dto\CarInformationRequest.cs" />
     <Compile Include="Infrastructure\GetCarInformation.cs" />
-    <Compile Include="Repositories\CarInformationRepository.cs" />
-    <Compile Include="Repositories\Factory\RepositoryFactory.cs" />
-    <Compile Include="Repositories\IReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Vin12CarInfoRepository.cs" />
     <Compile Include="UnitOfWork\CarInformationWorker.cs" />
   </ItemGroup>
   <ItemGroup>

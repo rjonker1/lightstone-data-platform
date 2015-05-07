@@ -4,9 +4,9 @@ using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
+using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services
 {
@@ -20,28 +20,28 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
         private IGetSales _getSales;
 
         private readonly IHaveCarInformation _request;
-        private readonly ISetupRepository _repositories;
+        private readonly IReadOnlyRepository _repository;
 
         public bool IsSatisfied { get; private set; }
         public IRespondWithValuation Valuation { get; private set; }
 
         public BaseRetrievalMetric(IHaveCarInformation request, IRespondWithValuation valuation,
-            ISetupRepository repositories)
+            IReadOnlyRepository repository)
         {
             _request = request;
-            _repositories = repositories;
+            _repository = repository;
             Valuation = valuation;
         }
 
         public IRetrieveValuationFromMetrics SetupDataSources()
         {
-            _getStatistics = new StatisticsUnitOfWork(_repositories.StatisticRepository());
-            _getMetrics = new MetricUnitOfWork(_repositories.MetricRepository());
-            _getBands = new BandUnitOfWork(_repositories.BandRepository());
-            _getMuncipalities = new MuncipalityUnitOfWork(_repositories.MuncipalityRepository());
-            _getMakes = new MakeUnitOfWork(_repositories.MakeRepository());
+            _getStatistics = new StatisticsUnitOfWork(_repository);
+            _getMetrics = new MetricUnitOfWork(_repository);
+            _getBands = new BandUnitOfWork(_repository);
+            _getMuncipalities = new MuncipalityUnitOfWork(_repository);
+            _getMakes = new MakeUnitOfWork(_repository);
             //_getCarType = new CarTypeUnitOfWork(_getStatistics.Statistics);
-            _getSales = new SaleUnitOfWork(_repositories.SaleRepository());
+            _getSales = new SaleUnitOfWork(_repository);
 
             return this;
         }
