@@ -4,8 +4,6 @@ using AutoMapper;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
-using NHibernate;
-using NHibernate.Util;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers.ConsumerTypes
@@ -32,6 +30,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 {
                     Id = dbEntity.FirstOrDefault().Id,
                     AccountNumber = dbEntity.FirstOrDefault().AccountNumber,
+                    BillingType = entity.BillingType,
                     Created = dbEntity.FirstOrDefault().Created,
                     CreatedBy = dbEntity.FirstOrDefault().CreatedBy,
                     CustomerId = dbEntity.FirstOrDefault().CustomerId,
@@ -39,9 +38,6 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     Modified = DateTime.UtcNow,
                     ModifiedBy = GetType().Assembly.FullName
                 };
-
-                //Customer ICustomer = _session.Load<Customer>(dbEntity.Id);
-                //if (ICustomer.Id == dbEntity.Id) _session.Evict(_session.Load<Customer>(dbEntity.Id));
 
                 _accountRepository.SaveOrUpdate(updateEntity); 
                 return;
