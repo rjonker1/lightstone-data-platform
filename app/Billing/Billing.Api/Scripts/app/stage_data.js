@@ -115,8 +115,7 @@ window.userTransactionEditActionEvents = {
                 pageList: [10, 25, 50, 100, 'All'],
                 columns: [{
                     field: 'transactionId',
-                    title: 'Transaction ID',
-                    visible: false
+                    title: 'Transaction ID'
                 }, {
                     field: 'packageName',
                     title: 'Package Name',
@@ -126,28 +125,19 @@ window.userTransactionEditActionEvents = {
                     title: 'Is Billable',
                     formatter: transactionEditFormatter,
                     events: transactionEditActionEvents
-                }, {
-                    field: 'edit',
                 }]
-
             });
 
+            // init table use data
+            var $table = $('#userTransEdit-table'),
+                $button = $('#button');
 
-            //$.fn.editable.defaults.mode = 'inline';
-
-            //$('#isBillable').editable({
-            //    type: 'input',
-            //    url: '/post',    
-            //    pk: 1, 
-            //    //placement: 'right',
-            //    title: 'Option 1',
-            //    source: {'1': 'enabled'},
-            //    emptytext: 'disabled',
-            //    success: function (response) {
-
-            //    }
-            //});
-
+            $(function () {
+                $button.click(function () {
+                    console.log(JSON.stringify($('#userTransEdit-table').bootstrapTable('getData')));
+                });
+            });
+           
         });
 
         function transactionData(transRow) {
@@ -172,7 +162,13 @@ window.userTransactionEditActionEvents = {
             '</div>' +
 
             "<script>" +
-            "$('.switch').ready(function() { $('#" + row.transactionId + "').bootstrapSwitch('state', " + value + ", true); });" +
+            "$('.switch').ready(function() { $('#" + row.transactionId + "').bootstrapSwitch('state', " + value + ", true); " +
+                                            "$('#" + row.transactionId + "').on('switchChange.bootstrapSwitch', function(event, state) { " +
+                                                "$('#userTransEdit-table').bootstrapTable('updateRow', { index: " + index + ", row: { transactionId: '" + row.transactionId + "'," +
+                                                                                                                                " packageName: '" + row.packageName + "'," +
+                                                                                                                                " isBillable: state }});" +
+                                                " });" +
+                                            "});" +
             "</script>"
             ].join('');
         };
@@ -294,11 +290,6 @@ window.invoiceActionEvents = {
 
     }
 };
-
-//function packageResponseHandler(res) {
-
-//    return res.data[0].dataProviders;
-//}
 
 function gridTransactionsFormatter(value, row, index) {
 
