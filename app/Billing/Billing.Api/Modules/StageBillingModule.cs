@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
@@ -8,6 +9,8 @@ using Nancy;
 using Nancy.Extensions;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules
@@ -207,23 +210,48 @@ namespace Billing.Api.Modules
                     }
                 }
 
-                
-
-
                 return Response.AsJson(new { data = packageTransaction });
             };
 
-            Post["/StageBilling/"] = param =>
+            Post["/StageBilling/User/Transactions/Update"] = param =>
             {
-
+                var body = Request.Body<TransactionModel>();
                 return null;
             };
 
         }
     }
 
+    public static class BodyBinderExtension
+    {
+        public static T Body<T>(this Request request)
+        {
+            request.Body.Position = 0;
+            string bodyText;
+            using (var bodyReader = new StreamReader(request.Body))
+            {
+                bodyText = bodyReader.ReadToEnd();
+            }
+
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver()
+            };
+
+            return JsonConvert.DeserializeObject<T>(bodyText);
+        }
+    }
+
     public class TransactionModel
     {
-        public IEnumerable<TransactionDto> Transactions { get; set; }
+        public IEnumerable<UserTransactionDto> Transactions { get; set; }
+    }
+
+    public class UserTransactionDto
+    {
+        public Guid TransactionId { get; set; }
+        public Guid RequestId { get; set; }
+        public string PackageName { get; set; }
+        public bool IsBillable { get; set; }
     }
 }

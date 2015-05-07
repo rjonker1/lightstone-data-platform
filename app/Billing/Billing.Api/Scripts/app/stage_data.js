@@ -93,7 +93,7 @@ window.userTransactionEditActionEvents = {
             dataType: 'json'
 
         }).success(function (response) {
-            $('.transactionedit-render').html('<table id="userTransEdit-table"></table>' +
+            $('.userTransactionedit-render').html('<table id="userTransEdit-table"></table>' +
 
                ' <h2 id="detail-table-header"></h2>' +
                ' <table id="detail"></table>' +
@@ -126,16 +126,6 @@ window.userTransactionEditActionEvents = {
                     formatter: transactionEditFormatter,
                     events: transactionEditActionEvents
                 }]
-            });
-
-            // init table use data
-            var $table = $('#userTransEdit-table'),
-                $button = $('#button');
-
-            $(function () {
-                $button.click(function () {
-                    console.log(JSON.stringify($('#userTransEdit-table').bootstrapTable('getData')));
-                });
             });
            
         });
