@@ -27,23 +27,25 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Statistics = _repository.GetAll<Statistic>(Statistic.SelectAll, Statistic.CacheAllKey)
-                    .Where(s => s.MetricId ==
-                                (int) MetricTypes.AccidentDistribution ||
-                                (s.MetricId == (int) MetricTypes.AmortisedValues && s.CarId == request.CarId && s.YearId == request.Year) ||
-                                (s.MetricId == (int) MetricTypes.AreaFactors) ||
-                                (s.MetricId == (int) MetricTypes.AuctionFactors && s.MakeId == request.MakeId) ||
-                                (s.MetricId == (int) MetricTypes.RepairIndex && s.YearId == request.Year) ||
-                                (s.MetricId == (int) MetricTypes.TotalSalesByAge && s.MakeId == request.MakeId) ||
-                                (s.MetricId == (int) MetricTypes.TotalSalesByGender && s.MakeId == request.MakeId) ||
-                                (RetailMetrics.Contains(s.MetricId) && s.CarId == request.CarId && s.YearId == request.Year) ||
-                                PerformanceMetrics.Contains(s.MetricId) && s.CarId == request.CarId);
+                Statistics = _repository.Get<Statistic>(Statistic.SelectForCarIdMakeYear,
+                    new {request.CarId, request.Year, request.MakeId}, Statistic.CacheStatisticsKey);
 
-                if (!Statistics.Any())
-                {
-                    Statistics = _repository.Get<Statistic>(Statistic.SelectForCarIdMakeYear,
-                        new {request.CarId, request.Year, request.MakeId}, Statistic.CacheStatisticsKey);
-                }
+                //Statistics = _repository.GetAll<Statistic>(Statistic.SelectAll, Statistic.CacheAllKey)
+                //    .Where(s => (s.MetricId == (int) MetricTypes.AccidentDistribution) ||
+                //                (s.MetricId == (int) MetricTypes.AmortisedValues && s.CarId == request.CarId && s.YearId == request.Year) ||
+                //                (s.MetricId == (int) MetricTypes.AreaFactors) ||
+                //                (s.MetricId == (int) MetricTypes.AuctionFactors && s.MakeId == request.MakeId) ||
+                //                (s.MetricId == (int) MetricTypes.RepairIndex && s.YearId == request.Year) ||
+                //                (s.MetricId == (int) MetricTypes.TotalSalesByAge && s.MakeId == request.MakeId) ||
+                //                (s.MetricId == (int) MetricTypes.TotalSalesByGender && s.MakeId == request.MakeId) ||
+                //                (RetailMetrics.Contains(s.MetricId) && s.CarId == request.CarId && s.YearId == request.Year) ||
+                //                (PerformanceMetrics.Contains(s.MetricId) && s.CarId == request.CarId));
+
+                //if (!Statistics.Any())
+                //{
+                //    Statistics = _repository.Get<Statistic>(Statistic.SelectForCarIdMakeYear,
+                //        new {request.CarId, request.Year, request.MakeId}, Statistic.CacheStatisticsKey);
+                //}
             }
             catch (Exception ex)
             {
@@ -51,7 +53,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
         }
 
-        private static readonly List<int> RetailMetrics = new List<int>()
+        private static readonly int[] RetailMetrics =
         {
             (int) MetricTypes.RetailPriceLow,
             (int) MetricTypes.RetailPriceHigh,
@@ -63,7 +65,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             (int) MetricTypes.TradeConfidence
         };
 
-        private static readonly List<int> PerformanceMetrics = new List<int>()
+        private static readonly int[] PerformanceMetrics =
         {
             (int) MetricTypes.MaxSpeed,
             (int) MetricTypes.Acceleration,

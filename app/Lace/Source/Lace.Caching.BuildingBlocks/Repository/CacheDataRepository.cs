@@ -33,7 +33,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
                     var cachedItem = _cacheClient.As<TItem>();
                     var existing = cachedItem.Lists[cacheKey];
 
-                    if (existing != null && existing.Any())
+                    if (existing != null)
                     {
                         existing.Clear();
                         existing.RemoveAll();
@@ -48,7 +48,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
                     //_cacheClient.StoreAll(_connection.Query<TItem>(sql));
 
                     _connection.Query<TItem>(sql).ToList().ForEach(f => existing.Add(f));
-                    _cacheClient.Add(cacheKey, existing, DateTime.UtcNow.AddDays(1));
+                    _cacheClient.Add(cacheKey, existing, DateTime.UtcNow.AddDays(2));
 
                     _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
                 }
@@ -57,7 +57,6 @@ namespace Lace.Caching.BuildingBlocks.Repository
             {
                 _log.ErrorFormat("Cannot Add Items to Cache because of {0}", ex, ex.Message);
             }
-
         }
 
         public IEnumerable<TItem> Get<TItem>(string cacheKey) where TItem : class
@@ -79,7 +78,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
                     var cachedItem = _cacheClient.As<TItem>();
                     var existing = cachedItem.Lists[cacheKey];
 
-                    if (existing != null && existing.Any())
+                    if (existing != null)
                     {
                         existing.Clear();
                     }
@@ -91,7 +90,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
                     _log.InfoFormat("Tring to add {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
 
                     dbResponse.ForEach(f => existing.Add(f));
-                    _cacheClient.Add(cacheKey, existing, DateTime.UtcNow.AddDays(1));
+                    _cacheClient.Add(cacheKey, existing, DateTime.UtcNow.AddDays(2));
 
                     _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
                 }

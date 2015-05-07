@@ -67,9 +67,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
 
         public IRetrieveValuationFromMetrics BuildValuation()
         {
-            if (_request.CarId == null || _request.Year == null) return this;
-
-
             Valuation.AddImageGauages(GetImageGaugeMetrics());
             Valuation.AddAccidentDistribution(GetAccidentDistributionMetrics());
             Valuation.AddAmortisedValues(GetAmortisedValues());
@@ -82,7 +79,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
             Valuation.AddLastFiveSales(GetLastFiveSales());
 
             IsSatisfied = true;
-
             return this;
         }
 

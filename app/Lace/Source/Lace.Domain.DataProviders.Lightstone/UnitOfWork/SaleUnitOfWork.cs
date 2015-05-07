@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
                     _repository.GetAll<Sale>(Sale.SelectAllSales, Sale.CacheAllKey)
                         .Where(w => w.Car_ID == request.CarId && w.Year_ID == request.Year)
                         .OrderByDescending(o => o.SaleDateTime)
-                        .Take(5);
+                        .Take(5).ToList();
 
                 if (!Sales.Any())
                 {
