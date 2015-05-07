@@ -97,44 +97,7 @@
 <div class="modal fade" id="userTransEdit-modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-body">
-                
-                <table id="userTransEdit-table"></table>
-
-                <h2 id="detail-table-header"></h2>
-                <table id="detail"></table>
-
-                @*<script src="~/Scripts/app/stage_data.js"></script>*@
-
-                <script>
-
-                    $('#userTransEdit-table').bootstrapTable({
-                        url: '/StageBilling',
-                        search: true,
-                        showRefresh: true,
-                        showColumns: true,
-                        pagination: true,
-                        pageNumber: 1,
-                        pageSize: 10,
-                        pageList: [10, 25, 50, 100, 'All'],
-                        columns: [{
-                            field: 'transactionId',
-                            title: 'Transaction ID',
-                            visible: false
-                        }, {
-                            field: 'packageName',
-                            title: 'Package Name',
-                            sortable: true
-                        }, {
-                            field: 'isBillable',
-                            title: 'Is Billable',
-                        }, {
-                            field: 'edit',
-                        }]
-                    });
-
-                    Billing.overrideDataTablesStyling();
-                </script>
+            <div class="modal-body transactionedit-render">                
 
             </div>
             <div class="modal-footer">

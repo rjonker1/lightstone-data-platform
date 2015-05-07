@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataProviderDto.cs" />
+    <Compile Include="DataProviderTransactionDto.cs" />
     <Compile Include="PackageDto.cs" />
     <Compile Include="PreBillingDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

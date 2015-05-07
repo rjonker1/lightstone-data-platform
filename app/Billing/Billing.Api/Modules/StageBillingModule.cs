@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
+using FluentNHibernate.Utils;
 using Nancy;
+using Nancy.Extensions;
+using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using NHibernate.Param;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules
@@ -110,12 +112,11 @@ namespace Billing.Api.Modules
                     //Filter repo for user transaction; For specified customer | client
                     var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId
                         && (x.CustomerId == searchId || x.ClientId == searchId)
-                        && x.IsBillable)
-                                            .Select(x =>
-                                                new TransactionDto
-                                                {
-                                                    TransactionId = x.TransactionId
-                                                }).Distinct();
+                        && x.IsBillable).Select(x =>
+                                            new TransactionDto
+                                            {
+                                                TransactionId = x.TransactionId
+                                            }).Distinct();
 
                     foreach (var userTransaction in userTransactions)
                     {
@@ -187,7 +188,32 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
 
-            Post["/StageBilling/"] = parameters =>
+            Post["/StageBilling/User/Transactions"] = param =>
+            {
+                var dto = this.Bind<UserDto>();
+
+                var packageTransaction = new List<UserTransaction>();
+
+                foreach (var transaction in dto.Transactions)
+                {
+                    foreach (var billTransaction in stageBillingRepository.Where(x => x.TransactionId == transaction.TransactionId).DistinctBy(x => x.PackageId))
+                    {
+                        packageTransaction.Add(new UserTransaction
+                        {
+                            TransactionId = transaction.TransactionId,
+                            PackageName = billTransaction.PackageName,
+                            IsBillable = billTransaction.IsBillable
+                        });
+                    }
+                }
+
+                
+
+
+                return Response.AsJson(new { data = packageTransaction });
+            };
+
+            Post["/StageBilling/"] = param =>
             {
 
                 return null;
@@ -196,4 +222,8 @@ namespace Billing.Api.Modules
         }
     }
 
+    public class TransactionModel
+    {
+        public IEnumerable<TransactionDto> Transactions { get; set; }
+    }
 }

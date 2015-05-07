@@ -128,6 +128,10 @@
       <Project>{2A13D18D-B281-47CD-BF87-7415C857F2CD}</Project>
       <Name>Billing.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Billing.Domain.Dtos\Billing.Domain.Dtos.csproj">
+      <Project>{1F5E930A-B926-4E97-B512-6A9508293EA1}</Project>
+      <Name>Billing.Domain.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
       <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>
       <Name>Workflow.Billing.Messages</Name>

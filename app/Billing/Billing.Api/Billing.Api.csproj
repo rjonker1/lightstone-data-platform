@@ -323,6 +323,7 @@
     <Content Include="Scripts\bootstrap-switch\bootstrap-switch.js" />
     <Content Include="Scripts\bootstrap-switch\bootstrap-switch.min.js" />
     <Content Include="Scripts\bootstrap-table\bootstrap-table.min.js" />
+    <Content Include="Scripts\bootstrap-table\extensions\editable\bootstrap-table-editable-rawgit.js" />
     <Content Include="Scripts\bootstrap-table\extensions\editable\bootstrap-table-editable.min.js" />
     <Content Include="Scripts\bootstrap-table\extensions\export\bootstrap-table-export.min.js" />
     <Content Include="Scripts\bootstrap-table\extensions\filter\bootstrap-table-filter.min.js" />

@@ -50,7 +50,8 @@ window.userGridActionEvents = {
             }, {
                 field: 'transactions',
                 title: '# Transactions',
-                formatter: userTransactionsFormatter
+                formatter: userTransactionsFormatter,
+                events: userTransactionEditActionEvents
             }]
         });
 
@@ -68,10 +69,119 @@ function userTransactionsFormatter(value, row, index) {
 
     return [
         'Total Transactions: ( ' + count + ' ) ' +
-        '<button type="button" class="view btn btn-warning btn-md" data-toggle="modal" data-target="#userTransEdit-modal">' +
+        '<button type="button" class="editTransaction btn btn-warning btn-md" data-toggle="modal" data-target="#userTransEdit-modal">' +
             'Edit Transactions' +
             '</button>'
     ].join('');
+};
+
+window.userTransactionEditActionEvents = {
+
+    'click .editTransaction': function (e, value, row, index) {
+
+        var data = '{' +
+                       ' "userId": "' + row.userId + '",' +
+                        '"username": "' + row.username + '",' +
+                        '"transactions": ' + transactionData(row) + '' +
+                    '}';
+
+        $.ajax({
+            url: apiEndpoint + '/StageBilling/User/Transactions',
+            type: 'POST',
+            data: data,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json'
+
+        }).success(function (response) {
+            $('.transactionedit-render').html('<table id="userTransEdit-table"></table>' +
+
+               ' <h2 id="detail-table-header"></h2>' +
+               ' <table id="detail"></table>' +
+
+                '<script>' +
+
+            'Billing.overrideDataTablesStyling();' +
+            '</script>');
+
+            //Table data
+            $('#userTransEdit-table').bootstrapTable({
+                data: response.data,
+                search: true,
+                showRefresh: true,
+                showColumns: true,
+                pagination: true,
+                pageNumber: 1,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100, 'All'],
+                columns: [{
+                    field: 'transactionId',
+                    title: 'Transaction ID',
+                    visible: false
+                }, {
+                    field: 'packageName',
+                    title: 'Package Name',
+                    sortable: true
+                }, {
+                    field: 'isBillable',
+                    title: 'Is Billable',
+                    formatter: transactionEditFormatter,
+                    events: transactionEditActionEvents
+                }, {
+                    field: 'edit',
+                }]
+
+            });
+
+
+            //$.fn.editable.defaults.mode = 'inline';
+
+            //$('#isBillable').editable({
+            //    type: 'input',
+            //    url: '/post',    
+            //    pk: 1, 
+            //    //placement: 'right',
+            //    title: 'Option 1',
+            //    source: {'1': 'enabled'},
+            //    emptytext: 'disabled',
+            //    success: function (response) {
+
+            //    }
+            //});
+
+        });
+
+        function transactionData(transRow) {
+
+            var transString = '[';
+            for (var i = 0; i < transRow.transactions.length; i++) {
+
+                transString += '{ "transactionId": "' + transRow.transactions[i].transactionId + '" }';
+                if (transRow.transactions.length - 1 != i) transString += ',';
+            }
+
+            transString += ']';
+            return transString;
+        }
+
+        function transactionEditFormatter(value, row, index) {
+
+            return [
+            '<div>' +
+                '<input class="switch" id="' + row.transactionId + '" ' +
+                    'data-on-color="success" data-off-color="warning" data-on-text="Yes" data-off-text="No" type="checkbox">' +
+            '</div>' +
+
+            "<script>" +
+            "$('.switch').ready(function() { $('#" + row.transactionId + "').bootstrapSwitch('state', " + value + ", true); });" +
+            "</script>"
+            ].join('');
+        };
+    }
+};
+
+window.transactionEditActionEvents = {
+
+    'load-success.bs.table': function () { console.log("LOAD TEST"); }
 };
 
 function gridPackagesFormatter(value, row, index) {
