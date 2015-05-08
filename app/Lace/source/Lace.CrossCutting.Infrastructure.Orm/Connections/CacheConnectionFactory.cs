@@ -10,8 +10,9 @@ namespace Lace.CrossCutting.Infrastructure.Orm.Connections
 
         private static readonly PooledRedisClientManager LocalClientManager =
             new PooledRedisClientManager(CacheIp);
+       
 
-        public static Func<IRedisClient> LocalClient = () => LocalClientManager.GetClient();
+        public static Func<IRedisClient> LocalClient = () => new RedisClient(CacheIp);
     }
 
     public static class CacheConnectionExtenstions
