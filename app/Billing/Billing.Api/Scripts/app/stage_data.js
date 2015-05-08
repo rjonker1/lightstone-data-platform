@@ -50,7 +50,8 @@ window.userGridActionEvents = {
             }, {
                 field: 'transactions',
                 title: '# Transactions',
-                formatter: userTransactionsFormatter
+                formatter: userTransactionsFormatter,
+                events: userTransactionEditActionEvents
             }]
         });
 
@@ -68,10 +69,105 @@ function userTransactionsFormatter(value, row, index) {
 
     return [
         'Total Transactions: ( ' + count + ' ) ' +
-        '<button type="button" class="view btn btn-warning btn-md" data-toggle="modal" data-target="#userTransEdit-modal">' +
+        '<button type="button" class="editTransaction btn btn-warning btn-md" data-toggle="modal" data-target="#userTransEdit-modal">' +
             'Edit Transactions' +
             '</button>'
     ].join('');
+};
+
+window.userTransactionEditActionEvents = {
+
+    'click .editTransaction': function (e, value, row, index) {
+
+        var data = '{' +
+                       ' "userId": "' + row.userId + '",' +
+                        '"username": "' + row.username + '",' +
+                        '"transactions": ' + transactionData(row) + '' +
+                    '}';
+
+        $.ajax({
+            url: apiEndpoint + '/StageBilling/User/Transactions',
+            type: 'POST',
+            data: data,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json'
+
+        }).success(function (response) {
+            $('.userTransactionedit-render').html('<table id="userTransEdit-table"></table>' +
+
+               ' <h2 id="detail-table-header"></h2>' +
+               ' <table id="detail"></table>' +
+
+                '<script>' +
+
+            'Billing.overrideDataTablesStyling();' +
+            '</script>');
+
+            //Table data
+            $('#userTransEdit-table').bootstrapTable({
+                data: response.data,
+                search: true,
+                showRefresh: true,
+                showColumns: true,
+                pagination: true,
+                pageNumber: 1,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100, 'All'],
+                columns: [{
+                    field: 'transactionId',
+                    title: 'Transaction ID'
+                }, {
+                    field: 'packageName',
+                    title: 'Package Name',
+                    sortable: true
+                }, {
+                    field: 'isBillable',
+                    title: 'Is Billable',
+                    formatter: transactionEditFormatter,
+                    events: transactionEditActionEvents
+                }]
+            });
+           
+        });
+
+        function transactionData(transRow) {
+
+            var transString = '[';
+            for (var i = 0; i < transRow.transactions.length; i++) {
+
+                transString += '{ "transactionId": "' + transRow.transactions[i].transactionId + '" }';
+                if (transRow.transactions.length - 1 != i) transString += ',';
+            }
+
+            transString += ']';
+            return transString;
+        }
+
+        function transactionEditFormatter(value, row, index) {
+
+            return [
+            '<div>' +
+                '<input class="switch" id="' + row.transactionId + '" ' +
+                    'data-on-color="success" data-off-color="warning" data-on-text="Yes" data-off-text="No" type="checkbox">' +
+            '</div>' +
+
+            "<script>" +
+            "$('.switch').ready(function() { $('#" + row.transactionId + "').bootstrapSwitch('state', " + value + ", true); " +
+                                            "$('#" + row.transactionId + "').on('switchChange.bootstrapSwitch', function(event, state) { " +
+                                                "$('#userTransEdit-table').bootstrapTable('updateRow', { index: " + index + ", row: { transactionId: '" + row.transactionId + "'," +
+                                                                                                                                " packageName: '" + row.packageName + "'," +
+                                                                                                                                " isBillable: state }});" +
+                                                " });" +
+                                            "});" +
+            "</script>"
+            ].join('');
+        };
+    }
+};
+
+window.transactionEditActionEvents = {
+
+    'load-success.bs.table': function () { console.log("LOAD TEST"); }
 };
 
 function gridPackagesFormatter(value, row, index) {
@@ -118,7 +214,7 @@ window.packageGridActionEvents = {
                 title: 'Recommended Price',
                 sortable: true
             }, {
-                field: 'invoice',
+                field: 'packageEdit',
                 formatter: packageEditFormatter,
                 events: packageEditActionEvents
             }]
@@ -131,7 +227,7 @@ function packageEditFormatter(value, row, index) {
     return [
         '<div class="row">' +
             '<div class="col-md-4">' +
-                '<button type="button" class="invoice-view btn btn-warning btn-md" data-toggle="modal" data-target="#packageEdit-modal">' +
+                '<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#packageEdit-modal">' +
                     'Edit Item' +
                 '</button>' +
             '</div>' +
@@ -176,7 +272,7 @@ window.invoiceActionEvents = {
 
             $.post(reportingApi + "/ReportHTML", data)
                 .done(function (response) {
-                    $('.modal-body').html(response);
+                    $('.invoice-render').html(response);
                 });
         });
 
@@ -184,11 +280,6 @@ window.invoiceActionEvents = {
 
     }
 };
-
-//function packageResponseHandler(res) {
-
-//    return res.data[0].dataProviders;
-//}
 
 function gridTransactionsFormatter(value, row, index) {
 

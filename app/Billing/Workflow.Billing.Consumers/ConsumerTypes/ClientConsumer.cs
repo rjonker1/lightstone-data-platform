@@ -30,6 +30,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 {
                     Id = dbEntity.FirstOrDefault().Id,
                     AccountNumber = dbEntity.FirstOrDefault().AccountNumber,
+                    BillingType = entity.BillingType,
                     Created = dbEntity.FirstOrDefault().Created,
                     CreatedBy = dbEntity.FirstOrDefault().CreatedBy,
                     ClientId = dbEntity.FirstOrDefault().ClientId,

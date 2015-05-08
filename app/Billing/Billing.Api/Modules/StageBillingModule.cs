@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
+using FluentNHibernate.Utils;
 using Nancy;
+using Nancy.Extensions;
+using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules
@@ -109,12 +115,11 @@ namespace Billing.Api.Modules
                     //Filter repo for user transaction; For specified customer | client
                     var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId
                         && (x.CustomerId == searchId || x.ClientId == searchId)
-                        && x.IsBillable)
-                                            .Select(x =>
-                                                new TransactionDto
-                                                {
-                                                    TransactionId = x.TransactionId
-                                                }).Distinct();
+                        && x.IsBillable).Select(x =>
+                                            new TransactionDto
+                                            {
+                                                TransactionId = x.TransactionId
+                                            }).Distinct();
 
                     foreach (var userTransaction in userTransactions)
                     {
@@ -186,7 +191,67 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
 
+            Post["/StageBilling/User/Transactions"] = param =>
+            {
+                var dto = this.Bind<UserDto>();
+
+                var packageTransaction = new List<UserTransaction>();
+
+                foreach (var transaction in dto.Transactions)
+                {
+                    foreach (var billTransaction in stageBillingRepository.Where(x => x.TransactionId == transaction.TransactionId).DistinctBy(x => x.PackageId))
+                    {
+                        packageTransaction.Add(new UserTransaction
+                        {
+                            TransactionId = transaction.TransactionId,
+                            PackageName = billTransaction.PackageName,
+                            IsBillable = billTransaction.IsBillable
+                        });
+                    }
+                }
+
+                return Response.AsJson(new { data = packageTransaction });
+            };
+
+            Post["/StageBilling/User/Transactions/Update"] = param =>
+            {
+                var body = Request.Body<TransactionModel>();
+                return null;
+            };
+
         }
     }
 
+    public static class BodyBinderExtension
+    {
+        public static T Body<T>(this Request request)
+        {
+            request.Body.Position = 0;
+            string bodyText;
+            using (var bodyReader = new StreamReader(request.Body))
+            {
+                bodyText = bodyReader.ReadToEnd();
+            }
+
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver()
+            };
+
+            return JsonConvert.DeserializeObject<T>(bodyText);
+        }
+    }
+
+    public class TransactionModel
+    {
+        public IEnumerable<UserTransactionDto> Transactions { get; set; }
+    }
+
+    public class UserTransactionDto
+    {
+        public Guid TransactionId { get; set; }
+        public Guid RequestId { get; set; }
+        public string PackageName { get; set; }
+        public bool IsBillable { get; set; }
+    }
 }

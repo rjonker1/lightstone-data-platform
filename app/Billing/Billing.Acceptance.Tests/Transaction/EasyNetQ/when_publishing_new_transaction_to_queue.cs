@@ -21,7 +21,10 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
         {
             var bus = new TransactionBus(_bus);
 
-            transaction = new InvoiceTransactionCreated(new Guid("7B0C9277-0CCA-42BB-ACFB-8E60D8D02B3F"));
+            //Customer
+            transaction = new InvoiceTransactionCreated(new Guid("CA17F55B-F068-4DE0-B614-6A1F29EE4313"));
+
+            ////Client
             //transaction = new InvoiceTransactionCreated(new Guid("FD720634-2959-480A-BA45-96D970DA885C"));
             bus.SendDynamic(transaction);
         }
