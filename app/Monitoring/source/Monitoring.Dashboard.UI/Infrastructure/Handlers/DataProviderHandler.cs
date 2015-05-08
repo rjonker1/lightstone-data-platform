@@ -33,6 +33,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                 var requests =
                     _monitoring.Items<DataProvider>(DataProvider.SelectStatement()).ToArray();
 
+
                 if (!requests.Any())
                     return;
 
@@ -42,8 +43,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                     return;
 
                 var errors = _billing.Items<DataProviderError>(
-                    DataProviderError.SelectStatement(),
-                    new {@RequestIds = requests.Select(s => s.RequestId).ToArray()}).ToArray();
+                    DataProviderError.SelectStatement(), new {@RequestIds = requests.Select(s => s.RequestId).ToArray()}).ToArray();
 
                 if (!errors.Any())
                     errors = new DataProviderError[] {};
@@ -54,7 +54,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                             new DataProviderView(s.RequestId, payloads
                                 .Where(f => f.Id == s.RequestId)
                                 .Select(c => new SerializedPayload(c.Payload, c.CommitSequence)).ToList(), s.Date, false,
-                                s.ElapsedTime, s.PackageVersion,s.PackageName, s.DataProviderCount).DeserializePayload()
+                                s.ElapsedTime, s.PackageVersion, s.PackageName, s.DataProviderCount).DeserializePayload()
                                 .SetState(GetErrorCount(errors.FirstOrDefault(f => f.RequestId == s.RequestId))))
                         .ToList();
             }

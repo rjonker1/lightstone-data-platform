@@ -87,17 +87,17 @@ namespace Lace.Caching.BuildingBlocks.Repository
                         _connection.Query<TItem>(sql, param)
                             .ToList();
 
-                    _log.InfoFormat("Tring to add {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
+                    _log.InfoFormat("Tring to add {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
 
                     dbResponse.ForEach(f => existing.Add(f));
                     _cacheClient.Add(cacheKey, existing, DateTime.UtcNow.AddDays(2));
 
-                    _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
+                    _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
                 }
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Cannot Add Item to Cache because of {0}", ex,ex.Message);
+                _log.ErrorFormat("Cannot Add Item to Cache because of {0}", ex, ex.Message);
             }
 
         }

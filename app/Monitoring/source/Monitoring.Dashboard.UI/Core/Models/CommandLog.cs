@@ -10,7 +10,6 @@ namespace Monitoring.Dashboard.UI.Core.Models
         private const string GetEventsForRequests =
             @"select Id, Payload, CommitNumber, CommitSequence,[CommitStamp] from DataProviderEventLog where Id in (select top 100 RequestId from DataProviderMonitoring where [action] = 'response' order by [date] desc) order by CommitNumber, CommitSequence";
 
-
         [DataMember]
         public Guid Id { get; set; }
 

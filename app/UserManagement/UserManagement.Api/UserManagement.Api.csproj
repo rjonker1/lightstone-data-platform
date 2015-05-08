@@ -711,7 +711,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>22484</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://dev.usermanagement.api.lightstone.com/</IISUrl>
+          <IISUrl>http://dev.usermanagement.api.lightstone.co.za/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

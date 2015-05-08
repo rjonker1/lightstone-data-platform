@@ -9,7 +9,6 @@ namespace Monitoring.Dashboard.UI.Core.Models
         private const string GetRequests =
            @"select top 100 RequestId, PackageName, PackageVersion, ElapsedTime, Action, Date,DataProviderCount from DataProviderMonitoring where [action] = 'response' order by [date] desc";
 
-
         public static string SelectStatement()
         {
             return GetRequests;

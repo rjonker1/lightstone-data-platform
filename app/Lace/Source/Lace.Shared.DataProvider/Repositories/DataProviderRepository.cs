@@ -60,31 +60,5 @@ namespace Lace.Shared.DataProvider.Repositories
                 return dbResponse.AsQueryable();
             }
         }
-
-        //public TItem Item<TItem>(string sql, object param, string cacheKey) where TItem : class
-        //{
-        //    using (_cacheClient)
-        //    {
-        //        //var key = string.Format(cacheKey, param);
-        //        //var cachedStatistics = _cacheClient.As<TItem>();
-        //        //var response = cachedStatistics.Lists[key];
-        //        var key = string.Format(cacheKey, param);
-        //        var response = _cacheClient.Get<IQueryable<TItem>>(cacheKey);
-
-        //        if (response.DoesExistInTheCache())
-        //            return response.FirstOrDefault();
-
-        //        var dbResponse =
-        //            _connection.Query<TItem>(sql, param).FirstOrDefault();
-
-        //        if (!response.CanAddItemsToCache().HasValue)
-        //            return dbResponse;
-
-        //        response.ToList().Add(dbResponse);
-        //        _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
-
-        //        return dbResponse;
-        //    }
-        //}
     }
 }
