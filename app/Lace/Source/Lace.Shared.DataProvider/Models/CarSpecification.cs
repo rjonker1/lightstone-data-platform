@@ -10,9 +10,6 @@ namespace Lace.Shared.DataProvider.Models
         public const string SelectAll =
             @"select c.Car_ID as CarId, c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, c.RainSensorWindscreenWipers, c.HeadUpDisplay from Car c join Manufacturer m on m.Manufacturer_ID = c.Manufacturer_ID join CarType ct on ct.CarType_ID = c.CarType_ID";
 
-        public const string CacheAllKey = "urn:Auto_Carstats:CarSpecifications";
-        public const string CacheWithCarIdKey = "urn:Auto_Carstats:CarSpecifications:{0}";
-
         public CarSpecification()
         {
             
@@ -49,7 +46,7 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<CarSpecification>(SelectAll, CacheAllKey);
+            repository.AddItems<CarSpecification>(SelectAll);
         }
         public int CarId { get; set; }
         public string ManufacturerName { get; set; }

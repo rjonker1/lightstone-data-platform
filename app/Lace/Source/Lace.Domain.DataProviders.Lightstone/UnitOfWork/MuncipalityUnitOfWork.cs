@@ -25,9 +25,9 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Municipalities = _repository.GetAll<Municipality>(Municipality.SelectAll, Municipality.CacheAllKey);
+                Municipalities = _repository.GetAll<Municipality>(Municipality.SelectAll);
                 if (!Municipalities.Any())
-                    Municipalities = _repository.Get<Municipality>(Municipality.SelectAll, new { }, Municipality.CacheAllKey);
+                    Municipalities = _repository.Get<Municipality>(Municipality.SelectAll, new { });
             }
             catch (Exception ex)
             {

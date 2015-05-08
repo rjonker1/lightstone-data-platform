@@ -25,17 +25,16 @@ namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
         {
             try
             {
-                Vins = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear,
-                    CarInformation.CacheAllWithValidCarIdAndYearKey)
+                Vins = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear)
                     .Where(w => w.Vin == vin)
                     .Select(s => new Vin(s.Vin, s.CarId, s.MakeName, s.CarTypeName, s.CarModel, s.Year, s.Quarter, s.Month, s.Colour, s.Source));
 
                 if (!Vins.Any())
-                    Vins = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {@Vin = vin}, CarInformation.CacheWithVinKey)
+                    Vins = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {@Vin = vin})
                         .Select(s => new Vin(s.Vin, s.CarId, s.MakeName, s.CarTypeName, s.CarModel, s.Year, s.Quarter, s.Month, s.Colour, s.Source));
 
                 if (!Vins.Any())
-                    Vins = _repository.Get<Vin>(Vin.SelectWithVin, new {@Vin = vin}, Vin.CacheWithVinKey);
+                    Vins = _repository.Get<Vin>(Vin.SelectWithVin, new {@Vin = vin});
             }
             catch (Exception ex)
             {

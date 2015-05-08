@@ -8,12 +8,12 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
     public class FakeCarInfoRepository : IReadOnlyRepository
     {
 
-        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
+        public IQueryable<TItem> GetAll<TItem>(string sql) where TItem : class
         {
             return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformation().AsQueryable();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
+        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
             PropertyInfo[] props = param.GetType().GetProperties();
             var vin = props[0].GetValue(param);

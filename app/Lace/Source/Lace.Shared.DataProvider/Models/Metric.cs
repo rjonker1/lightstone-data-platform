@@ -5,7 +5,6 @@ namespace Lace.Shared.DataProvider.Models
     public class Metric : IAmCachable
     {
         public const string SelectAll = @"SELECT * FROM Metric";
-        public const string CacheAllKey = "urn:Auto_Carstats:Metric";
         public Metric()
         {
             
@@ -27,7 +26,7 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<Metric>(SelectAll, CacheAllKey);
+            repository.AddItems<Metric>(SelectAll);
         }
 
 

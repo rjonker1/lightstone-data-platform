@@ -11,12 +11,9 @@ namespace Lace.Shared.DataProvider.Models
         public const string SelectAllSales =
             @"SELECT  s.* from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID";
 
-        public const string CacheSaleKey = "urn:Auto_Carstats:Sale:{0}";
-        public const string CacheAllKey = "urn:Auto_Carstats:Sale";
-
         public Sale()
         {
-            
+
         }
 
         public Sale(int saleId, int carId, int? yearId, DateTime saleDateTime, bool isNew, decimal salePrice,
@@ -33,7 +30,7 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<Sale>(SelectAllSales, CacheAllKey);
+            repository.AddItems<Sale>(SelectAllSales);
         }
 
 
@@ -45,6 +42,6 @@ namespace Lace.Shared.DataProvider.Models
         public decimal SalePrice { get; set; }
         public int Municipality_ID { get; set; }
 
-       
+
     }
 }

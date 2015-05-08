@@ -55,16 +55,16 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             if (CannotGetWithVin(request.Vin))
                 return;
 
-            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear, CarInformation.CacheAllWithValidCarIdAndYearKey)
+            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear)
                 .Where(w => w.Vin == request.Vin);
 
             if (!Cars.Any())
-                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin}, CarInformation.CacheWithVinKey);
+                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin});
 
             if (!ItMightBeAVin12())
                 return;
 
-            Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin12, new { request.Vin }, CarInformation.CacheWithVin12Key).ToList();
+            Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin12, new { request.Vin }).ToList();
             if (Cars.Any())
             {
                 Cars.ForEach(f => f.IsAVin12Car());
@@ -92,7 +92,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
                 return;
             }
 
-            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear, CarInformation.CacheAllWithValidCarIdAndYearKey)
+            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear)
                 .Where(w => w.CarId == request.CarId && w.Year == request.Year);
         }
 
@@ -107,11 +107,11 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
                 return;
             }
 
-            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithCarId, CarInformation.CacheAllWithCarIdKey)
+            Cars = _repository.GetAll<CarInformation>(CarInformation.SelectAllWithCarId)
                 .Where(w => w.CarId == request.CarId);
 
             if (!Cars.Any())
-                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithCarId, new {request.CarId}, CarInformation.CacheWithCarIdKey);
+                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithCarId, new {request.CarId});
         }
     }
 }

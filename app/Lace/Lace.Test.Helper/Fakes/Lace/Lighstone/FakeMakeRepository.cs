@@ -6,25 +6,14 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
     //
     public class FakeMakeRepository : IReadOnlyRepository
     {
-        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
+        public IQueryable<TItem> GetAll<TItem>(string sql) where TItem : class
         {
             return (IQueryable<TItem>) Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes().AsQueryable();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
+        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
             return (IQueryable<TItem>) Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes().AsQueryable();
         }
     }
-
-    //public IEnumerable<Make> Get(string sql, object param, string cacheKey)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public IEnumerable<Make> GetAll(string sql, string cacheKey)
-        //{
-        //    return Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
-        //}
-    //}
 }

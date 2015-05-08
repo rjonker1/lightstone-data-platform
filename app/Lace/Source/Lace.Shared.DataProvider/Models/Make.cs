@@ -5,7 +5,6 @@ namespace Lace.Shared.DataProvider.Models
     public class Make : IAmCachable
     {
         public const string SelectAll = @"SELECT * FROM Make";
-        public const string CacheAllKey = "urn:Auto_Carstats:Make";
 
         public Make()
         {
@@ -20,7 +19,7 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<Make>(SelectAll, CacheAllKey);
+            repository.AddItems<Make>(SelectAll);
         }
 
         public int Make_ID { get; set; }

@@ -1,9 +1,10 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using ServiceStack.Redis;
+using ServiceStack.Redis.Generic;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Shared.DataProvider.Repositories
@@ -19,44 +20,37 @@ namespace Lace.Shared.DataProvider.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
+        public IQueryable<TItem> GetAll<TItem>(string sql) where TItem : class
         {
-            try
+            if (!_cacheClient.ContinueUsingCache())
             {
-                using (_cacheClient)
-                {
-                    var cachedItem = _cacheClient.As<TItem>();
-                    var response = cachedItem.Lists[cacheKey];
-                    return response != null && response.Any() ? response.AsQueryable() : new List<TItem>().AsQueryable();
-                }
+                return new List<TItem>().AsQueryable();
             }
-            catch 
-            {
 
+            var type = _cacheClient.GetTypedClient<TItem>() ?? new RedisTypedClient<TItem>(new RedisClient(CacheConnectionFactory.CacheIp));
+            using (type)
+            {
+                return type.GetAll().AsQueryable();
             }
-            return new List<TItem>().AsQueryable();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
+        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            using (_cacheClient)
+            if (!_cacheClient.ContinueUsingCache())
             {
-                var key = string.Format(cacheKey, param);
-                var cachedItem = _cacheClient.As<TItem>();
-                var response = cachedItem.Lists[key];
+                return _connection.Query<TItem>(sql, param).AsQueryable();
+            }
 
-                if (response.DoesExistInTheCache())
-                    return response.AsQueryable();
+            var type = _cacheClient.GetTypedClient<TItem>() ?? new RedisTypedClient<TItem>(new RedisClient(CacheConnectionFactory.CacheIp));
+            using (type)
+            {
+                if (type.GetAll().Any())
+                    return type.GetAll().AsQueryable();
 
                 var dbResponse =
-                    _connection.Query<TItem>(sql, param);
+                    _connection.Query<TItem>(sql, param).ToList();
 
-                if (!response.CanAddItemsToCache().HasValue)
-                    return dbResponse.AsQueryable();
-
-                dbResponse.ToList().ForEach(f => response.ToList().Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(2));
-
+                type.StoreAll(dbResponse);
                 return dbResponse.AsQueryable();
             }
         }

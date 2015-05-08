@@ -27,8 +27,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Statistics = _repository.Get<Statistic>(Statistic.SelectForCarIdMakeYear,
-                    new {request.CarId, request.Year, request.MakeId}, Statistic.CacheStatisticsKey);
+                Statistics = _repository.Get<Statistic>(Statistic.SelectForCarIdMakeYear, new {request.CarId, request.Year, request.MakeId});
 
                 //Statistics = _repository.GetAll<Statistic>(Statistic.SelectAll, Statistic.CacheAllKey)
                 //    .Where(s => (s.MetricId == (int) MetricTypes.AccidentDistribution) ||

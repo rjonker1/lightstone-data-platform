@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Shared.DataProvider.Models;
 using Lace.Shared.DataProvider.Repositories;
@@ -28,14 +27,14 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             try
             {
                 Sales =
-                    _repository.GetAll<Sale>(Sale.SelectAllSales, Sale.CacheAllKey)
+                    _repository.GetAll<Sale>(Sale.SelectAllSales)
                         .Where(w => w.Car_ID == request.CarId && w.Year_ID == request.Year)
                         .OrderByDescending(o => o.SaleDateTime)
-                        .Take(5).ToList();
+                        .Take(5);
 
                 if (!Sales.Any())
                 {
-                    Sales = _repository.Get<Sale>(Sale.SelectTopFiveSalesForCarIdAndYear, new {request.CarId, request.Year}, Sale.CacheSaleKey);
+                    Sales = _repository.Get<Sale>(Sale.SelectTopFiveSalesForCarIdAndYear, new {request.CarId, request.Year});
                 }
             }
             catch (Exception ex)

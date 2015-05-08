@@ -5,7 +5,6 @@ namespace Lace.Shared.DataProvider.Models
     public class Band : IAmCachable
     {
         public const string SelectAll = @"SELECT * FROM Band";
-        public const string CacheAllKey = "urn:Auto_Carstats:Bands";
         public Band()
         {
 
@@ -21,7 +20,7 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<Band>(SelectAll, CacheAllKey);
+            repository.AddItems<Band>(SelectAll);
         }
 
         public int Band_ID { get; set; }

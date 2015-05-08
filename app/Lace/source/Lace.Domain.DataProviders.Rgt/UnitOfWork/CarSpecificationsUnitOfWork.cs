@@ -26,12 +26,11 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
         {
             try
             {
-                CarSpecifications = _repository.GetAll<CarSpecification>(CarSpecification.SelectAll, CarSpecification.CacheAllKey)
+                CarSpecifications = _repository.GetAll<CarSpecification>(CarSpecification.SelectAll)
                     .Where(w => w.CarId == request.CarId);
 
                 if (!CarSpecifications.Any())
-                    CarSpecifications = _repository.Get<CarSpecification>(CarSpecification.SelectWithCarId, new {request.CarId},
-                        CarSpecification.CacheWithCarIdKey);
+                    CarSpecifications = _repository.Get<CarSpecification>(CarSpecification.SelectWithCarId, new {request.CarId});
             }
             catch (Exception ex)
             {

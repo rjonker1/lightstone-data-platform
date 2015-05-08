@@ -19,12 +19,6 @@ namespace Lace.Shared.DataProvider.Models
         public const string SelectWithVin12 =
             @"SELECT  DISTINCT vs.VinShortName as Vin, c.Car_ID as CarId, s.Year_ID as [Year], c.CarType_ID as CarTypeId, c.Manufacturer_ID as ManufacturerId, c.CarFullName, c.CarModel, c.BodyShape, c.FuelType, c.Market, c.TransmissionType, c.ModelYear, c.IntroductionDate, c.ImageUrl, ct.Make_ID as MakeId, 'Not Available' as [Quarter]  from VinShort vs join Car c on c.Car_ID = vs.Car_ID join dbo.[Statistics] s on s.Car_ID = vs.Car_ID join CarType ct ON c.CarType_ID = ct.CarType_ID where  SUBSTRING(vs.VinShortName,0,12) = SUBSTRING(@Vin,0,12) and s.Year_ID is not null";
 
-        public const string CacheAllWithCarIdKey = "urn:Auto_Carstats:CarInformation:Vin";
-        public const string CacheAllWithValidCarIdAndYearKey = "urn:Auto_Carstats:CarInformation:Vin";
-        public const string CacheWithCarIdKey = "urn:Auto_Carstats:CarInformation:Vin:{0}";
-        public const string CacheWithVinKey = "urn:Auto_Carstats:CarInformation:Vin:{0}";
-        public const string CacheWithVin12Key = "urn:Auto_Carstats:CarInformation:Vin:{0}";
-
         public CarInformation()
         {
 
@@ -53,8 +47,8 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<CarInformation>(SelectAllWithCarId, CacheAllWithCarIdKey);
-            repository.AddItems<CarInformation>(SelectAllWithValidCarIdAndYear, CacheAllWithValidCarIdAndYearKey);
+            repository.AddItems<CarInformation>(SelectAllWithCarId);
+            repository.AddItems<CarInformation>(SelectAllWithValidCarIdAndYear);
         }
 
         public void IsAVin12Car()

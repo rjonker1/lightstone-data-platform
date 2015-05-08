@@ -9,13 +9,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeDataProviderRepository : IReadOnlyRepository
     {
-        public IQueryable<TItem> GetAll<TItem>(string sql, string cacheKey) where TItem : class
+        public IQueryable<TItem> GetAll<TItem>(string sql) where TItem : class
         {
             var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
             return (IQueryable<TItem>) data;
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param, string cacheKey) where TItem : class
+        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
             var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
             return (IQueryable<TItem>)data;

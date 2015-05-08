@@ -5,7 +5,6 @@ namespace Lace.Shared.DataProvider.Models
     public class Municipality : IAmCachable
     {
         public const string SelectAll = @"SELECT * FROM Municipality";
-        public const string CacheAllKey = "urn:Auto_Carstats:Municipality";
         public Municipality()
         {
 
@@ -19,7 +18,7 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<Municipality>(SelectAll, CacheAllKey);
+            repository.AddItems<Municipality>(SelectAll);
         }
 
         public int Municipality_ID { get; set; }

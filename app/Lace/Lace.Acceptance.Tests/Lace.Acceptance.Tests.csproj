@@ -111,6 +111,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Caching\when_adding_bands_to_the_cache.cs" />
+    <Compile Include="Caching\when_adding_sale_data_to_the_cache.cs" />
     <Compile Include="Caching\when_refreshing_objects_in_the_cache.cs" />
     <Compile Include="Events\when_publlishing_lace_audatex_monitoring_commands_to_bus.cs" />
     <Compile Include="Events\when_publlishing_lace_ivid_monitoring_commands_to_bus.cs" />
