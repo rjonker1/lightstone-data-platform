@@ -211,6 +211,23 @@
 
     <!-- LACE START -->
     <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lace.Caching</name>
+      <folder>app/Lace/source/Lace.Caching</folder>
+      <author>CustomApp</author>
+      <description>Lace.Caching</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Lace.Caching.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Caching.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
+        <dependency id="Lightstone.DataPlatform.Workflow.BuildingBlocks" />
+      </dependencies>
+    </nuget>
+
+
+
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.Lace.Domain.Core</name>
       <folder>app/Lace/source/Lace.Domain.Core</folder>
       <author>CustomApp</author>
