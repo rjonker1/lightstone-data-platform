@@ -15,24 +15,24 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.BillingId, 101)
                 .CheckProperty(c => c.CustomerId, Guid.NewGuid())
-                .CheckProperty(c => c.CustomerName, "CustomerName")
+                .CheckProperty(c => c.CustomerName, "Customer 1")
                 .CheckProperty(c => c.UserId, Guid.NewGuid())
                 .CheckProperty(c => c.Username, "Username")
                 .CheckProperty(c => c.TransactionId, Guid.NewGuid())
                 .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
-                .CheckProperty(c => c.DataProviderName, "Customer Product")
+                .CheckProperty(c => c.DataProviderName, "Package Test")
                 .VerifyTheMappings();
 
             new PersistenceSpecification<PreBilling>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.BillingId, 102)
                 .CheckProperty(c => c.ClientId, Guid.NewGuid())
-                .CheckProperty(c => c.ClientName, "ClientName")
+                .CheckProperty(c => c.ClientName, "Client 1")
                 .CheckProperty(c => c.UserId, Guid.NewGuid())
                 .CheckProperty(c => c.Username, "Username")
                 .CheckProperty(c => c.TransactionId, Guid.NewGuid())
                 .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
-                .CheckProperty(c => c.DataProviderName, "Client Product")
+                .CheckProperty(c => c.DataProviderName, "Package Test")
                 .VerifyTheMappings();
         }
     }
