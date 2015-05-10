@@ -17,5 +17,16 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         {
             return (IQueryable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable();
         }
+
+
+        public IQueryable<TItem> GetAll<TItem>(string sql, Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TItem> Get<TItem>(string sql, object param, Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new NotImplementedException();
+        }
     }
 }

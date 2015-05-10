@@ -47,10 +47,8 @@ namespace Lace.Domain.DataProviders.Rgt
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_dataProvider,
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
-                            CacheConnectionFactory.LocalClient()),
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
-                            CacheConnectionFactory.LocalClient()), _logCommand));
+                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()),
+                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 

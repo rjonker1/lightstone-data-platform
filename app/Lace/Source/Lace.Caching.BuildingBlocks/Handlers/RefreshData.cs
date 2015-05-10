@@ -31,7 +31,6 @@ namespace Lace.Caching.BuildingBlocks.Handlers
             new Metric(),
             new Municipality(),
             new Sale(),
-            // new Statistic(),
             new CarInformation()
         };
     }

@@ -16,7 +16,7 @@ namespace Lace.Caching.Manager.Service.Installers
         {
             _log.InfoFormat("Installing Repositories");
             container.Register(Component.For<ICacheRepository>().UsingFactoryMethod(() => new CacheDataRepository(
-                ConnectionFactory.ForAutoCarStatsDatabase(), CacheConnectionFactory.LocalClient())));
+                ConnectionFactory.ForAutoCarStatsDatabase())));
         }
     }
 }

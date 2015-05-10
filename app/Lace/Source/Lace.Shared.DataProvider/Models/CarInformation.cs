@@ -48,7 +48,7 @@ namespace Lace.Shared.DataProvider.Models
         public void AddToCache(ICacheRepository repository)
         {
             repository.AddItems<CarInformation>(SelectAllWithCarId);
-            repository.AddItems<CarInformation>(SelectAllWithValidCarIdAndYear);
+            //repository.AddItemsForEach<CarInformation>(SelectAllWithValidCarIdAndYear);
         }
 
         public void IsAVin12Car()

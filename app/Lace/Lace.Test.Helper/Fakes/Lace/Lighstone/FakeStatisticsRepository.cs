@@ -14,6 +14,17 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         {
             return (IQueryable<TItem>)Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483().AsQueryable();
         }
+
+
+        public IQueryable<TItem> GetAll<TItem>(string sql, System.Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IQueryable<TItem> Get<TItem>(string sql, object param, System.Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 }

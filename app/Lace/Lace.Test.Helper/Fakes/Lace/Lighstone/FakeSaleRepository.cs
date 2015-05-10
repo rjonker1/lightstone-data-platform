@@ -15,15 +15,14 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         {
             return (IQueryable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483().AsQueryable();
         }
-    
-        //public IEnumerable<Sale> Get(string sql, object param, string cacheKey)
-        //{
-        //    return SaleDataBuilder.ForCarSalesOnCarId_107483();
-        //}
+        public IQueryable<TItem> GetAll<TItem>(string sql, System.Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new System.NotImplementedException();
+        }
 
-        //public IEnumerable<Sale> GetAll(string sql, string cacheKey)
-        //{
-        //    return SaleDataBuilder.ForCarSalesOnCarId_107483();
-        //}
+        public IQueryable<TItem> Get<TItem>(string sql, object param, System.Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

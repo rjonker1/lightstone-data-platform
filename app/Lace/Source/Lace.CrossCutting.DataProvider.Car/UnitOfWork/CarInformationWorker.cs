@@ -59,7 +59,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
                 .Where(w => w.Vin == request.Vin);
 
             if (!Cars.Any())
-                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin});
+                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin}, car => { return car.Vin == request.Vin; });
 
             if (!ItMightBeAVin12())
                 return;

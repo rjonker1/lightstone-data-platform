@@ -30,5 +30,16 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             {typeof(Sale), SaleDataBuilder.ForCarSalesOnCarId_107483().AsQueryable()},
             {typeof(Statistic), StatisticsDataBuilder.ForCarId_107483().AsQueryable()},
         };
+
+
+        public IQueryable<TItem> GetAll<TItem>(string sql, Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TItem> Get<TItem>(string sql, object param, Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new NotImplementedException();
+        }
     }
 }

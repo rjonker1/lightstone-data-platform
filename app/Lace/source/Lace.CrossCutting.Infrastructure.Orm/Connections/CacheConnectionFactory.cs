@@ -6,13 +6,16 @@ namespace Lace.CrossCutting.Infrastructure.Orm.Connections
 {
     public class CacheConnectionFactory
     {
-        public const string CacheIp = "127.0.0.1";
+        private const string CacheIp = "127.0.0.1:6379";
 
         private static readonly PooledRedisClientManager LocalClientManager =
-            new PooledRedisClientManager(CacheIp);
-       
+            new PooledRedisClientManager(10000, 1000, new[] {CacheIp})
+            {
+                ConnectTimeout = 15000
+            };
 
-        public static Func<IRedisClient> LocalClient = () => new RedisClient(CacheIp);
+
+        public static Func<PooledRedisClientManager> LocalClient = () => LocalClientManager;
     }
 
     public static class CacheConnectionExtenstions

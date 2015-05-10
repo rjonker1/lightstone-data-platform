@@ -6,10 +6,10 @@ namespace Lace.Shared.DataProvider.Models
     public class Sale : IAmCachable
     {
         public const string SelectTopFiveSalesForCarIdAndYear =
-            @"SELECT TOP 5 s.* from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID where s.Car_ID = @CarId and s.Year_ID = @Year order by SaleDateTime desc";
+            @"select top 5 select s.Sale_ID, s.Car_ID, ISNULL(s.Year_ID,0) AS Year_ID, s.SaleDateTime, s.IsNew, cast(s.SalePrice as decimal(18,2)) as SalePrice, s.Municipality_ID from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID where s.Car_ID = @CarId and s.Year_ID = @Year order by SaleDateTime desc";
 
         public const string SelectAllSales =
-            @"SELECT s.* from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID";
+            @"select s.Sale_ID, s.Car_ID, ISNULL(s.Year_ID,0) AS Year_ID, s.SaleDateTime, s.IsNew, cast(s.SalePrice as decimal(18,2)) as SalePrice, s.Municipality_ID from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID";
 
         public Sale()
         {
@@ -21,7 +21,7 @@ namespace Lace.Shared.DataProvider.Models
         {
             Sale_ID = saleId;
             Car_ID = carId;
-            Year_ID = yearId;
+            Year_ID = yearId.HasValue ? yearId.Value : 0;
             SaleDateTime = saleDateTime;
             IsNew = isNew;
             SalePrice = salePrice;
@@ -30,13 +30,13 @@ namespace Lace.Shared.DataProvider.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<Sale>(SelectAllSales);
+            repository.AddItemsForEach<Sale>(SelectAllSales);
         }
 
 
         public int Sale_ID { get; set; }
         public int Car_ID { get; set; }
-        public int? Year_ID { get; set; }
+        public int Year_ID { get; set; }
         public DateTime SaleDateTime { get; set; }
         public bool IsNew { get; set; }
         public decimal SalePrice { get; set; }

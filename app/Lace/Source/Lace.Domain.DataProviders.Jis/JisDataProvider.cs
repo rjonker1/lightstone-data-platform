@@ -46,7 +46,6 @@ namespace Lace.Domain.DataProviders.Jis
                 var consumer = new ConsumeSource(new HandleJisSourceCall(),
                     new CallJisDataProvider(_dataProvider,
                         new RepositoryFactory(ConnectionFactory.ForLsCorporateAutoDatabase(),
-                            CacheConnectionFactory.LocalClient(),
                             ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"
                                 ].ConnectionString),_logCommand));
                 consumer.ConsumeDataProvider(response);

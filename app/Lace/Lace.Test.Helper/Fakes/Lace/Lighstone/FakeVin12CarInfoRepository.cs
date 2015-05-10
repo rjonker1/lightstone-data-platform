@@ -34,5 +34,16 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                                 s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
                                 s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).AsQueryable();
         }
+
+
+        public IQueryable<TItem> GetAll<TItem>(string sql, System.Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IQueryable<TItem> Get<TItem>(string sql, object param, System.Func<TItem, bool> predicate) where TItem : class
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

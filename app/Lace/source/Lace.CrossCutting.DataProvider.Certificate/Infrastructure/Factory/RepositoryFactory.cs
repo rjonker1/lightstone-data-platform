@@ -3,20 +3,17 @@ using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Certificate.Core.Models;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Certificate.Repositories;
-using ServiceStack.Redis;
 
 namespace Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory
 {
     public class RepositoryFactory : ISetupCertificateRepository
     {
         private readonly IDbConnection _connection;
-        private readonly IRedisClient _redisClient;
         private readonly string _certficateConfiguration;
 
-        public RepositoryFactory(IDbConnection connection, IRedisClient redisClient,string certficateConfiguration)
+        public RepositoryFactory(IDbConnection connection,string certficateConfiguration)
         {
             _connection = connection;
-            _redisClient = redisClient;
             _certficateConfiguration = certficateConfiguration;
         }
 
@@ -28,7 +25,7 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory
 
         public IReadOnlyRepository<BaseStation> BaseStationRepository()
         {
-            return new BaseStationRepository(_connection, _redisClient);
+            return new BaseStationRepository(_connection);
         }
 
         public IReadOnlyRepository<CoOrdinateCertificate> CertifcateRepository()

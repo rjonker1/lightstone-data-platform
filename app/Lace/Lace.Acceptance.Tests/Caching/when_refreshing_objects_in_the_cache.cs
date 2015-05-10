@@ -19,9 +19,9 @@ namespace Lace.Acceptance.Tests.Caching
         public when_refreshing_objects_in_the_cache()
         {
             _repository = new CacheDataRepository(
-                ConnectionFactory.ForAutoCarStatsDatabase(), CacheConnectionFactory.LocalClient());
+                ConnectionFactory.ForAutoCarStatsDatabase());
 
-            _readRepository = new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase(), CacheConnectionFactory.LocalClient());
+            _readRepository = new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase());
 
             _clearing = new ClearData(_repository);
             _refreshing = new RefreshData(_repository);
@@ -91,13 +91,8 @@ namespace Lace.Acceptance.Tests.Caching
             //var sale = _readRepository.GetAll<Sale>(Sale.SelectAllSales);
             //sale.Count().ShouldNotEqual(0);
 
-            //var stats = _readRepository.GetAll<Statistic>(Statistic.CacheAllKey);
-            //stats.Count().ShouldNotEqual(0);
-
-            //var vin = _readRepository.GetAll<Vin>(Vin.CacheAllKey);
-            //vin.Count().ShouldNotEqual(0);
-
             //var carInfo = _readRepository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear);
+            //var count = carInfo.Count();
             //carInfo.Count().ShouldNotEqual(0);
         }
     }
