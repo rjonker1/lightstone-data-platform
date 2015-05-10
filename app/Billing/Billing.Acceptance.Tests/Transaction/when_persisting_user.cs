@@ -12,7 +12,7 @@ namespace Billing.Acceptance.Tests.Transaction
         public void should_persist()
         {
             new PersistenceSpecification<UserMeta>(Session)
-                .CheckProperty(c => c.Id, "A729F8E4-5677-4C0B-98E5-BDC7E902FDB4")
+                .CheckProperty(c => c.Id, new Guid("6E801E69-6F5F-4D47-BE32-3DA0E96B0513"))
                 .CheckProperty(c => c.Username, "Username")
                 .CheckProperty(c => c.FirstName, "FirstName")
                 .CheckProperty(c => c.LastName, "LastName")
