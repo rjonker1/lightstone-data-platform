@@ -22,7 +22,7 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
             var bus = new TransactionBus(_bus);
 
             //Customer
-            transaction = new InvoiceTransactionCreated(new Guid("CA17F55B-F068-4DE0-B614-6A1F29EE4313"));
+            transaction = new InvoiceTransactionCreated(new Guid("436BCB48-C21D-469A-A2ED-128F8133FDEE"));
 
             ////Client
             //transaction = new InvoiceTransactionCreated(new Guid("FD720634-2959-480A-BA45-96D970DA885C"));
