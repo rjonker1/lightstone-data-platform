@@ -216,6 +216,7 @@ namespace Billing.Api.Modules
             Post["/StageBilling/User/Transactions/Update"] = param =>
             {
                 var body = Request.Body<TransactionModel>();
+
                 return null;
             };
 
@@ -244,14 +245,7 @@ namespace Billing.Api.Modules
 
     public class TransactionModel
     {
-        public IEnumerable<UserTransactionDto> Transactions { get; set; }
+        public IEnumerable<TransactionDto> Transactions { get; set; }
     }
 
-    public class UserTransactionDto
-    {
-        public Guid TransactionId { get; set; }
-        public Guid RequestId { get; set; }
-        public string PackageName { get; set; }
-        public bool IsBillable { get; set; }
-    }
 }
