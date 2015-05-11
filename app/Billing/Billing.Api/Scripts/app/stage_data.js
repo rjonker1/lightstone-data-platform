@@ -125,8 +125,7 @@ window.userTransactionEditActionEvents = {
                 }, {
                     field: 'isBillable',
                     title: 'Is Billable',
-                    formatter: transactionEditFormatter,
-                    events: transactionEditActionEvents
+                    formatter: transactionEditFormatter
                 }]
             });
            
@@ -165,11 +164,6 @@ window.userTransactionEditActionEvents = {
             ].join('');
         };
     }
-};
-
-window.transactionEditActionEvents = {
-
-    'load-success.bs.table': function () { console.log("LOAD TEST"); }
 };
 
 function gridPackagesFormatter(value, row, index) {
@@ -243,7 +237,7 @@ function invoiceFormatter(value, row, index) {
     return [
         '<div class="row">' +
         '<div class="col-md-2">' +
-                '<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#recordEdit-modal">' +
+                '<button type="button" class="record-edit btn btn-warning btn-md" data-toggle="modal" data-target="#recordEdit-modal">' +
                     'Edit Record' +
                 '</button>' +
             '</div>' +
@@ -258,19 +252,19 @@ function invoiceFormatter(value, row, index) {
 }
 
 window.invoiceActionEvents = {
-    'click .invoice-view': function (e, value, row, index) {
+    'click .invoice-view': function(e, value, row, index) {
 
-        $.get('/StageBilling/CustomerClient/' + row.id + '/Packages', function (response) {
+        $.get('/StageBilling/CustomerClient/' + row.id + '/Packages', function(response) {
 
             var data = '{' +
                 '"template": { "shortid" : "N190datG" },' +
                 '"data" : {' +
-                    '"Customer": { ' +
-                       ' "Name": "' + row.customerName + '",' +
+                    '"Customer": {' +
+                        '"Name": "' + row.customerName + '",' +
                         '"TaxRegistration": 4190195679,' +
                         '"Packages" : [ ' +
                             '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": "' + row.billedTransactions + '", "Price": 16314.67, "Vat": 2284.00}' +
-                        ']  ' +
+                            ']  ' +
                     '} ' +
                 '}';
 
@@ -279,13 +273,15 @@ window.invoiceActionEvents = {
             //});
 
             $.post(reportingApi + "/ReportHTML", data)
-                .done(function (response) {
+                .done(function(response) {
                     $('.invoice-render').html(response);
                 });
         });
+    },
 
+    'click .record-edit': function(e, value, row, index) {
 
-
+        $('.recordEdit-render').html(row.customerName);
     }
 };
 
