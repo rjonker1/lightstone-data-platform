@@ -74,6 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageBillingDto.cs" />
     <Compile Include="TransactionDto.cs" />
+    <Compile Include="UserTransactionModelDto.cs" />
     <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup>

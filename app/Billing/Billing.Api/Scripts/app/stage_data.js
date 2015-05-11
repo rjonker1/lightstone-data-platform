@@ -85,6 +85,8 @@ window.userTransactionEditActionEvents = {
                         '"transactions": ' + transactionData(row) + '' +
                     '}';
 
+        console.log(data);
+
         $.ajax({
             url: apiEndpoint + '/StageBilling/User/Transactions',
             type: 'POST',
@@ -114,8 +116,8 @@ window.userTransactionEditActionEvents = {
                 pageSize: 10,
                 pageList: [10, 25, 50, 100, 'All'],
                 columns: [{
-                    field: 'transactionId',
-                    title: 'Transaction ID'
+                    field: 'requestId',
+                    title: 'Request ID'
                 }, {
                     field: 'packageName',
                     title: 'Package Name',
@@ -132,29 +134,29 @@ window.userTransactionEditActionEvents = {
 
         function transactionData(transRow) {
 
-            var transString = '[';
+            var requestString = '[';
             for (var i = 0; i < transRow.transactions.length; i++) {
 
-                transString += '{ "transactionId": "' + transRow.transactions[i].transactionId + '" }';
-                if (transRow.transactions.length - 1 != i) transString += ',';
+                requestString += '{ "requestId": "' + transRow.transactions[i].requestId + '" }';
+                if (transRow.transactions.length - 1 != i) requestString += ',';
             }
 
-            transString += ']';
-            return transString;
+            requestString += ']';
+            return requestString;
         }
 
         function transactionEditFormatter(value, row, index) {
 
             return [
             '<div>' +
-                '<input class="switch" id="' + row.transactionId + '" ' +
+                '<input class="switch" id="' + row.requestId + '" ' +
                     'data-on-color="success" data-off-color="warning" data-on-text="Yes" data-off-text="No" type="checkbox">' +
             '</div>' +
 
             "<script>" +
-            "$('.switch').ready(function() { $('#" + row.transactionId + "').bootstrapSwitch('state', " + value + ", true); " +
-                                            "$('#" + row.transactionId + "').on('switchChange.bootstrapSwitch', function(event, state) { " +
-                                                "$('#userTransEdit-table').bootstrapTable('updateRow', { index: " + index + ", row: { transactionId: '" + row.transactionId + "'," +
+            "$('.switch').ready(function() { $('#" + row.requestId + "').bootstrapSwitch('state', " + value + ", true); " +
+                                            "$('#" + row.requestId + "').on('switchChange.bootstrapSwitch', function(event, state) { " +
+                                                "$('#userTransEdit-table').bootstrapTable('updateRow', { index: " + index + ", row: { requestId: '" + row.requestId + "'," +
                                                                                                                                 " packageName: '" + row.packageName + "'," +
                                                                                                                                 " isBillable: state }});" +
                                                 " });" +

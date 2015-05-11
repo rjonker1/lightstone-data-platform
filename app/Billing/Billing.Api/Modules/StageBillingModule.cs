@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Billing.Domain.Dtos;
+using Billing.Domain.Entities;
 using DataPlatform.Shared.Repositories;
 using FluentNHibernate.Utils;
 using Nancy;
@@ -17,7 +18,7 @@ namespace Billing.Api.Modules
 {
     public class StageBillingModule : NancyModule
     {
-        public StageBillingModule(IRepository<StageBilling> stageBillingRepository)
+        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, UpdateBillingTransaction updateBillingTransaction)
         {
 
             Get["/StageBilling/"] = _ =>
@@ -114,11 +115,13 @@ namespace Billing.Api.Modules
 
                     //Filter repo for user transaction; For specified customer | client
                     var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId
-                        && (x.CustomerId == searchId || x.ClientId == searchId)
-                        && x.IsBillable).Select(x =>
+                        && (x.CustomerId == searchId || x.ClientId == searchId))
+                                            .Select(x =>
                                             new TransactionDto
                                             {
-                                                TransactionId = x.TransactionId
+                                                TransactionId = x.TransactionId,
+                                                RequestId = x.RequestId,
+                                                IsBillable = x.IsBillable
                                             }).Distinct();
 
                     foreach (var userTransaction in userTransactions)
@@ -199,11 +202,11 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in dto.Transactions)
                 {
-                    foreach (var billTransaction in stageBillingRepository.Where(x => x.TransactionId == transaction.TransactionId).DistinctBy(x => x.PackageId))
+                    foreach (var billTransaction in stageBillingRepository.Where(x => x.RequestId == transaction.RequestId).DistinctBy(x => x.PackageId))
                     {
                         packageTransaction.Add(new UserTransaction
                         {
-                            TransactionId = transaction.TransactionId,
+                            RequestId = transaction.RequestId,
                             PackageName = billTransaction.PackageName,
                             IsBillable = billTransaction.IsBillable
                         });
@@ -215,9 +218,11 @@ namespace Billing.Api.Modules
 
             Post["/StageBilling/User/Transactions/Update"] = param =>
             {
-                var body = Request.Body<TransactionModel>();
+                var body = Request.Body<UserTransactionModelDto>();
 
-                return null;
+                updateBillingTransaction.Commit(body);
+
+                return Response.AsJson(new {data = "Success"});
             };
 
         }
@@ -241,11 +246,6 @@ namespace Billing.Api.Modules
 
             return JsonConvert.DeserializeObject<T>(bodyText);
         }
-    }
-
-    public class TransactionModel
-    {
-        public IEnumerable<TransactionDto> Transactions { get; set; }
     }
 
 }

@@ -35,7 +35,7 @@ namespace Billing.Api
                 new RepositoryInstaller(),
                 new BusInstaller(),
                 new AutoMapperInstaller(),
-                new ApiClientInstaller()
+                new UpdateBillingTransactionInstaller()
                 );
 
             //Drop create

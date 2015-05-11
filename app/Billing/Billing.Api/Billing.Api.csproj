@@ -14,7 +14,7 @@
     <RootNamespace>Billing.Api</RootNamespace>
     <AssemblyName>Lightstone.DataPlatform.Billing.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -592,18 +592,15 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Installers\ApiClientInstaller.cs" />
-    <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Installers\UpdateBillingTransactionInstaller.cs" />
     <Compile Include="Modules\AdminBillingModule.cs" />
     <Compile Include="Modules\FinalBillingModule.cs" />
     <Compile Include="Modules\MIModule.cs" />
-    <Compile Include="Modules\PackageModule.cs" />
     <Compile Include="Modules\PreBillingModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Ping.cs" />
     <Compile Include="Modules\StageBillingModule.cs" />
     <Compile Include="Modules\Transaction.cs" />
-    <Compile Include="Modules\UMModule.cs" />
     <Compile Include="ViewModels\DataTablesViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
   </ItemGroup>
@@ -682,7 +679,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58790</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58790/</IISUrl>
+          <IISUrl>http://dev.billing.api.lightstone.co.za/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
