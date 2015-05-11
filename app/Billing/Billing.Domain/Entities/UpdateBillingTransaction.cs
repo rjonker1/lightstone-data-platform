@@ -16,7 +16,7 @@ namespace Billing.Domain.Entities
             _stageBillingRepository = stageBillingRepository;
         }
 
-        public void Commit(UserTransactionModelDto userTransactions)
+        public void UserTransactionCommit(UserTransactionModelDto userTransactions)
         {
             foreach (var userTransaction in userTransactions.Transactions)
             {
@@ -33,5 +33,8 @@ namespace Billing.Domain.Entities
 
             }
         }
+
+        public void CustomerClientCommit() { }
+        public void PackageItemDescriptionCommit() { }
     }
 }

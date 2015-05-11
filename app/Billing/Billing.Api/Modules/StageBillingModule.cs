@@ -220,7 +220,7 @@ namespace Billing.Api.Modules
             {
                 var body = Request.Body<UserTransactionModelDto>();
 
-                updateBillingTransaction.Commit(body);
+                updateBillingTransaction.UserTransactionCommit(body);
 
                 return Response.AsJson(new {data = "Success"});
             };
