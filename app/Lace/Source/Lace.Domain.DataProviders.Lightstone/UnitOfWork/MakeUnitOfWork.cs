@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Makes = _repository.GetAll<Make>(Make.SelectAll);
+                Makes = _repository.GetAll<Make>(null);
                 if (!Makes.Any())
                     Makes = _repository.Get<Make>(Make.SelectAll, new {});
             }

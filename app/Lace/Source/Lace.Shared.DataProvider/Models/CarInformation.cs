@@ -10,8 +10,8 @@ namespace Lace.Shared.DataProvider.Models
         public const string SelectWithCarId =
             @"SELECT c.Car_ID as CarId, 0 as [Year], c.CarType_ID as CarTypeId, c.Manufacturer_ID as ManufacturerId, c.CarFullName, c.CarModel, c.BodyShape, c.FuelType, c.Market, c.TransmissionType, c.ModelYear, c.IntroductionDate, c.ImageUrl, ct.Make_ID as MakeId,m.MakeName, 'Not Available' as [Quarter] FROM Car c INNER JOIN CarType ct ON c.CarType_ID = ct.CarType_ID INNER JOIN Make m ON ct.Make_ID = m.Make_ID where c.Car_ID = @CarId";
 
-        public const string SelectAllWithValidCarIdAndYear =
-            @"SELECT v.Vin, c.Car_ID AS CarId, c.CarType_ID AS CarTypeId, c.Manufacturer_ID AS ManufacturerId, c.CarFullName, c.CarModel, c.BodyShape, c.FuelType, c.Market, c.TransmissionType, c.ModelYear, c.IntroductionDate, c.ImageUrl, ct.Make_ID AS MakeId, v.MakeName, v.CarTypeName, v.Month,v.Colour,v.Source,  CASE WHEN v.Period = 'First' THEN '1st Quarter' WHEN v.Period = 'Second' THEN '2nd Quarter' WHEN v.Period = 'Third' THEN '3rd Quarter' WHEN v.Period = 'Fourth' THEN '4th Quarter' ELSE 'Not Available' END AS [Quarter], v.Year_ID AS Year FROM Car AS c INNER JOIN CarType AS ct ON c.CarType_ID = ct.CarType_ID INNER JOIN Vin AS v ON c.Car_ID = v.Car_ID where c.Car_ID is not null and v.Year_ID is not null and v.Year_ID > DATEPART(YEAR, DATEADD(YEAR,-6,GETDATE()))";
+        //public const string SelectAllWithValidCarIdAndYear =
+        //    @"SELECT v.Vin, c.Car_ID AS CarId, c.CarType_ID AS CarTypeId, c.Manufacturer_ID AS ManufacturerId, c.CarFullName, c.CarModel, c.BodyShape, c.FuelType, c.Market, c.TransmissionType, c.ModelYear, c.IntroductionDate, c.ImageUrl, ct.Make_ID AS MakeId, v.MakeName, v.CarTypeName, v.Month,v.Colour,v.Source,  CASE WHEN v.Period = 'First' THEN '1st Quarter' WHEN v.Period = 'Second' THEN '2nd Quarter' WHEN v.Period = 'Third' THEN '3rd Quarter' WHEN v.Period = 'Fourth' THEN '4th Quarter' ELSE 'Not Available' END AS [Quarter], v.Year_ID AS Year FROM Car AS c INNER JOIN CarType AS ct ON c.CarType_ID = ct.CarType_ID INNER JOIN Vin AS v ON c.Car_ID = v.Car_ID where c.Car_ID is not null and v.Year_ID is not null and v.Year_ID > DATEPART(YEAR, DATEADD(YEAR,-6,GETDATE()))";
 
         public const string SelectWithVin =
             @"SELECT v.Vin, c.Car_ID AS CarId, c.CarType_ID AS CarTypeId, c.Manufacturer_ID AS ManufacturerId, c.CarFullName, c.CarModel, c.BodyShape, c.FuelType, c.Market, c.TransmissionType, c.ModelYear, c.IntroductionDate, c.ImageUrl, ct.Make_ID AS MakeId, v.MakeName, v.CarTypeName, v.Month,v.Colour,v.Source, CASE WHEN v.Period = 'First' THEN '1st Quarter' WHEN v.Period = 'Second' THEN '2nd Quarter' WHEN v.Period = 'Third' THEN '3rd Quarter' WHEN v.Period = 'Fourth' THEN '4th Quarter' ELSE 'Not Available' END AS [Quarter], v.Year_ID AS Year FROM Car AS c INNER JOIN CarType AS ct ON c.CarType_ID = ct.CarType_ID INNER JOIN Vin AS v ON c.Car_ID = v.Car_ID where v.VIN = @Vin and c.Car_ID is not null and v.Year_ID is not null";
@@ -45,10 +45,32 @@ namespace Lace.Shared.DataProvider.Models
             CarModel = carModel;
         }
 
+        public CarInformation(string vin, int carId, int year, int carTypeId, int manufacturerId, string carFullname, string carModel, string bodyShape,
+           string fuelType, string market, string transmissionType, int modelYear,
+           string introductionDate, string imageUrl, string quarter, int makeId)
+        {
+            Vin = vin;
+            CarId = carId;
+            CarTypeId = carTypeId;
+            ManufacturerId = manufacturerId;
+            BodyShape = bodyShape;
+            FuelType = fuelType;
+            Market = market;
+            TransmissionType = transmissionType;
+            ModelYear = modelYear;
+            IntroductionDate = introductionDate;
+            MakeId = makeId;
+            Year = year;
+            ImageUrl = imageUrl;
+            Quarter = quarter;
+            CarFullname = carFullname;
+            CarModel = carModel;
+        }
+
         public void AddToCache(ICacheRepository repository)
         {
             repository.AddItems<CarInformation>(SelectAllWithCarId);
-            //repository.AddItemsForEach<CarInformation>(SelectAllWithValidCarIdAndYear);
+           // repository.AddItemsForEach<CarInformation>(SelectAllWithValidCarIdAndYear);
         }
 
         public void IsAVin12Car()

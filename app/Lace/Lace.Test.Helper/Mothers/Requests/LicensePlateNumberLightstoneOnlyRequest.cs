@@ -30,8 +30,8 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return VinNumberLightstoneAutoPackage.VinNumberPackage("SB1KV58E40F039277"); } //return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(107483,2008)
-        }
+            get { return VinNumberLightstoneAutoPackage.VinNumberPackage("SB1KV58E40F039277"); } //return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(107483,2008)   3C4PDCKG6ET232417
+        } 
 
 
         public IHaveContract Contract

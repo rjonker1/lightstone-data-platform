@@ -8,7 +8,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeMunicipalityRepository : IReadOnlyRepository
     {
-        public IQueryable<TItem> GetAll<TItem>(string sql) where TItem : class
+        public IQueryable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
         {
             return (IQueryable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable();
         }
@@ -16,17 +16,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
             return (IQueryable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable();
-        }
-
-
-        public IQueryable<TItem> GetAll<TItem>(string sql, Func<TItem, bool> predicate) where TItem : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<TItem> Get<TItem>(string sql, object param, Func<TItem, bool> predicate) where TItem : class
-        {
-            throw new NotImplementedException();
         }
     }
 }

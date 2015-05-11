@@ -40,19 +40,10 @@ namespace Lace.Acceptance.Tests.Caching
         {
             _sale.AddToCache(_repository);
             var sales =
-                _readRepository.GetAll<Sale>(Sale.SelectAllSales)
-                    .Where(w => w.Car_ID == CarId && w.Year_ID == Year)
+                _readRepository.GetAll<Sale>(sale => { return sale.Car_ID == CarId && sale.Year_ID == Year; })
                     .OrderByDescending(o => o.SaleDateTime)
                     .Take(5);
 
-            sales.Any().ShouldBeTrue();
-            sales.Count().ShouldEqual(5);
-        }
-
-        [Observation]
-        public void then_sale_data_should_be_able_to_be_added_to_the_cache()
-        {
-            var sales = _readRepository.Get<Sale>(Sale.SelectTopFiveSalesForCarIdAndYear, new { CarId, Year });
             sales.Any().ShouldBeTrue();
             sales.Count().ShouldEqual(5);
         }

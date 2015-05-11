@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
         {
             try
             {
-                CarSpecifications = _repository.GetAll<CarSpecification>(CarSpecification.SelectAll)
+                CarSpecifications = _repository.GetAll<CarSpecification>(null)
                     .Where(w => w.CarId == request.CarId);
 
                 if (!CarSpecifications.Any())
