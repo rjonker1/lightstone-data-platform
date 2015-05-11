@@ -28,6 +28,7 @@
             }, {
                 field: 'customerName',
                 title: 'Customer / Client Name',
+                formatter: customerClientFormatter,
                 sortable: true
             }, {
                 field: 'users',
@@ -81,7 +82,7 @@
 
 <!-- Record Edit Modal -->
 <div class="modal fade" id="recordEdit-modal" tabindex="-1" role="dialog" aria-labelledby="recordEditLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body recordEdit-render">
                 Record Edit

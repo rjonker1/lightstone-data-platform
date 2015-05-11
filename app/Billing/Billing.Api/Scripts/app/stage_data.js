@@ -281,7 +281,6 @@ window.invoiceActionEvents = {
 
     'click .record-edit': function(e, value, row, index) {
 
-        $('.recordEdit-render').html(row.customerName);
     }
 };
 
@@ -298,3 +297,9 @@ function gridBilledTransactionsFormatter(value, row, index) {
         'Total Transactions: ( ' + value + ' ) '
     ].join('');
 };
+
+function customerClientFormatter(value, row, index) {
+    return [
+        '<a href="#">' + value + '</a>'
+    ].join('');
+}
