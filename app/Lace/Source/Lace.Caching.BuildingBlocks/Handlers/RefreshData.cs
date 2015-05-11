@@ -25,12 +25,12 @@ namespace Lace.Caching.BuildingBlocks.Handlers
 
         private static readonly List<IAmCachable> ItemsToCache = new List<IAmCachable>()
         {
-            //new Band(),
-            //new CarSpecification(),
-            //new Make(),
-            //new Metric(),
-            //new Municipality(),
-            //new Sale(),
+            new Band(),
+            new CarSpecification(),
+            new Make(),
+            new Metric(),
+            new Municipality(),
+            new Sale(),
             new CarInformation()
         };
     }

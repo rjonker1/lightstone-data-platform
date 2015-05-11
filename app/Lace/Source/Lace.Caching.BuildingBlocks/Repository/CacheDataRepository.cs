@@ -2,7 +2,6 @@
 using System.Data;
 using System.Linq;
 using Common.Logging;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Shared.DataProvider.Contracts;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
@@ -25,9 +24,9 @@ namespace Lace.Caching.BuildingBlocks.Repository
         {
             try
             {
-                using (var redisManager = new PooledRedisClientManager(1000, 10, new[] { CacheIp }) { ConnectTimeout = 1000 })
+                using (var manager = new PooledRedisClientManager(1000, 10, new[] { CacheIp }) { ConnectTimeout = 1000 })
                 {
-                    using (var redis = redisManager.GetClient())
+                    using (var redis = manager.GetClient())
                     {
                         var type = redis.As<TItem>();
 
@@ -52,9 +51,9 @@ namespace Lace.Caching.BuildingBlocks.Repository
         {
             try
             {
-                using (var redisManager = new PooledRedisClientManager(1000, 10, new[] {CacheIp}) {ConnectTimeout = 1000})
+                using (var manager = new PooledRedisClientManager(1000, 10, new[] { CacheIp }) { ConnectTimeout = 1000 })
                 {
-                    using (var redis = redisManager.GetClient())
+                    using (var redis = manager.GetClient())
                     {
                         var type = redis.As<TItem>();
 
@@ -79,7 +78,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
         {
             try
             {
-                using (var client = CacheConnectionFactory.LocalClient().GetClient())
+                using (var client = new RedisClient(CacheIp))
                 {
                     client.FlushDb();
                     client.FlushAll();
@@ -90,7 +89,6 @@ namespace Lace.Caching.BuildingBlocks.Repository
                 _log.ErrorFormat("Cannot Clear All the Items from the Cache becuse of {0}", ex, ex.Message);
             }
         }
-
-       
+        
     }
 }

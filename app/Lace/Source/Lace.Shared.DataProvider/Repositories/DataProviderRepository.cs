@@ -53,52 +53,5 @@ namespace Lace.Shared.DataProvider.Repositories
 
             return new List<TItem>().AsQueryable();
         }
-
-        //private IQueryable<TItem> GetFromDataBase<TItem>(string sql, object param) where TItem : class
-        //{
-        //    try
-        //    {
-        //        return _connection.Query<TItem>(sql, param).AsQueryable();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _log.ErrorFormat("Could not get items from database because of {0}", ex.Message, ex);
-        //    }
-
-        //    return new List<TItem>().AsQueryable();
-        //}
-
-        //public IQueryable<TItem> GetAll<TItem>(string sql) where TItem : class
-        //{
-        //    try
-        //    {
-        //        using (var manager = new BasicRedisClientManager(CacheIp))
-        //        using (var client = manager.GetClient())
-        //        {
-        //            var type = client.As<TItem>();
-        //            return type.GetAll().AsQueryable();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _log.ErrorFormat("Could not get items from the cache because of {0}", ex.Message, ex);
-        //    }
-        //    return new List<TItem>().AsQueryable();
-        //}
-
-        //public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
-        //{
-        //    using (var manager = new BasicRedisClientManager(CacheIp))
-        //    using (var client = manager.GetClient())
-        //    {
-        //        if (!client.ContinueUsingCache())
-        //        {
-        //            return _connection.Query<TItem>(sql, param).AsQueryable();
-        //        }
-
-        //        var type = client.As<TItem>();
-        //        return type.GetAll().Any() ? type.GetAll().AsQueryable() : _connection.Query<TItem>(sql, param).AsQueryable();
-        //    }
-        //}
     }
 }

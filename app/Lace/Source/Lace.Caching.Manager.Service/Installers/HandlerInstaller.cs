@@ -8,11 +8,11 @@ namespace Lace.Caching.Manager.Service.Installers
 {
     public class HandlerInstaller : IWindsorInstaller
     {
-        private static readonly ILog _log = LogManager.GetLogger<HandlerInstaller>();
+        private static readonly ILog Log = LogManager.GetLogger<HandlerInstaller>();
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            _log.Info("Installing the handlers");
+            Log.Info("Installing the handlers");
             container.Register(Component.For<IHandleClearingData>().ImplementedBy<ClearData>().LifestyleTransient());
             container.Register(Component.For<IHandleRefreshingData>().ImplementedBy<RefreshData>().LifestyleTransient());
         }
