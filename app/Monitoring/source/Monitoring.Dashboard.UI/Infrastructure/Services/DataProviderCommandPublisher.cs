@@ -2,22 +2,21 @@
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.Topology;
-using Workflow.Lace.Messages.Core;
+using Monitoring.Dashboard.UI.Core.Contracts.Services;
 
-namespace Workflow.Lace.Messages.Shared
+namespace Monitoring.Dashboard.UI.Infrastructure.Services
 {
-    public class BillingPublisher : IPublishBillingMessages
+    public class DataProviderCommandPublisher : IPublishCacheMessages
     {
         private readonly IAdvancedBus _bus;
         private readonly IExchange _exchange;
         private readonly IQueue _queue;
         private readonly ILog _log;
 
-        private const string Exchange = "DataPlatform.Transactions.Billing";
-        private const string QueueName = "DataPlatform.Transactions.Billing";
+        private const string Exchange = "DataPlatform.DataProvider.Cache.Receiver";
+        private const string QueueName = "DataPlatform.DataProvider.Cache.Receiver";
 
-
-        public BillingPublisher(IAdvancedBus bus)
+        public DataProviderCommandPublisher(IAdvancedBus bus)
         {
             _bus = bus;
             _exchange = _bus.ExchangeDeclare(Exchange,
@@ -35,7 +34,7 @@ namespace Workflow.Lace.Messages.Shared
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error sending message to Billing Transation Bus: {0}",ex, ex.Message);
+                _log.ErrorFormat("Error sending message to Billing Transation Bus: {0}", ex, ex.Message);
             }
         }
     }

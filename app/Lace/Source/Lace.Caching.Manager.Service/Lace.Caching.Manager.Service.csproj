@@ -103,6 +103,7 @@
     <Compile Include="Consumers\CacheConsumer.cs" />
     <Compile Include="ICacheWorker.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
+    <Compile Include="Installers\ConsumerInstaller.cs" />
     <Compile Include="Installers\HandlerInstaller.cs" />
     <Compile Include="Installers\JobInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />

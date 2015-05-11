@@ -2,6 +2,7 @@
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using Castle.Windsor.Installer;
+using Lace.Caching.Manager.Service.Installers;
 using Topshelf;
 
 namespace Lace.Caching.Manager.Service
