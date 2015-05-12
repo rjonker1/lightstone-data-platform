@@ -7,7 +7,7 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Domain.Entities
 {
-    public class UserBillingTransaction<T> : ICommitBillingTransaction<UserTransactionModelDto>
+    public class UserBillingTransaction<T> : ICommitBillingTransaction<UserTransactionDto>
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
 
@@ -16,7 +16,7 @@ namespace Billing.Domain.Entities
             _stageBillingRepository = stageBillingRepository;
         }
 
-        public void Commit(UserTransactionModelDto userTransactions)
+        public void Commit(UserTransactionDto userTransactions)
         {
             foreach (var userTransaction in userTransactions.Transactions)
             {

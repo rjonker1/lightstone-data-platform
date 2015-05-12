@@ -67,14 +67,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerClientTransactionDto.cs" />
     <Compile Include="DataProviderDto.cs" />
     <Compile Include="DataProviderTransactionDto.cs" />
     <Compile Include="PackageDto.cs" />
+    <Compile Include="PackageTransactionDto.cs" />
     <Compile Include="PreBillingDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageBillingDto.cs" />
     <Compile Include="TransactionDto.cs" />
-    <Compile Include="UserTransactionModelDto.cs" />
+    <Compile Include="UserTransactionDto.cs" />
     <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
