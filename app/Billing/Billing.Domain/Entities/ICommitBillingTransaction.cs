@@ -2,7 +2,7 @@
 
 namespace Billing.Domain.Entities
 {
-    public interface IUpdateBillingTransaction<in T> where T: class
+    public interface ICommitBillingTransaction<in T> where T: class
     {
         void Commit(T entity);
     }

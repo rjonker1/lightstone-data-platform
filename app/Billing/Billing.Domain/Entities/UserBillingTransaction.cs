@@ -7,16 +7,16 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Domain.Entities
 {
-    public class UpdateBillingTransaction
+    public class UserBillingTransaction<T> : ICommitBillingTransaction<UserTransactionModelDto>
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
 
-        public UpdateBillingTransaction(IRepository<StageBilling> stageBillingRepository)
+        public UserBillingTransaction(IRepository<StageBilling> stageBillingRepository)
         {
             _stageBillingRepository = stageBillingRepository;
         }
 
-        public void UserTransactionCommit(UserTransactionModelDto userTransactions)
+        public void Commit(UserTransactionModelDto userTransactions)
         {
             foreach (var userTransaction in userTransactions.Transactions)
             {
@@ -34,7 +34,5 @@ namespace Billing.Domain.Entities
             }
         }
 
-        public void CustomerClientCommit() { }
-        public void PackageItemDescriptionCommit() { }
     }
 }

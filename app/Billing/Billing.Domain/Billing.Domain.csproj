@@ -77,8 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\IUpdateBillingTransaction.cs" />
-    <Compile Include="Entities\UpdateBillingTransaction.cs" />
+    <Compile Include="Entities\ICommitBillingTransaction.cs" />
+    <Compile Include="Entities\UserBillingTransaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

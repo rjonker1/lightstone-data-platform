@@ -9,7 +9,10 @@ namespace Billing.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<UpdateBillingTransaction>().ImplementedBy<UpdateBillingTransaction>());
+            container.Register(Component.For(typeof (ICommitBillingTransaction<>))
+                .ImplementedBy(typeof (UserBillingTransaction<>))
+                .ImplementedBy(typeof (CustomerClientBillingTransaction<>))
+                .ImplementedBy(typeof (PackageBillingTransaction<>)));
         }
     }
 }

@@ -18,7 +18,10 @@ namespace Billing.Api.Modules
 {
     public class StageBillingModule : NancyModule
     {
-        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, UpdateBillingTransaction updateBillingTransaction)
+        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, 
+                                    ICommitBillingTransaction<UserTransactionModelDto> userBillingTransaction,
+                                    ICommitBillingTransaction<UserTransactionModelDto> customerClientBillingTransaction,
+                                    ICommitBillingTransaction<UserTransactionModelDto> packBillingTransaction) // TODO: DTO setup
         {
 
             Get["/StageBilling/"] = _ =>
@@ -220,7 +223,7 @@ namespace Billing.Api.Modules
             {
                 var body = Request.Body<UserTransactionModelDto>();
 
-                updateBillingTransaction.UserTransactionCommit(body);
+                userBillingTransaction.Commit(body);
 
                 return Response.AsJson(new {data = "Success"});
             };
