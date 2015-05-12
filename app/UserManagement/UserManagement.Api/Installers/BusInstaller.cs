@@ -25,7 +25,7 @@ namespace UserManagement.Api.Installers
 
             container.Register(
                 Component.For<IAdvancedBus>()
-                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/billing/queue"))//.CreateBus("workflow/billing/queue", container))
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/billing/queue"))
                     .LifestyleSingleton()
                 );
 
