@@ -13,7 +13,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.UserManagement.Api</name>
       <folder>app/UserManagement/UserManagement.Api</folder>
       <author>CustomApp</author>
@@ -31,7 +31,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.PackageBuilder.Api</name>
       <folder>app/PackageBuilder/PackageBuilder.Api</folder>
       <author>CustomApp</author>
@@ -44,7 +44,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.PackageBuilder.Web.UI</name>
       <folder>app/PackageBuilder/PackageBuilder.Web.UI</folder>
       <author>CustomApp</author>
@@ -62,7 +62,7 @@
         <include pattern="Web.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.CentralInterfuseApplication.Api</name>
       <folder>app/CentralInterfuseApplication/CentralInterfuseApplication.Api</folder>
       <author>CustomApp</author>
@@ -79,7 +79,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.Monitoring.Dashboard.UI</name>
       <folder>app/Monitoring/source/Monitoring.Dashboard.UI</folder>
       <author>CustomApp</author>
@@ -93,7 +93,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Api</name>
       <folder>app/Billing/Billing.Api</folder>
       <author>CustomApp</author>
@@ -111,7 +111,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Scheduler</name>
       <folder>app/Billing/Billing.Scheduler</folder>
       <author>CustomApp</author>
@@ -192,7 +192,7 @@
     <!-- BILLING END -->
 
     <!-- REPORTING START -->
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.Workflow.Reporting</name>
       <folder>app/Reporting/Workflow.Reporting</folder>
       <author>CustomApp</author>
