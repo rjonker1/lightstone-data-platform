@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Lim.Extensions;
 
@@ -16,6 +17,12 @@ namespace Lim.Push.RestApi
         {
             _suffix = suffix;
             _client = baseAddress.ToHttpClient();
+        }
+
+        public HttpPushClient(string baseAddress, string suffix, string key, string token, AuthenticationHeaderValue authentication)
+        {
+            _suffix = suffix;
+            _client = baseAddress.ToHttpBasicClient(key, token, authentication);
         }
 
         public async Task<T> PostAsync(T model)
