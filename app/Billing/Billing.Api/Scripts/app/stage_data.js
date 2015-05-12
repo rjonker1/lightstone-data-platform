@@ -200,6 +200,27 @@ window.packageGridActionEvents = {
             }, {
                 field: 'packageName',
                 title: 'Package Name',
+                editable: {
+                    type: 'text',
+                    name: 'packageName',
+                    placement: 'right',
+                    url: '/test',
+                    title: 'Enter Package Name',
+                    ajaxOptions: {
+                        dataType: 'json'
+                    },
+                    success: function(response, newValue) {
+                        if (!response) {
+                            return "Unknown error!";
+                        }
+
+                        if (response.success === false) {
+                            return response.msg;
+                        }
+
+                        return null;
+                    }
+                },
                 sortable: true
             }, {
                 field: 'costPrice',
