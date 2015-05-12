@@ -281,6 +281,8 @@ window.invoiceActionEvents = {
 
     'click .record-edit': function (e, value, row, index) {
 
+        $("a:contains('" + row.customerName + "')").click();
+        e.stopPropagation();
     }
 };
 
@@ -296,14 +298,4 @@ function gridBilledTransactionsFormatter(value, row, index) {
     return [
         'Total Transactions: ( ' + value + ' ) '
     ].join('');
-};
-
-function customerClientFormatter(value, row, index) {
-    return [
-        '<a href="#" id="#'+row.id+'" data-type="text" data-pk="1">awesome</a>'
-    ].join('');
-}
-
-window.customerClientEvents = {
-
 };

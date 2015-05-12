@@ -21,82 +21,69 @@
             pageNumber: 1,
             pageSize: 10,
             pageList: [10, 25, 50, 100, 'All'],
-            columns: [{
-                field: 'id',
-                title: 'Customer ID',
-                visible: false
-            }, {
-                field: 'customerName',
-                title: 'Customer / Client Name',
-                editable: {
-                    type: 'text',
-                    name: 'customerName',
-                    placement: 'right',
-                    url: '/test',
-                    title: 'Enter username',
-                    ajaxOptions: {
-                        dataType: 'json'
+            columns: [
+                {
+                    field: 'id',
+                    title: 'Customer ID',
+                    visible: false
+                }, {
+                    field: 'customerName',
+                    title: 'Customer / Client Name',
+                    editable: {
+                        type: 'text',
+                        name: 'customerName',
+                        placement: 'right',
+                        url: '/test',
+                        title: 'Enter Customer / Client Name',
+                        ajaxOptions: {
+                            dataType: 'json'
+                        },
+                        success: function(response, newValue) {
+                            if (!response) {
+                                return "Unknown error!";
+                            }
+
+                            if (response.success === false) {
+                                return response.msg;
+                            }
+                        }
                     },
-                    success: function (response, newValue) {
-                        if (!response) {
-                            return "Unknown error!";
-                        }
-
-                        if (response.success === false) {
-                            return response.msg;
-                        }
-                    }
-                },
-                sortable: true
-            }, {
-                field: 'users',
-                title: '# Users',
-                formatter: gridUsersFormatter,
-                events: userGridActionEvents
-            }, {
-                field: 'type',
-                title: 'Customer / Client Type',
-                sortable: true
-            }, {
-                field: 'owner',
-                title: 'Owner',
-                sortable: true
-            }, {
-                field: 'products',
-                title: '# Packages',
-                formatter: gridPackagesFormatter,
-                events: packageGridActionEvents
-            }, {
-                field: 'transactions',
-                title: '# Transactions',
-                formatter: gridTransactionsFormatter
-            }, {
-                field: 'billedTransactions',
-                title: '# Billed Transactions',
-                formatter: gridBilledTransactionsFormatter
-            }, {
-                field: 'invoice',
-                formatter: invoiceFormatter,
-                events: invoiceActionEvents
-            }]
-        }).on('editable-init.bs.table', function (e) {
-
-            $('.editable').editable('option', {
-                type: 'text',
-                name: 'test',
-                placement: 'right',
-                url: '/post',
-                title: 'Enter username'
-            });
+                    sortable: true
+                }, {
+                    field: 'users',
+                    title: '# Users',
+                    formatter: gridUsersFormatter,
+                    events: userGridActionEvents
+                }, {
+                    field: 'type',
+                    title: 'Customer / Client Type',
+                    sortable: true
+                }, {
+                    field: 'owner',
+                    title: 'Owner',
+                    sortable: true
+                }, {
+                    field: 'products',
+                    title: '# Packages',
+                    formatter: gridPackagesFormatter,
+                    events: packageGridActionEvents
+                }, {
+                    field: 'transactions',
+                    title: '# Transactions',
+                    formatter: gridTransactionsFormatter
+                }, {
+                    field: 'billedTransactions',
+                    title: '# Billed Transactions',
+                    formatter: gridBilledTransactionsFormatter
+                }, {
+                    field: 'invoice',
+                    formatter: invoiceFormatter,
+                    events: invoiceActionEvents
+                }
+            ]
         });
 
         Billing.overrideDataTablesStyling();
-
-        //$('#table .editable').editable({
-        //    type: 'text',
-        //    //placement: 'right',
-        //    title: 'Enter username'
-        //});
 
         $(document).ready(function () {
 
