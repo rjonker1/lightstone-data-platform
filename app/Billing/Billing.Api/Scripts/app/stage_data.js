@@ -237,7 +237,7 @@ function invoiceFormatter(value, row, index) {
     return [
         '<div class="row">' +
         '<div class="col-md-2">' +
-                '<button type="button" class="record-edit btn btn-warning btn-md" data-toggle="modal" data-target="#recordEdit-modal">' +
+                '<button type="button" class="record-edit btn btn-warning btn-md" >' +
                     'Edit Record' +
                 '</button>' +
             '</div>' +
@@ -279,7 +279,7 @@ window.invoiceActionEvents = {
         });
     },
 
-    'click .record-edit': function(e, value, row, index) {
+    'click .record-edit': function (e, value, row, index) {
 
     }
 };
@@ -300,6 +300,10 @@ function gridBilledTransactionsFormatter(value, row, index) {
 
 function customerClientFormatter(value, row, index) {
     return [
-        '<a href="#">' + value + '</a>'
+        '<a href="#" id="#'+row.id+'" data-type="text" data-pk="1">awesome</a>'
     ].join('');
 }
+
+window.customerClientEvents = {
+
+};

@@ -28,7 +28,25 @@
             }, {
                 field: 'customerName',
                 title: 'Customer / Client Name',
-                formatter: customerClientFormatter,
+                editable: {
+                    type: 'text',
+                    name: 'customerName',
+                    placement: 'right',
+                    url: '/test',
+                    title: 'Enter username',
+                    ajaxOptions: {
+                        dataType: 'json'
+                    },
+                    success: function (response, newValue) {
+                        if (!response) {
+                            return "Unknown error!";
+                        }
+
+                        if (response.success === false) {
+                            return response.msg;
+                        }
+                    }
+                },
                 sortable: true
             }, {
                 field: 'users',
@@ -61,10 +79,34 @@
                 formatter: invoiceFormatter,
                 events: invoiceActionEvents
             }]
+        }).on('editable-init.bs.table', function (e) {
+
+            $('.editable').editable('option', {
+                type: 'text',
+                name: 'test',
+                placement: 'right',
+                url: '/post',
+                title: 'Enter username'
+            });
         });
 
         Billing.overrideDataTablesStyling();
+
+        //$('#table .editable').editable({
+        //    type: 'text',
+        //    //placement: 'right',
+        //    title: 'Enter username'
+        //});
+
+        $(document).ready(function () {
+
+            $(function () {
+
+            });
+        });
+
     </script>
+
 </div>
 
 <!-- Invoice Modal -->
@@ -99,7 +141,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body packageEdit-render">
-                Package Edit 
+                Package Edit
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -133,9 +175,9 @@
                         var obj = { "transactions": $('#userTransEdit-table').bootstrapTable('getData') };
 
                         $.post(apiEndpoint + '/StageBilling/User/Transactions/Update', JSON.stringify(obj))
-                        .success(function(response) {
-                            console.log(response);
-                        });
+                            .success(function (response) {
+                                console.log(response);
+                            });
                     });
                 });
             </script>

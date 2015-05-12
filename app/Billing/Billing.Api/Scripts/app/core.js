@@ -121,12 +121,6 @@
         $paging.css("padding-right", "0");
         $paging.addClass("col-lg-3");
         $paging.addClass("pull-right");
-
-        $('#table a').editable({
-            type: 'text',
-            placement: 'right',
-            title: 'Enter username'
-        });
     };
 
     return Billing;
