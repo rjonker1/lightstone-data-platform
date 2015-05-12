@@ -71,7 +71,7 @@ namespace Lace.Acceptance.Tests.Caching
         public void then_all_cachable_data_should_be_cached()
         {
             //_clearing.Handle();
-            //_refreshing.Handle();
+           // _refreshing.Handle();
 
             //var bands = _readRepository.GetAll<Band>(Band.SelectAll);
             //bands.Count().ShouldNotEqual(0);

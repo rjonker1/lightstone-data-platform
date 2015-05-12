@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using EasyNetQ;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
 using Monitoring.Dashboard.UI.Infrastructure.Handlers;
@@ -12,6 +13,7 @@ using Nancy.Conventions;
 using Nancy.TinyIoc;
 using Shared.BuildingBlocks.AdoNet.Mapping;
 using Shared.BuildingBlocks.AdoNet.Repository;
+using Workflow.BuildingBlocks;
 
 namespace Monitoring.Dashboard.UI
 {
@@ -28,6 +30,10 @@ namespace Monitoring.Dashboard.UI
             container.Register<IHandleMonitoringCommands, DataProviderHandler>();
             container.Register<IHandleDataProviderStatistics, DataProviderStatisticsHandler>();
             container.Register<ICallMonitoringService, DataProviderMonitoringService>();
+
+            container.Register<IHandleDataProviderCaching, DataProviderCachingHandler>();
+            container.Register<IPublishCacheMessages, DataProviderCommandPublisher>();
+            container.Register<IAdvancedBus>(BusFactory.CreateAdvancedBus("caching/dataprovider/queue"));
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

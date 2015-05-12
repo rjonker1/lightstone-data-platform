@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Bands = _repository.GetAll<Band>(Band.SelectAll);
+                Bands = _repository.GetAll<Band>(null);
                 if (!Bands.Any())
                     Bands = _repository.Get<Band>(Band.SelectAll, new {});
             }

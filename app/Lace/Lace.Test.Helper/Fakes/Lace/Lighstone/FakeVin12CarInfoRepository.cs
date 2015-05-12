@@ -13,7 +13,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             _vin = vin;
         }
 
-        public IQueryable<TItem> GetAll<TItem>(string sql) where TItem : class
+        public IQueryable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
         {
             return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort().Select(
                     s =>
@@ -35,15 +35,5 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                                 s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).AsQueryable();
         }
 
-
-        public IQueryable<TItem> GetAll<TItem>(string sql, System.Func<TItem, bool> predicate) where TItem : class
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IQueryable<TItem> Get<TItem>(string sql, object param, System.Func<TItem, bool> predicate) where TItem : class
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

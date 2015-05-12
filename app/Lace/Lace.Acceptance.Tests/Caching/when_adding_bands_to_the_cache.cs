@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Lace.Caching.BuildingBlocks.Handlers;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
@@ -39,7 +35,7 @@ namespace Lace.Acceptance.Tests.Caching
         [Observation]
         public void then_bands_should_exist_in_the_cache()
         {
-            var bands = _readRepository.GetAll<Band>(Band.SelectAll);
+            var bands = _readRepository.GetAll<Band>(null);
             bands.Any().ShouldBeTrue();
 
             var band = bands.Where(b => b.Band_ID == 55);

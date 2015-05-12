@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
         {
             try
             {
-                Metrics = _repository.GetAll<Metric>(Metric.SelectAll);
+                Metrics = _repository.GetAll<Metric>(null);
                 if (!Metrics.Any())
                     Metrics = _repository.Get<Metric>(Metric.SelectAll, new { });
             }

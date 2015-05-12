@@ -22,12 +22,12 @@ namespace Lace.Caching.Manager.Service.Consumers
 
         public void Consume(IMessage<RefreshCacheCommand> message)
         {
-           _refresh.Handle();
+            _refresh.Handle();
         }
 
         public void Consume(IMessage<RestartCacheDataStoreCommand> message)
         {
-            //TODO: Restart redis
+            //TODO: Restart redis service
         }
     }
 }
