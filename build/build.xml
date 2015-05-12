@@ -92,9 +92,6 @@
         <include pattern="Views\" to="content\Views"/>
         <include pattern="*.config" to="content"/>
       </includes>
-      <dependecies>
-        <dependecy id="Lightstone.DataPlatform.Lace.Caching" />
-      </dependecies>
     </nuget>
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Api</name>
