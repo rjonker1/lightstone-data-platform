@@ -228,11 +228,20 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new {data = "Success"});
             };
 
-            Post["/StageBilling/CustomerClient/Transactions/Update"] = param =>
+            Post["/StageBilling/CustomerClient/Transaction/Update"] = param =>
             {
-                var body = Request.Body<UserTransactionDto>();
+                var body = Request.Body<CustomerClientTransactionDto>();
 
-                userBillingTransaction.Commit(body);
+                customerClientBillingTransaction.Commit(body);
+
+                return Response.AsJson(new { data = "Success" });
+            };
+            
+            Post["/StageBilling/Package/Transaction/Update"] = param =>
+            {
+                var body = Request.Body<PackageTransactionDto>();
+
+                packBillingTransaction.Commit(body);
 
                 return Response.AsJson(new { data = "Success" });
             };

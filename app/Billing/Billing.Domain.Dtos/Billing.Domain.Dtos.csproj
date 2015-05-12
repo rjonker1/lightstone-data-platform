@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerClientDto.cs" />
     <Compile Include="CustomerClientTransactionDto.cs" />
     <Compile Include="DataProviderDto.cs" />
     <Compile Include="DataProviderTransactionDto.cs" />

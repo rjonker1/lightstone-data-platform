@@ -1,8 +1,10 @@
-﻿namespace Billing.Domain.Entities
+﻿using Billing.Domain.Dtos;
+
+namespace Billing.Domain.Entities
 {
-    public class PackageBillingTransaction<T> : ICommitBillingTransaction<T> where T : class
+    public class PackageBillingTransaction<T> : ICommitBillingTransaction<PackageTransactionDto> where T : class
     {
-        public void Commit(T entity)
+        public void Commit(PackageTransactionDto entity)
         {
             throw new System.NotImplementedException();
         }
