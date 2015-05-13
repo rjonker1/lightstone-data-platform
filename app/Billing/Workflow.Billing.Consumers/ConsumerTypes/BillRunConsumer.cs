@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Billing.Domain.Dtos;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
@@ -35,6 +36,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
             var bus = new TransactionBus(_bus);
             var reportList = new List<ReportDto>();
+            var csvReportList = new List<ReportDto>();
 
             #region Map PreBilling - Stage
 
@@ -56,14 +58,14 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
             #region Map StageBilling - Final
 
-            foreach (var stageBilling in _stageBillingRepository)
+            if (message.Body.RunType == "Final")
             {
-                var finalEntity = Mapper.Map(stageBilling, new FinalBilling());
 
-                #region FinalBilling
-
-                if (message.Body.RunType == "Final")
+                foreach (var stageBilling in _stageBillingRepository)
                 {
+                    var finalEntity = Mapper.Map(stageBilling, new FinalBilling());
+
+                    #region FinalBilling
 
                     if (!_finalBillingRepository.Any(x => x.StageBillingId == finalEntity.StageBillingId))
                         _finalBillingRepository.SaveOrUpdate(finalEntity);
@@ -87,7 +89,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
                             var reportData = new ReportDto()
                             {
-                                Template = new ReportTemplate {ShortId = "VJGAd9OM"},
+                                Template = new ReportTemplate { ShortId = "VJGAd9OM" },
                                 Data = new ReportData
                                 {
                                     Customer = new ReportCustomer
@@ -104,6 +106,51 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
                             //Index restriction for new record
                             if (reportIndex < 0) reportList.Add(reportData);
+
+
+                            //CSV Report Build-up
+                            var billedCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable)
+                                                        .Select(x => x.TransactionId).Distinct().Count();
+
+                            var invoiceList = new List<ReportInvoice>();
+                            
+                            var invoice =  new ReportInvoice
+                                {
+                                    DOCTYPE = "INV",
+                                    INVNUMBER = "",
+                                    ACCOUNTID = transaction.AccountNumber,
+                                    DESCRIPTION = "",
+                                    INVDATE = "",
+                                    TAXINCLUSIVE = "",
+                                    ORDERNUM = "",
+                                    CDESCRIPTION = "",
+                                    FQUANTITY = billedCustomerTransactionsTotal.ToString(),
+                                    FUNITPRICEEXCL = "",
+                                    ITAXTYPEID = "",
+                                    ISTOCKCODEID = "",
+                                    Project = "",
+                                    Tax_Number = ""
+                                };
+
+                            var invoiceListIndex = invoiceList.FindIndex(x => x.ACCOUNTID == transaction.AccountNumber);
+                            if (invoiceListIndex < 0) invoiceList.Add(invoice);
+
+                            var csvReportData = new ReportDto()
+                            {
+                                Template = new ReportTemplate { ShortId = "EJ-dvWnX" },
+                                Data = new ReportData
+                                {
+                                    Invoices = invoiceList
+                                }
+                            };
+
+                            //Report Index
+                            var csvReportIndex = csvReportList.FindIndex(x => x.Data.Invoices.Any(i => i.ACCOUNTID == transaction.AccountNumber));
+
+                            //Index restriction for new record
+                            if (csvReportIndex < 0) csvReportList.Add(csvReportData);
+
+                            /////// END ////////
                         }
 
                         //Client
@@ -121,7 +168,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
                             var reportData = new ReportDto()
                             {
-                                Template = new ReportTemplate {ShortId = "VJGAd9OM"},
+                                Template = new ReportTemplate { ShortId = "VJGAd9OM" },
                                 Data = new ReportData
                                 {
                                     Customer = new ReportCustomer
@@ -142,19 +189,31 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     }
 
                 }
-                #endregion
+                    #endregion
             }
             #endregion
 
             #region Report Queue
+
+            //PDF
             foreach (var report in reportList)
             {
-
                 bus.SendDynamic(new ReportMessage
                 {
                     Id = Guid.NewGuid(),
                     ReportBody = JsonConvert.SerializeObject(report),
                     ReportType = "pdf"
+                });
+            }
+
+            //CSV
+            foreach (var report in csvReportList)
+            {
+                bus.SendDynamic(new ReportMessage
+                {
+                    Id = Guid.NewGuid(),
+                    ReportBody = JsonConvert.SerializeObject(report),
+                    ReportType = "csv"
                 });
             }
             #endregion
