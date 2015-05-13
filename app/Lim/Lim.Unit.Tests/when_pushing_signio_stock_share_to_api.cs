@@ -10,7 +10,7 @@ namespace Lim.Unit.Tests
     public class when_pushing_signio_stock_share_to_api : Specification
     {
         private readonly string _url = "http://dev.lim.test.api.lightstone.co.za";
-        private readonly string _api = "stockshare/api/stock/";
+        private readonly string _api = "stockshare/api/stock/importStockItem";
         private readonly string _resource = "importStockItem";
 
         private readonly string _key = "X-Auth-Token";
@@ -34,27 +34,16 @@ namespace Lim.Unit.Tests
         [Observation]
         public void then_push_api_should_get_ok_status_code()
         {
-            PushToClient();
+            _push.PostWithNoResponse(
+                    new ImportVehicleRequest(DateTime.UtcNow, new User("", Guid.NewGuid()), new Vehicle(), new Stock('Y', true)));
+            _push.Dispose();
+            _push.IsSuccessful.ShouldBeTrue();
         }
 
         private AuthenticationHeaderValue BuildAuthentication()
         {
             return new AuthenticationHeaderValue("Basic",
                 Convert.ToBase64String(Encoding.UTF8.GetBytes(_username + ":" + _password)));
-        }
-
-        private async void PushToClient()
-        {
-            try
-            {
-                await _push.PutAsync(_resource,
-                    new ImportVehicleRequest(DateTime.UtcNow, new User("", Guid.NewGuid()), new Vehicle(), new Stock('Y', true)));
-
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
     }
 

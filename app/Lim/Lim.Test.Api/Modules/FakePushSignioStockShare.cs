@@ -6,7 +6,7 @@ namespace Lim.Test.Api.Modules
 {
     public class FakePushSignioStockShare : NancyModule
     {
-        private readonly ILog _log; 
+        private readonly ILog _log;
 
         public FakePushSignioStockShare()
         {
@@ -23,7 +23,7 @@ namespace Lim.Test.Api.Modules
             Post["stockshare/api/stock/importStockItem"] = _ =>
             {
                 _log.Info("Importing stock item");
-                return HttpStatusCode.OK;
+                return Response.AsJson(new {Successfull = true});
             };
 
             Put["stockshare/api/stock/importStockItem"] = _ =>

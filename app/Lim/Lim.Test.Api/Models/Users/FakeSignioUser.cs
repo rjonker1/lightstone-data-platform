@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Common.Logging;
 using Nancy.Authentication.Basic;
 using Nancy.Security;
 
@@ -17,8 +18,10 @@ namespace Lim.Test.Api.Models.Users
 
     public class FakeBasicUser : IUserValidator
     {
+        private readonly ILog _log = LogManager.GetLogger<FakeBasicUser>();
         public IUserIdentity Validate(string username, string password)
         {
+            _log.Info("Getting the user");
             return new FakeUser("LightstoneAuto");
         }
     }

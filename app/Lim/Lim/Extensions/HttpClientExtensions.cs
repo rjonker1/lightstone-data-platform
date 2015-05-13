@@ -7,6 +7,8 @@ namespace Lim.Extensions
     public static class HttpClientExtensions
     {
         private const string JsonMediaType = "application/json";
+        private const string XmlMediaType = "application/xml";
+        private const string HtmlMediaType = "text/html";
 
         public static HttpClient ToHttpClient(this string baseAddress)
         {
@@ -18,6 +20,8 @@ namespace Lim.Extensions
                 BaseAddress = new Uri(baseAddress)
             };
             client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse(JsonMediaType));
+            client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse(XmlMediaType));
+            client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse(HtmlMediaType));
             client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("gzip"));
             client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("defalte"));
             return client;
@@ -33,6 +37,10 @@ namespace Lim.Extensions
                 BaseAddress = new Uri(baseAddress)
             };
             client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse(JsonMediaType));
+            client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse(XmlMediaType));
+            client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse(HtmlMediaType));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("gzip"));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("defalte"));
             client.DefaultRequestHeaders.Authorization = authentication;
             client.DefaultRequestHeaders.Add(key, token);
             return client;

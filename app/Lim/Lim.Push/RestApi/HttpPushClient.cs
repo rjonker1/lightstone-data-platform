@@ -7,11 +7,12 @@ using Lim.Extensions;
 
 namespace Lim.Push.RestApi
 {
-    public class HttpPushClient<T, TResource> : IDisposable where T : class
+    public class HttpPushClient<T, TResponse> : IDisposable where T : class
     {
         private bool _hasBeenDisposed;
         private HttpClient _client;
         private readonly string _suffix;
+        public bool IsSuccessful { get; private set; }
 
         public HttpPushClient(string baseAddress, string suffix)
         {
@@ -25,19 +26,31 @@ namespace Lim.Push.RestApi
             _client = baseAddress.ToHttpBasicClient(key, token, authentication);
         }
 
-        public async Task<T> PostAsync(T model)
+        public async Task<TResponse> PostAsync(T model)
         {
             MediaTypeFormatter jsonFormatter = new JsonMediaTypeFormatter();
             var content = new ObjectContent<T>(model, jsonFormatter);
-            var response = await _client.PostAsync(_suffix, content);
-            return await response.Content.ReadAsAsync<T>();
+            //var response = await _client.PostAsync(_suffix, content);
+            var response = _client.PostAsync(_suffix, content).Result;
+            IsSuccessful = response.IsSuccessStatusCode;
+            return await response.Content.ReadAsAsync<TResponse>();
         }
 
-        public async Task PutAsync(TResource identifier, T model)
+        public void PostWithNoResponse(T model)
+        {
+            MediaTypeFormatter jsonFormatter = new JsonMediaTypeFormatter();
+            var content = new ObjectContent<T>(model, jsonFormatter);
+            //var response = await _client.PostAsync(_suffix, content);
+            var response = _client.PostAsync(_suffix, content).Result;
+            IsSuccessful = response.IsSuccessStatusCode;
+        }
+
+        public async Task PutAsync(TResponse identifier, T model)
         {
             MediaTypeFormatter jsonFormatter = new JsonMediaTypeFormatter();
             var content = new ObjectContent<T>(model, jsonFormatter);
             var response = await _client.PutAsync(_suffix + identifier, content);
+            IsSuccessful = response.IsSuccessStatusCode;
         }
 
         public void Dispose()
