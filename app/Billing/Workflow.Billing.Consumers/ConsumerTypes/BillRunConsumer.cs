@@ -153,7 +153,8 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 bus.SendDynamic(new ReportMessage
                 {
                     Id = Guid.NewGuid(),
-                    ReportBody = JsonConvert.SerializeObject(report)
+                    ReportBody = JsonConvert.SerializeObject(report),
+                    ReportType = "pdf"
                 });
             }
             #endregion

@@ -52,7 +52,8 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
             var report = new ReportMessage()
             {
                 Id = Guid.NewGuid(),
-                ReportBody = JsonConvert.SerializeObject(data)
+                ReportBody = JsonConvert.SerializeObject(data),
+                ReportType = "pdf"
             };
 
             bus.SendDynamic(report);

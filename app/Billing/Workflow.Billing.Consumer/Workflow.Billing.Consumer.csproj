@@ -77,7 +77,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1051\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1073\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1044, Culture=neutral, processorArchitecture=MSIL">
