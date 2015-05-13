@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dtos\ReportDto.cs" />
+    <Compile Include="Entities\InvoiceCsvData.cs" />
     <Compile Include="Entities\ReportCustomer.cs" />
     <Compile Include="Entities\ReportData.cs" />
     <Compile Include="Entities\ReportPackage.cs" />
