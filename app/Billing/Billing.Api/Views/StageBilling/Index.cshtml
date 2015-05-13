@@ -33,7 +33,13 @@
                         type: 'text',
                         name: 'customerName',
                         placement: 'right',
-                        url: '/test',
+                        params: function(params) {
+                            //originally params contain pk, name and value
+                            params.Id = window.editRow.id;
+                            
+                            return params;
+                        },
+                        url: '/StageBilling/CustomerClient/Transaction/Update',
                         title: 'Enter Customer / Client Name',
                         ajaxOptions: {
                             dataType: 'json'
@@ -43,7 +49,13 @@
                                 return "Unknown error!";
                             }
 
+                            if (response.status === 500) {
+                                return 'Service unavailable. Please try later.';
+                            }
+
                             if (response.success === false) {
+
+                                $('#table').bootstrapTable('refresh', { silent: true });
                                 return response.msg;
                             }
 
@@ -83,6 +95,8 @@
                     events: invoiceActionEvents
                 }
             ]
+        }).on('click-row.bs.table', function (e, row, $element) {
+            window.editRow = row;
         });
 
         Billing.overrideDataTablesStyling();
@@ -165,7 +179,8 @@
 
                         $.post(apiEndpoint + '/StageBilling/User/Transactions/Update', JSON.stringify(obj))
                             .success(function (response) {
-                                console.log(response);
+                                
+                                $('#table').bootstrapTable('refresh', { silent: true });
                             });
                     });
                 });

@@ -219,6 +219,7 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = packageTransaction });
             };
 
+            //User billable transactions
             Post["/StageBilling/User/Transactions/Update"] = param =>
             {
                 var body = Request.Body<UserTransactionDto>();
@@ -228,20 +229,22 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new {data = "Success"});
             };
 
+            //Customer | Client
             Post["/StageBilling/CustomerClient/Transaction/Update"] = param =>
             {
-                var body = Request.Body<CustomerClientTransactionDto>();
+                var body = this.Bind<CustomerClientTransactionDto>();
 
                 customerClientBillingTransaction.Commit(body);
 
                 return Response.AsJson(new { data = "Success" });
             };
             
+            //Package detail
             Post["/StageBilling/Package/Transaction/Update"] = param =>
             {
                 var body = Request.Body<PackageTransactionDto>();
 
-                packBillingTransaction.Commit(body);
+                //packBillingTransaction.Commit(body);
 
                 return Response.AsJson(new { data = "Success" });
             };

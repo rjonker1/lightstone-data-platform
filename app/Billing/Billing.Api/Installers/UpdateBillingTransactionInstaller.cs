@@ -9,10 +9,10 @@ namespace Billing.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For(typeof (ICommitBillingTransaction<>))
-                .ImplementedBy(typeof (UserBillingTransaction<>))
-                .ImplementedBy(typeof (CustomerClientBillingTransaction<>))
-                .ImplementedBy(typeof (PackageBillingTransaction<>)));
+            container.Register(AllTypes.FromAssemblyContaining(typeof (UserBillingTransaction<>))
+                                    .BasedOn(typeof(ICommitBillingTransaction<>))
+                                    .WithService.AllInterfaces().LifestyleTransient());
+
         }
     }
 }

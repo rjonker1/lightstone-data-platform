@@ -95,6 +95,7 @@ window.userTransactionEditActionEvents = {
             dataType: 'json'
 
         }).success(function (response) {
+
             $('.userTransactionedit-render').html('<table id="userTransEdit-table"></table>' +
 
                ' <h2 id="detail-table-header"></h2>' +
