@@ -64,7 +64,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                         _send.Send(dto);
                     }
 
-
+                     
                 }
                 catch (Exception e)
                 {
