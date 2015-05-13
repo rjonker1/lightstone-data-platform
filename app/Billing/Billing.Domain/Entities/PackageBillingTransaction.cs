@@ -1,12 +1,34 @@
-﻿using Billing.Domain.Dtos;
+﻿using System;
+using System.Linq;
+using Billing.Domain.Dtos;
+using DataPlatform.Shared.Repositories;
+using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Domain.Entities
 {
-    public class PackageBillingTransaction<T> : ICommitBillingTransaction<PackageTransactionDto> where T : class
+    public class PackageBillingTransaction<T> : ICommitBillingTransaction<PackageTransactionDto>
     {
+
+        private readonly IRepository<StageBilling> _stageBillingRepository;
+
+        public PackageBillingTransaction(IRepository<StageBilling> stageBillingRepository)
+        {
+            _stageBillingRepository = stageBillingRepository;
+        }
+
         public void Commit(PackageTransactionDto entity)
         {
-            throw new System.NotImplementedException();
+            var transactions = _stageBillingRepository.Where(x => x.PackageId == entity.PackageId);
+
+            foreach (var transactionRequest in transactions)
+            {
+                transactionRequest.Modified = DateTime.UtcNow;
+                transactionRequest.ModifiedBy = "dev.billing.api.lightstone.co.za";
+
+                transactionRequest.PackageName = entity.PackageName;
+
+                _stageBillingRepository.SaveOrUpdate(transactionRequest);
+            }
         }
     }
 }

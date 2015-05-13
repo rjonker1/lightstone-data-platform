@@ -242,9 +242,9 @@ namespace Billing.Api.Modules
             //Package detail
             Post["/StageBilling/Package/Transaction/Update"] = param =>
             {
-                var body = Request.Body<PackageTransactionDto>();
+                var body = this.Bind<PackageTransactionDto>();
 
-                //packBillingTransaction.Commit(body);
+                packBillingTransaction.Commit(body);
 
                 return Response.AsJson(new { data = "Success" });
             };

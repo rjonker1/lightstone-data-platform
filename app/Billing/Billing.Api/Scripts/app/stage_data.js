@@ -205,17 +205,30 @@ window.packageGridActionEvents = {
                     type: 'text',
                     name: 'packageName',
                     placement: 'right',
-                    url: '/test',
+                    params: function (params) {
+                        //originally params contain pk, name and value
+                        params.PackageId = window.editRow.packageId;
+                        params.PackageName = params.value;
+
+                        return params;
+                    },
+                    url: '/StageBilling/Package/Transaction/Update',
                     title: 'Enter Package Name',
                     ajaxOptions: {
                         dataType: 'json'
                     },
-                    success: function(response, newValue) {
+                    success: function (response, newValue) {
                         if (!response) {
                             return "Unknown error!";
                         }
 
+                        if (response.status === 500) {
+                            return 'Service unavailable. Please try later.';
+                        }
+
                         if (response.success === false) {
+
+                            $('#table').bootstrapTable('refresh', { silent: true });
                             return response.msg;
                         }
 
@@ -236,6 +249,8 @@ window.packageGridActionEvents = {
                 formatter: packageEditFormatter,
                 events: packageEditActionEvents
             }]
+        }).on('click-row.bs.table', function (e, row, $element) {
+            window.editRow = row;
         });
 
     }
@@ -245,7 +260,7 @@ function packageEditFormatter(value, row, index) {
     return [
         '<div class="row">' +
             '<div class="col-md-4">' +
-                '<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#packageEdit-modal">' +
+                '<button type="button" class="package-edit btn btn-warning btn-md" data-toggle="modal" data-target="#packageEdit-modal">' +
                     'Edit Item' +
                 '</button>' +
             '</div>' +
@@ -253,7 +268,14 @@ function packageEditFormatter(value, row, index) {
     ].join('');
 }
 
-window.packageEditActionEvents = {};
+window.packageEditActionEvents = {
+    
+    'click .package-edit': function (e, value, row, index) {
+
+        $("a:contains('" + row.packageName + "')").click();
+        e.stopPropagation();
+    }
+};
 
 function invoiceFormatter(value, row, index) {
     return [

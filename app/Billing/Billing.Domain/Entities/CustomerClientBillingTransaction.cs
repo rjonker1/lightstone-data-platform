@@ -30,7 +30,6 @@ namespace Billing.Domain.Entities
 
                 _stageBillingRepository.SaveOrUpdate(transactionRequest);
             }
-
         }
     }
 }
