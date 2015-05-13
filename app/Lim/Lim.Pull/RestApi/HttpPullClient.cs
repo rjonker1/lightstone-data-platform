@@ -28,7 +28,7 @@ namespace Lim.Pull.RestApi
 
         public async Task<T> GetAsync(TResource identifier)
         {
-            var message = await _client.GetAsync(_suffix + identifier);
+            var message = await _client.GetAsync(_suffix);
             message.EnsureSuccessStatusCode();
             return await message.Content.ReadAsAsync<T>();
         }
