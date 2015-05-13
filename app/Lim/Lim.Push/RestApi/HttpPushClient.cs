@@ -49,7 +49,7 @@ namespace Lim.Push.RestApi
         {
             MediaTypeFormatter jsonFormatter = new JsonMediaTypeFormatter();
             var content = new ObjectContent<T>(model, jsonFormatter);
-            var response = await _client.PutAsync(_suffix + identifier, content);
+            var response = await _client.PutAsync(_suffix, content);
             IsSuccessful = response.IsSuccessStatusCode;
         }
 

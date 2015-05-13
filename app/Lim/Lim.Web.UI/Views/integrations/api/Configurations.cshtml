@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+<body class="skin-blue">
+    <div class="wrapper">
+        <div class="wrapper">
+            @Html.Partial("_Header.cshtml")
+            @Html.Partial("_Sidebar.cshtml")
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        LIM
+                        <small>API Integration Configurations</small>
+                    </h1>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Existing Configurations</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Action</th>
+                                        <th>Base Address</th>
+                                        <th>Suffix</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Signio</td>
+                                        <td>Push</td>
+                                        <td>http://ci.conclude.co.za:80/StockShare/</td>
+                                        <td>stockshare/api/stock/importStockItem</td>
+                                        <td><button class="btn btn-block btn-success btn-lg">View</button></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Action</th>
+                                        <th>Base Address</th>
+                                        <th>Suffix</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div>
+                        </div>
+                    </div>
+                </section><!-- /.content -->
+            </div><!-- /.content-wrapper -->
+            @Html.Partial("_Footer.cshtml")
+        </div>
+    </div>
+</body>

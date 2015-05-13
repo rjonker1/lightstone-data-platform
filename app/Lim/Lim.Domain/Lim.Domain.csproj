@@ -46,6 +46,13 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ConfigurationTypes\RestApiConfiguration.cs" />
+    <Compile Include="Contracts\ISchedulePullForApi.cs" />
+    <Compile Include="Contracts\ISchedulePushForApi.cs" />
+    <Compile Include="Identifiers\ApiIdentifiers.cs" />
+    <Compile Include="Identifiers\IntegrationActionIdentifiers.cs" />
+    <Compile Include="Identifiers\IntegrationClientIdentifier.cs" />
+    <Compile Include="Identifiers\IntegrationPackageIdentifier.cs" />
+    <Compile Include="Identifiers\IntegrationTypeIdentifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
