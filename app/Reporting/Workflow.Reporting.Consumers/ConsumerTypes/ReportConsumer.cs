@@ -38,6 +38,30 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                 try
                 {
 
+                    if (message.Body.ReportType.Equals("csv"))
+                    {
+                        // Determine whether the directory exists. 
+                        if (!Directory.Exists(path))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(path);
+                            this.Info(
+                                () => "The directory was created successfully at " + Directory.GetCreationTime(path));
+                        }
+
+                        //Store to disk
+                        using (var fileStream = File.Create(path + @"\BillingOutput.csv"))
+                        {
+
+                            var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
+                            report.Content.CopyTo(fileStream);
+
+                            this.Info(
+                                () => "Report : BillingOutput.csv was created successfully");
+                        }
+
+                    }
+
                     if (message.Body.ReportType.Equals("pdf"))
                     {
                         // Determine whether the directory exists. 
@@ -62,30 +86,6 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
 
                         //Send Email
                         _emailPdfNotifications.Send(dto);
-                    }
-
-                    if (message.Body.ReportType.Equals("csv"))
-                    {
-                        // Determine whether the directory exists. 
-                        if (!Directory.Exists(path))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(path);
-                            this.Info(
-                                () => "The directory was created successfully at " + Directory.GetCreationTime(path));
-                        }
-
-                        //Store to disk
-                        using (var fileStream = File.Create(path + @"\BillingOutput.csv"))
-                        {
-
-                            var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
-                            report.Content.CopyTo(fileStream);
-
-                            this.Info(
-                                () => "Report : BillingOutput.csv was created successfully");
-                        }
-
                     }
                      
                 }
