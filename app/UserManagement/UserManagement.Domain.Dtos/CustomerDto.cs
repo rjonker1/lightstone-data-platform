@@ -9,6 +9,7 @@ namespace UserManagement.Domain.Dtos
         public Guid Id { get; set; }
 
         [Required]
+        [MinLength(3, ErrorMessage = "Name must be atleast 3 characters long")]
         [Display(Name = "Customer name is required")]
         public string Name { get; set; }
         public string CustomerAccountNumber { get; set; }

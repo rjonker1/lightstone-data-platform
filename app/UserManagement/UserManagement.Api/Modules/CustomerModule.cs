@@ -34,7 +34,7 @@ namespace UserManagement.Api.Modules
                 if (limit == null) limit = 10;
 
                 var model = this.Bind<DataTablesViewModel>();
-                var dto = (IEnumerable<CustomerDto>)Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
@@ -49,20 +49,10 @@ namespace UserManagement.Api.Modules
                 if (ModelValidationResult.IsValid)
                 {
 
-                    var entity = Mapper.Map(dto, customers.Get(dto.Id) ?? new Customer());
-                    //entity.CustomerAccountNumber.Customer = entity;
+                    var entity = Mapper.Map(dto, new Customer());
                     entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
-
-                    ////RabbitMQ
-                    var customer = Mapper.Map(dto, new Customer());
-                    customer.CustomerAccountNumber.Customer = entity;
-
-                    var metaEntity = Mapper.Map(customer, new CustomerMessage());
-                    metaEntity.BillingType = "Response"; //TODO: Map from Contract
-                    var advancedBus = new TransactionBus(eBus);
-                    advancedBus.SendDynamic(metaEntity);
 
                     return View["Index"];
                 }
@@ -87,12 +77,6 @@ namespace UserManagement.Api.Modules
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
-
-                    ////RabbitMQ
-                    var metaEntity = Mapper.Map(entity, new CustomerMessage());
-                    metaEntity.BillingType = "Response"; //TODO: Map from Contract
-                    var advancedBus = new TransactionBus(eBus);
-                    advancedBus.SendDynamic(metaEntity);
 
                     return View["Index"];
                 }

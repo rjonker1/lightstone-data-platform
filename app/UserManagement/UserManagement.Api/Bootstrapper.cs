@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Configuration;
+using AutoMapper;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
-using MemBus;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
+using DataPlatform.Shared.Messaging.Billing.Messages;
+using EasyNetQ;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
@@ -13,12 +17,14 @@ using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
-using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
+using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.DataImports;
 using UserManagement.Infrastructure.Helpers;
+using UserManagement.Infrastructure.Repositories;
+using IBus = MemBus.IBus;
 
 namespace UserManagement.Api
 {
@@ -75,7 +81,7 @@ namespace UserManagement.Api
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
                     token = HttpUtility.UrlDecode(cookie.Value);
-                
+
                 nancyContext.Request.Headers.Authorization = "Token {0}".FormatWith(token);
 
                 var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
@@ -107,6 +113,8 @@ namespace UserManagement.Api
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
             pipelines.AfterRequest.AddItemToEndOfPipeline(GetRedirectToLoginHook(null));
+
+            pipelines.PublishTransactionToQueue(container);
 
             base.RequestStartup(container, pipelines, context);
         }

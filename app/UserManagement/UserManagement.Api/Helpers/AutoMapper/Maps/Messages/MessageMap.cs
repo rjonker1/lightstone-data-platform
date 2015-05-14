@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using DataPlatform.Shared.Messaging.Billing.Messages;
+using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
@@ -20,6 +21,22 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(x => x.Name));
 
             Mapper.CreateMap<Client, ClientMessage>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => Guid.NewGuid()))
+                .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
+                .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.ClientAccountNumber.ToString()))
+                .ForMember(dest => dest.ClientId, opt => opt.MapFrom(x => x.Id))
+                .ForMember(dest => dest.ClientName, opt => opt.MapFrom(x => x.Name));
+
+            Mapper.CreateMap<CustomerDto, CustomerMessage>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => Guid.NewGuid()))
+                .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
+                .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.CustomerAccountNumber.ToString()))
+                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(x => x.Id))
+                .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(x => x.Name));
+
+            Mapper.CreateMap<ClientDto, ClientMessage>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => Guid.NewGuid()))
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))

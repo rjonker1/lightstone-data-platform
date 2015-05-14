@@ -51,15 +51,6 @@ namespace UserManagement.Api.Modules
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
-                    ///RabbitMQ
-                    var client = Mapper.Map(dto, new Client());
-                    client.ClientAccountNumber.Client = entity;
-
-                    var metaEntity = Mapper.Map(client, new ClientMessage());
-                    metaEntity.BillingType = "Response"; //TODO: Map from Contract
-                    var advancedBus = new TransactionBus(eBus);
-                    advancedBus.SendDynamic(metaEntity);
-
                     return View["Index"];
                 }
 
@@ -83,12 +74,6 @@ namespace UserManagement.Api.Modules
                     var entity = Mapper.Map(dto, clients.Get(dto.Id));
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
-
-                    ////RabbitMQ
-                    var metaEntity = Mapper.Map(entity, new ClientMessage());
-                    metaEntity.BillingType = "Response"; //TODO: Map from Contract
-                    var advancedBus = new TransactionBus(eBus);
-                    advancedBus.SendDynamic(metaEntity);
 
                     return View["Index"];
                 }

@@ -20,7 +20,7 @@ namespace UserManagement.Domain.BusinessRules.Clients
         {
             var entity = command.Entity;
 
-            //Check if Username for specific user already exists
+            //Check if Client already exists
             if (_currentClients.Exists(entity.Id, entity.Name))
             {
                 var exception = new LightstoneAutoException("Client already exists".FormatWith(entity.GetType().Name));
