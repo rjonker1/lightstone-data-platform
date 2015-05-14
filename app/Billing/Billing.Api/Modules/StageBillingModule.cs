@@ -18,7 +18,7 @@ namespace Billing.Api.Modules
 {
     public class StageBillingModule : NancyModule
     {
-        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, 
+        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs,
                                     ICommitBillingTransaction<UserTransactionDto> userBillingTransaction,
                                     ICommitBillingTransaction<CustomerClientTransactionDto> customerClientBillingTransaction,
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction)
@@ -235,6 +235,15 @@ namespace Billing.Api.Modules
                 var body = this.Bind<CustomerClientTransactionDto>();
 
                 customerClientBillingTransaction.Commit(body);
+                auditLogs.SaveOrUpdate(new AuditLog
+                {
+                    Id = Guid.NewGuid(),
+                    Modified = DateTime.UtcNow,
+                    ModifiedBy = "user",
+                    FieldName = body.Name,
+                    NewValue = body.Value,
+                    OriginalValue = body.OriginalValue
+                });
 
                 return Response.AsJson(new { data = "Success" });
             };
@@ -245,6 +254,15 @@ namespace Billing.Api.Modules
                 var body = this.Bind<PackageTransactionDto>();
 
                 packBillingTransaction.Commit(body);
+                auditLogs.SaveOrUpdate(new AuditLog
+                {
+                    Id = Guid.NewGuid(),
+                    Modified = DateTime.UtcNow,
+                    ModifiedBy = "user",
+                    FieldName = body.Name,
+                    NewValue = body.Value,
+                    OriginalValue = body.OriginalValue
+                });
 
                 return Response.AsJson(new { data = "Success" });
             };

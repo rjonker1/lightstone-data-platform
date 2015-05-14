@@ -1,4 +1,5 @@
 ﻿using System;
+using Billing.Domain.Entities;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Conventions;
@@ -33,7 +34,7 @@ namespace Workflow.Billing.Infrastructure.NHibernate
         public AutoPersistenceModel GetAutoPersistenceModel()
         {
             return AutoMap.AssemblyOf<UserMeta>(this)
-                //.AddEntityAssembly(typeof(Customer).Assembly)
+                .AddEntityAssembly(typeof(AuditLog).Assembly)
                 .IgnoreBase<Entity>()
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
                 .Conventions.Add<SubclassConvention>()

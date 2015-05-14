@@ -272,9 +272,6 @@
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="hibernate.cfg.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\DataTables-1.10.4\css\dataTables.responsive.scss" />
@@ -607,7 +604,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="connections.config" />
-    <Content Include="appSettings.config" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

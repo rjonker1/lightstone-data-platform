@@ -209,6 +209,7 @@ window.packageGridActionEvents = {
                         //originally params contain pk, name and value
                         params.PackageId = window.editRow.packageId;
                         params.PackageName = params.value;
+                        params.originalValue = window.editRow.packageName;
 
                         return params;
                     },

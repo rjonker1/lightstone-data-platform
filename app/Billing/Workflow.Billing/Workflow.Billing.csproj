@@ -40,6 +40,9 @@
       <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Billing.Domain">
+      <HintPath>..\Billing.Api\Bin\Billing.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
