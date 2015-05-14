@@ -87,8 +87,9 @@ function initializeClientRoutes(sammy) {
     });
     sammy.post('/Clients', function (context) {
         $(context.target).ajaxSubmit({
-            success: function () {
-                context.redirect('/#/Clients');
+            success: function (data) {
+                context.$element().html(data);
+                initializePlugins();
             }
         });
         // !!! Important !!! 

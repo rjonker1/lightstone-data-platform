@@ -6,9 +6,7 @@ namespace UserManagement.Domain.Entities
 {
     public class ContactDetail : Entity
     {
-        [Required]
         public virtual string ContactPerson { get; set; }
-        [Required]
         public virtual string ContactNumber { get; set; }
         public virtual string EmailAddress { get; set; }
         public virtual Address PhysicalAddress { get; set; }

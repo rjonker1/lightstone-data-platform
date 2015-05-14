@@ -1,14 +1,19 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace UserManagement.Domain.Dtos
 {
     public class ClientDto : EntityDto
     {
-        public Guid Id { get; set; } 
+        public Guid Id { get; set; }
+        [Required]
+        [Display(Name = "Client name is required")]
         public string Name { get; set; }
         public string ClientAccountNumber { get; set; }
         public Guid ContactDetailId { get; set; }
         public string ContactDetailContactNumber { get; set; }
+        [Required]
+        [Display(Name = "Contact person is required")]
         public string ContactDetailContactPerson { get; set; }
         public string ContactDetailEmailAddress { get; set; }
         public Guid ContactDetailPhysicalAddressId { get; set; }

@@ -7,15 +7,12 @@ namespace UserManagement.Domain.Entities
 {
     public class Billing : Entity
     {
-        [Required]
         public virtual string LegalEntityName { get; set; }
         public virtual string AccountContactName { get; set; }
-        [Required, DomainSignature]
         public virtual string CompanyRegistration { get; set; }
         public virtual DateTime? DebitOrderDate { get; set; }
         public virtual string PastelId { get; set; }
         public virtual string VatNumber { get; set; }
-        [Required]
         public virtual PaymentType PaymentType { get; set; }
 
         protected internal Billing() { }

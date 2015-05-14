@@ -7,17 +7,13 @@ namespace UserManagement.Domain.Entities
 {
     public class Address : Entity
     {
-        [Required]
         public virtual AddressType Type { get; set; } 
-        [Required]
         public virtual string Line1 { get; set; }
         public virtual string Line2 { get; set; }
         public virtual string Suburb { get; set; }
         public virtual string City { get; set; }
         public virtual string Country { get; set; }
-        [Required]
         public virtual string PostalCode { get; set; }
-        [Required]
         public virtual Province Province { get; set; }
 
         protected Address() { }

@@ -39,28 +39,31 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
-            Get["/Clients/Add"] = parameters =>
-            {
-                return View["Save", new ClientDto()];
-            };
+            Get["/Clients/Add"] = parameters => View["Save", new ClientDto()];
 
             Post["/Clients"] = _ =>
             {
-                var dto = this.Bind<ClientDto>();
-                var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+                var dto = this.BindAndValidate<ClientDto>();
 
-                bus.Publish(new CreateUpdateEntity(entity, "Create"));
+                if (ModelValidationResult.IsValid)
+                {
+                    var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                ///RabbitMQ
-                var client = Mapper.Map(dto, new Client());
-                client.ClientAccountNumber.Client = entity;
+                    bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
-                var metaEntity = Mapper.Map(client, new ClientMessage());
-                metaEntity.BillingType = "Response"; //TODO: Map from Contract
-                var advancedBus = new TransactionBus(eBus);
-                advancedBus.SendDynamic(metaEntity);
+                    ///RabbitMQ
+                    var client = Mapper.Map(dto, new Client());
+                    client.ClientAccountNumber.Client = entity;
 
-                return null;
+                    var metaEntity = Mapper.Map(client, new ClientMessage());
+                    metaEntity.BillingType = "Response"; //TODO: Map from Contract
+                    var advancedBus = new TransactionBus(eBus);
+                    advancedBus.SendDynamic(metaEntity);
+
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
             };
 
             Get["/Clients/{id}"] = parameters =>
