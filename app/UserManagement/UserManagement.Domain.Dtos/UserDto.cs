@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace UserManagement.Domain.Dtos
@@ -13,11 +14,19 @@ namespace UserManagement.Domain.Dtos
         }
 
         public virtual Guid Id { get; set; }
+        [Required]
+        [Display(Name = "Name is required")]
         public virtual string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Surename is required")]
         public virtual string LastName { get; set; }
         public virtual string IdNumber { get; set; }
         public virtual string ContactNumber { get; set; }
+        [Required]
+        [Display(Name = "Username is required")]
         public string UserName { get; set; }
+        [Required]
+        [Display(Name = "Password is required")]
         public string Password { get; set; }
         public bool? IsActive { get; set; }
         public Guid UserTypeId { get; set; }

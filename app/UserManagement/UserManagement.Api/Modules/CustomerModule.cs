@@ -49,8 +49,8 @@ namespace UserManagement.Api.Modules
                 if (ModelValidationResult.IsValid)
                 {
 
-                    var entity = Mapper.Map(dto, customers.Get(dto.Id));
-                    entity.CustomerAccountNumber.Customer = entity;
+                    var entity = Mapper.Map(dto, customers.Get(dto.Id) ?? new Customer());
+                    //entity.CustomerAccountNumber.Customer = entity;
                     entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
@@ -80,18 +80,24 @@ namespace UserManagement.Api.Modules
 
             Put["/Customers/{id}"] = _ =>
             {
-                var dto = this.Bind<CustomerDto>();
-                var entity = Mapper.Map(dto, customers.Get(dto.Id));
+                var dto = this.BindAndValidate<CustomerDto>();
 
-                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+                if (ModelValidationResult.IsValid)
+                {
+                    var entity = Mapper.Map(dto, customers.Get(dto.Id));
 
-                ////RabbitMQ
-                var metaEntity = Mapper.Map(entity, new CustomerMessage());
-                metaEntity.BillingType = "Response"; //TODO: Map from Contract
-                var advancedBus = new TransactionBus(eBus);
-                advancedBus.SendDynamic(metaEntity);
+                    bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
-                return null;
+                    ////RabbitMQ
+                    var metaEntity = Mapper.Map(entity, new CustomerMessage());
+                    metaEntity.BillingType = "Response"; //TODO: Map from Contract
+                    var advancedBus = new TransactionBus(eBus);
+                    advancedBus.SendDynamic(metaEntity);
+
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
             };
 
             Delete["/Customers/{id}"] = _ =>

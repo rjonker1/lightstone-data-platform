@@ -41,27 +41,30 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });
             };
 
-            Get["/Users/Add"] = _ =>
-            {
-                return View["Save", new UserDto()];
-            };
+            Get["/Users/Add"] = _ => View["Save", new UserDto()];
 
             Post["/Users"] = _ =>
             {
-                var dto = this.Bind<UserDto>();
-                var clientUsersDto = this.Bind<List<ClientUserDto>>();
-                dto.ClientUsers = clientUsersDto;
+                var dto = this.BindAndValidate<UserDto>();
 
-                var entity = Mapper.Map(dto, users.Get(dto.Id) ?? new User());
+                if (ModelValidationResult.IsValid)
+                {
+                    var clientUsersDto = this.Bind<List<ClientUserDto>>();
+                    dto.ClientUsers = clientUsersDto;
 
-                bus.Publish(new CreateUpdateEntity(entity, "Create"));
+                    var entity = Mapper.Map(dto, users.Get(dto.Id) ?? new User());
 
-                ////RabbitMQ
-                var metaEntity = Mapper.Map(entity, new UserMessage());
-                var advancedBus = new TransactionBus(eBus);
-                advancedBus.SendDynamic(metaEntity);
+                    bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
-                return null;
+                    ////RabbitMQ
+                    var metaEntity = Mapper.Map(entity, new UserMessage());
+                    var advancedBus = new TransactionBus(eBus);
+                    advancedBus.SendDynamic(metaEntity);
+
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
             };
 
             Get["/Users/{id}"] = parameters =>
@@ -74,15 +77,25 @@ namespace UserManagement.Api.Modules
 
             Put["/Users/{id}"] = _ =>
             {
-                var dto = this.Bind<UserDto>();
-                var clientUsersDto = this.Bind<List<ClientUserDto>>();
-                dto.ClientUsers = clientUsersDto;
+                var dto = this.BindAndValidate<UserDto>();
 
-                var entity = Mapper.Map(dto, users.Get(dto.Id));
+                if (ModelValidationResult.IsValid)
+                {
+                    var clientUsersDto = this.Bind<List<ClientUserDto>>();
+                    dto.ClientUsers = clientUsersDto;
+                    var entity = Mapper.Map(dto, users.Get(dto.Id));
 
-                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+                    bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
-                return null;
+                    ////RabbitMQ
+                    var metaEntity = Mapper.Map(entity, new UserMessage());
+                    var advancedBus = new TransactionBus(eBus);
+                    advancedBus.SendDynamic(metaEntity);
+
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
             };
 
             Delete["/Users/{id}"] = _ =>

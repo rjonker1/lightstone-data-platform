@@ -76,18 +76,24 @@ namespace UserManagement.Api.Modules
 
             Put["/Clients/{id}"] = _ =>
             {
-                var dto = this.Bind<ClientDto>();
-                var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+                var dto = this.BindAndValidate<ClientDto>();
 
-                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+                if (ModelValidationResult.IsValid)
+                {
+                    var entity = Mapper.Map(dto, clients.Get(dto.Id));
 
-                ////RabbitMQ
-                var metaEntity = Mapper.Map(entity, new ClientMessage());
-                metaEntity.BillingType = "Response"; //TODO: Map from Contract
-                var advancedBus = new TransactionBus(eBus);
-                advancedBus.SendDynamic(metaEntity);
+                    bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
-                return null;
+                    ////RabbitMQ
+                    var metaEntity = Mapper.Map(entity, new ClientMessage());
+                    metaEntity.BillingType = "Response"; //TODO: Map from Contract
+                    var advancedBus = new TransactionBus(eBus);
+                    advancedBus.SendDynamic(metaEntity);
+
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
             };
 
             Delete["/Clients/{id}"] = _ =>

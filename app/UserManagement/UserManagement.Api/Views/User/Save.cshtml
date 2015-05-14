@@ -56,11 +56,15 @@
 
 </script>
 
+@Html.ValidationSummary("Validation Results")
+
 <div class="box">
 
 
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("User Info", "", "glyphicon glyphicon-user", Model))
+   
     <form action="@url" method="@method" class="form-horizontal">
+        
         <div class="box-body">
 
             <div class="form-group">
@@ -125,7 +129,14 @@
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "" })
+                        @if (isCreate)
+                        {
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "" })
+                        }
+                        @if (!isCreate)
+                        {
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "", @readonly = "readonly" })
+                        }
                     </div>
                 </div>
                 <div class="col-lg-6">

@@ -54,8 +54,9 @@ function initializeCusomerRoutes(sammy) {
         var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
             type: method,
-            success: function () {
-                context.redirect('/#/Customers');
+            success: function (data) {
+                context.$element().html(data);
+                initializePlugins();
             }
         });
         // !!! Important !!! 
@@ -107,8 +108,9 @@ function initializeClientRoutes(sammy) {
         var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
             type: method,
-            success: function () {
-                context.redirect('/#/Clients');
+            success: function (data) {
+                context.$element().html(data);
+                initializePlugins();
             }
         });
         // !!! Important !!! 
@@ -140,8 +142,9 @@ function initializeUserRoutes(sammy) {
     });
     sammy.post('/Users', function (context) {
         $(context.target).ajaxSubmit({
-            success: function () {
-                context.redirect('/#/Users');
+            success: function (data) {
+                context.$element().html(data);
+                initializePlugins();
             }
         });
         // !!! Important !!! 
@@ -159,8 +162,9 @@ function initializeUserRoutes(sammy) {
         var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
             type: method,
-            success: function () {
-                context.redirect('/#/Users');
+            success: function (data) {
+                context.$element().html(data);
+                initializePlugins();
             }
         });
         /// !!! Important !!! 
