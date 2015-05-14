@@ -166,7 +166,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                     Vat = 2284
                                 }).Distinct();
 
-                            var reportData = new ReportDto()
+                            var reportData = new ReportDto
                             {
                                 Template = new ReportTemplate { ShortId = "VJGAd9OM" },
                                 Data = new ReportData
@@ -185,6 +185,51 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
                             //Index restriction for new record
                             if (reportIndex < 0) reportList.Add(reportData);
+
+
+                            //CSV Report Build-up
+                            var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId && x.IsBillable)
+                                                        .Select(x => x.TransactionId).Distinct().Count();
+
+                            var invoiceList = new List<ReportInvoice>();
+
+                            var invoice = new ReportInvoice
+                            {
+                                DOCTYPE = "INV",
+                                INVNUMBER = "",
+                                ACCOUNTID = transaction.AccountNumber,
+                                DESCRIPTION = "",
+                                INVDATE = "",
+                                TAXINCLUSIVE = "",
+                                ORDERNUM = "",
+                                CDESCRIPTION = "",
+                                FQUANTITY = billedClientTransactionsTotal.ToString(),
+                                FUNITPRICEEXCL = "",
+                                ITAXTYPEID = "",
+                                ISTOCKCODEID = "",
+                                Project = "",
+                                Tax_Number = ""
+                            };
+
+                            var invoiceListIndex = invoiceList.FindIndex(x => x.ACCOUNTID == transaction.AccountNumber);
+                            if (invoiceListIndex < 0) invoiceList.Add(invoice);
+
+                            var csvReportData = new ReportDto
+                            {
+                                Template = new ReportTemplate { ShortId = "EJ-dvWnX" },
+                                Data = new ReportData
+                                {
+                                    Invoices = invoiceList
+                                }
+                            };
+
+                            //Report Index
+                            var csvReportIndex = csvReportList.FindIndex(x => x.Data.Invoices.Any(i => i.ACCOUNTID == transaction.AccountNumber));
+
+                            //Index restriction for new record
+                            if (csvReportIndex < 0) csvReportList.Add(csvReportData);
+
+                            /////// END ////////
                         }
                     }
 
