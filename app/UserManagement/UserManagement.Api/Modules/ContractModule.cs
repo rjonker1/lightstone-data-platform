@@ -38,12 +38,18 @@ namespace UserManagement.Api.Modules
 
             Post["/Contracts"] = _ =>
             {
-                var dto = this.Bind<ContractDto>();
-                var entity = Mapper.Map(dto, contracts.Get(dto.Id));
+                var dto = this.BindAndValidate<ContractDto>();
 
-                bus.Publish(new CreateUpdateEntity(entity, "Create"));
+                if (ModelValidationResult.IsValid)
+                {
+                    var entity = Mapper.Map(dto, contracts.Get(dto.Id));
 
-                return null;
+                    bus.Publish(new CreateUpdateEntity(entity, "Create"));
+
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
             };
 
             Get["/Contracts/{id}"] = parameters =>
@@ -56,12 +62,18 @@ namespace UserManagement.Api.Modules
             
             Put["/Contracts/{id}"] = _ =>
             {
-                var dto = this.Bind<ContractDto>();
-                var entity = Mapper.Map(dto, contracts.Get(dto.Id));
+                var dto = this.BindAndValidate<ContractDto>();
 
-                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+                if (ModelValidationResult.IsValid)
+                {
+                    var entity = Mapper.Map(dto, contracts.Get(dto.Id));
 
-                return null;
+                    bus.Publish(new CreateUpdateEntity(entity, "Update"));
+
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
             };
 
             Post["/Contracts/GetPackage"] = _ =>

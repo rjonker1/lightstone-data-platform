@@ -196,8 +196,9 @@ function initializeContractRoutes(sammy) {
     });
     sammy.post('/Contracts', function (context) {
         $(context.target).ajaxSubmit({
-            success: function () {
-                context.redirect('/#/Contracts');
+            success: function (data) {
+                context.$element().html(data);
+                initializePlugins();
             }
         });
         // !!! Important !!! 
@@ -215,8 +216,9 @@ function initializeContractRoutes(sammy) {
         var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
             type: method,
-            success: function () {
-                context.redirect('/#/Contracts');
+            success: function (data) {
+                context.$element().html(data);
+                initializePlugins();
             }
         });
         // !!! Important !!! 

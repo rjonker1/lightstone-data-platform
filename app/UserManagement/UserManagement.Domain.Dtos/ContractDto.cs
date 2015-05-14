@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace UserManagement.Domain.Dtos
@@ -15,6 +16,8 @@ namespace UserManagement.Domain.Dtos
 
         public Guid Id { get; set; }
         public DateTime CommencementDate { get; set; }
+        [Required]
+        [Display(Name = "Contract name required")]
         public string Name { get; set; }
         public string Description { get; set; }
         public string EnteredIntoBy { get; set; }
