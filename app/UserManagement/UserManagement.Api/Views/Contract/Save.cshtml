@@ -14,6 +14,8 @@
 }
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
+@Html.ValidationSummary("Validation Results")
+
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open", Model))
     <form action="@url" method="@method" class="form-horizontal">
