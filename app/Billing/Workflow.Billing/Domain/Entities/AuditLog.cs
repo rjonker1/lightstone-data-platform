@@ -1,7 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 
-namespace Billing.Domain.Entities
+namespace Workflow.Billing.Domain.Entities
 {
     public class AuditLog : Entity
     {
