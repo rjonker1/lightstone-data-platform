@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lim.Web.UI</RootNamespace>
-    <AssemblyName>Lim.Web.UI</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lim.Web.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -75,6 +75,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\ang\angular-ui-bootstrap.js" />
     <Content Include="packages.config" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\_Footer.cshtml" />
@@ -148,6 +149,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\IntegrationForApiModule.cs" />
   </ItemGroup>
@@ -155,6 +157,16 @@
     <Folder Include="Views\integrations\ftp\" />
     <Folder Include="Views\integrations\mail\" />
     <Folder Include="Views\integrations\messages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain.Respository\Lim.Domain.Respository.csproj">
+      <Project>{b0ae3165-a2a9-450c-8a9c-c21acfecfcac}</Project>
+      <Name>Lim.Domain.Respository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Fake.Database\Lim.Fake.Database.csproj">
+      <Project>{f7347c19-f62e-4118-9f70-02aac878b5c0}</Project>
+      <Name>Lim.Fake.Database</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

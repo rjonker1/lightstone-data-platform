@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lim.Domain</RootNamespace>
-    <AssemblyName>Lim.Domain</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lim.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -53,6 +53,7 @@
     <Compile Include="Identifiers\IntegrationClientIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationPackageIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationTypeIdentifier.cs" />
+    <Compile Include="Models\ConfigurationModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
@@ -68,6 +69,7 @@
       <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

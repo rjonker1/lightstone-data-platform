@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+    <job>
+      <name>ApiIntegrationHourly</name>
+      <group>ApiIntegrationHourlyGroup</group>
+      <description>Run Api Integrations on an Hourly Basis</description>
+      <job-type>Lim.Schedule.Hourly.Api.Job, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>ApiIntegrationHourlyTrigger</name>
+        <job-name>ApiIntegrationHourly</job-name>
+        <job-group>ApiIntegrationHourlyGroup</job-group>
+        <!--To run every hour -->
+        <cron-expression>0 0 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+
+  <schedule>
+    <job>
+      <name>ApiIntegrationEveryMinute</name>
+      <group>ApiIntegrationEveryMinuteGroup</group>
+      <description>Run Api Integrations on an Every Minute Basis</description>
+      <job-type>Lim.Schedule.EveryMinute.Api.Job, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>ApiIntegrationEveryMinuteTrigger</name>
+        <job-name>ApiIntegrationEveryMinute</job-name>
+        <job-group>ApiIntegrationEveryMinuteGroup</job-group>
+        <!--To run every minute -->
+        <cron-expression>0 0/1 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+
+  <schedule>
+    <job>
+      <name>ApiIntegrationDaily</name>
+      <group>ApiIntegrationDailyGroup</group>
+      <description>Run Api Integrations on an Daily Basis</description>
+      <job-type>Lim.Schedule.Daily.Api.Job, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>ApiIntegrationDailyTrigger</name>
+        <job-name>ApiIntegrationDaily</job-name>
+        <job-group>ApiIntegrationDailyGroup</job-group>
+        <!--To run at 8pm every day -->
+        <cron-expression>0 0 20 * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+
+</job-scheduling-data>
