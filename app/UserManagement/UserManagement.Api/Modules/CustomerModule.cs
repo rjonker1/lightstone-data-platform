@@ -48,8 +48,11 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
+
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
+                    entity.CustomerAccountNumber.Customer = entity;
                     entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
+
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                     ////RabbitMQ
@@ -86,7 +89,7 @@ namespace UserManagement.Api.Modules
                 var metaEntity = Mapper.Map(entity, new CustomerMessage());
                 metaEntity.BillingType = "Response"; //TODO: Map from Contract
                 var advancedBus = new TransactionBus(eBus);
-                advancedBus.SendDynamic(metaEntity);           
+                advancedBus.SendDynamic(metaEntity);
 
                 return null;
             };
