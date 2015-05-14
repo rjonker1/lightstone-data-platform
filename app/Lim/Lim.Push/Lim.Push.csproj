@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lim.Push</RootNamespace>
-    <AssemblyName>Lim.Push</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lim.Push</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

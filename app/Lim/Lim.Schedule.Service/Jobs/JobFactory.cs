@@ -5,7 +5,7 @@ using Common.Logging;
 using Quartz;
 using Quartz.Spi;
 
-namespace Lace.Caching.Manager.Service.Jobs
+namespace Lim.Schedule.Service.Jobs
 {
     public class JobFactory : IJobFactory
     {
@@ -17,7 +17,7 @@ namespace Lace.Caching.Manager.Service.Jobs
             _container = container;
         }
 
-        public IJob NewJob(TriggerFiredBundle bundle, Quartz.IScheduler scheduler)
+        public IJob NewJob(TriggerFiredBundle bundle, IScheduler scheduler)
         {
             var jobDetail = bundle.JobDetail;
             var jobType = jobDetail.JobType;

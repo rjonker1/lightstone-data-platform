@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lim.Domain.Contracts
+﻿namespace Lim.Domain.Contracts
 {
     public interface ISchedulePushForApi
     {
