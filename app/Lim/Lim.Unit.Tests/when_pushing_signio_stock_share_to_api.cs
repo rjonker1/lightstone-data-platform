@@ -11,6 +11,7 @@ namespace Lim.Unit.Tests
     {
         private readonly string _url = "http://dev.lim.test.api.lightstone.co.za";
         private readonly string _api = "stockshare/api/stock/importStockItem";
+        private readonly string _other_api = "api/push";
         private readonly string _resource = "importStockItem";
 
         private readonly string _key = "X-Auth-Token";

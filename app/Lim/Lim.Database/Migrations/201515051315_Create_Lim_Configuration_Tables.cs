@@ -1,4 +1,5 @@
-﻿using FluentMigrator;
+﻿using System;
+using FluentMigrator;
 
 namespace Lim.Database.Migrations
 {
@@ -10,16 +11,15 @@ namespace Lim.Database.Migrations
         {
             Create.Table("Configuration")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
-                .WithColumn("Key").AsGuid().NotNullable().Indexed()
+                .WithColumn("Key").AsGuid().WithDefaultValue(SystemMethods.NewGuid).NotNullable().Indexed()
                 .WithColumn("FrequencyType").AsInt16().NotNullable()
                 .WithColumn("ActionType").AsInt16().NotNullable()
-                .WithColumn("IntegratioType").AsInt16().NotNullable()
+                .WithColumn("IntegrationType").AsInt16().NotNullable()
                 .WithColumn("ClientId").AsGuid()
                 .WithColumn("ContractId").AsGuid()
-                .WithColumn("AccountNumber").AsString()
-                .WithColumn("FrequencyConfigurantionId").AsInt64()
+                .WithColumn("AccountNumber").AsString(50)
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
-                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(false);
+                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
@@ -41,8 +41,10 @@ namespace Lim.Database.Migrations
                 .WithColumn("Suffix").AsString()
                 .WithColumn("Username").AsString()
                 .WithColumn("Password").AsString()
+                .WithColumn("HasAuthentication").AsBoolean().NotNullable().WithDefaultValue(false)
                 .WithColumn("AuthenticationToken").AsString()
                 .WithColumn("AuthenticationKey").AsString()
+                .WithColumn("AuthenticationType").AsInt16().NotNullable()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime);
         }
 
@@ -63,7 +65,7 @@ namespace Lim.Database.Migrations
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("PackageId").AsGuid()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
-                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(false);
+                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
@@ -81,7 +83,7 @@ namespace Lim.Database.Migrations
             Create.Table("ActionType")
                 .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
                 .WithColumn("Type").AsString()
-                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(false);
+                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
@@ -98,8 +100,8 @@ namespace Lim.Database.Migrations
         {
             Create.Table("IntegrationType")
                 .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
-                .WithColumn("Type").AsString()
-                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(false);
+                .WithColumn("Type").AsString(50)
+                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
@@ -116,8 +118,8 @@ namespace Lim.Database.Migrations
         {
             Create.Table("AuthenticationType")
                 .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
-                .WithColumn("Type").AsString()
-                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(false);
+                .WithColumn("Type").AsString(50)
+                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
@@ -134,8 +136,8 @@ namespace Lim.Database.Migrations
         {
             Create.Table("FrequencyType")
                 .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
-                .WithColumn("Type").AsString()
-                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(false);
+                .WithColumn("Type").AsString(50)
+                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
@@ -146,24 +148,46 @@ namespace Lim.Database.Migrations
 
     [Tags("Lim")]
     [Migration(201515051350)]
-    public class Create_Lim_FrequencyConfiguration_Table : Migration
+    public class Create_Lim_CustomFrequency_Table : Migration
     {
         public override void Up()
         {
-            Create.Table("FrequencyConfiguration")
-                .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
+            Create.Table("CustomFrequency")
+                .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("Seconds").AsInt32()
                 .WithColumn("Minutes").AsInt32()
                 .WithColumn("Hours").AsInt32()
                 .WithColumn("Month").AsString(3)
                 .WithColumn("WeekDay").AsString(3)
-                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(false);
+                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
         {
-            Delete.Table("FrequencyConfiguration");
+            Delete.Table("CustomFrequency");
+        }
+    }
+
+    [Tags("Lim")]
+    [Migration(201515051350)]
+    public class Create_Lim_AuditIntegration_Table : Migration
+    {
+        public override void Up()
+        {
+            Create.Table("AuditIntegration")
+                .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
+                .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
+                .WithColumn("ActionType").AsInt16()
+                .WithColumn("IntegrationType").AsInt16()
+                .WithColumn("Date").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
+                .WithColumn("WasSuccessful").AsBoolean().NotNullable().WithDefaultValue(true)
+                .WithColumn("Payload").AsString(Int32.MaxValue);
+        }
+
+        public override void Down()
+        {
+            Delete.Table("AuditIntegration");
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Lim.Schedule.Handlers
         {
             try
             {
-                var configs = _repository.Get<ApiPushConfiguration>(ApiPushConfiguration.Select, new { }).ToList();
+                var configs = _repository.Get<ApiPushConfiguration>(ApiPullConfiguration.Select, new { @FrequencyType = (int)command.Frequency, @Action = (int)command.Action, @IntegrationType = (int)command.Type }).ToList();
                 _log.InfoFormat("{0} Api Configurations will be handled", configs.Count());
 
                 HasConfiguration = configs.Any();
