@@ -39,21 +39,47 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1086\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+    </Reference>
     <Reference Include="Quartz">
       <HintPath>..\..\packages\Quartz.2.3.1\lib\net40\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Audits\IAuditIntegration.cs" />
     <Compile Include="Builders\CronExpressionBuilder.cs" />
-    <Compile Include="Custom\Api\Job.cs" />
-    <Compile Include="Daily\Api\Job.cs" />
-    <Compile Include="EveryMinute\Api\Job.cs" />
-    <Compile Include="Hourly\Api\Job.cs" />
+    <Compile Include="Commands\AuditIntegration.cs" />
+    <Compile Include="Commands\ExecuteConfiguration.cs" />
+    <Compile Include="Commands\FetchConfiguration.cs" />
+    <Compile Include="Core\IHandleConfigurationExecution.cs" />
+    <Compile Include="Core\IHandleFetchingConfiguration.cs" />
+    <Compile Include="Handlers\HandleFetchingApiPullConfiguration.cs" />
+    <Compile Include="Integrations\Custom\Api\PullJob.cs" />
+    <Compile Include="Integrations\Custom\Api\PushJob.cs" />
+    <Compile Include="Integrations\Daily\Api\PullJob.cs" />
+    <Compile Include="Integrations\Daily\Api\PushJob.cs" />
+    <Compile Include="Integrations\EveryMinute\Api\PullJob.cs" />
+    <Compile Include="Integrations\EveryMinute\Api\PushJob.cs" />
+    <Compile Include="Handlers\HandleExecutingApiConfiguration.cs" />
+    <Compile Include="Handlers\HandleFetchingApiPushConfiguration.cs" />
+    <Compile Include="Integrations\Hourly\Api\PullJob.cs" />
+    <Compile Include="Integrations\Hourly\Api\PushJob.cs" />
+    <Compile Include="Indentifiers\ApiIdentifiers.cs" />
+    <Compile Include="Indentifiers\IntegrationActionIdentifiers.cs" />
+    <Compile Include="Indentifiers\IntegrationClientIdentifier.cs" />
+    <Compile Include="Indentifiers\IntegrationPackageIdentifier.cs" />
+    <Compile Include="Indentifiers\IntegrationTypeIdentifier.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="job_scheduling_data_2_0.xsd">
@@ -61,7 +87,24 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
+      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
+      <Name>Lim.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
+      <Project>{0d4e5018-6f0d-42a3-8962-0bb05ffc136c}</Project>
+      <Name>Lim.Pull</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Push\Lim.Push.csproj">
+      <Project>{d7b63a79-2bc8-4bb2-9510-322c8b5d9efa}</Project>
+      <Name>Lim.Push</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

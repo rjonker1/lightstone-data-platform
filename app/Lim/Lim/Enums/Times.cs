@@ -35,10 +35,9 @@ namespace Lim.Enums
 
     public enum Frequency
     {
-        EveryMinute,
-        Hourly,
-        Daily,
-        AlwaysOn,
-        Custom
+        EveryMinute = 1,
+        Hourly =2,
+        Daily = 3,
+        Custom = 4
     }
 }
