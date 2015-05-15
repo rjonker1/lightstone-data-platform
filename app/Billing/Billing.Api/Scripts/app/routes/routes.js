@@ -45,6 +45,12 @@ function initializeAdminBilling(sammy) {
     });
 }
 
+function initializeAdminBilling(sammy) {
+    sammy.get('#/AuditLog', function (context) {
+        context.load('/Admin/AuditLog', { dataType: 'html', cache: false }).swap();
+    });
+}
+
 function initializePlugins() {
     $(".chosen-select").chosen({ width: "100%" });
     $('.input-group.date').bootstrapdatepicker({ autoclose: true, format: "yyyy-mm-dd" });

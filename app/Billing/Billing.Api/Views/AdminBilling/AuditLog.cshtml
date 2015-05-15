@@ -1,0 +1,59 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("StageBilling AuditLogs", ""))
+
+<div class="box">
+
+    <table id="table"></table>
+
+    <h2 id="detail-table-header"></h2>
+    <table id="detail"></table>
+
+    <script>
+
+        $('#table').bootstrapTable({
+            url: '/Admin/AuditLog',
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'transactionId',
+                title: 'TransactionId',
+                sortable: true
+            }, {
+                field: 'requestId',
+                title: 'RequestId',
+                sortable: true
+            }, {
+                field: 'fieldName',
+                title: 'Field Name',
+                sortable: true
+            }, {
+                field: 'originalValue',
+                title: 'Original Value',
+                sortable: true
+            }, {
+                field: 'newValue',
+                title: 'New Value',
+                sortable: true
+            }, {
+                field: 'modified',
+                title: 'Modified',
+                sortable: true
+            }, {
+                field: 'modifiedBy',
+                title: 'ModifiedBy',
+                sortable: true
+            }]
+        });
+
+        Billing.overrideDataTablesStyling();
+    </script>
+</div>

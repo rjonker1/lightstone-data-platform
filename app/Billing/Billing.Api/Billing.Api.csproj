@@ -620,6 +620,7 @@
     <Content Include="Views\AdminBilling\Index.cshtml" />
     <Content Include="Views\StageBilling\Index.cshtml" />
     <Content Include="Views\FinalBilling\Index.cshtml" />
+    <Content Include="Views\AdminBilling\AuditLog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
