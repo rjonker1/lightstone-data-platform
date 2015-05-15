@@ -17,7 +17,6 @@
     public enum AuthenticationType
     {
         None = 1,
-        BasicAuthenticationHeaderValue = 2,
-        BasicAuthenticationHeaderString = 3
+        Basic = 2
     }
 }

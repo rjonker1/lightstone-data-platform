@@ -45,6 +45,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="RestApi\HttpPushClient.cs" />
   </ItemGroup>
   <ItemGroup>

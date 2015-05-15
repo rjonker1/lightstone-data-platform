@@ -7,6 +7,13 @@ using Lim.Extensions;
 
 namespace Lim.Push.RestApi
 {
+    public interface IHttpPushClient<T, TResponse> : IDisposable where T : class
+    {
+        Task<TResponse> PostAsync(T model);
+        void PostWithNoResponse(T model);
+        Task PutAsync(TResponse identifier, T model);
+    }
+
     public class HttpPushClient<T, TResponse> : IDisposable where T : class
     {
         private bool _hasBeenDisposed;

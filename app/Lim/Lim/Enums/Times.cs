@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lim.Enums
+﻿namespace Lim.Enums
 {
     public enum Month
     {
@@ -35,10 +29,9 @@ namespace Lim.Enums
 
     public enum Frequency
     {
-        EveryMinute,
-        Hourly,
-        Daily,
-        AlwaysOn,
-        Custom
+        EveryMinute = 1,
+        Hourly =2,
+        Daily = 3,
+        Custom = 4
     }
 }
