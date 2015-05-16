@@ -13,6 +13,8 @@ namespace Billing.Domain.Entities
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<AuditLog> _auditLogs;
 
+        public string CurrentUser;
+
         public UserBillingTransaction(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs)
         {
             _stageBillingRepository = stageBillingRepository;
@@ -39,7 +41,7 @@ namespace Billing.Domain.Entities
                             TransactionId = transactionRequest.TransactionId,
                             RequestId = transactionRequest.RequestId,
                             Modified = DateTime.UtcNow,
-                            ModifiedBy = "user",
+                            ModifiedBy = userTransactions.UserName,
                             FieldName = "isBillable",
                             NewValue = userTransaction.IsBillable.ToString(),
                             OriginalValue = transactionRequest.IsBillable.ToString()
@@ -52,7 +54,7 @@ namespace Billing.Domain.Entities
 
                     transactionRequest.IsBillable = userTransaction.IsBillable;
                     transactionRequest.Modified = DateTime.UtcNow;
-                    transactionRequest.ModifiedBy = "dev.billing.api.lightstone.co.za";
+                    transactionRequest.ModifiedBy = CurrentUser;
 
                     _stageBillingRepository.SaveOrUpdate(transactionRequest);
                 }

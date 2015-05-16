@@ -1,11 +1,16 @@
+<<<<<<< Updated upstream
 ﻿using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
 using Workflow.Billing.Domain.Entities;
+=======
+﻿using Nancy;
+using Shared.BuildingBlocks.Api.Security;
+>>>>>>> Stashed changes
 
 namespace Billing.Api.Modules
 {
-    public class AdminBillingModule : NancyModule
+    public class AdminBillingModule : SecureModule
     {
         public AdminBillingModule(IRepository<AuditLog> auditLogs)
         {

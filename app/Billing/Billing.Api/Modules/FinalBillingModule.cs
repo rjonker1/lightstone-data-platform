@@ -5,11 +5,12 @@ using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules
 {
-    public class FinalBillingModule : NancyModule
+    public class FinalBillingModule : SecureModule
     {
         public FinalBillingModule(IRepository<FinalBilling> stageBillingRepository)
         {

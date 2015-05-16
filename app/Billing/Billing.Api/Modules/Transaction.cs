@@ -4,11 +4,12 @@ using Common.Logging;
 using Nancy;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api;
+using Shared.BuildingBlocks.Api.Security;
 using Workflow;
 
 namespace Billing.Api.Modules
 {
-    public class Transaction : NancyModule
+    public class Transaction : SecureModule
     {
         private readonly ILog _log;
 

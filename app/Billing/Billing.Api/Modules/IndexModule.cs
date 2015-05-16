@@ -1,8 +1,9 @@
 ﻿using Nancy;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace Billing.Api.Modules
 {
-    public class IndexModule : NancyModule
+    public class IndexModule : SecureModule
     {
         public IndexModule()
         {

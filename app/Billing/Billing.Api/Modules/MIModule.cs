@@ -6,10 +6,11 @@ using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace Billing.Api.Modules
 {
-    public class MIModule : NancyModule
+    public class MIModule : SecureModule
     {
         public MIModule()//IRepository<Customer> customers, IRepository<Product> products, IRepository<User> users)
         {

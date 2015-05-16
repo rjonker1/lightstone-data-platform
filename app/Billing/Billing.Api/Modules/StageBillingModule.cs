@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Billing.Api.Helpers.Nancy;
 using Billing.Domain.Dtos;
 using Billing.Domain.Entities;
 using DataPlatform.Shared.Repositories;
@@ -12,13 +13,14 @@ using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules
 {
-    public class StageBillingModule : NancyModule
+    public class StageBillingModule : SecureModule
     {
-        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs,
+        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs, CurrentNancyContext currentNancyContext,
                                     ICommitBillingTransaction<UserTransactionDto> userBillingTransaction,
                                     ICommitBillingTransaction<CustomerClientTransactionDto> customerClientBillingTransaction,
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction)
@@ -31,7 +33,7 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in stageBillingRepository)
                 {
-
+                   
                     var userList = new List<User>();
 
                     //Transactions total for customer
@@ -223,6 +225,7 @@ namespace Billing.Api.Modules
             Post["/StageBilling/User/Transactions/Update"] = param =>
             {
                 var body = Request.Body<UserTransactionDto>();
+                body.UserName = currentNancyContext.NancyContext.CurrentUser.UserName;
 
                 userBillingTransaction.Commit(body);
 
@@ -239,7 +242,7 @@ namespace Billing.Api.Modules
                 {
                     Id = Guid.NewGuid(),
                     Modified = DateTime.UtcNow,
-                    ModifiedBy = "user",
+                    ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName,
                     FieldName = body.Name,
                     NewValue = body.Value,
                     OriginalValue = body.OriginalValue
@@ -258,7 +261,7 @@ namespace Billing.Api.Modules
                 {
                     Id = Guid.NewGuid(),
                     Modified = DateTime.UtcNow,
-                    ModifiedBy = "user",
+                    ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName,
                     FieldName = body.Name,
                     NewValue = body.Value,
                     OriginalValue = body.OriginalValue

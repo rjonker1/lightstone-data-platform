@@ -1,10 +1,18 @@
-﻿using Billing.Api.Installers;
+﻿using System;
+using System.Linq;
+using System.Web.Configuration;
+using Billing.Api.Helpers.Nancy;
+using Billing.Api.Installers;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
+using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
+using Nancy.Extensions;
+using Nancy.Helpers;
+using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Consumer.Installers;
@@ -35,7 +43,9 @@ namespace Billing.Api
                 new RepositoryInstaller(),
                 new BusInstaller(),
                 new AutoMapperInstaller(),
-                new UpdateBillingTransactionInstaller()
+                new UpdateBillingTransactionInstaller(),
+                new AuthenticationInstaller(),
+                new CurrentNancyContextInstaller()
                 );
 
             //Drop create
@@ -47,6 +57,19 @@ namespace Billing.Api
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
                 this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                var token = "";
+                var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
+                if (cookie != null)
+                    token = HttpUtility.UrlDecode(cookie.Value);
+
+                nancyContext.Request.Headers.Authorization = "Token {0}".FormatWith(token);
+
+                var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
+                if (user != null)
+                {
+                    nancyContext.CurrentUser = user;
+                    container.Resolve<CurrentNancyContext>().NancyContext = nancyContext;
+                }
                 return null;
             });
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
@@ -61,7 +84,29 @@ namespace Billing.Api
             });
             pipelines.EnableCors(); // cross origin resource sharing
 
+            TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
+            pipelines.AfterRequest.AddItemToEndOfPipeline(GetRedirectToLoginHook(null));
+
             base.RequestStartup(container, pipelines, context);
+        }
+
+        private static Action<NancyContext> GetRedirectToLoginHook(FormsAuthenticationConfiguration configuration)
+        {
+            return context =>
+            {
+                var contentTypes = context.Request.Headers.FirstOrDefault(x => x.Key == "Accept");
+                var isHtml = (contentTypes.Value.FirstOrDefault(x => x.Contains("text/html")) + "").Any();
+                if (context.Response.StatusCode == HttpStatusCode.Unauthorized && isHtml)
+                    context.Response = context.GetRedirect("http://dev.cia.lightstone.co.za/login");
+            };
+        }
+
+        protected override IRootPathProvider RootPathProvider
+        {
+            get
+            {
+                return new AspNetRootPathProvider();
+            }
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
