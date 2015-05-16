@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Linq
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Lim.Web.UI.Models.Api.PushConfiguration>
+@{
     Layout = "_Layout.cshtml";
 }
 <body class="skin-blue">
@@ -32,86 +34,80 @@
                                         </label>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label>Client</label>
-                                    <input type="text" class="form-control" placeholder="Select Client ..." />
+                                    <select id="client-ids" name="client-ids" data-placeholder="Select Client ..." class="chosen-select form-control">
+                                        <option value=""></option>
+                                        @foreach (var client in Model.SelectableClients)
+                                        {
+                                            var isSelected = Model.SelectableClients.Select(x => x.Id).Contains(Model.Configuration.ClientId);
+                                            <option selected="@isSelected" value="@client.Id">@client.Name</option>
+                                        }
+                                    </select>
                                 </div>
-
-                                <!-- text input -->
-                                  
                                 <div class="form-group">
                                     <label>Packages / Products</label>
-                                    <input type="text" class="form-control" placeholder="Select Packages ..." />
+                                    <select id="package-ids" name="package-ids" data-placeholder="Select Packages ..." class="chosen-select form-control" multiple>
+                                        <option value=""></option>
+                                        @foreach (var package in Model.SelectablePackages)
+                                        {
+                                            var isSelected = Model.Packages != null && Model.Packages.Contains(package.Id);
+                                            <option selected="@isSelected" value="@package.Id">@package.Name</option>
+                                        }
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Base Address</label>
-                                    <input type="text" class="form-control" placeholder="http:// ..." />
+                                    <input type="text" class="form-control" value="@Model.BaseAddress" placeholder="http://..." />
                                 </div>
                                 <div class="form-group">
                                     <label>Suffix</label>
-                                    <input type="text" class="form-control" placeholder="..." />
+                                    <input type="text" class="form-control" value="@Model.Suffix" placeholder="api/pushroute" />
                                 </div>
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" />
+                                            <input type="checkbox" value="@Model.HasAuthentication" />
                                             Has Authentication
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Authentication Types</label>
-                                    <select class="form-control">
-                                        <option selected>None</option>
-                                        <option>Stateless Authentication</option>
-                                        <option>Basic Authentication</option>
+                                    <select id="authentication-type" name="authentication-ids" class="chosen-select form-control">
+                                        @foreach (var type in Model.Authentication)
+                                        {
+                                            var isSelected = Model.Authentication.Select(x => x.Id).Contains(Model.AuthenticationType);
+                                            <option selected="@isSelected" value="@type.Id">@type.Name</option>
+                                        }
                                     </select>
                                 </div>
-                                @*<div class="form-group">
-                <div class="col-xs-3">
-                    <label>Authentication Key</label>
-                    <input type="text" class="form-control" placeholder="..." />
-                </div>
-                <div class="col-xs-9">
-                    <label>Value</label>
-                    <input type="text" class="form-control" placeholder="..." />
-                </div>
-            </div>*@
                                 <div class="form-group">
                                     <label>Authentication Key</label>
-                                    <input type="text" class="form-control" placeholder="..." />
+                                    <input type="text" class="form-control" value="@Model.AuthenticationKey" />
                                 </div>
                                 <div class="form-group">
-                                    <label>Authentication Key Value</label>
-                                    <input type="text" class="form-control" placeholder="..." />
+                                    <label>Authentication Key Token</label>
+                                    <input type="text" class="form-control" value="@Model.AuthenticationToken" />
                                 </div>
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" placeholder="..." />
+                                    <input type="text" class="form-control" value="@Model.Username" />
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="text" class="form-control" placeholder="..." />
+                                    <input type="text" class="form-control" value="@Model.Password" />
                                 </div>
                                 <div class="form-group">
-                                    <label>Freuency</label>
-                                    <select class="form-control">
-                                        <option selected>Always On</option>
-                                        <option>Daily</option>
-                                        <option>Hourly</option>
-                                        <option>Custom</option>
+                                    <label>Frequency</label>
+                                    <select id="frequency-type" name="frequency-ids" class="chosen-select form-control">
+                                        @foreach (var type in Model.Frequency)
+                                        {
+                                            var isSelected = Model.Frequency.Select(x => x.Id).Contains(Model.Configuration.FrequencyType);
+                                            <option selected="@isSelected" value="@type.Id">@type.Name</option>
+                                        }
                                     </select>
                                 </div>
-                                @*<div class="form-group">
-                <label>Custom Frequency</label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-clock-o"></i>
-                    </div>
-                    <input type="text" class="form-control pull-right" id="frequencytime" />
-                </div> /.input group
-            </div>*@
                                 <div class="bootstrap-timepicker">
                                     <div class="form-group">
                                         <label>Custom Frequency</label>
@@ -142,18 +138,22 @@
     <script src="~/assets/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
     <script src="~/assets/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <script src="~/assets/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
-    <script src="~/assets/ang/angular-ui-bootstrap.js"></script>
-    <script src="~/assets/ang/angularjs-dropdown-multiselect.min.js"></script>
-    <script src="~/assets/ang/clientApp.js"></script>
-
+    <script src="~/assets/plugins/chosen/chosen.jquery.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(function() {
             //$('#frequencytime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' });
             $('#frequencytime').timepicker();
+            var config = {
+                '.chosen-select': {},
+                '.chosen-select-deselect': { allow_single_deselect: true },
+                '.chosen-select-no-single': { disable_search_threshold: 10 },
+                '.chosen-select-no-results': { no_results_text: 'Value does not exist in the list' },
+                '.chosen-select-width': { width: "95%" }
+            };
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
         })
     </script>
 </body>
