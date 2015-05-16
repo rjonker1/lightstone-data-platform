@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{33B3D7C8-9262-49A8-98A9-F55A9CEB4A66}</ProjectGuid>
+    <ProjectGuid>{90823222-BDB1-49C7-AF26-D709A6FE4A72}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lim.Unit.Tests</RootNamespace>
-    <AssemblyName>Lim.Unit.Tests</AssemblyName>
+    <RootNamespace>Lim.Acceptance.Tests</RootNamespace>
+    <AssemblyName>Lim.Acceptance.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -33,12 +33,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net1211">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1092\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\..\packages\Quartz.2.3.1\lib\net40\Quartz.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,18 +74,26 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="when_pushing_integration_to_api.cs" />
+    <Compile Include="Integrations\ApiIntegrationTestSetup.cs" />
+    <Compile Include="Integrations\Push\when_pushing_hourly_integration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="web.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
+      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
+      <Name>Lim.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
       <Project>{0d4e5018-6f0d-42a3-8962-0bb05ffc136c}</Project>
       <Name>Lim.Pull</Name>
@@ -75,17 +102,18 @@
       <Project>{d7b63a79-2bc8-4bb2-9510-322c8b5d9efa}</Project>
       <Name>Lim.Push</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lim.Test.Helper\Lim.Test.Helper.csproj">
-      <Project>{87a87c68-50ff-4df7-8318-ad793433b80e}</Project>
-      <Name>Lim.Test.Helper</Name>
+    <ProjectReference Include="..\Lim.Schedule\Lim.Schedule.csproj">
+      <Project>{8117e14c-45cb-4f67-a6d3-a8e6aa524f47}</Project>
+      <Name>Lim.Schedule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

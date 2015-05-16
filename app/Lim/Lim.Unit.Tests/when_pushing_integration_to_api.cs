@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Net.Http.Headers;
 using System.Text;
+using Lim.Push.Models;
 using Lim.Push.RestApi;
-using Lim.Test.Helper.Fakes.Signio;
+using Lim.Test.Helper.Fakes;
 using Xunit.Extensions;
 
 namespace Lim.Unit.Tests
 {
-    public class when_pushing_signio_stock_share_to_api : Specification
+    public class when_pushing_integration_to_api : Specification
     {
         private readonly string _url = "http://dev.lim.test.api.lightstone.co.za";
-        private readonly string _api = "stockshare/api/stock/importStockItem";
-        private readonly string _other_api = "api/push";
-        private readonly string _resource = "importStockItem";
+        //private readonly string _api = "stockshare/api/stock/importStockItem";
+        private readonly string _api = "api/push";
 
         private readonly string _key = "X-Auth-Token";
         private readonly string _keyValue = "2b1eeb42-0cf7-4234-b798-3bbaa293e273";
@@ -20,11 +20,11 @@ namespace Lim.Unit.Tests
         private readonly string _username = "LightStoneAuto";
         private readonly string _password = "49q42FwDSajrF9";
 
-        private readonly HttpPushClient<ImportVehicleRequest, string> _push;
+        private readonly HttpPushClient<Transaction, string> _push;
 
-        public when_pushing_signio_stock_share_to_api()
+        public when_pushing_integration_to_api()
         {
-            _push = new HttpPushClient<ImportVehicleRequest, string>(_url, _api, _key, _keyValue, BuildAuthentication());
+            _push = new HttpPushClient<Transaction, string>(_url, _api, _key, _keyValue, BuildAuthentication());
         }
 
         public override void Observe()
@@ -35,8 +35,7 @@ namespace Lim.Unit.Tests
         [Observation]
         public void then_push_api_should_get_ok_status_code()
         {
-            _push.PostWithNoResponse(
-                    new ImportVehicleRequest(DateTime.UtcNow, new User("", Guid.NewGuid()), new Vehicle(), new Stock('Y', true)));
+            _push.PostWithNoResponse(FakeTransactions.ForPushApi());
             _push.Dispose();
             _push.IsSuccessful.ShouldBeTrue();
         }

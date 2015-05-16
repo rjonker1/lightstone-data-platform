@@ -2,6 +2,7 @@
 using System.Data;
 using Common.Logging;
 using Lim.Schedule.Commands;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lim.Schedule.Audits
 {
@@ -26,16 +27,22 @@ namespace Lim.Schedule.Audits
             _log.Info("Storing Integration Audit information to the database");
             try
             {
-                //TODO: Implement Audit Insert
-                const string sql = @"Insert into ....";
+                const string sql =
+                    @"insert into AuditApiIntegration (ConfigurationKey,ActionType,IntegrationType,Date,WasSuccessful,Address,Suffix,Payload) values (@ConfigurationKey,@ActionType,@IntegrationType,@Date,@WasSuccessful,@Address,@Suffix,@Payload)";
                 var parameters = new
                 {
-                    ConfigurationKey = command.ConfigurationKey,
-                    Date = command.Date
+                    @ConfigurationKey = command.ConfigurationKey,
+                    @ActionType = command.Action,
+                    @IntegrationType = command.Type,
+                    @Date = DateTime.UtcNow,
+                    @WasSuccessful = command.WasSuccessful,
+                    @Address = command.Address,
+                    @Suffix = command.Suffix,
+                    @Payload = command.Payload
                 };
 
-                //_connection.Open();
-                //_connection.Execute(sql, parameters);
+                _connection.Open();
+                _connection.Execute(sql, parameters);
             }
             catch (Exception ex)
             {

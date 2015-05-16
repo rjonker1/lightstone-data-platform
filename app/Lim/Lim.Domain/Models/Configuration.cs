@@ -7,7 +7,7 @@ namespace Lim.Domain.Models
     public class ApiPushConfiguration
     {
         public static readonly string Select =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = true and FrequencyType = @FrequencyType and Action = @Action and IntegrationType = @IntegrationType";
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType";
 
         [DataMember]
         public long Id { get; set; }
@@ -66,7 +66,7 @@ namespace Lim.Domain.Models
     public class ApiPullConfiguration
     {
         public static readonly string Select =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = true and FrequencyType = @FrequencyType and Action = @Action and IntegrationType = @IntegrationType";
+            @"";
 
         [DataMember]
         public long Id { get; set; }

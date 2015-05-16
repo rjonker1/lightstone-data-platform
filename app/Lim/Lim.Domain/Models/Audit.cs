@@ -4,31 +4,32 @@ using System.Runtime.Serialization;
 namespace Lim.Domain.Models
 {
     [DataContract]
-    public class AuditPush
+    public class AuditIntegration
     {
         [DataMember]
         public long Id { get; set; }
-        [DataMember]
-        public long ConfigurationId { get; set; }
-        [DataMember]
-        public long IntegrationType { get; set; }
-        [DataMember]
-        public DateTime PushedDate { get; set; }
-        [DataMember]
-        public string Payload { get; set; }
-    }
 
-    [DataContract]
-    public class AuditPull
-    {
         [DataMember]
-        public long Id { get; set; }
+        public Guid ConfigurationKey { get; set; }
+
         [DataMember]
-        public long ConfigurationId { get; set; }
+        public int ActionType { get; set; }
+
         [DataMember]
-        public long IntegrationType { get; set; }
+        public int IntegrationType { get; set; }
+
         [DataMember]
-        public DateTime PulledDate { get; set; }
+        public DateTime Date { get; set; }
+
+        [DataMember]
+        public bool WasSuccessful { get; set; }
+
+        [DataMember]
+        public string Address { get; set; }
+
+        [DataMember]
+        public string Suffix { get; set; }
+
         [DataMember]
         public string Payload { get; set; }
     }

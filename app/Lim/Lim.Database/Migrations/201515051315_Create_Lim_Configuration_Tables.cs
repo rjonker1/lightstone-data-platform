@@ -175,13 +175,15 @@ namespace Lim.Database.Migrations
     {
         public override void Up()
         {
-            Create.Table("AuditIntegration")
+            Create.Table("AuditApiIntegration")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("ActionType").AsInt16()
                 .WithColumn("IntegrationType").AsInt16()
                 .WithColumn("Date").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("WasSuccessful").AsBoolean().NotNullable().WithDefaultValue(true)
+                .WithColumn("Address").AsString(500).NotNullable()
+                .WithColumn("Suffix").AsString(50).NotNullable()
                 .WithColumn("Payload").AsString(Int32.MaxValue);
         }
 

@@ -5,7 +5,9 @@ using System.Text;
 using Lim.Enums;
 using Lim.Push.Models;
 using Lim.Push.RestApi;
+using Lim.Schedule.Commands;
 using Lim.Schedule.Repositories;
+using Newtonsoft.Json;
 
 namespace Lim.Schedule.Indentifiers
 {
@@ -62,7 +64,7 @@ namespace Lim.Schedule.Indentifiers
             _transaction = new Transaction();
         }
 
-        public void Push()
+        public void Push(AuditIntegrationCommand audit)
         {
             if (Configuration.Authentication.HasAuthentication)
             {
@@ -71,11 +73,14 @@ namespace Lim.Schedule.Indentifiers
 
                 authenticationClient.PostWithNoResponse(_transaction);
                 authenticationClient.Dispose();
+                audit.SetPayload(JsonConvert.SerializeObject(_transaction));
+                return;
             }
 
             var client = new HttpPushClient<Transaction, string>(Configuration.BaseAddress, Configuration.Suffix);
             client.PostWithNoResponse(_transaction);
             client.Dispose();
+            audit.SetPayload(JsonConvert.SerializeObject(_transaction));
         }
 
         private AuthenticationHeaderValue GetAuthentication()
@@ -105,12 +110,14 @@ namespace Lim.Schedule.Indentifiers
     public class ApiAuthenticationIdentifier
     {
         public ApiAuthenticationIdentifier(bool hasAuthentication, ApiAuthenticationTypeIdentifier authenticationType, string username,
-            string password)
+            string password, string authenticationKey, string authenticationToken)
         {
             Username = username;
             Password = password;
             HasAuthentication = hasAuthentication;
             AuthenticationType = authenticationType;
+            AuthenticationKey = authenticationKey;
+            AuthenticationToken = authenticationToken;
         }
 
         [DataMember]

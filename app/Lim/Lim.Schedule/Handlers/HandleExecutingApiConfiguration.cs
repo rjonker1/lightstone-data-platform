@@ -24,16 +24,23 @@ namespace Lim.Schedule.Handlers
 
         public void Handle(ExecuteApiPushConfigurationCommand command)
         {
+            if (command.Configurations == null || !command.Configurations.Any())
+            {
+                _log.Info("There are not configurations to execute");
+                return;
+            }
+
             _log.InfoFormat("Executing {0} API Push Configurations", command.Configurations.Count());
             command.Configurations.ToList().ForEach(f =>
             {
-                var audit = new AuditIntegrationCommand(f.Key, DateTime.UtcNow, IntegrationAction.Push, IntegrationType.Api);
+                var audit = new AuditIntegrationCommand(f.Key, DateTime.UtcNow, IntegrationAction.Push, IntegrationType.Api,
+                    f.Configuration.BaseAddress, f.Configuration.Suffix);
                 try
                 {
-                   
+
                     _log.InfoFormat("Executing Push Configuration with Key {0}", f.Key);
                     f.Get(_repository);
-                    f.Push();
+                    f.Push(audit);
                     audit.Successful();
                 }
                 catch (Exception ex)

@@ -16,7 +16,7 @@ namespace Lim.Schedule.Service.Installers
             _log.InfoFormat("Installing Repositories");
             container.Register(Component.For<IRepository>().UsingFactoryMethod(() => new Repository(
                 new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["lim/schedule/database/auto-car-stats"].ToString()))));
+                    ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString()))));
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Lim.Test.Api
 
             //    if (c.Request.Headers.Authorization == null || !c.Request.Headers.Authorization.Any())
             //    {
-            //        _log.ErrorFormat("No request headerss are present in the request {0}",c);
+            //        _log.ErrorFormat("No request headers are present in the request {0}",c);
             //        return null;
             //    }
 

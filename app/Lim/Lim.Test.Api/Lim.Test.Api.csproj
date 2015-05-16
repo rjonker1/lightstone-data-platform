@@ -126,8 +126,8 @@
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Models\SomeDealerData.cs" />
     <Compile Include="Models\Users\FakeSignioUser.cs" />
-    <Compile Include="Modules\FakeDealerPullApi.cs" />
-    <Compile Include="Modules\FakePushSignioStockShare.cs" />
+    <Compile Include="Modules\FakePull.cs" />
+    <Compile Include="Modules\FakePush.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

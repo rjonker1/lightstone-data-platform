@@ -25,14 +25,14 @@ namespace Lim.Schedule.Handlers
         {
             try
             {
-                var configs = _repository.Get<ApiPushConfiguration>(ApiPullConfiguration.Select, new { @FrequencyType = (int)command.Frequency, @Action = (int)command.Action, @IntegrationType = (int)command.Type }).ToList();
-                _log.InfoFormat("{0} Api Configurations will be handled", configs.Count());
+                var configs = _repository.Get<ApiPushConfiguration>(ApiPushConfiguration.Select, new { @FrequencyType = (int)command.Frequency, @Action = (int)command.Action, @IntegrationType = (int)command.Type }).ToList();
+                _log.InfoFormat("{0} {1} Api Configurations will be handled", configs.Count(), command.Frequency.ToString());
 
                 HasConfiguration = configs.Any();
 
                 if (!HasConfiguration)
                 {
-                    _log.InfoFormat("No configurations found for {0}", command.Action.ToString());
+                    _log.InfoFormat("No configurations found for {1} {0}", command.Action.ToString(), command.Frequency.ToString());
                     return;
                 }
 
@@ -43,7 +43,7 @@ namespace Lim.Schedule.Handlers
 
                 }).Select(s => new ApiPushIntegration(s.Key.Key, new ApiConfigurationIdentifier(s.Key.BaseAddress, s.Key.Suffix,
                     new ApiAuthenticationIdentifier(s.Key.HasAuthentication,
-                        new ApiAuthenticationTypeIdentifier(s.Key.AuthenticationType,(((Enums.AuthenticationType) s.Key.AuthenticationType)).ToString()),s.Key.Username, s.Key.Password),
+                        new ApiAuthenticationTypeIdentifier(s.Key.AuthenticationType,(((Enums.AuthenticationType) s.Key.AuthenticationType)).ToString()),s.Key.Username, s.Key.Password,s.Key.AuthenticationKey,s.Key.AuthenticationToken),
                     new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Key.Action).ToString()),
                     new IntegrationTypeIdentifier(s.Key.IntegrationType, ((Enums.IntegrationAction)s.Key.IntegrationType).ToString())),
                     new IntegrationClientIdentifier(s.Key.ClientId, s.Key.AccountNumber),
