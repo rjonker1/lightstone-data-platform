@@ -9,6 +9,7 @@
     initializeFinalBilling(sammy);
     intitializeMI(sammy);
     initializeAdminBilling(sammy);
+    initializeAdminAuditLogBilling(sammy);
 }
 
 function initializePreBilling(sammy) {
@@ -45,7 +46,7 @@ function initializeAdminBilling(sammy) {
     });
 }
 
-function initializeAdminBilling(sammy) {
+function initializeAdminAuditLogBilling(sammy) {
     sammy.get('#/AuditLog', function (context) {
         context.load('/Admin/AuditLog', { dataType: 'html', cache: false }).swap();
     });
