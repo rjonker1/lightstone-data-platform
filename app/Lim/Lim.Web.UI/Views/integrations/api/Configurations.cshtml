@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Linq
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<Lim.Web.UI.Models.Api.ConfigurationView>>
+@{
     Layout = "_Layout.cshtml";
 }
 <body class="skin-blue">
@@ -30,24 +32,33 @@
                                     <tr>
                                         <th>Client</th>
                                         <th>Action</th>
+                                        <th>Frequency</th>
+                                        <th>Type</th>
                                         <th>Base Address</th>
                                         <th>Suffix</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Signio</td>
-                                        <td>Push</td>
-                                        <td>http://ci.conclude.co.za:80/StockShare/</td>
-                                        <td>stockshare/api/stock/importStockItem</td>
-                                        <td><button class="btn btn-block btn-success btn-lg">View</button></td>
-                                    </tr>
+                                    @foreach (var config in Model)
+                                    {
+                                        <tr>
+                                            <td>@config.ClientName</td>
+                                            <td>@config.Action</td>
+                                            <td>@config.Frequency</td>
+                                            <td>@config.Type</td>
+                                            <td>TBA</td>
+                                            <td>TBA</td>
+                                            <td><button class="btn btn-block btn-success btn-lg">View</button></td>
+                                        </tr>
+                                    }
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>Client</th>
                                         <th>Action</th>
+                                        <th>Frequency</th>
+                                        <th>Type</th>
                                         <th>Base Address</th>
                                         <th>Suffix</th>
                                         <th></th>

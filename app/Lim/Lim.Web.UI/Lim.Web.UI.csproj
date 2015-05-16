@@ -76,6 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\ang\angular-ui-bootstrap.js" />
+    <Content Include="assets\plugins\chosen\chosen-sprite%402x.png" />
+    <Content Include="assets\plugins\chosen\chosen-sprite.png" />
+    <Content Include="assets\plugins\chosen\chosen.jquery.min.js" />
+    <Content Include="assets\plugins\chosen\chosen.min.css" />
     <Content Include="packages.config" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\_Footer.cshtml" />
@@ -149,9 +153,18 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Modules\ClientModule.cs" />
+    <Compile Include="Models\Api\ConfigurationView.cs" />
+    <Compile Include="Models\Api\PullConfiguration.cs" />
+    <Compile Include="Models\Api\PushConfiguration.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\EnumTypes.cs" />
+    <Compile Include="Models\Package.cs" />
+    <Compile Include="Modules\FtpModule.cs" />
+    <Compile Include="Modules\MessageModule.cs" />
+    <Compile Include="Modules\MailModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
-    <Compile Include="Modules\IntegrationForApiModule.cs" />
+    <Compile Include="Modules\ApiModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\integrations\ftp\" />
@@ -166,6 +179,10 @@
     <ProjectReference Include="..\Lim.Fake.Database\Lim.Fake.Database.csproj">
       <Project>{f7347c19-f62e-4118-9f70-02aac878b5c0}</Project>
       <Name>Lim.Fake.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
