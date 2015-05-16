@@ -122,7 +122,7 @@
                                         }
                                     }
 
-                                    valueTotal += parent.price;
+                                    valueTotal += parent.costOfSale;
                                 }
                                 //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
@@ -140,14 +140,14 @@
                                             }
                                         }
 
-                                        valueTotal += child.price;
+                                        valueTotal += child.costOfSale;
                                     }
                                     //Tier 3
                                     for (var k = 0; k < (listItem.dataFields[x].dataFields[j].dataFields).length; k++) {
 
                                         if (listItem.dataFields[x].dataFields[j].dataFields[k].isSelected === true) {
 
-                                            valueTotal += listItem.dataFields[x].dataFields[j].dataFields[k].price;
+                                            valueTotal += listItem.dataFields[x].dataFields[j].dataFields[k].costOfSale;
                                         }
                                     }
                                 }
@@ -201,10 +201,10 @@
             var totalChildrenVal = 0;
 
             for (var i = 0; i < children.length; i++) {
-                totalChildrenVal += children[i].price;
+                totalChildrenVal += children[i].costOfSale;
             }
 
-            parent.price = totalChildrenVal;
+            parent.costOfSale = totalChildrenVal;
 
             return totalChildrenVal;
         };

@@ -10,7 +10,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
         public void CreateMaps()
         {
             Mapper.CreateMap<DataProviderFieldItemDto, DataFieldOverride>()
-                .ForMember(d => d.CostOfSale, opt => opt.MapFrom(x => x.Price))
+                .ForMember(d => d.CostOfSale, opt => opt.MapFrom(x => x.CostOfSale))
                 .ForMember(d => d.IsSelected, opt => opt.MapFrom(x => x.IsSelected))
                 .ForMember(d => d.RequestFieldOverrides, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>(x.RequestFields)))
                 .ForMember(d => d.DataFieldOverrides, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>(x.DataFields)));

@@ -10,7 +10,9 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Shared.Extensions;
 using Nancy;
+using Nancy.Extensions;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.Helpers;
@@ -51,13 +53,38 @@ namespace PackageBuilder.Api.Modules
                 string filter = (parameters.filter + "").Trim().ToLower();
                 Expression<Func<Domain.Entities.Packages.Read.Package, bool>> predicate = x => !x.IsDeleted && (x.Name + "").Trim().ToLower().StartsWith(filter);
                 predicate = package => true;
-                var publishedPackages = from p in readRepo
-                           where p.Id == (from pp in readRepo
-                                  where p.State.Name == StateName.Published
-                                  orderby pp.Version descending 
-                                  select pp.Id).FirstOrDefault()
-                           select p;
-                var packages = new PagedList<Domain.Entities.Packages.Read.Package>(publishedPackages, parameters.pageIndex, parameters.pageSize, predicate);
+
+                //var publishedPackages = from p in readRepo
+                //                        where p.Id == (from pp in readRepo
+                //                                       where p.State.Name == StateName.Published
+                //                                       orderby pp.Version descending
+                //                                       select pp.Id).FirstOrDefault()
+                //                        select p;
+
+                var packagesTest = readRepo.Where(x => x.State.Name == StateName.Published).OrderByDescending(d => d.Version);
+
+                var publishedPackagesList = new List<Domain.Entities.Packages.Read.Package>();
+
+                foreach (var package in packagesTest)
+                {
+
+                    var index = publishedPackagesList.FindIndex(x => x.PackageId == package.PackageId);
+
+                    if (index < 0) publishedPackagesList.Add(package);
+                    foreach (var pubPackage in publishedPackagesList)
+                    {
+                        if (package.Version > pubPackage.Version)
+                        {
+                            publishedPackagesList.Remove(pubPackage);
+                            publishedPackagesList.Add(package);
+                        }
+                    }
+                }
+
+                var publishedPackages = publishedPackagesList.AsQueryable();
+
+                var packages = new PagedList<Domain.Entities.Packages.Read.Package>(publishedPackages, 
+                                                parameters.pageIndex, parameters.pageSize, predicate);
                 return Response.AsJson(
                         new
                         {

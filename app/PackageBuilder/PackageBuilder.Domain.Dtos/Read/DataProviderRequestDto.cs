@@ -49,7 +49,7 @@ namespace PackageBuilder.Domain.Dtos.Read
                         s.FieldLevelCostPriceOverride, s.Owner, s.CreatedDate, s.EditedDate,
                         s.DataFields.Select(
                             d =>
-                                new DataField(d.Name, d.Type, d.Definition, d.Industries, d.Price,
+                                new DataField(d.Name, d.Type, d.Definition, d.Industries, d.CostOfSale,
                                     d.IsSelected.HasValue ? d.IsSelected.Value : false))));
         }
 

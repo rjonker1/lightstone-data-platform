@@ -103,7 +103,7 @@
                     for (var x = 0; x < (listItem.dataFields).length; x++) {
 
 
-                        valueTotal += listItem.dataFields[x].price;
+                        valueTotal += listItem.dataFields[x].costOfSale;
 
                         if ((listItem.dataFields[x].dataFields).length > 0) {
 
@@ -111,12 +111,12 @@
 
                             for (var j = 0; j < (subFields).length; j++) {
 
-                                valueTotal += subFields[j].price;
+                                valueTotal += subFields[j].costOfSale;
 
                                 var subChildFields = subFields[j].dataFields;
                                 for (var k = 0; k < subChildFields.length; k++) {
 
-                                    valueTotal += subChildFields[k].price;
+                                    valueTotal += subChildFields[k].costOfSale;
                                 }
                             }
                         }
@@ -137,13 +137,13 @@
 
             for (var i = 0; i < subItems.length; i++) {
 
-                valueTotal += subItems[i].price;
+                valueTotal += subItems[i].costOfSale;
 
                 var subChildItems = subItems[i].dataFields;
 
                 for (var j = 0; j < subChildItems.length; j++) {
 
-                    valueTotal += subChildItems[j].price;
+                    valueTotal += subChildItems[j].costOfSale;
                 }
 
             }

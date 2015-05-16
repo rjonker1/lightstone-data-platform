@@ -25,7 +25,7 @@ namespace PackageBuilder.TestObjects.Builders
                 Label = _label,
                 Definition = _definition,
                 Industries = _industries,
-                Price = _costOfSale,
+                CostOfSale = _costOfSale,
                 IsSelected = _isSelected,
                 DataFields = _dataFields,
             };

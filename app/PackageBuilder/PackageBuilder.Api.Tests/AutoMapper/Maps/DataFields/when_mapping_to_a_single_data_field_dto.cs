@@ -29,7 +29,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataFields
             _dto.Name.ShouldEqual("SpecificInformation");
             _dto.Label.ShouldEqual("Label");
             _dto.Definition.ShouldEqual("Definition");
-            _dto.Price.ShouldEqual(10d);
+            _dto.CostOfSale.ShouldEqual(10d);
             _dto.IsSelected.Value.ShouldBeTrue();
             _dto.Industries.Count().ShouldEqual(3);
             _dto.DataFields.Count().ShouldEqual(6);

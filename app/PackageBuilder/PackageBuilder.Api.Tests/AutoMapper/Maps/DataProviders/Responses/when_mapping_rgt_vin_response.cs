@@ -50,8 +50,8 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses
             _dataFields.FirstOrDefault(x => x.Name == "RgtCode").Name.ShouldEqual("RgtCode");
             _dataFields.FirstOrDefault(x => x.Name == "RgtCode").Type.ShouldEqual(typeof(int?).ToString());
 
-            _dataFields.FirstOrDefault(x => x.Name == "Price").Name.ShouldEqual("Price");
-            _dataFields.FirstOrDefault(x => x.Name == "Price").Type.ShouldEqual(typeof(decimal?).ToString());
+            _dataFields.FirstOrDefault(x => x.Name == "CostOfSale").Name.ShouldEqual("CostOfSale");
+            _dataFields.FirstOrDefault(x => x.Name == "CostOfSale").Type.ShouldEqual(typeof(decimal?).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "Colour").Name.ShouldEqual("Colour");
             _dataFields.FirstOrDefault(x => x.Name == "Colour").Type.ShouldEqual(typeof(string).ToString());

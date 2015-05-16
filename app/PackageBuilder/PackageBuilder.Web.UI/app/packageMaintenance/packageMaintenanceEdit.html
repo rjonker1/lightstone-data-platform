@@ -71,7 +71,7 @@
                 <input ng-if="dataField.dataFields.length > 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0"
                        value="{{totalChildren(dataField, dataField.dataFields)}}" />
 
-                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.costOfSale" />
             </div>
         </div>
     </div>
@@ -110,7 +110,7 @@
                 <input ng-if="dataField.dataFields.length > 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0"
                        value="{{totalChildren(dataField, dataField.dataFields)}}" />
 
-                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.costOfSale" />
             </div>
         </div>
     </div>
@@ -143,7 +143,7 @@
                         <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
                                value="{{totalChildren(subDF, subDF.dataFields)}}" />
 
-                        <input ng-if="subDF.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.price" />
+                        <input ng-if="subDF.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.costOfSale" />
                     </div>
                 </div>
             </div>
