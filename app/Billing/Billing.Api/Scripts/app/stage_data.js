@@ -297,9 +297,9 @@ function invoiceFormatter(value, row, index) {
 }
 
 window.invoiceActionEvents = {
-    'click .invoice-view': function(e, value, row, index) {
+    'click .invoice-view': function (e, value, row, index) {
 
-        $.get('/StageBilling/CustomerClient/' + row.id + '/Packages', function(response) {
+        $.get('/StageBilling/Billable/Transactions/' + row.id, function (response) {
 
             var data = '{' +
                 '"template": { "shortid" : "N190datG" },' +
@@ -308,7 +308,7 @@ window.invoiceActionEvents = {
                         '"Name": "' + row.customerName + '",' +
                         '"TaxRegistration": 4190195679,' +
                         '"Packages" : [ ' +
-                            '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": "' + row.billedTransactions + '", "Price": 16314.67, "Vat": 2284.00}' +
+                            '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": "' + row.billedTransactions + '", "Price":"' + response.data[0].price + '", "Vat": 0.00}' +
                             ']  ' +
                     '} ' +
                 '}';

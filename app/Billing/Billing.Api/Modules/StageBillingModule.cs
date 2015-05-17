@@ -199,6 +199,54 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
 
+            Get["/StageBilling/Billable/Transactions/{searchId}"] = param =>
+            {
+                var searchId = new Guid(param.searchId);
+                var packagesDetailList = new List<PackageDto>();
+
+                foreach (var transaction in stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId) && x.IsBillable))
+                {
+
+                    var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId)
+                                            .Select(x =>
+                                                new DataProviderDto()
+                                                {
+                                                    DataProviderId = x.DataProviderId,
+                                                    DataProviderName = x.DataProviderName,
+                                                    CostPrice = x.CostPrice,
+                                                    RecommendedPrice = x.RecommendedPrice,
+
+                                                    PackageId = x.PackageId,
+                                                    PackageName = x.PackageName
+
+                                                }).Distinct();
+
+
+                    var packageTotal = 0.00;
+
+                    foreach (var dataProvider in dataProviderList)
+                    {
+                        packageTotal += Convert.ToDouble(dataProvider.RecommendedPrice);
+                    }
+
+                    //Package
+                    var package = new PackageDto()
+                    {
+                        PackageId = transaction.PackageId,
+                        PackageName = transaction.PackageName,
+                        Price = packageTotal
+                    };
+
+                    //Package Index
+                    var packageIndex = packagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
+
+                    //Index restriction for new record
+                    if (packageIndex < 0) packagesDetailList.Add(package);
+                }
+
+                return Response.AsJson(new { data = packagesDetailList });
+            };
+
             Post["/StageBilling/User/Transactions"] = param =>
             {
                 var dto = this.Bind<UserDto>();
