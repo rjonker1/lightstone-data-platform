@@ -1,5 +1,4 @@
-﻿using Nancy;
-using Shared.BuildingBlocks.Api.Security;
+﻿using Shared.BuildingBlocks.Api.Security;
 
 namespace Billing.Api.Modules
 {
@@ -12,6 +11,8 @@ namespace Billing.Api.Modules
                 //"Billing API"
                 return View["Index"];
             };
+
+            Get["/logout"] = parameters => null;
         }
     }
 }
