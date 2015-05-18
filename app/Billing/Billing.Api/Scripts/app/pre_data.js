@@ -75,7 +75,7 @@ window.packageGridActionEvents = {
 
         $('#detail').bootstrapTable({
             url: '/PreBilling/CustomerClient/' + row.id + '/Packages',
-            responseHandler: packageResponseHandler,
+            //responseHandler: packageResponseHandler,
             cache: false,
             search: true,
             showRefresh: true,
@@ -84,16 +84,12 @@ window.packageGridActionEvents = {
             pageSize: 10,
             pageList: [10, 25, 50, 100, 'All'],
             columns: [{
-                field: 'dataProviderId',
-                title: 'DataProvider ID',
+                field: 'packageId',
+                title: 'Package ID',
                 visible: false
             }, {
                 field: 'packageName',
                 title: 'Package Name',
-                sortable: true
-            }, {
-                field: 'dataProviderName',
-                title: 'DataProvider Name',
                 sortable: true
             }, {
                 field: 'costPrice',

@@ -204,10 +204,30 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var packagesDetailList = new List<PackageDto>();
 
-                foreach (var transaction in stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId) && x.IsBillable))
+                var transactions = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+
+                foreach (var transaction in transactions)
                 {
 
-                    var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId)
+                    //Return Pacakge details without price, if non-billable
+                    if (transactions.Count(x => x.IsBillable).Equals(0))
+                    {
+                        var emptyPackage = new PackageDto
+                        {
+                            PackageId = transaction.PackageId,
+                            PackageName = transaction.PackageName,
+                            Price = 0.00
+                        };
+
+                        //Package Index
+                        var emptyPackageIndex = packagesDetailList.FindIndex(x => x.PackageId == emptyPackage.PackageId);
+
+                        //Index restriction for new record
+                        if (emptyPackageIndex < 0) packagesDetailList.Add(emptyPackage);
+                        break;
+                    }
+
+                    var dataProviderList = stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId) && x.IsBillable)
                                             .Select(x =>
                                                 new DataProviderDto()
                                                 {
@@ -230,7 +250,7 @@ namespace Billing.Api.Modules
                     }
 
                     //Package
-                    var package = new PackageDto()
+                    var package = new PackageDto
                     {
                         PackageId = transaction.PackageId,
                         PackageName = transaction.PackageName,
