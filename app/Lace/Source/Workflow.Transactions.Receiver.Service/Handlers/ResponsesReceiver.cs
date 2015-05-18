@@ -33,7 +33,7 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
         {
             var response =
                 new DataProviderTransaction(new DataProviderTransactionIdentifier(Guid.NewGuid(), message.Body.Id,
-                    message.Body.Date, new RequestIdentifier(message.Body.Id, null),
+                    message.Body.Date, new RequestIdentifier(message.Body.RequestId, null),
                     message.Body.DataProvider, message.Body.Connection,
                     new ActionIdentifier((int) message.Body.DataProvider.Action, message.Body.DataProvider.Action.ToString()),
                     new StateIdentifier((int) message.Body.DataProvider.State, message.Body.DataProvider.State.ToString())));
