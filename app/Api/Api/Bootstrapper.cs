@@ -5,6 +5,7 @@ using Api.Helpers.Installers;
 using Api.Infrastructure.Metadata;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
@@ -12,6 +13,7 @@ using Nancy.Bootstrappers.Windsor;
 using Nancy.Hosting.Aspnet;
 using Nancy.Routing;
 using Shared.BuildingBlocks.Api.ApiClients;
+using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace Api
@@ -36,7 +38,25 @@ namespace Api
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
 
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
-            pipelines.EnableCors(); // cross origin resource sharing
+
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
+            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
+            {
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                var fromException = ErrorResponse.FromException(exception);
+                fromException.Headers.Add("Access-Control-Allow-Origin", "*");
+                fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+                fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+                return fromException;
+            });
+
+            //pipelines.EnableCors(); // cross origin resource sharing
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
+            {
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+            });
             pipelines.EnableMonitoring();
 
             //Make every request SSL based

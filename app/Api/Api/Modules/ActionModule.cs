@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Api.Domain.Infrastructure.Dto;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -36,8 +37,10 @@ namespace Api.Modules
                 var apiRequest = this.Bind<ApiRequestDto>();
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
+                this.Info(() => "Api PB URI: ".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
                 var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), new KeyValuePair<string, string>("Content-Type", "application/json"), });
                 //var responses = packageBuilderApi.Get("", string.Format("/Packages/Execute/{0}/{1}/{2}/{3}", apiRequest.PackageId, apiRequest.UserId, apiRequest.SearchTerm, Guid.NewGuid()), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
+                this.Info(() => "Api responses: {0}".FormatWith(responses));
                 this.Info(() => "Api action completed.");
                 return responses;
             };

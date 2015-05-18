@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using AutoMapper;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.ExceptionHandling;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
@@ -146,7 +147,10 @@ namespace PackageBuilder.Api.Modules
                 // Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
                 if (package == null)
+                {
+                    this.Error(() => "Package not found:".FormatWith(apiRequest.PackageId));
                     throw new LightstoneAutoException("Package could not be found");
+                }
 
                 //var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
                 //dto.SetDataProviders(package);
