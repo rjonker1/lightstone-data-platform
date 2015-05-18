@@ -25,86 +25,97 @@
                             <h3 class="box-title">Push Configuration</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body" ng-app="clientApp">
-                            <form role="form" ng-controller="clientController">
+                            <form role="form" ng-controller="clientController" action="/integrations/for/api/push/save" method="post">
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" />
+                                            <input name="IsActive" type="checkbox" />
                                             Is Active
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Client</label>
-                                    <select id="client-ids" name="client-ids" data-placeholder="Select Client ..." class="chosen-select form-control">
+                                    <select id="ClientIdAccountNumber" name="ClientIdAccountNumber" data-placeholder="Select Client ..." class="chosen-select form-control">
                                         <option value=""></option>
                                         @foreach (var client in Model.SelectableClients)
                                         {
-                                            var isSelected = Model.SelectableClients.Select(x => x.Id).Contains(Model.Configuration.ClientId);
-                                            <option selected="@isSelected" value="@client.Id">@client.Name</option>
+                                            var isSelected = Model.SelectableClients.Select(x => x.Id).Contains(Model.ClientId);
+                                            <option id="@client.Id" name="@client.Id" selected="@isSelected" value="@client.Id|@client.AccountNumber">@client.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contracts</label>
+                                    <select id="ContractId" name="ContractId" data-placeholder="Select Contract ..." class="chosen-select form-control">
+                                        <option value=""></option>
+                                        @foreach (var contract in Model.SelectableContracts)
+                                        {
+                                            var isSelected = Model.SelectableContracts.Select(x => x.Id).Contains(Model.ContractId);
+                                            <option id="@contract.Id" name="@contract.Id" selected="@isSelected" value="@contract.Id">@contract.Name</option>
                                         }
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Packages / Products</label>
-                                    <select id="package-ids" name="package-ids" data-placeholder="Select Packages ..." class="chosen-select form-control" multiple>
+                                    <select id="Packages" name="Packages" data-placeholder="Select Packages ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
                                         @foreach (var package in Model.SelectablePackages)
                                         {
                                             var isSelected = Model.Packages != null && Model.Packages.Contains(package.Id);
-                                            <option selected="@isSelected" value="@package.Id">@package.Name</option>
+                                            <option id="@package.Id" selected="@isSelected" value="@package.Id">@package.Name</option>
                                         }
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Base Address</label>
-                                    <input type="text" class="form-control" value="@Model.BaseAddress" placeholder="http://..." />
+                                    <input type="text" name="BaseAddress" class="form-control" value="@Model.BaseAddress" placeholder="http://..." />
                                 </div>
                                 <div class="form-group">
                                     <label>Suffix</label>
-                                    <input type="text" class="form-control" value="@Model.Suffix" placeholder="api/pushroute" />
+                                    <input type="text" name="Suffix" class="form-control" value="@Model.Suffix" placeholder="api/pushroute" />
                                 </div>
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" value="@Model.HasAuthentication" />
+                                            <input name="HasAuthentication" type="checkbox" value="@Model.HasAuthentication" />
                                             Has Authentication
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Authentication Types</label>
-                                    <select id="authentication-type" name="authentication-ids" class="chosen-select form-control">
+                                    <select id="authentication-type" name="AuthenticationType" class="chosen-select form-control">
                                         @foreach (var type in Model.Authentication)
                                         {
                                             var isSelected = Model.Authentication.Select(x => x.Id).Contains(Model.AuthenticationType);
-                                            <option selected="@isSelected" value="@type.Id">@type.Name</option>
+                                            <option id="@type.Id" selected="@isSelected" value="@type.Id">@type.Name</option>
                                         }
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Authentication Key</label>
-                                    <input type="text" class="form-control" value="@Model.AuthenticationKey" />
+                                    <input type="text" name="AuthenticationKey" class="form-control" value="@Model.AuthenticationKey" />
                                 </div>
                                 <div class="form-group">
                                     <label>Authentication Key Token</label>
-                                    <input type="text" class="form-control" value="@Model.AuthenticationToken" />
+                                    <input type="text" name="AuthenticationToken" class="form-control" value="@Model.AuthenticationToken" />
                                 </div>
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" value="@Model.Username" />
+                                    <input type="text" name="Username" class="form-control" value="@Model.Username" />
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="text" class="form-control" value="@Model.Password" />
+                                    <input type="text" name="Password" class="form-control" value="@Model.Password" />
                                 </div>
                                 <div class="form-group">
                                     <label>Frequency</label>
-                                    <select id="frequency-type" name="frequency-ids" class="chosen-select form-control">
+                                    <select id="frequency-type" name="FrequencyType" class="chosen-select form-control">
                                         @foreach (var type in Model.Frequency)
                                         {
-                                            var isSelected = Model.Frequency.Select(x => x.Id).Contains(Model.Configuration.FrequencyType);
-                                            <option selected="@isSelected" value="@type.Id">@type.Name</option>
+                                            var isSelected = Model.Frequency.Select(x => x.Id).Contains(Model.FrequencyType);
+                                            <option id="@type.Id" selected="@isSelected" value="@type.Id">@type.Name</option>
                                         }
                                     </select>
                                 </div>

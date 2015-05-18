@@ -22,6 +22,9 @@ namespace Monitoring.Dashboard.UI
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             container.Register<IDbConnection>(ConnectionFactory.ForMonitoringDatabase());
+
+            container.Register<ITransactionRepository>(new BillingTransactionRepository(ConnectionFactory.ForBillingDatabase()));
+
             container.Register<IRepositoryMapper, RepositoryMapper>();
             container.Register<IHaveTypeMappings, MappingForMonitoringTypes>();
             container.Register<IMonitoringRepository, MonitoringRepository>();

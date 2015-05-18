@@ -19,19 +19,63 @@ namespace Monitoring.Domain.Repository
 
         public TType Get<TType>(Guid id) where TType : class
         {
-            var mapping = _mapper.GetMapping(typeof(TType));
-            return mapping.Get(_connection, id) as TType;
+            try
+            {
+                if (_connection.State == ConnectionState.Closed)
+                    _connection.Open();
+
+                var mapping = _mapper.GetMapping(typeof(TType));
+                return mapping.Get(_connection, id) as TType;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connection.Close();
+            }
         }
 
         public void Add<TType>(TType instance)
         {
-            var mapping = _mapper.GetMapping(instance);
-            mapping.Insert(_connection, instance);
+            try
+            {
+                if (_connection.State == ConnectionState.Closed)
+                    _connection.Open();
+
+                var mapping = _mapper.GetMapping(instance);
+                mapping.Insert(_connection, instance);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connection.Close();
+            }
         }
 
-        public IList<TItem> Items<TItem>(string sql) where TItem : class
+        public IEnumerable<TItem> Items<TItem>(string sql) where TItem : class
         {
-           return _connection.Query<TItem>(sql).ToList();
+            try
+            {
+                if (_connection.State == ConnectionState.Closed)
+                    _connection.Open();
+
+                return _connection.Query<TItem>(sql);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return Enumerable.Empty<TItem>();
         }
     }
 }

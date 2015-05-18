@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Lim.Enums;
 
 namespace Lim.Web.UI.Models
 {
@@ -9,18 +7,23 @@ namespace Lim.Web.UI.Models
         public readonly int ActionType;
         public readonly int IntegrationType;
 
+        public Configuration()
+        {
+            
+        }
+
         public Configuration(int actionType, int integrationType)
         {
             ActionType = actionType;
             IntegrationType = integrationType;
         }
 
-        public Configuration(long id, Guid configurationKey, int actionType, int integrationType, int frequency, Guid clientId, Guid contractId,string accountNumber, bool isActive)
+        public Configuration(long id, Guid key, int actionType, int integrationType, int frequency, Guid clientId, Guid contractId,string accountNumber, bool isActive)
         {
             ActionType = actionType;
             IntegrationType = integrationType;
             Id = id;
-            ConfigurationKey = configurationKey;
+            Key = key;
             FrequencyType = frequency;
             ClientId = clientId;
             ContractId = contractId;
@@ -29,7 +32,7 @@ namespace Lim.Web.UI.Models
         }
 
         public long Id { get; private set; }
-        public Guid ConfigurationKey { get; private set; }
+        public Guid Key { get; private set; }
         public int FrequencyType { get; set; }
         public Guid ClientId { get; set; }
         public Guid ContractId { get; set; }

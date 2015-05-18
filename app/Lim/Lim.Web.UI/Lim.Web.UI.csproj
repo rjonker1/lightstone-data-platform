@@ -40,6 +40,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net1211, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet, Version=1.0.0.1101, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1101\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy">
       <HintPath>..\..\packages\Nancy.1.2.0\lib\net40\Nancy.dll</HintPath>
@@ -53,6 +73,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -90,6 +111,9 @@
     <Content Include="Views\integrations\api\Pull.cshtml" />
     <Content Include="Views\integrations\api\Configurations.cshtml" />
     <Content Include="assets\jquery\jquery-2.1.3.min.map" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -153,11 +177,29 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Commands\GetClientContracts.cs" />
+    <Compile Include="Commands\GetConfiguration.cs" />
+    <Compile Include="Commands\GetConfigurations.cs" />
+    <Compile Include="Commands\GettingLookupTypes.cs" />
+    <Compile Include="Commands\GetClients.cs" />
+    <Compile Include="Commands\GetClientPackages.cs" />
+    <Compile Include="Commands\InsertApiPullConfiguration.cs" />
+    <Compile Include="Commands\UpdateApiPushConfiguration.cs" />
+    <Compile Include="Commands\InsertApiPushConfiguration.cs" />
+    <Compile Include="Handlers\GetClientHandler.cs" />
+    <Compile Include="Handlers\GetConfigurationHandler.cs" />
+    <Compile Include="Handlers\IHandleGettingClient.cs" />
+    <Compile Include="Handlers\IHandleGettingConfiguration.cs" />
+    <Compile Include="Handlers\IHandleSavingConfiguration.cs" />
+    <Compile Include="Handlers\SavingConfigurationHandler.cs" />
+    <Compile Include="Mappers\ApiPushConfigurationMapper.cs" />
+    <Compile Include="Models\Api\PushConfigurationView.cs" />
     <Compile Include="Models\Api\ConfigurationView.cs" />
     <Compile Include="Models\Api\PullConfiguration.cs" />
     <Compile Include="Models\Api\PushConfiguration.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\EnumTypes.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Modules\FtpModule.cs" />
@@ -165,6 +207,10 @@
     <Compile Include="Modules\MailModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\ApiModule.cs" />
+    <Compile Include="Repository\ConnectionFactory.cs" />
+    <Compile Include="Repository\IRepositories.cs" />
+    <Compile Include="Repository\LimRepository.cs" />
+    <Compile Include="Repository\UserManangementRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\integrations\ftp\" />

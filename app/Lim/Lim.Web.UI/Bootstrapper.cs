@@ -1,4 +1,7 @@
-﻿using Nancy;
+﻿using System.Data;
+using Lim.Web.UI.Handlers;
+using Lim.Web.UI.Repository;
+using Nancy;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
 
@@ -8,7 +11,13 @@ namespace Lim.Web.UI
     {
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
-            
+            container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());
+
+            container.Register<IUserManagementRepository>(new UserManangementRepository(ConnectionFactory.ForUsermanagementDatabase()));
+            container.Register<ILimRepository>(new LimRepository(ConnectionFactory.ForLimDatabase()));
+            container.Register<IHandleGettingClient, GetClientHandler>();
+            container.Register<IHandleGettingConfiguration, GetConfigurationHandler>();
+            container.Register<IHandleSavingConfiguration, SavingConfigurationHandler>();
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
