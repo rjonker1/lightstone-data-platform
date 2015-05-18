@@ -239,7 +239,6 @@
     <Compile Include="Infrastructure\Handlers\DataProviderCachingHandler.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderStatisticsHandler.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderHandler.cs" />
-    <Compile Include="Infrastructure\Repository\ICommitRepository.cs" />
     <Compile Include="Infrastructure\Repository\ITransactionRepository.cs" />
     <Compile Include="Infrastructure\Services\DataProviderCommandPublisher.cs" />
     <Compile Include="Infrastructure\Services\DataProviderMonitoringService.cs" />

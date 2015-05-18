@@ -13,7 +13,6 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     public class DataProviderHandler : IHandleMonitoringCommands
     {
         private readonly IMonitoringRepository _monitoring;
-        //  private readonly ICommitRepository _commit;
         private readonly ITransactionRepository _billing;
         private readonly ILog _log;
         public IEnumerable<DataProviderView> MonitoringResponse { get; private set; }

@@ -17,6 +17,7 @@
     public enum AuthenticationType
     {
         None = 1,
-        Basic = 2
+        Basic = 2,
+        Stateless = 3
     }
 }

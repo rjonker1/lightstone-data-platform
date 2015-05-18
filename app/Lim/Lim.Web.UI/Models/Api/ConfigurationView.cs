@@ -6,6 +6,10 @@ namespace Lim.Web.UI.Models.Api
 {
     public class ConfigurationView
     {
+        public ConfigurationView()
+        {
+            
+        }
         public ConfigurationView(Configuration configuration, string clientName)
         {
             Configuration = configuration;
@@ -28,8 +32,8 @@ namespace Lim.Web.UI.Models.Api
         }
 
         public Configuration Configuration { get; private set; }
-        public string ClientName { get; private set; }
 
+        public string ClientName { get; private set; }
         public string Action {
             get
             {
