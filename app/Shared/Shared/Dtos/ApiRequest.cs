@@ -8,6 +8,8 @@ namespace DataPlatform.Shared.Dtos
     public class ApiRequestDto
     {
         [DataMember]
+        public Guid CustomerClientId { get; private set; }
+        [DataMember]
         public Guid UserId { get; private set; }
         [DataMember]
         public Guid ContractId { get; private set; }

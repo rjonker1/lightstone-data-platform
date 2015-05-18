@@ -215,7 +215,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
                 contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos);
 
             if (request == null)
-                throw new Exception(string.Format("Request cannot be build to Contract with Id {0}", contractId));
+                throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
 
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
 

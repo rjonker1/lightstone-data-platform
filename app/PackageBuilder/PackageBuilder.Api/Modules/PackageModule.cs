@@ -160,7 +160,7 @@ namespace PackageBuilder.Api.Modules
                 //var responses = entryPoint.GetResponsesFromLace(request);
 
                 //TODO: Get these values from request or user management
-                var contractId = new Guid("713669a9-1506-42aa-88a6-80edb14757dc");
+                //var contractId = new Guid("713669a9-1506-42aa-88a6-80edb14757dc");
                 const string accountNumber = "ACC00000";
                 const long contractVersion = (long)1.0;
                 const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
@@ -170,7 +170,7 @@ namespace PackageBuilder.Api.Modules
 
 
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, "",
-                    "", Guid.NewGuid(), accountNumber, apiRequest.ContractId, contractVersion,
+                    "", apiRequest.RequestId, accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
                 return responses;
