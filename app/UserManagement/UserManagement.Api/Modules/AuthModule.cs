@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Authentication.Token;
 using UserManagement.Api.Helpers.Security;
@@ -38,7 +39,11 @@ namespace UserManagement.Api.Modules
 
                 var userType = (users.Where(x => x.UserName == userIdentity.UserName).Select(x => x.UserType).FirstOrDefault());
 
-                if (userType.ToString() != "Internal") userIdentity = null;
+                if (userType.ToString() != "Internal")
+                {
+                    userIdentity = null;
+                    this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType));
+                }
 
                 return userIdentity == null
                     ? HttpStatusCode.Unauthorized
