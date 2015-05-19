@@ -121,7 +121,7 @@ namespace PackageBuilder.Api.Modules
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 var resource = string.Format("CustomerClient/{0}", apiRequest.CustomerClientId);
                 var accountNumber = userManagementApi.Get("", resource, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), 
-                                                            new KeyValuePair<string, string>("Content-Type", "application/json") });//"ACC00000";
+                                                            new KeyValuePair<string, string>("Content-Type", "application/json") });
                 
                 //TODO: Get these values from request or user management                
                 const long contractVersion = (long)1.0;
