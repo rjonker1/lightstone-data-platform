@@ -82,7 +82,8 @@ namespace UserManagement.Api
                 if (cookie != null)
                     token = HttpUtility.UrlDecode(cookie.Value);
 
-                nancyContext.Request.Headers.Authorization = "Token {0}".FormatWith(token);
+                if (token != String.Empty)
+                    nancyContext.Request.Headers.Authorization = "Token {0}".FormatWith(token);
 
                 var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
                 if (user != null)

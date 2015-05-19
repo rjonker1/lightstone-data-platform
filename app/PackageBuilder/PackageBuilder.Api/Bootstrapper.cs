@@ -47,7 +47,8 @@ namespace PackageBuilder.Api
                 new ServiceLocatorInstaller(),
                 new AutoMapperInstaller(),
                 new LaceInstaller(),
-                new AuthInstaller()
+                new AuthInstaller(),
+                new ApiInstaller()
                 );
 
           //  container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());

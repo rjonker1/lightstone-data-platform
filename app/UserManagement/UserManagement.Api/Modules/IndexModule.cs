@@ -1,4 +1,7 @@
-﻿using Shared.BuildingBlocks.Api.Security;
+﻿using System;
+using System.Linq;
+using Shared.BuildingBlocks.Api.Security;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {

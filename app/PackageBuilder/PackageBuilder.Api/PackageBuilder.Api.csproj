@@ -246,6 +246,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.1093\lib\net45\ServiceStack.Common.dll</HintPath>
@@ -321,6 +324,7 @@
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Helpers\Extensions\ResponseExtensions.cs" />
+    <Compile Include="Installers\ApiInstaller.cs" />
     <Compile Include="Installers\AuthInstaller.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />

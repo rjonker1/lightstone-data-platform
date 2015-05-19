@@ -569,6 +569,7 @@
     <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Modules\ContractModule.cs" />
     <Compile Include="Modules\CustomerModule.cs" />
+    <Compile Include="Modules\ExternalModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\NamedEntityModule.cs" />
     <Compile Include="Modules\ValueEntityModule.cs" />

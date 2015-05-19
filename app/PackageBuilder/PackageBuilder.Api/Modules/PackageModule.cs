@@ -28,6 +28,7 @@ using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.TestObjects.Mothers;
+using Shared.BuildingBlocks.Api.ApiClients;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
@@ -38,7 +39,7 @@ namespace PackageBuilder.Api.Modules
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -105,46 +106,11 @@ namespace PackageBuilder.Api.Modules
                         Response = new[]{Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
                     });
 
-            //Get["/Packages/Execute/{id}/{userId}/{searchTerm}/{requestId}"] = parameters =>
-            //{
-            //    //Guid id = (Guid) parameters.id;
-            //    var package = writeRepo.GetById(parameters.id);
-            //    // Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
-
-            //    if (package == null)
-            //        throw new LightstoneAutoException("Package could not be found");
-
-            //    //var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
-            //    //dto.SetDataProviders(package);
-
-            //    //var request = package.FormLaceRequest(parameters.userId, parameters.username, parameters.searchTerm, "", parameters.requestId);
-
-            //    //var responses = entryPoint.GetResponsesFromLace(request);
-
-            //    //TODO: Get these values from request or user management
-            //    var contractId = new Guid("713669a9-1506-42aa-88a6-80edb14757dc");
-            //    const string accountNumber = "ACC00000";
-            //    const long contractVersion = (long) 1.0;
-            //    const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
-            //    const string fromIpAddress = "127.0.0.1";
-            //    const string osVersion = "";
-            //    const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
-
-
-            //    var responses = ((Package)package).Execute(entryPoint, parameters.userId, parameters.username,
-            //        parameters.searchTerm, "", parameters.requestId, accountNumber, contractId, contractVersion,
-            //        fromDevice, fromIpAddress, osVersion, systemType);
-            //    //return Response.AsJson(model);
-
-            //    return responses;
-            //};
-
             Post["/Packages/Execute"] = parameters =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
 
                 var package = writeRepo.GetById(apiRequest.PackageId);
-                // Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
                 if (package == null)
                 {
@@ -152,16 +118,12 @@ namespace PackageBuilder.Api.Modules
                     throw new LightstoneAutoException("Package could not be found");
                 }
 
-                //var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
-                //dto.SetDataProviders(package);
-
-                //var request = package.FormLaceRequest(parameters.userId, parameters.username, parameters.searchTerm, "", parameters.requestId);
-
-                //var responses = entryPoint.GetResponsesFromLace(request);
-
-                //TODO: Get these values from request or user management
-                //var contractId = new Guid("713669a9-1506-42aa-88a6-80edb14757dc");
-                const string accountNumber = "ACC00000";
+                var token = Context.Request.Headers.Authorization.Split(' ')[1];
+                var resource = string.Format("CustomerClient/{0}", apiRequest.CustomerClientId);
+                var accountNumber = userManagementApi.Get("", resource, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), 
+                                                            new KeyValuePair<string, string>("Content-Type", "application/json") });//"ACC00000";
+                
+                //TODO: Get these values from request or user management                
                 const long contractVersion = (long)1.0;
                 const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
                 const string fromIpAddress = "127.0.0.1";
