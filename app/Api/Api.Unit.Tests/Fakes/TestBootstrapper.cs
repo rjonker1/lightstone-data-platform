@@ -1,7 +1,6 @@
 ﻿using Api.Domain.Infrastructure.Automapping;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.Unit.Tests.Fakes
 {
