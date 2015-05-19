@@ -3,14 +3,13 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using jsreport.Client;
+using Nancy;
 using Nancy.Responses;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Reporting
+namespace Reporting.Api
 {
-    using Nancy;
-
     public class IndexModule : NancyModule
     {
         public IndexModule()

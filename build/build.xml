@@ -122,6 +122,19 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Reporting.Api</name>
+      <folder>app/Reporting/Reporting.Api</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Reporting.Api</description>
+      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <includes>
+       <include pattern="bin\" to="content\bin"/>
+        <include pattern="Content\" to="content\Content"/>
+        <include pattern="Views\" to="content\Views"/>
+        <include pattern="*.config" to="content"/>
+      </includes>
+    </nuget>
     <!-- IIS SITES -->
 
     <!-- BILLING START -->

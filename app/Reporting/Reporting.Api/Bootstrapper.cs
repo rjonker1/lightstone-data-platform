@@ -1,7 +1,7 @@
-﻿namespace Reporting
-{
-    using Nancy;
+﻿using Nancy;
 
+namespace Reporting.Api
+{
     public class Bootstrapper : DefaultNancyBootstrapper
     {
         // The bootstrapper enables you to reconfigure the composition of the framework,
