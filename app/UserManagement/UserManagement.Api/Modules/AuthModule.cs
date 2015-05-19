@@ -36,13 +36,18 @@ namespace UserManagement.Api.Modules
 
                 //.Where(x => x.Roles.Select(r => r.Value == "AccountOwner").FirstOrDefault());
 
-
-                var userType = (users.Where(x => x.UserName == userIdentity.UserName).Select(x => x.UserType).FirstOrDefault());
-
-                if (userType.ToString() != "Internal")
+                if (userIdentity != null)
                 {
-                    userIdentity = null;
-                    this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType));
+                    UserType userType =
+                        (users.Where(x => x.UserName == userIdentity.UserName).Select(x => x.UserType).FirstOrDefault());
+
+                    if (userType.Value != "Internal")
+                    {
+                        userIdentity = null;
+                        this.Error(
+                            () =>
+                                "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType.Value));
+                    }
                 }
 
                 return userIdentity == null
