@@ -7,7 +7,7 @@ namespace Lim.Web.UI.Models.Api
     public class PushConfigurationView
     {
         public const string Select =
-            @"select c.*, ca.BaseAddress,ca.Suffix,ca.Username,ca.Password,ca.HasAuthentication,ca.AuthenticationToken,ca.AuthenticationKey,ca.AuthenticationType,p.PackageId from Configuration c join ConfigurationApi ca on c.Id = ca.ConfigurationId join Packages p on c.id = p.ConfigurationId where c.Id = @Id";
+            @"select c.*, ca.BaseAddress,ca.Suffix,ca.Username,ca.Password,ca.HasAuthentication,ca.AuthenticationToken,ca.AuthenticationKey,ca.AuthenticationType,p.PackageId, ft.Type Frequency, ac.Type Action, it.Type Integration from Configuration c join ConfigurationApi ca on c.Id = ca.ConfigurationId join Packages p on c.id = p.ConfigurationId join FrequencyType ft on c.FrequencyType = ft.Id join ActionType ac on c.ActionType = ac.Id  join IntegrationType it on c.IntegrationType = it.Id where c.Id = @Id and p.IsActive = 1";
 
         [DataMember]
         public long Id { get; set; }

@@ -13,12 +13,29 @@ namespace Lim.Web.UI.Mappers
         private readonly ILog _log;
         private readonly PushConfiguration _configuration;
 
-        private const string InsertConfiguration = @"insert into Configuration (FrequencyType,ActionType,IntegrationType,ClientId,ContractId,AccountNumber,IsActive) values (@FrequencyType, @ActionType, @IntegrationType,@ClientId,@ContractId,@AccountNumber, @IsActive) select cast(SCOPE_IDENTITY() as bigint)";
+        //private const string InsertConfiguration = @"insert into Configuration (FrequencyType,ActionType,IntegrationType,ClientId,ContractId,AccountNumber,IsActive) values (@FrequencyType, @ActionType, @IntegrationType,@ClientId,@ContractId,@AccountNumber, @IsActive) select cast(SCOPE_IDENTITY() as bigint)";
+        private const string InsertOrUpdate = @"update Configuration SET FrequencyType = @FrequencyType,ActionType = @ActionType,IntegrationType = @IntegrationType,ClientId = @ClientId,ContractId = @ContractId,AccountNumber = @AccountNumber,IsActive = @IsActive WHERE Id = @Id
+ if @@ROWCOUNT = 0 
+ begin 
+ insert into Configuration (FrequencyType,ActionType,IntegrationType,ClientId,ContractId,AccountNumber,IsActive) values (@FrequencyType, @ActionType, @IntegrationType,@ClientId,@ContractId,@AccountNumber, @IsActive) select cast(SCOPE_IDENTITY() as bigint) 
+ end else begin select @Id end";
 
-        private const string InsertApiConfiguration =
-            @"insert into ConfigurationApi (ConfigurationId,BaseAddress,Suffix,Username,Password ,HasAuthentication,AuthenticationToken,AuthenticationKey,AuthenticationType) values(@ConfigurationId,@BaseAddress,@Suffix,@Username,@Password,@HasAuthentication,@AuthenticationToken,@AuthenticationKey,@AuthenticationType)";
+        //private const string InsertApiConfiguration =
+        //    @"insert into ConfigurationApi (ConfigurationId,BaseAddress,Suffix,Username,Password ,HasAuthentication,AuthenticationToken,AuthenticationKey,AuthenticationType) values(@ConfigurationId,@BaseAddress,@Suffix,@Username,@Password,@HasAuthentication,@AuthenticationToken,@AuthenticationKey,@AuthenticationType)";
 
-        private const string InsertPackages = @"insert into Packages(ConfigurationId,PackageId,IsActive) values (@ConfigurationId,@PackageId,@IsActive)";
+        private const string IntertOrUpdateApi = @"update ConfigurationApi set BaseAddress = @BaseAddress,Suffix = @Suffix,Username = @Username,Password = @Password,HasAuthentication = @HasAuthentication,AuthenticationToken = @AuthenticationToken,AuthenticationKey = @AuthenticationKey,AuthenticationType = @AuthenticationType where Id = (select ca.id from ConfigurationApi ca join Configuration c on c.Id = ca.ConfigurationId)
+if @@ROWCOUNT = 0
+begin
+insert into ConfigurationApi (ConfigurationId,BaseAddress,Suffix,Username,Password ,HasAuthentication,AuthenticationToken,AuthenticationKey,AuthenticationType) values(@ConfigurationId,@BaseAddress,@Suffix,@Username,@Password,@HasAuthentication,@AuthenticationToken,@AuthenticationKey,@AuthenticationType)
+end";
+
+        //private const string InsertPackages = @"insert into Packages(ConfigurationId,PackageId,IsActive) values (@ConfigurationId,@PackageId,@IsActive)";
+        private const string ResetPackages = @"update Packages set IsActive = 0 where ConfigurationId = @ConfigurationId";
+        private const string InsertOrUpdatePackage = @"update Packages set IsActive = 1 where ConfigurationId = @ConfigurationId and PackageId = @PackageId
+if @@ROWCOUNT = 0
+begin
+insert into Packages(ConfigurationId,PackageId,IsActive) values (@ConfigurationId,@PackageId,1)
+end";
         
         public ApiPushConfigurationMapper(IDbConnection connection, PushConfiguration configuration)
         {
@@ -27,12 +44,13 @@ namespace Lim.Web.UI.Mappers
             _log = LogManager.GetLogger(GetType());
         }
 
-        public void Insert()
+        public bool InsertUpdate()
         {
             try
             {
                 var configuration = new
                 {
+                    @Id = _configuration.Id,
                     @FrequencyType = _configuration.FrequencyType,
                     @ActionType = _configuration.ActionType,
                     @IntegrationType = _configuration.IntegrationType,
@@ -49,7 +67,7 @@ namespace Lim.Web.UI.Mappers
                 {
                     try
                     {
-                        var configurationId = _connection.Query<int>(InsertConfiguration, configuration,transaction).Single();
+                        var configurationId = _connection.Query<int>(InsertOrUpdate, configuration, transaction).Single();
 
                         if(configurationId == 0)
                             throw new Exception("Could not insert LIM configuration because configuration id is not valid");
@@ -67,14 +85,17 @@ namespace Lim.Web.UI.Mappers
                             @AuthenticationType = _configuration.AuthenticationType,
                         };
 
-                        _connection.Execute(InsertApiConfiguration, apiConfiguration,transaction);
+                        _connection.Execute(IntertOrUpdateApi, apiConfiguration, transaction);
+
+                        _connection.Execute(ResetPackages, new { @ConfigurationId = configurationId }, transaction);
 
                         foreach (var id in _configuration.Packages)
                         {
-                            _connection.Execute(InsertPackages, new { @ConfigurationId = configurationId, @PackageId = id, @IsActive = true}, transaction);
+                            _connection.Execute(InsertOrUpdatePackage, new { @ConfigurationId = configurationId, @PackageId = id }, transaction);
                         }
 
                         transaction.Commit();
+                        return true;
                     }
                     catch
                     {
@@ -91,6 +112,7 @@ namespace Lim.Web.UI.Mappers
             {
                 _connection.Close();
             }
+            return false;
         }
     }
 }

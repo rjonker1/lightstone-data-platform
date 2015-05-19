@@ -1,5 +1,5 @@
 ﻿@using System.Linq
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<Lim.Web.UI.Models.Api.ConfigurationView>>
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<Lim.Web.UI.Models.Api.ApiConfiguration>>
 @{
     Layout = "_Layout.cshtml";
 }
@@ -21,52 +21,56 @@
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
+                        <div class="col-xs-2">
+                            <a class="btn btn-block btn-success" href="/integrations/for/api/push">Create Push</a>
+                        </div>
+                        <div class="col-xs-2">
+                            <a class="btn btn-block btn-success" href="/integrations/for/api/pull">Create Pull</a>
+                        </div>
                         <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Existing Configurations</h3>
-                        </div><!-- /.box-header -->
-                        <div class="box-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Client</th>
-                                        <th>Action</th>
-                                        <th>Frequency</th>
-                                        <th>Type</th>
-                                        <th>Base Address</th>
-                                        <th>Suffix</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var config in Model)
-                                    {
-                                        <tr>
-                                            <td>@config.ClientName</td>
-                                            <td>@config.Action</td>
-                                            <td>@config.Frequency</td>
-                                            <td>@config.Type</td>
-                                            <td>TBA</td>
-                                            <td>TBA</td>
-                                            <td><button class="btn btn-block btn-success btn-lg">View</button></td>
-                                        </tr>
-                                    }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Client</th>
-                                        <th>Action</th>
-                                        <th>Frequency</th>
-                                        <th>Type</th>
-                                        <th>Base Address</th>
-                                        <th>Suffix</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div><!-- /.box-body -->
-                    </div>
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">Existing Configurations</h3>
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Client</th>
+                                                <th>Action</th>
+                                                <th>Frequency</th>
+                                                <th>Type</th>
+                                                <th>Is Active</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var config in Model)
+                                            {
+                                                <tr>
+                                                    <td>@config.Client.Name</td>
+                                                    <td>@config.Configuration.Action</td>
+                                                    <td>@config.Configuration.Frequency</td>
+                                                    <td>@config.Configuration.Type</td>
+                                                    <td>@config.Configuration.IsActive</td>
+                                                    <td><a class="btn btn-block btn-success" href="/integrations/for/api/@config.Configuration.Action/edit/@config.Configuration.Id/@config.Configuration.ClientId">Edit</a></td>
+                                                    @*<td><button class="btn btn-block btn-success btn-lg">View</button></td>*@
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Client</th>
+                                                <th>Action</th>
+                                                <th>Frequency</th>
+                                                <th>Type</th>
+                                                <th>Is Active</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div><!-- /.box-body -->
+                            </div>
                         </div>
                     </div>
                 </section><!-- /.content -->

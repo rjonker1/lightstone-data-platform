@@ -18,11 +18,10 @@ namespace Lim.Web.UI.Models.Api
             IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
-        private PushConfiguration(Configuration configuration, long configurationApiId)
+        private PushConfiguration(Configuration configuration)
         {
             Id = configuration.Id;
             Key = configuration.Key;
-            ConfigurationApiId = configurationApiId;
             ActionType = (int)IntegrationAction.Push;
             IntegrationType = (int)Enums.IntegrationType.Api;
             FrequencyType = configuration.FrequencyType;
@@ -32,9 +31,35 @@ namespace Lim.Web.UI.Models.Api
             IsActive = configuration.IsActive;
         }
 
-        public static PushConfiguration Existing(Configuration configuration, long apiPushId)
+        private PushConfiguration(List<PushConfigurationView> configuration)
         {
-            return new PushConfiguration(configuration, apiPushId);
+            Id = configuration.First().Id;
+            Key = configuration.First().Key;
+            //ConfigurationApiId = configurationApiId;
+            ActionType = configuration.First().ActionType;
+            IntegrationType = configuration.First().IntegrationType;
+            FrequencyType = configuration.First().FrequencyType;
+            ClientId = configuration.First().ClientId;
+            ContractId = configuration.First().ContractId;
+            AccountNumber = configuration.First().AccountNumber;
+            IsActive = configuration.First().IsActive;
+
+            Packages = configuration.Select(s => s.PackageId);
+            BaseAddress = configuration.First().BaseAddress;
+            Suffix = configuration.First().Suffix;
+            Username = configuration.First().Username;
+            Password = configuration.First().Password;
+            HasAuthentication = configuration.First().HasAuthentication;
+            AuthenticationToken = configuration.First().AuthenticationToken;
+            AuthenticationKey = configuration.First().AuthenticationKey;
+            AuthenticationType = configuration.First().AuthenticationType;
+            ClientIdAccountNumber = configuration.First().AccountNumber;
+        }
+
+        public static PushConfiguration Existing(IHandleGettingConfiguration handler, GetApiPushConfiguration command)
+        {
+            handler.Handle(command);
+            return new PushConfiguration(command.Configuration.ToList());
         }
 
         public static PushConfiguration Create()

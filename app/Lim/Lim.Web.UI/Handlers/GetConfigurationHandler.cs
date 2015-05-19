@@ -39,12 +39,17 @@ namespace Lim.Web.UI.Handlers
         public void Handle(GetApiPushConfiguration command)
         {
             command.Set(
-                _repository.Items<PushConfigurationView>(PushConfigurationView.Select, new {@Id = command.ConfigurationId}).FirstOrDefault());
+                _repository.Items<PushConfigurationView>(PushConfigurationView.Select, new {@Id = command.ConfigurationId}));
         }
 
         public void Handle(GetApiPullConfiguration command)
         {
             throw new NotImplementedException();
+        }
+
+        public void Handle(GetAllConfigurations command)
+        {
+            command.Set(_repository.Items<Configuration>(Configuration.Select, new { }));
         }
     }
 }

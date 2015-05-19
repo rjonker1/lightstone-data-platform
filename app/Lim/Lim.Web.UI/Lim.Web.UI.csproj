@@ -179,7 +179,6 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\GetClientContracts.cs" />
     <Compile Include="Commands\GetConfiguration.cs" />
-    <Compile Include="Commands\GetConfigurations.cs" />
     <Compile Include="Commands\GettingLookupTypes.cs" />
     <Compile Include="Commands\GetClients.cs" />
     <Compile Include="Commands\GetClientPackages.cs" />
@@ -194,7 +193,7 @@
     <Compile Include="Handlers\SavingConfigurationHandler.cs" />
     <Compile Include="Mappers\ApiPushConfigurationMapper.cs" />
     <Compile Include="Models\Api\PushConfigurationView.cs" />
-    <Compile Include="Models\Api\ConfigurationView.cs" />
+    <Compile Include="Models\Api\ApiConfiguration.cs" />
     <Compile Include="Models\Api\PullConfiguration.cs" />
     <Compile Include="Models\Api\PushConfiguration.cs" />
     <Compile Include="Models\Client.cs" />

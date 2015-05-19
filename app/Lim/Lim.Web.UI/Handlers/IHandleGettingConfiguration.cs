@@ -10,5 +10,6 @@ namespace Lim.Web.UI.Handlers
         void Handle(GetActionType command);
         void Handle(GetApiPushConfiguration command);
         void Handle(GetApiPullConfiguration command);
+        void Handle(GetAllConfigurations command);
     }
 }

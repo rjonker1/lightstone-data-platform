@@ -26,10 +26,11 @@
                         </div><!-- /.box-header -->
                         <div class="box-body" ng-app="clientApp">
                             <form role="form" ng-controller="clientController" action="/integrations/for/api/push/save" method="post">
+                                <input type="hidden" name="Id" value="@Model.Id"/>
                                 <div class="form-group">
                                     <div class="checkbox">
-                                        <label>
-                                            <input name="IsActive" type="checkbox" />
+                                        <label> 
+                                            <input name="IsActive" id="IsActive" checked="@Model.IsActive" value="@Model.IsActive" type="checkbox" />
                                             Is Active
                                         </label>
                                     </div>
@@ -78,48 +79,51 @@
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input name="HasAuthentication" type="checkbox" value="@Model.HasAuthentication" />
+                                            <input id="HasAuthentication" checked="@Model.HasAuthentication" name="HasAuthentication" type="checkbox" value="@Model.HasAuthentication" />
                                             Has Authentication
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Authentication Types</label>
-                                    <select id="authentication-type" name="AuthenticationType" class="chosen-select form-control">
-                                        @foreach (var type in Model.Authentication)
+                                <div class="section-authentication">
+                                    <div class="form-group">
+                                        <label>Authentication Types</label>
+                                        <select id="authentication-type" name="AuthenticationType" class="chosen-select form-control">
+                                            @foreach (var type in Model.Authentication)
                                         {
-                                            var isSelected = Model.Authentication.Select(x => x.Id).Contains(Model.AuthenticationType);
-                                            <option id="@type.Id" selected="@isSelected" value="@type.Id">@type.Name</option>
+                                            var isSelected = type.Id == Model.AuthenticationType;
+                                                <option id="@type.Id" selected="@isSelected" value="@type.Id">@type.Name</option>
                                         }
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Authentication Key</label>
-                                    <input type="text" name="AuthenticationKey" class="form-control" value="@Model.AuthenticationKey" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Authentication Key Token</label>
-                                    <input type="text" name="AuthenticationToken" class="form-control" value="@Model.AuthenticationToken" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Username</label>
-                                    <input type="text" name="Username" class="form-control" value="@Model.Username" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="text" name="Password" class="form-control" value="@Model.Password" />
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Authentication Key</label>
+                                        <input type="text" name="AuthenticationKey" class="form-control" value="@Model.AuthenticationKey" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Authentication Key Token</label>
+                                        <input type="text" name="AuthenticationToken" class="form-control" value="@Model.AuthenticationToken" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" name="Username" class="form-control" value="@Model.Username" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="text" name="Password" class="form-control" value="@Model.Password" />
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Frequency</label>
-                                    <select id="frequency-type" name="FrequencyType" class="chosen-select form-control">
+                                    <select id="frequencyType" name="FrequencyType" class="chosen-select form-control">
                                         @foreach (var type in Model.Frequency)
                                         {
-                                            var isSelected = Model.Frequency.Select(x => x.Id).Contains(Model.FrequencyType);
-                                            <option id="@type.Id" selected="@isSelected" value="@type.Id">@type.Name</option>
+                                            var isSelected = type.Id == @Model.FrequencyType;
+                                            <option id="@type.Id" data-name="@type.Name" selected="@isSelected" value="@type.Id">@type.Name</option>
                                         }
                                     </select>
                                 </div>
-                                <div class="bootstrap-timepicker">
+
+                                <div id="custom-time-picker" class="bootstrap-timepicker">
                                     <div class="form-group">
                                         <label>Custom Frequency</label>
                                         <div class="input-group bootstrap-timepicker">
@@ -165,6 +169,36 @@
             for (var selector in config) {
                 $(selector).chosen(config[selector]);
             }
+            
+            if ($('#HasAuthentication').is(':checked')) {
+                $('.section-authentication').fadeIn('slow');
+            } else {
+                $('.section-authentication').fadeOut('slow');
+            }
+            
+            if ($('#frequencyType').find(':selected').data('name') == 'Custom') {
+                $('#custom-time-picker').fadeIn('slow');
+            } else {
+                $('#custom-time-picker').fadeOut('slow');
+            }
+
+            $('#HasAuthentication').change(function() {
+                if (this.checked) {
+                    $('.section-authentication').fadeIn('slow');
+                } else {
+                    $('.section-authentication').fadeOut('slow');
+                }
+            });
+
+            $('#frequencyType').change(function() {
+                var name = $(this).find(':selected').data('name');
+                if (name == 'Custom') {
+                    $('#custom-time-picker').fadeIn('slow');
+                } else {
+                    $('#custom-time-picker').fadeOut('slow');
+                }
+
+            });
         })
     </script>
 </body>
