@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Lim.Enums;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
 
@@ -57,15 +55,5 @@ namespace Lim.Web.UI.Models.Api
             handler.Handle(command);
             Frequency = command.Frequency.ToList();
         }
-
-        //public IReadOnlyCollection<AuthenticationType> Authentication = Enum.GetValues(typeof(Enums.AuthenticationType))
-        //    .Cast<Enums.AuthenticationType>()
-        //    .Select(s => new AuthenticationType((int)s, s.ToString()))
-        //    .ToList();
-
-        //public IReadOnlyCollection<FrequencyType> Frequency = Enum.GetValues(typeof(Frequency))
-        //    .Cast<Frequency>()
-        //    .Select(s => new FrequencyType((int)s, s.ToString()))
-        //    .ToList();
     }
 }

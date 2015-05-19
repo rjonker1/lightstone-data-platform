@@ -27,7 +27,7 @@ namespace Lim.Web.UI.Mappers
             _log = LogManager.GetLogger(GetType());
         }
 
-        public void Insert()
+        public bool Insert()
         {
             try
             {
@@ -75,6 +75,7 @@ namespace Lim.Web.UI.Mappers
                         }
 
                         transaction.Commit();
+                        return true;
                     }
                     catch
                     {
@@ -91,6 +92,7 @@ namespace Lim.Web.UI.Mappers
             {
                 _connection.Close();
             }
+            return false;
         }
     }
 }

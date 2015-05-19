@@ -1,31 +1,41 @@
-﻿using Lim.Web.UI.Models.Api;
+﻿using System;
+using System.Collections.Generic;
+using Lim.Web.UI.Models;
+using Lim.Web.UI.Models.Api;
 
 namespace Lim.Web.UI.Commands
 {
-    public class GetConfiguration
+    public class GetAllConfigurations
     {
-        public GetConfiguration(long configurationId)
+        public GetAllConfigurations()
         {
-            ConfigurationId = configurationId;
         }
 
-        public readonly long ConfigurationId;
+        public void Set(IEnumerable<Configuration> configurations)
+        {
+            Configurations = configurations;
+        }
+
+        public IEnumerable<Configuration> Configurations { get; private set; } 
     }
 
     public class GetApiPushConfiguration
     {
-        public GetApiPushConfiguration(long configurationId)
+        public readonly long ConfigurationId;
+        public readonly Guid ClientId;
+
+        public GetApiPushConfiguration(long configurationId, Guid clientId)
         {
             ConfigurationId = configurationId;
+            ClientId = clientId;
         }
 
-        public void Set(PushConfigurationView configuration)
+        public void Set(IEnumerable<PushConfigurationView> configuration)
         {
             Configuration = configuration;
         }
 
-        public readonly long ConfigurationId;
-        public PushConfigurationView Configuration { get; private set; }
+        public IEnumerable<PushConfigurationView> Configuration { get; private set; }
     }
 
     public class GetApiPullConfiguration

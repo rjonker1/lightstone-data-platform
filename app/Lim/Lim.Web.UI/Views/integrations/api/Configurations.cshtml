@@ -1,5 +1,5 @@
 ﻿@using System.Linq
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<Lim.Web.UI.Models.Api.ConfigurationView>>
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<Lim.Web.UI.Models.Api.ApiConfiguration>>
 @{
     Layout = "_Layout.cshtml";
 }
@@ -34,8 +34,7 @@
                                         <th>Action</th>
                                         <th>Frequency</th>
                                         <th>Type</th>
-                                        <th>Base Address</th>
-                                        <th>Suffix</th>
+                                        <th>Is Active</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -43,13 +42,13 @@
                                     @foreach (var config in Model)
                                     {
                                         <tr>
-                                            <td>@config.ClientName</td>
-                                            <td>@config.Action</td>
-                                            <td>@config.Frequency</td>
-                                            <td>@config.Type</td>
-                                            <td>TBA</td>
-                                            <td>TBA</td>
-                                            <td><button class="btn btn-block btn-success btn-lg">View</button></td>
+                                            <td>@config.Client.Name</td>
+                                            <td>@config.Configuration.Action</td>
+                                            <td>@config.Configuration.Frequency</td>
+                                            <td>@config.Configuration.Type</td>
+                                            <td>@config.Configuration.IsActive</td>
+                                            <td><a class="btn btn-block btn-success btn-lg" href="/integrations/for/api/@config.Configuration.Action/edit/@config.Configuration.Id/@config.Configuration.ClientId">Edit</a></td>
+                                            @*<td><button class="btn btn-block btn-success btn-lg">View</button></td>*@
                                         </tr>
                                     }
                                 </tbody>
@@ -59,8 +58,7 @@
                                         <th>Action</th>
                                         <th>Frequency</th>
                                         <th>Type</th>
-                                        <th>Base Address</th>
-                                        <th>Suffix</th>
+                                        <th>Is Active</th>
                                         <th></th>
                                     </tr>
                                 </tfoot>
