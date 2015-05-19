@@ -1,8 +1,6 @@
 ﻿using System;
-using Lim.Enums;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
-using Lim.Web.UI.Models;
 using Lim.Web.UI.Models.Api;
 using Nancy;
 using Nancy.ModelBinding;
@@ -49,13 +47,17 @@ namespace Lim.Web.UI.Modules
                 var configuration = this.Bind<PushConfiguration>();
                 var command = new InsertApiPushConfiguration(configuration.SplitAccountAndClientId());
                 save.Handle(command);
-                return save.IsSaved ? Negotiate.WithView("/integrations/for/api/configurations") : View["integrations/api/push", configuration];
+                //return save.IsSaved ? Response.AsRedirect("/") : View["integrations/api/push", configuration];
+                return Response.AsRedirect("/integrations/for/api/configurations");
             };
 
             Get["/integrations/for/api/pull"] = _ =>
             {
-                var model = new PullConfiguration(new Configuration((int) IntegrationAction.Pull, (int) IntegrationType.Api));
+                var model = PullConfiguration.Create();
                 model.SetClients(client, new GetClients());
+                model.SetAuthentication(setup, new GetAuthenticationTypes());
+                model.SetFrequency(setup, new GetFrequencyTypes());
+                model.SetContracts(client,new GetClientContracts(Guid.NewGuid()));
                 return View["integrations/api/pull", model];
             };
 

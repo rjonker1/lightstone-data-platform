@@ -12,11 +12,11 @@ namespace Lim.Web.UI.Models
 
         }
 
-        public Configuration(int actionType, int integrationType)
-        {
-            ActionType = actionType;
-            IntegrationType = integrationType;
-        }
+        //public Configuration(int actionType, int integrationType)
+        //{
+        //    ActionType = actionType;
+        //    IntegrationType = integrationType;
+        //}
 
         public Configuration(long id, Guid key, int actionType, int integrationType, int frequency, Guid clientId, Guid contractId,
             string accountNumber, bool isActive)

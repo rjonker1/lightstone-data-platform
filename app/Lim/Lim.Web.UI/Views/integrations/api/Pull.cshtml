@@ -30,7 +30,7 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" />
+                                                <input name="IsActive" id="IsActive" checked="@Model.IsActive" value="@Model.IsActive" type="checkbox" />
                                                 Is Active
                                             </label>
                                         </div>
@@ -41,7 +41,7 @@
                                             <option value=""></option>
                                             @foreach (var client in Model.SelectableClients)
                                             {
-                                                var isSelected = Model.SelectableClients.Select(x => x.Id).Contains(Model.Configuration.ClientId);
+                                                var isSelected = Model.SelectableClients.Select(x => x.Id).Contains(Model.ClientId);
                                                 <option selected="@isSelected" value="@client.Id">@client.Name</option>
                                             }
                                         </select>
@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="@Model.HasAuthentication" />
+                                                <input id="HasAuthentication" checked="@Model.HasAuthentication" name="HasAuthentication" type="checkbox" value="@Model.HasAuthentication" />
                                                 Has Authentication
                                             </label>
                                         </div>
@@ -67,7 +67,7 @@
                                         <select id="authentication-type" name="authentication-ids" class="chosen-select form-control">
                                             @foreach (var type in Model.Authentication)
                                             {
-                                                var isSelected = Model.Authentication.Select(x => x.Id).Contains(Model.AuthenticationType);
+                                                var isSelected = type.Id == Model.AuthenticationType;
                                                 <option selected="@isSelected" value="@type.Id">@type.Name</option>
                                             }
                                         </select>
@@ -93,7 +93,7 @@
                                         <select id="frequency-type" name="frequency-ids" class="chosen-select form-control">
                                             @foreach (var type in Model.Frequency)
                                             {
-                                                var isSelected = Model.Frequency.Select(x => x.Id).Contains(Model.Configuration.FrequencyType);
+                                                var isSelected = type.Id == @Model.FrequencyType;
                                                 <option selected="@isSelected" value="@type.Id">@type.Name</option>
                                             }
                                         </select>

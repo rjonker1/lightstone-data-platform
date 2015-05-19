@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Lim.Enums;
 using Lim.Web.UI.Commands;
@@ -23,7 +22,6 @@ namespace Lim.Web.UI.Models.Api
         {
             Id = configuration.Id;
             Key = configuration.Key;
-            //ConfigurationApiId = configurationApiId;
             ActionType = (int)IntegrationAction.Push;
             IntegrationType = (int)Enums.IntegrationType.Api;
             FrequencyType = configuration.FrequencyType;

@@ -16,7 +16,7 @@ namespace Lim.Web.UI.Handlers
 
         public void Handle(InsertApiPushConfiguration command)
         {
-            IsSaved = new ApiPushConfigurationMapper(_connection, command.Configuration).Insert();
+            IsSaved = new ApiPushConfigurationMapper(_connection, command.Configuration).InsertUpdate();
         }
 
         public void Handle(UpdateApiPushConfiguration command)
