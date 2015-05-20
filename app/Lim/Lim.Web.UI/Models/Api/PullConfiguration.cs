@@ -14,16 +14,16 @@ namespace Lim.Web.UI.Models.Api
 
         public PullConfiguration()
         {
-            ActionType = (int)IntegrationAction.Push;
-            IntegrationType = (int)Enums.IntegrationType.Api;
+            ActionType = (int) IntegrationAction.Push;
+            IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
         private PullConfiguration(Configuration configuration)
         {
             Id = configuration.Id;
             Key = configuration.Key;
-            ActionType = (int)IntegrationAction.Pull;
-            IntegrationType = (int)Enums.IntegrationType.Api;
+            ActionType = (int) IntegrationAction.Pull;
+            IntegrationType = (int) Enums.IntegrationType.Api;
             FrequencyType = configuration.FrequencyType;
             ClientId = configuration.ClientId;
             ContractId = configuration.ContractId;
@@ -36,7 +36,7 @@ namespace Lim.Web.UI.Models.Api
             return new PullConfiguration();
         }
 
-       // public Configuration Configuration { get; private set; }
+        // public Configuration Configuration { get; private set; }
         public long Id { get; private set; }
         public Guid Key { get; private set; }
         public int FrequencyType { get; set; }
@@ -60,24 +60,29 @@ namespace Lim.Web.UI.Models.Api
 
         public IReadOnlyCollection<FrequencyType> Frequency;
 
-        public IReadOnlyCollection<Contract> SelectableContracts; 
-        public void SetClients(IHandleGettingClient handler, GetClients command)
+        public IReadOnlyCollection<Contract> SelectableContracts;
+
+        public void SetClients(IHandleGettingClient handler)
         {
+            var command = new GetClients();
             handler.Handle(command);
             SelectableClients = command.Clients.ToList();
         }
 
-        public void SetAuthentication(IHandleGettingConfiguration handler, GetAuthenticationTypes command)
+        public void SetAuthentication(IHandleGettingConfiguration handler)
         {
+            var command = new GetAuthenticationTypes();
             handler.Handle(command);
             Authentication = command.Authentication.ToList();
         }
 
-        public void SetFrequency(IHandleGettingConfiguration handler, GetFrequencyTypes command)
+        public void SetFrequency(IHandleGettingConfiguration handler)
         {
+            var command = new GetFrequencyTypes();
             handler.Handle(command);
             Frequency = command.Frequency.ToList();
         }
+
         public void SetContracts(IHandleGettingClient handler, GetClientContracts command)
         {
             handler.Handle(command);

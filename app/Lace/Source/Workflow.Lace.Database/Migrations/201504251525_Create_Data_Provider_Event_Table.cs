@@ -11,7 +11,7 @@ namespace Workflow.Lace.Database.Migrations
         {
             Create.Table("DataProviderEventLog")
                 .WithColumn("Id").AsGuid().NotNullable().Indexed()
-                .WithColumn("CommitNumber").AsInt64().Identity().PrimaryKey()
+                .WithColumn("CommitNumber").AsInt64().Identity().PrimaryKey("PK_DataProviderEventLog")
                 .WithColumn("CommitSequence").AsInt32().NotNullable()
                 .WithColumn("Dispatched").AsBoolean().NotNullable().WithDefaultValue(false)
                 .WithColumn("Payload").AsBinary(Int32.MaxValue)
@@ -26,6 +26,7 @@ namespace Workflow.Lace.Database.Migrations
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_DataProviderEventLog");
             Delete.Table("DataProviderEventLog");
         }
     }

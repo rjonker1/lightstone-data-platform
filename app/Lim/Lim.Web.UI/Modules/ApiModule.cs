@@ -54,16 +54,16 @@ namespace Lim.Web.UI.Modules
             Get["/integrations/for/api/pull"] = _ =>
             {
                 var model = PullConfiguration.Create();
-                model.SetClients(client, new GetClients());
-                model.SetAuthentication(setup, new GetAuthenticationTypes());
-                model.SetFrequency(setup, new GetFrequencyTypes());
+                model.SetClients(client);
+                model.SetAuthentication(setup);
+                model.SetFrequency(setup);
                 model.SetContracts(client,new GetClientContracts(Guid.NewGuid()));
                 return View["integrations/api/pull", model];
             };
 
             Get["/integrations/for/api/configurations"] = _ =>
             {
-                var model = ApiConfiguration.Get(setup, new GetAllConfigurations(), client, new GetClients());
+                var model = ApiConfiguration.Get(setup, client);
                 return View["integrations/api/configurations", model];
             };
         }

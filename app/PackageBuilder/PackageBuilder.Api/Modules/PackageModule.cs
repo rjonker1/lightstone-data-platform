@@ -134,7 +134,6 @@ namespace PackageBuilder.Api.Modules
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, "",
                     "", Guid.NewGuid(), accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
-
                 return responses;
             };
 

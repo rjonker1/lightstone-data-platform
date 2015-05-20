@@ -9,7 +9,7 @@ namespace Workflow.Lace.Database.Migrations
         public override void Up()
         {
             Create.Table("DataProviderTransaction")
-                .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
+                .WithColumn("Id").AsGuid().NotNullable().PrimaryKey("PK_DataProvider_Transaction")
                 .WithColumn("StreamId").AsGuid().NotNullable()
                 .WithColumn("Date").AsDateTime().NotNullable()
                 .WithColumn("RequestId").AsGuid().NotNullable()
@@ -26,6 +26,7 @@ namespace Workflow.Lace.Database.Migrations
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_DataProvider_Transaction");
             Delete.Table("DataProviderTransaction");
         }
     }
