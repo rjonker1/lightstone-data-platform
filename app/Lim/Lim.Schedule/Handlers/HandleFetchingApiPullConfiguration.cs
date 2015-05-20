@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lim.Domain.Models;
+using Lim.Domain.Repository;
 using Lim.Schedule.Commands;
 using Lim.Schedule.Core;
 using Lim.Schedule.Indentifiers;
-using Lim.Schedule.Repositories;
 
 namespace Lim.Schedule.Handlers
 {

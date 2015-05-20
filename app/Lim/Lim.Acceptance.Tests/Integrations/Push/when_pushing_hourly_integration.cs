@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Lim.Domain.Repository;
 using Lim.Enums;
 using Lim.Schedule.Audits;
 using Lim.Schedule.Commands;
@@ -9,8 +10,6 @@ using Lim.Schedule.Core;
 using Lim.Schedule.Handlers;
 using Xunit.Extensions;
 using IntegrationType = Lim.Enums.IntegrationType;
-using IRepository = Lim.Schedule.Repositories.IRepository;
-using Repository = Lim.Schedule.Repositories.Repository;
 
 namespace Lim.Acceptance.Tests.Integrations.Push
 {

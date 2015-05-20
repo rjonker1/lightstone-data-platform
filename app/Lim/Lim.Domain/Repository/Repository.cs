@@ -2,7 +2,7 @@
 using System.Data;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
-namespace Lim.Schedule.Repositories
+namespace Lim.Domain.Repository
 {
     public class Repository : IRepository
     {

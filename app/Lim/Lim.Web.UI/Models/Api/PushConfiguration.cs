@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Lim.Domain.Models;
 using Lim.Enums;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
+using AuthenticationType = Lim.Domain.Models.AuthenticationType;
 
 namespace Lim.Web.UI.Models.Api
 {

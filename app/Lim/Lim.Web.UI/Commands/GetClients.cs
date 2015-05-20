@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lim.Web.UI.Models;
+using Lim.Domain.Models;
 
 namespace Lim.Web.UI.Commands
 {

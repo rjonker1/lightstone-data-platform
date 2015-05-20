@@ -3,6 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using Lim.Domain.Receiver.Consumers;
+using Lim.Domain.Sender.Consumers;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -15,7 +16,8 @@ namespace Lim.Schedule.Service.Installers
             _log = LogManager.GetLogger(GetType());
             _log.InfoFormat("Installing Consumers");
 
-            container.Register(Component.For<PackageResponseReceiver>().ImplementedBy<PackageResponseReceiver>());
+            container.Register(Component.For<ResponseFromPackageConsumer>().ImplementedBy<ResponseFromPackageConsumer>());
+            container.Register(Component.For<AlwaysOnConfigurationConsumer>().ImplementedBy<AlwaysOnConfigurationConsumer>());
         }
     }
 }

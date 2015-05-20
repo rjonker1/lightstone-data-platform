@@ -2,11 +2,11 @@
 using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using System.Text;
+using Lim.Domain.Repository;
 using Lim.Enums;
 using Lim.Push.Models;
 using Lim.Push.RestApi;
 using Lim.Schedule.Commands;
-using Lim.Schedule.Repositories;
 using Newtonsoft.Json;
 
 namespace Lim.Schedule.Indentifiers

@@ -5,7 +5,7 @@ using System.Linq;
 using Common.Logging;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
-namespace Lim.Web.UI.Repository
+namespace Lim.Domain.Repository
 {
     public class UserManangementRepository : IUserManagementRepository
     {

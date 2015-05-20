@@ -1,4 +1,4 @@
-﻿namespace Lim.Web.UI.Models
+﻿namespace Lim.Domain.Models
 {
     public class AuthenticationType
     {

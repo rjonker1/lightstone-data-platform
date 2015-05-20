@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lim.Domain.Models;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
 

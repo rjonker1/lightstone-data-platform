@@ -1,6 +1,6 @@
 ﻿using System.Data;
+using Lim.Domain.Repository;
 using Lim.Web.UI.Handlers;
-using Lim.Web.UI.Repository;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;

@@ -58,7 +58,9 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Messages\MappedPackageResponseSentMessage.cs" />
+    <Compile Include="Messages\PackageConfigurationMessage.cs" />
+    <Compile Include="Messages\PackageResponseMessage.cs" />
+    <Compile Include="Publishing\IPublishConfigurationMessages.cs" />
     <Compile Include="Publishing\IPublishIntegrationMessages.cs" />
   </ItemGroup>
   <ItemGroup>

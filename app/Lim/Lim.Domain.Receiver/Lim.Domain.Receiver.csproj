@@ -48,19 +48,24 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumers\PackageResponseReceiver.cs" />
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Consumers\AlwaysOnConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim.Domain.Messaging\Lim.Domain.Messaging.csproj">
       <Project>{6ee18788-1427-4ed7-a5ad-2af7cda4429d}</Project>
       <Name>Lim.Domain.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
+      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
+      <Name>Lim.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
