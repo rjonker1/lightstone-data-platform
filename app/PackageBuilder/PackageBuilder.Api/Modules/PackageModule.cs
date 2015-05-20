@@ -31,7 +31,6 @@ using PackageBuilder.TestObjects.Mothers;
 using Shared.BuildingBlocks.Api.ApiClients;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
-using StringExtensions = ServiceStack.Text.StringExtensions;
 
 namespace PackageBuilder.Api.Modules
 {
@@ -138,7 +137,7 @@ namespace PackageBuilder.Api.Modules
                 var responses = ((Package) package).Execute(entryPoint, apiRequest.UserId, "","", requestId, accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
-                integration.SendToBus(new MappedPackageResponseSentMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
+                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     responses.Any() ? responses.AsJsonString() : string.Empty, requestId));
 
                 return responses;
