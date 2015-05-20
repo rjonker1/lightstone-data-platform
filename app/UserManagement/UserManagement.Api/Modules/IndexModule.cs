@@ -18,6 +18,8 @@ namespace UserManagement.Api.Modules
             {
                 return View["Home"];
             };
+
+            Get["/logout"] = parameters => null;
         }
     }
 }
