@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Billing.Domain.Dtos;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
@@ -58,8 +59,13 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
             #region Map StageBilling - Final
 
+            var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25, 0, 0, 0);
+            var lastMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26, 0, 0, 0);
+
             if (message.Body.RunType == "Final")
             {
+                
+                this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(lastMonth, thisMonth));
 
                 foreach (var stageBilling in _stageBillingRepository)
                 {
@@ -76,15 +82,19 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         //Customer
                         if (transaction.CustomerId != new Guid())
                         {
+                            var billedCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable
+                                                                    && (x.Created >= lastMonth && x.Created <= thisMonth))
+                                                        .Select(x => x.TransactionId).Distinct().Count();
+
                             var packagesList =
                                 _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                     .Select(x => new ReportPackage
                                     {
                                         ItemCode = "1000/200/002",
                                         ItemDescription = x.PackageName,
-                                        QuantityUnit = 1,
-                                        Price = 16314.67,
-                                        Vat = 2284
+                                        QuantityUnit = billedCustomerTransactionsTotal,
+                                        Price = x.Price,
+                                        //Vat = 0
                                     }).Distinct();
 
                             var reportData = new ReportDto()
@@ -109,8 +119,6 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
 
                             //CSV Report Build-up
-                            var billedCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
 
                             var invoiceList = new List<ReportInvoice>();
                             
@@ -156,14 +164,19 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         //Client
                         if (transaction.ClientId != new Guid())
                         {
+
+                            var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable
+                                                                    && (x.Created >= lastMonth && x.Created <= thisMonth))
+                                                        .Select(x => x.TransactionId).Distinct().Count();
+
                             var packagesList = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId)
                                 .Select(x => new ReportPackage
                                 {
                                     ItemCode = "1000/200/002",
                                     ItemDescription = x.PackageName,
-                                    QuantityUnit = 1,
-                                    Price = 16314.67,
-                                    Vat = 2284
+                                    QuantityUnit = billedClientTransactionsTotal,
+                                    Price = x.Price,
+                                    //Vat = 2284
                                 }).Distinct();
 
                             var reportData = new ReportDto
@@ -188,8 +201,6 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
 
                             //CSV Report Build-up
-                            var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId && x.IsBillable)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
 
                             var invoiceList = new List<ReportInvoice>();
 
@@ -234,7 +245,9 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     }
 
                 }
-                    #endregion
+
+                this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(lastMonth, thisMonth));
+                #endregion
             }
             #endregion
 
