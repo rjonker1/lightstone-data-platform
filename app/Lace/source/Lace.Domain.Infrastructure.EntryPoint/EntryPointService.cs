@@ -27,7 +27,6 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private IBuildSourceChain _dataProviderChain;
         private IBootstrap _bootstrap;
         private ILogCommandTypes _logCommand;
-
         public EntryPointService(IAdvancedBus bus)
         {
             _log = LogManager.GetLogger(GetType());

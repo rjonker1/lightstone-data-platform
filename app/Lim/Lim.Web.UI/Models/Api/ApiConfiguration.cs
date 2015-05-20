@@ -18,12 +18,13 @@ namespace Lim.Web.UI.Models.Api
             Client = client;
         }
 
-        public static List<ApiConfiguration> Get(IHandleGettingConfiguration configuration, GetAllConfigurations command,
-            IHandleGettingClient client, GetClients clientCommand)
+        public static List<ApiConfiguration> Get(IHandleGettingConfiguration configuration,IHandleGettingClient client)
         {
-            configuration.Handle(command);
-            client.Handle(clientCommand);
-            return command.Configurations.Select(s => new ApiConfiguration(s, clientCommand.Clients.FirstOrDefault(w => w.Id == s.ClientId))).ToList();
+            var config = new GetAllConfigurations();
+            var clientCommand = new GetClients();
+            configuration.Handle(config);
+            client.Handle(new GetClients());
+            return config.Configurations.Select(s => new ApiConfiguration(s, clientCommand.Clients.FirstOrDefault(w => w.Id == s.ClientId))).ToList();
         }
 
         public Configuration Configuration { get; private set; }

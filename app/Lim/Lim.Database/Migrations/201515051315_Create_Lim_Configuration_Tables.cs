@@ -10,7 +10,7 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("Configuration")
-                .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_Configuration").Indexed()
                 .WithColumn("Key").AsGuid().WithDefaultValue(SystemMethods.NewGuid).NotNullable().Indexed()
                 .WithColumn("FrequencyType").AsInt16().NotNullable()
                 .WithColumn("ActionType").AsInt16().NotNullable()
@@ -24,6 +24,7 @@ namespace Lim.Database.Migrations
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_Configuration");
             Delete.Table("Configuration");
         }
     }
@@ -35,7 +36,7 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("ConfigurationApi")
-                .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_ConfigurationApi").Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("BaseAddress").AsString()
                 .WithColumn("Suffix").AsString()
@@ -50,6 +51,7 @@ namespace Lim.Database.Migrations
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_ConfigurationApi");
             Delete.Table("ConfigurationApi");
         }
     }
@@ -61,7 +63,7 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("Packages")
-                .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_Pacakges").Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("PackageId").AsGuid()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
@@ -70,6 +72,7 @@ namespace Lim.Database.Migrations
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_Pacakges");
             Delete.Table("Packages");
         }
     }
@@ -81,13 +84,14 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("ActionType")
-                .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt16().Identity().PrimaryKey("PK_Action").Indexed()
                 .WithColumn("Type").AsString()
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_Action");
             Delete.Table("Action");
         }
     }
@@ -99,13 +103,14 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("IntegrationType")
-                .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt16().Identity().PrimaryKey("PK_IntegrationType").Indexed()
                 .WithColumn("Type").AsString(50)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_IntegrationType");
             Delete.Table("IntegrationType");
         }
     }
@@ -117,13 +122,14 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("AuthenticationType")
-                .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt16().Identity().PrimaryKey("PK_AuthenticationType").Indexed()
                 .WithColumn("Type").AsString(50)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_AuthenticationType");
             Delete.Table("AuthenticationType");
         }
     }
@@ -135,13 +141,14 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("FrequencyType")
-                .WithColumn("Id").AsInt16().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt16().Identity().PrimaryKey("PK_FrequencyType").Indexed()
                 .WithColumn("Type").AsString(50)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
         }
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_FrequencyType");
             Delete.Table("FrequencyType");
         }
     }
@@ -153,7 +160,7 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("CustomFrequency")
-                .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_CustomFrequency").Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("Seconds").AsInt32()
                 .WithColumn("Minutes").AsInt32()
@@ -165,6 +172,7 @@ namespace Lim.Database.Migrations
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_CustomFrequency");
             Delete.Table("CustomFrequency");
         }
     }
@@ -176,7 +184,7 @@ namespace Lim.Database.Migrations
         public override void Up()
         {
             Create.Table("AuditApiIntegration")
-                .WithColumn("Id").AsInt64().Identity().PrimaryKey().Indexed()
+                .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_AuditApiIntegration").Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("ActionType").AsInt16()
                 .WithColumn("IntegrationType").AsInt16()
@@ -189,6 +197,7 @@ namespace Lim.Database.Migrations
 
         public override void Down()
         {
+            Delete.PrimaryKey("PK_AuditApiIntegration");
             Delete.Table("AuditIntegration");
         }
     }
