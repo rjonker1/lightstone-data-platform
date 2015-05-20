@@ -10,6 +10,9 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Shared.Extensions;
+using Lim.Domain.Messaging.Messages;
+using Lim.Domain.Messaging.Publishing;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
@@ -28,6 +31,7 @@ using PackageBuilder.TestObjects.Mothers;
 using Shared.BuildingBlocks.Api.ApiClients;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
+using StringExtensions = ServiceStack.Text.StringExtensions;
 
 namespace PackageBuilder.Api.Modules
 {
@@ -36,7 +40,7 @@ namespace PackageBuilder.Api.Modules
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi,IPublishIntegrationMessages integration)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -132,8 +136,7 @@ namespace PackageBuilder.Api.Modules
                     "", Guid.NewGuid(), accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
-                //Need to send response to bus 
-                //eBus.SendToBus(responses.AsJsonString());
+                integration.SendToBus(new MappedPackageResponseSentMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber, responses.AsJsonString()));
 
                 return responses;
             };

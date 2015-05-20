@@ -2,6 +2,7 @@
 using Lim.Web.UI.Handlers;
 using Lim.Web.UI.Repository;
 using Nancy;
+using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
 
@@ -9,6 +10,11 @@ namespace Lim.Web.UI
 {
     public class Bootstrapper : DefaultNancyBootstrapper
     {
+        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        {
+            base.ApplicationStartup(container, pipelines);
+        }
+
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());

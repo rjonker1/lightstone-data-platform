@@ -4,7 +4,7 @@ namespace Lim.Domain.Messaging.Messages
 {
     public class MappedPackageResponseSentMessage
     {
-        public MappedPackageResponseSentMessage(Guid packageId, Guid userId, Guid contractId, string accountNumber, string payload)
+        public MappedPackageResponseSentMessage(Guid packageId, Guid userId, Guid contractId, string accountNumber, string payload, Guid requestId)
         {
             PacakgeId = packageId;
             UserId = userId;
@@ -12,6 +12,8 @@ namespace Lim.Domain.Messaging.Messages
             AccountNumber = accountNumber;
             ResponseDate = DateTime.UtcNow;
             Payload = payload;
+            RequestId = requestId;
+            HasData = !string.IsNullOrEmpty(payload);
         }
 
         public Guid PacakgeId { get; private set; }
@@ -19,6 +21,8 @@ namespace Lim.Domain.Messaging.Messages
         public Guid ContractId { get; private set; }
         public string AccountNumber { get; private set; }
         public DateTime ResponseDate { get; private set; }
+        public Guid RequestId { get; private set; }
         public string Payload { get; private set; }
+        public bool HasData { get; private set; }
     }
 }

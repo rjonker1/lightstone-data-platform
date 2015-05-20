@@ -4,7 +4,7 @@ using FluentMigrator;
 namespace Lim.Database.Migrations
 {
     [Tags("Lim")]
-    [Migration(201515051330)]
+    [Migration(201515051315)]
     public class Create_Lim_Configuration_Table : Migration
     {
         public override void Up()
@@ -57,7 +57,7 @@ namespace Lim.Database.Migrations
     }
 
     [Tags("Lim")]
-    [Migration(201515051328)]
+    [Migration(201515051315)]
     public class Create_Lim_Packages_Table : Migration
     {
         public override void Up()
@@ -78,7 +78,7 @@ namespace Lim.Database.Migrations
     }
 
     [Tags("Lim")]
-    [Migration(201515051325)]
+    [Migration(201515051315)]
     public class Create_Lim_ActionType_Table : Migration
     {
         public override void Up()
@@ -97,7 +97,7 @@ namespace Lim.Database.Migrations
     }
 
     [Tags("Lim")]
-    [Migration(201515051326)]
+    [Migration(201515051315)]
     public class Create_Lim_Integration_Type_Table : Migration
     {
         public override void Up()
@@ -116,7 +116,7 @@ namespace Lim.Database.Migrations
     }
 
     [Tags("Lim")]
-    [Migration(201515051327)]
+    [Migration(201515051315)]
     public class Create_Lim_Authentication_Type_Table : Migration
     {
         public override void Up()
@@ -135,7 +135,7 @@ namespace Lim.Database.Migrations
     }
 
     [Tags("Lim")]
-    [Migration(201515051338)]
+    [Migration(201515051315)]
     public class Create_Lim_FrequencyType_Table : Migration
     {
         public override void Up()
@@ -154,7 +154,7 @@ namespace Lim.Database.Migrations
     }
 
     [Tags("Lim")]
-    [Migration(201515051350)]
+    [Migration(201515051315)]
     public class Create_Lim_CustomFrequency_Table : Migration
     {
         public override void Up()
@@ -178,7 +178,7 @@ namespace Lim.Database.Migrations
     }
 
     [Tags("Lim")]
-    [Migration(201515051350)]
+    [Migration(201515051315)]
     public class Create_Lim_AuditIntegration_Table : Migration
     {
         public override void Up()

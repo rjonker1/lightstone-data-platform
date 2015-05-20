@@ -2,6 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using EasyNetQ;
+using Lim.Domain.Messaging.Publishing;
 using MemBus;
 using MemBus.Configurators;
 using PackageBuilder.Core.MessageHandling;
@@ -27,6 +28,8 @@ namespace PackageBuilder.Api.Installers
                     .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/billing/queue"))//.CreateBus("workflow/billing/queue", container))
                     .LifestyleSingleton()
                 );
+
+            container.Register(Component.For<IPublishIntegrationMessages>().ImplementedBy<IntegrationMessagePublisher>());
         }
     }
 }
