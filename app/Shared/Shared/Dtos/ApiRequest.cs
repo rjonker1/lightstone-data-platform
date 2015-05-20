@@ -24,6 +24,8 @@ namespace DataPlatform.Shared.Dtos
         [DataMember]
         public string Username { get; set; }
         [DataMember]
+        public string SourceIPAddress { get; set; }
+        [DataMember]
         public IEnumerable<RequestFieldDto> RequestFields { get; private set; }
 
         public bool IsValid()
