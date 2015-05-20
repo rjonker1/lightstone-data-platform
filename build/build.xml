@@ -597,9 +597,9 @@
 
      <nuget deploy="false">
       <name>Lightstone.DataPlatform.Lim.Domain.Messaging</name>
-      <folder>app/Lim</folder>
+      <folder>app/Lim/Lim.Domain.Messaging</folder>
       <author>CustomApp</author>
-      <description>Workflow</description>
+      <description>Lim Messaging</description>
       <includes>
         <include pattern="Lightstone.DataPlatform.Lim.Domain.Messaging.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lim.Domain.Messaging.pdb" to="lib\net45"/>
