@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.Topology;
@@ -30,6 +31,18 @@ namespace Lim.Domain.Messaging.Publishing
         }
 
         public void SendToBus<T>(T message) where T : class
+        {
+            try
+            {
+                Task.Run(() => SendToBusAsync(message));
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Error sending message to Integration Bus beceause of {0}", ex, ex.Message);
+            }
+        }
+
+        private void SendToBusAsync<T>(T message) where T : class
         {
             try
             {
