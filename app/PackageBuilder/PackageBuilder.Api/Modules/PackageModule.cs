@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Serialization;
 using AutoMapper;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.ExceptionHandling;
@@ -11,9 +10,7 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Shared.Extensions;
 using Nancy;
-using Nancy.Extensions;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.Helpers;
@@ -131,9 +128,13 @@ namespace PackageBuilder.Api.Modules
                 const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
 
 
-                var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, "",
+                var responses = ((Package) package).Execute(entryPoint, apiRequest.UserId, "",
                     "", Guid.NewGuid(), accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
+
+                //Need to send response to bus 
+                //eBus.SendToBus(responses.AsJsonString());
+
                 return responses;
             };
 

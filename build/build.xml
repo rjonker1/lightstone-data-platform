@@ -593,6 +593,26 @@
     </nuget>
 		<!-- SHARED END -->
 
+    <!--LIM-->
+
+     <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lim.Domain.Messaging</name>
+      <folder>app/Lim</folder>
+      <author>CustomApp</author>
+      <description>Workflow</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Lim.Domain.Messaging.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lim.Domain.Messaging.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="EasyNetQ" version="0.47.10.380" />
+        <dependency id="Common.Logging" />
+        <dependency id="Common.Logging.Log4Net1211" />
+      </dependencies>
+    </nuget>
+
+    <!--LIM END -->
+
 
 		<!-- WORKFLOW START -->
     <nuget deploy="false">

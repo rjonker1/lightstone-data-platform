@@ -1,9 +1,14 @@
 ﻿using System.Collections.Specialized;
 using Castle.Windsor;
 using Common.Logging;
+using EasyNetQ;
+using EasyNetQ.Topology;
+using Lim.Domain.Messaging.Messages;
+using Lim.Schedule.Service.Consumers;
 using Lim.Schedule.Service.Jobs;
 using Quartz;
 using Quartz.Impl;
+using IScheduler = Quartz.IScheduler;
 
 namespace Lim.Schedule.Service
 {
@@ -40,6 +45,18 @@ namespace Lim.Schedule.Service
             ISchedulerFactory schedulerFactory = new StdSchedulerFactory(properties);
             _scheduler = schedulerFactory.GetScheduler();
             _scheduler.JobFactory = new JobFactory(_container);
+
+            var bus = _container.Resolve<IAdvancedBus>();
+
+            var receiverQueue = bus.QueueDeclare("DataPlatform.Integration.Receiver");
+            var receiverExchange = bus.ExchangeDeclare("DataPlatform.Integration.Receiver", ExchangeType.Fanout);
+            bus.Bind(receiverExchange, receiverQueue, string.Empty);
+
+            bus.Consume(receiverQueue,
+                q =>
+                    q.Add<MappedPackageResponseSentMessage>(
+                        (message, info) => new ReceiverConsumers<MappedPackageResponseSentMessage>(message, _container)));
+
 
             _scheduler.Start();
 
