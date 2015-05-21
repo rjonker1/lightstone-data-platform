@@ -1,6 +1,6 @@
-﻿using Lim.Web.UI.Commands;
-using Lim.Web.UI.Models;
-using Lim.Web.UI.Repository;
+﻿using Lim.Domain.Models;
+using Lim.Domain.Repository;
+using Lim.Web.UI.Commands;
 
 namespace Lim.Web.UI.Handlers
 {

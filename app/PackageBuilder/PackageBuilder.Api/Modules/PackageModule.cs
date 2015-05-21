@@ -10,6 +10,9 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Shared.Extensions;
+using Lim.Domain.Messaging.Messages;
+using Lim.Domain.Messaging.Publishing;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
@@ -36,7 +39,7 @@ namespace PackageBuilder.Api.Modules
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi,IPublishIntegrationMessages integration)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -117,23 +120,25 @@ namespace PackageBuilder.Api.Modules
 
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 var resource = string.Format("CustomerClient/{0}", apiRequest.CustomerClientId);
-                var accountNumber = userManagementApi.Get("", resource, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), 
-                                                            new KeyValuePair<string, string>("Content-Type", "application/json") });
-                
+                var accountNumber = userManagementApi.Get("", resource, "", new[]
+                {
+                    new KeyValuePair<string, string>("Authorization", "Token " + token),
+                    new KeyValuePair<string, string>("Content-Type", "application/json")
+                });
+
                 //TODO: Get these values from request or user management                
-                const long contractVersion = (long)1.0;
+                const long contractVersion = (long) 1.0;
                 const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
                 const string fromIpAddress = "127.0.0.1";
                 const string osVersion = "";
                 const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
 
-
-                var responses = ((Package) package).Execute(entryPoint, apiRequest.UserId, "",
-                    "", Guid.NewGuid(), accountNumber, apiRequest.ContractId, contractVersion,
+                var requestId = Guid.NewGuid();
+                var responses = ((Package) package).Execute(entryPoint, apiRequest.UserId, "","", requestId, accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
-                //Need to send response to bus 
-                //eBus.SendToBus(responses.AsJsonString());
+                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
+                    responses.Any() ? responses.AsJsonString() : string.Empty, requestId));
 
                 return responses;
             };

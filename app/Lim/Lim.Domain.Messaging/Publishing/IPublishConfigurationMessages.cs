@@ -1,26 +1,25 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.Topology;
 
 namespace Lim.Domain.Messaging.Publishing
 {
-    public interface IPublishIntegrationMessages
+    public interface IPublishConfigurationMessages
     {
         void SendToBus<T>(T message) where T : class;
     }
 
-    public class IntegrationMessagePublisher : IPublishIntegrationMessages
+    public class ConfigurationMessagePublisher : IPublishIntegrationMessages
     {
         private readonly IAdvancedBus _bus;
         private readonly IExchange _exchange;
         private readonly ILog _log;
 
-        private const string Exchange = "DataPlatform.Integration.Sender";
-        private const string QueueName = "DataPlatform.Integration.Sender";
+        private const string Exchange = "DataPlatform.Integration.Receiver";
+        private const string QueueName = "DataPlatform.Integration.Receiver";
 
-        public IntegrationMessagePublisher(IAdvancedBus bus)
+        public ConfigurationMessagePublisher(IAdvancedBus bus)
         {
             _bus = bus;
             _exchange = _bus.ExchangeDeclare(Exchange,
@@ -34,23 +33,11 @@ namespace Lim.Domain.Messaging.Publishing
         {
             try
             {
-                Task.Run(() => SendToBusAsync(message));
-            }
-            catch (Exception ex)
-            {
-                _log.ErrorFormat("Error sending Integration Message because of {0}", ex, ex.Message);
-            }
-        }
-
-        private void SendToBusAsync<T>(T message) where T : class
-        {
-            try
-            {
                 _bus.Publish<T>(_exchange, "", true, false, new Message<T>(message));
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error sending Integration Message because of {0}", ex, ex.Message);
+                _log.ErrorFormat("Error sending Configuration Message because of {0}", ex, ex.Message);
             }
         }
     }

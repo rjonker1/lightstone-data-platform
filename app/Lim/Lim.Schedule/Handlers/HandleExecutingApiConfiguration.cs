@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using Common.Logging;
+using Lim.Domain.Repository;
 using Lim.Enums;
 using Lim.Schedule.Audits;
 using Lim.Schedule.Commands;
 using Lim.Schedule.Core;
-using Lim.Schedule.Repositories;
 
 namespace Lim.Schedule.Handlers
 {

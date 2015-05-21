@@ -4,7 +4,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
-using Lim.Schedule.Repositories;
+using Lim.Domain.Repository;
 
 namespace Lim.Schedule.Service.Installers
 {

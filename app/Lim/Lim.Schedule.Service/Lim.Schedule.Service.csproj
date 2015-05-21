@@ -83,6 +83,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Consumers\ReceiverConsumers.cs" />
+    <Compile Include="Consumers\SenderConsumers.cs" />
     <Compile Include="Installers\AuditInstallers.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
@@ -118,6 +119,14 @@
     <ProjectReference Include="..\Lim.Domain.Receiver\Lim.Domain.Receiver.csproj">
       <Project>{3aaed3f0-65da-48db-9d39-e459668da358}</Project>
       <Name>Lim.Domain.Receiver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain.Sender\Lim.Domain.Sender.csproj">
+      <Project>{e2a4a0c9-f043-439e-b7d0-afb0b60c2d99}</Project>
+      <Name>Lim.Domain.Sender</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
+      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
+      <Name>Lim.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim.Schedule\Lim.Schedule.csproj">
       <Project>{8117e14c-45cb-4f67-a6d3-a8e6aa524f47}</Project>

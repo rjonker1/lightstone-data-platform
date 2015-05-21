@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Lim.Web.UI.Repository
+namespace Lim.Domain.Repository
 {
     public class ConnectionFactory
     {

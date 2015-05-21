@@ -9,8 +9,8 @@ namespace Lim.Schedule.Service.Consumers
     {
         public ReceiverConsumers(IMessage<T> message, IWindsorContainer container)
         {
-            if (message is IMessage<MappedPackageResponseSentMessage>)
-                container.Resolve<PackageResponseReceiver>().Consume((IMessage<MappedPackageResponseSentMessage>)message);
+            if (message is IMessage<PackageConfigurationMessage>)
+                container.Resolve<AlwaysOnConfigurationConsumer>().Consume((IMessage<PackageConfigurationMessage>)message);
         }
     }
 }

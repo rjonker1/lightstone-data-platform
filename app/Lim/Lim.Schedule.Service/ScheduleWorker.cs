@@ -48,14 +48,23 @@ namespace Lim.Schedule.Service
 
             var bus = _container.Resolve<IAdvancedBus>();
 
+            var senderQueue = bus.QueueDeclare("DataPlatform.Integration.Sender");
+            var senderExchange = bus.ExchangeDeclare("DataPlatform.Integration.Sender", ExchangeType.Fanout);
+            bus.Bind(senderExchange, senderQueue, string.Empty);
+
+            bus.Consume(senderQueue,
+                q =>
+                    q.Add<PackageResponseMessage>(
+                        (message, info) => new ReceiverConsumers<PackageResponseMessage>(message, _container)));
+
             var receiverQueue = bus.QueueDeclare("DataPlatform.Integration.Receiver");
             var receiverExchange = bus.ExchangeDeclare("DataPlatform.Integration.Receiver", ExchangeType.Fanout);
             bus.Bind(receiverExchange, receiverQueue, string.Empty);
 
             bus.Consume(receiverQueue,
                 q =>
-                    q.Add<MappedPackageResponseSentMessage>(
-                        (message, info) => new ReceiverConsumers<MappedPackageResponseSentMessage>(message, _container)));
+                    q.Add<PackageConfigurationMessage>(
+                        (message, info) => new SenderConsumers<PackageConfigurationMessage>(message, _container)));
 
 
             _scheduler.Start();

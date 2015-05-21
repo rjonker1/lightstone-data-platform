@@ -196,20 +196,11 @@
     <Compile Include="Models\Api\ApiConfiguration.cs" />
     <Compile Include="Models\Api\PullConfiguration.cs" />
     <Compile Include="Models\Api\PushConfiguration.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Configuration.cs" />
-    <Compile Include="Models\Contract.cs" />
-    <Compile Include="Models\EnumTypes.cs" />
-    <Compile Include="Models\Package.cs" />
     <Compile Include="Modules\FtpModule.cs" />
     <Compile Include="Modules\MessageModule.cs" />
     <Compile Include="Modules\MailModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\ApiModule.cs" />
-    <Compile Include="Repository\ConnectionFactory.cs" />
-    <Compile Include="Repository\IRepositories.cs" />
-    <Compile Include="Repository\LimRepository.cs" />
-    <Compile Include="Repository\UserManangementRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\integrations\ftp\" />
@@ -217,13 +208,9 @@
     <Folder Include="Views\integrations\messages\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lim.Domain.Respository\Lim.Domain.Respository.csproj">
-      <Project>{b0ae3165-a2a9-450c-8a9c-c21acfecfcac}</Project>
-      <Name>Lim.Domain.Respository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lim.Fake.Database\Lim.Fake.Database.csproj">
-      <Project>{f7347c19-f62e-4118-9f70-02aac878b5c0}</Project>
-      <Name>Lim.Fake.Database</Name>
+    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
+      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
+      <Name>Lim.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim\Lim.csproj">
       <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>

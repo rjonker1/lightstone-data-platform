@@ -5,7 +5,7 @@ using System.Linq;
 using Common.Logging;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
-namespace Lim.Web.UI.Repository
+namespace Lim.Domain.Repository
 {
     public class LimRepository : ILimRepository
     {
@@ -42,7 +42,7 @@ namespace Lim.Web.UI.Repository
         {
             try
             {
-               if (_connection.State == ConnectionState.Closed)
+                if (_connection.State == ConnectionState.Closed)
                     _connection.Open();
                 return _connection.Query<TItem>(sql, param).FirstOrDefault();
             }
@@ -56,6 +56,24 @@ namespace Lim.Web.UI.Repository
             }
 
             return Enumerable.Empty<TItem>().FirstOrDefault();
+        }
+
+        public void Add(string sql, object param)
+        {
+            try
+            {
+                if (_connection.State == ConnectionState.Closed)
+                    _connection.Open();
+                _connection.Execute(sql, param);
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Failed to add information to the LIM database, because {0}", ex, ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
         }
     }
 }

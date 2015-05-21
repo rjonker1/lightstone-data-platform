@@ -1,123 +1,48 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace Lim.Domain.Models
 {
-    [DataContract]
-    public class ApiPushConfiguration
+    public class Configuration
     {
-        public static readonly string Select =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType";
+        public const string Select =
+            @"select c.*,ft.Type Frequency, ac.Type Action, it.Type from Configuration c join FrequencyType ft on c.FrequencyType = ft.Id join ActionType ac on c.ActionType = ac.Id  join IntegrationType it on c.IntegrationType = it.Id";
 
-        [DataMember]
-        public long Id { get; set; }
+        public Configuration()
+        {
 
-        [DataMember]
-        public Guid Key { get; set; }
+        }
 
-        [DataMember]
+        //public Configuration(int actionType, int integrationType)
+        //{
+        //    ActionType = actionType;
+        //    IntegrationType = integrationType;
+        //}
+
+        public Configuration(long id, Guid key, int actionType, int integrationType, int frequency, Guid clientId, Guid contractId,
+            string accountNumber, bool isActive)
+        {
+            ActionType = actionType;
+            IntegrationType = integrationType;
+            Id = id;
+            Key = key;
+            FrequencyType = frequency;
+            ClientId = clientId;
+            ContractId = contractId;
+            AccountNumber = accountNumber;
+            IsActive = isActive;
+        }
+
+        public long Id { get; private set; }
+        public Guid Key { get; private set; }
         public int FrequencyType { get; set; }
-
-        [DataMember]
-        public int Action { get; set; }
-
-        [DataMember]
+        public int ActionType { get; set; }
         public int IntegrationType { get; set; }
-
-        [DataMember]
-        public string BaseAddress { get; set; }
-
-        [DataMember]
-        public string Suffix { get; set; }
-
-        [DataMember]
-        public string Username { get; set; }
-
-        [DataMember]
-        public string Password { get; set; }
-
-        [DataMember]
-        public string AuthenticationToken { get; set; }
-
-        [DataMember]
-        public string AuthenticationKey { get; set; }
-
-        [DataMember]
-        public bool HasAuthentication { get; set; }
-
-        [DataMember]
-        public int AuthenticationType { get; set; }
-
-        [DataMember]
         public Guid ClientId { get; set; }
-
-        [DataMember]
         public Guid ContractId { get; set; }
-
-        [DataMember]
         public string AccountNumber { get; set; }
-
-        [DataMember]
-        public Guid PackageId { get; set; }
-
-    }
-
-    [DataContract]
-    public class ApiPullConfiguration
-    {
-        public static readonly string Select =
-            @"";
-
-        [DataMember]
-        public long Id { get; set; }
-
-        [DataMember]
-        public Guid Key { get; set; }
-
-        [DataMember]
-        public int FrequencyType { get; set; }
-
-        [DataMember]
-        public int Action { get; set; }
-
-        [DataMember]
-        public int IntegrationType { get; set; }
-
-        [DataMember]
-        public string BaseAddress { get; set; }
-
-        [DataMember]
-        public string Suffix { get; set; }
-
-        [DataMember]
-        public string Username { get; set; }
-
-        [DataMember]
-        public string Password { get; set; }
-
-        [DataMember]
-        public string AuthenticationToken { get; set; }
-
-        [DataMember]
-        public string AuthenticationKey { get; set; }
-
-        [DataMember]
-        public bool HasAuthentication { get; set; }
-
-        [DataMember]
-        public int AuthenticationType { get; set; }
-
-        [DataMember]
-        public Guid ClientId { get; set; }
-
-        [DataMember]
-        public Guid ContractId { get; set; }
-
-        [DataMember]
-        public string AccountNumber { get; set; }
-
-        [DataMember]
-        public int FrequencyConfigurationId { get; set; }
-
+        public bool IsActive { get; set; }
+        public string Action { get; private set; }
+        public string Frequency { get; private set; }
+        public string Type { get; private set; }
     }
 }

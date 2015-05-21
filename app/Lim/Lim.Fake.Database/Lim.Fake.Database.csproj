@@ -45,10 +45,6 @@
     <Compile Include="FakeLimRepo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lim.Domain.Respository\Lim.Domain.Respository.csproj">
-      <Project>{b0ae3165-a2a9-450c-8a9c-c21acfecfcac}</Project>
-      <Name>Lim.Domain.Respository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>
