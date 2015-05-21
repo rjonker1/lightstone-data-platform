@@ -106,6 +106,19 @@
                         content: '<i class="fa fa-edit"></i> States'
                     }
                 }
+            }, {
+                url: '/cia',
+                config: {
+                    title: 'cia',
+                    settings: {
+                        nav: 7,
+                        content: '<i class="glyphicon glyphicon-arrow-left"></i> Back to CIA'
+                    },
+                    template: '<div></div>',
+                    controller: function () {
+                        window.location.replace('http://dev.cia.lightstone.co.za');
+                    }
+                }
             }
         ];
     }

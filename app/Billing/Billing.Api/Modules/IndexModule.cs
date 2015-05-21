@@ -1,4 +1,5 @@
-﻿using Shared.BuildingBlocks.Api.Security;
+﻿using Nancy;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace Billing.Api.Modules
 {
@@ -13,6 +14,8 @@ namespace Billing.Api.Modules
             };
 
             Get["/logout"] = parameters => null;
+
+            Get["/cia"] = parameters => Response.AsRedirect("http://dev.cia.lightstone.co.za/");
         }
     }
 }
