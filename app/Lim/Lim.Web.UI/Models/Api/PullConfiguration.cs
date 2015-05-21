@@ -44,7 +44,7 @@ namespace Lim.Web.UI.Models.Api
         public int FrequencyType { get; set; }
         public Guid ClientId { get; set; }
         public Guid ContractId { get; set; }
-        public string AccountNumber { get; set; }
+        public int AccountNumber { get; set; }
         public bool IsActive { get; set; }
         public long ConfigurationApiId { get; private set; }
         public string BaseAddress { get; set; }

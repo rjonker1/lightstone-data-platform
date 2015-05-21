@@ -19,7 +19,7 @@ namespace Lim.Domain.Models
         //}
 
         public Configuration(long id, Guid key, int actionType, int integrationType, int frequency, Guid clientId, Guid contractId,
-            string accountNumber, bool isActive)
+            int accountNumber, bool isActive)
         {
             ActionType = actionType;
             IntegrationType = integrationType;
@@ -39,7 +39,7 @@ namespace Lim.Domain.Models
         public int IntegrationType { get; set; }
         public Guid ClientId { get; set; }
         public Guid ContractId { get; set; }
-        public string AccountNumber { get; set; }
+        public int AccountNumber { get; set; }
         public bool IsActive { get; set; }
         public string Action { get; private set; }
         public string Frequency { get; private set; }

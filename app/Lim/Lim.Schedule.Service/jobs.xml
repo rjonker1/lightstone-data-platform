@@ -6,7 +6,7 @@
   <processing-directives>
     <overwrite-existing-data>true</overwrite-existing-data>
   </processing-directives>
-
+  
   <schedule>
     <job>
       <name>ApiPushIntegrationHourly</name>
@@ -41,7 +41,7 @@
         <name>ApiPushIntegrationEveryMinuteTrigger</name>
         <job-name>ApiPushIntegrationEveryMinute</job-name>
         <job-group>ApiIntegrationEveryMinuteGroup</job-group>
-        <!--To run every minute -->
+       <!-- To run every minute  -->
         <cron-expression>0 0/1 * * * ?</cron-expression>
       </cron>
     </trigger>

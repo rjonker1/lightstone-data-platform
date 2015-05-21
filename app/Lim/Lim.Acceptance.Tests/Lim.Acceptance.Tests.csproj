@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
@@ -42,8 +48,17 @@
     <Reference Include="Common.Logging.Log4Net1211">
       <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
     </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1128\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1092\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1128\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
@@ -54,6 +69,9 @@
     </Reference>
     <Reference Include="Quartz">
       <HintPath>..\..\packages\Quartz.2.3.1\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -74,6 +92,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Bus\when_sending_package_response_to_integration_queue.cs" />
     <Compile Include="Integrations\ApiIntegrationTestSetup.cs" />
     <Compile Include="Integrations\Push\when_pushing_hourly_integration.cs" />
   </ItemGroup>
@@ -90,6 +109,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain.Messaging\Lim.Domain.Messaging.csproj">
+      <Project>{6ee18788-1427-4ed7-a5ad-2af7cda4429d}</Project>
+      <Name>Lim.Domain.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain.Receiver\Lim.Domain.Receiver.csproj">
+      <Project>{3aaed3f0-65da-48db-9d39-e459668da358}</Project>
+      <Name>Lim.Domain.Receiver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain.Sender\Lim.Domain.Sender.csproj">
+      <Project>{e2a4a0c9-f043-439e-b7d0-afb0b60c2d99}</Project>
+      <Name>Lim.Domain.Sender</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>
@@ -105,6 +136,10 @@
     <ProjectReference Include="..\Lim.Schedule\Lim.Schedule.csproj">
       <Project>{8117e14c-45cb-4f67-a6d3-a8e6aa524f47}</Project>
       <Name>Lim.Schedule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Test.Helper\Lim.Test.Helper.csproj">
+      <Project>{87a87c68-50ff-4df7-8318-ad793433b80e}</Project>
+      <Name>Lim.Test.Helper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim\Lim.csproj">
       <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>

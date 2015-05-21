@@ -11,6 +11,8 @@ namespace Lim.Schedule.Service.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IHandleFetchingApiPushConfiguration>().ImplementedBy<HandleFetchingApiPushConfiguration>().LifestyleTransient());
+            container.Register(
+                Component.For<IHandleFetchingApiPullConfiguration>().ImplementedBy<HandleFetchingApiPullConfiguration>().LifestyleTransient());
             container.Register(Component.For<IHandleExecutingApiConfiguration>().ImplementedBy<HandleExecutingApiConfiguration>().LifestyleTransient());
         }
     }

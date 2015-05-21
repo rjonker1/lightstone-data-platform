@@ -4,7 +4,7 @@ using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Models;
 using Lim.Domain.Repository;
 
-namespace Lim.Domain.Sender.Consumers
+namespace Lim.Domain.Sender.Handlers
 {
     public class ResponseFromPackageConsumer
     {
@@ -19,13 +19,11 @@ namespace Lim.Domain.Sender.Consumers
 
         public void Consume(IMessage<PackageResponseMessage> message)
         {
-            _log.InfoFormat("Receiving response from package with Package Id {0) on Contract {1}", message.Body.PackageId, message.Body.ContractId);
+            _log.InfoFormat("Receiving response from package with Package Id {0} on Contract {1}", message.Body.PackageId, message.Body.ContractId);
             _log.Info(message.Body.Payload);
 
             new PackageResponse(message.Body.PackageId, message.Body.UserId, message.Body.ContractId, message.Body.AccountNumber,
-                message.Body.ResponseDate, message.Body.Payload, message.Body.HasData).Insert(_repository);
-
-
+                message.Body.ResponseDate, message.Body.Payload, message.Body.HasData, message.Body.RequestId).Insert(_repository);
         }
     }
 }

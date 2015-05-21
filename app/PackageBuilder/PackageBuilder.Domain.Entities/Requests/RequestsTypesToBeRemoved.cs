@@ -35,6 +35,9 @@ namespace PackageBuilder.Domain.Entities.Requests
                 ,
                 {
                     DataProviderName.RgtVin, RgtVin
+                },
+                {
+                    DataProviderName.LightstoneProperty, LightstoneProperty
                 }
             };
 
@@ -44,7 +47,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> LightstoneAuto =
             (requests, user, packageName) =>
-                new LightstoneAutoLaceReqeust(requests);
+                new LightstoneAutoLaceRequest(requests);
 
         private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> IvidTitleHolder =
             (requests, user, packageName) =>
@@ -57,6 +60,9 @@ namespace PackageBuilder.Domain.Entities.Requests
         private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> RgtVin =
             (requests, user, packageName) =>
                 new RgtVinLaceReqeust(requests);
+
+        private static readonly Func<ICollection<IAmRequestField>,IHaveUser,string,IAmDataProviderRequest> LightstoneProperty =
+            (requests,user,packageName) => new LightstonePropertyLaceRequest(requests);
 
         public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes
         {
@@ -102,9 +108,9 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
 
-    public class LightstoneAutoLaceReqeust : IAmLightstoneAutoRequest
+    public class LightstoneAutoLaceRequest : IAmLightstoneAutoRequest
     {
-        public LightstoneAutoLaceReqeust(ICollection<IAmRequestField> requestFields)
+        public LightstoneAutoLaceRequest(ICollection<IAmRequestField> requestFields)
         {
             VinNumber = requestFields.GetRequestField<IAmVinNumberRequestField>();
             CarId = requestFields.GetRequestField<IAmCarIdRequestField>();
@@ -119,6 +125,25 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmMakeRequestField Make { get; private set; }
 
         public IAmVinNumberRequestField VinNumber { get; private set; }
+    }
+
+    public class LightstonePropertyLaceRequest : IAmLightstonePropertyRequest
+    {
+        public LightstonePropertyLaceRequest(ICollection<IAmRequestField> requestFields)
+        {
+            UserId = new UserIdRequestField("5a7222e1-ee65-433b-b673-827319e89cbb");
+            IdentityNumber = requestFields.GetRequestField<IAmIdentityNumberRequestField>();
+            TrackingNumber = new TrackingNumberRequestField(Guid.NewGuid().ToString());
+            MaxRowsToReturn = new MaxRowsToReturnRequestField("1");
+        }
+
+        public IAmUserIdRequestField UserId { get; private set; }
+
+        public IAmIdentityNumberRequestField IdentityNumber { get; private set; }
+
+        public IAmTrackingNumberRequestField TrackingNumber { get; private set; }
+
+        public IAmMaxRowsToReturnRequestField MaxRowsToReturn { get; private set; }
     }
 
     public class IvidLaceRequest : IAmIvidStandardRequest

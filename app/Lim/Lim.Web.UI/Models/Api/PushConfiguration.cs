@@ -55,7 +55,7 @@ namespace Lim.Web.UI.Models.Api
             AuthenticationToken = configuration.First().AuthenticationToken;
             AuthenticationKey = configuration.First().AuthenticationKey;
             AuthenticationType = configuration.First().AuthenticationType;
-            ClientIdAccountNumber = configuration.First().AccountNumber;
+            ClientIdAccountNumber = string.Format("{0}|{1}", ClientId, AccountNumber);
         }
 
         public static PushConfiguration Existing(IHandleGettingConfiguration handler, GetApiPushConfiguration command)
@@ -101,12 +101,16 @@ namespace Lim.Web.UI.Models.Api
 
         public PushConfiguration SplitAccountAndClientId()
         {
-            if(string.IsNullOrEmpty(ClientIdAccountNumber))
+            if (string.IsNullOrEmpty(ClientIdAccountNumber))
                 return this;
 
             var data = ClientIdAccountNumber.Split('|');
+
+            if (!data.Any() || data.Count() != 2)
+                return this;
+
             ClientId = new Guid(data[0]);
-            AccountNumber = data[1];
+            AccountNumber = int.Parse(data[1]);
             return this;
         }
 
@@ -116,7 +120,7 @@ namespace Lim.Web.UI.Models.Api
         public int FrequencyType { get; set; }
         public Guid ClientId { get; set; }
         public Guid ContractId { get; set; }
-        public string AccountNumber { get; set; }
+        public int AccountNumber { get; set; }
         public bool IsActive { get; set; }
         public long ConfigurationApiId { get; private set; }
         public IEnumerable<Guid> Packages { get; set; }

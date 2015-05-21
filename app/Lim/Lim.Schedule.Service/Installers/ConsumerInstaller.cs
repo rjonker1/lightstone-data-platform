@@ -2,8 +2,8 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
-using Lim.Domain.Receiver.Consumers;
-using Lim.Domain.Sender.Consumers;
+using Lim.Domain.Receiver.Handlers;
+using Lim.Domain.Sender.Handlers;
 
 namespace Lim.Schedule.Service.Installers
 {

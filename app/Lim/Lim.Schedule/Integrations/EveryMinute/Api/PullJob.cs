@@ -25,7 +25,7 @@ namespace Lim.Schedule.Integrations.EveryMinute.Api
             _log.Info("Fetching Every Minute Pull API Integrations");
             _fetch.Handle(new FetchConfigurationCommand(IntegrationAction.Pull, IntegrationType.Api,Frequency.EveryMinute));
 
-            if (!_fetch.Configurations.Any())
+            if (_fetch.Configurations == null || !_fetch.Configurations.Any())
             {
                 _log.Info("There are no Every Minute Pull API Integrations to execute");
                 return;

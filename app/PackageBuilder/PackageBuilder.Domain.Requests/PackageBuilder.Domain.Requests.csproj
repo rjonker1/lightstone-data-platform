@@ -47,12 +47,15 @@
     <Compile Include="Fields\LabelRequestField.cs" />
     <Compile Include="Fields\LicenceNumberRequestField.cs" />
     <Compile Include="Fields\MakeRequestField.cs" />
+    <Compile Include="Fields\MaxRowsToReturnRequestField.cs" />
     <Compile Include="Fields\ReasonForApplicationRequestField.cs" />
     <Compile Include="Fields\RegisterNumberRequestField.cs" />
     <Compile Include="Fields\RequesterEmailRequestField.cs" />
     <Compile Include="Fields\RequesterNameRequestField.cs" />
     <Compile Include="Fields\RequesterPhoneRequestField.cs" />
     <Compile Include="Fields\RequestReferenceRequestField.cs" />
+    <Compile Include="Fields\TrackingNumberRequestField.cs" />
+    <Compile Include="Fields\UserIdRequestField.cs" />
     <Compile Include="Fields\VinNumberRequestField.cs" />
     <Compile Include="Fields\YearRequestField.cs" />
     <Compile Include="IvidStandardRequest.cs" />

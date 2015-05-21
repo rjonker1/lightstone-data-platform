@@ -56,7 +56,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Consumers\AlwaysOnConfiguration.cs" />
+    <Compile Include="Handlers\AlwaysOnConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim.Domain.Messaging\Lim.Domain.Messaging.csproj">

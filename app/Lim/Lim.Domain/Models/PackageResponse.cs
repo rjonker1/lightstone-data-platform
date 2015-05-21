@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Lim.Domain.Repository;
 
 namespace Lim.Domain.Models
@@ -14,15 +15,16 @@ namespace Lim.Domain.Models
             
         }
 
-        public PackageResponse(Guid packageId, Guid userId, Guid contractId, string accountNumber, DateTime responseDate, string payload, bool hasData)
+        public PackageResponse(Guid packageId, Guid userId, Guid contractId, string accountNumber, DateTime responseDate, string payload, bool hasData, Guid requestId)
         {
             PackageId = packageId;
             UserId = userId;
             ContractId = contractId;
-            AccountNumber = accountNumber;
+            AccountNumber = !string.IsNullOrEmpty(accountNumber) ? int.Parse(string.Join("",accountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1;
             ResponseDate = responseDate;
             Payload = payload;
             HasResponse = hasData;
+            RequestId = requestId;
         }
 
         public void Insert(ILimRepository repository)
@@ -44,7 +46,7 @@ namespace Lim.Domain.Models
         public Guid PackageId { get; private set; }
         public Guid UserId { get; private set; }
         public Guid ContractId { get; private set; }
-        public string AccountNumber { get; private set; }
+        public int AccountNumber { get; private set; }
         public DateTime ResponseDate { get; private set; }
         public Guid RequestId { get; private set; }
         public string Payload { get; private set; }

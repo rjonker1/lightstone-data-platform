@@ -3,7 +3,7 @@ using EasyNetQ;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Repository;
 
-namespace Lim.Domain.Receiver.Consumers
+namespace Lim.Domain.Receiver.Handlers
 {
     public class AlwaysOnConfigurationConsumer
     {
@@ -18,9 +18,9 @@ namespace Lim.Domain.Receiver.Consumers
 
         public void Consume(IMessage<PackageConfigurationMessage> message)
         {
-            _log.InfoFormat("Receiving message with package with Package Id {0) on Contract {1}", message.Body.PackageId, message.Body.ContractId);
+            _log.InfoFormat("Receiving message with package with Package Id {0} on Contract {1}", message.Body.PackageId, message.Body.ContractId);
             
-            _log.InfoFormat("Checking for Always on configurations requiring these pacakges");
+            _log.InfoFormat("Checking for Always on configurations requiring these packges");
         }
     }
 }

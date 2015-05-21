@@ -29,13 +29,14 @@ using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.TestObjects.Mothers;
 using Shared.BuildingBlocks.Api.ApiClients;
+using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 using StringExtensions = ServiceStack.Text.StringExtensions;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class PackageModule : NancyModule// : SecureModule
+    public class PackageModule : SecureModule
     {
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
