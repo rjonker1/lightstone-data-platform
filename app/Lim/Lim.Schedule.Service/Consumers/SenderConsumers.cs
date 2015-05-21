@@ -1,7 +1,7 @@
 ﻿using Castle.Windsor;
 using EasyNetQ;
 using Lim.Domain.Messaging.Messages;
-using Lim.Domain.Sender.Consumers;
+using Lim.Domain.Sender.Handlers;
 
 namespace Lim.Schedule.Service.Consumers
 {

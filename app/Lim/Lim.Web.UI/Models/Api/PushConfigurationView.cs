@@ -31,7 +31,7 @@ namespace Lim.Web.UI.Models.Api
         public Guid ContractId { get; set; }
 
         [DataMember]
-        public string AccountNumber { get; set; }
+        public int AccountNumber { get; set; }
 
         [DataMember]
         public DateTime DateCreated { get; set; }

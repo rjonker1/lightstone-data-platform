@@ -17,7 +17,7 @@ namespace Lim.Database.Migrations
                .WithColumn("IntegrationType").AsInt16().NotNullable()
                .WithColumn("ClientId").AsGuid()
                .WithColumn("ContractId").AsGuid()
-               .WithColumn("AccountNumber").AsString(50)
+               .WithColumn("AccountNumber").AsInt32()
                .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true);
 
@@ -88,7 +88,7 @@ namespace Lim.Database.Migrations
                 .WithColumn("PackageId").AsGuid().Indexed()
                 .WithColumn("UserId").AsGuid()
                 .WithColumn("ContractId").AsGuid().Indexed()
-                .WithColumn("AccountNumber").AsString(50)
+                .WithColumn("AccountNumber").AsInt32()
                 .WithColumn("ResponseDate").AsDateTime()
                 .WithColumn("RequestId").AsGuid().Indexed()
                 .WithColumn("Payload").AsString(Int32.MaxValue)
