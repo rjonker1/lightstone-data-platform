@@ -10,7 +10,7 @@ namespace Lim.Domain.Messaging.Publishing
         void SendToBus<T>(T message) where T : class;
     }
 
-    public class ConfigurationMessagePublisher : IPublishIntegrationMessages
+    public class ConfigurationMessagePublisher : IPublishConfigurationMessages
     {
         private readonly IAdvancedBus _bus;
         private readonly IExchange _exchange;

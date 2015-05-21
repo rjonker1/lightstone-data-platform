@@ -19,9 +19,9 @@ namespace Lim.Domain.Models
             ContractId = contractId;
         }
 
-        public Guid Id { get; private set; }
-        public Guid ContractId { get; private set; }
-        public string Name { get; private set; }
-        public string AccountNumber { get; private set; }
+        public Guid Id { get; set; }
+        public Guid ContractId { get; set; }
+        public string Name { get; set; }
+        public string AccountNumber { get; set; }
     }
 }

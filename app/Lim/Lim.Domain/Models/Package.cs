@@ -5,7 +5,7 @@ namespace Lim.Domain.Models
     public class Package
     {
         public const string Select =
-             @"select distinct cp.ContractId, cp.PackageId, p.Name from ContractPackage cp join Package p on cp.PackageId = p.Id";
+             @"select distinct cp.ContractId, cp.PackageId Id, p.Name from ContractPackage cp join Package p on cp.PackageId = p.Id";
             //@"select distinct cast(cast(0 as binary) as uniqueidentifier) ContractId, cp.PackageId Id, p.Name from ContractPackage cp join Package p on cp.PackageId = p.Id";
        
         public Package()

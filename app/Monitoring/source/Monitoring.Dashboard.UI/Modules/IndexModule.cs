@@ -1,5 +1,4 @@
-﻿using System;
-using Nancy;
+﻿using Nancy;
 
 namespace Monitoring.Dashboard.UI.Modules
 {
@@ -9,10 +8,13 @@ namespace Monitoring.Dashboard.UI.Modules
         {
             Get["/"] = _ =>
             {
-               // var model = new MonitoringStorageModel(Guid.NewGuid());
+                // var model = new MonitoringStorageModel(Guid.NewGuid());
 
-              return View["Index"];
+                return View["Index"];
             };
+
+            Get["/cia"] = parameters => Response.AsRedirect(System.Configuration.ConfigurationManager.AppSettings["url/cia"].ToString());
+
         }
     }
 }

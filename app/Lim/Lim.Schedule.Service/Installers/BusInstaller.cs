@@ -3,6 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
+using Lim.Domain.Messaging.Publishing;
 using Workflow.BuildingBlocks;
 
 namespace Lim.Schedule.Service.Installers
@@ -20,6 +21,8 @@ namespace Lim.Schedule.Service.Installers
                     .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("lim/schedule/bus"))
                     .LifestyleSingleton()
                 );
+
+            container.Register(Component.For<IPublishConfigurationMessages>().ImplementedBy<ConfigurationMessagePublisher>());
         }
     }
 }

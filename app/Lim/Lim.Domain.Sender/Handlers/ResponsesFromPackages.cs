@@ -1,6 +1,7 @@
 ﻿using Common.Logging;
 using EasyNetQ;
 using Lim.Domain.Messaging.Messages;
+using Lim.Domain.Messaging.Publishing;
 using Lim.Domain.Models;
 using Lim.Domain.Repository;
 
@@ -10,8 +11,9 @@ namespace Lim.Domain.Sender.Handlers
     {
         private readonly ILog _log;
         private readonly ILimRepository _repository;
+        private readonly IPublishConfigurationMessages _publisher;
 
-        public ResponseFromPackageConsumer(ILimRepository repository)
+        public ResponseFromPackageConsumer(ILimRepository repository, IPublishConfigurationMessages publisher)
         {
             _repository = repository;
             _log = LogManager.GetLogger(GetType());
@@ -24,6 +26,9 @@ namespace Lim.Domain.Sender.Handlers
 
             new PackageResponse(message.Body.PackageId, message.Body.UserId, message.Body.ContractId, message.Body.AccountNumber,
                 message.Body.ResponseDate, message.Body.Payload, message.Body.HasData, message.Body.RequestId).Insert(_repository);
+
+            _publisher.SendToBus(new PackageConfigurationMessage(message.Body.PackageId, message.Body.UserId, message.Body.ContractId,
+                message.Body.AccountNumber, message.Body.RequestId));
         }
     }
 }
