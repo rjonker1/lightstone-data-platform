@@ -203,7 +203,7 @@ function initializeContractRoutes(sammy) {
     sammy.post('/Contracts', function (context) {
         $(context.target).ajaxSubmit({
             success: function (data) {
-                context.$element().html(data);
+                context.$element().html(data);+
                 initializePlugins();
                 context.redirect('#/Contracts');
             }
@@ -226,7 +226,6 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                context.redirect('#/Contracts');
             }
         });
         // !!! Important !!! 

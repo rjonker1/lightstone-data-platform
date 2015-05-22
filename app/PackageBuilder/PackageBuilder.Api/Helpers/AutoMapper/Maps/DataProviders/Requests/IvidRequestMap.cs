@@ -52,13 +52,13 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                 .ConvertUsing(s =>
                 {
                     var request = s.Request ?? new IvidStandardRequest(
-                                                    new RequesterNameRequestField(""),
-                                                    new RequesterPhoneRequestField(""),
-                                                    new RequesterEmailRequestField(""),
-                                                    new RequestReferenceRequestField(""),
-                                                    new ApplicantNameRequestField(""),
-                                                    new ReasonForApplicationRequestField(""),
-                                                    new LabelRequestField(""),
+                                                    //new RequesterNameRequestField(""),
+                                                    //new RequesterPhoneRequestField(""),
+                                                    //new RequesterEmailRequestField(""),
+                                                    //new RequestReferenceRequestField(""),
+                                                    //new ApplicantNameRequestField(""),
+                                                    //new ReasonForApplicationRequestField(""),
+                                                    //new LabelRequestField(""),
                                                     new EngineNumberRequestField(""),
                                                     new ChassisNumberRequestField(""),
                                                     new VinNumberRequestField(""),
@@ -70,7 +70,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IProvideDataFromIvidTitleHolder, IEnumerable<IDataField>>()
                 .ConvertUsing(s =>
                 {
-                    var request = s.Request ?? new IvidTitleholderRequest(new RequesterNameRequestField(""), new RequesterPhoneRequestField(""), new RequesterEmailRequestField(""), new VinNumberRequestField(""));
+                    var request = s.Request ?? new IvidTitleholderRequest(new VinNumberRequestField(""));
                     return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
                 });
         }

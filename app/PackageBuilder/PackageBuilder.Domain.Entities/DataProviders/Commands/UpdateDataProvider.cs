@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Helpers.Json;
+using Lace.Domain.Core.Contracts.Requests;
 using Newtonsoft.Json;
 using PackageBuilder.Core.Commands;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
@@ -24,10 +25,12 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly DateTime CreatedDate;
         public readonly DateTime? EditedDate;
         public readonly Type DataProviderType;
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
-        public readonly IEnumerable<IDataField> DataFields;
+        //[JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
+        //public readonly IEnumerable<IDataField> DataFields;
+        [JsonConverter(typeof(JsonTypeResolverConverter))]
+        public IPointToLaceProvider DataProvider { get; set; }
 
-        public UpdateDataProvider(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
+        public UpdateDataProvider(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IPointToLaceProvider dataProvider)
             : base(id)
         {
             Name = name;
@@ -41,7 +44,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
             Owner = owner;
             CreatedDate = createdDate;
             EditedDate = editedDate;
-            DataFields = dataFields;
+            //DataFields = dataFields;
+            DataProvider = dataProvider;
         }
 
         public override string ToString()
