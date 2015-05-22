@@ -1,5 +1,8 @@
-﻿using Common.Logging;
+﻿using System.Collections.Generic;
+using Common.Logging;
+using Lim.Domain.Models;
 using Nancy;
+using Nancy.ModelBinding;
 using Nancy.Security;
 
 namespace Lim.Test.Api.Modules
@@ -23,6 +26,13 @@ namespace Lim.Test.Api.Modules
             Post["api/push"] = _ =>
             {
                 _log.Info("Importing push item from POST");
+
+                var model = this.Bind<List<PackageTransaction>>();
+                foreach (var transaction in model)
+                {
+                    _log.InfoFormat("Contract Id {0}", transaction.ContractId);
+                }
+
                 return Response.AsJson(new {Successfull = true});
             };
 

@@ -36,6 +36,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -45,8 +49,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Models\Transaction.cs" />
-    <Compile Include="RestApi\HttpPushClient.cs" />
+    <Compile Include="Extensions\RestClientExtensions.cs" />
+    <Compile Include="RestApi\PushClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim\Lim.csproj">

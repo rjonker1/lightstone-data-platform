@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -67,6 +64,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
+      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
+      <Name>Lim.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
       <Project>{0d4e5018-6f0d-42a3-8962-0bb05ffc136c}</Project>
       <Name>Lim.Pull</Name>

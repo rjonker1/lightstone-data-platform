@@ -18,6 +18,7 @@ namespace Lim.Acceptance.Tests.Integrations.Push
        // private readonly IJob _job; 
         private readonly IHandleFetchingApiPushConfiguration _fetch;
         private readonly IHandleExecutingApiConfiguration _execute;
+        private readonly ILimRepository _limRepository;
         private readonly IRepository _repository;
         private readonly IDbConnection _connection;
         private readonly IAuditIntegration _audit;
@@ -33,10 +34,11 @@ namespace Lim.Acceptance.Tests.Integrations.Push
             _connection = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString());
             _repository = new Repository(_connection);
+            _limRepository = new LimRepository(_connection);
             _audit = new StoreIntegrationAudit(_connection);
 
             _fetch = new HandleFetchingApiPushConfiguration(_repository);
-            _execute = new HandleExecutingApiConfiguration(_repository,_audit);
+            _execute = new HandleExecutingApiConfiguration(_limRepository, _audit);
 
             _setup = new ApiIntegrationTestSetup(_connection);
            // _job = new Lim.Schedule.Integrations.Daily.Api.PushJob(_fetch, _execute);

@@ -25,7 +25,7 @@ namespace Lim.Domain.Sender.Handlers
             _log.Info(message.Body.Payload);
 
             new PackageResponse(message.Body.PackageId, message.Body.UserId, message.Body.ContractId, message.Body.AccountNumber,
-                message.Body.ResponseDate, message.Body.Payload, message.Body.HasData, message.Body.RequestId).Insert(_repository);
+                message.Body.ResponseDate, message.Body.Payload, message.Body.HasData, message.Body.RequestId, message.Body.Username).Insert(_repository);
 
             _publisher.SendToBus(new PackageConfigurationMessage(message.Body.PackageId, message.Body.UserId, message.Body.ContractId,
                 message.Body.AccountNumber, message.Body.RequestId));

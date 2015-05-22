@@ -20,7 +20,7 @@ namespace Lim.Domain.Receiver.Handlers
         {
             _log.InfoFormat("Receiving message with package with Package Id {0} on Contract {1}", message.Body.PackageId, message.Body.ContractId);
             
-            _log.InfoFormat("Checking for Always on configurations requiring these packges");
+            _log.InfoFormat("Checking for Always on configurations requiring these packages");
         }
     }
 }
