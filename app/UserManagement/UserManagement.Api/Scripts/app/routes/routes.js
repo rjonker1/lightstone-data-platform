@@ -37,6 +37,7 @@ function initializeCusomerRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                context.redirect('#/Customers');
             }
         });
         // !!! Important !!! 
@@ -57,6 +58,7 @@ function initializeCusomerRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                context.redirect('#/Customers');
             }
         });
         // !!! Important !!! 
@@ -91,6 +93,7 @@ function initializeClientRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                context.redirect('#/Clients');
             }
         });
         // !!! Important !!! 
@@ -111,6 +114,7 @@ function initializeClientRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                context.redirect('#/Clients');
             }
         });
         // !!! Important !!! 
@@ -145,6 +149,7 @@ function initializeUserRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                context.redirect('#/Users');
             }
         });
         // !!! Important !!! 
@@ -165,6 +170,7 @@ function initializeUserRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                context.redirect('#/Users');
             }
         });
         /// !!! Important !!! 
@@ -199,6 +205,7 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                context.redirect('#/Contracts');
             }
         });
         // !!! Important !!! 
@@ -219,6 +226,7 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                context.redirect('#/Contracts');
             }
         });
         // !!! Important !!! 
