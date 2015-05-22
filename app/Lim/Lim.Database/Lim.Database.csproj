@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="MigrationRunner.cs" />
     <Compile Include="Migrations\201515051315_CreateLimTables.cs" />
+    <Compile Include="Migrations\201522050950_AlterPacakgeResponseTable.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

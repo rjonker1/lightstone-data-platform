@@ -68,6 +68,7 @@
     <Compile Include="Models\ConfigurationForApi.cs" />
     <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\EnumTypes.cs" />
+    <Compile Include="Models\IntegrationPackage.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\PackageResponse.cs" />
     <Compile Include="Repository\ConnectionFactory.cs" />

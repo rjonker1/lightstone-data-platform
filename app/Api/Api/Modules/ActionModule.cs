@@ -12,7 +12,7 @@ using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.Modules
 {
-    public class ActionModule : SecureModule
+    public class ActionModule : NancyModule // SecureModule
     {
         private static int _defaultJsonMaxLength;
 

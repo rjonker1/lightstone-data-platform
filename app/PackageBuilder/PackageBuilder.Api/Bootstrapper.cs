@@ -11,11 +11,11 @@ using Nancy.Bootstrappers.Windsor;
 using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
+using PackageBuilder.Api.Helpers;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Entities.DataImports;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
-using Shared.BuildingBlocks.Api.Security;
 using DataPlatform.Shared.Helpers.Extensions;
 
 namespace PackageBuilder.Api
@@ -48,7 +48,8 @@ namespace PackageBuilder.Api
                 new AutoMapperInstaller(),
                 new LaceInstaller(),
                 new AuthInstaller(),
-                new ApiInstaller()
+                new ApiInstaller(),
+                new ContextInstaller()
                 );
 
           //  container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
@@ -76,7 +77,10 @@ namespace PackageBuilder.Api
 
                 var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
                 if (user != null)
+                {
                     nancyContext.CurrentUser = user;
+                    container.Resolve<CurrentContext>().Context = nancyContext;
+                }
                 return null;
             });
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Lim.Domain.Messaging.Messages
 {
@@ -9,7 +10,7 @@ namespace Lim.Domain.Messaging.Messages
             PackageId = packageId;
             UserId = userId;
             ContractId = contractId;
-            AccountNumber = accountNumber;
+            AccountNumber = !string.IsNullOrEmpty(accountNumber) ? int.Parse(string.Join("", accountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1;
             ResponseDate = DateTime.UtcNow;
             RequestId = requestId;
         }
@@ -17,7 +18,7 @@ namespace Lim.Domain.Messaging.Messages
         public Guid PackageId { get; private set; }
         public Guid UserId { get; private set; }
         public Guid ContractId { get; private set; }
-        public string AccountNumber { get; private set; }
+        public int AccountNumber { get; private set; }
         public DateTime ResponseDate { get; private set; }
         public Guid RequestId { get; private set; }
     }

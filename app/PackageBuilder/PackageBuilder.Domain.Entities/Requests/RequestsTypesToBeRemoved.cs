@@ -131,10 +131,11 @@ namespace PackageBuilder.Domain.Entities.Requests
     {
         public LightstonePropertyLaceRequest(ICollection<IAmRequestField> requestFields)
         {
-            UserId = new UserIdRequestField("5a7222e1-ee65-433b-b673-827319e89cbb");
+            UserId = new UserIdRequestField(System.Configuration.ConfigurationManager.AppSettings["LightstonePropertyUserId"]);
             IdentityNumber = requestFields.GetRequestField<IAmIdentityNumberRequestField>();
             TrackingNumber = new TrackingNumberRequestField(Guid.NewGuid().ToString());
-            MaxRowsToReturn = new MaxRowsToReturnRequestField("1");
+            MaxRowsToReturn =
+                new MaxRowsToReturnRequestField(System.Configuration.ConfigurationManager.AppSettings["LightstonePropertyMaxRowsToReturn"] ?? "1");
         }
 
         public IAmUserIdRequestField UserId { get; private set; }

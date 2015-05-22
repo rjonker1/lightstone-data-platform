@@ -4,7 +4,7 @@ namespace Lim.Domain.Messaging.Messages
 {
     public class PackageResponseMessage
     {
-        public PackageResponseMessage(Guid packageId, Guid userId, Guid contractId, string accountNumber, string payload, Guid requestId)
+        public PackageResponseMessage(Guid packageId, Guid userId, Guid contractId, string accountNumber, string payload, Guid requestId, string username)
         {
             PackageId = packageId;
             UserId = userId;
@@ -14,10 +14,12 @@ namespace Lim.Domain.Messaging.Messages
             Payload = payload;
             RequestId = requestId;
             HasData = !string.IsNullOrEmpty(payload);
+            Username = username;
         }
 
         public Guid PackageId { get; private set; }
         public Guid UserId { get; private set; }
+        public string Username { get; private set; }
         public Guid ContractId { get; private set; }
         public string AccountNumber { get; private set; }
         public DateTime ResponseDate { get; private set; }

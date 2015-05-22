@@ -46,6 +46,96 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
                 // authenticate
                 // call authenticateUser to get the UserToke by email and password
+                // email: murray@lightstone.co.za
+                //pass: Pass!1234
+
+//RESULT FROM RETURN COMPANIES
+//                <NewDataSet xmlns="">
+//<companies diffgr:id="companies1" msdata:rowOrder="0">
+//<companyid>3479505</companyid>
+//<companyname>LIGHTSTONE AUTO</companyname>
+//<companyregnumber>2010/018608/07</companyregnumber>
+//<VatNo>4740259769</VatNo>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies2" msdata:rowOrder="1">
+//<companyid>3142594</companyid>
+//<companyname>LIGHTSTONE BUSINESS SOLUTIONS</companyname>
+//<companyregnumber>2009/014520/07</companyregnumber>
+//<VatNo>4850261001</VatNo>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies3" msdata:rowOrder="2">
+//<companyid>2618016</companyid>
+//<companyname>LIGHTSTONE COMMERCIAL</companyname>
+//<companyregnumber>2007/029151/07</companyregnumber>
+//<VatNo/>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies4" msdata:rowOrder="3">
+//<companyid>1377071</companyid>
+//<companyname>LIGHTSTONE CONSUMER</companyname>
+//<companyregnumber>2001/013329/07</companyregnumber>
+//<VatNo>4570214256</VatNo>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies5" msdata:rowOrder="4">
+//<companyid>3585288</companyid>
+//<companyname>LIGHTSTONE EXPLORE</companyname>
+//<companyregnumber>2011/112308/07</companyregnumber>
+//<VatNo>4550259933</VatNo>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies6" msdata:rowOrder="5">
+//<companyid>2146386</companyid>
+//<companyname>LIGHTSTONE GROUP</companyname>
+//<companyregnumber>2006/004819/07</companyregnumber>
+//<VatNo>4740230646</VatNo>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies7" msdata:rowOrder="6">
+//<companyid>2678992</companyid>
+//<companyname>LIGHTSTONE INNOVATION</companyname>
+//<companyregnumber>2008/000160/07</companyregnumber>
+//<VatNo/>
+//<StatusCode>09</StatusCode>
+//</companies>
+//<companies diffgr:id="companies8" msdata:rowOrder="7">
+//<companyid>2850676</companyid>
+//<companyname>LIGHTSTONE INVESTMENT AND DEVELOPMENT</companyname>
+//<companyregnumber>2008/017493/07</companyregnumber>
+//<VatNo/>
+//<StatusCode>29</StatusCode>
+//</companies>
+//<companies diffgr:id="companies9" msdata:rowOrder="8">
+//<companyid>2145391</companyid>
+//<companyname>LIGHTSTONE PROCESSING</companyname>
+//<companyregnumber>2006/004664/07</companyregnumber>
+//<VatNo>4090230659</VatNo>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies10" msdata:rowOrder="9">
+//<companyid>1707642</companyid>
+//<companyname>LIGHTSTONE PROPERTY</companyname>
+//<companyregnumber>2003/029525/07</companyregnumber>
+//<VatNo>4670224890</VatNo>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies11" msdata:rowOrder="10">
+//<companyid>3577610</companyid>
+//<companyname>LIGHTSTONE STEEL</companyname>
+//<companyregnumber>2011/105935/07</companyregnumber>
+//<VatNo>4770258970</VatNo>
+//<StatusCode>03</StatusCode>
+//</companies>
+//<companies diffgr:id="companies12" msdata:rowOrder="11">
+//<companyid>2779273</companyid>
+//<companyname>LIGHTSTONE TRADING</companyname>
+//<companyregnumber>2008/090750/23</companyregnumber>
+//<VatNo/>
+//<StatusCode>29</StatusCode>
+//</companies>
+//</NewDataSet>
 
                 var token = webService.Client.authenticateUser(_username, _password);
 
@@ -66,6 +156,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
                 _result = webService.Client.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum,
                     request.CompanyVatnumber);
+
+                //call confirm company
 
                 webService.CloseSource();
                 _logCommand.LogResponse(_result != null ? DataProviderState.Successful : DataProviderState.Failed,
@@ -104,3 +196,110 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
         }
     }
 }
+
+//FINAL Resutl to be sent back - i.e. ls busienss response
+//<xs:element name="company">
+//<xs:complexType>
+//<xs:sequence>
+//<xs:element name="ID" type="xs:int" minOccurs="0"/>
+//<xs:element name="EnterpriseType" type="xs:string" minOccurs="0"/>
+//<xs:element name="ShortenType" type="xs:string" minOccurs="0"/>
+//<xs:element name="CompanyRegNumber" type="xs:string" minOccurs="0"/>
+//<xs:element name="OldRegistrationNumber" type="xs:string" minOccurs="0"/>
+//<xs:element name="TypeDate" type="xs:string" minOccurs="0"/>
+//<xs:element name="CompanyName" type="xs:string" minOccurs="0"/>
+//<xs:element name="ShortName" type="xs:string" minOccurs="0"/>
+//<xs:element name="TranslatedName" type="xs:string" minOccurs="0"/>
+//<xs:element name="RegistrationDate" type="xs:string" minOccurs="0"/>
+//<xs:element name="BusinessStartDate" type="xs:string" minOccurs="0"/>
+//<xs:element name="WithdrawnPublic" type="xs:string" minOccurs="0"/>
+//<xs:element name="StatusCode" type="xs:string" minOccurs="0"/>
+//<xs:element name="StatusDate" type="xs:string" minOccurs="0"/>
+//<xs:element name="SicCode" type="xs:string" minOccurs="0"/>
+//<xs:element name="FinancialYearEnd" type="xs:string" minOccurs="0"/>
+//<xs:element name="FinancialEffectiveDate" type="xs:string" minOccurs="0"/>
+//<xs:element name="PhysicalAddress1" type="xs:string" minOccurs="0"/>
+//<xs:element name="PhysicalAddress2" type="xs:string" minOccurs="0"/>
+//<xs:element name="PhysicalAddress3" type="xs:string" minOccurs="0"/>
+//<xs:element name="PhysicalAddress4" type="xs:string" minOccurs="0"/>
+//<xs:element name="PhysicalPostCode" type="xs:string" minOccurs="0"/>
+//<xs:element name="PostalAddress1" type="xs:string" minOccurs="0"/>
+//<xs:element name="PostalAddress2" type="xs:string" minOccurs="0"/>
+//<xs:element name="PostalAddress3" type="xs:string" minOccurs="0"/>
+//<xs:element name="PostalAddress4" type="xs:string" minOccurs="0"/>
+//<xs:element name="PostalPostCode" type="xs:string" minOccurs="0"/>
+//<xs:element name="CountryCode" type="xs:string" minOccurs="0"/>
+//<xs:element name="CountryOfOrigin" type="xs:string" minOccurs="0"/>
+//<xs:element name="RegionCode" type="xs:string" minOccurs="0"/>
+//<xs:element name="AuthorisedCapital" type="xs:double" minOccurs="0"/>
+//<xs:element name="AuthorisedShares" type="xs:double" minOccurs="0"/>
+//<xs:element name="IssuedCapital" type="xs:double" minOccurs="0"/>
+//<xs:element name="IssuedShares" type="xs:double" minOccurs="0"/>
+//<xs:element name="FormReceivedDate" type="xs:string" minOccurs="0"/>
+//<xs:element name="FormDate" type="xs:string" minOccurs="0"/>
+//<xs:element name="ConversionNumber" type="xs:string" minOccurs="0"/>
+//<xs:element name="TaxNumber" type="xs:string" minOccurs="0"/>
+//<xs:element name="CPA" type="xs:boolean" minOccurs="0"/>
+//<xs:element name="StatusCodeDesc" type="xs:string" minOccurs="0"/>
+//<xs:element name="RegionCodeDesc" type="xs:string" minOccurs="0"/>
+//<xs:element name="SIC_Description" type="xs:string" minOccurs="0"/>
+//</xs:sequence>
+//</xs:complexType>
+//</xs:element>
+
+
+
+
+//DIRECTOR return directors
+//<directors diffgr:id="directors1" msdata:rowOrder="0">
+//<directorid>1669624</directorid>
+//<firstname>MURRAY GRANT</firstname>
+//<surname>WOOLFSON</surname>
+//<idnumber>7902065199085</idnumber>
+//</directors>
+
+//Confirm Direcotrs
+
+//return director report
+
+//list of this stuff
+//<company diffgr:id="company1" msdata:rowOrder="0">
+//<ID>3206619</ID>
+//<EnterpriseType>Close Corporation (CC)</EnterpriseType>
+//<ShortenType>(CC)</ShortenType>
+//<CompanyRegNumber>2009/202656/23</CompanyRegNumber>
+//<CompanyName>SOUTHERN HEMISPHERE CORPORATION</CompanyName>
+//<ShortName/>
+//<TranslatedName/>
+//<RegistrationDate>2009/11/03</RegistrationDate>
+//<BusinessStartDate>2009/11/03</BusinessStartDate>
+//<WithdrawnPublic>False</WithdrawnPublic>
+//<StatusCode>03</StatusCode>
+//<StatusDate/>
+//<SicCode>88</SicCode>
+//<FinancialYearEnd>2</FinancialYearEnd>
+//<FinancialEffectiveDate>2009/11/03</FinancialEffectiveDate>
+//<PhysicalAddress1>48 BELLAIRS VIEW</PhysicalAddress1>
+//<PhysicalAddress2>137 BELLAIRS DRIVE</PhysicalAddress2>
+//<PhysicalAddress3>NORTHRIDING</PhysicalAddress3>
+//<PhysicalAddress4>GAUTENG</PhysicalAddress4>
+//<PhysicalPostCode>2169</PhysicalPostCode>
+//<PostalAddress1>PO BOX 501</PostalAddress1>
+//<PostalAddress2>DOUGLASDALE</PostalAddress2>
+//<PostalAddress3>DOUGLASDALE</PostalAddress3>
+//<PostalAddress4>GAUTENG</PostalAddress4>
+//<PostalPostCode>2165</PostalPostCode>
+//<CountryCode/>
+//<CountryOfOrigin/>
+//<RegionCode>7</RegionCode>
+//<AuthorisedCapital>-1</AuthorisedCapital>
+//<AuthorisedShares>-1</AuthorisedShares>
+//<IssuedCapital>-1</IssuedCapital>
+//<IssuedShares>-1</IssuedShares>
+//<FormReceivedDate/>
+//<FormDate/>
+//<ConversionNumber/>
+//<TaxNumber/>
+//<AppointmentDate>2009/11/03</AppointmentDate>
+//<SIC_Description>Other business activities</SIC_Description>
+//</company>

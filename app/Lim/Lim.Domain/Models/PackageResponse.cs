@@ -10,6 +10,8 @@ namespace Lim.Domain.Models
         private const string InsertStatement =
             @"insert into PackageResponses ([PackageId],[UserId],[ContractId],[AccountNumber],[ResponseDate],[RequestId],[Payload],[HasResponse]) values (@PackageId,@UserId,@ContractId,@AccountNumber,@ResponseDate,@RequestId,@Payload,@HasResponse)";
 
+        private const string SelectStatement = @"";
+
         public PackageResponse()
         {
             

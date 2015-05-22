@@ -16,6 +16,7 @@ using Lim.Domain.Messaging.Publishing;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
+using PackageBuilder.Api.Helpers;
 using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
@@ -35,12 +36,12 @@ using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class PackageModule : SecureModule
+    public class PackageModule : NancyModule //SecureModule
     {
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi,IPublishIntegrationMessages integration)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi,IPublishIntegrationMessages integration, CurrentContext nancyContext)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -135,7 +136,8 @@ namespace PackageBuilder.Api.Modules
                 const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
 
                 var requestId = Guid.NewGuid();
-                var responses = ((Package) package).Execute(entryPoint, apiRequest.UserId, "","", requestId, accountNumber, apiRequest.ContractId, contractVersion,
+                var responses = ((Package) package).Execute(entryPoint, apiRequest.UserId, nancyContext.Context.CurrentUser.UserName,
+                    nancyContext.Context.CurrentUser.UserName, requestId, accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,

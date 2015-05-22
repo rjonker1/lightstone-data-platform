@@ -36,7 +36,7 @@ namespace Lim.Acceptance.Tests.Bus
         {
             _bus = BusFactory.CreateAdvancedBus("lim/queue");
             _requestId = Guid.NewGuid();
-            _message = new PackageResponseMessage(_packageId, _userId, _contractId, _accountNumber, _payload, _requestId);
+            _message = new PackageResponseMessage(_packageId, _userId, _contractId, _accountNumber, _payload, _requestId, "rudi@customapp.co.za");
             _publisher = new IntegrationMessagePublisher(_bus);
 
             _connection = new SqlConnection(
