@@ -21,9 +21,9 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
             _dataFields =
                 Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(
                     new IvidTitleholderRequest(
-                        new RequesterNameRequestField(""),
-                        new RequesterPhoneRequestField(""),
-                        new RequesterEmailRequestField(""),
+                        //new RequesterNameRequestField(""),
+                        //new RequesterPhoneRequestField(""),
+                        //new RequesterEmailRequestField(""),
                         new VinNumberRequestField("")));
         }
 
