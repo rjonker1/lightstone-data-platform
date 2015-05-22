@@ -21,13 +21,13 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Requests
             _dataFields =
                 Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(
                     new IvidStandardRequest(
-                        new RequesterNameRequestField(""),
-                        new RequesterPhoneRequestField(""),
-                        new RequesterEmailRequestField(""),
-                        new RequestReferenceRequestField(""),
-                        new ApplicantNameRequestField(""),
-                        new ReasonForApplicationRequestField(""),
-                        new LabelRequestField(""),
+                        //new RequesterNameRequestField(""),
+                        //new RequesterPhoneRequestField(""),
+                        //new RequesterEmailRequestField(""),
+                        //new RequestReferenceRequestField(""),
+                        //new ApplicantNameRequestField(""),
+                        //new ReasonForApplicationRequestField(""),
+                        //new LabelRequestField(""),
                         new EngineNumberRequestField(""),
                         new ChassisNumberRequestField(""),
                         new VinNumberRequestField(""),
