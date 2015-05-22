@@ -8,16 +8,16 @@ namespace Lim.Domain.Models
     public class PackageResponse
     {
         private const string InsertStatement =
-            @"insert into PackageResponses ([PackageId],[UserId],[ContractId],[AccountNumber],[ResponseDate],[RequestId],[Payload],[HasResponse]) values (@PackageId,@UserId,@ContractId,@AccountNumber,@ResponseDate,@RequestId,@Payload,@HasResponse)";
+            @"insert into PackageResponses ([PackageId],[UserId],[ContractId],[AccountNumber],[ResponseDate],[RequestId],[Payload],[HasResponse], Username) values (@PackageId,@UserId,@ContractId,@AccountNumber,@ResponseDate,@RequestId,@Payload,@HasResponse,@Username)";
 
-        private const string SelectStatement = @"";
+        public const string SelectStatement = @"select pr.* from PackageResponses pr where pr.PackageId = @PackageId and pr.ContractId = @ContractId";
 
         public PackageResponse()
         {
             
         }
 
-        public PackageResponse(Guid packageId, Guid userId, Guid contractId, string accountNumber, DateTime responseDate, string payload, bool hasData, Guid requestId)
+        public PackageResponse(Guid packageId, Guid userId, Guid contractId, string accountNumber, DateTime responseDate, string payload, bool hasData, Guid requestId, string username)
         {
             PackageId = packageId;
             UserId = userId;
@@ -27,6 +27,7 @@ namespace Lim.Domain.Models
             Payload = payload;
             HasResponse = hasData;
             RequestId = requestId;
+            Username = username;
         }
 
         public void Insert(ILimRepository repository)
@@ -40,7 +41,8 @@ namespace Lim.Domain.Models
                 @ResponseDate = ResponseDate,
                 @RequestId = RequestId,
                 @Payload = Payload,
-                @HasResponse = HasResponse
+                @HasResponse = HasResponse,
+                @Username = Username
             };
             repository.Add(InsertStatement, parameters);
         }
@@ -53,5 +55,6 @@ namespace Lim.Domain.Models
         public Guid RequestId { get; private set; }
         public string Payload { get; private set; }
         public bool HasResponse { get; private set; }
+        public string Username { get; private set; }
     }
 }

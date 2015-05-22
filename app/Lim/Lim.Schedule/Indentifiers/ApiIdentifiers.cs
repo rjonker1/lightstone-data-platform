@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using System.Text;
+using Lim.Domain.Models;
 using Lim.Domain.Repository;
 using Lim.Enums;
-using Lim.Push.Models;
 using Lim.Push.RestApi;
 using Lim.Schedule.Commands;
 using Newtonsoft.Json;
@@ -56,38 +59,63 @@ namespace Lim.Schedule.Indentifiers
         [DataMember]
         public IntegrationPackageIdentifier Packages { get; private set; }
 
-        private Transaction _transaction;
-        public void Get(IRepository repository)
+        [DataMember] private List<PackageTransaction> _transaction;
+
+        public void Get(ILimRepository repository)
         {
-            //TOOD: Need to get from the repository
-            //_transaction = repository.Get<Transaction>("", new {}).First();
-            _transaction = new Transaction();
+            _transaction = new List<PackageTransaction>();
+            if (!Packages.PackageIds.Any())
+                return;
+
+            Packages.PackageIds.ToList().ForEach(f =>
+            {
+                var response =
+                    repository.Items<PackageResponse>(PackageResponse.SelectStatement, new {@PackageId = f, @ContractId = Client.ClientId}).ToList();
+                if (response.Any())
+                {
+                    _transaction.AddRange(
+                        response.Select(
+                            s =>
+                                new PackageTransaction(s.PackageId, s.UserId, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate, s.RequestId,
+                                    s.Payload, s.HasResponse)));
+                }
+            });
+
         }
 
         public void Push(AuditIntegrationCommand audit)
         {
-            if (Configuration.Authentication.HasAuthentication)
-            {
-                var authenticationClient = new HttpPushClient<Transaction, string>(Configuration.BaseAddress, Configuration.Suffix,
-                    Configuration.Authentication.AuthenticationKey, Configuration.Authentication.AuthenticationToken, GetAuthentication());
-
-                authenticationClient.PostWithNoResponse(_transaction);
-                authenticationClient.Dispose();
-                audit.SetPayload(JsonConvert.SerializeObject(_transaction));
+            if (!_transaction.Any())
                 return;
-            }
 
-            var client = new HttpPushClient<Transaction, string>(Configuration.BaseAddress, Configuration.Suffix);
-            client.PostWithNoResponse(_transaction);
-            client.Dispose();
+            var client = _pushClients.FirstOrDefault(w => w.Key == (Enums.AuthenticationType) Configuration.Authentication.AuthenticationType.Id);
+            if(client.Value == null)
+                throw new Exception(string.Format("Push Client for Authentication Type {0} could not be found", Configuration.Authentication.AuthenticationType.Type));
+
+            client.Value(Configuration).Post(_transaction);
             audit.SetPayload(JsonConvert.SerializeObject(_transaction));
         }
 
-        private AuthenticationHeaderValue GetAuthentication()
+        private readonly IDictionary<Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>> _pushClients = new Dictionary
+            <Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>>()
         {
-            return new AuthenticationHeaderValue("Basic",
-                Convert.ToBase64String(Encoding.UTF8.GetBytes(Configuration.Authentication.Username + ":" + Configuration.Authentication.Password)));
-        }
+            {Enums.AuthenticationType.Basic, Basic},
+            {Enums.AuthenticationType.None, Standard},
+            {Enums.AuthenticationType.Stateless, Stateless}
+        };
+
+        private static readonly Func<ApiConfigurationIdentifier, PushClient> Standard =
+            (configuration) => PushClient.Push(configuration.BaseAddress, configuration.Suffix);
+
+        private static readonly Func<ApiConfigurationIdentifier, PushClient> Basic =
+            (configuration) =>
+                PushClient.PushWithBasic(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
+                    configuration.Authentication.AuthenticationToken, configuration.Authentication.Username, configuration.Authentication.Password);
+
+        private static readonly Func<ApiConfigurationIdentifier, PushClient> Stateless =
+            (configuration) =>
+                PushClient.PushWithStateless(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
+                    configuration.Authentication.AuthenticationToken);
     }
 
     [DataContract]

@@ -49,6 +49,10 @@
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -71,6 +75,7 @@
     <Compile Include="Models\IntegrationPackage.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\PackageResponse.cs" />
+    <Compile Include="Models\PackageTransaction.cs" />
     <Compile Include="Repository\ConnectionFactory.cs" />
     <Compile Include="Repository\IRepositories.cs" />
     <Compile Include="Repository\LimRepository.cs" />
