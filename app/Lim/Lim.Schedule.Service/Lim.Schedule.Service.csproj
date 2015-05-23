@@ -92,6 +92,14 @@
     <Compile Include="Installers\JobInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Jobs\Integrations\Custom\Api\PullJob.cs" />
+    <Compile Include="Jobs\Integrations\Custom\Api\PushJob.cs" />
+    <Compile Include="Jobs\Integrations\Daily\Api\PullJob.cs" />
+    <Compile Include="Jobs\Integrations\Daily\Api\PushJob.cs" />
+    <Compile Include="Jobs\Integrations\EveryMinute\Api\PullJob.cs" />
+    <Compile Include="Jobs\Integrations\EveryMinute\Api\PushJob.cs" />
+    <Compile Include="Jobs\Integrations\Hourly\Api\PullJob.cs" />
+    <Compile Include="Jobs\Integrations\Hourly\Api\PushJob.cs" />
     <Compile Include="Jobs\JobFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ScheduleWorker.cs" />
@@ -133,11 +141,16 @@
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lim.Schedule\Lim.Schedule.csproj">
-      <Project>{8117e14c-45cb-4f67-a6d3-a8e6aa524f47}</Project>
-      <Name>Lim.Schedule</Name>
+    <ProjectReference Include="..\Lim.Schedule.Core\Lim.Schedule.Core.csproj">
+      <Project>{c2001d8a-5cc6-459c-b8fd-3dc87399f1ee}</Project>
+      <Name>Lim.Schedule.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

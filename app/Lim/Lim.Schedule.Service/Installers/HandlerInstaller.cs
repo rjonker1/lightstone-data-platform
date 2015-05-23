@@ -2,7 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Lim.Schedule.Core;
-using Lim.Schedule.Handlers;
+using Lim.Schedule.Core.Handlers;
 
 namespace Lim.Schedule.Service.Installers
 {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data;
 using Common.Logging;
-using Lim.Schedule.Commands;
+using Lim.Schedule.Core.Commands;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
-namespace Lim.Schedule.Audits
+namespace Lim.Schedule.Core.Audits
 {
     public interface IAuditIntegration
     {

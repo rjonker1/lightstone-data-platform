@@ -24,7 +24,7 @@ namespace Lim.Web.UI.Models.Api
             var config = new GetAllConfigurations();
             var clientCommand = new GetClients();
             configuration.Handle(config);
-            client.Handle(new GetClients());
+            client.Handle(clientCommand);
             return config.Configurations.Select(s => new ApiConfiguration(s, clientCommand.Clients.FirstOrDefault(w => w.Id == s.ClientId))).ToList();
         }
 

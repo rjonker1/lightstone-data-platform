@@ -11,5 +11,6 @@ namespace Lim.Web.UI.Handlers
         void Handle(GetApiPushConfiguration command);
         void Handle(GetApiPullConfiguration command);
         void Handle(GetAllConfigurations command);
+        void Handle(GetWeekdays command);
     }
 }

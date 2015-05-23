@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Common.Logging;
 using Lim.Enums;
-using Lim.Schedule.Commands;
 using Lim.Schedule.Core;
+using Lim.Schedule.Core.Commands;
 using Quartz;
 
 namespace Lim.Schedule.Integrations.Hourly.Api

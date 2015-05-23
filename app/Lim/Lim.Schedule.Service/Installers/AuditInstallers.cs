@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Lim.Schedule.Audits;
+using Lim.Schedule.Core.Audits;
 
 namespace Lim.Schedule.Service.Installers
 {

@@ -1,4 +1,4 @@
-﻿using Lim.Schedule.Commands;
+﻿using Lim.Schedule.Core.Commands;
 
 namespace Lim.Schedule.Core
 {

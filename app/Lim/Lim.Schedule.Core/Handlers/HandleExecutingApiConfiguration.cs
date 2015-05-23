@@ -3,11 +3,10 @@ using System.Linq;
 using Common.Logging;
 using Lim.Domain.Repository;
 using Lim.Enums;
-using Lim.Schedule.Audits;
-using Lim.Schedule.Commands;
-using Lim.Schedule.Core;
+using Lim.Schedule.Core.Audits;
+using Lim.Schedule.Core.Commands;
 
-namespace Lim.Schedule.Handlers
+namespace Lim.Schedule.Core.Handlers
 {
     public class HandleExecutingApiConfiguration : IHandleExecutingApiConfiguration
     {

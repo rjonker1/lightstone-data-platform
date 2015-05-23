@@ -127,11 +127,21 @@
                                     <div class="form-group">
                                         <label>Custom Frequency</label>
                                         <div class="input-group bootstrap-timepicker">
-                                            <input id="frequencytime" type="text" class="form-control " />
+                                            <input id="frequencytime" name="CustomFrequency" value="@Model.CustomFrequency.TimeOfDay" type="text" class="form-control " />
                                             <div class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Custom Day</label>
+                                        <select id="customDay" name="CustomDay" class="chosen-select form-control">
+                                            @foreach (var day in Model.Weekdays)
+                                            {
+                                                var isSelected = day.Day == @Model.CustomDay;
+                                                <option id="@day.Id" data-name="@day.Day" selected="@isSelected" value="@day.Day">@day.Day</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="box-footer">

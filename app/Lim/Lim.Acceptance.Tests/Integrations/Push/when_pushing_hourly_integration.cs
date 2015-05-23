@@ -4,10 +4,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using Lim.Domain.Repository;
 using Lim.Enums;
-using Lim.Schedule.Audits;
-using Lim.Schedule.Commands;
 using Lim.Schedule.Core;
-using Lim.Schedule.Handlers;
+using Lim.Schedule.Core.Audits;
+using Lim.Schedule.Core.Commands;
+using Lim.Schedule.Core.Handlers;
 using Xunit.Extensions;
 using IntegrationType = Lim.Enums.IntegrationType;
 

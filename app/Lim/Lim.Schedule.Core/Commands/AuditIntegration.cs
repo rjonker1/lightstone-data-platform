@@ -1,7 +1,7 @@
 ﻿using System;
 using Lim.Enums;
 
-namespace Lim.Schedule.Commands
+namespace Lim.Schedule.Core.Commands
 {
     public class AuditIntegrationCommand
     {

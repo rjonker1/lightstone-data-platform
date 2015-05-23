@@ -19,6 +19,7 @@ namespace Lim.Web.UI.Modules
                 model.SetFrequency(setup, new GetFrequencyTypes());
                 model.SetAuthentication(setup, new GetAuthenticationTypes());
                 model.SetContracts(client, new GetClientContracts(new Guid()));
+                model.SetWeekdays(setup, new GetWeekdays());
                 return View["integrations/api/push", model];
             };
 
@@ -39,6 +40,7 @@ namespace Lim.Web.UI.Modules
                 model.SetFrequency(setup, new GetFrequencyTypes());
                 model.SetAuthentication(setup, new GetAuthenticationTypes());
                 model.SetContracts(client, new GetClientContracts(clientId));
+                model.SetWeekdays(setup, new GetWeekdays());
                 return View["integrations/api/push", model];
             };
 
@@ -58,6 +60,7 @@ namespace Lim.Web.UI.Modules
                 model.SetAuthentication(setup);
                 model.SetFrequency(setup);
                 model.SetContracts(client,new GetClientContracts(Guid.NewGuid()));
+                model.SetWeekdays(setup, new GetWeekdays());
                 return View["integrations/api/pull", model];
             };
 

@@ -76,6 +76,7 @@
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\PackageResponse.cs" />
     <Compile Include="Models\PackageTransaction.cs" />
+    <Compile Include="Models\Weekday.cs" />
     <Compile Include="Repository\ConnectionFactory.cs" />
     <Compile Include="Repository\IRepositories.cs" />
     <Compile Include="Repository\LimRepository.cs" />

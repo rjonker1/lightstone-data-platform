@@ -95,10 +95,12 @@ namespace Lim.Database.Migrations
                 .WithColumn("HasResponse").AsBoolean().NotNullable().WithDefaultValue(false)
                 .WithColumn("CommitDate").AsDateTime().NotNullable().WithDefaultValue(SystemMethods.CurrentUTCDateTime);
 
-            Execute.Script("ScriptInsertActionType.sql"); 
-            Execute.Script("ScriptInsertIntegrationType.sql"); 
-            Execute.Script("ScriptInsertAuthenticationType.sql"); 
-            Execute.Script("ScriptInsertFrequencyType.sql");
+            Create.Table("Weekdays")
+                .WithColumn("Id").AsInt16().Identity().PrimaryKey("PK_Weekday").Indexed()
+                .WithColumn("Day").AsString(10);
+
+
+            Execute.Script("InsertSeedData.sql");
         }
 
         public override void Down()
@@ -114,6 +116,12 @@ namespace Lim.Database.Migrations
 
             Delete.PrimaryKey("PK_Action");
             Delete.Table("Action");
+
+            Delete.PrimaryKey("PK_Weekday");
+            Delete.Table("Weekdays");
+
+            Delete.PrimaryKey("PK_PackageResponses");
+            Delete.Table("PackageResponses");
 
             Delete.PrimaryKey("PK_IntegrationType");
             Delete.Table("IntegrationType");

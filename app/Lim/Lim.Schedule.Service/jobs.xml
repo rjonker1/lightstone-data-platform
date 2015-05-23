@@ -12,7 +12,7 @@
       <name>ApiPushIntegrationHourly</name>
       <group>ApiPushIntegrationHourlyGroup</group>
       <description>Run Push Api Integrations on an Hourly Basis</description>
-      <job-type>Lim.Schedule.Integrations.Hourly.Api.PushJob, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.Hourly.Api.PushJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
@@ -32,7 +32,7 @@
       <name>ApiPushIntegrationEveryMinute</name>
       <group>ApiPushIntegrationEveryMinuteGroup</group>
       <description>Run Push Api Integrations on an Every Minute Basis</description>
-      <job-type>Lim.Schedule.Integrations.EveryMinute.Api.PushJob, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.EveryMinute.Api.PushJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
@@ -40,7 +40,7 @@
       <cron>
         <name>ApiPushIntegrationEveryMinuteTrigger</name>
         <job-name>ApiPushIntegrationEveryMinute</job-name>
-        <job-group>ApiIntegrationEveryMinuteGroup</job-group>
+        <job-group>ApiPushIntegrationEveryMinuteGroup</job-group>
        <!-- To run every minute  -->
         <cron-expression>0 0/1 * * * ?</cron-expression>
       </cron>
@@ -52,7 +52,7 @@
       <name>ApiPushIntegrationDaily</name>
       <group>ApiPushIntegrationDailyGroup</group>
       <description>Run Push Api Integrations on an Daily Basis</description>
-      <job-type>Lim.Schedule.Integrations.Daily.Api.PushJob, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.Daily.Api.PushJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
@@ -69,10 +69,30 @@
 
   <schedule>
     <job>
+      <name>ApiPushIntegrationCustom</name>
+      <group>ApiPushIntegrationCustomGroup</group>
+      <description>Run Push Api Integrations for Custom</description>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.Custom.Api.PushJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>ApiPushIntegrationCustomTrigger</name>
+        <job-name>ApiPushIntegrationCustom</job-name>
+        <job-group>ApiPushIntegrationCustomGroup</job-group>
+        <!-- To run every fifteen minutes  -->
+        <cron-expression>0 0/15 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+
+  <schedule>
+    <job>
       <name>ApiPullIntegrationHourly</name>
       <group>ApiPullIntegrationHourlyGroup</group>
       <description>Run Pull Api Integrations on an Hourly Basis</description>
-      <job-type>Lim.Schedule.Integrations.Hourly.Api.PullJob, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.Hourly.Api.PullJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
@@ -92,7 +112,7 @@
       <name>ApiPullIntegrationEveryMinute</name>
       <group>ApiPullIntegrationEveryMinuteGroup</group>
       <description>Run Pull Api Integrations on an Every Minute Basis</description>
-      <job-type>Lim.Schedule.Integrations.EveryMinute.Api.PullJob, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.EveryMinute.Api.PullJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
@@ -112,7 +132,7 @@
       <name>ApiPullIntegrationDaily</name>
       <group>ApiPullIntegrationDailyGroup</group>
       <description>Run Pull Api Integrations on an Daily Basis</description>
-      <job-type>Lim.Schedule.Integrations.Daily.Api.PullJob, Lightstone.DataPlatform.Lim.Schedule</job-type>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.Daily.Api.PullJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
@@ -123,6 +143,26 @@
         <job-group>ApiPullIntegrationDailyGroup</job-group>
         <!--To run at 8pm every day -->
         <cron-expression>0 0 20 * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+
+  <schedule>
+    <job>
+      <name>ApiPullIntegrationCustom</name>
+      <group>ApiPullIntegrationCustomGroup</group>
+      <description>Run Pull Api Integrations for Custom</description>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.Custom.Api.PullJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>ApiPullIntegrationCustomTrigger</name>
+        <job-name>ApiPullIntegrationCustom</job-name>
+        <job-group>ApiPullIntegrationCustomGroup</job-group>
+        <!-- To run every fifteen minutes  -->
+        <cron-expression>0 0/15 * * * ?</cron-expression>
       </cron>
     </trigger>
   </schedule>

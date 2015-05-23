@@ -23,6 +23,16 @@ namespace Lim.Web.UI.Commands
         public IEnumerable<FrequencyType> Frequency { get; private set; }
     }
 
+    public class GetWeekdays
+    {
+        public void Set(IEnumerable<Weekday> weekdays)
+        {
+            Weekdays = weekdays;
+        }
+
+        public IEnumerable<Weekday> Weekdays { get; private set; }
+    }
+
     public class GetIntegrationTypes
     {
     }

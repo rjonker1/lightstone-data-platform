@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Lim.Schedule.Indentifiers
+namespace Lim.Schedule.Core.Identifiers
 {
     [DataContract]
     public class IntegrationActionIdentifier

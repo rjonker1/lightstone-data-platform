@@ -67,29 +67,15 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Audits\IAuditIntegration.cs" />
     <Compile Include="Builders\CronExpressionBuilder.cs" />
-    <Compile Include="Commands\AuditIntegration.cs" />
-    <Compile Include="Commands\ExecuteConfiguration.cs" />
-    <Compile Include="Commands\FetchConfiguration.cs" />
-    <Compile Include="Core\IHandleConfigurationExecution.cs" />
-    <Compile Include="Core\IHandleFetchingConfiguration.cs" />
-    <Compile Include="Handlers\HandleFetchingApiPullConfiguration.cs" />
     <Compile Include="Integrations\Custom\Api\PullJob.cs" />
     <Compile Include="Integrations\Custom\Api\PushJob.cs" />
     <Compile Include="Integrations\Daily\Api\PullJob.cs" />
     <Compile Include="Integrations\Daily\Api\PushJob.cs" />
     <Compile Include="Integrations\EveryMinute\Api\PullJob.cs" />
     <Compile Include="Integrations\EveryMinute\Api\PushJob.cs" />
-    <Compile Include="Handlers\HandleExecutingApiConfiguration.cs" />
-    <Compile Include="Handlers\HandleFetchingApiPushConfiguration.cs" />
     <Compile Include="Integrations\Hourly\Api\PullJob.cs" />
     <Compile Include="Integrations\Hourly\Api\PushJob.cs" />
-    <Compile Include="Indentifiers\ApiIdentifiers.cs" />
-    <Compile Include="Indentifiers\IntegrationActionIdentifiers.cs" />
-    <Compile Include="Indentifiers\IntegrationClientIdentifier.cs" />
-    <Compile Include="Indentifiers\IntegrationPackageIdentifier.cs" />
-    <Compile Include="Indentifiers\IntegrationTypeIdentifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -110,6 +96,10 @@
     <ProjectReference Include="..\Lim.Push\Lim.Push.csproj">
       <Project>{d7b63a79-2bc8-4bb2-9510-322c8b5d9efa}</Project>
       <Name>Lim.Push</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Schedule.Core\Lim.Schedule.Core.csproj">
+      <Project>{c2001d8a-5cc6-459c-b8fd-3dc87399f1ee}</Project>
+      <Name>Lim.Schedule.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim\Lim.csproj">
       <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>

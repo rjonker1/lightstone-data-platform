@@ -48,7 +48,12 @@ namespace Lim.Web.UI.Handlers
 
         public void Handle(GetAllConfigurations command)
         {
-            command.Set(_repository.Items<Configuration>(Configuration.Select, new { }));
+            command.Set(_repository.Items<Configuration>(Configuration.Select, new {}));
+        }
+
+        public void Handle(GetWeekdays command)
+        {
+            command.Set(Weekday.Weekdays());
         }
     }
 }

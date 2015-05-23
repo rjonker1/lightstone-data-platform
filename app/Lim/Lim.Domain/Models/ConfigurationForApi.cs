@@ -9,6 +9,12 @@ namespace Lim.Domain.Models
         public static readonly string Select =
             @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType";
 
+        public static readonly string SelectWithContract =
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and c.ContractId = @ContractId and package.Id = @PackageId";
+
+        public static readonly string SelectWithCustomDay =
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationTypeand and c.CustomFrequencyDay = @CustomFrequencyDay and c.CustomFrequencyTime >= Cast(CONVERT(VARCHAR(5),Dateadd(mi,-1, getdate()),108) as time) and c.CustomFrequencyTime <= Cast(CONVERT(VARCHAR(5),Dateadd(mi,1, getdate()),108) as time)";
+        
         [DataMember]
         public long Id { get; set; }
 
@@ -68,6 +74,13 @@ namespace Lim.Domain.Models
         public static readonly string Select =
             @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType";
 
+        public static readonly string SelectWithContract =
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and c.ContractId = @ContractId and package.Id = @PackageId";
+
+        public static readonly string SelectWithCustomDay =
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationTypeand and c.CustomFrequencyDay = @CustomFrequencyDay and c.CustomFrequencyTime >= Cast(CONVERT(VARCHAR(5),Dateadd(mi,-1, getdate()),108) as time) and c.CustomFrequencyTime <= Cast(CONVERT(VARCHAR(5),Dateadd(mi,1, getdate()),108) as time)";
+
+        
         [DataMember]
         public long Id { get; set; }
 

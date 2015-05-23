@@ -65,5 +65,9 @@ namespace Lim.Web.UI.Models.Api
 
         [DataMember]
         public Guid PackageId { get; set; }
+        [DataMember]
+        public TimeSpan CustomFrequencyTime { get; set; }
+        [DataMember]
+        public string CustomFrequencyDay { get; set; }
     }
 }

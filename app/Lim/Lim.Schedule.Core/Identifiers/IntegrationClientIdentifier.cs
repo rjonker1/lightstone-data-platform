@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Lim.Schedule.Indentifiers
+namespace Lim.Schedule.Core.Identifiers
 {
     public class IntegrationClientIdentifier
     {

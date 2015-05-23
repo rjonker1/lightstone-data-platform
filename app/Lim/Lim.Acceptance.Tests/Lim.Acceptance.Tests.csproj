@@ -134,9 +134,9 @@
       <Project>{d7b63a79-2bc8-4bb2-9510-322c8b5d9efa}</Project>
       <Name>Lim.Push</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lim.Schedule\Lim.Schedule.csproj">
-      <Project>{8117e14c-45cb-4f67-a6d3-a8e6aa524f47}</Project>
-      <Name>Lim.Schedule</Name>
+    <ProjectReference Include="..\Lim.Schedule.Core\Lim.Schedule.Core.csproj">
+      <Project>{c2001d8a-5cc6-459c-b8fd-3dc87399f1ee}</Project>
+      <Name>Lim.Schedule.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim.Test.Helper\Lim.Test.Helper.csproj">
       <Project>{87a87c68-50ff-4df7-8318-ad793433b80e}</Project>

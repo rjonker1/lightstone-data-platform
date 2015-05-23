@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lim.Schedule.Indentifiers
+namespace Lim.Schedule.Core.Identifiers
 {
     public class IntegrationPackageIdentifier
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Lim.Schedule.Indentifiers;
+using Lim.Schedule.Core.Identifiers;
 
-namespace Lim.Schedule.Commands
+namespace Lim.Schedule.Core.Commands
 {
     public class ExecuteApiPushConfigurationCommand
     {
@@ -15,7 +15,11 @@ namespace Lim.Schedule.Commands
 
     public class ExecuteApiPullConfigurationCommand
     {
-        public ExecuteApiPullConfigurationCommand()
-        { }
+        public readonly IEnumerable<ApiPullIntegration> Configurations;
+
+        public ExecuteApiPullConfigurationCommand(IEnumerable<ApiPullIntegration> configurations)
+        {
+            Configurations = configurations;
+        }
     }
 }

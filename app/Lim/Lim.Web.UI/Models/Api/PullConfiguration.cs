@@ -55,6 +55,9 @@ namespace Lim.Web.UI.Models.Api
         public string AuthenticationToken { get; set; }
         public string AuthenticationKey { get; set; }
         public int AuthenticationType { get; set; }
+        public string ClientIdAccountNumber { get; set; }
+        public TimeSpan CustomFrequency { get; set; }
+        public string CustomDay { get; set; }
 
         public IReadOnlyCollection<Client> SelectableClients;
 
@@ -63,6 +66,8 @@ namespace Lim.Web.UI.Models.Api
         public IReadOnlyCollection<FrequencyType> Frequency;
 
         public IReadOnlyCollection<Contract> SelectableContracts;
+
+        public IReadOnlyCollection<Weekday> Weekdays;
 
         public void SetClients(IHandleGettingClient handler)
         {
@@ -89,6 +94,11 @@ namespace Lim.Web.UI.Models.Api
         {
             handler.Handle(command);
             SelectableContracts = command.Contracts.ToList();
+        }
+        public void SetWeekdays(IHandleGettingConfiguration handler, GetWeekdays command)
+        {
+            handler.Handle(command);
+            Weekdays = command.Weekdays.ToList();
         }
     }
 }

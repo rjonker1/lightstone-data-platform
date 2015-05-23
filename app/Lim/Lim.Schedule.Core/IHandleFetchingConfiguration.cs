@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Lim.Schedule.Commands;
-using Lim.Schedule.Indentifiers;
-
+using Lim.Schedule.Core.Commands;
+using Lim.Schedule.Core.Identifiers;
 namespace Lim.Schedule.Core
 {
     public interface IHandleFetchingApiPushConfiguration
@@ -9,6 +8,8 @@ namespace Lim.Schedule.Core
         IEnumerable<ApiPushIntegration> Configurations { get; }
         bool HasConfiguration { get; }
         void Handle(FetchConfigurationCommand command);
+        void Handle(FetchConfigurationForClientCommand command);
+        void Handle(FetchConfigurationForCustomCommand command);
     }
 
     public interface IHandleFetchingApiPullConfiguration
@@ -16,5 +17,7 @@ namespace Lim.Schedule.Core
         IEnumerable<ApiPullIntegration> Configurations { get; }
         bool HasConfiguration { get; }
         void Handle(FetchConfigurationCommand command);
+        void Handle(FetchConfigurationForClientCommand command);
+        void Handle(FetchConfigurationForCustomCommand command);
     }
 }

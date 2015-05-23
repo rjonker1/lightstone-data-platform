@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Runtime.Serialization;
-using System.Text;
 using Lim.Domain.Models;
 using Lim.Domain.Repository;
 using Lim.Enums;
 using Lim.Push.RestApi;
-using Lim.Schedule.Commands;
+using Lim.Schedule.Core.Commands;
 using Newtonsoft.Json;
 
-namespace Lim.Schedule.Indentifiers
+namespace Lim.Schedule.Core.Identifiers
 {
     [DataContract]
     public class ApiPullIntegration

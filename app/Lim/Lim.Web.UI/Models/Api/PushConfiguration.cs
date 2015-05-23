@@ -5,6 +5,7 @@ using Lim.Domain.Models;
 using Lim.Enums;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
+using Microsoft.SqlServer.Server;
 using AuthenticationType = Lim.Domain.Models.AuthenticationType;
 
 namespace Lim.Web.UI.Models.Api
@@ -56,6 +57,8 @@ namespace Lim.Web.UI.Models.Api
             AuthenticationKey = configuration.First().AuthenticationKey;
             AuthenticationType = configuration.First().AuthenticationType;
             ClientIdAccountNumber = string.Format("{0}|{1}", ClientId, AccountNumber);
+            CustomFrequency = DateTime.Now.Date + configuration.First().CustomFrequencyTime;
+            CustomDay = configuration.First().CustomFrequencyDay;
         }
 
         public static PushConfiguration Existing(IHandleGettingConfiguration handler, GetApiPushConfiguration command)
@@ -99,6 +102,12 @@ namespace Lim.Web.UI.Models.Api
             SelectableContracts = command.Contracts.ToList();
         }
 
+        public void SetWeekdays(IHandleGettingConfiguration handler, GetWeekdays command)
+        {
+            handler.Handle(command);
+            Weekdays = command.Weekdays.ToList();
+        }
+
         public PushConfiguration SplitAccountAndClientId()
         {
             if (string.IsNullOrEmpty(ClientIdAccountNumber))
@@ -133,6 +142,8 @@ namespace Lim.Web.UI.Models.Api
         public string AuthenticationKey { get; set; }
         public int AuthenticationType { get; set; }
         public string ClientIdAccountNumber { get; set; }
+        public DateTime CustomFrequency { get; set; }
+        public string CustomDay { get; set; }
 
         public IReadOnlyCollection<Client> SelectableClients;
 
@@ -144,6 +155,6 @@ namespace Lim.Web.UI.Models.Api
 
         public IReadOnlyCollection<FrequencyType> Frequency;
 
-        
+        public IReadOnlyCollection<Weekday> Weekdays;
     }
 }
