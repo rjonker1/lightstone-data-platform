@@ -1,6 +1,7 @@
 ﻿@using System
 @using System.Linq
 @*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using DataPlatform.Shared.Repositories
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
 @using UserManagement.Domain.Dtos
@@ -18,27 +19,51 @@
 
 
 <script>
-    
-    var userRoles = [];
+
+    var externalRoles = [];
     var internalRoles = [];
+    var roleIds = [];
+    var selectedRoles = [];
+
+    @*@if (Model.RoleIds.Any()) { 
+        
+        foreach (var roleId in Model.RoleIds)
+        {
+            @:roleIds.push('@roleId');
+
+            if (ViewBag.Roles.Value == roleId)
+            {
+                foreach (var rolesItem in ViewBag.Roles)
+                {
+
+                    @:selectedRoles.push({ 'label': '@rolesItem.Text', 'value': '@rolesItem.Value', 'type': 'user' });
+                  
+                }
+            }
+        }
+        
+        //@:$(document).onload() { $('#rolesSelect').append($('<option>', { value: internalRoles[role].value, text: internalRoles[role].label })); }
+    }*@
 
     @foreach (SelectListItem userItem in ViewBag.UserTypes.Value)
     {
         foreach (SelectListItem roleItem in ViewBag.Roles.Value)
         {
-            if (userItem.Text == "User" && (roleItem.Text == "Owner" || roleItem.Text == "SuperUser" || roleItem.Text == "User"))
+
+            if (userItem.Text == "External" && (roleItem.Text == "Owner" || roleItem.Text == "SuperUser" || roleItem.Text == "User"))
             {
-                @:userRoles.push({ 'id': 'test', 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'user' });
-            }
+                @:externalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'user' });
+                    }
 
             if (userItem.Text == "Internal" && (roleItem.Text == "Admin" || roleItem.Text == "AccountManager" || roleItem.Text == "ProductManager" || roleItem.Text == "Support"))
             {
                 @:internalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'internal' });
-            }
+                    }
         }
     }
 
     $('#userTypeSelect').on("change", function () {
+
         $('#rolesSelect').empty();
         if ($('#userTypeSelect option:selected').text() == 'Internal') {
             for (var role in internalRoles) {
@@ -46,9 +71,9 @@
             }
             $("#rolesSelect").trigger("chosen:updated");
         }
-        if ($('#userTypeSelect option:selected').text() == 'User') {
-            for (var role in userRoles) {
-                $('#rolesSelect').append($('<option>', { value: userRoles[role].value, text: userRoles[role].label }));
+        if ($('#userTypeSelect option:selected').text() == 'External') {
+            for (var role in externalRoles) {
+                $('#rolesSelect').append($('<option>', { value: externalRoles[role].value, text: externalRoles[role].label }));
             }
             $("#rolesSelect").trigger("chosen:updated");
         }
@@ -173,7 +198,7 @@
                     </select>
                 </div>
                 <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.UserTypeId)
+                    @Html.ValidationMessageFor(x => x.UserTypeId)  
                 </div>
 
             </div>
