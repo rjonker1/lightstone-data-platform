@@ -20,9 +20,9 @@ namespace Lim.Schedule.Service.Installers
                 Component.For<IDbConnection>()
                     .UsingFactoryMethod(() => new SqlConnection(ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString())));
 
-            container.Register(Component.For<IRepository>().UsingFactoryMethod(() => new Repository(
-                new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString()))));
+            //container.Register(Component.For<IRepository>().UsingFactoryMethod(() => new Repository(
+            //    new SqlConnection(
+            //        ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString()))));
 
             container.Register(Component.For<ILimRepository>().UsingFactoryMethod(() => new LimRepository(
                new SqlConnection(

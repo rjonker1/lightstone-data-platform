@@ -11,10 +11,10 @@ namespace Lim.Schedule.Core.Handlers
 {
     public class HandleFetchingApiPushConfiguration : IHandleFetchingApiPushConfiguration
     {
-        private readonly IRepository _repository;
+        private readonly ILimRepository _repository;
         private readonly ILog _log;
 
-        public HandleFetchingApiPushConfiguration(IRepository repository)
+        public HandleFetchingApiPushConfiguration(ILimRepository repository)
         {
             _repository = repository;
             _log = LogManager.GetLogger(GetType());
@@ -25,7 +25,7 @@ namespace Lim.Schedule.Core.Handlers
             try
             {
                 var configs =
-                    _repository.Get<ApiPushConfiguration>(ApiPushConfiguration.Select,
+                    _repository.Items<ApiPushConfiguration>(ApiPushConfiguration.Select,
                         new {@FrequencyType = (int) command.Frequency, @Action = (int) command.Action, @IntegrationType = (int) command.Type})
                         .ToList();
                 _log.InfoFormat("{0} {1} Api Configurations will be handled", configs.Count(), command.Frequency.ToString());
@@ -65,7 +65,7 @@ namespace Lim.Schedule.Core.Handlers
             try
             {
                 var configs =
-                    _repository.Get<ApiPushConfiguration>(ApiPushConfiguration.SelectWithCustomDay,
+                    _repository.Items<ApiPushConfiguration>(ApiPushConfiguration.SelectWithCustomDay,
                         new { @FrequencyType = (int)command.Frequency, @Action = (int)command.Action, @IntegrationType = (int)command.Type, @CustomFrequencyDay = command.CustomDay})
                         .ToList();
                 _log.InfoFormat("{0} {1} Api Custom Push Configurations on {2} will be handled", configs.Count(), command.Frequency.ToString(), command.CustomDay);
@@ -104,7 +104,7 @@ namespace Lim.Schedule.Core.Handlers
             try
             {
                 var configs =
-                    _repository.Get<ApiPushConfiguration>(ApiPushConfiguration.SelectWithContract,
+                    _repository.Items<ApiPushConfiguration>(ApiPushConfiguration.SelectWithContract,
                         new
                         {
                             @FrequencyType = (int) command.Frequency,

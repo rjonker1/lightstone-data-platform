@@ -23,7 +23,7 @@ namespace Lim.Acceptance.Tests.Bus
         private readonly IAdvancedBus _bus;
         private Exception _exception;
 
-        private readonly IRepository _repository;
+        private readonly ILimRepository _repository;
         private readonly IDbConnection _connection;
 
         private readonly Guid _packageId = new Guid("390CD416-FC52-4A0B-98CE-8E8940212354");
@@ -41,7 +41,7 @@ namespace Lim.Acceptance.Tests.Bus
 
             _connection = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString());
-            _repository = new Repository(_connection);
+            _repository = new LimRepository(_connection);
         }
 
         public override void Observe()
@@ -65,7 +65,7 @@ namespace Lim.Acceptance.Tests.Bus
         [Observation]
         public void then_response_should_exist_in_the_database()
         {
-            var response = _repository.Get<PackageResponse>("select * from PackageResponses where RequestId = @RequestId",
+            var response = _repository.Items<PackageResponse>("select * from PackageResponses where RequestId = @RequestId",
                 new {@RequestId = _requestId}).ToList();
             response.ShouldNotBeNull();
             response.Count.ShouldEqual(1);

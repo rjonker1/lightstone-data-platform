@@ -15,8 +15,8 @@ namespace Lim.Domain.Repository
         TItem Item<TItem>(string sql, object param) where TItem : class;
     }
 
-    public interface IRepository
-    {
-        IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class;
-    }
+    //public interface IRepository
+    //{
+    //    IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class;
+    //}
 }
