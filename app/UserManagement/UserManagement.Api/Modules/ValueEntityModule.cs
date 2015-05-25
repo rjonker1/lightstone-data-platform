@@ -7,6 +7,7 @@ using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
+using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
@@ -18,7 +19,7 @@ namespace UserManagement.Api.Modules
 {
     public class ValueEntityModule : SecureModule
     {
-        public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
+        public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities, CurrentNancyContext currentNancyContext)
         {
             Get["/ValueEntities/{type}"] = parameters =>
             {
@@ -44,6 +45,9 @@ namespace UserManagement.Api.Modules
             Post["/ValueEntities"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();
+                dto.Created = DateTime.UtcNow;
+                dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+
                 var entity = (ValueEntity)Mapper.Map(dto, null, typeof(ValueEntityDto), Type.GetType(dto.AssemblyQualifiedName));
 
                 bus.Publish(new CreateUpdateEntity(entity, "Read"));
@@ -69,9 +73,15 @@ namespace UserManagement.Api.Modules
                 return Response.AsJson(new {data = dto});
             };
 
-            Put["/ValueEntities/{id}"] = _ =>
+            Put["/ValueEntities/{id}"] = parameters =>
             {
+                var dbDto = Mapper.Map<ValueEntity, ValueEntityDto>(entities.Get((Guid)parameters.id));
                 var dto = this.Bind<ValueEntityDto>();
+                dto.Created = dbDto.Created;
+                dto.CreatedBy = dbDto.CreatedBy;
+                dto.Modified = DateTime.UtcNow;
+                dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+
                 var valueEntity = entities.First(x => x.Id == dto.Id);
                 var entity = (ValueEntity)Mapper.Map(dto, valueEntity, typeof(ValueEntityDto), valueEntity.GetType());
 

@@ -9,6 +9,7 @@ using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
+using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
@@ -22,7 +23,7 @@ namespace UserManagement.Api.Modules
 {
     public class CustomerModule : SecureModule
     {
-        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<CreateSource> createSources)
+        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<CreateSource> createSources, CurrentNancyContext currentNancyContext)
         {
             Get["/Customers"] = _ =>
             {
@@ -45,6 +46,8 @@ namespace UserManagement.Api.Modules
             Post["/Customers"] = _ =>
             {
                 var dto = this.BindAndValidate<CustomerDto>();
+                dto.Created = DateTime.UtcNow;
+                dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 
                 if (ModelValidationResult.IsValid)
                 {
@@ -68,9 +71,14 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Put["/Customers/{id}"] = _ =>
+            Put["/Customers/{id}"] = parameters =>
             {
+                var dbDto = Mapper.Map<Customer, CustomerDto>(customers.Get((Guid)parameters.id));
                 var dto = this.BindAndValidate<CustomerDto>();
+                dto.Created = dbDto.Created;
+                dto.CreatedBy = dbDto.CreatedBy;
+                dto.Modified = DateTime.UtcNow;
+                dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 
                 if (ModelValidationResult.IsValid)
                 {

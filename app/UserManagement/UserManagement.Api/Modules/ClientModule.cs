@@ -9,6 +9,7 @@ using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
+using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -20,7 +21,7 @@ namespace UserManagement.Api.Modules
 {
     public class ClientModule : SecureModule
     {
-        public ClientModule(IBus bus, IAdvancedBus eBus, IClientRepository clients)
+        public ClientModule(IBus bus, IAdvancedBus eBus, IClientRepository clients, CurrentNancyContext currentNancyContext)
         {
             Get["/Clients"] = _ =>
             {
@@ -44,6 +45,8 @@ namespace UserManagement.Api.Modules
             Post["/Clients"] = _ =>
             {
                 var dto = this.BindAndValidate<ClientDto>();
+                dto.Created = DateTime.UtcNow;
+                dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 
                 if (ModelValidationResult.IsValid)
                 {
@@ -65,9 +68,14 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Put["/Clients/{id}"] = _ =>
+            Put["/Clients/{id}"] = parameters =>
             {
+                var dbDto = Mapper.Map<Client, ClientDto>(clients.Get((Guid)parameters.id));
                 var dto = this.BindAndValidate<ClientDto>();
+                dto.Created = dbDto.Created;
+                dto.CreatedBy = dbDto.CreatedBy;
+                dto.Modified = DateTime.UtcNow;
+                dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 
                 if (ModelValidationResult.IsValid)
                 {
