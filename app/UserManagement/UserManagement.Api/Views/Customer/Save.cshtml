@@ -14,6 +14,9 @@
     
     @Html.ValidationSummary("Validation Results")
     
+    @Html.HiddenFor(x => x.Created)
+    @Html.HiddenFor(x => x.CreatedBy)
+    
     @Html.Partial("Customer", Model)
     @Html.Partial("Billing", Model)
     @Html.Partial("ContactDetail", Model)

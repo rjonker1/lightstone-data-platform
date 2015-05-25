@@ -21,6 +21,8 @@ namespace UserManagement.Domain.Dtos
         [Display(Name = "Surename is required")]
         public virtual string LastName { get; set; }
         public virtual string IdNumber { get; set; }
+        [Required]
+        [Display(Name = "Contact number is required")]
         public virtual string ContactNumber { get; set; }
         [Required]
         [Display(Name = "Username is required")]

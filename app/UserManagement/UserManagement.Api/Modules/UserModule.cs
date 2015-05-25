@@ -8,7 +8,9 @@ using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using NHibernate.Context;
 using Shared.BuildingBlocks.Api.Security;
+using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -20,7 +22,7 @@ namespace UserManagement.Api.Modules
 {
     public class UserModule : SecureModule
     {
-        public UserModule(IBus bus, IAdvancedBus eBus, IUserRepository users)
+        public UserModule(IBus bus, IAdvancedBus eBus, IUserRepository users, CurrentNancyContext currentNancyContext)
         {
             Get["/Users/All"] = _ => Response.AsJson(Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users));
 
@@ -46,6 +48,8 @@ namespace UserManagement.Api.Modules
             Post["/Users"] = _ =>
             {
                 var dto = this.BindAndValidate<UserDto>();
+                dto.Created = DateTime.UtcNow;
+                dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 
                 if (ModelValidationResult.IsValid)
                 {
@@ -75,9 +79,11 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Put["/Users/{id}"] = _ =>
+            Put["/Users/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<UserDto>();
+                dto.Modified = DateTime.UtcNow;
+                dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 
                 if (ModelValidationResult.IsValid)
                 {
