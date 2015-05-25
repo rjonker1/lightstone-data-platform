@@ -549,6 +549,7 @@
     <Compile Include="Helpers\NancyRazorHelpers\Tag\HtmlTag.cs" />
     <Compile Include="Helpers\NancyRazorHelpers\Tag\HtmlTagBuilder.cs" />
     <Compile Include="Helpers\NancyRazorHelpers\ValidationMessageExtensions.cs" />
+    <Compile Include="Helpers\Nancy\CurrentNancyContext.cs" />
     <Compile Include="Helpers\Security\RedisAuthenticator.cs" />
     <Compile Include="Helpers\Security\UmAuthenticator.cs" />
     <Compile Include="Installers\ApiClientInstaller.cs" />
@@ -557,6 +558,7 @@
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\CommandInstaller.cs" />
+    <Compile Include="Installers\CurrentNancyContextInstaller.cs" />
     <Compile Include="Installers\HashProviderInstaller.cs" />
     <Compile Include="Installers\HelperInstaller.cs" />
     <Compile Include="Installers\NHibernateInstaller.cs" />

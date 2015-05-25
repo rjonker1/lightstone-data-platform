@@ -18,6 +18,7 @@ using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using UserManagement.Api.Helpers.Extensions;
+using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -60,7 +61,8 @@ namespace UserManagement.Api
                 new RedisInstaller(),
                 new AuthenticationInstaller(),
                 new HashProviderInstaller(),
-                new AuthInstaller()
+                new AuthInstaller(),
+                new CurrentNancyContextInstaller()
                 );
 
             //Drop create
@@ -87,7 +89,11 @@ namespace UserManagement.Api
 
                 var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
                 if (user != null)
+                {
                     nancyContext.CurrentUser = user;
+                    container.Resolve<CurrentNancyContext>().NancyContext = nancyContext;
+                }
+                    
                 return null;
             });
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
