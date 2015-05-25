@@ -1,1 +1,1 @@
-Lightstone.DataPlatform.Lace.Caching.Manager.Service.exe uninstall
+Lightstone.DataPlatform.Lim.Schedule.Service.exe uninstall

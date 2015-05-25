@@ -1,1 +1,1 @@
-Lightstone.DataPlatform.Lace.Caching.Manager.Service.exe install
+Lightstone.DataPlatform.Lim.Schedule.Service.exe install
