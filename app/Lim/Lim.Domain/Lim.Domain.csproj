@@ -80,7 +80,6 @@
     <Compile Include="Repository\ConnectionFactory.cs" />
     <Compile Include="Repository\IRepositories.cs" />
     <Compile Include="Repository\LimRepository.cs" />
-    <None Include="Repository\Repository.cs.old" />
     <Compile Include="Repository\UserManangementRepository.cs" />
   </ItemGroup>
   <ItemGroup>
