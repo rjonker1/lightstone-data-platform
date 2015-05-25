@@ -37,7 +37,8 @@ function initializeCusomerRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                context.redirect('#/Customers');
+
+                if (!data.contains('Validation')) { context.redirect('#/Customers'); }
             }
         });
         // !!! Important !!! 
@@ -58,7 +59,7 @@ function initializeCusomerRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                context.redirect('#/Customers');
+                if (!data.contains('Validation')) { context.redirect('#/Customers'); }
             }
         });
         // !!! Important !!! 
@@ -93,7 +94,7 @@ function initializeClientRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                context.redirect('#/Clients');
+                if (!data.contains('Validation')) { context.redirect('#/Clients'); }
             }
         });
         // !!! Important !!! 
@@ -114,7 +115,7 @@ function initializeClientRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                context.redirect('#/Clients');
+                if (!data.contains('Validation')) { context.redirect('#/Clients'); }
             }
         });
         // !!! Important !!! 
@@ -149,7 +150,7 @@ function initializeUserRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                context.redirect('#/Users');
+                if (!data.contains('Validation')) { context.redirect('#/Users'); }
             }
         });
         // !!! Important !!! 
@@ -170,7 +171,7 @@ function initializeUserRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                context.redirect('#/Users');
+                if (!data.contains('Validation')) { context.redirect('#/Users'); }
             }
         });
         /// !!! Important !!! 
@@ -205,7 +206,7 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);+
                 initializePlugins();
-                context.redirect('#/Contracts');
+                if (!data.contains('Validation')) { context.redirect('#/Contracts'); }
             }
         });
         // !!! Important !!! 
@@ -226,6 +227,7 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
+                if (!data.contains('Validation')) { context.redirect('#/Contracts'); }
             }
         });
         // !!! Important !!! 
@@ -256,7 +258,7 @@ function initializeLookupRoutes(sammy) {
     sammy.post('/ValueEntities', function (context) {
         $(context.target).ajaxSubmit({
             success: function (response) {
-                context.redirect('/#/ValueEntities/' + response);
+                if (!data.contains('Validation')) { context.redirect('#/ValueEntities/' + response); }
             }
         });
         // !!! Important !!! 
@@ -268,7 +270,7 @@ function initializeLookupRoutes(sammy) {
         $(context.target).ajaxSubmit({
             type: method,
             success: function (response) {
-                context.redirect('/#/ValueEntities/' + response);
+                if (!data.contains('Validation')) { context.redirect('#/ValueEntities/' + response); }
             }
         });
         // !!! Important !!! 

@@ -1,7 +1,6 @@
 ﻿@using System
 @using System.Linq
 @*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
-@using DataPlatform.Shared.Repositories
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
 @using UserManagement.Domain.Dtos
@@ -25,25 +24,28 @@
     var roleIds = [];
     var selectedRoles = [];
 
-    @*@if (Model.RoleIds.Any()) { 
-        
+    @if (!isCreate) {
+
         foreach (var roleId in Model.RoleIds)
         {
             @:roleIds.push('@roleId');
 
-            if (ViewBag.Roles.Value == roleId)
+            foreach (var viewBagRole in ViewBag.Roles)
             {
-                foreach (var rolesItem in ViewBag.Roles)
-                {
 
-                    @:selectedRoles.push({ 'label': '@rolesItem.Text', 'value': '@rolesItem.Value', 'type': 'user' });
-                  
-                }
+                if (viewBagRole.Value == roleId.ToString() && Model.UserTypeValue == "Internal")
+                {
+                    @:selectedRoles.push({ 'label': '@viewBagRole.Text', 'value': '@viewBagRole.Value', 'type': 'Internal' });
+                                                                                    }
+
+                if (viewBagRole.Value == roleId.ToString() && Model.UserTypeValue == "External")
+                {
+                    @:selectedRoles.push({ 'label': '@viewBagRole.Text', 'value': '@viewBagRole.Value', 'type': 'External' });
+                                                                                }
             }
         }
-        
-        //@:$(document).onload() { $('#rolesSelect').append($('<option>', { value: internalRoles[role].value, text: internalRoles[role].label })); }
-    }*@
+
+    }
 
     @foreach (SelectListItem userItem in ViewBag.UserTypes.Value)
     {
@@ -52,31 +54,145 @@
 
             if (userItem.Text == "External" && (roleItem.Text == "Owner" || roleItem.Text == "SuperUser" || roleItem.Text == "User"))
             {
-                @:externalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'user' });
-                    }
+                @:externalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'External' });
+                                                                                                    }
 
             if (userItem.Text == "Internal" && (roleItem.Text == "Admin" || roleItem.Text == "AccountManager" || roleItem.Text == "ProductManager" || roleItem.Text == "Support"))
             {
-                @:internalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'internal' });
-                    }
+                @:internalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'Internal' });
+                                                                                                        }
         }
     }
+
+    $(document).ready(function () {
+
+        $('#rolesSelect').empty();
+        if ($('#userTypeSelect option:selected').text() == 'Internal') {
+
+            if (selectedRoles.length > 0) {
+
+                for (var intRole in selectedRoles) {
+
+                    if (selectedRoles[intRole].type == 'Internal')
+                        $('#rolesSelect').append($('<option>', { value: selectedRoles[intRole].value, text: selectedRoles[intRole].label, selected: true }));
+
+                    $("#rolesSelect").trigger("chosen:updated");
+                }
+
+                for (var interRole in internalRoles) {
+
+                    if ($('#rolesSelect').find('option[value="' + internalRoles[interRole].value + '"]').length == 0) {
+
+                        $('#rolesSelect').append($('<option>', { value: internalRoles[interRole].value, text: internalRoles[interRole].label }));
+                    }
+                    $("#rolesSelect").trigger("chosen:updated");
+                }
+                return;
+            }
+
+            for (var internalRole in internalRoles) {
+                $('#rolesSelect').append($('<option>', { value: internalRoles[internalRole].value, text: internalRoles[internalRole].label }));
+            }
+
+        }
+
+        if ($('#userTypeSelect option:selected').text() == 'External') {
+
+            if (selectedRoles.length > 0) {
+
+                for (var extRole in selectedRoles) {
+
+                    if (selectedRoles[extRole].type == 'External')
+                        $('#rolesSelect').append($('<option>', { value: selectedRoles[extRole].value, text: selectedRoles[extRole].label, selected: true }));
+
+                    $("#rolesSelect").trigger("chosen:updated");
+                }
+
+                for (var exterRole in externalRoles) {
+
+                    if ($('#rolesSelect').find('option[value="' + externalRoles[exterRole].value + '"]').length == 0) {
+
+                        $('#rolesSelect').append($('<option>', { value: externalRoles[exterRole].value, text: externalRoles[exterRole].label }));
+                    }
+                    $("#rolesSelect").trigger("chosen:updated");
+                }
+                return;
+            }
+
+            for (var externalRole in externalRoles) {
+                $('#rolesSelect').append($('<option>', { value: externalRoles[externalRole].value, text: externalRoles[externalRole].label }));
+            }
+
+        }
+
+        $("#rolesSelect").trigger("chosen:updated");
+
+    });
 
     $('#userTypeSelect').on("change", function () {
 
         $('#rolesSelect').empty();
+
         if ($('#userTypeSelect option:selected').text() == 'Internal') {
-            for (var role in internalRoles) {
-                $('#rolesSelect').append($('<option>', { value: internalRoles[role].value, text: internalRoles[role].label }));
+
+            if (selectedRoles.length > 0) {
+
+                for (var intRole in selectedRoles) {
+
+                    if (selectedRoles[intRole].type == 'Internal')
+                        $('#rolesSelect').append($('<option>', { value: selectedRoles[intRole].value, text: selectedRoles[intRole].label, selected: true }));
+
+                    $("#rolesSelect").trigger("chosen:updated");
+                }
+
+                for (var interRole in internalRoles) {
+
+                    if ($('#rolesSelect').find('option[value="' + internalRoles[interRole].value + '"]').length == 0) {
+
+                        $('#rolesSelect').append($('<option>', { value: internalRoles[interRole].value, text: internalRoles[interRole].label }));
+                    }
+                    $("#rolesSelect").trigger("chosen:updated");
+                }
+                return;
             }
-            $("#rolesSelect").trigger("chosen:updated");
+
+            for (var internalRole in internalRoles) {
+                $('#rolesSelect').append($('<option>', { value: internalRoles[internalRole].value, text: internalRoles[internalRole].label }));
+            }
+
         }
+
         if ($('#userTypeSelect option:selected').text() == 'External') {
-            for (var role in externalRoles) {
-                $('#rolesSelect').append($('<option>', { value: externalRoles[role].value, text: externalRoles[role].label }));
+
+            if (selectedRoles.length > 0) {
+
+                for (var extRole in selectedRoles) {
+
+                    if (selectedRoles[extRole].type == 'External')
+                        $('#rolesSelect').append($('<option>', { value: selectedRoles[extRole].value, text: selectedRoles[extRole].label, selected: true }));
+
+                    $("#rolesSelect").trigger("chosen:updated");
+                }
+
+                for (var exterRole in externalRoles) {
+
+                    if ($('#rolesSelect').find('option[value="' + externalRoles[exterRole].value + '"]').length == 0) {
+
+                        $('#rolesSelect').append($('<option>', { value: externalRoles[exterRole].value, text: externalRoles[exterRole].label }));
+                    }
+                    $("#rolesSelect").trigger("chosen:updated");
+                }
+                return;
             }
-            $("#rolesSelect").trigger("chosen:updated");
+
+            for (var externalRole in externalRoles) {
+                $('#rolesSelect').append($('<option>', { value: externalRoles[externalRole].value, text: externalRoles[externalRole].label }));
+            }
+
         }
+
+        $("#rolesSelect").trigger("chosen:updated");
+
     });
 
 </script>
@@ -87,9 +203,9 @@
 
 
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("User Info", "", "glyphicon glyphicon-user", Model))
-   
+
     <form action="@url" method="@method" class="form-horizontal">
-        
+
         <div class="box-body">
 
             <div class="form-group">
@@ -198,7 +314,7 @@
                     </select>
                 </div>
                 <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.UserTypeId)  
+                    @Html.ValidationMessageFor(x => x.UserTypeId)
                 </div>
 
             </div>
@@ -206,8 +322,7 @@
 
                 <label class="control-label col-lg-4">Roles</label>
                 <div id="roles" class="input-group col-lg-2">
-                    <select id="rolesSelect" name="RoleIds" data-placeholder="Select roles" multiple class="chosen-select">
-                    </select>
+                    <select id="rolesSelect" name="RoleIds" data-placeholder="Select roles" multiple class="chosen-select"></select>
                 </div>
                 <div class="col-lg-6">
                     @Html.ValidationMessageFor(x => x.RoleIds)
