@@ -114,6 +114,8 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\clients\Client.cshtml" />
+    <Content Include="Views\clients\Clients.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -196,6 +198,7 @@
     <Compile Include="Models\Api\ApiConfiguration.cs" />
     <Compile Include="Models\Api\PullConfiguration.cs" />
     <Compile Include="Models\Api\PushConfiguration.cs" />
+    <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Modules\FtpModule.cs" />
     <Compile Include="Modules\MessageModule.cs" />
     <Compile Include="Modules\MailModule.cs" />

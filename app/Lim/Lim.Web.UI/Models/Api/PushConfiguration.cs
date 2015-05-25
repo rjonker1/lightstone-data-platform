@@ -29,8 +29,6 @@ namespace Lim.Web.UI.Models.Api
             IntegrationType = (int)Enums.IntegrationType.Api;
             FrequencyType = configuration.FrequencyType;
             ClientId = configuration.ClientId;
-            ContractId = configuration.ContractId;
-            AccountNumber = configuration.AccountNumber;
             IsActive = configuration.IsActive;
         }
 
@@ -42,12 +40,14 @@ namespace Lim.Web.UI.Models.Api
             ActionType = configuration.First().ActionType;
             IntegrationType = configuration.First().IntegrationType;
             FrequencyType = configuration.First().FrequencyType;
-            ClientId = configuration.First().ClientId;
-            ContractId = configuration.First().ContractId;
+            IntegrationClients = configuration.Select(s => s.IntegrationClientId);
+            IntegrationContracts = configuration.Select(s => s.IntegrationContractId);
             AccountNumber = configuration.First().AccountNumber;
             IsActive = configuration.First().IsActive;
 
-            Packages = configuration.Select(s => s.PackageId);
+            AccountNumber = configuration.First().AccountNumber;
+
+            IntegrationPackages = configuration.Select(s => s.IntegrationPackageId);
             BaseAddress = configuration.First().BaseAddress;
             Suffix = configuration.First().Suffix;
             Username = configuration.First().Username;
@@ -56,7 +56,7 @@ namespace Lim.Web.UI.Models.Api
             AuthenticationToken = configuration.First().AuthenticationToken;
             AuthenticationKey = configuration.First().AuthenticationKey;
             AuthenticationType = configuration.First().AuthenticationType;
-            ClientIdAccountNumber = string.Format("{0}|{1}", ClientId, AccountNumber);
+            ClientIdAccountNumber = string.Format("{0}|{1}", IntegrationClients, AccountNumber);
             CustomFrequency = DateTime.Now.Date + configuration.First().CustomFrequencyTime;
             CustomDay = configuration.First().CustomFrequencyDay;
         }
@@ -72,16 +72,16 @@ namespace Lim.Web.UI.Models.Api
             return new PushConfiguration();
         }
 
-        public void SetClients(IHandleGettingClient handler, GetClients command)
+        public void SetDataPlatformClients(IHandleGettingDataPlatformClient handler, GetDataPlatformClients command)
         {
             handler.Handle(command);
-            SelectableClients = command.Clients.ToList();
+            SelectableDataPlatformClients = command.Clients.ToList();
         }
 
-        public void SetPackages(IHandleGettingClient handler, GetClientPackages command)
+        public void SetDataPlatformPackages(IHandleGettingDataPlatformClient handler, GetDataPlatformClientPackages command)
         {
             handler.Handle(command);
-            SelectablePackages = command.Packages.ToList();
+            SelectableDataPlatformPackages = command.Packages.ToList();
         }
 
         public void SetAuthentication(IHandleGettingConfiguration handler, GetAuthenticationTypes command)
@@ -96,10 +96,16 @@ namespace Lim.Web.UI.Models.Api
             Frequency = command.Frequency.ToList();
         }
 
-        public void SetContracts(IHandleGettingClient handler, GetClientContracts command)
+        public void SetDataPlatformContracts(IHandleGettingDataPlatformClient handler, GetDataPlatformClientContracts command)
         {
             handler.Handle(command);
-            SelectableContracts = command.Contracts.ToList();
+            SelectableDataPlatformContracts = command.Contracts.ToList();
+        }
+
+        public void SetIntegrationClients(IHandleGettingIntegrationClient handler, GetIntegrationClients command)
+        {
+            handler.Handle(command);
+            SelectableIntegrationClients = command.Clients.ToList();
         }
 
         public void SetWeekdays(IHandleGettingConfiguration handler, GetWeekdays command)
@@ -118,7 +124,7 @@ namespace Lim.Web.UI.Models.Api
             if (!data.Any() || data.Count() != 2)
                 return this;
 
-            ClientId = new Guid(data[0]);
+          //  IntegrationClients = new Guid(data[0]);
             AccountNumber = int.Parse(data[1]);
             return this;
         }
@@ -126,13 +132,14 @@ namespace Lim.Web.UI.Models.Api
         //public Configuration Configuration { get; set; }
         public long Id { get; private set; }
         public Guid Key { get; private set; }
+        public long ClientId { get; private set; }
         public int FrequencyType { get; set; }
-        public Guid ClientId { get; set; }
-        public Guid ContractId { get; set; }
+        public IEnumerable<Guid> IntegrationClients { get; set; }
+        public IEnumerable<Guid> IntegrationContracts { get; set; }
         public int AccountNumber { get; set; }
         public bool IsActive { get; set; }
         public long ConfigurationApiId { get; private set; }
-        public IEnumerable<Guid> Packages { get; set; }
+        public IEnumerable<Guid> IntegrationPackages { get; set; }
         public string BaseAddress { get; set; }
         public string Suffix { get; set; }
         public string Username { get; set; }
@@ -145,11 +152,13 @@ namespace Lim.Web.UI.Models.Api
         public DateTime CustomFrequency { get; set; }
         public string CustomDay { get; set; }
 
-        public IReadOnlyCollection<Client> SelectableClients;
+        public IReadOnlyCollection<Client> SelectableIntegrationClients; 
 
-        public IReadOnlyCollection<Package> SelectablePackages;
+        public IReadOnlyCollection<DataPlatformClient> SelectableDataPlatformClients;
 
-        public IReadOnlyCollection<Contract> SelectableContracts; 
+        public IReadOnlyCollection<DataPlatformPackage> SelectableDataPlatformPackages;
+
+        public IReadOnlyCollection<DataPlatformContract> SelectableDataPlatformContracts; 
 
         public IReadOnlyCollection<AuthenticationType> Authentication;
 

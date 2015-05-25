@@ -4,19 +4,19 @@ using Lim.Domain.Models;
 
 namespace Lim.Web.UI.Commands
 {
-    public class GetClientPackages
+    public class GetDataPlatformClientPackages
     {
         public readonly Guid ClientId;
-        public GetClientPackages(Guid clientId)
+        public GetDataPlatformClientPackages(Guid clientId)
         {
             ClientId = clientId;
         }
 
-        public void Set(IEnumerable<Package> packages)
+        public void Set(IEnumerable<DataPlatformPackage> packages)
         {
             Packages = packages;
         }
 
-        public IEnumerable<Package> Packages { get; private set; } 
+        public IEnumerable<DataPlatformPackage> Packages { get; private set; } 
     }
 }

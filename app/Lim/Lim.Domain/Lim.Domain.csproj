@@ -68,12 +68,15 @@
     </Compile>
     <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\DataPlatformClient.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\ConfigurationForApi.cs" />
-    <Compile Include="Models\Contract.cs" />
+    <Compile Include="Models\DataPlatformContract.cs" />
     <Compile Include="Models\EnumTypes.cs" />
+    <Compile Include="Models\DataPlatformPackage.cs" />
+    <Compile Include="Models\IntegrationClient.cs" />
+    <Compile Include="Models\IntegrationContract.cs" />
     <Compile Include="Models\IntegrationPackage.cs" />
-    <Compile Include="Models\Package.cs" />
     <Compile Include="Models\PackageResponse.cs" />
     <Compile Include="Models\PackageTransaction.cs" />
     <Compile Include="Models\Weekday.cs" />

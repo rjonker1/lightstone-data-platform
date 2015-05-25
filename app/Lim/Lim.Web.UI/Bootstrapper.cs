@@ -21,7 +21,8 @@ namespace Lim.Web.UI
 
             container.Register<IUserManagementRepository>(new UserManangementRepository(ConnectionFactory.ForUsermanagementDatabase()));
             container.Register<ILimRepository>(new LimRepository(ConnectionFactory.ForLimDatabase()));
-            container.Register<IHandleGettingClient, GetClientHandler>();
+            container.Register<IHandleGettingDataPlatformClient, GetDataPlatformClientHandler>();
+            container.Register<IHandleGettingIntegrationClient, GetIntegrationClientHandler>();
             container.Register<IHandleGettingConfiguration, GetConfigurationHandler>();
             container.Register<IHandleSavingConfiguration, SavingConfigurationHandler>();
         }

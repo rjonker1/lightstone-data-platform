@@ -4,19 +4,19 @@ using Lim.Domain.Models;
 
 namespace Lim.Web.UI.Commands
 {
-    public class GetClientContracts
+    public class GetDataPlatformClientContracts
     {
         public readonly Guid ClientId;
-        public GetClientContracts(Guid clientId)
+        public GetDataPlatformClientContracts(Guid clientId)
         {
             ClientId = clientId;
         }
 
-        public void Set(IEnumerable<Contract> contracts)
+        public void Set(IEnumerable<DataPlatformContract> contracts)
         {
             Contracts = contracts;
         }
 
-        public IEnumerable<Contract> Contracts { get; private set; } 
+        public IEnumerable<DataPlatformContract> Contracts { get; private set; } 
     }
 }
