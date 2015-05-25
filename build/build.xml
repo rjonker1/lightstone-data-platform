@@ -135,6 +135,19 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lim.Web.UI</name>
+      <folder>app/Lim/Lim.Web.UI</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Lim.Web.UI</description>
+      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="bin\" to="content\bin"/>
+        <include pattern="assets\" to="content\assets"/> 
+        <include pattern="Views\" to="content\Views"/>
+        <include pattern="*.config" to="content"/>
+      </includes>
+    </nuget>
     <!-- IIS SITES -->
 
     <!-- BILLING START -->
