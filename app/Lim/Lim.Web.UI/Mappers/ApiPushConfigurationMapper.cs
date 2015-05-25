@@ -54,8 +54,8 @@ end";
                     @FrequencyType = _configuration.FrequencyType,
                     @ActionType = _configuration.ActionType,
                     @IntegrationType = _configuration.IntegrationType,
-                    @ClientId = _configuration.ClientId,
-                    @ContractId = _configuration.ContractId,
+                    @ClientId = _configuration.IntegrationClients,
+                    @ContractId = _configuration.IntegrationContracts,
                     @AccountNumber = _configuration.AccountNumber,
                     @IsActive = _configuration.IsActive,
                     @CustomFrequencyTime = _configuration.FrequencyType == (int)Frequency.Custom ? _configuration.CustomFrequency.TimeOfDay : TimeSpan.Parse("00:00"),
@@ -91,7 +91,7 @@ end";
 
                         _connection.Execute(ResetPackages, new {@ConfigurationId = configurationId}, transaction);
 
-                        foreach (var id in _configuration.Packages)
+                        foreach (var id in _configuration.IntegrationPackages)
                         {
                             _connection.Execute(InsertOrUpdatePackage, new {@ConfigurationId = configurationId, @PackageId = id}, transaction);
                         }

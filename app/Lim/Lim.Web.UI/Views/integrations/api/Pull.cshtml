@@ -36,13 +36,35 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Client</label>
-                                        <select id="client-ids" name="client-ids" data-placeholder="Select Client ..." class="chosen-select form-control">
+                                        <label>LIM Client</label>
+                                        <select id="ClientId" name="ClientId" data-placeholder="Select LIM Client ..." class="chosen-select form-control">
                                             <option value=""></option>
-                                            @foreach (var client in Model.SelectableClients)
+                                            @foreach (var client in Model.SelectableIntegrationClients)
                                             {
-                                                var isSelected = Model.SelectableClients.Select(x => x.Id).Contains(Model.ClientId);
-                                                <option selected="@isSelected" value="@client.Id">@client.Name</option>
+                                                var isSelected = Model.SelectableIntegrationClients.Select(x => x.Id).Contains(Model.ClientId);
+                                                <option id="@client.Id" name="@client.Id" selected="@isSelected" value="@client.Id">@client.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Clients</label>
+                                        <select id="IntegrationClients" name="IntegrationClients" data-placeholder="Select Integration Clients ..." class="chosen-select form-control" multiple>
+                                            <option value=""></option>
+                                            @foreach (var client in Model.SelectableDataPlatformClients)
+                                            {
+                                                var isSelected = Model.SelectableDataPlatformClients != null && Model.IntegrationClients.Contains(client.Id);
+                                                <option id="@client.Id" name="@client.Id" selected="@isSelected" value="@client.Id">@client.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contracts</label>
+                                        <select id="IntegrationContracts" name="IntegrationContracts" data-placeholder="Select Contract ..." class="chosen-select form-control" multiple>
+                                            <option value=""></option>
+                                            @foreach (var contract in Model.SelectableDataPlatformContracts)
+                                            {
+                                                var isSelected = Model.SelectableDataPlatformContracts != null && Model.IntegrationContracts.Contains(contract.Id);
+                                                <option id="@contract.Id" name="@contract.Id" selected="@isSelected" value="@contract.Id">@contract.Name</option>
                                             }
                                         </select>
                                     </div>
@@ -98,13 +120,15 @@
                                             }
                                         </select>
                                     </div>
-                                    <div class="bootstrap-timepicker">
-                                        <div class="form-group">
-                                            <label>Custom Frequency</label>
-                                            <div class="input-group bootstrap-timepicker">
-                                                <input id="frequencytime" type="text" class="form-control " />
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-clock-o"></i>
+                                    <div id="custom-time-picker">
+                                        <div class="bootstrap-timepicker">
+                                            <div class="form-group">
+                                                <label>Custom Frequency</label>
+                                                <div class="input-group bootstrap-timepicker">
+                                                    <input id="frequencytime" name="CustomFrequency" value="@Model.CustomFrequency.TimeOfDay" type="text" class="form-control " />
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-clock-o"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,10 +138,11 @@
                                                 @foreach (var day in Model.Weekdays)
                                                 {
                                                     var isSelected = day.Day == @Model.CustomDay;
-                                                    <option id="@day.Id" data-name="@day.Day" selected="@isSelected" value="@day.Id">@day.Day</option>
+                                                    <option id="@day.Id" data-name="@day.Day" selected="@isSelected" value="@day.Day">@day.Day</option>
                                                 }
                                             </select>
                                         </div>
+
                                     </div>
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-primary">Save</button>

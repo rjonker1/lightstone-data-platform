@@ -4,7 +4,7 @@ namespace Lim.Database.Migrations
 {
     [Tags("Lim")]
     [Migration(201522050950)]
-    public class AlterPacakgeResponseTable : Migration
+    public class AlterPackageResponseTable : Migration
     {
         public override void Down()
         {

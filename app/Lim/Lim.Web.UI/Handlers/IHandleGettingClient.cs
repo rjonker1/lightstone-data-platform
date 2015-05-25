@@ -2,10 +2,15 @@
 
 namespace Lim.Web.UI.Handlers
 {
-    public interface IHandleGettingClient
+    public interface IHandleGettingDataPlatformClient
     {
-        void Handle(GetClients command);
-        void Handle(GetClientPackages command);
-        void Handle(GetClientContracts command);
+        void Handle(GetDataPlatformClients command);
+        void Handle(GetDataPlatformClientPackages command);
+        void Handle(GetDataPlatformClientContracts command);
+    }
+
+    public interface IHandleGettingIntegrationClient
+    {
+        void Handle(GetIntegrationClients command);
     }
 }

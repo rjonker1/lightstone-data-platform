@@ -19,10 +19,10 @@ namespace Lim.Web.UI.Models.Api
             Client = client;
         }
 
-        public static List<ApiConfiguration> Get(IHandleGettingConfiguration configuration,IHandleGettingClient client)
+        public static List<ApiConfiguration> Get(IHandleGettingConfiguration configuration, IHandleGettingIntegrationClient client)
         {
             var config = new GetAllConfigurations();
-            var clientCommand = new GetClients();
+            var clientCommand = new GetIntegrationClients();
             configuration.Handle(config);
             client.Handle(clientCommand);
             return config.Configurations.Select(s => new ApiConfiguration(s, clientCommand.Clients.FirstOrDefault(w => w.Id == s.ClientId))).ToList();

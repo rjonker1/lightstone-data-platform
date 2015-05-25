@@ -2,18 +2,17 @@
 
 namespace Lim.Domain.Models
 {
-    public class Package
+    public class DataPlatformPackage
     {
         public const string Select =
              @"select distinct cp.ContractId, cp.PackageId Id, p.Name from ContractPackage cp join Package p on cp.PackageId = p.Id";
-            //@"select distinct cast(cast(0 as binary) as uniqueidentifier) ContractId, cp.PackageId Id, p.Name from ContractPackage cp join Package p on cp.PackageId = p.Id";
        
-        public Package()
+        public DataPlatformPackage()
         {
 
         }
 
-        public Package(Guid id, string name, Guid contractId)
+        public DataPlatformPackage(Guid id, string name, Guid contractId)
         {
             Id = id;
             Name = name;
