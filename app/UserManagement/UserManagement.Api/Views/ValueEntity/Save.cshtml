@@ -14,6 +14,10 @@
 <div class="box dark">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Lookup Info", "", "fa fa-edit", Model))
     <form action="@url" method="@method" class="form-horizontal">
+        
+        @Html.HiddenFor(x => x.Created)
+        @Html.HiddenFor(x => x.CreatedBy)
+
         <div class="box-body">
             <div class="form-group">
                 @Html.HiddenFor(x => x.AssemblyQualifiedName)

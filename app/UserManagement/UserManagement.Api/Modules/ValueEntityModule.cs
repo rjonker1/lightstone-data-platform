@@ -75,10 +75,7 @@ namespace UserManagement.Api.Modules
 
             Put["/ValueEntities/{id}"] = parameters =>
             {
-                var dbDto = Mapper.Map<ValueEntity, ValueEntityDto>(entities.Get((Guid)parameters.id));
                 var dto = this.Bind<ValueEntityDto>();
-                dto.Created = dbDto.Created;
-                dto.CreatedBy = dbDto.CreatedBy;
                 dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 

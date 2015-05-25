@@ -81,11 +81,7 @@ namespace UserManagement.Api.Modules
 
             Put["/Users/{id}"] = parameters =>
             {
-                var dbDto = Mapper.Map<User, UserDto>(users.Get((Guid)parameters.id));
-
                 var dto = this.BindAndValidate<UserDto>();
-                dto.Created = dbDto.Created;
-                dto.CreatedBy = dbDto.CreatedBy;
                 dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 

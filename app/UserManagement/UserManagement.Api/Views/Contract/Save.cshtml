@@ -19,6 +19,10 @@
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open", Model))
     <form action="@url" method="@method" class="form-horizontal">
+        
+        @Html.HiddenFor(x => x.Created)
+        @Html.HiddenFor(x => x.CreatedBy)
+
         <div class="box-body">
 
             <div class="form-group">
