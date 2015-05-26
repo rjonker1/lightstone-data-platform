@@ -48,11 +48,11 @@
         }, {
             field: 'customers',
             title: 'Customers',
-            //formatter: gridTransactionsFormatter
+            formatter: customerClientFormatter
         }, {
             field: 'clients',
             title: 'Clients',
-            sortable: true
+            formatter: customerClientFormatter
         }, {
             field: '',
             title: '',
@@ -78,6 +78,7 @@
 
         return state;
     }
+
     function roleFormatter(value, row, index) {
 
         var state = "";
@@ -94,6 +95,27 @@
         });
 
         return state;
+    }
+
+    function customerClientFormatter(value, row, index) {
+
+        var stringBuilder = "";
+        if (value) {
+
+            var count = value.length;
+
+            for (customerObj in value) {
+
+                stringBuilder += value[customerObj].name;
+                count--;
+
+                if (count > 0) stringBuilder += ", ";
+            }
+        } else {
+            stringBuilder += "~";
+        }
+
+        return stringBuilder;
     }
 
     function gridActionFormatter(value, row, index) {
