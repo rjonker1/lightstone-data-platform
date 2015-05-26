@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
-using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
@@ -38,7 +36,7 @@ namespace UserManagement.Api.Modules
                 var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });
             };
 
             Get["/Customers/Add"] = parameters => View["Save", new CustomerDto()];
