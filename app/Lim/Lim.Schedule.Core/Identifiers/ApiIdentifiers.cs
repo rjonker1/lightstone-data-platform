@@ -14,44 +14,57 @@ namespace Lim.Schedule.Core.Identifiers
     [DataContract]
     public class ApiPullIntegration
     {
-        public ApiPullIntegration(Guid key, ApiConfigurationIdentifier configuration, IntegrationClientIdentifier client)
+        public ApiPullIntegration(Guid key, ApiConfigurationIdentifier configuration, IntegrationClientIdentifier integrationClient)
         {
             Key = key;
             Configuration = configuration;
-            Client = client;
+            IntegrationClient = integrationClient;
         }
 
         [DataMember]
         public Guid Key { get; private set; }
 
+
         [DataMember]
         public ApiConfigurationIdentifier Configuration { get; private set; }
 
         [DataMember]
-        public IntegrationClientIdentifier Client { get; private set; }
+        public IntegrationClientIdentifier IntegrationClient { get; private set; }
     }
 
 
     [DataContract]
     public class ApiPushIntegration
     {
-        public ApiPushIntegration(Guid key, ApiConfigurationIdentifier configuration, IntegrationClientIdentifier client,
-            IntegrationPackageIdentifier packages)
+        public ApiPushIntegration(Guid key, long configurationId, ApiConfigurationIdentifier configuration, IntegrationClientIdentifier integrationClient, IntegrationContractIdentifier integrationContract,
+            IntegrationPackageIdentifier packages, ClientIdentifier client)
         {
             Key = key;
+            ConfigurationId = configurationId;
             Configuration = configuration;
-            Client = client;
+            IntegrationClient = integrationClient;
+            IntegrationContract = integrationContract;
             Packages = packages;
+            Client = client;
         }
 
         [DataMember]
         public Guid Key { get; private set; }
 
         [DataMember]
+        public long ConfigurationId { get; private set; }
+
+        [DataMember]
         public ApiConfigurationIdentifier Configuration { get; private set; }
 
         [DataMember]
-        public IntegrationClientIdentifier Client { get; private set; }
+        public ClientIdentifier Client { get; private set; }
+
+        [DataMember]
+        public IntegrationClientIdentifier IntegrationClient { get; private set; }
+
+        [DataMember]
+        public IntegrationContractIdentifier IntegrationContract { get; private set; }
 
         [DataMember]
         public IntegrationPackageIdentifier Packages { get; private set; }
@@ -67,7 +80,7 @@ namespace Lim.Schedule.Core.Identifiers
             Packages.PackageIds.ToList().ForEach(f =>
             {
                 var response =
-                    repository.Items<PackageResponse>(PackageResponse.SelectStatement, new {@PackageId = f, @ContractId = Client.ClientId}).ToList();
+                    repository.Items<PackageResponse>(PackageResponse.SelectStatement, new { @PackageId = f.PackageId, @ContractId = f.ContractId}).ToList();
                 if (response.Any())
                 {
                     _transaction.AddRange(

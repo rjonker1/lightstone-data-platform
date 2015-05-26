@@ -22,9 +22,9 @@ namespace Lim.Web.UI.Commands
     public class GetApiPushConfiguration
     {
         public readonly long ConfigurationId;
-        public readonly Guid ClientId;
+        public readonly long ClientId;
 
-        public GetApiPushConfiguration(long configurationId, Guid clientId)
+        public GetApiPushConfiguration(long configurationId, long clientId)
         {
             ConfigurationId = configurationId;
             ClientId = clientId;

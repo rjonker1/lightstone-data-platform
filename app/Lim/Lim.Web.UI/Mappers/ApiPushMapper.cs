@@ -15,10 +15,10 @@ namespace Lim.Web.UI.Mappers
         private readonly PushConfiguration _configuration;
 
         private const string SaveConfiguration =
-            @"update Configuration SET FrequencyType = @FrequencyType,ActionType = @ActionType,IntegrationType = @IntegrationType,ClientId = @ClientId,ContractId = @ContractId,AccountNumber = @AccountNumber,IsActive = @IsActive,CustomFrequencyTime = @CustomFrequencyTime, CustomFrequencyDay = @CustomFrequencyDay WHERE Id = @Id
+            @"update Configuration SET FrequencyType = @FrequencyType,ActionType = @ActionType,IntegrationType = @IntegrationType,ClientId = @ClientId,IsActive = @IsActive,CustomFrequencyTime = @CustomFrequencyTime, CustomFrequencyDay = @CustomFrequencyDay, DateModified = @DateModified WHERE Id = @Id
  if @@ROWCOUNT = 0 
  begin 
- insert into Configuration (FrequencyType,ActionType,IntegrationType,ClientId,ContractId,AccountNumber,IsActive,CustomFrequencyTime,CustomFrequencyDay) values (@FrequencyType, @ActionType, @IntegrationType,@ClientId,@ContractId,@AccountNumber, @IsActive,@CustomFrequencyTime,@CustomFrequencyDay) select cast(SCOPE_IDENTITY() as bigint) 
+ insert into Configuration (FrequencyType,ActionType,IntegrationType,ClientId,IsActive,CustomFrequencyTime,CustomFrequencyDay) values (@FrequencyType, @ActionType, @IntegrationType,@ClientId,@IsActive,@CustomFrequencyTime,@CustomFrequencyDay) select cast(SCOPE_IDENTITY() as bigint) 
  end else begin select @Id end";
 
         private const string SaveApiConfiguration =
@@ -28,14 +28,31 @@ begin
 insert into ConfigurationApi (ConfigurationId,BaseAddress,Suffix,Username,Password ,HasAuthentication,AuthenticationToken,AuthenticationKey,AuthenticationType) values(@ConfigurationId,@BaseAddress,@Suffix,@Username,@Password,@HasAuthentication,@AuthenticationToken,@AuthenticationKey,@AuthenticationType)
 end";
 
-        private const string ResetPackages = @"update Packages set IsActive = 0 where ConfigurationId = @ConfigurationId";
+        private const string ResetPackages = @"update IntegrationPackages set IsActive = 0 where ConfigurationId = @ConfigurationId";
 
         private const string SavePackages =
             @"update IntegrationPackages set IsActive = 1 where ConfigurationId = @ConfigurationId and PackageId = @PackageId
 if @@ROWCOUNT = 0
 begin
-insert into Packages(ConfigurationId,PackageId,IsActive) values (@ConfigurationId,@PackageId,1)
+insert into IntegrationPackages(ConfigurationId,PackageId,IsActive) values (@ConfigurationId,@PackageId,1)
 end";
+
+        private const string ResetClients = @"update IntegrationClients set IsActive = 0 where ConfigurationId = @ConfigurationId";
+
+        private const string SaveClients =
+            @"update IntegrationClients set AccountNumber = @AccountNumber ,ConfigurationId = @ConfigurationId, IsActive = 1,DateModified = @DateModified,ModifiedBy = @ModifiedBy WHERE ConfigurationId = @ConfigurationId and ClientCustomerId = @ClientCustomerId
+if @@ROWCOUNT = 0
+begin
+insert into IntegrationClients (ClientCustomerId,AccountNumber,ConfigurationId,IsActive) values (@ClientCustomerId,@AccountNumber,@ConfigurationId,1)
+end";
+
+        private const string SaveContracts = @"update IntegrationContracts set ConfigurationId = @ConfigurationId,IsActive = 1,DateModified = @DateModified,ModifiedBy = @ModifiedBy where ConfigurationId =  @ConfigurationId and Contract = @Contract
+if @@ROWCOUNT = 0
+begin
+USE Lim
+insert into IntegrationContracts (Contract,ConfigurationId,IsActive) values (@Contract,@ConfigurationId,1)
+end";
+        private const string ResetContracts = @"update IntegrationContracts set IsActive = 0 where ConfigurationId = @ConfigurationId ";
 
         public ApiPushMapper(IDbConnection connection, PushConfiguration configuration)
         {
@@ -54,12 +71,13 @@ end";
                     @FrequencyType = _configuration.FrequencyType,
                     @ActionType = _configuration.ActionType,
                     @IntegrationType = _configuration.IntegrationType,
-                    @ClientId = _configuration.IntegrationClients,
-                    @ContractId = _configuration.IntegrationContracts,
+                    @ClientId = _configuration.ClientId,
                     @AccountNumber = _configuration.AccountNumber,
                     @IsActive = _configuration.IsActive,
                     @CustomFrequencyTime = _configuration.FrequencyType == (int)Frequency.Custom ? _configuration.CustomFrequency.TimeOfDay : TimeSpan.Parse("00:00"),
-                    @CustomFrequencyDay = _configuration.FrequencyType == (int) Frequency.Custom ? _configuration.CustomDay : null
+                    @CustomFrequencyDay = _configuration.FrequencyType == (int) Frequency.Custom ? _configuration.CustomDay : null,
+                    @DateModified = DateTime.UtcNow,
+                    @ModifiedBy = _configuration.User ?? Environment.MachineName
                 };
 
                 if (_connection.State == ConnectionState.Closed)
@@ -90,10 +108,22 @@ end";
                         _connection.Execute(SaveApiConfiguration, apiConfiguration, transaction);
 
                         _connection.Execute(ResetPackages, new {@ConfigurationId = configurationId}, transaction);
+                        _connection.Execute(ResetClients, new {@ConfigurationId = configurationId}, transaction);
+                        _connection.Execute(ResetContracts, new {@ConfigurationId = configurationId}, transaction);
 
                         foreach (var id in _configuration.IntegrationPackages)
                         {
                             _connection.Execute(SavePackages, new {@ConfigurationId = configurationId, @PackageId = id}, transaction);
+                        }
+
+                        foreach (var id in _configuration.IntegrationClients)
+                        {
+                            _connection.Execute(SaveClients, new { @ClientCustomerId = id, @AccountNumber = 0, @ConfigurationId = configurationId, @DateModified = DateTime.UtcNow, @ModifiedBy = _configuration.User ?? Environment.MachineName }, transaction);
+                        }
+
+                        foreach (var id in _configuration.IntegrationContracts)
+                        {
+                            _connection.Execute(SaveContracts, new { @Contract = id, @ConfigurationId = configurationId, @DateModified = DateTime.UtcNow, @ModifiedBy = _configuration.User ?? Environment.MachineName }, transaction);
                         }
 
                         transaction.Commit();

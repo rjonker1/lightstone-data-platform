@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lim.Test.Helper</RootNamespace>
-    <AssemblyName>Lim.Test.Helper</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lim.Test.Helper</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

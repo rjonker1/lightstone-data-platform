@@ -59,7 +59,7 @@ namespace Lim.Acceptance.Tests.Integrations.Push
             _fetch.Configurations.Any().ShouldBeTrue();
             foreach (var config in _fetch.Configurations)
             {
-                var record = _setup.GetAuditLog(config.Key);
+                var record = _setup.GetAuditLog(config.ConfigurationId);
                 record.ShouldNotBeNull();
                 record.WasSuccessful.ShouldBeTrue();
             }

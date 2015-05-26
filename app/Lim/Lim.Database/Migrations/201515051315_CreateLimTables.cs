@@ -39,11 +39,11 @@ namespace Lim.Database.Migrations
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("BaseAddress").AsString()
                 .WithColumn("Suffix").AsString()
-                .WithColumn("Username").AsString()
-                .WithColumn("Password").AsString()
+                .WithColumn("Username").AsString().Nullable()
+                .WithColumn("Password").AsString().Nullable()
                 .WithColumn("HasAuthentication").AsBoolean().NotNullable().WithDefaultValue(false)
-                .WithColumn("AuthenticationToken").AsString()
-                .WithColumn("AuthenticationKey").AsString()
+                .WithColumn("AuthenticationToken").AsString().Nullable()
+                .WithColumn("AuthenticationKey").AsString().Nullable()
                 .WithColumn("AuthenticationType").AsInt16().NotNullable()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime);
 
@@ -107,6 +107,7 @@ namespace Lim.Database.Migrations
 
             Create.Table("AuditApiIntegration")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_AuditApiIntegration").Indexed()
+                .WithColumn("ClientId").AsInt64().Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("ActionType").AsInt16()
                 .WithColumn("IntegrationType").AsInt16()
