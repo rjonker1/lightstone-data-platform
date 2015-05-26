@@ -18,8 +18,8 @@ namespace Lim.Database.Migrations
                 .WithColumn("ContactNumber").AsString(15)
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("CreatedBy").AsString(50)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
             Create.Table("Configuration")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_Configuration").Indexed()
@@ -30,8 +30,8 @@ namespace Lim.Database.Migrations
                 .WithColumn("ClientId").AsInt64().ForeignKey("Client", "Id").Indexed()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
 
             Create.Table("ConfigurationApi")
@@ -54,8 +54,8 @@ namespace Lim.Database.Migrations
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().ForeignKey("Configuration", "Id").Indexed()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
             Create.Table("IntegrationContracts")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_IntegrationContracts").Indexed()
@@ -63,8 +63,8 @@ namespace Lim.Database.Migrations
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().ForeignKey("Configuration", "Id").Indexed()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
             Create.Table("IntegrationPackages")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_IntegrationPacakges").Indexed()
@@ -72,8 +72,8 @@ namespace Lim.Database.Migrations
                 .WithColumn("PackageId").AsGuid().Indexed()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
             Create.Table("ActionType")
                .WithColumn("Id").AsInt16().Identity().PrimaryKey("PK_Action").Indexed()

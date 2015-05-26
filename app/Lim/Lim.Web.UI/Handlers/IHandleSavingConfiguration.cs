@@ -5,8 +5,8 @@ namespace Lim.Web.UI.Handlers
     public interface IHandleSavingConfiguration
     {
         bool IsSaved { get; }
-        void Handle(InsertApiPushConfiguration command);
+        void Handle(AddApiPushConfiguration command);
         void Handle(UpdateApiPushConfiguration command);
-        void Handle(InsertApiPullConfiguration command);
+        void Handle(AddApiPullConfiguration command);
     }
 }

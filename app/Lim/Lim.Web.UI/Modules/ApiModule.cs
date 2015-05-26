@@ -49,7 +49,7 @@ namespace Lim.Web.UI.Modules
             Post["/integrations/for/api/push/save"] = _ =>
             {
                 var configuration = this.Bind<PushConfiguration>();
-                var command = new InsertApiPushConfiguration(configuration.SplitAccountAndClientId());
+                var command = new AddApiPushConfiguration(configuration.SplitAccountAndClientId());
                 save.Handle(command);
                 //return save.IsSaved ? Response.AsRedirect("/") : View["integrations/api/push", configuration];
                 return Response.AsRedirect("/integrations/for/api/configurations");

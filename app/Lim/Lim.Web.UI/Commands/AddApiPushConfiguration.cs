@@ -2,11 +2,11 @@
 
 namespace Lim.Web.UI.Commands
 {
-    public class InsertApiPushConfiguration
+    public class AddApiPushConfiguration
     {
         public readonly PushConfiguration Configuration;
 
-        public InsertApiPushConfiguration(PushConfiguration configuration)
+        public AddApiPushConfiguration(PushConfiguration configuration)
         {
             Configuration = configuration;
         }
