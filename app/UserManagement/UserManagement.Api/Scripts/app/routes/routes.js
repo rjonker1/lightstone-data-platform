@@ -38,7 +38,7 @@ function initializeCusomerRoutes(sammy) {
                 context.$element().html(data);
                 initializePlugins();
 
-                if (!data.contains('Validation')) { context.redirect('#/Customers'); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/Customers'); }
             }
         });
         // !!! Important !!! 
@@ -59,7 +59,7 @@ function initializeCusomerRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                if (!data.contains('Validation')) { context.redirect('#/Customers'); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/Customers'); }
             }
         });
         // !!! Important !!! 
@@ -94,7 +94,7 @@ function initializeClientRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                if (!data.contains('Validation')) { context.redirect('#/Clients'); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/Clients'); }
             }
         });
         // !!! Important !!! 
@@ -115,7 +115,7 @@ function initializeClientRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                if (!data.contains('Validation')) { context.redirect('#/Clients'); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/Clients'); }
             }
         });
         // !!! Important !!! 
@@ -150,7 +150,7 @@ function initializeUserRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                if (!data.contains('Validation')) { context.redirect('#/Users'); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/Users'); }
             }
         });
         // !!! Important !!! 
@@ -171,7 +171,7 @@ function initializeUserRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                if (!data.contains('Validation')) { context.redirect('#/Users'); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/Users'); }
             }
         });
         /// !!! Important !!! 
@@ -211,7 +211,7 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);+
                 initializePlugins();
-                if (!data.contains('Validation')) { context.redirect('#/Contracts'); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/Contracts'); }
             }
         });
         // !!! Important !!! 
@@ -232,7 +232,7 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
                 context.$element().html(data);
                 initializePlugins();
-                if (!data.contains('Validation')) { context.redirect('#/Contracts'); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/Contracts'); }
             }
         });
         // !!! Important !!! 
@@ -263,7 +263,7 @@ function initializeLookupRoutes(sammy) {
     sammy.post('/ValueEntities', function (context) {
         $(context.target).ajaxSubmit({
             success: function (response) {
-                if (!data.contains('Validation')) { context.redirect('#/ValueEntities/' + response); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
             }
         });
         // !!! Important !!! 
@@ -275,7 +275,7 @@ function initializeLookupRoutes(sammy) {
         $(context.target).ajaxSubmit({
             type: method,
             success: function (response) {
-                if (!data.contains('Validation')) { context.redirect('#/ValueEntities/' + response); }
+                if (data.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
             }
         });
         // !!! Important !!! 

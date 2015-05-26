@@ -14,6 +14,11 @@
 }
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
+@if (isCreate)
+{
+    <p>* Denotes required fields, please ensure that all required fields are filled in.</p>
+}
+
 @Html.ValidationSummary("Validation Results")
 
 <div class="box">
@@ -27,7 +32,7 @@
 
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Name</label>
+                <label class="control-label col-lg-4">* Contract Name</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">

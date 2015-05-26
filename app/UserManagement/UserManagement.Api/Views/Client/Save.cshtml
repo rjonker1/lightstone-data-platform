@@ -10,6 +10,11 @@
 }
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
+@if (isCreate)
+{
+    <p>* Denotes required fields, please ensure that all required fields are filled in.</p>
+}
+
 <form action="@url" method="@method" class="form-horizontal">
 
     @Html.ValidationSummary("Validation Results")

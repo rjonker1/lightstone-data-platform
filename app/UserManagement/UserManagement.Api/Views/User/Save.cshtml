@@ -16,6 +16,10 @@
 }
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
+@if (isCreate)
+{
+    <p>* Denotes required fields, please ensure that all required fields are filled in.</p>
+}
 
 <script>
 
@@ -213,7 +217,7 @@
 
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Name</label>
+                <label class="control-label col-lg-4">* Name</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -227,7 +231,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Surname</label>
+                <label class="control-label col-lg-4">* Surname</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -255,7 +259,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Contact Number</label>
+                <label class="control-label col-lg-4">* Contact Number</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-book" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -269,7 +273,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Username</label>
+                <label class="control-label col-lg-4">* Username</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -290,7 +294,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Password</label>
+                <label class="control-label col-lg-4">* Password</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-certificate" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
