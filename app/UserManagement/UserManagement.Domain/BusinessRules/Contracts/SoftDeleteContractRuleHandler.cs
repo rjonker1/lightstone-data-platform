@@ -23,25 +23,25 @@ namespace UserManagement.Domain.BusinessRules.Contracts
 
             var entity = command.Entity;
 
-            var hasClients = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Clients.Where(cl => cl.IsActive.Equals(true))).ToList();
-            var hasCustomers = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Customers.Where(cus => cus.IsLocked.Equals(true))).ToList();
-            var hasPackages = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Packages.Where(pkg => pkg.IsActive.Equals(true))).ToList();
+            var hasClients = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Clients.Where(cl => cl.IsActive)).ToList();
+            var hasCustomers = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Customers.Where(cus => cus.IsActive)).ToList();
+            var hasPackages = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Packages.Where(pkg => pkg.IsActive)).ToList();
 
-            if (hasClients.Any())
+            if (hasClients.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Client constraint".FormatWith(entity.GetType().Name));
                 this.Warn(() => exception);
                 throw exception;
             }
 
-            if (hasCustomers.Any())
+            if (hasCustomers.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Customer constraint".FormatWith(entity.GetType().Name));
                 this.Warn(() => exception);
                 throw exception;
             }
 
-            if (hasPackages.Any())
+            if (hasPackages.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Package constraint".FormatWith(entity.GetType().Name));
                 this.Warn(() => exception);

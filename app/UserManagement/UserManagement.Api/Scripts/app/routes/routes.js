@@ -254,7 +254,12 @@ function initializeContractRoutes(sammy) {
             type: "DELETE",
             url: '/Contracts/' + context.params.id,
             contentType: 'application/json',
-            datatype: 'json'
+            datatype: 'json',
+            success: function (data) {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Contracts');
+            }
         });
     });
 }
