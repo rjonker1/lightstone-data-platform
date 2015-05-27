@@ -44,9 +44,8 @@ namespace Lim.Web.UI.Models.Api
             IntegrationContracts = configuration.Select(s => s.IntegrationContractId);
             AccountNumber = configuration.First().AccountNumber;
             IsActive = configuration.First().IsActive;
-
+            ClientId = configuration.First().ClientId;
             AccountNumber = configuration.First().AccountNumber;
-
             IntegrationPackages = configuration.Select(s => s.IntegrationPackageId);
             BaseAddress = configuration.First().BaseAddress;
             Suffix = configuration.First().Suffix;
@@ -114,26 +113,26 @@ namespace Lim.Web.UI.Models.Api
             Weekdays = command.Weekdays.ToList();
         }
 
-        public PushConfiguration SplitAccountAndClientId()
-        {
-            if (string.IsNullOrEmpty(ClientIdAccountNumber))
-                return this;
+        //public PushConfiguration SplitAccountAndClientId()
+        //{
+        //    if (string.IsNullOrEmpty(ClientIdAccountNumber))
+        //        return this;
 
-            var data = ClientIdAccountNumber.Split('|');
+        //    var data = ClientIdAccountNumber.Split('|');
 
-            if (!data.Any() || data.Count() != 2)
-                return this;
+        //    if (!data.Any() || data.Count() != 2)
+        //        return this;
 
-          //  IntegrationClients = new Guid(data[0]);
-            AccountNumber = int.Parse(data[1]);
-            return this;
-        }
+        //  //  IntegrationClients = new Guid(data[0]);
+        //    AccountNumber = int.Parse(data[1]);
+        //    return this;
+        //}
 
-        //public Configuration Configuration { get; set; }
         public long Id { get; private set; }
         public Guid Key { get; private set; }
         public long ClientId { get; private set; }
         public int FrequencyType { get; set; }
+        //public IEnumerable<Guid> IntegrationClients { get; set; }
         public IEnumerable<Guid> IntegrationClients { get; set; }
         public IEnumerable<Guid> IntegrationContracts { get; set; }
         public int AccountNumber { get; set; }
@@ -151,6 +150,7 @@ namespace Lim.Web.UI.Models.Api
         public string ClientIdAccountNumber { get; set; }
         public DateTime CustomFrequency { get; set; }
         public string CustomDay { get; set; }
+        public string User { get; set; }
 
         public IReadOnlyCollection<Client> SelectableIntegrationClients; 
 

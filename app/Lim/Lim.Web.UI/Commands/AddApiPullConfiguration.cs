@@ -2,11 +2,11 @@
 
 namespace Lim.Web.UI.Commands
 {
-    public class InsertApiPullConfiguration
+    public class AddApiPullConfiguration
     {
         public readonly PullConfiguration Configuration;
 
-        public InsertApiPullConfiguration(PullConfiguration configuration)
+        public AddApiPullConfiguration(PullConfiguration configuration)
         {
             Configuration = configuration;
         }

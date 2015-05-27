@@ -25,6 +25,7 @@ namespace Lim.Web.UI
             container.Register<IHandleGettingIntegrationClient, GetIntegrationClientHandler>();
             container.Register<IHandleGettingConfiguration, GetConfigurationHandler>();
             container.Register<IHandleSavingConfiguration, SavingConfigurationHandler>();
+            container.Register<IHandleSavingClient, SavingClientHandler>();
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

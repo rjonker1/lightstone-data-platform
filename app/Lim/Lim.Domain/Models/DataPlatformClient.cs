@@ -16,7 +16,7 @@ select  c.Id,cc.ContractId,c.Name,c.CustomerAccountNumberId AccountNumber from C
             
         }
         
-        public DataPlatformClient(Guid id, string name, string accountNumber, Guid contractId)
+        public DataPlatformClient(Guid id, string name, int accountNumber, Guid contractId)
         {
             Id = id;
             Name = name;
@@ -27,6 +27,6 @@ select  c.Id,cc.ContractId,c.Name,c.CustomerAccountNumberId AccountNumber from C
         public Guid Id { get; set; }
         public Guid ContractId { get; set; }
         public string Name { get; set; }
-        public string AccountNumber { get; set; }
+        public int AccountNumber { get; set; }
     }
 }

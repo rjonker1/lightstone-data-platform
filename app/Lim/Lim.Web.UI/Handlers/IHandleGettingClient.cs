@@ -12,5 +12,6 @@ namespace Lim.Web.UI.Handlers
     public interface IHandleGettingIntegrationClient
     {
         void Handle(GetIntegrationClients command);
+        void Handle(GetIntegrationClient command);
     }
 }

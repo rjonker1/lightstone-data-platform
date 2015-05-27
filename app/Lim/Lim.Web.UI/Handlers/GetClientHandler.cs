@@ -41,7 +41,12 @@ namespace Lim.Web.UI.Handlers
 
         public void Handle(GetIntegrationClients command)
         {
-            command.Set(_repository.Items<Client>(Client.Select, new {}));
+            command.Set(_repository.Items<Client>(Client.SelectAll, new {}));
+        }
+
+        public void Handle(GetIntegrationClient command)
+        {
+            command.Set(_repository.Item<Client>(Client.Select, new {@Id = command.Id}));
         }
     }
 }
