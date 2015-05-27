@@ -1,27 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Permissions;
+﻿using System.Collections.Generic;
+using Lim.Domain.Models;
 
 namespace Lim.Schedule.Core.Identifiers
 {
     public class IntegrationPackageIdentifier
     {
-        public IntegrationPackageIdentifier(IEnumerable<PackageContract> packageIds)
+        public IntegrationPackageIdentifier(IEnumerable<IntegrationPackage> packages)
         {
-            PackageIds = packageIds;
+            Packages = packages;
         }
-        public IEnumerable<PackageContract> PackageIds { get; private set; }
-    }
-
-    public class PackageContract
-    {
-        public PackageContract(Guid packageId, Guid contractId)
-        {
-            PackageId = packageId;
-            ContractId = contractId;
-        }
-
-        public Guid PackageId { get; private set; }
-        public Guid ContractId { get; private set; }
+        public IEnumerable<IntegrationPackage> Packages { get; private set; }
     }
 }

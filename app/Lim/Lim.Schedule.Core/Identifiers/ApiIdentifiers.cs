@@ -74,13 +74,13 @@ namespace Lim.Schedule.Core.Identifiers
         public void Get(ILimRepository repository)
         {
             _transaction = new List<PackageTransaction>();
-            if (!Packages.PackageIds.Any())
+            if (!Packages.Packages.Any())
                 return;
 
-            Packages.PackageIds.ToList().ForEach(f =>
+            Packages.Packages.ToList().ForEach(f =>
             {
                 var response =
-                    repository.Items<PackageResponse>(PackageResponse.SelectStatement, new { @PackageId = f.PackageId, @ContractId = f.ContractId}).ToList();
+                    repository.Items<PackageResponse>(PackageResponse.SelectStatement, new { @PackageId = f.PackageId}).ToList();
                 if (response.Any())
                 {
                     _transaction.AddRange(

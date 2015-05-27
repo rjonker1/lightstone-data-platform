@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Data;
 using System.Linq;
 using Common.Logging;
@@ -31,10 +32,10 @@ end";
         private const string ResetPackages = @"update IntegrationPackages set IsActive = 0 where ConfigurationId = @ConfigurationId";
 
         private const string SavePackages =
-            @"update IntegrationPackages set IsActive = 1 where ConfigurationId = @ConfigurationId and PackageId = @PackageId
+            @"update IntegrationPackages set IsActive = 1, ContractId = @ContractId where ConfigurationId = @ConfigurationId and PackageId = @PackageId
 if @@ROWCOUNT = 0
 begin
-insert into IntegrationPackages(ConfigurationId,PackageId,IsActive) values (@ConfigurationId,@PackageId,1)
+insert into IntegrationPackages(ConfigurationId,PackageId,ContractId,IsActive) values (@ConfigurationId,@PackageId,@ContractId,1)
 end";
 
         private const string ResetClients = @"update IntegrationClients set IsActive = 0 where ConfigurationId = @ConfigurationId";
@@ -46,11 +47,11 @@ begin
 insert into IntegrationClients (ClientCustomerId,AccountNumber,ConfigurationId,IsActive) values (@ClientCustomerId,@AccountNumber,@ConfigurationId,1)
 end";
 
-        private const string SaveContracts = @"update IntegrationContracts set ConfigurationId = @ConfigurationId,IsActive = 1,DateModified = @DateModified,ModifiedBy = @ModifiedBy where ConfigurationId =  @ConfigurationId and Contract = @Contract
+        private const string SaveContracts = @"update IntegrationContracts set ConfigurationId = @ConfigurationId, ClientCustomerId = ClientCustomerId   ,IsActive = 1,DateModified = @DateModified,ModifiedBy = @ModifiedBy where ConfigurationId =  @ConfigurationId and Contract = @Contract
 if @@ROWCOUNT = 0
 begin
 USE Lim
-insert into IntegrationContracts (Contract,ConfigurationId,IsActive) values (@Contract,@ConfigurationId,1)
+insert into IntegrationContracts (Contract,ConfigurationId,ClientCustomerId,IsActive) values (@Contract,@ConfigurationId,@ClientCustomerId,1)
 end";
         private const string ResetContracts = @"update IntegrationContracts set IsActive = 0 where ConfigurationId = @ConfigurationId ";
 
@@ -113,7 +114,8 @@ end";
 
                         foreach (var id in _configuration.IntegrationPackages)
                         {
-                            _connection.Execute(SavePackages, new {@ConfigurationId = configurationId, @PackageId = id}, transaction);
+                            var contractId = _configuration.SelectableDataPlatformPackages.FirstOrDefault(w => w.Id == id).ContractId;
+                            _connection.Execute(SavePackages, new { @ConfigurationId = configurationId, @PackageId = id, @ContractId = contractId }, transaction);
                         }
 
                         foreach (var id in _configuration.IntegrationClients)
@@ -123,7 +125,8 @@ end";
 
                         foreach (var id in _configuration.IntegrationContracts)
                         {
-                            _connection.Execute(SaveContracts, new { @Contract = id, @ConfigurationId = configurationId, @DateModified = DateTime.UtcNow, @ModifiedBy = _configuration.User ?? Environment.MachineName }, transaction);
+                            var clientCustomerId = _configuration.SelectableDataPlatformContracts.FirstOrDefault(w => w.Id == id).ClientId;
+                            _connection.Execute(SaveContracts, new { @Contract = id, @ConfigurationId = configurationId, @ClientCustomerId = clientCustomerId, @DateModified = DateTime.UtcNow, @ModifiedBy = _configuration.User ?? Environment.MachineName }, transaction);
                         }
 
                         transaction.Commit();

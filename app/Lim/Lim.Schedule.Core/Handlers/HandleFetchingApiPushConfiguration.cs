@@ -38,42 +38,18 @@ namespace Lim.Schedule.Core.Handlers
                     return;
                 }
 
-                Configurations = configs.GroupBy(g => new
-                {
-                    Key = g,
-                    Contracts =  g,
-                    Packages = g.PackageId,
-                    Clients = g.ClientId,
-                    //Accounts = g.AccountNumber
-                })
-                .Distinct()
-                .Select(s => new ApiPushIntegration(s.Key.Key.Key,s.Key.Key.Id, new ApiConfigurationIdentifier(s.Key.Key.BaseAddress, s.Key.Key.Suffix,
-                    new ApiAuthenticationIdentifier(s.Key.Key.HasAuthentication,
-                        new ApiAuthenticationTypeIdentifier(s.Key.Key.AuthenticationType,
-                            (((Enums.AuthenticationType) s.Key.Key.AuthenticationType)).ToString()), s.Key.Key.Username, s.Key.Key.Password,
-                        s.Key.Key.AuthenticationKey, s.Key.Key.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Key.Key.Action).ToString()),
-                    new IntegrationTypeIdentifier(s.Key.Key.IntegrationType, ((Enums.IntegrationAction) s.Key.Key.IntegrationType).ToString())),
-                    new IntegrationClientIdentifier(s.Distinct().Select(c => new ClientAccount(c.ClientCustomerId, c.AccountNumber))),
-                    new IntegrationContractIdentifier(s.Distinct().Select(c => c.Contract)), 
-                    new IntegrationPackageIdentifier(s.Distinct().Select(p => new PackageContract(p.PackageId,p.Contract))), new ClientIdentifier(s.Key.Key.ClientId)));
-
-                //Configurations = configs.GroupBy(g => g, g => g.PackageId,  (key, packages) => new
-                //{
-                //    Key = key,
-                //    Packages = packages,
-                //    Clients = key.ClientCustomerId
-
-                //}).Select(s => new ApiPushIntegration(s.Key.Key, new ApiConfigurationIdentifier(s.Key.BaseAddress, s.Key.Suffix,
-                //    new ApiAuthenticationIdentifier(s.Key.HasAuthentication,
-                //        new ApiAuthenticationTypeIdentifier(s.Key.AuthenticationType,
-                //            (((Enums.AuthenticationType) s.Key.AuthenticationType)).ToString()), s.Key.Username, s.Key.Password,
-                //        s.Key.AuthenticationKey, s.Key.AuthenticationToken),
-                //    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Key.Action).ToString()),
-                //    new IntegrationTypeIdentifier(s.Key.IntegrationType, ((Enums.IntegrationAction) s.Key.IntegrationType).ToString())),
-                //    new IntegrationClientIdentifier(s.Key.ClientCustomerId, s.Key.AccountNumber),
-                //    new IntegrationContractIdentifier(s.Contracts.), 
-                //    new IntegrationPackageIdentifier(s.Packages.Select(p => p)), new ClientIdentifier(s.Key.ClientId)));
+                Configurations = configs
+                .Select(s => new ApiPushIntegration(s.Key,s.Id, new ApiConfigurationIdentifier(s.BaseAddress, s.Suffix,
+                    new ApiAuthenticationIdentifier(s.HasAuthentication,
+                        new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
+                            (((Enums.AuthenticationType) s.AuthenticationType)).ToString()), s.Username, s.Password,
+                        s.AuthenticationKey, s.AuthenticationToken),
+                    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Action).ToString()),
+                    new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction) s.IntegrationType).ToString())),
+                    new IntegrationClientIdentifier(_repository.Items<IntegrationClient>(IntegrationClient.Select, new { @ConfigurationId = s.Id})),
+                    new IntegrationContractIdentifier(_repository.Items<IntegrationContract>(IntegrationContract.Select, new { @ConfigurationId = s.Id }).Select(c =>c.Contract)),
+                    new IntegrationPackageIdentifier(_repository.Items<IntegrationPackage>(IntegrationPackage.Select, new { @ConfigurationId = s.Id })), new ClientIdentifier(s.ClientId)));
+            
 
             }
             catch (Exception ex)
@@ -108,36 +84,17 @@ namespace Lim.Schedule.Core.Handlers
                     return;
                 }
 
-                Configurations = configs.GroupBy(g => new
-                {
-                    Key = g
-                })
-                .Select(s => new ApiPushIntegration(s.Key.Key.Key,s.Key.Key.Id, new ApiConfigurationIdentifier(s.Key.Key.BaseAddress, s.Key.Key.Suffix,
-                    new ApiAuthenticationIdentifier(s.Key.Key.HasAuthentication,
-                        new ApiAuthenticationTypeIdentifier(s.Key.Key.AuthenticationType,
-                            (((Enums.AuthenticationType)s.Key.Key.AuthenticationType)).ToString()), s.Key.Key.Username, s.Key.Key.Password,
-                        s.Key.Key.AuthenticationKey, s.Key.Key.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Key.Key.Action).ToString()),
-                    new IntegrationTypeIdentifier(s.Key.Key.IntegrationType, ((Enums.IntegrationAction)s.Key.Key.IntegrationType).ToString())),
-                    new IntegrationClientIdentifier(s.Select(c => new ClientAccount(c.ClientCustomerId, c.AccountNumber))),
-                    new IntegrationContractIdentifier(s.Select(c => c.Contract)),
-                    new IntegrationPackageIdentifier(s.Select(p => new PackageContract(p.PackageId, p.Contract))), new ClientIdentifier(s.Key.Key.ClientId)));
-
-                //Configurations = configs.GroupBy(g => g, g => g.PackageId, (key, packages) => new
-                //{
-                //    Key = key,
-                //    Packages = packages
-
-                //}).Select(s => new ApiPushIntegration(s.Key.Key, new ApiConfigurationIdentifier(s.Key.BaseAddress, s.Key.Suffix,
-                //    new ApiAuthenticationIdentifier(s.Key.HasAuthentication,
-                //        new ApiAuthenticationTypeIdentifier(s.Key.AuthenticationType,
-                //            (((Enums.AuthenticationType) s.Key.AuthenticationType)).ToString()), s.Key.Username, s.Key.Password,
-                //        s.Key.AuthenticationKey, s.Key.AuthenticationToken),
-                //    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Key.Action).ToString()),
-                //    new IntegrationTypeIdentifier(s.Key.IntegrationType, ((Enums.IntegrationAction) s.Key.IntegrationType).ToString())),
-                //    new IntegrationClientIdentifier(s.Key.ClientCustomerId, s.Key.AccountNumber),
-                //    new IntegrationContractIdentifier(s.Key.Contract),
-                //    new IntegrationPackageIdentifier(s.Packages.Select(p => p)), new ClientIdentifier(s.Key.ClientId)));
+                Configurations = configs
+                 .Select(s => new ApiPushIntegration(s.Key, s.Id, new ApiConfigurationIdentifier(s.BaseAddress, s.Suffix,
+                     new ApiAuthenticationIdentifier(s.HasAuthentication,
+                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
+                             (((Enums.AuthenticationType)s.AuthenticationType)).ToString()), s.Username, s.Password,
+                         s.AuthenticationKey, s.AuthenticationToken),
+                     new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString()),
+                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction)s.IntegrationType).ToString())),
+                     new IntegrationClientIdentifier(_repository.Items<IntegrationClient>(IntegrationClient.Select, new { @ConfigurationId = s.Id })),
+                     new IntegrationContractIdentifier(_repository.Items<IntegrationContract>(IntegrationContract.Select, new { @ConfigurationId = s.Id }).Select(c => c.Contract)),
+                     new IntegrationPackageIdentifier(_repository.Items<IntegrationPackage>(IntegrationPackage.Select, new { @ConfigurationId = s.Id })), new ClientIdentifier(s.ClientId)));
 
             }
             catch (Exception ex)
@@ -151,14 +108,12 @@ namespace Lim.Schedule.Core.Handlers
             try
             {
                 var configs =
-                    _repository.Items<ApiPushConfiguration>(ApiPushConfiguration.SelectWithContract,
+                    _repository.Items<ApiPushConfiguration>(ApiPushConfiguration.Select,
                         new
                         {
                             @FrequencyType = (int) command.Frequency,
                             @Action = (int) command.Action,
-                            @IntegrationType = (int) command.Type,
-                            @ContractId = command.ContractId,
-                            @PackageId = command.PackageId
+                            @IntegrationType = (int) command.Type
                         }).ToList();
                 _log.InfoFormat("{0} {1} Api Configurations for specific client and contract will be handled", configs.Count(),
                     command.Frequency.ToString());
@@ -172,37 +127,17 @@ namespace Lim.Schedule.Core.Handlers
                     return;
                 }
 
-                Configurations = configs.GroupBy(g => new
-                {
-                    Key = g
-                })
-                .Select(s => new ApiPushIntegration(s.Key.Key.Key,s.Key.Key.Id, new ApiConfigurationIdentifier(s.Key.Key.BaseAddress, s.Key.Key.Suffix,
-                    new ApiAuthenticationIdentifier(s.Key.Key.HasAuthentication,
-                        new ApiAuthenticationTypeIdentifier(s.Key.Key.AuthenticationType,
-                            (((Enums.AuthenticationType)s.Key.Key.AuthenticationType)).ToString()), s.Key.Key.Username, s.Key.Key.Password,
-                        s.Key.Key.AuthenticationKey, s.Key.Key.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Key.Key.Action).ToString()),
-                    new IntegrationTypeIdentifier(s.Key.Key.IntegrationType, ((Enums.IntegrationAction)s.Key.Key.IntegrationType).ToString())),
-                    new IntegrationClientIdentifier(s.Select(c => new ClientAccount(c.ClientCustomerId, c.AccountNumber))),
-                    new IntegrationContractIdentifier(s.Select(c => c.Contract)),
-                    new IntegrationPackageIdentifier(s.Select(p => new PackageContract(p.PackageId, p.Contract))), new ClientIdentifier(s.Key.Key.ClientId)));
-
-                //Configurations = configs.GroupBy(g => g, g => g.PackageId, (key, packages) => new
-                //{
-                //    Key = key,
-                //    Packages = packages
-
-                //}).Select(s => new ApiPushIntegration(s.Key.Key, new ApiConfigurationIdentifier(s.Key.BaseAddress, s.Key.Suffix,
-                //    new ApiAuthenticationIdentifier(s.Key.HasAuthentication,
-                //        new ApiAuthenticationTypeIdentifier(s.Key.AuthenticationType,
-                //            (((Enums.AuthenticationType) s.Key.AuthenticationType)).ToString()), s.Key.Username, s.Key.Password,
-                //        s.Key.AuthenticationKey, s.Key.AuthenticationToken),
-                //    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Key.Action).ToString()),
-                //    new IntegrationTypeIdentifier(s.Key.IntegrationType, ((Enums.IntegrationAction) s.Key.IntegrationType).ToString())),
-                //    new IntegrationClientIdentifier(s.Key.ClientCustomerId, s.Key.AccountNumber),
-                //    new IntegrationContractIdentifier(s.Key.Contract), 
-                //    new IntegrationPackageIdentifier(s.Packages.Select(p => p)),new ClientIdentifier(s.Key.ClientId)));
-
+                Configurations = configs
+                .Select(s => new ApiPushIntegration(s.Key, s.Id, new ApiConfigurationIdentifier(s.BaseAddress, s.Suffix,
+                    new ApiAuthenticationIdentifier(s.HasAuthentication,
+                        new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
+                            (((Enums.AuthenticationType)s.AuthenticationType)).ToString()), s.Username, s.Password,
+                        s.AuthenticationKey, s.AuthenticationToken),
+                    new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString()),
+                    new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction)s.IntegrationType).ToString())),
+                    new IntegrationClientIdentifier(_repository.Items<IntegrationClient>(IntegrationClient.Select, new { @ConfigurationId = s.Id })),
+                    new IntegrationContractIdentifier(_repository.Items<IntegrationContract>(IntegrationContract.SelectContract, new { @ConfigurationId = s.Id, @ContractId = command.ContractId }).Select(c => c.Contract)),
+                    new IntegrationPackageIdentifier(_repository.Items<IntegrationPackage>(IntegrationPackage.SelectPackage, new { @ConfigurationId = s.Id, @PackageId = command.PackageId })), new ClientIdentifier(s.ClientId)));
             }
             catch (Exception ex)
             {
