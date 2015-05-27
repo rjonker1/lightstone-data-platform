@@ -383,7 +383,17 @@ function initializePlugins() {
         $select.append('<option id="' + id + '" selected="true" value="' + id + '|' + val + '">' + val + '</option>');
         $select.trigger("chosen:updated");
     });
-    
+
+    $(".list-group-item a.close-box").click(function () {
+
+        removeListItem(this);
+    });
+
+    function removeListItem(element) {
+
+        $(element).parent().parent().remove();
+    }
+
     $('#ClientIds').autocomplete({
         source: function(request, response) {
             var $container = $(this.element).closest('div');
@@ -409,17 +419,20 @@ function initializePlugins() {
             });
         },
         select: function (event, ui) {
+
             if ($('#' + ui.item.value).length) {
                 return;
             }
-            
+
+            console.log(ui.item.value);
+
             var $container = $(this).closest('div');
             var $listGroup = $container.find('.list-group');
             
             var $item = $("<div>", { "class": "list-group-item" }).appendTo($listGroup);
 
             var $left = $("<div>", { "class": "pull-left" }).appendTo($item);
-            var $remove = $("<a>", { "class": "btn btn-danger btn-xs close-box", href: "javascript:;" }).appendTo($left);
+            var $remove = $("<a>", { "class": "btn btn-danger btn-xs close-box" }).appendTo($left);
             var $removeIcon = $("<i>", { "class": "fa fa-times" }).appendTo($remove);
             
             var index = $listGroup.children('li').length;
@@ -430,6 +443,10 @@ function initializePlugins() {
                 value: ui.item.value,
                 type: 'hidden'
             }).appendTo($item);
+
+            $remove.click(function() {
+                removeListItem(this);
+            });
             
             var $label = $("<label>", { text: ui.item.label }).appendTo($item);
             
