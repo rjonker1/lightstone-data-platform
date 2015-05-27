@@ -72,7 +72,12 @@ function initializeCusomerRoutes(sammy) {
             type: "DELETE",
             url: '/Customers/' + context.params.id,
             contentType: 'application/json',
-            datatype: 'json'
+            datatype: 'json',
+            success: function (data) {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Customers');
+            }
         });
     });
 }
@@ -128,7 +133,12 @@ function initializeClientRoutes(sammy) {
             type: "DELETE",
             url: '/Clients/' + context.params.id,
             contentType: 'application/json',
-            datatype: 'json'
+            datatype: 'json',
+            success: function (data) {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Clients');
+            }
         });
     });
 }
