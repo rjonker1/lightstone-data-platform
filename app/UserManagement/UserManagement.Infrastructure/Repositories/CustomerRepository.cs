@@ -21,7 +21,7 @@ namespace UserManagement.Infrastructure.Repositories
         {
             var predicate = PredicateBuilder.False<Customer>();
             predicate = predicate.Or(x => (x.Name + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-            predicate = predicate.Or(x => (x.AccountOwnerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
+            predicate = predicate.Or(x => (x.AccountOwner + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
             return new PagedList<Customer>(this, pageIndex, pageSize, predicate);
         }
     }

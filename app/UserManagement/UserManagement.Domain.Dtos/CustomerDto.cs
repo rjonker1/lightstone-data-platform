@@ -15,6 +15,7 @@ namespace UserManagement.Domain.Dtos
         public string CustomerAccountNumber { get; set; }
         [Required]
         [Display(Name = "Account owner is required")]
+        public Guid AccountOwnerId { get; set; }
         public string AccountOwnerName { get; set; }
         [Required]
         [Display(Name = "Commercial state is required")]

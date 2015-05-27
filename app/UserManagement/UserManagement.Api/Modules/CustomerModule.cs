@@ -33,10 +33,10 @@ namespace UserManagement.Api.Modules
                 if (limit == null) limit = 10;
 
                 var model = this.Bind<DataTablesViewModel>();
-                var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers.Where(x => x.IsActive));//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
             Get["/Customers/Add"] = parameters => View["Save", new CustomerDto()];

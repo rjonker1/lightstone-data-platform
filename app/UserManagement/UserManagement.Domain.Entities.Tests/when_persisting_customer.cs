@@ -30,7 +30,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.Name, "Name")
                 .CheckProperty(c => c.CustomerAccountNumber, new AccountNumber())
-                .CheckProperty(c => c.AccountOwnerName, "AccountOwnerName")
+                .CheckProperty(c => c.AccountOwner, "AccountOwnerName")
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))
                 .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus", PlatformStatusType.Activated))

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using AutoMapper;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
@@ -8,7 +9,7 @@ using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using NHibernate.Context;
+using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
@@ -36,11 +37,37 @@ namespace UserManagement.Api.Modules
                 if (limit == null) limit = 10;
 
                 var model = this.Bind<DataTablesViewModel>();
-                var dto = (IEnumerable<UserDto>) Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users.Where(x => x.IsActive != false));//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
 
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
+            };
+
+            Get["/Users/{filter:alpha}"] = parameters =>
+            {
+                
+                
+                //var dto = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(source);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+
+                //return Negotiate
+                //    .WithView("Index")
+                //    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
+
+                var filter = (string)Context.Request.Query["q_word[]"].Value.ToString();
+                var pageIndex = 0;
+                var pageSize = 0;
+                int.TryParse(Context.Request.Query["page_num"].Value, out pageIndex);
+                int.TryParse(Context.Request.Query["per_page"].Value, out pageSize);
+
+                var source = users.Where(x => x.IsActive != false && (x.FirstName.StartsWith(filter) || x.LastName.StartsWith(filter)));
+
+                var packages = JsonConvert.DeserializeObject<PagedCollectionDto<PackageDto>>(null);
+                //var result = packages.Select(x => new { id = x.Id, name = x.Name });
+                //var dto = Mapper.Map<IEnumerable<PackageBuilder.Domain.Entities.Packages.ReadModels.Package>, IEnumerable<PackageDto>>(packages);
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { result = packages.Data, cnt_whole = packages.RecordsFiltered });
             };
 
             Get["/Users/Add"] = _ => View["Save", new UserDto()];
@@ -71,7 +98,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Get["/Users/{id}"] = parameters =>
+            Get["/Users/{id:guid}"] = parameters =>
             {
                 var guid = (Guid)parameters.id;
                 var dto = Mapper.Map<User, UserDto>(users.Get(guid));

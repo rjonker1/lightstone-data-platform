@@ -359,6 +359,58 @@ function initializePlugins() {
     //        $select.trigger("chosen:updated");
     //    }
     //});
+    
+    //$('.acc-owner .chosen-search input').autocomplete({
+    //    source: function (request, response) {
+    //        //var $container = $(this.element).closest('.packag-autocomplete');
+    //        //var type = $container.data('type');
+    //        $.ajax({
+    //            url: "/users/" + request.term + "/",
+    //            dataType: "json",
+    //            beforeSend: function () { $('ul.chosen-results').empty(); },
+    //            success: function (data) {
+    //                response($.map(data, function (item) {
+    //                    return {
+    //                        label: item.name,
+    //                        value: item.packageId
+    //                    };
+    //                }));
+    //            }
+    //        });
+    //    },
+    //    select: function (event, ui) {
+    //        if ($('#' + ui.item.value).length) {
+    //            return;
+    //        }
+    //        var $container = $(this).closest('.packag-autocomplete');
+    //        var $select = $container.find('select');
+    //        $select.append('<option id="' + ui.item.value + '" selected="true" value="' + ui.item.value + '|' + ui.item.label + '">' + ui.item.label + '</option>');
+    //        $select.trigger("chosen:updated");
+    //    }
+    //});
+
+    $('#AccountOwnerId').ajaxComboBox(
+        "/users/",
+        {
+            lang: 'en',
+            bind_to: 'select',
+            primary_key: 'packageId',
+            per_page: 10,
+        }
+    );
+    //.bind('select', function () {
+    //    var val = $(this).val();
+    //    var id = $('#PackageIdNames_primary_key').val();
+
+    //    if ($('#' + id).length) {
+    //        return;
+    //    }
+
+    //    var $container = $(this).closest('.packag-autocomplete');
+    //    var $select = $container.find('select');
+    //    $select.append('<option id="' + id + '" selected="true" value="' + id + '|' + val + '">' + val + '</option>');
+    //    $select.trigger("chosen:updated");
+    //});
 
     $('.packag-autocomplete .chosen-choices input').attr("name", "PackageIdNames");
     $('.packag-autocomplete .chosen-choices input').ajaxComboBox(

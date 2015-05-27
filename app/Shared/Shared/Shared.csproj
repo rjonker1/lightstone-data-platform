@@ -81,6 +81,7 @@
     <Compile Include="Helpers\Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\Json\JsonConcreteTypeConverter.cs" />
     <Compile Include="Helpers\Json\JsonTypeResolverConverter.cs" />
+    <Compile Include="Helpers\PagedList.cs" />
     <Compile Include="Helpers\SystemTime.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Identifiers\AccountIdentifier.cs" />
