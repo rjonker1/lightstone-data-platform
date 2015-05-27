@@ -28,10 +28,10 @@ namespace Lim.Schedule.Core.Audits
             try
             {
                 const string sql =
-                    @"insert into AuditApiIntegration (ClientId,ConfigurationKey,ActionType,IntegrationType,Date,WasSuccessful,Address,Suffix,Payload) values (@ConfigurationKey,@ActionType,@IntegrationType,@Date,@WasSuccessful,@Address,@Suffix,@Payload)";
+                    @"insert into AuditApiIntegration (ClientId,ConfigurationId,ActionType,IntegrationType,Date,WasSuccessful,Address,Suffix,Payload) values (@ConfigurationId,@ActionType,@IntegrationType,@Date,@WasSuccessful,@Address,@Suffix,@Payload)";
                 var parameters = new
                 {
-                    @ConfigurationKey = command.ConfigurationKey,
+                    @ConfigurationId = command.ConfigurationId,
                     @ActionType = command.Action,
                     @IntegrationType = command.Type,
                     @Date = DateTime.UtcNow,

@@ -7,7 +7,7 @@ namespace Lim.Domain.Models
     public class IntegrationPackage
     {
         public const string Select = @"select p.* from IntegrationPackages p where p.ConfigurationId = @ConfigurationId and p.IsActive = 1";
-        public const string SelectPackage = @"select p.* from IntegrationPackages p where p.ConfigurationId = @ConfigurationId and p.IsActive = 1 and p.PackageId = @PackageId";
+        public const string SelectPackage = @"select p.* from IntegrationPackages p where p.ConfigurationId = @ConfigurationId and p.IsActive = 1 and p.PackageId = @PackageId and p.ContractId = @ContractId";
 
         public IntegrationPackage()
         {

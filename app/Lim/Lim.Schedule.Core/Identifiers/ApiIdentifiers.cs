@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Common.Logging;
 using Lim.Domain.Models;
 using Lim.Domain.Repository;
 using Lim.Enums;
@@ -71,7 +72,7 @@ namespace Lim.Schedule.Core.Identifiers
 
         [DataMember] private List<PackageTransaction> _transaction;
 
-        public void Get(ILimRepository repository)
+        public void Get(ILimRepository repository, ILog log)
         {
             _transaction = new List<PackageTransaction>();
             if (!Packages.Packages.Any())
@@ -80,9 +81,13 @@ namespace Lim.Schedule.Core.Identifiers
             Packages.Packages.ToList().ForEach(f =>
             {
                 var response =
-                    repository.Items<PackageResponse>(PackageResponse.SelectStatement, new { @PackageId = f.PackageId}).ToList();
+                    repository.Items<PackageResponse>(PackageResponse.SelectStatement, new {@PackageId = f.PackageId, @ContractId = f.ContractId})
+                        .ToList();
+
                 if (response.Any())
                 {
+                    log.InfoFormat("Found {0} Package Responses for Package Id {1} on Contract {2} to Push using API", response.Count, f.PackageId,
+                        f.ContractId);
                     _transaction.AddRange(
                         response.Select(
                             s =>
@@ -101,9 +106,12 @@ namespace Lim.Schedule.Core.Identifiers
             var client = _pushClients.FirstOrDefault(w => w.Key == (Enums.AuthenticationType) Configuration.Authentication.AuthenticationType.Id);
             if(client.Value == null)
                 throw new Exception(string.Format("Push Client for Authentication Type {0} could not be found", Configuration.Authentication.AuthenticationType.Type));
-
-            client.Value(Configuration).Post(_transaction);
-            audit.SetPayload(JsonConvert.SerializeObject(_transaction));
+            foreach (var packageTransaction in _transaction)
+            {
+                client.Value(Configuration).Post(packageTransaction);
+                audit.SetPayload(JsonConvert.SerializeObject(packageTransaction));
+            }
+            
         }
 
         private readonly IDictionary<Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>> _pushClients = new Dictionary
@@ -206,38 +214,38 @@ namespace Lim.Schedule.Core.Identifiers
         [DataMember]
         public IntegrationTypeIdentifier Type { get; private set; }
 
-        [DataMember]
-        public ApiFrequencyIdentifier Frequency { get; private set; }
+        //[DataMember]
+        //public ApiFrequencyIdentifier Frequency { get; private set; }
 
     }
 
-    [DataContract]
-    public class ApiFrequencyIdentifier
-    {
-        public ApiFrequencyIdentifier(int seconds, int minutes, int hours, string dayOfMonth, Month month, WeekDay dayOfWeek, Frequency frequency)
-        {
-            Seconds = seconds;
-            Minutes = minutes;
-            Hours = hours;
-            DayOfMonth = dayOfMonth;
-            Month = month;
-            DayofWeek = dayOfWeek;
-            Frequency = frequency;
-        }
+    //[DataContract]
+    //public class ApiFrequencyIdentifier
+    //{
+    //    public ApiFrequencyIdentifier(int seconds, int minutes, int hours, string dayOfMonth, Month month, WeekDay dayOfWeek, Frequency frequency)
+    //    {
+    //        Seconds = seconds;
+    //        Minutes = minutes;
+    //        Hours = hours;
+    //        DayOfMonth = dayOfMonth;
+    //        Month = month;
+    //        DayofWeek = dayOfWeek;
+    //        Frequency = frequency;
+    //    }
 
-        [DataMember]
-        public int Seconds { get; private set; }
-        [DataMember]
-        public int Minutes { get; private set; }
-        [DataMember]
-        public int Hours { get; private set; }
-        [DataMember]
-        public string DayOfMonth { get; private set; }
-        [DataMember]
-        public Month Month { get; private set; }
-        [DataMember]
-        public WeekDay DayofWeek { get; private set; }
-        [DataMember]
-        public Frequency Frequency { get; private set; }
-    }
+    //    [DataMember]
+    //    public int Seconds { get; private set; }
+    //    [DataMember]
+    //    public int Minutes { get; private set; }
+    //    [DataMember]
+    //    public int Hours { get; private set; }
+    //    [DataMember]
+    //    public string DayOfMonth { get; private set; }
+    //    [DataMember]
+    //    public Month Month { get; private set; }
+    //    [DataMember]
+    //    public WeekDay DayofWeek { get; private set; }
+    //    [DataMember]
+    //    public Frequency Frequency { get; private set; }
+    //}
 }

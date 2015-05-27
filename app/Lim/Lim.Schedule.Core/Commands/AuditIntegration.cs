@@ -5,10 +5,10 @@ namespace Lim.Schedule.Core.Commands
 {
     public class AuditIntegrationCommand
     {
-        public AuditIntegrationCommand(long clientId, Guid configurationKey, DateTime date, IntegrationAction action, IntegrationType type, string address, string suffix)
+        public AuditIntegrationCommand(long clientId, long configurationId, DateTime date, IntegrationAction action, IntegrationType type, string address, string suffix)
         {
             ClientId = clientId;
-            ConfigurationKey = configurationKey;
+            ConfigurationId = configurationId;
             Date = date;
             Action = action;
             Type = type;
@@ -32,8 +32,7 @@ namespace Lim.Schedule.Core.Commands
         }
 
         public long ClientId { get; private set; }
-
-        public Guid ConfigurationKey { get; private set; }
+        public long ConfigurationId { get; private set; }
         public DateTime Date { get; private set; }
         public IntegrationAction Action { get; private set; }
         public IntegrationType Type { get; private set; }

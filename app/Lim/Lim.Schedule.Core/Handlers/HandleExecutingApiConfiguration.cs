@@ -32,13 +32,13 @@ namespace Lim.Schedule.Core.Handlers
             _log.InfoFormat("Executing {0} API Push Configurations", command.Configurations.Count());
             command.Configurations.ToList().ForEach(f =>
             {
-                var audit = new AuditIntegrationCommand(f.Client.ClientId, f.Key, DateTime.UtcNow, IntegrationAction.Push, IntegrationType.Api,
+                var audit = new AuditIntegrationCommand(f.Client.ClientId, f.ConfigurationId, DateTime.UtcNow, IntegrationAction.Push, IntegrationType.Api,
                     f.Configuration.BaseAddress, f.Configuration.Suffix);
                 try
                 {
 
                     _log.InfoFormat("Executing Push Configuration with Key {0}", f.Key);
-                    f.Get(_repository);
+                    f.Get(_repository,_log);
                     f.Push(audit);
                     audit.Successful();
                 }

@@ -137,7 +137,7 @@ namespace Lim.Schedule.Core.Handlers
                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction)s.IntegrationType).ToString())),
                     new IntegrationClientIdentifier(_repository.Items<IntegrationClient>(IntegrationClient.Select, new { @ConfigurationId = s.Id })),
                     new IntegrationContractIdentifier(_repository.Items<IntegrationContract>(IntegrationContract.SelectContract, new { @ConfigurationId = s.Id, @ContractId = command.ContractId }).Select(c => c.Contract)),
-                    new IntegrationPackageIdentifier(_repository.Items<IntegrationPackage>(IntegrationPackage.SelectPackage, new { @ConfigurationId = s.Id, @PackageId = command.PackageId })), new ClientIdentifier(s.ClientId)));
+                    new IntegrationPackageIdentifier(_repository.Items<IntegrationPackage>(IntegrationPackage.SelectPackage, new { @ConfigurationId = s.Id, @PackageId = command.PackageId, @ContractId = command.ContractId })), new ClientIdentifier(s.ClientId)));
             }
             catch (Exception ex)
             {

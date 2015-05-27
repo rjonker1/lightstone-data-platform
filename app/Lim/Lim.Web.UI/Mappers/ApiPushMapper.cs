@@ -32,7 +32,7 @@ end";
         private const string ResetPackages = @"update IntegrationPackages set IsActive = 0 where ConfigurationId = @ConfigurationId";
 
         private const string SavePackages =
-            @"update IntegrationPackages set IsActive = 1, ContractId = @ContractId where ConfigurationId = @ConfigurationId and PackageId = @PackageId
+            @"update IntegrationPackages set IsActive = 1, ContractId = @ContractId, DateModified = @DateModified, ModifiedBy = @ModifiedBy where ConfigurationId = @ConfigurationId and PackageId = @PackageId
 if @@ROWCOUNT = 0
 begin
 insert into IntegrationPackages(ConfigurationId,PackageId,ContractId,IsActive) values (@ConfigurationId,@PackageId,@ContractId,1)
@@ -47,7 +47,7 @@ begin
 insert into IntegrationClients (ClientCustomerId,AccountNumber,ConfigurationId,IsActive) values (@ClientCustomerId,@AccountNumber,@ConfigurationId,1)
 end";
 
-        private const string SaveContracts = @"update IntegrationContracts set ConfigurationId = @ConfigurationId, ClientCustomerId = ClientCustomerId   ,IsActive = 1,DateModified = @DateModified,ModifiedBy = @ModifiedBy where ConfigurationId =  @ConfigurationId and Contract = @Contract
+        private const string SaveContracts = @"update IntegrationContracts set ConfigurationId = @ConfigurationId, ClientCustomerId = @ClientCustomerId   ,IsActive = 1,DateModified = @DateModified,ModifiedBy = @ModifiedBy where ConfigurationId =  @ConfigurationId and Contract = @Contract
 if @@ROWCOUNT = 0
 begin
 USE Lim
@@ -115,7 +115,7 @@ end";
                         foreach (var id in _configuration.IntegrationPackages)
                         {
                             var contractId = _configuration.SelectableDataPlatformPackages.FirstOrDefault(w => w.Id == id).ContractId;
-                            _connection.Execute(SavePackages, new { @ConfigurationId = configurationId, @PackageId = id, @ContractId = contractId }, transaction);
+                            _connection.Execute(SavePackages, new { @ConfigurationId = configurationId, @PackageId = id, @ContractId = contractId, @DateModified = DateTime.UtcNow, @ModifiedBy = _configuration.User ?? Environment.MachineName }, transaction);
                         }
 
                         foreach (var id in _configuration.IntegrationClients)

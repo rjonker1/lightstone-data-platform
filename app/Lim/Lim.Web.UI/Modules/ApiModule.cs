@@ -49,6 +49,8 @@ namespace Lim.Web.UI.Modules
             Post["/integrations/for/api/push/save"] = _ =>
             {
                 var configuration = this.Bind<PushConfiguration>();
+                configuration.SetDataPlatformPackages(dataPlatformClient, new GetDataPlatformClientPackages(new Guid()));
+                configuration.SetDataPlatformContracts(dataPlatformClient, new GetDataPlatformClientContracts(new Guid()));
                 var command = new AddApiPushConfiguration(configuration);
                 save.Handle(command);
                 //return save.IsSaved ? Response.AsRedirect("/") : View["integrations/api/push", configuration];
