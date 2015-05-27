@@ -21,6 +21,14 @@
 
 @Html.ValidationSummary("Validation Results")
 
+<script type="text/javascript">
+            //$(function () {
+            //    $('input-group date').datetimepicker({
+            //        defaultDate: "01/01/2015"
+            //    });
+            //});
+</script>
+
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open", Model))
     <form action="@url" method="@method" class="form-horizontal">

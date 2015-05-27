@@ -15,7 +15,7 @@ namespace UserManagement.Domain.Dtos
         }
 
         public Guid Id { get; set; }
-        public DateTime CommencementDate { get; set; }
+        public DateTime? CommencementDate { get; set; }
         [Required]
         [Display(Name = "Contract name required")]
         public string Name { get; set; }

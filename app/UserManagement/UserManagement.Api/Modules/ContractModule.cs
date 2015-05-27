@@ -34,7 +34,7 @@ namespace UserManagement.Api.Modules
 
             Get["/Contracts/Add"] = parameters =>
             {
-                return View["Save", new ContractDto()];
+                return View["Save", new ContractDto{CommencementDate = DateTime.Today, OnlineAcceptance = DateTime.Today}];
             };
 
             Post["/Contracts"] = _ =>
