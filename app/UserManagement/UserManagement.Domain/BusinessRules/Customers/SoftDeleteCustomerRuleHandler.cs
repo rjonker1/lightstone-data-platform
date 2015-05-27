@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
-using NHibernate.Util;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
@@ -13,7 +10,6 @@ namespace UserManagement.Domain.BusinessRules.Customers
 {
     public class SoftDeleteCustomerRuleHandler : AbstractMessageHandler<SoftDeleteCustomerRule>
     {
-
         private readonly IRepository<Customer> _customers;
         private readonly IRepository<User> _users;
 
@@ -24,10 +20,9 @@ namespace UserManagement.Domain.BusinessRules.Customers
 
         public override void Handle(SoftDeleteCustomerRule command)
         {
-
             var entity = command.Entity;
             //var hasCustomerUser = _customers.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Users.Where(usr => usr.IsActive != null && usr.IsActive.Value.Equals(true))).ToList();
-            var hasCustomerUser = _customers.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Users.Where(usr => usr.IsActive.Equals(true))).ToList();
+            var hasCustomerUser = _customers.Where(x => x.Id == entity.Id).Select(u => u.Users.Where(usr => usr.IsActive == true)).ToList();
 
             if (hasCustomerUser.Any(user => user.Any()))
             {
@@ -36,7 +31,7 @@ namespace UserManagement.Domain.BusinessRules.Customers
                 throw exception;
             }
 
-            entity.IsLocked = false;
+            entity.IsActive = false;
         }
     }
 }
