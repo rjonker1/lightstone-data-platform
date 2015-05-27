@@ -29,12 +29,12 @@ namespace UserManagement.Api.Modules
                     (IEnumerable<ContractDto>) Mapper.Map<IEnumerable<Contract>, IEnumerable<ContractDto>>(contracts);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive).ToList() });
             };
 
             Get["/Contracts/Add"] = parameters =>
             {
-                return View["Save", new ContractDto()];
+                return View["Save", new ContractDto{CommencementDate = DateTime.Today, OnlineAcceptance = DateTime.Today}];
             };
 
             Post["/Contracts"] = _ =>

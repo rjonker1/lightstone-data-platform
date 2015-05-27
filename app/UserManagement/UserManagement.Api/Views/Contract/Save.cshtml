@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Description</label>
+                <label class="control-label col-lg-4">* Description</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -60,14 +60,14 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Commencement Date</label>
-                <div class="input-group col-lg-6">
+                <label class="control-label col-lg-4">* Commencement Date</label>
+                <div class="input-group col-lg-2">
                     <div class="input-group date">
                         <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
                         <input type="text" class="form-control" name="CommencementDate" readonly="true" value="@Model.CommencementDate">
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     @Html.ValidationMessageFor(x => x.CommencementDate)
                 </div>
 
@@ -130,7 +130,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Contract Type</label>
+                <label class="control-label col-lg-4">* Contract Type</label>
                 <div class="input-group col-lg-2">
                     <select name="ContractTypeId" data-placeholder="Select user type" class="chosen-select">
                         <option value=""></option>
@@ -148,7 +148,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Escalation Type</label>
+                <label class="control-label col-lg-4">* Escalation Type</label>
                 <div class="input-group col-lg-2">
                     <select name="EscalationTypeId" data-placeholder="Select escalation type" class="chosen-select">
                         <option value=""></option>
@@ -166,7 +166,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">Contract Duration</label>
+                <label class="control-label col-lg-4">* Contract Duration</label>
                 <div class="input-group col-lg-2">
                     <select name="ContractDurationId" data-placeholder="Select contract duration" class="chosen-select">
                         <option value=""></option>
