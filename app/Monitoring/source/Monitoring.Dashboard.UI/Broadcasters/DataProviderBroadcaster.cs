@@ -19,7 +19,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         private readonly IHubConnectionContext<dynamic> _clients;
         private Uri _root = null;
-        private TimeSpan _interval = TimeSpan.FromMilliseconds(1000);
+        private TimeSpan _interval = TimeSpan.FromMilliseconds(5000);
         private Timer _monitoringTimer;
         private Timer _statisticsTimer;
         private bool _isFirstCall = true;
@@ -119,7 +119,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             if (_isFirstCall)
             {
                 _isFirstCall = false;
-                _interval = TimeSpan.FromMilliseconds(15000);
+                _interval = TimeSpan.FromMilliseconds(30000);
                 SetStatisticsTimer();
             }
 

@@ -20,11 +20,11 @@ namespace Lim.Acceptance.Tests.Integrations
             _connection.Execute("truncate table AuditApiIntegration");
         }
 
-        public AuditIntegration GetAuditLog(Guid configurationKey)
+        public AuditIntegration GetAuditLog(long configurationId)
         {
             _connection.Open();
-            var auditrecord = _connection.Query<AuditIntegration>("select * from AuditApiIntegration where ConfigurationKey = @ConfigurationKey",
-                new { @ConfigurationKey = configurationKey });
+            var auditrecord = _connection.Query<AuditIntegration>("select * from AuditApiIntegration where ConfigurationId = @ConfigurationId",
+                new { @ConfigurationId = configurationId });
             _connection.Close();
             return auditrecord.FirstOrDefault();
         }

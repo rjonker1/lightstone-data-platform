@@ -27,20 +27,20 @@ namespace Lim.Web.UI.Modules
             Get["/integrations/for/api/push/edit/{id}/{clientId}"] = _ =>
             {
                 int id;
-                Guid clientId;
+                int clientId;
 
                 int.TryParse(_.Id, out id);
-                Guid.TryParse(_.clientId, out clientId);
+                int.TryParse(_.clientId, out clientId);
 
-                if (id == 0 || clientId == Guid.Empty)
+                if (id == 0 || clientId == 0)
                     return HttpStatusCode.NoResponse;
 
                 var model = PushConfiguration.Existing(setup, new GetApiPushConfiguration(id, clientId));
                 model.SetDataPlatformClients(dataPlatformClient, new GetDataPlatformClients());
-                model.SetDataPlatformPackages(dataPlatformClient, new GetDataPlatformClientPackages(clientId));
+                model.SetDataPlatformPackages(dataPlatformClient, new GetDataPlatformClientPackages(new Guid()));
                 model.SetFrequency(setup, new GetFrequencyTypes());
                 model.SetAuthentication(setup, new GetAuthenticationTypes());
-                model.SetDataPlatformContracts(dataPlatformClient, new GetDataPlatformClientContracts(clientId));
+                model.SetDataPlatformContracts(dataPlatformClient, new GetDataPlatformClientContracts(new Guid()));
                 model.SetWeekdays(setup, new GetWeekdays());
                 model.SetIntegrationClients(client,new GetIntegrationClients());
                 return View["integrations/api/push", model];
@@ -49,7 +49,9 @@ namespace Lim.Web.UI.Modules
             Post["/integrations/for/api/push/save"] = _ =>
             {
                 var configuration = this.Bind<PushConfiguration>();
-                var command = new InsertApiPushConfiguration(configuration.SplitAccountAndClientId());
+                configuration.SetDataPlatformPackages(dataPlatformClient, new GetDataPlatformClientPackages(new Guid()));
+                configuration.SetDataPlatformContracts(dataPlatformClient, new GetDataPlatformClientContracts(new Guid()));
+                var command = new AddApiPushConfiguration(configuration);
                 save.Handle(command);
                 //return save.IsSaved ? Response.AsRedirect("/") : View["integrations/api/push", configuration];
                 return Response.AsRedirect("/integrations/for/api/configurations");

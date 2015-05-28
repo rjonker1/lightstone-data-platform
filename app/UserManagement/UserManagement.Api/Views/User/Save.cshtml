@@ -29,6 +29,7 @@
     <form action="@url" method="@method" class="form-horizontal">
         @Html.HiddenFor(x => x.Created)
         @Html.HiddenFor(x => x.CreatedBy)
+        @Html.HiddenFor(x => x.IsActive)
 
         <div class="box-body">
 
@@ -180,7 +181,7 @@
                         {
                             <div class="list-group-item">
                                 <div class="pull-left">
-                                    <a class="btn btn-danger btn-xs close-box" href="javascript:;">
+                                    <a class="btn btn-danger btn-xs close-box">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>

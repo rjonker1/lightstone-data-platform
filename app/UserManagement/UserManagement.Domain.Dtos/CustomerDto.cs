@@ -19,7 +19,7 @@ namespace UserManagement.Domain.Dtos
         public string AccountOwnerLastName { get; set; }
         [Required]
         [Display(Name = "Commercial state is required")]
-        public Guid CommercialStateId { get; set; }
+        public Guid? CommercialStateId { get; set; }
         public string CommercialStateValue { get; set; }
         public string CreateSourceValue { get; set; }
         public Guid PlatformStatusId { get; set; }
@@ -38,7 +38,7 @@ namespace UserManagement.Domain.Dtos
         public string BillingAccountContactName { get; set; }
         [Required]
         [Display(Name = "Payment type is required")]
-        public Guid BillingPaymentTypeId { get; set; }
+        public Guid? BillingPaymentTypeId { get; set; }
 
         public string ContactDetailContactNumber { get; set; }
         [Required]

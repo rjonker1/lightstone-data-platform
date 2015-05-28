@@ -37,7 +37,7 @@ namespace UserManagement.Api.Modules
                 var dto = (IEnumerable<ClientDto>) Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(clients);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });
             };
 
             Get["/Clients/Add"] = parameters => View["Save", new ClientDto()];
@@ -47,6 +47,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.BindAndValidate<ClientDto>();
                 dto.Created = DateTime.UtcNow;
                 dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.IsActive = true;
 
                 if (ModelValidationResult.IsValid)
                 {

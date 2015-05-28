@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Lim.Domain.Models
@@ -8,7 +7,8 @@ namespace Lim.Domain.Models
     public class Client
     {
 
-        public const string Select = @"select c.* from Client c";
+        public const string SelectAll = @"select c.* from Client c";
+        public const string Select = @"select c.* from Client c where c.Id = @Id";
 
         public Client()
         {
@@ -60,18 +60,13 @@ namespace Lim.Domain.Models
             return new Client();
         }
 
-        public static Client Existing(long id)
-        {
-            return new Client(id);
-        }
-
-        public static IEnumerable<Client> Get()
-        {
-            //TODO: get all clients
-            return new List<Client>();
-        }
+        //public static Client Existing(long id)
+        //{
+        //    return new Client(id);
+        //}
+      
             
-            [DataMember]
+        [DataMember]
         public long Id { get; private set; }
         [DataMember]
         public bool IsActive { get; private set; }

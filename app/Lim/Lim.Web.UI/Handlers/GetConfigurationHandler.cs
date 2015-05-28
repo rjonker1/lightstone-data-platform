@@ -38,7 +38,7 @@ namespace Lim.Web.UI.Handlers
         public void Handle(GetApiPushConfiguration command)
         {
             command.Set(
-                _repository.Items<PushConfigurationView>(PushConfigurationView.Select, new {@Id = command.ConfigurationId}));
+                _repository.Items<PushConfigurationView>(PushConfigurationView.Select, new {@Id = command.ConfigurationId, @ClientId = command.ClientId}));
         }
 
         public void Handle(GetApiPullConfiguration command)

@@ -1,5 +1,7 @@
 ﻿using Lim.Domain.Models;
+using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
+using Lim.Web.UI.Models.LimClients;
 using Nancy;
 using Nancy.ModelBinding;
 
@@ -7,7 +9,7 @@ namespace Lim.Web.UI.Modules
 {
     public class ClientModule : NancyModule
     {
-        public ClientModule(IHandleGettingIntegrationClient client)
+        public ClientModule(IHandleGettingIntegrationClient client, IHandleSavingClient save)
         {
             Get["/client/new"] = _ =>
             {
@@ -17,20 +19,20 @@ namespace Lim.Web.UI.Modules
 
             Get["client/edit/{id}"] = _ =>
             {
-                var model = Client.Existing(_.Id);
+                var model = LimClientView.Existing(client, new GetIntegrationClient(_.Id));
                 return View["clients/client", model];
             };
 
             Post["/client/save"] = _ =>
             {
                 var model = this.Bind<Client>();
-                //TOOO: Save the client
-                return Response.AsRedirect("/clients/clients");
+                save.Handle(new AddClient(model));
+                return Response.AsRedirect("/client/view/all");
             };
 
             Get["client/view/all"] = _ =>
             {
-                var model = Client.Get();
+                var model = LimClientView.Get(client);
                 return View["/clients/clients", model];
             };
         }
