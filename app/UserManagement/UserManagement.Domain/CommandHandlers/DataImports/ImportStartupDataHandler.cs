@@ -2,7 +2,6 @@
 using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
@@ -12,7 +11,6 @@ using UserManagement.Domain.Entities.Commands.PaymentTypes;
 using UserManagement.Domain.Entities.Commands.PlatformStatuses;
 using UserManagement.Domain.Entities.Commands.Provinces;
 using UserManagement.Domain.Entities.Commands.Roles;
-using UserManagement.Domain.Entities.Commands.UserTypes;
 using UserManagement.Domain.Entities.DataImports;
 
 namespace UserManagement.Domain.CommandHandlers.DataImports
@@ -34,18 +32,13 @@ namespace UserManagement.Domain.CommandHandlers.DataImports
             this.Info(() => "Found ImportDataOnApiStartUp - {0} AppSetting".FormatWith(importDataOnApiStartUp));
 
             if (importDataOnApiStartUp)
-            {
                 ImportData();
-                return;
-            }
-
         }
 
         private void ImportData()
         {
             this.Info(() => "Attempting to import required data");
             _bus.Publish(new ImportRole());
-            _bus.Publish(new ImportUserType());
             _bus.Publish(new ImportProvince());
             _bus.Publish(new ImportContractDuration());
             _bus.Publish(new ImportEscalationType());

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Nancy;
@@ -31,7 +32,7 @@ namespace UserManagement.Api.Modules
 
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 var resource = string.Format("/Packages/{0}/{1}/{2}", filter, pageIndex - 1, pageSize).ToString();
-                var packagesJson = packageBuilderApi.Get("", (string)resource);
+                var packagesJson = packageBuilderApi.Get("", (string)resource, null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
                // var packages = packageBuilderApi.Get<Test>("", string.Format("/Packages/{0}/{1}/{2}", filter, pageIndex, pageSize), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
                 var packages = JsonConvert.DeserializeObject<PagedCollectionDto<PackageDto>>(packagesJson);
                 //var result = packages.Select(x => new { id = x.Id, name = x.Name });

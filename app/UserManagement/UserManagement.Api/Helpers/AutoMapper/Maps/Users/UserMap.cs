@@ -24,7 +24,6 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
 
             Mapper.CreateMap<UserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .ForMember(dest => dest.UserType, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<UserType>>().Get(x.UserTypeId)))
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(x => 
                     x.RoleIds != null
                         ? new HashSet<Role>(x.RoleIds.Select(id => ServiceLocator.Current.GetInstance<IValueEntityRepository<Role>>().Get(id))) 

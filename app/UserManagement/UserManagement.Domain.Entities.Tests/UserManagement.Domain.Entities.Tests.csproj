@@ -81,7 +81,6 @@
     <Compile Include="ValueTypes\when_persisting_payment_type.cs" />
     <Compile Include="ValueTypes\when_persisting_platfrom_status.cs" />
     <Compile Include="ValueTypes\when_persisting_province.cs" />
-    <Compile Include="ValueTypes\when_persisting_user_type.cs" />
     <Compile Include="when_persisting_address.cs" />
     <Compile Include="when_persisting_audit_log.cs" />
     <Compile Include="when_persisting_billing.cs" />

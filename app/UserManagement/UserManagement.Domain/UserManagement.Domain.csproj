@@ -130,7 +130,6 @@
     <Compile Include="CommandHandlers\PlatformStatuses\ImportPlatformStatusHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Roles\ImportRoleHandler.cs" />
-    <Compile Include="CommandHandlers\UserTypes\ImportUserTypeHandler.cs" />
     <Compile Include="CommandHandlers\ValueEntities\CreateValueEntityHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

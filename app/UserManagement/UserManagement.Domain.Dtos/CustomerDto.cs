@@ -16,7 +16,7 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Account owner is required")]
         public Guid AccountOwnerId { get; set; }
-        public string AccountOwnerName { get; set; }
+        public string AccountOwnerLastName { get; set; }
         [Required]
         [Display(Name = "Commercial state is required")]
         public Guid CommercialStateId { get; set; }
@@ -73,5 +73,6 @@ namespace UserManagement.Domain.Dtos
         public AddressDto PostalAddressDto { get; set; }
         public CreateSourceType CreateSourceType { get; set; }
         public bool? IsActive { get; set; }
+        public Guid accountownername_primary_key { get; set; }
     }
 }

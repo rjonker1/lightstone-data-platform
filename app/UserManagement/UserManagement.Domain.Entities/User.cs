@@ -4,6 +4,7 @@ using System.Linq;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
 using UserManagement.Domain.Core.Security;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {

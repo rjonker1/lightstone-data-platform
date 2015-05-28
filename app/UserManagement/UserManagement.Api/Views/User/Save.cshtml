@@ -1,10 +1,10 @@
 ﻿@using System
 @using System.Linq
-@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
 @using UserManagement.Domain.Dtos
 @using UserManagement.Domain.Entities
+@using UserManagement.Domain.Enums
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.UserDto>
 @{
     var isCreate = Model.Id == new Guid();
@@ -21,6 +21,187 @@
     <p>* Denotes required fields, please ensure that all required fields are filled in.</p>
 }
 
+@Html.ValidationSummary("Validation Results")
+
+<div class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("User Info", "", "glyphicon glyphicon-user", Model))
+
+    <form action="@url" method="@method" class="form-horizontal">
+        @Html.HiddenFor(x => x.Created)
+        @Html.HiddenFor(x => x.CreatedBy)
+
+        <div class="box-body">
+
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">* Name</label>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.FirstName)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">* Surname</label>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.LastName)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">ID Number</label>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.IdNumber, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.IdNumber)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">* Contact Number</label>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-book" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.ContactNumber)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">* Username</label>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @if (isCreate)
+                        {
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "" })
+                        }
+                        @if (!isCreate)
+                        {
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "", @readonly = "readonly" })
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.UserName)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">* Password</label>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-certificate" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @*@Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "" })*@
+                        <input type="password" class="form-control" name="password" value="@Model.Password">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.Password)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">User Type</label>
+                <div class="input-group col-lg-2">
+                    <select id="userTypeSelect" name="UserType" data-placeholder="Select user type" class="chosen-select">
+                        <option value=""></option>
+                        @foreach (var item in Enum.GetValues(typeof(UserType)))
+                        {
+                            var isSelected = item.ToString() == Model.UserType.ToString();
+                            <option selected="@isSelected" value="@item">@item</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    @*@Html.ValidationMessageFor(x => x.UserTypeId)*@
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">Roles</label>
+                <div id="roles" class="input-group col-lg-2">
+                    <select id="rolesSelect" name="RoleIds" data-placeholder="Select roles" multiple class="chosen-select"></select>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.RoleIds)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">Customers</label>
+                <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Customer).AssemblyQualifiedName">
+                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
+                        @foreach (NamedEntityDto item in Model.Customers)
+                        {
+                            var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
+                            <option selected="@isSelected" value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.CustomerIds)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">Clients</label>
+                <div class="input-group col-lg-2 auto-list-complete user-alias" data-type="@typeof(Client).AssemblyQualifiedName">
+                    <input id="ClientIds" class="form-control" type="text" placeholder="Type to search & add clients" />
+                    <div class="list-group">
+                        @foreach (var cu in Model.ClientUsers)
+                        {
+                            <div class="list-group-item">
+                                <div class="pull-left">
+                                    <a class="btn btn-danger btn-xs close-box" href="javascript:;">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                                <input type="hidden" id="@cu.ClientId" name="ClientId[@count]" value="@cu.ClientId" />
+                                <label>@cu.ClientName</label>
+                                <input type="text" class="form-control" name="UserAlias[@count]" value="@cu.UserAlias" placeholder="User alias" />
+                            </div>
+                            count++;
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.ClientUsers)
+                </div>
+
+            </div>
+        </div>
+        @Html.Partial("Shared/BoxFooter")
+    </form>
+</div>
+
 <script>
 
     var externalRoles = [];
@@ -28,47 +209,44 @@
     var roleIds = [];
     var selectedRoles = [];
 
-    @if (!isCreate) {
-
+    @if (!isCreate) 
+    {
         foreach (var roleId in Model.RoleIds)
         {
             @:roleIds.push('@roleId');
 
             foreach (var viewBagRole in ViewBag.Roles)
             {
-
-                if (viewBagRole.Value == roleId.ToString() && Model.UserTypeValue == "Internal")
+                if (viewBagRole.Value == roleId.ToString() && Model.UserType == UserType.Internal)
                 {
                     @:selectedRoles.push({ 'label': '@viewBagRole.Text', 'value': '@viewBagRole.Value', 'type': 'Internal' });
-                                                                                    }
-
-                if (viewBagRole.Value == roleId.ToString() && Model.UserTypeValue == "External")
+                }
+                if (viewBagRole.Value == roleId.ToString() && Model.UserType == UserType.External)
                 {
                     @:selectedRoles.push({ 'label': '@viewBagRole.Text', 'value': '@viewBagRole.Value', 'type': 'External' });
-                                                                                }
+                }
             }
         }
-
     }
 
-    @foreach (SelectListItem userItem in ViewBag.UserTypes.Value)
+    @foreach (var userItem in Enum.GetValues(typeof(UserType)))
     {
         foreach (SelectListItem roleItem in ViewBag.Roles.Value)
         {
 
-            if (userItem.Text == "External" && (roleItem.Text == "Owner" || roleItem.Text == "SuperUser" || roleItem.Text == "User"))
+            if (userItem.ToString() == UserType.External.ToString() && (roleItem.Text == "Owner" || roleItem.Text == "SuperUser" || roleItem.Text == "User"))
             {
                 @:externalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'External' });
-                                                                                                    }
+            }
 
-            if (userItem.Text == "Internal" && (roleItem.Text == "Admin" || roleItem.Text == "AccountManager" || roleItem.Text == "ProductManager" || roleItem.Text == "Support"))
+            if (userItem.ToString() == UserType.Internal.ToString() && (roleItem.Text == "Admin" || roleItem.Text == "AccountManager" || roleItem.Text == "ProductManager" || roleItem.Text == "Support"))
             {
                 @:internalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'Internal' });
-                                                                                                        }
+            }
         }
     }
 
-    $(document).ready(function () {
+    $(function () {
 
         $('#rolesSelect').empty();
         if ($('#userTypeSelect option:selected').text() == 'Internal') {
@@ -196,191 +374,6 @@
         }
 
         $("#rolesSelect").trigger("chosen:updated");
-
     });
 
 </script>
-
-@Html.ValidationSummary("Validation Results")
-
-<div class="box">
-
-
-    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("User Info", "", "glyphicon glyphicon-user", Model))
-
-    <form action="@url" method="@method" class="form-horizontal">
-        
-        @Html.HiddenFor(x => x.Created)
-        @Html.HiddenFor(x => x.CreatedBy)
-
-        <div class="box-body">
-
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Name</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.FirstName)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Surname</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.LastName)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">ID Number</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.IdNumber, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.IdNumber)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Contact Number</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-book" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.ContactNumber)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Username</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @if (isCreate)
-                        {
-                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "" })
-                        }
-                        @if (!isCreate)
-                        {
-                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "", @readonly = "readonly" })
-                        }
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.UserName)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Password</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-certificate" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @*@Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "" })*@
-                        <input type="password" class="form-control" name="password" value="@Model.Password">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.Password)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">User Type</label>
-                <div class="input-group col-lg-2">
-                    <select id="userTypeSelect" name="UserTypeId" data-placeholder="Select user type" class="chosen-select">
-                        <option value=""></option>
-                        @foreach (SelectListItem item in ViewBag.UserTypes.Value)
-                        {
-                            var isSelected = item.Value == Model.UserTypeId.ToString();
-                            <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.UserTypeId)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Roles</label>
-                <div id="roles" class="input-group col-lg-2">
-                    <select id="rolesSelect" name="RoleIds" data-placeholder="Select roles" multiple class="chosen-select"></select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.RoleIds)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Customers</label>
-                <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Customer).AssemblyQualifiedName">
-                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
-                        @foreach (NamedEntityDto item in Model.Customers)
-                        {
-                            var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
-                            <option selected="@isSelected" value="@item.Id">@item.Name</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.CustomerIds)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Clients</label>
-                <div class="input-group col-lg-2 auto-list-complete user-alias" data-type="@typeof(Client).AssemblyQualifiedName">
-                    <input id="ClientIds" class="form-control" type="text" placeholder="Type to search & add clients" />
-                    <div class="list-group">
-                        @foreach (var cu in Model.ClientUsers)
-                        {
-                            <div class="list-group-item">
-                                <div class="pull-left">
-                                    <a class="btn btn-danger btn-xs close-box" href="javascript:;">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
-                                <input type="hidden" id="@cu.ClientId" name="ClientId[@count]" value="@cu.ClientId" />
-                                <label>@cu.ClientName</label>
-                                <input type="text" class="form-control" name="UserAlias[@count]" value="@cu.UserAlias" placeholder="User alias" />
-                            </div>
-                            count++;
-                        }
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.ClientUsers)
-                </div>
-
-            </div>
-        </div>
-        @Html.Partial("Shared/BoxFooter")
-    </form>
-</div>

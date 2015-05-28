@@ -54,9 +54,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1168, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1169, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1168\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1169\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="MemBus">
       <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
@@ -107,7 +107,6 @@
     <Compile Include="BusinessRules\Lookups\PlatformStatuses\DeletePlatformStatusRule.cs" />
     <Compile Include="BusinessRules\Lookups\Provinces\DeleteProvinceRule.cs" />
     <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRule.cs" />
-    <Compile Include="BusinessRules\Lookups\UserTypes\DeleteUserTypeRule.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRule.cs" />
@@ -126,7 +125,6 @@
     <Compile Include="Commands\PlatformStatuses\ImportPlatformStatus.cs" />
     <Compile Include="Commands\Provinces\ImportProvince.cs" />
     <Compile Include="Commands\Roles\ImportRole.cs" />
-    <Compile Include="Commands\UserTypes\ImportUserType.cs" />
     <Compile Include="ContractPackage.cs" />
     <Compile Include="AccountNumber.cs" />
     <Compile Include="CustomerAccountNumber.cs" />
@@ -158,7 +156,6 @@
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserRole.cs" />
-    <Compile Include="UserType.cs" />
     <Reference Include="UserManagement.Domain">
       <HintPath>..\UserManagement.Api\Bin\UserManagement.Domain.dll</HintPath>
     </Reference>
