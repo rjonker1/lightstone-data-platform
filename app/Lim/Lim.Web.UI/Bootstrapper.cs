@@ -26,7 +26,7 @@ namespace Lim.Web.UI
         {
             container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());
 
-            container.Register<ISessionFactory>(SessionFactory.Build("database/lim"));
+            container.Register<ISessionFactory>(SessionFactory.BuildSession("database/lim"));
 
             container.Register<IReadUserManagementRepository>(new UserManangementReadRepository(ConnectionFactory.ForUsermanagementDatabase()));
             container.Register<IReadLimRepository>(new LimReadRepository(ConnectionFactory.ForLimDatabase()));

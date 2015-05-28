@@ -18,6 +18,8 @@ namespace Lim.Schedule.Service.Installers
 
             container.Register(Component.For<ResponseFromPackageConsumer>().ImplementedBy<ResponseFromPackageConsumer>());
             container.Register(Component.For<AlwaysOnConfigurationConsumer>().ImplementedBy<AlwaysOnConfigurationConsumer>());
+
+            _log.InfoFormat("Consumers Installed");
         }
     }
 }

@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Domain.Entities.Factory;
 using NHibernate;
+using NHibernate.Cfg;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -15,12 +16,11 @@ namespace Lim.Schedule.Service.Installers
         {
             _log.InfoFormat("Installing Database");
 
-            container.Register(Component.For<ISessionFactory>().UsingFactoryMethod(c => SessionFactory.Build("lim/schedule/database")).LifestyleSingleton());
-            container.Register(Component.For<ISession>().UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession()).LifestyleTransient());
+            container.Register(Component.For<Configuration>().UsingFactoryMethod(c => SessionFactory.BuildConfiguration("lim/schedule/database")).LifestyleTransient());
+            container.Register(Component.For<ISessionFactory>().UsingFactoryMethod(c => c.Resolve<Configuration>().BuildSessionFactory()).LifestyleSingleton());
+            container.Register(Component.For<ISession>().UsingFactoryMethod(c => c.Resolve<ISessionFactory>().OpenSession()).LifestyleTransient());
 
-            _log.InfoFormat("Database Installed Database");
-
-            
+            _log.InfoFormat("Installed Database");
         }
     }
 }

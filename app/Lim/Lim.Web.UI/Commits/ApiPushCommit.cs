@@ -69,9 +69,9 @@ namespace Lim.Web.UI.Commits
 
                         session.SaveOrUpdate(apiConfiguration);
 
-                        var integrationClients = session.Query<IntegrationClients>().Where(w => w.Configuration.Id == configuration.Id);
-                        var integrationContracts = session.Query<IntegrationContracts>().Where(w => w.Configuration.Id == configuration.Id);
-                        var integrationPackages = session.Query<IntegrationPackages>().Where(w => w.Configuration.Id == configuration.Id);
+                        var integrationClients = session.Query<IntegrationClient>().Where(w => w.Configuration.Id == configuration.Id);
+                        var integrationContracts = session.Query<IntegrationContract>().Where(w => w.Configuration.Id == configuration.Id);
+                        var integrationPackages = session.Query<IntegrationPackage>().Where(w => w.Configuration.Id == configuration.Id);
 
                         foreach (var integrationClient in integrationClients)
                         {
@@ -98,7 +98,7 @@ namespace Lim.Web.UI.Commits
 
                             var id = existing == null || existing.Id == 0 ? 0 : existing.Id;
 
-                            var integrationPackage = new IntegrationPackages()
+                            var integrationPackage = new IntegrationPackage()
                             {
                                 Id = id,
                                 Configuration = configuration,
@@ -111,7 +111,7 @@ namespace Lim.Web.UI.Commits
 
                             if (id > 0)
                             {
-                                var evict = session.Get(typeof (IntegrationPackages), id);
+                                var evict = session.Get(typeof (IntegrationPackage), id);
                                 session.Evict(evict);
                             }
 
@@ -125,7 +125,7 @@ namespace Lim.Web.UI.Commits
 
                             var id = existing == null || existing.Id == 0 ? 0 : existing.Id;
 
-                            var integrationContract = new IntegrationContracts()
+                            var integrationContract = new IntegrationContract()
                             {
                                 Id = id,
                                 Configuration = configuration,
@@ -139,7 +139,7 @@ namespace Lim.Web.UI.Commits
 
                             if (id > 0)
                             {
-                                var evict = session.Get(typeof(IntegrationContracts), id);
+                                var evict = session.Get(typeof(IntegrationContract), id);
                                 session.Evict(evict);
                             }
                             session.SaveOrUpdate(integrationContract);
@@ -149,7 +149,7 @@ namespace Lim.Web.UI.Commits
                         {
                             var existing = integrationClients.FirstOrDefault(w => w.ClientCustomerId == clientCustomer);
                             var id = existing == null || existing.Id == 0 ? 0 : existing.Id;
-                            var integrationClient = new IntegrationClients()
+                            var integrationClient = new IntegrationClient()
                             {
                                 Id = id,
                                 Configuration = configuration,
@@ -162,7 +162,7 @@ namespace Lim.Web.UI.Commits
 
                             if (id > 0)
                             {
-                                var evict = session.Get(typeof(IntegrationClients), id);
+                                var evict = session.Get(typeof(IntegrationClient), id);
                                 session.Evict(evict);
                             }
 

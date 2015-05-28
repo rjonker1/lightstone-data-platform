@@ -61,8 +61,6 @@ namespace Lim.Schedule.Service
                     q.Add<PackageResponseMessage>(
                         (message, info) => new SenderConsumers<PackageResponseMessage>(message, _container)));
 
-            
-
             bus.Consume(receiverQueue,
                 q =>
                     q.Add<PackageConfigurationMessage>(

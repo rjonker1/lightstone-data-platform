@@ -1,7 +1,7 @@
 using System;
 namespace Lim.Domain.Entities {
     
-    public class IntegrationPackages {
+    public class IntegrationPackage {
         public virtual long Id { get; set; }
         public virtual Configuration Configuration { get; set; }
         public virtual System.Guid PackageId { get; set; }

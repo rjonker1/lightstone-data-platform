@@ -3,7 +3,7 @@ using FluentNHibernate.Mapping;
 namespace Lim.Domain.Entities.Maps {
     
     
-    public class IntegrationContractsMap : ClassMap<IntegrationContracts> {
+    public class IntegrationContractsMap : ClassMap<IntegrationContract> {
         
         public IntegrationContractsMap() {
 			Table("IntegrationContracts");
