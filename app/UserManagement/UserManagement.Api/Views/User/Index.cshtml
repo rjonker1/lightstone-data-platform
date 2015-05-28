@@ -41,10 +41,10 @@
             sortable: true
             //formatter: userFormatter
         }, {
-            field: 'role',
-            title: 'Role',
-            sortable: true,
-            formatter: roleFormatter
+            field: 'roleValues',
+            title: 'Roles',
+            sortable: true
+            //formatter: roleFormatter
         }, {
             field: 'customers',
             title: 'Customers',
@@ -81,23 +81,25 @@
     //    return state;
     //}
 
-    function roleFormatter(value, row, index) {
+    //function roleFormatter(value, row, index) {
 
-        var state = "";
+    //    var role = "";
 
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: '/ValueEntities/Lookup/' + row.roleIds[0],
-            success: function (response) {
-                //callback
+    //    console.log(value);
 
-                state = response.data.value;
-            }
-        });
+    //    //$.ajax({
+    //    //    async: false,
+    //    //    type: 'GET',
+    //    //    url: '/ValueEntities/Lookup/' + row.roleIds[0],
+    //    //    success: function (response) {
+    //    //        //callback
 
-        return state;
-    }
+    //    //        state = response.data.value;
+    //    //    }
+    //    //});
+
+    //    return value;
+    //}
 
     function customerClientFormatter(value, row, index) {
 

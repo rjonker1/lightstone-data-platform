@@ -19,6 +19,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
 
             Mapper.CreateMap<User, UserDto>()
                 .ForMember(dest => dest.RoleIds, opt => opt.MapFrom(x => x.Roles.Select(y => y.Id)))
+                .ForMember(dest => dest.RoleValues, opt => opt.MapFrom(x => x.Roles.Select(r => r.Value)))
                 .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)))
                 .ForMember(dest => dest.ClientUsers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<ClientUser>, IEnumerable<ClientUserDto>>(x.ClientUsers)));
 
