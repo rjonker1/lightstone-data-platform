@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Lim.Domain.Repository;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Identifiers;
@@ -11,10 +11,10 @@ namespace Lim.Schedule.Core.Handlers
 {
     public class HandleFetchingApiPushConfiguration : IHandleFetchingApiPushConfiguration
     {
-        private readonly ILimRepository _repository;
+        private readonly IReadLimRepository _repository;
         private readonly ILog _log;
 
-        public HandleFetchingApiPushConfiguration(ILimRepository repository)
+        public HandleFetchingApiPushConfiguration(IReadLimRepository repository)
         {
             _repository = repository;
             _log = LogManager.GetLogger(GetType());
@@ -25,7 +25,7 @@ namespace Lim.Schedule.Core.Handlers
             try
             {
                 var configs =
-                    _repository.Items<ApiPushConfiguration>(ApiPushConfiguration.Select,
+                    _repository.Items<ApiPushConfigurationDto>(ApiPushConfigurationDto.Select,
                         new {@FrequencyType = (int) command.Frequency, @Action = (int) command.Action, @IntegrationType = (int) command.Type})
                         .ToList();
                 _log.InfoFormat("{0} {1} Api Configurations will be handled", configs.Count(), command.Frequency.ToString());
@@ -46,9 +46,9 @@ namespace Lim.Schedule.Core.Handlers
                         s.AuthenticationKey, s.AuthenticationToken),
                     new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Action).ToString()),
                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction) s.IntegrationType).ToString())),
-                    new IntegrationClientIdentifier(_repository.Items<IntegrationClient>(IntegrationClient.Select, new { @ConfigurationId = s.Id})),
-                    new IntegrationContractIdentifier(_repository.Items<IntegrationContract>(IntegrationContract.Select, new { @ConfigurationId = s.Id }).Select(c =>c.Contract)),
-                    new IntegrationPackageIdentifier(_repository.Items<IntegrationPackage>(IntegrationPackage.Select, new { @ConfigurationId = s.Id })), new ClientIdentifier(s.ClientId)));
+                    new IntegrationClientIdentifier(_repository.Items<IntegrationClientDto>(IntegrationClientDto.Select, new { @ConfigurationId = s.Id})),
+                    new IntegrationContractIdentifier(_repository.Items<IntegrationContractDto>(IntegrationContractDto.Select, new { @ConfigurationId = s.Id }).Select(c =>c.Contract)),
+                    new IntegrationPackageIdentifier(_repository.Items<IntegrationPackageDto>(IntegrationPackageDto.Select, new { @ConfigurationId = s.Id })), new ClientIdentifier(s.ClientId)));
             
 
             }
@@ -63,7 +63,7 @@ namespace Lim.Schedule.Core.Handlers
             try
             {
                 var configs =
-                    _repository.Items<ApiPushConfiguration>(ApiPushConfiguration.SelectWithCustomDay,
+                    _repository.Items<ApiPushConfigurationDto>(ApiPushConfigurationDto.SelectWithCustomDay,
                         new
                         {
                             @FrequencyType = (int) command.Frequency,
@@ -92,9 +92,9 @@ namespace Lim.Schedule.Core.Handlers
                          s.AuthenticationKey, s.AuthenticationToken),
                      new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString()),
                      new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction)s.IntegrationType).ToString())),
-                     new IntegrationClientIdentifier(_repository.Items<IntegrationClient>(IntegrationClient.Select, new { @ConfigurationId = s.Id })),
-                     new IntegrationContractIdentifier(_repository.Items<IntegrationContract>(IntegrationContract.Select, new { @ConfigurationId = s.Id }).Select(c => c.Contract)),
-                     new IntegrationPackageIdentifier(_repository.Items<IntegrationPackage>(IntegrationPackage.Select, new { @ConfigurationId = s.Id })), new ClientIdentifier(s.ClientId)));
+                     new IntegrationClientIdentifier(_repository.Items<IntegrationClientDto>(IntegrationClientDto.Select, new { @ConfigurationId = s.Id })),
+                     new IntegrationContractIdentifier(_repository.Items<IntegrationContractDto>(IntegrationContractDto.Select, new { @ConfigurationId = s.Id }).Select(c => c.Contract)),
+                     new IntegrationPackageIdentifier(_repository.Items<IntegrationPackageDto>(IntegrationPackageDto.Select, new { @ConfigurationId = s.Id })), new ClientIdentifier(s.ClientId)));
 
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace Lim.Schedule.Core.Handlers
             try
             {
                 var configs =
-                    _repository.Items<ApiPushConfiguration>(ApiPushConfiguration.Select,
+                    _repository.Items<ApiPushConfigurationDto>(ApiPushConfigurationDto.Select,
                         new
                         {
                             @FrequencyType = (int) command.Frequency,
@@ -135,9 +135,9 @@ namespace Lim.Schedule.Core.Handlers
                         s.AuthenticationKey, s.AuthenticationToken),
                     new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString()),
                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction)s.IntegrationType).ToString())),
-                    new IntegrationClientIdentifier(_repository.Items<IntegrationClient>(IntegrationClient.Select, new { @ConfigurationId = s.Id })),
-                    new IntegrationContractIdentifier(_repository.Items<IntegrationContract>(IntegrationContract.SelectContract, new { @ConfigurationId = s.Id, @ContractId = command.ContractId }).Select(c => c.Contract)),
-                    new IntegrationPackageIdentifier(_repository.Items<IntegrationPackage>(IntegrationPackage.SelectPackage, new { @ConfigurationId = s.Id, @PackageId = command.PackageId, @ContractId = command.ContractId })), new ClientIdentifier(s.ClientId)));
+                    new IntegrationClientIdentifier(_repository.Items<IntegrationClientDto>(IntegrationClientDto.Select, new { @ConfigurationId = s.Id })),
+                    new IntegrationContractIdentifier(_repository.Items<IntegrationContractDto>(IntegrationContractDto.SelectContract, new { @ConfigurationId = s.Id, @ContractId = command.ContractId }).Select(c => c.Contract)),
+                    new IntegrationPackageIdentifier(_repository.Items<IntegrationPackageDto>(IntegrationPackageDto.SelectPackage, new { @ConfigurationId = s.Id, @PackageId = command.PackageId, @ContractId = command.ContractId })), new ClientIdentifier(s.ClientId)));
             }
             catch (Exception ex)
             {

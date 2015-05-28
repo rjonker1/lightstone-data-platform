@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
 
@@ -8,8 +8,8 @@ namespace Lim.Web.UI.Models.LimClients
 {
     public class LimClientView
     {
-        public readonly Client Client;
-        public LimClientView(Client client)
+        public readonly ClientDto Client;
+        public LimClientView(ClientDto client)
         {
             Client = client;
         }
@@ -21,7 +21,7 @@ namespace Lim.Web.UI.Models.LimClients
             return command.Clients.Select(s => new LimClientView(s));
         }
 
-        public static Client Existing(IHandleGettingIntegrationClient client, GetIntegrationClient command)
+        public static ClientDto Existing(IHandleGettingIntegrationClient client, GetIntegrationClient command)
         {
             client.Handle(command);
             return command.Client;

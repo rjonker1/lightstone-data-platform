@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 
 namespace Lim.Schedule.Core.Identifiers
 {
     public class IntegrationPackageIdentifier
     {
-        public IntegrationPackageIdentifier(IEnumerable<IntegrationPackage> packages)
+        public IntegrationPackageIdentifier(IEnumerable<IntegrationPackageDto> packages)
         {
             Packages = packages;
         }
-        public IEnumerable<IntegrationPackage> Packages { get; private set; }
+        public IEnumerable<IntegrationPackageDto> Packages { get; private set; }
     }
 }

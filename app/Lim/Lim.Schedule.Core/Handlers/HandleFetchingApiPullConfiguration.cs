@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Lim.Domain.Repository;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Identifiers;
@@ -11,10 +11,10 @@ namespace Lim.Schedule.Core.Handlers
 {
     public class HandleFetchingApiPullConfiguration : IHandleFetchingApiPullConfiguration
     {
-        private readonly ILimRepository _repository;
+        private readonly IReadLimRepository _repository;
         private readonly ILog _log;
 
-        public HandleFetchingApiPullConfiguration(ILimRepository repository)
+        public HandleFetchingApiPullConfiguration(IReadLimRepository repository)
         {
             _repository = repository;
             _log = LogManager.GetLogger(GetType());
@@ -24,7 +24,7 @@ namespace Lim.Schedule.Core.Handlers
         {
             try
             {
-                var configs = _repository.Items<ApiPullConfiguration>(ApiPullConfiguration.Select, new { @FrequencyType = (int)command.Frequency, @Action = (int)command.Action, @IntegrationType = (int)command.Type }).ToList();
+                var configs = _repository.Items<ApiPullConfigurationDto>(ApiPullConfigurationDto.Select, new { @FrequencyType = (int)command.Frequency, @Action = (int)command.Action, @IntegrationType = (int)command.Type }).ToList();
                 _log.InfoFormat("{0} Api Pull Configurations will be handled", configs.Count());
 
                 HasConfiguration = configs.Any();
@@ -45,7 +45,7 @@ namespace Lim.Schedule.Core.Handlers
         {
             try
             {
-                var configs = _repository.Items<ApiPullConfiguration>(ApiPullConfiguration.Select, new
+                var configs = _repository.Items<ApiPullConfigurationDto>(ApiPullConfigurationDto.Select, new
                 {
                     @FrequencyType = (int)command.Frequency,
                     @Action = (int)command.Action,
@@ -74,7 +74,7 @@ namespace Lim.Schedule.Core.Handlers
             try
             {
                 var configs =
-                    _repository.Items<ApiPushConfiguration>(ApiPullConfiguration.SelectWithCustomDay,
+                    _repository.Items<ApiPullConfigurationDto>(ApiPullConfigurationDto.SelectWithCustomDay,
                         new { @FrequencyType = (int)command.Frequency, @Action = (int)command.Action, @IntegrationType = (int)command.Type, @CustomFrequencyDay = command.CustomDay })
                         .ToList();
                 _log.InfoFormat("{0} {1} Api Custom Pull Configurations on {2} will be handled", configs.Count(), command.Frequency.ToString(), command.CustomDay);

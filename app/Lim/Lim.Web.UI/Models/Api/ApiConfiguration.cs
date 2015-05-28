@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
 
@@ -13,7 +13,7 @@ namespace Lim.Web.UI.Models.Api
 
         }
 
-        public ApiConfiguration(Configuration configuration, Client client)
+        public ApiConfiguration(ConfigurationDto configuration, ClientDto client)
         {
             Configuration = configuration;
             Client = client;
@@ -28,7 +28,7 @@ namespace Lim.Web.UI.Models.Api
             return config.Configurations.Select(s => new ApiConfiguration(s, clientCommand.Clients.FirstOrDefault(w => w.Id == s.ClientId))).ToList();
         }
 
-        public Configuration Configuration { get; private set; }
-        public Client Client { get; private set; }
+        public ConfigurationDto Configuration { get; private set; }
+        public ClientDto Client { get; private set; }
     }
 }

@@ -11,10 +11,10 @@ namespace Lim.Schedule.Core.Handlers
     public class HandleExecutingApiConfiguration : IHandleExecutingApiConfiguration
     {
         private readonly ILog _log;
-        private readonly ILimRepository _repository;
+        private readonly IReadLimRepository _repository;
         private readonly IAuditIntegration _auditLog;
 
-        public HandleExecutingApiConfiguration(ILimRepository repository, IAuditIntegration auditLog)
+        public HandleExecutingApiConfiguration(IReadLimRepository repository, IAuditIntegration auditLog)
         {
             _repository = repository;
             _auditLog = auditLog;

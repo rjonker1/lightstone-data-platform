@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Data;
+using Lim.Domain.Entities.Contracts;
 using Lim.Web.UI.Commands;
-using Lim.Web.UI.Mappers;
+using Lim.Web.UI.Models.Api;
 
 namespace Lim.Web.UI.Handlers
 {
     public class SavingConfigurationHandler : IHandleSavingConfiguration
     {
-        private readonly IDbConnection _connection;
+        //private readonly IDbConnection _connection;
+        private readonly IPersistObject<PushConfiguration> _persistence;
 
-        public SavingConfigurationHandler(IDbConnection connection)
+        public SavingConfigurationHandler(IPersistObject<PushConfiguration> persistence)
         {
-            _connection = connection;
+            _persistence = persistence;
         }
 
         public void Handle(AddApiPushConfiguration command)
         {
-            IsSaved = new ApiPushMapper(_connection, command.Configuration).Save();
+            //IsSaved = new ApiPushCommit(_connection, command.Configuration).Save();
+            IsSaved = _persistence.Persist(command.Configuration);
         }
 
         public void Handle(UpdateApiPushConfiguration command)

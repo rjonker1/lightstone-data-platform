@@ -1,7 +1,6 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lim.Acceptance.Tests.Integrations
@@ -20,10 +19,10 @@ namespace Lim.Acceptance.Tests.Integrations
             _connection.Execute("truncate table AuditApiIntegration");
         }
 
-        public AuditIntegration GetAuditLog(long configurationId)
+        public AuditIntegrationDto GetAuditLog(long configurationId)
         {
             _connection.Open();
-            var auditrecord = _connection.Query<AuditIntegration>("select * from AuditApiIntegration where ConfigurationId = @ConfigurationId",
+            var auditrecord = _connection.Query<AuditIntegrationDto>("select * from AuditApiIntegration where ConfigurationId = @ConfigurationId",
                 new { @ConfigurationId = configurationId });
             _connection.Close();
             return auditrecord.FirstOrDefault();

@@ -1,4 +1,4 @@
-﻿using Lim.Domain.Models;
+﻿using Lim.Domain.Dto;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
 using Lim.Web.UI.Models.LimClients;
@@ -13,7 +13,7 @@ namespace Lim.Web.UI.Modules
         {
             Get["/client/new"] = _ =>
             {
-                var model = Client.Create();
+                var model = ClientDto.Create();
                 return View["clients/client", model];
             };
 
@@ -25,7 +25,7 @@ namespace Lim.Web.UI.Modules
 
             Post["/client/save"] = _ =>
             {
-                var model = this.Bind<Client>();
+                var model = this.Bind<ClientDto>();
                 save.Handle(new AddClient(model));
                 return Response.AsRedirect("/client/view/all");
             };

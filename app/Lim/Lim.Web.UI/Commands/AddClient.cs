@@ -1,12 +1,11 @@
-﻿using Lim.Domain.Models;
-
+﻿using Lim.Domain.Dto;
 namespace Lim.Web.UI.Commands
 {
     public class AddClient
     {
-        public readonly Client Client;
+        public readonly ClientDto Client;
 
-        public AddClient(Client client)
+        public AddClient(ClientDto client)
         {
             Client = client;
         }

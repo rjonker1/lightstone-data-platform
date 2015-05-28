@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Common.Logging;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Security;
@@ -27,7 +27,7 @@ namespace Lim.Test.Api.Modules
             {
                 _log.Info("Importing push item from POST");
 
-                var model = this.Bind<List<PackageTransaction>>();
+                var model = this.Bind<List<PackageTransactionDto>>();
                 foreach (var transaction in model)
                 {
                     _log.InfoFormat("Contract Id {0}", transaction.ContractId);
