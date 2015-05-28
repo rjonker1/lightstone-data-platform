@@ -1,24 +1,25 @@
 ﻿using System;
-using System.Data;
+using Lim.Domain.Dto;
+using Lim.Domain.Entities.Contracts;
 using Lim.Web.UI.Commands;
-using Lim.Web.UI.Mappers;
 
 namespace Lim.Web.UI.Handlers
 {
     public class SavingClientHandler : IHandleSavingClient
     {
-        private readonly IDbConnection _connection;
+        //private readonly IDbConnection _connection;
+        private readonly IPersistObject<ClientDto> _client;
 
         public bool IsSaved { get; private set; }
 
-        public SavingClientHandler(IDbConnection connection)
+        public SavingClientHandler(IPersistObject<ClientDto> client)
         {
-            _connection = connection;
+            _client = client;
         }
 
         public void Handle(AddClient command)
         {
-            IsSaved = new ClientMapper(_connection, command.Client).Save();
+            IsSaved = _client.Persist(command.Client);
         }
 
         public void Handle(UpdateClient command)

@@ -1,10 +1,16 @@
 ﻿using System.Data;
+using Lim.Domain.Dto;
+using Lim.Domain.Entities.Contracts;
+using Lim.Domain.Entities.Factory;
 using Lim.Domain.Repository;
+using Lim.Web.UI.Commits;
 using Lim.Web.UI.Handlers;
+using Lim.Web.UI.Models.Api;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
+using NHibernate;
 
 namespace Lim.Web.UI
 {
@@ -13,19 +19,24 @@ namespace Lim.Web.UI
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
+            StaticConfiguration.DisableErrorTraces = false;
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());
 
-            container.Register<IUserManagementRepository>(new UserManangementRepository(ConnectionFactory.ForUsermanagementDatabase()));
-            container.Register<ILimRepository>(new LimRepository(ConnectionFactory.ForLimDatabase()));
+            container.Register<ISessionFactory>(SessionFactory.BuildSession("database/lim"));
+
+            container.Register<IReadUserManagementRepository>(new UserManangementReadRepository(ConnectionFactory.ForUsermanagementDatabase()));
+            container.Register<IReadLimRepository>(new LimReadRepository(ConnectionFactory.ForLimDatabase()));
             container.Register<IHandleGettingDataPlatformClient, GetDataPlatformClientHandler>();
             container.Register<IHandleGettingIntegrationClient, GetIntegrationClientHandler>();
             container.Register<IHandleGettingConfiguration, GetConfigurationHandler>();
             container.Register<IHandleSavingConfiguration, SavingConfigurationHandler>();
             container.Register<IHandleSavingClient, SavingClientHandler>();
+            container.Register<IPersistObject<PushConfiguration>, ApiPushCommit>();
+            container.Register<IPersistObject<ClientDto>, ClientCommit>();
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

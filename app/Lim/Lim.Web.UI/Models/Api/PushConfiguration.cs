@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Lim.Enums;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
-using Microsoft.SqlServer.Server;
-using AuthenticationType = Lim.Domain.Models.AuthenticationType;
 
 namespace Lim.Web.UI.Models.Api
 {
     public class PushConfiguration
     {
-        public readonly int ActionType;
-        public readonly int IntegrationType;
+        public readonly short ActionType;
+        public readonly short IntegrationType;
 
         public PushConfiguration()
         {
@@ -21,7 +19,7 @@ namespace Lim.Web.UI.Models.Api
             IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
-        private PushConfiguration(Configuration configuration)
+        private PushConfiguration(ConfigurationDto configuration)
         {
             Id = configuration.Id;
             Key = configuration.Key;
@@ -113,26 +111,10 @@ namespace Lim.Web.UI.Models.Api
             Weekdays = command.Weekdays.ToList();
         }
 
-        //public PushConfiguration SplitAccountAndClientId()
-        //{
-        //    if (string.IsNullOrEmpty(ClientIdAccountNumber))
-        //        return this;
-
-        //    var data = ClientIdAccountNumber.Split('|');
-
-        //    if (!data.Any() || data.Count() != 2)
-        //        return this;
-
-        //  //  IntegrationClients = new Guid(data[0]);
-        //    AccountNumber = int.Parse(data[1]);
-        //    return this;
-        //}
-
         public long Id { get; private set; }
         public Guid Key { get; private set; }
         public long ClientId { get; private set; }
-        public int FrequencyType { get; set; }
-        //public IEnumerable<Guid> IntegrationClients { get; set; }
+        public short FrequencyType { get; set; }
         public IEnumerable<Guid> IntegrationClients { get; set; }
         public IEnumerable<Guid> IntegrationContracts { get; set; }
         public int AccountNumber { get; set; }
@@ -146,24 +128,24 @@ namespace Lim.Web.UI.Models.Api
         public bool HasAuthentication { get; set; }
         public string AuthenticationToken { get; set; }
         public string AuthenticationKey { get; set; }
-        public int AuthenticationType { get; set; }
+        public short AuthenticationType { get; set; }
         public string ClientIdAccountNumber { get; set; }
         public DateTime CustomFrequency { get; set; }
         public string CustomDay { get; set; }
         public string User { get; set; }
 
-        public IReadOnlyCollection<Client> SelectableIntegrationClients; 
+        public IReadOnlyCollection<ClientDto> SelectableIntegrationClients; 
 
-        public IReadOnlyCollection<DataPlatformClient> SelectableDataPlatformClients;
+        public IReadOnlyCollection<DataPlatformClientDto> SelectableDataPlatformClients;
 
-        public IReadOnlyCollection<DataPlatformPackage> SelectableDataPlatformPackages;
+        public IReadOnlyCollection<DataPlatformPackageDto> SelectableDataPlatformPackages;
 
-        public IReadOnlyCollection<DataPlatformContract> SelectableDataPlatformContracts; 
+        public IReadOnlyCollection<DataPlatformContractDto> SelectableDataPlatformContracts; 
 
-        public IReadOnlyCollection<AuthenticationType> Authentication;
+        public IReadOnlyCollection<AuthenticationTypeDto> Authentication;
 
-        public IReadOnlyCollection<FrequencyType> Frequency;
+        public IReadOnlyCollection<FrequencyTypeDto> Frequency;
 
-        public IReadOnlyCollection<Weekday> Weekdays;
+        public IReadOnlyCollection<WeekdayDto> Weekdays;
     }
 }

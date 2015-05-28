@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Configuration;
-using Lim.Domain.Models;
+﻿using System.Collections.Generic;
+using Lim.Domain.Dto;
 
 namespace Lim.Web.UI.Commands
 {
     public class GetDataPlatformClients
     {
-        public void Set(IEnumerable<DataPlatformClient> clients)
+        public void Set(IEnumerable<DataPlatformClientDto> clients)
         {
             Clients = clients;
         }
        
-       public IEnumerable<DataPlatformClient> Clients { get; private set; }
+       public IEnumerable<DataPlatformClientDto> Clients { get; private set; }
     }
 
     public class GetIntegrationClients
     {
-        public void Set(IEnumerable<Client> clients)
+        public void Set(IEnumerable<ClientDto> clients)
         {
             Clients = clients;
         }
 
-        public IEnumerable<Client> Clients { get; private set; }
+        public IEnumerable<ClientDto> Clients { get; private set; }
     }
 
     public class GetIntegrationClient
@@ -34,11 +32,11 @@ namespace Lim.Web.UI.Commands
             Id = id;
         }
 
-        public void Set(Client client)
+        public void Set(ClientDto client)
         {
             Client = client;
         }
 
-        public Client Client { get; private set; }
+        public ClientDto Client { get; private set; }
     }
 }

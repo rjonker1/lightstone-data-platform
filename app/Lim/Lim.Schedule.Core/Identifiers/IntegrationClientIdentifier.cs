@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 
 namespace Lim.Schedule.Core.Identifiers
 {
     public class IntegrationClientIdentifier
     {
-        public IntegrationClientIdentifier(IEnumerable<IntegrationClient> clients)
+        public IntegrationClientIdentifier(IEnumerable<IntegrationClientDto> clients)
         {
             Clients = clients;
         }
 
-        public IEnumerable<IntegrationClient> Clients;
+        public IEnumerable<IntegrationClientDto> Clients;
     }
 
     public class IntegrationContractIdentifier

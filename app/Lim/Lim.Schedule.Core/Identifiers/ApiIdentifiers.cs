@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Common.Logging;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Lim.Domain.Repository;
-using Lim.Enums;
 using Lim.Push.RestApi;
 using Lim.Schedule.Core.Commands;
 using Newtonsoft.Json;
@@ -70,18 +69,18 @@ namespace Lim.Schedule.Core.Identifiers
         [DataMember]
         public IntegrationPackageIdentifier Packages { get; private set; }
 
-        [DataMember] private List<PackageTransaction> _transaction;
+        [DataMember] private List<PackageTransactionDto> _transaction;
 
-        public void Get(ILimRepository repository, ILog log)
+        public void Get(IReadLimRepository repository, ILog log)
         {
-            _transaction = new List<PackageTransaction>();
+            _transaction = new List<PackageTransactionDto>();
             if (!Packages.Packages.Any())
                 return;
 
             Packages.Packages.ToList().ForEach(f =>
             {
                 var response =
-                    repository.Items<PackageResponse>(PackageResponse.SelectStatement, new {@PackageId = f.PackageId, @ContractId = f.ContractId})
+                    repository.Items<PackageResponseDto>(PackageResponseDto.SelectStatement, new {@PackageId = f.PackageId, @ContractId = f.ContractId})
                         .ToList();
 
                 if (response.Any())
@@ -91,7 +90,7 @@ namespace Lim.Schedule.Core.Identifiers
                     _transaction.AddRange(
                         response.Select(
                             s =>
-                                new PackageTransaction(s.PackageId, s.UserId, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate, s.RequestId,
+                                new PackageTransactionDto(s.PackageId, s.UserId, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate, s.RequestId,
                                     s.Payload, s.HasResponse)));
                 }
             });

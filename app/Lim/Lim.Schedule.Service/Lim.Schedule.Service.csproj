@@ -54,6 +54,14 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1122\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
@@ -63,6 +71,10 @@
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Quartz">
       <HintPath>..\..\packages\Quartz.2.3.1\lib\net40\Quartz.dll</HintPath>
@@ -88,6 +100,7 @@
     <Compile Include="Installers\AuditInstallers.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
+    <Compile Include="Installers\DatabaseInstaller.cs" />
     <Compile Include="Installers\HandlerInstaller.cs" />
     <Compile Include="Installers\JobInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
@@ -135,6 +148,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
+      <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
+      <Name>Lim.Domain.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Messaging\Lim.Domain.Messaging.csproj">
       <Project>{6ee18788-1427-4ed7-a5ad-2af7cda4429d}</Project>
       <Name>Lim.Domain.Messaging</Name>

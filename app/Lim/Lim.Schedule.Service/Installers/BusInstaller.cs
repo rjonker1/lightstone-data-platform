@@ -23,6 +23,8 @@ namespace Lim.Schedule.Service.Installers
                 );
 
             container.Register(Component.For<IPublishConfigurationMessages>().ImplementedBy<ConfigurationMessagePublisher>());
+
+            _log.InfoFormat("Bus Installed");
         }
     }
 }

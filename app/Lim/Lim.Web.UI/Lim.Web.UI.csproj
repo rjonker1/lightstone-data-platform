@@ -53,6 +53,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet, Version=1.0.0.1128, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1128\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
@@ -73,6 +77,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
@@ -197,9 +205,8 @@
     <Compile Include="Handlers\IHandleSavingConfiguration.cs" />
     <Compile Include="Handlers\SavingClientHandler.cs" />
     <Compile Include="Handlers\SavingConfigurationHandler.cs" />
-    <Compile Include="Mappers\ApiPushMapper.cs" />
-    <Compile Include="Mappers\ClientMapper.cs" />
-    <Compile Include="Mappers\IMapToTheDatabase.cs" />
+    <Compile Include="Commits\ApiPushCommit.cs" />
+    <Compile Include="Commits\ClientCommit.cs" />
     <Compile Include="Models\Api\PushConfigurationView.cs" />
     <Compile Include="Models\Api\ApiConfiguration.cs" />
     <Compile Include="Models\Api\PullConfiguration.cs" />
@@ -218,6 +225,10 @@
     <Folder Include="Views\integrations\messages\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
+      <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
+      <Name>Lim.Domain.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>

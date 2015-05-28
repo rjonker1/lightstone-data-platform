@@ -1,5 +1,4 @@
-﻿using System.Net.NetworkInformation;
-using Lim.Domain.Models;
+﻿using Lim.Domain.Dto;
 using Lim.Domain.Repository;
 using Lim.Web.UI.Commands;
 
@@ -7,46 +6,46 @@ namespace Lim.Web.UI.Handlers
 {
     public class GetDataPlatformClientHandler : IHandleGettingDataPlatformClient
     {
-        private readonly IUserManagementRepository _repository;
+        private readonly IReadUserManagementRepository _repository;
 
-        public GetDataPlatformClientHandler(IUserManagementRepository repository)
+        public GetDataPlatformClientHandler(IReadUserManagementRepository repository)
         {
             _repository = repository;
         }
 
         public void Handle(GetDataPlatformClients command)
         {
-            command.Set(_repository.Items<DataPlatformClient>(DataPlatformClient.Select, new {}));
+            command.Set(_repository.Items<DataPlatformClientDto>(DataPlatformClientDto.Select, new { }));
         }
 
         public void Handle(GetDataPlatformClientPackages command)
         {
-            command.Set(_repository.Items<DataPlatformPackage>(DataPlatformPackage.Select, new {}));
+            command.Set(_repository.Items<DataPlatformPackageDto>(DataPlatformPackageDto.Select, new { }));
         }
 
         public void Handle(GetDataPlatformClientContracts command)
         {
-            command.Set(_repository.Items<DataPlatformContract>(DataPlatformContract.Select, new {}));
+            command.Set(_repository.Items<DataPlatformContractDto>(DataPlatformContractDto.Select, new { }));
         }
     }
 
     public class GetIntegrationClientHandler : IHandleGettingIntegrationClient
     {
-        private readonly ILimRepository _repository;
+        private readonly IReadLimRepository _repository;
 
-        public GetIntegrationClientHandler(ILimRepository repository)
+        public GetIntegrationClientHandler(IReadLimRepository repository)
         {
             _repository = repository;
         }
 
         public void Handle(GetIntegrationClients command)
         {
-            command.Set(_repository.Items<Client>(Client.SelectAll, new {}));
+            command.Set(_repository.Items<ClientDto>(ClientDto.SelectAll, new {}));
         }
 
         public void Handle(GetIntegrationClient command)
         {
-            command.Set(_repository.Item<Client>(Client.Select, new {@Id = command.Id}));
+            command.Set(_repository.Item<ClientDto>(ClientDto.Select, new {@Id = command.Id}));
         }
     }
 }

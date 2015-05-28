@@ -7,7 +7,7 @@ namespace Lim.Web.UI.Models.Api
     public class PushConfigurationView
     {
         public const string Select =
-            @"select Client.Name ClientName, c.*, ca.BaseAddress,ca.Suffix,ca.Username,ca.Password,ca.HasAuthentication,ca.AuthenticationToken,ca.AuthenticationKey,ca.AuthenticationType,p.PackageId IntegrationPackageId, ft.Type Frequency, ac.Type Action, it.Type Integration,ic.ClientCustomerId IntegrationClientId, contracts.Contract IntegrationContractId, ic.AccountNumber from Configuration c join ConfigurationApi ca on c.Id = ca.ConfigurationId join IntegrationPackages p on c.id = p.ConfigurationId join FrequencyType ft on c.FrequencyType = ft.Id join ActionType ac on c.ActionType = ac.Id join IntegrationType it on c.IntegrationType = it.Id join Client on Client.id = c.ClientId join IntegrationClients ic on c.id = ic.ConfigurationId join IntegrationContracts contracts on c.Id = contracts.ConfigurationId where c.Id = 5 and c.ClientId = 1 and contracts.IsActive = 1 and p.IsActive = 1 and ic.IsActive = 1";
+            @"select Client.Name ClientName, c.*, ca.BaseAddress,ca.Suffix,ca.Username,ca.Password,ca.HasAuthentication,ca.AuthenticationToken,ca.AuthenticationKey,ca.AuthenticationType,p.PackageId IntegrationPackageId, ft.Type Frequency, ac.Type Action, it.Type Integration,ic.ClientCustomerId IntegrationClientId, contracts.Contract IntegrationContractId, ic.AccountNumber from Configuration c join ConfigurationApi ca on c.Id = ca.ConfigurationId join IntegrationPackages p on c.id = p.ConfigurationId join FrequencyType ft on c.FrequencyType = ft.Id join ActionType ac on c.ActionType = ac.Id join IntegrationType it on c.IntegrationType = it.Id join Client on Client.id = c.ClientId join IntegrationClients ic on c.id = ic.ConfigurationId join IntegrationContracts contracts on c.Id = contracts.ConfigurationId where c.Id = @Id and c.ClientId = @ClientId and contracts.IsActive = 1 and p.IsActive = 1 and ic.IsActive = 1";
 
         [DataMember]
         public long Id { get; set; }
@@ -22,13 +22,13 @@ namespace Lim.Web.UI.Models.Api
         public string ClientName { get; set; }
 
         [DataMember]
-        public int FrequencyType { get; set; }
+        public short FrequencyType { get; set; }
 
         [DataMember]
-        public int ActionType { get; set; }
+        public short ActionType { get; set; }
 
         [DataMember]
-        public int IntegrationType { get; set; }
+        public short IntegrationType { get; set; }
 
         [DataMember]
         public Guid IntegrationClientId { get; set; }
@@ -67,7 +67,7 @@ namespace Lim.Web.UI.Models.Api
         public string AuthenticationKey { get; set; }
 
         [DataMember]
-        public int AuthenticationType { get; set; }
+        public short AuthenticationType { get; set; }
 
         [DataMember]
         public Guid IntegrationPackageId { get; set; }

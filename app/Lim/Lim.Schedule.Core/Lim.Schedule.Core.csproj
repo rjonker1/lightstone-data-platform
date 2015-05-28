@@ -87,6 +87,10 @@
     <Compile Include="IHandleFetchingConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
+      <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
+      <Name>Lim.Domain.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>

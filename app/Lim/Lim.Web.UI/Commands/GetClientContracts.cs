@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lim.Domain.Models;
-
+using Lim.Domain.Dto;
 namespace Lim.Web.UI.Commands
 {
     public class GetDataPlatformClientContracts
@@ -12,11 +11,11 @@ namespace Lim.Web.UI.Commands
             ClientId = clientId;
         }
 
-        public void Set(IEnumerable<DataPlatformContract> contracts)
+        public void Set(IEnumerable<DataPlatformContractDto> contracts)
         {
             Contracts = contracts;
         }
 
-        public IEnumerable<DataPlatformContract> Contracts { get; private set; } 
+        public IEnumerable<DataPlatformContractDto> Contracts { get; private set; } 
     }
 }

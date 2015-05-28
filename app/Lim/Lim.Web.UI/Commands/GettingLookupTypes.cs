@@ -1,36 +1,36 @@
 ﻿using System.Collections.Generic;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 
 namespace Lim.Web.UI.Commands
 {
     public class GetAuthenticationTypes
     {
-        public void Set(IEnumerable<AuthenticationType> authentication)
+        public void Set(IEnumerable<AuthenticationTypeDto> authentication)
         {
             Authentication = authentication;
         }
 
-        public IEnumerable<AuthenticationType> Authentication { get; private set; }
+        public IEnumerable<AuthenticationTypeDto> Authentication { get; private set; }
     }
 
     public class GetFrequencyTypes
     {
-        public void Set(IEnumerable<FrequencyType> frequency)
+        public void Set(IEnumerable<FrequencyTypeDto> frequency)
         {
             Frequency = frequency;
         }
 
-        public IEnumerable<FrequencyType> Frequency { get; private set; }
+        public IEnumerable<FrequencyTypeDto> Frequency { get; private set; }
     }
 
     public class GetWeekdays
     {
-        public void Set(IEnumerable<Weekday> weekdays)
+        public void Set(IEnumerable<WeekdayDto> weekdays)
         {
             Weekdays = weekdays;
         }
 
-        public IEnumerable<Weekday> Weekdays { get; private set; }
+        public IEnumerable<WeekdayDto> Weekdays { get; private set; }
     }
 
     public class GetIntegrationTypes

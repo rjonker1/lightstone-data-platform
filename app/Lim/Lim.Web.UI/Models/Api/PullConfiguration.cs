@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lim.Domain.Models;
+using Lim.Domain.Dto;
 using Lim.Enums;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
-using AuthenticationType = Lim.Domain.Models.AuthenticationType;
 
 namespace Lim.Web.UI.Models.Api
 {
@@ -20,7 +19,7 @@ namespace Lim.Web.UI.Models.Api
             IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
-        private PullConfiguration(Configuration configuration)
+        private PullConfiguration(ConfigurationDto configuration)
         {
             Id = configuration.Id;
             Key = configuration.Key;
@@ -57,17 +56,17 @@ namespace Lim.Web.UI.Models.Api
         public DateTime CustomFrequency { get; set; }
         public string CustomDay { get; set; }
 
-        public IReadOnlyCollection<Client> SelectableIntegrationClients;
+        public IReadOnlyCollection<ClientDto> SelectableIntegrationClients;
 
-        public IReadOnlyCollection<DataPlatformClient> SelectableDataPlatformClients;
+        public IReadOnlyCollection<DataPlatformClientDto> SelectableDataPlatformClients;
 
-        public IReadOnlyCollection<AuthenticationType> Authentication;
+        public IReadOnlyCollection<AuthenticationTypeDto> Authentication;
 
-        public IReadOnlyCollection<FrequencyType> Frequency;
+        public IReadOnlyCollection<FrequencyTypeDto> Frequency;
 
-        public IReadOnlyCollection<DataPlatformContract> SelectableDataPlatformContracts;
+        public IReadOnlyCollection<DataPlatformContractDto> SelectableDataPlatformContracts;
 
-        public IReadOnlyCollection<Weekday> Weekdays;
+        public IReadOnlyCollection<WeekdayDto> Weekdays;
 
         public void SetClients(IHandleGettingDataPlatformClient handler)
         {

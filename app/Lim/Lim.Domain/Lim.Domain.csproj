@@ -66,24 +66,24 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Models\Audit.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\DataPlatformClient.cs" />
-    <Compile Include="Models\Configuration.cs" />
-    <Compile Include="Models\ConfigurationForApi.cs" />
-    <Compile Include="Models\DataPlatformContract.cs" />
-    <Compile Include="Models\EnumTypes.cs" />
-    <Compile Include="Models\DataPlatformPackage.cs" />
-    <Compile Include="Models\IntegrationClient.cs" />
-    <Compile Include="Models\IntegrationContract.cs" />
-    <Compile Include="Models\IntegrationPackage.cs" />
-    <Compile Include="Models\PackageResponse.cs" />
-    <Compile Include="Models\PackageTransaction.cs" />
-    <Compile Include="Models\Weekday.cs" />
+    <Compile Include="Dto\Audit.cs" />
+    <Compile Include="Dto\ClientDto.cs" />
+    <Compile Include="Dto\DataPlatformClientDto.cs" />
+    <Compile Include="Dto\ConfigurationDto.cs" />
+    <Compile Include="Dto\ConfigurationForApiDto.cs" />
+    <Compile Include="Dto\DataPlatformContractDto.cs" />
+    <Compile Include="Dto\EnumTypes.cs" />
+    <Compile Include="Dto\DataPlatformPackageDto.cs" />
+    <Compile Include="Dto\IntegrationClientDto.cs" />
+    <Compile Include="Dto\IntegrationContractDto.cs" />
+    <Compile Include="Dto\IntegrationPackageDto.cs" />
+    <Compile Include="Dto\PackageResponseDto.cs" />
+    <Compile Include="Dto\PackageTransactionDto.cs" />
+    <Compile Include="Dto\WeekdayDto.cs" />
     <Compile Include="Repository\ConnectionFactory.cs" />
     <Compile Include="Repository\IRepositories.cs" />
-    <Compile Include="Repository\LimRepository.cs" />
-    <Compile Include="Repository\UserManangementRepository.cs" />
+    <Compile Include="Repository\LimReadRepository.cs" />
+    <Compile Include="Repository\UserManangementReadRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
@@ -102,6 +102,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

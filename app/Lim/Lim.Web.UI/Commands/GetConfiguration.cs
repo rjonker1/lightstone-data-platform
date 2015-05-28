@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Lim.Domain.Models;
+﻿using System.Collections.Generic;
+using Lim.Domain.Dto;
 using Lim.Web.UI.Models.Api;
 
 namespace Lim.Web.UI.Commands
@@ -11,12 +10,12 @@ namespace Lim.Web.UI.Commands
         {
         }
 
-        public void Set(IEnumerable<Configuration> configurations)
+        public void Set(IEnumerable<ConfigurationDto> configurations)
         {
             Configurations = configurations;
         }
 
-        public IEnumerable<Configuration> Configurations { get; private set; } 
+        public IEnumerable<ConfigurationDto> Configurations { get; private set; } 
     }
 
     public class GetApiPushConfiguration
