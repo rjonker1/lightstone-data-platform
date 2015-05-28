@@ -34,6 +34,7 @@ namespace UserManagement.Domain.Dtos
         public Guid UserTypeId { get; set; }
         public string UserTypeValue { get; set; }
         public IEnumerable<Guid> RoleIds { get; set; }
+        public IEnumerable<string> RoleValues { get; set; }
         public IEnumerable<Guid> CustomerIds { get; set; }
         public IEnumerable<NamedEntityDto> Customers { get; set; }
         public IEnumerable<ClientUserDto> ClientUsers { get; set; }
