@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
 {
@@ -12,6 +13,7 @@ namespace UserManagement.Domain.Dtos
         public string ClientAccountNumber { get; set; }
         public Guid ContactDetailId { get; set; }
         public string ContactDetailContactNumber { get; set; }
+        public ContactType ContactDetailContactType { get; set; }
         [Required]
         [Display(Name = "Contact person is required")]
         public string ContactDetailContactPerson { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {
@@ -9,6 +9,7 @@ namespace UserManagement.Domain.Entities
         public virtual string ContactPerson { get; set; }
         public virtual string ContactNumber { get; set; }
         public virtual string EmailAddress { get; set; }
+        public virtual ContactType ContactType { get; set; }
         public virtual Address PhysicalAddress { get; set; }
         public virtual Address PostalAddress { get; set; }
 

@@ -1,6 +1,8 @@
 ﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using System
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Enums
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
 <div class="box">
@@ -34,7 +36,25 @@
                 @Html.ValidationMessageFor(x => x.ContactDetailContactNumber)
             </div>
 
-        </div>      
+        </div> 
+        <div class="form-group">
+
+            <label class="control-label col-lg-4">Contact Type</label>
+            <div class="input-group col-lg-2">
+                <select id="contactTypeSelect" name="ContactDetailContactType" data-placeholder="Select contact type" class="chosen-select">
+                    <option value=""></option>
+                    @foreach (var item in Enum.GetValues(typeof(ContactType)))
+                    {
+                        var isSelected = item.ToString() == Model.ContactDetailContactType.ToString();
+                        <option selected="@isSelected" value="@item">@item</option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-6">
+                @*@Html.ValidationMessageFor(x => x.UserTypeId)*@
+            </div>
+
+        </div>     
         <div class="form-group">
 
             <label class="control-label col-lg-4">Email Address</label>
