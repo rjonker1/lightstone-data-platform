@@ -73,9 +73,13 @@ function initializeCusomerRoutes(sammy) {
             url: '/Customers/' + context.params.id,
             contentType: 'application/json',
             datatype: 'json',
-            success: function (data) {
+            success: function () {
 
                 //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Customers');
+            },
+            error: function () {
+
                 context.redirect('#/Customers');
             }
         });
@@ -138,6 +142,10 @@ function initializeClientRoutes(sammy) {
 
                 //$('#table').bootstrapTable('refresh', { silent: true });
                 context.redirect('#/Clients');
+            },
+            error: function () {
+
+                context.redirect('#/Clients');
             }
         });
     });
@@ -199,6 +207,10 @@ function initializeUserRoutes(sammy) {
                 
                 //$('#table').bootstrapTable('refresh', { silent: true });
                 context.redirect('#/Users');
+            },
+            error: function () {
+
+                context.redirect('#/Users');
             }
         });
     });
@@ -258,6 +270,10 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
 
                 //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Contracts');
+            },
+            error: function () {
+
                 context.redirect('#/Contracts');
             }
         });
