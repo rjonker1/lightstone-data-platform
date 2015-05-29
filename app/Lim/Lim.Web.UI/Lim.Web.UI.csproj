@@ -215,7 +215,6 @@
     <Compile Include="Commands\UpdateApiPushConfiguration.cs" />
     <Compile Include="Commands\AddApiPushConfiguration.cs" />
     <Compile Include="Commands\UpdateClient.cs" />
-    <None Include="Commits\ClientCommit - Copy.cs.delete" />
     <Compile Include="Handlers\GetClientHandler.cs" />
     <Compile Include="Handlers\GetConfigurationHandler.cs" />
     <Compile Include="Handlers\IHandleGettingClient.cs" />
