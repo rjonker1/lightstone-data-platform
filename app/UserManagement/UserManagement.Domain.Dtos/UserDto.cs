@@ -33,7 +33,7 @@ namespace UserManagement.Domain.Dtos
         public string Password { get; set; }
         public bool? IsActive { get; set; }
         public DateTime? TrialExpiration { get; set; }
-        public UserType UserType { get; set; }
+        public string UserType { get; set; }
         public IEnumerable<Guid> RoleIds { get; set; }
         public IEnumerable<string> RoleValues { get; set; }
         public IEnumerable<Guid> CustomerIds { get; set; }

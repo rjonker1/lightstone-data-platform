@@ -218,11 +218,11 @@
 
             foreach (var viewBagRole in ViewBag.Roles)
             {
-                if (viewBagRole.Value == roleId.ToString() && Model.UserType == UserType.Internal)
+                if (viewBagRole.Value == roleId.ToString() && Model.UserType == UserType.Internal.ToString())
                 {
                     @:selectedRoles.push({ 'label': '@viewBagRole.Text', 'value': '@viewBagRole.Value', 'type': 'Internal' });
                 }
-                if (viewBagRole.Value == roleId.ToString() && Model.UserType == UserType.External)
+                if (viewBagRole.Value == roleId.ToString() && Model.UserType == UserType.External.ToString())
                 {
                     @:selectedRoles.push({ 'label': '@viewBagRole.Text', 'value': '@viewBagRole.Value', 'type': 'External' });
                 }
