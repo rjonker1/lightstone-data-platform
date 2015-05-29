@@ -12,6 +12,23 @@
     var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Contracts" : "/Contracts/" + Model.Id;
 }
+
+<style>
+    .ac_container input {
+        min-width: 88%;
+    }
+
+    .ac_result_area {
+        position: inherit;
+        z-index: 99999;
+    }
+
+    .ac_results {
+        min-height: 150px;
+    }
+</style>
+
+
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
 @if (isCreate)
@@ -24,9 +41,10 @@
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open", Model))
     <form action="@url" method="@method" class="form-horizontal">
-        
+
         @Html.HiddenFor(x => x.Created)
         @Html.HiddenFor(x => x.CreatedBy)
+        @Html.HiddenFor(x => x.IsActive)
 
         <div class="box-body">
 

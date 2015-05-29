@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Castle.Windsor;
+using DataPlatform.Shared.Helpers;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Helpers;
 using UserManagement.Domain.Core.Repositories;
 
 namespace UserManagement.Infrastructure.Helpers

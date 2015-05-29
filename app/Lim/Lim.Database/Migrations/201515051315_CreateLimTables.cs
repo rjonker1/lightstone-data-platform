@@ -18,8 +18,8 @@ namespace Lim.Database.Migrations
                 .WithColumn("ContactNumber").AsString(15)
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("CreatedBy").AsString(50)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
             Create.Table("Configuration")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_Configuration").Indexed()
@@ -30,8 +30,8 @@ namespace Lim.Database.Migrations
                 .WithColumn("ClientId").AsInt64().ForeignKey("Client", "Id").Indexed()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
 
             Create.Table("ConfigurationApi")
@@ -39,11 +39,11 @@ namespace Lim.Database.Migrations
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("BaseAddress").AsString()
                 .WithColumn("Suffix").AsString()
-                .WithColumn("Username").AsString()
-                .WithColumn("Password").AsString()
+                .WithColumn("Username").AsString().Nullable()
+                .WithColumn("Password").AsString().Nullable()
                 .WithColumn("HasAuthentication").AsBoolean().NotNullable().WithDefaultValue(false)
-                .WithColumn("AuthenticationToken").AsString()
-                .WithColumn("AuthenticationKey").AsString()
+                .WithColumn("AuthenticationToken").AsString().Nullable()
+                .WithColumn("AuthenticationKey").AsString().Nullable()
                 .WithColumn("AuthenticationType").AsInt16().NotNullable()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime);
 
@@ -54,26 +54,28 @@ namespace Lim.Database.Migrations
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().ForeignKey("Configuration", "Id").Indexed()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
             Create.Table("IntegrationContracts")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_IntegrationContracts").Indexed()
                 .WithColumn("Contract").AsGuid().Indexed()
+                .WithColumn("ClientCustomerId").AsGuid().Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().ForeignKey("Configuration", "Id").Indexed()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
             Create.Table("IntegrationPackages")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_IntegrationPacakges").Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().ForeignKey("Configuration", "Id").Indexed()
                 .WithColumn("PackageId").AsGuid().Indexed()
+                .WithColumn("ContractId").AsGuid().Indexed()
                 .WithColumn("DateCreated").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("IsActive").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("DateModified").AsDateTime()
-                .WithColumn("ModifiedBy").AsString(50);
+                .WithColumn("DateModified").AsDateTime().Nullable()
+                .WithColumn("ModifiedBy").AsString(50).Nullable();
 
             Create.Table("ActionType")
                .WithColumn("Id").AsInt16().Identity().PrimaryKey("PK_Action").Indexed()
@@ -107,6 +109,7 @@ namespace Lim.Database.Migrations
 
             Create.Table("AuditApiIntegration")
                 .WithColumn("Id").AsInt64().Identity().PrimaryKey("PK_AuditApiIntegration").Indexed()
+                .WithColumn("ClientId").AsInt64().Indexed()
                 .WithColumn("ConfigurationId").AsInt64().NotNullable().Indexed()
                 .WithColumn("ActionType").AsInt16()
                 .WithColumn("IntegrationType").AsInt16()

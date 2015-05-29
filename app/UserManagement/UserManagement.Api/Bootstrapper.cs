@@ -23,6 +23,7 @@ using UserManagement.Api.Installers;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.DataImports;
+using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Helpers;
 using UserManagement.Infrastructure.Repositories;
 using IBus = MemBus.IBus;
@@ -147,7 +148,6 @@ namespace UserManagement.Api
             pipelines.AddLookupDataToViewBag<EscalationType>(entityRetriever);
             pipelines.AddLookupDataToViewBag<ContractDuration>(entityRetriever);
             pipelines.AddLookupDataToViewBag<Province>(entityRetriever);
-            pipelines.AddLookupDataToViewBag<UserType>(entityRetriever);
             pipelines.AddLookupDataToViewBag<Role>(entityRetriever);
         }
 

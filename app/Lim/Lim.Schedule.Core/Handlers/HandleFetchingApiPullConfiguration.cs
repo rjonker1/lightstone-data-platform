@@ -45,13 +45,11 @@ namespace Lim.Schedule.Core.Handlers
         {
             try
             {
-                var configs = _repository.Items<ApiPullConfiguration>(ApiPullConfiguration.SelectWithContract, new
+                var configs = _repository.Items<ApiPullConfiguration>(ApiPullConfiguration.Select, new
                 {
                     @FrequencyType = (int)command.Frequency,
                     @Action = (int)command.Action,
-                    @IntegrationType = (int)command.Type,
-                    @ContractId = command.ContractId,
-                    @PackageId = command.PackageId
+                    @IntegrationType = (int)command.Type
                 }).ToList();
 
                 _log.InfoFormat("{0} Api Pull Configurations for specific client and contract will be handled", configs.Count());

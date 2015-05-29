@@ -73,9 +73,13 @@ function initializeCusomerRoutes(sammy) {
             url: '/Customers/' + context.params.id,
             contentType: 'application/json',
             datatype: 'json',
-            success: function (data) {
+            success: function () {
 
                 //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Customers');
+            },
+            error: function () {
+
                 context.redirect('#/Customers');
             }
         });
@@ -138,6 +142,10 @@ function initializeClientRoutes(sammy) {
 
                 //$('#table').bootstrapTable('refresh', { silent: true });
                 context.redirect('#/Clients');
+            },
+            error: function () {
+
+                context.redirect('#/Clients');
             }
         });
     });
@@ -199,6 +207,10 @@ function initializeUserRoutes(sammy) {
                 
                 //$('#table').bootstrapTable('refresh', { silent: true });
                 context.redirect('#/Users');
+            },
+            error: function () {
+
+                context.redirect('#/Users');
             }
         });
     });
@@ -258,6 +270,10 @@ function initializeContractRoutes(sammy) {
             success: function (data) {
 
                 //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Contracts');
+            },
+            error: function () {
+
                 context.redirect('#/Contracts');
             }
         });
@@ -374,58 +390,38 @@ function initializePlugins() {
     //        $select.trigger("chosen:updated");
     //    }
     //});
-    
-    //$('.acc-owner .chosen-search input').autocomplete({
-    //    source: function (request, response) {
-    //        //var $container = $(this.element).closest('.packag-autocomplete');
-    //        //var type = $container.data('type');
-    //        $.ajax({
-    //            url: "/users/" + request.term + "/",
-    //            dataType: "json",
-    //            beforeSend: function () { $('ul.chosen-results').empty(); },
-    //            success: function (data) {
-    //                response($.map(data, function (item) {
-    //                    return {
-    //                        label: item.name,
-    //                        value: item.packageId
-    //                    };
-    //                }));
-    //            }
-    //        });
-    //    },
-    //    select: function (event, ui) {
-    //        if ($('#' + ui.item.value).length) {
-    //            return;
-    //        }
-    //        var $container = $(this).closest('.packag-autocomplete');
-    //        var $select = $container.find('select');
-    //        $select.append('<option id="' + ui.item.value + '" selected="true" value="' + ui.item.value + '|' + ui.item.label + '">' + ui.item.label + '</option>');
-    //        $select.trigger("chosen:updated");
+
+    //$('#AccountOwnerName').focusout(function() {
+    //    var id = $('#accountownername_primary_key').val();
+    //    if (id == "") {
+    //        $(this).val("");
     //    }
     //});
+    
+    var accountOwnerUserId = $('#AccountOwnerId').val();
+    var accountOwnerUserName = $('#AccountOwnerName').val();
 
-    $('#AccountOwnerId').ajaxComboBox(
-        "/users/",
+    $('#AccountOwnerName').ajaxComboBox(
+        "/userlist/",
         {
             lang: 'en',
-            bind_to: 'select',
-            primary_key: 'packageId',
+            //bind_to: 'select',
+            primary_key: 'id',
+            field: 'lastName',
+            sub_info: true,
+            sub_as: {
+                firstName: 'First Name',
+                idNumber: 'ID Number'
+            },
+            show_field: 'firstName, idNumber',
+            //select_only: true,
+            //init_record: [accountOwnerUserId],
             per_page: 10,
         }
     );
-    //.bind('select', function () {
-    //    var val = $(this).val();
-    //    var id = $('#PackageIdNames_primary_key').val();
-
-    //    if ($('#' + id).length) {
-    //        return;
-    //    }
-
-    //    var $container = $(this).closest('.packag-autocomplete');
-    //    var $select = $container.find('select');
-    //    $select.append('<option id="' + id + '" selected="true" value="' + id + '|' + val + '">' + val + '</option>');
-    //    $select.trigger("chosen:updated");
-    //});
+    
+    $('#AccountOwnerId').val(accountOwnerUserId);
+    $('#AccountOwnerName').text(accountOwnerUserName);
 
     $('.packag-autocomplete .chosen-choices input').attr("name", "PackageIdNames");
     $('.packag-autocomplete .chosen-choices input').ajaxComboBox(

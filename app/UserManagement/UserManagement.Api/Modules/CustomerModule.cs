@@ -21,7 +21,7 @@ namespace UserManagement.Api.Modules
 {
     public class CustomerModule : SecureModule
     {
-        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<CreateSource> createSources, CurrentNancyContext currentNancyContext)
+        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<User> userRepository, IRepository<CreateSource> createSources, CurrentNancyContext currentNancyContext)
         {
             Get["/Customers"] = _ =>
             {
@@ -46,12 +46,14 @@ namespace UserManagement.Api.Modules
                 var dto = this.BindAndValidate<CustomerDto>();
                 dto.Created = DateTime.UtcNow;
                 dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.IsActive = true;
 
                 if (ModelValidationResult.IsValid)
                 {
-
+                    var user = userRepository.Get(dto.accountownername_primary_key);
                     var entity = Mapper.Map(dto, new Customer());
                     entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
+                    entity.AccountOwner = user;
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
@@ -77,7 +79,9 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
+                    var user = userRepository.Get(dto.accountownername_primary_key);
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
+                    entity.AccountOwner = user;
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
 

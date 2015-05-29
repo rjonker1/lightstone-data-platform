@@ -4,6 +4,11 @@
 @using UserManagement.Api.ViewModels
 @*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
+<style>
+    #AccountOwnerName {
+        width: 88%;
+    } 
+</style>
 
 <div id="customerView" class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Customer Info", "", "fa fa-edit", Model))
@@ -37,40 +42,16 @@
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">* Account Owner</label>
-            <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-control", placeholder = "" })
-                </div>
-            </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.AccountOwnerName)
-            </div>
-
-        </div>
-        
-        
-        @*<div class="form-group">
-
             <label class="control-label col-lg-4">Account Owner</label>
-            <div class="input-group col-lg-1">
-                @*<select name="AccountOwnerId" data-placeholder="Select user" class="chosen-choices">
-                    <option value=""></option>
-                    <option selected="true" value="@Model.AccountOwnerId">@Model.AccountOwnerName</option>
-                </select>*@
-                
-                @*@Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-control", placeholder = "", id = "AccountOwnerId" })
-
-
+            <div class="input-group col-lg-2">
+                @Html.TextBoxFor(x => x.AccountOwnerLastName, new { @class = "form-control", placeholder = "", id = "AccountOwnerName" })
+                @Html.HiddenFor(x => x.AccountOwnerId, new { id = "AccountOwnerId" })
             </div>
             <div class="col-lg-6">
                 @Html.ValidationMessageFor(x => x.CommercialStateId)
             </div>
 
-        </div>*@
-
-
+        </div>
         <div class="form-group">
 
             <label class="control-label col-lg-4">Create Source</label>

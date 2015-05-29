@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
 {
@@ -32,9 +33,9 @@ namespace UserManagement.Domain.Dtos
         public string Password { get; set; }
         public bool? IsActive { get; set; }
         public DateTime? TrialExpiration { get; set; }
-        public Guid UserTypeId { get; set; }
-        public string UserTypeValue { get; set; }
+        public UserType UserType { get; set; }
         public IEnumerable<Guid> RoleIds { get; set; }
+        public IEnumerable<string> RoleValues { get; set; }
         public IEnumerable<Guid> CustomerIds { get; set; }
         public IEnumerable<NamedEntityDto> Customers { get; set; }
         public IEnumerable<ClientUserDto> ClientUsers { get; set; }

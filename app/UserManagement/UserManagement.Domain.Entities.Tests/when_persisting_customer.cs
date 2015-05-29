@@ -24,8 +24,7 @@ namespace UserManagement.Domain.Entities.Tests
             var postalAddress = new Address(AddressType.Postal, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
             var billing = new Billing("ContactNumber", "ContactPerson", "RegistrationNumber", DateTime.Now, "PastelId", "VatNumber", paymentType);
             var roles = new HashSet<Role>{new Role("Role")};
-            var userType = new UserType("UserType");
-            var user = new User("FirstName", "LastName", "IdNumber", "ContactNumber", "UserName", "Password", false, userType, roles);
+            var user = new User("FirstName", "LastName", "IdNumber", "ContactNumber", "UserName", "Password", false, UserType.Internal, roles);
             new PersistenceSpecification<Customer>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.Name, "Name")

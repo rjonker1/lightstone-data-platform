@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using System.Linq.Expressions;
 using AutoMapper;
+using DataPlatform.Shared.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Repositories;
 using IBus = MemBus.IBus;
 
@@ -23,9 +24,9 @@ namespace UserManagement.Api.Modules
 {
     public class UserModule : SecureModule
     {
-        public UserModule(IBus bus, IAdvancedBus eBus, IUserRepository users, CurrentNancyContext currentNancyContext)
+        public UserModule(IBus bus, IAdvancedBus eBus, IUserRepository userRepository, CurrentNancyContext currentNancyContext)
         {
-            Get["/Users/All"] = _ => Response.AsJson(Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users));
+            Get["/Users/All"] = _ => Response.AsJson(Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(userRepository));
 
             Get["/Users"] = _ =>
             {
@@ -37,37 +38,29 @@ namespace UserManagement.Api.Modules
                 if (limit == null) limit = 10;
 
                 var model = this.Bind<DataTablesViewModel>();
-                var dto = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users.Where(x => x.IsActive != false));//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(userRepository.Where(x => x.IsActive != false));//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
 
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
-            Get["/Users/{filter:alpha}"] = parameters =>
+            Get["/Userlist"] = parameters =>
             {
-                
-                
-                //var dto = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(source);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
-
-                //return Negotiate
-                //    .WithView("Index")
-                //    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
-
-                var filter = (string)Context.Request.Query["q_word[]"].Value.ToString();
+                var filter = "";
+                if (Context.Request.Query["q_word[]"].HasValue)
+                    filter = (string)Context.Request.Query["q_word[]"].Value.ToString();
                 var pageIndex = 0;
                 var pageSize = 0;
                 int.TryParse(Context.Request.Query["page_num"].Value, out pageIndex);
                 int.TryParse(Context.Request.Query["per_page"].Value, out pageSize);
 
-                var source = users.Where(x => x.IsActive != false && (x.FirstName.StartsWith(filter) || x.LastName.StartsWith(filter)));
+                Expression<Func<User, bool>> predicate = x => x.IsActive == true && x.UserType == UserType.Internal && (x.FirstName.StartsWith(filter) || x.LastName.StartsWith(filter));
+                var users = new PagedList<User>(userRepository, pageIndex != 0 ? pageIndex - 1 : pageIndex, pageSize == 0 ? 10 : pageSize, predicate);
 
-                var packages = JsonConvert.DeserializeObject<PagedCollectionDto<PackageDto>>(null);
-                //var result = packages.Select(x => new { id = x.Id, name = x.Name });
-                //var dto = Mapper.Map<IEnumerable<PackageBuilder.Domain.Entities.Packages.ReadModels.Package>, IEnumerable<PackageDto>>(packages);
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { result = packages.Data, cnt_whole = packages.RecordsFiltered });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { result = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users), cnt_whole = users.RecordsFiltered });
             };
 
             Get["/Users/Add"] = _ => View["Save", new UserDto()];
@@ -77,13 +70,14 @@ namespace UserManagement.Api.Modules
                 var dto = this.BindAndValidate<UserDto>();
                 dto.Created = DateTime.UtcNow;
                 dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.IsActive = true;
 
                 if (ModelValidationResult.IsValid)
                 {
                     var clientUsersDto = this.Bind<List<ClientUserDto>>();
                     dto.ClientUsers = clientUsersDto;
 
-                    var entity = Mapper.Map(dto, users.Get(dto.Id) ?? new User());
+                    var entity = Mapper.Map(dto, userRepository.Get(dto.Id) ?? new User());
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
@@ -101,7 +95,7 @@ namespace UserManagement.Api.Modules
             Get["/Users/{id:guid}"] = parameters =>
             {
                 var guid = (Guid)parameters.id;
-                var dto = Mapper.Map<User, UserDto>(users.Get(guid));
+                var dto = Mapper.Map<User, UserDto>(userRepository.Get(guid));
 
                 return View["Save", dto];
             };
@@ -116,7 +110,7 @@ namespace UserManagement.Api.Modules
                 {
                     var clientUsersDto = this.Bind<List<ClientUserDto>>();
                     dto.ClientUsers = clientUsersDto;
-                    var entity = Mapper.Map(dto, users.Get(dto.Id));
+                    var entity = Mapper.Map(dto, userRepository.Get(dto.Id));
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -134,7 +128,7 @@ namespace UserManagement.Api.Modules
             Delete["/Users/{id}"] = _ =>
             {
                 var dto = this.Bind<UserDto>();
-                var entity = users.Get(dto.Id);
+                var entity = userRepository.Get(dto.Id);
 
                 bus.Publish(new SoftDeleteEntity(entity));
 

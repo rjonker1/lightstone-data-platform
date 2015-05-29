@@ -1,14 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using Lim.Domain.Models;
+
 namespace Lim.Schedule.Core.Identifiers
 {
     public class IntegrationClientIdentifier
     {
-        public IntegrationClientIdentifier(Guid clientId, string accountNumber)
+        public IntegrationClientIdentifier(IEnumerable<IntegrationClient> clients)
         {
-            ClientId = clientId;
-            AccountNumber = accountNumber;
+            Clients = clients;
         }
-        public Guid ClientId { get; private set; }
-        public string AccountNumber { get; private set; }
+
+        public IEnumerable<IntegrationClient> Clients;
+    }
+
+    public class IntegrationContractIdentifier
+    {
+        public IntegrationContractIdentifier(IEnumerable<Guid> contractIds)
+        {
+            ContractIds = contractIds;
+        }
+        public IEnumerable<Guid> ContractIds { get; private set; }
     }
 }

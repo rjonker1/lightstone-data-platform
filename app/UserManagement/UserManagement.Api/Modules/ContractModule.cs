@@ -42,6 +42,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.BindAndValidate<ContractDto>();
                 dto.Created = DateTime.UtcNow;
                 dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.IsActive = true;
 
                 if (ModelValidationResult.IsValid)
                 {

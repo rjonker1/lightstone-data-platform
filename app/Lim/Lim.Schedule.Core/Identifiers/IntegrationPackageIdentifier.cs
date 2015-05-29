@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Lim.Domain.Models;
 
 namespace Lim.Schedule.Core.Identifiers
 {
     public class IntegrationPackageIdentifier
     {
-        public IntegrationPackageIdentifier(IEnumerable<Guid> packageIds)
+        public IntegrationPackageIdentifier(IEnumerable<IntegrationPackage> packages)
         {
-            PackageIds = packageIds;
+            Packages = packages;
         }
-        public IEnumerable<Guid> PackageIds { get; private set; }
+        public IEnumerable<IntegrationPackage> Packages { get; private set; }
     }
 }

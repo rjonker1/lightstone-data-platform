@@ -21,7 +21,6 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
                 .Include<EscalationType, ValueEntityDto>()
                 .Include<ContractDuration, ValueEntityDto>()
                 .Include<Province, ValueEntityDto>()
-                .Include<UserType, ValueEntityDto>()
                 .Include<Role, ValueEntityDto>();
 
             Mapper.CreateMap<ValueEntityDto, ValueEntity>()
@@ -34,7 +33,6 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
                 .Include<ValueEntityDto, EscalationType>()
                 .Include<ValueEntityDto, ContractDuration>()
                 .Include<ValueEntityDto, Province>()
-                .Include<ValueEntityDto, UserType>()
                 .Include<ValueEntityDto, Role>();
             Mapper.CreateMap<ValueEntityDto, PaymentType>();
             Mapper.CreateMap<ValueEntityDto, PlatformStatus>();
@@ -44,7 +42,6 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
             Mapper.CreateMap<ValueEntityDto, EscalationType>();
             Mapper.CreateMap<ValueEntityDto, ContractDuration>();
             Mapper.CreateMap<ValueEntityDto, Province>();
-            Mapper.CreateMap<ValueEntityDto, UserType>();
             Mapper.CreateMap<ValueEntityDto, Role>();
         }
     }

@@ -14,9 +14,9 @@ namespace Lim.Web.UI.Handlers
             _connection = connection;
         }
 
-        public void Handle(InsertApiPushConfiguration command)
+        public void Handle(AddApiPushConfiguration command)
         {
-            IsSaved = new ApiPushConfigurationMapper(_connection, command.Configuration).InsertUpdate();
+            IsSaved = new ApiPushMapper(_connection, command.Configuration).Save();
         }
 
         public void Handle(UpdateApiPushConfiguration command)
@@ -24,7 +24,7 @@ namespace Lim.Web.UI.Handlers
             throw new NotImplementedException();
         }
 
-        public void Handle(InsertApiPullConfiguration command)
+        public void Handle(AddApiPullConfiguration command)
         {
             throw new NotImplementedException();
         }

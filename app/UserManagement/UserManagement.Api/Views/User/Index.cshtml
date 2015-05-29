@@ -38,13 +38,13 @@
         }, {
             field: 'userTypeValue',
             title: 'User Type',
-            sortable: true,
-            formatter: userFormatter
+            sortable: true
+            //formatter: userFormatter
         }, {
-            field: 'role',
-            title: 'Role',
-            sortable: true,
-            formatter: roleFormatter
+            field: 'roleValues',
+            title: 'Roles',
+            sortable: true
+            //formatter: roleFormatter
         }, {
             field: 'customers',
             title: 'Customers',
@@ -63,41 +63,43 @@
         }]
     });
 
-    function userFormatter(value, row, index) {
+    //function userFormatter(value, row, index) {
 
-        var state = "";
+    //    var state = "";
 
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: '/ValueEntities/Lookup/' + row.userTypeId,
-            success: function (response) {
-                //callback
+    //    $.ajax({
+    //        async: false,
+    //        type: 'GET',
+    //        url: '/ValueEntities/Lookup/' + row.userTypeId,
+    //        success: function (response) {
+    //            //callback
 
-                state = response.data.value;
-            }
-        });
+    //            state = response.data.value;
+    //        }
+    //    });
 
-        return state;
-    }
+    //    return state;
+    //}
 
-    function roleFormatter(value, row, index) {
+    //function roleFormatter(value, row, index) {
 
-        var state = "";
+    //    var role = "";
 
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: '/ValueEntities/Lookup/' + row.roleIds[0],
-            success: function (response) {
-                //callback
+    //    console.log(value);
 
-                state = response.data.value;
-            }
-        });
+    //    //$.ajax({
+    //    //    async: false,
+    //    //    type: 'GET',
+    //    //    url: '/ValueEntities/Lookup/' + row.roleIds[0],
+    //    //    success: function (response) {
+    //    //        //callback
 
-        return state;
-    }
+    //    //        state = response.data.value;
+    //    //    }
+    //    //});
+
+    //    return value;
+    //}
 
     function customerClientFormatter(value, row, index) {
 

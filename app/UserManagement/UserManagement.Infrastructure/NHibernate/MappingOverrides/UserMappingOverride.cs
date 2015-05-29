@@ -9,7 +9,6 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<User> mapping)
         {
-            mapping.References(x => x.UserType).Cascade.SaveUpdate();
             mapping.HasManyToMany(x => x.Roles).Cascade.SaveUpdate().Table("UserRole");
             mapping.HasManyToMany(x => x.Customers).Cascade.SaveUpdate().Table("CustomerUser");
             mapping.HasMany(x => x.ClientUsers).Cascade.SaveUpdate().Table("ClientUser");

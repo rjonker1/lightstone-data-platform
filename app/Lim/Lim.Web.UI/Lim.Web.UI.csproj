@@ -179,25 +179,32 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Commands\AddClient.cs" />
     <Compile Include="Commands\GetClientContracts.cs" />
     <Compile Include="Commands\GetConfiguration.cs" />
     <Compile Include="Commands\GettingLookupTypes.cs" />
     <Compile Include="Commands\GetClients.cs" />
     <Compile Include="Commands\GetClientPackages.cs" />
-    <Compile Include="Commands\InsertApiPullConfiguration.cs" />
+    <Compile Include="Commands\AddApiPullConfiguration.cs" />
     <Compile Include="Commands\UpdateApiPushConfiguration.cs" />
-    <Compile Include="Commands\InsertApiPushConfiguration.cs" />
+    <Compile Include="Commands\AddApiPushConfiguration.cs" />
+    <Compile Include="Commands\UpdateClient.cs" />
     <Compile Include="Handlers\GetClientHandler.cs" />
     <Compile Include="Handlers\GetConfigurationHandler.cs" />
     <Compile Include="Handlers\IHandleGettingClient.cs" />
     <Compile Include="Handlers\IHandleGettingConfiguration.cs" />
+    <Compile Include="Handlers\IHandleSavingClient.cs" />
     <Compile Include="Handlers\IHandleSavingConfiguration.cs" />
+    <Compile Include="Handlers\SavingClientHandler.cs" />
     <Compile Include="Handlers\SavingConfigurationHandler.cs" />
-    <Compile Include="Mappers\ApiPushConfigurationMapper.cs" />
+    <Compile Include="Mappers\ApiPushMapper.cs" />
+    <Compile Include="Mappers\ClientMapper.cs" />
+    <Compile Include="Mappers\IMapToTheDatabase.cs" />
     <Compile Include="Models\Api\PushConfigurationView.cs" />
     <Compile Include="Models\Api\ApiConfiguration.cs" />
     <Compile Include="Models\Api\PullConfiguration.cs" />
     <Compile Include="Models\Api\PushConfiguration.cs" />
+    <Compile Include="Models\LimClients\LimClientView.cs" />
     <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Modules\FtpModule.cs" />
     <Compile Include="Modules\MessageModule.cs" />

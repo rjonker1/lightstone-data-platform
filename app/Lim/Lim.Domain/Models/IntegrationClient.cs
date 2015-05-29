@@ -6,7 +6,7 @@ namespace Lim.Domain.Models
     [DataContract]
     public class IntegrationClient
     {
-        public const string Select = @"select ic.* from IntegrationClients ic where ic.Id = @Id";
+        public const string Select = @"select ic.* from IntegrationClients ic where ic.ConfigurationId = @ConfigurationId and ic.IsActive = 1";
         public IntegrationClient()
         {
             

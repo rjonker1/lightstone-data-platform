@@ -12,7 +12,7 @@ namespace UserManagement.Domain.Entities
 {
     public class Customer : NamedEntity
     {
-        public virtual User AccountOwner { get; protected internal set; }
+        public virtual User AccountOwner { get; set; }
         public virtual string Notes { get; protected internal set; }
 
         private CustomerAccountNumber _customerAccountNumber = new CustomerAccountNumber();

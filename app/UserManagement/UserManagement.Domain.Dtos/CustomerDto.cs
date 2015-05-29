@@ -16,7 +16,7 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Account owner is required")]
         public Guid AccountOwnerId { get; set; }
-        public string AccountOwnerName { get; set; }
+        public string AccountOwnerLastName { get; set; }
         [Required]
         [Display(Name = "Commercial state is required")]
         public Guid? CommercialStateId { get; set; }
@@ -25,7 +25,6 @@ namespace UserManagement.Domain.Dtos
         public Guid PlatformStatusId { get; set; }
         public string PlatformStatusValue { get; set; }
         public Guid BillingId { get; set; }
-
         public string BillingCompanyRegistration { get; set; }
         public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingPastelId { get; set; }
@@ -39,13 +38,12 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Payment type is required")]
         public Guid? BillingPaymentTypeId { get; set; }
-
         public string ContactDetailContactNumber { get; set; }
+        public ContactType ContactDetailContactType { get; set; }
         [Required]
         [Display(Name = "Contact person is required")]
         public string ContactDetailContactPerson { get; set; }  
         public Guid ContactDetailId { get; set; }
-
         public string ContactDetailEmailAddress { get; set; }
         public string ContactDetailTelephoneNumber { get; set; }
         public Guid ContactDetailPhysicalAddressId { get; set; }
@@ -57,7 +55,6 @@ namespace UserManagement.Domain.Dtos
         public string ContactDetailPhysicalAddressCountry { get; set; }
         public string ContactDetailPhysicalAddressPostalCode { get; set; }
         public Guid ContactDetailPhysicalAddressProvinceId { get; set; }
-
         public Guid ContactDetailPostalAddressId { get; set; }
         public string ContactDetailPostalAddressType { get; set; }
         public string ContactDetailPostalAddressLine1 { get; set; }
@@ -73,6 +70,7 @@ namespace UserManagement.Domain.Dtos
         public AddressDto PostalAddressDto { get; set; }
         public CreateSourceType CreateSourceType { get; set; }
         public bool? IsActive { get; set; }
+		public Guid accountownername_primary_key { get; set; }
         public DateTime? TrialExpiration { get; set; }
     }
 }

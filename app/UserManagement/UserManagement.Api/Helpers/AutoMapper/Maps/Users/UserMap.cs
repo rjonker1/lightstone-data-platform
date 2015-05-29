@@ -19,12 +19,12 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
 
             Mapper.CreateMap<User, UserDto>()
                 .ForMember(dest => dest.RoleIds, opt => opt.MapFrom(x => x.Roles.Select(y => y.Id)))
+                .ForMember(dest => dest.RoleValues, opt => opt.MapFrom(x => x.Roles.Select(r => r.Value)))
                 .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)))
                 .ForMember(dest => dest.ClientUsers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<ClientUser>, IEnumerable<ClientUserDto>>(x.ClientUsers)));
 
             Mapper.CreateMap<UserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .ForMember(dest => dest.UserType, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<UserType>>().Get(x.UserTypeId)))
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(x => 
                     x.RoleIds != null
                         ? new HashSet<Role>(x.RoleIds.Select(id => ServiceLocator.Current.GetInstance<IValueEntityRepository<Role>>().Get(id))) 

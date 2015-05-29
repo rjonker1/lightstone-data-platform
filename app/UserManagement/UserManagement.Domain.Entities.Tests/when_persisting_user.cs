@@ -28,7 +28,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.UserName, "UserName")
                 .CheckProperty(c => c.Password, "Password")
                 .CheckProperty(c => c.IsActive, true)
-                .CheckReference(c => c.UserType, new UserType("Test"))
+                .CheckReference(c => c.UserType, UserType.Internal)
                 .CheckComponentList(c => c.Roles, roles)
                 .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer {Name = "Name", AccountOwner = new User(), CommercialState = new CommercialState("State")} })
                 .CheckComponentList(c => c.ClientUsers, new HashSet<ClientUser> { new ClientUser(new Client("Client"), "Alias") })

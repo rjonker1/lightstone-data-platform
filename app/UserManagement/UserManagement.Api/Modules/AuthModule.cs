@@ -38,15 +38,15 @@ namespace UserManagement.Api.Modules
 
                 if (userIdentity != null)
                 {
-                    UserType userType =
-                        (users.Where(x => x.UserName == userIdentity.UserName).Select(x => x.UserType).FirstOrDefault());
-
-                    if (userType.Value != "Internal")
+                    var user = users.FirstOrDefault(x => x.UserName == userIdentity.UserName);
+                    if (user != null)
                     {
-                        userIdentity = null;
-                        this.Error(
-                            () =>
-                                "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType.Value));
+                        var userType = user.UserType;
+                        if (userType != UserType.Internal)
+                        {
+                            userIdentity = null;
+                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType));
+                        }
                     }
                 }
 

@@ -1,5 +1,5 @@
 ﻿@using System.Linq
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<Lim.Domain.Models.Client>>
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Lim.Web.UI.Models.LimClients.LimClientView>>
 @{
     Layout = "_Layout.cshtml";
 }
@@ -43,10 +43,10 @@
                                         @foreach (var client in Model)
                                         {
                                             <tr>
-                                                <td>@client.Name</td>
-                                                <td>@client.Email</td>
-                                                <td>@client.IsActive</td>
-                                                <td><a class="btn btn-block btn-success" href="/client/edit/@client.Id">Edit</a></td>
+                                                <td>@client.Client.Name</td>
+                                                <td>@client.Client.Email</td>
+                                                <td>@client.Client.IsActive</td>
+                                                <td><a class="btn btn-block btn-success" href="/client/edit/@client.Client.Id">Edit</a></td>
                                             </tr>
                                         }
                                     </tbody>

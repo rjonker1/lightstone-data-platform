@@ -45,13 +45,13 @@
         }, {
             field: 'platformStatusValue',
             title: 'Platform State',
-            srtable: true,
-            formatter: platformFormatter
+            srtable: true
+            //formatter: platformFormatter
         }, {
             field: 'commercialStateValue',
             title: 'Commercial State',
-            sortable: true,
-            formatter: commercialFormatter
+            sortable: true
+            //formatter: commercialFormatter
         }, {
             field: '',
             title: '',
@@ -60,41 +60,41 @@
         }]
     });
 
-    function platformFormatter(value, row, index) {
+    //function platformFormatter(value, row, index) {
 
-        var state = "";
+    //    var state = "";
 
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: '/ValueEntities/Lookup/' + row.platformStatusId,
-            success: function (response) {
-                //callback
+    //    $.ajax({
+    //        async: false,
+    //        type: 'GET',
+    //        url: '/ValueEntities/Lookup/' + row.platformStatusId,
+    //        success: function (response) {
+    //            //callback
 
-                state = response.data.value;
-            }
-        });
+    //            state = response.data.value;
+    //        }
+    //    });
 
-        return state;
-    }
+    //    return state;
+    //}
 
-    function commercialFormatter(value, row, index) {
+    //function commercialFormatter(value, row, index) {
 
-        var state = "";
+    //    var state = "";
 
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: '/ValueEntities/Lookup/' + row.commercialStateId,
-            success: function (response) {
-                //callback
+    //    $.ajax({
+    //        async: false,
+    //        type: 'GET',
+    //        url: '/ValueEntities/Lookup/' + row.commercialStateId,
+    //        success: function (response) {
+    //            //callback
 
-                state = response.data.value;
-            }
-        });
+    //            state = response.data.value;
+    //        }
+    //    });
 
-        return state;
-    }
+    //    return state;
+    //}
 
     function gridActionFormatter(value, row, index) {
 

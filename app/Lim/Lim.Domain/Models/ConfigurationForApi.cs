@@ -7,13 +7,13 @@ namespace Lim.Domain.Models
     public class ApiPushConfiguration
     {
         public static readonly string Select =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType";
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType";
 
-        public static readonly string SelectWithContract =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and c.ContractId = @ContractId and package.Id = @PackageId";
+        //public static readonly string SelectWithContract =
+        //    @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,clients.ClientCustomerId, contracts.Contract,clients.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join IntegrationPackages package on c.Id = package.ConfigurationId join IntegrationContracts contracts on c.Id = contracts.ConfigurationId join IntegrationClients clients on c.Id = clients.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and package.IsActive = 1 and contracts.IsActive = 1 and clients.IsActive = 1 and contracts.Contract = @ContractId and package.PackageId =  @PackageId";
 
         public static readonly string SelectWithCustomDay =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and and c.CustomFrequencyDay = @CustomFrequencyDay and c.CustomFrequencyTime >= Cast(CONVERT(VARCHAR(5),Dateadd(mi,-1, getdate()),108) as time) and c.CustomFrequencyTime <= Cast(CONVERT(VARCHAR(5),Dateadd(mi,1, getdate()),108) as time)";
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and c.CustomFrequencyDay = @CustomFrequencyDay and c.CustomFrequencyTime >= Cast(CONVERT(VARCHAR(5),Dateadd(mi,-1, getdate()),108) as time) and c.CustomFrequencyTime <= Cast(CONVERT(VARCHAR(5),Dateadd(mi,1, getdate()),108) as time)";
         
         [DataMember]
         public long Id { get; set; }
@@ -55,16 +55,19 @@ namespace Lim.Domain.Models
         public int AuthenticationType { get; set; }
 
         [DataMember]
-        public Guid ClientId { get; set; }
+        public long ClientId { get; set; }
 
-        [DataMember]
-        public Guid ContractId { get; set; }
+        //[DataMember]
+        //public Guid ClientCustomerId { get; set; }
 
-        [DataMember]
-        public string AccountNumber { get; set; }
+        //[DataMember]
+        //public Guid Contract { get; set; }
 
-        [DataMember]
-        public Guid PackageId { get; set; }
+        //[DataMember]
+        //public string AccountNumber { get; set; }
+
+        //[DataMember]
+        //public Guid PackageId { get; set; }
 
     }
 
@@ -72,14 +75,13 @@ namespace Lim.Domain.Models
     public class ApiPullConfiguration
     {
         public static readonly string Select =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType";
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType";
 
-        public static readonly string SelectWithContract =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and c.ContractId = @ContractId and package.Id = @PackageId";
+        //public static readonly string SelectWithContract =
+        //    @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,clients.ClientCustomerId, contracts.Contract,clients.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join IntegrationPackages package on c.Id = package.ConfigurationId join IntegrationContracts contracts on c.Id = contracts.ConfigurationId join IntegrationClients clients on c.Id = clients.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and package.IsActive = 1 and contracts.IsActive = 1 and clients.IsActive = 1 and contracts.Contract = @ContractId and package.PackageId =  @PackageId";
 
         public static readonly string SelectWithCustomDay =
-            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,c.ContractId,c.AccountNumber, api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType,package.PackageId from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId join Packages package on c.Id = package.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationTypeand and c.CustomFrequencyDay = @CustomFrequencyDay and c.CustomFrequencyTime >= Cast(CONVERT(VARCHAR(5),Dateadd(mi,-1, getdate()),108) as time) and c.CustomFrequencyTime <= Cast(CONVERT(VARCHAR(5),Dateadd(mi,1, getdate()),108) as time)";
-
+            @"select c.Id,c.[Key],c.FrequencyType,c.ActionType Action,c.IntegrationType,c.ClientId,api.BaseAddress,api.Suffix,api.Username,api.Password,api.AuthenticationToken,api.AuthenticationKey,api.HasAuthentication,api.AuthenticationType from Configuration c join ConfigurationApi api on c.Id = api.ConfigurationId where c.IsActive = 1 and c.FrequencyType = @FrequencyType and c.ActionType = @Action and c.IntegrationType = @IntegrationType and c.CustomFrequencyDay = @CustomFrequencyDay and c.CustomFrequencyTime >= Cast(CONVERT(VARCHAR(5),Dateadd(mi,-1, getdate()),108) as time) and c.CustomFrequencyTime <= Cast(CONVERT(VARCHAR(5),Dateadd(mi,1, getdate()),108) as time)";
         
         [DataMember]
         public long Id { get; set; }
@@ -121,16 +123,19 @@ namespace Lim.Domain.Models
         public int AuthenticationType { get; set; }
 
         [DataMember]
-        public Guid ClientId { get; set; }
+        public long ClientId { get; set; }
 
-        [DataMember]
-        public Guid ContractId { get; set; }
+        //[DataMember]
+        //public Guid Contract { get; set; }
 
-        [DataMember]
-        public string AccountNumber { get; set; }
+        //[DataMember]
+        //public Guid ClientCustomerId { get; set; }
 
-        [DataMember]
-        public int FrequencyConfigurationId { get; set; }
+        //[DataMember]
+        //public string AccountNumber { get; set; }
+
+        //[DataMember]
+        //public int FrequencyConfigurationId { get; set; }
 
     }
 }
