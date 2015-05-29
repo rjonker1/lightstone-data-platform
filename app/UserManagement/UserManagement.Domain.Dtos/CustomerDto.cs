@@ -73,5 +73,6 @@ namespace UserManagement.Domain.Dtos
         public AddressDto PostalAddressDto { get; set; }
         public CreateSourceType CreateSourceType { get; set; }
         public bool? IsActive { get; set; }
+        public DateTime? TrialExpiration { get; set; }
     }
 }
