@@ -19,6 +19,7 @@ namespace UserManagement.Domain.Entities
         public virtual string Password { get; protected internal set; }
         public virtual string Salt { get; protected internal set; }
         public virtual bool? IsActive { get; set; }
+        public virtual DateTime? TrialExpiration { get; set; }
         public virtual UserType UserType { get; protected internal set; }
         public virtual ISet<Role> Roles { get; protected internal set; }
         public virtual ISet<Customer> Customers { get; protected internal set; }

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Practices.ServiceLocation;
+using RestSharp;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
 using UserManagement.Domain.Core.Repositories;
@@ -42,5 +44,6 @@ namespace UserManagement.Domain.Entities
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual bool IsLocked { get; set; }
         public virtual bool IsActive { get; set; }
+        public virtual DateTime? TrialExpiration { get; set; }
     }
 }
