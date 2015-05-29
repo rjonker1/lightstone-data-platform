@@ -19,17 +19,6 @@ namespace Lim.Web.UI.Models.Api
             IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
-        private PushConfiguration(ConfigurationDto configuration)
-        {
-            Id = configuration.Id;
-            Key = configuration.Key;
-            ActionType = (int)IntegrationAction.Push;
-            IntegrationType = (int)Enums.IntegrationType.Api;
-            FrequencyType = configuration.FrequencyType;
-            ClientId = configuration.ClientId;
-            IsActive = configuration.IsActive;
-        }
-
         private PushConfiguration(List<PushConfigurationView> configuration)
         {
             Id = configuration.First().Id;
@@ -75,12 +64,6 @@ namespace Lim.Web.UI.Models.Api
             SelectableDataPlatformClients = command.Clients.ToList();
         }
 
-        public void SetDataPlatformPackages(IHandleGettingDataPlatformClient handler, GetDataPlatformClientPackages command)
-        {
-            handler.Handle(command);
-            SelectableDataPlatformPackages = command.Packages.ToList();
-        }
-
         public void SetAuthentication(IHandleGettingConfiguration handler, GetAuthenticationTypes command)
         {
             handler.Handle(command);
@@ -91,12 +74,6 @@ namespace Lim.Web.UI.Models.Api
         {
             handler.Handle(command);
             Frequency = command.Frequency.ToList();
-        }
-
-        public void SetDataPlatformContracts(IHandleGettingDataPlatformClient handler, GetDataPlatformClientContracts command)
-        {
-            handler.Handle(command);
-            SelectableDataPlatformContracts = command.Contracts.ToList();
         }
 
         public void SetIntegrationClients(IHandleGettingIntegrationClient handler, GetIntegrationClients command)
@@ -137,10 +114,6 @@ namespace Lim.Web.UI.Models.Api
         public IReadOnlyCollection<ClientDto> SelectableIntegrationClients; 
 
         public IReadOnlyCollection<DataPlatformClientDto> SelectableDataPlatformClients;
-
-        public IReadOnlyCollection<DataPlatformPackageDto> SelectableDataPlatformPackages;
-
-        public IReadOnlyCollection<DataPlatformContractDto> SelectableDataPlatformContracts; 
 
         public IReadOnlyCollection<AuthenticationTypeDto> Authentication;
 

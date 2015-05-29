@@ -1,31 +1,51 @@
-﻿using Lim.Domain.Dto;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using Common.Logging;
+using Lim.Domain.Dto;
 using Lim.Domain.Repository;
 using Lim.Web.UI.Commands;
+using Newtonsoft.Json;
 
 namespace Lim.Web.UI.Handlers
 {
     public class GetDataPlatformClientHandler : IHandleGettingDataPlatformClient
     {
-        private readonly IReadUserManagementRepository _repository;
+        private readonly ILog _log;
+        private const string Endpoint = "/Integration/ClientCustomerContracts/All";
 
-        public GetDataPlatformClientHandler(IReadUserManagementRepository repository)
+        public GetDataPlatformClientHandler()
         {
-            _repository = repository;
+            _log = LogManager.GetLogger(GetType());
         }
 
         public void Handle(GetDataPlatformClients command)
         {
-            command.Set(_repository.Items<DataPlatformClientDto>(DataPlatformClientDto.Select, new { }));
-        }
+            var authorization = new[]
+            {
+                new KeyValuePair<string, string>("Authorization", "Token " + command.Token),
+                new KeyValuePair<string, string>("Content-Type", "application/json")
+            };
 
-        public void Handle(GetDataPlatformClientPackages command)
-        {
-            command.Set(_repository.Items<DataPlatformPackageDto>(DataPlatformPackageDto.Select, new { }));
-        }
+            var clients = command.Api.Get("", Endpoint);
 
-        public void Handle(GetDataPlatformClientContracts command)
-        {
-            command.Set(_repository.Items<DataPlatformContractDto>(DataPlatformContractDto.Select, new { }));
+            if (string.IsNullOrEmpty(clients))
+            {
+                _log.InfoFormat("Could not get a response on endpoint {0}", Endpoint);
+                command.Set(Enumerable.Empty<DataPlatformClientDto>());
+                return;
+            }
+
+            var dataPlatformClients = JsonConvert.DeserializeObject<IEnumerable<DataPlatformClientDto>>(clients).ToList();
+
+            if (!dataPlatformClients.Any())
+            {
+                _log.InfoFormat("Could not get a deserialized list of information on endpoint {0}", Endpoint);
+                command.Set(Enumerable.Empty<DataPlatformClientDto>());
+                return;
+            }
+
+            command.Set(dataPlatformClients);
         }
     }
 

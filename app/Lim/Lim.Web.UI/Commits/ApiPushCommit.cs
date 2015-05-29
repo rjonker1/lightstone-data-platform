@@ -3,183 +3,89 @@ using System.Linq;
 using Common.Logging;
 using Lim.Domain.Entities;
 using Lim.Domain.Entities.Contracts;
+using Lim.Domain.Entities.Repository;
 using Lim.Enums;
 using Lim.Web.UI.Models.Api;
-using NHibernate;
-using NHibernate.Linq;
 
 namespace Lim.Web.UI.Commits
 {
     public class ApiPushCommit : IPersistObject<PushConfiguration>
     {
-        private readonly ISessionFactory _session;
+        private readonly ISaveApiConfiguration _save;
         private readonly ILog _log;
 
-        public ApiPushCommit(ISessionFactory session)
+        public ApiPushCommit(ISaveApiConfiguration save)
         {
-            _session = session;
+            _save = save;
             _log = LogManager.GetLogger(GetType());
         }
 
         public bool Persist(PushConfiguration pushConfig)
         {
-            try
+            var configuration = new Configuration()
             {
-                using (var session = _session.OpenSession())
-                {
-                    using (var transaction = session.BeginTransaction())
-                    {
-                        var client = session.Get<Client>(pushConfig.ClientId);
-                        if (client == null || client.Id == 0)
-                            throw new Exception("Could not insert LIM configuration because LIM Client is not valid");
+                Id = pushConfig.Id,
+                FrequencyType = pushConfig.FrequencyType,
+                ActionType = pushConfig.ActionType,
+                IntegrationType = pushConfig.IntegrationType,
+                IsActive = pushConfig.IsActive,
+                DateModified = DateTime.UtcNow,
+                ModifiedBy = pushConfig.User ?? Environment.MachineName,
+                CustomFrequencyTime =
+                    pushConfig.FrequencyType == (int) Frequency.Custom ? pushConfig.CustomFrequency.TimeOfDay : TimeSpan.Parse("00:00"),
+                CustomFrequencyDay = pushConfig.FrequencyType == (int) Frequency.Custom ? pushConfig.CustomDay : null
+            };
 
-                        var configuration = new Configuration()
-                        {
-                            Id = pushConfig.Id,
-                            Client = client,
-                            FrequencyType = pushConfig.FrequencyType,
-                            ActionType = pushConfig.ActionType,
-                            IntegrationType = pushConfig.IntegrationType,
-                            IsActive = pushConfig.IsActive,
-                            DateModified = DateTime.UtcNow,
-                            ModifiedBy = pushConfig.User ?? Environment.MachineName,
-                            CustomFrequencyTime = pushConfig.FrequencyType == (int)Frequency.Custom ? pushConfig.CustomFrequency.TimeOfDay : TimeSpan.Parse("00:00"),
-                            CustomFrequencyDay = pushConfig.FrequencyType == (int)Frequency.Custom ? pushConfig.CustomDay : null,
-
-                        };
-
-                        session.SaveOrUpdate(configuration);
-
-                        if (configuration.Id == 0)
-                            throw new Exception("Could not insert LIM configuration because configuration id is not valid");
-
-                        var apiConfiguration = new ConfigurationApi()
-                        {
-                            Id = pushConfig.ConfigurationApiId,
-                            Configuration = configuration,
-                            BaseAddress = pushConfig.BaseAddress,
-                            Suffix = pushConfig.Suffix,
-                            Username = pushConfig.Username,
-                            Password = pushConfig.Password,
-                            HasAuthentication = pushConfig.HasAuthentication,
-                            AuthenticationToken = pushConfig.AuthenticationToken,
-                            AuthenticationKey = pushConfig.AuthenticationKey,
-                            AuthenticationType = pushConfig.AuthenticationType
-                        };
-
-                        session.SaveOrUpdate(apiConfiguration);
-
-                        var integrationClients = session.Query<IntegrationClient>().Where(w => w.Configuration.Id == configuration.Id);
-                        var integrationContracts = session.Query<IntegrationContract>().Where(w => w.Configuration.Id == configuration.Id);
-                        var integrationPackages = session.Query<IntegrationPackage>().Where(w => w.Configuration.Id == configuration.Id);
-
-                        foreach (var integrationClient in integrationClients)
-                        {
-                            integrationClient.IsActive = false;
-                            session.SaveOrUpdate(integrationClient);
-                        }
-
-                        foreach (var integrationContract in integrationContracts)
-                        {
-                            integrationContract.IsActive = false;
-                            session.SaveOrUpdate(integrationContract);
-                        }
-
-                        foreach (var integrationPackage in integrationPackages)
-                        {
-                            integrationPackage.IsActive = false;
-                            session.SaveOrUpdate(integrationPackage);
-                        }
-
-                        foreach (var package in pushConfig.IntegrationPackages)
-                        {
-                            var contractId = pushConfig.SelectableDataPlatformPackages.FirstOrDefault(w => w.Id == package).ContractId;
-                            var existing = integrationPackages.FirstOrDefault(w => w.PackageId == package);
-
-                            var id = existing == null || existing.Id == 0 ? 0 : existing.Id;
-
-                            var integrationPackage = new IntegrationPackage()
-                            {
-                                Id = id,
-                                Configuration = configuration,
-                                PackageId = package,
-                                ContractId = contractId,
-                                IsActive = true,
-                                DateModified = DateTime.UtcNow,
-                                ModifiedBy = pushConfig.User ?? Environment.MachineName
-                            };
-
-                            if (id > 0)
-                            {
-                                var evict = session.Get(typeof (IntegrationPackage), id);
-                                session.Evict(evict);
-                            }
-
-                            session.SaveOrUpdate(integrationPackage);
-                        }
-
-                        foreach (var contract in pushConfig.IntegrationContracts)
-                        {
-                            var clientCustomerId = pushConfig.SelectableDataPlatformContracts.FirstOrDefault(w => w.Id == contract).ClientId;
-                            var existing = integrationContracts.FirstOrDefault(w => w.Contract == contract);
-
-                            var id = existing == null || existing.Id == 0 ? 0 : existing.Id;
-
-                            var integrationContract = new IntegrationContract()
-                            {
-                                Id = id,
-                                Configuration = configuration,
-                                Contract = contract,
-                                ClientCustomerId = clientCustomerId,
-                                IsActive = true,
-                                DateModified = DateTime.UtcNow,
-                                ModifiedBy = pushConfig.User ?? Environment.MachineName
-                            };
-
-
-                            if (id > 0)
-                            {
-                                var evict = session.Get(typeof(IntegrationContract), id);
-                                session.Evict(evict);
-                            }
-                            session.SaveOrUpdate(integrationContract);
-                        }
-
-                        foreach (var clientCustomer in pushConfig.IntegrationClients)
-                        {
-                            var existing = integrationClients.FirstOrDefault(w => w.ClientCustomerId == clientCustomer);
-                            var id = existing == null || existing.Id == 0 ? 0 : existing.Id;
-                            var integrationClient = new IntegrationClient()
-                            {
-                                Id = id,
-                                Configuration = configuration,
-                                ClientCustomerId = clientCustomer,
-                                AccountNumber = pushConfig.AccountNumber,
-                                IsActive = true,
-                                DateModified = DateTime.UtcNow,
-                                ModifiedBy = pushConfig.User ?? Environment.MachineName
-                            };
-
-                            if (id > 0)
-                            {
-                                var evict = session.Get(typeof(IntegrationClient), id);
-                                session.Evict(evict);
-                            }
-
-                            session.SaveOrUpdate(integrationClient);
-                        }
-                        transaction.Commit();
-                        return true;
-                    }
-
-                }
-            }
-            catch (Exception ex)
+            var apiConfiguration = new ConfigurationApi()
             {
-                _log.ErrorFormat("Failed to save information in the LIM database, because {0}", ex, ex.Message);
-            }
+                Id = pushConfig.ConfigurationApiId,
+                Configuration = configuration,
+                BaseAddress = pushConfig.BaseAddress,
+                Suffix = pushConfig.Suffix,
+                Username = pushConfig.Username,
+                Password = pushConfig.Password,
+                HasAuthentication = pushConfig.HasAuthentication,
+                AuthenticationToken = pushConfig.AuthenticationToken,
+                AuthenticationKey = pushConfig.AuthenticationKey,
+                AuthenticationType = pushConfig.AuthenticationType
+            };
 
-            return false;
+            var packages = pushConfig.IntegrationPackages.Select(s => new IntegrationPackage()
+            {
+                Id = 0,
+                Configuration = configuration,
+                PackageId = s,
+                ContractId = pushConfig.SelectableDataPlatformClients.SelectMany(c => c.Contracts)
+                    .FirstOrDefault(c => c.Packages.Select(p => p.PackageId).Contains(s)).ContractId,
+                IsActive = true,
+                DateModified = DateTime.UtcNow,
+                ModifiedBy = pushConfig.User ?? Environment.MachineName
+            }).ToList();
+
+            var contracts = pushConfig.IntegrationContracts.Select(s => new IntegrationContract()
+            {
+                Id = 0,
+                Configuration = configuration,
+                Contract = s,
+                ClientCustomerId =
+                    pushConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.Contracts.Select(c => c.ContractId).Contains(s)).ClientCustomerId,
+                IsActive = true,
+                DateModified = DateTime.UtcNow,
+                ModifiedBy = pushConfig.User ?? Environment.MachineName
+            }).ToList();
+
+            var clients = pushConfig.IntegrationClients.Select(s => new IntegrationClient()
+            {
+                Id = 0,
+                Configuration = configuration,
+                ClientCustomerId = s,
+                AccountNumber = pushConfig.AccountNumber,
+                IsActive = true,
+                DateModified = DateTime.UtcNow,
+                ModifiedBy = pushConfig.User ?? Environment.MachineName
+            }).ToList();
+
+            return _save.SaveConfiguration(pushConfig.ClientId, configuration, apiConfiguration, packages, contracts, clients);
         }
     }
 }

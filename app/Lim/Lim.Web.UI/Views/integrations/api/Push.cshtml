@@ -53,8 +53,8 @@
                                         <option value=""></option>
                                         @foreach (var client in Model.SelectableDataPlatformClients)
                                         {
-                                            var isSelected = Model.IntegrationClients != null && Model.IntegrationClients.Contains(client.Id);
-                                            <option id="@client.Id" name="@client.Id" selected="@isSelected" value="@client.Id">@client.Name</option>
+                                            var isSelected = Model.IntegrationClients != null && Model.IntegrationClients.Contains(client.ClientCustomerId);
+                                            <option id="@client.ClientCustomerId" name="@client.ClientCustomerId" selected="@isSelected" value="@client.ClientCustomerId">@client.Name</option>
                                         }
                                     </select>
                                 </div>
@@ -62,10 +62,10 @@
                                     <label>Contracts</label>
                                     <select id="IntegrationContracts" name="IntegrationContracts" data-placeholder="Select Contract ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
-                                        @foreach (var contract in Model.SelectableDataPlatformContracts)
+                                        @foreach (var contract in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts))
                                         {
-                                            var isSelected = Model.IntegrationContracts != null && Model.IntegrationContracts.Contains(contract.Id);
-                                            <option id="@contract.Id" name="@contract.Id" selected="@isSelected" value="@contract.Id">@contract.Name</option>
+                                            var isSelected = Model.IntegrationContracts != null && Model.IntegrationContracts.Contains(contract.ContractId);
+                                            <option id="@contract.ContractId" name="@contract.ContractId" selected="@isSelected" value="@contract.ContractId">@contract.Name</option>
                                         }
                                     </select>
                                 </div>
@@ -73,10 +73,10 @@
                                     <label>Packages / Products</label>
                                     <select id="IntegrationPackages" name="IntegrationPackages" data-placeholder="Select Packages ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
-                                        @foreach (var package in Model.SelectableDataPlatformPackages)
+                                        @foreach (var package in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts).SelectMany(s => s.Packages))
                                         {
-                                            var isSelected = Model.IntegrationPackages != null && Model.IntegrationPackages.Contains(package.Id);
-                                            <option id="@package.Id" selected="@isSelected" value="@package.Id">@package.Name</option>
+                                            var isSelected = Model.IntegrationPackages != null && Model.IntegrationPackages.Contains(package.PackageId);
+                                            <option id="@package.PackageId" selected="@isSelected" value="@package.PackageId">@package.Name</option>
                                         }
                                     </select>
                                 </div>

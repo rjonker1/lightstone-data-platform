@@ -2,6 +2,7 @@
 using Lim.Domain.Dto;
 using Lim.Domain.Entities.Contracts;
 using Lim.Domain.Entities.Factory;
+using Lim.Domain.Entities.Repository;
 using Lim.Domain.Repository;
 using Lim.Web.UI.Commits;
 using Lim.Web.UI.Handlers;
@@ -11,6 +12,7 @@ using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
 using NHibernate;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Lim.Web.UI
 {
@@ -27,8 +29,10 @@ namespace Lim.Web.UI
             container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());
 
             container.Register<ISessionFactory>(SessionFactory.BuildSession("database/lim"));
-
-            container.Register<IReadUserManagementRepository>(new UserManangementReadRepository(ConnectionFactory.ForUsermanagementDatabase()));
+            container.Register<ISession>(container.Resolve<ISessionFactory>().OpenSession());
+            container.Register<IAmEntityRepository, LimEntityRepository>();
+            container.Register<IUserManagementApiClient, UserManagementApiClient>();
+            container.Register<ISaveApiConfiguration, SaveApiConfiguration>();
             container.Register<IReadLimRepository>(new LimReadRepository(ConnectionFactory.ForLimDatabase()));
             container.Register<IHandleGettingDataPlatformClient, GetDataPlatformClientHandler>();
             container.Register<IHandleGettingIntegrationClient, GetIntegrationClientHandler>();

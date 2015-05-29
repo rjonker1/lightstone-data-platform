@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Logging;
 using EasyNetQ;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.EntityRepository;
+using Lim.Domain.Entities.Repository;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
 
