@@ -19,17 +19,6 @@ namespace Lim.Web.UI.Models.Api
             IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
-        private PullConfiguration(ConfigurationDto configuration)
-        {
-            Id = configuration.Id;
-            Key = configuration.Key;
-            ActionType = (int) IntegrationAction.Pull;
-            IntegrationType = (int) Enums.IntegrationType.Api;
-            FrequencyType = configuration.FrequencyType;
-            ClientId = configuration.ClientId;
-            IsActive = configuration.IsActive;
-        }
-
         public static PullConfiguration Create()
         {
             return new PullConfiguration();
@@ -67,14 +56,6 @@ namespace Lim.Web.UI.Models.Api
         public IReadOnlyCollection<DataPlatformContractDto> SelectableDataPlatformContracts;
 
         public IReadOnlyCollection<WeekdayDto> Weekdays;
-
-        public void SetClients(IHandleGettingDataPlatformClient handler)
-        {
-            var command = new GetDataPlatformClients();
-            handler.Handle(command);
-            SelectableDataPlatformClients = command.Clients.ToList();
-        }
-
         public void SetAuthentication(IHandleGettingConfiguration handler)
         {
             var command = new GetAuthenticationTypes();
@@ -89,11 +70,6 @@ namespace Lim.Web.UI.Models.Api
             Frequency = command.Frequency.ToList();
         }
 
-        public void SetContracts(IHandleGettingDataPlatformClient handler, GetDataPlatformClientContracts command)
-        {
-            handler.Handle(command);
-            SelectableDataPlatformContracts = command.Contracts.ToList();
-        }
         public void SetWeekdays(IHandleGettingConfiguration handler, GetWeekdays command)
         {
             handler.Handle(command);

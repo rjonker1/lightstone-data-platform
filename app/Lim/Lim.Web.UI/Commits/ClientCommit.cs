@@ -3,18 +3,18 @@ using Common.Logging;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
 using Lim.Domain.Entities.Contracts;
-using NHibernate;
+using Lim.Domain.Entities.Repository;
 
 namespace Lim.Web.UI.Commits
 {
     public class ClientCommit : IPersistObject<ClientDto>
     {
-        private readonly ISessionFactory _session;
+        private readonly IAmEntityRepository _repository;
         private readonly ILog _log;
 
-        public ClientCommit(ISessionFactory session)
+        public ClientCommit(IAmEntityRepository repository)
         {
-            _session = session;
+            _repository = repository;
             _log = LogManager.GetLogger(GetType());
         }
 
@@ -22,24 +22,20 @@ namespace Lim.Web.UI.Commits
         {
             try
             {
-                using (var session = _session.OpenSession())
+                var client = new Client()
                 {
-                    var client = new Client()
-                    {
-                        Id = clientDto.Id,
-                        IsActive = clientDto.IsActive,
-                        Name = clientDto.Name,
-                        Email = clientDto.Email,
-                        ContactPerson = clientDto.ContactPerson,
-                        ContactNumber = clientDto.ContactNumber,
-                        CreatedBy = clientDto.CreatedBy ?? Environment.MachineName,
-                        DateModified = DateTime.UtcNow,
-                        ModifiedBy = clientDto.ModifiedBy ?? Environment.MachineName
-                    };
-                    session.SaveOrUpdate(client);
-                    return client.Id > 0;
-                }
-               
+                    Id = clientDto.Id,
+                    IsActive = clientDto.IsActive,
+                    Name = clientDto.Name,
+                    Email = clientDto.Email,
+                    ContactPerson = clientDto.ContactPerson,
+                    ContactNumber = clientDto.ContactNumber,
+                    CreatedBy = clientDto.CreatedBy ?? Environment.MachineName,
+                    DateModified = DateTime.UtcNow,
+                    ModifiedBy = clientDto.ModifiedBy ?? Environment.MachineName
+                };
+                _repository.SaveOrUpdate(client);
+                return true;
             }
             catch (Exception ex)
             {

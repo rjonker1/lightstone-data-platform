@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -45,6 +46,8 @@
     <Compile Include="CreateSourceDto.cs" />
     <Compile Include="CustomerDto.cs" />
     <Compile Include="EntityDto.cs" />
+    <Compile Include="IntegrationClientDto.cs" />
+    <Compile Include="IntegrationContractDto.cs" />
     <Compile Include="NamedEntityDto.cs" />
     <Compile Include="PackageDto.cs" />
     <Compile Include="PagedCollectionDto.cs" />

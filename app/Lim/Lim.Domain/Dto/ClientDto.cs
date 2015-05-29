@@ -38,17 +38,6 @@ namespace Lim.Domain.Dto
             ModifiedBy = modifiedBy;
         }
 
-        //public static Client New(bool isActive, string name, string email, string contactPerson, string contactNumber,
-        //    string createdBy)
-        //{
-        //    return new Client(isActive,name,email,contactPerson,contactPerson,createdBy);
-        //}
-
-        //public static Client Exisiting(long id, bool isActive, string name, string email, string contactPerson, string contactNumber,
-        //    string modifiedBy)
-        //{
-        //    return new Client(id, isActive, name, email, contactPerson, contactNumber, modifiedBy);
-        //}
 
         public ClientDto(long id)
         {
@@ -59,12 +48,6 @@ namespace Lim.Domain.Dto
         {
             return new ClientDto();
         }
-
-        //public static Client Existing(long id)
-        //{
-        //    return new Client(id);
-        //}
-      
             
         [DataMember]
         public long Id { get; private set; }

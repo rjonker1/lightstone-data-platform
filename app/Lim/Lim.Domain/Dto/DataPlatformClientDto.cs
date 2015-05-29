@@ -1,32 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lim.Domain.Dto
 {
     public class DataPlatformClientDto
     {
-        //public const string Select = @"select c.Id,cc.ContractId,c.Name,c.ClientAccountNumberId AccountNumber from Client c join ClientContract cc on c.Id = cc.ClientId";
-        public const string Select =
-            @"
-select c.Id,cc.ContractId,c.Name,c.ClientAccountNumberId AccountNumber from Client c join ClientContract cc on c.Id = cc.ClientId
-union
-select  c.Id,cc.ContractId,c.Name,c.CustomerAccountNumberId AccountNumber from Customer c join CustomerContract cc on c.Id = cc.CustomerId";
-
         public DataPlatformClientDto()
         {
             
         }
-        
-        public DataPlatformClientDto(Guid id, string name, int accountNumber, Guid contractId)
+
+        public DataPlatformClientDto(Guid id, string name, string accountNumber, bool isActive, IEnumerable<DataPlatformContractDto> contracts)
         {
-            Id = id;
+            ClientCustomerId = id;
             Name = name;
             AccountNumber = accountNumber;
-            ContractId = contractId;
+            Contracts = contracts;
+            IsActive = isActive;
         }
 
-        public Guid Id { get; set; }
+        public Guid ClientCustomerId { get; set; }
+        public string Name { get; set; }
+        public string AccountNumber { get; set; }
+        public bool IsActive { get; set; }
+        public IEnumerable<DataPlatformContractDto> Contracts { get; set; }
+    }
+
+    public class DataPlatformContractDto
+    {
+        public DataPlatformContractDto()
+        {
+            
+        }
+
+        public DataPlatformContractDto(Guid id, string name, IEnumerable<PackageDto> packages)
+        {
+            ContractId = id;
+            Name = name;
+            Packages = packages;
+        }
+
         public Guid ContractId { get; set; }
         public string Name { get; set; }
-        public int AccountNumber { get; set; }
+        public IEnumerable<PackageDto> Packages { get; set; }
+    }
+
+    public class PackageDto
+    {
+        public Guid Id { get; set; }
+        public Guid PackageId { get; set; }
+        public string Name { get; set; }
+        public bool IsActive { get; set; }
     }
 }

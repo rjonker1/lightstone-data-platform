@@ -1,16 +1,26 @@
 ﻿using System.Collections.Generic;
 using Lim.Domain.Dto;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Lim.Web.UI.Commands
 {
     public class GetDataPlatformClients
     {
+        public readonly IUserManagementApiClient Api;
+        public readonly string Token;
+
+        public GetDataPlatformClients(IUserManagementApiClient api, string token)
+        {
+            Api = api;
+            Token = token;
+        }
+
         public void Set(IEnumerable<DataPlatformClientDto> clients)
         {
             Clients = clients;
         }
-       
-       public IEnumerable<DataPlatformClientDto> Clients { get; private set; }
+
+        public IEnumerable<DataPlatformClientDto> Clients { get; private set; }
     }
 
     public class GetIntegrationClients

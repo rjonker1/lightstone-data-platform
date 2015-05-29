@@ -1,30 +1,32 @@
-﻿using System;
+﻿using System.Linq;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
 using Lim.Web.UI.Models.Api;
 using Nancy;
 using Nancy.ModelBinding;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Lim.Web.UI.Modules
 {
     public class ApiModule : NancyModule
     {
-        public ApiModule(IHandleGettingDataPlatformClient dataPlatformClient, IHandleGettingConfiguration setup, IHandleSavingConfiguration save, IHandleGettingIntegrationClient client)
+        public ApiModule(IHandleGettingConfiguration setup, IHandleSavingConfiguration save, IHandleGettingIntegrationClient client,
+            IUserManagementApiClient api, IHandleGettingDataPlatformClient dataPlatform)
         {
             Get["/integrations/for/api/push"] = _ =>
             {
                 var model = PushConfiguration.Create();
-                model.SetDataPlatformClients(dataPlatformClient, new GetDataPlatformClients());
-                model.SetDataPlatformPackages(dataPlatformClient, new GetDataPlatformClientPackages(new Guid()));
+                var token = Context.Request.Headers.Authorization.Any() ? Context.Request.Headers.Authorization.Split(' ')[1] : string.Empty;
                 model.SetFrequency(setup, new GetFrequencyTypes());
                 model.SetAuthentication(setup, new GetAuthenticationTypes());
-                model.SetDataPlatformContracts(dataPlatformClient, new GetDataPlatformClientContracts(new Guid()));
+                model.SetDataPlatformClients(dataPlatform, new GetDataPlatformClients(api, token));
                 model.SetWeekdays(setup, new GetWeekdays());
-                model.SetIntegrationClients(client,new GetIntegrationClients());
+                model.SetIntegrationClients(client, new GetIntegrationClients());
                 return View["integrations/api/push", model];
             };
+        
 
-            Get["/integrations/for/api/push/edit/{id}/{clientId}"] = _ =>
+        Get["/integrations/for/api/push/edit/{id}/{clientId}"] = _ =>
             {
                 int id;
                 int clientId;
@@ -35,12 +37,11 @@ namespace Lim.Web.UI.Modules
                 if (id == 0 || clientId == 0)
                     return HttpStatusCode.NoResponse;
 
+                var token = Context.Request.Headers.Authorization.Any() ? Context.Request.Headers.Authorization.Split(' ')[1] : string.Empty;
                 var model = PushConfiguration.Existing(setup, new GetApiPushConfiguration(id, clientId));
-                model.SetDataPlatformClients(dataPlatformClient, new GetDataPlatformClients());
-                model.SetDataPlatformPackages(dataPlatformClient, new GetDataPlatformClientPackages(new Guid()));
                 model.SetFrequency(setup, new GetFrequencyTypes());
                 model.SetAuthentication(setup, new GetAuthenticationTypes());
-                model.SetDataPlatformContracts(dataPlatformClient, new GetDataPlatformClientContracts(new Guid()));
+                model.SetDataPlatformClients(dataPlatform, new GetDataPlatformClients(api, token));
                 model.SetWeekdays(setup, new GetWeekdays());
                 model.SetIntegrationClients(client,new GetIntegrationClients());
                 return View["integrations/api/push", model];
@@ -49,21 +50,18 @@ namespace Lim.Web.UI.Modules
             Post["/integrations/for/api/push/save"] = _ =>
             {
                 var configuration = this.Bind<PushConfiguration>();
-                configuration.SetDataPlatformPackages(dataPlatformClient, new GetDataPlatformClientPackages(new Guid()));
-                configuration.SetDataPlatformContracts(dataPlatformClient, new GetDataPlatformClientContracts(new Guid()));
+                var token = Context.Request.Headers.Authorization.Any() ? Context.Request.Headers.Authorization.Split(' ')[1] : string.Empty;
+                configuration.SetDataPlatformClients(dataPlatform, new GetDataPlatformClients(api, token));
                 var command = new AddApiPushConfiguration(configuration);
                 save.Handle(command);
-                //return save.IsSaved ? Response.AsRedirect("/") : View["integrations/api/push", configuration];
                 return Response.AsRedirect("/integrations/for/api/configurations");
             };
 
             Get["/integrations/for/api/pull"] = _ =>
             {
                 var model = PullConfiguration.Create();
-                model.SetClients(dataPlatformClient);
                 model.SetAuthentication(setup);
                 model.SetFrequency(setup);
-                model.SetContracts(dataPlatformClient,new GetDataPlatformClientContracts(Guid.NewGuid()));
                 model.SetWeekdays(setup, new GetWeekdays());
                 model.SetIntegrationClients(client,new GetIntegrationClients());
                 return View["integrations/api/pull", model];

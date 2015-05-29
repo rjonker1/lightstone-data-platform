@@ -5,7 +5,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
-using Lim.Domain.Entities.EntityRepository;
+using Lim.Domain.Entities.Repository;
 using Lim.Domain.Repository;
 using NHibernate;
 
