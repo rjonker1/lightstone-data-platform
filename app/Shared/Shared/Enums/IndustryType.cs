@@ -1,6 +1,6 @@
 ﻿namespace DataPlatform.Shared.Enums
 {
-    public enum Industry
+    public enum IndustryType
     {
         Insurance,
         Automotive,
