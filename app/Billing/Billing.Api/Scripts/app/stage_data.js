@@ -280,15 +280,15 @@ window.packageEditActionEvents = {
 
 function invoiceFormatter(value, row, index) {
     return [
-        '<div class="row">' +
+        '<div class="row" style="width: 400px;">' +
         '<div class="col-md-2">' +
-                '<button type="button" class="record-edit btn btn-warning btn-md" >' +
+                '<button type="button" class="record-edit btn btn-warning" >' +
                     'Edit Record' +
                 '</button>' +
             '</div>' +
             '<div class="col-md-1" />' +
             '<div class="col-md-2">' +
-                '<button type="button" class="invoice-view btn btn-primary btn-md" data-toggle="modal" data-target="#invoice-modal">' +
+                '<button type="button" class="invoice-view btn btn-primary" data-toggle="modal" data-target="#invoice-modal">' +
                     'Preview Invoice' +
                 '</button>' +
             '</div>' +
