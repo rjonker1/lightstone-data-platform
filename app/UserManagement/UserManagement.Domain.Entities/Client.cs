@@ -19,6 +19,7 @@ namespace UserManagement.Domain.Entities
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
         public virtual bool IsActive { get; set; }
+        public virtual bool IsLocked { get; set; }
         public virtual DateTime? TrialExpiration { get; set; }
 
         public Client() { }

@@ -133,7 +133,7 @@
                         <option value=""></option>
                         @foreach (var item in Enum.GetValues(typeof(UserType)))
                         {
-                            var isSelected = item.ToString() == Model.UserType.ToString();
+                            var isSelected = item.ToString() == Model.UserType;
                             <option selected="@isSelected" value="@item">@item</option>
                         }
                     </select>

@@ -70,6 +70,7 @@ namespace UserManagement.Domain.Dtos
         public AddressDto PostalAddressDto { get; set; }
         public CreateSourceType CreateSourceType { get; set; }
         public bool? IsActive { get; set; }
+        public bool IsLocked { get; set; }
 		public Guid accountownername_primary_key { get; set; }
         public DateTime? TrialExpiration { get; set; }
     }

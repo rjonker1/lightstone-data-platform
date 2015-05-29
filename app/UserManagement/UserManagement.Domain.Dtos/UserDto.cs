@@ -32,6 +32,7 @@ namespace UserManagement.Domain.Dtos
         [Display(Name = "Password is required")]
         public string Password { get; set; }
         public bool? IsActive { get; set; }
+        public bool IsLocked { get; set; }
         public DateTime? TrialExpiration { get; set; }
         public string UserType { get; set; }
         public IEnumerable<Guid> RoleIds { get; set; }
