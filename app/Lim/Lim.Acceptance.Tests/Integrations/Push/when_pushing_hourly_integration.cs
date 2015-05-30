@@ -2,12 +2,14 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Lim.Domain.Repository;
+using Lim.Domain.Entities.Factory;
+using Lim.Domain.Entities.Repository;
 using Lim.Enums;
 using Lim.Schedule.Core;
 using Lim.Schedule.Core.Audits;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Handlers;
+using NHibernate;
 using Xunit.Extensions;
 using IntegrationType = Lim.Enums.IntegrationType;
 
@@ -18,10 +20,11 @@ namespace Lim.Acceptance.Tests.Integrations.Push
        // private readonly IJob _job; 
         private readonly IHandleFetchingApiPushConfiguration _fetch;
         private readonly IHandleExecutingApiConfiguration _execute;
-        private readonly IReadLimRepository _limRepository;
-        private readonly IReadLimRepository _repository;
+     
         private readonly IDbConnection _connection;
         private readonly IAuditIntegration _audit;
+        private readonly IAmRepository _entityRepository;
+        private readonly ISession _session;
 
         private readonly FetchConfigurationCommand _fetchCommand = new FetchConfigurationCommand(IntegrationAction.Push, IntegrationType.Api, Frequency.Hourly);
         private ExecuteApiPushConfigurationCommand _executeCommand;
@@ -30,18 +33,17 @@ namespace Lim.Acceptance.Tests.Integrations.Push
 
         public when_pushing_hourly_integration()
         {
+            _entityRepository = new LimRepository(SessionFactory.BuildSession("lim/schedule/database").OpenSession());
+            _session = SessionFactory.BuildSession("lim/schedule/database").OpenSession();
 
             _connection = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString());
-            _repository = new LimReadRepository(_connection);
-            _limRepository = new LimReadRepository(_connection);
-            _audit = new StoreIntegrationAudit(_connection);
+            _audit = new StoreIntegrationAudit(_entityRepository);
 
-            _fetch = new HandleFetchingApiPushConfiguration(_repository);
-            _execute = new HandleExecutingApiConfiguration(_limRepository, _audit);
+            _fetch = new HandleFetchingApiPushConfiguration(_entityRepository);
+            _execute = new HandleExecutingApiConfiguration(_entityRepository, _audit);
 
-            _setup = new ApiIntegrationTestSetup(_connection);
-           // _job = new Lim.Schedule.Integrations.Daily.Api.PushJob(_fetch, _execute);
+            _setup = new ApiIntegrationTestSetup(_session, _entityRepository);
         }
 
         public override void Observe()

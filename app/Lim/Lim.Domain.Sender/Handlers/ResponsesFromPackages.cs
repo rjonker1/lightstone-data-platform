@@ -12,10 +12,10 @@ namespace Lim.Domain.Sender.Handlers
     public class ResponseFromPackageConsumer
     {
         private readonly ILog _log;
-        private readonly IAmEntityRepository _repository;
+        private readonly IAmRepository _repository;
         private readonly IPublishConfigurationMessages _publisher;
 
-        public ResponseFromPackageConsumer(IAmEntityRepository repository, IPublishConfigurationMessages publisher)
+        public ResponseFromPackageConsumer(IAmRepository repository, IPublishConfigurationMessages publisher)
         {
             _repository = repository;
             _publisher = publisher;

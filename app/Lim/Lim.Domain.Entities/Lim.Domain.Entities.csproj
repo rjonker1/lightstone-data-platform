@@ -98,7 +98,7 @@
     <Compile Include="Maps\IntegrationTypeMap.cs" />
     <Compile Include="Maps\PackageResponsesMap.cs" />
     <Compile Include="PackageResponses.cs" />
-    <Compile Include="Repository\IAmEntityRepository.cs" />
+    <Compile Include="Repository\IAmRepository.cs" />
     <Compile Include="Repository\ISaveApiConfiguration.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="Weekdays.cs" />
@@ -111,6 +111,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

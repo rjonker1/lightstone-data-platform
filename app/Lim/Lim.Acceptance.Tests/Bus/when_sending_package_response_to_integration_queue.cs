@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using EasyNetQ;
-using Lim.Domain.Dto;
+using Lim.Domain.Entities;
+using Lim.Domain.Entities.Factory;
+using Lim.Domain.Entities.Repository;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
-using Lim.Domain.Repository;
 using Lim.Test.Helper.Fakes;
 using Workflow.BuildingBlocks;
 using Xunit.Extensions;
@@ -22,8 +20,7 @@ namespace Lim.Acceptance.Tests.Bus
         private readonly IAdvancedBus _bus;
         private Exception _exception;
 
-        private readonly IReadLimRepository _repository;
-        private readonly IDbConnection _connection;
+        private readonly IAmRepository _repository;
 
         private readonly Guid _packageId = new Guid("390CD416-FC52-4A0B-98CE-8E8940212354");
         private readonly Guid _userId = new Guid("A8085D55-DF0E-4875-A81C-26892126C01C");
@@ -38,9 +35,7 @@ namespace Lim.Acceptance.Tests.Bus
             _message = new PackageResponseMessage(_packageId, _userId, _contractId, _accountNumber, _payload, _requestId, "rudi@customapp.co.za");
             _publisher = new IntegrationMessagePublisher(_bus);
 
-            _connection = new SqlConnection(
-                ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString());
-            _repository = new LimReadRepository(_connection);
+            _repository = new LimRepository(SessionFactory.BuildSession("lim/schedule/database").OpenSession());
         }
 
         public override void Observe()
@@ -64,8 +59,7 @@ namespace Lim.Acceptance.Tests.Bus
         [Observation]
         public void then_response_should_exist_in_the_database()
         {
-            var response = _repository.Items<PackageResponseDto>("select * from PackageResponses where RequestId = @RequestId",
-                new {@RequestId = _requestId}).ToList();
+            var response = _repository.Get<PackageResponses>(w => w.RequestId == _requestId).ToList();
             response.ShouldNotBeNull();
             response.Count.ShouldEqual(1);
             response.FirstOrDefault().RequestId.ShouldEqual(_requestId);

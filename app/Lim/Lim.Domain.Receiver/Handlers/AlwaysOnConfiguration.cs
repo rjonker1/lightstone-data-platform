@@ -2,7 +2,6 @@
 using Common.Logging;
 using EasyNetQ;
 using Lim.Domain.Messaging.Messages;
-using Lim.Domain.Repository;
 using Lim.Enums;
 using Lim.Schedule.Core;
 using Lim.Schedule.Core.Commands;

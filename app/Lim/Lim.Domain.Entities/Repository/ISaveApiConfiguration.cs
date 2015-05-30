@@ -9,7 +9,7 @@ namespace Lim.Domain.Entities.Repository
 {
     public interface ISaveApiConfiguration
     {
-        bool SaveConfiguration(long clientId, Configuration configuration, ConfigurationApi apiConfiguration, List<IntegrationPackage> packages,
+        bool SaveConfiguration(long clientId, short actionId, short frequencyId, short integrationId, short authenticationId, Configuration configuration, ConfigurationApi apiConfiguration, List<IntegrationPackage> packages,
             List<IntegrationContract> contracts, List<IntegrationClient> clients);
     }
 
@@ -24,7 +24,7 @@ namespace Lim.Domain.Entities.Repository
             _log = LogManager.GetLogger(GetType());
         }
 
-        public bool SaveConfiguration(long clientId, Configuration configuration, ConfigurationApi apiConfiguration, List<IntegrationPackage> packages,
+        public bool SaveConfiguration(long clientId, short actionId, short frequencyId, short integrationId, short authenticationId, Configuration configuration, ConfigurationApi apiConfiguration, List<IntegrationPackage> packages,
             List<IntegrationContract> contracts, List<IntegrationClient> clients)
         {
             try
@@ -37,12 +37,22 @@ namespace Lim.Domain.Entities.Repository
                         if (client == null || client.Id == 0)
                             throw new Exception("Could not insert LIM configuration because LIM Client is not valid");
 
+                        var frequency = session.Get<FrequencyType>(frequencyId);
+                        var action = session.Get<ActionType>(actionId);
+                        var integration = session.Get<IntegrationType>(integrationId);
+
                         configuration.Client = client;
+                        configuration.FrequencyType = frequency;
+                        configuration.ActionType = action;
+                        configuration.IntegrationType = integration;
                         session.SaveOrUpdate(configuration);
 
                         if (configuration.Id == 0)
                             throw new Exception("Could not insert LIM configuration because configuration id is not valid");
 
+                        var authentication = session.Get<AuthenticationType>(authenticationId);
+
+                        apiConfiguration.AuthenticationType = authentication;
                         session.SaveOrUpdate(apiConfiguration);
 
                         var integrationClients = session.Query<IntegrationClient>().Where(w => w.Configuration.Id == configuration.Id);

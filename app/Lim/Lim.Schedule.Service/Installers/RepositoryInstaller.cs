@@ -6,7 +6,6 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using Lim.Domain.Entities.Repository;
-using Lim.Domain.Repository;
 using NHibernate;
 
 namespace Lim.Schedule.Service.Installers
@@ -19,15 +18,7 @@ namespace Lim.Schedule.Service.Installers
         {
             _log.InfoFormat("Installing Repositories");
 
-            container.Register(
-                Component.For<IDbConnection>()
-                    .UsingFactoryMethod(() => new SqlConnection(ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString())));
-
-            container.Register(Component.For<IReadLimRepository>().UsingFactoryMethod(() => new LimReadRepository(
-                new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString()))));
-
-            container.Register(Component.For<IAmEntityRepository>().UsingFactoryMethod(() => new LimEntityRepository(container.Resolve<ISession>())));
+            container.Register(Component.For<IAmRepository>().UsingFactoryMethod(() => new LimRepository(container.Resolve<ISession>())));
 
             _log.InfoFormat("Repositories Installed");
         }

@@ -12,7 +12,7 @@ namespace Lim.Domain.Entities {
         public virtual bool HasAuthentication { get; set; }
         public virtual string AuthenticationToken { get; set; }
         public virtual string AuthenticationKey { get; set; }
-        public virtual short AuthenticationType { get; set; }
+        public virtual AuthenticationType AuthenticationType { get; set; }
         public virtual DateTime? DateCreated { get; set; }
     }
 }

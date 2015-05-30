@@ -4,7 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Common.Logging;
 using Lim.Domain.Dto;
-using Lim.Domain.Repository;
+using Lim.Domain.Entities;
+using Lim.Domain.Entities.Repository;
 using Lim.Push.RestApi;
 using Lim.Schedule.Core.Commands;
 using Newtonsoft.Json;
@@ -71,7 +72,7 @@ namespace Lim.Schedule.Core.Identifiers
 
         [DataMember] private List<PackageTransactionDto> _transaction;
 
-        public void Get(IReadLimRepository repository, ILog log)
+        public void Get(IAmRepository repository, ILog log)
         {
             _transaction = new List<PackageTransactionDto>();
             if (!Packages.Packages.Any())
@@ -79,18 +80,17 @@ namespace Lim.Schedule.Core.Identifiers
 
             Packages.Packages.ToList().ForEach(f =>
             {
-                var response =
-                    repository.Items<PackageResponseDto>(PackageResponseDto.SelectStatement, new {@PackageId = f.PackageId, @ContractId = f.ContractId})
-                        .ToList();
 
-                if (response.Any())
+                var packages = repository.Get<PackageResponses>(w => w.PackageId == f.PackageId && w.ContractId == f.ContractId).ToList();
+                   
+                if (packages.Any())
                 {
-                    log.InfoFormat("Found {0} Package Responses for Package Id {1} on Contract {2} to Push using API", response.Count, f.PackageId,
+                    log.InfoFormat("Found {0} Package Responses for Package Id {1} on Contract {2} to Push using API", packages.Count, f.PackageId,
                         f.ContractId);
                     _transaction.AddRange(
-                        response.Select(
+                        packages.Select(
                             s =>
-                                new PackageTransactionDto(s.PackageId, s.UserId, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate, s.RequestId,
+                                PackageTransactionDto.Set(s.PackageId, s.Userid, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate, s.RequestId,
                                     s.Payload, s.HasResponse)));
                 }
             });
@@ -213,38 +213,5 @@ namespace Lim.Schedule.Core.Identifiers
         [DataMember]
         public IntegrationTypeIdentifier Type { get; private set; }
 
-        //[DataMember]
-        //public ApiFrequencyIdentifier Frequency { get; private set; }
-
     }
-
-    //[DataContract]
-    //public class ApiFrequencyIdentifier
-    //{
-    //    public ApiFrequencyIdentifier(int seconds, int minutes, int hours, string dayOfMonth, Month month, WeekDay dayOfWeek, Frequency frequency)
-    //    {
-    //        Seconds = seconds;
-    //        Minutes = minutes;
-    //        Hours = hours;
-    //        DayOfMonth = dayOfMonth;
-    //        Month = month;
-    //        DayofWeek = dayOfWeek;
-    //        Frequency = frequency;
-    //    }
-
-    //    [DataMember]
-    //    public int Seconds { get; private set; }
-    //    [DataMember]
-    //    public int Minutes { get; private set; }
-    //    [DataMember]
-    //    public int Hours { get; private set; }
-    //    [DataMember]
-    //    public string DayOfMonth { get; private set; }
-    //    [DataMember]
-    //    public Month Month { get; private set; }
-    //    [DataMember]
-    //    public WeekDay DayofWeek { get; private set; }
-    //    [DataMember]
-    //    public Frequency Frequency { get; private set; }
-    //}
 }

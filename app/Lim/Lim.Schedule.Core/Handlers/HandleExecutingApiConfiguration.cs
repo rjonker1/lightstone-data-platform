@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Common.Logging;
-using Lim.Domain.Repository;
+using Lim.Domain.Entities.Repository;
 using Lim.Enums;
 using Lim.Schedule.Core.Audits;
 using Lim.Schedule.Core.Commands;
@@ -11,10 +11,10 @@ namespace Lim.Schedule.Core.Handlers
     public class HandleExecutingApiConfiguration : IHandleExecutingApiConfiguration
     {
         private readonly ILog _log;
-        private readonly IReadLimRepository _repository;
+        private readonly IAmRepository _repository;
         private readonly IAuditIntegration _auditLog;
 
-        public HandleExecutingApiConfiguration(IReadLimRepository repository, IAuditIntegration auditLog)
+        public HandleExecutingApiConfiguration(IAmRepository repository, IAuditIntegration auditLog)
         {
             _repository = repository;
             _auditLog = auditLog;
@@ -32,7 +32,7 @@ namespace Lim.Schedule.Core.Handlers
             _log.InfoFormat("Executing {0} API Push Configurations", command.Configurations.Count());
             command.Configurations.ToList().ForEach(f =>
             {
-                var audit = new AuditIntegrationCommand(f.Client.ClientId, f.ConfigurationId, DateTime.UtcNow, IntegrationAction.Push, IntegrationType.Api,
+                var audit = new AuditIntegrationCommand(f.Client.ClientId, f.ConfigurationId, DateTime.UtcNow, (short)IntegrationAction.Push, (short)IntegrationType.Api,
                     f.Configuration.BaseAddress, f.Configuration.Suffix);
                 try
                 {

@@ -6,10 +6,6 @@ namespace Lim.Domain.Dto
     [DataContract]
     public class ClientDto
     {
-
-        public const string SelectAll = @"select c.* from Client c";
-        public const string Select = @"select c.* from Client c where c.Id = @Id";
-
         public ClientDto()
         {
             
@@ -27,7 +23,7 @@ namespace Lim.Domain.Dto
         }
 
         private ClientDto(long id, bool isActive, string name, string email, string contactPerson, string contactNumber,
-            string modifiedBy)
+            string modifiedBy, DateTime? dateModified)
         {
             Id = id;
             IsActive = isActive;
@@ -36,12 +32,13 @@ namespace Lim.Domain.Dto
             ContactPerson = contactPerson;
             ContactNumber = contactNumber;
             ModifiedBy = modifiedBy;
+            DateModified = dateModified;
         }
 
-
-        public ClientDto(long id)
+        public static ClientDto Existing(long id, bool isActive, string name, string email, string contactPerson, string contactNumber,
+            string modifiedBy, DateTime? dateModified)
         {
-            Id = id;
+            return new ClientDto(id, isActive, name, email, contactPerson, contactNumber, modifiedBy, dateModified);
         }
 
         public static ClientDto Create()
@@ -66,9 +63,8 @@ namespace Lim.Domain.Dto
         [DataMember]
         public string CreatedBy { get; private set; }
         [DataMember]
-        public DateTime DateModified { get; private set; }
+        public DateTime? DateModified { get; private set; }
         [DataMember]
         public string ModifiedBy { get; private set; }
-
     }
 }

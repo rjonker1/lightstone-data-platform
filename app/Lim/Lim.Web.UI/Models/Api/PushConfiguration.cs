@@ -19,38 +19,35 @@ namespace Lim.Web.UI.Models.Api
             IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
-        private PushConfiguration(List<PushConfigurationView> configuration)
+        private PushConfiguration(PushConfigurationView configuration)
         {
-            Id = configuration.First().Id;
-            Key = configuration.First().Key;
-            //ConfigurationApiId = configurationApiId;
-            ActionType = configuration.First().ActionType;
-            IntegrationType = configuration.First().IntegrationType;
-            FrequencyType = configuration.First().FrequencyType;
-            IntegrationClients = configuration.Select(s => s.IntegrationClientId);
-            IntegrationContracts = configuration.Select(s => s.IntegrationContractId);
-            AccountNumber = configuration.First().AccountNumber;
-            IsActive = configuration.First().IsActive;
-            ClientId = configuration.First().ClientId;
-            AccountNumber = configuration.First().AccountNumber;
-            IntegrationPackages = configuration.Select(s => s.IntegrationPackageId);
-            BaseAddress = configuration.First().BaseAddress;
-            Suffix = configuration.First().Suffix;
-            Username = configuration.First().Username;
-            Password = configuration.First().Password;
-            HasAuthentication = configuration.First().HasAuthentication;
-            AuthenticationToken = configuration.First().AuthenticationToken;
-            AuthenticationKey = configuration.First().AuthenticationKey;
-            AuthenticationType = configuration.First().AuthenticationType;
-            ClientIdAccountNumber = string.Format("{0}|{1}", IntegrationClients, AccountNumber);
-            CustomFrequency = DateTime.Now.Date + configuration.First().CustomFrequencyTime;
-            CustomDay = configuration.First().CustomFrequencyDay;
+            Id = configuration.Id;
+            Key = configuration.Key;
+            ConfigurationApiId = configuration.ApiConfigurationId;
+            ActionType = configuration.ActionType;
+            IntegrationType = configuration.IntegrationType;
+            FrequencyType = configuration.FrequencyType;
+            IntegrationClients = configuration.IntegrationClients;
+            IntegrationContracts = configuration.IntegrationContracts;
+            IsActive = configuration.IsActive;
+            ClientId = configuration.ClientId;
+            IntegrationPackages = configuration.IntegrationPackages;
+            BaseAddress = configuration.BaseAddress;
+            Suffix = configuration.Suffix;
+            Username = configuration.Username;
+            Password = configuration.Password;
+            HasAuthentication = configuration.HasAuthentication;
+            AuthenticationToken = configuration.AuthenticationToken;
+            AuthenticationKey = configuration.AuthenticationKey;
+            AuthenticationType = configuration.AuthenticationType;
+            CustomFrequency = DateTime.Now.Date + (configuration.CustomFrequencyTime.HasValue ? configuration.CustomFrequencyTime.Value : TimeSpan.Parse("00:00"));
+            CustomDay = configuration.CustomFrequencyDay;
         }
 
         public static PushConfiguration Existing(IHandleGettingConfiguration handler, GetApiPushConfiguration command)
         {
             handler.Handle(command);
-            return new PushConfiguration(command.Configuration.ToList());
+            return new PushConfiguration(command.Configuration);
         }
 
         public static PushConfiguration Create()
@@ -94,7 +91,6 @@ namespace Lim.Web.UI.Models.Api
         public short FrequencyType { get; set; }
         public IEnumerable<Guid> IntegrationClients { get; set; }
         public IEnumerable<Guid> IntegrationContracts { get; set; }
-        public int AccountNumber { get; set; }
         public bool IsActive { get; set; }
         public long ConfigurationApiId { get; private set; }
         public IEnumerable<Guid> IntegrationPackages { get; set; }
@@ -106,7 +102,6 @@ namespace Lim.Web.UI.Models.Api
         public string AuthenticationToken { get; set; }
         public string AuthenticationKey { get; set; }
         public short AuthenticationType { get; set; }
-        public string ClientIdAccountNumber { get; set; }
         public DateTime CustomFrequency { get; set; }
         public string CustomDay { get; set; }
         public string User { get; set; }

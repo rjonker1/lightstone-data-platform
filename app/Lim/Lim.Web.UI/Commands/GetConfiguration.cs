@@ -29,12 +29,12 @@ namespace Lim.Web.UI.Commands
             ClientId = clientId;
         }
 
-        public void Set(IEnumerable<PushConfigurationView> configuration)
+        public void Set(PushConfigurationView configuration)
         {
             Configuration = configuration;
         }
 
-        public IEnumerable<PushConfigurationView> Configuration { get; private set; }
+        public PushConfigurationView Configuration { get; private set; }
     }
 
     public class GetApiPullConfiguration

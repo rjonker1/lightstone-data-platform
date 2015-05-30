@@ -9,10 +9,10 @@ namespace Lim.Web.UI.Commits
 {
     public class ClientCommit : IPersistObject<ClientDto>
     {
-        private readonly IAmEntityRepository _repository;
+        private readonly IAmRepository _repository;
         private readonly ILog _log;
 
-        public ClientCommit(IAmEntityRepository repository)
+        public ClientCommit(IAmRepository repository)
         {
             _repository = repository;
             _log = LogManager.GetLogger(GetType());

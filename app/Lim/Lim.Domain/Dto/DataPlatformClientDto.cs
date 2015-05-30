@@ -7,7 +7,7 @@ namespace Lim.Domain.Dto
     {
         public DataPlatformClientDto()
         {
-            
+
         }
 
         public DataPlatformClientDto(Guid id, string name, string accountNumber, bool isActive, IEnumerable<DataPlatformContractDto> contracts)
@@ -30,7 +30,7 @@ namespace Lim.Domain.Dto
     {
         public DataPlatformContractDto()
         {
-            
+
         }
 
         public DataPlatformContractDto(Guid id, string name, IEnumerable<PackageDto> packages)
@@ -47,6 +47,14 @@ namespace Lim.Domain.Dto
 
     public class PackageDto
     {
+        public PackageDto(Guid id, Guid packageId, string name, bool isActive)
+        {
+            Id = id;
+            PackageId = packageId;
+            Name = name;
+            IsActive = isActive;
+        }
+
         public Guid Id { get; set; }
         public Guid PackageId { get; set; }
         public string Name { get; set; }

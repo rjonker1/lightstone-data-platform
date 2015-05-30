@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Net;
 using Common.Logging;
 using Lim.Domain.Dto;
-using Lim.Domain.Repository;
+using Lim.Domain.Entities;
+using Lim.Domain.Entities.Repository;
 using Lim.Web.UI.Commands;
 using Newtonsoft.Json;
 
@@ -51,21 +52,28 @@ namespace Lim.Web.UI.Handlers
 
     public class GetIntegrationClientHandler : IHandleGettingIntegrationClient
     {
-        private readonly IReadLimRepository _repository;
+        private readonly IAmRepository _repository;
 
-        public GetIntegrationClientHandler(IReadLimRepository repository)
+        public GetIntegrationClientHandler(IAmRepository repository)
         {
             _repository = repository;
         }
 
         public void Handle(GetIntegrationClients command)
         {
-            command.Set(_repository.Items<ClientDto>(ClientDto.SelectAll, new {}));
+            var items = _repository.GetAll<Client>();
+            var dto =
+                items.Select(
+                    s => ClientDto.Existing(s.Id, s.IsActive, s.Name, s.Email, s.ContactPerson, s.ContactNumber, s.ModifiedBy, s.DateModified)).ToList();
+            command.Set(dto.Any() ? dto : Enumerable.Empty<ClientDto>());
         }
 
         public void Handle(GetIntegrationClient command)
         {
-            command.Set(_repository.Item<ClientDto>(ClientDto.Select, new {@Id = command.Id}));
+            var item = _repository.Get<Client>(w => w.Id == command.Id);
+            var dto = item.Select(
+                s => ClientDto.Existing(s.Id, s.IsActive, s.Name, s.Email, s.ContactPerson, s.ContactNumber, s.ModifiedBy, s.DateModified)).FirstOrDefault();
+            command.Set(dto);
         }
     }
 }

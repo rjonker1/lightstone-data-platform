@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Common.Logging;
 using Lim.Domain.Entities;
 using Lim.Domain.Entities.Contracts;
 using Lim.Domain.Entities.Repository;
@@ -12,12 +11,10 @@ namespace Lim.Web.UI.Commits
     public class ApiPushCommit : IPersistObject<PushConfiguration>
     {
         private readonly ISaveApiConfiguration _save;
-        private readonly ILog _log;
 
         public ApiPushCommit(ISaveApiConfiguration save)
         {
             _save = save;
-            _log = LogManager.GetLogger(GetType());
         }
 
         public bool Persist(PushConfiguration pushConfig)
@@ -25,9 +22,6 @@ namespace Lim.Web.UI.Commits
             var configuration = new Configuration()
             {
                 Id = pushConfig.Id,
-                FrequencyType = pushConfig.FrequencyType,
-                ActionType = pushConfig.ActionType,
-                IntegrationType = pushConfig.IntegrationType,
                 IsActive = pushConfig.IsActive,
                 DateModified = DateTime.UtcNow,
                 ModifiedBy = pushConfig.User ?? Environment.MachineName,
@@ -46,8 +40,8 @@ namespace Lim.Web.UI.Commits
                 Password = pushConfig.Password,
                 HasAuthentication = pushConfig.HasAuthentication,
                 AuthenticationToken = pushConfig.AuthenticationToken,
-                AuthenticationKey = pushConfig.AuthenticationKey,
-                AuthenticationType = pushConfig.AuthenticationType
+                AuthenticationKey = pushConfig.AuthenticationKey //,
+                //AuthenticationType = pushConfig.AuthenticationType
             };
 
             var packages = pushConfig.IntegrationPackages.Select(s => new IntegrationPackage()
@@ -79,13 +73,19 @@ namespace Lim.Web.UI.Commits
                 Id = 0,
                 Configuration = configuration,
                 ClientCustomerId = s,
-                AccountNumber = pushConfig.AccountNumber,
+                AccountNumber = GetAccountNumber(pushConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.ClientCustomerId == s) != null ? pushConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.ClientCustomerId == s).AccountNumber : string.Empty),
                 IsActive = true,
                 DateModified = DateTime.UtcNow,
                 ModifiedBy = pushConfig.User ?? Environment.MachineName
             }).ToList();
 
-            return _save.SaveConfiguration(pushConfig.ClientId, configuration, apiConfiguration, packages, contracts, clients);
+            return _save.SaveConfiguration(pushConfig.ClientId, pushConfig.ActionType, pushConfig.FrequencyType, pushConfig.IntegrationType, pushConfig.AuthenticationType,
+                configuration, apiConfiguration, packages, contracts, clients);
+        }
+
+        private static int GetAccountNumber(string accountNumber)
+        {
+            return !string.IsNullOrEmpty(accountNumber) ? int.Parse(string.Join("", accountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1;
         }
     }
 }

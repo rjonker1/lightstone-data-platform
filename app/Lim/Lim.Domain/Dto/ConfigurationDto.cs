@@ -4,23 +4,30 @@ namespace Lim.Domain.Dto
 {
     public class ConfigurationDto
     {
-        public const string Select =
-            @"select c.*,ft.Type Frequency, ac.Type Action, it.Type from Configuration c join FrequencyType ft on c.FrequencyType = ft.Id join ActionType ac on c.ActionType = ac.Id  join IntegrationType it on c.IntegrationType = it.Id";
-
         public ConfigurationDto()
         {
 
         }
 
-        public ConfigurationDto(long id, Guid key, short actionType, short integrationType, short frequency, long clientId, bool isActive)
+        private ConfigurationDto(long id, Guid key, short actionType, short integrationType, short frequencyType, long clientId, bool isActive,
+            string action, string frequency, string type)
         {
             ActionType = actionType;
             IntegrationType = integrationType;
             Id = id;
             Key = key;
-            FrequencyType = frequency;
+            FrequencyType = frequencyType;
             ClientId = clientId;
             IsActive = isActive;
+            Action = action;
+            Frequency = frequency;
+            Type = type;
+        }
+
+        public static ConfigurationDto Existing(long id, Guid key, short actionType, short integrationType, short frequencyType, long clientId,
+            bool isActive, string action, string frequency, string type)
+        {
+            return new ConfigurationDto(id, key, actionType, integrationType, frequencyType, clientId, isActive, action, frequency, type);
         }
 
         public long Id { get; private set; }

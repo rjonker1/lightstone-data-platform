@@ -6,14 +6,12 @@ namespace Lim.Domain.Dto
     [DataContract]
     public class IntegrationContractDto
     {
-        public const string Select = @"select ic.* from IntegrationContracts ic where ic.ConfigurationId = @ConfigurationId and ic.IsActive = 1";
-        public const string SelectContract = @"select ic.* from IntegrationContracts ic where ic.ConfigurationId = @ConfigurationId and ic.IsActive = 1 and ic.Contract = @ContractId";
         public IntegrationContractDto()
         {
-            
+
         }
 
-        private IntegrationContractDto(long id, Guid contractId, long configurationId, bool isActive, DateTime dateModified,
+        private IntegrationContractDto(long id, Guid contractId, long configurationId, bool isActive, DateTime? dateModified,
             string modifiedBy, Guid clientCustomerId)
         {
             Id = id;
@@ -39,14 +37,15 @@ namespace Lim.Domain.Dto
         }
 
         public static IntegrationContractDto Existing(long id, Guid contractId, long configurationId, bool isActive,
-            DateTime dateModified,
+            DateTime? dateModified,
             string modifiedBy, Guid clientCustomerId)
         {
-            return new IntegrationContractDto(id, contractId, configurationId, isActive, dateModified, modifiedBy,clientCustomerId);
+            return new IntegrationContractDto(id, contractId, configurationId, isActive, dateModified, modifiedBy, clientCustomerId);
         }
 
         [DataMember]
         public long Id { get; private set; }
+
         [DataMember]
         public Guid Contract { get; private set; }
 
@@ -55,12 +54,16 @@ namespace Lim.Domain.Dto
 
         [DataMember]
         public long ConfigurationId { get; private set; }
+
         [DataMember]
         public bool IsActive { get; private set; }
+
         [DataMember]
         public DateTime DateCreated { get; private set; }
+
         [DataMember]
-        public DateTime DateModified { get; private set; }
+        public DateTime? DateModified { get; private set; }
+
         [DataMember]
         public string ModifiedBy { get; private set; }
 
