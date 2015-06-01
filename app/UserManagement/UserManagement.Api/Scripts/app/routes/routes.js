@@ -66,6 +66,45 @@ function initializeCusomerRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
+
+    sammy.get('/Customers/Lock/:id', function (context) {
+
+        $.ajax({
+            type: "PUT",
+            url: '/Customers/Lock/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json',
+            success: function () {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Customers');
+            },
+            error: function () {
+
+                context.redirect('#/Customers');
+            }
+        });
+    });
+
+    sammy.get('/Customers/UnLock/:id', function (context) {
+
+        $.ajax({
+            type: "PUT",
+            url: '/Customers/UnLock/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json',
+            success: function () {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Customers');
+            },
+            error: function () {
+
+                context.redirect('#/Customers');
+            }
+        });
+    });
+
     sammy.get('/Customers/Delete/:id', function (context) {
 
         $.ajax({
