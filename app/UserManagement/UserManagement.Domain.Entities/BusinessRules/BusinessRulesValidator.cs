@@ -37,7 +37,8 @@ namespace UserManagement.Domain.Entities.BusinessRules
             }
             else if (entity is Customer)
             {
-                if (func.Equals("Create") || func.Equals("Update")) _handler.Handle(new CreateCustomerRule(entity as Customer));
+                if (func.Equals("Create")) _handler.Handle(new CreateCustomerRule(entity as Customer));
+                if (func.Equals("Update")) _handler.Handle(new UpdateCustomerRule(entity as Customer));
                 if (func.Equals("Delete")) _handler.Handle(new SoftDeleteCustomerRule(entity as Customer));
             }
             else if (entity is Client)

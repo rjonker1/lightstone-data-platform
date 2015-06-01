@@ -48,6 +48,8 @@ namespace UserManagement.Api.Modules
                 dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
                 dto.IsActive = true;
 
+                if(dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
+
                 if (ModelValidationResult.IsValid)
                 {
                     var user = userRepository.Get(dto.accountownername_primary_key);
@@ -76,6 +78,8 @@ namespace UserManagement.Api.Modules
                 var dto = this.BindAndValidate<CustomerDto>();
                 dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+
+                if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
 
                 if (ModelValidationResult.IsValid)
                 {

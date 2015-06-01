@@ -49,6 +49,8 @@ namespace UserManagement.Api.Modules
                 dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
                 dto.IsActive = true;
 
+                if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
+
                 if (ModelValidationResult.IsValid)
                 {
                     var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
@@ -74,6 +76,8 @@ namespace UserManagement.Api.Modules
                 var dto = this.BindAndValidate<ClientDto>();
                 dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+
+                if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
 
                 if (ModelValidationResult.IsValid)
                 {

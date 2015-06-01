@@ -24,7 +24,7 @@ namespace UserManagement.Domain.BusinessRules.Customers
             //Check if Customer already exists
             if (_currentCustomers.Exists(entity.Id, entity.Name))
             {
-                var exception = new LightstoneAutoException("Customer name already exists".FormatWith(entity.GetType().Name));
+                var exception = new LightstoneAutoException("Create customer error: Customer name already exists".FormatWith(entity.GetType().Name));
                 this.Warn(() => exception);
                 throw exception;
             }
