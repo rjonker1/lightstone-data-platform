@@ -13,6 +13,10 @@ namespace UserManagement.Domain.Dtos
         public string ClientAccountNumber { get; set; }
         public Guid ContactDetailId { get; set; }
         public string ContactDetailContactNumber { get; set; }
+        [Required]
+        [Display(Name = "Commercial state is required")]
+        public Guid? CommercialStateId { get; set; }
+        public string CommercialStateValue { get; set; }
         public ContactType ContactDetailContactType { get; set; }
         [Required]
         [Display(Name = "Contact person is required")]
