@@ -91,6 +91,34 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
+            Put["/Clients/Lock/{id}"] = parameters =>
+            {
+                var dto = this.Bind<ClientDto>();
+
+                var entity = clients.Get(dto.Id);
+                entity.Modified = DateTime.UtcNow;
+                entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                entity.IsLocked = true;
+
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+
+                return Response.AsJson("Client has been locked");
+            };
+
+            Put["/Clients/UnLock/{id}"] = parameters =>
+            {
+                var dto = this.Bind<ClientDto>();
+
+                var entity = clients.Get(dto.Id);
+                entity.Modified = DateTime.UtcNow;
+                entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                entity.IsLocked = false;
+
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+
+                return Response.AsJson("Client has been un-locked");
+            };
+
             Delete["/Clients/{id}"] = _ =>
             {
 

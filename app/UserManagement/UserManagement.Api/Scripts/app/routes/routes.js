@@ -170,6 +170,45 @@ function initializeClientRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
+
+    sammy.get('/Clients/Lock/:id', function (context) {
+
+        $.ajax({
+            type: "PUT",
+            url: '/Clients/Lock/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json',
+            success: function () {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Clients');
+            },
+            error: function () {
+
+                context.redirect('#/Clients');
+            }
+        });
+    });
+
+    sammy.get('/Clients/UnLock/:id', function (context) {
+
+        $.ajax({
+            type: "PUT",
+            url: '/Clients/UnLock/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json',
+            success: function () {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Clients');
+            },
+            error: function () {
+
+                context.redirect('#/Clients');
+            }
+        });
+    });
+
     sammy.get('/Clients/Delete/:id', function (context) {
 
         $.ajax({
@@ -235,6 +274,45 @@ function initializeUserRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
+
+    sammy.get('/Users/Lock/:id', function (context) {
+
+        $.ajax({
+            type: "PUT",
+            url: '/Users/Lock/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json',
+            success: function () {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Users');
+            },
+            error: function () {
+
+                context.redirect('#/Users');
+            }
+        });
+    });
+
+    sammy.get('/Users/UnLock/:id', function (context) {
+
+        $.ajax({
+            type: "PUT",
+            url: '/Users/UnLock/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json',
+            success: function () {
+
+                //$('#table').bootstrapTable('refresh', { silent: true });
+                context.redirect('#/Users');
+            },
+            error: function () {
+
+                context.redirect('#/Users');
+            }
+        });
+    });
+
     sammy.get('/Users/Delete/:id', function (context) {
 
         $.ajax({
