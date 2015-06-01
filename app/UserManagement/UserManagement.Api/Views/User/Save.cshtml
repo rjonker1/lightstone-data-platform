@@ -125,6 +125,43 @@
                 </div>
 
             </div>
+            
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">Activation Status</label>
+                <div class="input-group col-lg-2">
+                    <select id="activationTypeSelect" name="ActivationStatusType" data-placeholder="Select user activation type" class="chosen-select">
+                        <option value=""></option>
+                        @foreach (var item in Enum.GetValues(typeof(ActivationStatusType)))
+                        {
+                            var isSelected = item.ToString() == Model.ActivationStatusType;
+                            <option selected="@isSelected" value="@item">@item</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    @*@Html.ValidationMessageFor(x => x.ActivationStatusType)*@
+                </div>
+
+            </div>
+            
+            <div class="form-group trial-expiration">
+
+                <label class="control-label col-lg-4">Trial Expiration Date</label>
+                <div class="input-group col-lg-2">
+                    <div class="input-group date">
+                        <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                        <div aria-describedby="basic-addon1">
+                            @Html.TextBoxFor(x => x.TrialExpiration, new { @class = "form-control", placeholder = "" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.TrialExpiration)
+                </div>
+
+            </div>
+
             <div class="form-group">
 
                 <label class="control-label col-lg-4">User Type</label>
@@ -375,6 +412,28 @@
         }
 
         $("#rolesSelect").trigger("chosen:updated");
+    });
+
+    $(document).ready(function () {
+
+        if ($('#activationTypeSelect option:selected').text() == 'Trial') {
+
+            $('.trial-expiration').show();
+            return;
+        }
+
+        $('.trial-expiration').hide();
+    });
+
+    $('#activationTypeSelect').on('change', function () {
+
+        if ($('#activationTypeSelect option:selected').text() == 'Trial') {
+
+            $('.trial-expiration').show();
+            return;
+        }
+
+        $('.trial-expiration').hide();
     });
 
 </script>

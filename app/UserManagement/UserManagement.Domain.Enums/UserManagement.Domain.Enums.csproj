@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivationStatusType.cs" />
     <Compile Include="AddressType.cs" />
     <Compile Include="ContactType.cs" />
     <Compile Include="CreateSourceType.cs" />
