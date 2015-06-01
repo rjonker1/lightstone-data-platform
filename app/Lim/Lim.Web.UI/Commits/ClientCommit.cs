@@ -34,7 +34,7 @@ namespace Lim.Web.UI.Commits
                     DateModified = DateTime.UtcNow,
                     ModifiedBy = clientDto.ModifiedBy ?? Environment.MachineName
                 };
-                _repository.SaveOrUpdate(client);
+                _repository.Merge(client);
                 return true;
             }
             catch (Exception ex)

@@ -54,7 +54,7 @@ namespace Lim.Web.UI.Handlers
                 item.Configuration.Client.Name, item.Configuration.FrequencyType.Id,
                 item.Configuration.ActionType.Id, item.Configuration.IntegrationType.Id, clients.Select(s => s.ClientCustomerId),
                 contracts.Select(s => s.Contract), item.Configuration.DateCreated, item.Configuration.IsActive, item.BaseAddress, item.Suffix,
-                item.Username, item.Password, item.HasAuthentication, item.AuthenticationToken, item.AuthenticationType.Id,
+                item.Username, item.Password, item.HasAuthentication,item.AuthenticationKey, item.AuthenticationToken, item.AuthenticationType.Id,
                 packages.Select(s => s.PackageId), item.Configuration.CustomFrequencyTime, item.Configuration.CustomFrequencyDay));
         }
 

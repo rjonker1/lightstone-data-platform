@@ -14,6 +14,7 @@ namespace Lim.Domain.Entities.Repository
         IQueryable<T> GetAll<T>() where T : class;
         void Save<T>(T entity) where T : class;
         void SaveOrUpdate<T>(T entity) where T : class;
+        void Merge<T>(T entity) where T : class;
     }
 
     public class LimRepository : IAmRepository
@@ -33,12 +34,12 @@ namespace Lim.Domain.Entities.Repository
 
         public T Find<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            return _session.Query<T>().Where(predicate).FirstOrDefault();
+            return _session.Query<T>().CacheMode(CacheMode.Refresh).Where(predicate).FirstOrDefault();
         }
 
         public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            return _session.Query<T>().Where(predicate);
+            return _session.Query<T>().CacheMode(CacheMode.Refresh).Where(predicate);
         }
 
         public void Save<T>(T entity) where T : class
@@ -54,6 +55,10 @@ namespace Lim.Domain.Entities.Repository
         public IQueryable<T> GetAll<T>() where T : class
         {
             return _session.Query<T>();
+        }
+        public void Merge<T>(T entity) where T : class
+        {
+            _session.Merge(entity);
         }
     }
 }

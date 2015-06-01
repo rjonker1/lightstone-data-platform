@@ -27,7 +27,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             try
             {
                 Sales =
-                    _repository.GetAll<Sale>(sale => { return sale.Car_ID == request.CarId && sale.Year_ID == request.Year; })
+                    _repository.GetAll<Sale>(sale => sale.Car_ID == request.CarId && sale.Year_ID == request.Year)
                         .OrderByDescending(o => o.SaleDateTime)
                         .Take(5);
 

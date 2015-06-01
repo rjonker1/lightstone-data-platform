@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using Common.Logging;
 using EasyNetQ;
 using Lim.Domain.Entities;
@@ -35,9 +36,9 @@ namespace Lim.Domain.Sender.Handlers
                 AccountNumber = !string.IsNullOrEmpty(message.Body.AccountNumber) ? int.Parse(string.Join("", message.Body.AccountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1,
                 ResponseDate = message.Body.ResponseDate,
                 RequestId = message.Body.RequestId,
-                Payload = message.Body.Payload,
+                Payload = !string.IsNullOrEmpty(message.Body.Payload) ? Encoding.UTF8.GetBytes(message.Body.Payload) : null,
                 HasResponse = message.Body.HasData,
-                Username = message.Body.Username
+                Username = message.Body.Username ?? "unavailable"
             };
             _repository.Save(package);
 

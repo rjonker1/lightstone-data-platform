@@ -29,7 +29,7 @@ namespace Lim.Schedule.Core.Handlers
                     _repository.Get<ConfigurationApi>(
                         w =>
                             w.Configuration.FrequencyType.Id == (int) command.Frequency && w.Configuration.ActionType.Id == (int) command.Action &&
-                            w.Configuration.IntegrationType.Id == (int) command.Type)
+                            w.Configuration.IntegrationType.Id == (int) command.Type && w.Configuration.IsActive)
                         .Select(
                             s =>
                                 ApiPushConfigurationDto.Existing(s.Id, s.Configuration.ConfigurationKey, s.Configuration.FrequencyType.Id,
@@ -62,7 +62,7 @@ namespace Lim.Schedule.Core.Handlers
                 var configs =
                     _repository.Get<ConfigurationApi>(
                         w =>
-                            w.Configuration.FrequencyType.Id == (short)command.Frequency && w.Configuration.ActionType.Id == (short)command.Action &&
+                            w.Configuration.IsActive && w.Configuration.FrequencyType.Id == (short)command.Frequency && w.Configuration.ActionType.Id == (short)command.Action &&
                             w.Configuration.IntegrationType.Id == (short)command.Type && w.Configuration.CustomFrequencyDay == command.CustomDay &&
                             w.Configuration.CustomFrequencyTime >= DateTime.Now.AddMinutes(-1).TimeOfDay && w.Configuration.CustomFrequencyTime <= DateTime.Now.AddMinutes(1).TimeOfDay)
                         .Select(
@@ -98,7 +98,7 @@ namespace Lim.Schedule.Core.Handlers
                 var configs =
                      _repository.Get<ConfigurationApi>(
                          w =>
-                             w.Configuration.FrequencyType.Id == (int)command.Frequency && w.Configuration.ActionType.Id == (int)command.Action &&
+                             w.Configuration.IsActive && w.Configuration.FrequencyType.Id == (int)command.Frequency && w.Configuration.ActionType.Id == (int)command.Action &&
                              w.Configuration.IntegrationType.Id == (int)command.Type)
                          .Select(
                              s =>

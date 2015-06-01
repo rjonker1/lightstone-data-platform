@@ -22,7 +22,8 @@ namespace Lim.Domain.Dto
             AccountNumber = accountNumber;
             ResponseDate = responseDate;
             RequestId = requestId;
-            Report = hasResponse ? JsonConvert.DeserializeObject(payload) : new {};
+            //Report = hasResponse ? JsonConvert.DeserializeObject(payload) : new {};
+            Report = hasResponse ? payload : "[{}]";
             HasResponse = hasResponse;
         }
 
@@ -55,7 +56,7 @@ namespace Lim.Domain.Dto
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public object Report { get; private set; }
+        public string Report { get; private set; }
 
         [DataMember]
         public bool HasResponse { get; private set; }

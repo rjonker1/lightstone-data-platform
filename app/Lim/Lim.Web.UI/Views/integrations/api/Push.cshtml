@@ -28,6 +28,7 @@
                         <div class="box-body" >
                             <form role="form" action="/integrations/for/api/push/save" method="post">
                                 <input type="hidden" name="Id" value="@Model.Id"/>
+                                <input type="hidden" name="ConfigurationApiId" value="@Model.ConfigurationApiId" />
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label> 
@@ -38,7 +39,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>LIM Client</label>
-                                    <select id="ClientId" name="ClientId" data-placeholder="Select LIM Client ..." class="chosen-select form-control">
+                                    <select id="ClientId" name="ClientId" required data-placeholder="Select LIM Client ..." class="chosen-select form-control">
                                         <option value=""></option>
                                         @foreach (var client in Model.SelectableIntegrationClients)
                                         {
@@ -49,7 +50,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Clients / Customers</label>
-                                    <select id="IntegrationClients" name="IntegrationClients" data-placeholder="Select Integration Clients ..." class="chosen-select form-control" multiple>
+                                    <select id="IntegrationClients" name="IntegrationClients" required data-placeholder="Select Integration Clients ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
                                         @foreach (var client in Model.SelectableDataPlatformClients)
                                         {
@@ -60,7 +61,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Contracts</label>
-                                    <select id="IntegrationContracts" name="IntegrationContracts" data-placeholder="Select Contract ..." class="chosen-select form-control" multiple>
+                                    <select id="IntegrationContracts" name="IntegrationContracts" required data-placeholder="Select Contract ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
                                         @foreach (var contract in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts))
                                         {
@@ -71,7 +72,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Packages / Products</label>
-                                    <select id="IntegrationPackages" name="IntegrationPackages" data-placeholder="Select Packages ..." class="chosen-select form-control" multiple>
+                                    <select id="IntegrationPackages" name="IntegrationPackages" required data-placeholder="Select Packages ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
                                         @foreach (var package in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts).SelectMany(s => s.Packages))
                                         {
@@ -82,11 +83,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Base Address</label>
-                                    <input type="text" name="BaseAddress" class="form-control" value="@Model.BaseAddress" placeholder="http://..." />
+                                    <input type="text" name="BaseAddress" required maxlength="1000" class="form-control" value="@Model.BaseAddress" placeholder="http://..." />
                                 </div>
                                 <div class="form-group">
                                     <label>Suffix</label>
-                                    <input type="text" name="Suffix" class="form-control" value="@Model.Suffix" placeholder="api/pushroute" />
+                                    <input type="text" name="Suffix" required maxlength="255" class="form-control" value="@Model.Suffix" placeholder="api/pushroute" />
                                 </div>
                                 <div class="form-group">
                                     <div class="checkbox">
@@ -109,19 +110,19 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Authentication Key</label>
-                                        <input type="text" name="AuthenticationKey" class="form-control" value="@Model.AuthenticationKey" />
+                                        <input type="text" name="AuthenticationKey" maxlength="50" class="form-control" value="@Model.AuthenticationKey" />
                                     </div>
                                     <div class="form-group">
                                         <label>Authentication Key Token</label>
-                                        <input type="text" name="AuthenticationToken" class="form-control" value="@Model.AuthenticationToken" />
+                                        <input type="text" name="AuthenticationToken" maxlength="500" class="form-control" value="@Model.AuthenticationToken" />
                                     </div>
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input type="text" name="Username" class="form-control" value="@Model.Username" />
+                                        <input type="text" name="Username" maxlength="50" class="form-control" value="@Model.Username" />
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="text" name="Password" class="form-control" value="@Model.Password" />
+                                        <input type="text" name="Password" maxlength="100" class="form-control" value="@Model.Password" />
                                     </div>
                                 </div>
                                 <div class="form-group">

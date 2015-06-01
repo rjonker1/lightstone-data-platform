@@ -8,7 +8,7 @@ namespace Lim.Domain.Entities.Maps {
         
         public AuditApiIntegrationMap() {
 			Table("AuditApiIntegration");
-			LazyLoad();
+            LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id");
 			Map(x => x.ClientId).Column("ClientId").Not.Nullable().Index("IX_Audit_ClientId");
             Map(x => x.ConfigurationId).Column("ConfigurationId").Not.Nullable().Index("IX_Audit_ConfigurationId"); ;

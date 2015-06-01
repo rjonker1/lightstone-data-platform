@@ -7,7 +7,7 @@ namespace Lim.Domain.Entities.Maps {
         
         public ConfigurationApiMap() {
 			Table("ConfigurationApi");
-			LazyLoad();
+            LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id").Index("IX_ConfigurationApi_Id");
             References(x => x.Configuration).Column("ConfigurationId").Not.Nullable().Index("IX_ConfigurationApi_ConfigurationId");
             References(x => x.AuthenticationType).Column("AuthenticationType").Index("IX_ConfigurationApi_AuthenticationTypeId");

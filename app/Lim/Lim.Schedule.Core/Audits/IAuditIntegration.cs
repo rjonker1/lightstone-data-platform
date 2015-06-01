@@ -37,7 +37,7 @@ namespace Lim.Schedule.Core.Audits
                     WasSuccessful = command.WasSuccessful,
                     Address = command.Address,
                     Suffix = command.Suffix,
-                    Payload = command.Payload
+                    Payload = command.Payload ?? string.Empty
 
                 };
                 _repository.Save(audit);

@@ -10,7 +10,7 @@ namespace Lim.Web.UI.Models.Api
         private PushConfigurationView(long id, long apiConfigurationId, Guid key, long clientId, string clientName, short frequencyType, short actionType,
             short integrationType, IEnumerable<Guid> integrationClients, IEnumerable<Guid> integrationContracts,
             DateTime? dateCreated, bool isActive, string baseAddress, string suffix, string userName, string password,
-            bool hasAuthentication, string authenticationToken, short authenticationType,
+            bool hasAuthentication, string authenticationKey, string authenticationToken, short authenticationType,
             IEnumerable<Guid> packages, TimeSpan? customTime, string customDay)
         {
             Id = id;
@@ -30,6 +30,7 @@ namespace Lim.Web.UI.Models.Api
             Username = userName;
             Password = password;
             HasAuthentication = hasAuthentication;
+            AuthenticationKey = authenticationKey;
             AuthenticationToken = authenticationToken;
             AuthenticationType = authenticationType;
             IntegrationPackages = packages;
@@ -40,11 +41,11 @@ namespace Lim.Web.UI.Models.Api
         public static PushConfigurationView Set(long id, long apiConfigurationId, Guid key, long clientId, string clientName, short frequencyType, short actionType,
             short integrationType, IEnumerable<Guid> integrationClients, IEnumerable<Guid> integrationContracts,
             DateTime? dateCreated, bool isActive, string baseAddress, string suffix, string userName, string password,
-            bool hasAuthentication, string authenticationToken, short authenticationType,
+            bool hasAuthentication,string authenticationKey, string authenticationToken, short authenticationType,
             IEnumerable<Guid> packages, TimeSpan? customTime, string customDay)
         {
             return new PushConfigurationView(id, apiConfigurationId, key, clientId, clientName, frequencyType, actionType, integrationType, integrationClients,
-                integrationContracts, dateCreated, isActive, baseAddress, suffix, userName, password, hasAuthentication,
+                integrationContracts, dateCreated, isActive, baseAddress, suffix, userName, password, hasAuthentication,authenticationKey,
                 authenticationToken, authenticationType, packages, customTime, customDay);
         }
         

@@ -1,3 +1,4 @@
+using System;
 using FluentNHibernate.Mapping;
 
 namespace Lim.Domain.Entities.Maps {
@@ -7,7 +8,7 @@ namespace Lim.Domain.Entities.Maps {
         
         public PackageResponsesMap() {
 			Table("PackageResponses");
-			LazyLoad();
+            LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id");
 			Map(x => x.PackageId).Column("PackageId").Not.Nullable().Index("IX_PackageResponses_Id");
 			Map(x => x.Userid).Column("UserId").Not.Nullable();
@@ -15,10 +16,10 @@ namespace Lim.Domain.Entities.Maps {
 			Map(x => x.AccountNumber).Column("AccountNumber").Length(250).Not.Nullable();
 			Map(x => x.ResponseDate).Column("ResponseDate").Not.Nullable();
 			Map(x => x.RequestId).Column("RequestId").Not.Nullable();
-            Map(x => x.Payload).Column("Payload").Not.Nullable().Length(10000);
+            Map(x => x.Payload).Column("Payload").Nullable().Length(Int32.MaxValue);
 			Map(x => x.HasResponse).Column("HasResponse").Not.Nullable();
             Map(x => x.CommitDate).Column("CommitDate").Not.Nullable().Default("GETUTCDATE()").Not.Nullable().Generated.Insert();
-            Map(x => x.Username).Column("Username").Not.Nullable().Length(50); ;
+            Map(x => x.Username).Column("Username").Not.Nullable().Length(50);
         }
     }
 }

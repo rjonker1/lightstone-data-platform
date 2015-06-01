@@ -27,7 +27,7 @@ namespace Lim.Schedule.Service.Jobs.Integrations.Custom.Api
             _fetch.Handle(new FetchConfigurationForCustomCommand(IntegrationAction.Push, IntegrationType.Api, Frequency.Custom,
                 DateTime.Now.ToString("dddd")));
 
-            if (!_fetch.Configurations.Any())
+            if (_fetch.Configurations == null || !_fetch.Configurations.Any())
             {
                 _log.Info("There are no Custom Push API Integrations to execute");
                 return;
