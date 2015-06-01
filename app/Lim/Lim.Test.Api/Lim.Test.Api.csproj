@@ -161,7 +161,6 @@
     <Content Include="packages.config" />
     <Content Include="log4net.config" />
     <Content Include="assets\jquery\jquery-2.1.3.min.map" />
-    <None Include="Properties\PublishProfiles\limtest.pubxml" />
     <Content Include="Views\Push\Received.cshtml" />
     <Content Include="Views\Pull\Sent.cshtml" />
     <Content Include="Views\Index.cshtml" />
