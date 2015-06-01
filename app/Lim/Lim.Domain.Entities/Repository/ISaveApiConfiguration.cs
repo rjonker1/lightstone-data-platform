@@ -45,7 +45,7 @@ namespace Lim.Domain.Entities.Repository
                         configuration.FrequencyType = frequency;
                         configuration.ActionType = action;
                         configuration.IntegrationType = integration;
-                        session.SaveOrUpdate(configuration);
+                        session.Merge(configuration);
 
                         if (configuration.Id == 0)
                             throw new Exception("Could not insert LIM configuration because configuration id is not valid");
@@ -53,7 +53,12 @@ namespace Lim.Domain.Entities.Repository
                         var authentication = session.Get<AuthenticationType>(authenticationId);
 
                         apiConfiguration.AuthenticationType = authentication;
-                        session.SaveOrUpdate(apiConfiguration);
+
+                        var apiConfigurationId = session.Query<ConfigurationApi>().Where(w => w.Configuration.Id == configuration.Id);
+                        var currentApiId = apiConfigurationId.FirstOrDefault() == null || apiConfigurationId.FirstOrDefault().Id == 0 ? 0 : apiConfigurationId.FirstOrDefault().Id;
+
+                        apiConfiguration.Id = currentApiId;
+                        session.Merge(apiConfiguration);
 
                         var integrationClients = session.Query<IntegrationClient>().Where(w => w.Configuration.Id == configuration.Id);
                         var integrationContracts = session.Query<IntegrationContract>().Where(w => w.Configuration.Id == configuration.Id);
@@ -62,19 +67,19 @@ namespace Lim.Domain.Entities.Repository
                         foreach (var integrationClient in integrationClients)
                         {
                             integrationClient.IsActive = false;
-                            session.SaveOrUpdate(integrationClient);
+                            session.Merge(integrationClient);
                         }
 
                         foreach (var integrationContract in integrationContracts)
                         {
                             integrationContract.IsActive = false;
-                            session.SaveOrUpdate(integrationContract);
+                            session.Merge(integrationContract);
                         }
 
                         foreach (var integrationPackage in integrationPackages)
                         {
                             integrationPackage.IsActive = false;
-                            session.SaveOrUpdate(integrationPackage);
+                            session.Merge(integrationPackage);
                         }
 
                         foreach (var package in packages)
@@ -89,7 +94,7 @@ namespace Lim.Domain.Entities.Repository
                             }
 
                             package.Id = id;
-                            session.SaveOrUpdate(package);
+                            session.Merge(package);
                         }
 
                         foreach (var contract in contracts)
@@ -103,7 +108,7 @@ namespace Lim.Domain.Entities.Repository
                                 session.Evict(evict);
                             }
                             contract.Id = id;
-                            session.SaveOrUpdate(contract);
+                            session.Merge(contract);
                         }
 
                         foreach (var clientCustomer in clients)
@@ -119,7 +124,7 @@ namespace Lim.Domain.Entities.Repository
                                 session.Evict(evict);
                             }
 
-                            session.SaveOrUpdate(clientCustomer);
+                            session.Merge(clientCustomer);
                         }
 
                         transaction.Commit();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Common.Logging;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
@@ -82,7 +83,7 @@ namespace Lim.Schedule.Core.Identifiers
             {
 
                 var packages = repository.Get<PackageResponses>(w => w.PackageId == f.PackageId && w.ContractId == f.ContractId).ToList();
-                   
+
                 if (packages.Any())
                 {
                     log.InfoFormat("Found {0} Package Responses for Package Id {1} on Contract {2} to Push using API", packages.Count, f.PackageId,
@@ -90,11 +91,20 @@ namespace Lim.Schedule.Core.Identifiers
                     _transaction.AddRange(
                         packages.Select(
                             s =>
-                                PackageTransactionDto.Set(s.PackageId, s.Userid, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate, s.RequestId,
-                                    s.Payload, s.HasResponse)));
+                                PackageTransactionDto.Set(s.PackageId, s.Userid, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate,
+                                    s.RequestId,
+                                    GetPayload(s.Payload, s.HasResponse), s.HasResponse)));
                 }
             });
 
+        }
+
+        private static string GetPayload(byte[] payload, bool hasResponse)
+        {
+            if (!hasResponse || payload == null || payload.Length == 0)
+                return "[{'Error': 'Report could not be generated}]";
+
+            return Encoding.UTF8.GetString(payload);
         }
 
         public void Push(AuditIntegrationCommand audit)

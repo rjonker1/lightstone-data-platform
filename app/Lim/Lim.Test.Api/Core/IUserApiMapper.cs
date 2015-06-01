@@ -11,7 +11,7 @@ namespace Lim.Test.Api.Core
         IUserIdentity GetUserWithTokenAndAutorization(string token, string authorization);
     }
 
-    public class SiginioUserApiMapper : IUserApiMapper
+    public class UserApiMapper : IUserApiMapper
     {
         private const string Token = "2b1eeb42-0cf7-4234-b798-3bbaa293e273";
         private const string Username = "LightStoneAuto";

@@ -25,7 +25,7 @@ namespace Lim.Schedule.Service.Jobs.Integrations.Hourly.Api
             _log.Info("Fetching Hourly Push API Integrations");
             _fetch.Handle(new FetchConfigurationCommand(IntegrationAction.Push, IntegrationType.Api, Frequency.Hourly));
 
-            if (!_fetch.Configurations.Any())
+            if (_fetch.Configurations == null || !_fetch.Configurations.Any())
             {
                 _log.Info("There are no Hourly Push API Integrations to execute");
                 return;
