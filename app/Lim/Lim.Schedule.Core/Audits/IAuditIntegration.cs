@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Common.Logging;
 using Lim.Domain.Entities;
 using Lim.Domain.Entities.Repository;
@@ -27,20 +28,25 @@ namespace Lim.Schedule.Core.Audits
             _log.Info("Storing Integration Audit information for an API Integration to the database");
             try
             {
-                var audit = new AuditApiIntegration()
-                {
-                    ClientId = command.ClientId,
-                    ConfigurationId = command.ConfigurationId,
-                    ActionType = command.Action,
-                    IntegrationType = command.Type,
-                    Date = DateTime.UtcNow,
-                    WasSuccessful = command.WasSuccessful,
-                    Address = command.Address,
-                    Suffix = command.Suffix,
-                    Payload = command.Payload ?? string.Empty
+                if (command.Payloads == null || !command.Payloads.Any())
+                    return;
 
-                };
-                _repository.Save(audit);
+                foreach (var payload in command.Payloads)
+                {
+                    _repository.Save(new AuditApiIntegration()
+                    {
+                        ClientId = command.ClientId,
+                        ConfigurationId = command.ConfigurationId,
+                        ActionType = command.Action,
+                        IntegrationType = command.Type,
+                        Date = DateTime.UtcNow,
+                        WasSuccessful = payload.WasSuccessful,
+                        Address = command.Address,
+                        Suffix = command.Suffix,
+                        Payload = payload.Payload ?? string.Empty
+
+                    });
+                }
             }
             catch (Exception ex)
             {

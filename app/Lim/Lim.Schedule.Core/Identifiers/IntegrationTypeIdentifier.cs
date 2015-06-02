@@ -6,11 +6,11 @@ namespace Lim.Schedule.Core.Identifiers
     public class IntegrationTypeIdentifier
     {
         [DataMember]
-        public int Id { get; private set; }
+        public short Id { get; private set; }
         [DataMember]
         public string Type { get; private set; }
 
-        public IntegrationTypeIdentifier(int id, string type)
+        public IntegrationTypeIdentifier(short id, string type)
         {
             Id = id;
             Type = type;

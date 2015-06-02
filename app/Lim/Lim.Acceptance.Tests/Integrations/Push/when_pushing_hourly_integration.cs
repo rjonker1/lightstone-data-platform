@@ -9,6 +9,7 @@ using Lim.Schedule.Core;
 using Lim.Schedule.Core.Audits;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Handlers;
+using Lim.Schedule.Core.Tracking;
 using NHibernate;
 using Xunit.Extensions;
 using IntegrationType = Lim.Enums.IntegrationType;
@@ -24,6 +25,7 @@ namespace Lim.Acceptance.Tests.Integrations.Push
         private readonly IDbConnection _connection;
         private readonly IAuditIntegration _audit;
         private readonly IAmRepository _entityRepository;
+        private readonly ITrackIntegration _tracking;
         private readonly ISession _session;
 
         private readonly FetchConfigurationCommand _fetchCommand = new FetchConfigurationCommand(IntegrationAction.Push, IntegrationType.Api, Frequency.Hourly);
@@ -39,9 +41,10 @@ namespace Lim.Acceptance.Tests.Integrations.Push
             _connection = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString());
             _audit = new StoreIntegrationAudit(_entityRepository);
+            _tracking = new TrackIntegration(_entityRepository);
 
             _fetch = new HandleFetchingApiPushConfiguration(_entityRepository);
-            _execute = new HandleExecutingApiConfiguration(_entityRepository, _audit);
+            _execute = new HandleExecutingApiConfiguration(_entityRepository, _audit, _tracking);
 
             _setup = new ApiIntegrationTestSetup(_session, _entityRepository);
         }

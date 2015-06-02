@@ -70,17 +70,24 @@
     <Compile Include="Commands\AuditIntegration.cs" />
     <Compile Include="Commands\ExecuteConfiguration.cs" />
     <Compile Include="Commands\FetchConfiguration.cs" />
+    <Compile Include="Commands\TrackIntegration.cs" />
     <Compile Include="Handlers\HandleExecutingApiConfiguration.cs" />
     <Compile Include="Handlers\HandleFetchingApiPullConfiguration.cs" />
     <Compile Include="Handlers\HandleFetchingApiPushConfiguration.cs" />
+    <Compile Include="Identifiers\ApiAuthenticationIdentifier.cs" />
+    <Compile Include="Identifiers\ApiAuthenticationTypeIdentifier.cs" />
+    <Compile Include="Identifiers\ApiConfigurationIdentifier.cs" />
     <Compile Include="Identifiers\ApiIdentifiers.cs" />
+    <Compile Include="Identifiers\ApiPullIntegration.cs" />
     <Compile Include="Identifiers\ClientIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationActionIdentifiers.cs" />
     <Compile Include="Identifiers\IntegrationClientIdentifier.cs" />
+    <Compile Include="Identifiers\IntegrationFrequencyIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationPackageIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationTypeIdentifier.cs" />
     <Compile Include="IHandleConfigurationExecution.cs" />
     <Compile Include="IHandleFetchingConfiguration.cs" />
+    <Compile Include="Tracking\ITrackIntegration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">

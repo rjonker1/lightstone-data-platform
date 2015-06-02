@@ -14,7 +14,9 @@ namespace Lim.Domain.Entities.Repository
         IQueryable<T> GetAll<T>() where T : class;
         void Save<T>(T entity) where T : class;
         void SaveOrUpdate<T>(T entity) where T : class;
+        void Update<T>(T entity) where T : class;
         void Merge<T>(T entity) where T : class;
+        void Flush();
     }
 
     public class LimRepository : IAmRepository
@@ -47,6 +49,11 @@ namespace Lim.Domain.Entities.Repository
             _session.Save(entity);
         }
 
+        public void Update<T>(T entity) where T : class
+        {
+            _session.Update(entity);
+        }
+
         public void SaveOrUpdate<T>(T entity) where T : class
         {
             _session.SaveOrUpdate(entity);
@@ -59,6 +66,11 @@ namespace Lim.Domain.Entities.Repository
         public void Merge<T>(T entity) where T : class
         {
             _session.Merge(entity);
+        }
+
+        public void Flush()
+        {
+            _session.Flush();
         }
     }
 }

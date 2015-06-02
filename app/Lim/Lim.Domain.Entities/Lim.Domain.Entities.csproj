@@ -84,6 +84,7 @@
     <Compile Include="IntegrationClients.cs" />
     <Compile Include="IntegrationContracts.cs" />
     <Compile Include="IntegrationPackages.cs" />
+    <Compile Include="IntegrationTracking.cs" />
     <Compile Include="IntegrationType.cs" />
     <Compile Include="Maps\ActionTypeMap.cs" />
     <Compile Include="Maps\AuditApiIntegrationMap.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Maps\IntegrationClientsMap.cs" />
     <Compile Include="Maps\IntegrationContractsMap.cs" />
     <Compile Include="Maps\IntegrationPackagesMap.cs" />
+    <Compile Include="Maps\IntegrationTrackingMap.cs" />
     <Compile Include="Maps\IntegrationTypeMap.cs" />
     <Compile Include="Maps\PackageResponsesMap.cs" />
     <Compile Include="PackageResponses.cs" />
