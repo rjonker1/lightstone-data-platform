@@ -13,7 +13,7 @@ namespace Lim.Domain.Dto
         }
 
         private PackageTransactionDto(Guid packageId, Guid userId, string username, Guid contractId, int accountNumber, DateTime responseDate,
-            Guid requestId, string payload, bool hasResponse)
+            Guid requestId, string payload, bool hasResponse, DateTime commitDate)
         {
             PackageId = packageId;
             UserId = userId;
@@ -25,13 +25,14 @@ namespace Lim.Domain.Dto
             //Report = hasResponse ? JsonConvert.DeserializeObject(payload) : new {};
             Report = hasResponse ? payload : "[{}]";
             HasResponse = hasResponse;
+            CommitDate = commitDate;
         }
 
         public static PackageTransactionDto Set(Guid packageId, Guid userId, string username, Guid contractId, int accountNumber,
             DateTime responseDate,
-            Guid requestId, string payload, bool hasResponse)
+            Guid requestId, string payload, bool hasResponse, DateTime commitDate)
         {
-            return new PackageTransactionDto(packageId, userId, username, contractId, accountNumber, responseDate, requestId, payload, hasResponse);
+            return new PackageTransactionDto(packageId, userId, username, contractId, accountNumber, responseDate, requestId, payload, hasResponse,commitDate);
         }
 
         [DataMember]
@@ -60,5 +61,8 @@ namespace Lim.Domain.Dto
 
         [DataMember]
         public bool HasResponse { get; private set; }
+
+        [DataMember]
+        public DateTime CommitDate { get; private set; }
     }
 }

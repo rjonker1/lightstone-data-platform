@@ -1,5 +1,5 @@
 ﻿using System;
-using Lim.Enums;
+using System.Collections.Generic;
 
 namespace Lim.Schedule.Core.Commands
 {
@@ -26,9 +26,12 @@ namespace Lim.Schedule.Core.Commands
             WasSuccessful = false;
         }
 
-        public void SetPayload(string payload)
+        public void SetPayload(string payload, bool successful, DateTime transactionDate)
         {
-            Payload = payload;
+            if (Payloads == null)
+                Payloads = new List<AuditPayload>();
+
+            Payloads.Add(new AuditPayload(payload, successful, transactionDate));
         }
 
         public long ClientId { get; private set; }
@@ -39,6 +42,20 @@ namespace Lim.Schedule.Core.Commands
         public bool WasSuccessful { get; private set; }
         public string Address { get; private set; }
         public string Suffix { get; private set; }
+        public IList<AuditPayload> Payloads { get; private set; }
+    }
+
+    public class AuditPayload
+    {
+        public AuditPayload(string payload, bool wasSuccessful, DateTime transactionDate)
+        {
+            Payload = payload;
+            WasSuccessful = wasSuccessful;
+            TransactionDate = wasSuccessful ? transactionDate : DateTime.MinValue;
+        }
+
         public string Payload { get; private set; }
+        public bool WasSuccessful { get; private set; }
+        public DateTime TransactionDate { get; private set; }
     }
 }

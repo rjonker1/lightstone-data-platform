@@ -134,8 +134,9 @@ namespace Lim.Schedule.Core.Handlers
                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
                             (((Enums.AuthenticationType) s.AuthenticationType)).ToString()), s.Username, s.Password,
                         s.AuthenticationKey, s.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Action).ToString()),
-                    new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction) s.IntegrationType).ToString())),
+                    new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
+                    new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction) s.IntegrationType).ToString()),
+                    new IntegrationFrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(),s.FrequencyType)),
                     new IntegrationClientIdentifier(_repository.Get<IntegrationClient>(w => w.Configuration.Id == s.Id && w.IsActive)
                         .Select(
                             c =>
@@ -165,8 +166,9 @@ namespace Lim.Schedule.Core.Handlers
                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
                             (((Enums.AuthenticationType) s.AuthenticationType)).ToString()), s.Username, s.Password,
                         s.AuthenticationKey, s.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Action).ToString()),
-                    new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction) s.IntegrationType).ToString())),
+                    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Action).ToString(),s.Action),
+                    new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction) s.IntegrationType).ToString()),
+                    new IntegrationFrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(),s.FrequencyType)),
                     new IntegrationClientIdentifier(_repository.Get<IntegrationClient>(w => w.Configuration.Id == s.Id && w.IsActive)
                         .Select(
                             c =>

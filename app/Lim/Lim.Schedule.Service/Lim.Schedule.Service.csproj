@@ -104,6 +104,7 @@
     <Compile Include="Installers\HandlerInstaller.cs" />
     <Compile Include="Installers\JobInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
+    <Compile Include="Installers\TrackingInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Jobs\Integrations\Custom\Api\PullJob.cs" />
     <Compile Include="Jobs\Integrations\Custom\Api\PushJob.cs" />

@@ -27,20 +27,23 @@ namespace Lim.Schedule.Core.Audits
             _log.Info("Storing Integration Audit information for an API Integration to the database");
             try
             {
-                var audit = new AuditApiIntegration()
+                foreach (var payload in command.Payloads)
                 {
-                    ClientId = command.ClientId,
-                    ConfigurationId = command.ConfigurationId,
-                    ActionType = command.Action,
-                    IntegrationType = command.Type,
-                    Date = DateTime.UtcNow,
-                    WasSuccessful = command.WasSuccessful,
-                    Address = command.Address,
-                    Suffix = command.Suffix,
-                    Payload = command.Payload ?? string.Empty
+                    var audit = new AuditApiIntegration()
+                    {
+                        ClientId = command.ClientId,
+                        ConfigurationId = command.ConfigurationId,
+                        ActionType = command.Action,
+                        IntegrationType = command.Type,
+                        Date = DateTime.UtcNow,
+                        WasSuccessful = payload.WasSuccessful,
+                        Address = command.Address,
+                        Suffix = command.Suffix,
+                        Payload = payload.Payload ?? string.Empty
 
-                };
-                _repository.Save(audit);
+                    };
+                    _repository.Save(audit);
+                }
             }
             catch (Exception ex)
             {

@@ -93,7 +93,7 @@ namespace Lim.Schedule.Core.Identifiers
                             s =>
                                 PackageTransactionDto.Set(s.PackageId, s.Userid, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate,
                                     s.RequestId,
-                                    GetPayload(s.Payload, s.HasResponse), s.HasResponse)));
+                                    GetPayload(s.Payload, s.HasResponse), s.HasResponse,s.CommitDate.HasValue ? s.CommitDate.Value : DateTime.MinValue)));
                 }
             });
 
@@ -107,7 +107,7 @@ namespace Lim.Schedule.Core.Identifiers
             return Encoding.UTF8.GetString(payload);
         }
 
-        public void Push(AuditIntegrationCommand audit)
+        public void Push(AuditIntegrationCommand audit, ILog log)
         {
             if (!_transaction.Any())
                 return;
@@ -117,10 +117,27 @@ namespace Lim.Schedule.Core.Identifiers
                 throw new Exception(string.Format("Push Client for Authentication Type {0} could not be found", Configuration.Authentication.AuthenticationType.Type));
             foreach (var packageTransaction in _transaction)
             {
-                client.Value(Configuration).Post(packageTransaction);
-                audit.SetPayload(JsonConvert.SerializeObject(packageTransaction));
+                try
+                {
+                    client.Value(Configuration).Post(packageTransaction);
+                    audit.SetPayload(JsonConvert.SerializeObject(packageTransaction),true, packageTransaction.CommitDate);
+                }
+                catch (Exception ex)
+                {
+                    log.ErrorFormat("An error occurred executing API configuration because of {0}", ex, ex.Message);
+                    audit.SetPayload(JsonConvert.SerializeObject(packageTransaction), false, DateTime.MinValue);
+                }
             }
-            
+        }
+
+        //public DateTime GetTransactionsMaxDate()
+        //{
+        //    return _transaction.Max(m => m.CommitDate);
+        //}
+
+        public long GetTransactionCount()
+        {
+            return _transaction.Count;
         }
 
         private readonly IDictionary<Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>> _pushClients = new Dictionary
@@ -199,13 +216,14 @@ namespace Lim.Schedule.Core.Identifiers
     {
 
         public ApiConfigurationIdentifier(string baseAddress, string suffix, ApiAuthenticationIdentifier authentication,
-            IntegrationActionIdentifier action, IntegrationTypeIdentifier type)
+            IntegrationActionIdentifier action, IntegrationTypeIdentifier type, IntegrationFrequencyIdentifier frequency)
         {
             BaseAddress = baseAddress;
             Suffix = suffix;
             Authentication = authentication;
             Action = action;
             Type = type;
+            Frequency = frequency;
         }
 
         [DataMember]
@@ -222,6 +240,9 @@ namespace Lim.Schedule.Core.Identifiers
 
         [DataMember]
         public IntegrationTypeIdentifier Type { get; private set; }
+
+        [DataMember]
+        public IntegrationFrequencyIdentifier Frequency { get; private set; }
 
     }
 }
