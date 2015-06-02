@@ -14,28 +14,6 @@ using Newtonsoft.Json;
 namespace Lim.Schedule.Core.Identifiers
 {
     [DataContract]
-    public class ApiPullIntegration
-    {
-        public ApiPullIntegration(Guid key, ApiConfigurationIdentifier configuration, IntegrationClientIdentifier integrationClient)
-        {
-            Key = key;
-            Configuration = configuration;
-            IntegrationClient = integrationClient;
-        }
-
-        [DataMember]
-        public Guid Key { get; private set; }
-
-
-        [DataMember]
-        public ApiConfigurationIdentifier Configuration { get; private set; }
-
-        [DataMember]
-        public IntegrationClientIdentifier IntegrationClient { get; private set; }
-    }
-
-
-    [DataContract]
     public class ApiPushIntegration
     {
         public ApiPushIntegration(Guid key, long configurationId, ApiConfigurationIdentifier configuration, IntegrationClientIdentifier integrationClient, IntegrationContractIdentifier integrationContract,
@@ -49,6 +27,96 @@ namespace Lim.Schedule.Core.Identifiers
             Packages = packages;
             Client = client;
         }
+
+        private readonly IDictionary<Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>> _pushClients = new Dictionary
+            <Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>>()
+        {
+            {Enums.AuthenticationType.Basic, Basic},
+            {Enums.AuthenticationType.None, Standard},
+            {Enums.AuthenticationType.Stateless, Stateless}
+        };
+
+        private static readonly Func<ApiConfigurationIdentifier, PushClient> Standard =
+            (configuration) => PushClient.Push(configuration.BaseAddress, configuration.Suffix);
+
+        private static readonly Func<ApiConfigurationIdentifier, PushClient> Basic =
+            (configuration) =>
+                PushClient.PushWithBasic(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
+                    configuration.Authentication.AuthenticationToken, configuration.Authentication.Username, configuration.Authentication.Password);
+
+        private static readonly Func<ApiConfigurationIdentifier, PushClient> Stateless =
+            (configuration) =>
+                PushClient.PushWithStateless(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
+                    configuration.Authentication.AuthenticationToken);
+
+        private DateTime GetDateRange(IAmRepository repository)
+        {
+            var tracking = repository.Find<IntegrationTracking>(w => w.Configuration.Id == ConfigurationId);
+            return tracking == null ? DateTime.Now.AddYears(-10) : tracking.MaxTransactionDate.AddSeconds(1);
+        }
+
+        private static string GetPayload(byte[] payload, bool hasResponse)
+        {
+            if (!hasResponse || payload == null || payload.Length == 0)
+                return "[{'Error': 'Report could not be generated}]";
+
+            return Encoding.UTF8.GetString(payload);
+        }
+
+        public void Get(IAmRepository repository, ILog log)
+        {
+            _transaction = new List<PackageTransactionDto>();
+            if (!Packages.Packages.Any())
+                return;
+
+            Packages.Packages.ToList().ForEach(f =>
+            {
+                var dateRange = GetDateRange(repository);
+                var packages = repository.Get<PackageResponses>(w => w.PackageId == f.PackageId && w.ContractId == f.ContractId && w.CommitDate > dateRange).ToList();
+
+                if (packages.Any())
+                {
+                    log.InfoFormat("Found {0} Package Responses for Package Id {1} on Contract {2} to Push using API", packages.Count, f.PackageId,
+                        f.ContractId);
+                    _transaction.AddRange(
+                        packages.Select(
+                            s =>
+                                PackageTransactionDto.Set(s.PackageId, s.Userid, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate,
+                                    s.RequestId,
+                                    GetPayload(s.Payload, s.HasResponse), s.HasResponse, s.CommitDate)));
+                }
+            });
+
+        }
+
+        public void Push(AuditIntegrationCommand audit, ILog log)
+        {
+            if (!_transaction.Any())
+                return;
+
+            var client = _pushClients.FirstOrDefault(w => w.Key == (Enums.AuthenticationType)Configuration.Authentication.AuthenticationType.Id);
+            if (client.Value == null)
+                throw new Exception(string.Format("Push Client for Authentication Type {0} could not be found", Configuration.Authentication.AuthenticationType.Type));
+            foreach (var packageTransaction in _transaction)
+            {
+                try
+                {
+                    client.Value(Configuration).Post(packageTransaction);
+                    audit.SetPayload(JsonConvert.SerializeObject(packageTransaction), true, packageTransaction.CommitDate);
+                }
+                catch (Exception ex)
+                {
+                    log.ErrorFormat("An error occurred executing API configuration because of {0}", ex, ex.Message);
+                    audit.SetPayload(JsonConvert.SerializeObject(packageTransaction), false, DateTime.MinValue);
+                }
+            }
+        }
+
+        public long GetTransactionCount()
+        {
+            return _transaction.Count;
+        }
+
 
         [DataMember]
         public Guid Key { get; private set; }
@@ -72,177 +140,5 @@ namespace Lim.Schedule.Core.Identifiers
         public IntegrationPackageIdentifier Packages { get; private set; }
 
         [DataMember] private List<PackageTransactionDto> _transaction;
-
-        public void Get(IAmRepository repository, ILog log)
-        {
-            _transaction = new List<PackageTransactionDto>();
-            if (!Packages.Packages.Any())
-                return;
-
-            Packages.Packages.ToList().ForEach(f =>
-            {
-
-                var packages = repository.Get<PackageResponses>(w => w.PackageId == f.PackageId && w.ContractId == f.ContractId).ToList();
-
-                if (packages.Any())
-                {
-                    log.InfoFormat("Found {0} Package Responses for Package Id {1} on Contract {2} to Push using API", packages.Count, f.PackageId,
-                        f.ContractId);
-                    _transaction.AddRange(
-                        packages.Select(
-                            s =>
-                                PackageTransactionDto.Set(s.PackageId, s.Userid, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate,
-                                    s.RequestId,
-                                    GetPayload(s.Payload, s.HasResponse), s.HasResponse,s.CommitDate.HasValue ? s.CommitDate.Value : DateTime.MinValue)));
-                }
-            });
-
-        }
-
-        private static string GetPayload(byte[] payload, bool hasResponse)
-        {
-            if (!hasResponse || payload == null || payload.Length == 0)
-                return "[{'Error': 'Report could not be generated}]";
-
-            return Encoding.UTF8.GetString(payload);
-        }
-
-        public void Push(AuditIntegrationCommand audit, ILog log)
-        {
-            if (!_transaction.Any())
-                return;
-
-            var client = _pushClients.FirstOrDefault(w => w.Key == (Enums.AuthenticationType) Configuration.Authentication.AuthenticationType.Id);
-            if(client.Value == null)
-                throw new Exception(string.Format("Push Client for Authentication Type {0} could not be found", Configuration.Authentication.AuthenticationType.Type));
-            foreach (var packageTransaction in _transaction)
-            {
-                try
-                {
-                    client.Value(Configuration).Post(packageTransaction);
-                    audit.SetPayload(JsonConvert.SerializeObject(packageTransaction),true, packageTransaction.CommitDate);
-                }
-                catch (Exception ex)
-                {
-                    log.ErrorFormat("An error occurred executing API configuration because of {0}", ex, ex.Message);
-                    audit.SetPayload(JsonConvert.SerializeObject(packageTransaction), false, DateTime.MinValue);
-                }
-            }
-        }
-
-        //public DateTime GetTransactionsMaxDate()
-        //{
-        //    return _transaction.Max(m => m.CommitDate);
-        //}
-
-        public long GetTransactionCount()
-        {
-            return _transaction.Count;
-        }
-
-        private readonly IDictionary<Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>> _pushClients = new Dictionary
-            <Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>>()
-        {
-            {Enums.AuthenticationType.Basic, Basic},
-            {Enums.AuthenticationType.None, Standard},
-            {Enums.AuthenticationType.Stateless, Stateless}
-        };
-
-        private static readonly Func<ApiConfigurationIdentifier, PushClient> Standard =
-            (configuration) => PushClient.Push(configuration.BaseAddress, configuration.Suffix);
-
-        private static readonly Func<ApiConfigurationIdentifier, PushClient> Basic =
-            (configuration) =>
-                PushClient.PushWithBasic(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
-                    configuration.Authentication.AuthenticationToken, configuration.Authentication.Username, configuration.Authentication.Password);
-
-        private static readonly Func<ApiConfigurationIdentifier, PushClient> Stateless =
-            (configuration) =>
-                PushClient.PushWithStateless(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
-                    configuration.Authentication.AuthenticationToken);
-    }
-
-    [DataContract]
-    public class ApiAuthenticationTypeIdentifier
-    {
-        public ApiAuthenticationTypeIdentifier(int id, string type)
-        {
-            Type = type;
-            Id = id;
-        }
-
-        [DataMember]
-        public int Id { get; private set; }
-
-        [DataMember]
-        public string Type { get; private set; }
-    }
-
-    [DataContract]
-    public class ApiAuthenticationIdentifier
-    {
-        public ApiAuthenticationIdentifier(bool hasAuthentication, ApiAuthenticationTypeIdentifier authenticationType, string username,
-            string password, string authenticationKey, string authenticationToken)
-        {
-            Username = username;
-            Password = password;
-            HasAuthentication = hasAuthentication;
-            AuthenticationType = authenticationType;
-            AuthenticationKey = authenticationKey;
-            AuthenticationToken = authenticationToken;
-        }
-
-        [DataMember]
-        public bool HasAuthentication { get; private set; }
-
-        [DataMember]
-        public ApiAuthenticationTypeIdentifier AuthenticationType { get; private set; }
-
-        [DataMember]
-        public string Username { get; private set; }
-
-        [DataMember]
-        public string Password { get; private set; }
-
-        [DataMember]
-        public string AuthenticationKey { get; private set; }
-
-        [DataMember]
-        public string AuthenticationToken { get; private set; }
-    }
-
-    [DataContract]
-    public class ApiConfigurationIdentifier
-    {
-
-        public ApiConfigurationIdentifier(string baseAddress, string suffix, ApiAuthenticationIdentifier authentication,
-            IntegrationActionIdentifier action, IntegrationTypeIdentifier type, IntegrationFrequencyIdentifier frequency)
-        {
-            BaseAddress = baseAddress;
-            Suffix = suffix;
-            Authentication = authentication;
-            Action = action;
-            Type = type;
-            Frequency = frequency;
-        }
-
-        [DataMember]
-        public string BaseAddress { get; private set; }
-
-        [DataMember]
-        public string Suffix { get; private set; }
-
-        [DataMember]
-        public ApiAuthenticationIdentifier Authentication { get; private set; }
-
-        [DataMember]
-        public IntegrationActionIdentifier Action { get; private set; }
-
-        [DataMember]
-        public IntegrationTypeIdentifier Type { get; private set; }
-
-        [DataMember]
-        public IntegrationFrequencyIdentifier Frequency { get; private set; }
-
     }
 }

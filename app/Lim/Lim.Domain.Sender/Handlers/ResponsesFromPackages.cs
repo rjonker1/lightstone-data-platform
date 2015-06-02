@@ -41,7 +41,7 @@ namespace Lim.Domain.Sender.Handlers
                 Username = message.Body.Username ?? "unavailable"
             };
             _repository.Save(package);
-
+           
             _publisher.SendToBus(new PackageConfigurationMessage(message.Body.PackageId, message.Body.UserId, message.Body.ContractId,
                 message.Body.AccountNumber, message.Body.RequestId));
         }

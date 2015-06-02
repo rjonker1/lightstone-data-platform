@@ -40,21 +40,20 @@ namespace Lim.Schedule.Core.Handlers
                     f.Configuration.BaseAddress, f.Configuration.Suffix);
                 try
                 {
-
                     _log.InfoFormat("Executing Push Configuration with Key {0}", f.Key);
                     f.Get(_repository, _log);
-                    f.Push(audit,_log);
+                    f.Push(audit, _log);
                     audit.Successful();
 
-                    _tracking.Track(new TrackIntegrationCommand(audit.Payloads.Max(m => m.TransactionDate), (short) IntegrationAction.Push,
-                        (short) IntegrationType.Api, f.Configuration.Frequency.Id, audit.Payloads.Count(w => w.WasSuccessful)));
+                    if (audit.Payloads != null && audit.Payloads.Any())
+                        _tracking.Track(new TrackIntegrationCommand(audit.Payloads.Max(m => m.TransactionDate), f.ConfigurationId,
+                            audit.Payloads.Count(w => w.WasSuccessful)));
                 }
                 catch (Exception ex)
                 {
                     _log.ErrorFormat("An error occurred executing API Push configuration because of {0}", ex, ex.Message);
                     audit.Failed();
                 }
-
                 _auditLog.Audit(audit);
             });
         }

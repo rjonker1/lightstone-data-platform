@@ -5,32 +5,24 @@ namespace Lim.Schedule.Core.Commands
     public class TrackIntegrationCommand
     {
         public readonly DateTime MaxTransactionDate;
-        public readonly short Action;
-        public readonly short Type;
-        public readonly short Frequency;
-        public readonly long TransactionsIntegrated;
+        public readonly long ConfigurationId;
+        public readonly long TransactionsCount;
 
-        public TrackIntegrationCommand(DateTime maxTransactionDate, short action, short type, short frequency, long recordsIntegrated)
+        public TrackIntegrationCommand(DateTime maxTransactionDate, long configurationId, long transactionCount)
         {
             MaxTransactionDate = maxTransactionDate;
-            Action = action;
-            Type = type;
-            Frequency = frequency;
-            TransactionsIntegrated = recordsIntegrated;
+            ConfigurationId = configurationId;
+            TransactionsCount = transactionCount;
         }
     }
 
     public class GetLastTransactionDateCommand
     {
-        public readonly short Action;
-        public readonly short Type;
-        public readonly short Frequency;
+        public readonly long ConfigurationId;
 
-        public GetLastTransactionDateCommand(short action, short type, short frequency)
+        public GetLastTransactionDateCommand(long configurationId)
         {
-            Action = action;
-            Type = type;
-            Frequency = frequency;
+            ConfigurationId = configurationId;
         }
 
         public void Set(DateTime trackDate)

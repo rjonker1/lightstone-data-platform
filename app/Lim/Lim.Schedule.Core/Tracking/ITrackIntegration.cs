@@ -22,30 +22,27 @@ namespace Lim.Schedule.Core.Tracking
             _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
+
         public void Track(TrackIntegrationCommand command)
         {
-            _log.InfoFormat("Storing Tracking information for Integration Type {0} Action {1} Frequency {2}", (Enums.IntegrationType)command.Type, (Enums.IntegrationAction)command.Action, (Enums.Frequency)command.Frequency);
+            _log.InfoFormat("Storing Tracking information for Configuration {0}", command.ConfigurationId);
 
             try
             {
-                var action = _repository.Get<ActionType>(command.Action);
-                var frequency = _repository.Get<FrequencyType>(command.Frequency);
-                var type = _repository.Get<IntegrationType>(command.Type);
+                var configuration = _repository.Get<Configuration>(command.ConfigurationId);
 
-                var currentTracking =
+                var current =
                     _repository.Find<IntegrationTracking>(
-                        w => w.Action.Id == command.Action && w.Frequency.Id == command.Frequency && w.Type.Id == command.Type);
+                        w => w.Configuration.Id == configuration.Id);
 
                 var tracking = new IntegrationTracking()
                 {
-                    Id = currentTracking != null ? currentTracking.Id : 0,
-                    Action = action,
-                    Frequency = frequency,
-                    Type = type,
+                    Id = current != null ? current.Id : 0,
+                    Configuration = configuration,
                     Updated = DateTime.UtcNow,
                     MaxTransactionDate = command.MaxTransactionDate,
                     TransactionCount =
-                        currentTracking == null ? command.TransactionsIntegrated : currentTracking.TransactionCount + command.TransactionsIntegrated
+                        current == null ? command.TransactionsCount : current.TransactionCount + command.TransactionsCount
                 };
 
                 _repository.Merge(tracking);
@@ -59,18 +56,18 @@ namespace Lim.Schedule.Core.Tracking
 
         public void Get(GetLastTransactionDateCommand command)
         {
-            _log.InfoFormat("Getting Tracking information for Integration Type {0} Action {1} Frequency {2}", (Enums.IntegrationType)command.Type, (Enums.IntegrationAction)command.Action, (Enums.Frequency)command.Frequency);
+            _log.InfoFormat("Getting Tracking information for Configuration Id {0}", command.ConfigurationId);
 
             try
             {
                
                 var currentTracking =
                     _repository.Find<IntegrationTracking>(
-                        w => w.Action.Id == command.Action && w.Frequency.Id == command.Frequency && w.Type.Id == command.Type);
+                        w => w.Configuration.Id == command.ConfigurationId);
 
                 if (currentTracking == null)
                 {
-                    _log.InfoFormat("Cannot find tracking information for Integration Type {0} Action {1} Frequency {2}", (Enums.IntegrationType)command.Type, (Enums.IntegrationAction)command.Action, (Enums.Frequency)command.Frequency);
+                    _log.InfoFormat("Cannot find tracking information for Configuration with Id {0}", command.ConfigurationId);
                     throw new Exception("Tracking information not found");
                 }
 

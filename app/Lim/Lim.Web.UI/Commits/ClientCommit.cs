@@ -35,6 +35,7 @@ namespace Lim.Web.UI.Commits
                     ModifiedBy = clientDto.ModifiedBy ?? Environment.MachineName
                 };
                 _repository.Merge(client);
+                _repository.Flush();
                 return true;
             }
             catch (Exception ex)

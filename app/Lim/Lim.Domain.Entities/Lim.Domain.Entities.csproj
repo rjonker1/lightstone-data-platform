@@ -84,7 +84,7 @@
     <Compile Include="IntegrationClients.cs" />
     <Compile Include="IntegrationContracts.cs" />
     <Compile Include="IntegrationPackages.cs" />
-    <Compile Include="IntegrationTrackingApi.cs" />
+    <Compile Include="IntegrationTracking.cs" />
     <Compile Include="IntegrationType.cs" />
     <Compile Include="Maps\ActionTypeMap.cs" />
     <Compile Include="Maps\AuditApiIntegrationMap.cs" />
