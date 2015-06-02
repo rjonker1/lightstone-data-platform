@@ -45,7 +45,8 @@ namespace Lim.Domain.Entities.Repository
                         configuration.FrequencyType = frequency;
                         configuration.ActionType = action;
                         configuration.IntegrationType = integration;
-                        session.Merge(configuration);
+                        session.SaveOrUpdate(configuration);
+                        session.Flush();
 
                         if (configuration.Id == 0)
                             throw new Exception("Could not insert LIM configuration because configuration id is not valid");
@@ -59,6 +60,8 @@ namespace Lim.Domain.Entities.Repository
 
                         apiConfiguration.Id = currentApiId;
                         session.Merge(apiConfiguration);
+                        session.Flush();
+                        
 
                         var integrationClients = session.Query<IntegrationClient>().Where(w => w.Configuration.Id == configuration.Id);
                         var integrationContracts = session.Query<IntegrationContract>().Where(w => w.Configuration.Id == configuration.Id);

@@ -1,8 +1,10 @@
-﻿@using System.Collections.Generic
+﻿@using System
+@using System.Collections.Generic
 @using System.Linq
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Lim.Web.UI.Models.Api.PushConfiguration>
 @{
     Layout = "_Layout.cshtml";
+    var contracts = Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts);
 }
 <body class="skin-blue">
     <div class="wrapper">
@@ -50,7 +52,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Clients / Customers</label>
-                                    <select id="IntegrationClients" name="IntegrationClients" required data-placeholder="Select Integration Clients ..." class="chosen-select form-control" multiple>
+                                    <select id="integrationClients" name="IntegrationClients" required data-placeholder="Select Integration Clients ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
                                         @foreach (var client in Model.SelectableDataPlatformClients)
                                         {
@@ -61,23 +63,25 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Contracts</label>
-                                    <select id="IntegrationContracts" name="IntegrationContracts" required data-placeholder="Select Contract ..." class="chosen-select form-control" multiple>
+                                    <select id="integrationContracts" name="IntegrationContracts" required data-placeholder="Select Contract ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
                                         @foreach (var contract in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts))
                                         {
+                                            var clientId = Model.SelectableDataPlatformClients != null ? Model.SelectableDataPlatformClients.FirstOrDefault(f => f.Contracts.Contains(contract)).ClientCustomerId : Guid.Empty;
                                             var isSelected = Model.IntegrationContracts != null && Model.IntegrationContracts.Contains(contract.ContractId);
-                                            <option id="@contract.ContractId" name="@contract.ContractId" selected="@isSelected" value="@contract.ContractId">@contract.Name</option>
+                                            <option id="@contract.ContractId" data-clientid="@clientId" name="@contract.ContractId" selected="@isSelected" value="@contract.ContractId">@contract.Name</option>
                                         }
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Packages / Products</label>
-                                    <select id="IntegrationPackages" name="IntegrationPackages" required data-placeholder="Select Packages ..." class="chosen-select form-control" multiple>
+                                    <select id="integrationPackages" name="IntegrationPackages" required data-placeholder="Select Packages ..." class="chosen-select form-control" multiple>
                                         <option value=""></option>
-                                        @foreach (var package in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts).SelectMany(s => s.Packages))
+                                        @foreach (var package in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts).SelectMany(s => s.Packages).Select(s => new { PackageId = s.PackageId, Name = s.Name }).Distinct())
                                         {
+                                            var contractId = contracts.FirstOrDefault(f => f.Packages.Select(s => s.PackageId).Contains(package.PackageId)).ContractId;
                                             var isSelected = Model.IntegrationPackages != null && Model.IntegrationPackages.Contains(package.PackageId);
-                                            <option id="@package.PackageId" selected="@isSelected" value="@package.PackageId">@package.Name</option>
+                                            <option id="@package.PackageId" data-contractid="@contractId" selected="@isSelected" value="@package.PackageId">@package.Name</option>
                                         }
                                     </select>
                                 </div>
@@ -102,10 +106,10 @@
                                         <label>Authentication Types</label>
                                         <select id="authentication-type" name="AuthenticationType" class="chosen-select form-control">
                                             @foreach (var type in Model.Authentication)
-                                        {
-                                            var isSelected = type.Id == Model.AuthenticationType;
+                                            {
+                                                var isSelected = type.Id == Model.AuthenticationType;
                                                 <option id="@type.Id" selected="@isSelected" value="@type.Id">@type.Name</option>
-                                        }
+                                            }
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -225,6 +229,34 @@
                 }
 
             });
+
+            //$('#integrationClients').change(function () {
+            //    var id = $(this).val();
+            //    $("#integrationContracts > option").each(function () {
+            //        var clientId = $(this).data('clientid');
+            //        if (clientId == id && clientId != undefined) {
+            //            alert('enabling');
+            //            $(this).prop('disabled', false);
+            //        }
+            //        if(clientId != id && clientId != undefined){
+            //            alert('disabling');
+            //            $(this).hide();
+            //            $(this).prop('disabled', true);
+            //        }
+            //    });
+            //});
+
+            //$('#integrationContracts').change(function() {
+            //    var id = $(this).val();
+            //    $('#integrationPackages > option').each(function() {
+            //        var contractId = $(this).data('contractid');
+            //        if (contractId == id) {
+            //            $(this).prop('disabled', false);
+            //        } else {
+            //            $(this).prop('disabled', true);
+            //        }
+            //    });
+            //});
         })
     </script>
 </body>
