@@ -26,7 +26,6 @@ namespace UserManagement.Domain.Dtos
         public string PlatformStatusValue { get; set; }
         public Guid BillingId { get; set; }
         public string BillingCompanyRegistration { get; set; }
-        public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingPastelId { get; set; }
         public string BillingVatNumber { get; set; }
         [Required]
@@ -35,9 +34,14 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Account contact name is required")]
         public string BillingAccountContactName { get; set; }
+        public string BillingAccountContactNumber { get; set; }
+        public string BillingAccountContactEmail { get; set; }
         [Required]
         [Display(Name = "Payment type is required")]
         public Guid? BillingPaymentTypeId { get; set; }
+        public DateTime? BillingDebitOrderDate { get; set; }
+        public string BillingDebitOrderAccountOwner { get; set; }
+        public string BillingDebitOrderAccountNumber { get; set; }
         public string ContactDetailContactNumber { get; set; }
         public ContactType ContactDetailContactType { get; set; }
         [Required]

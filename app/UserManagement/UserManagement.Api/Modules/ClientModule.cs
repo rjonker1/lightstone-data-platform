@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
-using DataPlatform.Shared.Messaging.Billing.Messages;
-using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
@@ -21,7 +18,7 @@ namespace UserManagement.Api.Modules
 {
     public class ClientModule : SecureModule
     {
-        public ClientModule(IBus bus, IAdvancedBus eBus, IClientRepository clients, CurrentNancyContext currentNancyContext)
+        public ClientModule(IBus bus, IClientRepository clients, CurrentNancyContext currentNancyContext)
         {
             Get["/Clients"] = _ =>
             {
@@ -34,7 +31,7 @@ namespace UserManagement.Api.Modules
                 if (limit == null) limit = 10;
 
                 var model = this.Bind<DataTablesViewModel>();
-                var dto = (IEnumerable<ClientDto>) Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(clients);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto = Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(clients);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });

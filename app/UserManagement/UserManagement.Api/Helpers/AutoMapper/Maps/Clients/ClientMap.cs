@@ -23,6 +23,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Clients
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
                 .ForMember(dest => dest.CommercialState, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<CommercialState>>().Get(x.CommercialStateId)))
                 //.ForMember(dest => dest.Contracts, opt => opt.MapFrom(x => x.ContractIds != null ? new HashSet<Contract>(x.ContractIds.Select(id => (Contract)Mapper.Map<Tuple<Guid, Type>, Entity>(new Tuple<Guid, Type>(id, typeof(Contract))))) : Enumerable.Empty<Contract>()))
+                .ForMember(dest => dest.Billing, opt => opt.MapFrom(x => Mapper.Map<ClientDto, Billing>(x)))
                 .ForMember(dest => dest.ContactDetail, opt => opt.MapFrom(x => Mapper.Map<ClientDto, ContactDetail>(x)))
                 .ForMember(dest => dest.ClientUsers, opt => opt.Ignore());
         }

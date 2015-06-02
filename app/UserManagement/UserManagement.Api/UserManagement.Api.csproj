@@ -668,6 +668,7 @@
     </Content>
     <Content Include="Views\Customer\PhysicalAddress.cshtml" />
     <Content Include="Views\Customer\PostalAddress.cshtml" />
+    <Content Include="Views\Client\Billing.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
