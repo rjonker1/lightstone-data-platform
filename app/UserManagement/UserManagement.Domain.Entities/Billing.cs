@@ -13,6 +13,8 @@ namespace UserManagement.Domain.Entities
         public virtual string AccountContactEmail { get; set; }
         public virtual string CompanyRegistration { get; set; }
         public virtual DateTime? DebitOrderDate { get; set; }
+        public virtual string DebitOrderAccountOwner { get; set; }
+        public virtual string DebitOrderAccountNumber { get; set; }
         public virtual string PastelId { get; set; }
         public virtual string VatNumber { get; set; }
         public virtual PaymentType PaymentType { get; set; }
