@@ -35,6 +35,8 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Account contact name is required")]
         public string BillingAccountContactName { get; set; }
+        public string BillingAccountContactNumber { get; set; }
+        public string BillingAccountContactEmail { get; set; }
         [Required]
         [Display(Name = "Payment type is required")]
         public Guid? BillingPaymentTypeId { get; set; }

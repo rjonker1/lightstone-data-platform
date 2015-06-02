@@ -9,8 +9,10 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
         public void Override(AutoMapping<Client> mapping)
         {
             mapping.References(x => x.ClientAccountNumber).Cascade.Persist();
-            mapping.References(x => x.ContactDetail).Cascade.SaveUpdate();
             mapping.HasMany(x => x.ClientUsers).Cascade.SaveUpdate();
+            mapping.References(x => x.CommercialState).Cascade.SaveUpdate();
+            mapping.References(x => x.Billing).Cascade.SaveUpdate();
+            mapping.References(x => x.ContactDetail).Cascade.SaveUpdate();
             mapping.HasManyToMany(x => x.Contracts).Cascade.SaveUpdate().Table("ClientContract");
         }
     }

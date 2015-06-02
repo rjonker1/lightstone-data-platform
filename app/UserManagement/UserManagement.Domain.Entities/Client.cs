@@ -15,6 +15,8 @@ namespace UserManagement.Domain.Entities
                 return _clientAccountNumber ?? (_clientAccountNumber = new ClientAccountNumber());
             }
         }
+
+        public virtual Billing Billing { get; protected internal set; }
         public virtual CommercialState CommercialState { get; protected internal set; }
         public virtual ContactDetail ContactDetail { get; protected internal set; }
         public virtual ISet<Contract> Contracts { get; protected internal set; }

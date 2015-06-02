@@ -1,7 +1,7 @@
 ﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
 
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Billing Info", "", "fa fa-money", Model))
