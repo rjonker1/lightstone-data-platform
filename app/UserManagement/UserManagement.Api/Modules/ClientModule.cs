@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using AutoMapper;
 using Nancy;
 using Nancy.ModelBinding;
@@ -38,6 +39,8 @@ namespace UserManagement.Api.Modules
             };
 
             Get["/Clients/Add"] = parameters => View["Save", new ClientDto()];
+
+            Get["/Clients/ImportUsers"] = _ => View["ImportClientUser"];
 
             Post["/Clients"] = _ =>
             {
