@@ -48,7 +48,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         {
             try
             {
-                _vinNumber = GetVinNumber(response.ToList(), _dataProvider.GetRequest<IAmLightstoneAutoRequest>());
+                _vinNumber = HandleRequest.GetVinNumber(response.ToList(), _dataProvider.GetRequest<IAmLightstoneAutoRequest>());
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
                     .ForDatabaseType(), new { _dataProvider });
@@ -112,23 +112,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     .BuildValuation();
         }
 
-        private static string GetVinNumber(IList<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
-        {
-            return string.IsNullOrEmpty(GetValue(request.VinNumber))
-                ? ContinueWithIvid(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
-                : GetValue(request.VinNumber);
-        }
-
-        private static string GetValue(IAmRequestField field)
-        {
-            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
-        }
-
-        private static bool ContinueWithIvid(IList<IPointToLaceProvider> response)
-        {
-            return response.OfType<IProvideDataFromIvid>().Any() && response.OfType<IProvideDataFromIvid>().First() != null &&
-                       response.OfType<IProvideDataFromIvid>().First().Handled;
-        }
+        
 
     }
 }

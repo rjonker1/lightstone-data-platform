@@ -103,6 +103,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Infrastructure\CallLightstoneAutoDataProvider.cs" />
+    <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\HandleLightstoneAutoSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneAuto.cs" />
