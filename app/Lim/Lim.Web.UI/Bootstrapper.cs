@@ -37,6 +37,7 @@ namespace Lim.Web.UI
             container.Register<IHandleGettingConfiguration, GetConfigurationHandler>();
             container.Register<IHandleSavingConfiguration, SavingConfigurationHandler>();
             container.Register<IHandleSavingClient, SavingClientHandler>();
+            container.Register<IHandleGettingMetadata, GetMetadataHandler>();
             container.Register<IPersistObject<PushConfiguration>, ApiPushCommit>();
             container.Register<IPersistObject<ClientDto>, ClientCommit>();
         }

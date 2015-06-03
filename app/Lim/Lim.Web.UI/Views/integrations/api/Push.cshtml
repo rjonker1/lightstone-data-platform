@@ -1,6 +1,4 @@
-﻿@using System
-@using System.Collections.Generic
-@using System.Linq
+﻿@using System.Linq
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Lim.Web.UI.Models.Api.PushConfiguration>
 @{
     Layout = "_Layout.cshtml";
@@ -67,9 +65,8 @@
                                         <option value=""></option>
                                         @foreach (var contract in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts))
                                         {
-                                            var clientId = Model.SelectableDataPlatformClients != null ? Model.SelectableDataPlatformClients.FirstOrDefault(f => f.Contracts.Contains(contract)).ClientCustomerId : Guid.Empty;
                                             var isSelected = Model.IntegrationContracts != null && Model.IntegrationContracts.Contains(contract.ContractId);
-                                            <option id="@contract.ContractId" data-clientid="@clientId" name="@contract.ContractId" selected="@isSelected" value="@contract.ContractId">@contract.Name</option>
+                                            <option id="@contract.ContractId" name="@contract.ContractId" selected="@isSelected" value="@contract.ContractId">@contract.Name</option>
                                         }
                                     </select>
                                 </div>
@@ -79,9 +76,8 @@
                                         <option value=""></option>
                                         @foreach (var package in Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts).SelectMany(s => s.Packages).Select(s => new { PackageId = s.PackageId, Name = s.Name }).Distinct())
                                         {
-                                            var contractId = contracts.FirstOrDefault(f => f.Packages.Select(s => s.PackageId).Contains(package.PackageId)).ContractId;
                                             var isSelected = Model.IntegrationPackages != null && Model.IntegrationPackages.Contains(package.PackageId);
-                                            <option id="@package.PackageId" data-contractid="@contractId" selected="@isSelected" value="@package.PackageId">@package.Name</option>
+                                            <option id="@package.PackageId" selected="@isSelected" value="@package.PackageId">@package.Name</option>
                                         }
                                     </select>
                                 </div>
@@ -188,6 +184,11 @@
     <script type="text/javascript">
         $(function() {
             //$('#frequencytime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' });
+
+            @*var packages =  @Html.Raw(new JavaScriptSerializer().Serialize(Model.SelectableDataPlatformClients.Select(s => s.Contracts)));
+            var contracts = @Html.Raw(new JavaScriptSerializer().Serialize(Model.SelectableDataPlatformClients));*@
+
+
             $('#frequencytime').timepicker();
             var config = {
                 '.chosen-select': {},
@@ -199,13 +200,13 @@
             for (var selector in config) {
                 $(selector).chosen(config[selector]);
             }
-            
+
             if ($('#HasAuthentication').is(':checked')) {
                 $('.section-authentication').fadeIn('slow');
             } else {
                 $('.section-authentication').fadeOut('slow');
             }
-            
+
             if ($('#frequencyType').find(':selected').data('name') == 'Custom') {
                 $('#custom-time-picker').fadeIn('slow');
             } else {
@@ -229,6 +230,30 @@
                 }
 
             });
+
+            //$('#integrationClients').change(function() {
+            //    var id = $(this).val();
+            //    var clientContracts = $.grep(contracts, function(e) {
+            //        alert("client id " + id);
+            //        return e.clientCustomerId = id;
+            //    });
+            //    $.each(clientContracts, function(client, clientContract) {
+
+            //        $.each(clientContract.contracts, function(clientid, contract) {
+            //            alert(contract.contractId);
+            //            alert(contract.name);
+            //            $('#integrationContracts').append($("<option></option>")
+            //                .attr("value", contract.contractId)
+            //                .text(contract.name));
+            //        });
+            //        //alert(contract.contractId);
+            //        //alert(contract.name);
+            //        //$('#integrationContracts').append($("<option></option>")
+            //        //    .attr("value", contract.contractId)
+            //        //    .text(contract.name));
+            //    });
+
+            //});
 
             //$('#integrationClients').change(function () {
             //    var id = $(this).val();

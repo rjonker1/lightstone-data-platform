@@ -11,17 +11,9 @@ namespace Lim.Web.UI.Modules
     {
         public ClientModule(IHandleGettingIntegrationClient client, IHandleSavingClient save)
         {
-            Get["/client/new"] = _ =>
-            {
-                var model = ClientDto.Create();
-                return View["clients/client", model];
-            };
+            Get["/client/new"] = _ => View["clients/client", ClientDto.Create()];
 
-            Get["client/edit/{id}"] = _ =>
-            {
-                var model = LimClientView.Existing(client, new GetIntegrationClient(_.Id));
-                return View["clients/client", model];
-            };
+            Get["client/edit/{id}"] = _ => View["clients/client", LimClientView.Existing(client, new GetIntegrationClient(_.Id))];
 
             Post["/client/save"] = _ =>
             {
@@ -30,11 +22,7 @@ namespace Lim.Web.UI.Modules
                 return Response.AsRedirect("/client/view/all");
             };
 
-            Get["client/view/all"] = _ =>
-            {
-                var model = LimClientView.Get(client);
-                return View["/clients/clients", model];
-            };
+            Get["client/view/all"] = _ => View["/clients/clients", LimClientView.Get(client)];
         }
     }
 }

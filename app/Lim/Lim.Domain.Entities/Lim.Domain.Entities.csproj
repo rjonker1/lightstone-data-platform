@@ -98,7 +98,9 @@
     <Compile Include="Maps\IntegrationPackagesMap.cs" />
     <Compile Include="Maps\IntegrationTrackingMap.cs" />
     <Compile Include="Maps\IntegrationTypeMap.cs" />
+    <Compile Include="Maps\PackageMetadataMap.cs" />
     <Compile Include="Maps\PackageResponsesMap.cs" />
+    <Compile Include="PackageMetadata.cs" />
     <Compile Include="PackageResponses.cs" />
     <Compile Include="Repository\IAmRepository.cs" />
     <Compile Include="Repository\ISaveApiConfiguration.cs" />

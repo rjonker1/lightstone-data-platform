@@ -24,6 +24,7 @@ namespace Lim.Domain.Entities.Factory
                 .Mappings(m => m.FluentMappings.Add<Maps.PackageResponsesMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.AuditApiIntegrationMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.IntegrationTrackingMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.PackageMetadataMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false,true))
                 .BuildSessionFactory();
         }
@@ -47,6 +48,7 @@ namespace Lim.Domain.Entities.Factory
                 .Mappings(m => m.FluentMappings.Add<Maps.PackageResponsesMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.AuditApiIntegrationMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.IntegrationTrackingMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.PackageMetadataMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, true))
                 .BuildConfiguration();
         }

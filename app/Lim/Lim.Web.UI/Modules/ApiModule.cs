@@ -11,7 +11,7 @@ namespace Lim.Web.UI.Modules
     public class ApiModule : NancyModule
     {
         public ApiModule(IHandleGettingConfiguration setup, IHandleSavingConfiguration save, IHandleGettingIntegrationClient client,
-            IUserManagementApiClient api, IHandleGettingDataPlatformClient dataPlatform)
+            IUserManagementApiClient api, IHandleGettingDataPlatformClient dataPlatform, IHandleGettingMetadata metadata)
         {
             Get["/integrations/for/api/push"] = _ =>
             {
@@ -67,10 +67,13 @@ namespace Lim.Web.UI.Modules
                 return View["integrations/api/pull", model];
             };
 
-            Get["/integrations/for/api/configurations"] = _ =>
+            Get["/integrations/for/api/configurations"] = _ => View["integrations/api/configurations", ApiConfiguration.Get(setup, client)];
+
+            Get["/integrations/for/api/metadata/push"] = _ =>
             {
-                var model = ApiConfiguration.Get(setup, client);
-                return View["integrations/api/configurations", model];
+                var command = new GetApiResponseMetadataCommand();
+                metadata.Handle(command);
+                return View["integrations/api/pushmetadata", command.Metadata];
             };
         }
     }
