@@ -2,7 +2,7 @@ using System;
 namespace Lim.Domain.Entities {
     
     public class PackageResponses {
-        public virtual long Id { get; protected set; }
+        public virtual long Id { get; set; }
         public virtual System.Guid PackageId { get; set; }
         public virtual System.Guid Userid { get; set; }
         public virtual System.Guid ContractId { get; set; }

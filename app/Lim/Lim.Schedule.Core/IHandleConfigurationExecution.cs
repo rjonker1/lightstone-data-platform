@@ -6,5 +6,6 @@ namespace Lim.Schedule.Core
     {
         void Handle(ExecuteApiPushConfigurationCommand command);
         void Handle(ExecuteApiPullConfigurationCommand command);
+        bool IsHandled { get; }
     }
 }

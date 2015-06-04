@@ -48,5 +48,17 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _response.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
         }
 
+        [Observation]
+        public void lace_lightstone_property_response_should_have_property_information()
+        {
+            _response.OfType<IProvideDataFromLightstoneProperty>().First().PropertyInformation.Count().ShouldEqual(1);
+        }
+
+        [Observation]
+        public void lace_lightstone_property_response_should_have_property_buyers_name()
+        {
+            _response.OfType<IProvideDataFromLightstoneProperty>().First().PropertyInformation.First().BuyerName.ShouldEqual("WOOLFSON MURRAY GRANT");
+        }
+
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Common.Logging;
+using Lim.Domain.Entities;
 using Lim.Domain.Entities.Repository;
 using Lim.Enums;
 using Lim.Schedule.Core.Audits;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Tracking;
+using IntegrationType = Lim.Enums.IntegrationType;
 
 namespace Lim.Schedule.Core.Handlers
 {
@@ -41,7 +43,8 @@ namespace Lim.Schedule.Core.Handlers
                 try
                 {
                     _log.InfoFormat("Executing Push Configuration with Key {0}", f.Key);
-                    f.Get(_repository, _log);
+
+                    f.Get(_repository, GetDateRange(f.ConfigurationId));
                     f.Push(audit, _log);
                     audit.Successful();
 
@@ -56,11 +59,23 @@ namespace Lim.Schedule.Core.Handlers
                 }
                 _auditLog.Audit(audit);
             });
+
+            IsHandled = true;
         }
+
+        private DateTime GetDateRange(long configurationId)
+        {
+            var tracking = _repository.Find<IntegrationTracking>(w => w.Configuration.Id == configurationId);
+            return tracking == null ? DateTime.Now.AddYears(-10) : tracking.MaxTransactionDate.AddSeconds(1);
+        }
+
+
 
         public void Handle(ExecuteApiPullConfigurationCommand command)
         {
             throw new NotImplementedException();
         }
+
+        public bool IsHandled { get; private set; }
     }
 }

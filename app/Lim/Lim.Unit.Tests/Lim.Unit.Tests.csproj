@@ -33,6 +33,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net1211, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -52,6 +68,11 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Jobs\Api\when_pushing_always_on_api_job.cs" />
+    <Compile Include="Jobs\Api\when_pushing_every_minute_api_job.cs" />
+    <Compile Include="Jobs\Api\when_pushing_hourly_api_job.cs" />
+    <Compile Include="Jobs\Api\when_pushing_daily_api_job.cs" />
+    <Compile Include="Jobs\Api\when_pushing_cusom_api_job.cs" />
     <Compile Include="when_pushing_integration_to_api.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,9 +97,17 @@
       <Project>{d7b63a79-2bc8-4bb2-9510-322c8b5d9efa}</Project>
       <Name>Lim.Push</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lim.Schedule.Core\Lim.Schedule.Core.csproj">
+      <Project>{c2001d8a-5cc6-459c-b8fd-3dc87399f1ee}</Project>
+      <Name>Lim.Schedule.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Test.Helper\Lim.Test.Helper.csproj">
       <Project>{87a87c68-50ff-4df7-8318-ad793433b80e}</Project>
       <Name>Lim.Test.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

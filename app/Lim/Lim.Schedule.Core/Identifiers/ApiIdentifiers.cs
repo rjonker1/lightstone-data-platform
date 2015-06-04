@@ -16,6 +16,7 @@ namespace Lim.Schedule.Core.Identifiers
     [DataContract]
     public class ApiPushIntegration
     {
+        private readonly ILog _log = LogManager.GetLogger<ApiPushIntegration>();
         public ApiPushIntegration(Guid key, long configurationId, ApiConfigurationIdentifier configuration, IntegrationClientIdentifier integrationClient, IntegrationContractIdentifier integrationContract,
             IntegrationPackageIdentifier packages, ClientIdentifier client)
         {
@@ -49,11 +50,11 @@ namespace Lim.Schedule.Core.Identifiers
                 PushClient.PushWithStateless(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
                     configuration.Authentication.AuthenticationToken);
 
-        private DateTime GetDateRange(IAmRepository repository)
-        {
-            var tracking = repository.Find<IntegrationTracking>(w => w.Configuration.Id == ConfigurationId);
-            return tracking == null ? DateTime.Now.AddYears(-10) : tracking.MaxTransactionDate.AddSeconds(1);
-        }
+        //private DateTime GetDateRange(IAmRepository repository)
+        //{
+        //    var tracking = repository.Find<IntegrationTracking>(w => w.Configuration.Id == ConfigurationId);
+        //    return tracking == null ? DateTime.Now.AddYears(-10) : tracking.MaxTransactionDate.AddSeconds(1);
+        //}
 
         private static string GetPayload(byte[] payload, bool hasResponse)
         {
@@ -63,7 +64,7 @@ namespace Lim.Schedule.Core.Identifiers
             return Encoding.UTF8.GetString(payload);
         }
 
-        public void Get(IAmRepository repository, ILog log)
+        public void Get(IAmRepository repository, DateTime dateRange)
         {
             _transaction = new List<PackageTransactionDto>();
             if (!Packages.Packages.Any())
@@ -71,12 +72,11 @@ namespace Lim.Schedule.Core.Identifiers
 
             Packages.Packages.ToList().ForEach(f =>
             {
-                var dateRange = GetDateRange(repository);
                 var packages = repository.Get<PackageResponses>(w => w.PackageId == f.PackageId && w.ContractId == f.ContractId && w.CommitDate > dateRange).ToList();
 
                 if (packages.Any())
                 {
-                    log.InfoFormat("Found {0} Package Responses for Package Id {1} on Contract {2} to Push using API", packages.Count, f.PackageId,
+                    _log.InfoFormat("Found {0} Package Responses for Package Id {1} on Contract {2} to Push using API", packages.Count, f.PackageId,
                         f.ContractId);
                     _transaction.AddRange(
                         packages.Select(
