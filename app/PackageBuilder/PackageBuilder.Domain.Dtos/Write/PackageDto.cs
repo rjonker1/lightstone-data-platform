@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Domain.Dtos.Write
@@ -11,7 +10,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         public string Name { get; set; }
         public string Description { get; set; }
         public string Notes { get; set; }
-        public IEnumerable<Industry> Industries { get; set; }
+        public IEnumerable<IndustryDto> Industries { get; set; }
         public int Version { get; set; }
         public decimal DisplayVersion { get; set; }
         public State State { get; set; }

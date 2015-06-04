@@ -266,9 +266,9 @@
                             </div>
                             <div class="col-lg-12">
                                 <div ui-tree ng-model="dataProvsPkg">
-                                    <div ng-repeat="providers in dataProvsPkg.Package">
-                                        <ol ui-tree-nodes="" ng-model="providers">
-                                            <li ng-repeat="provider in providers" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
+                                    <div ng-repeat="(key,value) in filterDataProviders(dataProvsPkg.Package)">
+                                        <ol ui-tree-nodes="" ng-model="value">
+                                            <li ng-repeat="provider in value" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
                                         </ol>
                                     </div>
                                 </div>

@@ -9,7 +9,7 @@ namespace PackageBuilder.Infrastructure.NHibernate.MappingOverrides
         public void Override(AutoMapping<Package> mapping)
         {
             mapping.Map(x => x.DisplayVersion).Scale(1);
-            //mapping.HasManyToMany(x => x.Industries).Table("PackageIndustries").ParentKeyColumn("PackageId").ChildKeyColumn("IndustryId");
+            mapping.HasManyToMany(x => x.Industries).Cascade.SaveUpdate().Table("PackageIndustry");
         }
     }
 }

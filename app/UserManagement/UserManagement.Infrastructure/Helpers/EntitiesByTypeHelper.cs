@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Castle.Windsor;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers;
+using FluentNHibernate.Utils;
+using NHibernate.Criterion;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
+using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Helpers
 {
@@ -17,7 +21,7 @@ namespace UserManagement.Infrastructure.Helpers
         IQueryable<ValueEntity> GetValueEntities(Type type);
         IQueryable<ValueEntity> GetValueEntities(Type type, string value);
         PagedList<ValueEntity> GetValueEntities(Type type, string value, int pageIndex, int pageSize);
-
+        IQueryable<NamedEntity> GetIndustryEntities(Type type, string name, Guid[] industries);
     }
 
     public class EntitiesByTypeHelper : IRetrieveEntitiesByType
@@ -46,6 +50,12 @@ namespace UserManagement.Infrastructure.Helpers
         public IQueryable<NamedEntity> GetNamedEntities(Type type, string name)
         {
             return GetNamedEntities(type).Where(x => (x.Name + "").Trim().ToLower().StartsWith((name + "").Trim().ToLower()));
+        }
+
+        public IQueryable<NamedEntity> GetIndustryEntities(Type type, string name, Guid[] industries)
+        {
+            //return null;
+            return GetNamedEntities(type).Where(x => (x.Name + "").Trim().ToLower().StartsWith((name + "").Trim().ToLower()) && ((IIndustry)x).Industries.Any(ind => industries.Contains(ind.IndustryId)));
         }
 
         public PagedList<NamedEntity> GetNamedEntities(Type type, string name, int pageIndex, int pageSize)

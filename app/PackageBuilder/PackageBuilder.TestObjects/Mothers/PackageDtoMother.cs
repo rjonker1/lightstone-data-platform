@@ -18,7 +18,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(0.1m)
                     .With(10m, 20m)
                     .With(DateTime.UtcNow)
-                    .With(IndustryMother.Automotive)
+                    .With(new IndustryDto{ Id = Guid.NewGuid(), Name = "Finance"})
                     .With(DataProviderDtoMother.Ivid, DataProviderDtoMother.IvidTitleHolder)
                     .Build();
             }

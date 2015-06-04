@@ -9,6 +9,7 @@ using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -37,6 +38,23 @@ namespace UserManagement.Api.Modules
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
+            };
+
+            Get["/CustomerLookup/{industryIds?}/{filter:alpha}"] = parameters =>
+            {
+                var dto = Enumerable.Empty<NamedEntityDto>();
+                if (parameters.industryIds.Value != null)
+                {
+                    var industryString = (string)parameters.industryIds.Value;
+                    var industryIds = industryString.Split(',').Select(x => new Guid(x)).ToArray();
+                    var filter = (string)parameters.filter + "";
+                    var valueEntities = customers.Where(x => (x.Name + "").Trim().ToLower().StartsWith(filter.Trim().ToLower()) && x.Industries.Any(ind => industryIds.Contains(ind.IndustryId)));
+                    dto = Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(valueEntities);
+                }
+                
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
             };
 
             Get["/Customers/Add"] = parameters => View["Save", new CustomerDto()];

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Read;
 using PackageBuilder.Domain.Entities.States.Read;
 
@@ -15,9 +17,10 @@ namespace PackageBuilder.TestObjects.Builders
         private string _owner;
         private DateTime _createdDate;
         private DateTime? _editedDate;
+        private IEnumerable<Industry> _industries;
         public Package Build()
         {
-            return new Package(_id, _name, _description, _state, _version, _displayVersion, _owner, _createdDate, _editedDate);
+            return new Package(_id, _name, _description, _state, _version, _displayVersion, _owner, _createdDate, _editedDate, _industries);
         }
 
         public ReadPackageBuilder With(Guid id)
@@ -55,6 +58,12 @@ namespace PackageBuilder.TestObjects.Builders
         {
             _createdDate = createdDate;
             _editedDate = createdDate;
+            return this;
+        }
+
+        public ReadPackageBuilder With(params Industry[] industries)
+        {
+            _industries = industries;
             return this;
         }
     }

@@ -9,7 +9,9 @@ namespace PackageBuilder.Domain.Entities
     {
         public static IEnumerable<IDataField> Traverse(this IEnumerable<IDataField> dataFields)
         {
-            return dataFields != null ? dataFields.SelectMany(x => x.Traverse(y => y.DataFields, x.Name)) : Enumerable.Empty<IDataField>();
+            if (dataFields == null) return Enumerable.Empty<IDataField>();
+            var fields = dataFields as IList<IDataField> ?? dataFields.ToList();
+            return fields.Any() ? fields.SelectMany(x => x != null ? x.Traverse(y => y.DataFields, x.Name) : Enumerable.Empty<IDataField>()) : Enumerable.Empty<IDataField>();
         }
 
         private static IEnumerable<T> Traverse<T>(this T root, Func<T, IEnumerable<T>> childrenSelector, string name) where T : class, IDataField
@@ -31,7 +33,9 @@ namespace PackageBuilder.Domain.Entities
 
         public static IEnumerable<IDataFieldOverride> Traverse(this IEnumerable<IDataFieldOverride> dataFields)
         {
-            return dataFields != null ? dataFields.SelectMany(x => x.Traverse(y => y.DataFieldOverrides, x.Name)) : Enumerable.Empty<IDataFieldOverride>();
+            if (dataFields == null) return Enumerable.Empty<IDataFieldOverride>();
+            var fields = dataFields as IList<IDataFieldOverride> ?? dataFields.ToList();
+            return fields.Any() ? fields.SelectMany(x => x != null ? x.Traverse(y => y.DataFieldOverrides, x.Name) : Enumerable.Empty<IDataFieldOverride>()) : Enumerable.Empty<IDataFieldOverride>();
         }
 
         private static IEnumerable<IDataFieldOverride> Traverse(this IDataFieldOverride root, Func<IDataFieldOverride, IEnumerable<IDataFieldOverride>> childrenSelector, string name) 

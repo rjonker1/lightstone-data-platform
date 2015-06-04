@@ -4,7 +4,7 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class Client : NamedEntity
+    public class Client : NamedEntity, IIndustry
     {
         public virtual string Notes { get; protected internal set; }
         private ClientAccountNumber _clientAccountNumber = new ClientAccountNumber();
@@ -24,7 +24,7 @@ namespace UserManagement.Domain.Entities
         public virtual bool IsActive { get; set; }
         public virtual bool IsLocked { get; set; }
         public virtual DateTime? TrialExpiration { get; set; }
-
+		public virtual ISet<ClientIndustry> Industries { get; set; }
         public Client() { }
 
         public Client(string clientName) : base(clientName)

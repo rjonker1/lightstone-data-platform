@@ -21,14 +21,13 @@ using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
-using PackageBuilder.Domain.Dtos.Read;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
+using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
-using PackageBuilder.TestObjects.Mothers;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
@@ -52,9 +51,15 @@ namespace PackageBuilder.Api.Modules
             Get["/Packages"] = parameters =>
                 Response.AsJson(readRepo.Where(x => !x.IsDeleted));
 
-            Get["/Packages/{filter?}/{pageIndex:int}/{pageSize:int}"] = parameters =>
+            Get["/PackageLookup/{industryIds?}"] = parameters =>
             {
-                string filter = (parameters.filter + "").Trim().ToLower();
+                var filter = (string)Context.Request.Query["q_word[]"].Value;
+                var pageIndex = 0;
+                var pageSize = 0;
+                int.TryParse(Context.Request.Query["page_num"].Value, out pageIndex);
+                int.TryParse(Context.Request.Query["per_page"].Value, out pageSize);
+
+                //string filter = (parameters.filter + "").Trim().ToLower();
                 Expression<Func<Domain.Entities.Packages.Read.Package, bool>> predicate = x => !x.IsDeleted && (x.Name + "").Trim().ToLower().StartsWith(filter);
                 predicate = package => true;
 
@@ -65,7 +70,15 @@ namespace PackageBuilder.Api.Modules
                 //                                       select pp.Id).FirstOrDefault()
                 //                        select p;
 
-                var packagesTest = readRepo.Where(x => x.State.Name == StateName.Published).OrderByDescending(d => d.Version);
+                var industries = Enumerable.Empty<Guid>();
+                if (parameters.industryIds.Value != null)
+                {
+                    var industryString = (string)parameters.industryIds.Value;
+                    industries = industryString.Split(',').Select(x => new Guid(x));
+                }
+                
+                //var packagesTest = readRepo.Where(x => x.State.Name == StateName.Published).OrderByDescending(d => d.Version);
+                var packagesTest = readRepo.Where(x => x.State.Name == StateName.Published && x.Industries.Any(ind => industries.Contains(ind.Id))).OrderByDescending(d => d.Version);
 
                 var publishedPackagesList = new List<Domain.Entities.Packages.Read.Package>();
 
@@ -88,16 +101,12 @@ namespace PackageBuilder.Api.Modules
                 var publishedPackages = publishedPackagesList.AsQueryable();
 
                 var packages = new PagedList<Domain.Entities.Packages.Read.Package>(publishedPackages, 
-                                                parameters.pageIndex, parameters.pageSize, predicate);
+                                                pageIndex - 1, pageSize, predicate);
                 return Response.AsJson(
                         new
                         {
-                            data = packages,
-                            pageIndex = packages.PageIndex,
-                            pageSize = packages.PageSize,
-                            pageTotal = packages.PageTotal,
-                            recordsTotal = packages.RecordsTotal,
-                            recordsFiltered = packages.RecordsFiltered
+                            result = packages,
+                            cnt_whole = packages.RecordsFiltered
                         });
             };
 
@@ -146,20 +155,6 @@ namespace PackageBuilder.Api.Modules
                 return responses;
             };
 
-            //TODO: This route must be removed. Data Provider pacakges should all come through /Packages/DataProvider/{id
-            Get["/Packages/DataProvider/ForPropertySearch/{id}"] = parameters =>
-            {
-                PackageDto package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
-
-                if (package == null)
-                    throw new LightstoneAutoException("Package could not be found");
-
-                var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.PropertyVerificationAction);
-                dto.SetDataProviders(package);
-
-                return Response.AsJson(dto);
-            };
-
             Post["/Packages"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
@@ -168,7 +163,7 @@ namespace PackageBuilder.Api.Modules
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
 
                 publisher.Publish(new CreatePackage(dto.Id, dto.Name, dto.Description, dto.CostOfSale,
-                    dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Owner, DateTime.UtcNow, null,
+                    dto.RecommendedSalePrice, dto.Notes, Mapper.Map<PackageDto, IEnumerable<Industry>>(dto), dto.State, dto.Owner, DateTime.UtcNow, null,
                     dProviders));
 
                 ////RabbitMQ
@@ -186,7 +181,7 @@ namespace PackageBuilder.Api.Modules
                     Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
 
                 publisher.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale,
-                    dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Version, dto.Owner,
+                    dto.RecommendedSalePrice, dto.Notes, Mapper.Map<PackageDto, IEnumerable<Industry>>(dto), dto.State, dto.Version, dto.Owner,
                     dto.CreatedDate, DateTime.UtcNow, dProviders));
 
                 ////RabbitMQ

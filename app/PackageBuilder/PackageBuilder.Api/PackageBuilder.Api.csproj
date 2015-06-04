@@ -309,6 +309,9 @@
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Industries\IndustryMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\IndustryDtoConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\PackageIndustryConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\PackageIndustryDtoConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\RequestToDataFieldConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\ResponseToDataFieldConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldOverrideMap.cs" />

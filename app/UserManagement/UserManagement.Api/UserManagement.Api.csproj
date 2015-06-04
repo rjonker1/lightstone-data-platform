@@ -83,13 +83,19 @@
     <Reference Include="FluentValidation">
       <HintPath>..\..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender">
+      <HintPath>..\..\libs\NhProf\HibernatingRhinos.Profiler.Appender.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender.NHibernateLog4Net">
+      <HintPath>..\..\libs\NhProf\HibernatingRhinos.Profiler.Appender.NHibernateLog4Net.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1169, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1179, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1169\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1179\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1128, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -267,6 +273,13 @@
     <Content Include="Content\jasny-bootstrap\css\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap\css\jasny-bootstrap.min.css" />
     <Content Include="Content\jasny-bootstrap\css\navmenu-push.css" />
+    <Content Include="Content\jquery.fileupload\demo-ie8.css" />
+    <Content Include="Content\jquery.fileupload\demo.css" />
+    <Content Include="Content\jquery.fileupload\jquery.fileupload-noscript.css" />
+    <Content Include="Content\jquery.fileupload\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Content\jquery.fileupload\jquery.fileupload-ui.css" />
+    <Content Include="Content\jquery.fileupload\jquery.fileupload.css" />
+    <Content Include="Content\jquery.fileupload\style.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\nancy-logo.png" />
     <Content Include="Content\site.css" />
@@ -366,6 +379,14 @@
     <Content Include="Scripts\DataTables-1.10.4\dataTables.tableTools.min.js" />
     <Content Include="Scripts\DataTables-1.10.4\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables-1.10.4\jquery.dataTables.min.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
     <Content Include="Scripts\fastclick\fastclick.js" />
     <Content Include="Scripts\fastclick\fastclick.min.js" />
     <Content Include="Scripts\GreenSock\TweenMax.min.js" />
@@ -379,6 +400,21 @@
     <Content Include="Scripts\jquery.ajax-combobox\jquery.ajax-combobox.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.fileupload\app.js" />
+    <Content Include="Scripts\jquery.fileupload\cors\jquery.postmessage-transport.js" />
+    <Content Include="Scripts\jquery.fileupload\cors\jquery.xdr-transport.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload-angular.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload-audio.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload-image.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload-process.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload-video.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.fileupload.js" />
+    <Content Include="Scripts\jquery.fileupload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jquery.fileupload\main.js" />
+    <Content Include="Scripts\jquery.fileupload\vendor\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.form.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -669,6 +705,7 @@
     <Content Include="Views\Customer\PhysicalAddress.cshtml" />
     <Content Include="Views\Customer\PostalAddress.cshtml" />
     <Content Include="Views\Client\Billing.cshtml" />
+    <Content Include="Views\Client\ImportClientUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

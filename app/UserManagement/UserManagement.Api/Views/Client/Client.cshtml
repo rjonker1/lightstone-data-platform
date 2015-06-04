@@ -1,4 +1,6 @@
 ﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using System
+@using DataPlatform.Shared.Enums
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
@@ -72,13 +74,33 @@
 
     </div>
 
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Industry Type</label>
+        <div class="input-group col-lg-2">
+            <select id="industryTypeSelect" name="Industries" data-placeholder="Select industry type" multiple class="chosen-select"></select>
+        </div>
+        <div class="col-lg-6">
+            @*@Html.ValidationMessageFor(x => x.UserTypeId)*@
+        </div>
+    </div>
     @Html.Partial("Shared/BoxFooter")
 </div>
 
 <script>
-
-    $(document).ready(function () {
-
+    @{
+        var selected = Model.Industries != null;
+        var url = "http://dev.packagebuilder.api.lightstone.co.za/Industries/" + (selected ? string.Join(",", Model.Industries) : "");        
+    }
+    $(function () {
+	$.get("@url", function (data) {
+            var $industrySelect = $("#industryTypeSelect");
+            $.each(data, function (index, industry) {
+                $("<option>", { value: industry.id, text: industry.name, selected: industry.isSelected }).appendTo($industrySelect);
+            });
+            $industrySelect.trigger("chosen:updated");
+        });
+	
         if ($('#commercialStateSelect option:selected').text() == 'TRIAL') {
 
             $('.trial-expiration').show();
@@ -98,5 +120,7 @@
 
         $('.trial-expiration').hide();
     });
+    
+    
 
 </script>

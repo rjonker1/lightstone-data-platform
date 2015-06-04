@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using PackageBuilder.Domain.Dtos.Write;
-using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.TestObjects.Builders
@@ -12,7 +11,7 @@ namespace PackageBuilder.TestObjects.Builders
         private string _name;
         private string _description;
         private string _notes;
-        private IEnumerable<Industry> _industries;
+        private IEnumerable<IndustryDto> _industries;
         private int _version;
         private decimal _displayVersion;
         //private string _state;
@@ -58,7 +57,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public PackageDtoBuilder With(params Industry[] industries)
+        public PackageDtoBuilder With(params IndustryDto[] industries)
         {
             _industries = industries;
             return this;

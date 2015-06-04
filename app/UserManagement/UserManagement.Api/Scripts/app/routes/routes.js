@@ -130,6 +130,11 @@ function initializeClientRoutes(sammy) {
     sammy.get('/Clients', function (context) {
         context.load('/Clients', { dataType: 'html', cache: false }).swap();
     });
+
+    sammy.get('/Clients/ImportUsers', function (context) {
+        context.load('/Clients/ImportUsers', { dataType: 'html', cache: false }).swap();
+    });
+
     sammy.get('/Clients/Add', function (context) {
         context.load('/Clients/Add', { dataType: 'html', cache: false })
             .swap()
@@ -348,7 +353,7 @@ function initializeContractRoutes(sammy) {
     sammy.post('/Contracts', function (context) {
         $(context.target).ajaxSubmit({
             success: function (data) {
-                context.$element().html(data);+
+                context.$element().html(data);
                 initializePlugins();
                 if (data.indexOf('Validation') < 0) { context.redirect('#/Contracts'); }
             }
@@ -479,6 +484,72 @@ function initializePlugins() {
         }
     });
     
+    $('.customer-autocomplete .chosen-choices input').autocomplete({
+        source: function (request, response) {
+            var industries = $("#industryTypeSelect").val();
+            var url = "/CustomerLookup/" + industries;
+            if (industries == null || industries == "") {
+                url = "/CustomerLookup";
+            } 
+            $.ajax({
+                url: url + "/" + request.term + "/",
+                dataType: "json",
+                beforeSend: function () { $('ul.chosen-results').empty(); },
+                success: function (data) {
+                    response($.map(data.dto, function (item) {
+                        return {
+                            label: item.name,
+                            value: item.id
+                        };
+                    }));
+                }
+            });
+        },
+        select: function (event, ui) {
+            if ($('#' + ui.item.value).length) {
+                return;
+            }
+
+            var $container = $(this).closest('.customer-autocomplete');
+            var $select = $container.find('select');
+            $select.append('<option id="' + ui.item.value + '" selected="true" value="' + ui.item.value + '">' + ui.item.label + '</option>');
+            $select.trigger("chosen:updated");
+        }
+    });
+    
+    $('.client-autocomplete .chosen-choices input').autocomplete({
+        source: function (request, response) {
+            var industries = $("#industryTypeSelect").val();
+            var url = "/ClientLookup/" + industries;
+            if (industries == null || industries == "") {
+                url = "/ClientLookup";
+            }
+            $.ajax({
+                url: url + "/" + request.term + "/",
+                dataType: "json",
+                beforeSend: function () { $('ul.chosen-results').empty(); },
+                success: function (data) {
+                    response($.map(data.dto, function (item) {
+                        return {
+                            label: item.name,
+                            value: item.id
+                        };
+                    }));
+                }
+            });
+        },
+        select: function (event, ui) {
+            if ($('#' + ui.item.value).length) {
+                return;
+            }
+
+            var $container = $(this).closest('.client-autocomplete');
+            var $select = $container.find('select');
+            $select.append('<option id="' + ui.item.value + '" selected="true" value="' + ui.item.value + '">' + ui.item.label + '</option>');
+            $select.trigger("chosen:updated");
+        }
+    });
+    
     //$('.packag-autocomplete .chosen-choices input').autocomplete({
     //    source: function (request, response) {
     //        var $container = $(this.element).closest('.packag-autocomplete');
@@ -540,17 +611,25 @@ function initializePlugins() {
     $('#AccountOwnerId').val(accountOwnerUserId);
     $('#AccountOwnerName').text(accountOwnerUserName);
 
+    $.ajaxSetup({
+        //crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        }
+    });
+
     $('.packag-autocomplete .chosen-choices input').attr("name", "PackageIdNames");
-    $('.packag-autocomplete .chosen-choices input').ajaxComboBox(
-        "/packages/",
+    var packageLookup = $('.packag-autocomplete .chosen-choices input').ajaxComboBox("http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/",
         {
             lang: 'en',
             bind_to: 'select',
             primary_key: 'packageId',
             per_page: 10,
+            instance: true
         }
-    )
-    .bind('select', function () {
+    );
+    
+    $('.packag-autocomplete .chosen-choices input').bind('select', function () {
         var val = $(this).val();
         var id = $('#PackageIdNames_primary_key').val();
         
@@ -564,6 +643,10 @@ function initializePlugins() {
         $select.trigger("chosen:updated");
     });
 
+    $(".ac_button").click(function() {
+        
+    });
+
     $(".list-group-item a.close-box").click(function () {
 
         removeListItem(this);
@@ -573,6 +656,18 @@ function initializePlugins() {
 
         $(element).parent().parent().remove();
     }
+
+    var _function = function () {
+        var industries = $("#industryTypeSelect").val();
+        $(packageLookup).each(function () {
+            var url = "http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/" + industries;
+            if (industries == null || industries == "") {
+                url = "http://dev.packagebuilder.api.lightstone.co.za/PackageLookup";
+            }
+            this.option.source = url;
+        });
+    };
+    $("#industryTypeSelect_chosen input").focusout(_function);
 
     $('#ClientIds').autocomplete({
         source: function(request, response) {

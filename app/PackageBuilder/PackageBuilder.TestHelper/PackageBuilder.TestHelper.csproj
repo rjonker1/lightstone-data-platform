@@ -88,6 +88,7 @@
     <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="BaseTests\when_persisting_entities_to_db.cs" />
     <Compile Include="BaseTests\when_persisting_entities_to_memory.cs" />
+    <Compile Include="Helpers\CustomEqualityComparer.cs" />
     <Compile Include="OverrideHelper.cs" />
   </ItemGroup>
   <ItemGroup>

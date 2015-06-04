@@ -48,7 +48,7 @@
 
     <div style="cursor:default; background-color: #4C7E80 !important;" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
-            
+
             <div class="col-md-4">
                 <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
@@ -147,7 +147,7 @@
                     </div>
                 </div>
             </div>
-        </li>   
+        </li>
     </ol>
 
 </script>
@@ -216,7 +216,7 @@
                                         </select>-->
 
                                         <div multi-select
-                                             input-model="industries"
+                                             input-model="dataProvsPkg.Package[0].industries"
                                              button-label="name"
                                              item-label="name maker"
                                              max-labels="1"
@@ -265,12 +265,10 @@
                             </div>
                             <div class="col-lg-12">
                                 <div ui-tree id="asdt" ng-model="dataProvsPkg">
-                                    <div ng-repeat="providers in dataProvsPkg.Package">
-                                        <div ng-repeat="provs in providers">
-                                            <ol ui-tree-nodes="" ng-model="provs">
-                                                <li ng-repeat="provider in provs" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
-                                            </ol>
-                                        </div>
+                                    <div ng-repeat="(key,value) in filterDataProviders(dataProvsPkg.Package[0])">
+                                        <ol ui-tree-nodes="" ng-model="value">
+                                            <li ng-repeat="provider in value" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
+                                        </ol>
                                     </div>
                                 </div>
                                 <br />

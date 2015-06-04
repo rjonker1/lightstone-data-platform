@@ -26,7 +26,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
                 return;
             }
 
-            _repository.Save(new Industry(command.Id, command.Name, command.IsSelected));
+            _repository.Save(new Industry(command.Id, command.Name));
         }
     }
 }

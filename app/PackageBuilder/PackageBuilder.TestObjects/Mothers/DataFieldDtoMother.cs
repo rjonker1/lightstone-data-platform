@@ -1,5 +1,4 @@
-﻿using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Dtos.Write;
+﻿using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers
@@ -15,7 +14,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(true)
                     .With(typeof(string).ToString())
                     .With(10d)
-                    .With(IndustryMother.Automotive)
+                    .With(new IndustryDto())
                     .Build();
             }
         }
@@ -28,7 +27,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(true)
                     .With(typeof(string).ToString())
                     .With(10d)
-                    .With(IndustryMother.Automotive)
+                    .With(new IndustryDto())
                     .Build();
             }
         }
@@ -100,7 +99,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With("SpecificInformation", "Label", "Definition")
                     .With(10d)
                     .With(true)
-                    .With(IndustryMother.Automotive, IndustryMother.Finance)
+                    .With(new IndustryDto())
                     .With(typeof(string).ToString())
                     .With(Colour, EngineNumber, LicenseNumber, Odometer, RegistrationNumber, VinNumber)
                     .Build();

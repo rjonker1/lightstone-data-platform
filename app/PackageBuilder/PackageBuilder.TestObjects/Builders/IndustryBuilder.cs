@@ -6,10 +6,9 @@ namespace PackageBuilder.TestObjects.Builders
     public class IndustryBuilder
     {
         private string _name;
-        private bool _selected;
         public Industry Build()
         {
-            return new Industry(Guid.NewGuid(), _name, _selected);
+            return new Industry(Guid.NewGuid(), _name);
         }
 
         public IndustryBuilder With(Guid id)

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using DataPlatform.Shared.Enums;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
@@ -24,6 +26,7 @@ namespace UserManagement.Domain.Dtos
         public string CreateSourceValue { get; set; }
         public Guid PlatformStatusId { get; set; }
         public string PlatformStatusValue { get; set; }
+        public IEnumerable<Guid> Industries { get; set; }
         public Guid BillingId { get; set; }
         public string BillingCompanyRegistration { get; set; }
         public string BillingPastelId { get; set; }

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Dtos.Write;
-using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.TestObjects.Builders
 {
@@ -10,7 +8,7 @@ namespace PackageBuilder.TestObjects.Builders
         private string _name;
         private string _label;
         private string _definition;
-        private IEnumerable<Industry> _industries;
+        private IEnumerable<IndustryDto> _industries;
         private double _costOfSale;
         private bool _isSelected;
         private string _type;
@@ -39,7 +37,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public DataFieldDtoBuilder With(params Industry[] industries)
+        public DataFieldDtoBuilder With(params IndustryDto[] industries)
         {
             _industries = industries;
             return this;

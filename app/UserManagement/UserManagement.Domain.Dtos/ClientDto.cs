@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Enums;
 
@@ -11,6 +12,7 @@ namespace UserManagement.Domain.Dtos
         [Display(Name = "Client name is required")]
         public string Name { get; set; }
         public string ClientAccountNumber { get; set; }
+        public IEnumerable<Guid> Industries { get; set; }
         public Guid ContactDetailId { get; set; }
         public string ContactDetailContactNumber { get; set; }
         [Required]

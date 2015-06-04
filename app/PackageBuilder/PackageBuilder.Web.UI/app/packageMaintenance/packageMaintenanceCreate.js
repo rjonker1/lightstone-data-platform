@@ -32,7 +32,19 @@
 
         $scope.dataProvsPkg = {};
         // Prevent $modelValue undefined error
-        $scope.dataProvsPkg.Package = { 'mock': 'mock' };
+        $scope.dataProvsPkg.Package = { };
+        //http://stackoverflow.com/questions/14788652/how-to-filter-key-value-with-ng-repeat-in-angularjs
+        //pre-filter method
+        $scope.filterDataProviders = function(items) {
+            var result = {};
+            angular.forEach(items, function (value, key) {
+                var propertyName = key;
+                if (propertyName == "DataProviders") {
+                    result[key] = value;
+                }
+            });
+            return result;
+        };
 
         $scope.createPackage = function(packageData) {
             return datacontext.createPackage(packageData).then(function(response) {
@@ -72,6 +84,7 @@
         $scope.filterData = function(filterIndustries) {
 
             filterVal = filterIndustries;
+            $scope.dataProvsPkg.Package.Industries = filterIndustries;
         };
 
         $scope.total = function () {

@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Web.UI.WebControls;
 using AutoMapper;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using RestSharp;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
@@ -37,7 +45,68 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });
             };
 
+            Get["/ClientLookup/{industryIds?}/{filter:alpha}"] = parameters =>
+            {
+                var dto = Enumerable.Empty<NamedEntityDto>();
+                if (parameters.industryIds.Value != null)
+                {
+                    var industryString = (string)parameters.industryIds.Value;
+                    var industryIds = industryString.Split(',').Select(x => new Guid(x)).ToArray();
+                    var filter = (string)parameters.filter + "";
+                    var valueEntities = clients.Where(x => (x.Name + "").Trim().ToLower().StartsWith(filter.Trim().ToLower()) && x.Industries.Any(ind => industryIds.Contains(ind.IndustryId)));
+                    dto = Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(valueEntities);
+                }
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
+            };
+
             Get["/Clients/Add"] = parameters => View["Save", new ClientDto()];
+
+            Get["/Clients/ImportUsers"] = _ => View["ImportClientUser"];
+
+            Get["/Clients/ImportUsers/FilesUpload"] = _ => Response.AsJson("");
+
+            //TODO: Error checking for file type. Allow csv only
+            Post["/Clients/ImportUsers/FilesUpload"] = _ =>
+            {
+                var filesUploaded = Request.Files;
+
+                var files = new List<FileUploadDto>();
+                var clientImportUsers = new List<ClientImportUser>();
+
+                foreach (var httpFile in filesUploaded)
+                {
+                    using (var reader = new StreamReader(httpFile.Value))
+                    {
+                        var contents = reader.ReadToEnd().Split('\n');
+                        var csv = from line in contents
+                                  select line.Split(',').ToArray();
+
+                        clientImportUsers.AddRange(csv.Skip(1).TakeWhile(r => r.Length > 1 && r.Last().Trim().Length > 0)
+                            .Select(row => new ClientImportUser
+                        {
+                            UuId = row[0],
+                            FirstName = row[1],
+                            LastName = row[2],
+                            UserName = row[3].Replace("\r", "")
+                        }));
+                    }
+
+                    files.Add(new FileUploadDto
+                    {
+                        name = httpFile.Name,
+                        size = Convert.ToInt32(httpFile.Value.Length),
+                        thumbnailUrl = "http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-2/72/success-icon.png",
+                        deleteType = "DELETE"
+                    });
+                }
+
+                JObject fileResponseJsonObject = new JObject(new JProperty("files", JsonConvert.SerializeObject(files)));
+
+                return Response.AsJson(fileResponseJsonObject);
+            };
 
             Post["/Clients"] = _ =>
             {
@@ -126,6 +195,24 @@ namespace UserManagement.Api.Modules
 
                 return Response.AsJson("Client has been soft deleted");
             };
+        }
+
+        private class FileUploadDto
+        {
+            public string name { get; set; }
+            public int size { get; set; }
+            public string thumbnailUrl { get; set; }
+            public string deleteType { get; set; }
+
+            public string error { get; set; }
+        }
+
+        private class ClientImportUser
+        {
+            public string UuId { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string UserName { get; set; }
         }
     }
 }
