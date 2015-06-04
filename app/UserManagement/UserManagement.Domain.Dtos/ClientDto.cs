@@ -15,6 +15,29 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<Guid> Industries { get; set; }
         public Guid ContactDetailId { get; set; }
         public string ContactDetailContactNumber { get; set; }
+        [Required]
+        [Display(Name = "Commercial state is required")]
+        public Guid? CommercialStateId { get; set; }
+        public string CommercialStateValue { get; set; }
+        public Guid BillingId { get; set; }
+        public string BillingCompanyRegistration { get; set; }
+        public string BillingPastelId { get; set; }
+        public string BillingVatNumber { get; set; }
+        [Required]
+        [Display(Name = "Legal entity name is required")]
+        public string BillingLegalEntityName { get; set; }
+        [Required]
+        [Display(Name = "Account contact name is required")]
+        public string BillingAccountContactName { get; set; }
+        public string BillingAccountContactNumber { get; set; }
+        public string BillingAccountContactEmail { get; set; }
+        [Required]
+        [Display(Name = "Payment type is required")]
+        public Guid? BillingPaymentTypeId { get; set; }
+        public DateTime? BillingDebitOrderDate { get; set; }
+        public string BillingDebitOrderAccountOwner { get; set; }
+        public string BillingDebitOrderAccountNumber { get; set; }
+
         public ContactType ContactDetailContactType { get; set; }
         [Required]
         [Display(Name = "Contact person is required")]
@@ -43,5 +66,7 @@ namespace UserManagement.Domain.Dtos
         // Work around for AutoMapper to map address as Nancy does not support nested Model binding when using url encoded form posts
         public AddressDto PostalAddressDto { get; set; }
         public bool? IsActive { get; set; }
+        public bool IsLocked { get; set; }
+        public DateTime? TrialExpiration { get; set; }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System.Data;
-using Lim.Domain.Dto;
+﻿using Lim.Domain.Dto;
 using Lim.Domain.Entities.Contracts;
 using Lim.Domain.Entities.Factory;
-using Lim.Domain.Repository;
+using Lim.Domain.Entities.Repository;
 using Lim.Web.UI.Commits;
 using Lim.Web.UI.Handlers;
 using Lim.Web.UI.Models.Api;
@@ -11,6 +10,7 @@ using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
 using NHibernate;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Lim.Web.UI
 {
@@ -24,17 +24,20 @@ namespace Lim.Web.UI
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
-            container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());
+            //container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());
 
             container.Register<ISessionFactory>(SessionFactory.BuildSession("database/lim"));
-
-            container.Register<IReadUserManagementRepository>(new UserManangementReadRepository(ConnectionFactory.ForUsermanagementDatabase()));
-            container.Register<IReadLimRepository>(new LimReadRepository(ConnectionFactory.ForLimDatabase()));
+            container.Register<ISession>(container.Resolve<ISessionFactory>().OpenSession());
+            container.Register<IAmRepository, LimRepository>();
+            container.Register<IUserManagementApiClient, UserManagementApiClient>();
+            container.Register<ISaveApiConfiguration, SaveApiConfiguration>();
+            //container.Register<IReadLimRepository>(new LimReadRepository(ConnectionFactory.ForLimDatabase()));
             container.Register<IHandleGettingDataPlatformClient, GetDataPlatformClientHandler>();
             container.Register<IHandleGettingIntegrationClient, GetIntegrationClientHandler>();
             container.Register<IHandleGettingConfiguration, GetConfigurationHandler>();
             container.Register<IHandleSavingConfiguration, SavingConfigurationHandler>();
             container.Register<IHandleSavingClient, SavingClientHandler>();
+            container.Register<IHandleGettingMetadata, GetMetadataHandler>();
             container.Register<IPersistObject<PushConfiguration>, ApiPushCommit>();
             container.Register<IPersistObject<ClientDto>, ClientCommit>();
         }

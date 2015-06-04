@@ -72,6 +72,8 @@ namespace UserManagement.Api.Modules
                 dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
                 dto.IsActive = true;
 
+                if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
+
                 if (ModelValidationResult.IsValid)
                 {
                     var clientUsersDto = this.Bind<List<ClientUserDto>>();
@@ -106,6 +108,8 @@ namespace UserManagement.Api.Modules
                 dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
 
+                if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
+
                 if (ModelValidationResult.IsValid)
                 {
                     var clientUsersDto = this.Bind<List<ClientUserDto>>();
@@ -123,6 +127,34 @@ namespace UserManagement.Api.Modules
                 }
 
                 return View["Save", dto];
+            };
+
+            Put["/Users/Lock/{id}"] = parameters =>
+            {
+                var dto = this.Bind<CustomerDto>();
+
+                var entity = userRepository.Get(dto.Id);
+                entity.Modified = DateTime.UtcNow;
+                entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                entity.IsLocked = true;
+
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+
+                return Response.AsJson("User has been locked");
+            };
+
+            Put["/Users/UnLock/{id}"] = parameters =>
+            {
+                var dto = this.Bind<CustomerDto>();
+
+                var entity = userRepository.Get(dto.Id);
+                entity.Modified = DateTime.UtcNow;
+                entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                entity.IsLocked = false;
+
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+
+                return Response.AsJson("User has been un-locked");
             };
 
             Delete["/Users/{id}"] = _ =>

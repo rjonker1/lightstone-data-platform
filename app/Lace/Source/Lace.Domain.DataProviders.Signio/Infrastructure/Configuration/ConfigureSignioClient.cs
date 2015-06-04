@@ -8,10 +8,11 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configu
     public class ConfigureSignioClient
     {
         public readonly string Url = Credentials.DecryptyDriversLicenseApiUrl();
-        public readonly string Operation;
+        public readonly string Suffix;
         public readonly string Username = Credentials.DecryptyDriversLicenseApiUsername();
         public readonly string Password = Credentials.DecryptyDriversLicenseApiPassword();
-        public readonly string XAuthToken = Credentials.DecryptyDriversLicenseoApiXAuthToken();
+        public readonly string Token = Credentials.DecryptyDriversLicenseoApiToken();
+        public readonly string Key = Credentials.DecryptyDriversLicenseApiKey();
         public readonly string Content;
 
         public bool IsSuccessful { get; private set; }
@@ -19,9 +20,8 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configu
 
         public ConfigureSignioClient(IAmSignioDriversLicenseDecryptionRequest request)
         {
-            //TODO: Uncomment after updating nuget PackageBuilder.Domain.Requests.Contracts.Requests;
-            //Operation = string.Format("{0}/{1}", Credentials.DecryptyDriversLicenseApiOperation(), request.UserId);
-            //Content = request.ScanData;
+            Suffix = string.Format("{0}/{1}", Credentials.DecryptyDriversLicenseApiSuffix(), request.UserId);
+            Content = request.ScanData.Field;
         }
 
         public void Run()
@@ -30,12 +30,12 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configu
             using (var client = new WebClient())
             {
                 client.Headers.Add(HttpRequestHeader.ContentType, "application/xml");
-                client.Headers.Add("X-Auth-Token", XAuthToken);
+                client.Headers.Add(Key, Token);
                 client.Headers.Add(HttpRequestHeader.Authorization,
                     AuthenticationHeaders.CreateBasicAuthorizationStringHeader(Username, Password));
                 client.BaseAddress = Url;
 
-                var response = client.UploadString(Operation, Content);
+                var response = client.UploadString(Suffix, Content);
                 IsSuccessful = !string.IsNullOrEmpty(response);
 
                 Resonse = response;

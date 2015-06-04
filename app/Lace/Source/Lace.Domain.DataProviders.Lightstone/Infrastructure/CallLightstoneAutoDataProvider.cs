@@ -6,7 +6,6 @@ using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -15,7 +14,6 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Shared.DataProvider.Repositories;
 using Lace.Shared.Extensions;
-using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
 
@@ -48,7 +46,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         {
             try
             {
-                _vinNumber = GetVinNumber(response.ToList(), _dataProvider.GetRequest<IAmLightstoneAutoRequest>());
+                _vinNumber = HandleRequest.GetVinNumber(response.ToList(), _dataProvider.GetRequest<IAmLightstoneAutoRequest>());
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
                     .ForDatabaseType(), new { _dataProvider });
@@ -112,23 +110,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     .BuildValuation();
         }
 
-        private static string GetVinNumber(IList<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
-        {
-            return string.IsNullOrEmpty(GetValue(request.VinNumber))
-                ? ContinueWithIvid(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
-                : GetValue(request.VinNumber);
-        }
-
-        private static string GetValue(IAmRequestField field)
-        {
-            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
-        }
-
-        private static bool ContinueWithIvid(IList<IPointToLaceProvider> response)
-        {
-            return response.OfType<IProvideDataFromIvid>().Any() && response.OfType<IProvideDataFromIvid>().First() != null &&
-                       response.OfType<IProvideDataFromIvid>().First().Handled;
-        }
+        
 
     }
 }

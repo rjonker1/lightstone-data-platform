@@ -98,10 +98,12 @@
   <ItemGroup>
     <Compile Include="BusinessRules\Clients\CreateClientRuleHandler.cs" />
     <Compile Include="BusinessRules\Clients\SoftDeleteClientRuleHandler.cs" />
+    <Compile Include="BusinessRules\Clients\UpdateClientRuleHandler.cs" />
     <Compile Include="BusinessRules\Contracts\CreateContractRuleHandler.cs" />
     <Compile Include="BusinessRules\Contracts\SoftDeleteContractRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\CreateCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\SoftDeleteCustomerRuleHandler.cs" />
+    <Compile Include="BusinessRules\Customers\UpdateCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\CommercialStates\DeleteCommercialStateRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\ContractDurations\DeleteContractDurationRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\ContractTypes\DeleteContractTypeRuleHandler.cs" />

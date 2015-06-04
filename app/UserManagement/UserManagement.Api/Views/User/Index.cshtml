@@ -21,46 +21,46 @@
         pageSize: 10,
         pageList: [10, 25, 50, 100, 'All'],
         columns: [{
-            field: 'id',
-            title: 'Item ID',
-            visible: false
-        }, {
-            field: 'userName',
-            title: 'Username',
-            sortable: true
-        }, {
-            field: 'firstName',
-            title: 'First Name'
-        }, {
-            field: 'lastName',
-            title: 'Last Name',
-            sortable: true
-        }, {
-            field: 'userTypeValue',
-            title: 'User Type',
-            sortable: true
-            //formatter: userFormatter
-        }, {
-            field: 'roleValues',
-            title: 'Roles',
-            sortable: true
-            //formatter: roleFormatter
-        }, {
-            field: 'customers',
-            title: 'Customers',
-            formatter: customerClientFormatter
-        }
-        //, {
-        //    field: 'clients',
-        //    title: 'Clients',
-        //    formatter: customerClientFormatter
-        //}
-        , {
-            field: '',
-            title: '',
-            formatter: gridActionFormatter
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'userName',
+                title: 'Username',
+                sortable: true
+            }, {
+                field: 'firstName',
+                title: 'First Name'
+            }, {
+                field: 'lastName',
+                title: 'Last Name',
+                sortable: true
+            }, {
+                field: 'userType',
+                title: 'User Type',
+                sortable: true
+                //formatter: userFormatter
+            }, {
+                field: 'roleValues',
+                title: 'Roles',
+                sortable: true
+                //formatter: roleFormatter
+            }, {
+                field: 'customers',
+                title: 'Customers',
+                formatter: customerClientFormatter
+            }
+            //, {
+            //    field: 'clients',
+            //    title: 'Clients',
+            //    formatter: customerClientFormatter
+            //}
+            , {
+                field: '',
+                title: '',
+                formatter: gridActionFormatter
 
-        }]
+            }]
     });
 
     //function userFormatter(value, row, index) {
@@ -124,11 +124,18 @@
 
     function gridActionFormatter(value, row, index) {
 
+        var lockUnlock = '<a class="btn btn-warning entity-lock" href="#/Users/Lock/' + row.id + '">Lock</a>';
+
+        if (row.isLocked == true) lockUnlock = '<a class="btn btn-success entity-lock" href="#/Users/UnLock/' + row.id + '">UnLock</a>';
+
         return [
-            '<div class="row">' +
-                        '<div id="indexEdit" class="col-lg-2"><a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '">Edit</a></div>' +
-                        '<div id="indexDelete" class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '">Delete</a></div>' +
-                        '</div>'
+            '<div class="row" style="width: 240px;">' +
+                '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '">Edit</a></div>' +
+                '<div class="col-md-1" />' +
+                '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '">Delete</a></div>' +
+                '<div class="col-md-2" />' +
+                '<div id="indexLock" class="col-md-1">' + lockUnlock + '</div>' +
+            '</div>'
         ].join('');
     };
 

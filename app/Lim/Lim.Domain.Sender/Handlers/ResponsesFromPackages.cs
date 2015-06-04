@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using Common.Logging;
 using EasyNetQ;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.EntityRepository;
+using Lim.Domain.Entities.Repository;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
 
@@ -12,10 +13,10 @@ namespace Lim.Domain.Sender.Handlers
     public class ResponseFromPackageConsumer
     {
         private readonly ILog _log;
-        private readonly IAmEntityRepository _repository;
+        private readonly IAmRepository _repository;
         private readonly IPublishConfigurationMessages _publisher;
 
-        public ResponseFromPackageConsumer(IAmEntityRepository repository, IPublishConfigurationMessages publisher)
+        public ResponseFromPackageConsumer(IAmRepository repository, IPublishConfigurationMessages publisher)
         {
             _repository = repository;
             _publisher = publisher;
@@ -35,12 +36,12 @@ namespace Lim.Domain.Sender.Handlers
                 AccountNumber = !string.IsNullOrEmpty(message.Body.AccountNumber) ? int.Parse(string.Join("", message.Body.AccountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1,
                 ResponseDate = message.Body.ResponseDate,
                 RequestId = message.Body.RequestId,
-                Payload = message.Body.Payload,
+                Payload = !string.IsNullOrEmpty(message.Body.Payload) ? Encoding.UTF8.GetBytes(message.Body.Payload) : null,
                 HasResponse = message.Body.HasData,
-                Username = message.Body.Username
+                Username = message.Body.Username ?? "unavailable"
             };
             _repository.Save(package);
-
+           
             _publisher.SendToBus(new PackageConfigurationMessage(message.Body.PackageId, message.Body.UserId, message.Body.ContractId,
                 message.Body.AccountNumber, message.Body.RequestId));
         }

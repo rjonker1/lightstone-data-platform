@@ -9,9 +9,9 @@ namespace Lim.Domain.Entities {
         public virtual int AccountNumber { get; set; }
         public virtual DateTime ResponseDate { get; set; }
         public virtual System.Guid RequestId { get; set; }
-        public virtual string Payload { get; set; }
+        public virtual byte[] Payload { get; set; }
         public virtual bool HasResponse { get; set; }
-        public virtual DateTime? CommitDate { get; set; }
+        public virtual DateTime CommitDate { get; set; }
         public virtual string Username { get; set; }
     }
 }

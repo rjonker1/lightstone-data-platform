@@ -9,26 +9,26 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeDataProviderRepository : IReadOnlyRepository
     {
-        public IQueryable<TItem> GetAll<TItem>(Func<TItem, bool> predicate) where TItem : class
+        public IEnumerable<TItem> GetAll<TItem>(Func<TItem, bool> predicate) where TItem : class
         {
             var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
-            return (IQueryable<TItem>) data;
+            return (IEnumerable<TItem>)data;
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
             var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
-            return (IQueryable<TItem>)data;
+            return (IEnumerable<TItem>)data;
         }
 
-        private readonly Dictionary<Type, IQueryable<object>> _data = new Dictionary<Type, IQueryable<object>>()
+        private readonly Dictionary<Type, IEnumerable<object>> _data = new Dictionary<Type, IEnumerable<object>>()
         {
-            {typeof(Band), BandsDataBuilder.ForAllBands().AsQueryable()},
-            {typeof(Make), MakeDataBuilder.ForAllMakes().AsQueryable()},
-            {typeof(Metric), MetricDataBuilder.ForAllMetrics().AsQueryable()},
-            {typeof(Municipality), MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable()},
-            {typeof(Sale), SaleDataBuilder.ForCarSalesOnCarId_107483().AsQueryable()},
-            {typeof(Statistic), StatisticsDataBuilder.ForCarId_107483().AsQueryable()},
+            {typeof(Band), BandsDataBuilder.ForAllBands()},
+            {typeof(Make), MakeDataBuilder.ForAllMakes()},
+            {typeof(Metric), MetricDataBuilder.ForAllMetrics()},
+            {typeof(Municipality), MuncipalityDataBuilder.ForAllMunicipalities()},
+            {typeof(Sale), SaleDataBuilder.ForCarSalesOnCarId_107483()},
+            {typeof(Statistic), StatisticsDataBuilder.ForCarId_107483()},
         };
 
     }

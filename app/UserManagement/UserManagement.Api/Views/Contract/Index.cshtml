@@ -50,10 +50,11 @@
     function gridActionFormatter(value, row, index) {
 
         return [
-            '<div class="row">' +
-                        '<div id="indexEdit" class="col-lg-2"><a class="btn btn-primary entity-edit" href="#/Contracts/' + row.id + '">Edit</a></div>' +
-                        '<div id="indexEdit" class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Contracts/Delete/' + row.id + '">Delete</a></div>' +
-                        '</div>'
+            '<div class="row" style="width: 160px;">' +
+                '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Contracts/' + row.id + '">Edit</a></div>' +
+                '<div class="col-md-1" />' +
+                '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Contracts/Delete/' + row.id + '">Delete</a></div>' +
+            '</div>'
         ].join('');
     };
 

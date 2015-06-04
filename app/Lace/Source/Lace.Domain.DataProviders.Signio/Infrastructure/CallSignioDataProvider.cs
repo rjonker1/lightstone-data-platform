@@ -40,19 +40,19 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                         _client.Url,
                         _client.Username,
                         _client.Password,
-                        _client.XAuthToken,
-                        _client.Operation
+                        XAuthToken = _client.Token,
+                        Operation = _client.Suffix
                     }
                 },
                     new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"});
 
 
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(_client.Operation).ForWebApiType(), _client.Operation);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), _client.Suffix);
 
                 _client.Run();
 
                 _logCommand.LogResponse(_client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(_client.Operation).ForWebApiType(), new {_client.Resonse});
+                    new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), new {_client.Resonse});
 
 
                 if (string.IsNullOrWhiteSpace(_client.Resonse))

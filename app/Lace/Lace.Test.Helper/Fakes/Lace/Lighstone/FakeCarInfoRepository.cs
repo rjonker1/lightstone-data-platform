@@ -10,7 +10,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
     public class FakeCarInfoRepository : IReadOnlyRepository
     {
 
-        public IQueryable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
+        public IEnumerable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
         {
             //PropertyInfo[] props = param.GetType().GetProperties();
             //var vin = props[0].GetValue(param);
@@ -24,12 +24,12 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                                 s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
                                 s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).ToList();
 
-            return (IQueryable<TItem>)data.Where((Func<CarInformation, bool>)predicate).AsQueryable();
+            return (IQueryable<TItem>)data.Where((Func<CarInformation, bool>)predicate);
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformation().AsQueryable();
+            return (IEnumerable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformation();
         }
     }
 }

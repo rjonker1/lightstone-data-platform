@@ -8,7 +8,7 @@ namespace Lim.Domain.Entities.Maps {
         
         public ClientMap() {
 			Table("Client");
-			LazyLoad();
+            LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id").Index("IX_Client_Id");
 			Map(x => x.IsActive).Column("IsActive").Not.Nullable();
 			Map(x => x.Name).Column("Name").Not.Nullable().Length(50);

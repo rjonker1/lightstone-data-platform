@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -14,14 +15,16 @@ namespace UserManagement.Domain.Entities
                 return _clientAccountNumber ?? (_clientAccountNumber = new ClientAccountNumber());
             }
         }
+
+        public virtual Billing Billing { get; protected internal set; }
+        public virtual CommercialState CommercialState { get; protected internal set; }
         public virtual ContactDetail ContactDetail { get; protected internal set; }
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
         public virtual bool IsActive { get; set; }
-        //public virtual Guid[] Industries { get; set; }
-        public virtual ISet<ClientIndustry> Industries { get; set; }
-
-
+        public virtual bool IsLocked { get; set; }
+        public virtual DateTime? TrialExpiration { get; set; }
+		public virtual ISet<ClientIndustry> Industries { get; set; }
         public Client() { }
 
         public Client(string clientName) : base(clientName)

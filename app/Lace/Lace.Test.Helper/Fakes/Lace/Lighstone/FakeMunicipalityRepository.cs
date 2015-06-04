@@ -8,14 +8,14 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeMunicipalityRepository : IReadOnlyRepository
     {
-        public IQueryable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
+        public IEnumerable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
         {
-            return (IQueryable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable();
+            return (IQueryable<TItem>) MuncipalityDataBuilder.ForAllMunicipalities();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return (IQueryable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable();
+            return (IEnumerable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities();
         }
     }
 }

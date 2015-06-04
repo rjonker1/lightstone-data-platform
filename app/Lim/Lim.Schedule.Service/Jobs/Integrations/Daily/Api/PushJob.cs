@@ -25,7 +25,7 @@ namespace Lim.Schedule.Service.Jobs.Integrations.Daily.Api
             _log.Info("Fetching Daily Push API Integrations");
             _fetch.Handle(new FetchConfigurationCommand(IntegrationAction.Push, IntegrationType.Api,Frequency.Daily));
 
-            if (!_fetch.Configurations.Any())
+            if (_fetch.Configurations == null || !_fetch.Configurations.Any())
             {
                 _log.Info("There are no daily Push API Integrations to execute");
                 return;

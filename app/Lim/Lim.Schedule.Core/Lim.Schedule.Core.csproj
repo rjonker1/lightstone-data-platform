@@ -45,10 +45,6 @@
       <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet, Version=1.0.0.1150, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1150\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -74,17 +70,24 @@
     <Compile Include="Commands\AuditIntegration.cs" />
     <Compile Include="Commands\ExecuteConfiguration.cs" />
     <Compile Include="Commands\FetchConfiguration.cs" />
+    <Compile Include="Commands\TrackIntegration.cs" />
     <Compile Include="Handlers\HandleExecutingApiConfiguration.cs" />
     <Compile Include="Handlers\HandleFetchingApiPullConfiguration.cs" />
     <Compile Include="Handlers\HandleFetchingApiPushConfiguration.cs" />
+    <Compile Include="Identifiers\ApiAuthenticationIdentifier.cs" />
+    <Compile Include="Identifiers\ApiAuthenticationTypeIdentifier.cs" />
+    <Compile Include="Identifiers\ApiConfigurationIdentifier.cs" />
     <Compile Include="Identifiers\ApiIdentifiers.cs" />
+    <Compile Include="Identifiers\ApiPullIntegration.cs" />
     <Compile Include="Identifiers\ClientIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationActionIdentifiers.cs" />
     <Compile Include="Identifiers\IntegrationClientIdentifier.cs" />
+    <Compile Include="Identifiers\IntegrationFrequencyIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationPackageIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationTypeIdentifier.cs" />
     <Compile Include="IHandleConfigurationExecution.cs" />
     <Compile Include="IHandleFetchingConfiguration.cs" />
+    <Compile Include="Tracking\ITrackIntegration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">

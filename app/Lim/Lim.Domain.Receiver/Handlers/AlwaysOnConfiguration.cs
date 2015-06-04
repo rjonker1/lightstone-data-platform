@@ -2,7 +2,6 @@
 using Common.Logging;
 using EasyNetQ;
 using Lim.Domain.Messaging.Messages;
-using Lim.Domain.Repository;
 using Lim.Enums;
 using Lim.Schedule.Core;
 using Lim.Schedule.Core.Commands;
@@ -31,7 +30,7 @@ namespace Lim.Domain.Receiver.Handlers
             _log.Info("Fetching Always On Push API Integrations");
 
             _fetchApiPush.Handle(new FetchConfigurationForClientCommand(IntegrationAction.Push, IntegrationType.Api, Frequency.AlwaysOn,message.Body.ContractId,message.Body.PackageId));
-            if (!_fetchApiPush.Configurations.Any())
+            if (_fetchApiPush.Configurations == null || !_fetchApiPush.Configurations.Any())
             {
                 _log.InfoFormat("There are no always on Push API Integrations for Pacakge Id {0} on Contract {1}  to execute",message.Body.PackageId,message.Body.ContractId);
                 return;

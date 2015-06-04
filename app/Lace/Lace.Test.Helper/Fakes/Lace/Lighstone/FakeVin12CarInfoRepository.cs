@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Lace.Shared.DataProvider.Models;
 using Lace.Shared.DataProvider.Repositories;
 
@@ -13,9 +14,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             _vin = vin;
         }
 
-        public IQueryable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
+        public IEnumerable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
         {
-            return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort().Select(
+            return (IEnumerable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort().Select(
                     s =>
                         new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
                             s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
@@ -23,7 +24,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                             s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).AsQueryable();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
             return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort()
                     .Where(w => w.Key == _vin)

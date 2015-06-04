@@ -1,30 +1,28 @@
-﻿using System.Data;
-using System.Linq;
-using Lim.Domain.Dto;
-using Shared.BuildingBlocks.AdoNet.Repository;
+﻿using System.Linq;
+using Lim.Domain.Entities;
+using Lim.Domain.Entities.Repository;
+using NHibernate;
 
 namespace Lim.Acceptance.Tests.Integrations
 {
     public class ApiIntegrationTestSetup
     {
-        private readonly IDbConnection _connection;
-        public ApiIntegrationTestSetup(IDbConnection connection)
+        private readonly ISession _session;
+        private readonly IAmRepository _repository;
+        public ApiIntegrationTestSetup(ISession session, IAmRepository repository)
         {
-            _connection = connection;
+            _session = session;
+            _repository = repository;
         }
 
         public void DeleteAllAudits()
         {
-             _connection.Open();
-            _connection.Execute("truncate table AuditApiIntegration");
+            _session.CreateQuery("truncate table AuditApiIntegration");
         }
 
-        public AuditIntegrationDto GetAuditLog(long configurationId)
+        public AuditApiIntegration GetAuditLog(long configurationId)
         {
-            _connection.Open();
-            var auditrecord = _connection.Query<AuditIntegrationDto>("select * from AuditApiIntegration where ConfigurationId = @ConfigurationId",
-                new { @ConfigurationId = configurationId });
-            _connection.Close();
+            var auditrecord = _repository.Get<AuditApiIntegration>(w => w.ConfigurationId == configurationId);
             return auditrecord.FirstOrDefault();
         }
     }

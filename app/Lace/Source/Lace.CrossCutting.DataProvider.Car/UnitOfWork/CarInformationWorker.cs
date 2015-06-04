@@ -55,7 +55,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             if (CannotGetWithVin(request.Vin))
                 return;
 
-            Cars = _repository.GetAll<CarInformation>(car => { return car.Vin == request.Vin; });
+            Cars = _repository.GetAll<CarInformation>(car => car.Vin == request.Vin);
 
             if (!Cars.Any())
                 Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin});
