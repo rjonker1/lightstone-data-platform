@@ -2,15 +2,15 @@
 
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Clients", "All clients"))
 
-
 <div class="box">
-    
+
     <div class="box-header"></div>
     <table id="table"></table>
 
 </div>
-<script>
 
+<script>
+    
     $('#table').bootstrapTable({
         url: '/Clients',
         search: true,
@@ -61,11 +61,11 @@
 
         return [
             '<div class="row" style="width: 240px;">' +
-                '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Clients/' + row.id + '">Edit</a></div>' +
-                '<div class="col-md-1" />' +
-                '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Clients/Delete/' + row.id + '">Delete</a></div>' +
-                '<div class="col-md-2" />' +
-                '<div id="indexLock" class="col-md-1">' + lockUnlock + '</div>' +
+            '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Clients/' + row.id + '">Edit</a></div>' +
+            '<div class="col-md-1" />' +
+            '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Clients/Delete/' + row.id + '">Delete</a></div>' +
+            '<div class="col-md-2" />' +
+            '<div id="indexLock" class="col-md-1">' + lockUnlock + '</div>' +
             '</div>'
         ].join('');
     };
