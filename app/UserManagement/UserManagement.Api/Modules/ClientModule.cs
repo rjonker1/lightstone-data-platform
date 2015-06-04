@@ -50,6 +50,7 @@ namespace UserManagement.Api.Modules
 
             Get["/Clients/ImportUsers/FilesUpload"] = _ => Response.AsJson("");
 
+            //TODO: Error checking for file type. Allow csv only
             Post["/Clients/ImportUsers/FilesUpload"] = _ =>
             {
                 var filesUploaded = Request.Files;
