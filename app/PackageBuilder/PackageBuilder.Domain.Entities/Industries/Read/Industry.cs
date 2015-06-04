@@ -12,15 +12,12 @@ namespace PackageBuilder.Domain.Entities.Industries.Read
     {
         [DomainSignature, DataMember]
         public virtual string Name { get; set; }
-        [DataMember]
-        public virtual bool IsSelected { get; set; }
 
         public Industry() { }
 
-        public Industry(Guid id, string name, bool selected) : base(id)
+        public Industry(Guid id, string name) : base(id)
         {
             Name = name;
-            IsSelected = selected;
         }
 
         public override string ToString()

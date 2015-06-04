@@ -12,6 +12,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
             mapping.References(x => x.ContactDetail).Cascade.SaveUpdate();
             mapping.HasMany(x => x.ClientUsers).Cascade.SaveUpdate();
             mapping.HasManyToMany(x => x.Contracts).Cascade.SaveUpdate().Table("ClientContract");
+            mapping.HasMany(x => x.Industries).Cascade.SaveUpdate(); 
         }
     }
 }

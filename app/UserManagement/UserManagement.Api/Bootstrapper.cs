@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Configuration;
-using AutoMapper;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
-using DataPlatform.Shared.Messaging.Billing.Messages;
-using EasyNetQ;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
@@ -20,12 +15,9 @@ using Shared.BuildingBlocks.Api.ExceptionHandling;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.Installers;
-using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.DataImports;
-using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Helpers;
-using UserManagement.Infrastructure.Repositories;
 using IBus = MemBus.IBus;
 
 namespace UserManagement.Api
@@ -38,6 +30,7 @@ namespace UserManagement.Api
         // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize(); 
 
             this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
@@ -112,6 +105,7 @@ namespace UserManagement.Api
             {
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
             });
             pipelines.AddTransactionScope(container);

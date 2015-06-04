@@ -3,7 +3,7 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class Client : NamedEntity
+    public class Client : NamedEntity, IIndustry
     {
         public virtual string Notes { get; protected internal set; }
         private ClientAccountNumber _clientAccountNumber = new ClientAccountNumber();
@@ -18,6 +18,9 @@ namespace UserManagement.Domain.Entities
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
         public virtual bool IsActive { get; set; }
+        //public virtual Guid[] Industries { get; set; }
+        public virtual ISet<ClientIndustry> Industries { get; set; }
+
 
         public Client() { }
 

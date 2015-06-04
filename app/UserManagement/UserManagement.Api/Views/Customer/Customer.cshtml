@@ -1,7 +1,9 @@
 ﻿@using System
 @using System.Linq
+@using DataPlatform.Shared.Enums
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Enums
 @*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 <style>
@@ -83,6 +85,16 @@
         </div>
         <div class="form-group">
 
+            <label class="control-label col-lg-4">Industry Type</label>
+            <div class="input-group col-lg-2">
+                <select id="industryTypeSelect" name="Industries" data-placeholder="Select industry type" multiple class="chosen-select"></select>
+            </div>
+            <div class="col-lg-6">
+                @*@Html.ValidationMessageFor(x => x.UserTypeId)*@
+            </div>
+        </div>  
+        <div class="form-group">
+
             <label class="control-label col-lg-4">Platform Status</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -95,3 +107,18 @@
     </div>
     @Html.Partial("Shared/BoxFooter")
 </div>
+<script>
+    @{
+        var selected = Model.Industries != null;
+        var url = "http://dev.packagebuilder.api.lightstone.co.za/Industries/" + (selected ? string.Join(",", Model.Industries) : "");
+    }
+    $(function () {
+        $.get("@url", function (data) {
+            var $industrySelect = $("#industryTypeSelect");
+            $.each(data, function (index, industry) {
+                $("<option>", { value: industry.id, text: industry.name, selected: industry.isSelected }).appendTo($industrySelect);
+            });
+            $industrySelect.trigger("chosen:updated");
+        });
+    });
+</script>

@@ -8,7 +8,7 @@ using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {
-    public class Customer : NamedEntity
+    public class Customer : NamedEntity//, IIndustry
     {
         public virtual User AccountOwner { get; set; }
         public virtual string Notes { get; protected internal set; }
@@ -42,5 +42,7 @@ namespace UserManagement.Domain.Entities
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual bool IsLocked { get; set; }
         public virtual bool IsActive { get; set; }
+        //public virtual Guid[] Industries { get; set; }
+        public virtual ISet<CustomerIndustry> Industries { get; set; }
     }
 }

@@ -28,15 +28,15 @@ namespace UserManagement.Domain.Entities.Tests
             new PersistenceSpecification<Customer>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.Name, "Name")
-                .CheckProperty(c => c.CustomerAccountNumber, new AccountNumber())
-                .CheckProperty(c => c.AccountOwner, "AccountOwnerName")
+                .CheckReference(c => c.AccountOwner, user)
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))
-                .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus", PlatformStatusType.Activated))
+                //.CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus", PlatformStatusType.Activated))
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddress", physicalAddress, postalAddress))
-                .CheckComponentList(c => c.CreateSource, new HashSet<CreateSource> { new CreateSource("CreateSource", CreateSourceType.Web) })
+                .CheckReference(c => c.CreateSource, new CreateSource("CreateSource", CreateSourceType.Web))
                 .CheckComponentList(c => c.Users, new HashSet<User>{ user })
                 .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })
+                .CheckComponentList(c => c.Industries, new HashSet<CustomerIndustry> { new CustomerIndustry{Customer = customer, IndustryId = Guid.NewGuid()} })
                 .VerifyTheMappings(customer);
         }
     }

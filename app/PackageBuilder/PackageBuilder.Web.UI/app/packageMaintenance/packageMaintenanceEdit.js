@@ -28,7 +28,19 @@
 
         $scope.dataProvsPkg = {};
         //Prevent $modelValue undefined error
-        $scope.dataProvsPkg.Package = { 'mock': 'mock' };
+        $scope.dataProvsPkg.Package = { };
+
+        //http://stackoverflow.com/questions/14788652/how-to-filter-key-value-with-ng-repeat-in-angularjs
+        //pre-filter method
+        $scope.filterDataProviders = function (items) {
+            var result = {};
+            angular.forEach(items, function (value, key) {
+                if (key == 'dataProviders') {
+                    result[key] = value;
+                }
+            });
+            return result;
+        };
 
         $scope.editPackage = function(packageData) {
             return datacontext.editPackage($routeParams.id, packageData).then(function(response) {
@@ -63,8 +75,9 @@
 
         $scope.filterData = function(filterIndustries) {
             filterVal = filterIndustries;
+            $scope.dataProvsPkg.Package.Industries = filterIndustries;
         };
-
+        
         $scope.total = function () {
             var rspEdit = angular.element(document.getElementById('rsp'));
             var valueTotal = 0;
@@ -197,7 +210,7 @@
         activate();
 
         function activate() {
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId).then(function () {
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates()], controllerId).then(function () {
                 log('Activated Package Maintenance View');
             }, function(error) {
                 logError(error.data.errorMessage);
@@ -244,24 +257,6 @@
         function getStates() {
             return datacontext.getStates().then(function (response) {
                 $scope.states = response;
-            }, function (error) {
-                logError(error.data.errorMessage);
-            });
-        }
-
-        function getIndustries() {
-            return datacontext.getIndustries().then(function (response) {
-                $scope.industries = response;
-                //$scope.filteredConstraint = $scope.industries[0];
-
-                var bootFilters = [];
-
-                for (var i = 0; i < $scope.industries.length; i++) {
-                    $scope.industries[i].isSelected = true;
-                    bootFilters.push($scope.industries[i]);
-                }
-
-                $scope.filterData(bootFilters);
             }, function (error) {
                 logError(error.data.errorMessage);
             });

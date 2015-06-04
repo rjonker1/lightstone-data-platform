@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Nancy;
 using Nancy.ModelBinding;
-using Nancy.Responses.Negotiation;
-using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.ApiClients;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
@@ -22,26 +19,6 @@ namespace UserManagement.Api.Modules
     {
         public PackageModule(IPackageBuilderApiClient packageBuilderApi, IRepository<User> users)
         {
-            Get["/Packages"] = parameters =>
-            {
-                var filter = Context.Request.Query["q_word[]"].Value.ToString();
-                var pageIndex = 0;
-                var pageSize = 0;
-                int.TryParse(Context.Request.Query["page_num"].Value, out pageIndex);
-                int.TryParse(Context.Request.Query["per_page"].Value, out pageSize);
-
-                var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var resource = string.Format("/Packages/{0}/{1}/{2}", filter, pageIndex - 1, pageSize).ToString();
-                var packagesJson = packageBuilderApi.Get("", (string)resource, null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
-               // var packages = packageBuilderApi.Get<Test>("", string.Format("/Packages/{0}/{1}/{2}", filter, pageIndex, pageSize), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
-                var packages = JsonConvert.DeserializeObject<PagedCollectionDto<PackageDto>>(packagesJson);
-                //var result = packages.Select(x => new { id = x.Id, name = x.Name });
-                //var dto = Mapper.Map<IEnumerable<PackageBuilder.Domain.Entities.Packages.ReadModels.Package>, IEnumerable<PackageDto>>(packages);
-                return Negotiate
-                    .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new {result = packages.Data, cnt_whole = packages.RecordsFiltered});
-            };
-
             Post["/Packages/GetPackage"] = parameters =>
             {
                 var dto = this.Bind<PDto>();

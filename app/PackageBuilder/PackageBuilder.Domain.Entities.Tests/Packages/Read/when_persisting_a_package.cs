@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Read;
 using PackageBuilder.TestHelper.BaseTests;
+using PackageBuilder.TestHelper.Helpers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Entities.Tests.Packages.Read
 {
-    public class when_persisting_a_package : when_persisting_entities_to_memory
+    public class when_persisting_a_package : when_persisting_entities_to_db
     {
         public override void Observe()
         {
@@ -16,7 +19,7 @@ namespace PackageBuilder.Domain.Entities.Tests.Packages.Read
         [Observation]
         public void should_persist_package()
         {
-            new PersistenceSpecification<Package>(Session)
+            new PersistenceSpecification<Package>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.PackageId, Guid.NewGuid())
                 .CheckProperty(c => c.Name, "VVi")
                 .CheckProperty(c => c.Description, "Description")
@@ -25,6 +28,7 @@ namespace PackageBuilder.Domain.Entities.Tests.Packages.Read
                 .CheckProperty(c => c.Owner, "Owner")
                 .CheckProperty(c => c.CreatedDate, new DateTime(2014, 01, 01))
                 .CheckProperty(c => c.EditedDate, new DateTime(2014, 01, 01))
+                .CheckList(c => c.Industries, new List<Industry>{new Industry {Name = ""}})
                 .VerifyTheMappings();
         }
     }

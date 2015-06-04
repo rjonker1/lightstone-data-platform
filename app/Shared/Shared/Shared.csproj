@@ -71,7 +71,6 @@
     <Compile Include="Enums\DataProviderName.cs" />
     <Compile Include="Enums\DataProviderState.cs" />
     <Compile Include="Enums\DeviceTypes.cs" />
-    <Compile Include="Enums\IndustryType.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />
     <Compile Include="Enums\SystemType.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
