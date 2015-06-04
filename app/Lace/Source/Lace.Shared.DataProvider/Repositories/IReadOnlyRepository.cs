@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Lace.Shared.DataProvider.Repositories
 {
@@ -9,6 +8,6 @@ namespace Lace.Shared.DataProvider.Repositories
         //IQueryable<TItem> GetAll<TItem>(string sql) where TItem : class;
         //IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class;
         IEnumerable<TItem> GetAll<TItem>(Func<TItem, bool> predicate) where TItem : class;
-        IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class;
+        IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class;
     }
 }

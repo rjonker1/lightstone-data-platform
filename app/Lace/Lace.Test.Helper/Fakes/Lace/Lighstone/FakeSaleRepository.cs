@@ -12,9 +12,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             return (IQueryable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return (IQueryable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483().AsQueryable();
+            return (IEnumerable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483();
         }
     }
 }

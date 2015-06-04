@@ -39,18 +39,18 @@ namespace Lace.Shared.DataProvider.Repositories
             return Enumerable.Empty<TItem>();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
             try
             {
-                return _connection.Query<TItem>(sql, param).AsQueryable();
+                return _connection.Query<TItem>(sql, param);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Could not get items from database because of {0}", ex.Message, ex);
             }
 
-            return new List<TItem>().AsQueryable();
+            return Enumerable.Empty<TItem>();
         }
     }
 }

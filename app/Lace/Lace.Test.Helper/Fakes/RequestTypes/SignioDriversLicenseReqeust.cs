@@ -7,12 +7,17 @@ namespace Lace.Test.Helper.Fakes.RequestTypes
 {
     public class SignioDriversLicenseRequest : IAmSignioDriversLicenseDecryptionRequest
     {
-        public SignioDriversLicenseRequest(string scanData, string registrationCode, Guid userId, string userName)
+        private SignioDriversLicenseRequest(string scanData, string registrationCode, Guid userId, string userName)
         {
             RegistrationCode = RegistrationCodeRequestField.Get(registrationCode);
             ScanData = ScanDataRequestField.Get(scanData);
             UserId = UserIdRequestField.Get(Convert.ToString(userId));
             Username = UsernameRequestField.Get(userName);
+        }
+
+        public static IAmSignioDriversLicenseDecryptionRequest Request(string scanData, string registrationCode, Guid userId, string userName)
+        {
+            return new SignioDriversLicenseRequest(scanData,registrationCode,userId,userName);
         }
 
         public IAmRegistrationCodeRequestField RegistrationCode { get; private set; }

@@ -12,9 +12,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             return (IQueryable<TItem>) Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return (IQueryable<TItem>) Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes().AsQueryable();
+            return (IEnumerable<TItem>)Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
         }
     }
 }

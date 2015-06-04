@@ -13,9 +13,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             return (IQueryable<TItem>) MuncipalityDataBuilder.ForAllMunicipalities();
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return (IQueryable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities().AsQueryable();
+            return (IEnumerable<TItem>)MuncipalityDataBuilder.ForAllMunicipalities();
         }
     }
 }

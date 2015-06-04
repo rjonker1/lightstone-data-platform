@@ -41,9 +41,27 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         }
 
         [Observation]
-        public void lace_signio_drivers_license_decryption_response_shuould_not_be_null_test()
+        public void lace_signio_drivers_license_decryption_response_shuould_not_be_null()
         {
             _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_signio_drivers_license_decryption_response_drivers_licese_should_exist()
+        {
+            _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().DrivingLicense.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_signio_drivers_license_decryption_response_drivers_licese_decoded_data_should_exist()
+        {
+            _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().DecodedData.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lace_signio_drivers_license_decryption_response_drivers_license_identity_number_should_be_correct()
+        {
+            _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().DrivingLicense.IdentityDocument.Number.ShouldEqual("8103155077088");
         }
     }
 }

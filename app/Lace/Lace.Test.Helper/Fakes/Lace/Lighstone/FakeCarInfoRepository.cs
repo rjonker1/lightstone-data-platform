@@ -27,9 +27,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             return (IQueryable<TItem>)data.Where((Func<CarInformation, bool>)predicate);
         }
 
-        public IQueryable<TItem> Get<TItem>(string sql, object param) where TItem : class
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformation().AsQueryable();
+            return (IEnumerable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformation();
         }
     }
 }
