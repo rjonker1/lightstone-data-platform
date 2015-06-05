@@ -7,7 +7,6 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Management;
@@ -22,12 +21,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
-
-
         private DataSet _result;
-
-        private readonly string _username = Credentials.LightstoneBusinessApiUsername();
-        private readonly string _password = Credentials.LightstoneBusinessApiPassword();
 
         public CallLightstoneBusinessCompanyDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
