@@ -90,6 +90,7 @@
     <Compile Include="AreaFactorModel.cs" />
     <Compile Include="AuctionFactorModel.cs" />
     <Compile Include="AudatexResponse.cs" />
+    <Compile Include="BusinessCompanyResponse.cs" />
     <Compile Include="ConfidenceModel.cs" />
     <Compile Include="DriversLicenseModels.cs" />
     <Compile Include="EstimatedValueModel.cs" />
@@ -100,8 +101,8 @@
     <Compile Include="IvidResponseHandled.cs" />
     <Compile Include="IvidTitleHolderResponse.cs" />
     <Compile Include="JisResponse.cs" />
-    <Compile Include="LightstoneBusinessResponse.cs" />
-    <Compile Include="LightstoneBusinessModels.cs" />
+    <Compile Include="LightstoneBusinessDirectorResponse.cs" />
+    <Compile Include="LightstoneBusinessCompanyResponse.cs" />
     <Compile Include="LightstoneResponse.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="PCubedFicaVerficationResponse.cs" />

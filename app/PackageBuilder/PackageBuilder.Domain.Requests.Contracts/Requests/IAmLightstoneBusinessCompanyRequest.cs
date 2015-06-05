@@ -2,9 +2,9 @@
 
 namespace PackageBuilder.Domain.Requests.Contracts.Requests
 {
-    public interface IAmLightstoneBusinessRequest : IAmDataProviderRequest
+    public interface IAmLightstoneBusinessCompanyRequest : IAmDataProviderRequest
     {
-        IAmUserTokenRequestField UserToken { get; }
+        IAmIdentityNumberRequestField IdNumber { get; }
         IAmCompanyNameRequestField CompanyName { get; }
         IAmCompanyRegistrationNumberRequestField CompanyRegistrationNumber { get; }
         IAmCompanyVatNumberRequestField CompanyVatNumber { get; }

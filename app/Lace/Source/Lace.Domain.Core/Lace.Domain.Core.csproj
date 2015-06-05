@@ -77,10 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\DataProviders\Business\IRespondWithBusiness.cs" />
+    <Compile Include="Contracts\DataProviders\Business\IProvideDirector.cs" />
+    <Compile Include="Contracts\DataProviders\Business\IProvideCompany.cs" />
     <Compile Include="Contracts\DataProviders\DriversLicense\IRespondWithDriversLicenseInformation.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneBusinessDirector.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneProperty.cs" />
-    <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneBusiness.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneBusinessCompany.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
     <Compile Include="Contracts\DataProviders\Property\IRespondWithProperty.cs" />

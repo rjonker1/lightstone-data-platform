@@ -6,7 +6,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
     {
         private readonly IAmLightstonePropertyRequest _request;
 
-        public bool RequestIsValid { get; private set; }
+        public bool IsValid { get; private set; }
 
         public GetPropertyRequest(IAmLightstonePropertyRequest request)
         {
@@ -36,7 +36,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
 
         public GetPropertyRequest Validate()
         {
-            RequestIsValid = !string.IsNullOrEmpty(UserId) && !string.IsNullOrEmpty(IdCkOfOwner) &&
+            IsValid = !string.IsNullOrEmpty(UserId) && !string.IsNullOrEmpty(IdCkOfOwner) &&
                              !string.IsNullOrEmpty(TrackingNumber);
             return this;
         }
