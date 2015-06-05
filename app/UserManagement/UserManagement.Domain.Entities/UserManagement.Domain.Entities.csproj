@@ -133,6 +133,7 @@
     <Compile Include="CustomerAccountNumber.cs" />
     <Compile Include="CustomerIndustry.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
+    <Compile Include="UserAlias.cs" />
     <Compile Include="IIndustry.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
