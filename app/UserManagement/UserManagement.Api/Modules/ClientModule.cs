@@ -106,6 +106,13 @@ namespace UserManagement.Api.Modules
                             LastName = row[2],
                             UserName = row[3].Replace("\r", "")
                         }));
+
+                        foreach (var clientImportUser in clientImportUsers)
+                        {
+                            var entity = Mapper.Map(clientImportUser, new UserAlias());
+                            bus.Publish(new CreateUpdateEntity(entity, "Create"));
+                        }
+                        
                     }
 
                     // Response for file upload component
