@@ -2,7 +2,7 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 
-namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
+namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
 {
     public class RequestDataFromLightstoneBusinessSource : IRequestDataFromDataProviderSource
     {

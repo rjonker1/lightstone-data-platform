@@ -8,23 +8,23 @@ namespace Lace.Domain.Core.Entities
 {
     [Serializable]
     [DataContract]
-    public class LightstoneBusinessResponse : IProvideDataFromLightstoneBusiness
+    public class LightstoneBusinessCompanyResponse : IProvideDataFromLightstoneBusinessCompany
     {
-        public LightstoneBusinessResponse()
+        public LightstoneBusinessCompanyResponse()
         {
             
         }
 
-        public LightstoneBusinessResponse(IEnumerable<IRespondWithBusiness> result)
+        public LightstoneBusinessCompanyResponse(IEnumerable<IProvideCompany> companies)
         {
-            BusinessInformation = result;
+            Companies = companies;
         }
 
         [DataMember]
-        public IEnumerable<IRespondWithBusiness> BusinessInformation { get; private set; }
+        public IEnumerable<IProvideCompany> Companies { get; private set; }
 
         [DataMember]
-        public System.Type Type
+        public Type Type
         {
             get { return GetType(); }
         }

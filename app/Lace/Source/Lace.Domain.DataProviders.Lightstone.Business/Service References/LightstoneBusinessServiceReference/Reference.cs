@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference {
+namespace Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference {
     using System.Data;
     
     
@@ -53,10 +53,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmCompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmCompany(string user_token, long company_id, string trackingnumber);
+        Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmCompany(string user_token, long company_id, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmCompany", ReplyAction="*")]
-        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmCompanyAsync(string user_token, long company_id, string trackingnumber);
+        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmCompanyAsync(string user_token, long company_id, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnCompanyDirectors", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -95,10 +95,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmCompany_Short", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmCompany_Short(string user_token, long company_id, string trackingnumber);
+        Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmCompany_Short(string user_token, long company_id, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmCompany_Short", ReplyAction="*")]
-        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmCompany_ShortAsync(string user_token, long company_id, string trackingnumber);
+        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmCompany_ShortAsync(string user_token, long company_id, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnCompanyReport_Short", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -109,10 +109,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmCompany_Comprehensive", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmCompany_Comprehensive(string user_token, long company_id, string trackingnumber);
+        Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmCompany_Comprehensive(string user_token, long company_id, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmCompany_Comprehensive", ReplyAction="*")]
-        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmCompany_ComprehensiveAsync(string user_token, long company_id, string trackingnumber);
+        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmCompany_ComprehensiveAsync(string user_token, long company_id, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnDirectors_Comprehensive", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -144,10 +144,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmDirector", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmDirector(string user_token, long directorid, string idnumber, string trackingnumber);
+        Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmDirector(string user_token, long directorid, string idnumber, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmDirector", ReplyAction="*")]
-        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmDirectorAsync(string user_token, long directorid, string idnumber, string trackingnumber);
+        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmDirectorAsync(string user_token, long directorid, string idnumber, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnDirectorReport", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -165,10 +165,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnProspects", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet returnProspects(Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.request_propspect rp);
+        System.Data.DataSet returnProspects(Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.request_propspect rp);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnProspects", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> returnProspectsAsync(Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.request_propspect rp);
+        System.Threading.Tasks.Task<System.Data.DataSet> returnProspectsAsync(Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.request_propspect rp);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnUserHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -186,10 +186,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmPropertyAndInsert", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmPropertyAndInsert(string user_token, long prop_id);
+        Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmPropertyAndInsert(string user_token, long prop_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmPropertyAndInsert", ReplyAction="*")]
-        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmPropertyAndInsertAsync(string user_token, long prop_id);
+        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmPropertyAndInsertAsync(string user_token, long prop_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnPropertyReport", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -207,10 +207,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmBankCode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmBankCode(string user_token, long companyid, string trackingnumber);
+        Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmBankCode(string user_token, long companyid, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmBankCode", ReplyAction="*")]
-        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmBankCodeAsync(string user_token, long companyid, string trackingnumber);
+        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmBankCodeAsync(string user_token, long companyid, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/insertBankCode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -249,10 +249,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmTradeReferences", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmTradeReferences(string user_token, long companyid, string trackingnumber);
+        Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmTradeReferences(string user_token, long companyid, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmTradeReferences", ReplyAction="*")]
-        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmTradeReferencesAsync(string user_token, long companyid, string trackingnumber);
+        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmTradeReferencesAsync(string user_token, long companyid, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/insertTradeReference_Company", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -323,10 +323,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmConsumer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmConsumer(string user_token, string idnumber, string firstname, string surname, string dateofbirth, string trackingnumber);
+        Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmConsumer(string user_token, string idnumber, string firstname, string surname, string dateofbirth, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/confirmConsumer", ReplyAction="*")]
-        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmConsumerAsync(string user_token, string idnumber, string firstname, string surname, string dateofbirth, string trackingnumber);
+        System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmConsumerAsync(string user_token, string idnumber, string firstname, string surname, string dateofbirth, string trackingnumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://lightstonebusiness.co.za/returnConsumerReport", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -632,12 +632,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface apiSoapChannel : Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.apiSoap, System.ServiceModel.IClientChannel {
+    public interface apiSoapChannel : Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.apiSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class apiSoapClient : System.ServiceModel.ClientBase<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.apiSoap>, Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.apiSoap {
+    public partial class apiSoapClient : System.ServiceModel.ClientBase<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.apiSoap>, Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.apiSoap {
         
         public apiSoapClient() {
         }
@@ -698,11 +698,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.returnCompanyConfirmDetailsAsync(user_token, companyid);
         }
         
-        public Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmCompany(string user_token, long company_id, string trackingnumber) {
+        public Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmCompany(string user_token, long company_id, string trackingnumber) {
             return base.Channel.confirmCompany(user_token, company_id, trackingnumber);
         }
         
-        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmCompanyAsync(string user_token, long company_id, string trackingnumber) {
+        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmCompanyAsync(string user_token, long company_id, string trackingnumber) {
             return base.Channel.confirmCompanyAsync(user_token, company_id, trackingnumber);
         }
         
@@ -746,11 +746,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.returnCompanyPropsAsync(companyid);
         }
         
-        public Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmCompany_Short(string user_token, long company_id, string trackingnumber) {
+        public Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmCompany_Short(string user_token, long company_id, string trackingnumber) {
             return base.Channel.confirmCompany_Short(user_token, company_id, trackingnumber);
         }
         
-        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmCompany_ShortAsync(string user_token, long company_id, string trackingnumber) {
+        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmCompany_ShortAsync(string user_token, long company_id, string trackingnumber) {
             return base.Channel.confirmCompany_ShortAsync(user_token, company_id, trackingnumber);
         }
         
@@ -762,11 +762,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.returnCompanyReport_ShortAsync(rcs_id);
         }
         
-        public Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmCompany_Comprehensive(string user_token, long company_id, string trackingnumber) {
+        public Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmCompany_Comprehensive(string user_token, long company_id, string trackingnumber) {
             return base.Channel.confirmCompany_Comprehensive(user_token, company_id, trackingnumber);
         }
         
-        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmCompany_ComprehensiveAsync(string user_token, long company_id, string trackingnumber) {
+        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmCompany_ComprehensiveAsync(string user_token, long company_id, string trackingnumber) {
             return base.Channel.confirmCompany_ComprehensiveAsync(user_token, company_id, trackingnumber);
         }
         
@@ -802,11 +802,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.returnDirectorsAsync(user_token, firstname, surname, idnumber);
         }
         
-        public Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmDirector(string user_token, long directorid, string idnumber, string trackingnumber) {
+        public Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmDirector(string user_token, long directorid, string idnumber, string trackingnumber) {
             return base.Channel.confirmDirector(user_token, directorid, idnumber, trackingnumber);
         }
         
-        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmDirectorAsync(string user_token, long directorid, string idnumber, string trackingnumber) {
+        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmDirectorAsync(string user_token, long directorid, string idnumber, string trackingnumber) {
             return base.Channel.confirmDirectorAsync(user_token, directorid, idnumber, trackingnumber);
         }
         
@@ -826,11 +826,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.returnDirectorPropsAsync(directorid);
         }
         
-        public System.Data.DataSet returnProspects(Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.request_propspect rp) {
+        public System.Data.DataSet returnProspects(Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.request_propspect rp) {
             return base.Channel.returnProspects(rp);
         }
         
-        public System.Threading.Tasks.Task<System.Data.DataSet> returnProspectsAsync(Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.request_propspect rp) {
+        public System.Threading.Tasks.Task<System.Data.DataSet> returnProspectsAsync(Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.request_propspect rp) {
             return base.Channel.returnProspectsAsync(rp);
         }
         
@@ -850,11 +850,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.checkValidTokenAsync(user_token);
         }
         
-        public Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmPropertyAndInsert(string user_token, long prop_id) {
+        public Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmPropertyAndInsert(string user_token, long prop_id) {
             return base.Channel.confirmPropertyAndInsert(user_token, prop_id);
         }
         
-        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmPropertyAndInsertAsync(string user_token, long prop_id) {
+        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmPropertyAndInsertAsync(string user_token, long prop_id) {
             return base.Channel.confirmPropertyAndInsertAsync(user_token, prop_id);
         }
         
@@ -874,11 +874,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.returnAVSAsync(ac_id);
         }
         
-        public Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmBankCode(string user_token, long companyid, string trackingnumber) {
+        public Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmBankCode(string user_token, long companyid, string trackingnumber) {
             return base.Channel.confirmBankCode(user_token, companyid, trackingnumber);
         }
         
-        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmBankCodeAsync(string user_token, long companyid, string trackingnumber) {
+        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmBankCodeAsync(string user_token, long companyid, string trackingnumber) {
             return base.Channel.confirmBankCodeAsync(user_token, companyid, trackingnumber);
         }
         
@@ -922,11 +922,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.returnAlertCompaniesAsync(user_token);
         }
         
-        public Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmTradeReferences(string user_token, long companyid, string trackingnumber) {
+        public Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmTradeReferences(string user_token, long companyid, string trackingnumber) {
             return base.Channel.confirmTradeReferences(user_token, companyid, trackingnumber);
         }
         
-        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmTradeReferencesAsync(string user_token, long companyid, string trackingnumber) {
+        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmTradeReferencesAsync(string user_token, long companyid, string trackingnumber) {
             return base.Channel.confirmTradeReferencesAsync(user_token, companyid, trackingnumber);
         }
         
@@ -1002,11 +1002,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServic
             return base.Channel.returnTradeReferenceReportAsync(rt_id);
         }
         
-        public Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans confirmConsumer(string user_token, string idnumber, string firstname, string surname, string dateofbirth, string trackingnumber) {
+        public Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans confirmConsumer(string user_token, string idnumber, string firstname, string surname, string dateofbirth, string trackingnumber) {
             return base.Channel.confirmConsumer(user_token, idnumber, firstname, surname, dateofbirth, trackingnumber);
         }
         
-        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference.reportTrans> confirmConsumerAsync(string user_token, string idnumber, string firstname, string surname, string dateofbirth, string trackingnumber) {
+        public System.Threading.Tasks.Task<Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference.reportTrans> confirmConsumerAsync(string user_token, string idnumber, string firstname, string surname, string dateofbirth, string trackingnumber) {
             return base.Channel.confirmConsumerAsync(user_token, idnumber, firstname, surname, dateofbirth, trackingnumber);
         }
         

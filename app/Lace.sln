@@ -78,7 +78,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Lace", "Lace\sourc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Property", "Lace\source\Lace.Domain.DataProviders.Lightstone.Property\Lace.Domain.DataProviders.Lightstone.Property.csproj", "{FB2933C0-2D3D-4ACC-80DC-7162BE740442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Business", "Lace\Source\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.csproj", "{B1093454-D552-434B-A474-F1CAA7A3FC42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Business.Company", "Lace\Source\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.Company.csproj", "{B1093454-D552-434B-A474-F1CAA7A3FC42}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Transactions.Shared", "Lace\Source\Workflow.Transactions.Shared\Workflow.Transactions.Shared.csproj", "{3047F71B-9F70-4824-B4E4-4F00BC0CD1C5}"
 EndProject

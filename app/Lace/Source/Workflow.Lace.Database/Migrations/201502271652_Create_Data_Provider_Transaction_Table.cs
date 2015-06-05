@@ -12,7 +12,7 @@ namespace Workflow.Lace.Database.Migrations
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey("PK_DataProvider_Transaction")
                 .WithColumn("StreamId").AsGuid().NotNullable()
                 .WithColumn("Date").AsDateTime().NotNullable()
-                .WithColumn("RequestId").AsGuid().NotNullable()
+                .WithColumn("RequestId").AsGuid().NotNullable().Indexed("IX_DataProvider_Transaction_RequestId")
                 .WithColumn("DataProvider").AsInt32().NotNullable()
                 .WithColumn("DataProviderName").AsString().NotNullable()
                 .WithColumn("ConnectionType").AsString().NotNullable()
