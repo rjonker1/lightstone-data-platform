@@ -142,6 +142,23 @@
         </div>
 
     </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Contracts</label>
+        <div class="input-group col-lg-2 customer-autocomplete">
+            <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add contracts" multiple class="chosen-select">
+                @foreach (NamedEntityDto item in Model.Contracts)
+                {
+                    var isSelected = Model.Contracts != null && Model.Contracts.Select(x => x.Id).Contains(item.Id);
+                    <option id="@item.Id" selected="@isSelected" value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.ContractIds)
+        </div>
+
+    </div>
 
     @Html.Partial("Shared/BoxFooter")
 </div>

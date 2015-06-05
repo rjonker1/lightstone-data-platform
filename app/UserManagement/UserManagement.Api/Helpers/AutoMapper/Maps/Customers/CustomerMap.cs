@@ -35,7 +35,11 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
                 .ForMember(dest => dest.Clients, opt => opt.MapFrom(x =>
                     x.ClientIds != null
                         ? new HashSet<Client>(x.ClientIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Client>>().Get(id)))
-                        : Enumerable.Empty<Client>()));
+                        : Enumerable.Empty<Client>()))
+                .ForMember(dest => dest.Contracts, opt => opt.MapFrom(x =>
+                    x.ContractIds != null
+                        ? new HashSet<Contract>(x.ContractIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Contract>>().Get(id)))
+                        : Enumerable.Empty<Contract>()));
         }
     }
 }

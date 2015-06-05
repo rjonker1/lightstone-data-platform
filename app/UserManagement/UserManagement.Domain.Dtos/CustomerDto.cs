@@ -82,6 +82,7 @@ namespace UserManagement.Domain.Dtos
         public DateTime? TrialExpiration { get; set; }
         public IEnumerable<Guid> ClientIds { get; set; }
         public IEnumerable<NamedEntityDto> Clients { get; set; }
-
+        public IEnumerable<Guid> ContractIds { get; set; }
+        public IEnumerable<NamedEntityDto> Contracts { get; set; }
     }
 }
