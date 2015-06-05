@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
@@ -70,5 +71,10 @@ namespace UserManagement.Domain.Dtos
         public DateTime? TrialExpiration { get; set; }
         public IEnumerable<Guid> CustomerIds { get; set; }
         public IEnumerable<NamedEntityDto> Customers { get; set; }
+
+        public ClientDto()
+        {
+            Customers = Enumerable.Empty<NamedEntityDto>(); 
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using DataPlatform.Shared.Enums;
+using System.Linq;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
@@ -84,5 +84,11 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<NamedEntityDto> Clients { get; set; }
         public IEnumerable<Guid> ContractIds { get; set; }
         public IEnumerable<NamedEntityDto> Contracts { get; set; }
+
+        public CustomerDto()
+        {
+            Clients = Enumerable.Empty<NamedEntityDto>();
+            Contracts = Enumerable.Empty<NamedEntityDto>();
+        }
     }
 }
