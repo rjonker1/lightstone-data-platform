@@ -11,6 +11,8 @@ using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Management;
+using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using DataSet = System.Data.DataSet;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
@@ -45,16 +47,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
                 if(webService.UserToken == Guid.Empty)
                     throw new Exception("Cannot continue calling Lightstone Business Api. User is not valid");
 
-                //Company Search
-                const string idNumber = "7902065199085";
-                const string companyname = "lighstone";
-                const string company_reg = "2010/018608/07";
-                const string company_vat = "4740259769";
+                var request = new CompanyRequest(_dataProvider.GetRequest<IAmLightstoneBusinessCompanyRequest>());
+                if(!request.IsValid)
+                    throw new Exception("Cannot continue call Lightstone Business Api. Request is not valid");
 
-                var companiesDs = webService.Client.returnCompanies(webService.UserToken.ToString(), companyname, company_reg, company_vat);
+                var companiesDs = webService.Client.returnCompanies(webService.UserToken.ToString(), request.CompanyName, request.CompanyRegnum, request.CompanyVatnumber);
                 var company = Dto.Company.GetFromDataset(companiesDs);
                 if(!company.Valid())
-                    throw new Exception(string.Format("Company with Name {0} could not be found", companyname));
+                    throw new Exception(string.Format("Company with Name {0} could not be found", request.CompanyName));
 
                 var confirmation = webService.Client.confirmCompany(webService.UserToken.ToString(), company.CompanyId, Guid.NewGuid().ToString());
                 var confirm = Confirmation.Get(confirmation);

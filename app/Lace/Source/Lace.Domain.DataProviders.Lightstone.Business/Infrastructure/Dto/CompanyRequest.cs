@@ -5,15 +5,20 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
 {
     public class CompanyRequest
     {
-        private readonly IAmLightstoneBusinessRequest _request;
-        public CompanyRequest(IAmLightstoneBusinessRequest request)
+        //const string idNumber = "7902065199085";
+        //const string companyname = "lighstone";
+        //const string company_reg = "2010/018608/07";
+        //const string company_vat = "4740259769";
+
+        private readonly IAmLightstoneBusinessCompanyRequest _request;
+        public CompanyRequest(IAmLightstoneBusinessCompanyRequest request)
         {
             _request = request;
         }
 
         public CompanyRequest Map()
         {
-           // IdNumber = GetValue(_request.IdNumber);
+            //IdNumber = GetValue(_request.IdNumber);
             CompanyName = GetValue(_request.CompanyName);
             CompanyRegnum = GetValue(_request.CompanyRegistrationNumber);
             CompanyVatnumber = GetValue(_request.CompanyVatNumber);
@@ -22,7 +27,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
 
         public CompanyRequest Validate()
         {
-            IsValid = !string.IsNullOrEmpty(IdNumber);
+            IsValid = !string.IsNullOrEmpty(CompanyName) || !string.IsNullOrEmpty(CompanyRegnum) || !string.IsNullOrEmpty(CompanyVatnumber);
             return this;
         }
 
@@ -33,7 +38,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
 
         public bool IsValid { get; private set; }
 
-        public string IdNumber { get; private set; }
+        //public string IdNumber { get; private set; }
 
         public string CompanyName { get; private set; }
 
