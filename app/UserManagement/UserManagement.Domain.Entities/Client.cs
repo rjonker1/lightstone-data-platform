@@ -19,6 +19,7 @@ namespace UserManagement.Domain.Entities
         public virtual Billing Billing { get; protected internal set; }
         public virtual CommercialState CommercialState { get; protected internal set; }
         public virtual ContactDetail ContactDetail { get; protected internal set; }
+        public virtual ISet<Customer> Customers { get; protected internal set; }
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
         public virtual bool IsActive { get; set; }

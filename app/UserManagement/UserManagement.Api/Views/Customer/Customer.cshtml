@@ -3,6 +3,8 @@
 @using DataPlatform.Shared.Enums
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Dtos
+@using UserManagement.Domain.Entities
 @using UserManagement.Domain.Enums
 @*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
@@ -123,6 +125,24 @@
 
         </div>
     </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Clients</label>
+        <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Client).AssemblyQualifiedName">
+            <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
+                @foreach (NamedEntityDto item in Model.Clients)
+                {
+                    var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
+                    <option selected="@isSelected" value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.ClientIds)
+        </div>
+
+    </div>
+
     @Html.Partial("Shared/BoxFooter")
 </div>
 

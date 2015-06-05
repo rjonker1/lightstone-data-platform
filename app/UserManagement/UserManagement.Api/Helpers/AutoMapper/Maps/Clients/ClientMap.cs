@@ -22,13 +22,18 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Clients
 
             Mapper.CreateMap<ClientDto, Client>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .ForMember(dest => dest.Industries, opt => opt.MapFrom(c => new HashSet<ClientIndustry>(
-                    c.Industries.Select(id => new ClientIndustry { Client = ServiceLocator.Current.GetInstance<IRepository<Client>>().Get(c.Id), IndustryId = id }))))
-				.ForMember(dest => dest.CommercialState, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<CommercialState>>().Get(x.CommercialStateId)))
+                .ForMember(dest => dest.Industries, opt => opt.MapFrom(c => c.Industries != null 
+                    ? new HashSet<ClientIndustry>(c.Industries.Select(id => new ClientIndustry { Client = ServiceLocator.Current.GetInstance<IRepository<Client>>().Get(c.Id), IndustryId = id })) 
+                    : Enumerable.Empty<ClientIndustry>()))
+                .ForMember(dest => dest.CommercialState, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<CommercialState>>().Get(x.CommercialStateId)))
                 //.ForMember(dest => dest.Contracts, opt => opt.MapFrom(x => x.ContractIds != null ? new HashSet<Contract>(x.ContractIds.Select(id => (Contract)Mapper.Map<Tuple<Guid, Type>, Entity>(new Tuple<Guid, Type>(id, typeof(Contract))))) : Enumerable.Empty<Contract>()))
                 .ForMember(dest => dest.Billing, opt => opt.MapFrom(x => Mapper.Map<ClientDto, Billing>(x)))
                 .ForMember(dest => dest.ContactDetail, opt => opt.MapFrom(x => Mapper.Map<ClientDto, ContactDetail>(x)))
-                .ForMember(dest => dest.ClientUsers, opt => opt.Ignore());
+                .ForMember(dest => dest.Customers, opt => opt.MapFrom(x =>
+                    x.CustomerIds != null
+                        ? new HashSet<Customer>(x.CustomerIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Customer>>().Get(id)))
+                        : Enumerable.Empty<Customer>()));
+            //.ForMember(dest => dest.ClientUsers, opt => opt.Ignore());
         }
     }
 }

@@ -68,5 +68,7 @@ namespace UserManagement.Domain.Dtos
         public bool? IsActive { get; set; }
         public bool IsLocked { get; set; }
         public DateTime? TrialExpiration { get; set; }
+        public IEnumerable<Guid> CustomerIds { get; set; }
+        public IEnumerable<NamedEntityDto> Customers { get; set; }
     }
 }

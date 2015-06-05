@@ -80,5 +80,8 @@ namespace UserManagement.Domain.Dtos
         public bool IsLocked { get; set; }
 		public Guid accountownername_primary_key { get; set; }
         public DateTime? TrialExpiration { get; set; }
+        public IEnumerable<Guid> ClientIds { get; set; }
+        public IEnumerable<NamedEntityDto> Clients { get; set; }
+
     }
 }
