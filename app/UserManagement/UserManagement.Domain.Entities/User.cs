@@ -26,6 +26,7 @@ namespace UserManagement.Domain.Entities
         public virtual ISet<Role> Roles { get; protected internal set; }
         public virtual ISet<Customer> Customers { get; protected internal set; }
         public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
+        public virtual ISet<UserAlias> UserAliases { get; protected internal set; }
 
         [DoNotMap]
         public virtual IEnumerable<Client> Clients

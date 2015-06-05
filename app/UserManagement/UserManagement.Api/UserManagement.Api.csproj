@@ -555,6 +555,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\Contracts\ContractMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataTables\DataTablesMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Messages\MessageMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Users\UserAliasMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ValueEntities\ValueEntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\PackageMap.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\ClientUserDtoToClientUserConverter.cs" />

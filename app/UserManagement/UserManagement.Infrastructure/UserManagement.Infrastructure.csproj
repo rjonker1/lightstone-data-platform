@@ -104,6 +104,7 @@
     <Compile Include="NHibernate\MappingOverrides\CustomerAccountNumberMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\NamedEntityOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\UserAliasMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />

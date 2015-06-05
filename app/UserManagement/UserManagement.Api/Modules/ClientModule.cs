@@ -74,10 +74,24 @@ namespace UserManagement.Api.Modules
                 var filesUploaded = Request.Files;
 
                 var files = new List<FileUploadDto>();
-                var clientImportUsers = new List<ClientImportUser>();
+                var clientImportUsers = new List<UserAliasDto>();
 
                 foreach (var httpFile in filesUploaded)
                 {
+                    if (httpFile.ContentType != "text/csv")
+                    {
+                        // Response for file upload component
+                        files.Add(new FileUploadDto
+                        {
+                            name = httpFile.Name,
+                            size = Convert.ToInt32(httpFile.Value.Length),
+                            error = "File type not allowed"
+                        });
+
+                        break;
+                    };
+
+                    // CSV to object
                     using (var reader = new StreamReader(httpFile.Value))
                     {
                         var contents = reader.ReadToEnd().Split('\n');
@@ -85,15 +99,23 @@ namespace UserManagement.Api.Modules
                                   select line.Split(',').ToArray();
 
                         clientImportUsers.AddRange(csv.Skip(1).TakeWhile(r => r.Length > 1 && r.Last().Trim().Length > 0)
-                            .Select(row => new ClientImportUser
+                            .Select(row => new UserAliasDto
                         {
                             UuId = row[0],
                             FirstName = row[1],
                             LastName = row[2],
                             UserName = row[3].Replace("\r", "")
                         }));
+
+                        foreach (var clientImportUser in clientImportUsers)
+                        {
+                            var entity = Mapper.Map(clientImportUser, new UserAlias());
+                            bus.Publish(new CreateUpdateEntity(entity, "Create"));
+                        }
+                        
                     }
 
+                    // Response for file upload component
                     files.Add(new FileUploadDto
                     {
                         name = httpFile.Name,
@@ -205,14 +227,6 @@ namespace UserManagement.Api.Modules
             public string deleteType { get; set; }
 
             public string error { get; set; }
-        }
-
-        private class ClientImportUser
-        {
-            public string UuId { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string UserName { get; set; }
         }
     }
 }
