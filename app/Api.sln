@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{B721F577-C2A4-4A2E-8B2B-1155B241FBF5}"
 EndProject
@@ -16,6 +16,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Domain.Infrastructure", "Api\Api.Domain.Infrastructure\Api.Domain.Infrastructure.csproj", "{3185C675-2461-4382-B123-3090D3C45D2E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Tests.Helper", "Api\Api.Tests.Helper\Api.Tests.Helper.csproj", "{B174EC22-1318-43B3-8BB3-903B6E886096}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9F0ACC98-F8FD-42DD-A1B4-FC2ADA6231D8}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,8 +76,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{31BCF2FE-006D-4F35-B697-2A538C9BA0D3} = {B721F577-C2A4-4A2E-8B2B-1155B241FBF5}
-		{B174EC22-1318-43B3-8BB3-903B6E886096} = {B721F577-C2A4-4A2E-8B2B-1155B241FBF5}
 		{03AFD087-7C76-44D0-9ECB-386B6F500C62} = {9F759FEA-92E4-4EDD-A54B-8584078CC196}
 		{3185C675-2461-4382-B123-3090D3C45D2E} = {9F759FEA-92E4-4EDD-A54B-8584078CC196}
+		{B174EC22-1318-43B3-8BB3-903B6E886096} = {B721F577-C2A4-4A2E-8B2B-1155B241FBF5}
 	EndGlobalSection
 EndGlobal
