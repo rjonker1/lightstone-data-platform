@@ -6,7 +6,7 @@
       <folder>app/Api/Api</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Api</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
         <include pattern="bin\*.dll" to="content\bin"/>
         <include pattern="bin\*.pdb" to="content\bin"/>
@@ -18,7 +18,7 @@
       <folder>app/UserManagement/UserManagement.Api</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.UserManagement.Api</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
         <include pattern="bin\" to="content\bin"/>
         <include pattern="Content\" to="content\Content"/>
@@ -36,7 +36,7 @@
       <folder>app/PackageBuilder/PackageBuilder.Api</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.PackageBuilder.Api</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
         <include pattern="bin\*.dll" to="content\bin"/>
         <include pattern="bin\*.pdb" to="content\bin"/>
@@ -49,7 +49,7 @@
       <folder>app/PackageBuilder/PackageBuilder.Web.UI</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.PackageBuilder.Web.UI</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
         <include pattern="app\" to="content\app"/>
         <include pattern="bin\" to="content\bin"/>
@@ -67,7 +67,7 @@
       <folder>app/CentralInterfuseApplication/CentralInterfuseApplication.Api</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.CentralInterfuseApplication.Api</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
         <include pattern="bin\" to="content\bin"/>
         <include pattern="Content\" to="content\Content"/>
@@ -84,7 +84,7 @@
       <folder>app/Monitoring/source/Monitoring.Dashboard.UI</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Monitoring.Dashboard.UI</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
         <include pattern="bin\" to="content\bin"/>
         <include pattern="assets\" to="content\assets"/>        
@@ -98,7 +98,7 @@
       <folder>app/Billing/Billing.Api</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Billing.Api</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
        <include pattern="bin\" to="content\bin"/>
         <include pattern="Content\" to="content\Content"/>
@@ -116,7 +116,7 @@
       <folder>app/Billing/Billing.Scheduler</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Billing.Scheduler</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
        <include pattern="bin\" to="content\bin"/>
         <include pattern="*.config" to="content"/>
@@ -127,7 +127,7 @@
       <folder>app/Reporting/Reporting.Api</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Reporting.Api</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
        <include pattern="bin\" to="content\bin"/>
         <include pattern="Content\" to="content\Content"/>
@@ -140,7 +140,7 @@
       <folder>app/Lim/Lim.Web.UI</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Lim.Web.UI</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
         <include pattern="bin\" to="content\bin"/>
         <include pattern="assets\" to="content\assets"/> 
@@ -153,7 +153,7 @@
       <folder>app/Lim/Lim.Test.Api</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Lim.Test.Api</description>
-      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
         <include pattern="bin\" to="content\bin"/>
         <include pattern="assets\" to="content\assets"/> 
