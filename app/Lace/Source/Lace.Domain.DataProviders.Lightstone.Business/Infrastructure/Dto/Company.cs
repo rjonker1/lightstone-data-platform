@@ -6,6 +6,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
 {
     public class Company
     {
+        private Company()
+        {
+            
+        }
         private Company(long companyId, string name, string regNumber, string vatNumber, string statusCode)
         {
             CompanyId = companyId;
@@ -23,7 +27,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
                     s =>
                         new Company(s.GetLongRowValue("companyid"), s.GetStringValue("companyname"), s.GetStringValue("companyregnumber"),
                             s.GetStringValue("VatNo"), s.GetStringValue("StatusCode")))
-                .FirstOrDefault();
+                .FirstOrDefault() ?? new Company();
         }
 
         public bool Valid()

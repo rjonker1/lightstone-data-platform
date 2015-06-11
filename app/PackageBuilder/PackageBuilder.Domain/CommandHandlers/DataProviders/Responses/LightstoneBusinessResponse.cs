@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
+using Lace.Domain.Core.Entities;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
 {
     public class LightstoneBusinessResponse
     {
-        //private static Lace.Domain.Core.Entities.LightstoneBusinessResponse DefaultLightstoneBusinessResponse()
-        //{
+        public Lace.Domain.Core.Entities.LightstoneBusinessCompanyResponse LightstoneCompanyResponse()
+        {
+            var result = new List<IProvideCompany>()
+            {
+                new CompanyResponse(0,"","","","","","","","","","","","","","","","")};
 
-        //    var result = new List<IRespondWithBusiness>(); // List<ReturnCompaniesResponse.Company>();l
-
-        //    return new Lace.Domain.Core.Entities.LightstoneBusinessResponse(result)
-        //    {
-        //        // TODO: new up a company response
-        //    };
-        //} 
+            return new LightstoneBusinessCompanyResponse(result);
+        } 
     }
 }

@@ -24,7 +24,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                                 s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
                                 s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).ToList();
 
-            return (IQueryable<TItem>)data.Where((Func<CarInformation, bool>)predicate);
+            return (IEnumerable<TItem>)data.Where((Func<CarInformation, bool>)predicate);
         }
 
         public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class

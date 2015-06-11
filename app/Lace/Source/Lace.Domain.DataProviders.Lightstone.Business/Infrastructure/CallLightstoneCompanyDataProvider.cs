@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
                 if (webService.UserToken == Guid.Empty)
                     throw new Exception("Cannot continue calling Lightstone Business Api. User is not valid");
 
-                var request = new CompanyRequest(_dataProvider.GetRequest<IAmLightstoneBusinessCompanyRequest>());
+                var request = new CompanyRequest(_dataProvider.GetRequest<IAmLightstoneBusinessCompanyRequest>()).Map().Validate();
                 if (!request.IsValid)
                     throw new Exception("Cannot continue call Lightstone Business Api. Request is not valid");
 

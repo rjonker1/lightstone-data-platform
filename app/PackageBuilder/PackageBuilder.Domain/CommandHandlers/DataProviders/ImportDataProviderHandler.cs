@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Contracts.DataProviders.Business;
-using Lace.Domain.Core.Contracts.DataProviders.Property;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.CommandHandlers.DataProviders.Responses;
@@ -59,9 +56,9 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 DataProviderName.LightstoneProperty, DataProviderName.LightstoneProperty.ToString(), 0m,
                 typeof (IProvideDataFromLightstoneProperty), "Owner", DateTime.UtcNow));
 
-            //_publisher.Publish(new CreateDataProvider(DefaultLightstoneBusinessResponse(), Guid.NewGuid(),
-            //    DataProviderName.LightstoneBusiness, DataProviderName.LightstoneBusiness.ToString(), 0d,
-            //    typeof(IProvideDataFromLightstoneBusiness), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(new LightstoneBusinessResponse().LightstoneCompanyResponse(), Guid.NewGuid(),
+                DataProviderName.LightstoneBusinessCompany, DataProviderName.LightstoneBusinessCompany.ToString(), 0m,
+                typeof(IProvideDataFromLightstoneBusinessCompany), "Owner", DateTime.UtcNow));
 
             this.Info(() => "Successfully imported data providers");
         }

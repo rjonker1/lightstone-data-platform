@@ -14,7 +14,7 @@ namespace Lace.Test.Helper.Mothers.Requests.BusinessRequests
 
         public IHavePackageForRequest Package
         {
-            get { return new CompanyPackage("lighstone", "2010/018608/07", "4740259769"); }
+            get { return new CompanyPackage("lightstone", "2010/018608/07", "4740259769"); }
         }
 
         public IHaveRequestContext Request

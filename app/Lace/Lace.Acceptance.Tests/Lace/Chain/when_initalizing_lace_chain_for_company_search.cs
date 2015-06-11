@@ -8,24 +8,23 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
-using Lace.Shared.Extensions;
-using Lace.Test.Helper.Builders.Scans;
 using Lace.Test.Helper.Builders.Buses;
+using Lace.Test.Helper.Builders.Requests;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Chain
 {
-    public class when_initializing_lace_source_chain_for_drivers_license_decryption : Specification
+    public class when_initalizing_lace_chain_for_company_search : Specification
     {
         private IBootstrap _initialize;
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly IAdvancedBus _command;
         private readonly IBuildSourceChain _buildSourceChain;
 
-        public when_initializing_lace_source_chain_for_drivers_license_decryption()
+        public when_initalizing_lace_chain_for_company_search()
         {
             _command = BusFactory.WorkflowBus();
-            _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
+            _request = new CompanyRequestBuilder().ForLightstoneCompany();
             _buildSourceChain = new CreateSourceChain();
         }
 
@@ -36,14 +35,15 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         }
 
         [Observation]
-        public void lace_data_providers_for_drivers_license_decryption_should_loaded_correclty()
+        public void lace_data_providers_for_company_search_should_loaded_correctly()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
             _initialize.DataProviderResponses.Count.ShouldEqual(8);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(1);
 
-            _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
-            _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Companies.Count().ShouldEqual(1);
 
         }
     }

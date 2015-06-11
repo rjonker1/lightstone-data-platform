@@ -6,7 +6,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
     public class CompanyRequest
     {
         //const string idNumber = "7902065199085";
-        //const string companyname = "lighstone";
+        //const string companyname = "lightstone";
         //const string company_reg = "2010/018608/07";
         //const string company_vat = "4740259769";
 

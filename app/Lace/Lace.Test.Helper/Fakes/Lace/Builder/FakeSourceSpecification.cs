@@ -4,9 +4,7 @@ using DataPlatform.Shared.Enums;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Fakes.Lace.Consumer;
-using Workflow.Lace.Domain;
 using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
