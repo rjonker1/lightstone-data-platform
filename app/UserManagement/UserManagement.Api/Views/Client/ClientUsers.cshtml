@@ -91,9 +91,19 @@
             });
         });
         $("td .ac_container").css("margin-bottom", "-10px");
-        $(".defaultCustomerSelect").each(function () {
+        $('.clientUserSelect').each(function() {
             var $select = $(this);
-            var $option = $("<option>", { value: $select.data("defaultCustomerId"), text: $select.data("defaultCustomerName") });
+            var $container = $select.closest("div");
+            var userId = $select.data("userId");
+            var userLastName = $select.data("userLastName");
+            $container.find('#userId_primary_key').val(userId);
+            $(this).val(userLastName);
+        });
+        $("#defaultCustomerSelect").each(function () {
+            var $select = $(this);
+            var customerId = $select.data("defaultCustomerId");
+            var customerName = $select.data("defaultCustomerName");
+            var $option = $("<option>", { value: customerId, text: customerName });
             $option.attr("selected", true);
             $option.appendTo($select);
             $select.addClass("chosen-select");
@@ -139,27 +149,8 @@
     });
     
     function gridActionFormatter(value, row, index) {
-
-        return ['<input class="clientUserSelect" name="userId" data-user-id="' + row.userId + '" type="text" />' +
+        return ['<input class="clientUserSelect" name="userId" data-user-id="' + row.userId + '" data-user-last-name="' + row.userLastName + '" type="text" />' +
             '<select id="defaultCustomerSelect" name="Customer" data-default-customer-id="' + row.defaultCustomerId + '" data-default-customer-name="' + row.defaultCustomerName + '" data-placeholder="Select default customer"></select>' +
             '<a class="btn btn-primary user-alias-link" data-alias-id="' + row.id + '">Save</a> '];
-
-        var lockUnlock = '<a class="btn btn-warning entity-lock" href="#/Users/Lock/' + row.id + '">Lock</a>';
-
-        if (row.isLocked == true) lockUnlock = '<a class="btn btn-success entity-lock" href="#/Users/UnLock/' + row.id + '">UnLock</a>';
-
-        return [
-            '<div class="row" style="width: 240px;">' +
-                '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '">Edit</a></div>' +
-                '<div class="col-md-1" />' +
-                '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '">Delete</a></div>' +
-                '<div class="col-md-2" />' +
-                '<div id="indexLock" class="col-md-1">' + lockUnlock + '</div>' +
-            '</div>'
-        ].join('');
     };
-
-    //$("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Users/Add", text: "Add" }).appendTo($("div.box-header"));
-
-    //UserManagement.overrideDataTablesStyling();
 </script>
