@@ -46,7 +46,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 
                 _logCommand.LogConfiguration(new { request },null);
 
-                if (!request.RequestIsValid)
+                if (!request.IsValid)
                     throw new Exception(
                         string.Format(
                             "Minimum requirements for Lightstone Property request has not been met with User id {0} and  Id or CK {1} and Max Rows to Return {2} and Tracking Number {3}",

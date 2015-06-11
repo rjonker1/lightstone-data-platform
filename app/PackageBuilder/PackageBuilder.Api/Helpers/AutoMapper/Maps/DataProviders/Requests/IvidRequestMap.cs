@@ -28,8 +28,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                     var request = s.Request ?? new LightstoneAutoRequest(new CarIdRequestField(""), new YearRequestField(""), new MakeRequestField(""), new VinNumberRequestField(""));
                     return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
                 });
-            Mapper.CreateMap<IProvideDataFromLightstoneBusiness, IEnumerable<IDataField>>()
-                .ConvertUsing(s => Enumerable.Empty<IDataField>());
+            //Mapper.CreateMap<IProvideDataFromLightstoneBusiness, IEnumerable<IDataField>>()
+            //    .ConvertUsing(s => Enumerable.Empty<IDataField>());
             Mapper.CreateMap<IProvideDataFromLightstoneProperty, IEnumerable<IDataField>>()
                .ConvertUsing(s => Enumerable.Empty<IDataField>());
             Mapper.CreateMap<IProvideDataFromPCubedFicaVerfication, IEnumerable<IDataField>>()

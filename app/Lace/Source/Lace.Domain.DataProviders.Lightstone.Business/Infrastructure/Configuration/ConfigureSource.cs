@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference;
+using System.ServiceModel;
+using Common.Logging;
+using Lace.Domain.DataProviders.Core.Shared;
+using Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference;
 
-
-namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configuration
+namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Configuration
 {
     [Serializable]
     [DataContract]
     public class ConfigureSource
     {
-        //private readonly string Username = Credentials.LightstoneBusinessApiEmail();
-        //private readonly string Password = Credentials.LightstoneBusinessApiPassword();
-
-        //public readonly string UserToken;
+        // email: murray@lightstone.co.za
+        //pass: Pass!1234
+        private readonly ILog _log = LogManager.GetLogger<ConfigureSource>();
+        private readonly string _username = Credentials.LightstoneBusinessApiUsername();
+        private readonly string _password = Credentials.LightstoneBusinessApiPassword();
+        public readonly Guid UserToken;
 
         [DataMember]
         public apiSoapClient Client { get; private set; }
@@ -20,13 +24,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configura
         public ConfigureSource()
         {
             Client = new apiSoapClient();
+            if(Client.State == CommunicationState.Closed)
+                Client.Open();
 
-
-            // TODO: confirm if this should be called in the configuration or per request.
-            // Should the proxy not be closed after every request?
-
-
-            //UserToken = Proxy.authenticateUser(Username, Password).ToString();
+            _log.InfoFormat("Attempting to login to Lightstone Business APi using username {0} and password {1}", _username,_password);
+            UserToken = Client.authenticateUser(_username, _password);
         }
 
         public void CloseSource()

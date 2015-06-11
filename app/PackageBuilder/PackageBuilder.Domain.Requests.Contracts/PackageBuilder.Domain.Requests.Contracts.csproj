@@ -47,6 +47,7 @@
     <Compile Include="RequestFields\IAmCompanyRegistrationNumberRequestField.cs" />
     <Compile Include="RequestFields\IAmCompanyVatNumberRequestField.cs" />
     <Compile Include="RequestFields\IAmEngineNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmSurnameRequestField.cs" />
     <Compile Include="RequestFields\IAmFirstNameRequestField.cs" />
     <Compile Include="RequestFields\IAmIdentityNumberRequestField.cs" />
     <Compile Include="RequestFields\IAmImageRequestField.cs" />
@@ -78,7 +79,8 @@
     <Compile Include="Requests\IAmIvidTitleholderRequest.cs" />
     <Compile Include="Requests\IAmJisRequest.cs" />
     <Compile Include="Requests\IAmLightstoneAutoRequest.cs" />
-    <Compile Include="Requests\IAmLightstoneBusinessRequest.cs" />
+    <Compile Include="Requests\IAmLightstoneBusinessDirectorRequest.cs" />
+    <Compile Include="Requests\IAmLightstoneBusinessCompanyRequest.cs" />
     <Compile Include="Requests\IAmLightstonePropertyRequest.cs" />
     <Compile Include="Requests\IAmRgtRequest.cs" />
     <Compile Include="Requests\IAmRgtVinRequest.cs" />

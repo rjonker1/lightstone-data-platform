@@ -4,8 +4,8 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromLightstoneBusiness : IPointToLaceProvider
+    public interface IProvideDataFromLightstoneBusinessCompany : IPointToLaceProvider
     {
-        IEnumerable<IRespondWithBusiness> BusinessInformation { get; }
+        IEnumerable<IProvideCompany> Companies { get; }
     }
 }

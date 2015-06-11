@@ -23,8 +23,8 @@ namespace Lace.Domain.DataProviders.Core.Shared
 
         // Lightstone Business API
 
-        public static Func<string> LightstoneBusinessApiEmail = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LightstoneBusinessApiEmail");
-        public static Func<string> LightstoneBusinessApiPassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LightstoneBusinessApiPassword");
+        public static Func<string> LightstoneBusinessApiUsername = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("lightstone/business/api/username");
+        public static Func<string> LightstoneBusinessApiPassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("lightstone/business/api/password");
 
 
 
