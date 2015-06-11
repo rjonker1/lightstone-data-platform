@@ -50,8 +50,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromLightstoneBusinessDirector>().Any() ||
-                    response.OfType<IProvideDataFromLightstoneBusinessDirector>().First() == null)
+                if (!response.OfType<IProvideDataFromLightstoneBusinessDirector>().Any() || response.OfType<IProvideDataFromLightstoneBusinessDirector>().First() == null)
                     CallFallbackSource(response, _command);
             }
 
