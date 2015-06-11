@@ -46,7 +46,7 @@ namespace UserManagement.Domain.Entities
         {
             get
             {
-                return CustomerUsers.Select(x => x.User).ToList();
+                return CustomerUsers != null ? CustomerUsers.Select(x => x.User).ToList() : Enumerable.Empty<User>();
             }
             set
             {
