@@ -16,6 +16,7 @@
         RequesterName,
         RequesterEmail,
         RequesterPhone,
-        RequestReference
+        RequestReference,
+        IdentityNumber
     }
 }

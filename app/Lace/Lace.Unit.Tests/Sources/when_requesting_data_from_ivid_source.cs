@@ -25,10 +25,6 @@ namespace Lace.Unit.Tests.Sources
 
         public when_requesting_data_from_ivid_source()
         {
-            //var bus = new FakeBus();
-            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
-
-        
             _requestDataFromService = new RequestDataFromIvidSource();
             _ividRequest = new LicensePlateRequestBuilder().ForIvid();
             _laceResponse = new Collection<IPointToLaceProvider>();
