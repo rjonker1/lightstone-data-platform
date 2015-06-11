@@ -13,6 +13,7 @@
         PCubedFica,
         SignioDecryptDriversLicense,
         LightstoneProperty,
-        LightstoneBusiness
+        LightstoneBusinessCompany,
+        LightstoneBusinessDirector,
     }
 }

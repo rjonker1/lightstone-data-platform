@@ -133,6 +133,7 @@
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_lightstone.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_Lightstone_business_company_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_Lightstone_property_request.cs">
       <SubType>Code</SubType>
     </Compile>
