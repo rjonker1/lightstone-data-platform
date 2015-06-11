@@ -6,6 +6,6 @@ namespace Lace.Domain.Core.Contracts.DataProviders
 {
     public interface IProvideDataFromLightstoneBusinessDirector : IPointToLaceProvider
     {
-        IEnumerable<IProvideDataFromLightstoneBusinessDirector> Directors { get; }
+        IEnumerable<IProvideDirector> Directors { get; }
     }
 }

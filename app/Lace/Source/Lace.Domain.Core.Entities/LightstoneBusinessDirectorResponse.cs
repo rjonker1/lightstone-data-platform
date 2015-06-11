@@ -15,13 +15,13 @@ namespace Lace.Domain.Core.Entities
             
         }
 
-        public LightstoneBusinessDirectorResponse(IEnumerable<IProvideDataFromLightstoneBusinessDirector> directors)
+        public LightstoneBusinessDirectorResponse(IEnumerable<IProvideDirector> directors)
         {
             Directors = directors;
         }
 
         [DataMember]
-        public IEnumerable<IProvideDataFromLightstoneBusinessDirector> Directors { get; private set; }
+        public IEnumerable<IProvideDirector> Directors { get; private set; }
 
         [DataMember]
         public Type Type
