@@ -25,22 +25,22 @@ namespace Billing.Api.Modules
 
                     var userList = new List<User>();
 
-                    //Transactions total for customer
+                    // Transactions total for customer
                     var customerTransactionsTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.TransactionId).Distinct().Count();
-                    //Products total for customer
+                    // Products total for customer
                     var customerPackagesTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
-                    //Transactions total for client
+                    // Transactions total for client
                     var clientTransactionsTotal = preBillingRepository.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.TransactionId).Distinct().Count();
-                    //Products total for client
+                    // Products total for client
                     var clientPackagesTotal = preBillingRepository.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
                     var customer = new PreBillingDto();
-                    //Customer
+                    // Customer
                     if (transaction.ClientId == new Guid())
                     {
                         customer = new PreBillingDto
@@ -52,7 +52,7 @@ namespace Billing.Api.Modules
                         };
                     }
 
-                    //Client
+                    // Client
                     if (transaction.CustomerId == new Guid())
                     {
                         customer = new PreBillingDto
@@ -64,7 +64,7 @@ namespace Billing.Api.Modules
                         };
                     }
 
-                    //Customer user
+                    // User
                     var user = new User
                     {
                         UserId = transaction.UserId,

@@ -43,7 +43,7 @@ window.userGridActionEvents = {
                 sortable: true
             }, {
                 field: 'firstName',
-                title: 'Fisrt Name',
+                title: 'First Name',
             }, {
                 field: 'lastName',
                 title: 'Last Name',

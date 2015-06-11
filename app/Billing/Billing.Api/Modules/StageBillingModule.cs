@@ -36,26 +36,26 @@ namespace Billing.Api.Modules
                    
                     var userList = new List<User>();
 
-                    //Transactions total for customer
+                    // Transactions total for customer
                     var customerTransactionsTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.TransactionId).Distinct().Count();
                     var billedCustomerTransactionsTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable)
                                                         .Select(x => x.TransactionId).Distinct().Count();
-                    //Products total for customer
+                    // Products total for customer
                     var customerPackagesTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
-                    //Transactions total for client
+                    // Transactions total for client
                     var clientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.TransactionId).Distinct().Count();
                     var billedClientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId && x.IsBillable)
                                                         .Select(x => x.TransactionId).Distinct().Count();
-                    //Products total for client
+                    // Products total for client
                     var clientPackagesTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
                     var customer = new StageBillingDto();
-                    //Customer
+                    // Customer
                     if (transaction.ClientId == new Guid())
                     {
                         customer = new StageBillingDto
@@ -68,7 +68,7 @@ namespace Billing.Api.Modules
                         };
                     }
 
-                    //Client
+                    // Client
                     if (transaction.CustomerId == new Guid())
                     {
                         customer = new StageBillingDto
@@ -81,7 +81,7 @@ namespace Billing.Api.Modules
                         };
                     }
 
-                    //Customer user
+                    // User
                     var user = new User
                     {
                         UserId = transaction.UserId,
@@ -94,7 +94,8 @@ namespace Billing.Api.Modules
                     var customerIndex = customerList.FindIndex(x => x.Id == customer.Id);
 
                     //Index restrictions for new records
-                    if (userIndex < 0 && user.HasTransactions) userList.Add(user);
+                    //if (userIndex < 0 && user.HasTransactions) userList.Add(user);
+                    if (userIndex < 0) userList.Add(user);
 
                     customer.Users = userList;
                     if (customerIndex < 0 && customer.Users.Any()) customerList.Add(customer);
