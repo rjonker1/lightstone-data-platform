@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Web.UI.WebControls;
+using System.Linq.Expressions;
 using AutoMapper;
+using DataPlatform.Shared.Helpers;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using RestSharp;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
@@ -19,6 +14,7 @@ using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Repositories;
 using IBus = MemBus.IBus;
 
@@ -26,11 +22,10 @@ namespace UserManagement.Api.Modules
 {
     public class ClientModule : SecureModule
     {
-        public ClientModule(IBus bus, IClientRepository clients, CurrentNancyContext currentNancyContext)
+        public ClientModule(IBus bus, IClientRepository clientRepository, CurrentNancyContext currentNancyContext)
         {
             Get["/Clients"] = _ =>
             {
-
                 var search = Context.Request.Query["search"];
                 var offset = Context.Request.Query["offset"];
                 var limit = Context.Request.Query["limit"];
@@ -39,10 +34,49 @@ namespace UserManagement.Api.Modules
                 if (limit == null) limit = 10;
 
                 var model = this.Bind<DataTablesViewModel>();
-                var dto = Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(clients);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto = Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(clientRepository);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });
+            };
+
+            Get["/ClientLookup"] = parameters =>
+            {
+                var filter = "";
+                if (Context.Request.Query["q_word[]"].HasValue)
+                    filter = (string)Context.Request.Query["q_word[]"].Value.ToString();
+                var pageIndex = 0;
+                var pageSize = 0;
+                int.TryParse(Context.Request.Query["page_num"].Value, out pageIndex);
+                int.TryParse(Context.Request.Query["per_page"].Value, out pageSize);
+
+                Expression<Func<Client, bool>> predicate = x => x.IsActive && x.Name.StartsWith(filter);
+                var clients = new PagedList<Client>(clientRepository, pageIndex != 0 ? pageIndex - 1 : pageIndex, pageSize == 0 ? 10 : pageSize, predicate);
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { result = Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(clients), cnt_whole = clients.RecordsFiltered });
+            };
+
+            Get["/ClientUsers/{clientId:guid}"] = _ =>
+            {
+                var filter = "";
+                if (Context.Request.Query["q_word[]"].HasValue)
+                    filter = (string)Context.Request.Query["q_word[]"].Value.ToString();
+                var pageIndex = 0;
+                var pageSize = 0;
+                int.TryParse(Context.Request.Query["page_num"].Value, out pageIndex);
+                int.TryParse(Context.Request.Query["per_page"].Value, out pageSize);
+
+                var clientId = (Guid)_.clientId;
+                var clientUsers = clientRepository.Where(x => x.Id == clientId).SelectMany(x => x.Customers.SelectMany(c => c.CustomerUsers)).Select(x => x.User);
+
+                Expression<Func<User, bool>> predicate = x => x.IsActive == true && x.UserType == UserType.Internal && (x.FirstName.StartsWith(filter) || x.LastName.StartsWith(filter));
+                var users = new PagedList<User>(clientUsers, pageIndex != 0 ? pageIndex - 1 : pageIndex, pageSize == 0 ? 10 : pageSize, predicate);
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { result = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users), cnt_whole = users.RecordsFiltered });
             };
 
             Get["/ClientLookup/{industryIds?}/{filter:alpha}"] = parameters =>
@@ -53,7 +87,7 @@ namespace UserManagement.Api.Modules
                     var industryString = (string)parameters.industryIds.Value;
                     var industryIds = industryString.Split(',').Select(x => new Guid(x)).ToArray();
                     var filter = (string)parameters.filter + "";
-                    var valueEntities = clients.Where(x => (x.Name + "").Trim().ToLower().StartsWith(filter.Trim().ToLower()) && x.Industries.Any(ind => industryIds.Contains(ind.IndustryId)));
+                    var valueEntities = clientRepository.Where(x => (x.Name + "").Trim().ToLower().StartsWith(filter.Trim().ToLower()) && x.Industries.Any(ind => industryIds.Contains(ind.IndustryId)));
                     dto = Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(valueEntities);
                 }
 
@@ -64,71 +98,6 @@ namespace UserManagement.Api.Modules
 
             Get["/Clients/Add"] = parameters => View["Save", new ClientDto()];
 
-            Get["/Clients/ImportUsers"] = _ => View["ImportClientUser"];
-
-            Get["/Clients/ImportUsers/FilesUpload"] = _ => Response.AsJson("");
-
-            //TODO: Error checking for file type. Allow csv only
-            Post["/Clients/ImportUsers/FilesUpload"] = _ =>
-            {
-                var filesUploaded = Request.Files;
-
-                var files = new List<FileUploadDto>();
-                var clientImportUsers = new List<UserAliasDto>();
-
-                foreach (var httpFile in filesUploaded)
-                {
-                    if (httpFile.ContentType != "text/csv")
-                    {
-                        // Response for file upload component
-                        files.Add(new FileUploadDto
-                        {
-                            name = httpFile.Name,
-                            size = Convert.ToInt32(httpFile.Value.Length),
-                            error = "File type not allowed"
-                        });
-
-                        break;
-                    };
-
-                    // CSV to object
-                    using (var reader = new StreamReader(httpFile.Value))
-                    {
-                        var contents = reader.ReadToEnd().Split('\n');
-                        var csv = from line in contents
-                                  select line.Split(',').ToArray();
-
-                        clientImportUsers.AddRange(csv.Skip(1).TakeWhile(r => r.Length > 1 && r.Last().Trim().Length > 0)
-                            .Select(row => new UserAliasDto
-                        {
-                            UuId = row[0],
-                            FirstName = row[1],
-                            LastName = row[2],
-                            UserName = row[3].Replace("\r", "")
-                        }));
-
-                        foreach (var clientImportUser in clientImportUsers)
-                        {
-                            var entity = Mapper.Map(clientImportUser, new UserAlias());
-                            bus.Publish(new CreateUpdateEntity(entity, "Create"));
-                        }
-                        
-                    }
-
-                    // Response for file upload component
-                    files.Add(new FileUploadDto
-                    {
-                        name = httpFile.Name,
-                        size = Convert.ToInt32(httpFile.Value.Length),
-                        thumbnailUrl = "http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-2/72/success-icon.png",
-                        deleteType = "DELETE"
-                    });
-                }
-
-                JObject fileResponseJsonObject = new JObject(new JProperty("files", JsonConvert.SerializeObject(files)));
-
-                return Response.AsJson(fileResponseJsonObject);
-            };
 
             Post["/Clients"] = _ =>
             {
@@ -141,7 +110,7 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+                    var entity = Mapper.Map(dto, clientRepository.Get(dto.Id) ?? new Client());
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
@@ -154,7 +123,7 @@ namespace UserManagement.Api.Modules
             Get["/Clients/{id}"] = parameters =>
             {
                 var guid = (Guid)parameters.id;
-                var client = clients.Get(guid);
+                var client = clientRepository.Get(guid);
                 var dto = Mapper.Map<Client, ClientDto>(client);
                 return View["Save", dto];
             };
@@ -169,7 +138,7 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var entity = Mapper.Map(dto, clients.Get(dto.Id));
+                    var entity = Mapper.Map(dto, clientRepository.Get(dto.Id));
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -183,7 +152,7 @@ namespace UserManagement.Api.Modules
             {
                 var dto = this.Bind<ClientDto>();
 
-                var entity = clients.Get(dto.Id);
+                var entity = clientRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
                 entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
                 entity.IsLocked = true;
@@ -197,7 +166,7 @@ namespace UserManagement.Api.Modules
             {
                 var dto = this.Bind<ClientDto>();
 
-                var entity = clients.Get(dto.Id);
+                var entity = clientRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
                 entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
                 entity.IsLocked = false;
@@ -211,7 +180,7 @@ namespace UserManagement.Api.Modules
             {
 
                 var dto = this.Bind<ClientDto>();
-                var entity = clients.Get(dto.Id);
+                var entity = clientRepository.Get(dto.Id);
 
                 bus.Publish(new SoftDeleteEntity(entity));
 
@@ -219,14 +188,6 @@ namespace UserManagement.Api.Modules
             };
         }
 
-        private class FileUploadDto
-        {
-            public string name { get; set; }
-            public int size { get; set; }
-            public string thumbnailUrl { get; set; }
-            public string deleteType { get; set; }
-
-            public string error { get; set; }
-        }
+        
     }
 }

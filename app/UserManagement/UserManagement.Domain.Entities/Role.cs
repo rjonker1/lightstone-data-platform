@@ -4,7 +4,7 @@ namespace UserManagement.Domain.Entities
 {
     public class Role : ValueEntity
     {
-        protected Role() { }
+        protected internal Role() { }
 
         public Role(string val) : base(val)
         {

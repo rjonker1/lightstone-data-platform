@@ -35,3 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: InternalsVisibleTo("Lightstone.Dataplatform.UserManagement.Domain.Entities.Tests")]
+[assembly: InternalsVisibleTo("Lightstone.Dataplatform.UserManagement.Infrastructure.Tests")]

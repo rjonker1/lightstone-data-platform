@@ -131,8 +131,8 @@ function initializeClientRoutes(sammy) {
         context.load('/Clients', { dataType: 'html', cache: false }).swap();
     });
 
-    sammy.get('/Clients/ImportUsers', function (context) {
-        context.load('/Clients/ImportUsers', { dataType: 'html', cache: false }).swap();
+    sammy.get('/UserAliases/ImportUsers', function (context) {
+        context.load('/UserAliases/ImportUsers', { dataType: 'html', cache: false }).swap();
     });
 
     sammy.get('/Clients/Add', function (context) {

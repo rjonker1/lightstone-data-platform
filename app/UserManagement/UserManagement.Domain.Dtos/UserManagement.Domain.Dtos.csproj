@@ -55,7 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressDto.cs" />
+    <Compile Include="AliasDto.cs" />
     <Compile Include="ClientDto.cs" />
+    <Compile Include="ClientUserAliasImportDto.cs" />
     <Compile Include="ClientUserDto.cs" />
     <Compile Include="ContactDetailDto.cs" />
     <Compile Include="ContractDto.cs" />

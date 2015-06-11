@@ -19,6 +19,8 @@ namespace UserManagement.TestHelper.BaseTests
 
         public when_persisting_entities_to_db(bool useSingleSession = false)
         {
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize(); 
+
             Container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
             if (useSingleSession)
                 Container.Kernel.ComponentModelCreated += OverrideHelper.OverrideNhibernateSessionLifestyle;

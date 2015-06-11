@@ -27,7 +27,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
                 .ForMember(dest => dest.CreateSource, opt => opt.Ignore())
                 //.ForMember(dest => dest.CreateSource, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<CreateSource>>().Get(x.CreateSourceId)))
                 .ForMember(dest => dest.Industries, opt => opt.MapFrom(c => c.Industries != null 
-                    ? new HashSet<CustomerIndustry>(c.Industries.Select(id => new CustomerIndustry { Customer = ServiceLocator.Current.GetInstance<IRepository<Customer>>().Get(c.Id), IndustryId = id })) 
+                    ? new HashSet<CustomerIndustry>(c.Industries.Select(id => new CustomerIndustry (ServiceLocator.Current.GetInstance<IRepository<Customer>>().Get(c.Id), id)))
                     : Enumerable.Empty<CustomerIndustry>()))
                 .ForMember(dest => dest.PlatformStatus, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<PlatformStatus>>().Get(x.PlatformStatusId)))
                 .ForMember(dest => dest.Billing, opt => opt.MapFrom(x => Mapper.Map<CustomerDto, Billing>(x)))

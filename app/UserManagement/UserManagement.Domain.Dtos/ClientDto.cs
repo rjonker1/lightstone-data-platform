@@ -71,10 +71,13 @@ namespace UserManagement.Domain.Dtos
         public DateTime? TrialExpiration { get; set; }
         public IEnumerable<Guid> CustomerIds { get; set; }
         public IEnumerable<NamedEntityDto> Customers { get; set; }
+        public IEnumerable<UserDto> Users { get; set; }
+        public IEnumerable<UserAliasDto> UserAliases { get; set; }
 
         public ClientDto()
         {
-            Customers = Enumerable.Empty<NamedEntityDto>(); 
+            Customers = Enumerable.Empty<NamedEntityDto>();
+            UserAliases = Enumerable.Empty<UserAliasDto>(); 
         }
     }
 }

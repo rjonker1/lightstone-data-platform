@@ -99,7 +99,23 @@
         </div>
 
     </div>
+    @*<div class="form-group">
 
+        <label class="control-label col-lg-4">Users</label>
+        <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(User).AssemblyQualifiedName">
+            <select id="UserIds" name="UserIds" data-placeholder="Type to search & add users" multiple class="chosen-select">
+                @foreach (EntityDto item in Model.Users)
+                {
+                    var isSelected = Model.Users != null && Model.Users.Select(x => x.Id).Contains(item.Id);
+                    <option selected="@isSelected" value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.UserIds)
+        </div>
+
+    </div>*@
     @Html.Partial("Shared/BoxFooter")
 </div>
 
@@ -109,9 +125,9 @@
         var url = "http://dev.packagebuilder.api.lightstone.co.za/Industries/" + (selected ? string.Join(",", Model.Industries) : "");        
     }
     $(function () {
-	$.get("@url", function (data) {
+        $.get("@url", function(data) {
             var $industrySelect = $("#industryTypeSelect");
-            $.each(data, function (index, industry) {
+            $.each(data, function(index, industry) {
                 $("<option>", { value: industry.id, text: industry.name, selected: industry.isSelected }).appendTo($industrySelect);
             });
             $industrySelect.trigger("chosen:updated");
@@ -136,7 +152,6 @@
 
         $('.trial-expiration').hide();
     });
-    
     
 
 </script>

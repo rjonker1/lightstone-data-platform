@@ -7,5 +7,16 @@ namespace UserManagement.Domain.Entities
     {
         public virtual Customer Customer { get; set; }
         public virtual Guid IndustryId { get; set; }
+
+        protected CustomerIndustry()
+        {
+        }
+
+        public CustomerIndustry(Customer customer, Guid industryId)
+        {
+            Id = Guid.NewGuid();
+            Customer = customer;
+            IndustryId = industryId;
+        }
     }
 }

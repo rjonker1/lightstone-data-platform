@@ -128,12 +128,14 @@
     <Compile Include="Commands\PlatformStatuses\ImportPlatformStatus.cs" />
     <Compile Include="Commands\Provinces\ImportProvince.cs" />
     <Compile Include="Commands\Roles\ImportRole.cs" />
+    <Compile Include="Commands\UserAliases\LinkUserAliasCommand.cs" />
     <Compile Include="ContractPackage.cs" />
     <Compile Include="AccountNumber.cs" />
     <Compile Include="CustomerAccountNumber.cs" />
     <Compile Include="CustomerIndustry.cs" />
+    <Compile Include="CustomerUser.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
-    <Compile Include="UserAlias.cs" />
+    <Compile Include="ClientUserAlias.cs" />
     <Compile Include="IIndustry.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
@@ -141,7 +143,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Billing.cs" />
     <Compile Include="Client.cs" />
-    <Compile Include="ClientUser.cs" />
     <Compile Include="CommercialState.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="ContractDuration.cs" />

@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using DataPlatform.Shared.ExceptionHandling;
-using DataPlatform.Shared.Helpers.Extensions;
-using UserManagement.Domain.Core.MessageHandling;
+﻿using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules.Users;
@@ -11,12 +8,10 @@ namespace UserManagement.Domain.BusinessRules.Users
     public class SoftDeleteUserRuleHandler : AbstractMessageHandler<SoftDeleteUserRule>
     {
 
-        private readonly IRepository<ClientUser> _clientUsers;
         private readonly IRepository<UserRole> _userRoles;
 
-        public SoftDeleteUserRuleHandler(IRepository<ClientUser> clientUsers, IRepository<UserRole> userRoles)
+        public SoftDeleteUserRuleHandler(IRepository<UserRole> userRoles)
         {
-            _clientUsers = clientUsers;
             _userRoles = userRoles;
         }
 

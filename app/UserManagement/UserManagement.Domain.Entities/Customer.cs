@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.Practices.ServiceLocation;
-using RestSharp;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
 using UserManagement.Domain.Core.Repositories;
@@ -40,7 +40,23 @@ namespace UserManagement.Domain.Entities
 
         public virtual ContactDetail ContactDetail { get; protected internal set; }
         public virtual CreateSource CreateSource { get; set; }
-        public virtual ISet<User> Users { get; protected internal set; }
+        public virtual ISet<CustomerUser> CustomerUsers { get; protected internal set; }
+        [DoNotMap]
+        public virtual IEnumerable<User> Users
+        {
+            get
+            {
+                return CustomerUsers.Select(x => x.User).ToList();
+            }
+            set
+            {
+                CustomerUsers = new HashSet<CustomerUser>(value.Select(x => new CustomerUser(this, x, false)).ToList());
+            }
+        }
+        public static class Expressions
+        {
+            public static readonly Expression<Func<Customer, IEnumerable<User>>> Users = x => x.Users;
+        }
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual ISet<Client> Clients { get; protected internal set; }
         public virtual bool IsLocked { get; set; }

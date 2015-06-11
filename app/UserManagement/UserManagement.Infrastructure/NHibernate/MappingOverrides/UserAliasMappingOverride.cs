@@ -4,11 +4,11 @@ using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
 {
-    public class UserAliasMappingOverride : IAutoMappingOverride<UserAlias>
-    {
-        public void Override(AutoMapping<UserAlias> mapping)
-        {
-            mapping.HasManyToMany(x => x.Users).Cascade.SaveUpdate();
-        }
-    }
+    //public class UserAliasMappingOverride : IAutoMappingOverride<ClientUserAlias>
+    //{
+    //    public void Override(AutoMapping<ClientUserAlias> mapping)
+    //    {
+    //        mapping.HasManyToMany(x => x.Users).Cascade.SaveUpdate().Table("UserAlias");
+    //    }
+    //}
 }

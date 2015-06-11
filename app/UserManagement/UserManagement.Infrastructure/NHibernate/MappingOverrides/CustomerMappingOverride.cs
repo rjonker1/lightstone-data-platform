@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
+using FluentNHibernate.Mapping;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
@@ -15,7 +16,12 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
             mapping.References(x => x.CreateSource).Cascade.SaveUpdate();
             mapping.HasManyToMany(x => x.Clients).Cascade.SaveUpdate().Table("ClientCustomer"); 
             mapping.HasManyToMany(x => x.Contracts).Cascade.SaveUpdate().Table("CustomerContract"); 
-            mapping.HasManyToMany(x => x.Users).Cascade.SaveUpdate().Table("CustomerUser"); // Inverse as User entity responsible for saving
+            mapping.HasMany(x => x.CustomerUsers).Cascade.SaveUpdate().Table("CustomerUser"); // Inverse as User entity responsible for saving
+            //mapping.HasMany(Customer.Expressions.Users)
+            //    .Inverse()
+            //    .AsSet()
+            //    .LazyLoad()
+            //    .KeyColumn("CustomerId");
             mapping.HasMany(x => x.Industries).Cascade.SaveUpdate(); 
         }
     }

@@ -128,8 +128,8 @@
     <div class="form-group">
 
         <label class="control-label col-lg-4">Clients</label>
-        <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Client).AssemblyQualifiedName">
-            <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
+        <div class="input-group col-lg-2 client-autocomplete">
+            <select id="ClientIds" name="ClientIds" data-placeholder="Type to search & add clients" multiple class="chosen-select">
                 @foreach (NamedEntityDto item in Model.Clients)
                 {
                     var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
@@ -146,7 +146,7 @@
 
         <label class="control-label col-lg-4">Contracts</label>
         <div class="input-group col-lg-2 customer-autocomplete">
-            <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add contracts" multiple class="chosen-select">
+            <select id="ContractIds" name="ContractIds" data-placeholder="Type to search & add contracts" multiple class="chosen-select">
                 @foreach (NamedEntityDto item in Model.Contracts)
                 {
                     var isSelected = Model.Contracts != null && Model.Contracts.Select(x => x.Id).Contains(item.Id);

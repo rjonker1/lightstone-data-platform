@@ -24,28 +24,32 @@ namespace UserManagement.Domain.Entities
         public virtual DateTime? TrialExpiration { get; set; }
         public virtual UserType UserType { get; protected internal set; }
         public virtual ISet<Role> Roles { get; protected internal set; }
-        public virtual ISet<Customer> Customers { get; protected internal set; }
-        public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
-        public virtual ISet<UserAlias> UserAliases { get; protected internal set; }
-
+        public virtual ISet<CustomerUser> CustomerUsers { get; protected internal set; }
         [DoNotMap]
-        public virtual IEnumerable<Client> Clients
+        public virtual IEnumerable<Customer> Customers
         {
             get
             {
-                return ClientUsers != null ? ClientUsers.Select(x => x.Client) : Enumerable.Empty<Client>();
+                return CustomerUsers.Select(x => x.Customer).ToList();
             }
-        }
+            set
+            {
+                CustomerUsers = new HashSet<CustomerUser>(value.Select(x => new CustomerUser(x, this, false)).ToList());
+            }
+        } 
+        public virtual ISet<ClientUserAlias> ClientUserAliases { get; protected internal set; }
+
         [DoNotMap]
         public virtual IEnumerable<Contract> Contracts
         {
             get
             {
-                var customerContracts = Customers.SelectMany(x => x.Contracts);
-                var clientContracts = Clients.SelectMany(x => x.Contracts);
+                var customerContracts = Customers.SelectMany(c => c.Contracts);
+                var clientContracts = Customers.SelectMany(c => c.Clients.SelectMany(client => client.Contracts));
                 return customerContracts.Union(clientContracts);
             }
-        } 
+        }
+
         public User() { }
 
         public User(string firstName, string lastName, string idNumber, string contactNumber, string userName, string password, 

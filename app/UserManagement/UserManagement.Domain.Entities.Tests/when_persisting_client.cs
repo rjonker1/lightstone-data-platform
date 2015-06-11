@@ -27,9 +27,9 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.Name, "Client")
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "Number", "EmailAddress", physicalAddress, postalAddress))
                 .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })
-                .CheckComponentList(c => c.ClientUsers, new HashSet<ClientUser> { new ClientUser(client, "Alias") })
+                .CheckComponentList(c => c.UserAliases, new HashSet<ClientUserAlias> { new ClientUserAlias() })
                 //.CheckProperty(c => c.Industries, new[] { Guid.NewGuid(), Guid.NewGuid() })
-                .CheckComponentList(c => c.Industries, new List<ClientIndustry> { new ClientIndustry { Client = client, IndustryId = Guid.NewGuid() } })
+                .CheckComponentList(c => c.Industries, new List<ClientIndustry> { new ClientIndustry (client, Guid.NewGuid())})
                 .VerifyTheMappings(client);
         }
     }

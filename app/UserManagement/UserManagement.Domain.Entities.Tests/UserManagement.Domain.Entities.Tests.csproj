@@ -95,11 +95,10 @@
     <Compile Include="ValueTypes\when_persisting_role.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\UserManagement.Api\connectionStrings.config">
-      <Link>connectionStrings.config</Link>
+    <None Include="app.config" />
+    <None Include="connectionStrings.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

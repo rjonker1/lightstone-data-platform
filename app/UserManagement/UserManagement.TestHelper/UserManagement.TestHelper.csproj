@@ -38,6 +38,10 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\NhProf\HibernatingRhinos.Profiler.Appender.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>

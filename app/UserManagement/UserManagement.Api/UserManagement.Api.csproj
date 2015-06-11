@@ -413,7 +413,6 @@
     <Content Include="Scripts\jquery.fileupload\jquery.fileupload-video.js" />
     <Content Include="Scripts\jquery.fileupload\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.fileupload\jquery.iframe-transport.js" />
-    <Content Include="Scripts\jquery.fileupload\main.js" />
     <Content Include="Scripts\jquery.fileupload\vendor\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.form.min.js" />
@@ -558,11 +557,9 @@
     <Compile Include="Helpers\AutoMapper\Maps\Users\UserAliasMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ValueEntities\ValueEntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\PackageMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Converters\ClientUserDtoToClientUserConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Addresses\AddressMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Clients\ClientMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Billings\BillingMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\ClientUsers\ClientUserMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ContactDetails\ContactDetailMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Customers\CustomerMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\NamedEntities\NamedEntityMap.cs" />
@@ -613,6 +610,7 @@
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\IntegrationModule.cs" />
     <Compile Include="Modules\NamedEntityModule.cs" />
+    <Compile Include="Modules\UserAliasModule.cs" />
     <Compile Include="Modules\ValueEntityModule.cs" />
     <Compile Include="ViewModels\DataTablesViewModel.cs" />
     <Compile Include="ViewModels\LookupViewModel.cs" />
@@ -706,7 +704,7 @@
     <Content Include="Views\Customer\PhysicalAddress.cshtml" />
     <Content Include="Views\Customer\PostalAddress.cshtml" />
     <Content Include="Views\Client\Billing.cshtml" />
-    <Content Include="Views\Client\ImportClientUser.cshtml" />
+    <Content Include="Views\Client\ClientUsers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

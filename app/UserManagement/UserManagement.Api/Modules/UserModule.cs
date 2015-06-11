@@ -45,6 +45,16 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
+            Get["/UserCustomers/{userId:guid}"] = _ =>
+            {
+                var userId = (Guid)_.userId;
+                var customers = userRepository.Where(x => x.Id == userId && x.IsActive == true).SelectMany(x => x.CustomerUsers.Select(cu => cu.Customer));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers));
+            };
+
             Get["/Userlist"] = parameters =>
             {
                 var filter = "";
@@ -76,8 +86,8 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var clientUsersDto = this.Bind<List<ClientUserDto>>();
-                    dto.ClientUsers = clientUsersDto;
+                    //var clientUsersDto = this.Bind<List<ClientUserDto>>();
+                    //dto.ClientUsers = clientUsersDto;
 
                     var entity = Mapper.Map(dto, userRepository.Get(dto.Id) ?? new User());
 
@@ -112,8 +122,8 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var clientUsersDto = this.Bind<List<ClientUserDto>>();
-                    dto.ClientUsers = clientUsersDto;
+                    //var clientUsersDto = this.Bind<List<ClientUserDto>>();
+                    //dto.ClientUsers = clientUsersDto;
                     var entity = Mapper.Map(dto, userRepository.Get(dto.Id));
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));

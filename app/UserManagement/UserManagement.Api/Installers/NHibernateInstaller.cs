@@ -6,13 +6,10 @@ using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using UserManagement.Domain.Entities.NHibernate.Interceptors;
 using UserManagement.Infrastructure.NHibernate;
 
 namespace UserManagement.Api.Installers
 {
-
-
     public class NHibernateInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)

@@ -20,26 +20,21 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
             Mapper.CreateMap<User, UserDto>()
                 .ForMember(dest => dest.RoleIds, opt => opt.MapFrom(x => x.Roles.Select(y => y.Id)))
                 .ForMember(dest => dest.RoleValues, opt => opt.MapFrom(x => x.Roles.Select(r => r.Value)))
-                .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)))
-                .ForMember(dest => dest.ClientUsers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<ClientUser>, IEnumerable<ClientUserDto>>(x.ClientUsers)));
+                .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)));
 
             Mapper.CreateMap<UserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .ForMember(dest => dest.Roles, opt => opt.MapFrom(x => 
+                .ForMember(dest => dest.Roles, opt => opt.MapFrom(x =>
                     x.RoleIds != null
-                        ? new HashSet<Role>(x.RoleIds.Select(id => ServiceLocator.Current.GetInstance<IValueEntityRepository<Role>>().Get(id))) 
+                        ? new HashSet<Role>(
+                            x.RoleIds.Select(
+                                id => ServiceLocator.Current.GetInstance<IValueEntityRepository<Role>>().Get(id)))
                         : Enumerable.Empty<Role>()))
-                .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => 
+                .ForMember(dest => dest.Customers, opt => opt.MapFrom(x =>
                     x.CustomerIds != null
-                        ? new HashSet<Customer>(x.CustomerIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Customer>>().Get(id))) 
-                        : Enumerable.Empty<Customer>()))
-                .ForMember(dest => dest.ClientUsers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<ClientUserDto>, IEnumerable<ClientUser>>(x.ClientUsers)))
-                .AfterMap((src, dest) =>
-                {
-                    dest.HashPassword();
-                    foreach (var clientuser in dest.ClientUsers)
-                        clientuser.LinkUser(dest);
-                });
+                        ? new HashSet<Customer>(
+                            x.CustomerIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Customer>>().Get(id))).ToList()
+                        : Enumerable.Empty<Customer>()));
         }
     }
 }
