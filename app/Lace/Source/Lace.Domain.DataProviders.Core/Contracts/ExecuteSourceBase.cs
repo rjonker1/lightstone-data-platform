@@ -9,6 +9,7 @@ namespace Lace.Domain.DataProviders.Core.Contracts
     {
         public IExecuteTheDataProviderSource Next { get; private set; }
         public IExecuteTheDataProviderSource FallBack { get; private set; }
+        public IExecuteTheDataProviderSource Lookup { get; private set; }
 
         public ExecuteSourceBase(IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource)
         {
@@ -28,6 +29,13 @@ namespace Lace.Domain.DataProviders.Core.Contracts
             if (FallBack == null) return;
 
             FallBack.CallSource(response);
+        }
+
+        public void CallLookupSource(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
+        {
+            if (Lookup == null) return;
+
+            Lookup.CallSource(response);
         }
     }
 }

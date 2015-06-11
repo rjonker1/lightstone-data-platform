@@ -6,13 +6,13 @@ using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Exten
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Management
 {
-    public class TransformLightstoneBusinessResponse : ITransformResponseFromDataProvider
+    public class TransformLightstoneCompanyResponse : ITransformResponseFromDataProvider
     {
         public DataSet Response { get; private set; }
         public IProvideDataFromLightstoneBusinessCompany Result { get; private set; }
         public bool Continue { get; private set; }
 
-        public TransformLightstoneBusinessResponse(DataSet response)
+        public TransformLightstoneCompanyResponse(DataSet response)
         {
             Response = response;
             Continue = Response != null && Response.Tables.Count > 0;

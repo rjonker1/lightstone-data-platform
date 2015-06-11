@@ -22,14 +22,9 @@ namespace Lace.Acceptance.Tests.Requests
 
         public when_sending_property_request_to_lace_entry_point()
         {
-            //var assembliesToScan =
-            //    AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.command.Monitoring.Messages")
-            //        .And("NServiceBus.NHibernate")
-            //        .And("NServiceBus.Transports.RabbitMQ");
-
             _bus = BusFactory.WorkflowBus();
 
-            _request = new LicensePlateRequestBuilder().ForPropertySources();
+            _request = new PropertyRequestBuilder().ForPropertySources();
             _entryPoint = new EntryPointService(_bus);
         }
 
@@ -42,11 +37,14 @@ namespace Lace.Acceptance.Tests.Requests
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_property_sources()
         {
             _responses.ShouldNotBeNull();
-            _responses.Count.ShouldEqual(7);
+            _responses.Count.ShouldEqual(8);
+            _responses.Count(c => c.Handled).ShouldEqual(1);
 
 
             _responses.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
             _responses.OfType<IProvideDataFromLightstoneProperty>().First().Handled.ShouldBeTrue();
+            _responses.OfType<IProvideDataFromLightstoneProperty>().First().PropertyInformation.ShouldNotBeNull();
+            _responses.OfType<IProvideDataFromLightstoneProperty>().First().PropertyInformation.Count().ShouldEqual(1);
 
         }
     }

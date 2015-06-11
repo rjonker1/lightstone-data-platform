@@ -40,26 +40,25 @@ namespace Lace.Domain.DataProviders.Lightstone
             }
             else
             {
-
-                CallFallbackSource(response,_command);
+                CallLookupSource(response, _command);
 
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
                 _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
-                _logCommand.LogBegin(new { _dataProvider });
+                _logCommand.LogBegin(new {_dataProvider});
 
                 var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
                     new CallLightstoneAutoDataProvider(_dataProvider,
                         new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()),
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()),_logCommand));
+                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
-                _logCommand.LogEnd(new { response });
+                _logCommand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
                     response.OfType<IProvideDataFromLightstoneAuto>().First() == null)
-                    CallFallbackSource(response, _command);
+                    CallFallbackSource(response, _command); //TODO: VIN12?
             }
 
             CallNextSource(response, _command);

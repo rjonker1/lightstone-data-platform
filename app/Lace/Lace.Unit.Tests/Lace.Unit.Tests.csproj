@@ -49,12 +49,12 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1200\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1215\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1215, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1215\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -104,6 +104,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Chain\when_building_lace_source_chain_for_company_search.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_license_plate_number_search.cs" />
     <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Sources\Lightstone\when_getting_total_sales_by_age_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_total_sales_by_gender_metric.cs" />
     <Compile Include="Sources\when_getting_request_fields_from_reqeust.cs" />
+    <Compile Include="Sources\when_requesting_data_from_lightsone_business_compan_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_lightstone.source.cs" />
     <Compile Include="Sources\when_requesting_data_from_rgt_vin_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_ivid_title_holder_source.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Sources\when_transforming_ivid_hpi_standard_query_response.cs" />
     <Compile Include="Sources\when_requesting_data_from_ivid_source.cs" />
     <Compile Include="Transform\when_transforming_lighstone_response.cs" />
+    <Compile Include="Transform\when_transforming_lightstone_business_company_response.cs" />
     <Compile Include="Transform\when_transforming_rgt_vin_response.cs" />
     <Compile Include="Transform\when_transforming_audatex_response.cs" />
     <Compile Include="Transform\when_transforming_ivid_response.cs" />
@@ -188,6 +191,10 @@
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj">
       <Project>{d2f75a1a-20e2-4b05-8f04-ef932d6f6b38}</Project>
       <Name>Lace.Domain.DataProviders.Jis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.Company.csproj">
+      <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Business.Company</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>

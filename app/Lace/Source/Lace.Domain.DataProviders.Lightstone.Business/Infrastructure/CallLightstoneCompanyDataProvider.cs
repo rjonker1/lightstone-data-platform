@@ -37,22 +37,23 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
                 var webService = new ConfigureSource();
                 if (webService.Client.State == CommunicationState.Closed)
                     webService.Client.Open();
-              
-                if(webService.UserToken == Guid.Empty)
+
+                if (webService.UserToken == Guid.Empty)
                     throw new Exception("Cannot continue calling Lightstone Business Api. User is not valid");
 
                 var request = new CompanyRequest(_dataProvider.GetRequest<IAmLightstoneBusinessCompanyRequest>());
-                if(!request.IsValid)
+                if (!request.IsValid)
                     throw new Exception("Cannot continue call Lightstone Business Api. Request is not valid");
 
-                var companiesDs = webService.Client.returnCompanies(webService.UserToken.ToString(), request.CompanyName, request.CompanyRegnum, request.CompanyVatnumber);
+                var companiesDs = webService.Client.returnCompanies(webService.UserToken.ToString(), request.CompanyName, request.CompanyRegnum,
+                    request.CompanyVatnumber);
                 var company = Dto.Company.GetFromDataset(companiesDs);
-                if(!company.Valid())
+                if (!company.Valid())
                     throw new Exception(string.Format("Company with Name {0} could not be found", request.CompanyName));
 
                 var confirmation = webService.Client.confirmCompany(webService.UserToken.ToString(), company.CompanyId, Guid.NewGuid().ToString());
                 var confirm = Confirmation.Get(confirmation);
-                if(!confirm.Valid())
+                if (!confirm.Valid())
                     throw new Exception(string.Format("Company with Id {0} could not be confirmed", company.CompanyId));
 
                 _result = webService.Client.returnCompanyReport(confirm.ReportGuid.ToString());
@@ -85,11 +86,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
                 // call authenticateUser to get the UserToke by email and password
                 // email: murray@lightstone.co.za
                 //pass: Pass!1234
-                
+
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lightstone Business Data Provider {0}", ex);
+                _log.ErrorFormat("Error calling Lightstone Business Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(ex, new {ErrorMessage = "Error calling Lightstone Business Data Provider"});
                 LightstoneBusinessResponseFailed(response);
             }
@@ -104,7 +105,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformLightstoneBusinessResponse(_result);
+            var transformer = new TransformLightstoneCompanyResponse(_result);
 
             if (transformer.Continue)
             {

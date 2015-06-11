@@ -32,7 +32,7 @@ namespace Lim.Test.Api.Modules
                     ? transations.Select(
                         s =>
                             new TransactionDto(s.PackageId, s.UserId, s.Username, s.ContractId, s.AccountNumber, s.ResponseDate, s.RequestId, s.Report,
-                                s.HasResponse)).ToList()
+                                s.HasResponse)).OrderByDescending(o => o.ResponseDate).ToList()
                     : new List<TransactionDto>();
                 return View["Push/Received", model];
             };
