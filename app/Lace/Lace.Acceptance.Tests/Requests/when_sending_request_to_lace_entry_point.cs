@@ -35,7 +35,8 @@ namespace Lace.Acceptance.Tests.Requests
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_all_sources()
         {
             _response.ShouldNotBeNull();
-            _response.Count.ShouldEqual(7);
+            _response.Count.ShouldEqual(8);
+            _response.Count(c => c.Handled).ShouldEqual(5);
             
             _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
             _response.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();

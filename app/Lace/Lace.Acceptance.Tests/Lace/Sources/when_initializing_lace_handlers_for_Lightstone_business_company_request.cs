@@ -6,9 +6,9 @@ using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Property;
+using Lace.Domain.DataProviders.Lightstone.Business.Company;
 using Lace.Test.Helper.Builders.Buses;
-using Lace.Test.Helper.Builders.Property;
+using Lace.Test.Helper.Builders.Requests;
 using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
@@ -23,12 +23,10 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_Lightstone_business_company_request()
         {
-            _command = MonitoringBusBuilder.ForLightstonePropertyCommands(Guid.NewGuid());
-            var lspRequestBuilder = new LspRequestBuilder();
-
-            _request = lspRequestBuilder.ForReturnProperties();
+            _command = MonitoringBusBuilder.ForLightstoneCompanyCommands(Guid.NewGuid());
+            _request = new CompanyRequestBuilder().ForLightstoneCompany();
             _response = new Collection<IPointToLaceProvider>();
-            _dataProvider = new LightstonePropertyDataProvider(_request, null, null, _command);
+            _dataProvider = new LightstoneCompanyDataProvider(_request, null, null, _command);
         }
 
         public override void Observe()
@@ -37,27 +35,27 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         }
 
         [Observation]
-        public void lace_lightstone_property_response_should_be_handled_test()
+        public void lace_lightstone_company_response_should_be_handled_test()
         {
-            _response.OfType<IProvideDataFromLightstoneProperty>().First().Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
-        public void lace_lightstone_property_response_shuould_not_be_null_test()
+        public void lace_lightstone_company_response_shuould_not_be_null_test()
         {
-            _response.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
+            _response.OfType<IProvideDataFromLightstoneBusinessCompany>().First().ShouldNotBeNull();
         }
 
         [Observation]
-        public void lace_lightstone_property_response_should_have_property_information()
+        public void lace_lightstone_compan_response_should_have_company()
         {
-            _response.OfType<IProvideDataFromLightstoneProperty>().First().PropertyInformation.Count().ShouldEqual(1);
+            _response.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Companies.Count().ShouldEqual(1);
         }
 
         [Observation]
         public void lace_lightstone_property_response_should_have_property_buyers_name()
         {
-            _response.OfType<IProvideDataFromLightstoneProperty>().First().PropertyInformation.First().BuyerName.ShouldEqual("WOOLFSON MURRAY GRANT");
+            _response.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Companies.First().CompanyName.ShouldEqual("LIGHTSTONE AUTO");
         }
 
     }

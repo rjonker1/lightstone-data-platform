@@ -17,7 +17,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 
         public string AccountNumber
         {
-            get { return "ACCRJ000000"; }
+            get { return "1"; }
         }
     }
 }

@@ -61,6 +61,12 @@ namespace Lace.Test.Helper.Builders.Buses
             var bus = BusFactory.WorkflowBus();
             return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneProperty);
         }
+
+        public static ISendCommandToBus ForLightstoneCompanyCommands(Guid requestId)
+        {
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneBusinessCompany);
+        }
     }
 
     public class BusFactory

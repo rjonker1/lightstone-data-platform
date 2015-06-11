@@ -43,7 +43,7 @@ namespace Lace.Unit.Tests.Chain
         public void then_drivers_license_source_chain_should_be_loaded_correctly()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(6);
+            _initialize.DataProviderResponses.Count(w => w.Handled).ShouldEqual(1);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeTrue();

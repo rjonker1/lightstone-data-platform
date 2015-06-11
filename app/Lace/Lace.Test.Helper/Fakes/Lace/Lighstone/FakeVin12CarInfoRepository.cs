@@ -26,7 +26,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return (IQueryable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort()
+            return (IEnumerable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort()
                     .Where(w => w.Key == _vin)
                     .Select(
                         s =>

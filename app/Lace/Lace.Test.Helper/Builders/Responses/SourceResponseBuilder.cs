@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DataPlatform.Shared.Dtos;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
@@ -66,6 +67,11 @@ namespace Lace.Test.Helper.Builders.Responses
         public string ForLightstoneReturnPropertiesResponse()
         {
             return FakeLightstonePropertyResponse.GetResponseFromReturnProperties();
+        }
+
+        public System.Data.DataSet ForLightstoneBusinessCompanyResponse()
+        {
+            return FakeLightstoneBusinessCompanyResponse.ReturnCompanyReport();
         }
     }
 }

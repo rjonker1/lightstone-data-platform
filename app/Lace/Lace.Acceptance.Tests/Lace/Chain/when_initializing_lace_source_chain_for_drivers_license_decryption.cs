@@ -27,8 +27,6 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _command = BusFactory.WorkflowBus();
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
             _buildSourceChain = new CreateSourceChain();
-            //_buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
-            //_buildSourceChain.Build();
         }
 
         public override void Observe()
@@ -41,7 +39,8 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public void lace_data_providers_for_drivers_license_decryption_should_loaded_correclty()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(7);
+            _initialize.DataProviderResponses.Count.ShouldEqual(8);
+            _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(1);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeTrue();

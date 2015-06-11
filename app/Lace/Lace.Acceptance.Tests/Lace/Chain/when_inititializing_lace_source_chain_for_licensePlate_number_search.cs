@@ -47,7 +47,8 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public void lace_data_providers_for_VVI_product_must_be_handled_loaded_correclty()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(7);
+            _initialize.DataProviderResponses.Count.ShouldEqual(8);
+            _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(5);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
@@ -66,10 +67,6 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneProperty>().First().Handled.ShouldBeFalse();
-
-            //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
-            //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
-
         }
     }
 }

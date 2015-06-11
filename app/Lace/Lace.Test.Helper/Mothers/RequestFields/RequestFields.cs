@@ -257,4 +257,49 @@ namespace Lace.Test.Helper.Mothers.RequestFields
 
         public string Field { get; private set; }
     }
+
+    public class CompanyNameRequestField : IAmCompanyNameRequestField
+    {
+        private CompanyNameRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmCompanyNameRequestField Get(string field)
+        {
+            return new CompanyNameRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
+    public class CompanyRegistrationNumberRequestField : IAmCompanyRegistrationNumberRequestField
+    {
+        private CompanyRegistrationNumberRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmCompanyRegistrationNumberRequestField Get(string field)
+        {
+            return new CompanyRegistrationNumberRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
+    public class CompanyVatNumberRequestField : IAmCompanyVatNumberRequestField
+    {
+        private CompanyVatNumberRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmCompanyVatNumberRequestField Get(string field)
+        {
+            return new CompanyVatNumberRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
 }

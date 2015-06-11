@@ -44,7 +44,8 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         public void lace_ivid_response_for_vvi_product_should_not_be_null()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(7);
+            _initialize.DataProviderResponses.Count.ShouldEqual(8);
+            _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(5);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();

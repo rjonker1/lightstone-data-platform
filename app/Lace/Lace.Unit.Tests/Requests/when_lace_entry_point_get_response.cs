@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
@@ -35,7 +34,7 @@ namespace Lace.Unit.Tests.Requests
         [Observation]
         public void lace_entry_point_get_response_must_be_availble()
         {
-            _response.Count.ShouldEqual(6);
+            _response.Count.ShouldEqual(7);
         }
         
     }

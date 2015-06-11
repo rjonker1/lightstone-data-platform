@@ -14,21 +14,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
             SourceChain = FakeSourceSpecification.Chain();
         }
 
-        //public void Build()
-        //{
-        //    //SourceChain =
-        //    //    new FakeSourceSpecification().Specifications.First().Value;
-        //    //if (string.IsNullOrEmpty(_action.Action))
-        //    //{
-        //    //    throw new Exception("Action for request is empty");
-        //    //}
-
-
-        //    //SourceChain =
-        //    //    new FakeSourceSpecification().Specifications.SingleOrDefault(
-        //    //        w => w.Key.Equals(_action.Action, StringComparison.CurrentCultureIgnoreCase)).Value;
-        //}
-
         public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; private set; }
 
 

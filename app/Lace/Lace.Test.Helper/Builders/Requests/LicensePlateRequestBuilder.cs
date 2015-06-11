@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Mothers.Requests;
-using Lace.Test.Helper.Mothers.Requests.PropertyRequests;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -63,11 +61,5 @@ namespace Lace.Test.Helper.Builders.Requests
             _request = new[] {new LicensePlateNumberAllDataProvidersRequest()};
             return _request;
         }
-
-        public ICollection<IPointToLaceRequest> ForPropertySources()
-        {
-            return new Collection<IPointToLaceRequest>() {new PropertiesRequest()};
-        }
-
     }
 }

@@ -42,9 +42,9 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         }
 
         [Observation]
-        public void lace_response_to_be_returned_should_be_one()
+        public void lace_response_to_be_returned_should_be_8()
         {
-            _response.Count.ShouldEqual(7);
+            _response.Count.ShouldEqual(8);
         }
 
         [Observation]
