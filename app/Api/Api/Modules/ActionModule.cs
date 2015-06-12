@@ -42,8 +42,7 @@ namespace Api.Modules
                     var apiRequest = this.Bind<ApiRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
-                    new ApiRequestValidator(userManagementApi).AuthenticateRequest(token, apiRequest.UserId,
-                        apiRequest.CustomerClientId);
+                    new ApiRequestValidator(userManagementApi).AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId);
 
                     this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));

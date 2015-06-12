@@ -17,7 +17,7 @@ namespace Api.Helpers.Validators
             _userManagementApiClient = userManagementApiClient;
         }
 
-        public void AuthenticateRequest(string authToken, Guid userId, Guid customerClientId)
+        public void AuthenticateRequest(string authToken, Guid userId, Guid customerClientId, Guid contractId)
         {
             #region ValuePopulation Validation
 
@@ -66,10 +66,12 @@ namespace Api.Helpers.Validators
 
             #endregion
 
+            #region Contract relationship validation
+
             // Validate Contract
-            //var contract = JsonConvert.DeserializeObject<ValidationDto>(_userManagementApiClient.Get("", "/Customers/Details/" + customerClientId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
+            var contract = JsonConvert.DeserializeObject<ContractEntityDto>(_userManagementApiClient.Get("", "/Contracts/Details/" + contractId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
 
-
+            #endregion
 
             // TODO: Validate Customer | Client
             // TODO: Validate Contract
