@@ -35,72 +35,45 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
             try
             {
                 var webService = new ConfigureSource();
-                //if (webService.Client.State == CommunicationState.Closed)
-                //    webService.Client.Open();
+                if (webService.Client.State == CommunicationState.Closed)
+                    webService.Client.Open();
 
                 if (webService.UserToken == Guid.Empty)
-                    throw new Exception("Cannot continue calling Lightstone Business Api. User is not valid");
+                    throw new Exception("Cannot continue calling Lightstone Business Directory Api. User is not valid");
 
-                var request = new CompanyRequest(_dataProvider.GetRequest<IAmLightstoneBusinessCompanyRequest>()).Map().Validate();
+                var request = new DirectorRequest(_dataProvider.GetRequest<IAmLightstoneBusinessDirectorRequest>()).Map().Validate();
                 if (!request.IsValid)
-                    throw new Exception("Cannot continue call Lightstone Business Api. Request is not valid");
+                    throw new Exception("Cannot continue call Lightstone Business Director Api. Request is not valid");
 
-                //var companiesDs = webService.Client.returnCompanies(webService.UserToken.ToString(), request.CompanyName, request.CompanyRegnum,
-                //    request.CompanyVatnumber);
-                //var company = Dto.Company.GetFromDataset(companiesDs);
-                //if (!company.Valid())
-                //    throw new Exception(string.Format("Company with Name {0} could not be found", request.CompanyName));
+                var directorDs = webService.Client.returnDirectors(webService.UserToken.ToString(), null, null, request.IdNumber);
+                var director = Dto.Director.GetFromDataset(directorDs);
+                if (!director.Valid())
+                    throw new Exception(string.Format("Director with Id Number {0} is not valid", request.IdNumber));
 
-                //var confirmation = webService.Client.confirmCompany(webService.UserToken.ToString(), company.CompanyId, Guid.NewGuid().ToString());
-                //var confirm = Confirmation.Get(confirmation);
-                //if (!confirm.Valid())
-                //    throw new Exception(string.Format("Company with Id {0} could not be confirmed", company.CompanyId));
+                var confirmReport = webService.Client.confirmDirector(webService.UserToken.ToString(), director.DirectorId, director.IdNumber.ToString(),
+                    Guid.NewGuid().ToString());
 
-                //_result = webService.Client.returnCompanyReport(confirm.ReportGuid.ToString());
+                var confirm = Confirmation.Get(confirmReport);
+                if (!confirm.Valid())
+                    throw new Exception(string.Format("Director with Id {0} could not be confirmed", director.DirectorId));
+
+                _result = webService.Client.returnDirectorReport(confirm.ReportGuid.ToString());
 
                 TransformResponse(response);
-
-                ////Director Search
-                ////get directors
-                ////var idNumber = _dataProvider.GetRequest<IAmLightstoneBusinessRequest>().IdNumber;
-                //const string idNumber = "7902065199085";
-                //const string firstname = "MURRAY GRANT";
-                //const string surname = "WOOLFSON";
-                //var directorDs = webService.Client.returnDirectors(webService.UserToken.ToString(), null, null, idNumber);
-
-                //var director = Director.GetFromDataset(directorDs);
-                //if(!director.Valid())
-                //    throw new Exception(string.Format("Director with Id Number {0} is not valid", idNumber));
-
-                ////confirm director
-                //var confirmReport = webService.Client.confirmDirector(webService.UserToken.ToString(), director.DirectorId, director.IdNumber.ToString(),
-                //    Guid.NewGuid().ToString());
-
-                //var confirm = ConfirmDirector.Get(confirmReport);
-                //if(!confirm.Valid())
-                //    throw new Exception(string.Format("Director with Id {0} could not be confirmed", director.DirectorId));
-
-
-
-                // authenticate
-                // call authenticateUser to get the UserToke by email and password
-                // email: murray@lightstone.co.za
-                //pass: Pass!1234
-
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lightstone Business Data Provider {0}", ex, ex.Message);
-                _logCommand.LogFault(ex, new {ErrorMessage = "Error calling Lightstone Business Data Provider"});
-                LightstoneBusinessResponseFailed(response);
+                _log.ErrorFormat("Error calling Lightstone Business Director Data Provider {0}", ex, ex.Message);
+                _logCommand.LogFault(ex, new {ErrorMessage = "Error calling Lightstone Business Director Data Provider"});
+                LightstoneDirectorResponseFailed(response);
             }
         }
 
-        private static void LightstoneBusinessResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void LightstoneDirectorResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneBusinessResponse = new LightstoneBusinessDirectorResponse();
-            lightstoneBusinessResponse.HasBeenHandled();
-            response.Add(lightstoneBusinessResponse);
+            var lightstoneDirectorResponse = new LightstoneBusinessDirectorResponse();
+            lightstoneDirectorResponse.HasBeenHandled();
+            response.Add(lightstoneDirectorResponse);
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)

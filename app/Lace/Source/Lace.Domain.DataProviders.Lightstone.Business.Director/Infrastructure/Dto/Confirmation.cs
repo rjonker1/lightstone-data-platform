@@ -1,5 +1,5 @@
 ﻿using System;
-//using Lace.Domain.DataProviders.Lightstone.Business.Director.LightstoneBusinessServiceReference;
+using Lace.Domain.DataProviders.Lightstone.Business.Director.LightstoneBusinessServiceReference;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.Dto
 {
@@ -11,10 +11,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.
             ReportGuid = reportGuid;
         }
 
-        //public static Confirmation Get(reportTrans report)
-        //{
-        //    return new Confirmation(report.paid,report.report_guid);
-        //}
+        public static Confirmation Get(reportTrans report)
+        {
+            return new Confirmation(report.paid,report.report_guid);
+        }
 
         public bool Valid()
         {

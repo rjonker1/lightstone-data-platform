@@ -20,28 +20,19 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.
 
         public void Transform()
         {
-            //var results = Response.Tables["company"]
-            //    .AsEnumerable()
-            //    .Select(
-            //        s =>
-            //            new CompanyResponse(s.GetIntRowValue("ID"), s.GetStringValue("EnterpriseType"), s.GetStringValue("ShortenType"),
-            //                s.GetStringValue("CompanyRegNumber"), s.GetStringValue("OldRegistrationNumber"),
-            //                s.GetStringValue("TypeDate"), s.GetStringValue("CompanyName"), s.GetStringValue("ShortName"),
-            //                s.GetStringValue("TranslatedName"), s.GetStringValue("RegistrationDate"), s.GetStringValue("BusinessStartDate"),
-            //                s.GetStringValue("WithdrawnPublic"), s.GetStringValue("StatusCode"), s.GetStringValue("StatusDate"),
-            //                s.GetStringValue("SicCode"), s.GetStringValue("FinancialYearEnd"), s.GetStringValue("FinancialEffectiveDate"))
-            //                .SetPhysicalAddress(s.GetStringValue("PhysicalAddress1"), s.GetStringValue("PhysicalAddress2"),
-            //                    s.GetStringValue("PhysicalAddress3"), s.GetStringValue("PhysicalAddress4"), s.GetStringValue("PhysicalPostCode")
-            //                    , s.GetStringValue("CountryCode"), s.GetStringValue("CountryOfOrigin"), s.GetStringValue("RegionCode"))
-            //                .SetPostalAddress(s.GetStringValue("PostalAddress1"), s.GetStringValue("PostalAddress2"),
-            //                    s.GetStringValue("PostalAddress3"), s.GetStringValue("PostalAddress4"), s.GetStringValue("PostalPostCode"))
-            //                .SetCompanyDetail(s.GetDoubleRowValue("AuthorisedCapital"), s.GetDoubleRowValue("AuthorisedShares"),
-            //                    s.GetDoubleRowValue("IssuedCapital"), s.GetDoubleRowValue("IssuedShares"), s.GetStringValue("FormReceivedDate"),
-            //                    s.GetStringValue("FormDate"), s.GetStringValue("ConversionNumber"), s.GetStringValue("TaxNumber"),
-            //                    s.GetBoolRowValue("CPA"), s.GetStringValue("StatusCodeDesc"), s.GetStringValue("RegionCodeDesc"),
-            //                    s.GetStringValue("SIC_Description")));
+            var results = Response.Tables["director"]
+                .AsEnumerable()
+                .Select(
+                    s =>
+                        new DirectorResponse(s.GetIntRowValue("ID"), s.GetIntRowValue("DirectorID"), s.GetIntRowValue("CompanyID"), s.GetStringValue("CompanyRegNumber"), s.GetStringValue("FirstName"), s.GetStringValue("Initials"),
+                            s.GetStringValue("Surname"), s.GetStringValue("SurnameParticular"), s.GetStringValue("PreviousSurname"), s.GetStringValue("IdNumber"), s.GetStringValue("BirthDate"), s.GetStringValue("DesignationCode"),
+                            s.GetStringValue("RsaResident"), s.GetStringValue("WithdrawPublic"), s.GetStringValue("CountryCode"), s.GetStringValue("TypeCode"), s.GetStringValue("StatusCode"), s.GetStringValue("StatusDate"),
+                            s.GetStringValue("RegisterNumber"), s.GetStringValue("ExecutorName"), s.GetStringValue("ExecutorAppointDate"), s.GetStringValue("TrusteeName"), s.GetStringValue("FormLodgeDate"), s.GetStringValue("FormReceiveDate"),
+                            s.GetStringValue("FoundingStatementDate"), s.GetDoubleRowValue("MemberSize"), s.GetDoubleRowValue("MemberContribution"), s.GetStringValue("MemberContributionType"), s.GetStringValue("Excl_Con"), s.GetStringValue("OccupationCode"),
+                            s.GetStringValue("FineExpiryDate"), s.GetStringValue("NatureOfChange"),s.GetStringValue()
+                            ));
 
-            //Result = new LightstoneBusinessDirectorResponse(results);
+            Result = new LightstoneBusinessDirectorResponse(results);
         }
     }
 }
