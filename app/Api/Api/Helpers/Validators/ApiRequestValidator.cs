@@ -10,6 +10,7 @@ namespace Api.Helpers.Validators
     public class ApiRequestValidator
     {
         private readonly IUserManagementApiClient _userManagementApiClient;
+        private const string commercialState = "TRIAL";
 
         public ApiRequestValidator(IUserManagementApiClient userManagementApiClient)
         {
@@ -51,6 +52,19 @@ namespace Api.Helpers.Validators
 
             #endregion
 
+            #region TrialAccount Validation
+
+            if (customer != null)
+            {
+                if (customer.CommercialStateValue.Equals(commercialState)) TrialValidation(customer);
+            }
+
+            if (customer == null)
+            {
+                if (client.CommercialStateValue.Equals(commercialState)) TrialValidation(client);
+            }
+
+            #endregion
 
             // Validate Contract
             //var contract = JsonConvert.DeserializeObject<ValidationDto>(_userManagementApiClient.Get("", "/Customers/Details/" + customerClientId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
@@ -61,6 +75,11 @@ namespace Api.Helpers.Validators
             // TODO: Validate Contract
             // TODO: Validate Package
 
+        }
+
+        private void TrialValidation(ValidationDto dto)
+        {
+            if (dto.TrialExpiration < DateTime.Today) throw new LightstoneAutoException("CustomerClient: " + dto.Id + " trial period has expired");
         }
     }
 }
