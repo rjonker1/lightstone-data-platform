@@ -1,5 +1,6 @@
 ﻿using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure;
+using Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.DataProviders.Rgt.Infrastructure;
 using Lace.Test.Helper.Mothers.Sources;
@@ -51,6 +52,12 @@ namespace Lace.Test.Helper.Builders.Sources
         public IRequestDataFromDataProviderSource ForLightstoneBusinessCompany()
         {
             _requestDataFromSource = new RequestDataFromLightstoneCompany();
+            return _requestDataFromSource;
+        }
+
+        public IRequestDataFromDataProviderSource ForLightstoneBusinessDirector()
+        {
+            _requestDataFromSource = new RequestDataFromLightstoneDirector();
             return _requestDataFromSource;
         }
 

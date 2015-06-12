@@ -8,6 +8,7 @@ using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Domain.DataProviders.Lightstone;
 using Lace.Domain.DataProviders.Lightstone.Business.Company;
+using Lace.Domain.DataProviders.Lightstone.Business.Director;
 using Lace.Domain.DataProviders.Lightstone.Property;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
@@ -29,7 +30,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                         new RgtDataProvider(request,
                                             new SignioDataProvider(request,
                                                 new LightstonePropertyDataProvider(request,
-                                                    new LightstoneCompanyDataProvider(request, null, null,
+                                                    new LightstoneCompanyDataProvider(request,
+                                                        new LightstoneDirectorDataProvider(request, null, null,
+                                                            CommandSender.InitCommandSender(bus, requestId,
+                                                                DataProviderCommandSource.LightstoneBusinessDirector)), null,
                                                         CommandSender.InitCommandSender(bus, requestId,
                                                             DataProviderCommandSource.LightstoneBusinessCompany)), null,
                                                     CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneProperty)),

@@ -47,7 +47,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public void lace_data_providers_for_VVI_product_must_be_handled_loaded_correclty()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(8);
+            _initialize.DataProviderResponses.Count.ShouldEqual(9);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(5);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();

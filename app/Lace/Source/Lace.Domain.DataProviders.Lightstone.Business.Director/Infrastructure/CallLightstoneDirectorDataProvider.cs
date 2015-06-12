@@ -45,7 +45,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
                 if (!request.IsValid)
                     throw new Exception("Cannot continue call Lightstone Business Director Api. Request is not valid");
 
-                var directorDs = webService.Client.returnDirectors(webService.UserToken.ToString(), null, null, request.IdNumber);
+                var directorDs = webService.Client.returnDirectors(webService.UserToken.ToString(), request.FirstName, request.FirstName, request.IdNumber);
                 var director = Dto.Director.GetFromDataset(directorDs);
                 if (!director.Valid())
                     throw new Exception(string.Format("Director with Id Number {0} is not valid", request.IdNumber));

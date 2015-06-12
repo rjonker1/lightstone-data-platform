@@ -49,7 +49,7 @@ namespace Lace.Unit.Tests.Chain
         {
 
             _initialize.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(7);
+            _initialize.DataProviderResponses.Count.ShouldEqual(8);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(5);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();

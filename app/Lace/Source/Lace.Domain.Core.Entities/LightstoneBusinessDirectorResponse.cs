@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -47,5 +48,12 @@ namespace Lace.Domain.Core.Entities
         {
             Handled = true;
         }
+
+
+        [DataMember]
+        public IAmLightstoneBusinessDirectorRequest Request { get; private set; }
+      
+
+      
     }
 }

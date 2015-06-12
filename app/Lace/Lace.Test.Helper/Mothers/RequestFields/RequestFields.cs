@@ -302,4 +302,35 @@ namespace Lace.Test.Helper.Mothers.RequestFields
 
         public string Field { get; private set; }
     }
+
+    //IAmSurnameRequestField
+    public class FirstNameRequestField : IAmFirstNameRequestField
+    {
+        private FirstNameRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmFirstNameRequestField Get(string field)
+        {
+            return new FirstNameRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
+    public class SurnameRequestField : IAmSurnameRequestField
+    {
+        private SurnameRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmSurnameRequestField Get(string field)
+        {
+            return new SurnameRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
 }

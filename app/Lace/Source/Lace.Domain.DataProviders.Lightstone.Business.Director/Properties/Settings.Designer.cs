@@ -33,16 +33,5 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Properties {
                     "iders_Lightstone_Business_Director_LightstoneBusinessServiceReference1_api"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://test.lightstonebusiness.co.za/lsb/api/api.asmx")]
-        public string Lightstone_DataPlatform_Lace_Domain_DataProviders_Lightstone_Lace_Domain_DataProviders_Lightstone_Business_Director_LightstoneBusinessServiceReference_api {
-            get {
-                return ((string)(this["Lightstone_DataPlatform_Lace_Domain_DataProviders_Lightstone_Lace_Domain_DataProv" +
-                    "iders_Lightstone_Business_Director_LightstoneBusinessServiceReference_api"]));
-            }
-        }
     }
 }

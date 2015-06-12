@@ -13,7 +13,7 @@ namespace Lace.Domain.Core.Entities
             string designationCode, string rsaResident, string withdrawPublic, string countryCode, string typeCode, string statusCode,
             string statusDate, string registerNumber, string executorName, string executorAppointDate, string trusteeName, string formLodgeDate, string formReceiveDate, string foundingStatementDate, double memberSize, double memberContribution,
             string memberContributionType, int exclCon, string occupationCode, string fineExpiryDate, string natureOfChange, string nationalityCode, string profession,
-            string resignationDate, string estate, string lsId, string statusOrder)
+            string resignationDate, string estate, int lsId, int statusOrder)
         {
             Id = id;
             DirectorId = directorId;
@@ -206,9 +206,9 @@ namespace Lace.Domain.Core.Entities
 
         public string Estate { get; private set; }
 
-        public string LsId { get; private set; }
+        public int LsId { get; private set; }
 
-        public string StatusOrder { get; private set; }
+        public int StatusOrder { get; private set; }
 
         [DataMember]
         public string TypeName

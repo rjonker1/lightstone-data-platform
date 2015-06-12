@@ -60,7 +60,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Business
         string Profession { get; }
         string ResignationDate { get; }
         string Estate { get; }
-        string LsId { get; }
-        string StatusOrder { get; }
+        int LsId { get; }
+        int StatusOrder { get; }
     }
 }

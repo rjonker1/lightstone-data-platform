@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.DataProviders;
@@ -13,18 +12,18 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Requests
 {
-    public class when_sending_property_request_to_lace_entry_point : Specification
+    public class when_sending_director_request_to_lace_entry_point : Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private ICollection<IPointToLaceProvider> _responses;
         private readonly IEntryPoint _entryPoint;
         private readonly IAdvancedBus _bus;
 
-        public when_sending_property_request_to_lace_entry_point()
+        public when_sending_director_request_to_lace_entry_point()
         {
             _bus = BusFactory.WorkflowBus();
 
-            _request = new PropertyRequestBuilder().ForPropertySources();
+            _request = new DirectorRequestBuilder().ForLightstoneDirector();
             _entryPoint = new EntryPointService(_bus);
         }
 
@@ -34,17 +33,17 @@ namespace Lace.Acceptance.Tests.Requests
         }
 
         [Observation]
-        public void lace_request_to_be_loaded_and_responses_to_be_returned_for_property_sources()
+        public void lace_request_to_be_loaded_and_responses_to_be_returned_for_director_search_sources()
         {
             _responses.ShouldNotBeNull();
             _responses.Count.ShouldEqual(9);
             _responses.Count(c => c.Handled).ShouldEqual(1);
 
 
-            _responses.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneProperty>().First().Handled.ShouldBeTrue();
-            _responses.OfType<IProvideDataFromLightstoneProperty>().First().PropertyInformation.ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneProperty>().First().PropertyInformation.Count().ShouldEqual(1);
+            _responses.OfType<IProvideDataFromLightstoneBusinessDirector>().First().ShouldNotBeNull();
+            _responses.OfType<IProvideDataFromLightstoneBusinessDirector>().First().Handled.ShouldBeTrue();
+            _responses.OfType<IProvideDataFromLightstoneBusinessDirector>().First().Directors.ShouldNotBeNull();
+            _responses.OfType<IProvideDataFromLightstoneBusinessDirector>().First().Directors.Count().ShouldEqual(1);
 
         }
     }

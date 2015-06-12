@@ -5,8 +5,5 @@
     <Setting Name="Lightstone_DataPlatform_Lace_Domain_DataProviders_Lightstone_Lace_Domain_DataProviders_Lightstone_Business_Director_LightstoneBusinessServiceReference1_api" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://test.lightstonebusiness.co.za/lsb/api/api.asmx</Value>
     </Setting>
-    <Setting Name="Lightstone_DataPlatform_Lace_Domain_DataProviders_Lightstone_Lace_Domain_DataProviders_Lightstone_Business_Director_LightstoneBusinessServiceReference_api" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://test.lightstonebusiness.co.za/lsb/api/api.asmx</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

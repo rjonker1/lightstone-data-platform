@@ -73,5 +73,10 @@ namespace Lace.Test.Helper.Builders.Responses
         {
             return FakeLightstoneBusinessCompanyResponse.ReturnCompanyReport();
         }
+
+        public System.Data.DataSet ForLightstoneDirectorResponse()
+        {
+            return FakeLightstoneDirectorResponse.ReturnDirectorReport();
+        }
     }
 }
