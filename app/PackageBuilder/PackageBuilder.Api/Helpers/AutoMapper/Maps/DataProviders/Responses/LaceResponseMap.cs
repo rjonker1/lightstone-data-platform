@@ -25,7 +25,10 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                 .Include<IProvideDataFromAudatex, DataProviderName>()
                 .Include<IProvideDataFromLightstoneProperty, DataProviderName>()
                 .Include<IProvideDataFromSignioDriversLicenseDecryption, DataProviderName>()
-                .Include<IProvideDataFromPCubedFicaVerfication, DataProviderName>();
+                .Include<IProvideDataFromPCubedFicaVerfication, DataProviderName>()
+                .Include<IProvideDataFromLightstoneBusinessCompany, DataProviderName>()
+                .Include<IProvideDataFromLightstoneBusinessDirector, DataProviderName>();
+
             Mapper.CreateMap<IProvideDataFromIvid, DataProviderName>().ConvertUsing(s => DataProviderName.Ivid);
             Mapper.CreateMap<IProvideDataFromIvidTitleHolder, DataProviderName>().ConvertUsing(s => DataProviderName.IvidTitleHolder);
             Mapper.CreateMap<IProvideDataFromLightstoneAuto, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneAuto);
@@ -36,6 +39,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             Mapper.CreateMap<IProvideDataFromLightstoneBusinessCompany, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneBusinessCompany);
             Mapper.CreateMap<IProvideDataFromSignioDriversLicenseDecryption, DataProviderName>().ConvertUsing(s => DataProviderName.SignioDecryptDriversLicense);
             Mapper.CreateMap<IProvideDataFromPCubedFicaVerfication, DataProviderName>().ConvertUsing(s => DataProviderName.PCubedFica);
+            Mapper.CreateMap<IProvideDataFromLightstoneBusinessDirector, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneBusinessDirector);
 
             Mapper.CreateMap<IPointToLaceProvider, DataProvider>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(x => Mapper.Map(x, x.GetType(), typeof(DataProviderName))))

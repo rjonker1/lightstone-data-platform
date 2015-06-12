@@ -38,6 +38,12 @@ namespace PackageBuilder.Domain.Entities.Requests
                 },
                 {
                     DataProviderName.LightstoneProperty, LightstoneProperty
+                },
+                {
+                    DataProviderName.LightstoneBusinessCompany, LightstoneCompany
+                },
+                {
+                    DataProviderName.LightstoneBusinessDirector, LightstoneDirectors
                 }
             };
 
@@ -61,8 +67,14 @@ namespace PackageBuilder.Domain.Entities.Requests
             (requests, user, packageName) =>
                 new RgtVinLaceReqeust(requests);
 
-        private static readonly Func<ICollection<IAmRequestField>,IHaveUser,string,IAmDataProviderRequest> LightstoneProperty =
-            (requests,user,packageName) => new LightstonePropertyLaceRequest(requests);
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> LightstoneProperty =
+            (requests, user, packageName) => new LightstonePropertyLaceRequest(requests);
+
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> LightstoneCompany =
+            (requests, user, packageName) => new LightstoneCompanyRequest(requests);
+
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> LightstoneDirectors =
+            (requests, user, packageName) => new LightstoneDirectorRequest(requests);
 
         public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes
         {
@@ -183,6 +195,36 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmRegisterNumberRequestField RegisterNumber { get; private set; }
 
         public IAmMakeRequestField Make { get; private set; }
+    }
+
+    public class LightstoneDirectorRequest : IAmLightstoneBusinessDirectorRequest
+    {
+        public LightstoneDirectorRequest(ICollection<IAmRequestField> requestFields)
+        {
+            IdNumber = requestFields.GetRequestField<IAmIdentityNumberRequestField>();
+            FirstName = requestFields.GetRequestField<IAmFirstNameRequestField>();
+            Surname = requestFields.GetRequestField<IAmSurnameRequestField>();
+        }
+
+        public IAmIdentityNumberRequestField IdNumber { get; private set; }
+        public IAmFirstNameRequestField FirstName { get; private set; }
+        public IAmSurnameRequestField Surname { get; private set; }
+    }
+
+    public class LightstoneCompanyRequest : IAmLightstoneBusinessCompanyRequest
+    {
+        public LightstoneCompanyRequest(ICollection<IAmRequestField> requestFields)
+        {
+            CompanyName = requestFields.GetRequestField<IAmCompanyNameRequestField>();
+            CompanyRegistrationNumber = requestFields.GetRequestField<IAmCompanyRegistrationNumberRequestField>();
+            CompanyVatNumber = requestFields.GetRequestField<IAmCompanyVatNumberRequestField>();
+        }
+
+        public IAmCompanyNameRequestField CompanyName { get; private set; }
+
+        public IAmCompanyRegistrationNumberRequestField CompanyRegistrationNumber { get; private set; }
+
+        public IAmCompanyVatNumberRequestField CompanyVatNumber { get; private set; }
     }
 
     public static class RequestFieldExtensions
