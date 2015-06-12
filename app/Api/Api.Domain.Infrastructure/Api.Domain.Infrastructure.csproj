@@ -60,7 +60,6 @@
     </Compile>
     <Compile Include="Automapping\AutoMapperConfiguration.cs" />
     <Compile Include="Dto\ContractResponseDto.cs" />
-    <Compile Include="Dto\ContractEntityDto.cs" />
     <Compile Include="Dto\NamedEntityDto.cs" />
     <Compile Include="Dto\RequestDto.cs" />
     <Compile Include="Dto\ValidationDto.cs" />

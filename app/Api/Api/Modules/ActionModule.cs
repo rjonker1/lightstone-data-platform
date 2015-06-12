@@ -42,13 +42,13 @@ namespace Api.Modules
                     var apiRequest = this.Bind<ApiRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
-                    new ApiRequestValidator(userManagementApi).AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId);
+                    new ApiRequestValidator(userManagementApi)
+                        .AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
 
                     this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
-                    var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest,
-                        new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), new KeyValuePair<string, string>("Content-Type", "application/json") });
+                    var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), new KeyValuePair<string, string>("Content-Type", "application/json"), });
 
                     this.Info(() => "Api responses: {0}".FormatWith(responses));
                     this.Info(() => "Api action completed.");

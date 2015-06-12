@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Api.Domain.Infrastructure.Dto;
 using DataPlatform.Shared.ExceptionHandling;
 using Newtonsoft.Json;
@@ -17,7 +19,7 @@ namespace Api.Helpers.Validators
             _userManagementApiClient = userManagementApiClient;
         }
 
-        public void AuthenticateRequest(string authToken, Guid userId, Guid customerClientId, Guid contractId)
+        public void AuthenticateRequest(string authToken, Guid userId, Guid customerClientId, Guid contractId, Guid packageId)
         {
             #region ValuePopulation Validation
 
@@ -69,14 +71,17 @@ namespace Api.Helpers.Validators
             #region Contract relationship validation
 
             // Validate Contract
-            var contract = JsonConvert.DeserializeObject<ContractEntityDto>(_userManagementApiClient.Get("", "/Contracts/Details/" + contractId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
+            var contract = JsonConvert.DeserializeObject<ValidationDto>(_userManagementApiClient.Get("", "/Contracts/Details/" + contractId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
+
+            // Package, Customer, Client relationship check
+            if (contract != null)
+            {
+                if (contract.Packages.All(x => x.Key != packageId)) throw new LightstoneAutoException("Package relationship invalid for contract: " + contractId);
+                if (customer != null && contract.Customers.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Customer relationship invalid for contract: " + contractId);
+                if (customer == null && contract.Clients.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Client relationship invalid for contract: " + contractId);
+            }
 
             #endregion
-
-            // TODO: Validate Customer | Client
-            // TODO: Validate Contract
-            // TODO: Validate Package
-
         }
 
         private void TrialValidation(ValidationDto dto)
