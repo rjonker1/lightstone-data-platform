@@ -93,12 +93,14 @@
     <Compile Include="Builders\Buses\WorkflowBusBuilder.cs" />
     <Compile Include="Builders\Buses\WorkflowQueueSender.cs" />
     <Compile Include="Builders\Business\CompanySourcePackage.cs" />
+    <Compile Include="Builders\Business\DirectorSourcePackage.cs" />
     <Compile Include="Builders\Cmds\MonitoringCommandBuilder.cs" />
     <Compile Include="Builders\Cmds\WorkflowCommandBuilder.cs" />
     <Compile Include="Builders\DataProviders\DataProviderResponseBuilder.cs" />
     <Compile Include="Builders\Property\LspRequestBuilder.cs" />
     <Compile Include="Builders\Property\LspSourcePackage.cs" />
     <Compile Include="Builders\Requests\CompanyRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\DirectorRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Fakes\Lace\Builder\FakeSourceSpecification.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidTitleHolderSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeLightstoneBusinessDirectorExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeLightstoneBusinessCompanyExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeLightstoneSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeRgtSourceExecution.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidTitleHolderServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleLighstoneSourceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleLightstoneBusinessDirectorServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleLightstoneBusinessCompanyServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleRgtServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleRgtVinServiceCall.cs" />
@@ -158,6 +162,7 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingAudatexExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingLightstoneBusinessDirectorExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingLightstoneBusinessCompanyExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingPCubedDataProvider.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtDataProvider.cs" />
@@ -169,6 +174,7 @@
     <Compile Include="Fakes\RequestTypes\IvidTitleHolderRequestType.cs" />
     <Compile Include="Fakes\RequestTypes\LighstonePropertyRequest.cs" />
     <Compile Include="Fakes\RequestTypes\LightstoneAutoRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\LightstoneBusinessDirectorRequest.cs" />
     <Compile Include="Fakes\RequestTypes\LightstoneBusinessRequest.cs" />
     <Compile Include="Fakes\RequestTypes\RgtRequestType.cs" />
     <Compile Include="Fakes\RequestTypes\RgtVinRequest.cs" />
@@ -176,6 +182,7 @@
     <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeLightstoneBusinessCompanyResponse.cs" />
+    <Compile Include="Fakes\Responses\FakeLightstoneBusinessDirectorResponse.cs" />
     <Compile Include="Fakes\Responses\FakeLightstonePropertyResponse.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
@@ -190,6 +197,7 @@
     <Compile Include="Mothers\Packages\LicensePlateNumberPackage.cs" />
     <Compile Include="Mothers\Packages\PropertyPackage.cs" />
     <Compile Include="Mothers\RequestFields\RequestFields.cs" />
+    <Compile Include="Mothers\Requests\BusinessRequests\DirectorRequest.cs" />
     <Compile Include="Mothers\Requests\BusinessRequests\CompaniesRequest.cs" />
     <Compile Include="Mothers\Requests\DriversLicenseRequests\DriversLicenseDecryptionRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
@@ -284,6 +292,10 @@
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj">
       <Project>{d2f75a1a-20e2-4b05-8f04-ef932d6f6b38}</Project>
       <Name>Lace.Domain.DataProviders.Jis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Domain.DataProviders.Lightstone.Business.Director\Lace.Domain.DataProviders.Lightstone.Business.Director.csproj">
+      <Project>{f8a50911-4066-4eca-ba26-42aef9c3a521}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Business.Director</Name>
     </ProjectReference>
     <ProjectReference Include="..\Source\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.Company.csproj">
       <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>

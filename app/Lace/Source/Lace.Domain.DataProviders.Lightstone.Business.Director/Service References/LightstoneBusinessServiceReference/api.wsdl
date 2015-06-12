@@ -1,0 +1,3489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://lightstonebusiness.co.za/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://lightstonebusiness.co.za/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://lightstonebusiness.co.za/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="authenticateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="authenticateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="authenticateUserResult" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="logOutUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="logOutUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="logOutUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="company_name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="company_regnum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="company_vatnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompaniesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompaniesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompaniesClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="company_name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="company_regnum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="company_vatnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompaniesClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompaniesClientResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyConfirmDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyid" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyConfirmDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompanyConfirmDetailsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="company_id" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="trackingnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmCompanyResult" type="tns:reportTrans" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="reportTrans">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="paid" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="report_guid" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="returnCompanyDirectors">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rc_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyDirectorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompanyDirectorsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="processDirector">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rc_id" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="directorid" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="surname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="postalcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="processDirectorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="processDirectorResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rc_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompanyReportResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyReportTiers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rc_id" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyid" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyReportTiersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompanyReportTiersResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyProps">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyid" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyPropsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompanyPropsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmCompany_Short">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="company_id" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="trackingnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmCompany_ShortResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmCompany_ShortResult" type="tns:reportTrans" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyReport_Short">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rcs_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyReport_ShortResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompanyReport_ShortResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmCompany_Comprehensive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="company_id" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="trackingnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmCompany_ComprehensiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmCompany_ComprehensiveResult" type="tns:reportTrans" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnDirectors_Comprehensive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rcc_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnDirectors_ComprehensiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnDirectors_ComprehensiveResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="processDirector_Comprehensive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rcc_id" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="directorid" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="surname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="postalcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="processDirector_ComprehensiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="processDirector_ComprehensiveResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyReport_Comprehensive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rcc_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyReport_ComprehensiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompanyReport_ComprehensiveResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnDirectors">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="surname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnDirectorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnDirectorsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmDirector">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="directorid" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="trackingnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmDirectorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmDirectorResult" type="tns:reportTrans" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnDirectorReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rd_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnDirectorReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnDirectorReportResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnDirectorProps">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="directorid" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnDirectorPropsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnDirectorPropsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnProspects">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rp" type="tns:request_propspect" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="request_propspect">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="prov_id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="munic_id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="sub_id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="est_id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="radius" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="x" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="y" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="siccode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="groupscore" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="sizecat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="companyname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tradingas" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vatnumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="date" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="returnProspectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnProspectsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnUserHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnUserHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnUserHistoryResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkValidToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkValidTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="checkValidTokenResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmPropertyAndInsert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="prop_id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmPropertyAndInsertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmPropertyAndInsertResult" type="tns:reportTrans" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnPropertyReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rp_id" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnPropertyReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnPropertyReportResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnAVS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ac_id" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnAVSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnAVSResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmBankCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyid" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="trackingnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmBankCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmBankCodeResult" type="tns:reportTrans" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertBankCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rb_id" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_AccountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_Bank" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_BranchName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_Branchcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_Amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_Period" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_Express" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_BankCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_TradingAs" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertBankCodeResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="updateBankCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_BankCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RB_BankCodeDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="rb_id" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="rb_amount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateBankCodeResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="returnBankCodeReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rb_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnBankCodeReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnBankCodeReportResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnPersonalDetailsFromCell">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cellnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnPersonalDetailsFromCellResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnPersonalDetailsFromCellResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnAlertCompanies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnAlertCompaniesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnAlertCompaniesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmTradeReferences">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyid" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="trackingnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmTradeReferencesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmTradeReferencesResult" type="tns:reportTrans" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertTradeReference_Company">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rt_id" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyid" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="companyname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="companyregnum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertTradeReference_CompanyResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="updateTradeReferenceReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rt_id" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="RT_RefCount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="RT_TradingAs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RT_Address1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RT_Address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RT_Address3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RT_AddressCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RT_PhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RT_Contact" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="trackingnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateTradeReferenceReportResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="updateTradeReference">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rtc_id" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_PaymentProfile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_OutstandingBalance" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RTC_Known_Years" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RTC_Known_Months" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_CreditLimit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_AVGPurchase" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_Terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_Discount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_RefName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_Memo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_Address1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_Address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_Address3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_AreaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RTC_Phone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateTradeReferenceResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="updateTradeReferenceProgress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rt_id" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateTradeReferenceProgressResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="returnTradeReferenceReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rt_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnTradeReferenceReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnTradeReferenceReportResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmConsumer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="surname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateofbirth" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="trackingnumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirmConsumerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmConsumerResult" type="tns:reportTrans" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnConsumerReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rco_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnConsumerReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnConsumerReportResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyDefaults">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rd_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnCompanyDefaultsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnCompanyDefaultsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnUserDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnUserDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="returnUserDetailsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnUserSetting">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="setting_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="returnUserSettingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="returnUserSettingResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="guid" type="s1:guid" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="reportTrans" nillable="true" type="tns:reportTrans" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="authenticateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:authenticateUser" />
+  </wsdl:message>
+  <wsdl:message name="authenticateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:authenticateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="logOutUserSoapIn">
+    <wsdl:part name="parameters" element="tns:logOutUser" />
+  </wsdl:message>
+  <wsdl:message name="logOutUserSoapOut">
+    <wsdl:part name="parameters" element="tns:logOutUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanies" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompaniesResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesClientSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompaniesClient" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesClientSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompaniesClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyConfirmDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanyConfirmDetails" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyConfirmDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompanyConfirmDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:confirmCompany" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:confirmCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDirectorsSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanyDirectors" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDirectorsSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompanyDirectorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="processDirectorSoapIn">
+    <wsdl:part name="parameters" element="tns:processDirector" />
+  </wsdl:message>
+  <wsdl:message name="processDirectorSoapOut">
+    <wsdl:part name="parameters" element="tns:processDirectorResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanyReport" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompanyReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportTiersSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanyReportTiers" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportTiersSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompanyReportTiersResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyPropsSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanyProps" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyPropsSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompanyPropsResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ShortSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmCompany_Short" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ShortSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmCompany_ShortResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ShortSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanyReport_Short" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ShortSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompanyReport_ShortResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ComprehensiveSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmCompany_Comprehensive" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ComprehensiveSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmCompany_ComprehensiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectors_ComprehensiveSoapIn">
+    <wsdl:part name="parameters" element="tns:returnDirectors_Comprehensive" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectors_ComprehensiveSoapOut">
+    <wsdl:part name="parameters" element="tns:returnDirectors_ComprehensiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="processDirector_ComprehensiveSoapIn">
+    <wsdl:part name="parameters" element="tns:processDirector_Comprehensive" />
+  </wsdl:message>
+  <wsdl:message name="processDirector_ComprehensiveSoapOut">
+    <wsdl:part name="parameters" element="tns:processDirector_ComprehensiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ComprehensiveSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanyReport_Comprehensive" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ComprehensiveSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompanyReport_ComprehensiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorsSoapIn">
+    <wsdl:part name="parameters" element="tns:returnDirectors" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorsSoapOut">
+    <wsdl:part name="parameters" element="tns:returnDirectorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmDirectorSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmDirector" />
+  </wsdl:message>
+  <wsdl:message name="confirmDirectorSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmDirectorResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorReportSoapIn">
+    <wsdl:part name="parameters" element="tns:returnDirectorReport" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorReportSoapOut">
+    <wsdl:part name="parameters" element="tns:returnDirectorReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorPropsSoapIn">
+    <wsdl:part name="parameters" element="tns:returnDirectorProps" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorPropsSoapOut">
+    <wsdl:part name="parameters" element="tns:returnDirectorPropsResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnProspectsSoapIn">
+    <wsdl:part name="parameters" element="tns:returnProspects" />
+  </wsdl:message>
+  <wsdl:message name="returnProspectsSoapOut">
+    <wsdl:part name="parameters" element="tns:returnProspectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnUserHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:returnUserHistory" />
+  </wsdl:message>
+  <wsdl:message name="returnUserHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:returnUserHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkValidTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:checkValidToken" />
+  </wsdl:message>
+  <wsdl:message name="checkValidTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:checkValidTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmPropertyAndInsertSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmPropertyAndInsert" />
+  </wsdl:message>
+  <wsdl:message name="confirmPropertyAndInsertSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmPropertyAndInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnPropertyReportSoapIn">
+    <wsdl:part name="parameters" element="tns:returnPropertyReport" />
+  </wsdl:message>
+  <wsdl:message name="returnPropertyReportSoapOut">
+    <wsdl:part name="parameters" element="tns:returnPropertyReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnAVSSoapIn">
+    <wsdl:part name="parameters" element="tns:returnAVS" />
+  </wsdl:message>
+  <wsdl:message name="returnAVSSoapOut">
+    <wsdl:part name="parameters" element="tns:returnAVSResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmBankCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmBankCode" />
+  </wsdl:message>
+  <wsdl:message name="confirmBankCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmBankCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="insertBankCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:insertBankCode" />
+  </wsdl:message>
+  <wsdl:message name="insertBankCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:insertBankCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateBankCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:updateBankCode" />
+  </wsdl:message>
+  <wsdl:message name="updateBankCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:updateBankCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnBankCodeReportSoapIn">
+    <wsdl:part name="parameters" element="tns:returnBankCodeReport" />
+  </wsdl:message>
+  <wsdl:message name="returnBankCodeReportSoapOut">
+    <wsdl:part name="parameters" element="tns:returnBankCodeReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnPersonalDetailsFromCellSoapIn">
+    <wsdl:part name="parameters" element="tns:returnPersonalDetailsFromCell" />
+  </wsdl:message>
+  <wsdl:message name="returnPersonalDetailsFromCellSoapOut">
+    <wsdl:part name="parameters" element="tns:returnPersonalDetailsFromCellResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnAlertCompaniesSoapIn">
+    <wsdl:part name="parameters" element="tns:returnAlertCompanies" />
+  </wsdl:message>
+  <wsdl:message name="returnAlertCompaniesSoapOut">
+    <wsdl:part name="parameters" element="tns:returnAlertCompaniesResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmTradeReferencesSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmTradeReferences" />
+  </wsdl:message>
+  <wsdl:message name="confirmTradeReferencesSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmTradeReferencesResponse" />
+  </wsdl:message>
+  <wsdl:message name="insertTradeReference_CompanySoapIn">
+    <wsdl:part name="parameters" element="tns:insertTradeReference_Company" />
+  </wsdl:message>
+  <wsdl:message name="insertTradeReference_CompanySoapOut">
+    <wsdl:part name="parameters" element="tns:insertTradeReference_CompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateTradeReferenceReportSoapIn">
+    <wsdl:part name="parameters" element="tns:updateTradeReferenceReport" />
+  </wsdl:message>
+  <wsdl:message name="updateTradeReferenceReportSoapOut">
+    <wsdl:part name="parameters" element="tns:updateTradeReferenceReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateTradeReferenceSoapIn">
+    <wsdl:part name="parameters" element="tns:updateTradeReference" />
+  </wsdl:message>
+  <wsdl:message name="updateTradeReferenceSoapOut">
+    <wsdl:part name="parameters" element="tns:updateTradeReferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateTradeReferenceProgressSoapIn">
+    <wsdl:part name="parameters" element="tns:updateTradeReferenceProgress" />
+  </wsdl:message>
+  <wsdl:message name="updateTradeReferenceProgressSoapOut">
+    <wsdl:part name="parameters" element="tns:updateTradeReferenceProgressResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnTradeReferenceReportSoapIn">
+    <wsdl:part name="parameters" element="tns:returnTradeReferenceReport" />
+  </wsdl:message>
+  <wsdl:message name="returnTradeReferenceReportSoapOut">
+    <wsdl:part name="parameters" element="tns:returnTradeReferenceReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmConsumerSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmConsumer" />
+  </wsdl:message>
+  <wsdl:message name="confirmConsumerSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmConsumerResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnConsumerReportSoapIn">
+    <wsdl:part name="parameters" element="tns:returnConsumerReport" />
+  </wsdl:message>
+  <wsdl:message name="returnConsumerReportSoapOut">
+    <wsdl:part name="parameters" element="tns:returnConsumerReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDefaultsSoapIn">
+    <wsdl:part name="parameters" element="tns:returnCompanyDefaults" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDefaultsSoapOut">
+    <wsdl:part name="parameters" element="tns:returnCompanyDefaultsResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnUserDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:returnUserDetails" />
+  </wsdl:message>
+  <wsdl:message name="returnUserDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:returnUserDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="returnUserSettingSoapIn">
+    <wsdl:part name="parameters" element="tns:returnUserSetting" />
+  </wsdl:message>
+  <wsdl:message name="returnUserSettingSoapOut">
+    <wsdl:part name="parameters" element="tns:returnUserSettingResponse" />
+  </wsdl:message>
+  <wsdl:message name="authenticateUserHttpGetIn">
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="authenticateUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:guid" />
+  </wsdl:message>
+  <wsdl:message name="logOutUserHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="logOutUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_name" type="s:string" />
+    <wsdl:part name="company_regnum" type="s:string" />
+    <wsdl:part name="company_vatnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesClientHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_name" type="s:string" />
+    <wsdl:part name="company_regnum" type="s:string" />
+    <wsdl:part name="company_vatnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesClientHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyConfirmDetailsHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="companyid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyConfirmDetailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompanyHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_id" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompanyHttpGetOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDirectorsHttpGetIn">
+    <wsdl:part name="rc_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDirectorsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportHttpGetIn">
+    <wsdl:part name="rc_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportTiersHttpGetIn">
+    <wsdl:part name="rc_id" type="s:string" />
+    <wsdl:part name="companyid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportTiersHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyPropsHttpGetIn">
+    <wsdl:part name="companyid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyPropsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ShortHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_id" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ShortHttpGetOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ShortHttpGetIn">
+    <wsdl:part name="rcs_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ShortHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ComprehensiveHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_id" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ComprehensiveHttpGetOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectors_ComprehensiveHttpGetIn">
+    <wsdl:part name="rcc_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectors_ComprehensiveHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ComprehensiveHttpGetIn">
+    <wsdl:part name="rcc_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ComprehensiveHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorsHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="firstname" type="s:string" />
+    <wsdl:part name="surname" type="s:string" />
+    <wsdl:part name="idnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmDirectorHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="directorid" type="s:string" />
+    <wsdl:part name="idnumber" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmDirectorHttpGetOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorReportHttpGetIn">
+    <wsdl:part name="rd_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorPropsHttpGetIn">
+    <wsdl:part name="directorid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorPropsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnUserHistoryHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnUserHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="checkValidTokenHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="checkValidTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="confirmPropertyAndInsertHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="prop_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmPropertyAndInsertHttpGetOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="confirmBankCodeHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="companyid" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmBankCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnBankCodeReportHttpGetIn">
+    <wsdl:part name="rb_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnBankCodeReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnPersonalDetailsFromCellHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="cellnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnPersonalDetailsFromCellHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnAlertCompaniesHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnAlertCompaniesHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmTradeReferencesHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="companyid" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmTradeReferencesHttpGetOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnTradeReferenceReportHttpGetIn">
+    <wsdl:part name="rt_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnTradeReferenceReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmConsumerHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="idnumber" type="s:string" />
+    <wsdl:part name="firstname" type="s:string" />
+    <wsdl:part name="surname" type="s:string" />
+    <wsdl:part name="dateofbirth" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmConsumerHttpGetOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnConsumerReportHttpGetIn">
+    <wsdl:part name="rco_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnConsumerReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDefaultsHttpGetIn">
+    <wsdl:part name="rd_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDefaultsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnUserDetailsHttpGetIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnUserDetailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnUserSettingHttpGetIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="setting_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnUserSettingHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="authenticateUserHttpPostIn">
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="authenticateUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:guid" />
+  </wsdl:message>
+  <wsdl:message name="logOutUserHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="logOutUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_name" type="s:string" />
+    <wsdl:part name="company_regnum" type="s:string" />
+    <wsdl:part name="company_vatnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesClientHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_name" type="s:string" />
+    <wsdl:part name="company_regnum" type="s:string" />
+    <wsdl:part name="company_vatnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompaniesClientHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyConfirmDetailsHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="companyid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyConfirmDetailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompanyHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_id" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompanyHttpPostOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDirectorsHttpPostIn">
+    <wsdl:part name="rc_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDirectorsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportHttpPostIn">
+    <wsdl:part name="rc_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportTiersHttpPostIn">
+    <wsdl:part name="rc_id" type="s:string" />
+    <wsdl:part name="companyid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReportTiersHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyPropsHttpPostIn">
+    <wsdl:part name="companyid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyPropsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ShortHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_id" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ShortHttpPostOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ShortHttpPostIn">
+    <wsdl:part name="rcs_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ShortHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ComprehensiveHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="company_id" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmCompany_ComprehensiveHttpPostOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectors_ComprehensiveHttpPostIn">
+    <wsdl:part name="rcc_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectors_ComprehensiveHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ComprehensiveHttpPostIn">
+    <wsdl:part name="rcc_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyReport_ComprehensiveHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorsHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="firstname" type="s:string" />
+    <wsdl:part name="surname" type="s:string" />
+    <wsdl:part name="idnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmDirectorHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="directorid" type="s:string" />
+    <wsdl:part name="idnumber" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmDirectorHttpPostOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorReportHttpPostIn">
+    <wsdl:part name="rd_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorPropsHttpPostIn">
+    <wsdl:part name="directorid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnDirectorPropsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnUserHistoryHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnUserHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="checkValidTokenHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="checkValidTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="confirmPropertyAndInsertHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="prop_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmPropertyAndInsertHttpPostOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="confirmBankCodeHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="companyid" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmBankCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnBankCodeReportHttpPostIn">
+    <wsdl:part name="rb_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnBankCodeReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnPersonalDetailsFromCellHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="cellnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnPersonalDetailsFromCellHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnAlertCompaniesHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnAlertCompaniesHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmTradeReferencesHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="companyid" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmTradeReferencesHttpPostOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnTradeReferenceReportHttpPostIn">
+    <wsdl:part name="rt_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnTradeReferenceReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="confirmConsumerHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="idnumber" type="s:string" />
+    <wsdl:part name="firstname" type="s:string" />
+    <wsdl:part name="surname" type="s:string" />
+    <wsdl:part name="dateofbirth" type="s:string" />
+    <wsdl:part name="trackingnumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="confirmConsumerHttpPostOut">
+    <wsdl:part name="Body" element="tns:reportTrans" />
+  </wsdl:message>
+  <wsdl:message name="returnConsumerReportHttpPostIn">
+    <wsdl:part name="rco_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnConsumerReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDefaultsHttpPostIn">
+    <wsdl:part name="rd_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnCompanyDefaultsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnUserDetailsHttpPostIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="user_token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnUserDetailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="returnUserSettingHttpPostIn">
+    <wsdl:part name="user_token" type="s:string" />
+    <wsdl:part name="setting_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="returnUserSettingHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="apiSoap">
+    <wsdl:operation name="authenticateUser">
+      <wsdl:input message="tns:authenticateUserSoapIn" />
+      <wsdl:output message="tns:authenticateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="logOutUser">
+      <wsdl:input message="tns:logOutUserSoapIn" />
+      <wsdl:output message="tns:logOutUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanies">
+      <wsdl:input message="tns:returnCompaniesSoapIn" />
+      <wsdl:output message="tns:returnCompaniesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompaniesClient">
+      <wsdl:input message="tns:returnCompaniesClientSoapIn" />
+      <wsdl:output message="tns:returnCompaniesClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyConfirmDetails">
+      <wsdl:input message="tns:returnCompanyConfirmDetailsSoapIn" />
+      <wsdl:output message="tns:returnCompanyConfirmDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany">
+      <wsdl:input message="tns:confirmCompanySoapIn" />
+      <wsdl:output message="tns:confirmCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDirectors">
+      <wsdl:input message="tns:returnCompanyDirectorsSoapIn" />
+      <wsdl:output message="tns:returnCompanyDirectorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="processDirector">
+      <wsdl:input message="tns:processDirectorSoapIn" />
+      <wsdl:output message="tns:processDirectorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport">
+      <wsdl:input message="tns:returnCompanyReportSoapIn" />
+      <wsdl:output message="tns:returnCompanyReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReportTiers">
+      <wsdl:input message="tns:returnCompanyReportTiersSoapIn" />
+      <wsdl:output message="tns:returnCompanyReportTiersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyProps">
+      <wsdl:input message="tns:returnCompanyPropsSoapIn" />
+      <wsdl:output message="tns:returnCompanyPropsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Short">
+      <wsdl:input message="tns:confirmCompany_ShortSoapIn" />
+      <wsdl:output message="tns:confirmCompany_ShortSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Short">
+      <wsdl:input message="tns:returnCompanyReport_ShortSoapIn" />
+      <wsdl:output message="tns:returnCompanyReport_ShortSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Comprehensive">
+      <wsdl:input message="tns:confirmCompany_ComprehensiveSoapIn" />
+      <wsdl:output message="tns:confirmCompany_ComprehensiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors_Comprehensive">
+      <wsdl:input message="tns:returnDirectors_ComprehensiveSoapIn" />
+      <wsdl:output message="tns:returnDirectors_ComprehensiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="processDirector_Comprehensive">
+      <wsdl:input message="tns:processDirector_ComprehensiveSoapIn" />
+      <wsdl:output message="tns:processDirector_ComprehensiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Comprehensive">
+      <wsdl:input message="tns:returnCompanyReport_ComprehensiveSoapIn" />
+      <wsdl:output message="tns:returnCompanyReport_ComprehensiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors">
+      <wsdl:input message="tns:returnDirectorsSoapIn" />
+      <wsdl:output message="tns:returnDirectorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmDirector">
+      <wsdl:input message="tns:confirmDirectorSoapIn" />
+      <wsdl:output message="tns:confirmDirectorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorReport">
+      <wsdl:input message="tns:returnDirectorReportSoapIn" />
+      <wsdl:output message="tns:returnDirectorReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorProps">
+      <wsdl:input message="tns:returnDirectorPropsSoapIn" />
+      <wsdl:output message="tns:returnDirectorPropsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnProspects">
+      <wsdl:input message="tns:returnProspectsSoapIn" />
+      <wsdl:output message="tns:returnProspectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserHistory">
+      <wsdl:input message="tns:returnUserHistorySoapIn" />
+      <wsdl:output message="tns:returnUserHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkValidToken">
+      <wsdl:input message="tns:checkValidTokenSoapIn" />
+      <wsdl:output message="tns:checkValidTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmPropertyAndInsert">
+      <wsdl:input message="tns:confirmPropertyAndInsertSoapIn" />
+      <wsdl:output message="tns:confirmPropertyAndInsertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnPropertyReport">
+      <wsdl:input message="tns:returnPropertyReportSoapIn" />
+      <wsdl:output message="tns:returnPropertyReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnAVS">
+      <wsdl:input message="tns:returnAVSSoapIn" />
+      <wsdl:output message="tns:returnAVSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmBankCode">
+      <wsdl:input message="tns:confirmBankCodeSoapIn" />
+      <wsdl:output message="tns:confirmBankCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insertBankCode">
+      <wsdl:input message="tns:insertBankCodeSoapIn" />
+      <wsdl:output message="tns:insertBankCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateBankCode">
+      <wsdl:input message="tns:updateBankCodeSoapIn" />
+      <wsdl:output message="tns:updateBankCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnBankCodeReport">
+      <wsdl:input message="tns:returnBankCodeReportSoapIn" />
+      <wsdl:output message="tns:returnBankCodeReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnPersonalDetailsFromCell">
+      <wsdl:input message="tns:returnPersonalDetailsFromCellSoapIn" />
+      <wsdl:output message="tns:returnPersonalDetailsFromCellSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnAlertCompanies">
+      <wsdl:input message="tns:returnAlertCompaniesSoapIn" />
+      <wsdl:output message="tns:returnAlertCompaniesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmTradeReferences">
+      <wsdl:input message="tns:confirmTradeReferencesSoapIn" />
+      <wsdl:output message="tns:confirmTradeReferencesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insertTradeReference_Company">
+      <wsdl:input message="tns:insertTradeReference_CompanySoapIn" />
+      <wsdl:output message="tns:insertTradeReference_CompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReferenceReport">
+      <wsdl:input message="tns:updateTradeReferenceReportSoapIn" />
+      <wsdl:output message="tns:updateTradeReferenceReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReference">
+      <wsdl:input message="tns:updateTradeReferenceSoapIn" />
+      <wsdl:output message="tns:updateTradeReferenceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReferenceProgress">
+      <wsdl:input message="tns:updateTradeReferenceProgressSoapIn" />
+      <wsdl:output message="tns:updateTradeReferenceProgressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnTradeReferenceReport">
+      <wsdl:input message="tns:returnTradeReferenceReportSoapIn" />
+      <wsdl:output message="tns:returnTradeReferenceReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmConsumer">
+      <wsdl:input message="tns:confirmConsumerSoapIn" />
+      <wsdl:output message="tns:confirmConsumerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnConsumerReport">
+      <wsdl:input message="tns:returnConsumerReportSoapIn" />
+      <wsdl:output message="tns:returnConsumerReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDefaults">
+      <wsdl:input message="tns:returnCompanyDefaultsSoapIn" />
+      <wsdl:output message="tns:returnCompanyDefaultsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserDetails">
+      <wsdl:input message="tns:returnUserDetailsSoapIn" />
+      <wsdl:output message="tns:returnUserDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserSetting">
+      <wsdl:input message="tns:returnUserSettingSoapIn" />
+      <wsdl:output message="tns:returnUserSettingSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="apiHttpGet">
+    <wsdl:operation name="authenticateUser">
+      <wsdl:input message="tns:authenticateUserHttpGetIn" />
+      <wsdl:output message="tns:authenticateUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="logOutUser">
+      <wsdl:input message="tns:logOutUserHttpGetIn" />
+      <wsdl:output message="tns:logOutUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanies">
+      <wsdl:input message="tns:returnCompaniesHttpGetIn" />
+      <wsdl:output message="tns:returnCompaniesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompaniesClient">
+      <wsdl:input message="tns:returnCompaniesClientHttpGetIn" />
+      <wsdl:output message="tns:returnCompaniesClientHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyConfirmDetails">
+      <wsdl:input message="tns:returnCompanyConfirmDetailsHttpGetIn" />
+      <wsdl:output message="tns:returnCompanyConfirmDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany">
+      <wsdl:input message="tns:confirmCompanyHttpGetIn" />
+      <wsdl:output message="tns:confirmCompanyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDirectors">
+      <wsdl:input message="tns:returnCompanyDirectorsHttpGetIn" />
+      <wsdl:output message="tns:returnCompanyDirectorsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport">
+      <wsdl:input message="tns:returnCompanyReportHttpGetIn" />
+      <wsdl:output message="tns:returnCompanyReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReportTiers">
+      <wsdl:input message="tns:returnCompanyReportTiersHttpGetIn" />
+      <wsdl:output message="tns:returnCompanyReportTiersHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyProps">
+      <wsdl:input message="tns:returnCompanyPropsHttpGetIn" />
+      <wsdl:output message="tns:returnCompanyPropsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Short">
+      <wsdl:input message="tns:confirmCompany_ShortHttpGetIn" />
+      <wsdl:output message="tns:confirmCompany_ShortHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Short">
+      <wsdl:input message="tns:returnCompanyReport_ShortHttpGetIn" />
+      <wsdl:output message="tns:returnCompanyReport_ShortHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Comprehensive">
+      <wsdl:input message="tns:confirmCompany_ComprehensiveHttpGetIn" />
+      <wsdl:output message="tns:confirmCompany_ComprehensiveHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors_Comprehensive">
+      <wsdl:input message="tns:returnDirectors_ComprehensiveHttpGetIn" />
+      <wsdl:output message="tns:returnDirectors_ComprehensiveHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Comprehensive">
+      <wsdl:input message="tns:returnCompanyReport_ComprehensiveHttpGetIn" />
+      <wsdl:output message="tns:returnCompanyReport_ComprehensiveHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors">
+      <wsdl:input message="tns:returnDirectorsHttpGetIn" />
+      <wsdl:output message="tns:returnDirectorsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmDirector">
+      <wsdl:input message="tns:confirmDirectorHttpGetIn" />
+      <wsdl:output message="tns:confirmDirectorHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorReport">
+      <wsdl:input message="tns:returnDirectorReportHttpGetIn" />
+      <wsdl:output message="tns:returnDirectorReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorProps">
+      <wsdl:input message="tns:returnDirectorPropsHttpGetIn" />
+      <wsdl:output message="tns:returnDirectorPropsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserHistory">
+      <wsdl:input message="tns:returnUserHistoryHttpGetIn" />
+      <wsdl:output message="tns:returnUserHistoryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkValidToken">
+      <wsdl:input message="tns:checkValidTokenHttpGetIn" />
+      <wsdl:output message="tns:checkValidTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmPropertyAndInsert">
+      <wsdl:input message="tns:confirmPropertyAndInsertHttpGetIn" />
+      <wsdl:output message="tns:confirmPropertyAndInsertHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmBankCode">
+      <wsdl:input message="tns:confirmBankCodeHttpGetIn" />
+      <wsdl:output message="tns:confirmBankCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnBankCodeReport">
+      <wsdl:input message="tns:returnBankCodeReportHttpGetIn" />
+      <wsdl:output message="tns:returnBankCodeReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnPersonalDetailsFromCell">
+      <wsdl:input message="tns:returnPersonalDetailsFromCellHttpGetIn" />
+      <wsdl:output message="tns:returnPersonalDetailsFromCellHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnAlertCompanies">
+      <wsdl:input message="tns:returnAlertCompaniesHttpGetIn" />
+      <wsdl:output message="tns:returnAlertCompaniesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmTradeReferences">
+      <wsdl:input message="tns:confirmTradeReferencesHttpGetIn" />
+      <wsdl:output message="tns:confirmTradeReferencesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnTradeReferenceReport">
+      <wsdl:input message="tns:returnTradeReferenceReportHttpGetIn" />
+      <wsdl:output message="tns:returnTradeReferenceReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmConsumer">
+      <wsdl:input message="tns:confirmConsumerHttpGetIn" />
+      <wsdl:output message="tns:confirmConsumerHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnConsumerReport">
+      <wsdl:input message="tns:returnConsumerReportHttpGetIn" />
+      <wsdl:output message="tns:returnConsumerReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDefaults">
+      <wsdl:input message="tns:returnCompanyDefaultsHttpGetIn" />
+      <wsdl:output message="tns:returnCompanyDefaultsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserDetails">
+      <wsdl:input message="tns:returnUserDetailsHttpGetIn" />
+      <wsdl:output message="tns:returnUserDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserSetting">
+      <wsdl:input message="tns:returnUserSettingHttpGetIn" />
+      <wsdl:output message="tns:returnUserSettingHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="apiHttpPost">
+    <wsdl:operation name="authenticateUser">
+      <wsdl:input message="tns:authenticateUserHttpPostIn" />
+      <wsdl:output message="tns:authenticateUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="logOutUser">
+      <wsdl:input message="tns:logOutUserHttpPostIn" />
+      <wsdl:output message="tns:logOutUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanies">
+      <wsdl:input message="tns:returnCompaniesHttpPostIn" />
+      <wsdl:output message="tns:returnCompaniesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompaniesClient">
+      <wsdl:input message="tns:returnCompaniesClientHttpPostIn" />
+      <wsdl:output message="tns:returnCompaniesClientHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyConfirmDetails">
+      <wsdl:input message="tns:returnCompanyConfirmDetailsHttpPostIn" />
+      <wsdl:output message="tns:returnCompanyConfirmDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany">
+      <wsdl:input message="tns:confirmCompanyHttpPostIn" />
+      <wsdl:output message="tns:confirmCompanyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDirectors">
+      <wsdl:input message="tns:returnCompanyDirectorsHttpPostIn" />
+      <wsdl:output message="tns:returnCompanyDirectorsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport">
+      <wsdl:input message="tns:returnCompanyReportHttpPostIn" />
+      <wsdl:output message="tns:returnCompanyReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReportTiers">
+      <wsdl:input message="tns:returnCompanyReportTiersHttpPostIn" />
+      <wsdl:output message="tns:returnCompanyReportTiersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyProps">
+      <wsdl:input message="tns:returnCompanyPropsHttpPostIn" />
+      <wsdl:output message="tns:returnCompanyPropsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Short">
+      <wsdl:input message="tns:confirmCompany_ShortHttpPostIn" />
+      <wsdl:output message="tns:confirmCompany_ShortHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Short">
+      <wsdl:input message="tns:returnCompanyReport_ShortHttpPostIn" />
+      <wsdl:output message="tns:returnCompanyReport_ShortHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Comprehensive">
+      <wsdl:input message="tns:confirmCompany_ComprehensiveHttpPostIn" />
+      <wsdl:output message="tns:confirmCompany_ComprehensiveHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors_Comprehensive">
+      <wsdl:input message="tns:returnDirectors_ComprehensiveHttpPostIn" />
+      <wsdl:output message="tns:returnDirectors_ComprehensiveHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Comprehensive">
+      <wsdl:input message="tns:returnCompanyReport_ComprehensiveHttpPostIn" />
+      <wsdl:output message="tns:returnCompanyReport_ComprehensiveHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors">
+      <wsdl:input message="tns:returnDirectorsHttpPostIn" />
+      <wsdl:output message="tns:returnDirectorsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmDirector">
+      <wsdl:input message="tns:confirmDirectorHttpPostIn" />
+      <wsdl:output message="tns:confirmDirectorHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorReport">
+      <wsdl:input message="tns:returnDirectorReportHttpPostIn" />
+      <wsdl:output message="tns:returnDirectorReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorProps">
+      <wsdl:input message="tns:returnDirectorPropsHttpPostIn" />
+      <wsdl:output message="tns:returnDirectorPropsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserHistory">
+      <wsdl:input message="tns:returnUserHistoryHttpPostIn" />
+      <wsdl:output message="tns:returnUserHistoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkValidToken">
+      <wsdl:input message="tns:checkValidTokenHttpPostIn" />
+      <wsdl:output message="tns:checkValidTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmPropertyAndInsert">
+      <wsdl:input message="tns:confirmPropertyAndInsertHttpPostIn" />
+      <wsdl:output message="tns:confirmPropertyAndInsertHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmBankCode">
+      <wsdl:input message="tns:confirmBankCodeHttpPostIn" />
+      <wsdl:output message="tns:confirmBankCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnBankCodeReport">
+      <wsdl:input message="tns:returnBankCodeReportHttpPostIn" />
+      <wsdl:output message="tns:returnBankCodeReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnPersonalDetailsFromCell">
+      <wsdl:input message="tns:returnPersonalDetailsFromCellHttpPostIn" />
+      <wsdl:output message="tns:returnPersonalDetailsFromCellHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnAlertCompanies">
+      <wsdl:input message="tns:returnAlertCompaniesHttpPostIn" />
+      <wsdl:output message="tns:returnAlertCompaniesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmTradeReferences">
+      <wsdl:input message="tns:confirmTradeReferencesHttpPostIn" />
+      <wsdl:output message="tns:confirmTradeReferencesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnTradeReferenceReport">
+      <wsdl:input message="tns:returnTradeReferenceReportHttpPostIn" />
+      <wsdl:output message="tns:returnTradeReferenceReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmConsumer">
+      <wsdl:input message="tns:confirmConsumerHttpPostIn" />
+      <wsdl:output message="tns:confirmConsumerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnConsumerReport">
+      <wsdl:input message="tns:returnConsumerReportHttpPostIn" />
+      <wsdl:output message="tns:returnConsumerReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDefaults">
+      <wsdl:input message="tns:returnCompanyDefaultsHttpPostIn" />
+      <wsdl:output message="tns:returnCompanyDefaultsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserDetails">
+      <wsdl:input message="tns:returnUserDetailsHttpPostIn" />
+      <wsdl:output message="tns:returnUserDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="returnUserSetting">
+      <wsdl:input message="tns:returnUserSettingHttpPostIn" />
+      <wsdl:output message="tns:returnUserSettingHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="apiSoap" type="tns:apiSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="authenticateUser">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/authenticateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOutUser">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/logOutUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanies">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompaniesClient">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompaniesClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyConfirmDetails">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanyConfirmDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/confirmCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDirectors">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanyDirectors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDirector">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/processDirector" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanyReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReportTiers">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanyReportTiers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyProps">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanyProps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Short">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/confirmCompany_Short" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Short">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanyReport_Short" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Comprehensive">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/confirmCompany_Comprehensive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors_Comprehensive">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnDirectors_Comprehensive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDirector_Comprehensive">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/processDirector_Comprehensive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Comprehensive">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanyReport_Comprehensive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnDirectors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmDirector">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/confirmDirector" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorReport">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnDirectorReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorProps">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnDirectorProps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnProspects">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnProspects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserHistory">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnUserHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkValidToken">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/checkValidToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmPropertyAndInsert">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/confirmPropertyAndInsert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnPropertyReport">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnPropertyReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnAVS">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnAVS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmBankCode">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/confirmBankCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertBankCode">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/insertBankCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateBankCode">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/updateBankCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnBankCodeReport">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnBankCodeReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnPersonalDetailsFromCell">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnPersonalDetailsFromCell" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnAlertCompanies">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnAlertCompanies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmTradeReferences">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/confirmTradeReferences" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertTradeReference_Company">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/insertTradeReference_Company" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReferenceReport">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/updateTradeReferenceReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReference">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/updateTradeReference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReferenceProgress">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/updateTradeReferenceProgress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnTradeReferenceReport">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnTradeReferenceReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmConsumer">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/confirmConsumer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnConsumerReport">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnConsumerReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDefaults">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnCompanyDefaults" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserDetails">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnUserDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserSetting">
+      <soap:operation soapAction="http://lightstonebusiness.co.za/returnUserSetting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="apiSoap12" type="tns:apiSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="authenticateUser">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/authenticateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOutUser">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/logOutUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanies">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompaniesClient">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompaniesClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyConfirmDetails">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanyConfirmDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/confirmCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDirectors">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanyDirectors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDirector">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/processDirector" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanyReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReportTiers">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanyReportTiers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyProps">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanyProps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Short">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/confirmCompany_Short" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Short">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanyReport_Short" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Comprehensive">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/confirmCompany_Comprehensive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors_Comprehensive">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnDirectors_Comprehensive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDirector_Comprehensive">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/processDirector_Comprehensive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Comprehensive">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanyReport_Comprehensive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnDirectors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmDirector">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/confirmDirector" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorReport">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnDirectorReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorProps">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnDirectorProps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnProspects">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnProspects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserHistory">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnUserHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkValidToken">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/checkValidToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmPropertyAndInsert">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/confirmPropertyAndInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnPropertyReport">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnPropertyReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnAVS">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnAVS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmBankCode">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/confirmBankCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertBankCode">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/insertBankCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateBankCode">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/updateBankCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnBankCodeReport">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnBankCodeReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnPersonalDetailsFromCell">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnPersonalDetailsFromCell" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnAlertCompanies">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnAlertCompanies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmTradeReferences">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/confirmTradeReferences" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertTradeReference_Company">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/insertTradeReference_Company" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReferenceReport">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/updateTradeReferenceReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReference">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/updateTradeReference" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTradeReferenceProgress">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/updateTradeReferenceProgress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnTradeReferenceReport">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnTradeReferenceReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmConsumer">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/confirmConsumer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnConsumerReport">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnConsumerReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDefaults">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnCompanyDefaults" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserDetails">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnUserDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserSetting">
+      <soap12:operation soapAction="http://lightstonebusiness.co.za/returnUserSetting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="apiHttpGet" type="tns:apiHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="authenticateUser">
+      <http:operation location="/authenticateUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOutUser">
+      <http:operation location="/logOutUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanies">
+      <http:operation location="/returnCompanies" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompaniesClient">
+      <http:operation location="/returnCompaniesClient" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyConfirmDetails">
+      <http:operation location="/returnCompanyConfirmDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany">
+      <http:operation location="/confirmCompany" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDirectors">
+      <http:operation location="/returnCompanyDirectors" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport">
+      <http:operation location="/returnCompanyReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReportTiers">
+      <http:operation location="/returnCompanyReportTiers" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyProps">
+      <http:operation location="/returnCompanyProps" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Short">
+      <http:operation location="/confirmCompany_Short" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Short">
+      <http:operation location="/returnCompanyReport_Short" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Comprehensive">
+      <http:operation location="/confirmCompany_Comprehensive" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors_Comprehensive">
+      <http:operation location="/returnDirectors_Comprehensive" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Comprehensive">
+      <http:operation location="/returnCompanyReport_Comprehensive" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors">
+      <http:operation location="/returnDirectors" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmDirector">
+      <http:operation location="/confirmDirector" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorReport">
+      <http:operation location="/returnDirectorReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorProps">
+      <http:operation location="/returnDirectorProps" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserHistory">
+      <http:operation location="/returnUserHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkValidToken">
+      <http:operation location="/checkValidToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmPropertyAndInsert">
+      <http:operation location="/confirmPropertyAndInsert" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmBankCode">
+      <http:operation location="/confirmBankCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnBankCodeReport">
+      <http:operation location="/returnBankCodeReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnPersonalDetailsFromCell">
+      <http:operation location="/returnPersonalDetailsFromCell" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnAlertCompanies">
+      <http:operation location="/returnAlertCompanies" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmTradeReferences">
+      <http:operation location="/confirmTradeReferences" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnTradeReferenceReport">
+      <http:operation location="/returnTradeReferenceReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmConsumer">
+      <http:operation location="/confirmConsumer" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnConsumerReport">
+      <http:operation location="/returnConsumerReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDefaults">
+      <http:operation location="/returnCompanyDefaults" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserDetails">
+      <http:operation location="/returnUserDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserSetting">
+      <http:operation location="/returnUserSetting" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="apiHttpPost" type="tns:apiHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="authenticateUser">
+      <http:operation location="/authenticateUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOutUser">
+      <http:operation location="/logOutUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanies">
+      <http:operation location="/returnCompanies" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompaniesClient">
+      <http:operation location="/returnCompaniesClient" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyConfirmDetails">
+      <http:operation location="/returnCompanyConfirmDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany">
+      <http:operation location="/confirmCompany" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDirectors">
+      <http:operation location="/returnCompanyDirectors" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport">
+      <http:operation location="/returnCompanyReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReportTiers">
+      <http:operation location="/returnCompanyReportTiers" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyProps">
+      <http:operation location="/returnCompanyProps" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Short">
+      <http:operation location="/confirmCompany_Short" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Short">
+      <http:operation location="/returnCompanyReport_Short" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmCompany_Comprehensive">
+      <http:operation location="/confirmCompany_Comprehensive" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors_Comprehensive">
+      <http:operation location="/returnDirectors_Comprehensive" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyReport_Comprehensive">
+      <http:operation location="/returnCompanyReport_Comprehensive" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectors">
+      <http:operation location="/returnDirectors" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmDirector">
+      <http:operation location="/confirmDirector" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorReport">
+      <http:operation location="/returnDirectorReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnDirectorProps">
+      <http:operation location="/returnDirectorProps" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserHistory">
+      <http:operation location="/returnUserHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkValidToken">
+      <http:operation location="/checkValidToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmPropertyAndInsert">
+      <http:operation location="/confirmPropertyAndInsert" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmBankCode">
+      <http:operation location="/confirmBankCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnBankCodeReport">
+      <http:operation location="/returnBankCodeReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnPersonalDetailsFromCell">
+      <http:operation location="/returnPersonalDetailsFromCell" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnAlertCompanies">
+      <http:operation location="/returnAlertCompanies" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmTradeReferences">
+      <http:operation location="/confirmTradeReferences" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnTradeReferenceReport">
+      <http:operation location="/returnTradeReferenceReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmConsumer">
+      <http:operation location="/confirmConsumer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnConsumerReport">
+      <http:operation location="/returnConsumerReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnCompanyDefaults">
+      <http:operation location="/returnCompanyDefaults" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserDetails">
+      <http:operation location="/returnUserDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnUserSetting">
+      <http:operation location="/returnUserSetting" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="api">
+    <wsdl:port name="apiSoap" binding="tns:apiSoap">
+      <soap:address location="http://test.lightstonebusiness.co.za/lsb/api/api.asmx" />
+    </wsdl:port>
+    <wsdl:port name="apiSoap12" binding="tns:apiSoap12">
+      <soap12:address location="http://test.lightstonebusiness.co.za/lsb/api/api.asmx" />
+    </wsdl:port>
+    <wsdl:port name="apiHttpGet" binding="tns:apiHttpGet">
+      <http:address location="http://test.lightstonebusiness.co.za/lsb/api/api.asmx" />
+    </wsdl:port>
+    <wsdl:port name="apiHttpPost" binding="tns:apiHttpPost">
+      <http:address location="http://test.lightstonebusiness.co.za/lsb/api/api.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

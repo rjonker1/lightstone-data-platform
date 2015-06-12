@@ -376,6 +376,8 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Property.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Company.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Company.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Director.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Director.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll" to="lib\net45"/>

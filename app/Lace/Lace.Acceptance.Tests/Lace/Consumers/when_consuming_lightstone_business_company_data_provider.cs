@@ -22,7 +22,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public when_consuming_lightstone_business_company_data_provider()
         {
-            _command = MonitoringBusBuilder.ForIvidCommands(Guid.NewGuid());
+            _command = MonitoringBusBuilder.ForLightstoneCompanyCommands(Guid.NewGuid());
             _request = new[] {new CompaniesRequest()};
             _response = new Collection<IPointToLaceProvider>();
         }

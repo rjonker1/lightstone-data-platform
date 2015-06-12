@@ -104,6 +104,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Chain\when_building_lace_source_chain_for_director_search.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_company_search.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_license_plate_number_search.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Sources\Lightstone\when_getting_total_sales_by_age_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_total_sales_by_gender_metric.cs" />
     <Compile Include="Sources\when_getting_request_fields_from_reqeust.cs" />
+    <Compile Include="Sources\when_requesting_data_from_lightsone_business_director_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_lightsone_business_compan_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_lightstone.source.cs" />
     <Compile Include="Sources\when_requesting_data_from_rgt_vin_source.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Sources\when_transforming_ivid_hpi_standard_query_response.cs" />
     <Compile Include="Sources\when_requesting_data_from_ivid_source.cs" />
     <Compile Include="Transform\when_transforming_lighstone_response.cs" />
+    <Compile Include="Transform\when_transforming_lightstone_business_director_response.cs" />
     <Compile Include="Transform\when_transforming_lightstone_business_company_response.cs" />
     <Compile Include="Transform\when_transforming_rgt_vin_response.cs" />
     <Compile Include="Transform\when_transforming_audatex_response.cs" />
@@ -191,6 +194,10 @@
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj">
       <Project>{d2f75a1a-20e2-4b05-8f04-ef932d6f6b38}</Project>
       <Name>Lace.Domain.DataProviders.Jis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Domain.DataProviders.Lightstone.Business.Director\Lace.Domain.DataProviders.Lightstone.Business.Director.csproj">
+      <Project>{f8a50911-4066-4eca-ba26-42aef9c3a521}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Business.Director</Name>
     </ProjectReference>
     <ProjectReference Include="..\Source\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.Company.csproj">
       <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>

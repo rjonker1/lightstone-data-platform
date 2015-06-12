@@ -19,8 +19,8 @@ require 'fileutils'
 		:executable => '../tools/nuget/nuget.exe',
 	},
 	:octupus => {
-  		:server => 'http://dev.lsa.octopus/api',
-  		:apiKey => 'API-RC2X3OCLSRMQKYRCWENMLLT7FU'
+  		:server => 'http://dev.octopus/api',
+  		:apiKey => 'API-ONI3VWBDTIWUFPOJOJIOMOC7AZA'
  	}
 }
 

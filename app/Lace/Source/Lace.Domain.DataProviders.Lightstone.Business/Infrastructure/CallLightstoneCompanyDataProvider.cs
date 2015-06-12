@@ -60,33 +60,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
 
                 TransformResponse(response);
 
-                ////Director Search
-                ////get directors
-                ////var idNumber = _dataProvider.GetRequest<IAmLightstoneBusinessRequest>().IdNumber;
-                //const string idNumber = "7902065199085";
-                //const string firstname = "MURRAY GRANT";
-                //const string surname = "WOOLFSON";
-                //var directorDs = webService.Client.returnDirectors(webService.UserToken.ToString(), null, null, idNumber);
-
-                //var director = Director.GetFromDataset(directorDs);
-                //if(!director.Valid())
-                //    throw new Exception(string.Format("Director with Id Number {0} is not valid", idNumber));
-
-                ////confirm director
-                //var confirmReport = webService.Client.confirmDirector(webService.UserToken.ToString(), director.DirectorId, director.IdNumber.ToString(),
-                //    Guid.NewGuid().ToString());
-
-                //var confirm = ConfirmDirector.Get(confirmReport);
-                //if(!confirm.Valid())
-                //    throw new Exception(string.Format("Director with Id {0} could not be confirmed", director.DirectorId));
-
-
-
-                // authenticate
-                // call authenticateUser to get the UserToke by email and password
-                // email: murray@lightstone.co.za
-                //pass: Pass!1234
-
             }
             catch (Exception ex)
             {
