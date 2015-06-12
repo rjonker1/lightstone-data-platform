@@ -26,6 +26,7 @@ namespace Api.Helpers.Validators
             if (authToken == string.Empty) throw new LightstoneAutoException("Auth Token not found");
             if (userId == new Guid()) throw new LightstoneAutoException("UserId required");
             if (customerClientId == new Guid()) throw new LightstoneAutoException("customerClientId required");
+            if (packageId == new Guid()) throw new LightstoneAutoException("packageId required");
 
             #endregion
 
@@ -65,6 +66,13 @@ namespace Api.Helpers.Validators
             {
                 if (client.CommercialStateValue.Equals(commercialState)) TrialValidation(client);
             }
+
+            #endregion
+
+            #region User Customer | Client relationship validation
+
+            if (customer != null && user.Customers.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Customer relationship invalid for user: " + userId);
+            if (customer == null && user.Clients.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Client relationship invalid for user: " + userId);
 
             #endregion
 
