@@ -59,6 +59,12 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IAmYearRequestField, DataField>()
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.Year));
+            Mapper.CreateMap<IAmIdentityNumberRequestField, DataField>()
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.IdentityNumber));
+            //Mapper.CreateMap<IAmFirstNameRequestField, DataField>()
+            //   .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+            //   .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.f));
 
             Mapper.CreateMap<IDataField, IAmRequestField>()
                 .ConvertUsing<ITypeConverter<IDataField, IAmRequestField>>();
