@@ -1,8 +1,9 @@
 ﻿using System;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class ContractBundle
+    public class ContractBundle : Entity
     {
         public virtual Guid Id { get; set; }
         public virtual decimal Price { get; set; }
