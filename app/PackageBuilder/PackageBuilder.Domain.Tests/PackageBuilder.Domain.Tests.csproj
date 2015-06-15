@@ -93,7 +93,7 @@
       <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="PackageBuilder.Domain.Entities.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.1223\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.1224\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

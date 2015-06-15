@@ -87,7 +87,7 @@
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PackageBuilder.Domain.Entities.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.1223\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.1224\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

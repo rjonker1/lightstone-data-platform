@@ -175,7 +175,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PackageBuilder.Domain.Entities.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.1223\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.1224\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
