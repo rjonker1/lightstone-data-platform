@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Entities
 {
     public class CreateSource : ValueEntity
     {
-        [DomainSignature]
+        [Unique]
         public virtual CreateSourceType CreateSourceType { get; protected internal set; }
         protected CreateSource() { }
 

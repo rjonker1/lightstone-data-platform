@@ -130,7 +130,7 @@
         <label class="control-label col-lg-4">Clients</label>
         <div class="input-group col-lg-2 client-autocomplete">
             <select id="ClientIds" name="ClientIds" data-placeholder="Type to search & add clients" multiple class="chosen-select">
-                @foreach (NamedEntityDto item in Model.Clients)
+                @foreach (var item in Model.Clients)
                 {
                     var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
                     <option selected="@isSelected" value="@item.Id">@item.Name</option>
@@ -147,7 +147,7 @@
         <label class="control-label col-lg-4">Contracts</label>
         <div class="input-group col-lg-2 customer-autocomplete">
             <select id="ContractIds" name="ContractIds" data-placeholder="Type to search & add contracts" multiple class="chosen-select">
-                @foreach (NamedEntityDto item in Model.Contracts)
+                @foreach (var item in Model.Contracts)
                 {
                     var isSelected = Model.Contracts != null && Model.Contracts.Select(x => x.Id).Contains(item.Id);
                     <option id="@item.Id" selected="@isSelected" value="@item.Id">@item.Name</option>
@@ -159,7 +159,23 @@
         </div>
 
     </div>
+    <div class="form-group">
 
+        <label class="control-label col-lg-4">Users</label>
+        <div class="input-group col-lg-2 user-autocomplete">
+            <select id="UserIds" name="UserIds" data-placeholder="Type to search & add users" multiple class="chosen-select">
+                @foreach (var item in Model.Users)
+                {
+                    var isSelected = Model.Users != null && Model.Users.Select(x => x.Id).Contains(item.Id);
+                    <option selected="@isSelected" value="@item.Id">@item.LastName</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.UserIds)
+        </div>
+
+    </div>
     @Html.Partial("Shared/BoxFooter")
 </div>
 

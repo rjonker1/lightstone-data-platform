@@ -6,7 +6,7 @@ namespace UserManagement.Domain.Core.Entities
 {
     public abstract class ValueEntity : Entity, IValueEntity
     {
-        [Required, DomainSignature]
+        [Required, Unique]
         public virtual string Value { get; protected internal set; }
 
         protected ValueEntity() { }

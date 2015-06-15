@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Entities
 {
     public class PlatformStatus : ValueEntity
     {
-        [DomainSignature]
+        [Unique]
         public virtual PlatformStatusType PlatformStatusType { get; protected internal set; }
         protected PlatformStatus() { }
 

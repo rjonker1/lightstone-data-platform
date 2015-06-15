@@ -13,6 +13,7 @@ using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
@@ -43,6 +44,15 @@ namespace UserManagement.Api.Modules
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
+            };
+
+            Get["/UserLookup/{filter}"] = _ =>
+            {
+                var filter = (string)_.filter;
+                var dto = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(userRepository.Where(x => x.IsActive == true && (x.FirstName.StartsWith(filter) || x.LastName.StartsWith(filter))));
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
             };
 
             Get["/UserCustomers/{userId:guid}"] = _ =>

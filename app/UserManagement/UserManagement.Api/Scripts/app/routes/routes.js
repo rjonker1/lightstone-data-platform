@@ -550,6 +550,34 @@ function initializePlugins() {
         }
     });
     
+    $('.user-autocomplete .chosen-choices input').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "UserLookup" + "/" + request.term + "/",
+                dataType: "json",
+                beforeSend: function () { $('ul.chosen-results').empty(); },
+                success: function (data) {
+                    response($.map(data.dto, function (item) {
+                        return {
+                            label: item.lastName,
+                            value: item.id
+                        };
+                    }));
+                }
+            });
+        },
+        select: function (event, ui) {
+            if ($('#' + ui.item.value).length) {
+                return;
+            }
+
+            var $container = $(this).closest('.user-autocomplete');
+            var $select = $container.find('select');
+            $select.append('<option id="' + ui.item.value + '" selected="true" value="' + ui.item.value + '">' + ui.item.label + '</option>');
+            $select.trigger("chosen:updated");
+        }
+    });
+    
     //$('.packag-autocomplete .chosen-choices input').autocomplete({
     //    source: function (request, response) {
     //        var $container = $(this.element).closest('.packag-autocomplete');

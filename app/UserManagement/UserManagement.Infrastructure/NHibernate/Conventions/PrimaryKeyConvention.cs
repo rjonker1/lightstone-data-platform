@@ -1,6 +1,5 @@
 ﻿using FluentNHibernate.Conventions;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.NHibernate.Conventions
 {

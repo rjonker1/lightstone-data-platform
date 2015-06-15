@@ -8,10 +8,10 @@ namespace UserManagement.Domain.Entities
         public virtual string UuId { get; protected internal set; }
         public virtual string FirstName { get; protected internal set; }
         public virtual string LastName { get; protected internal set; }
-        [DomainSignature]
+        [Unique]
         public virtual string UserName { get; protected internal set; }
         public virtual User User { get; set; }
-        [DomainSignature]
+        [Unique]
         public virtual Client Client { get; protected internal set; }
     }
 }

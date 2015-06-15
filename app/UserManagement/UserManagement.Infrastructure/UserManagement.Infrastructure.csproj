@@ -86,7 +86,7 @@
     <Compile Include="NHibernate\Conventions\AuditLogConvention.cs" />
     <Compile Include="NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="NHibernate\Conventions\CustomForeignAndSubclassKeyConvention.cs" />
-    <Compile Include="NHibernate\Conventions\DomainSignatureConvention.cs" />
+    <Compile Include="NHibernate\Conventions\UniquePropertyConvention.cs" />
     <Compile Include="NHibernate\Conventions\ManyToManyConvention.cs" />
     <Compile Include="NHibernate\Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="NHibernate\Conventions\PropertyConvention.cs" />
@@ -94,6 +94,7 @@
     <Compile Include="NHibernate\Conventions\RequiredConvention.cs" />
     <Compile Include="NHibernate\Conventions\SubClassConvention.cs" />
     <Compile Include="NHibernate\Conventions\TableNameConvention.cs" />
+    <Compile Include="NHibernate\Conventions\UniqueReferenceConvention.cs" />
     <Compile Include="NHibernate\MappingOverrides\AddressOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\BillingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\ClientAccountNumberMappingOverride.cs" />
