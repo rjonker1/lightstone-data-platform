@@ -44,6 +44,11 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<string> PackageIdNames { get; set; } // Used to post Ids on form submit
         public IEnumerable<KeyValuePair<Guid, string>> Packages { get; set; } // Used in populating edit view
 
+        public bool HasPackagePriceOverride { get; set; }
+        public Guid ContractBundleId { get; set; }
+        public decimal ContractBundlePrice { get; set; }
+        public int ContractBundleTransactionLimit { get; set; }
+
         public bool IsActive { get; set; }
     }
 }

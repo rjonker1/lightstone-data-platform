@@ -129,6 +129,7 @@
     <Compile Include="Commands\Provinces\ImportProvince.cs" />
     <Compile Include="Commands\Roles\ImportRole.cs" />
     <Compile Include="Commands\UserAliases\LinkUserAliasCommand.cs" />
+    <Compile Include="ContractBundle.cs" />
     <Compile Include="ContractPackage.cs" />
     <Compile Include="AccountNumber.cs" />
     <Compile Include="CustomerAccountNumber.cs" />
