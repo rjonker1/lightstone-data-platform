@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Enums;
 using Nancy;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;

@@ -14,7 +14,7 @@ namespace UserManagement.Domain.Entities
         public virtual string LastName { get; set; }
         public virtual string IdNumber { get; set; }
         public virtual string ContactNumber { get; set; }
-        [DomainSignature]
+        [Unique]
         public virtual string UserName { get; protected internal set; }
         public virtual string Password { get; protected internal set; }
         public virtual string Salt { get; protected internal set; }

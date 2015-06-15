@@ -1,5 +1,4 @@
 ﻿@using UserManagement.Api.ViewModels
-@*@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>*@
 
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Users", ""))
 
@@ -102,7 +101,7 @@
     //}
 
     function customerClientFormatter(value, row, index) {
-
+        console.log(value);
         var stringBuilder = "";
         if (value) {
 

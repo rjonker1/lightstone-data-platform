@@ -84,11 +84,14 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<NamedEntityDto> Clients { get; set; }
         public IEnumerable<Guid> ContractIds { get; set; }
         public IEnumerable<NamedEntityDto> Contracts { get; set; }
+        public IEnumerable<Guid> UserIds { get; set; }
+        public IEnumerable<UserDto> Users { get; set; }
 
         public CustomerDto()
         {
             Clients = Enumerable.Empty<NamedEntityDto>();
             Contracts = Enumerable.Empty<NamedEntityDto>();
+            Users = Enumerable.Empty<UserDto>();
         }
     }
 }

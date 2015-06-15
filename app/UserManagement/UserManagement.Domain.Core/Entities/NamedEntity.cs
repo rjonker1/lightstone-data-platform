@@ -6,7 +6,7 @@ namespace UserManagement.Domain.Core.Entities
 {
     public abstract class NamedEntity : Entity, INamedEntity
     {
-        [Required, DomainSignature]
+        [Required, Unique]
         public virtual string Name { get; protected internal set; }
 
         protected NamedEntity() { }
