@@ -67,6 +67,12 @@ namespace Lace.Test.Helper.Builders.Buses
             var bus = BusFactory.WorkflowBus();
             return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneBusinessCompany);
         }
+
+        public static ISendCommandToBus ForLightstoneDirectorCommands(Guid requestId)
+        {
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneBusinessDirector);
+        }
     }
 
     public class BusFactory
@@ -74,17 +80,7 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public static IAdvancedBus WorkflowBus()
         {
-
             return Workflow.BuildingBlocks.BusFactory.CreateAdvancedBus("workflow/dataprovider/queue");
-
-            //var assembliesToScan =
-            //    AllAssemblies.Matching("Lightstone.DataPlatform.Workflow.Lace.Messages")
-            //        .And("NServiceBus.NHibernate")
-            //        .And("NServiceBus.Transports.RabbitMQ");
-            //return
-            //    new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Workflow.Lace.Messages.Commands",
-            //        assembliesToScan,
-            //        "DataPlatform.Transactions.Host.Write").CreateBusWithNHibernatePersistence();
         }
     }
 }

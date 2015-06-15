@@ -60,7 +60,9 @@
     </Compile>
     <Compile Include="Automapping\AutoMapperConfiguration.cs" />
     <Compile Include="Dto\ContractResponseDto.cs" />
+    <Compile Include="Dto\NamedEntityDto.cs" />
     <Compile Include="Dto\RequestDto.cs" />
+    <Compile Include="Dto\ValidationDto.cs" />
     <Compile Include="Extensions\AuthorizationHeaderExtensions.cs" />
     <Compile Include="Metadata\ApiMetaDataGenerator.cs" />
     <Compile Include="Metadata\DefaultRouteMetadata.cs" />

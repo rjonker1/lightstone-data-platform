@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneBusinessCompany);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneBusinessCompany, _dataProvider);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

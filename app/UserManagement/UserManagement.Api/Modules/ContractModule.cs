@@ -63,6 +63,14 @@ namespace UserManagement.Api.Modules
 
                 return View["Save", dto];
             };
+
+            Get["/Contracts/Details/{id}"] = parameters =>
+            {
+                var guid = (Guid)parameters.id;
+                var dto = Mapper.Map<Contract, ContractDto>(contracts.Get(guid));
+
+                return Response.AsJson(dto);
+            };
             
             Put["/Contracts/{id}"] = parameters =>
             {

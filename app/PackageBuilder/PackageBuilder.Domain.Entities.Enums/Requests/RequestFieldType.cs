@@ -17,6 +17,11 @@
         RequesterEmail,
         RequesterPhone,
         RequestReference,
-        IdentityNumber
+        IdentityNumber,
+        FirstName,
+        Surname,
+        CompanyName,
+        CompanyRegistrationNumber,
+        CompanyVatNumber
     }
 }

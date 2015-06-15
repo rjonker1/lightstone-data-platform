@@ -7,6 +7,5 @@ namespace PackageBuilder.Domain.Requests.Contracts.Requests
         IAmIdentityNumberRequestField IdNumber { get; }
         IAmFirstNameRequestField FirstName { get; }
         IAmSurnameRequestField Surname { get; }
-        IAmCompanyVatNumberRequestField CompanyVatNumber { get; }
     }
 }

@@ -91,6 +91,14 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
+            Get["/Customers/Details/{id}"] = parameters =>
+            {
+                var guid = (Guid)parameters.id;
+                var dto = Mapper.Map<Customer, CustomerDto>(customers.Get(guid));
+
+                return Response.AsJson(dto);
+            };
+
             Put["/Customers/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<CustomerDto>();

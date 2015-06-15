@@ -38,7 +38,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public void lace_data_providers_for_company_search_should_loaded_correctly()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(8);
+            _initialize.DataProviderResponses.Count.ShouldEqual(9);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(1);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().ShouldNotBeNull();

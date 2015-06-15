@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\Installers\AuthInstaller.cs" />
+    <Compile Include="Helpers\Validators\ApiRequestValidator.cs" />
     <Compile Include="Infrastructure\Metadata\DefaultRouteMetadataProvider.cs" />
     <Compile Include="Modules\ApiModule.cs" />
     <Compile Include="Infrastructure\Metadata\ApiRouteDescriptionProvider.cs" />

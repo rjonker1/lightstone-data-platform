@@ -123,6 +123,10 @@
       <Project>{3180c3d9-5f65-4ab3-9111-1144f96a352c}</Project>
       <Name>Lace.Domain.DataProviders.Ivid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone.Business.Director\Lace.Domain.DataProviders.Lightstone.Business.Director.csproj">
+      <Project>{f8a50911-4066-4eca-ba26-42aef9c3a521}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Business.Director</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.Company.csproj">
       <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone.Business.Company</Name>

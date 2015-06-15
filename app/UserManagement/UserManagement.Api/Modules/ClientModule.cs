@@ -128,6 +128,15 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
+            Get["/Clients/Details/{id}"] = parameters =>
+            {
+                var guid = (Guid)parameters.id;
+                var client = clientRepository.Get(guid);
+                var dto = Mapper.Map<Client, ClientDto>(client);
+
+                return Response.AsJson(dto);
+            };
+
             Put["/Clients/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<ClientDto>();

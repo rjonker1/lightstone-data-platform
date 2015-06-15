@@ -60,6 +60,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 DataProviderName.LightstoneBusinessCompany, DataProviderName.LightstoneBusinessCompany.ToString(), 0m,
                 typeof(IProvideDataFromLightstoneBusinessCompany), "Owner", DateTime.UtcNow));
 
+            _publisher.Publish(new CreateDataProvider(new LightstoneDirectorResponse().LightstoneCompanyResponse(), Guid.NewGuid(),
+               DataProviderName.LightstoneBusinessDirector, DataProviderName.LightstoneBusinessDirector.ToString(), 0m,
+               typeof(IProvideDataFromLightstoneBusinessDirector), "Owner", DateTime.UtcNow));
+
             this.Info(() => "Successfully imported data providers");
         }
     }

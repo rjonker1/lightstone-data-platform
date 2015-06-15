@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Reflection;
 using Api.Domain.Infrastructure.Dto;
+using Api.Helpers.Validators;
 using DataPlatform.Shared.Dtos;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Json;
@@ -16,7 +19,7 @@ namespace Api.Modules
     {
         private static int _defaultJsonMaxLength;
 
-        public ActionModule(IPackageBuilderApiClient packageBuilderApi)
+        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -33,16 +36,33 @@ namespace Api.Modules
 
             Post["/action"] = parameters =>
             {
-                this.Info(() => "Api action started.");
-                var apiRequest = this.Bind<ApiRequestDto>();
-                var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
-                this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
-                var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), new KeyValuePair<string, string>("Content-Type", "application/json"), });
-                //var responses = packageBuilderApi.Get("", string.Format("/Packages/Execute/{0}/{1}/{2}/{3}", apiRequest.PackageId, apiRequest.UserId, apiRequest.SearchTerm, Guid.NewGuid()), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
-                this.Info(() => "Api responses: {0}".FormatWith(responses));
-                this.Info(() => "Api action completed.");
-                return responses;
+                try
+                {
+                    this.Info(() => "Api action started.");
+                    var apiRequest = this.Bind<ApiRequestDto>();
+                    var token = Context.Request.Headers.Authorization.Split(' ')[1];
+
+                    new ApiRequestValidator(userManagementApi)
+                        .AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
+
+                    this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
+                    this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
+
+                    var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), new KeyValuePair<string, string>("Content-Type", "application/json"), });
+
+                    this.Info(() => "Api responses: {0}".FormatWith(responses));
+                    this.Info(() => "Api action completed.");
+
+                    return responses;
+                }
+                catch (LightstoneAutoException execption)
+                {
+                    return Response.AsJson(new { error = execption.Message });
+                }
+                catch (TargetInvocationException targetInvocationException)
+                {
+                    return Response.AsJson(new { error = "Ensure all properties are populated" });
+                }
             };
         }
     }
