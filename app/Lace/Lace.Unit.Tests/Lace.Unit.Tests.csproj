@@ -108,6 +108,7 @@
     <Compile Include="Chain\when_building_lace_source_chain_for_company_search.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_license_plate_number_search.cs" />
+    <Compile Include="Metadata\when_getting_meta_data_for_company_search.cs" />
     <Compile Include="Metadata\when_getting_meta_data_for_vehicle_search.cs" />
     <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
     <Compile Include="SourceRequests\when_configuring_ivid_title_holder_request_message.cs" />

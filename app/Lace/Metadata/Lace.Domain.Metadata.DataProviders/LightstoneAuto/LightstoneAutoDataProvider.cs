@@ -48,7 +48,7 @@ namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto
 
                 var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
                     new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(),
-                        new FakeVin12CarInfoRepository(_dataProvider.GetRequest<IAmLightstoneAutoRequest>().VinNumber.Field), _logCommand));
+                        new FakeCarInfoRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 

@@ -339,7 +339,7 @@
     </nuget>
 
     <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Domain.Metadata.DataProviders</name>
+      <name>Lightstone.DataPlatform.Lace.Domain.Metadata.Entrypoint</name>
       <folder>app/Lace/Metadata/Lace.Domain.Metadata.Entrypoint</folder>
       <author>CustomApp</author>
       <description>Lace.Domain.Metadata.Entrypoint</description>
