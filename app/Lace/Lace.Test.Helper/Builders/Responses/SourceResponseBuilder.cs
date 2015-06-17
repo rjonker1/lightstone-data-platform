@@ -64,7 +64,7 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeSignioDecryptedDriversLicenseResponse.GetDecryptedDriversLicenseXmlResponse();
         }
 
-        public string ForLightstoneReturnPropertiesResponse()
+        public System.Data.DataSet ForLightstoneReturnPropertiesResponse()
         {
             return FakeLightstonePropertyResponse.GetResponseFromReturnProperties();
         }

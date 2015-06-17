@@ -2,9 +2,10 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 
-namespace Lace.Domain.DataProviders.Ivid.Infrastructure
+
+namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto.Infrastructure
 {
-    public class RequestDataFromIvidSource : IRequestDataFromDataProviderSource
+    public class RequestDataFromLightstoneAuto : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalSource)
         {

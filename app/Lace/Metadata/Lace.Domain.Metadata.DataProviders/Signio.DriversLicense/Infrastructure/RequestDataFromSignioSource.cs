@@ -2,9 +2,9 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 
-namespace Lace.Domain.DataProviders.Ivid.Infrastructure
+namespace Lace.Domain.Metadata.DataProviders.Signio.DriversLicense.Infrastructure
 {
-    public class RequestDataFromIvidSource : IRequestDataFromDataProviderSource
+    public class RequestDataFromSignioSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalSource)
         {

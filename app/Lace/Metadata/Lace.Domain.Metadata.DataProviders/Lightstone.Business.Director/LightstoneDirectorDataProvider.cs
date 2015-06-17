@@ -7,18 +7,18 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure;
+using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 using Workflow.Lace.Messages.Core;
 
-namespace Lace.Test.Helper.Fakes.Lace.Consumer
+namespace Lace.Domain.Metadata.DataProviders.Lightstone.Business.Director
 {
-    public class FakeSignioDataProvider: ExecuteSourceBase, IExecuteTheDataProviderSource
+    public class LightstoneDirectorDataProvider: ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
 
-        public FakeSignioDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
+        public LightstoneDirectorDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
@@ -28,28 +28,31 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.SignioDecryptDriversLicense, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneBusinessDirector, _request);
+
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
-                var consumer = new ConsumeSource(new HandleSignioSourceCall(), new FakeCallingSignioDataProvider());
+                var consumer = new ConsumeSource(new FakeHandleLightstoneBusinessDirectorServiceCall(),
+                    new FakeCallingLightstoneBusinessDirectorExternalWebService());
                 consumer.ConsumeDataProvider(response);
 
-                if (!response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().Any() || response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First() == null)
+                if (!response.OfType<IProvideDataFromLightstoneBusinessDirector>().Any() || response.OfType<IProvideDataFromLightstoneBusinessDirector>().First() == null)
                     CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);
+
         }
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var sigi = new SignioDriversLicenseDecryptionResponse();
-            sigi.HasNotBeenHandled();
-            response.Add(sigi);
+            var businessResponse = new LightstoneBusinessDirectorResponse();
+            businessResponse.HasNotBeenHandled();
+            response.Add(businessResponse);
         }
     }
 }
