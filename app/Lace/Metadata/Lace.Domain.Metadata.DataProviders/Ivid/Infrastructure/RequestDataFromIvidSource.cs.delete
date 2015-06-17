@@ -2,7 +2,7 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 
-namespace Lace.Domain.DataProviders.Ivid.Infrastructure
+namespace Lace.Domain.Metadata.DataProviders.Ivid.Infrastructure
 {
     public class RequestDataFromIvidSource : IRequestDataFromDataProviderSource
     {

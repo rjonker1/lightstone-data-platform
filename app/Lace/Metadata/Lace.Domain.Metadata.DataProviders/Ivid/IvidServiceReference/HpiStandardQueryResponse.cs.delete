@@ -1,0 +1,1012 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lace.Domain.Metadata.DataProviders.Ivid.IvidServiceReference
+{
+    public enum IvidQueryResult
+    {
+
+        /// <remarks/>
+        NO_RECORDS,
+
+        /// <remarks/>
+        NO_ISSUES,
+
+        /// <remarks/>
+        FURTHER_INVESTIGATION,
+    }
+
+    public enum VehicleState
+    {
+
+        /// <remarks/>
+        INTRODUCED_BY_ONLINE_MIB_CONTROLLED,
+
+        /// <remarks/>
+        INTRODUCED_BY_ONLINE_MIB_RELEASED,
+
+        /// <remarks/>
+        INTRODUCED_BY_NON_MIB,
+
+        /// <remarks/>
+        INTRODUCED_BY_POLICE_PRIVATE_OR_BUSINESS,
+
+        /// <remarks/>
+        REGISTERED_EXEMPT_FROM_LICENSING,
+
+        /// <remarks/>
+        REGISTERED_LIABLE_FOR_LICENSING,
+
+        /// <remarks/>
+        REGISTERED_EXEMPT_AND_LIMITED_OWNER,
+
+        /// <remarks/>
+        DEREGISTERED_BY_REQUEST,
+
+        /// <remarks/>
+        DEREGISTERED_BY_DEFAULT,
+
+        /// <remarks/>
+        EXPORTED_WHILE_EXEMPT_FROM_LICENSING,
+
+        /// <remarks/>
+        EXPORTED_WHILE_LICENSED,
+
+        /// <remarks/>
+        LICENSED,
+
+        /// <remarks/>
+        UNLICENSED_LIABLE_FOR_LICENSING,
+
+        /// <remarks/>
+        PENDING_SALE_FROM_MD_TO_MD,
+
+        /// <remarks/>
+        PENDING_SALE_FROM_MIB_MD_TO_PERSON,
+
+        /// <remarks/>
+        PENDING_NOTIFIED_OF_STOLEN_SCRAPPED,
+
+        /// <remarks/>
+        PENDING_TRANSFER_TO_LIMITED_OWNER,
+
+        /// <remarks/>
+        PENDING_SALE_OF_USED_MV,
+    }
+
+    public enum IdType
+    {
+
+        /// <remarks/>
+        UNKNOWN,
+
+        /// <remarks/>
+        REG_NO_CERTIFICATE,
+
+        /// <remarks/>
+        RSA_ID_DOCUMENT,
+
+        /// <remarks/>
+        FOREIGN_ID_DOC,
+
+        /// <remarks/>
+        BUSINESS_REG_CERTIFICATE,
+
+        /// <remarks/>
+        FOREIGN_PASSPORT,
+
+        /// <remarks/>
+        ID_CARD,
+
+        /// <remarks/>
+        TRAVEL_DOCUMENT,
+
+        /// <remarks/>
+        FOREIGN_DRIVERS_LICENCE,
+
+        /// <remarks/>
+        SA_DRIVERS_LICENCE,
+
+        /// <remarks/>
+        SA_PASSPORT,
+
+        /// <remarks/>
+        REFERENCE_BOOK,
+
+        /// <remarks/>
+        TRANSVAAL_REG_NO,
+
+        /// <remarks/>
+        MERGED_ALIAS,
+
+        /// <remarks/>
+        PSEUDO_PERSON,
+
+        /// <remarks/>
+        OTHER,
+
+        /// <remarks/>
+        NONE,
+    }
+
+    public class IssuesType : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private bool policeIssueField;
+
+        private bool policeIssueFieldSpecified;
+
+        private bool taxIssueField;
+
+        private bool taxIssueFieldSpecified;
+
+        private bool insuranceIssueField;
+
+        private bool insuranceIssueFieldSpecified;
+
+        private bool financingIssueField;
+
+        private bool financingIssueFieldSpecified;
+
+        private bool permitViolationIssueField;
+
+        private bool permitViolationIssueFieldSpecified;
+
+        private bool standardsIssueField;
+
+        private bool standardsIssueFieldSpecified;
+
+        private bool commercialIssueField;
+
+        private bool commercialIssueFieldSpecified;
+
+        private bool transportIssueField;
+
+        private bool transportIssueFieldSpecified;
+
+        private bool descriptionAbuseIssueField;
+
+        private bool descriptionAbuseIssueFieldSpecified;
+
+        private bool otherIssueField;
+
+        private bool otherIssueFieldSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+        public bool PoliceIssue
+        {
+            get
+            {
+                return this.policeIssueField;
+            }
+            set
+            {
+                this.policeIssueField = value;
+                this.RaisePropertyChanged("PoliceIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PoliceIssueSpecified
+        {
+            get
+            {
+                return this.policeIssueFieldSpecified;
+            }
+            set
+            {
+                this.policeIssueFieldSpecified = value;
+                this.RaisePropertyChanged("PoliceIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+        public bool TaxIssue
+        {
+            get
+            {
+                return this.taxIssueField;
+            }
+            set
+            {
+                this.taxIssueField = value;
+                this.RaisePropertyChanged("TaxIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TaxIssueSpecified
+        {
+            get
+            {
+                return this.taxIssueFieldSpecified;
+            }
+            set
+            {
+                this.taxIssueFieldSpecified = value;
+                this.RaisePropertyChanged("TaxIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
+        public bool InsuranceIssue
+        {
+            get
+            {
+                return this.insuranceIssueField;
+            }
+            set
+            {
+                this.insuranceIssueField = value;
+                this.RaisePropertyChanged("InsuranceIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool InsuranceIssueSpecified
+        {
+            get
+            {
+                return this.insuranceIssueFieldSpecified;
+            }
+            set
+            {
+                this.insuranceIssueFieldSpecified = value;
+                this.RaisePropertyChanged("InsuranceIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 3)]
+        public bool FinancingIssue
+        {
+            get
+            {
+                return this.financingIssueField;
+            }
+            set
+            {
+                this.financingIssueField = value;
+                this.RaisePropertyChanged("FinancingIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool FinancingIssueSpecified
+        {
+            get
+            {
+                return this.financingIssueFieldSpecified;
+            }
+            set
+            {
+                this.financingIssueFieldSpecified = value;
+                this.RaisePropertyChanged("FinancingIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 4)]
+        public bool PermitViolationIssue
+        {
+            get
+            {
+                return this.permitViolationIssueField;
+            }
+            set
+            {
+                this.permitViolationIssueField = value;
+                this.RaisePropertyChanged("PermitViolationIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PermitViolationIssueSpecified
+        {
+            get
+            {
+                return this.permitViolationIssueFieldSpecified;
+            }
+            set
+            {
+                this.permitViolationIssueFieldSpecified = value;
+                this.RaisePropertyChanged("PermitViolationIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 5)]
+        public bool StandardsIssue
+        {
+            get
+            {
+                return this.standardsIssueField;
+            }
+            set
+            {
+                this.standardsIssueField = value;
+                this.RaisePropertyChanged("StandardsIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool StandardsIssueSpecified
+        {
+            get
+            {
+                return this.standardsIssueFieldSpecified;
+            }
+            set
+            {
+                this.standardsIssueFieldSpecified = value;
+                this.RaisePropertyChanged("StandardsIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 6)]
+        public bool CommercialIssue
+        {
+            get
+            {
+                return this.commercialIssueField;
+            }
+            set
+            {
+                this.commercialIssueField = value;
+                this.RaisePropertyChanged("CommercialIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CommercialIssueSpecified
+        {
+            get
+            {
+                return this.commercialIssueFieldSpecified;
+            }
+            set
+            {
+                this.commercialIssueFieldSpecified = value;
+                this.RaisePropertyChanged("CommercialIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 7)]
+        public bool TransportIssue
+        {
+            get
+            {
+                return this.transportIssueField;
+            }
+            set
+            {
+                this.transportIssueField = value;
+                this.RaisePropertyChanged("TransportIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TransportIssueSpecified
+        {
+            get
+            {
+                return this.transportIssueFieldSpecified;
+            }
+            set
+            {
+                this.transportIssueFieldSpecified = value;
+                this.RaisePropertyChanged("TransportIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 8)]
+        public bool DescriptionAbuseIssue
+        {
+            get
+            {
+                return this.descriptionAbuseIssueField;
+            }
+            set
+            {
+                this.descriptionAbuseIssueField = value;
+                this.RaisePropertyChanged("DescriptionAbuseIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DescriptionAbuseIssueSpecified
+        {
+            get
+            {
+                return this.descriptionAbuseIssueFieldSpecified;
+            }
+            set
+            {
+                this.descriptionAbuseIssueFieldSpecified = value;
+                this.RaisePropertyChanged("DescriptionAbuseIssueSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 9)]
+        public bool OtherIssue
+        {
+            get
+            {
+                return this.otherIssueField;
+            }
+            set
+            {
+                this.otherIssueField = value;
+                this.RaisePropertyChanged("OtherIssue");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool OtherIssueSpecified
+        {
+            get
+            {
+                return this.otherIssueFieldSpecified;
+            }
+            set
+            {
+                this.otherIssueFieldSpecified = value;
+                this.RaisePropertyChanged("OtherIssueSpecified");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    public partial class HpiStandardQueryResponse : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private IvidQueryResult ividQueryResultField;
+
+        private IssuesType issuesTypesField;
+
+        private string ividReferenceField;
+
+        private bool partialResponseField;
+
+        private bool partialResponseFieldSpecified;
+
+        private string licenceNumberField;
+
+        private string registerNumberField;
+
+        private string vinField;
+
+        private string engineNumberField;
+
+        private string titleHolderIdNumberField;
+
+        private IdType titleHolderIdTypeField;
+
+        private bool titleHolderIdTypeFieldSpecified;
+
+        private VehicleState vehicleStatusCodeField;
+
+        private bool vehicleStatusCodeFieldSpecified;
+
+        private string engineDisplacementField;
+
+        private CodeDescription makeField;
+
+        private CodeDescription modelField;
+
+        private CodeDescription colourField;
+
+        private CodeDescription drivenField;
+
+        private string tareField;
+
+        private string gVMField;
+
+        private CodeDescription categoryField;
+
+        private CodeDescription descriptionField;
+
+        private CodeDescription economicSectorField;
+
+        private CodeDescription lifeStatusField;
+
+        private CodeDescription sapMarkField;
+
+        private string registrationDateField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+        public IvidQueryResult ividQueryResult
+        {
+            get
+            {
+                return this.ividQueryResultField;
+            }
+            set
+            {
+                this.ividQueryResultField = value;
+                this.RaisePropertyChanged("ividQueryResult");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+        public IssuesType issuesTypes
+        {
+            get
+            {
+                return this.issuesTypesField;
+            }
+            set
+            {
+                this.issuesTypesField = value;
+                this.RaisePropertyChanged("issuesTypes");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
+        public string IvidReference
+        {
+            get
+            {
+                return this.ividReferenceField;
+            }
+            set
+            {
+                this.ividReferenceField = value;
+                this.RaisePropertyChanged("IvidReference");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 3)]
+        public bool partialResponse
+        {
+            get
+            {
+                return this.partialResponseField;
+            }
+            set
+            {
+                this.partialResponseField = value;
+                this.RaisePropertyChanged("partialResponse");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool partialResponseSpecified
+        {
+            get
+            {
+                return this.partialResponseFieldSpecified;
+            }
+            set
+            {
+                this.partialResponseFieldSpecified = value;
+                this.RaisePropertyChanged("partialResponseSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 4)]
+        public string licenceNumber
+        {
+            get
+            {
+                return this.licenceNumberField;
+            }
+            set
+            {
+                this.licenceNumberField = value;
+                this.RaisePropertyChanged("licenceNumber");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 5)]
+        public string registerNumber
+        {
+            get
+            {
+                return this.registerNumberField;
+            }
+            set
+            {
+                this.registerNumberField = value;
+                this.RaisePropertyChanged("registerNumber");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 6)]
+        public string vin
+        {
+            get
+            {
+                return this.vinField;
+            }
+            set
+            {
+                this.vinField = value;
+                this.RaisePropertyChanged("vin");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 7)]
+        public string engineNumber
+        {
+            get
+            {
+                return this.engineNumberField;
+            }
+            set
+            {
+                this.engineNumberField = value;
+                this.RaisePropertyChanged("engineNumber");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 8)]
+        public string titleHolderIdNumber
+        {
+            get
+            {
+                return this.titleHolderIdNumberField;
+            }
+            set
+            {
+                this.titleHolderIdNumberField = value;
+                this.RaisePropertyChanged("titleHolderIdNumber");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 9)]
+        public IdType titleHolderIdType
+        {
+            get
+            {
+                return this.titleHolderIdTypeField;
+            }
+            set
+            {
+                this.titleHolderIdTypeField = value;
+                this.RaisePropertyChanged("titleHolderIdType");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool titleHolderIdTypeSpecified
+        {
+            get
+            {
+                return this.titleHolderIdTypeFieldSpecified;
+            }
+            set
+            {
+                this.titleHolderIdTypeFieldSpecified = value;
+                this.RaisePropertyChanged("titleHolderIdTypeSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 10)]
+        public VehicleState vehicleStatusCode
+        {
+            get
+            {
+                return this.vehicleStatusCodeField;
+            }
+            set
+            {
+                this.vehicleStatusCodeField = value;
+                this.RaisePropertyChanged("vehicleStatusCode");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool vehicleStatusCodeSpecified
+        {
+            get
+            {
+                return this.vehicleStatusCodeFieldSpecified;
+            }
+            set
+            {
+                this.vehicleStatusCodeFieldSpecified = value;
+                this.RaisePropertyChanged("vehicleStatusCodeSpecified");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 11)]
+        public string engineDisplacement
+        {
+            get
+            {
+                return this.engineDisplacementField;
+            }
+            set
+            {
+                this.engineDisplacementField = value;
+                this.RaisePropertyChanged("engineDisplacement");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 12)]
+        public CodeDescription make
+        {
+            get
+            {
+                return this.makeField;
+            }
+            set
+            {
+                this.makeField = value;
+                this.RaisePropertyChanged("make");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 13)]
+        public CodeDescription model
+        {
+            get
+            {
+                return this.modelField;
+            }
+            set
+            {
+                this.modelField = value;
+                this.RaisePropertyChanged("model");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 14)]
+        public CodeDescription colour
+        {
+            get
+            {
+                return this.colourField;
+            }
+            set
+            {
+                this.colourField = value;
+                this.RaisePropertyChanged("colour");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 15)]
+        public CodeDescription driven
+        {
+            get
+            {
+                return this.drivenField;
+            }
+            set
+            {
+                this.drivenField = value;
+                this.RaisePropertyChanged("driven");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 16)]
+        public string tare
+        {
+            get
+            {
+                return this.tareField;
+            }
+            set
+            {
+                this.tareField = value;
+                this.RaisePropertyChanged("tare");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 17)]
+        public string GVM
+        {
+            get
+            {
+                return this.gVMField;
+            }
+            set
+            {
+                this.gVMField = value;
+                this.RaisePropertyChanged("GVM");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 18)]
+        public CodeDescription category
+        {
+            get
+            {
+                return this.categoryField;
+            }
+            set
+            {
+                this.categoryField = value;
+                this.RaisePropertyChanged("category");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 19)]
+        public CodeDescription description
+        {
+            get
+            {
+                return this.descriptionField;
+            }
+            set
+            {
+                this.descriptionField = value;
+                this.RaisePropertyChanged("description");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 20)]
+        public CodeDescription economicSector
+        {
+            get
+            {
+                return this.economicSectorField;
+            }
+            set
+            {
+                this.economicSectorField = value;
+                this.RaisePropertyChanged("economicSector");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 21)]
+        public CodeDescription lifeStatus
+        {
+            get
+            {
+                return this.lifeStatusField;
+            }
+            set
+            {
+                this.lifeStatusField = value;
+                this.RaisePropertyChanged("lifeStatus");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 22)]
+        public CodeDescription sapMark
+        {
+            get
+            {
+                return this.sapMarkField;
+            }
+            set
+            {
+                this.sapMarkField = value;
+                this.RaisePropertyChanged("sapMark");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 23)]
+        public string registrationDate
+        {
+            get
+            {
+                return this.registrationDateField;
+            }
+            set
+            {
+                this.registrationDateField = value;
+                this.RaisePropertyChanged("registrationDate");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    public partial class CodeDescription : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private string codeField;
+
+        private string descriptionField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+        public string code
+        {
+            get
+            {
+                return this.codeField;
+            }
+            set
+            {
+                this.codeField = value;
+                this.RaisePropertyChanged("code");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+        public string description
+        {
+            get
+            {
+                return this.descriptionField;
+            }
+            set
+            {
+                this.descriptionField = value;
+                this.RaisePropertyChanged("description");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+}
