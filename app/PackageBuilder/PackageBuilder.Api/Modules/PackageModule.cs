@@ -21,7 +21,9 @@ using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
+using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
@@ -149,10 +151,13 @@ namespace PackageBuilder.Api.Modules
                     nancyContext.Context.CurrentUser.UserName, requestId, accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
+                // Filter responses for cleaner api payload
+                var filteredResponse = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>(responses);
+
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     responses.Any() ? responses.AsJsonString() : string.Empty, requestId, nancyContext.Context != null ? nancyContext.Context.CurrentUser.UserName : "unavailable"));
 
-                return responses;
+                return filteredResponse;
             };
 
             Post["/Packages"] = parameters =>

@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="Read\DataProviderDto.cs" />
     <Compile Include="Read\DataProviderRequestDto.cs" />
+    <Compile Include="ResponseDataFieldDto.cs" />
+    <Compile Include="ResponseDataProviderDto.cs" />
     <Compile Include="Write\DataProviderDto.cs">
       <SubType>Code</SubType>
     </Compile>

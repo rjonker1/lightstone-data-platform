@@ -299,6 +299,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Read\ToDataProviderDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Requests\RequestFieldToDataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\ApiResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneDirectorResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneCompanyResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Messages\MessageMaps.cs" />

@@ -200,7 +200,8 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             foreach (var dataProvider in dataProviders.Where(x => x.Handled))
             {
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
-                var response = (IDataProvider)Mapper.Map(laceResponse, DataProviders.FirstOrDefault(x => x.Name == laceResponse.Name), typeof(IDataProvider), typeof(DataProvider));
+                IDataProvider response = (IDataProvider) Mapper.Map(laceResponse, DataProviders.FirstOrDefault(x => x.Name == laceResponse.Name), typeof(IDataProvider), typeof(DataProvider));
+
                 if (response.DataFields.Any())
                     yield return response;
             }
