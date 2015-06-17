@@ -108,6 +108,7 @@
     <Compile Include="Chain\when_building_lace_source_chain_for_company_search.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_license_plate_number_search.cs" />
+    <Compile Include="Metadata\when_getting_meta_data_for_vehicle_search.cs" />
     <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
     <Compile Include="SourceRequests\when_configuring_ivid_title_holder_request_message.cs" />
     <Compile Include="Sources\Lightstone\when_getting_accident_distribution_metrics.cs" />
@@ -150,6 +151,10 @@
     <ProjectReference Include="..\Lace.Test.Helper\Lace.Test.Helper.csproj">
       <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
       <Name>Lace.Test.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metadata\Lace.Domain.Metadata.Entrypoint\Lace.Domain.Metadata.Entrypoint.csproj">
+      <Project>{8822eee7-4325-4f44-93ba-d822f2694e25}</Project>
+      <Name>Lace.Domain.Metadata.Entrypoint</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
       <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>

@@ -43,8 +43,6 @@ namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto
             }
             else
             {
-                CallLookupSource(response, _command);
-
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
                 _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 

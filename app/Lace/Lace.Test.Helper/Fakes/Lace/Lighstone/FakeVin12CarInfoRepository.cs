@@ -21,7 +21,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                         new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
                             s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
                             s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
-                            s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).AsQueryable();
+                            s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId));
         }
 
         public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
@@ -33,7 +33,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                             new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
                                 s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
                                 s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
-                                s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).AsQueryable();
+                                s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId));
         }
 
     }
