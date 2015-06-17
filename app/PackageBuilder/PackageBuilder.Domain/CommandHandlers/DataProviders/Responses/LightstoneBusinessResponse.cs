@@ -10,9 +10,13 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
         {
             var result = new List<IProvideCompany>()
             {
-                new CompanyResponse(0,"","","","","","","","","","","","","","","","")};
+                new CompanyResponse(0, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+                    .SetCompanyDetail(0, 0, 0, 0, "", "", "", "", false, "", "", "")
+                    .SetPhysicalAddress("", "", "", "", "", "", "", "")
+                    .SetPostalAddress("", "", "", "", "")
+            };
 
             return new LightstoneBusinessCompanyResponse(result);
-        } 
+        }
     }
 }

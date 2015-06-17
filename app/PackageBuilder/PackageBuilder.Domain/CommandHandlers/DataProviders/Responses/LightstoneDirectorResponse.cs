@@ -12,6 +12,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
             {
                 new DirectorResponse(0, 0, 0, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", 0, "",
                     "", "", "", "", "", "", 0, 0)
+                    .SetBusinessAddress("","","","","")
+                    .SetPostalAddress("","","","","")
+                    .SetRegisteredAddress("","","","","")
+                    .SetResidentialAddress("","","","","")
             };
 
             return new LightstoneBusinessDirectorResponse(result);

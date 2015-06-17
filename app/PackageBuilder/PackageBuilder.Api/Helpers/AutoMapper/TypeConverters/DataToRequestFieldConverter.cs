@@ -44,6 +44,18 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                     return new VinNumberRequestField(source.Value);
                 case RequestFieldType.Year:
                     return new YearRequestField(source.Value);
+                case RequestFieldType.IdentityNumber:
+                    return new IdentityNumberRequestField(source.Value);
+                case RequestFieldType.FirstName:
+                    return new FirstNameRequestField(source.Value);
+                case RequestFieldType.Surname:
+                    return new SurnameRequestField(source.Value);
+                case RequestFieldType.CompanyName:
+                    return new CompanyNameRequestField(source.Value);
+                case RequestFieldType.CompanyRegistrationNumber:
+                    return new CompanyRegistrationNumberRequestField(source.Value);
+                case RequestFieldType.CompanyVatNumber:
+                    return new CompanyVatNumberRequestField(source.Value);
             }
 
             return null;
