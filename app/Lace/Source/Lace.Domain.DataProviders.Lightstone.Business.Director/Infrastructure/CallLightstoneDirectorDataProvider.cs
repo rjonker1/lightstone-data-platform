@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -12,6 +13,7 @@ using Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.Management;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
+using Workflow.Lace.Identifiers;
 using DataSet = System.Data.DataSet;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
@@ -34,30 +36,39 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
         {
             try
             {
-                var webService = new ConfigureSource();
-                if (webService.Client.State == CommunicationState.Closed)
-                    webService.Client.Open();
-
-                if (webService.UserToken == Guid.Empty)
+                var api = new ConfigureApi();
+                if (api.UserToken == Guid.Empty)
                     throw new Exception("Cannot continue calling Lightstone Business Directory Api. User is not valid");
+
+                if (api.Client.State == CommunicationState.Closed)
+                    api.Client.Open();
+
+                _logCommand.LogSecurity(new {Credentials = new {api.Username, api.Password}},
+                    new {Message = "Lightstone Business Data Provider Credentials"});
 
                 var request = new DirectorRequest(_dataProvider.GetRequest<IAmLightstoneBusinessDirectorRequest>()).Map().Validate();
                 if (!request.IsValid)
                     throw new Exception("Cannot continue call Lightstone Business Director Api. Request is not valid");
 
-                var directorDs = webService.Client.returnDirectors(webService.UserToken.ToString(), request.FirstName, request.FirstName, request.IdNumber);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(),
+                    new {_dataProvider});
+
+                var directorDs = api.Client.returnDirectors(api.UserToken.ToString(), request.FirstName, request.FirstName, request.IdNumber);
                 var director = Dto.Director.GetFromDataset(directorDs);
                 if (!director.Valid())
                     throw new Exception(string.Format("Director with Id Number {0} is not valid", request.IdNumber));
 
-                var confirmReport = webService.Client.confirmDirector(webService.UserToken.ToString(), director.DirectorId, director.IdNumber.ToString(),
+                var confirmReport = api.Client.confirmDirector(api.UserToken.ToString(), director.DirectorId, director.IdNumber.ToString(),
                     Guid.NewGuid().ToString());
 
                 var confirm = Confirmation.Get(confirmReport);
                 if (!confirm.Valid())
                     throw new Exception(string.Format("Director with Id {0} could not be confirmed", director.DirectorId));
 
-                _result = webService.Client.returnDirectorReport(confirm.ReportGuid.ToString());
+                _result = api.Client.returnDirectorReport(confirm.ReportGuid.ToString());
+
+                _logCommand.LogResponse(_result == null || _result.Tables.Count == 0 ? DataProviderState.Failed : DataProviderState.Successful,
+                    new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result});
 
                 TransformResponse(response);
             }

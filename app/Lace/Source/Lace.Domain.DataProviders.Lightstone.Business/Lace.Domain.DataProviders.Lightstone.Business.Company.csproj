@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\CallLightstoneCompanyDataProvider.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigureSource.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigureApi.cs" />
     <Compile Include="Infrastructure\Dto\CompanyRequest.cs" />
     <Compile Include="Infrastructure\Dto\Company.cs" />
     <Compile Include="Infrastructure\Dto\Confirmation.cs" />

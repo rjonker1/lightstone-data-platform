@@ -9,26 +9,26 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.C
 {
     [Serializable]
     [DataContract]
-    public class ConfigureSource
+    public class ConfigureApi
     {
         // email: murray@lightstone.co.za
         //pass: Pass!1234
-        private readonly ILog _log = LogManager.GetLogger<ConfigureSource>();
-        private readonly string _username = Credentials.LightstoneBusinessApiUsername();
-        private readonly string _password = Credentials.LightstoneBusinessApiPassword();
+        private readonly ILog _log = LogManager.GetLogger<ConfigureApi>();
+        public readonly string Username = Credentials.LightstoneBusinessApiUsername();
+        public readonly string Password = Credentials.LightstoneBusinessApiPassword();
         public readonly Guid UserToken;
 
         [DataMember]
         public apiSoapClient Client { get; private set; }
 
-        public ConfigureSource()
+        public ConfigureApi()
         {
             Client = new apiSoapClient();
             if(Client.State == CommunicationState.Closed)
                 Client.Open();
 
-            _log.InfoFormat("Attempting to login to Lightstone Business APi using username {0} and password {1}", _username,_password);
-            UserToken = Client.authenticateUser(_username, _password);
+            _log.InfoFormat("Attempting to login to Lightstone Business APi using username {0} and password {1}", Username, Password);
+            UserToken = Client.authenticateUser(Username, Password);
         }
 
         public void CloseSource()
