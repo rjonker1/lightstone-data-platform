@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -18,6 +17,10 @@ namespace UserManagement.Domain.Entities
         public virtual ContractDuration ContractDuration { get; set; }
         public virtual ISet<Client> Clients { get; set; }
         public virtual ISet<Customer> Customers { get; set; }
+
+        public virtual bool HasPackagePriceOverride { get; set; }
+        public virtual ContractBundle ContractBundle { get; set; }
+
         public virtual bool IsActive { get; set; }
         //public virtual ISet<ContractPackage> ContractPackages { get; set; }
         //public virtual IEnumerable<Guid> ContractPackageIds

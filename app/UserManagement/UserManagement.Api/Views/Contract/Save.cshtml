@@ -41,231 +41,316 @@
 
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open", Model))
-    <form action="@url" method="@method" class="form-horizontal">
+    
+    <div class="row">
+        <div class="col-md-4">
+            <form action="@url" method="@method" class="form-horizontal">
 
-        @Html.HiddenFor(x => x.Created)
-        @Html.HiddenFor(x => x.CreatedBy)
-        @Html.HiddenFor(x => x.IsActive)
+                @Html.HiddenFor(x => x.Created)
+                @Html.HiddenFor(x => x.CreatedBy)
+                @Html.HiddenFor(x => x.IsActive)
+                
+                @Html.HiddenFor(x => x.HasPackagePriceOverride)
+                @Html.HiddenFor(x => x.ContractBundleId)
+                @Html.HiddenFor(x => x.ContractBundlePrice)
+                @Html.HiddenFor(x => x.ContractBundleTransactionLimit)
 
-        <div class="box-body">
+                <div class="box-body">
 
-            <div class="form-group">
+                    <div class="form-group">
 
-                <label class="control-label col-lg-4">* Contract Name</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
+                        <label class="control-label col-sm-4 col-md-4">* Contract Name</label>
+                        <div class="input-group col-md-4">
+                            <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                            <div aria-describedby="basic-addon1">
+                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.Name)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">* Description</label>
+                        <div class="input-group col-md-4">
+                            <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                            <div aria-describedby="basic-addon1">
+                                @Html.TextBoxFor(x => x.Description, new { @class = "form-control", placeholder = "" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.Description)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">* Commencement Date</label>
+                        <div class="input-group col-md-4">
+                            <div class="input-group date">
+                                <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                                <input type="text" class="form-control" name="CommencementDate" readonly="true" value="@Model.CommencementDate">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(x => x.CommencementDate)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">Entered Into By</label>
+                        <div class="input-group col-md-4">
+                            <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                            <div aria-describedby="basic-addon1">
+                                @Html.TextBoxFor(x => x.EnteredIntoBy, new { @class = "form-control", placeholder = "" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.EnteredIntoBy)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">Online Acceptance</label>
+                        <div class="input-group col-md-4">
+                            <div class="input-group date">
+                                <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                                <input type="text" class="form-control" name="OnlineAcceptance" readonly="true" value="@Model.OnlineAcceptance">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.OnlineAcceptance)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">Registered Name</label>
+                        <div class="input-group col-md-4">
+                            <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                            <div aria-describedby="basic-addon1">
+                                @Html.TextBoxFor(x => x.RegisteredName, new { @class = "form-control", placeholder = "" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.RegisteredName)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">Registration Number</label>
+                        <div class="input-group col-md-4">
+                            <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
+                            <div aria-describedby="basic-addon1">
+                                @Html.TextBoxFor(x => x.RegistrationNumber, new { @class = "form-control", placeholder = "" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.RegistrationNumber)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">* Contract Type</label>
+                        <div class="input-group col-md-4">
+                            <select name="ContractTypeId" data-placeholder="Select user type" class="chosen-select">
+                                <option value=""></option>
+                                @foreach (SelectListItem item in ViewBag.ContractTypes.Value)
+                                {
+                                    var isSelected = item.Value == Model.ContractTypeId.ToString();
+                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.ContractTypeId)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">* Escalation Type</label>
+                        <div class="input-group col-md-4">
+                            <select name="EscalationTypeId" data-placeholder="Select escalation type" class="chosen-select">
+                                <option value=""></option>
+                                @foreach (SelectListItem item in ViewBag.EscalationTypes.Value)
+                                {
+                                    var isSelected = item.Value == Model.EscalationTypeId.ToString();
+                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.EscalationTypeId)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">* Contract Duration</label>
+                        <div class="input-group col-md-4">
+                            <select name="ContractDurationId" data-placeholder="Select contract duration" class="chosen-select">
+                                <option value=""></option>
+                                @foreach (SelectListItem item in ViewBag.ContractDurations.Value)
+                                {
+                                    var isSelected = item.Value == Model.ContractDurationId.ToString();
+                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.ContractDurationId)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 col-md-4">Industry Type</label>
+                        <div class="input-group col-md-4">
+                            <select id="industryTypeSelect" name="IndustryType" data-placeholder="Select industry type" multiple class="chosen-select"></select>
+                        </div>
+                        <div class="col-md-6">
+                            @*@Html.ValidationMessageFor(x => x.UserTypeId)*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">Clients</label>
+                        <div class="input-group col-md-4 client-autocomplete">
+                            <select id="ClientIds" name="ClientIds" data-placeholder="Type to search & add clients" multiple class="chosen-select">
+                                @foreach (NamedEntityDto item in Model.Clients)
+                                {
+                                    var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
+                                    <option selected="@isSelected" value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.ClientIds)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">Customers</label>
+                        <div class="input-group col-md-4 customer-autocomplete">
+                            <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
+                                @foreach (NamedEntityDto item in Model.Customers)
+                                {
+                                    var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
+                                    <option id="@item.Id" selected="@isSelected" value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.CustomerIds)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4">Packages</label>
+                        <div class="input-group col-md-4 packag-autocomplete">
+                            <select id="PackageIdNames" name="PackageIdNames" data-placeholder=" " multiple class="chosen-select">
+                                @foreach (var item in Model.Packages)
+                                {
+                                    var isSelected = Model.Packages != null && Model.Packages.Select(x => x.Key).Contains(item.Key);
+                                    <option id="@item.Key" selected="@isSelected" value="@item.Key|@item.Value">@item.Value</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.PackageIdNames)
+                        </div>
+
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.Name)
-                </div>
+                @Html.Partial("Shared/BoxFooter")
+            </form>
+        </div>
+        
+        <div class="col-sm-2"></div>
+        
+        <div class="col-sm-6 col-md-8" style="width: 65%; margin-top: 10px;">
 
-            </div>
-            <div class="form-group">
+            <div class="row">
 
-                <label class="control-label col-lg-4">* Description</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.Description, new { @class = "form-control", placeholder = "" })
+                <div class="col-sm-6 col-md-3">
+                    <div class="well">
+                        <h2 class="text-warning">Bundle 1</h2>
+                        <p><span class="label label-warning">OVERVIEW</span></p>
+                        <ul>
+                            <li>200 transactions</li>
+                            <li>Pro rata thereafter</li>
+                        </ul>
+                        <p></p>
+                        <hr>
+                        <h3>R1000 / first 200 transactions</h3>
+                        <hr>
+                        <p><a class="btn btn-success btn-md"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.Description)
-                </div>
 
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Commencement Date</label>
-                <div class="input-group col-lg-2">
-                    <div class="input-group date">
-                        <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
-                        <input type="text" class="form-control" name="CommencementDate" readonly="true" value="@Model.CommencementDate">
+                <div class="col-sm-6 col-md-3">
+                    <div class="well">
+                        <h2 class="text-info">Bundle 2</h2>
+                        <p><span class="label label-info">OVERVIEW</span></p>
+                        <ul>
+                            <li>600 transactions</li>
+                            <li>Pro rata thereafter</li>
+                        </ul>
+                        <p></p>
+                        <hr>
+                        <h3>R3500 / first 600 transactions</h3>
+                        <hr>
+                        <p><a class="btn btn-success btn-md"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    @Html.ValidationMessageFor(x => x.CommencementDate)
-                </div>
 
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Entered Into By</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.EnteredIntoBy, new { @class = "form-control", placeholder = "" })
+                <div class="col-sm-6 col-md-3">
+                    <div class="well">
+                        <h2 class="text-success">Bundle 3</h2>
+                        <p><span class="label label-success">OVERVIEW</span></p>
+                        <ul>
+                            <li>1200 transactions</li>
+                            <li>Pro rata thereafter</li>
+                        </ul>
+                        <p></p>
+                        <hr>
+                        <h3>R6000 / first 1200 transactions</h3>
+                        <hr>
+                        <p><a class="btn btn-success btn-md"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.EnteredIntoBy)
-                </div>
 
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Online Acceptance</label>
-                <div class="input-group col-lg-6">
-                    <div class="input-group date">
-                        <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
-                        <input type="text" class="form-control" name="OnlineAcceptance" readonly="true" value="@Model.OnlineAcceptance">
+                <div class="col-sm-6 col-md-3">
+                    <div class="well">
+                        <h2 class="text-danger">Bundle 4</h2>
+                        <p><span class="label label-danger">OVERVIEW</span></p>
+                        <ul>
+                            <li>3500 transactions</li>
+                            <li>Pro rata thereafter</li>
+                        </ul>
+                        <p></p>
+                        <hr>
+                        <h3>R17500 / first 3500 transactions</h3>
+                        <hr>
+                        <p><a class="btn btn-success btn-md"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.OnlineAcceptance)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Registered Name</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.RegisteredName, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.RegisteredName)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Registration Number</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.RegistrationNumber, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.RegistrationNumber)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Contract Type</label>
-                <div class="input-group col-lg-2">
-                    <select name="ContractTypeId" data-placeholder="Select user type" class="chosen-select">
-                        <option value=""></option>
-                        @foreach (SelectListItem item in ViewBag.ContractTypes.Value)
-                        {
-                            var isSelected = item.Value == Model.ContractTypeId.ToString();
-                            <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.ContractTypeId)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Escalation Type</label>
-                <div class="input-group col-lg-2">
-                    <select name="EscalationTypeId" data-placeholder="Select escalation type" class="chosen-select">
-                        <option value=""></option>
-                        @foreach (SelectListItem item in ViewBag.EscalationTypes.Value)
-                        {
-                            var isSelected = item.Value == Model.EscalationTypeId.ToString();
-                            <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.EscalationTypeId)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Contract Duration</label>
-                <div class="input-group col-lg-2">
-                    <select name="ContractDurationId" data-placeholder="Select contract duration" class="chosen-select">
-                        <option value=""></option>
-                        @foreach (SelectListItem item in ViewBag.ContractDurations.Value)
-                        {
-                            var isSelected = item.Value == Model.ContractDurationId.ToString();
-                            <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.ContractDurationId)
-                </div>
-
-            </div>
-            <div class="form-group">
-                <label class="control-label col-lg-4">Industry Type</label>
-                <div class="input-group col-lg-2">
-                    <select id="industryTypeSelect" name="IndustryType" data-placeholder="Select industry type" multiple class="chosen-select">
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @*@Html.ValidationMessageFor(x => x.UserTypeId)*@
-                </div>
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Clients</label>
-                <div class="input-group col-lg-2 client-autocomplete">
-                    <select id="ClientIds" name="ClientIds" data-placeholder="Type to search & add clients" multiple class="chosen-select">
-                        @foreach (NamedEntityDto item in Model.Clients)
-                        {
-                            var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
-                            <option selected="@isSelected" value="@item.Id">@item.Name</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.ClientIds)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Customers</label>
-                <div class="input-group col-lg-2 customer-autocomplete">
-                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
-                        @foreach (NamedEntityDto item in Model.Customers)
-                        {
-                            var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
-                            <option id="@item.Id" selected="@isSelected" value="@item.Id">@item.Name</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.CustomerIds)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">Packages</label>
-                <div class="input-group col-lg-2 packag-autocomplete">
-                    <select id="PackageIdNames" name="PackageIdNames" data-placeholder=" " multiple class="chosen-select">
-                        @foreach (var item in Model.Packages)
-                        {
-                            var isSelected = Model.Packages != null && Model.Packages.Select(x => x.Key).Contains(item.Key);
-                            <option id="@item.Key" selected="@isSelected" value="@item.Key|@item.Value">@item.Value</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.PackageIdNames)
                 </div>
 
             </div>
         </div>
-        @Html.Partial("Shared/BoxFooter")
-    </form>
+
+    </div>
+
 </div>
+
 <script>
     $(function () {
         $.get("http://dev.packagebuilder.api.lightstone.co.za/Industries", function (data) {
