@@ -68,7 +68,7 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var user = userRepository.Get(dto.accountownername_primary_key);
+                    var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, new Customer(dto.Name));
                     entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
                     entity.AccountOwner = user;
@@ -106,7 +106,7 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var user = userRepository.Get(dto.accountownername_primary_key);
+                    var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
                     entity.AccountOwner = user;
 
