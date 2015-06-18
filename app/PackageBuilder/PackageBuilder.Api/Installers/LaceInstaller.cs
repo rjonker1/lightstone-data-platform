@@ -3,6 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
+using Lace.Domain.Metadata.Entrypoint;
 
 namespace PackageBuilder.Api.Installers
 {
