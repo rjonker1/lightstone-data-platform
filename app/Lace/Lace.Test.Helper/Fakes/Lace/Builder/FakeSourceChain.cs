@@ -16,6 +16,5 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
 
         public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; private set; }
 
-
     }
 }

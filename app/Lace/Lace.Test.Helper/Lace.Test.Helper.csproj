@@ -138,6 +138,7 @@
     <Compile Include="Fakes\Lace\EntryPoint\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Lace\FakeLaceInitializer.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleAudatexServiceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleLightstonePropertyServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidTitleHolderServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleLighstoneSourceCall.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingLightstoneBusinessDirectorExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingLightstoneBusinessCompanyExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingLightstonePropertyExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingPCubedDataProvider.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtDataProvider.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />

@@ -74,127 +74,127 @@ namespace Lace.Test.Helper.Mothers.Sources.Lightstone
                         "Hatch (5-dr)", "Petrol", "PAS", "Man", 2006, DateTime.Now.ToShortDateString(),
                         "/images/Lightstone-auto-car.png", "Not Available", 24)
                 },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105252, 2015, 175, 3, "DAIHATSU Sirion 1.3 CX 5-dr", "Sirion 1.3 CX 5-dr",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2004, DateTime.Now.ToShortDateString(),
-                        "/images/Lightstone-auto-car.png", "Not Available", 24)
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105254, 2015, 175, 3, "DAIHATSU Sirion 1.3 CXL 5-dr", "Sirion 1.3 CXL 5-dr",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2004, DateTime.Now.ToShortDateString(),
-                        "/images/Lightstone-auto-car.png", "Not Available", 24)
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105253, 2005, 175, 3, "DAIHATSU Sirion 1.3 CX AT 5-dr", "Sirion 1.3 CX AT 5-dr",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2004, DateTime.Now.ToShortDateString(),
-                        "/images/Lightstone-auto-car.png", "Not Available", 24)
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105526, 2007, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY05", "Sirion 1.3 5-dr MY05",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005, DateTime.Now.ToShortDateString(),
-                        "http://www.rgt.co.za/photos/DAIHATSU/105526_1_P.jpg", "Not Available", 24)
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105527, 3, 175, 3, "DAIHATSU Sirion 1.3 AT 5-dr MY05", "Sirion 1.3 AT 5-dr MY05",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2005, DateTime.Now.ToShortDateString(),
-                        "http://www.rgt.co.za/photos/DAIHATSU/105527_1_P.jpg", "Not Available", 24)
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(108149, 7, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY07", "Sirion 1.3 5-dr MY07",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2007, DateTime.Now.ToShortDateString(),
-                        "http://www.rgt.co.za/photos/DAIHATSU/108149_1_P.jpg", "Not Available", 24)
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105529, 2007, 175, 3, "DAIHATSU Sirion 1.3 Sport AT 5-dr MY05",
-                        "Sirion 1.3 Sport AT 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2005,
-                        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105529_1_P.jpg",
-                        "Not Available", 24)
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105252, 2015, 175, 3, "DAIHATSU Sirion 1.3 CX 5-dr", "Sirion 1.3 CX 5-dr",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2004, DateTime.Now.ToShortDateString(),
+                //        "/images/Lightstone-auto-car.png", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105254, 2015, 175, 3, "DAIHATSU Sirion 1.3 CXL 5-dr", "Sirion 1.3 CXL 5-dr",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2004, DateTime.Now.ToShortDateString(),
+                //        "/images/Lightstone-auto-car.png", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105253, 2005, 175, 3, "DAIHATSU Sirion 1.3 CX AT 5-dr", "Sirion 1.3 CX AT 5-dr",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2004, DateTime.Now.ToShortDateString(),
+                //        "/images/Lightstone-auto-car.png", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105526, 2007, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY05", "Sirion 1.3 5-dr MY05",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005, DateTime.Now.ToShortDateString(),
+                //        "http://www.rgt.co.za/photos/DAIHATSU/105526_1_P.jpg", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105527, 3, 175, 3, "DAIHATSU Sirion 1.3 AT 5-dr MY05", "Sirion 1.3 AT 5-dr MY05",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2005, DateTime.Now.ToShortDateString(),
+                //        "http://www.rgt.co.za/photos/DAIHATSU/105527_1_P.jpg", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(108149, 7, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY07", "Sirion 1.3 5-dr MY07",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2007, DateTime.Now.ToShortDateString(),
+                //        "http://www.rgt.co.za/photos/DAIHATSU/108149_1_P.jpg", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105529, 2007, 175, 3, "DAIHATSU Sirion 1.3 Sport AT 5-dr MY05",
+                //        "Sirion 1.3 Sport AT 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2005,
+                //        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105529_1_P.jpg",
+                //        "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105528, 2005, 175, 3, "DAIHATSU Sirion 1.3 Sport 5-dr MY05",
-                        "Sirion 1.3 Sport 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005,
-                        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105528_1_P.jpg",
-                        "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105528, 2005, 175, 3, "DAIHATSU Sirion 1.3 Sport 5-dr MY05",
+                //        "Sirion 1.3 Sport 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005,
+                //        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105528_1_P.jpg",
+                //        "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105529, 2008, 175, 3, "DAIHATSU Sirion 1.3 Sport AT 5-dr MY05",
-                        "Sirion 1.3 Sport AT 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2005,
-                        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105529_1_P.jpg",
-                        "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105529, 2008, 175, 3, "DAIHATSU Sirion 1.3 Sport AT 5-dr MY05",
+                //        "Sirion 1.3 Sport AT 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2005,
+                //        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105529_1_P.jpg",
+                //        "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105527, 2008, 175, 3, "DAIHATSU Sirion 1.3 AT 5-dr MY05",
-                        "Sirion 1.3 AT 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2005,
-                        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105527_1_P.jpg",
-                        "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105527, 2008, 175, 3, "DAIHATSU Sirion 1.3 AT 5-dr MY05",
+                //        "Sirion 1.3 AT 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2005,
+                //        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105527_1_P.jpg",
+                //        "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105528, 2008, 175, 3, "DAIHATSU Sirion 1.3 Sport 5-dr MY05",
-                        "Sirion 1.3 Sport 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005,
-                        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105528_1_P.jpg",
-                        "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105528, 2008, 175, 3, "DAIHATSU Sirion 1.3 Sport 5-dr MY05",
+                //        "Sirion 1.3 Sport 5-dr MY05", "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005,
+                //        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/105528_1_P.jpg",
+                //        "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(108150, 2009, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY07 AT",
-                        "Sirion 1.3 5-dr MY07 AT", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2007,
-                        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/108150_1_P.jpg",
-                        "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(108150, 2009, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY07 AT",
+                //        "Sirion 1.3 5-dr MY07 AT", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2007,
+                //        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/108150_1_P.jpg",
+                //        "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105526, 2008, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY05", "Sirion 1.3 5-dr MY05",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005, DateTime.Now.ToShortDateString(),
-                        "http://www.rgt.co.za/photos/DAIHATSU/105526_1_P.jpg", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105526, 2008, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY05", "Sirion 1.3 5-dr MY05",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005, DateTime.Now.ToShortDateString(),
+                //        "http://www.rgt.co.za/photos/DAIHATSU/105526_1_P.jpg", "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(105526, 2008, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY05", "Sirion 1.3 5-dr MY05",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005, DateTime.Now.ToShortDateString(),
-                        "http://www.rgt.co.za/photos/DAIHATSU/105526_1_P.jpg", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(105526, 2008, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY05", "Sirion 1.3 5-dr MY05",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2005, DateTime.Now.ToShortDateString(),
+                //        "http://www.rgt.co.za/photos/DAIHATSU/105526_1_P.jpg", "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(107725, 2011, 175, 3, "DAIHATSU Sirion 1.5 Sport 5-dr", "Sirion 1.5 Sport 5-dr",
-                        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2007, DateTime.Now.ToShortDateString(),
-                        "http://www.rgt.co.za/photos/DAIHATSU/107725_1_P.jpg", "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(107725, 2011, 175, 3, "DAIHATSU Sirion 1.5 Sport 5-dr", "Sirion 1.5 Sport 5-dr",
+                //        "Hatch (5-dr)", "Petrol", "PAS", "Man", 2007, DateTime.Now.ToShortDateString(),
+                //        "http://www.rgt.co.za/photos/DAIHATSU/107725_1_P.jpg", "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(108150, 2011, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY07 AT",
-                        "Sirion 1.3 5-dr MY07 AT", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2007,
-                       DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/108150_1_P.jpg",
-                        "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(108150, 2011, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY07 AT",
+                //        "Sirion 1.3 5-dr MY07 AT", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2007,
+                //       DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/108150_1_P.jpg",
+                //        "Not Available", 24)
 
-                },
-                {
-                    "JDAM301S001019742",
-                    new CarInformation(108150, 2009, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY07 AT",
-                        "Sirion 1.3 5-dr MY07 AT", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2007,
-                        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/108150_1_P.jpg",
-                        "Not Available", 24)
+                //},
+                //{
+                //    "JDAM301S001019742",
+                //    new CarInformation(108150, 2009, 175, 3, "DAIHATSU Sirion 1.3 5-dr MY07 AT",
+                //        "Sirion 1.3 5-dr MY07 AT", "Hatch (5-dr)", "Petrol", "PAS", "Auto", 2007,
+                //        DateTime.Now.ToShortDateString(), "http://www.rgt.co.za/photos/DAIHATSU/108150_1_P.jpg",
+                //        "Not Available", 24)
 
-                }
+                //}
             };
         }
     }

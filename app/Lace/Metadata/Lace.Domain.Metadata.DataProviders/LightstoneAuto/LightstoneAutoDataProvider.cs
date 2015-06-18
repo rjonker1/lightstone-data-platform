@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -10,10 +9,14 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
+using Lace.Domain.Metadata.DataProviders.LightstoneAuto.Infrastructure;
 using Lace.Shared.DataProvider.Repositories;
+using Lace.Shared.Extensions;
+using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Messages.Core;
 
-namespace Lace.Domain.DataProviders.Lightstone
+namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto
 {
     public class LightstoneAutoDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
@@ -40,24 +43,17 @@ namespace Lace.Domain.DataProviders.Lightstone
             }
             else
             {
-
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
                 _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
-                _logCommand.LogBegin(new {_dataProvider});
-
                 var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
-                    new CallLightstoneAutoDataProvider(_dataProvider,
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()),
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()), _logCommand));
+                    new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(),
+                        new FakeCarInfoRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
-                _logCommand.LogEnd(new {response});
-
-                if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
-                    response.OfType<IProvideDataFromLightstoneAuto>().First() == null)
-                    CallFallbackSource(response, _command); //TODO: VIN12?
+                if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() || response.OfType<IProvideDataFromLightstoneAuto>().First() == null)
+                    CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

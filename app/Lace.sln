@@ -106,6 +106,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Caching.BuildingBlocks
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Business.Director", "Lace\Source\Lace.Domain.DataProviders.Lightstone.Business.Director\Lace.Domain.DataProviders.Lightstone.Business.Director.csproj", "{F8A50911-4066-4ECA-BA26-42AEF9C3A521}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Metadata", "Metadata", "{78179D8A-3C63-449A-9FE8-B6ADAE7F8E65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Metadata.Entrypoint", "Lace\Metadata\Lace.Domain.Metadata.Entrypoint\Lace.Domain.Metadata.Entrypoint.csproj", "{8822EEE7-4325-4F44-93BA-D822F2694E25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Metadata.DataProviders", "Lace\Metadata\Lace.Domain.Metadata.DataProviders\Lace.Domain.Metadata.DataProviders.csproj", "{029714DA-F831-4F1B-864D-CFED5910B443}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -264,6 +270,14 @@ Global
 		{F8A50911-4066-4ECA-BA26-42AEF9C3A521}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8A50911-4066-4ECA-BA26-42AEF9C3A521}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8A50911-4066-4ECA-BA26-42AEF9C3A521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8822EEE7-4325-4F44-93BA-D822F2694E25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8822EEE7-4325-4F44-93BA-D822F2694E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8822EEE7-4325-4F44-93BA-D822F2694E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8822EEE7-4325-4F44-93BA-D822F2694E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{029714DA-F831-4F1B-864D-CFED5910B443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{029714DA-F831-4F1B-864D-CFED5910B443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{029714DA-F831-4F1B-864D-CFED5910B443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{029714DA-F831-4F1B-864D-CFED5910B443}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -313,5 +327,7 @@ Global
 		{5C53C8CB-BAEC-44D7-A183-19FAED7035E7} = {45CC1CB7-CDC3-4502-BB60-85EEBCE0DD94}
 		{A38117CD-AFCD-4F1A-999C-0C390F6BE5AE} = {45CC1CB7-CDC3-4502-BB60-85EEBCE0DD94}
 		{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B} = {45CC1CB7-CDC3-4502-BB60-85EEBCE0DD94}
+		{8822EEE7-4325-4F44-93BA-D822F2694E25} = {78179D8A-3C63-449A-9FE8-B6ADAE7F8E65}
+		{029714DA-F831-4F1B-864D-CFED5910B443} = {78179D8A-3C63-449A-9FE8-B6ADAE7F8E65}
 	EndGlobalSection
 EndGlobal
