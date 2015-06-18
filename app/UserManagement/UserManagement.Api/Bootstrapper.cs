@@ -108,12 +108,18 @@ namespace UserManagement.Api
             pipelines.AddTransactionScope(container);
 
             AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());
-
+           
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
             pipelines.AfterRequest.AddItemToEndOfPipeline(GetRedirectToLoginHook(null));
 
             pipelines.PublishTransactionToQueue(container);
+
+            pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
+            {
+                ctx.ViewBag["UserName"] = ctx.CurrentUser.UserName;
+                return null;
+            });
 
             base.RequestStartup(container, pipelines, context);
         }

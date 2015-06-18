@@ -79,6 +79,15 @@ namespace UserManagement.Api.Helpers.Extensions
             });
         }
 
+        public static void AddLookupDataToViewBag(this IPipelines pipelines, string key, object value) 
+        {
+            pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
+            {
+                ctx.ViewBag[key] = value;
+                return null;
+            });
+        }
+
         public static void PublishTransactionToQueue(this IPipelines pipelines, IWindsorContainer container)
         {
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
