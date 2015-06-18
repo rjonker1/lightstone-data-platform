@@ -39,7 +39,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return LicensePlateNumberAllRequestPackage.LicenseNumberPackage("XMC167GP", "VVi+Adx"); }
+            get { return LicensePlateNumberAllRequestPackage.LicenseNumberOnlyPackage("CN62KZGP", "VVi+Adx"); } //
         }
 
 
