@@ -138,6 +138,7 @@
     <Compile Include="Modules\ApiModule.cs" />
     <Compile Include="Infrastructure\Metadata\ApiRouteDescriptionProvider.cs" />
     <Compile Include="Modules\ActionModule.cs" />
+    <Compile Include="Modules\AuthModule.cs" />
     <Compile Include="Modules\MetaModule.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
