@@ -595,9 +595,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Helpers\Nancy\CurrentNancyContext.cs" />
     <Compile Include="Installers\AuthenticationInstaller.cs" />
-    <Compile Include="Installers\CurrentNancyContextInstaller.cs" />
     <Compile Include="Installers\UpdateBillingTransactionInstaller.cs" />
     <Compile Include="Modules\AdminBillingModule.cs" />
     <Compile Include="Modules\FinalBillingModule.cs" />
@@ -669,6 +667,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\AutoMapper\Maps\" />
+    <Folder Include="Helpers\Nancy\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

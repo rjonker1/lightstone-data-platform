@@ -8,7 +8,6 @@ using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
@@ -22,7 +21,7 @@ namespace UserManagement.Api.Modules
 {
     public class ClientModule : SecureModule
     {
-        public ClientModule(IBus bus, IClientRepository clientRepository, CurrentNancyContext currentNancyContext)
+        public ClientModule(IBus bus, IClientRepository clientRepository)
         {
             Get["/Clients"] = _ =>
             {
@@ -103,7 +102,7 @@ namespace UserManagement.Api.Modules
             {
                 var dto = this.BindAndValidate<ClientDto>();
                 dto.Created = DateTime.UtcNow;
-                dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.CreatedBy = Context.CurrentUser.UserName;
                 dto.IsActive = true;
 
                 if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
@@ -141,7 +140,7 @@ namespace UserManagement.Api.Modules
             {
                 var dto = this.BindAndValidate<ClientDto>();
                 dto.Modified = DateTime.UtcNow;
-                dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.ModifiedBy = Context.CurrentUser.UserName;
 
                 if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
 
@@ -163,7 +162,7 @@ namespace UserManagement.Api.Modules
 
                 var entity = clientRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
-                entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                entity.ModifiedBy = Context.CurrentUser.UserName;
                 entity.IsLocked = true;
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
@@ -177,7 +176,7 @@ namespace UserManagement.Api.Modules
 
                 var entity = clientRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
-                entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                entity.ModifiedBy = Context.CurrentUser.UserName;
                 entity.IsLocked = false;
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
