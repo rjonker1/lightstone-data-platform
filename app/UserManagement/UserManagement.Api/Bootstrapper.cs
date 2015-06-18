@@ -13,7 +13,6 @@ using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using UserManagement.Api.Helpers.Extensions;
-using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.DataImports;
@@ -55,8 +54,7 @@ namespace UserManagement.Api
                 new RedisInstaller(),
                 new AuthenticationInstaller(),
                 new HashProviderInstaller(),
-                new AuthInstaller(),
-                new CurrentNancyContextInstaller()
+                new AuthInstaller()
                 );
 
             //Drop create
@@ -85,7 +83,6 @@ namespace UserManagement.Api
                 if (user != null)
                 {
                     nancyContext.CurrentUser = user;
-                    container.Resolve<CurrentNancyContext>().NancyContext = nancyContext;
                 }
                     
                 return null;
