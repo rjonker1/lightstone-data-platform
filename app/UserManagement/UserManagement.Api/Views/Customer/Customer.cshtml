@@ -145,7 +145,7 @@
     <div class="form-group">
 
         <label class="control-label col-lg-4">Contracts</label>
-        <div class="input-group col-lg-2 customer-autocomplete">
+        <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Contract).AssemblyQualifiedName">
             <select id="ContractIds" name="ContractIds" data-placeholder="Type to search & add contracts" multiple class="chosen-select">
                 @foreach (var item in Model.Contracts)
                 {
