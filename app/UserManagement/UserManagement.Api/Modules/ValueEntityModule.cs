@@ -7,7 +7,6 @@ using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
@@ -19,7 +18,7 @@ namespace UserManagement.Api.Modules
 {
     public class ValueEntityModule : SecureModule
     {
-        public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities, CurrentNancyContext currentNancyContext)
+        public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
         {
             Get["/ValueEntities/{type}"] = parameters =>
             {
@@ -45,8 +44,7 @@ namespace UserManagement.Api.Modules
             Post["/ValueEntities"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();
-                dto.Created = DateTime.UtcNow;
-                dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.CreatedBy = Context.CurrentUser.UserName;
 
                 var entity = (ValueEntity)Mapper.Map(dto, null, typeof(ValueEntityDto), Type.GetType(dto.AssemblyQualifiedName));
 
@@ -76,8 +74,7 @@ namespace UserManagement.Api.Modules
             Put["/ValueEntities/{id}"] = parameters =>
             {
                 var dto = this.Bind<ValueEntityDto>();
-                dto.Modified = DateTime.UtcNow;
-                dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.ModifiedBy = Context.CurrentUser.UserName;
 
                 var valueEntity = entities.First(x => x.Id == dto.Id);
                 var entity = (ValueEntity)Mapper.Map(dto, valueEntity, typeof(ValueEntityDto), valueEntity.GetType());

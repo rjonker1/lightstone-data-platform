@@ -35,7 +35,7 @@
 
             <div class="form-group">
 
-                <label class="control-label col-lg-4">* Name</label>
+                <label class="control-label col-lg-4"><span class="required-field">*</span> Name</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">* Surname</label>
+                <label class="control-label col-lg-4"><span class="required-field">*</span> Surname</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -63,21 +63,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">ID Number</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.IdNumber, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.IdNumber)
-                </div>
-
-            </div>
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">* Contact Number</label>
+                <label class="control-label col-lg-4"><span class="required-field">*</span> Contact Number</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-book" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -91,7 +77,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">* Username</label>
+                <label class="control-label col-lg-4"><span class="required-field">*</span> Username</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -112,7 +98,7 @@
             </div>
             <div class="form-group">
 
-                <label class="control-label col-lg-4">* Password</label>
+                <label class="control-label col-lg-4"><span class="required-field">*</span> Password</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-certificate" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
@@ -125,7 +111,20 @@
                 </div>
 
             </div>
-            
+            <div class="form-group">
+
+                <label class="control-label col-lg-4">ID Number</label>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.IdNumber, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.IdNumber)
+                </div>
+
+            </div>
             <div class="form-group">
 
                 <label class="control-label col-lg-4">Activation Status</label>

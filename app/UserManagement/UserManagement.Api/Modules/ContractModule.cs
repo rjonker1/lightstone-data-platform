@@ -7,7 +7,6 @@ using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.CommandHandlers.Contracts;
 using UserManagement.Domain.Dtos;
@@ -20,7 +19,7 @@ namespace UserManagement.Api.Modules
 {
     public class ContractModule : SecureModule
     {
-        public ContractModule(IBus bus, IContractRepository contracts, CurrentNancyContext currentNancyContext)
+        public ContractModule(IBus bus, IContractRepository contracts)
         {
             Get["/Contracts"] = _ =>
             {
@@ -40,8 +39,7 @@ namespace UserManagement.Api.Modules
             Post["/Contracts"] = _ =>
             {
                 var dto = this.BindAndValidate<ContractDto>();
-                dto.Created = DateTime.UtcNow;
-                dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.CreatedBy = Context.CurrentUser.UserName;
                 dto.IsActive = true;
 
                 if (ModelValidationResult.IsValid)
@@ -75,8 +73,7 @@ namespace UserManagement.Api.Modules
             Put["/Contracts/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<ContractDto>();
-                dto.Modified = DateTime.UtcNow;
-                dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.ModifiedBy = Context.CurrentUser.UserName;
 
                 if (ModelValidationResult.IsValid)
                 {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Billing.Api.Helpers.Nancy;
 using Billing.Domain.Dtos;
 using Billing.Domain.Entities;
 using DataPlatform.Shared.Repositories;
@@ -20,7 +19,7 @@ namespace Billing.Api.Modules
 {
     public class StageBillingModule : SecureModule
     {
-        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs, CurrentNancyContext currentNancyContext,
+        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs,
                                     ICommitBillingTransaction<UserTransactionDto> userBillingTransaction,
                                     ICommitBillingTransaction<CustomerClientTransactionDto> customerClientBillingTransaction,
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction)
@@ -294,7 +293,7 @@ namespace Billing.Api.Modules
             Post["/StageBilling/User/Transactions/Update"] = param =>
             {
                 var body = Request.Body<UserTransactionDto>();
-                body.UserName = currentNancyContext.NancyContext.CurrentUser.UserName;
+                body.UserName = Context.CurrentUser.UserName;
 
                 userBillingTransaction.Commit(body);
 
@@ -311,7 +310,7 @@ namespace Billing.Api.Modules
                 {
                     Id = Guid.NewGuid(),
                     Modified = DateTime.UtcNow,
-                    ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName,
+                    ModifiedBy = Context.CurrentUser.UserName,
                     FieldName = body.Name,
                     NewValue = body.Value,
                     OriginalValue = body.OriginalValue
@@ -330,7 +329,7 @@ namespace Billing.Api.Modules
                 {
                     Id = Guid.NewGuid(),
                     Modified = DateTime.UtcNow,
-                    ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName,
+                    ModifiedBy = Context.CurrentUser.UserName,
                     FieldName = body.Name,
                     NewValue = body.Value,
                     OriginalValue = body.OriginalValue

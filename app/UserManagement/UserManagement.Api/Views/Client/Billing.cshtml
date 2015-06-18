@@ -9,7 +9,7 @@
         @Html.HiddenFor(x => x.BillingId)
         <div class="form-group">
 
-            <label class="control-label col-lg-4">* Legal Entity Name</label>
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Legal Entity Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">* Accounts Contact Name</label>
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Accounts Contact Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -32,6 +32,68 @@
             </div>
             <div class="col-lg-6">
                 @Html.ValidationMessageFor(x => x.BillingAccountContactName)
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Payment Type</label>
+            <div class="input-group col-lg-2">
+                <select id="paymentTypeSelect" name="BillingPaymentTypeId" data-placeholder="Select payment type" class="chosen-select">
+                    <option value=""></option>
+                    @foreach (SelectListItem item in ViewBag.PaymentTypes.Value)
+                    {
+                        var isSelected = item.Value == Model.BillingPaymentTypeId.ToString();
+                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingPaymentTypeId)
+            </div>
+
+        </div>
+        <div class="form-group debit-order">
+
+            <label class="control-label col-lg-4">Debit Order Date</label>
+            <div class="input-group col-lg-2">
+                <div class="input-group date">
+                    <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.BillingDebitOrderDate, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingDebitOrderDate)
+            </div>
+
+        </div>
+        <div class="form-group debit-order">
+
+            <label class="control-label col-lg-4">Debit Order Account Owner</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingDebitOrderAccountOwner, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingDebitOrderAccountOwner)
+            </div>
+
+        </div>
+        <div class="form-group debit-order">
+
+            <label class="control-label col-lg-4">Debit Order Account Number</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon" id="basic-addon1"><b>123</b></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingDebitOrderAccountNumber, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingDebitOrderAccountNumber)
             </div>
 
         </div>
@@ -107,71 +169,6 @@
             </div>
 
         </div>
-        <div class="form-group">
-
-            <label class="control-label col-lg-4">* Payment Type</label>
-            <div class="input-group col-lg-2">
-                <select id="paymentTypeSelect" name="BillingPaymentTypeId" data-placeholder="Select payment type" class="chosen-select">
-                    <option value=""></option>
-                    @foreach (SelectListItem item in ViewBag.PaymentTypes.Value)
-                    {
-                        var isSelected = item.Value == Model.BillingPaymentTypeId.ToString();
-                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                    }
-                </select>
-            </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.BillingPaymentTypeId)
-            </div>
-
-        </div>
-
-        <div class="form-group debit-order">
-
-            <label class="control-label col-lg-4">Debit Order Date</label>
-            <div class="input-group col-lg-2">
-                <div class="input-group date">
-                    <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.BillingDebitOrderDate, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.BillingDebitOrderDate)
-            </div>
-
-        </div>
-        <div class="form-group debit-order">
-
-            <label class="control-label col-lg-4">Debit Order Account Owner</label>
-            <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
-                <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.BillingDebitOrderAccountOwner, new { @class = "form-control", placeholder = "" })
-                </div>
-            </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.BillingDebitOrderAccountOwner)
-            </div>
-
-        </div>
-        <div class="form-group debit-order">
-
-            <label class="control-label col-lg-4">Debit Order Account Number</label>
-            <div class="input-group col-lg-2">
-                <span class="input-group-addon" id="basic-addon1"><b>123</b></span>
-                <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.BillingDebitOrderAccountNumber, new { @class = "form-control", placeholder = "" })
-                </div>
-            </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.BillingDebitOrderAccountNumber)
-            </div>
-
-        </div>
-
-
     </div>
     @Html.Partial("Shared/BoxFooter")
 </div>

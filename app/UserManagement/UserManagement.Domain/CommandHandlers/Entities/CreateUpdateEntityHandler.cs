@@ -1,4 +1,5 @@
-﻿using UserManagement.Domain.Core.Entities;
+﻿using System;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities.BusinessRules;
@@ -9,7 +10,6 @@ namespace UserManagement.Domain.CommandHandlers.Entities
     public class CreateUpdateEntityHandler : AbstractMessageHandler<CreateUpdateEntity>
     {
         private readonly IRepository<Entity> _repository;
-
         private readonly IHandleMessages _handler;
 
         public CreateUpdateEntityHandler(IRepository<Entity> repository, IHandleMessages handler)
@@ -22,6 +22,8 @@ namespace UserManagement.Domain.CommandHandlers.Entities
         {
             var brv = new BusinessRulesValidator(_handler);
             brv.CheckRules(command.Entity, command.Function);
+
+            command.Entity.Modified = DateTime.UtcNow;
 
             _repository.SaveOrUpdate(command.Entity);
         }

@@ -11,6 +11,7 @@ using Lace.Domain.Core.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 //using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Metadata.Entrypoint;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
@@ -219,6 +220,22 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
                 throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
 
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
+
+            return MapLaceResponses(responses).ToList();
+        }
+
+        public IEnumerable<IDataProvider> ExecuteMeta(MetadataEntryPointService entryPoint, Guid userId, string userName,
+            string firstName, Guid requestId, string accountNumber, Guid contractId,
+            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
+            IEnumerable<RequestFieldDto> requestFieldsDtos)
+        {
+            var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
+                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos);
+
+            if (request == null)
+                throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
+
+            var responses = entryPoint.GetResponsesFromLace(new[] { request });
 
             return MapLaceResponses(responses).ToList();
         }
