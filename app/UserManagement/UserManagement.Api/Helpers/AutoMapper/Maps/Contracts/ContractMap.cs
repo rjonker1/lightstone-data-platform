@@ -15,6 +15,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Contracts
         public void CreateMaps()
         {
             Mapper.CreateMap<Contract, ContractDto>()
+                .AfterMap((s, d) => Mapper.Map(s, d, typeof(Entity), typeof(EntityDto)))
                 .ForMember(dest => dest.Clients, opt => opt.MapFrom(x => 
                     x.Clients != null && x.Clients.Any() 
                         ? Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Clients) 

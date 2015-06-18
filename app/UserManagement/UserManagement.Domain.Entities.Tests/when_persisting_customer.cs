@@ -18,7 +18,7 @@ namespace UserManagement.Domain.Entities.Tests
         [Observation]
         public void should_persist()
         {
-            var customer = new Customer();
+            var customer = new Customer("Name");
             var paymentType = new PaymentType("PaymentType");
             var physicalAddress = new Address(AddressType.Physical, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Limpopo"));
             var postalAddress = new Address(AddressType.Postal, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));

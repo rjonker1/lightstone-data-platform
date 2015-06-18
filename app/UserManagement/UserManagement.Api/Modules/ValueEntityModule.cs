@@ -44,7 +44,6 @@ namespace UserManagement.Api.Modules
             Post["/ValueEntities"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();
-                dto.Created = DateTime.UtcNow;
                 dto.CreatedBy = Context.CurrentUser.UserName;
 
                 var entity = (ValueEntity)Mapper.Map(dto, null, typeof(ValueEntityDto), Type.GetType(dto.AssemblyQualifiedName));
@@ -75,7 +74,6 @@ namespace UserManagement.Api.Modules
             Put["/ValueEntities/{id}"] = parameters =>
             {
                 var dto = this.Bind<ValueEntityDto>();
-                dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = Context.CurrentUser.UserName;
 
                 var valueEntity = entities.First(x => x.Id == dto.Id);

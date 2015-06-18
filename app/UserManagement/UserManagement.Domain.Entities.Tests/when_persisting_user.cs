@@ -30,7 +30,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.IsActive, true)
                 .CheckReference(c => c.UserType, UserType.Internal)
                 .CheckComponentList(c => c.Roles, roles)
-                .CheckComponentList(c => c.CustomerUsers, new HashSet<Customer> { new Customer {Name = "Name", AccountOwner = new User(), CommercialState = new CommercialState("State")} })
+                .CheckComponentList(c => c.CustomerUsers, new HashSet<Customer> { new Customer("Name") { AccountOwner = new User(), CommercialState = new CommercialState("State") } })
                 //.CheckComponentList(c => c.Clients, new HashSet<Client> { new Client("Client") })
                 .VerifyTheMappings();
         }

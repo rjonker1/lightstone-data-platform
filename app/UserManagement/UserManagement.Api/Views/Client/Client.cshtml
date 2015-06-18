@@ -13,7 +13,7 @@
     <div class="box-body">
         <div class="form-group">
             @*@Html.LabelFor(x => x.Name, new { @class = "control-label col-lg-4" })*@
-            <label class="control-label col-lg-4">* Name</label>
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -27,20 +27,7 @@
     </div>
     <div class="form-group">
 
-        <label class="control-label col-lg-4">Client Account Number</label>
-        <div class="input-group col-lg-2">
-            <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-            <div aria-describedby="basic-addon1">
-                @Html.TextBoxFor(x => x.ClientAccountNumber, new { @class = "form-control", placeholder = "", @readonly = true })
-            </div>
-        </div>
-        <div class="col-lg-6">
-        </div>
-
-    </div>
-    <div class="form-group">
-
-        <label class="control-label col-lg-4">* Commercial State</label>
+        <label class="control-label col-lg-4"><span class="required-field">*</span> Commercial State</label>
         <div class="input-group col-lg-2">
             <select id="commercialStateSelect" name="CommercialStateId" data-placeholder="Select commercial state" class="chosen-select">
                 <option value=""></option>
@@ -53,6 +40,19 @@
         </div>
         <div class="col-lg-6">
             @Html.ValidationMessageFor(x => x.CommercialStateId)
+        </div>
+
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Client Account Number</label>
+        <div class="input-group col-lg-2">
+            <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+            <div aria-describedby="basic-addon1">
+                @Html.TextBoxFor(x => x.ClientAccountNumber, new { @class = "form-control", placeholder = "", @readonly = true })
+            </div>
+        </div>
+        <div class="col-lg-6">
         </div>
 
     </div>

@@ -15,6 +15,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Clients
         public void CreateMaps()
         {
             Mapper.CreateMap<Client, ClientDto>()
+                .AfterMap((s, d) => Mapper.Map(s, d, typeof(Entity), typeof(EntityDto)))
                 .ForMember(dest => dest.Industries, opt => opt.MapFrom(x => x.Industries.Select(cind => cind.IndustryId)))
                 .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)))
                 .ForMember(dest => dest.Users, opt => opt.Ignore());
