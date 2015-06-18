@@ -10,6 +10,7 @@ using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
@@ -21,7 +22,7 @@ namespace UserManagement.Api.Modules
 {
     public class ClientModule : SecureModule
     {
-        public ClientModule(IBus bus, IClientRepository clientRepository)
+        public ClientModule(IBus bus, IClientRepository clientRepository, IRepository<User> userRepository)
         {
             Get["/Clients"] = _ =>
             {
@@ -108,7 +109,9 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
+                    var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, clientRepository.Get(dto.Id) ?? new Client());
+                    entity.AccountOwner = user;
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
@@ -144,7 +147,9 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
+                    var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, clientRepository.Get(dto.Id));
+                    entity.AccountOwner = user;
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
 

@@ -13,6 +13,12 @@ namespace UserManagement.Domain.Dtos
         [Display(Name = "Client name is required")]
         public string Name { get; set; }
         public string ClientAccountNumber { get; set; }
+        [Required]
+        [Display(Name = "Account owner is required")]
+        public Guid AccountOwnerId { get; set; }
+        public string AccountOwnerName { get; set; }
+        public string AccountOwnerLastName { get; set; }
+        public Guid accountownerlastname_primary_key { get; set; }
         public IEnumerable<Guid> Industries { get; set; }
         public Guid ContactDetailId { get; set; }
         public string ContactDetailContactNumber { get; set; }

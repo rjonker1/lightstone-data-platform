@@ -20,6 +20,7 @@ namespace UserManagement.Domain.Dtos
         public Guid AccountOwnerId { get; set; }
         public string AccountOwnerName { get; set; }
         public string AccountOwnerLastName { get; set; }
+        public Guid accountownerlastname_primary_key { get; set; }
         [Required]
         [Display(Name = "Commercial state is required")]
         public Guid? CommercialStateId { get; set; }
@@ -79,7 +80,6 @@ namespace UserManagement.Domain.Dtos
         public CreateSourceType CreateSourceType { get; set; }
         public bool? IsActive { get; set; }
         public bool IsLocked { get; set; }
-		public Guid accountownerlastname_primary_key { get; set; }
         public DateTime? TrialExpiration { get; set; }
         public IEnumerable<Guid> ClientIds { get; set; }
         public IEnumerable<NamedEntityDto> Clients { get; set; }

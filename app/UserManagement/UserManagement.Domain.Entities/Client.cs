@@ -8,6 +8,7 @@ namespace UserManagement.Domain.Entities
 {
     public class Client : NamedEntity, IIndustry
     {
+        public virtual User AccountOwner { get; set; }
         public virtual string Notes { get; protected internal set; }
         private ClientAccountNumber _clientAccountNumber = new ClientAccountNumber();
         public virtual ClientAccountNumber ClientAccountNumber
