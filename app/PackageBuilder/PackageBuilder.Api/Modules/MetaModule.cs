@@ -37,16 +37,6 @@ namespace PackageBuilder.Api.Modules
                     throw new LightstoneAutoException("Package could not be found");
                 }
 
-                //var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                //var resource = string.Format("CustomerClient/{0}", apiRequest.CustomerClientId);
-                //var accountNumber = userManagementApi.Get("", resource, "", new[]
-                //{
-                //    new KeyValuePair<string, string>("Authorization", "Token " + token),
-                //    new KeyValuePair<string, string>("Content-Type", "application/json")
-                //});
-
-                const string accountNumber = "META";
-
                 const long contractVersion = (long)1.0;
                 const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
                 const string fromIpAddress = "127.0.0.1";
@@ -54,8 +44,12 @@ namespace PackageBuilder.Api.Modules
                 const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
 
                 var requestId = Guid.NewGuid();
-                var responses = ((Package)package).ExecuteMeta(new MetadataEntryPointService(), apiRequest.UserId, Context.CurrentUser.UserName,
-                    Context.CurrentUser.UserName, requestId, accountNumber, apiRequest.ContractId, contractVersion,
+                var contractId = new Guid();
+                var userId = new Guid();
+                const string accountNumber = "META";
+
+                var responses = ((Package)package).ExecuteMeta(new MetadataEntryPointService(), userId, Context.CurrentUser.UserName,
+                    Context.CurrentUser.UserName, requestId, accountNumber, contractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
                 // Filter responses for cleaner api payload
