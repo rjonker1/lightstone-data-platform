@@ -61,7 +61,6 @@ namespace UserManagement.Api.Modules
             Post["/Customers"] = _ =>
             {
                 var dto = this.BindAndValidate<CustomerDto>();
-                dto.Created = DateTime.UtcNow;
                 dto.CreatedBy = Context.CurrentUser.UserName;
                 dto.IsActive = true;
 
@@ -69,8 +68,8 @@ namespace UserManagement.Api.Modules
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var user = userRepository.Get(dto.accountownername_primary_key);
-                    var entity = Mapper.Map(dto, new Customer());
+                    var user = userRepository.Get(dto.accountownerlastname_primary_key);
+                    var entity = Mapper.Map(dto, new Customer(dto.Name));
                     entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
                     entity.AccountOwner = user;
 
@@ -101,14 +100,13 @@ namespace UserManagement.Api.Modules
             Put["/Customers/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<CustomerDto>();
-                dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = Context.CurrentUser.UserName;
 
                 if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var user = userRepository.Get(dto.accountownername_primary_key);
+                    var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
                     entity.AccountOwner = user;
 

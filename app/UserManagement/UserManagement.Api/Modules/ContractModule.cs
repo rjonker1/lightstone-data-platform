@@ -39,7 +39,6 @@ namespace UserManagement.Api.Modules
             Post["/Contracts"] = _ =>
             {
                 var dto = this.BindAndValidate<ContractDto>();
-                dto.Created = DateTime.UtcNow;
                 dto.CreatedBy = Context.CurrentUser.UserName;
                 dto.IsActive = true;
 
@@ -74,7 +73,6 @@ namespace UserManagement.Api.Modules
             Put["/Contracts/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<ContractDto>();
-                dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = Context.CurrentUser.UserName;
 
                 if (ModelValidationResult.IsValid)

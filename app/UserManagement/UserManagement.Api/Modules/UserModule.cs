@@ -86,7 +86,6 @@ namespace UserManagement.Api.Modules
             Post["/Users"] = _ =>
             {
                 var dto = this.BindAndValidate<UserDto>();
-                dto.Created = DateTime.UtcNow;
                 dto.CreatedBy = Context.CurrentUser.UserName;
                 dto.IsActive = true;
 
@@ -131,7 +130,6 @@ namespace UserManagement.Api.Modules
             Put["/Users/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<UserDto>();
-                dto.Modified = DateTime.UtcNow;
                 dto.ModifiedBy = Context.CurrentUser.UserName;
 
                 if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
