@@ -281,7 +281,7 @@
             <div class="row">
 
                 <div class="col-sm-6 col-md-3">
-                    <div class="well">
+                    <div id="bundle1" class="well">
                         <h2 class="text-warning">Bundle 1</h2>
                         <p><span class="label label-warning">OVERVIEW</span></p>
                         <ul>
@@ -292,12 +292,12 @@
                         <hr>
                         <h3>R1000 / first 200 transactions</h3>
                         <hr>
-                        <p><a class="btn btn-success btn-md"><i class="icon-ok"></i> Select plan</a></p>
+                        <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
                 </div>
 
                 <div class="col-sm-6 col-md-3">
-                    <div class="well">
+                    <div id="bundle2" class="well">
                         <h2 class="text-info">Bundle 2</h2>
                         <p><span class="label label-info">OVERVIEW</span></p>
                         <ul>
@@ -308,12 +308,12 @@
                         <hr>
                         <h3>R3500 / first 600 transactions</h3>
                         <hr>
-                        <p><a class="btn btn-success btn-md"><i class="icon-ok"></i> Select plan</a></p>
+                        <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
                 </div>
 
                 <div class="col-sm-6 col-md-3">
-                    <div class="well">
+                    <div id="bundle3" class="well">
                         <h2 class="text-success">Bundle 3</h2>
                         <p><span class="label label-success">OVERVIEW</span></p>
                         <ul>
@@ -324,12 +324,12 @@
                         <hr>
                         <h3>R6000 / first 1200 transactions</h3>
                         <hr>
-                        <p><a class="btn btn-success btn-md"><i class="icon-ok"></i> Select plan</a></p>
+                        <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
                 </div>
 
                 <div class="col-sm-6 col-md-3">
-                    <div class="well">
+                    <div id="bundle4" class="well">
                         <h2 class="text-danger">Bundle 4</h2>
                         <p><span class="label label-danger">OVERVIEW</span></p>
                         <ul>
@@ -340,7 +340,7 @@
                         <hr>
                         <h3>R17500 / first 3500 transactions</h3>
                         <hr>
-                        <p><a class="btn btn-success btn-md"><i class="icon-ok"></i> Select plan</a></p>
+                        <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
                 </div>
 
@@ -362,4 +362,12 @@
             $industrySelect.trigger("chosen:updated");
         });
     });
+
+    function bundleSelect(bundleElement) {
+
+        $('.well').css('border-color', '#e3e3e3');
+
+        var bundleWell = $(bundleElement).parent().parent();
+        $('#' + bundleWell[0].id).css('border-color', 'green');
+    };
 </script>
