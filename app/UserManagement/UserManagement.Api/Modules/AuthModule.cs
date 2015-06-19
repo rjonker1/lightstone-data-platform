@@ -54,6 +54,31 @@ namespace UserManagement.Api.Modules
                     ? HttpStatusCode.Unauthorized
                     : Response.AsText(tokenizer.Tokenize(userIdentity, Context));
             };
+
+            Post["/login/api"] = parameters =>
+            {
+                var username = Context.Request.Headers["Username"].FirstOrDefault();
+                var password = Context.Request.Headers["Password"].FirstOrDefault();
+                var userIdentity = authenticator.GetUserIdentity(username, password);
+
+                if (userIdentity != null)
+                {
+                    var user = users.FirstOrDefault(x => x.UserName == userIdentity.UserName);
+                    if (user != null)
+                    {
+                        var userType = user.UserType;
+                        if (userType != UserType.Internal && userType != UserType.External)
+                        {
+                            userIdentity = null;
+                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType));
+                        }
+                    }
+                }
+
+                return userIdentity == null
+                    ? HttpStatusCode.Unauthorized
+                    : Response.AsText(tokenizer.Tokenize(userIdentity, Context));
+            };
         }
     }
 }

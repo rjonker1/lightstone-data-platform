@@ -48,8 +48,7 @@ namespace PackageBuilder.Api
                 new AutoMapperInstaller(),
                 new LaceInstaller(),
                 new AuthInstaller(),
-                new ApiInstaller(),
-                new ContextInstaller()
+                new ApiInstaller()
                 );
 
           //  container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
@@ -79,7 +78,7 @@ namespace PackageBuilder.Api
                 if (user != null)
                 {
                     nancyContext.CurrentUser = user;
-                    container.Resolve<CurrentContext>().Context = nancyContext;
+                    //container.Resolve<CurrentContext>().Context = nancyContext;
                 }
                 return null;
             });

@@ -21,7 +21,9 @@ using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
+using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
@@ -35,12 +37,12 @@ using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class PackageModule : NancyModule // SecureModule
+    public class PackageModule : SecureModule
     {
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi,IPublishIntegrationMessages integration, CurrentContext nancyContext)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi,IPublishIntegrationMessages integration)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -145,14 +147,17 @@ namespace PackageBuilder.Api.Modules
                 const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
 
                 var requestId = Guid.NewGuid();
-                var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, nancyContext.Context.CurrentUser.UserName,
-                    nancyContext.Context.CurrentUser.UserName, requestId, accountNumber, apiRequest.ContractId, contractVersion,
+                var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
+                    Context.CurrentUser.UserName, requestId, accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
 
-                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
-                    responses.Any() ? responses.AsJsonString() : string.Empty, requestId, nancyContext.Context != null ? nancyContext.Context.CurrentUser.UserName : "unavailable"));
+                // Filter responses for cleaner api payload
+                var filteredResponse = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>(responses);
 
-                return responses;
+                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
+                    filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, requestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
+
+                return filteredResponse;
             };
 
             Post["/Packages"] = parameters =>

@@ -13,8 +13,15 @@ namespace UserManagement.Domain.Dtos
         [Display(Name = "Client name is required")]
         public string Name { get; set; }
         public string ClientAccountNumber { get; set; }
+        [Required]
+        [Display(Name = "Account owner is required")]
+        public Guid AccountOwnerId { get; set; }
+        public string AccountOwnerName { get; set; }
+        public string AccountOwnerLastName { get; set; }
+        public Guid accountownerlastname_primary_key { get; set; }
         public IEnumerable<Guid> Industries { get; set; }
         public Guid ContactDetailId { get; set; }
+        [Phone(ErrorMessage = "Contact Info Contact Number is not a valid phone number")]
         public string ContactDetailContactNumber { get; set; }
         [Required]
         [Display(Name = "Commercial state is required")]
@@ -30,7 +37,9 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Account contact name is required")]
         public string BillingAccountContactName { get; set; }
+        [Phone(ErrorMessage = "Billing Info Contact Number is not a valid phone number")]
         public string BillingAccountContactNumber { get; set; }
+        [EmailAddress]
         public string BillingAccountContactEmail { get; set; }
         [Required]
         [Display(Name = "Payment type is required")]
@@ -38,11 +47,11 @@ namespace UserManagement.Domain.Dtos
         public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingDebitOrderAccountOwner { get; set; }
         public string BillingDebitOrderAccountNumber { get; set; }
-
         public ContactType ContactDetailContactType { get; set; }
         [Required]
         [Display(Name = "Contact person is required")]
         public string ContactDetailContactPerson { get; set; }
+        [EmailAddress]
         public string ContactDetailEmailAddress { get; set; }
         public Guid ContactDetailPhysicalAddressId { get; set; }
         public string ContactDetailPhysicalAddressType { get; set; }

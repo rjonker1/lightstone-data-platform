@@ -13,7 +13,7 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    class FakeSignioDataProvider: ExecuteSourceBase, IExecuteTheDataProviderSource
+    public class FakeSignioDataProvider: ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;

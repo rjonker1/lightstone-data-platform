@@ -7,7 +7,6 @@ using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Api.Helpers.Nancy;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
@@ -22,7 +21,7 @@ namespace UserManagement.Api.Modules
 {
     public class CustomerModule : SecureModule
     {
-        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<User> userRepository, IRepository<CreateSource> createSources, CurrentNancyContext currentNancyContext)
+        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<User> userRepository, IRepository<CreateSource> createSources)
         {
             Get["/Customers"] = _ =>
             {
@@ -62,16 +61,15 @@ namespace UserManagement.Api.Modules
             Post["/Customers"] = _ =>
             {
                 var dto = this.BindAndValidate<CustomerDto>();
-                dto.Created = DateTime.UtcNow;
-                dto.CreatedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.CreatedBy = Context.CurrentUser.UserName;
                 dto.IsActive = true;
 
                 if(dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var user = userRepository.Get(dto.accountownername_primary_key);
-                    var entity = Mapper.Map(dto, new Customer());
+                    var user = userRepository.Get(dto.accountownerlastname_primary_key);
+                    var entity = Mapper.Map(dto, new Customer(dto.Name));
                     entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
                     entity.AccountOwner = user;
 
@@ -102,14 +100,13 @@ namespace UserManagement.Api.Modules
             Put["/Customers/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<CustomerDto>();
-                dto.Modified = DateTime.UtcNow;
-                dto.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                dto.ModifiedBy = Context.CurrentUser.UserName;
 
                 if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
 
                 if (ModelValidationResult.IsValid)
                 {
-                    var user = userRepository.Get(dto.accountownername_primary_key);
+                    var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
                     entity.AccountOwner = user;
 
@@ -127,7 +124,7 @@ namespace UserManagement.Api.Modules
 
                 var entity = customers.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
-                entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                entity.ModifiedBy = Context.CurrentUser.UserName;
                 entity.IsLocked = true;
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
@@ -141,7 +138,7 @@ namespace UserManagement.Api.Modules
 
                 var entity = customers.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
-                entity.ModifiedBy = currentNancyContext.NancyContext.CurrentUser.UserName;
+                entity.ModifiedBy = Context.CurrentUser.UserName;
                 entity.IsLocked = false;
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));

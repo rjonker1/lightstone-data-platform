@@ -30,7 +30,7 @@ namespace UserManagement.Domain.Entities
         {
             get
             {
-                return CustomerUsers != null ? CustomerUsers.Select(x => x.Customer).ToList() : Enumerable.Empty<Customer>();
+                return CustomerUsers != null ? CustomerUsers.Where(x => x.Customer != null).Select(x => x.Customer).ToList() : Enumerable.Empty<Customer>();
             }
             set
             {

@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\CallLightstoneDirectorDataProvider.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigureSource.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigureApi.cs" />
     <Compile Include="Infrastructure\Dto\DirectorRequest.cs" />
     <Compile Include="Infrastructure\Dto\Confirmation.cs">
       <SubType>
@@ -133,6 +133,10 @@
     <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
       <Name>Workflow.Lace.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Lace\Workflow.Lace.csproj">
+      <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
+      <Name>Workflow.Lace</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

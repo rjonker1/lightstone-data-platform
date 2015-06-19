@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Microsoft.Practices.ServiceLocation;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -14,6 +15,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
         public void CreateMaps()
         {
             Mapper.CreateMap<Customer, CustomerDto>()
+                .AfterMap((s, d) => Mapper.Map(s, d, typeof(Entity), typeof(EntityDto)))
+                .ForMember(dest => dest.AccountOwnerName, opt => opt.MapFrom(x => x.AccountOwner != null ? string.Format("{0} {1}", x.AccountOwner.FirstName, x.AccountOwner.LastName) : ""))
                 .ForMember(dest => dest.CreateSourceType, opt => opt.MapFrom(x => x.CreateSource.CreateSourceType))
                 .ForMember(dest => dest.Industries, opt => opt.MapFrom(x => x.Industries.Select(cind => cind.IndustryId)));
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Configuration;
-using Billing.Api.Helpers.Nancy;
 using Billing.Api.Installers;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -44,8 +43,7 @@ namespace Billing.Api
                 new BusInstaller(),
                 new AutoMapperInstaller(),
                 new UpdateBillingTransactionInstaller(),
-                new AuthenticationInstaller(),
-                new CurrentNancyContextInstaller()
+                new AuthenticationInstaller()
                 );
 
             //Drop create
@@ -68,7 +66,6 @@ namespace Billing.Api
                 if (user != null)
                 {
                     nancyContext.CurrentUser = user;
-                    container.Resolve<CurrentNancyContext>().NancyContext = nancyContext;
                 }
                 return null;
             });

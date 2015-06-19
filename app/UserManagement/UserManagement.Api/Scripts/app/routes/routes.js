@@ -638,7 +638,8 @@ function initializePlugins() {
     
     $('#AccountOwnerId').val(accountOwnerUserId);
     $('#AccountOwnerName').text(accountOwnerUserName);
-
+    $('#accountownerlastname_primary_key').val(accountOwnerUserId);
+    
     $.ajaxSetup({
         //crossDomain: true,
         xhrFields: {

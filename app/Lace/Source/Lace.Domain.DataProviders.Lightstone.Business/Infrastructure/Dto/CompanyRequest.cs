@@ -1,8 +1,10 @@
-﻿using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+﻿using System.Runtime.Serialization;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Dto
 {
+    [DataContract]
     public class CompanyRequest
     {
         //const string idNumber = "7902065199085";
@@ -36,15 +38,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
             return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
         }
 
+        [DataMember]
         public bool IsValid { get; private set; }
-
-        //public string IdNumber { get; private set; }
-
+        [DataMember]
         public string CompanyName { get; private set; }
-
+        [DataMember]
         public string CompanyRegnum { get; private set; }
-
-
+        [DataMember]
         public string CompanyVatnumber { get; private set; }
     }
 }

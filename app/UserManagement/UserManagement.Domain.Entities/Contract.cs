@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Core.NHibernate.Attributes;
 
 namespace UserManagement.Domain.Entities
 {
@@ -17,7 +19,13 @@ namespace UserManagement.Domain.Entities
         public virtual ContractDuration ContractDuration { get; set; }
         public virtual ISet<Client> Clients { get; set; }
         public virtual ISet<Customer> Customers { get; set; }
-
+        [DoNotMap]
+        public virtual bool HasPackage {
+            get
+            {
+                return Packages.Any();
+            } 
+        }
         public virtual bool HasPackagePriceOverride { get; set; }
         public virtual ContractBundle ContractBundle { get; set; }
 

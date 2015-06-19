@@ -59,7 +59,7 @@
 
                     <div class="form-group">
 
-                        <label class="control-label col-sm-4 col-md-4">* Contract Name</label>
+                        <label class="control-label col-sm-4 col-md-4"><span class="required-field">*</span> Contract Name</label>
                         <div class="input-group col-md-4">
                             <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                             <div aria-describedby="basic-addon1">
@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group">
 
-                        <label class="control-label col-sm-4 col-md-4">* Description</label>
+                        <label class="control-label col-sm-4 col-md-4"><span class="required-field">*</span> Description</label>
                         <div class="input-group col-md-4">
                             <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                             <div aria-describedby="basic-addon1">
@@ -87,7 +87,7 @@
                     </div>
                     <div class="form-group">
 
-                        <label class="control-label col-sm-4 col-md-4">* Commencement Date</label>
+                        <label class="control-label col-sm-4 col-md-4"><span class="required-field">*</span> Commencement Date</label>
                         <div class="input-group col-md-4">
                             <div class="input-group date">
                                 <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
@@ -96,6 +96,60 @@
                         </div>
                         <div class="col-md-4">
                             @Html.ValidationMessageFor(x => x.CommencementDate)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4"><span class="required-field">*</span> Contract Type</label>
+                        <div class="input-group col-md-4">
+                            <select name="ContractTypeId" data-placeholder="Select user type" class="chosen-select">
+                                <option value=""></option>
+                                @foreach (SelectListItem item in ViewBag.ContractTypes.Value)
+                                {
+                                    var isSelected = item.Value == Model.ContractTypeId.ToString();
+                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.ContractTypeId)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4"><span class="required-field">*</span> Escalation Type</label>
+                        <div class="input-group col-md-4">
+                            <select name="EscalationTypeId" data-placeholder="Select escalation type" class="chosen-select">
+                                <option value=""></option>
+                                @foreach (SelectListItem item in ViewBag.EscalationTypes.Value)
+                                {
+                                    var isSelected = item.Value == Model.EscalationTypeId.ToString();
+                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.EscalationTypeId)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4"><span class="required-field">*</span> Contract Duration</label>
+                        <div class="input-group col-md-4">
+                            <select name="ContractDurationId" data-placeholder="Select contract duration" class="chosen-select">
+                                <option value=""></option>
+                                @foreach (SelectListItem item in ViewBag.ContractDurations.Value)
+                                {
+                                    var isSelected = item.Value == Model.ContractDurationId.ToString();
+                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ValidationMessageFor(x => x.ContractDurationId)
                         </div>
 
                     </div>
@@ -152,60 +206,6 @@
                         </div>
                         <div class="col-md-6">
                             @Html.ValidationMessageFor(x => x.RegistrationNumber)
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-
-                        <label class="control-label col-sm-4 col-md-4">* Contract Type</label>
-                        <div class="input-group col-md-4">
-                            <select name="ContractTypeId" data-placeholder="Select user type" class="chosen-select">
-                                <option value=""></option>
-                                @foreach (SelectListItem item in ViewBag.ContractTypes.Value)
-                                {
-                                    var isSelected = item.Value == Model.ContractTypeId.ToString();
-                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.ValidationMessageFor(x => x.ContractTypeId)
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-
-                        <label class="control-label col-sm-4 col-md-4">* Escalation Type</label>
-                        <div class="input-group col-md-4">
-                            <select name="EscalationTypeId" data-placeholder="Select escalation type" class="chosen-select">
-                                <option value=""></option>
-                                @foreach (SelectListItem item in ViewBag.EscalationTypes.Value)
-                                {
-                                    var isSelected = item.Value == Model.EscalationTypeId.ToString();
-                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.ValidationMessageFor(x => x.EscalationTypeId)
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-
-                        <label class="control-label col-sm-4 col-md-4">* Contract Duration</label>
-                        <div class="input-group col-md-4">
-                            <select name="ContractDurationId" data-placeholder="Select contract duration" class="chosen-select">
-                                <option value=""></option>
-                                @foreach (SelectListItem item in ViewBag.ContractDurations.Value)
-                                {
-                                    var isSelected = item.Value == Model.ContractDurationId.ToString();
-                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.ValidationMessageFor(x => x.ContractDurationId)
                         </div>
 
                     </div>

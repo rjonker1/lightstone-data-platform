@@ -46,7 +46,7 @@ namespace UserManagement.Domain.Entities
         {
             get
             {
-                return CustomerUsers != null ? CustomerUsers.Select(x => x.User).ToList() : Enumerable.Empty<User>();
+                return CustomerUsers != null ? CustomerUsers.Where(x => x.User != null).Select(x => x.User).ToList() : Enumerable.Empty<User>();
             }
             set
             {
@@ -63,5 +63,11 @@ namespace UserManagement.Domain.Entities
         public virtual bool IsActive { get; set; }
 		public virtual ISet<CustomerIndustry> Industries { get; set; }
         public virtual DateTime? TrialExpiration { get; set; }
+
+        protected Customer() { }
+
+        public Customer(string name) : base(name)
+        {
+        }
     }
 }

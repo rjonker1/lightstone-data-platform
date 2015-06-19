@@ -29,7 +29,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckReference(c => c.EscalationType, new EscalationType("EscalationType"))
                 .CheckReference(c => c.ContractDuration, new ContractDuration("ContractDuration"))
                 .CheckComponentList(c => c.Clients, new HashSet<Client> { new Client() })
-                .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer() })
+                .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer("Name") })
                 .CheckComponentList(c => c.Packages, new HashSet<Package> { new Package("Name", Guid.NewGuid()) })
                 .VerifyTheMappings();
         }
