@@ -121,12 +121,15 @@
     <Compile Include="CommandHandlers\CommercialStates\ImportCommercialStateHandler.cs" />
     <Compile Include="CommandHandlers\ContractDurations\ImportContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\Contracts\GetContractPackageHandler.cs" />
+    <Compile Include="CommandHandlers\Contracts\ImportContractBundleHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\ImportContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\ImportCreateSourceHandler.cs" />
     <Compile Include="CommandHandlers\DataImports\ImportStartupDataHandler.cs" />
     <Compile Include="CommandHandlers\Entities\CreateUpdateEntityHandler.cs" />
     <Compile Include="CommandHandlers\Entities\DeleteLookupEntityHandler.cs" />
+    <Compile Include="CommandHandlers\Entities\NamedEntityRuleHandler.cs" />
     <Compile Include="CommandHandlers\Entities\SoftDeleteEntityHandler.cs" />
+    <Compile Include="CommandHandlers\Entities\ValueEntityRuleHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\PaymentTypes\ImportPaymentTypeHandler.cs" />
     <Compile Include="CommandHandlers\PlatformStatuses\ImportPlatformStatusHandler.cs" />

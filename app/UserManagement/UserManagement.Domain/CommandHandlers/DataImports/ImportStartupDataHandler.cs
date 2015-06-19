@@ -4,6 +4,7 @@ using MemBus;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
+using UserManagement.Domain.Entities.Commands.Contracts;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
 using UserManagement.Domain.Entities.Commands.CreateSources;
 using UserManagement.Domain.Entities.Commands.EscalationTypes;
@@ -37,6 +38,8 @@ namespace UserManagement.Domain.CommandHandlers.DataImports
 
         private void ImportData()
         {
+            // Uses ExceptionHelper to supress individual imports, to allow for new imports of that type
+
             this.Info(() => "Attempting to import required data");
             _bus.Publish(new ImportRole());
             _bus.Publish(new ImportProvince());
@@ -47,6 +50,7 @@ namespace UserManagement.Domain.CommandHandlers.DataImports
             _bus.Publish(new ImportCreateSource());
             _bus.Publish(new ImportPlatformStatus());
             _bus.Publish(new ImportPaymentType());
+            _bus.Publish(new ImportContractBundle());
             this.Info(() => "Successfully imported required data");
         }
     }

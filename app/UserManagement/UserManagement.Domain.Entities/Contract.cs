@@ -27,7 +27,7 @@ namespace UserManagement.Domain.Entities
             } 
         }
         public virtual bool HasPackagePriceOverride { get; set; }
-        public virtual ContractBundle ContractBundle { get; set; }
+        //public virtual ContractBundle ContractBundle { get; set; }
 
         public virtual bool IsActive { get; set; }
         //public virtual ISet<ContractPackage> ContractPackages { get; set; }

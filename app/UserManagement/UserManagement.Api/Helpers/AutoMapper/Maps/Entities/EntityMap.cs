@@ -2,6 +2,7 @@
 using AutoMapper;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
+using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.Entities
 {
@@ -17,6 +18,13 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Entities
                 .ForMember(d => d.Modified, opt => opt.MapFrom(x => x.Modified.HasValue 
                     ? TimeZoneInfo.ConvertTimeFromUtc(x.Modified.Value, TimeZoneInfo.FindSystemTimeZoneById(southAfricaStandardTime)) + ""
                     : ""));
+
+
+            //Mapper.CreateMap<Role, ValueEntityDto>()
+            //    .ForMember(d => d.Modified, opt => opt.NullSubstitute(""))
+            //    .ForMember(d => d.ModifiedBy, opt => opt.NullSubstitute(""))
+            //    .ForMember(d => d.Created, opt => opt.NullSubstitute(""))
+            //    .ForMember(d => d.CreatedBy, opt => opt.NullSubstitute(""));
         }
     }
 }

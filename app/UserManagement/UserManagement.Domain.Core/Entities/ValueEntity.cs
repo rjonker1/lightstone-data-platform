@@ -9,7 +9,7 @@ namespace UserManagement.Domain.Core.Entities
         [Required, Unique]
         public virtual string Value { get; protected internal set; }
 
-        protected ValueEntity() { }
+        public ValueEntity() { }
 
         protected ValueEntity(string value, Guid id = new Guid())
             : base(id)

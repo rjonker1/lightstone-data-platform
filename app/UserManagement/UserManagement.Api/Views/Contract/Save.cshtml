@@ -47,10 +47,10 @@
             <form action="@url" method="@method" class="form-horizontal">
                 @Html.HiddenFor(x => x.IsActive)
                 
-                @Html.HiddenFor(x => x.HasPackagePriceOverride)
-                @Html.HiddenFor(x => x.ContractBundleId)
-                @Html.HiddenFor(x => x.ContractBundlePrice)
-                @Html.HiddenFor(x => x.ContractBundleTransactionLimit)
+                @Html.HiddenFor(x => x.HasPackagePriceOverride, new { @class = "hasPackagePriceOverride" })
+                @Html.HiddenFor(x => x.ContractBundleId, new { @class = "contractBundleId" })
+                @Html.HiddenFor(x => x.ContractBundlePrice, new { @class = "contractBundlePrice" })
+                @Html.HiddenFor(x => x.ContractBundleTransactionLimit, new { @class = "contractBundleTransactionLimit" })
 
                 <div class="box-body">
 
@@ -282,12 +282,12 @@
                         <h2 class="text-warning">Bundle 1</h2>
                         <p><span class="label label-warning">OVERVIEW</span></p>
                         <ul>
-                            <li>200 transactions</li>
+                            <li><label id="transactionLimit">200</label> transactions</li>
                             <li>Pro rata thereafter</li>
                         </ul>
                         <p></p>
                         <hr>
-                        <h3>R1000 / first 200 transactions</h3>
+                        <h3>R<label id="bundlePrice">1000</label> / first 200 transactions</h3>
                         <hr>
                         <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
@@ -298,12 +298,12 @@
                         <h2 class="text-info">Bundle 2</h2>
                         <p><span class="label label-info">OVERVIEW</span></p>
                         <ul>
-                            <li>600 transactions</li>
+                            <li><label id="transactionLimit">600</label> transactions</li>
                             <li>Pro rata thereafter</li>
                         </ul>
                         <p></p>
                         <hr>
-                        <h3>R3500 / first 600 transactions</h3>
+                        <h3>R<label id="bundlePrice">3500</label> / first 600 transactions</h3>
                         <hr>
                         <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
@@ -314,12 +314,12 @@
                         <h2 class="text-success">Bundle 3</h2>
                         <p><span class="label label-success">OVERVIEW</span></p>
                         <ul>
-                            <li>1200 transactions</li>
+                            <li><label id="transactionLimit">1200</label> transactions</li>
                             <li>Pro rata thereafter</li>
                         </ul>
                         <p></p>
                         <hr>
-                        <h3>R6000 / first 1200 transactions</h3>
+                        <h3>R<label id="bundlePrice">6000</label> / first 1200 transactions</h3>
                         <hr>
                         <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
@@ -330,12 +330,12 @@
                         <h2 class="text-danger">Bundle 4</h2>
                         <p><span class="label label-danger">OVERVIEW</span></p>
                         <ul>
-                            <li>3500 transactions</li>
+                            <li><label id="transactionLimit">3500</label> transactions</li>
                             <li>Pro rata thereafter</li>
                         </ul>
                         <p></p>
                         <hr>
-                        <h3>R17500 / first 3500 transactions</h3>
+                        <h3>R<label id="bundlePrice">17500</label> / first 3500 transactions</h3>
                         <hr>
                         <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
                     </div>
@@ -362,9 +362,14 @@
 
     function bundleSelect(bundleElement) {
 
-        $('.well').css('border-color', '#e3e3e3');
-
         var bundleWell = $(bundleElement).parent().parent();
+
+        $('.well').css('border-color', '#e3e3e3');
         $('#' + bundleWell[0].id).css('border-color', 'green');
+
+        $('.hasPackagePriceOverride').val(true);
+        $('.contractBundleTransactionLimit').val($('#' + bundleWell[0].id + ' #transactionLimit').text());
+        $('.contractBundlePrice').val($('#' + bundleWell[0].id + ' #bundlePrice').text());
+       
     };
 </script>
