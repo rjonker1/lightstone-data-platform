@@ -17,9 +17,6 @@
 
 <form action="@url" method="@method" class="form-horizontal">
     @Html.ValidationSummary("Validation Results")
-    
-    @Html.HiddenFor(x => x.Created)
-    @Html.HiddenFor(x => x.CreatedBy)
     @Html.HiddenFor(x => x.IsActive)
 
     @Html.Partial("Client", Model)

@@ -117,7 +117,7 @@ namespace UserManagement.Api
 
             pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
             {
-                ctx.ViewBag["UserName"] = ctx.CurrentUser.UserName;
+                if (ctx.CurrentUser != null) ctx.ViewBag["UserName"] = ctx.CurrentUser.UserName;
                 return null;
             });
 

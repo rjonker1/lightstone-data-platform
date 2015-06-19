@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
 {
@@ -10,6 +9,10 @@ namespace UserManagement.Domain.Dtos
     {
         public UserDto()
         {
+            RoleIds = Enumerable.Empty<Guid>();
+            RoleValues = Enumerable.Empty<string>();
+            CustomerIds = Enumerable.Empty<Guid>();
+            ClientIds = Enumerable.Empty<Guid>();
             Customers = Enumerable.Empty<NamedEntityDto>();
             Clients = Enumerable.Empty<NamedEntityDto>();
         }
@@ -21,6 +24,7 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Surname is required")]
         public virtual string LastName { get; set; }
+        [RegularExpression(@"(((\d{2}((0[13578]|1[02])(0[1-9]|[12]\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\d|30)|02(0[1-9]|1\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\d{4})( |-)(\d{3})|(\d{7}))", ErrorMessage = "Invalid ID Number")]
         public virtual string IdNumber { get; set; }
         [Required]
         [Display(Name = "Contact number is required")]
