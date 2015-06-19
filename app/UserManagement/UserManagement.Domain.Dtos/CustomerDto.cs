@@ -39,7 +39,9 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Account contact name is required")]
         public string BillingAccountContactName { get; set; }
+        [Phone(ErrorMessage = "Billing Info Contact Number is not a valid phone number")]
         public string BillingAccountContactNumber { get; set; }
+        [EmailAddress]
         public string BillingAccountContactEmail { get; set; }
         [Required]
         [Display(Name = "Payment type is required")]
@@ -47,14 +49,15 @@ namespace UserManagement.Domain.Dtos
         public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingDebitOrderAccountOwner { get; set; }
         public string BillingDebitOrderAccountNumber { get; set; }
+        [Phone(ErrorMessage = "Contact Info Contact Number is not a valid phone number")]
         public string ContactDetailContactNumber { get; set; }
         public ContactType ContactDetailContactType { get; set; }
         [Required]
         [Display(Name = "Contact person is required")]
         public string ContactDetailContactPerson { get; set; }  
         public Guid ContactDetailId { get; set; }
+        [EmailAddress]
         public string ContactDetailEmailAddress { get; set; }
-        public string ContactDetailTelephoneNumber { get; set; }
         public Guid ContactDetailPhysicalAddressId { get; set; }
         public string ContactDetailPhysicalAddressType { get; set; }
         public string ContactDetailPhysicalAddressLine1 { get; set; }

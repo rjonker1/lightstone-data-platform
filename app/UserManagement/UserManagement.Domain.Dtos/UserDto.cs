@@ -24,9 +24,11 @@ namespace UserManagement.Domain.Dtos
         public virtual string IdNumber { get; set; }
         [Required]
         [Display(Name = "Contact number is required")]
+        [Phone(ErrorMessage = "Contact Number is not a valid phone number")]
         public virtual string ContactNumber { get; set; }
         [Required]
         [Display(Name = "Username is required")]
+        [EmailAddress]
         public string UserName { get; set; }
         [Required]
         [Display(Name = "Password is required")]
