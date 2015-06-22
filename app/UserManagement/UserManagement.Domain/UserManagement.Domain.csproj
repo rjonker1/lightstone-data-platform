@@ -125,8 +125,6 @@
     <Compile Include="CommandHandlers\Entities\NamedEntityRuleHandler.cs" />
     <Compile Include="CommandHandlers\Entities\SoftDeleteEntityHandler.cs" />
     <Compile Include="CommandHandlers\Entities\ValueEntityRuleHandler.cs" />
-    <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
-    <Compile Include="CommandHandlers\PaymentTypes\ImportPaymentTypeHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Roles\ImportRoleHandler.cs" />
     <Compile Include="CommandHandlers\UserAliases\LinkUserAliasCommandHandler.cs" />

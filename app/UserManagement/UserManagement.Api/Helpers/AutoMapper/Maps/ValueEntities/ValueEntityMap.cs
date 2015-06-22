@@ -18,11 +18,9 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
                 .Include<Country, ValueEntityDto>()
                 .Include<Province, ValueEntityDto>()
                 .Include<Role, ValueEntityDto>();
-            Mapper.CreateMap<PaymentType, ValueEntityDto>();
             Mapper.CreateMap<CommercialState, ValueEntityDto>();
             Mapper.CreateMap<ContractType, ValueEntityDto>();
-            Mapper.CreateMap<EscalationType, ValueEntityDto>();
-            Mapper.CreateMap<ContractDuration, ValueEntityDto>();
+            Mapper.CreateMap<Country, ValueEntityDto>();
             Mapper.CreateMap<Province, ValueEntityDto>();
             Mapper.CreateMap<Role, ValueEntityDto>();
 
