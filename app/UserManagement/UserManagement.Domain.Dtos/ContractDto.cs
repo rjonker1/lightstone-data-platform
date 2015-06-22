@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
