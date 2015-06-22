@@ -69,13 +69,17 @@
 
             <label class="control-label col-lg-4">Country</label>
             <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-globe" id="basic-addon1"></span>
-                <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressCountry, new { @class = "form-control", placeholder = "" })
-                </div>
+                <select name="ContactDetailPhysicalAddressCountryId" data-placeholder="Select country" class="chosen-select">
+                    <option value=""></option>
+                    @foreach (var item in ViewBag.Countrys.Value)
+                    {
+                        var isSelected = item.Value == Model.ContactDetailPhysicalAddressCountryId.ToString();
+                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                    }
+                </select>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressCountry)
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressCountryId)
             </div>
 
         </div>

@@ -1,11 +1,11 @@
 ﻿@using System
 @using System.Linq
 @*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
-@using DataPlatform.Shared.Enums
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
 @using UserManagement.Domain.Dtos
 @using UserManagement.Domain.Entities
+@using UserManagement.Domain.Enums
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ContractDto>
 @{
     var isCreate = Model.Id == new Guid();
@@ -102,7 +102,7 @@
                         <div class="input-group col-md-4">
                             <select name="ContractTypeId" data-placeholder="Select user type" class="chosen-select">
                                 <option value=""></option>
-                                @foreach (SelectListItem item in ViewBag.ContractTypes.Value)
+                                @foreach (var item in ViewBag.ContractTypes.Value)
                                 {
                                     var isSelected = item.Value == Model.ContractTypeId.ToString();
                                     <option selected="@isSelected" value="@item.Value">@item.Text</option>
@@ -118,17 +118,17 @@
 
                         <label class="control-label col-sm-4 col-md-4"><span class="required-field">*</span> Escalation Type</label>
                         <div class="input-group col-md-4">
-                            <select name="EscalationTypeId" data-placeholder="Select escalation type" class="chosen-select">
+                            <select name="EscalationType" data-placeholder="Select escalation type" class="chosen-select">
                                 <option value=""></option>
-                                @foreach (SelectListItem item in ViewBag.EscalationTypes.Value)
+                                @foreach (var item in Enum.GetValues(typeof(EscalationType)))
                                 {
-                                    var isSelected = item.Value == Model.EscalationTypeId.ToString();
-                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                    var isSelected = item.ToString() == Model.EscalationType.ToString();
+                                    <option selected="@isSelected" value="@item">@item</option>
                                 }
                             </select>
                         </div>
                         <div class="col-md-6">
-                            @Html.ValidationMessageFor(x => x.EscalationTypeId)
+                            @Html.ValidationMessageFor(x => x.EscalationType)
                         </div>
 
                     </div>
@@ -136,17 +136,17 @@
 
                         <label class="control-label col-sm-4 col-md-4"><span class="required-field">*</span> Contract Duration</label>
                         <div class="input-group col-md-4">
-                            <select name="ContractDurationId" data-placeholder="Select contract duration" class="chosen-select">
+                            <select name="ContractDuration" data-placeholder="Select contract duration" class="chosen-select">
                                 <option value=""></option>
-                                @foreach (SelectListItem item in ViewBag.ContractDurations.Value)
+                                @foreach (var item in Enum.GetValues(typeof(ContractDuration)))
                                 {
-                                    var isSelected = item.Value == Model.ContractDurationId.ToString();
-                                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                    var isSelected = item.ToString() == Model.ContractDuration.ToString();
+                                    <option selected="@isSelected" value="@item">@item</option>
                                 }
                             </select>
                         </div>
                         <div class="col-md-6">
-                            @Html.ValidationMessageFor(x => x.ContractDurationId)
+                            @Html.ValidationMessageFor(x => x.ContractDuration)
                         </div>
 
                     </div>
@@ -220,7 +220,7 @@
                         <label class="control-label col-sm-4 col-md-4">Clients</label>
                         <div class="input-group col-md-4 client-autocomplete">
                             <select id="ClientIds" name="ClientIds" data-placeholder="Type to search & add clients" multiple class="chosen-select">
-                                @foreach (NamedEntityDto item in Model.Clients)
+                                @foreach (var item in Model.Clients)
                                 {
                                     var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
                                     <option selected="@isSelected" value="@item.Id">@item.Name</option>
@@ -237,7 +237,7 @@
                         <label class="control-label col-sm-4 col-md-4">Customers</label>
                         <div class="input-group col-md-4 customer-autocomplete">
                             <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
-                                @foreach (NamedEntityDto item in Model.Customers)
+                                @foreach (var item in Model.Customers)
                                 {
                                     var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
                                     <option id="@item.Id" selected="@isSelected" value="@item.Id">@item.Name</option>

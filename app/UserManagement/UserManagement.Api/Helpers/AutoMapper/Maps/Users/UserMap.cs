@@ -18,6 +18,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
                 .AfterMap((s, d) => Mapper.Map(s, d, typeof(Entity), typeof(EntityDto)))
                 .ForMember(dest => dest.RoleIds, opt => opt.MapFrom(x => x.Roles.Select(y => y.Id)))
                 .ForMember(dest => dest.RoleValues, opt => opt.MapFrom(x => x.Roles.Select(r => r.Value)))
+                .ForMember(dest => dest.Clients, opt => opt.MapFrom(x => x.Clients.Select(r => r.Name)))
                 .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)));
 
             Mapper.CreateMap<UserDto, User>()

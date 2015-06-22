@@ -17,7 +17,6 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
             Mapper.CreateMap<Customer, CustomerDto>()
                 .AfterMap((s, d) => Mapper.Map(s, d, typeof(Entity), typeof(EntityDto)))
                 .ForMember(dest => dest.AccountOwnerName, opt => opt.MapFrom(x => x.AccountOwner != null ? string.Format("{0} {1}", x.AccountOwner.FirstName, x.AccountOwner.LastName) : ""))
-                //.ForMember(dest => dest.CreateSourceType, opt => opt.MapFrom(x => x.CreateSource.CreateSourceType))
                 .ForMember(dest => dest.Industries, opt => opt.MapFrom(x => x.Industries.Select(cind => cind.IndustryId)));
 
             Mapper.CreateMap<CustomerDto, Customer>()

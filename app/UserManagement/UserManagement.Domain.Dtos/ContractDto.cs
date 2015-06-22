@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using UserManagement.Domain.Entities;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
 {
@@ -34,10 +34,10 @@ namespace UserManagement.Domain.Dtos
         public Guid? ContractTypeId { get; set; }
         [Required]
         [Display(Name = "Escalation type required")]
-        public Guid? EscalationTypeId { get; set; }
+        public EscalationType EscalationType { get; set; }
         [Required]
         [Display(Name = "Contract durations required")]
-        public Guid? ContractDurationId { get; set; }
+        public ContractDuration ContractDuration { get; set; }
         public IEnumerable<Guid> ClientIds { get; set; } // Used to post Ids on form submit
         public IEnumerable<NamedEntityDto> Clients { get; set; } // Used in populating edit view
         public IEnumerable<Guid> CustomerIds { get; set; } // Used to post Ids on form submit

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Enums;
 
@@ -12,13 +11,13 @@ namespace UserManagement.Domain.Entities
         public virtual string Line2 { get; set; }
         public virtual string Suburb { get; set; }
         public virtual string City { get; set; }
-        public virtual string Country { get; set; }
+        public virtual Country Country { get; set; }
         public virtual string PostalCode { get; set; }
         public virtual Province Province { get; set; }
 
         protected Address() { }
 
-        public Address(AddressType type, string line1, string line2, string suburb, string city, string country, string postalCode, Province province, Guid id = new Guid())
+        public Address(AddressType type, string line1, string line2, string suburb, string city, Country country, string postalCode, Province province, Guid id = new Guid())
             : base(id)
         {
             Type = type;

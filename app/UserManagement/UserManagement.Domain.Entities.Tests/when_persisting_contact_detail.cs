@@ -17,8 +17,8 @@ namespace UserManagement.Domain.Entities.Tests
         [Observation]
         public void should_persist()
         {
-            var physicalAddress = new Address(AddressType.Physical, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
-            var postalAddress = new Address(AddressType.Postal, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
+            var physicalAddress = new Address(AddressType.Physical, "Line1", "Line2", "PostalCode", "City", new Country("South Africa"), "PostalCode", new Province("Gauteng"));
+            var postalAddress = new Address(AddressType.Postal, "Line1", "Line2", "PostalCode", "City", new Country("South Africa"), "PostalCode", new Province("Gauteng"));
             new PersistenceSpecification<ContactDetail>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.ContactPerson, "ContactPerson")

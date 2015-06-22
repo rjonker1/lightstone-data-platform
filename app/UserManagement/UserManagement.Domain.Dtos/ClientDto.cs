@@ -43,7 +43,7 @@ namespace UserManagement.Domain.Dtos
         public string BillingAccountContactEmail { get; set; }
         [Required]
         [Display(Name = "Payment type is required")]
-        public Guid? BillingPaymentTypeId { get; set; }
+        public PaymentType BillingPaymentType { get; set; }
         public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingDebitOrderAccountOwner { get; set; }
         public string BillingDebitOrderAccountNumber { get; set; }
@@ -59,7 +59,7 @@ namespace UserManagement.Domain.Dtos
         public string ContactDetailPhysicalAddressLine2 { get; set; }
         public string ContactDetailPhysicalAddressSuburb { get; set; }
         public string ContactDetailPhysicalAddressCity { get; set; }
-        public string ContactDetailPhysicalAddressCountry { get; set; }
+        public Guid ContactDetailPhysicalAddressCountryId { get; set; }
         public string ContactDetailPhysicalAddressPostalCode { get; set; }
         public Guid ContactDetailPhysicalAddressProvinceId { get; set; }
         public Guid ContactDetailPostalAddressId { get; set; }
@@ -68,7 +68,7 @@ namespace UserManagement.Domain.Dtos
         public string ContactDetailPostalAddressLine2 { get; set; }
         public string ContactDetailPostalAddressSuburb { get; set; }
         public string ContactDetailPostalAddressCity { get; set; }
-        public string ContactDetailPostalAddressCountry { get; set; }
+        public Guid ContactDetailPostalAddressCountryId { get; set; }
         public string ContactDetailPostalAddressPostalCode { get; set; }
         public Guid ContactDetailPostalAddressProvinceId { get; set; }
         // Work around for AutoMapper to map address as Nancy does not support nested Model binding when using url encoded form posts

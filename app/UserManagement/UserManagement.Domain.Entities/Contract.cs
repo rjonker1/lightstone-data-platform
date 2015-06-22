@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {

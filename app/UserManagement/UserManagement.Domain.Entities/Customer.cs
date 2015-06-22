@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.Practices.ServiceLocation;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
