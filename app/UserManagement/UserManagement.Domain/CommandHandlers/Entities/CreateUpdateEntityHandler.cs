@@ -26,12 +26,15 @@ namespace UserManagement.Domain.CommandHandlers.Entities
             //var brv = new BusinessRulesValidator(_handler);
             //brv.CheckRules(command.Entity, command.Function);
 
+            // Func helper
             var namedEntityDto = ExceptionHelper.IgnoreException(() => Mapper.Map(command.Entity, new NamedEntityDto(), typeof(NamedEntity), typeof(NamedEntityDto)));
+            var valueEntityDto = ExceptionHelper.IgnoreException(() => Mapper.Map(command.Entity, new ValueEntityDto(), typeof(ValueEntity), typeof(ValueEntityDto)));
 
             try
             {
                 _handler.Handle(namedEntityDto);
-                _handler.Handle(Mapper.Map(command.Entity, new ValueEntityDto(), typeof(ValueEntity), typeof(ValueEntityDto)));
+
+                _handler.Handle(valueEntityDto);
             }
             catch (LightstoneAutoException lightstoneAutoException)
             {
