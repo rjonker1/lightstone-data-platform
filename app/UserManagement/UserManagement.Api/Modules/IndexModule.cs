@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using Nancy;
 using Shared.BuildingBlocks.Api.Security;
@@ -22,7 +23,7 @@ namespace UserManagement.Api.Modules
 
             Get["/logout"] = parameters => null;
 
-            Get["/cia"] = parameters => Response.AsRedirect("http://dev.cia.lightstone.co.za/");
+            Get["/cia"] = parameters => Response.AsRedirect(ConfigurationManager.AppSettings["cia/auth"]);
         }
     }
 }
