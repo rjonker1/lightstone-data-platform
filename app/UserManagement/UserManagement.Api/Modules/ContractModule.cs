@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Repositories;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -19,7 +20,7 @@ namespace UserManagement.Api.Modules
 {
     public class ContractModule : SecureModule
     {
-        public ContractModule(IBus bus, IContractRepository contracts)
+        public ContractModule(IBus bus, IContractRepository contracts, IContractBundleRepository contractBundles)
         {
             Get["/Contracts"] = _ =>
             {
@@ -33,7 +34,12 @@ namespace UserManagement.Api.Modules
 
             Get["/Contracts/Add"] = parameters =>
             {
-                return View["Save", new ContractDto{CommencementDate = DateTime.Today, OnlineAcceptance = DateTime.Today}];
+                return View["Save", new ContractDto
+                {
+                    CommencementDate = DateTime.Today, 
+                    OnlineAcceptance = DateTime.Today,
+                    ContractBundleList = contractBundles
+                }];
             };
 
             Post["/Contracts"] = _ =>
