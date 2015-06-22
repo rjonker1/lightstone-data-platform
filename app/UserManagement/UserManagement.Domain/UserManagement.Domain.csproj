@@ -105,7 +105,6 @@
     <Compile Include="BusinessRules\Customers\SoftDeleteCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\UpdateCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\CommercialStates\DeleteCommercialStateRuleHandler.cs" />
-    <Compile Include="BusinessRules\Lookups\ContractDurations\DeleteContractDurationRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\ContractTypes\DeleteContractTypeRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\Provinces\DeleteProvinceRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRuleHandler.cs" />

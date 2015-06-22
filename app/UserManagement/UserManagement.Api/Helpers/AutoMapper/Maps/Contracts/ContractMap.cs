@@ -37,8 +37,6 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Contracts
                //.ForMember(dest => dest.ContractPackages, opt => opt.MapFrom(x => x.PackageIds.Select(id => new ContractPackage(id))))
                .ForMember(dest => dest.Packages, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<string>, IEnumerable<Package>>(x.PackageIdNames)))
                .ForMember(dest => dest.ContractType, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<ContractType>>().Get(x.ContractTypeId)))
-               //.ForMember(dest => dest.EscalationType, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<EscalationType>>().Get(x.EscalationTypeId)))
-               //.ForMember(dest => dest.Country, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<Country>>().Get(x.ContractDurationId)))
                .ForMember(dest => dest.Clients, opt => opt.MapFrom(x => 
                    x.ClientIds != null 
                         ? new HashSet<Client>(x.ClientIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Client>>().Get(id))) 

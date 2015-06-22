@@ -28,7 +28,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.RegistrationNumber, "RegistrationNumber")
                 .CheckReference(c => c.ContractType, new ContractType("ContractType"))
                 .CheckReference(c => c.EscalationType, EscalationType.AnnualPercentageAllProducts)
-                .CheckReference(c => c.Country, new Country("ContractDuration"))
+                .CheckReference(c => c.ContractDuration, ContractDuration.Custom)
                 .CheckComponentList(c => c.Clients, new HashSet<Client> { new Client() })
                 .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer("Name") })
                 .CheckComponentList(c => c.Packages, new HashSet<Package> { new Package("Name", Guid.NewGuid()) })

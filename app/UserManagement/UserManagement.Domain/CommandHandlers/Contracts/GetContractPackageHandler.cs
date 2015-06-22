@@ -33,7 +33,7 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
 
         private static Contract FakeContract(Guid contractId)
         {
-            return new Contract(DateTime.Now, "VVI Product", null, null, null, null, null, null, EscalationType.AnnualPercentageAllProducts, null, contractId)
+            return new Contract(DateTime.Now, "VVI Product", null, null, null, null, null, null, EscalationType.AnnualPercentageAllProducts, ContractDuration.Custom, contractId)
             {
                 Id = contractId,
                 Packages = new HashSet<Package>()

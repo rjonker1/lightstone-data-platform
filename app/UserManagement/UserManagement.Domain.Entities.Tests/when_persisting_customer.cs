@@ -34,7 +34,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddress", physicalAddress, postalAddress))
                 .CheckReference(c => c.CreateSource, CreateSourceType.Web)
                 .CheckComponentList(c => c.CustomerUsers, new HashSet<User>{ user })
-                .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), EscalationType.AnnualPercentageAllProducts, new Country("Dur")) })
+                .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), EscalationType.AnnualPercentageAllProducts, ContractDuration.Custom) })
                 .CheckComponentList(c => c.Industries, new HashSet<CustomerIndustry> { new CustomerIndustry(customer, Guid.NewGuid())})
                 .VerifyTheMappings(customer);
         }
