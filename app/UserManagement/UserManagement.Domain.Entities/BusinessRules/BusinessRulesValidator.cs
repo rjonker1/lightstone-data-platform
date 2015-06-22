@@ -5,10 +5,8 @@ using UserManagement.Domain.Entities.BusinessRules.Customers;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.CommercialStates;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.ContractDurations;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.ContractTypes;
-using UserManagement.Domain.Entities.BusinessRules.Lookups.CreateSources;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.EscalationTypes;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.PaymentTypes;
-using UserManagement.Domain.Entities.BusinessRules.Lookups.PlatformStatuses;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.Provinces;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.Roles;
 using UserManagement.Domain.Entities.BusinessRules.Packages;
@@ -59,14 +57,11 @@ namespace UserManagement.Domain.Entities.BusinessRules
 
             //Hard delete entities
             if (entity is PaymentType) _handler.Handle(new DeletePaymentTypeRule(entity as PaymentType));
-            if (entity is PlatformStatus) _handler.Handle(new DeletePlatformStatusRule(entity as PlatformStatus));
-            if (entity is CreateSource) _handler.Handle(new DeleteCreateSourceRule(entity as CreateSource));
             if (entity is CommercialState) _handler.Handle(new DeleteCommercialStateRule(entity as CommercialState));
             if (entity is ContractType) _handler.Handle(new DeleteContractTypeRule(entity as ContractType));
             if (entity is EscalationType) _handler.Handle(new DeleteEscalationTypeRule(entity as EscalationType));
             if (entity is ContractDuration) _handler.Handle(new DeleteContractDurationRule(entity as ContractDuration));
             if (entity is Province) _handler.Handle(new DeleteProvinceRule(entity as Province));
-            //if (entity is UserType) _handler.Handle(new DeleteUserTypeRule(entity as UserType)); //todo: Provide implementation
             if (entity is Role) _handler.Handle(new DeleteRoleRule(entity as Role));
         }
     }

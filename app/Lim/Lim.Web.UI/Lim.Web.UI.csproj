@@ -138,8 +138,8 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\clients\Client.cshtml" />
-    <Content Include="Views\clients\Clients.cshtml" />
+    <Content Include="Views\client\Client.cshtml" />
+    <Content Include="Views\client\Clients.cshtml" />
     <Content Include="Views\integrations\api\PushMetadata.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -76,10 +76,8 @@
     <Compile Include="ValueTypes\when_persisting_commercial_state.cs" />
     <Compile Include="ValueTypes\when_persisting_contract_duration.cs" />
     <Compile Include="ValueTypes\when_persisting_contract_type.cs" />
-    <Compile Include="ValueTypes\when_persisting_create_source.cs" />
     <Compile Include="ValueTypes\when_persisting_escalation_type.cs" />
     <Compile Include="ValueTypes\when_persisting_payment_type.cs" />
-    <Compile Include="ValueTypes\when_persisting_platfrom_status.cs" />
     <Compile Include="ValueTypes\when_persisting_province.cs" />
     <Compile Include="when_persisting_address.cs" />
     <Compile Include="when_persisting_audit_log.cs" />
