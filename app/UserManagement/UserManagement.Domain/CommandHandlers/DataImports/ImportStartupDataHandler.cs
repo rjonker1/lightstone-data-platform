@@ -3,6 +3,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
+using UserManagement.Domain.Entities.Commands.Contracts;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
 using UserManagement.Domain.Entities.Commands.Countries;
 using UserManagement.Domain.Entities.Commands.Provinces;
@@ -33,12 +34,15 @@ namespace UserManagement.Domain.CommandHandlers.DataImports
 
         private void ImportData()
         {
+            // Uses ExceptionHelper to supress individual imports, to allow for new imports of that type
+
             this.Info(() => "Attempting to import required data");
             _bus.Publish(new ImportRole());
             _bus.Publish(new ImportProvince());
             _bus.Publish(new ImportCountry());
             _bus.Publish(new ImportContractType());
             _bus.Publish(new ImportCommercialState());
+            _bus.Publish(new ImportContractBundle());
             this.Info(() => "Successfully imported required data");
         }
     }

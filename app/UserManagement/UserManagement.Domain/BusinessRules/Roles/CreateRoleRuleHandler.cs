@@ -20,12 +20,12 @@ namespace UserManagement.Domain.BusinessRules.Roles
         {
             var entity = command.Role;
 
-            //Check if Username for specific user already exists
+            //Check if role  already exists
             if (_roles.Exists(entity.Id, entity.Value))
             {
-                //var exception = new LightstoneAutoException("Role already exists".FormatWith(entity.GetType().Name));
-                //this.Warn(() => exception);
-                //throw exception;
+                var exception = new LightstoneAutoException("Role already exists".FormatWith(entity.GetType().Name));
+                this.Warn(() => exception);
+                throw exception;
             }
         }
     }

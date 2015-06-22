@@ -18,6 +18,13 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
                 .Include<Country, ValueEntityDto>()
                 .Include<Province, ValueEntityDto>()
                 .Include<Role, ValueEntityDto>();
+            Mapper.CreateMap<PaymentType, ValueEntityDto>();
+            Mapper.CreateMap<CommercialState, ValueEntityDto>();
+            Mapper.CreateMap<ContractType, ValueEntityDto>();
+            Mapper.CreateMap<EscalationType, ValueEntityDto>();
+            Mapper.CreateMap<ContractDuration, ValueEntityDto>();
+            Mapper.CreateMap<Province, ValueEntityDto>();
+            Mapper.CreateMap<Role, ValueEntityDto>();
 
             Mapper.CreateMap<ValueEntityDto, ValueEntity>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))

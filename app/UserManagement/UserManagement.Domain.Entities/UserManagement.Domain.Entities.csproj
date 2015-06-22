@@ -114,6 +114,7 @@
     <Compile Include="Commands\CommercialStates\ImportCommercialState.cs" />
     <Compile Include="Commands\Countries\ImportCountry.cs" />
     <Compile Include="Commands\Contracts\GetPackageOnContract.cs" />
+    <Compile Include="Commands\Contracts\ImportContractBundle.cs" />
     <Compile Include="Commands\ContractTypes\ImportContractType.cs" />
     <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
     <Compile Include="Commands\Entities\DeleteLookupEntity.cs" />

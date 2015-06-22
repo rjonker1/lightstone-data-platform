@@ -11,7 +11,7 @@ namespace UserManagement.Domain.Core.Repositories
 
         public bool Exists(Guid id, string value)
         {
-            return this.Any(x => x.Id != id && (x.Value + "").Trim().ToLower() == (value + "").Trim().ToLower());
+            return this.FirstOrDefault(x => x.Id != id && (x.Value + "").Trim().ToLower() == (value + "").Trim().ToLower()) != null;
         }
     }
 }

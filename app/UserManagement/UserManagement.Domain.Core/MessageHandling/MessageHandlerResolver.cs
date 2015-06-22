@@ -19,6 +19,7 @@ namespace UserManagement.Domain.Core.MessageHandling
 
         public void Handle(object message)
         {
+            if( message == null) return;
             var type = message.GetType();
             var executorType = typeof(IHandleMessages<>).MakeGenericType(type);
             var executor = (IHandleMessages)_container.Resolve(executorType);
