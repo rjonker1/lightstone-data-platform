@@ -153,27 +153,27 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="appSetting.config">
+    <Content Include="appSettings.config">
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
-    <None Include="appSetting.Debug.config">
-      <DependentUpon>appSetting.config</DependentUpon>
+    <None Include="appSettings.Debug.config">
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="appSetting.Prod.config">
-      <DependentUpon>appSetting.config</DependentUpon>
+    <None Include="appSettings.Prod.config">
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="appSetting.Release.config">
-      <DependentUpon>appSetting.config</DependentUpon>
+    <None Include="appSettings.Release.config">
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="appSetting.TeamCity.config">
-      <DependentUpon>appSetting.config</DependentUpon>
+    <None Include="appSettings.TeamCity.config">
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="appSetting.Test.config">
-      <DependentUpon>appSetting.config</DependentUpon>
+    <None Include="appSettings.Test.config">
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
