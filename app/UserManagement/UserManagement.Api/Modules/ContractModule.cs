@@ -38,7 +38,7 @@ namespace UserManagement.Api.Modules
                 {
                     CommencementDate = DateTime.Today, 
                     OnlineAcceptance = DateTime.Today,
-                    ContractBundleList = contractBundles
+                    ContractBundleList = contractBundles.OrderBy(x => x.TransactionLimit)
                 }];
             };
 

@@ -41,12 +41,12 @@
 
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open", Model))
-    
+
     <div class="row">
         <div class="col-md-4">
             <form action="@url" method="@method" class="form-horizontal">
                 @Html.HiddenFor(x => x.IsActive)
-                
+
                 @Html.HiddenFor(x => x.HasPackagePriceOverride, new { @class = "hasPackagePriceOverride" })
                 @Html.HiddenFor(x => x.ContractBundleId, new { @class = "contractBundleId" })
                 @Html.HiddenFor(x => x.ContractBundlePrice, new { @class = "contractBundlePrice" })
@@ -270,76 +270,98 @@
                 @Html.Partial("Shared/BoxFooter")
             </form>
         </div>
-        
+
         <div class="col-sm-2"></div>
-        
+
         <div class="col-sm-6 col-md-8" style="width: 65%; margin-top: 10px;">
 
             <div class="row">
 
-                <div class="col-sm-6 col-md-3">
-                    <div id="bundle1" class="well">
-                        <h2 class="text-warning">Bundle 1</h2>
-                        <p><span class="label label-warning">OVERVIEW</span></p>
-                        <ul>
-                            <li><label id="transactionLimit">200</label> transactions</li>
-                            <li>Pro rata thereafter</li>
-                        </ul>
-                        <p></p>
-                        <hr>
-                        <h3>R<label id="bundlePrice">1000</label> / first 200 transactions</h3>
-                        <hr>
-                        <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
-                    </div>
-                </div>
+                @foreach (var bundle in Model.ContractBundleList)
+                {
 
-                <div class="col-sm-6 col-md-3">
-                    <div id="bundle2" class="well">
-                        <h2 class="text-info">Bundle 2</h2>
-                        <p><span class="label label-info">OVERVIEW</span></p>
-                        <ul>
-                            <li><label id="transactionLimit">600</label> transactions</li>
-                            <li>Pro rata thereafter</li>
-                        </ul>
-                        <p></p>
-                        <hr>
-                        <h3>R<label id="bundlePrice">3500</label> / first 600 transactions</h3>
-                        <hr>
-                        <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
-                    </div>
-                </div>
 
-                <div class="col-sm-6 col-md-3">
-                    <div id="bundle3" class="well">
-                        <h2 class="text-success">Bundle 3</h2>
-                        <p><span class="label label-success">OVERVIEW</span></p>
-                        <ul>
-                            <li><label id="transactionLimit">1200</label> transactions</li>
-                            <li>Pro rata thereafter</li>
-                        </ul>
-                        <p></p>
-                        <hr>
-                        <h3>R<label id="bundlePrice">6000</label> / first 1200 transactions</h3>
-                        <hr>
-                        <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
-                    </div>
-                </div>
+                    if (bundle.Name == "Bundle 1")
+                    {
+                        <div class="col-sm-6 col-md-3">
+                            <div id="bundle1" class="well">
+                                <h2 class="text-warning">@bundle.Name</h2>
+                                <div id="bundleId" style="display: none">@bundle.Id</div>
+                                <p><span class="label label-warning">OVERVIEW</span></p>
+                                <ul>
+                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
+                                    <li>Pro rata thereafter</li>
+                                </ul>
+                                <p></p>
+                                <hr>
+                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
+                                <hr>
+                                <p><a class="btn btn-success btn-md" onclick=" bundleSelect(this) "><i class="icon-ok"></i> Select plan</a></p>
+                            </div>
+                        </div>
+                    }
 
-                <div class="col-sm-6 col-md-3">
-                    <div id="bundle4" class="well">
-                        <h2 class="text-danger">Bundle 4</h2>
-                        <p><span class="label label-danger">OVERVIEW</span></p>
-                        <ul>
-                            <li><label id="transactionLimit">3500</label> transactions</li>
-                            <li>Pro rata thereafter</li>
-                        </ul>
-                        <p></p>
-                        <hr>
-                        <h3>R<label id="bundlePrice">17500</label> / first 3500 transactions</h3>
-                        <hr>
-                        <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
-                    </div>
-                </div>
+                    if (bundle.Name == "Bundle 2")
+                    {
+                        <div class="col-sm-6 col-md-3">
+                            <div id="bundle2" class="well">
+                                <h2 class="text-info">@bundle.Name</h2>
+                                <div id="bundleId" style="display: none">@bundle.Id</div>
+                                <p><span class="label label-info">OVERVIEW</span></p>
+                                <ul>
+                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
+                                    <li>Pro rata thereafter</li>
+                                </ul>
+                                <p></p>
+                                <hr>
+                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
+                                <hr>
+                                <p><a class="btn btn-success btn-md" onclick=" bundleSelect(this) "><i class="icon-ok"></i> Select plan</a></p>
+                            </div>
+                        </div>
+                    }
+
+                    if (bundle.Name == "Bundle 3")
+                    {
+                        <div class="col-sm-6 col-md-3">
+                            <div id="bundle3" class="well">
+                                <h2 class="text-success">@bundle.Name</h2>
+                                <div id="bundleId" style="display: none">@bundle.Id</div>
+                                <p><span class="label label-success">OVERVIEW</span></p>
+                                <ul>
+                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
+                                    <li>Pro rata thereafter</li>
+                                </ul>
+                                <p></p>
+                                <hr>
+                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
+                                <hr>
+                                <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
+                            </div>
+                        </div>
+                    }
+
+                    if (bundle.Name == "Bundle 4")
+                    {
+                        <div class="col-sm-6 col-md-3">
+                            <div id="bundle4" class="well">
+                                <h2 class="text-danger">@bundle.Name</h2>
+                                <div id="bundleId" style="display: none">@bundle.Id</div>
+                                <p><span class="label label-danger">OVERVIEW</span></p>
+                                <ul>
+                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
+                                    <li>Pro rata thereafter</li>
+                                </ul>
+                                <p></p>
+                                <hr>
+                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
+                                <hr>
+                                <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
+                            </div>
+                        </div>
+                    }
+
+                }
 
             </div>
         </div>
@@ -368,8 +390,9 @@
         $('#' + bundleWell[0].id).css('border-color', 'green');
 
         $('.hasPackagePriceOverride').val(true);
+        $('.contractBundleId').val($('#' + bundleWell[0].id + ' #bundleId').text());
         $('.contractBundleTransactionLimit').val($('#' + bundleWell[0].id + ' #transactionLimit').text());
         $('.contractBundlePrice').val($('#' + bundleWell[0].id + ' #bundlePrice').text());
-       
+
     };
 </script>
