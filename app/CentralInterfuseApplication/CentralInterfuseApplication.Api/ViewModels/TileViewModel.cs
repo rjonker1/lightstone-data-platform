@@ -1,4 +1,6 @@
-﻿namespace CentralInterfuseApplication.Api.ViewModels
+﻿using System.Configuration;
+
+namespace CentralInterfuseApplication.Api.ViewModels
 {
     public class SystemViewModel
     {
@@ -10,7 +12,7 @@
 
         public SystemViewModel(string url, string name, string description, string icon, string colour)
         {
-            Url = url;
+            Url = ConfigurationManager.AppSettings[url];
             Name = name;
             Description = description;
             Icon = icon;
