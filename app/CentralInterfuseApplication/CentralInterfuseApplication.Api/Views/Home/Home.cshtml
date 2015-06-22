@@ -1,15 +1,16 @@
-﻿@using CentralInterfuseApplication.Api.ViewModels
+﻿@using System.Configuration
+@using CentralInterfuseApplication.Api.ViewModels
 @{
     //Layout = "Shared/_Layout.cshtml";
 }
 
 @*<div class="row">*@
-    @Html.Partial("Shared/Tile", new SystemViewModel("http://dev.usermanagement.api.lightstone.co.za/", "User Management", "", "fa fa-user", "blue"))
-    @Html.Partial("Shared/Tile", new SystemViewModel("http://dev.packagebuilder.web.lightstone.co.za/", "Package Builder", "", "fa fa-gift", "purple"))
-    @Html.Partial("Shared/Tile", new SystemViewModel("http://dev.billing.api.lightstone.co.za/", "Billing", "", "fa fa-dollar", "green"))
-    @Html.Partial("Shared/Tile", new SystemViewModel("http://dev.lightstone.packagebuilder.api/", "Reporting", "", "fa fa-bar-chart-o", "red"))
-    @Html.Partial("Shared/Tile", new SystemViewModel("http://dev.monitoring.web.lightstone.co.za/", "Monitoring", "", "fa fa-heartbeat", "yellow"))
-    @Html.Partial("Shared/Tile", new SystemViewModel("http://dev.lim.web.lightstone.co.za/", "LIM", "", "fa fa-paper-plane", "blue"))
+    @Html.Partial("Shared/Tile", new SystemViewModel(ConfigurationManager.AppSettings["userManagementApi/config/baseUrl"], "User Management", "", "fa fa-user", "blue"))
+    @Html.Partial("Shared/Tile", new SystemViewModel(ConfigurationManager.AppSettings["pbApi/config/baseUrl"], "Package Builder", "", "fa fa-gift", "purple"))
+    @Html.Partial("Shared/Tile", new SystemViewModel(ConfigurationManager.AppSettings["billing/config/baseUrl"], "Billing", "", "fa fa-dollar", "green"))
+    @*@Html.Partial("Shared/Tile", new SystemViewModel("http://dev.lightstone.packagebuilder.api/", "Reporting", "", "fa fa-bar-chart-o", "red"))*@
+    @Html.Partial("Shared/Tile", new SystemViewModel(ConfigurationManager.AppSettings["monitoring/config/baseUrl"], "Monitoring", "", "fa fa-heartbeat", "yellow"))
+    @Html.Partial("Shared/Tile", new SystemViewModel(ConfigurationManager.AppSettings["limweb/config/baseUrl"], "LIM", "", "fa fa-paper-plane", "blue"))
 @*</div>*@
 
 
