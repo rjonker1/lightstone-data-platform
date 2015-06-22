@@ -14,7 +14,6 @@ namespace UserManagement.Domain.Dtos
             CustomerIds = Enumerable.Empty<Guid>();
             ClientIds = Enumerable.Empty<Guid>();
             Customers = Enumerable.Empty<NamedEntityDto>();
-            Clients = Enumerable.Empty<NamedEntityDto>();
         }
 
         public virtual Guid Id { get; set; }
@@ -47,7 +46,7 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<Guid> CustomerIds { get; set; }
         public IEnumerable<NamedEntityDto> Customers { get; set; }
         public IEnumerable<Guid> ClientIds { get; set; }
-        public IEnumerable<NamedEntityDto> Clients { get; set; }
+        public IEnumerable<string> Clients { get; set; }
         //public IEnumerable<ClientUserDto> ClientUsers { get; set; }
     }
 }

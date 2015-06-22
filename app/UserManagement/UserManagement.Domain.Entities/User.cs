@@ -36,6 +36,14 @@ namespace UserManagement.Domain.Entities
             {
                 CustomerUsers = new HashSet<CustomerUser>(value.Select(x => new CustomerUser(x, this, false)).ToList());
             }
+        }
+        [DoNotMap]
+        public virtual IEnumerable<Client> Clients
+        {
+            get
+            {
+                return Customers.SelectMany(x => x.Clients);
+            }
         } 
         public virtual ISet<ClientUserAlias> ClientUserAliases { get; protected internal set; }
 

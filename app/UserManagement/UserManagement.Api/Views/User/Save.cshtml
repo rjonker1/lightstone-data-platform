@@ -205,50 +205,16 @@
                 </div>
 
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
 
                 <label class="control-label col-lg-4">Clients</label>
-                <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Client).AssemblyQualifiedName">
-                    <select id="ClientIds" name="ClientIds" data-placeholder="Type to search & add clients" multiple class="chosen-select">
-                        @foreach (NamedEntityDto item in Model.Clients)
-                        {
-                            var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
-                            <option selected="@isSelected" value="@item.Id">@item.Name</option>
-                        }
-                    </select>
+                <div id="roles" class="input-group col-lg-2">
+                    <textarea readonly="readonly">@string.Join(", ", Model.Clients)</textarea>
                 </div>
                 <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.ClientIds)
                 </div>
 
-            </div>*@
-            @*<div class="form-group">
-
-                <label class="control-label col-lg-4">Clients</label>
-                <div class="input-group col-lg-2 auto-list-complete user-alias" data-type="@typeof(Client).AssemblyQualifiedName">
-                    <input id="ClientIds" class="form-control" type="text" placeholder="Type to search & add clients" />
-                    <div class="list-group">
-                        @foreach (var cu in Model.ClientUsers)
-                        {
-                            <div class="list-group-item">
-                                <div class="pull-left">
-                                    <a class="btn btn-danger btn-xs close-box">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
-                                <input type="hidden" id="@cu.ClientId" name="ClientId[@count]" value="@cu.ClientId" />
-                                <label>@cu.ClientName</label>
-                                <input type="text" class="form-control" name="UserAlias[@count]" value="@cu.UserAlias" placeholder="User alias" />
-                            </div>
-                            count++;
-                        }
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.ClientUsers)
-                </div>
-
-            </div>*@
+            </div>
         </div>
         @Html.Partial("Shared/BoxFooter")
     </form>
