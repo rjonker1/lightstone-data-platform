@@ -137,11 +137,9 @@ namespace UserManagement.Api
 
         private static void AddLookupData(IPipelines pipelines, IRetrieveEntitiesByType entityRetriever)
         {
-            pipelines.AddLookupDataToViewBag<PaymentType>(entityRetriever);
             pipelines.AddLookupDataToViewBag<CommercialState>(entityRetriever);
             pipelines.AddLookupDataToViewBag<ContractType>(entityRetriever);
-            pipelines.AddLookupDataToViewBag<EscalationType>(entityRetriever);
-            pipelines.AddLookupDataToViewBag<ContractDuration>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<Country>(entityRetriever);
             pipelines.AddLookupDataToViewBag<Province>(entityRetriever);
             pipelines.AddLookupDataToViewBag<Role>(entityRetriever);
         }

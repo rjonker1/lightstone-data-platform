@@ -4,9 +4,9 @@ namespace UserManagement.Domain.Entities.BusinessRules.Lookups.ContractDurations
 {
     public class DeleteContractDurationRule : DomainCommand
     {
-        public ContractDuration Entity;
+        public Country Entity;
 
-        public DeleteContractDurationRule(ContractDuration entity)
+        public DeleteContractDurationRule(Country entity)
         {
             Entity = entity;
         }

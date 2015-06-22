@@ -6,6 +6,7 @@ using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities.Commands.Contracts;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.CommandHandlers.Contracts
 {
@@ -32,7 +33,7 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
 
         private static Contract FakeContract(Guid contractId)
         {
-            return new Contract(DateTime.Now, "VVI Product", null, null, null, null, null, null, null, null, contractId)
+            return new Contract(DateTime.Now, "VVI Product", null, null, null, null, null, null, EscalationType.AnnualPercentageAllProducts, null, contractId)
             {
                 Id = contractId,
                 Packages = new HashSet<Package>()

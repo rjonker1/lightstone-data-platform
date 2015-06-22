@@ -56,7 +56,10 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
             };
 
-            Get["/Customers/Add"] = parameters => View["Save", new CustomerDto()];
+            Get["/Customers/Add"] = parameters =>
+            {
+                return View["Save", new CustomerDto()];
+            };
 
             Post["/Customers"] = _ =>
             {

@@ -20,7 +20,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ContactDetails
                         Line2 = s.ContactDetailPhysicalAddressLine2,
                         Suburb = s.ContactDetailPhysicalAddressSuburb,
                         City = s.ContactDetailPhysicalAddressCity,
-                        Country = s.ContactDetailPhysicalAddressCountry,
+                        CountryId = s.ContactDetailPhysicalAddressCountryId,
                         PostalCode = s.ContactDetailPhysicalAddressPostalCode,
                         ProvinceId = s.ContactDetailPhysicalAddressProvinceId
                     };
@@ -32,7 +32,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ContactDetails
                         Line2 = s.ContactDetailPostalAddressLine2,
                         Suburb = s.ContactDetailPostalAddressSuburb,
                         City = s.ContactDetailPostalAddressCity,
-                        Country = s.ContactDetailPostalAddressCountry,
+                        CountryId = s.ContactDetailPostalAddressCountryId,
                         PostalCode = s.ContactDetailPostalAddressPostalCode,
                         ProvinceId = s.ContactDetailPostalAddressProvinceId
                     };
@@ -56,7 +56,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ContactDetails
                         Line2 = s.ContactDetailPhysicalAddressLine2,
                         Suburb = s.ContactDetailPhysicalAddressSuburb,
                         City = s.ContactDetailPhysicalAddressCity,
-                        Country = s.ContactDetailPhysicalAddressCountry,
+                        CountryId = s.ContactDetailPhysicalAddressCountryId,
                         PostalCode = s.ContactDetailPhysicalAddressPostalCode,
                         ProvinceId = s.ContactDetailPhysicalAddressProvinceId
                     };
@@ -68,7 +68,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ContactDetails
                         Line2 = s.ContactDetailPostalAddressLine2,
                         Suburb = s.ContactDetailPostalAddressSuburb,
                         City = s.ContactDetailPostalAddressCity,
-                        Country = s.ContactDetailPostalAddressCountry,
+                        CountryId = s.ContactDetailPostalAddressCountryId,
                         PostalCode = s.ContactDetailPostalAddressPostalCode,
                         ProvinceId = s.ContactDetailPostalAddressProvinceId
                     };

@@ -2,11 +2,11 @@
 
 namespace UserManagement.Domain.Entities
 {
-    public class ContractDuration : ValueEntity
+    public class Country : ValueEntity
     {
-        protected ContractDuration() { }
+        protected Country() { }
 
-        public ContractDuration(string val) : base(val)
+        public Country(string val) : base(val)
         {
             Value = val;
         }

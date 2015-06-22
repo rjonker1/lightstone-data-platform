@@ -13,28 +13,22 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
             Mapper.CreateMap<ValueEntity, ValueEntityDto>()
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName))
-                .Include<PaymentType, ValueEntityDto>()
                 .Include<CommercialState, ValueEntityDto>()
                 .Include<ContractType, ValueEntityDto>()
-                .Include<EscalationType, ValueEntityDto>()
-                .Include<ContractDuration, ValueEntityDto>()
+                .Include<Country, ValueEntityDto>()
                 .Include<Province, ValueEntityDto>()
                 .Include<Role, ValueEntityDto>();
 
             Mapper.CreateMap<ValueEntityDto, ValueEntity>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .Include<ValueEntityDto, PaymentType>()
                 .Include<ValueEntityDto, CommercialState>()
                 .Include<ValueEntityDto, ContractType>()
-                .Include<ValueEntityDto, EscalationType>()
-                .Include<ValueEntityDto, ContractDuration>()
+                .Include<ValueEntityDto, Country>()
                 .Include<ValueEntityDto, Province>()
                 .Include<ValueEntityDto, Role>();
-            Mapper.CreateMap<ValueEntityDto, PaymentType>();
             Mapper.CreateMap<ValueEntityDto, CommercialState>();
             Mapper.CreateMap<ValueEntityDto, ContractType>();
-            Mapper.CreateMap<ValueEntityDto, EscalationType>();
-            Mapper.CreateMap<ValueEntityDto, ContractDuration>();
+            Mapper.CreateMap<ValueEntityDto, Country>();
             Mapper.CreateMap<ValueEntityDto, Province>();
             Mapper.CreateMap<ValueEntityDto, Role>();
         }

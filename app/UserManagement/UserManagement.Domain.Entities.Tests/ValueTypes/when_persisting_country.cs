@@ -6,7 +6,7 @@ using Xunit.Extensions;
 
 namespace UserManagement.Domain.Entities.Tests.ValueTypes
 {
-    public class when_persisting_contract_duration : when_persisting_entities_to_db
+    public class when_persisting_country : when_persisting_entities_to_db
     {
         public override void Observe()
         {
@@ -16,7 +16,7 @@ namespace UserManagement.Domain.Entities.Tests.ValueTypes
         [Observation]
         public void should_persist()
         {
-            new PersistenceSpecification<ContractDuration>(Session, new CustomEqualityComparer())
+            new PersistenceSpecification<Country>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.Value, "test")
                 .VerifyTheMappings();

@@ -9,7 +9,7 @@
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Physical Address", "", "glyphicon glyphicon-home", Model))
     <div class="box-body">
         @Html.HiddenFor(x => x.ContactDetailPhysicalAddressId)
-        @Html.HiddenFor(x => x.ContactDetailPhysicalAddressType, new {value = AddressType.Physical})
+        @Html.HiddenFor(x => x.ContactDetailPhysicalAddressType, new { value = AddressType.Physical })
         <div class="form-group">
 
             <label class="control-label col-lg-4">Line1</label>
@@ -58,12 +58,15 @@
 
             <label class="control-label col-lg-4">Country</label>
             <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-globe" id="basic-addon1"></span>
-                <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressCountry, new { @class = "form-control", placeholder = "" })
-                </div>
+                <select name="ContactDetailPhysicalAddressCountryId" data-placeholder="Select country" class="chosen-select">
+                    <option value=""></option>
+                    @foreach (var item in ViewBag.Countrys.Value)
+                    {
+                        var isSelected = item.Value == Model.ContactDetailPhysicalAddressCountryId.ToString();
+                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                    }
+                </select>
             </div>
-
         </div>
         <div class="form-group">
 
@@ -82,7 +85,7 @@
             <div class="input-group col-lg-2">
                 <select name="ContactDetailPhysicalAddressProvinceId" data-placeholder="Select province" class="chosen-select">
                     <option value=""></option>
-                    @foreach (SelectListItem item in ViewBag.Provinces.Value)
+                    @foreach (var item in ViewBag.Provinces.Value)
                     {
                         var isSelected = item.Value == Model.ContactDetailPhysicalAddressProvinceId.ToString();
                         <option selected="@isSelected" value="@item.Value">@item.Text</option>

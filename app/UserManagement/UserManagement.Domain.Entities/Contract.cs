@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {
@@ -16,7 +17,7 @@ namespace UserManagement.Domain.Entities
         public virtual string RegistrationNumber { get; set; }
         public virtual ContractType ContractType { get; set; }
         public virtual EscalationType EscalationType { get; set; }
-        public virtual ContractDuration ContractDuration { get; set; }
+        public virtual Country Country { get; set; }
         public virtual ISet<Client> Clients { get; set; }
         public virtual ISet<Customer> Customers { get; set; }
         [DoNotMap]
@@ -44,7 +45,7 @@ namespace UserManagement.Domain.Entities
 
         protected Contract() { }
 
-        public Contract(DateTime commencementDate, string name, string description, string enteredIntoBy, DateTime? onlineAcceptance, string registeredName, string registrationNumber, ContractType contractType, EscalationType escalationType, ContractDuration contractDuration, Guid id = new Guid()) 
+        public Contract(DateTime commencementDate, string name, string description, string enteredIntoBy, DateTime? onlineAcceptance, string registeredName, string registrationNumber, ContractType contractType, EscalationType escalationType, Country country, Guid id = new Guid()) 
             : base(name)
         {
             CommencementDate = commencementDate;
@@ -56,7 +57,7 @@ namespace UserManagement.Domain.Entities
             RegistrationNumber = registrationNumber;
             ContractType = contractType;
             EscalationType = escalationType;
-            ContractDuration = contractDuration;
+            Country = country;
         }
     }
 }

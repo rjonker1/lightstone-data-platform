@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using UserManagement.Domain.Enums;
 using UserManagement.TestHelper.BaseTests;
 using UserManagement.TestHelper.Helpers;
 using Xunit.Extensions;
@@ -26,8 +27,8 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.RegisteredName, "RegisteredName")
                 .CheckProperty(c => c.RegistrationNumber, "RegistrationNumber")
                 .CheckReference(c => c.ContractType, new ContractType("ContractType"))
-                .CheckReference(c => c.EscalationType, new EscalationType("EscalationType"))
-                .CheckReference(c => c.ContractDuration, new ContractDuration("ContractDuration"))
+                .CheckReference(c => c.EscalationType, EscalationType.AnnualPercentageAllProducts)
+                .CheckReference(c => c.Country, new Country("ContractDuration"))
                 .CheckComponentList(c => c.Clients, new HashSet<Client> { new Client() })
                 .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer("Name") })
                 .CheckComponentList(c => c.Packages, new HashSet<Package> { new Package("Name", Guid.NewGuid()) })

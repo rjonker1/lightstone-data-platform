@@ -1,6 +1,8 @@
 ﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using System
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Enums
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
 <div class="box">
@@ -39,17 +41,17 @@
 
             <label class="control-label col-lg-4"><span class="required-field">*</span> Payment Type</label>
             <div class="input-group col-lg-2">
-                <select id="paymentTypeSelect" name="BillingPaymentTypeId" data-placeholder="Select payment type" class="chosen-select">
+                <select id="paymentTypeSelect" name="BillingPaymentType" data-placeholder="Select payment type" class="chosen-select">
                     <option value=""></option>
-                    @foreach (SelectListItem item in ViewBag.PaymentTypes.Value)
+                    @foreach (var item in Enum.GetValues(typeof(PaymentType)))
                     {
-                        var isSelected = item.Value == Model.BillingPaymentTypeId.ToString();
-                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                        var isSelected = item.ToString() == Model.BillingPaymentType.ToString();
+                        <option selected="@isSelected" value="@item">@item</option>
                     }
                 </select>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.BillingPaymentTypeId)
+                @Html.ValidationMessageFor(x => x.BillingPaymentType)
             </div>
 
         </div>

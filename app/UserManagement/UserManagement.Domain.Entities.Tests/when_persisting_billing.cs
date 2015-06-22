@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentNHibernate.Testing;
+using UserManagement.Domain.Enums;
 using UserManagement.TestHelper.BaseTests;
 using UserManagement.TestHelper.Helpers;
 using Xunit.Extensions;
@@ -24,7 +25,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.DebitOrderDate, DateTime.Now.Date)
                 .CheckProperty(c => c.PastelId, "PastelId")
                 .CheckProperty(c => c.VatNumber, "VatNumber")
-                .CheckReference(c => c.PaymentType, new PaymentType("PaymentType"))
+                .CheckReference(c => c.PaymentType, PaymentType.Eft)
                 .VerifyTheMappings();
         }
     }
