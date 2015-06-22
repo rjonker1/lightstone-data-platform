@@ -153,6 +153,26 @@
       <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="connectionStrings.Debug.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="connectionStrings.Prod.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="connectionStrings.Release.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="connectionStrings.TeamCity.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="connectionStrings.Test.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="Installers\MappingInstaller.cs.delete" />
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
@@ -168,6 +188,7 @@
     <None Include="connectionStrings.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
+      <TransformOnBuild>true</TransformOnBuild>
     </None>
     <None Include="Deploy\build.ps1" />
     <None Include="Deploy\deploy.ps1" />
