@@ -5,10 +5,8 @@ using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
-using UserManagement.Domain.Entities.Commands.CreateSources;
 using UserManagement.Domain.Entities.Commands.EscalationTypes;
 using UserManagement.Domain.Entities.Commands.PaymentTypes;
-using UserManagement.Domain.Entities.Commands.PlatformStatuses;
 using UserManagement.Domain.Entities.Commands.Provinces;
 using UserManagement.Domain.Entities.Commands.Roles;
 using UserManagement.Domain.Entities.DataImports;
@@ -44,8 +42,6 @@ namespace UserManagement.Domain.CommandHandlers.DataImports
             _bus.Publish(new ImportEscalationType());
             _bus.Publish(new ImportContractType());
             _bus.Publish(new ImportCommercialState());
-            _bus.Publish(new ImportCreateSource());
-            _bus.Publish(new ImportPlatformStatus());
             _bus.Publish(new ImportPaymentType());
             this.Info(() => "Successfully imported required data");
         }

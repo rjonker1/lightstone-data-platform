@@ -103,10 +103,8 @@
     <Compile Include="BusinessRules\Lookups\CommercialStates\DeleteCommercialStateRule.cs" />
     <Compile Include="BusinessRules\Lookups\ContractDurations\DeleteContractDurationRule.cs" />
     <Compile Include="BusinessRules\Lookups\ContractTypes\DeleteContractTypeRule.cs" />
-    <Compile Include="BusinessRules\Lookups\CreateSources\DeleteCreateSourceRule.cs" />
     <Compile Include="BusinessRules\Lookups\EscalationTypes\DeleteEscalationTypeRule.cs" />
     <Compile Include="BusinessRules\Lookups\PaymentTypes\DeletePaymentTypeRule.cs" />
-    <Compile Include="BusinessRules\Lookups\PlatformStatuses\DeletePlatformStatusRule.cs" />
     <Compile Include="BusinessRules\Lookups\Provinces\DeleteProvinceRule.cs" />
     <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRule.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
@@ -119,13 +117,11 @@
     <Compile Include="Commands\ContractDurations\ImportContractDuration.cs" />
     <Compile Include="Commands\Contracts\GetPackageOnContract.cs" />
     <Compile Include="Commands\ContractTypes\ImportContractType.cs" />
-    <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
     <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
     <Compile Include="Commands\Entities\DeleteLookupEntity.cs" />
     <Compile Include="Commands\Entities\SoftDeleteEntity.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
     <Compile Include="Commands\PaymentTypes\ImportPaymentType.cs" />
-    <Compile Include="Commands\PlatformStatuses\ImportPlatformStatus.cs" />
     <Compile Include="Commands\Provinces\ImportProvince.cs" />
     <Compile Include="Commands\Roles\ImportRole.cs" />
     <Compile Include="Commands\UserAliases\LinkUserAliasCommand.cs" />
@@ -148,7 +144,6 @@
     <Compile Include="Contract.cs" />
     <Compile Include="ContractDuration.cs" />
     <Compile Include="ContractType.cs" />
-    <Compile Include="CreateSource.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="EscalationType.cs" />
     <Compile Include="IClient.cs" />
@@ -158,7 +153,6 @@
     <Compile Include="IUserRole.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PaymentType.cs" />
-    <Compile Include="PlatformStatus.cs" />
     <Compile Include="ContactDetail.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="Role.cs" />
@@ -182,17 +176,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\Addresses\" />
-    <Folder Include="Commands\Billings\" />
-    <Folder Include="Commands\Clients\" />
-    <Folder Include="Commands\CustomerProfiles\" />
-    <Folder Include="Commands\Customers\" />
-    <Folder Include="Commands\Packages\" />
-    <Folder Include="Commands\ProfileDetails\" />
-    <Folder Include="Commands\UserProfiles\" />
-    <Folder Include="Commands\Users\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="NHibernate\Interceptors\QueryAuditLog.sql" />
   </ItemGroup>

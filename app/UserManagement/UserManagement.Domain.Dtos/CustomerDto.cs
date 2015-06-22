@@ -80,7 +80,7 @@ namespace UserManagement.Domain.Dtos
         public AddressDto PhysicalAddressDto { get; set; }
         // Work around for AutoMapper to map address as Nancy does not support nested Model binding when using url encoded form posts
         public AddressDto PostalAddressDto { get; set; }
-        public CreateSourceType CreateSourceType { get; set; }
+        public CreateSourceType CreateSource { get; set; }
         public bool? IsActive { get; set; }
         public bool IsLocked { get; set; }
         public DateTime? TrialExpiration { get; set; }

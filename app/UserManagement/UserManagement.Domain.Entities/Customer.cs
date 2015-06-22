@@ -10,7 +10,7 @@ using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {
-    public class Customer : NamedEntity//, IIndustry
+    public class Customer : NamedEntity
     {
         public virtual User AccountOwner { get; set; }
         public virtual string Notes { get; protected internal set; }
@@ -26,20 +26,24 @@ namespace UserManagement.Domain.Entities
 
         public virtual Billing Billing { get; protected internal set; }
         public virtual CommercialState CommercialState { get; protected internal set; }
-        [DoNotMap] // Calculated read only property, if needed for MI reporting a specific query should be created
-        public virtual PlatformStatus PlatformStatus
+        private PlatformStatusType _platformStatus;
+        public virtual PlatformStatusType PlatformStatus
         {
             get
             {
                 var activated = Contracts != null && (Contracts.Any() && Contracts.SelectMany(x => x.Packages).Any());
-                var platformStatusType = activated ? PlatformStatusType.Activated : PlatformStatusType.Incomplete;
-                if (IsLocked) platformStatusType = PlatformStatusType.Locked;
-                return ServiceLocator.Current.GetInstance<IRepository<PlatformStatus>>().FirstOrDefault(x => x.PlatformStatusType == platformStatusType);
+                _platformStatus = activated ? PlatformStatusType.Activated : PlatformStatusType.Incomplete;
+                if (IsLocked) _platformStatus = PlatformStatusType.Locked;
+                return _platformStatus;
+            }
+            set
+            {
+                _platformStatus = value;
             }
         }
 
         public virtual ContactDetail ContactDetail { get; protected internal set; }
-        public virtual CreateSource CreateSource { get; set; }
+        public virtual CreateSourceType CreateSource { get; set; }
         public virtual ISet<CustomerUser> CustomerUsers { get; protected internal set; }
         [DoNotMap]
         public virtual IEnumerable<User> Users

@@ -21,7 +21,7 @@ namespace UserManagement.Api.Modules
 {
     public class CustomerModule : SecureModule
     {
-        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<User> userRepository, IRepository<CreateSource> createSources)
+        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<User> userRepository)
         {
             Get["/Customers"] = _ =>
             {
@@ -70,7 +70,7 @@ namespace UserManagement.Api.Modules
                 {
                     var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, new Customer(dto.Name));
-                    entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
+                    entity.CreateSource = CreateSourceType.UserManagement;
                     entity.AccountOwner = user;
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
