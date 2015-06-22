@@ -8,17 +8,17 @@ namespace UserManagement.Domain.Entities
 {
     public class Contract : NamedEntity
     {
-        public virtual DateTime CommencementDate { get; set; }
-        public virtual string Description { get; set; }
-        public virtual string EnteredIntoBy { get; set; }
-        public virtual DateTime? OnlineAcceptance { get; set; }
-        public virtual string RegisteredName { get; set; }
-        public virtual string RegistrationNumber { get; set; }
-        public virtual ContractType ContractType { get; set; }
-        public virtual EscalationType EscalationType { get; set; }
-        public virtual ContractDuration ContractDuration { get; set; }
-        public virtual ISet<Client> Clients { get; set; }
-        public virtual ISet<Customer> Customers { get; set; }
+        public virtual DateTime CommencementDate { get; protected internal set; }
+        public virtual string Description { get; protected internal set; }
+        public virtual string EnteredIntoBy { get; protected internal set; }
+        public virtual DateTime? OnlineAcceptance { get; protected internal set; }
+        public virtual string RegisteredName { get; protected internal set; }
+        public virtual string RegistrationNumber { get; protected internal set; }
+        public virtual ContractType ContractType { get; protected internal set; }
+        public virtual EscalationType EscalationType { get; protected internal set; }
+        public virtual ContractDuration ContractDuration { get; protected internal set; }
+        public virtual ISet<Client> Clients { get; protected internal set; }
+        public virtual ISet<Customer> Customers { get; protected internal set; }
         [DoNotMap]
         public virtual bool HasPackage {
             get
@@ -26,8 +26,8 @@ namespace UserManagement.Domain.Entities
                 return Packages.Any();
             } 
         }
-        public virtual bool HasPackagePriceOverride { get; set; }
-        //public virtual ContractBundle ContractBundle { get; set; }
+        public virtual bool HasPackagePriceOverride { get; protected internal set; }
+        public virtual ContractBundle ContractBundle { get; protected internal set; }
 
         public virtual bool IsActive { get; set; }
         //public virtual ISet<ContractPackage> ContractPackages { get; set; }
@@ -40,7 +40,7 @@ namespace UserManagement.Domain.Entities
         //            : Enumerable.Empty<Guid>();
         //    }
         //}
-        public virtual ISet<Package> Packages { get; set; }
+        public virtual ISet<Package> Packages { get; protected internal set; }
 
         protected Contract() { }
 

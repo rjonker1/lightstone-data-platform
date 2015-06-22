@@ -20,11 +20,12 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Clients
                 .ForMember(dest => dest.Industries, opt => opt.MapFrom(x => x.Industries.Select(cind => cind.IndustryId)))
                 .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)))
                 .ForMember(dest => dest.Users, opt => opt.Ignore());
-                //.ForMember(dest => dest.UserAliases, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<Entity>, IEnumerable<EntityDto>>(x.UserAliases)));
+            //.ForMember(dest => dest.UserAliases, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<Entity>, IEnumerable<EntityDto>>(x.UserAliases)));
 
             Mapper.CreateMap<ClientDto, Client>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .ForMember(dest => dest.Industries, opt => opt.MapFrom(c => c.Industries != null 
+                .ForMember(dest => dest.Created, opt => opt.UseDestinationValue())
+                .ForMember(dest => dest.Industries, opt => opt.MapFrom(c => c.Industries != null
                     ? new HashSet<ClientIndustry>(c.Industries.Select(id => new ClientIndustry(ServiceLocator.Current.GetInstance<IRepository<Client>>().Get(c.Id), id)))
                     : Enumerable.Empty<ClientIndustry>()))
                 .ForMember(dest => dest.CommercialState, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<CommercialState>>().Get(x.CommercialStateId)))
@@ -35,11 +36,15 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Clients
                 .ForMember(dest => dest.Customers, opt => opt.MapFrom(x =>
                     x.CustomerIds != null
                         ? new HashSet<Customer>(x.CustomerIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Customer>>().Get(id)))
-                        : Enumerable.Empty<Customer>()));
-                //.ForMember(dest => dest.UserAliases, opt => opt.MapFrom(x =>
-                //    x.UserIds != null
-                //        ? new HashSet<UserAlias>(x.UserIds.Select(id => ServiceLocator.Current.GetInstance<IRepository<UserAlias>>().Get(id)))
-                //        : Enumerable.Empty<UserAlias>()));
+                        : Enumerable.Empty<Customer>()))
+                .AfterMap((src, dest) =>
+                {
+                    dest.Created = dest.Created ?? DateTime.UtcNow;
+                });
+            //.ForMember(dest => dest.UserAliases, opt => opt.MapFrom(x =>
+            //    x.UserIds != null
+            //        ? new HashSet<UserAlias>(x.UserIds.Select(id => ServiceLocator.Current.GetInstance<IRepository<UserAlias>>().Get(id)))
+            //        : Enumerable.Empty<UserAlias>()));
             //.ForMember(dest => dest.ClientUsers, opt => opt.Ignore());
         }
     }
