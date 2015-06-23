@@ -1,4 +1,5 @@
 ﻿using MemBus;
+using UserManagement.Domain.Core.Helpers;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
@@ -17,15 +18,15 @@ namespace UserManagement.Domain.CommandHandlers.Provinces
 
         public override void Handle(ImportProvince command)
         {
-            _bus.Publish(new CreateUpdateEntity(new Province("Eastern Cape"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new Province("Free State"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new Province("Gauteng"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new Province("KwaZulu-Natal"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new Province("Limpopo"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new Province("Mpumalanga"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new Province("North West"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new Province("Northern Cape"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new Province("Western Cape"), "Create"));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("Eastern Cape"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("Free State"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("Gauteng"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("KwaZulu-Natal"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("Limpopo"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("Mpumalanga"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("North West"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("Northern Cape"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Province("Western Cape"), "Create")));
         }
     }
 }

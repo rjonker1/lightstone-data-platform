@@ -115,23 +115,33 @@
         </div>
 
     </div>
-    @*<div class="form-group">
+    <div class="form-group">
 
-        <label class="control-label col-lg-4">Users</label>
-        <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(User).AssemblyQualifiedName">
-            <select id="UserIds" name="UserIds" data-placeholder="Type to search & add users" multiple class="chosen-select">
-                @foreach (EntityDto item in Model.Users)
+        <label class="control-label col-lg-4">Contracts</label>
+        <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Contract).AssemblyQualifiedName">
+            <select id="ContractIds" name="ContractIds" data-placeholder="Type to search & add contracts" multiple class="chosen-select">
+                @foreach (var item in Model.Contracts)
                 {
-                    var isSelected = Model.Users != null && Model.Users.Select(x => x.Id).Contains(item.Id);
-                    <option selected="@isSelected" value="@item.Id">@item.Name</option>
+                    var isSelected = Model.Contracts != null && Model.Contracts.Select(x => x.Id).Contains(item.Id);
+                    <option id="@item.Id" selected="@isSelected" value="@item.Id">@item.Name</option>
                 }
             </select>
         </div>
         <div class="col-lg-6">
-            @Html.ValidationMessageFor(x => x.UserIds)
+            @Html.ValidationMessageFor(x => x.ContractIds)
         </div>
 
-    </div>*@
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Users</label>
+        <div id="roles" class="input-group col-lg-2">
+            <textarea readonly="readonly">@string.Join(", ", Model.Users)</textarea>
+        </div>
+        <div class="col-lg-6">
+        </div>
+
+    </div>
     @Html.Partial("Shared/BoxFooter")
 </div>
 
