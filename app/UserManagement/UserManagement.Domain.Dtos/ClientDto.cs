@@ -80,13 +80,16 @@ namespace UserManagement.Domain.Dtos
         public DateTime? TrialExpiration { get; set; }
         public IEnumerable<Guid> CustomerIds { get; set; }
         public IEnumerable<NamedEntityDto> Customers { get; set; }
-        public IEnumerable<UserDto> Users { get; set; }
+        public IEnumerable<string> Users { get; set; }
         public IEnumerable<UserAliasDto> UserAliases { get; set; }
+        public IEnumerable<Guid> ContractIds { get; set; }
+        public IEnumerable<NamedEntityDto> Contracts { get; set; }
 
         public ClientDto()
         {
             Customers = Enumerable.Empty<NamedEntityDto>();
-            UserAliases = Enumerable.Empty<UserAliasDto>(); 
+            Contracts = Enumerable.Empty<NamedEntityDto>(); 
+            UserAliases = Enumerable.Empty<UserAliasDto>();
         }
     }
 }

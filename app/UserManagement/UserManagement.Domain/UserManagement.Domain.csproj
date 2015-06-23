@@ -96,38 +96,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessRules\Clients\CreateClientRuleHandler.cs" />
-    <Compile Include="BusinessRules\Clients\SoftDeleteClientRuleHandler.cs" />
-    <Compile Include="BusinessRules\Clients\UpdateClientRuleHandler.cs" />
-    <Compile Include="BusinessRules\Contracts\CreateContractRuleHandler.cs" />
+    <Compile Include="BusinessRules\Contracts\ContractRuleHandler.cs" />
     <Compile Include="BusinessRules\Contracts\SoftDeleteContractRuleHandler.cs" />
-    <Compile Include="BusinessRules\Customers\CreateCustomerRuleHandler.cs" />
+    <Compile Include="BusinessRules\Clients\ClientRuleHandler.cs" />
+    <Compile Include="BusinessRules\Customers\CustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\SoftDeleteCustomerRuleHandler.cs" />
-    <Compile Include="BusinessRules\Customers\UpdateCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\CommercialStates\DeleteCommercialStateRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\ContractTypes\DeleteContractTypeRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\Provinces\DeleteProvinceRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRuleHandler.cs" />
-    <Compile Include="BusinessRules\Packages\CreatePackageRuleHandler.cs" />
-    <Compile Include="BusinessRules\Roles\CreateRoleRuleHandler.cs" />
-    <Compile Include="BusinessRules\Users\CreateUserRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRuleHandler.cs" />
     <Compile Include="CommandHandlers\AuditLogs\CreateAuditLogHandler.cs" />
     <Compile Include="CommandHandlers\CommercialStates\ImportCommercialStateHandler.cs" />
-    <Compile Include="CommandHandlers\ContractDurations\ImportCountryHandler.cs" />
+    <Compile Include="CommandHandlers\Countries\ImportCountryHandler.cs" />
     <Compile Include="CommandHandlers\Contracts\GetContractPackageHandler.cs" />
     <Compile Include="CommandHandlers\Contracts\ImportContractBundleHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\ImportContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\DataImports\ImportStartupDataHandler.cs" />
     <Compile Include="CommandHandlers\Entities\CreateUpdateEntityHandler.cs" />
     <Compile Include="CommandHandlers\Entities\DeleteLookupEntityHandler.cs" />
-    <Compile Include="CommandHandlers\Entities\NamedEntityRuleHandler.cs" />
+    <Compile Include="BusinessRules\NamedEntities\NamedEntityRuleHandler.cs" />
     <Compile Include="CommandHandlers\Entities\SoftDeleteEntityHandler.cs" />
-    <Compile Include="CommandHandlers\Entities\ValueEntityRuleHandler.cs" />
+    <Compile Include="BusinessRules\ValueEntities\ValueEntityRuleHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Roles\ImportRoleHandler.cs" />
     <Compile Include="CommandHandlers\UserAliases\LinkUserAliasCommandHandler.cs" />
-    <Compile Include="CommandHandlers\ValueEntities\CreateValueEntityHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

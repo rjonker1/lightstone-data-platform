@@ -5,7 +5,7 @@ using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 
-namespace UserManagement.Domain.CommandHandlers.Entities
+namespace UserManagement.Domain.BusinessRules.ValueEntities
 {
     public class ValueEntityRuleHandler : AbstractMessageHandler<ValueEntityDto>
     {
@@ -19,7 +19,7 @@ namespace UserManagement.Domain.CommandHandlers.Entities
         public override void Handle(ValueEntityDto valueEntity)
         {
             if (_repository.Exists(valueEntity.Id, valueEntity.Value))
-                throw new LightstoneAutoException("{0} already exists".FormatWith(valueEntity));
+                throw new LightstoneAutoException("{0} already exists".FormatWith(valueEntity.Value));
         }
     }
 }
