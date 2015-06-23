@@ -99,6 +99,7 @@
     <Compile Include="Entities\NamedEntity.cs" />
     <Compile Include="Entities\ValueEntity.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\WindsorExtensions.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="NHibernate\Attributes\UniqueAttribute.cs" />

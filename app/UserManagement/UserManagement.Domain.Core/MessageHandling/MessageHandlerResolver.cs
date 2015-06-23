@@ -1,4 +1,5 @@
 ﻿using Castle.Windsor;
+using UserManagement.Domain.Core.Helpers;
 
 namespace UserManagement.Domain.Core.MessageHandling
 {
@@ -22,7 +23,8 @@ namespace UserManagement.Domain.Core.MessageHandling
             if( message == null) return;
             var type = message.GetType();
             var executorType = typeof(IHandleMessages<>).MakeGenericType(type);
-            var executor = (IHandleMessages)_container.Resolve(executorType);
+            var executor = (IHandleMessages)_container.TryResolve(executorType);
+            if (executor == null) return;
             executor.Handle(message);
         }
     }

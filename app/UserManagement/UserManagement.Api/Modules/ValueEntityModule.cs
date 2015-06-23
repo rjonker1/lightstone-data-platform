@@ -46,9 +46,14 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ValueEntityDto>();
                 dto.CreatedBy = Context.CurrentUser.UserName;
 
-                var entity = (ValueEntity)Mapper.Map(dto, null, typeof(ValueEntityDto), Type.GetType(dto.AssemblyQualifiedName));
+                if (ModelValidationResult.IsValid)
+                {
+                    var entity =
+                        (ValueEntity)
+                            Mapper.Map(dto, null, typeof (ValueEntityDto), Type.GetType(dto.AssemblyQualifiedName));
 
-                bus.Publish(new CreateUpdateEntity(entity, "Read"));
+                    bus.Publish(new CreateUpdateEntity(entity, "Read"));
+                }
 
                 return Response.AsJson(dto.AssemblyQualifiedName);
             };
@@ -76,12 +81,16 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ValueEntityDto>();
                 dto.ModifiedBy = Context.CurrentUser.UserName;
 
-                var valueEntity = entities.First(x => x.Id == dto.Id);
-                var entity = (ValueEntity)Mapper.Map(dto, valueEntity, typeof(ValueEntityDto), valueEntity.GetType());
+                if (ModelValidationResult.IsValid)
+                {
+                    var valueEntity = entities.First(x => x.Id == dto.Id);
+                    var entity =
+                        (ValueEntity) Mapper.Map(dto, valueEntity, typeof (ValueEntityDto), valueEntity.GetType());
 
-                bus.Publish(new CreateUpdateEntity(entity, "Create"));
+                    bus.Publish(new CreateUpdateEntity(entity, "Create"));
+                }
 
-                return Response.AsJson(valueEntity.GetType().AssemblyQualifiedName);
+                return Response.AsJson(dto.AssemblyQualifiedName);
             };
 
             Get["/ValueEntities/{type}/{filter}"] = parameters =>

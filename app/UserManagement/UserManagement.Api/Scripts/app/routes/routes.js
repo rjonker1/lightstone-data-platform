@@ -416,7 +416,7 @@ function initializeLookupRoutes(sammy) {
     sammy.post('/ValueEntities', function (context) {
         $(context.target).ajaxSubmit({
             success: function (response) {
-                if (data.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
+                if (response.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
             }
         });
         // !!! Important !!! 
@@ -428,7 +428,7 @@ function initializeLookupRoutes(sammy) {
         $(context.target).ajaxSubmit({
             type: method,
             success: function (response) {
-                if (data.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
+                if (response.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
             }
         });
         // !!! Important !!! 
