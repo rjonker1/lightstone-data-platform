@@ -34,6 +34,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Contracts
 
             Mapper.CreateMap<ContractDto, Contract>()
                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
+               .ForMember(dest => dest.Created, opt => opt.UseDestinationValue())
                //.ForMember(dest => dest.ContractPackages, opt => opt.MapFrom(x => x.PackageIds.Select(id => new ContractPackage(id))))
                .ForMember(dest => dest.Packages, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<string>, IEnumerable<Package>>(x.PackageIdNames)))
                .ForMember(dest => dest.ContractType, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<ContractType>>().Get(x.ContractTypeId)))
@@ -44,12 +45,12 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Contracts
                .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => 
                    x.CustomerIds != null 
                         ? new HashSet<Customer>(x.CustomerIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Customer>>().Get(id))) 
-                        : Enumerable.Empty<Customer>()));
-               //.AfterMap((src, dest) =>
-               //{
-               //    foreach (var contractPackage in dest.ContractPackages)
-               //        contractPackage.LinkContract(dest);
-               //});
+                        : Enumerable.Empty<Customer>()))
+               .ForMember(dest => dest.ContractBundle, opt => opt.MapFrom(x => new ContractBundle{Id = x.ContractBundleId}))
+               .AfterMap((src, dest) =>
+               {
+                   dest.Created = dest.Created ?? DateTime.UtcNow;
+               });
         }
     }
 }

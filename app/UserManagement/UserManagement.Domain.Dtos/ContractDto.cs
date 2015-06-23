@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
@@ -49,6 +50,7 @@ namespace UserManagement.Domain.Dtos
         public Guid ContractBundleId { get; set; }
         public decimal ContractBundlePrice { get; set; }
         public int ContractBundleTransactionLimit { get; set; }
+        public IEnumerable<ContractBundle> ContractBundleList { get; set; } 
 
         public bool IsActive { get; set; }
     }

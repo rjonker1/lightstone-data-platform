@@ -23,6 +23,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
 
             Mapper.CreateMap<UserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
+                .ForMember(dest => dest.Created, opt => opt.UseDestinationValue())
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(x =>
                     x.RoleIds != null
                         ? new HashSet<Role>(
@@ -33,7 +34,11 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
                     x.CustomerIds != null
                         ? new HashSet<Customer>(
                             x.CustomerIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Customer>>().Get(id))).ToList()
-                        : Enumerable.Empty<Customer>()));
+                        : Enumerable.Empty<Customer>()))
+                .AfterMap((src, dest) =>
+                {
+                    dest.Created = dest.Created ?? DateTime.UtcNow;
+                });
         }
     }
 }

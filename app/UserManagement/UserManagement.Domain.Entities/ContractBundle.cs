@@ -1,14 +1,15 @@
-﻿using System;
-using UserManagement.Domain.Core.Entities;
+﻿using UserManagement.Domain.Core.Entities;
+using IEntity = DataPlatform.Shared.Entities.IEntity;
+using INamedEntity = DataPlatform.Shared.Entities.INamedEntity;
 
 namespace UserManagement.Domain.Entities
 {
-    public class ContractBundle : NamedEntity
+    public class ContractBundle : NamedEntity, INamedEntity, IEntity
     {
         public virtual double Price { get; set; }
         public virtual int TransactionLimit { get; set; }
 
-        protected ContractBundle() { }
+        public ContractBundle() { }
 
         public ContractBundle(double price, int transactionLimit, string name) : base (name)
         {

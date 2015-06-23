@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Repositories;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -19,7 +20,7 @@ namespace UserManagement.Api.Modules
 {
     public class ContractModule : SecureModule
     {
-        public ContractModule(IBus bus, IContractRepository contracts)
+        public ContractModule(IBus bus, IContractRepository contracts, IContractBundleRepository contractBundles)
         {
             Get["/Contracts"] = _ =>
             {
@@ -33,7 +34,12 @@ namespace UserManagement.Api.Modules
 
             Get["/Contracts/Add"] = parameters =>
             {
-                return View["Save", new ContractDto{CommencementDate = DateTime.Today, OnlineAcceptance = DateTime.Today}];
+                return View["Save", new ContractDto
+                {
+                    CommencementDate = DateTime.Today, 
+                    OnlineAcceptance = DateTime.Today,
+                    ContractBundleList = contractBundles.OrderBy(x => x.TransactionLimit)
+                }];
             };
 
             Post["/Contracts"] = _ =>
@@ -58,6 +64,7 @@ namespace UserManagement.Api.Modules
             {
                 var guid = (Guid)parameters.id;
                 var dto = Mapper.Map<Contract, ContractDto>(contracts.Get(guid));
+                dto.ContractBundleList = contractBundles.OrderBy(x => x.TransactionLimit);
 
                 return View["Save", dto];
             };
@@ -87,17 +94,17 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Post["/Contracts/GetPackage"] = _ =>
-            {
-                var dto = this.Bind<ContractPackageRequestDto>();
-                if (dto == null)
-                    return Response.AsJson(new { });
+            //Post["/Contracts/GetPackage"] = _ =>
+            //{
+            //    var dto = this.Bind<ContractPackageRequestDto>();
+            //    if (dto == null)
+            //        return Response.AsJson(new { });
 
-                var handler = new GetContractPackageHandler(contracts);
-                handler.Handle(new GetPackageOnContract(dto.ContractId));
+            //    var handler = new GetContractPackageHandler(contracts);
+            //    handler.Handle(new GetPackageOnContract(dto.ContractId));
 
-                return Response.AsJson(handler.Response);
-            };
+            //    return Response.AsJson(handler.Response);
+            //};
 
             Delete["/Contracts/{id}"] = _ =>
             {

@@ -21,6 +21,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
 
             Mapper.CreateMap<CustomerDto, Customer>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
+                .ForMember(dest => dest.Created, opt => opt.UseDestinationValue())
                 .ForMember(dest => dest.CommercialState, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<CommercialState>>().Get(x.CommercialStateId)))
                 .ForMember(dest => dest.CreateSource, opt => opt.Ignore())
                 .ForMember(dest => dest.Industries, opt => opt.MapFrom(c => c.Industries != null 
@@ -39,7 +40,11 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
                 .ForMember(dest => dest.Users, opt => opt.MapFrom(x =>
                     x.UserIds != null
                         ? new HashSet<User>(x.UserIds.Select(id => ServiceLocator.Current.GetInstance<IRepository<User>>().Get(id)))
-                        : Enumerable.Empty<User>()));
+                        : Enumerable.Empty<User>()))
+                .AfterMap((src, dest) =>
+                {
+                    dest.Created = dest.Created ?? DateTime.UtcNow;
+                });
         }
     }
 }
