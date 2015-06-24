@@ -241,7 +241,6 @@
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IExpirable.cs" />
     <Compile Include="Industries\Commands\CreateIndustry.cs" />
-    <Compile Include="Industries\Commands\ImportIndustry.cs" />
     <Compile Include="Industries\Commands\RenameIndustry.cs" />
     <Compile Include="Industries\Read\Industry.cs" />
     <Compile Include="IWorkflow.cs" />

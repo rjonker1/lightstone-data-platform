@@ -90,6 +90,7 @@ namespace UserManagement.Domain.Dtos
             Customers = Enumerable.Empty<NamedEntityDto>();
             Contracts = Enumerable.Empty<NamedEntityDto>(); 
             UserAliases = Enumerable.Empty<UserAliasDto>();
+            Users = Enumerable.Empty<string>();
         }
     }
 }
