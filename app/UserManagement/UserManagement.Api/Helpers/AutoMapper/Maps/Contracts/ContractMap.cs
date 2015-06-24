@@ -46,7 +46,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Contracts
                    x.CustomerIds != null 
                         ? new HashSet<Customer>(x.CustomerIds.Select(id => ServiceLocator.Current.GetInstance<INamedEntityRepository<Customer>>().Get(id))) 
                         : Enumerable.Empty<Customer>()))
-               .ForMember(dest => dest.ContractBundle, opt => opt.MapFrom(x => new ContractBundle{Id = x.ContractBundleId}))
+               //.ForMember(dest => dest.ContractBundle, opt => opt.MapFrom(x => new ContractBundle{Id = x.ContractBundleId}))
                .AfterMap((src, dest) =>
                {
                    dest.Created = dest.Created ?? DateTime.UtcNow;

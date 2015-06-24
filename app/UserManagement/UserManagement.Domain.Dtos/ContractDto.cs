@@ -47,7 +47,7 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<KeyValuePair<Guid, string>> Packages { get; set; } // Used in populating edit view
         public bool HasPackage { get; set; }
         public bool HasPackagePriceOverride { get; set; }
-        public Guid ContractBundleId { get; set; }
+        public Guid? ContractBundleId { get; set; }
         public decimal ContractBundlePrice { get; set; }
         public int ContractBundleTransactionLimit { get; set; }
         public IEnumerable<ContractBundle> ContractBundleList { get; set; } 
