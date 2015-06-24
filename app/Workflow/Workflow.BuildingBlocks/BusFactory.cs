@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
+using EasyNetQ.Topology;
 using Shared.Configuration;
 using Workflow.BuildingBlocks.Consumers;
 using Workflow.BuildingBlocks.Dispatcher;
@@ -116,6 +117,9 @@ namespace Workflow.BuildingBlocks
 
             IConventions conventions = new Conventions(new TypeNameSerializer())
             {
+                ExchangeNamingConvention = type => queue.ExchangeName,
+                QueueNamingConvention = (type, info) => queue.QueueName,
+                TopicNamingConvention = type => type.Name,
                 ErrorExchangeNamingConvention = info => queue.ErrorExchangeName,
                 ErrorQueueNamingConvention = () => queue.ErrorQueueName
             };
