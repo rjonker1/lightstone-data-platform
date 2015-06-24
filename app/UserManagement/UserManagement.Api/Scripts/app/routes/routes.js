@@ -647,7 +647,11 @@ function initializePlugins() {
         }
     });
 
-    var packageLookupUri = "http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/";
+    var packageLookupUri = '#{Lightstone.dp.pb.api.url}/PackageLookup/';
+
+    if (packageLookupUri.indexOf('Lightstone.dp.pb.api.url') > -1) {
+        packageLookupUri = 'http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/';
+    }
 
     $('.packag-autocomplete .chosen-choices input').attr("name", "PackageIdNames");
     var packageLookup = $('.packag-autocomplete .chosen-choices input').ajaxComboBox(packageLookupUri,
