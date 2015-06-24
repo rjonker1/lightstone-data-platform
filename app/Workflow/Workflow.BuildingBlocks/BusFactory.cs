@@ -50,6 +50,8 @@ namespace Workflow.BuildingBlocks
         }
 
 
+
+
         public static IBus CreateBus(string connectionStringKey)
         {
             var appSettings = new AppSettings();
@@ -105,7 +107,25 @@ namespace Workflow.BuildingBlocks
 
                 throw;
             }
+        }
 
+        public static IAdvancedBus CreateAdvancedBus(IDefineQueue queue)
+        {
+            var appSettings = new AppSettings();
+            var connectionString = appSettings.ConnectionStrings.Get(queue.ConnectionStringKey, () => DefaultConnection);
+
+            IConventions conventions = new Conventions(new TypeNameSerializer())
+            {
+                ErrorExchangeNamingConvention = info => queue.ErrorExchangeName,
+                ErrorQueueNamingConvention = () => queue.ErrorQueueName
+            };
+
+            var bus = RabbitHutch.CreateBus(connectionString, x =>
+            {
+                x.Register(provider => conventions);
+                x.Register<IEasyNetQLogger, RabbitMQLogger>();
+            }).Advanced;
+            return bus;
         }
 
         public IBus CreateBus(string connectionStringKey, IWindsorContainer container)
