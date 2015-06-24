@@ -647,8 +647,10 @@ function initializePlugins() {
         }
     });
 
+    var packageLookupUri = "http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/";
+
     $('.packag-autocomplete .chosen-choices input').attr("name", "PackageIdNames");
-    var packageLookup = $('.packag-autocomplete .chosen-choices input').ajaxComboBox("http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/",
+    var packageLookup = $('.packag-autocomplete .chosen-choices input').ajaxComboBox(packageLookupUri,
         {
             lang: 'en',
             bind_to: 'select',
@@ -689,9 +691,9 @@ function initializePlugins() {
     var _function = function () {
         var industries = $("#industryTypeSelect").val();
         $(packageLookup).each(function () {
-            var url = "http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/" + industries;
+            var url = packageLookupUri + industries;
             if (industries == null || industries == "") {
-                url = "http://dev.packagebuilder.api.lightstone.co.za/PackageLookup";
+                url = packageLookupUri;
             }
             this.option.source = url;
         });
