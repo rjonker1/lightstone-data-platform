@@ -578,6 +578,21 @@ function initializePlugins() {
         }
     });
     
+    var industryLookupUri = '#{Lightstone.dp.pb.api.url}/Industries/';
+
+    if (industryLookupUri.indexOf('Lightstone.dp.pb.api.url') > -1) {
+        industryLookupUri = 'http://dev.packagebuilder.api.lightstone.co.za/Industries/';
+    }
+
+    var selectedIndustries = $("#industryTypeSelect").data("selected");
+    $.get(industryLookupUri + (selectedIndustries == undefined ? "" : selectedIndustries), function (data) {
+        var $industrySelect = $("#industryTypeSelect");
+        $.each(data, function (index, industry) {
+            $("<option>", { value: industry.id, text: industry.name, selected: industry.isSelected }).appendTo($industrySelect);
+        });
+        $industrySelect.trigger("chosen:updated");
+    });
+    
     //$('.packag-autocomplete .chosen-choices input').autocomplete({
     //    source: function (request, response) {
     //        var $container = $(this.element).closest('.packag-autocomplete');

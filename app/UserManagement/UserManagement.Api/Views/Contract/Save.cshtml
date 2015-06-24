@@ -371,17 +371,6 @@
 </div>
 
 <script>
-    $(function () {
-        $.get("http://dev.packagebuilder.api.lightstone.co.za/Industries", function (data) {
-            var $industrySelect = $("#industryTypeSelect");
-            $.each(data, function (index, industry) {
-                //alert(index + ": " + industry);
-                $("<option>", { value: industry.id, text: industry.name }).appendTo($industrySelect);
-            });
-            $industrySelect.trigger("chosen:updated");
-        });
-    });
-
     function bundleSelect(bundleElement) {
 
         var bundleWell = $(bundleElement).parent().parent();
