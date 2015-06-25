@@ -4,15 +4,15 @@ namespace Workflow.Lace.Messages.Reader
 {
     public static class ConfigurationReader
     {
-        public static readonly WorkflowQueueConfiguration Workflow;
+        public static readonly WorkflowSenderQueueConfiguration WorkflowSender;
         public static readonly BillingQueueConfiguratoin Billing;
-        public static readonly ReceiverQueueConfiguration Receiver;
+        public static readonly WorkflowReceiverQueueConfiguration WorkflowReceiver;
 
         static ConfigurationReader()
         {
-            Workflow = new WorkflowQueueConfiguration();
+            WorkflowSender = new WorkflowSenderQueueConfiguration();
             Billing = new BillingQueueConfiguratoin();
-            Receiver = new ReceiverQueueConfiguration();
+            WorkflowReceiver = new WorkflowReceiverQueueConfiguration();
         }
     }
 
@@ -32,9 +32,19 @@ namespace Workflow.Lace.Messages.Reader
         {
             get { return "DataPlatform.Transactions.Billing.Error"; }
         }
+
+        public string ExchangeName
+        {
+            get { return "DataPlatform.Transactions.Billing"; }
+        }
+
+        public string QueueName
+        {
+            get { return "DataPlatform.Transactions.Billing"; }
+        }
     }
 
-    public class WorkflowQueueConfiguration : IDefineQueue
+    public class WorkflowSenderQueueConfiguration : IDefineQueue
     {
         public string ConnectionStringKey
         {
@@ -50,9 +60,20 @@ namespace Workflow.Lace.Messages.Reader
         {
             get { return "DataPlatform.DataProvider.Error"; }
         }
+
+
+        public string ExchangeName
+        {
+            get { return "DataPlatform.DataProvider.Sender"; }
+        }
+
+        public string QueueName
+        {
+            get { return "DataPlatform.DataProvider.Sender"; }
+        }
     }
 
-    public class ReceiverQueueConfiguration : IDefineQueue
+    public class WorkflowReceiverQueueConfiguration : IDefineQueue
     {
         public string ConnectionStringKey
         {
@@ -67,6 +88,15 @@ namespace Workflow.Lace.Messages.Reader
         public string ErrorQueueName
         {
             get { return "DataPlatform.DataProvider.ReceiverError"; }
+        }
+        public string ExchangeName
+        {
+            get { return "DataPlatform.DataProvider.Receiver"; }
+        }
+
+        public string QueueName
+        {
+            get { return "DataPlatform.DataProvider.Receiver"; }
         }
     }
 }

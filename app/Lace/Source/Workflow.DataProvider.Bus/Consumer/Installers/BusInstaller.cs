@@ -20,7 +20,7 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
 
             container.Register(
                 Component.For<IAdvancedBus>()
-                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus(ConfigurationReader.Workflow))
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowSender))
                     .LifestyleSingleton()
                 );
 
@@ -29,7 +29,7 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
                     .UsingFactoryMethod(
                         () =>
                             new WorkflowCommandPublisher(
-                                BusFactory.CreateAdvancedBus(ConfigurationReader.Workflow))));
+                                BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowSender))));
 
             container.Register(
                 Component.For<IPublishBillingMessages>()
@@ -43,9 +43,7 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
                     .UsingFactoryMethod(
                         () =>
                             new EventPublisher(
-                                BusFactory.CreateAdvancedBus(ConfigurationReader.Receiver))));
+                                BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowReceiver))));
         }
     }
-
-    
 }
