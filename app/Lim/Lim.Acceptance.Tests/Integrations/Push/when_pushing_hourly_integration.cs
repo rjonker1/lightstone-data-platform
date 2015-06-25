@@ -61,6 +61,7 @@ namespace Lim.Acceptance.Tests.Integrations.Push
         [Observation]
         public void then_configuration_for_hourl_push_must_be_successful()
         {
+            _fetch.Configurations.ShouldNotBeNull();
             _fetch.Configurations.Any().ShouldBeTrue();
             foreach (var config in _fetch.Configurations)
             {

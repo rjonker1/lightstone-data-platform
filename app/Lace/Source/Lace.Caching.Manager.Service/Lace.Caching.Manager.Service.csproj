@@ -63,8 +63,8 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1295, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1295\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1296, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1296\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net">
@@ -112,6 +112,7 @@
     <Compile Include="Jobs\JobFactory.cs" />
     <Compile Include="Jobs\RefreshCache.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Reader\ConfigurationReader.cs" />
     <Compile Include="Receiver\ReceiverConsumers.cs" />
   </ItemGroup>
   <ItemGroup>
