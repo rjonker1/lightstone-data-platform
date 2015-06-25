@@ -35,7 +35,7 @@ namespace Api.Helpers.Validators
             // Validate User
             var user = JsonConvert.DeserializeObject<ValidationDto>(_userManagementApiClient.Get("", "/Users/Details/" + userId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
             
-            if (user == null) throw new LightstoneAutoException("User: " + userId + " not found. Please make sure the UserId entered is correct. Alternatively please reauthenticate token.");
+            if (user == null) throw new LightstoneAutoException("User: " + userId + " not found. Please make sure the UserId entered is correct. Alternatively please re-authenticate token.");
             if (user.IsLocked) throw new LightstoneAutoException("User: " + userId + " is locked");
             
             //Validate Customer|Client
