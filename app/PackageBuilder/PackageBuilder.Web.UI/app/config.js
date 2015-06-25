@@ -40,16 +40,6 @@
 
     app.value('config', config); //Global placeholder for config settings
     
-    //app.config(['$logProvider', '$httpProvider', function ($logProvider, $httpProvider) {
-    //    $httpProvider.defaults.useXDomain = true;
-    //    $httpProvider.defaults.headers.common['X-Requested-With'];
-    //    $httpProvider.defaults.withCredentials = true;
-    //    // turn debugging off/on (no info or warn)
-    //    if ($logProvider.debugEnabled) {
-    //        $logProvider.debugEnabled(true);
-    //    }
-    //}]);
-    
     app.config(['$httpProvider', function ($httpProvider) {
         //$httpProvider.defaults.withCredentials = true;
         //$httpProvider.defaults.useXDomain = true;
