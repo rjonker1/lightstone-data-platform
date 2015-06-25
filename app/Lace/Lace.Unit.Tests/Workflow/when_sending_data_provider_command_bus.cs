@@ -6,9 +6,6 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Mothers.Requests;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
-using RabbitMQ.Client;
-using Shared.Configuration;
-using Workflow.BuildingBlocks;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Infrastructure;
@@ -38,30 +35,30 @@ namespace Lace.Unit.Tests.Workflow
                         new LicensePlateNumberIvidOnlyRequest().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid)
                             .GetRequest<IAmIvidStandardRequest>()).ObjectToJson(),
                     "testing message to bus"));
-            _bus = CreateAdvancedBus(ConfigurationReader.WorkflowSender);
+            _bus = BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowSender);
         }
 
-        public static IAdvancedBus CreateAdvancedBus(IDefineQueue queue)
-        {
-            var appSettings = new AppSettings();
-            var connectionString = appSettings.ConnectionStrings.Get(queue.ConnectionStringKey, () => "");
+        //public static IAdvancedBus CreateAdvancedBus(IDefineQueue queue)
+        //{
+        //    var appSettings = new AppSettings();
+        //    var connectionString = appSettings.ConnectionStrings.Get(queue.ConnectionStringKey, () => "");
 
-            IConventions conventions = new Conventions(new TypeNameSerializer())
-            {
-                ExchangeNamingConvention = type => "DataPlatform.DataProvider.Sender",
-                QueueNamingConvention = (type, info) => "DataPlatform.DataProvider.Sender",
-                TopicNamingConvention = type => ExchangeType.Fanout,
-                ErrorExchangeNamingConvention = info => queue.ErrorExchangeName,
-                ErrorQueueNamingConvention = () => queue.ErrorQueueName
-            };
+        //    IConventions conventions = new Conventions(new TypeNameSerializer())
+        //    {
+        //        ExchangeNamingConvention = type => "DataPlatform.DataProvider.Sender",
+        //        QueueNamingConvention = (type, info) => "DataPlatform.DataProvider.Sender",
+        //        TopicNamingConvention = type => ExchangeType.Fanout,
+        //        ErrorExchangeNamingConvention = info => queue.ErrorExchangeName,
+        //        ErrorQueueNamingConvention = () => queue.ErrorQueueName
+        //    };
 
-            var bus = RabbitHutch.CreateBus(connectionString, x =>
-            {
-                x.Register(provider => conventions);
-                x.Register<IEasyNetQLogger, RabbitMQLogger>();
-            }).Advanced;
-            return bus;
-        }
+        //    var bus = RabbitHutch.CreateBus(connectionString, x =>
+        //    {
+        //        x.Register(provider => conventions);
+        //        x.Register<IEasyNetQLogger, RabbitMQLogger>();
+        //    }).Advanced;
+        //    return bus;
+        //}
 
         public override void Observe()
         {

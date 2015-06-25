@@ -3,6 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
+using Lace.Caching.Manager.Service.Reader;
 using Workflow.BuildingBlocks;
 
 namespace Lace.Caching.Manager.Service.Installers
@@ -13,11 +14,11 @@ namespace Lace.Caching.Manager.Service.Installers
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            _log.InfoFormat("Installing bus");
+            _log.InfoFormat("Installing Cache bus");
 
             container.Register(
                 Component.For<IAdvancedBus>()
-                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/dataprovider/queue"))
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus(ConfigurationReader.Cache))
                     .LifestyleSingleton()
                 );
         }
