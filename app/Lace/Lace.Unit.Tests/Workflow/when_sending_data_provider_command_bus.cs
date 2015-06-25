@@ -38,7 +38,7 @@ namespace Lace.Unit.Tests.Workflow
                         new LicensePlateNumberIvidOnlyRequest().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid)
                             .GetRequest<IAmIvidStandardRequest>()).ObjectToJson(),
                     "testing message to bus"));
-            _bus = CreateAdvancedBus(ConfigurationReader.Workflow);
+            _bus = CreateAdvancedBus(ConfigurationReader.WorkflowSender);
         }
 
         public static IAdvancedBus CreateAdvancedBus(IDefineQueue queue)
