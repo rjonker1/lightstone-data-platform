@@ -4,7 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Shared.DataProvider.Contracts;
+using Lace.Domain.Core.Contracts.Caching;
 
 namespace Lace.Caching.Manager.Service.Installers
 {

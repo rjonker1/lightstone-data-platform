@@ -55,7 +55,7 @@ namespace Lace.Domain.DataProviders.Ivid
         }
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var ividResponse = new IvidResponse();
+            var ividResponse = IvidResponse.Empty();
             ividResponse.HasNotBeenHandled();
             response.Add(ividResponse);
         }

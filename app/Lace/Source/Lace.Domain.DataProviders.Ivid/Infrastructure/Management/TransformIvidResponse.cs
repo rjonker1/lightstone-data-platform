@@ -1,4 +1,7 @@
-﻿using Lace.Domain.Core.Entities;
+﻿using System;
+using System.Threading.Tasks;
+using Lace.Caching.BuildingBlocks.Repository;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Models;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
@@ -15,17 +18,21 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
         public TransformIvidResponse(HpiStandardQueryResponse response)
         {
             Continue = response != null;
-            Result = new IvidResponse();
+            Result = Continue ? null : IvidResponse.Empty();
             Message = response;
         }
 
         public void Transform()
         {
-            Result.SetErrorFlag(Message.partialResponse);
-
-            Result.Build(Message.ividQueryResult.ToString(), Message.IvidReference, Message.licenceNumber,
+            Result = IvidResponse.Build(Message.ividQueryResult.ToString(), Message.IvidReference, Message.licenceNumber,
                 Message.registerNumber, Message.registrationDate, Message.vin, Message.engineNumber,
                 Message.engineDisplacement, Message.tare);
+
+            Result.SetErrorFlag(Message.partialResponse);
+
+            //Result.Build(Message.ividQueryResult.ToString(), Message.IvidReference, Message.licenceNumber,
+            //    Message.registerNumber, Message.registrationDate, Message.vin, Message.engineNumber,
+            //    Message.engineDisplacement, Message.tare);
 
             Result.SetMake(BuildIvidCodePair(Message.make));
 
@@ -50,7 +57,32 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             Result.BuildSpecificInformation();
 
             Result.SetCarFullName();
+
+            Result.AddToCache(CacheDataRepository.ForCacheOnly());
         }
+
+        //private void AddToCache()
+        //{
+        //    try
+        //    {
+        //        Task.Run(() =>
+        //        {
+        //            try
+        //            {
+        //                Result.AddToCache(CacheDataRepository.ForCacheOnly());
+        //            }
+        //            catch(Exception ex)
+        //            {
+        //            }
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+                
+        //    }
+        //}
+
+       
 
         private static IvidCodePair BuildIvidCodePair(CodeDescription description)
         {

@@ -4,8 +4,8 @@ namespace Lace.Domain.Core.Contracts
 {
     public interface IBuildIvidResponse
     {
-        void Build(string statusMessage, string reference, string license, string registration, string registrationDate, string vin, string engine,
-            string displacement, string tare);
+        //void Build(string statusMessage, string reference, string license, string registration, string registrationDate, string vin, string engine,
+        //    string displacement, string tare);
 
         void SetErrorFlag(bool check);
 
