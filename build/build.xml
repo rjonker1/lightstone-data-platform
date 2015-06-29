@@ -399,11 +399,7 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Metadata.Entrypoint.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Test.Helper.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Test.Helper.pdb" to="lib\net45"/>
-        <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
-        <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
-        <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
-        <include pattern="ServiceStack.Common.dll" to="lib\net45" />
-        <include pattern="ServiceStack.Text.dll" to="lib\net45" />
+        <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>      
       </includes>
       <dependencies>
         <dependency id="Common.Logging" version="3.1.0" />
@@ -413,6 +409,7 @@
         <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
         <dependency id="Lightstone.DataPlatform.Workflow.BuildingBlocks" />
         <dependency id="RabbitMQ.Client"  />
+        <dependency id="ServiceStack.Redis" version="3.9.71" />
       </dependencies>
     </nuget>
 
@@ -470,10 +467,6 @@
         <include pattern="Lightstone.DataPlatform.Lace.Shared.DataProvider.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Shared.DataProvider.pdb" to="lib\net45"/>
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
-        <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
-        <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
-        <include pattern="ServiceStack.Common.dll" to="lib\net45" />
-        <include pattern="ServiceStack.Text.dll" to="lib\net45" />
 			</includes>
 			<dependencies>
 				<dependency id="Common.Logging" version="3.1.0" />
@@ -483,6 +476,7 @@
         <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
         <dependency id="Lightstone.DataPlatform.Workflow.BuildingBlocks" />
         <dependency id="RabbitMQ.Client"  />
+        <dependency id="ServiceStack.Redis" version="3.9.71" />
 			</dependencies>
 		</nuget>
     <nuget deploy="false">
