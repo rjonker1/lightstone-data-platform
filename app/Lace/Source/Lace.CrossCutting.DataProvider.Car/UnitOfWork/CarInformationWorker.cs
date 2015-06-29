@@ -5,7 +5,6 @@ using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Shared.DataProvider.Models;
 using Lace.Shared.DataProvider.Repositories;
-using ServiceStack.Common.Extensions;
 
 namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
 {
@@ -60,40 +59,22 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             if (!Cars.Any())
                 Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin});
 
-            if (!ItMightBeAVin12())
-                return;
+            //Not Checking for VIN12 yett
+            //if (!ItMightBeAVin12())
+            //    return;
 
-            Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin12, new {request.Vin});
-            if (Cars.Any())
-            {
-                Cars.ForEach(f => f.IsAVin12Car());
-            }
+            //Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin12, new {request.Vin});
+            //if (Cars.Any())
+            //{
+            //    Cars.ForEach(f => f.IsAVin12Car());
+            //}
         }
 
-        //private static bool HasValidCarIdAndYearInformation(IHaveCarInformation request)
-        //{
-        //    return request.CarId > 0 && request.Year > 0;
-        //}
 
         private static bool HasValidCarIdInformation(IHaveCarInformation request)
         {
             return request.CarId > 0;
         }
-
-        //private void GetCarWithCarIdAndYear(IHaveCarInformation request)
-        //{
-        //    if (NoNeedToContinue())
-        //        return;
-
-        //    if (!HasValidCarIdAndYearInformation(request))
-        //    {
-        //        Cars = new List<CarInformation>();
-        //        return;
-        //    }
-
-        //    Cars = _repository.Get<CarInformation>(CarInformation.SelectWithCarId,)
-        //        .Where(w => w.CarId == request.CarId && w.Year == request.Year);
-        //}
 
         private void GetWithCarId(IHaveCarInformation request)
         {
@@ -106,7 +87,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
                 return;
             }
 
-            Cars = _repository.GetAll<CarInformation>(car => { return car.CarId == request.CarId; });
+            Cars = _repository.GetAll<CarInformation>(car => car.CarId == request.CarId);
 
             if (!Cars.Any())
                 Cars = _repository.Get<CarInformation>(CarInformation.SelectWithCarId, new {request.CarId});

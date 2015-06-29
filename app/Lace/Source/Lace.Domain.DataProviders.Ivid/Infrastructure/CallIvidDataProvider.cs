@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
 using Common.Logging;
-using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
-using Workflow.Lace.Identifiers;
-
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
     public class CallIvidDataProvider : ICallTheDataProviderSource
@@ -38,11 +32,13 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             try
             {
                 _request = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
-                var retriever = VechicleRetriever.Start(_logCommand).FirstWithCache(_request).ThenWithApi(_request, _dataProvider, out _response);
+                var retriever = VechicleRetriever.Start(_logCommand)
+                    .FirstWithCache(_request)
+                    .ThenWithApi(_request, _dataProvider, out _response);
 
-                if (retriever.HasCacheResponse)
+                if (retriever.NoNeedToCallApi)
                 {
-                    _logCommand.LogTransformation(retriever.CacheResponse, new {CacheResponse = "Response Retrieved From the Cache"});
+                    _logCommand.LogTransformation(retriever.CacheResponse, new {CacheResponse = "Response retrieved from Ivid's Cache"});
                     retriever.CacheResponse.HasBeenHandled();
                     response.Add(retriever.CacheResponse);
                     return;

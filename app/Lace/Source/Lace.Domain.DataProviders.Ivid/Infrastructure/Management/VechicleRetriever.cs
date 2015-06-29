@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
         public VechicleRetriever ThenWithApi(HpiStandardQueryRequest request, IAmDataProvider dataProvider,
             out HpiStandardQueryResponse response)
         {
-            if (HasCacheResponse)
+            if (NoNeedToCallApi)
             {
                 response = null;
                 return this;
@@ -109,7 +109,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 
         public IProvideDataFromIvid CacheResponse { get; private set; }
         public HpiStandardQueryResponse Response { get; private set; }
-        public bool HasCacheResponse
+        public bool NoNeedToCallApi
         {
             get
             {

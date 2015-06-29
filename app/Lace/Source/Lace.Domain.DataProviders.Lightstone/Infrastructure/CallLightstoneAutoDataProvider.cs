@@ -109,8 +109,5 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     .GenerateData()
                     .BuildValuation();
         }
-
-        
-
     }
 }
