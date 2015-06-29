@@ -70,8 +70,8 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1199\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1296, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1296\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -110,6 +110,7 @@
     <Compile Include="Infrastructure\Metadata.cs" />
     <Compile Include="Infrastructure\StopWatchFactory.cs" />
     <Compile Include="Infrastructure\StopWatchResults.cs" />
+    <Compile Include="Reader\ConfigurationReader.cs" />
     <Compile Include="Shared\BillingPublisher.cs" />
     <Compile Include="Shared\CommandSender.cs" />
     <Compile Include="Shared\EventPublisher.cs" />

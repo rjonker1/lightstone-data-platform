@@ -69,6 +69,7 @@
     <Compile Include="DependencyInjection\WindsorAdapter.cs" />
     <Compile Include="Dispatcher\NoMagicAutoDispatcher.cs" />
     <Compile Include="Dispatcher\WindsorMessageDispatcher.cs" />
+    <Compile Include="IDefineQueue.cs" />
     <Compile Include="RabbitMQLogger.cs" />
     <Compile Include="Dispatcher\SyncDispatcher.cs" />
   </ItemGroup>

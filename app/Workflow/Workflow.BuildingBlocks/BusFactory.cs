@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
+using EasyNetQ.Topology;
 using Shared.Configuration;
 using Workflow.BuildingBlocks.Consumers;
 using Workflow.BuildingBlocks.Dispatcher;
@@ -48,6 +49,8 @@ namespace Workflow.BuildingBlocks
                 throw;
             }
         }
+
+
 
 
         public static IBus CreateBus(string connectionStringKey)
@@ -105,7 +108,28 @@ namespace Workflow.BuildingBlocks
 
                 throw;
             }
+        }
 
+        public static IAdvancedBus CreateAdvancedBus(IDefineQueue queue)
+        {
+            var appSettings = new AppSettings();
+            var connectionString = appSettings.ConnectionStrings.Get(queue.ConnectionStringKey, () => DefaultConnection);
+
+            IConventions conventions = new Conventions(new TypeNameSerializer())
+            {
+                //ExchangeNamingConvention = type => queue.ExchangeName,
+                //QueueNamingConvention = (type, information) => queue.QueueName,
+                TopicNamingConvention = type => queue.ExchangeType, // type.Name,
+                ErrorExchangeNamingConvention = information => queue.ErrorExchangeName,
+                ErrorQueueNamingConvention = () => queue.ErrorQueueName
+            };
+
+            var bus = RabbitHutch.CreateBus(connectionString, x =>
+            {
+                x.Register(provider => conventions);
+                x.Register<IEasyNetQLogger, RabbitMQLogger>();
+            }).Advanced;
+            return bus;
         }
 
         public IBus CreateBus(string connectionStringKey, IWindsorContainer container)

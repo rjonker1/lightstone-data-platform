@@ -40,6 +40,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,7 +117,6 @@
     <Compile Include="CommandHandlers\DataProviders\ImportDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\CreateDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\UpdateDataProviderHandler.cs" />
-    <Compile Include="CommandHandlers\Industries\ImportIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Industries\RenameIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Industries\CreateIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />

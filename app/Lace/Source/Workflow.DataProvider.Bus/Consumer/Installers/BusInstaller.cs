@@ -5,6 +5,7 @@ using Common.Logging;
 using EasyNetQ;
 using Workflow.BuildingBlocks;
 using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Reader;
 using Workflow.Lace.Messages.Shared;
 
 namespace Workflow.DataProvider.Bus.Consumer.Installers
@@ -19,30 +20,30 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
 
             container.Register(
                 Component.For<IAdvancedBus>()
-                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/dataprovider/queue"))
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowSender))
                     .LifestyleSingleton()
                 );
 
             container.Register(
-               Component.For<IPublishCommandMessages>()
-                   .UsingFactoryMethod(
-                       () =>
-                           new WorkflowCommandPublisher(
-                               BusFactory.CreateAdvancedBus("workflow/dataprovider/queue"))));
+                Component.For<IPublishCommandMessages>()
+                    .UsingFactoryMethod(
+                        () =>
+                            new WorkflowCommandPublisher(
+                                BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowSender))));
 
             container.Register(
-              Component.For<IPublishBillingMessages>()
-                  .UsingFactoryMethod(
-                      () =>
-                          new BillingPublisher(
-                              BusFactory.CreateAdvancedBus("workflow/dataprovider/queue"))));
+                Component.For<IPublishBillingMessages>()
+                    .UsingFactoryMethod(
+                        () =>
+                            new BillingPublisher(
+                                BusFactory.CreateAdvancedBus(ConfigurationReader.Billing))));
 
             container.Register(
-            Component.For<IPublishEventMessages>()
-                .UsingFactoryMethod(
-                    () =>
-                        new EventPublisher(
-                            BusFactory.CreateAdvancedBus("workflow/dataprovider/queue"))));
+                Component.For<IPublishEventMessages>()
+                    .UsingFactoryMethod(
+                        () =>
+                            new EventPublisher(
+                                BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowReceiver))));
         }
     }
 }

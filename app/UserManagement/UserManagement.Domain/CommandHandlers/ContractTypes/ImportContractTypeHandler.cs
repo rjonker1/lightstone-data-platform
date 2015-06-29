@@ -18,9 +18,9 @@ namespace UserManagement.Domain.CommandHandlers.ContractTypes
 
         public override void Handle(ImportContractType command)
         {
-            _bus.Publish(new CreateUpdateEntity(new ContractType("Master Agreement"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new ContractType("Online Agreement"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new ContractType("Client Agreement"), "Create"));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractType("Master Agreement"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractType("Online Agreement"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractType("Client Agreement"), "Create")));
         }
     }
 }

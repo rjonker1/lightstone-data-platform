@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
 using Lim.Domain.Messaging.Publishing;
+using Lim.Schedule.Service.Reader;
 using Workflow.BuildingBlocks;
 
 namespace Lim.Schedule.Service.Installers
@@ -18,11 +19,15 @@ namespace Lim.Schedule.Service.Installers
 
             container.Register(
                 Component.For<IAdvancedBus>()
-                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("lim/schedule/bus"))
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus(ConfigurationReader.LimSender))
                     .LifestyleSingleton()
                 );
 
-            container.Register(Component.For<IPublishConfigurationMessages>().ImplementedBy<ConfigurationMessagePublisher>());
+            //container.Register(Component.For<IPublishConfigurationMessages>().ImplementedBy<ConfigurationMessagePublisher>());
+            container.Register(Component.For<IPublishConfigurationMessages>().UsingFactoryMethod(
+                () =>
+                    new ConfigurationMessagePublisher(
+                        BusFactory.CreateAdvancedBus(ConfigurationReader.LimReceiver))));
 
             _log.InfoFormat("Bus Installed");
         }

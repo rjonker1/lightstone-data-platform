@@ -116,7 +116,7 @@
                     },
                     template: '<div></div>',
                     controller: function () {
-                        window.location.replace('http://dev.cia.lightstone.co.za');
+                        window.location.replace(config.ciaAuthUri);
                     }
                 }
             }

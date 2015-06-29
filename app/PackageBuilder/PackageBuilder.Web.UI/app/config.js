@@ -17,6 +17,7 @@
 
     // used by Octopus Deploy
     var apiUrl = "#{Lightstone.dp.pb.api.url}";
+    var ciaAuth = "#{Lightstone.cia.auth}";
 
     var config = {
         appErrorPrefix: '[LSA Error] ', //Configure the exceptionHandler decorator
@@ -25,24 +26,19 @@
         remoteServiceName: remoteServiceName,
         version: '2.1.0',
         baseUri: "http://localhost:62500",
-        apiUri: apiUrl
+        apiUri: apiUrl,
+        ciaAuthUri: ciaAuth
     };
     
     if (config.apiUri.indexOf("Lightstone.dp.pb.api.url") > -1) {
         config.apiUri = "http://dev.packagebuilder.api.lightstone.co.za";
     }
 
+    if (config.ciaAuthUri.indexOf("Lightstone.cia.auth") > -1) {
+        config.ciaAuthUri = "http://dev.cia.lightstone.co.za/login";
+    }
+
     app.value('config', config); //Global placeholder for config settings
-    
-    //app.config(['$logProvider', '$httpProvider', function ($logProvider, $httpProvider) {
-    //    $httpProvider.defaults.useXDomain = true;
-    //    $httpProvider.defaults.headers.common['X-Requested-With'];
-    //    $httpProvider.defaults.withCredentials = true;
-    //    // turn debugging off/on (no info or warn)
-    //    if ($logProvider.debugEnabled) {
-    //        $logProvider.debugEnabled(true);
-    //    }
-    //}]);
     
     app.config(['$httpProvider', function ($httpProvider) {
         //$httpProvider.defaults.withCredentials = true;

@@ -416,7 +416,7 @@ function initializeLookupRoutes(sammy) {
     sammy.post('/ValueEntities', function (context) {
         $(context.target).ajaxSubmit({
             success: function (response) {
-                if (data.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
+                if (response.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
             }
         });
         // !!! Important !!! 
@@ -428,7 +428,7 @@ function initializeLookupRoutes(sammy) {
         $(context.target).ajaxSubmit({
             type: method,
             success: function (response) {
-                if (data.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
+                if (response.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
             }
         });
         // !!! Important !!! 
@@ -578,6 +578,21 @@ function initializePlugins() {
         }
     });
     
+    var industryLookupUri = '#{Lightstone.dp.pb.api.url}/Industries/';
+
+    if (industryLookupUri.indexOf('Lightstone.dp.pb.api.url') > -1) {
+        industryLookupUri = 'http://dev.packagebuilder.api.lightstone.co.za/Industries/';
+    }
+
+    var selectedIndustries = $("#industryTypeSelect").data("selected");
+    $.get(industryLookupUri + (selectedIndustries == undefined ? "" : selectedIndustries), function (data) {
+        var $industrySelect = $("#industryTypeSelect");
+        $.each(data, function (index, industry) {
+            $("<option>", { value: industry.id, text: industry.name, selected: industry.isSelected }).appendTo($industrySelect);
+        });
+        $industrySelect.trigger("chosen:updated");
+    });
+    
     //$('.packag-autocomplete .chosen-choices input').autocomplete({
     //    source: function (request, response) {
     //        var $container = $(this.element).closest('.packag-autocomplete');
@@ -647,8 +662,14 @@ function initializePlugins() {
         }
     });
 
+    var packageLookupUri = '#{Lightstone.dp.pb.api.url}/PackageLookup/';
+
+    if (packageLookupUri.indexOf('Lightstone.dp.pb.api.url') > -1) {
+        packageLookupUri = 'http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/';
+    }
+
     $('.packag-autocomplete .chosen-choices input').attr("name", "PackageIdNames");
-    var packageLookup = $('.packag-autocomplete .chosen-choices input').ajaxComboBox("http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/",
+    var packageLookup = $('.packag-autocomplete .chosen-choices input').ajaxComboBox(packageLookupUri,
         {
             lang: 'en',
             bind_to: 'select',
@@ -689,9 +710,9 @@ function initializePlugins() {
     var _function = function () {
         var industries = $("#industryTypeSelect").val();
         $(packageLookup).each(function () {
-            var url = "http://dev.packagebuilder.api.lightstone.co.za/PackageLookup/" + industries;
+            var url = packageLookupUri + industries;
             if (industries == null || industries == "") {
-                url = "http://dev.packagebuilder.api.lightstone.co.za/PackageLookup";
+                url = packageLookupUri;
             }
             this.option.source = url;
         });

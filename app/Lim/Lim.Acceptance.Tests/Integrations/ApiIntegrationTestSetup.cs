@@ -17,7 +17,7 @@ namespace Lim.Acceptance.Tests.Integrations
 
         public void DeleteAllAudits()
         {
-            _session.CreateQuery("truncate table AuditApiIntegration");
+            _session.CreateQuery("delete from AuditApiIntegration");
         }
 
         public AuditApiIntegration GetAuditLog(long configurationId)

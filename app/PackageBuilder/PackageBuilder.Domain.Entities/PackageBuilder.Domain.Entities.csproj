@@ -32,6 +32,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -232,7 +241,6 @@
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IExpirable.cs" />
     <Compile Include="Industries\Commands\CreateIndustry.cs" />
-    <Compile Include="Industries\Commands\ImportIndustry.cs" />
     <Compile Include="Industries\Commands\RenameIndustry.cs" />
     <Compile Include="Industries\Read\Industry.cs" />
     <Compile Include="IWorkflow.cs" />

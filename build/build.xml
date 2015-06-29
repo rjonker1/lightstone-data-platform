@@ -92,6 +92,9 @@
         <include pattern="Views\" to="content\Views"/>
         <include pattern="*.config" to="content"/>
       </includes>
+      <dependencies>
+        <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />       
+      </dependencies>
     </nuget>
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Api</name>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Web.Configuration;
 using Castle.MicroKernel.Registration;
@@ -117,7 +118,7 @@ namespace PackageBuilder.Api
                 var contentTypes = context.Request.Headers.FirstOrDefault(x => x.Key == "Accept");
                 var isHtml = (contentTypes.Value.FirstOrDefault(x => x.Contains("text/html")) + "").Any();
                 if (context.Response.StatusCode == HttpStatusCode.Unauthorized && isHtml)
-                    context.Response = context.GetRedirect("http://dev.cia.lightstone.co.za/login");
+                    context.Response = context.GetRedirect(ConfigurationManager.AppSettings["cia/auth"]);
             };
         }
 

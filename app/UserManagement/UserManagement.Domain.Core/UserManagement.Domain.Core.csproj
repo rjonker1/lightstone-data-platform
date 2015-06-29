@@ -31,6 +31,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
+    <OutputPath>bin\TeamCity\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
       <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
@@ -90,6 +99,7 @@
     <Compile Include="Entities\NamedEntity.cs" />
     <Compile Include="Entities\ValueEntity.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\WindsorExtensions.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="NHibernate\Attributes\UniqueAttribute.cs" />

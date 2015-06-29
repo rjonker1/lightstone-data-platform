@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using System.Configuration;
+using Hangfire;
 using Hangfire.Logging.LogProviders;
 using Microsoft.Owin;
 using Nancy;
@@ -12,9 +13,11 @@ namespace Billing.Scheduler
     {
         public void Configuration(IAppBuilder app)
         {
+            ConnectionStringSettings connString;
+
             GlobalConfiguration.Configuration
             .UseLogProvider(new ColouredConsoleLogProvider())
-            .UseSqlServerStorage(@"Server=.;Database=Billing.Scheduler; Integrated Security=SSPI;");
+            .UseSqlServerStorage(ConfigurationManager.ConnectionStrings["billingScheduler"].ConnectionString);
 
             app.UseHangfireServer();
             app.UseHangfireDashboard();

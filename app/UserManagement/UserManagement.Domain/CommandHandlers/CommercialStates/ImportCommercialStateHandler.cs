@@ -18,9 +18,9 @@ namespace UserManagement.Domain.CommandHandlers.CommercialStates
 
         public override void Handle(ImportCommercialState command)
         {
-            _bus.Publish(new CreateUpdateEntity(new CommercialState("BILLABLE"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new CommercialState("TRIAL"), "Create"));
-            _bus.Publish(new CreateUpdateEntity(new CommercialState("INTERNAL"), "Create"));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new CommercialState("BILLABLE"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new CommercialState("TRIAL"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new CommercialState("INTERNAL"), "Create")));
         }
     }
 }
