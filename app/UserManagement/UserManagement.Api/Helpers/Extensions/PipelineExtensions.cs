@@ -110,7 +110,7 @@ namespace UserManagement.Api.Helpers.Extensions
 
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(customer, new CustomerMessage());
-                            metaEntity.BillingType = "Response"; //TODO: Map from Contract
+                            metaEntity.BillingType = customer.CommercialState.Value;
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
                         }
@@ -133,7 +133,7 @@ namespace UserManagement.Api.Helpers.Extensions
 
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(dto, new CustomerMessage());
-                            metaEntity.BillingType = "Response"; //TODO: Map from Contract
+                            metaEntity.BillingType = dto.CommercialStateValue;
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
 
@@ -158,7 +158,7 @@ namespace UserManagement.Api.Helpers.Extensions
 
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(client, new ClientMessage());
-                            metaEntity.BillingType = "Response"; //TODO: Map from Contract
+                            metaEntity.BillingType = client.CommercialState.Value;
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
                         }
@@ -181,7 +181,7 @@ namespace UserManagement.Api.Helpers.Extensions
 
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(dto, new ClientMessage());
-                            metaEntity.BillingType = "Response"; //TODO: Map from Contract
+                            metaEntity.BillingType = dto.CommercialStateValue;
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
 
