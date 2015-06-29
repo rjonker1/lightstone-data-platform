@@ -8,7 +8,6 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {
     public static class RuleProcessor
     {
-        private static StatusMessageType _statusMessage;
         static RuleProcessor()
         {
 
@@ -16,33 +15,10 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 
         public static void ForReportStatusMessage(HpiStandardQueryRequest request, IvidResponse response)
         {
-            CheckFurtherInvestigation(response);
-            CheckLicensePlate(request,response);
-        }
-
-        private static void CheckFurtherInvestigation(IvidResponse response)
-        {
-            _statusMessage = response.HasIssues || response.HasNoRecords
-                ? StatusMessageType.FurtherInvestigation
-                : StatusMessageType.NoStatusFeedbackRequired;
-            response.AddReportStatusMessage(ReportStatusMessages.FirstOrDefault(w => w.Key == _statusMessage).Value);
-        }
-
-        private static void CheckLicensePlate(HpiStandardQueryRequest request, IvidResponse response)
-        {
-            _statusMessage = !string.IsNullOrEmpty(request.LicenceNo) && !string.IsNullOrEmpty(response.License) &&
-                   !response.License.Equals(request.LicenceNo, StringComparison.CurrentCultureIgnoreCase)
-                ? StatusMessageType.LicensePlateMismatch
-                : StatusMessageType.NoStatusFeedbackRequired;
-
-            response.AddReportStatusMessage(ReportStatusMessages.FirstOrDefault(w => w.Key == _statusMessage).Value);
-        }
-
-        private enum StatusMessageType
-        {
-            NoStatusFeedbackRequired,
-            FurtherInvestigation,
-            LicensePlateMismatch
+            response.AddReportStatusMessage(ReportStatusMessages.FirstOrDefault(w => w.Key == ResponseChecks((response.HasIssues || response.HasNoRecords), ValidationTest.FurtherInvestigation)).Value);
+            response.AddReportStatusMessage(ReportStatusMessages.FirstOrDefault(w => w.Key == ResponseChecks((!string.IsNullOrEmpty(request.LicenceNo) && !string.IsNullOrEmpty(response.License) &&
+                                             !response.License.Equals(request.LicenceNo, StringComparison.CurrentCultureIgnoreCase)),
+                ValidationTest.LicensePlateMismatch)).Value);
         }
 
         private static readonly IDictionary<StatusMessageType, string> ReportStatusMessages = new Dictionary<StatusMessageType, string>()
@@ -53,7 +29,27 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             },
             {StatusMessageType.LicensePlateMismatch, "The licence plate number for this vehicle has changed. Please check the vehicle carefully."},
             {StatusMessageType.NoStatusFeedbackRequired, null}
-
         };
+
+        private static StatusMessageType ResponseChecks(bool check, ValidationTest test)
+        {
+            var dataTests = new Dictionary<ValidationTest, Func<bool,StatusMessageType>>();
+            dataTests[ValidationTest.LicensePlateMismatch] = (c) => c ? StatusMessageType.LicensePlateMismatch : StatusMessageType.NoStatusFeedbackRequired;
+            dataTests[ValidationTest.FurtherInvestigation] = (c) => c ? StatusMessageType.FurtherInvestigation : StatusMessageType.NoStatusFeedbackRequired;
+            return dataTests.FirstOrDefault(w => w.Key == test).Value(check);
+        }
+
+        private enum StatusMessageType
+        {
+            NoStatusFeedbackRequired,
+            FurtherInvestigation,
+            LicensePlateMismatch
+        }
+
+        private enum ValidationTest
+        {
+            LicensePlateMismatch,
+            FurtherInvestigation
+        }
     }
 }
