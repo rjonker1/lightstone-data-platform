@@ -59,7 +59,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             if (!Cars.Any())
                 Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin});
 
-            //Not Checking for VIN12 yett
+            //Not Checking for VIN12 yet! If VIN12 is required, it needs to be implemented as a Fallback Source : i.e. its own project init with the request....
             //if (!ItMightBeAVin12())
             //    return;
 

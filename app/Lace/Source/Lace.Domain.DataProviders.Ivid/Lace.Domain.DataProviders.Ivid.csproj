@@ -87,6 +87,7 @@
     <Compile Include="Infrastructure\Dto\IvidRequestMessage.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureIvid.cs" />
     <Compile Include="Infrastructure\HandleIvidSourceCall.cs" />
+    <Compile Include="Infrastructure\Management\RuleProcessor.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidResponse.cs" />
     <Compile Include="Infrastructure\Management\VechicleRetriever.cs" />
     <Compile Include="Infrastructure\RequestDataFromIvidSource.cs" />

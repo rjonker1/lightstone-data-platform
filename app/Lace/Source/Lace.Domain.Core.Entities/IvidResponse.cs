@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts;
@@ -16,6 +15,7 @@ namespace Lace.Domain.Core.Entities
     {
         private const string NotAvailableError = "Error - Not Available";
         public const string CacheKey = "urn:Ivid:{0}";
+
 
         public IvidResponse()
         {
@@ -64,6 +64,11 @@ namespace Lace.Domain.Core.Entities
         public void SetHasIssuesFlag(bool check)
         {
             HasIssues |= check;
+        }
+
+        public void SetHasNoRecordsFlag(bool check)
+        {
+            HasNoRecords |= check;
         }
 
         public void SetMake(IvidCodePair pair)
@@ -131,6 +136,11 @@ namespace Lace.Domain.Core.Entities
         {
             var carFullName = string.Format("{0} {1}", MakeDescription, ModelDescription);
             CarFullname = string.IsNullOrEmpty(carFullName) ? null : carFullName;
+        }
+
+        public void SetReportStatusMessage(string message)
+        {
+            ReportStatusMessage = message;
         }
 
         private string CheckPartial(string value)
@@ -206,7 +216,12 @@ namespace Lace.Domain.Core.Entities
         [DataMember]
         public bool HasErrors { get; private set; }
         [DataMember]
+        public bool HasNoRecords { get; private set; }
+        [DataMember]
         public string CarFullname { get; private set; }
+        [DataMember]
+        public string ReportStatusMessage { get; private set; }
+
         [DataMember]
         public string TypeName
         {
@@ -236,7 +251,5 @@ namespace Lace.Domain.Core.Entities
         {
             Handled = true;
         }
-
-       
     }
 }
