@@ -9,16 +9,23 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
     public static class HandleRequest
     {
-        public static bool IsSatisfied(IList<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
+        public static bool IsSatisfied(ICollection<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
         {
             return !string.IsNullOrEmpty(GetVinNumber(response, request));
         }
 
-        public static string GetVinNumber(IList<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
+        public static string GetVinNumber(ICollection<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
         {
             return string.IsNullOrEmpty(GetValue(request.VinNumber))
                 ? ContinueWithIvid(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
                 : GetValue(request.VinNumber);
+        }
+
+        public static int GetCarId(IAmLightstoneAutoRequest request)
+        {
+            int carId;
+            int.TryParse(GetValue(request.CarId), out carId);
+            return carId;
         }
 
         private static string GetValue(IAmRequestField field)
@@ -26,7 +33,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
         }
 
-        private static bool ContinueWithIvid(IList<IPointToLaceProvider> response)
+        private static bool ContinueWithIvid(ICollection<IPointToLaceProvider> response)
         {
             return response.OfType<IProvideDataFromIvid>().Any() && response.OfType<IProvideDataFromIvid>().First() != null &&
                        response.OfType<IProvideDataFromIvid>().First().Handled;

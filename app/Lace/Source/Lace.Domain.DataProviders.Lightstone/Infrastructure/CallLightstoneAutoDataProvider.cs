@@ -4,7 +4,6 @@ using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -30,8 +29,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private readonly IReadOnlyRepository _repository;
         private readonly IReadOnlyRepository _carRepository;
 
-        private string _vinNumber;
-
         public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository,
             IReadOnlyRepository carRepository, ILogCommandTypes logCommand)
         {
@@ -46,23 +43,24 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         {
             try
             {
-                _vinNumber = HandleRequest.GetVinNumber(response.ToList(), _dataProvider.GetRequest<IAmLightstoneAutoRequest>());
-
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
-                    .ForDatabaseType(), new { _dataProvider });
+                    .ForDatabaseType(), new {_dataProvider});
 
-                GetCarInformation();
+                RetrieveVechicle.WithCarId(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation,
+                    RetrieveVechicle.WithVin(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation));
+
                 GetMetrics();
 
-                _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
-                        .ForDatabaseType(), new { _carInformation, _metrics });
+                _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                        .ForDatabaseType(), new {_carInformation, _metrics});
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex,ex.Message);
-                _logCommand.LogFault(ex, new { ErrorMessage = "Error calling Lightstone Data Provider" });
+                _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex, ex.Message);
+                _logCommand.LogFault(ex, new {ErrorMessage = "Error calling Lightstone Data Provider"});
                 LightstoneResponseFailed(response);
             }
         }
@@ -89,16 +87,16 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             response.Add(lightstoneResponse);
         }
 
-        private void GetCarInformation()
-        {
-            _carInformation =
-                new GetCarInformation(_vinNumber,
-                    _carRepository)
-                    .SetupDataSources()
-                    .GenerateData()
-                    .BuildCarInformation()
-                    .BuildCarInformationRequest();
-        }
+        //private void GetCarInformation(string vinNumber)
+        //{
+        //    _carInformation =
+        //        new GetCarInformation(vinNumber,
+        //            _carRepository)
+        //            .SetupDataSources()
+        //            .GenerateData()
+        //            .BuildCarInformation()
+        //            .BuildCarInformationRequest();
+        //}
 
         private void GetMetrics()
         {

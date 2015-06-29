@@ -57,7 +57,7 @@ namespace Lace.Domain.DataProviders.Lightstone
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
                     response.OfType<IProvideDataFromLightstoneAuto>().First() == null)
-                    CallFallbackSource(response, _command); //TODO: VIN12?
+                    CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

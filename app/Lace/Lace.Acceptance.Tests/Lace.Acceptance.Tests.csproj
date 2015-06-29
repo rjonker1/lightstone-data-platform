@@ -125,6 +125,7 @@
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_source_with_financed_interest.cs" />
     <Compile Include="Lace\Consumers\when_consuming_lightstone_business_director_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_lightstone_business_company_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_lightstone_data_provider_with_car_id.cs" />
     <Compile Include="Lace\Consumers\when_consuming_lightstone_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_rgt_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_rgt_vin_data_provider.cs" />
@@ -273,7 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\License\License.xml" />
-    <Content Include="License\License.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

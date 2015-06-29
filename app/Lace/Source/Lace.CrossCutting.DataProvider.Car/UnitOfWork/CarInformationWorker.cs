@@ -25,7 +25,6 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             try
             {
                 GetCarInformationWithVin(request);
-                //GetCarWithCarIdAndYear(request);
                 GetWithCarId(request);
             }
             catch (Exception ex)
