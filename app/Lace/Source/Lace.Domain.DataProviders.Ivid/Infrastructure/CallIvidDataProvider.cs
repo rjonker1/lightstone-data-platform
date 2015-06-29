@@ -68,7 +68,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             if (transformer.Continue)
             {
                 transformer.Transform();
-                transformer.SetReportStatus(_request);
+                transformer.SetStatusMessages(_request);
             }
 
             _logCommand.LogTransformation(transformer.Result, null);

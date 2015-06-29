@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.Domain.Core.Entities;
@@ -57,9 +58,18 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             AddToCache();
         }
 
-        public void SetReportStatus(HpiStandardQueryRequest request)
+        public void SetStatusMessages(HpiStandardQueryRequest request)
         {
-            RuleProcessor.ForReportStatusMessage(request, Result);
+            Result.AddReportStatusMessage(
+                DataChecks.ReportStatusMessages.FirstOrDefault(
+                    w => w.Key == DataChecks.ResponseChecks((Result.HasIssues || Result.HasNoRecords), DataChecks.ValidationTest.FurtherInvestigation))
+                    .Value);
+            Result.AddReportStatusMessage(
+                DataChecks.ReportStatusMessages.FirstOrDefault(
+                    w => w.Key == DataChecks.ResponseChecks((!string.IsNullOrEmpty(request.LicenceNo) && !string.IsNullOrEmpty(Result.License) &&
+                                                             !Result.License.Equals(request.LicenceNo, StringComparison.CurrentCultureIgnoreCase)),
+                        DataChecks.ValidationTest.LicensePlateMismatch)).Value);
+
         }
 
         private void AddToCache()

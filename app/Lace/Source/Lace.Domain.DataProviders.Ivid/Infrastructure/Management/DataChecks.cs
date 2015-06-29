@@ -6,22 +6,14 @@ using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {
-    public static class RuleProcessor
+    public static class DataChecks
     {
-        static RuleProcessor()
+        static DataChecks()
         {
 
         }
 
-        public static void ForReportStatusMessage(HpiStandardQueryRequest request, IvidResponse response)
-        {
-            response.AddReportStatusMessage(ReportStatusMessages.FirstOrDefault(w => w.Key == ResponseChecks((response.HasIssues || response.HasNoRecords), ValidationTest.FurtherInvestigation)).Value);
-            response.AddReportStatusMessage(ReportStatusMessages.FirstOrDefault(w => w.Key == ResponseChecks((!string.IsNullOrEmpty(request.LicenceNo) && !string.IsNullOrEmpty(response.License) &&
-                                             !response.License.Equals(request.LicenceNo, StringComparison.CurrentCultureIgnoreCase)),
-                ValidationTest.LicensePlateMismatch)).Value);
-        }
-
-        private static readonly IDictionary<StatusMessageType, string> ReportStatusMessages = new Dictionary<StatusMessageType, string>()
+        public static readonly IDictionary<StatusMessageType, string> ReportStatusMessages = new Dictionary<StatusMessageType, string>()
         {
             {
                 StatusMessageType.FurtherInvestigation,
@@ -31,7 +23,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             {StatusMessageType.NoStatusFeedbackRequired, null}
         };
 
-        private static StatusMessageType ResponseChecks(bool check, ValidationTest test)
+        public static StatusMessageType ResponseChecks(bool check, ValidationTest test)
         {
             var dataTests = new Dictionary<ValidationTest, Func<bool,StatusMessageType>>();
             dataTests[ValidationTest.LicensePlateMismatch] = (c) => c ? StatusMessageType.LicensePlateMismatch : StatusMessageType.NoStatusFeedbackRequired;
@@ -39,14 +31,14 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             return dataTests.FirstOrDefault(w => w.Key == test).Value(check);
         }
 
-        private enum StatusMessageType
+        public enum StatusMessageType
         {
             NoStatusFeedbackRequired,
             FurtherInvestigation,
             LicensePlateMismatch
         }
 
-        private enum ValidationTest
+        public enum ValidationTest
         {
             LicensePlateMismatch,
             FurtherInvestigation
