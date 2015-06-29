@@ -1,6 +1,5 @@
 ﻿using System;
-using Lace.Shared.DataProvider.Contracts;
-
+using Lace.Domain.Core.Contracts.Caching;
 namespace Lace.Shared.DataProvider.Models
 {
     public class Sale : IAmCachable

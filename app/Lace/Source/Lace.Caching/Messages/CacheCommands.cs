@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using EasyNetQ;
+using Lace.Domain.Core.Contracts.DataProviders;
 
 namespace Lace.Caching.Messages
 {

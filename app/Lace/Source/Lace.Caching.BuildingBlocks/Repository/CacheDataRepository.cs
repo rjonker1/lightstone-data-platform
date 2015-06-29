@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Common.Logging;
-using Lace.Shared.DataProvider.Contracts;
+using Lace.Domain.Core.Contracts.Caching;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -18,6 +20,16 @@ namespace Lace.Caching.BuildingBlocks.Repository
         {
             _connection = connection;
             _log = LogManager.GetLogger(GetType());
+        }
+
+        private CacheDataRepository()
+        {
+            
+        }
+
+        public static CacheDataRepository ForCacheOnly()
+        {
+            return new CacheDataRepository();
         }
 
         public void AddItemsForEach<TItem>(string sql) where TItem : class
@@ -89,6 +101,23 @@ namespace Lace.Caching.BuildingBlocks.Repository
                 _log.ErrorFormat("Cannot Clear All the Items from the Cache becuse of {0}", ex, ex.Message);
             }
         }
-        
+
+        public void AddItemWithKey<TItem>(string key, TItem item, DateTime expiresAt) where TItem : class
+        {
+            try
+            {
+                using (var client = new RedisClient(CacheIp))
+                {
+                    var cachedItem = client.As<TItem>();
+                    var response = cachedItem.Lists[key];
+                    response.Add(item);
+                    client.Add(key, response, expiresAt);
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Cannot Clear All the Items from the Cache becuse of {0}", ex, ex.Message);
+            }
+        }
     }
 }

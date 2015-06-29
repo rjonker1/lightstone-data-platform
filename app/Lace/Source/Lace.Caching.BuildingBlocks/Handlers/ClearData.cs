@@ -1,5 +1,5 @@
 ﻿using Common.Logging;
-using Lace.Shared.DataProvider.Contracts;
+using Lace.Domain.Core.Contracts.Caching;
 
 namespace Lace.Caching.BuildingBlocks.Handlers
 {
