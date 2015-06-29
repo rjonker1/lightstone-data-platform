@@ -80,11 +80,11 @@
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1304\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1304\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -114,6 +114,7 @@
     <Compile Include="Domain\Entities\AuditLog.cs" />
     <Compile Include="Domain\Entities\BillingTransaction.cs" />
     <Compile Include="Domain\Entities\Client.cs" />
+    <Compile Include="Domain\Entities\ContractMeta.cs" />
     <Compile Include="Domain\Entities\Customer.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
     <Compile Include="Domain\Entities\FinalBilling.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Helpers\AutoMapper\MappingOverrides\UserCheck1MappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ClientMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ContractMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\CustomerMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\FinalBIllingMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />

@@ -45,7 +45,8 @@ namespace Workflow.Billing.Consumer
                 .Add<UserMessage>((message, info) => new TransactionConsumer<UserMessage> (message, container))
                 .Add<CustomerMessage>((message, info) => new TransactionConsumer<CustomerMessage>(message, container))
                 .Add<ClientMessage>((message, info) => new TransactionConsumer<ClientMessage>(message, container))
-                .Add<PackageMessage>((message, info) => new TransactionConsumer<PackageMessage>(message, container)));
+                .Add<PackageMessage>((message, info) => new TransactionConsumer<PackageMessage>(message, container))
+                .Add<ContractMessage>((message, info) => new TransactionConsumer<ContractMessage>(message, container)));
 
             _log.DebugFormat("Billing service started");
         }
