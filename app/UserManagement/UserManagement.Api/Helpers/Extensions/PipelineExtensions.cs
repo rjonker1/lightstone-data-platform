@@ -93,7 +93,7 @@ namespace UserManagement.Api.Helpers.Extensions
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
             {
 
-                //Customer
+                // Customer
                 if (nancyContext.Request.Method == "POST" && nancyContext.Request.Url.Path.Contains("Customer"))
                 {
 
@@ -102,8 +102,8 @@ namespace UserManagement.Api.Helpers.Extensions
                     foreach (var customer in customers)
                     {
 
-                        //Set new customer AccountNumber
-                        //Send to Queue
+                        // Set new customer AccountNumber
+                        // Send to Queue
                         if (customer.CustomerAccountNumber.Customer == null)
                         {
                             customer.CustomerAccountNumber.Customer = customer;
@@ -141,7 +141,7 @@ namespace UserManagement.Api.Helpers.Extensions
                     }
                 }
 
-                //Client
+                // Client
                 if (nancyContext.Request.Method == "POST" && nancyContext.Request.Url.Path.Contains("Client"))
                 {
 
@@ -150,8 +150,8 @@ namespace UserManagement.Api.Helpers.Extensions
                     foreach (var client in clients)
                     {
 
-                        //Set new client AccountNumber
-                        //Send to Queue
+                        // Set new client AccountNumber
+                        // Send to Queue
                         if (client.ClientAccountNumber.Client == null)
                         {
                             client.ClientAccountNumber.Client = client;
