@@ -48,7 +48,7 @@ namespace UserManagement.Domain.Dtos
         public bool HasPackage { get; set; }
         public bool HasPackagePriceOverride { get; set; }
         public Guid? ContractBundleId { get; set; }
-        public decimal ContractBundlePrice { get; set; }
+        public double ContractBundlePrice { get; set; }
         public int ContractBundleTransactionLimit { get; set; }
         public IEnumerable<ContractBundle> ContractBundleList { get; set; } 
 

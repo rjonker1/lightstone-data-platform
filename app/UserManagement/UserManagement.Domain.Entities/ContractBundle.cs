@@ -5,8 +5,8 @@ namespace UserManagement.Domain.Entities
 {
     public class ContractBundle : NamedEntity
     {
-        public virtual double? Price { get; set; }
-        public virtual int? TransactionLimit { get; set; }
+        public virtual double Price { get; set; }
+        public virtual int TransactionLimit { get; set; }
 
         public ContractBundle() { }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
 using AutoMapper;
 using Castle.Windsor;
@@ -10,6 +11,7 @@ using EasyNetQ;
 using Nancy;
 using Nancy.Bootstrapper;
 using NHibernate;
+using NHibernate.Util;
 using UserManagement.Api.Helpers.NancyRazorHelpers;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
@@ -22,7 +24,7 @@ namespace UserManagement.Api.Helpers.Extensions
 {
     public static class PipelineExtensions
     {
-         public static void AddTransactionScope(this IPipelines pipelines, IWindsorContainer container, TransactionScope scope)
+        public static void AddTransactionScope(this IPipelines pipelines, IWindsorContainer container, TransactionScope scope)
         {
             //pipelines.AfterRequest.AddItemToEndOfPipeline(ctx =>
             //{
@@ -57,7 +59,7 @@ namespace UserManagement.Api.Helpers.Extensions
                 var session = container.Resolve<ISession>();
                 if (session == null)
                     return;
-                if (!session.Transaction.IsActive) 
+                if (!session.Transaction.IsActive)
                     return;
                 if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
                     session.Transaction.Rollback();
@@ -68,7 +70,7 @@ namespace UserManagement.Api.Helpers.Extensions
 
         public static void AddLookupDataToViewBag<T>(this IPipelines pipelines, IRetrieveEntitiesByType entityRetriever) where T : IValueEntity, IEntity
         {
-            var type = typeof (T);
+            var type = typeof(T);
             var valueEntities = entityRetriever.GetValueEntities(type);
             var list = valueEntities.ToList().Select(x => new SelectListItem(x.Value, x.Id + ""));
 
@@ -79,7 +81,7 @@ namespace UserManagement.Api.Helpers.Extensions
             });
         }
 
-        public static void AddLookupDataToViewBag(this IPipelines pipelines, string key, object value) 
+        public static void AddLookupDataToViewBag(this IPipelines pipelines, string key, object value)
         {
             pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
             {
@@ -182,6 +184,63 @@ namespace UserManagement.Api.Helpers.Extensions
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(dto, new ClientMessage());
                             metaEntity.BillingType = dto.CommercialStateValue;
+                            var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
+                            advancedBus.SendDynamic(metaEntity);
+
+                        }
+                    }
+                }
+
+                // Contract
+                if (nancyContext.Request.Method == "POST" && nancyContext.Request.Url.Path.Contains("Contract"))
+                {
+
+                    var contracts = container.Resolve<IContractRepository>().Select(x => x);
+                    var contractBundles = container.Resolve<IContractBundleRepository>().Select(x => x);
+
+                    foreach (var contract in contracts)
+                    {
+
+
+                        var contractBundle = contractBundles.FirstOrDefault(x => x.Id == contract.ContractBundleId);
+
+                        //////RabbitMQ
+                        var metaEntity = Mapper.Map(contract, new ContractMessage
+                        {
+                            ContractBundleName = contractBundle == null ? null : contractBundle.Name,
+                            ContractBundleTransactionLimit = contractBundle == null ? 0 : contractBundle.TransactionLimit,
+                            ContractBundlePrice = contractBundle == null ? 0 : contractBundle.Price
+                        });
+
+                        var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
+                        advancedBus.SendDynamic(metaEntity);
+
+                    }
+                }
+
+                if (nancyContext.Request.Method == "PUT" && nancyContext.Request.Url.Path.Contains("Contract"))
+                {
+
+                    var valueArray = nancyContext.Request.Url.ToString().Split('/');
+                    var contracts = Mapper.Map<IEnumerable<Contract>, IEnumerable<ContractDto>>(container.Resolve<IContractRepository>());
+                    var contractBundles = container.Resolve<IContractBundleRepository>().Select(x => x);
+
+                    foreach (var val in valueArray)
+                    {
+                        Guid urlId;
+                        if (Guid.TryParse(val, out urlId))
+                        {
+
+                            var dto = contracts.FirstOrDefault(x => x.Id == urlId);
+                            var contractBundle = contractBundles.FirstOrDefault(x => x.Id == dto.ContractBundleId);
+
+                            ////RabbitMQ
+                            var metaEntity = Mapper.Map(dto, new ContractMessage
+                            {
+                                ContractBundleName = contractBundle == null ? null : contractBundle.Name,
+                                ContractBundleTransactionLimit = contractBundle == null ? 0 : contractBundle.TransactionLimit,
+                                ContractBundlePrice = contractBundle == null ? 0.00 : contractBundle.Price
+                            });
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
 
