@@ -53,8 +53,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             Result.BuildSpecificInformation();
 
             Result.SetCarFullName();
-
-            //Result.AddToCache(CacheDataRepository.ForCacheOnly());
+            
             AddToCache();
         }
 
@@ -65,17 +64,19 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 
         private void AddToCache()
         {
-            if(!Result.HasNoRecords)
+            if(Result.HasNoRecords)
                 return;
 
-            try
-            {
-                Task.Run(() => Result.AddToCache(CacheDataRepository.ForCacheOnly()));
-            }
-            catch (Exception ex)
-            {
+            Result.AddToCache(CacheDataRepository.ForCacheOnly());
 
-            }
+            //try
+            //{
+            //    Task.Run(() => Result.AddToCache(CacheDataRepository.ForCacheOnly()));
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
         }
 
         private static IvidCodePair BuildIvidCodePair(CodeDescription description)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts;
@@ -138,9 +139,15 @@ namespace Lace.Domain.Core.Entities
             CarFullname = string.IsNullOrEmpty(carFullName) ? null : carFullName;
         }
 
-        public void SetReportStatusMessage(string message)
+        public void AddReportStatusMessage(string message)
         {
-            ReportStatusMessage = message;
+            if(string.IsNullOrEmpty(message))
+                return;
+
+            if (ReportStatusMessages == null)
+                ReportStatusMessages = new List<string>();
+
+            ReportStatusMessages.Add(message);
         }
 
         private string CheckPartial(string value)
@@ -220,7 +227,7 @@ namespace Lace.Domain.Core.Entities
         [DataMember]
         public string CarFullname { get; private set; }
         [DataMember]
-        public string ReportStatusMessage { get; private set; }
+        public List<string> ReportStatusMessages  { get; private set; }
 
         [DataMember]
         public string TypeName

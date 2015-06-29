@@ -58,5 +58,12 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         {
             _consumer.FallBack.ShouldBeNull();
         }
+
+        [Observation]
+        public void ivid_consumer_should_have_no_status_message_raised()
+        {
+            _response.OfType<IProvideDataFromIvid>().First().ReportStatusMessages.ShouldBeNull();
+            _response.OfType<IProvideDataFromIvid>().First().HasIssues.ShouldBeFalse();
+        }
     }
 }

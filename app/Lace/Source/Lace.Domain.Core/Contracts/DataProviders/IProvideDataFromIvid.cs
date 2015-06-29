@@ -1,4 +1,5 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.Requests;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
@@ -38,6 +39,6 @@ namespace Lace.Domain.Core.Contracts.DataProviders
         bool HasErrors { get; }
         bool HasNoRecords { get; }
         string CarFullname { get; }
-        string ReportStatusMessage { get; }
+        List<string> ReportStatusMessages { get; }
     }
 }

@@ -30,6 +30,6 @@ namespace Lace.Domain.Core.Contracts
         void BuildSpecificInformation();
 
         void SetCarFullName();
-        void SetReportStatusMessage(string message);
+        void AddReportStatusMessage(string message);
     }
 }
