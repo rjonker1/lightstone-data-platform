@@ -174,8 +174,7 @@
       <description>Lightstone.DataPlatform.Lim.Schedule.Service</description>
       <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
-       <include pattern="bin\" to="content\bin"/>
-       <include pattern="*.config" to="content"/>
+       <include pattern="*" to="content\bin"/>
       </includes>
     </nuget>
     <nuget deploy="false">
@@ -185,8 +184,7 @@
       <description>Lightstone.DataPlatform.Lace.Caching.Manager.Service</description>
       <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
-       <include pattern="bin\" to="content\bin"/>
-       <include pattern="*.config" to="content"/>
+       <include pattern="*" to="content\bin"/>
       </includes>
     </nuget>
     <nuget deploy="false">
@@ -196,8 +194,7 @@
       <description>Lightstone.DataPlatform.Workflow.DataProvider.Bus</description>
       <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
-       <include pattern="bin\" to="content\bin"/>
-       <include pattern="*.config" to="content"/>
+       <include pattern="*" to="content\bin"/>
       </includes>
     </nuget>
 
