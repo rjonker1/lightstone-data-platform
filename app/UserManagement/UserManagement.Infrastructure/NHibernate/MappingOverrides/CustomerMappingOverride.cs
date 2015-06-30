@@ -12,8 +12,8 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
             mapping.References(x => x.ContactDetail).Cascade.SaveUpdate();
             mapping.References(x => x.CommercialState).Cascade.SaveUpdate();
             mapping.References(x => x.Billing).Cascade.SaveUpdate();
-            mapping.HasManyToMany(x => x.Clients).Cascade.SaveUpdate().Table("ClientCustomer"); 
-            mapping.HasManyToMany(x => x.Contracts).Cascade.SaveUpdate().Table("CustomerContract"); 
+            mapping.HasManyToMany(x => x.Clients).Cascade.SaveUpdate().Table("ClientCustomer").ParentKeyColumn("CustomerId").ChildKeyColumn("ClientId"); ; 
+            mapping.HasManyToMany(x => x.Contracts).Cascade.SaveUpdate().Table("CustomerContract").ParentKeyColumn("CustomerId").ChildKeyColumn("ContractId"); 
             mapping.HasMany(x => x.CustomerUsers).Cascade.SaveUpdate().Table("CustomerUser"); // Inverse as User entity responsible for saving
             //mapping.HasMany(Customer.Expressions.Users)
             //    .Inverse()

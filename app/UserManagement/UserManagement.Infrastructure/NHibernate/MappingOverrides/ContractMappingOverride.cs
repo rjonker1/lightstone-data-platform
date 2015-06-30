@@ -9,9 +9,9 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
         public void Override(AutoMapping<Contract> mapping)
         {
             mapping.References(x => x.ContractType).Cascade.SaveUpdate();
-            mapping.HasManyToMany(x => x.Packages).Cascade.SaveUpdate().Table("ContractPackage");
-            mapping.HasManyToMany(x => x.Customers).Cascade.SaveUpdate().Table("CustomerContract");
-            mapping.HasManyToMany(x => x.Clients).Cascade.SaveUpdate().Table("ClientContract");
+            mapping.HasManyToMany(x => x.Packages).Cascade.SaveUpdate().Table("ContractPackage").ParentKeyColumn("ContractId").ChildKeyColumn("PackageId"); ;
+            mapping.HasManyToMany(x => x.Customers).Cascade.SaveUpdate().Table("CustomerContract").ParentKeyColumn("ContractId").ChildKeyColumn("CustomerId"); ;
+            mapping.HasManyToMany(x => x.Clients).Cascade.SaveUpdate().Table("ClientContract").ParentKeyColumn("ContractId").ChildKeyColumn("ClientId");
         }
     }
 }
