@@ -5,9 +5,22 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Lim.Domain.Entities.Factory
 {
-    public class SessionFactory
+    public sealed class FactoryManager
     {
-        public static ISessionFactory BuildSession(string connectionString)
+        private static readonly ISessionFactory _instance = BuildSession("lim/schedule/database");
+        static FactoryManager()
+        {
+        }
+
+        public static ISessionFactory Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
+        private static ISessionFactory BuildSession(string connectionString)
         {
             return Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2012.ConnectionString(System.Configuration.ConfigurationManager.ConnectionStrings[connectionString].ConnectionString))

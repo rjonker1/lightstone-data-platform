@@ -25,9 +25,8 @@ namespace Lim.Web.UI
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             //container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());
-
-            container.Register<ISessionFactory>(SessionFactory.BuildSession("database/lim"));
-            container.Register<ISession>(container.Resolve<ISessionFactory>().OpenSession());
+            //container.Register<ISessionFactory>(FactoryManager.Instance);
+            //container.Register<ISession>(container.Resolve<ISessionFactory>().OpenSession());
             container.Register<IAmRepository, LimRepository>();
             container.Register<IUserManagementApiClient, UserManagementApiClient>();
             container.Register<ISaveApiConfiguration, SaveApiConfiguration>();

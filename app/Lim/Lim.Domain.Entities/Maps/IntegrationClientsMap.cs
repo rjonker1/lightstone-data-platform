@@ -7,7 +7,7 @@ namespace Lim.Domain.Entities.Maps {
         
         public IntegrationClientsMap() {
 			Table("IntegrationClients");
-            LazyLoad();
+            Not.LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id").Index("IX_IntegrationClient_Id");
             References(x => x.Configuration).Column("ConfigurationId").Index("IX_IntegrationClient_ConfigurationId"); ;
             Map(x => x.ClientCustomerId).Column("ClientCustomerId").Not.Nullable().Index("IX_IntegrationClient_ClientId");

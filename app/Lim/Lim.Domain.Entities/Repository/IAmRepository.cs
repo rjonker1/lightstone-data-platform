@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Lim.Domain.Entities.Factory;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -11,81 +12,71 @@ namespace Lim.Domain.Entities.Repository
     {
         T Get<T>(object id);
         T Find<T>(Expression<Func<T, bool>> predicate) where T : class;
-        IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : class;
-        IQueryable<T> GetAll<T>() where T : class;
+        IEnumerable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : class;
+        IEnumerable<T> GetAll<T>() where T : class;
         void Save<T>(T entity) where T : class;
         void SaveOrUpdate<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;
         void Merge<T>(T entity) where T : class;
-        void Flush();
     }
 
     public class LimRepository : IAmRepository
     {
-        private readonly ISession _session;
-
-        public LimRepository(ISession session)
-        {
-            _session = session;
-            _session.FlushMode = FlushMode.Always;
-        }
-
         public T Get<T>(object id)
         {
-            CheckConnection();
-            return _session.Get<T>(id);
+            using (var session = FactoryManager.Instance.OpenSession())
+                return session.Get<T>(id);
         }
 
         public T Find<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            CheckConnection();
-            return _session.Query<T>().CacheMode(CacheMode.Refresh).Where(predicate).FirstOrDefault();
+            using (var session = FactoryManager.Instance.OpenSession())
+                return session.Query<T>().CacheMode(CacheMode.Refresh).Where(predicate).FirstOrDefault();
         }
 
-        public IQueryable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : class
+        public IEnumerable<T> Get<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            CheckConnection();
-            return _session.Query<T>().CacheMode(CacheMode.Refresh).Where(predicate);
+            using (var session = FactoryManager.Instance.OpenSession())
+                return session.Query<T>().CacheMode(CacheMode.Refresh).Where(predicate).ToList();
         }
 
         public void Save<T>(T entity) where T : class
         {
-            CheckConnection();
-            _session.Save(entity);
+            using (var session = FactoryManager.Instance.OpenSession())
+                session.Save(entity);
         }
 
         public void Update<T>(T entity) where T : class
         {
-            CheckConnection();
-            _session.Update(entity);
+            using (var session = FactoryManager.Instance.OpenSession())
+                session.Update(entity);
         }
 
         public void SaveOrUpdate<T>(T entity) where T : class
         {
-            CheckConnection();
-            _session.SaveOrUpdate(entity);
+            using (var session = FactoryManager.Instance.OpenSession())
+                session.SaveOrUpdate(entity);
         }
 
-        public IQueryable<T> GetAll<T>() where T : class
+        public IEnumerable<T> GetAll<T>() where T : class
         {
-            CheckConnection();
-            return _session.Query<T>();
+            using (var session = FactoryManager.Instance.OpenSession())
+                return session.Query<T>().ToList();
         }
         public void Merge<T>(T entity) where T : class
         {
-            CheckConnection();
-            _session.Merge(entity);
+            using (var session = FactoryManager.Instance.OpenSession())
+            {
+                session.Merge(entity);
+                session.Flush();
+            }
+                
         }
 
         private void CheckConnection()
         {
-            if (_session.Connection.State == ConnectionState.Closed)
-                _session.Connection.Open();
-        }
-
-        public void Flush()
-        {
-            _session.Flush();
+            using (var session = FactoryManager.Instance.OpenSession())
+                session.Connection.Open();
         }
     }
 }
