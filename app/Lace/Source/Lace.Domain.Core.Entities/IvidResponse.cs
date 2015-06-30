@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Caching;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Models;
 using Newtonsoft.Json;
@@ -10,11 +12,30 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 namespace Lace.Domain.Core.Entities
 {
     [DataContract]
-    public class IvidResponse : IProvideDataFromIvid, IBuildIvidResponse
+    public class IvidResponse : IProvideDataFromIvid, IBuildIvidResponse, IAmCachable
     {
         private const string NotAvailableError = "Error - Not Available";
+        public const string CacheKey = "urn:Ivid:{0}";
 
-        public void Build(string statusMessage, string reference, string license, string registration,
+
+        public IvidResponse()
+        {
+            
+        }
+
+        public static IvidResponse Empty()
+        {
+            return new IvidResponse();
+        }
+
+        public static IvidResponse Build(string statusMessage, string reference, string license, string registration,
+            string registrationDate, string vin, string engine,
+            string displacement, string tare)
+        {
+            return  new IvidResponse(statusMessage,reference,license,registration,registrationDate, vin,engine,displacement,tare);
+        }
+
+        private IvidResponse(string statusMessage, string reference, string license, string registration,
             string registrationDate, string vin, string engine,
             string displacement, string tare)
         {
@@ -29,6 +50,13 @@ namespace Lace.Domain.Core.Entities
             Tare = CheckPartial(tare);
         }
 
+        public void AddToCache(ICacheRepository repository)
+        {
+            repository.AddItemWithKey(string.Format(CacheKey, Vin), this, DateTime.Now.AddDays(1));
+            repository.AddItemWithKey(string.Format(CacheKey, License), this, DateTime.Now.AddDays(1));
+            repository.AddItemWithKey(string.Format(CacheKey, Registration), this, DateTime.Now.AddDays(1));
+        }
+
         public void SetErrorFlag(bool check)
         {
             HasErrors |= check;
@@ -37,6 +65,11 @@ namespace Lace.Domain.Core.Entities
         public void SetHasIssuesFlag(bool check)
         {
             HasIssues |= check;
+        }
+
+        public void SetHasNoRecordsFlag(bool check)
+        {
+            HasNoRecords |= check;
         }
 
         public void SetMake(IvidCodePair pair)
@@ -104,6 +137,17 @@ namespace Lace.Domain.Core.Entities
         {
             var carFullName = string.Format("{0} {1}", MakeDescription, ModelDescription);
             CarFullname = string.IsNullOrEmpty(carFullName) ? null : carFullName;
+        }
+
+        public void AddReportStatusMessage(string message)
+        {
+            if(string.IsNullOrEmpty(message))
+                return;
+
+            if (ReportStatusMessages == null)
+                ReportStatusMessages = new List<string>();
+
+            ReportStatusMessages.Add(message);
         }
 
         private string CheckPartial(string value)
@@ -179,7 +223,12 @@ namespace Lace.Domain.Core.Entities
         [DataMember]
         public bool HasErrors { get; private set; }
         [DataMember]
+        public bool HasNoRecords { get; private set; }
+        [DataMember]
         public string CarFullname { get; private set; }
+        [DataMember]
+        public List<string> ReportStatusMessages  { get; private set; }
+
         [DataMember]
         public string TypeName
         {

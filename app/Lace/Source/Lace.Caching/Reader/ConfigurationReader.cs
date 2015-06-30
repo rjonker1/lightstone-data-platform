@@ -1,6 +1,6 @@
 ﻿using Workflow.BuildingBlocks;
 
-namespace Lace.Caching.Manager.Service.Reader
+namespace Lace.Caching.Reader
 {
     public class ConfigurationReader
     {

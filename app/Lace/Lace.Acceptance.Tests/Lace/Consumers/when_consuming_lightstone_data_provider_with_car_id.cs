@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone;
 using Lace.Test.Helper.Builders.Buses;
-using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Mothers.Requests;
 using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Consumers
 {
-    public class when_consuming_lightstone_data_provider : Specification
+    public class when_consuming_lightstone_data_provider_with_car_id : Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private readonly ICollection<IPointToLaceProvider> _response;
         private LightstoneAutoDataProvider _consumer;
 
-        public when_consuming_lightstone_data_provider()
+        public when_consuming_lightstone_data_provider_with_car_id()
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
-            _request = new[] {new LicensePlateNumberLightstoneOnlyRequest()};
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _request = new[] {new CarIdLightstoneOnlyRequest()};
+            _response = new Collection<IPointToLaceProvider>();
         }
 
         public override void Observe()

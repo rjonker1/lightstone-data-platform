@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
-using Lace.Caching.Manager.Service.Reader;
+using Lace.Caching.Reader;
 using Workflow.BuildingBlocks;
 
 namespace Lace.Caching.Manager.Service.Installers

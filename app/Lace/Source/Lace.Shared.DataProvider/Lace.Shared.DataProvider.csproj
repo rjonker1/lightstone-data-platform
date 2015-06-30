@@ -89,8 +89,6 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Contracts\ICacheRepository.cs" />
-    <Compile Include="Contracts\IAmCachable.cs" />
     <Compile Include="Models\Band.cs" />
     <Compile Include="Models\CarInformation.cs" />
     <Compile Include="Models\CarSpecification.cs" />
@@ -110,6 +108,10 @@
     <ProjectReference Include="..\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj">
       <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
       <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
+      <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
+      <Name>Lace.Domain.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

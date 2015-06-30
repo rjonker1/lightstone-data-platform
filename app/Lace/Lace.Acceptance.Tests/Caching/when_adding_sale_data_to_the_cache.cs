@@ -3,7 +3,7 @@ using System.Linq;
 using Lace.Caching.BuildingBlocks.Handlers;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Shared.DataProvider.Contracts;
+using Lace.Domain.Core.Contracts.Caching;
 using Lace.Shared.DataProvider.Models;
 using Lace.Shared.DataProvider.Repositories;
 using Xunit.Extensions;
