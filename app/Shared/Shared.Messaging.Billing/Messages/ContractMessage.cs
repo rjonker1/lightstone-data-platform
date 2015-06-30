@@ -7,6 +7,7 @@ namespace DataPlatform.Shared.Messaging.Billing.Messages
     [Queue("DataPlatform.Transactions.Billing", ExchangeName = "DataPlatform.Transactions.Billing")]
     public class ContractMessage : Entity
     {
+        public virtual Guid ContractId { get; set; }
         public virtual string ContractName { get; set; }
         public virtual bool IsActive { get; set; }
         public virtual bool HasPackagePriceOverride { get; set; }
