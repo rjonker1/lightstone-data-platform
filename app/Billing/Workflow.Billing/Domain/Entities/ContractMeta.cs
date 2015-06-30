@@ -5,6 +5,7 @@ namespace Workflow.Billing.Domain.Entities
 {
     public class ContractMeta : Entity
     {
+        public virtual Guid ContractId { get; set; }
         public virtual string ContractName { get; set; }
         public virtual bool IsActive { get; set; }
         public virtual bool HasPackagePriceOverride { get; set; }

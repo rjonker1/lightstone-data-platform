@@ -21,7 +21,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
         {
             // New ContractMeta
             var entity = Mapper.Map<ContractMessage, ContractMeta>(message.Body);
-            var dbEntity = _contracts.Select(x => x).Where(x => x.Id == message.Body.Id);
+            var dbEntity = _contracts.Select(x => x).Where(x => x.ContractId == message.Body.ContractId);
 
             if (dbEntity.Any())
             {
@@ -33,6 +33,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     CreatedBy = dbEntity.FirstOrDefault().CreatedBy,
                     Modified = DateTime.UtcNow,
                     ModifiedBy = GetType().Assembly.FullName,
+                    ContractId = dbEntity.FirstOrDefault().ContractId,
                     ContractName = dbEntity.FirstOrDefault().ContractName,
                     ContractBundleId = dbEntity.FirstOrDefault().ContractBundleId,
                     ContractBundleName = dbEntity.FirstOrDefault().ContractName,

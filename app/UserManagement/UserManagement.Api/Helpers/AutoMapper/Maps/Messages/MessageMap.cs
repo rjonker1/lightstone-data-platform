@@ -32,6 +32,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => Guid.NewGuid()))
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
+                .ForMember(dest => dest.ContractId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.ContractName, opt => opt.MapFrom(x => x.Name))
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(x => x.IsActive))
                 .ForMember(dest => dest.ContractBundleId, opt => opt.MapFrom(x => x.ContractBundleId));
@@ -56,6 +57,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => Guid.NewGuid()))
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
+                .ForMember(dest => dest.ContractId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.ContractName, opt => opt.MapFrom(x => x.Name))
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(x => x.IsActive))
                 .ForMember(dest => dest.ContractBundleId, opt => opt.MapFrom(x => x.ContractBundleId))
