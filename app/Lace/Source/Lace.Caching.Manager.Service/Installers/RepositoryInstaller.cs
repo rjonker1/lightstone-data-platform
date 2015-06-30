@@ -3,7 +3,6 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using Lace.Caching.BuildingBlocks.Repository;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Caching;
 
 namespace Lace.Caching.Manager.Service.Installers
@@ -15,8 +14,7 @@ namespace Lace.Caching.Manager.Service.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             _log.InfoFormat("Installing Repositories");
-            container.Register(Component.For<ICacheRepository>().UsingFactoryMethod(() => new CacheDataRepository(
-                ConnectionFactory.ForAutoCarStatsDatabase())));
+            container.Register(Component.For<ICacheRepository>().UsingFactoryMethod(() => new CacheDataRepository()));
         }
     }
 }

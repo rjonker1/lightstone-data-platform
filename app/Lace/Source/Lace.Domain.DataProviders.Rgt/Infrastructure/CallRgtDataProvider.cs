@@ -53,7 +53,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     throw new Exception("Cannot continue with RGT as the request is invalid");
                 }
 
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {_dataProvider});
 
                 _carInformation = request.CarInformation;
@@ -62,7 +62,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 GetCarSpecifics();
 
                 _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                    new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                         .ForDatabaseType(), new {_carSpecifications});
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)

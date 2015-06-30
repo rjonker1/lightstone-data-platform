@@ -21,9 +21,7 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
         {
             _log.InfoFormat("Installing Repositories");
             container.Register(
-                Component.For<IEventRepository>().UsingFactoryMethod(() => new EventRepository(new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["workflow/dataprovider/database"]
-                        .ConnectionString), new RepositoryMapper(new MappingDataProviderTypes()))));
+                Component.For<IEventRepository>().UsingFactoryMethod(() => new EventRepository(new RepositoryMapper(new MappingDataProviderTypes()))));
             container.Register(
                 Component.For<ITransactionRepository>()
                     .UsingFactoryMethod(

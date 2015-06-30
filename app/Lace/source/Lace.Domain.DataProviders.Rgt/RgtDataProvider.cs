@@ -46,9 +46,7 @@ namespace Lace.Domain.DataProviders.Rgt
                 _logCommand.LogBegin(new {_dataProvider, IvidResponse = response.OfType<IProvideDataFromIvid>()});
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
-                    new CallRgtDataProvider(_dataProvider,
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()),
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()), _logCommand));
+                    new CallRgtDataProvider(_dataProvider, new DataProviderRepository(), new DataProviderRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 

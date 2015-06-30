@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         {
             try
             {
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {_dataProvider});
 
                 RetrieveVechicle.WithCarId(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation,
@@ -52,7 +52,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 GetMetrics();
 
                 _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                    new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                         .ForDatabaseType(), new {_carInformation, _metrics});
 
                 TransformResponse(response);
@@ -86,17 +86,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             lightstoneResponse.HasBeenHandled();
             response.Add(lightstoneResponse);
         }
-
-        //private void GetCarInformation(string vinNumber)
-        //{
-        //    _carInformation =
-        //        new GetCarInformation(vinNumber,
-        //            _carRepository)
-        //            .SetupDataSources()
-        //            .GenerateData()
-        //            .BuildCarInformation()
-        //            .BuildCarInformationRequest();
-        //}
 
         private void GetMetrics()
         {

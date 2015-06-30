@@ -26,8 +26,6 @@ namespace Lace.CrossCutting.Infrastructure.Orm.Connections
         {
             try
             {
-                
-                
                 var check = client.DbSize;
                 return true;
             }

@@ -87,6 +87,7 @@
       <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -113,6 +114,7 @@
     <Compile Include="Mappers\MappingForTypes.cs" />
     <Compile Include="Persistence\EventRepository.cs" />
     <Compile Include="Persistence\IEventRepository.cs" />
+    <Compile Include="Persistence\PersistenceManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">

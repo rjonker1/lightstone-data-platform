@@ -1,21 +1,25 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Lace.CrossCutting.Infrastructure.Orm.Connections
 {
-    public class ConnectionFactory
+    public sealed class ConnectionFactoryManager
     {
-        public static Func<IDbConnection> ForAutoCarStatsDatabase =
-            () =>
-                new SqlConnection(
+        private static readonly IDbConnection _autocarStatsConnection;
+
+        private ConnectionFactoryManager()
+        {
+
+        }
+
+        public static IDbConnection AutocarStatsConnection
+        {
+            get
+            {
+                return _autocarStatsConnection ?? new SqlConnection(
                     ConfigurationManager.ConnectionStrings["lace/source/database/auto-car-stats"].ToString());
-
-
-        public static Func<IDbConnection> ForLsCorporateAutoDatabase =
-            () =>
-                new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["lace/source/database/ls-corporate-auto"].ToString());
+            }
+        }
     }
 }

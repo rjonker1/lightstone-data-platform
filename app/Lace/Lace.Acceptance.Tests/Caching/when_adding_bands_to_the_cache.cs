@@ -19,11 +19,10 @@ namespace Lace.Acceptance.Tests.Caching
 
         public when_adding_bands_to_the_cache()
         {
-            _repository = new CacheDataRepository(
-               ConnectionFactory.ForAutoCarStatsDatabase());
+            _repository = new CacheDataRepository();
             _band = new Band();
             _clearing = new ClearData(_repository);
-            _readRepository = new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase());
+            _readRepository = new DataProviderRepository();
         }
 
         public override void Observe()

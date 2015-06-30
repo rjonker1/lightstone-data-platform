@@ -45,9 +45,7 @@ namespace Lace.Domain.DataProviders.RgtVin
 
                 _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
-                    new CallRgtVinDataProvider(_dataProvider,
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()), _logCommand));
+                var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(), new CallRgtVinDataProvider(_dataProvider,new DataProviderRepository(), _logCommand));
                 consumer.ConsumeDataProvider(response);
 
                 _logCommand.LogEnd(new {response});

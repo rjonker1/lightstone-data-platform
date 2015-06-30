@@ -45,12 +45,12 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                 var vin = new RgtVinRequestMessage(_dataProvider.GetRequest<IAmRgtVinRequest>(), response).Vin;
 
                 _logCommand.LogConfiguration(new {VinNumber = vin}, null);
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {VinNumber = vin});
 
                 GetListOfVin(vin);
 
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {_vins});
 
                 if (_vins == null || !_vins.Any())
@@ -58,7 +58,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                         new {ErrorMessage = "No VINs were received"});
 
                 _logCommand.LogResponse(_vins != null && _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                    new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                         .ForDatabaseType(), new {_vins});
 
                 TransformResponse(response);

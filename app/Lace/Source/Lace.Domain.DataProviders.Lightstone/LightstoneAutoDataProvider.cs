@@ -48,8 +48,8 @@ namespace Lace.Domain.DataProviders.Lightstone
 
                 var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
                     new CallLightstoneAutoDataProvider(_dataProvider,
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()),
-                        new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase()), _logCommand));
+                        new DataProviderRepository(),
+                        new DataProviderRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
