@@ -2,7 +2,7 @@
 
 namespace UserManagement.Domain.Dtos
 {
-    public class NamedEntityDto
+    public class NamedEntityDto : EntityDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

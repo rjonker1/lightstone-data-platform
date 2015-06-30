@@ -6,7 +6,7 @@ using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
 {
-    public class CustomerDto : EntityDto
+    public class CustomerDto : NamedEntityDto
     {
         public Guid Id { get; set; }
 

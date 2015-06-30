@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace UserManagement.Domain.Dtos
 {
-    public class UserDto : EntityDto
+    public class UserDto : NamedEntityDto
     {
         public UserDto()
         {

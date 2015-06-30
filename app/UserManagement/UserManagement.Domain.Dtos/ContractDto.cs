@@ -7,7 +7,7 @@ using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
 {
-    public class ContractDto : EntityDto
+    public class ContractDto : NamedEntityDto
     {
         public ContractDto()
         {

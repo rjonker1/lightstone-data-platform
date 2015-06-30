@@ -18,6 +18,8 @@
 <form action="@url" method="@method" class="form-horizontal">
     @Html.ValidationSummary("Validation Results")
     @Html.HiddenFor(x => x.IsActive)
+    
+    @Html.HiddenFor(x => x.AssemblyQualifiedName);
 
     @Html.Partial("Client", Model)
     @if (!isCreate)
