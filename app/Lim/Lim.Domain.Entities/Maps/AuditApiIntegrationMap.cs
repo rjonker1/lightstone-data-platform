@@ -1,14 +1,11 @@
-using System;
 using FluentNHibernate.Mapping;
 
 namespace Lim.Domain.Entities.Maps {
-    
-    
     public class AuditApiIntegrationMap : ClassMap<AuditApiIntegration> {
         
         public AuditApiIntegrationMap() {
 			Table("AuditApiIntegration");
-            LazyLoad();
+            Not.LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id");
 			Map(x => x.ClientId).Column("ClientId").Not.Nullable().Index("IX_Audit_ClientId");
             Map(x => x.ConfigurationId).Column("ConfigurationId").Not.Nullable().Index("IX_Audit_ConfigurationId"); ;

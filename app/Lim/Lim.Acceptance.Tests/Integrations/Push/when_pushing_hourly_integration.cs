@@ -35,8 +35,9 @@ namespace Lim.Acceptance.Tests.Integrations.Push
 
         public when_pushing_hourly_integration()
         {
-            _entityRepository = new LimRepository(SessionFactory.BuildSession("lim/schedule/database").OpenSession());
-            _session = SessionFactory.BuildSession("lim/schedule/database").OpenSession();
+            //_entityRepository = new LimRepository(SessionFactory.BuildSession("lim/schedule/database").OpenSession());
+            _entityRepository = new LimRepository();
+            _session = FactoryManager.Instance.OpenSession();
 
             _connection = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["lim/schedule/database"].ToString());

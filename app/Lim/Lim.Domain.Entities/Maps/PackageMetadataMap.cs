@@ -8,7 +8,7 @@ namespace Lim.Domain.Entities.Maps
         public PackageMetadataMap()
         {
             Table("PackageMetadata");
-            LazyLoad();
+            Not.LazyLoad();
             Id(x => x.Id).GeneratedBy.Identity().Column("Id");
             Map(x => x.Payload).Column("Payload").Not.Nullable().Length(Int32.MaxValue);
             Map(x => x.Description).Column("Description").Nullable().Length(100);

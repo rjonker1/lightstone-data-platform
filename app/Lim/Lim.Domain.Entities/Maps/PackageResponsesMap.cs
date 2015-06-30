@@ -8,7 +8,7 @@ namespace Lim.Domain.Entities.Maps {
         
         public PackageResponsesMap() {
 			Table("PackageResponses");
-            LazyLoad();
+            Not.LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id");
 			Map(x => x.PackageId).Column("PackageId").Not.Nullable().Index("IX_PackageResponses_Id");
 			Map(x => x.Userid).Column("UserId").Not.Nullable();

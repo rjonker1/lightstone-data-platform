@@ -46,7 +46,7 @@ namespace Lim.Schedule.Core.Tracking
                 };
 
                 _repository.Merge(tracking);
-                _repository.Flush();
+               // _repository.Flush();
             }
             catch (Exception ex)
             {

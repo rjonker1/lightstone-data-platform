@@ -7,7 +7,7 @@ namespace Lim.Domain.Entities.Maps {
         
         public IntegrationPackagesMap() {
 			Table("IntegrationPackages");
-            LazyLoad();
+            Not.LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id").Index("IX_IntegrationPackages_Id");
             References(x => x.Configuration).Column("ConfigurationId").Index("IX_IntegrationPackages_ConfigurationId"); ;
             Map(x => x.PackageId).Column("PackageId").Not.Nullable().Index("IX_IntegrationPackages_PackageId"); ;

@@ -2,13 +2,11 @@ using System;
 using FluentNHibernate.Mapping;
 
 namespace Lim.Domain.Entities.Maps {
-    
-    
     public class ClientMap : ClassMap<Client> {
         
         public ClientMap() {
 			Table("Client");
-            LazyLoad();
+            Not.LazyLoad();
 			Id(x => x.Id).GeneratedBy.Identity().Column("Id").Index("IX_Client_Id");
 			Map(x => x.IsActive).Column("IsActive").Not.Nullable();
 			Map(x => x.Name).Column("Name").Not.Nullable().Length(50);

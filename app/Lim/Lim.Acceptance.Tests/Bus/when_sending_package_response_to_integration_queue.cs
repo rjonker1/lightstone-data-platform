@@ -35,7 +35,8 @@ namespace Lim.Acceptance.Tests.Bus
             _message = new PackageResponseMessage(_packageId, _userId, _contractId, _accountNumber, _payload, _requestId, "rudi@customapp.co.za");
             _publisher = new IntegrationMessagePublisher(_bus);
 
-            _repository = new LimRepository(SessionFactory.BuildSession("lim/schedule/database").OpenSession());
+            //_repository = new LimRepository(SessionFactory.BuildSession("lim/schedule/database").OpenSession());
+            _repository = new LimRepository();
         }
 
         public override void Observe()

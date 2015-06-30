@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Lim.Domain.Entities.Repository;
@@ -18,14 +19,14 @@ namespace Lim.Test.Helper.Fakes.Repository
             throw new NotImplementedException();
         }
 
-        public IQueryable<T> Get<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate) where T : class
+        public IEnumerable<T> Get<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate) where T : class
         {
-            return (IQueryable<T>)LimDatabase.PackageResponseses().AsQueryable();
+            return (IEnumerable<T>)LimDatabase.PackageResponseses().ToList();
         }
 
-        public IQueryable<T> GetAll<T>() where T : class
+        public IEnumerable<T> GetAll<T>() where T : class
         {
-            return (IQueryable<T>)LimDatabase.PackageResponseses().AsQueryable();
+            return (IEnumerable<T>)LimDatabase.PackageResponseses().ToList();
         }
 
         public void Save<T>(T entity) where T : class

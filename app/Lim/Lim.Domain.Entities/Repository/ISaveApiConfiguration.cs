@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using NHibernate;
+using Lim.Domain.Entities.Factory;
 using NHibernate.Linq;
 
 namespace Lim.Domain.Entities.Repository
@@ -15,12 +15,10 @@ namespace Lim.Domain.Entities.Repository
 
     public class SaveApiConfiguration : ISaveApiConfiguration
     {
-        private readonly ISessionFactory _session;
         private readonly ILog _log;
 
-        public SaveApiConfiguration(ISessionFactory session)
+        public SaveApiConfiguration()
         {
-            _session = session;
             _log = LogManager.GetLogger(GetType());
         }
 
@@ -29,7 +27,7 @@ namespace Lim.Domain.Entities.Repository
         {
             try
             {
-                using (var session = _session.OpenSession())
+                using (var session = FactoryManager.Instance.OpenSession())
                 {
                     using (var transaction = session.BeginTransaction())
                     {

@@ -1,14 +1,11 @@
 using FluentNHibernate.Mapping;
 
-namespace Lim.Domain.Entities.Maps
-{
-    public class ConfigurationMap : ClassMap<Configuration>
-    {
-
+namespace Lim.Domain.Entities.Maps{
+    public class ConfigurationMap : ClassMap<Configuration>{
         public ConfigurationMap()
         {
             Table("Configuration");
-            LazyLoad();
+            Not.LazyLoad();
             Id(x => x.Id).GeneratedBy.Identity().Column("Id").Index("IX_Configuration_Id");
             References(x => x.Client).Column("ClientId").Index("IX_Congfiguration_ClientId");
             References(x => x.FrequencyType).Column("FrequencyType").Index("IX_Congfiguration_FrequencyTypeId");
@@ -21,7 +18,6 @@ namespace Lim.Domain.Entities.Maps
             Map(x => x.ModifiedBy).Column("ModifiedBy").Length(50);
             Map(x => x.CustomFrequencyTime).Column("CustomFrequencyTime").Nullable().CustomType("TimeAsTimeSpan");
             Map(x => x.CustomFrequencyDay).Column("CustomFrequencyDay").Nullable().Length(20);
-            ;
         }
     }
 }
