@@ -33,12 +33,12 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     CreatedBy = dbEntity.FirstOrDefault().CreatedBy,
                     Modified = DateTime.UtcNow,
                     ModifiedBy = GetType().Assembly.FullName,
-                    ContractId = dbEntity.FirstOrDefault().ContractId,
-                    ContractName = dbEntity.FirstOrDefault().ContractName,
-                    ContractBundleId = dbEntity.FirstOrDefault().ContractBundleId,
-                    ContractBundleName = dbEntity.FirstOrDefault().ContractName,
-                    ContractBundleTransactionLimit = dbEntity.FirstOrDefault().ContractBundleTransactionLimit,
-                    ContractBundlePrice = dbEntity.FirstOrDefault().ContractBundlePrice
+                    ContractId = entity.ContractId,
+                    ContractName = entity.ContractName,
+                    ContractBundleId = entity.ContractBundleId,
+                    ContractBundleName = entity.ContractName,
+                    ContractBundleTransactionLimit = entity.ContractBundleTransactionLimit,
+                    ContractBundlePrice = entity.ContractBundlePrice
                 };
 
                 _contracts.SaveOrUpdate(updateEntity);
