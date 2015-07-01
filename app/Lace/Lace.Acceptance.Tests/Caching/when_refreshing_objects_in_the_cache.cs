@@ -16,10 +16,8 @@ namespace Lace.Acceptance.Tests.Caching
 
         public when_refreshing_objects_in_the_cache()
         {
-            _repository = new CacheDataRepository(
-                ConnectionFactory.ForAutoCarStatsDatabase());
-
-            _readRepository = new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase());
+            _repository = new CacheDataRepository();
+            _readRepository = new DataProviderRepository();
 
             _clearing = new ClearData(_repository);
             _refreshing = new RefreshData(_repository);

@@ -43,12 +43,12 @@ namespace Lace.Domain.DataProviders.Jis
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Jis);
                 _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.Jis, _dataProvider);
 
-                var consumer = new ConsumeSource(new HandleJisSourceCall(),
-                    new CallJisDataProvider(_dataProvider,
-                        new RepositoryFactory(ConnectionFactory.ForLsCorporateAutoDatabase(),
-                            ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"
-                                ].ConnectionString),_logCommand));
-                consumer.ConsumeDataProvider(response);
+                //var consumer = new ConsumeSource(new HandleJisSourceCall(),
+                //    new CallJisDataProvider(_dataProvider,
+                //        new RepositoryFactory(ConnectionFactoryManager.ForLsCorporateAutoDatabase(),
+                //            ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"
+                //                ].ConnectionString),_logCommand));
+                //consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromJis>().Any() || response.OfType<IProvideDataFromJis>().First() == null)
                     CallFallbackSource(response, _command);

@@ -166,6 +166,38 @@
     </nuget>
     <!-- IIS SITES -->
 
+    <!--Windows Services-->
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lim.Schedule.Service</name>
+      <folder>app/Lim/Lim.Schedule.Service</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Lim.Schedule.Service</description>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
+      <includes>
+       <include pattern="*" to="content\bin"/>
+      </includes>
+    </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lace.Caching.Manager.Service</name>
+      <folder>app/Lace/Source/Lace.Caching.Manager.Service</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Lace.Caching.Manager.Service</description>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
+      <includes>
+       <include pattern="*" to="content\bin"/>
+      </includes>
+    </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Workflow.DataProvider.Bus</name>
+      <folder>app/Lace/Source/Workflow.DataProvider.Bus</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Workflow.DataProvider.Bus</description>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
+      <includes>
+       <include pattern="*" to="content\bin"/>
+      </includes>
+    </nuget>
+
     <!-- BILLING START -->
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Api.Dtos</name>
@@ -479,7 +511,7 @@
         <dependency id="ServiceStack.Redis" version="3.9.71" />
 			</dependencies>
 		</nuget>
-    <nuget deploy="false">
+  <!--  <nuget deploy="false">
       <name>Lightstone.DataPlatform.Workflow.DataProvider.Bus</name>
       <folder>app/Lace/source/Workflow.DataProvider.Bus</folder>
       <author>CustomApp</author>
@@ -520,7 +552,7 @@
         <dependency id="RabbitMQ.Client" version="3.4.3" targetFramework="net45" />
         <dependency id="Topshelf" version="3.1.4" targetFramework="net45" />
       </dependencies>
-    </nuget>
+    </nuget> -->
 		<!-- LACE END -->
 
 

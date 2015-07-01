@@ -13,10 +13,7 @@ namespace Lim.Schedule.Service.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             _log.InfoFormat("Installing Repositories");
-
-            //container.Register(Component.For<IAmRepository>().UsingFactoryMethod(() => new LimRepository(container.Resolve<ISession>())));
             container.Register(Component.For<IAmRepository>().UsingFactoryMethod(() => new LimRepository()));
-
             _log.InfoFormat("Repositories Installed");
         }
     }

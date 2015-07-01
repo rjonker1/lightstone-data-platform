@@ -22,11 +22,10 @@ namespace Lace.Acceptance.Tests.Caching
 
         public when_adding_sale_data_to_the_cache()
         {
-            _repository = new CacheDataRepository(
-                ConnectionFactory.ForAutoCarStatsDatabase());
+            _repository = new CacheDataRepository();
             _sale = new Sale();
             _clearing = new ClearData(_repository);
-            _readRepository = new DataProviderRepository(ConnectionFactory.ForAutoCarStatsDatabase());
+            _readRepository = new DataProviderRepository();
 
         }
 

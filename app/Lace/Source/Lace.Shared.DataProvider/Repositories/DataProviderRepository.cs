@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Castle.DynamicProxy.Internal;
 using Common.Logging;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -11,13 +11,13 @@ namespace Lace.Shared.DataProvider.Repositories
 {
     public class DataProviderRepository : IReadOnlyRepository
     {
-        private readonly IDbConnection _connection;
+        //private readonly IDbConnection _connection;
         private const string CacheIp = "127.0.0.1:6379";
         private static readonly ILog Log = LogManager.GetLogger<DataProviderRepository>();
 
-        public DataProviderRepository(IDbConnection connection)
+        public DataProviderRepository()
         {
-            _connection = connection;
+            //_connection = connection;
         }
 
         public IEnumerable<TItem> GetAll<TItem>(Func<TItem, bool> predicate) where TItem : class
@@ -43,7 +43,8 @@ namespace Lace.Shared.DataProvider.Repositories
         {
             try
             {
-                return _connection.Query<TItem>(sql, param);
+                using(var connection = ConnectionFactoryManager.AutocarStatsConnection)
+                    return connection.Query<TItem>(sql, param);
             }
             catch (Exception ex)
             {
