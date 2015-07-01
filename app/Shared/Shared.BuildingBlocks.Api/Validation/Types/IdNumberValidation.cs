@@ -3,6 +3,7 @@
     public sealed class IdentityNumberValidation : IValidateRequestField
     {
         private static MandatoryIdentityRules _mandatoryRules;
+
         static IdentityNumberValidation()
         {
         }
@@ -15,14 +16,14 @@
 
         public string RuleError
         {
-            get { return null; }
+            get { return _mandatoryRules.ErrorMessage; }
         }
     }
 
     internal sealed class MandatoryIdentityRules
     {
         public readonly string IdentityNumber;
-        public const string ErrorMessage = "ID number provided is not valid";
+        public readonly string ErrorMessage = "ID number provided is not valid";
 
         static MandatoryIdentityRules()
         {
@@ -48,6 +49,8 @@
                 return !string.IsNullOrEmpty(IdentityNumber) && IdentityNumber.Length == 13;
             }
         }
+
+        
 
         private bool IsAValidIdNumber
         {

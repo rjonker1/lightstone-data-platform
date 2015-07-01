@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Shared.BuildingBlocks.Api.Validation.Types;
 
 namespace Shared.BuildingBlocks.Api.Validation
@@ -36,8 +37,13 @@ namespace Shared.BuildingBlocks.Api.Validation
         {
             var validator = Validators.FirstOrDefault(w => w.Key == type);
             return validator.Key > 0 && validator.Value != null
-                ? new ValidationResult(validator.Value().RulesPass(field), validator.Value().RuleError)
+                ? new ValidationResult(validator.Value().RulesPass(RemoveWhitespace(field)), validator.Value().RuleError)
                 : new ValidationResult(true, string.Empty);
+        }
+
+        private static string RemoveWhitespace(string plate)
+        {
+            return Regex.Replace(plate, @"\s+", "");
         }
     }
 }

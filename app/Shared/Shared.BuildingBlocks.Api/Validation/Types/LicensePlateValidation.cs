@@ -51,7 +51,7 @@ namespace Shared.BuildingBlocks.Api.Validation.Types
 
         public MandatoryLicensePlateRules(string licensePlate)
         {
-            LicensePlate = RemoveWhitespace(licensePlate);
+            LicensePlate = licensePlate;
         }
 
         public bool IsValid
@@ -97,10 +97,10 @@ namespace Shared.BuildingBlocks.Api.Validation.Types
             }
         }
 
-        private static string RemoveWhitespace(string plate)
-        {
-            return Regex.Replace(plate, @"\s+", "");
-        }
+        //private static string RemoveWhitespace(string plate)
+        //{
+        //    return Regex.Replace(plate, @"\s+", "");
+        //}
     }
 
     internal sealed class LicensePlateLegislationRules

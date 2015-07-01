@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Reflection;
 using Api.Domain.Infrastructure.Dto;
 using Api.Helpers.Validators;
+using Castle.Core.Internal;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -12,6 +13,7 @@ using Nancy.Json;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.BuildingBlocks.Api.Validation;
 
 namespace Api.Modules
 {
@@ -48,20 +50,32 @@ namespace Api.Modules
                     this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
-                    var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token), new KeyValuePair<string, string>("Content-Type", "application/json"), });
+                    apiRequest.RequestFields.ForEach(f =>
+                    {
+                        var valid = ValidationManager.Validate(int.Parse(f.Type), f.Value);
+                        if (!valid.IsValid)
+                            throw new LightstoneAutoException(valid.Error);
+                    });
+
+                    var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest,
+                        new[]
+                        {
+                            new KeyValuePair<string, string>("Authorization", "Token " + token),
+                            new KeyValuePair<string, string>("Content-Type", "application/json"),
+                        });
 
                     this.Info(() => "Api responses: {0}".FormatWith(responses));
                     this.Info(() => "Api action completed.");
 
                     return responses;
                 }
-                catch (LightstoneAutoException execption)
+                catch (LightstoneAutoException ex)
                 {
-                    return Response.AsJson(new { error = execption.Message });
+                    return Response.AsJson(new {error = ex.Message});
                 }
-                catch (TargetInvocationException targetInvocationException)
+                catch (TargetInvocationException)
                 {
-                    return Response.AsJson(new { error = "Ensure all properties are populated" });
+                    return Response.AsJson(new {error = "Ensure all properties are populated"});
                 }
             };
         }

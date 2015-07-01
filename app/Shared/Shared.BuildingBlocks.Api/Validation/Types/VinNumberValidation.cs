@@ -85,7 +85,7 @@ namespace Shared.BuildingBlocks.Api.Validation.Types
         {
             get
             {
-                return new RuleCheck(6 >= VinNumber.Length, "Vin number cannot be smaller than 6 characters");
+                return new RuleCheck(6 <= VinNumber.Length, "Vin number cannot be smaller than 6 characters");
             }
         }
     }
