@@ -23,7 +23,7 @@ namespace Api.Unit.Tests.Validation
         [Observation]
         public void then_id_number_characters_should_not_be_valid()
         {
-            _validation = ValidationManager.Validate(16, "8310245010085");
+            _validation = ValidationManager.Validate(16, "83102450100810");
             _validation.IsValid.ShouldBeFalse();
             _validation.Error.ShouldEqual("ID number provided is not valid");
 
