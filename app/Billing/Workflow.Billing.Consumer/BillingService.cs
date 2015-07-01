@@ -32,7 +32,8 @@ namespace Workflow.Billing.Consumer
                 new RepositoryInstaller(),
                 new AutoMapperInstaller(),
                 new ConsumerInstaller(),
-                new BusInstaller());
+                new BusInstaller(),
+                new PivotInstaller());
 
             //bus = container.Resolve<IBus>();
             advancedBus = container.Resolve<IAdvancedBus>();

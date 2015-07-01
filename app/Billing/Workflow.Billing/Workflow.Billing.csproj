@@ -87,6 +87,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1307\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Reporting">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1199\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -127,6 +130,9 @@
     <Compile Include="Domain\Entities\Transaction.cs" />
     <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\IPivotBilling.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\PivotFinalBilling.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\PivotStageBilling.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\AccountMappingOverride.cs" />

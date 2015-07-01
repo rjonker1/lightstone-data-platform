@@ -11,6 +11,7 @@ using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Newtonsoft.Json;
 using Workflow.Billing.Domain.Entities;
+using Workflow.Billing.Domain.Helpers.BillingRunHelpers;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
 
@@ -18,18 +19,21 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 {
     public class BillRunConsumer
     {
-        private readonly IRepository<PreBilling> _preBillingrRepository;
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
 
         private readonly IAdvancedBus _bus;
 
-        public BillRunConsumer(IRepository<PreBilling> preBillingrRepository, IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IAdvancedBus bus)
+        private readonly IPivotBilling<PivotStageBilling> _pivotStageBilling;
+        //private readonly IPivotBilling<PivotFinalBilling> _pivotFinalBilling;
+
+        public BillRunConsumer(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IAdvancedBus bus, IPivotBilling<PivotStageBilling> pivotStageBilling)
         {
-            _preBillingrRepository = preBillingrRepository;
             _stageBillingRepository = stageBillingRepository;
             _finalBillingRepository = finalBillingRepository;
             _bus = bus;
+            _pivotStageBilling = pivotStageBilling;
+            //_pivotFinalBilling = pivotFinalBilling;
         }
 
         public void Consume(IMessage<BillingMessage> message)
@@ -39,58 +43,45 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
             var reportList = new List<ReportDto>();
             var csvReportList = new List<ReportDto>();
 
-            #region Map PreBilling - Stage
+            #region Pivot PreBilling - Stage
 
-            foreach (var preBilling in _preBillingrRepository)
-            {
-                var stageEntity = Mapper.Map(preBilling, new StageBilling());
-                //var finalEntity = Mapper.Map(preBilling, new FinalBilling());
+            if (message.Body.RunType == "Stage")
+                _pivotStageBilling.Pivot();
 
-                #region StageBilling
-
-                if (message.Body.RunType == "Stage")
-                    if (!_stageBillingRepository.Any(x => x.PreBillingId == stageEntity.PreBillingId))
-                        _stageBillingRepository.SaveOrUpdate(stageEntity);
-
-                #endregion
-
-            }
             #endregion
 
-            #region Map StageBilling - Final
+            #region Pivot StageBilling - Final
 
-            var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25, 0, 0, 0);
-            var lastMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26, 0, 0, 0);
+            var currentBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
+            var previousBillMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
 
             if (message.Body.RunType == "Final")
             {
-                
-                this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(lastMonth, thisMonth));
+
+                this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
 
                 foreach (var stageBilling in _stageBillingRepository)
                 {
                     var finalEntity = Mapper.Map(stageBilling, new FinalBilling());
-
-                    #region FinalBilling
 
                     if (!_finalBillingRepository.Any(x => x.StageBillingId == finalEntity.StageBillingId))
                         _finalBillingRepository.SaveOrUpdate(finalEntity);
 
                     foreach (var transaction in _finalBillingRepository)
                     {
+                        #region Customer Transactions
 
-                        //Customer
                         if (transaction.CustomerId != new Guid())
                         {
                             var billedCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable
-                                                                    && (x.Created >= lastMonth && x.Created <= thisMonth))
+                                                                    && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
                                                         .Select(x => x.TransactionId).Distinct().Count();
 
                             var packagesList =
                                 _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                     .Select(x => new ReportPackage
                                     {
-                                        ItemCode = "1000/200/002",
+                                        ItemCode = x.PackageName,
                                         ItemDescription = x.PackageName,
                                         QuantityUnit = billedCustomerTransactionsTotal,
                                         Price = x.Price,
@@ -117,12 +108,11 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                             //Index restriction for new record
                             if (reportIndex < 0) reportList.Add(reportData);
 
-
-                            //CSV Report Build-up
+                            #region CSV Report Build-up
 
                             var invoiceList = new List<ReportInvoice>();
-                            
-                            var invoice =  new ReportInvoice
+
+                            var invoice = new ReportInvoice
                                 {
                                     DOCTYPE = "INV",
                                     INVNUMBER = "",
@@ -158,21 +148,23 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                             //Index restriction for new record
                             if (csvReportIndex < 0) csvReportList.Add(csvReportData);
 
-                            /////// END ////////
+                            #endregion
                         }
+                        #endregion
 
-                        //Client
+                        #region Client Transactions
+
                         if (transaction.ClientId != new Guid())
                         {
 
                             var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable
-                                                                    && (x.Created >= lastMonth && x.Created <= thisMonth))
+                                                                    && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
                                                         .Select(x => x.TransactionId).Distinct().Count();
 
                             var packagesList = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId)
                                 .Select(x => new ReportPackage
                                 {
-                                    ItemCode = "1000/200/002",
+                                    ItemCode = x.PackageName,
                                     ItemDescription = x.PackageName,
                                     QuantityUnit = billedClientTransactionsTotal,
                                     Price = x.Price,
@@ -200,7 +192,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                             if (reportIndex < 0) reportList.Add(reportData);
 
 
-                            //CSV Report Build-up
+                            #region CSV Report Build-up
 
                             var invoiceList = new List<ReportInvoice>();
 
@@ -240,14 +232,14 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                             //Index restriction for new record
                             if (csvReportIndex < 0) csvReportList.Add(csvReportData);
 
-                            /////// END ////////
+                            #endregion
                         }
+                        #endregion
                     }
 
                 }
 
-                this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(lastMonth, thisMonth));
-                #endregion
+                this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
             }
             #endregion
 

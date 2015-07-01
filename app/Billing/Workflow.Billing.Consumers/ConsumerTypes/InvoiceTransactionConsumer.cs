@@ -53,10 +53,9 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 foreach (var account in _clientAccounts.Where(account => account.AccountNumber == transaction.AccountNumber))
                     client = account;
 
-                //var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.StateId == 1 && x.Action == "Response");
-
                 var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.StateId == 1 && 
-                                                (x.Action == customer.BillingType || x.Action == client.BillingType))
+                                                //(x.Action == customer.BillingType || x.Action == client.BillingType))
+                                                x.Action == "Request")
                                                 .Select(x => new DataProviderTransactionDto
                                                 {
                                                     Id = x.StreamId,
