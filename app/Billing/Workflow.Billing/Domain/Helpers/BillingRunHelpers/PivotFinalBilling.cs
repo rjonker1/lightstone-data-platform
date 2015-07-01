@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Repositories;
-using EasyNetQ;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
@@ -17,10 +15,13 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
 
-        public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository)
+        private readonly IPublishReportQueue<BillingReport> _report; 
+
+        public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IPublishReportQueue<BillingReport> report)
         {
             _stageBillingRepository = stageBillingRepository;
             _finalBillingRepository = finalBillingRepository;
+            _report = report;
         }
 
         public void Pivot()
@@ -164,7 +165,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         //Index restriction for new record
                         if (reportIndex < 0) reportList.Add(reportData);
 
-
                         #region CSV Report Build-up
 
                         var invoiceList = new List<ReportInvoice>();
@@ -213,6 +213,9 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             }
 
             this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
+
+            _report.PublishToQueue(reportList, "pdf");
+            _report.PublishToQueue(csvReportList, "csv");
         }
     }
 }

@@ -131,6 +131,8 @@
     <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
     <Compile Include="Domain\Helpers\BillingRunHelpers\IPivotBilling.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\IPublishReportQueue.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\BillingReport.cs" />
     <Compile Include="Domain\Helpers\BillingRunHelpers\PivotFinalBilling.cs" />
     <Compile Include="Domain\Helpers\BillingRunHelpers\PivotStageBilling.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />

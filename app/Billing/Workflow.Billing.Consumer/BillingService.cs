@@ -1,17 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Castle.Windsor;
+﻿using Castle.Windsor;
 using Common.Logging;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
-using DataPlatform.Shared.Repositories;
 using EasyNetQ;
-using EasyNetQ.AutoSubscribe;
-using NHibernate;
 using Workflow.Billing.Consumer.Installers;
 using Workflow.Billing.Consumers;
-using Workflow.Billing.Consumers.ConsumerTypes;
-using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumer
 {
@@ -33,6 +26,7 @@ namespace Workflow.Billing.Consumer
                 new AutoMapperInstaller(),
                 new ConsumerInstaller(),
                 new BusInstaller(),
+                new PublishReportQueueInstaller(),
                 new PivotInstaller());
 
             //bus = container.Resolve<IBus>();

@@ -95,6 +95,10 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1199\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1199\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
@@ -176,6 +180,7 @@
     <None Include="Installers\MappingInstaller.cs.delete" />
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\PivotInstaller.cs" />
+    <Compile Include="Installers\PublishReportQueueInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Program.cs" />
