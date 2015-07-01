@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 
-namespace DataPlatform.Shared.Validation
+namespace DataPlatform.Shared.Validation.Types
 {
-    public sealed class VinNumberValidation
+    public sealed class VinNumberValidation : IValidateRequestField
     {
         private static MandatoryVinRules _mandatoryRules;
         static VinNumberValidation()
@@ -10,13 +10,13 @@ namespace DataPlatform.Shared.Validation
             
         }
 
-        public static bool RulesPass(string vinNumber)
+        public bool RulesPass(string field)
         {
-            _mandatoryRules = new MandatoryVinRules(vinNumber);
+            _mandatoryRules = new MandatoryVinRules(field);
             return _mandatoryRules.IsValid;
         }
 
-        public static string RuleError
+        public string RuleError
         {
             get
             {

@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace DataPlatform.Shared.Validation
+namespace DataPlatform.Shared.Validation.Types
 {
-    public sealed class LicensePlateValidation
+    public sealed class LicensePlateValidation : IValidateRequestField
     {
         private static MandatoryLicensePlateRules _mandatoryRules;
         private static LicensePlateLegislationRules _legislationRules; 
@@ -14,14 +14,14 @@ namespace DataPlatform.Shared.Validation
             
         }
 
-        public static bool RulesPass(string licensePlate)
+        public bool RulesPass(string field)
         {
-            _mandatoryRules= new MandatoryLicensePlateRules(licensePlate);
+            _mandatoryRules= new MandatoryLicensePlateRules(field);
             _legislationRules = new LicensePlateLegislationRules(_mandatoryRules.LicensePlate);
             return _mandatoryRules.IsValid && _legislationRules.IsValid;
         }
 
-        public static string RuleError
+        public string RuleError
         {
             get
             {
