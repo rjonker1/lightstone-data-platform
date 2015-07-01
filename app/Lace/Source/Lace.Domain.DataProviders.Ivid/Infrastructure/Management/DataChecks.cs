@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lace.Domain.Core.Entities;
-using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {

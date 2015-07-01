@@ -98,6 +98,8 @@
     <Compile Include="Messaging\MessageTopic.cs" />
     <Compile Include="Repositories\INamedEntityRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Validation\LicensePlateValidation.cs" />
+    <Compile Include="Validation\VinNumberValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RabbitMQ\" />
