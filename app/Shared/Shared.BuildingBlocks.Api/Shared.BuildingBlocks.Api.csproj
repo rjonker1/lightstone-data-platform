@@ -77,6 +77,13 @@
     <Compile Include="Security\UerManagementAuthenticator.cs" />
     <Compile Include="ApiClients\UserAuthenticatorClient.cs" />
     <Compile Include="ApiClients\UserManagementApiClient.cs" />
+    <Compile Include="Validation\IValidateRequestField.cs" />
+    <Compile Include="Validation\Types\EngineNumberValidation.cs" />
+    <Compile Include="Validation\Types\IdNumberValidation.cs" />
+    <Compile Include="Validation\Types\LicensePlateValidation.cs" />
+    <Compile Include="Validation\Types\RegistrationNumberValidation.cs" />
+    <Compile Include="Validation\Types\VinNumberValidation.cs" />
+    <Compile Include="Validation\ValidationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

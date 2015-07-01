@@ -1,4 +1,4 @@
-﻿namespace DataPlatform.Shared.Validation.Types
+﻿namespace Shared.BuildingBlocks.Api.Validation.Types
 {
     public sealed class IdentityNumberValidation : IValidateRequestField
     {

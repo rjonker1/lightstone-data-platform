@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace DataPlatform.Shared.Validation.Types
+namespace Shared.BuildingBlocks.Api.Validation.Types
 {
     public sealed class LicensePlateValidation : IValidateRequestField
     {

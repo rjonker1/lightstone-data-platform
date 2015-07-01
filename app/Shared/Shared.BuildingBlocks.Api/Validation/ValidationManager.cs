@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Validation.Types;
+using Shared.BuildingBlocks.Api.Validation.Types;
 
-namespace DataPlatform.Shared.Validation
+namespace Shared.BuildingBlocks.Api.Validation
 {
     public class ValidationResult
     {

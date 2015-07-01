@@ -1,4 +1,4 @@
-﻿namespace DataPlatform.Shared.Validation
+﻿namespace Shared.BuildingBlocks.Api.Validation
 {
     public interface IValidateRequestField
     {
