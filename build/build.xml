@@ -199,9 +199,19 @@
     </nuget>
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Workflow.Billing.Consumer</name>
-      <folder>app/Billing/Source/Workflow.Billing.Consumer</folder>
+      <folder>app/Billing/Workflow.Billing.Consumer</folder>
       <author>CustomApp</author>
       <description>Lightstone.DataPlatform.Workflow.Billing.Consumer</description>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
+      <includes>
+       <include pattern="*" to="content\bin"/>
+      </includes>
+    </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Workflow.Reporting.Consumer</name>
+      <folder>app/Reporting/Workflow.Reporting.Consumer</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Workflow.Reporting.Consumer</description>
       <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
        <include pattern="*" to="content\bin"/>
