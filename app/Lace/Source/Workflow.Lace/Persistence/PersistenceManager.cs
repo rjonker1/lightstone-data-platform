@@ -6,9 +6,7 @@ namespace Workflow.Lace.Persistence
 {
     public sealed class PersistenceManager
     {
-        private static readonly IDbConnection _connection = new SqlConnection(
-            ConfigurationManager.ConnectionStrings["workflow/dataprovider/database"]
-                .ConnectionString);
+        private static readonly IDbConnection _connection;
 
         static PersistenceManager()
         {
@@ -19,7 +17,8 @@ namespace Workflow.Lace.Persistence
         {
             get
             {
-                return _connection;
+                return _connection ?? new SqlConnection(
+                    ConfigurationManager.ConnectionStrings["workflow/dataprovider/database"].ToString());
             }
         }
     }
