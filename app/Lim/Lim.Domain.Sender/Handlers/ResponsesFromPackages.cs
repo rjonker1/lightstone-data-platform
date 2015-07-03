@@ -25,8 +25,11 @@ namespace Lim.Domain.Sender.Handlers
 
         public void Consume(IMessage<PackageResponseMessage> message)
         {
-            _log.InfoFormat("Receiving response from package with Package Id {0} on Contract {1}", message.Body.PackageId, message.Body.ContractId);
-            _log.Info(message.Body.Payload);
+            _log.InfoFormat("Receiving response from package with Package Id {0} on Contract {1}", message.Body == null ? Guid.Empty : message.Body.PackageId, message.Body == null ? Guid.Empty : message.Body.ContractId);
+            _log.Info(message.Body == null ? "Empty Message Body" : message.Body.Payload);
+
+            if(message.Body == null)
+                throw  new Exception("There is no package response available to save.");
 
             var package = new PackageResponses()
             {
