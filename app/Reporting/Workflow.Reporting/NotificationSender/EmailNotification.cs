@@ -12,7 +12,7 @@ namespace Workflow.Reporting.NotificationSender
     {
 
         ReportingService _reportingService = new ReportingService(ConfigurationManager.ConnectionStrings["workflow/reporting/jsreport"].ConnectionString);
-
+        
         public void Send(ReportDto dto)
         {
             try
