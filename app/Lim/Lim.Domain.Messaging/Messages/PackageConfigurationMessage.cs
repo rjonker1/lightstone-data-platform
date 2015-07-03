@@ -10,9 +10,14 @@ namespace Lim.Domain.Messaging.Messages
             PackageId = packageId;
             UserId = userId;
             ContractId = contractId;
-            AccountNumber = !string.IsNullOrEmpty(accountNumber) ? int.Parse(string.Join("", accountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1;
+            AccountNumber = !string.IsNullOrEmpty(accountNumber) && HasDigit(accountNumber) ? int.Parse(string.Join("", accountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1;
             ResponseDate = DateTime.UtcNow;
             RequestId = requestId;
+        }
+
+        private static bool HasDigit(string value)
+        {
+            return value.Any(Char.IsDigit);
         }
 
         public Guid PackageId { get; private set; }
