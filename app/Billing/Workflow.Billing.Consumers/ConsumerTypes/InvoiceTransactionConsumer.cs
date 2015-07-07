@@ -89,6 +89,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         TransactionId = transaction.Id,
                         PackageId = package.PackageId,
                         PackageName = package.PackageName,
+                        PackagePrice = package.PackagePrice,
                         RequestId = transaction.RequestId,
                         DataProviderId = product.Id,
                         DataProviderName = product.DataProviderName,

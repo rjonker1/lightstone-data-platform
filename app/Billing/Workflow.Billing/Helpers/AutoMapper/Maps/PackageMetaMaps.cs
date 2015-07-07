@@ -9,7 +9,8 @@ namespace Workflow.Billing.Helpers.AutoMapper.Maps
         public void CreateMaps()
         {
             Mapper.CreateMap<PackageMessage, PackageMeta>();
-            Mapper.CreateMap<PackageMeta, Package>();
+            Mapper.CreateMap<PackageMeta, Package>()
+                .ForMember(dest => dest.PackagePrice, opt => opt.MapFrom(x => x.PackageRsp));
         }
     }
 }

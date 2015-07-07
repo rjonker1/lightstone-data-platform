@@ -58,7 +58,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                     ItemCode = x.PackageName,
                                     ItemDescription = x.PackageName,
                                     QuantityUnit = billedCustomerTransactionsTotal,
-                                    Price = x.Price,
+                                    Price = x.PackagePrice,
                                     //Vat = 0
                                 }).Distinct();
 
@@ -141,7 +141,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 ItemCode = x.PackageName,
                                 ItemDescription = x.PackageName,
                                 QuantityUnit = billedClientTransactionsTotal,
-                                Price = x.Price,
+                                Price = x.PackagePrice,
                                 //Vat = 2284
                             }).Distinct();
 
