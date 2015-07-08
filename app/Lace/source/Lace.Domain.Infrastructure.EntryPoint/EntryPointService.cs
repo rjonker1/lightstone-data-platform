@@ -99,7 +99,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 request.GetFromRequest<IPointToLaceRequest>().Contract.ContractId,
                 request.GetFromRequest<IPointToLaceRequest>().Request.System.ToString(),
                 request.GetFromRequest<IPointToLaceRequest>().Contract.ContractVersion, state,
-                request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber);
+                request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber,
+                request.GetFromRequest<IPointToLaceRequest>().Package.PackageCostPrice,
+                request.GetFromRequest<IPointToLaceRequest>().Package.PackageRecommendedPrice);
         }
 
         private bool ChainIsNotAvailable(IEnumerable<IPointToLaceRequest> request)

@@ -92,10 +92,10 @@ namespace Lace.Test.Helper.Builders.Buses
         }
 
         public WorkflowQueueSender CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
-            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber)
+            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber, double packageCostPrice, double packageRecommendedPrice)
         {
             _workflow.CreateTransaction(packageId, packageVersion, userId, requestId, contractId, system,
-                contractVersion, state, accountNumber);
+                contractVersion, state, accountNumber, packageCostPrice, packageRecommendedPrice);
             return this;
         }
 

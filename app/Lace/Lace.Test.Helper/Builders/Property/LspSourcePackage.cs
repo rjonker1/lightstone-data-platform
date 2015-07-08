@@ -53,6 +53,16 @@ namespace Lace.Test.Helper.Builders.Property
             get { return "Property Package"; }
         }
 
+        public double PackageCostPrice
+        {
+            get { return 0.0; }
+        }
+
+        public double PackageRecommendedPrice
+        {
+            get { return 0.0; }
+        }
+
         //public string Action
         //{
         //    get { return "Property Search"; }

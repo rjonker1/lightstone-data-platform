@@ -31,11 +31,13 @@ namespace Lace.Test.Helper.Builders.Cmds
         private readonly Guid _userId;
         private readonly string _accountNumber;
         private readonly long _packageVersion;
+        private readonly double _packageCostPrice;
+        private readonly double _packageRecommendedPrice;
         private readonly string _system;
         public readonly DataProviderStopWatch _Watch;
 
         public WorkflowCommandBuilder(ISendWorkflowCommand bus, Guid packageId, Guid contractId, Guid userId,
-            long packageVersion, Guid requestId, string system, string accountNumber)
+            long packageVersion, Guid requestId, string system, string accountNumber, double packageCostPrice, double packageRecommendedPrice)
         {
             _requestId = requestId;
             _bus = bus;
@@ -45,6 +47,8 @@ namespace Lace.Test.Helper.Builders.Cmds
             _packageVersion = packageVersion;
             _system = system;
             _accountNumber = accountNumber;
+            _packageCostPrice = packageCostPrice;
+            _packageRecommendedPrice = packageRecommendedPrice;
             _Watch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);
         }
 
@@ -268,7 +272,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
                     DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources(), _Watch)
                 .CreateTransaction(_packageId, _packageVersion, _userId, _requestId, _contractId, _system,
-                    0, DataProviderState.Successful, _accountNumber);
+                    0, DataProviderState.Successful, _accountNumber, _packageCostPrice, _packageRecommendedPrice);
             return this;
         }
 

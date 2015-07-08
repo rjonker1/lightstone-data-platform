@@ -13,6 +13,8 @@ namespace Lace.Acceptance.Tests.Workflow
         private readonly Guid _contractId;
         private readonly Guid _userId;
         private readonly long _packageVersion;
+        private readonly double _packageCostPrice;
+        private readonly double _packageRecommendedPrice;
         private readonly string _system;
         private readonly string _accountNumber;
         private Exception _exception;
@@ -25,6 +27,8 @@ namespace Lace.Acceptance.Tests.Workflow
             _contractId = new Guid("5B6DC4A1-C598-4751-8274-1AE366AC061A");
             _userId = new Guid("7A6E95C4-46B6-460A-89E6-259BA6792FD0");
             _packageVersion = 1;
+            _packageCostPrice = 1.00;
+            _packageRecommendedPrice = 1.00;
             _system = "API";
             _accountNumber = "UNITTEST0001";
             _bus = WorkflowBusBuilder.ForWorkflowBus(_requestId);
@@ -35,7 +39,7 @@ namespace Lace.Acceptance.Tests.Workflow
             try
             {
                 new WorkflowCommandBuilder(_bus, _packageId, _contractId, _userId, _packageVersion, _requestId, _system,
-                    _accountNumber)
+                    _accountNumber, _packageCostPrice, _packageRecommendedPrice)
                     .ForRequestReceived()
                     .Wait()
                     .ForIvidSecurity()

@@ -49,5 +49,15 @@ namespace Lace.Test.Helper.Builders.Business
         {
             get { return "Director Package"; }
         }
+
+        public double PackageCostPrice
+        {
+            get { return 0.0; }
+        }
+
+        public double PackageRecommendedPrice
+        {
+            get { return 0.0; }
+        }
     }
 }

@@ -37,8 +37,15 @@ namespace Lace.Test.Helper.Mothers.Packages
             get { return "LicensePlatePackage"; }
         }
 
-        public double PackageCostPrice { get; private set; }
-        public double PackageRecommendedPrice { get; private set; }
+        public double PackageCostPrice
+        {
+            get { return 0.0; }
+        }
+
+        public double PackageRecommendedPrice
+        {
+            get { return 0.0; }
+        }
 
         //public string Action
         //{
