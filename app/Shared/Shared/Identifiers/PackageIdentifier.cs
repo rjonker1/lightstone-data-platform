@@ -11,10 +11,12 @@ namespace DataPlatform.Shared.Identifiers
         {
         }
 
-        public PackageIdentifier(Guid id, VersionIdentifier version)
+        public PackageIdentifier(Guid id, VersionIdentifier version, double packageCostPrice, double packageRecommendedPrice)
         {
             Id = id;
             Version = version;
+            PackageCostPrice = packageCostPrice;
+            PackageRecommendedPrice = PackageRecommendedPrice;
         }
 
         [DataMember]

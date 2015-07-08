@@ -77,7 +77,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                 Request.InitRequest(message.Body.RequestId)
                     .CreateTransaction(message.Body.PackageId, message.Body.PackageVersion, message.Body.Date,
                         message.Body.UserId, message.Body.ContractId, message.Body.System, message.Body.ContractVersion,
-                        message.Body.State, message.Body.AccountNumber);
+                        message.Body.State, message.Body.AccountNumber, message.Body.PackageCostPrice, message.Body.PackageRecommendedPrice);
 
             var @event =
                 new BillTransactionMessage(request.Package,

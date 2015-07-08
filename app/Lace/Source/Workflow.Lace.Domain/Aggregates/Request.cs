@@ -164,7 +164,7 @@ namespace Workflow.Lace.Domain.Aggregates
 
         public Request CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId,
             Guid contractId,
-            string system, long contractVersion, DataProviderState state, string accountNumber)
+            string system, long contractVersion, DataProviderState state, string accountNumber, double packageCostPrice, double packageRecommendedPrice)
         {
             DataProvider = new DataProviderIdentifier(DataProviderCommandSource.EntryPoint, DataProviderAction.Response, state);
             Date = date;
@@ -174,6 +174,8 @@ namespace Workflow.Lace.Domain.Aggregates
             State = new StateIdentifier((int) state, state.ToString());
             RequestContext = new SearchRequestIndentifier();
             Package = new PackageIdentifier(packageId, new VersionIdentifier(packageVersion));
+            Package.PackageCostPrice = packageCostPrice;
+            Package.PackageRecommendedPrice = packageRecommendedPrice;
             return this;
         }
 

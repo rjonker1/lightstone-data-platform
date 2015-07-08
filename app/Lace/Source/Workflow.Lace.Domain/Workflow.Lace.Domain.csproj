@@ -80,9 +80,9 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.Messages.1.0.0.1199\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.1199, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.Messages.1.0.0.1349\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1296, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1296\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
@@ -108,6 +108,7 @@
     <None Include="Aggregates\Request.cs.delete" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
