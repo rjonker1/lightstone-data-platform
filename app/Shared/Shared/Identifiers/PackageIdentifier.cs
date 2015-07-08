@@ -21,6 +21,10 @@ namespace DataPlatform.Shared.Identifiers
         public Guid Id { get; set; }
         [DataMember]
         public VersionIdentifier Version { get; set; }
+        [DataMember]
+        public double PackageCostPrice { get; set; }
+        [DataMember]
+        public double PackageRecommendedPrice { get; set; }
 
         protected bool Equals(PackageIdentifier other)
         {
