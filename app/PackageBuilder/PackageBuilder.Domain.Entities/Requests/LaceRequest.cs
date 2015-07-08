@@ -107,19 +107,23 @@ namespace PackageBuilder.Domain.Entities.Requests
 
     public class RequestPackage : IHavePackageForRequest
     {
-        public RequestPackage(IAmDataProvider[] dataProviders, Guid id, string name, long version)
+        public RequestPackage(IAmDataProvider[] dataProviders, Guid id, string name, long version, double packageCostPrice, double packageRecommendedPrice)
         {
           
             DataProviders = dataProviders;
             Id = id;
             Name = name;
             Version = version;
+            PackageCostPrice = packageCostPrice;
+            PackageRecommendedPrice = packageRecommendedPrice;
         }
 
         public Guid Id { get; private set; }
 
         public IAmDataProvider[] DataProviders { get; private set; }
         public string Name { get; private set; }
+        public double PackageCostPrice { get; private set; }
+        public double PackageRecommendedPrice { get; private set; }
 
         public long Version { get; private set; }
     }

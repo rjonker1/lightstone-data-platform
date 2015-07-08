@@ -50,7 +50,7 @@ namespace PackageBuilder.Api.Modules
 
                 var responses = ((Package)package).ExecuteMeta(new MetadataEntryPointService(), userId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, requestId, accountNumber, contractId, contractVersion,
-                    fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
+                    fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice);
 
                 // Filter responses for cleaner api payload
                 var filteredResponse = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>(responses);

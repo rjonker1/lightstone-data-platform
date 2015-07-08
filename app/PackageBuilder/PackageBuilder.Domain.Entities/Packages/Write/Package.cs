@@ -165,7 +165,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string firstName, Guid requestId, string accountNumber,
             Guid contractId, long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
-            IEnumerable<RequestFieldDto> requestFieldsDtos)
+            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
         {
             if (DataProviders == null)
                 return null;
@@ -188,7 +188,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             var request = new LaceRequest(
                 user,
                 new Contract(contractVersion, accountNumber, contractId),
-                new RequestPackage(laceProviders.ToArray(), Id, Name, (long) DisplayVersion),
+                new RequestPackage(laceProviders.ToArray(), Id, Name, (long) DisplayVersion, packageCostPrice, packageRecommendedPrice),
                 new RequestContext(requestId, fromDevice, fromIpAddress, osVersion, system),
                 DateTime.UtcNow);
 
@@ -211,10 +211,10 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string firstName, Guid requestId, string accountNumber, Guid contractId,
             long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
-            IEnumerable<RequestFieldDto> requestFieldsDtos)
+            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
         {
             var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
-                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos);
+                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice);
 
             if (request == null)
                 throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
@@ -227,10 +227,10 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         public IEnumerable<IDataProvider> ExecuteMeta(MetadataEntryPointService entryPoint, Guid userId, string userName,
             string firstName, Guid requestId, string accountNumber, Guid contractId,
             long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
-            IEnumerable<RequestFieldDto> requestFieldsDtos)
+            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
         {
             var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
-                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos);
+                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice);
 
             if (request == null)
                 throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));

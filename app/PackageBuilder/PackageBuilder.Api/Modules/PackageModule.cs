@@ -42,7 +42,7 @@ namespace PackageBuilder.Api.Modules
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi,IPublishIntegrationMessages integration)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -78,7 +78,7 @@ namespace PackageBuilder.Api.Modules
                     var industryString = (string)parameters.industryIds.Value;
                     industries = industryString.Split(',').Select(x => new Guid(x));
                 }
-                
+
                 //var packagesTest = readRepo.Where(x => x.State.Name == StateName.Published).OrderByDescending(d => d.Version);
                 var packagesTest = readRepo.Where(x => x.State.Name == StateName.Published && x.Industries.Any(ind => industries.Contains(ind.Id))).OrderByDescending(d => d.Version);
 
@@ -102,7 +102,7 @@ namespace PackageBuilder.Api.Modules
 
                 var publishedPackages = publishedPackagesList.AsQueryable();
 
-                var packages = new PagedList<Domain.Entities.Packages.Read.Package>(publishedPackages, 
+                var packages = new PagedList<Domain.Entities.Packages.Read.Package>(publishedPackages,
                                                 pageIndex - 1, pageSize, predicate);
                 return Response.AsJson(
                         new
@@ -116,7 +116,7 @@ namespace PackageBuilder.Api.Modules
                 Response.AsJson(
                     new
                     {
-                        Response = new[]{Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
+                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version)) }
                     });
 
             Post["/Packages/Execute"] = parameters =>
@@ -140,7 +140,7 @@ namespace PackageBuilder.Api.Modules
                 });
 
                 //TODO: Get these values from request or user management                
-                const long contractVersion = (long) 1.0;
+                const long contractVersion = (long)1.0;
                 const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
                 const string fromIpAddress = "127.0.0.1";
                 const string osVersion = "";
@@ -149,7 +149,7 @@ namespace PackageBuilder.Api.Modules
                 var requestId = Guid.NewGuid();
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, requestId, accountNumber, apiRequest.ContractId, contractVersion,
-                    fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields);
+                    fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice);
 
                 // Filter responses for cleaner api payload
                 var filteredResponse = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>(responses);
@@ -176,7 +176,7 @@ namespace PackageBuilder.Api.Modules
                 var advancedBus = new TransactionBus(eBus);
                 advancedBus.SendDynamic(metaEntity);
 
-                return Response.AsJson(new {msg = "Success"});
+                return Response.AsJson(new { msg = "Success" });
             };
 
             Put["/Packages/{id}"] = parameters =>
@@ -194,7 +194,7 @@ namespace PackageBuilder.Api.Modules
                 var advancedBus = new TransactionBus(eBus);
                 advancedBus.SendDynamic(metaEntity);
 
-                return Response.AsJson(new {msg = "Success, " + parameters.id + " edited"});
+                return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
 
             Put["/Packages/Clone/{id}/{cloneName}"] = parameters =>
@@ -231,7 +231,7 @@ namespace PackageBuilder.Api.Modules
             {
                 publisher.Publish(new DeletePackage(new Guid(parameters.id)));
 
-                return Response.AsJson(new {msg = "Success, " + parameters.id + " deleted"});
+                return Response.AsJson(new { msg = "Success, " + parameters.id + " deleted" });
             };
         }
     }

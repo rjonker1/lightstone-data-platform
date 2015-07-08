@@ -22,11 +22,11 @@ namespace Shared.BuildingBlocks.Api.Validation
     {
         private static readonly Dictionary<int, Func<IValidateRequestField>> Validators = new Dictionary<int, Func<IValidateRequestField>>()
         {
-            {1, () => new VinNumberValidation()},
-            {2, () => new LicensePlateValidation()},
-            {3, () => new RegistrationNumberValidation()},
-            {4, () => new EngineNumberValidation()},
-            {16, () => new IdentityNumberValidation()}
+            {0, () => new VinNumberValidation()},
+            {1, () => new LicensePlateValidation()},
+            {2, () => new RegistrationNumberValidation()},
+            {3, () => new EngineNumberValidation()},
+            {15, () => new IdentityNumberValidation()}
         };
 
         static ValidationManager()
