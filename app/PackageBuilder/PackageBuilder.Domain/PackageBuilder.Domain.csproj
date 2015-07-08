@@ -104,7 +104,9 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="CommandHandlers\DataImports\ImportStartupDataHandler.cs" />
+    <Compile Include="CommandHandlers\DataProviders\AmendDataProviderStructureHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\AudatexResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\DataProviderResponseRepository.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\IvidResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneAutoResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneBusinessResponse.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="EventHandlers\DataProviders\DataProviderUpdatedHandler.cs" />
     <Compile Include="EventHandlers\Packages\PackageCreatedHandler.cs" />
     <Compile Include="EventHandlers\Packages\PackageUpdatedHandler.cs" />
+    <Compile Include="Helpers\DataFieldEqualityComparer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -12,7 +12,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.Modules.States
 {
-    public class when_invoking_state_route : when_persisting_entities_to_db
+    public class when_invoking_state_route : when_persisting_entities_to_memory
     {
         private Browser _browser;
         private BrowserResponse _response;

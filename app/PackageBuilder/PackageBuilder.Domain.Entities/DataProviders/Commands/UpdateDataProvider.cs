@@ -23,7 +23,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly string Owner;
         public readonly DateTime CreatedDate;
         public readonly DateTime? EditedDate;
-        public readonly Type DataProviderType;
         [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
         public readonly IEnumerable<IDataField> RequestFields;
         [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]

@@ -1,6 +1,5 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Entities;
 using Moq;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;
@@ -8,7 +7,6 @@ using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
-using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
@@ -22,7 +20,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         {
             base.Observe();
 
-            var command = new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, "Description", 10m, typeof(IvidResponse), "User", DateTime.UtcNow);
+            var command = new CreateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, 10m, "User", DateTime.UtcNow);
             _handler = new CreateDataProviderHandler(_writeRepository.Object, _readRepository.Object);
             _handler.Handle(command);
         }

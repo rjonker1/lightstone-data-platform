@@ -36,3 +36,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: InternalsVisibleTo("PackageBuilder.Api.Tests")]
 [assembly: InternalsVisibleTo("Lightstone.Dataplatform.PackageBuilder.TestObjects")]
+[assembly: InternalsVisibleTo("Lightstone.Dataplatform.PackageBuilder.Acceptance.Tests")]

@@ -12,7 +12,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
 {
-    public class when_mapping_an_override_to_a_single_data_provider : when_persisting_entities_to_db
+    public class when_mapping_an_override_to_a_single_data_provider : when_persisting_entities_to_memory
     {
         private IDataProvider _dataProvider;
 

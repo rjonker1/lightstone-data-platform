@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
+using FluentNHibernate.Conventions.AcceptanceCriteria;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
@@ -34,12 +35,12 @@ namespace PackageBuilder.Api.Modules
             //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
-            Get["/DataProviders"] = parameters => {
+            Get["/DataProviders"] = _ => {
                 var test = Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>(readRepo));
                 return test;
             };
 
-            Get["/DataProviders/Latest"] = parameters =>
+            Get["/DataProviders/Latest"] = _ =>
             {
                 var repoSource =
                     readRepo.GetUniqueIds()
@@ -74,13 +75,13 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProviders/{id}"] = parameters => 
-                Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(parameters.id)) } });
+            Get["/DataProviders/{id}"] = _ => 
+                Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id)) } });
 
-            Get["/DataProviders/{id}/{version}"] = parameters =>
-                Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(parameters.id, parameters.version)) } });
+            Get["/DataProviders/{id}/{version}"] = _ =>
+                Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id, _.version)) } });
 
-            Put["/Dataproviders/{id}"] = parameters =>
+            Put["/Dataproviders/{id}"] = _ =>
             {
                 var dto = this.Bind<Domain.Dtos.Write.DataProviderDto>();
                 var rFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(dto.RequestFields);
@@ -90,13 +91,20 @@ namespace PackageBuilder.Api.Modules
                 //    dto.CostOfSale, typeof (Domain.Dtos.Write.DataProviderDto), dto.FieldLevelCostPriceOverride,
                 //    stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dFields);
 
-                var command = new UpdateDataProvider(parameters.id,
+                var command = new UpdateDataProvider(_.id,
                     (DataProviderName)Enum.Parse(typeof(DataProviderName), dto.Name, true), dto.Description,
                     dto.CostOfSale, typeof(Domain.Dtos.Write.DataProviderDto), dto.FieldLevelCostPriceOverride,
                     stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, rFields, dFields);
                 publisher.Publish(command);
 
-                return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
+                return Response.AsJson(new {msg = "Success, " + _.id + " created"});
+            };
+
+            Put["/Dataproviders/{id}/amend"] = _ =>
+            {
+                var id = (Guid) _.id;
+                publisher.Publish(new AmendDataProviderStructure(id));
+                return null;
             };
 
             Post["DataProvider/Clone/{id}/{cloneName}"] = ParametersBackTrackExtensions =>
