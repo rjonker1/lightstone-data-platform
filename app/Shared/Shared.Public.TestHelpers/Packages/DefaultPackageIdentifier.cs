@@ -15,5 +15,15 @@ namespace Shared.Public.TestHelpers.Packages
         {
             get { return new VersionIdentifier(1, SystemTime.Now()); }
         }
+
+        public double PackageCostPrice
+        {
+            get { return 0; }
+        }
+
+        public double PackageRecommendedPrice
+        {
+            get { return 0; }
+        }
     }
 }

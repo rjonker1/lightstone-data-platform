@@ -7,5 +7,7 @@ namespace Shared.Public.TestHelpers.Packages
     {
         Guid Id { get; }
         VersionIdentifier Version { get; }
+        double PackageCostPrice { get; }
+        double PackageRecommendedPrice { get; }
     }
 }
