@@ -8,6 +8,8 @@ namespace Workflow.Billing.Domain.Entities
         public virtual DateTime Date { get; protected internal set; }
         public virtual Guid PackageId { get; protected internal set; }
         public virtual int PackageVersion { get; protected internal set; }
+        public virtual double PackageCostPrice { get; protected internal set; }
+        public virtual double PackageRecommendedPrice { get; protected internal set; }
         public virtual Guid ContractId { get; protected internal set; }
         public virtual int ContractVersion { get; protected internal set; }
         public virtual Guid UserId { get; protected internal set; }
