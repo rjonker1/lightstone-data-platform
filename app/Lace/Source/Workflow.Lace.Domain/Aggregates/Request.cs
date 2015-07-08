@@ -173,9 +173,10 @@ namespace Workflow.Lace.Domain.Aggregates
             CommandType = CommandType.Accounting;
             State = new StateIdentifier((int) state, state.ToString());
             RequestContext = new SearchRequestIndentifier();
-            Package = new PackageIdentifier(packageId, new VersionIdentifier(packageVersion));
-            Package.PackageCostPrice = packageCostPrice;
-            Package.PackageRecommendedPrice = packageRecommendedPrice;
+            Package = new PackageIdentifier();
+            //Package = new PackageIdentifier(packageId, new VersionIdentifier(packageVersion));
+            //Package.PackageCostPrice = packageCostPrice;
+            //Package.PackageRecommendedPrice = packageRecommendedPrice;
             return this;
         }
 
