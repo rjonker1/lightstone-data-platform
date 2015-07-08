@@ -21,7 +21,7 @@ namespace Workflow.Billing.Messages.Mapping
             {
                 return new[]
                 {
-                    "Id", "Date", "PackageId", "PackageVersion","ContractId", "ContractVersion", "UserId", "RequestId", "System", "Server", "State", "StateId", "AccountNumber"
+                    "Id", "Date", "PackageId", "PackageVersion","PackageCostPrice","PackageRecommendedPrice","ContractId", "ContractVersion", "UserId", "RequestId", "System", "Server", "State", "StateId", "AccountNumber"
                 };
             }
         }
@@ -38,6 +38,8 @@ namespace Workflow.Billing.Messages.Mapping
                 Date = transaction.Date,
                 PackageId = transaction.Package.Id,
                 PackageVersion = transaction.Package.Version.Number,
+                PackageCostPrice = "",
+                PackageRecommendedPrice = "",
                 ContractId = transaction.Contract.Id,
                 ContractVersion = transaction.Contract.Version.Number,
                 UserId = transaction.User.Id,

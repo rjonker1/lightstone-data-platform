@@ -22,7 +22,7 @@ namespace Workflow.Lace.Messages.Core
         void EntryPointResponse(object payload, DataProviderStopWatch stopWatch, DataProviderState state, ICollection<IPointToLaceRequest> request);
 
         void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
-            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber);
+            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber, double packageCostPrice, double packageRecommendedPrice);
 
         void Begin(object payload,
             DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider);

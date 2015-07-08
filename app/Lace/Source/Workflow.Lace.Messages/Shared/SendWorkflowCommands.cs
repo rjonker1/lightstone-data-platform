@@ -77,11 +77,11 @@ namespace Workflow.Lace.Messages.Shared
         }
 
         public void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
-            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber)
+            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber, double packageCostPrice, double packageRecommendedPrice)
         {
             new CreateTransactionCommand(Guid.NewGuid(), packageId, packageVersion, DateTime.UtcNow, userId, requestId,
                 contractId,
-                system, contractVersion, state,accountNumber)
+                system, contractVersion, state,accountNumber, packageCostPrice, packageRecommendedPrice)
                 .SendToBus(_publisher, _log);
         }
 

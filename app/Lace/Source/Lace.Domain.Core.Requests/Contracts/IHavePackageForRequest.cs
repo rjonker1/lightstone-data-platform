@@ -8,6 +8,8 @@ namespace Lace.Domain.Core.Requests.Contracts
         long Version { get; }
         IAmDataProvider[] DataProviders { get; }
         string Name { get; }
+        double PackageCostPrice { get; }
+        double PackageRecommendedPrice { get; }
        // string Action { get; }
     }
 }
