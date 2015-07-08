@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
-using System.Web.Configuration;
-using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using MemBus;
 using Nancy;
@@ -12,7 +10,6 @@ using Nancy.Bootstrappers.Windsor;
 using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
-using PackageBuilder.Api.Helpers;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Entities.DataImports;

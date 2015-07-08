@@ -7,7 +7,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Entities.Tests.DataProviders.Read
 {
-    public class when_persisting_a_data_provider : when_persisting_entities_to_db
+    public class when_persisting_a_data_provider : when_persisting_entities_to_memory
     {
         public override void Observe()
         {

@@ -12,7 +12,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
 {
-    public class when_mapping_to_package : when_persisting_entities_to_db
+    public class when_mapping_to_package : when_persisting_entities_to_memory
     {
         private IPackage _package;
         public override void Observe()

@@ -25,15 +25,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.CommandStore
 
             _repository = new Repository<Command>(Session);
 
-            var createDataProvider = new CreateDataProvider(
-                new RgtResponse(), 
-                Guid.NewGuid(), 
-                DataProviderName.Rgt,
-                DataProviderName.Rgt.ToString(), 
-                0m, 
-                typeof (IProvideDataFromRgt), 
-                "Owner", 
-                DateTime.UtcNow);
+            var createDataProvider = new CreateDataProvider(Guid.NewGuid(), DataProviderName.Rgt, 0m, "Owner", DateTime.UtcNow);
             var command = new StoreCommand(Guid.NewGuid(), createDataProvider);
             _handler = new StoreCommandHandler(_repository);
             _handler.Handle(command);

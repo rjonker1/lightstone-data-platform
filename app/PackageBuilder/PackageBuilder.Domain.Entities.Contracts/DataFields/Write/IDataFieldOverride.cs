@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using PackageBuilder.Core.Entities;
 
 namespace PackageBuilder.Domain.Entities.Contracts.DataFields.Write
 {
-    public interface IDataFieldOverride
+    public interface IDataFieldOverride : INamedEntity
     {
-        string Name { get; }
         string Namespace { get; set; }
         string DisplayName { get; }
         double CostOfSale { get; }

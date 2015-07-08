@@ -1,6 +1,4 @@
-﻿using Lace.Domain.Core.Entities;
-
-namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
+﻿namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
 {
     public class IvidResponse
     {

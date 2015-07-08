@@ -51,8 +51,9 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                 {
                     if (s.DataFields != null)
                     {
-                        var objects = s.DataFields.ToNamespace().Select(x => (IDataField)Mapper.Map(x, d.DataFields.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace)
-                            .FirstOrDefault(), typeof(IDataField), typeof(DataField))).ToList();
+                        var objects = s.DataFields.ToNamespace()
+                                        .Select(x => (IDataField)Mapper.Map(x, d.DataFields.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault(), typeof(IDataField), typeof(DataField)))
+                                        .ToList();
                         d.DataFields = objects.Filter(x => x.IsSelected == true);
                     }
                 })
