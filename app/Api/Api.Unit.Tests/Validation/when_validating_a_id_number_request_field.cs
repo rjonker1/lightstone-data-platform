@@ -14,7 +14,7 @@ namespace Api.Unit.Tests.Validation
         [Observation]
         public void then_id_number_less_than_13_characters_should_not_be_valid()
         {
-            _validation = ValidationManager.Validate(16,"8310245010");
+            _validation = ValidationManager.Validate(15,"8310245010");
             _validation.IsValid.ShouldBeFalse();
             _validation.Error.ShouldEqual("ID number provided is not valid");
         
@@ -23,7 +23,7 @@ namespace Api.Unit.Tests.Validation
         [Observation]
         public void then_id_number_characters_should_not_be_valid()
         {
-            _validation = ValidationManager.Validate(16, "83102450100810");
+            _validation = ValidationManager.Validate(15, "83102450100810");
             _validation.IsValid.ShouldBeFalse();
             _validation.Error.ShouldEqual("ID number provided is not valid");
 
@@ -32,7 +32,7 @@ namespace Api.Unit.Tests.Validation
         [Observation]
         public void then_male_id_number_should_be_valid()
         {
-            _validation = ValidationManager.Validate(16, "8310245010082");
+            _validation = ValidationManager.Validate(15, "8310245010082");
             _validation.IsValid.ShouldBeTrue();
         }
     }
