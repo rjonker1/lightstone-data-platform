@@ -16,7 +16,7 @@ namespace DataPlatform.Shared.Identifiers
             Id = id;
             Version = version;
             PackageCostPrice = packageCostPrice;
-            PackageRecommendedPrice = PackageRecommendedPrice;
+            PackageRecommendedPrice = packageRecommendedPrice;
         }
 
         [DataMember]
