@@ -12,7 +12,7 @@ namespace Billing.Api.Modules
 {
     public class PreBillingModule : SecureModule
     {
-        public PreBillingModule(IRepository<PreBilling> preBillingRepository)
+        public PreBillingModule(IRepository<PreBilling> preBillingRepository, IRepository<UserMeta> userMetaRepository)
         {
 
             Get["/PreBilling/"] = _ =>
@@ -72,12 +72,12 @@ namespace Billing.Api.Modules
                         HasTransactions = true
                     };
 
-                    //Indices
+                    // Indices
                     var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
                     var customerIndex = customerList.FindIndex(x => x.Id == customer.Id);
 
 
-                    //Index restrictions for new records
+                    // Index restrictions for new records
                     if (userIndex < 0) userList.Add(user);
 
                     customer.Users = userList;
@@ -96,24 +96,53 @@ namespace Billing.Api.Modules
             {
 
                 var searchId = new Guid(param.searchId);
-                var customerUsersDetailList = new List<User>();
+                var customerUsersDetailList = new List<UserDto>();
 
                 foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
-                    //User
-                    var user = new User
+
+                    var userTransactionsList = new List<TransactionDto>();
+
+                    // Get User Meta data
+                    var userMeta = userMetaRepository.FirstOrDefault(x => x.Id == transaction.UserId) ?? new UserMeta
+                    {
+                        Id = transaction.UserId,
+                        Username = transaction.Username
+                    };
+
+                    // Filter repo for user transaction; For specified customer | client
+                    var userTransactions = preBillingRepository.Where(x => x.UserId == transaction.UserId
+                        && (x.CustomerId == searchId || x.ClientId == searchId))
+                                            .Select(x =>
+                                            new TransactionDto
+                                            {
+                                                TransactionId = x.TransactionId,
+                                                RequestId = x.RequestId,
+                                                IsBillable = x.IsBillable
+                                            }).Distinct();
+
+                    foreach (var userTransaction in userTransactions)
+                    {
+
+                        // Index
+                        var userTransIndex = userTransactionsList.FindIndex(x => x.TransactionId == userTransaction.TransactionId);
+                        if (userTransIndex < 0) userTransactionsList.Add(userTransaction);
+                    }
+
+                    // User
+                    var user = new UserDto
                     {
                         UserId = transaction.UserId,
                         Username = transaction.Username,
-                        FirstName = transaction.FirstName,
-                        LastName = transaction.LastName,
-                        HasTransactions = true
+                        FirstName = userMeta.FirstName,
+                        LastName = userMeta.LastName,
+                        Transactions = userTransactionsList
                     };
 
-                    //Index
+                    // Index
                     var userIndex = customerUsersDetailList.FindIndex(x => x.UserId == user.UserId);
 
-                    //Index restriction for new record
+                    // Index restriction for new record
                     if (userIndex < 0) customerUsersDetailList.Add(user);
                 }
 
@@ -129,64 +158,26 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
-
-                    var dataProviderList = preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId)
-                                            .Select(x =>
-                                                new DataProviderDto()
-                                                {
-                                                    DataProviderId = x.DataProviderId,
-                                                    DataProviderName = x.DataProviderName,
-                                                    CostPrice = x.CostPrice,
-                                                    RecommendedPrice = x.RecommendedPrice,
-
-                                                    PackageId = x.PackageId,
-                                                    PackageName = x.PackageName
-
-                                                }).Distinct();
-
-                    //Package
+                    // Package
                     var package = new PackageDto()
                     {
                         PackageId = transaction.PackageId,
                         PackageName = transaction.PackageName,
-                        DataProviders = dataProviderList
+                        PackageCostPrice = transaction.PackageCostPrice,
+                        PackageRecommendedPrice = transaction.PackageRecommendedPrice
+                        //DataProviders = dataProviderList
                     };
 
-                    //Package Index
+                    // Package Index
                     var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
 
-                    //Index restriction for new record
+                    // Index restriction for new record
                     if (packageIndex < 0) customerPackagesDetailList.Add(package);
                 }
 
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
-
-            //Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Products = products });
-
-            //Get["/PreBilling/Customers"] = _ => Response.AsJson(new { Customers = customersRepo });
-
         }
     }
 
-    ////Server side Paging
-    //public interface IServerPageRepo : IRepository<Transaction>
-    //{
-    //    PagedList<Transaction> Search(string searchValue, int pageIndex, int pageSize);
-    //}
-
-    //public class PreBillingDtoRepository : Repository<Transaction>, IServerPageRepo
-    //{
-    //    public PreBillingDtoRepository(ISession session)
-    //        : base(session)
-    //    {
-    //    }
-
-    //    public PagedList<Transaction> Search(string searchValue, int pageIndex, int pageSize)
-    //    {
-    //        var predicate = PredicateBuilder.False<Transaction>();
-    //        //predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-    //        return new PagedList<Transaction>(this, pageIndex, pageSize);
-    //    }
-    //}
 }

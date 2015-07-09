@@ -5,7 +5,6 @@ using System.Linq;
 using Billing.Domain.Dtos;
 using Billing.Domain.Entities;
 using DataPlatform.Shared.Repositories;
-using FluentNHibernate.Utils;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.ModelBinding;
@@ -19,7 +18,7 @@ namespace Billing.Api.Modules
 {
     public class StageBillingModule : SecureModule
     {
-        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs,
+        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs, IRepository<UserMeta> userMetaRepository,
                                     ICommitBillingTransaction<UserTransactionDto> userBillingTransaction,
                                     ICommitBillingTransaction<CustomerClientTransactionDto> customerClientBillingTransaction,
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction)
@@ -118,7 +117,14 @@ namespace Billing.Api.Modules
 
                     var userTransactionsList = new List<TransactionDto>();
 
-                    //Filter repo for user transaction; For specified customer | client
+                    // Get User Meta data
+                    var userMeta = userMetaRepository.FirstOrDefault(x => x.Id == transaction.UserId) ?? new UserMeta
+                    {
+                        Id = transaction.UserId,
+                        Username = transaction.Username
+                    };
+
+                    // Filter repo for user transaction; For specified customer | client
                     var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId
                         && (x.CustomerId == searchId || x.ClientId == searchId))
                                             .Select(x =>
@@ -132,25 +138,25 @@ namespace Billing.Api.Modules
                     foreach (var userTransaction in userTransactions)
                     {
 
-                        //Index
+                        // Index
                         var userTransIndex = userTransactionsList.FindIndex(x => x.TransactionId == userTransaction.TransactionId);
                         if (userTransIndex < 0) userTransactionsList.Add(userTransaction);
                     }
 
-                    //User
+                    // User
                     var user = new UserDto
                     {
                         UserId = transaction.UserId,
                         Username = transaction.Username,
-                        FirstName = transaction.FirstName,
-                        LastName = transaction.LastName,
+                        FirstName = userMeta.FirstName,
+                        LastName = userMeta.LastName,
                         Transactions = userTransactionsList
                     };
 
-                    //Index
+                    // Index
                     var userIndex = customerUsersDetailList.FindIndex(x => x.UserId == user.UserId);
 
-                    //Index restriction for new record
+                    // Index restriction for new record
                     if (userIndex < 0) customerUsersDetailList.Add(user);
                 }
 
@@ -167,26 +173,28 @@ namespace Billing.Api.Modules
                 foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
                 {
 
-                    var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId)
-                                            .Select(x =>
-                                                new DataProviderDto()
-                                                {
-                                                    DataProviderId = x.DataProviderId,
-                                                    DataProviderName = x.DataProviderName,
-                                                    CostPrice = x.CostPrice,
-                                                    RecommendedPrice = x.RecommendedPrice,
+                    //var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId)
+                    //                        .Select(x =>
+                    //                            new DataProviderDto()
+                    //                            {
+                    //                                DataProviderId = x.DataProviderId,
+                    //                                DataProviderName = x.DataProviderName,
+                    //                                CostPrice = x.CostPrice,
+                    //                                RecommendedPrice = x.RecommendedPrice,
 
-                                                    PackageId = x.PackageId,
-                                                    PackageName = x.PackageName
+                    //                                PackageId = x.PackageId,
+                    //                                PackageName = x.PackageName
 
-                                                }).Distinct();
+                    //                            }).Distinct();
 
                     //Package
                     var package = new PackageDto()
                     {
                         PackageId = transaction.PackageId,
                         PackageName = transaction.PackageName,
-                        DataProviders = dataProviderList
+                        PackageCostPrice = transaction.PackageCostPrice,
+                        PackageRecommendedPrice = transaction.PackageRecommendedPrice
+                        //DataProviders = dataProviderList
                     };
 
                     //Package Index
@@ -209,7 +217,7 @@ namespace Billing.Api.Modules
                 foreach (var transaction in transactions)
                 {
 
-                    //Return Pacakge details without price, if non-billable
+                    // Return Pacakge details without price, if non-billable
                     if (transactions.Count(x => x.IsBillable).Equals(0))
                     {
                         var emptyPackage = new PackageDto
@@ -220,7 +228,7 @@ namespace Billing.Api.Modules
                             PackageRecommendedPrice = 0.00
                         };
 
-                        //Package Index
+                        // Package Index
                         var emptyPackageIndex = packagesDetailList.FindIndex(x => x.PackageId == emptyPackage.PackageId);
 
                         //Index restriction for new record
@@ -250,7 +258,7 @@ namespace Billing.Api.Modules
                     //    packageTotal += Convert.ToDouble(dataProvider.RecommendedPrice);
                     //}
 
-                    //Package
+                    // Package
                     var package = new PackageDto
                     {
                         PackageId = transaction.PackageId,
@@ -259,10 +267,10 @@ namespace Billing.Api.Modules
                         PackageRecommendedPrice = transaction.PackageRecommendedPrice
                     };
 
-                    //Package Index
+                    // Package Index
                     var packageIndex = packagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
 
-                    //Index restriction for new record
+                    // Index restriction for new record
                     if (packageIndex < 0) packagesDetailList.Add(package);
                 }
 
@@ -291,7 +299,7 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = packageTransaction });
             };
 
-            //User billable transactions
+            // User billable transactions
             Post["/StageBilling/User/Transactions/Update"] = param =>
             {
                 var body = Request.Body<UserTransactionDto>();
@@ -302,7 +310,7 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new {data = "Success"});
             };
 
-            //Customer | Client
+            // Customer | Client
             Post["/StageBilling/CustomerClient/Transaction/Update"] = param =>
             {
                 var body = this.Bind<CustomerClientTransactionDto>();
@@ -321,7 +329,7 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = "Success" });
             };
             
-            //Package detail
+            // Package detail
             Post["/StageBilling/Package/Transaction/Update"] = param =>
             {
                 var body = this.Bind<PackageTransactionDto>();

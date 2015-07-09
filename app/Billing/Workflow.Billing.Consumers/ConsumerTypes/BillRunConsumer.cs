@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using Billing.Domain.Dtos;
-using DataPlatform.Shared.Helpers.Extensions;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
-using DataPlatform.Shared.Messaging.Billing.Messages;
-using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
-using DataPlatform.Shared.Repositories;
+﻿using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
 using Workflow.Billing.Domain.Helpers.BillingRunHelpers;
 

@@ -50,10 +50,25 @@ window.userGridActionEvents = {
             }, {
                 field: 'transactions',
                 title: 'User Transactions (Total)',
+                formatter: userTransactionsFormatter
             }]
         });
 
     }
+};
+
+function userTransactionsFormatter(value, row, index) {
+
+    var count = 0;
+
+    for (var i = 0; i < row.transactions.length; i++) {
+
+        count++;
+    }
+
+    return [
+        'Total Transactions: ( ' + count + ' ) '
+    ].join('');
 };
 
 function gridPackagesFormatter(value, row, index) {
@@ -92,11 +107,11 @@ window.packageGridActionEvents = {
                 title: 'Package Name',
                 sortable: true
             }, {
-                field: 'costPrice',
+                field: 'packageCostPrice',
                 title: 'Cost Of Sale',
                 sortable: true
             }, {
-                field: 'recommendedPrice',
+                field: 'packageRecommendedPrice',
                 title: 'Recommended Price',
                 sortable: true
             }]

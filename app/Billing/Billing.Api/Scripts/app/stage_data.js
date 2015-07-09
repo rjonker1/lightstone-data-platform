@@ -238,11 +238,11 @@ window.packageGridActionEvents = {
                 },
                 sortable: true
             }, {
-                field: 'costPrice',
+                field: 'packageCostPrice',
                 title: 'Cost Of Sale',
                 sortable: true
             }, {
-                field: 'recommendedPrice',
+                field: 'packageRecommendedPrice',
                 title: 'Recommended Price',
                 sortable: true
             }, {
