@@ -26,7 +26,6 @@ namespace Billing.Api.Modules
 
             Get["/StageBilling/"] = _ =>
             {
-
                 var customerList = new List<StageBillingDto>();
 
                 foreach (var transaction in stageBillingRepository)
@@ -108,7 +107,6 @@ namespace Billing.Api.Modules
 
             Get["/StageBilling/CustomerClient/{searchId}/Users"] = param =>
             {
-
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
@@ -166,7 +164,6 @@ namespace Billing.Api.Modules
 
             Get["/StageBilling/CustomerClient/{searchId}/Packages"] = param =>
             {
-
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 

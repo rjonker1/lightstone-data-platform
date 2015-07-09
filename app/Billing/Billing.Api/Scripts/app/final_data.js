@@ -50,10 +50,25 @@ window.userGridActionEvents = {
             }, {
                 field: 'transactions',
                 title: 'User Transactions (Total)',
+                formatter: userTransactionsFormatter
             }]
         });
 
     }
+};
+
+function userTransactionsFormatter(value, row, index) {
+
+    var count = 0;
+
+    for (var i = 0; i < row.transactions.length; i++) {
+
+        count++;
+    }
+
+    return [
+        'Total Transactions: ( ' + count + ' ) '
+    ].join('');
 };
 
 function gridPackagesFormatter(value, row, index) {
@@ -71,11 +86,11 @@ window.packageGridActionEvents = {
 
         $('#detail').bootstrapTable('destroy');
 
-        $('#detail-table-header').text('DataProviders Detail For : ' + row.customerName);
+        $('#detail-table-header').text('Packages Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
             url: '/FinalBilling/CustomerClient/' + row.id + '/Packages',
-            responseHandler: packageResponseHandler,
+            //responseHandler: packageResponseHandler,
             cache: false,
             search: true,
             showRefresh: true,
@@ -84,26 +99,24 @@ window.packageGridActionEvents = {
             pageSize: 10,
             pageList: [10, 25, 50, 100, 'All'],
             columns: [{
-                field: 'dataProviderId',
-                title: 'DataProvider ID',
+                field: 'packageId',
+                title: 'Package ID',
                 visible: false
             }, {
                 field: 'packageName',
                 title: 'Package Name',
                 sortable: true
             }, {
-                field: 'dataProviderName',
-                title: 'DataProvider Name',
-                sortable: true
-            }, {
-                field: 'costPrice',
+                field: 'packageCostPrice',
                 title: 'Cost Of Sale',
                 sortable: true
             }, {
-                field: 'recommendedPrice',
+                field: 'packageRecommendedPrice',
                 title: 'Recommended Price',
                 sortable: true
             }]
+        }).on('click-row.bs.table', function (e, row, $element) {
+            window.editRow = row;
         });
 
     }

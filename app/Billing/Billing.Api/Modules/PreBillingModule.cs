@@ -17,7 +17,6 @@ namespace Billing.Api.Modules
 
             Get["/PreBilling/"] = _ =>
             {
-
                 var customerList = new List<PreBillingDto>();
 
                 foreach (var transaction in preBillingRepository)
@@ -94,7 +93,6 @@ namespace Billing.Api.Modules
 
             Get["/PreBilling/CustomerClient/{searchId}/Users"] = param =>
             {
-
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
@@ -152,7 +150,6 @@ namespace Billing.Api.Modules
 
             Get["/PreBilling/CustomerClient/{searchId}/Packages"] = param =>
             {
-
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
@@ -165,7 +162,6 @@ namespace Billing.Api.Modules
                         PackageName = transaction.PackageName,
                         PackageCostPrice = transaction.PackageCostPrice,
                         PackageRecommendedPrice = transaction.PackageRecommendedPrice
-                        //DataProviders = dataProviderList
                     };
 
                     // Package Index
