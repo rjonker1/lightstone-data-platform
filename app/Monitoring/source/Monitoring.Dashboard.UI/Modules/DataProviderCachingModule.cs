@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Logging;
 using Lace.Caching.Messages;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Nancy;
@@ -7,12 +8,16 @@ namespace Monitoring.Dashboard.UI.Modules
 {
     public class DataProviderCachingModule : NancyModule
     {
+        private static readonly ILog Log = LogManager.GetLogger<DataProviderCachingModule>();
+
         public DataProviderCachingModule(IHandleDataProviderCaching handler)
         {
             Get["/dataProviders/caching"] = _ => View["DataProvidersCaching"];
 
             Post["/dataProviders/caching/refresh"] = _ =>
             {
+                Log.Info("Refreshing the cache for Data Providers");
+
                 handler.Handle(new RefreshCacheCommand(Guid.NewGuid(), DateTime.UtcNow));
                 return HttpStatusCode.OK;
             };
