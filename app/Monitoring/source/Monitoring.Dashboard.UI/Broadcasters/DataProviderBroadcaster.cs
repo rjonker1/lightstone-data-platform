@@ -35,7 +35,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         public static DataProviderBroadcaster Instance
         {
-            get { return _instance.Value; }
+            get { return  _instance.Value; }
         }
 
         public Uri Root

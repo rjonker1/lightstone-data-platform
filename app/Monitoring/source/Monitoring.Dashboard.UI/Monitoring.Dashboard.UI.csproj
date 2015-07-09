@@ -157,7 +157,9 @@
       <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\ang\angular-ui-bootstrap.js" />
