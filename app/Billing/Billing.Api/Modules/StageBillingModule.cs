@@ -216,7 +216,8 @@ namespace Billing.Api.Modules
                         {
                             PackageId = transaction.PackageId,
                             PackageName = transaction.PackageName,
-                            Price = 0.00
+                            PackageCostPrice = 0.00,
+                            PackageRecommendedPrice = 0.00
                         };
 
                         //Package Index
@@ -227,34 +228,35 @@ namespace Billing.Api.Modules
                         break;
                     }
 
-                    var dataProviderList = stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId) && x.IsBillable)
-                                            .Select(x =>
-                                                new DataProviderDto()
-                                                {
-                                                    DataProviderId = x.DataProviderId,
-                                                    DataProviderName = x.DataProviderName,
-                                                    CostPrice = x.CostPrice,
-                                                    RecommendedPrice = x.RecommendedPrice,
+                    //var dataProviderList = stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId) && x.IsBillable)
+                    //                        .Select(x =>
+                    //                            new DataProviderDto()
+                    //                            {
+                    //                                DataProviderId = x.DataProviderId,
+                    //                                DataProviderName = x.DataProviderName,
+                    //                                CostPrice = x.CostPrice,
+                    //                                RecommendedPrice = x.RecommendedPrice,
 
-                                                    PackageId = x.PackageId,
-                                                    PackageName = x.PackageName
+                    //                                PackageId = x.PackageId,
+                    //                                PackageName = x.PackageName
 
-                                                }).Distinct();
+                    //                            }).Distinct();
 
 
-                    var packageTotal = 0.00;
+                    //var packageTotal = 0.00;
 
-                    foreach (var dataProvider in dataProviderList)
-                    {
-                        packageTotal += Convert.ToDouble(dataProvider.RecommendedPrice);
-                    }
+                    //foreach (var dataProvider in dataProviderList)
+                    //{
+                    //    packageTotal += Convert.ToDouble(dataProvider.RecommendedPrice);
+                    //}
 
                     //Package
                     var package = new PackageDto
                     {
                         PackageId = transaction.PackageId,
                         PackageName = transaction.PackageName,
-                        Price = packageTotal
+                        PackageCostPrice = transaction.PackageCostPrice,
+                        PackageRecommendedPrice = transaction.PackageRecommendedPrice
                     };
 
                     //Package Index
