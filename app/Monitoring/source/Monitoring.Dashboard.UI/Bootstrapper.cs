@@ -36,7 +36,7 @@ namespace Monitoring.Dashboard.UI
 
             container.Register<IHandleDataProviderCaching, DataProviderCachingHandler>();
             container.Register<IPublishCacheMessages, DataProviderCommandPublisher>();
-            container.Register<IAdvancedBus>(BusFactory.CreateAdvancedBus("caching/dataprovider/queue"));
+            container.Register<IAdvancedBus>(BusFactory.CreateAdvancedBus(QueueConfigurationReader.CacheSender));
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Lace.Caching.BuildingBlocks.Handlers;
 using Lace.Caching.BuildingBlocks.Repository;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Caching;
 using Lace.Shared.DataProvider.Models;
 using Lace.Shared.DataProvider.Repositories;
@@ -39,7 +37,7 @@ namespace Lace.Acceptance.Tests.Caching
         {
             _sale.AddToCache(_repository);
             var sales =
-                _readRepository.GetAll<Sale>(sale => { return sale.Car_ID == CarId && sale.Year_ID == Year; })
+                _readRepository.GetAll<Sale>(sale => sale.Car_ID == CarId && sale.Year_ID == Year)// { return sale.Car_ID == CarId && sale.Year_ID == Year; })
                     .OrderByDescending(o => o.SaleDateTime)
                     .Take(5);
 
