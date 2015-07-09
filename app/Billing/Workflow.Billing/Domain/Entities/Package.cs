@@ -6,6 +6,7 @@ namespace Workflow.Billing.Domain.Entities
     {
         public virtual Guid PackageId { get; set; }
         public virtual string PackageName { get; set; }
-        public virtual double PackagePrice { get; set; }
+        public virtual double PackageCostPrice { get; set; }
+        public virtual double PackageRecommendedPrice { get; set; }
     }
 }
