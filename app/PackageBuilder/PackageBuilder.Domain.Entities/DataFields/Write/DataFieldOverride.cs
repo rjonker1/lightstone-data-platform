@@ -14,7 +14,10 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
     {
         [DataMember]
         public string Name { get; internal set; }
-        [DataMember]
+        /// <summary>
+        /// NB: Namespace should always be calculated at runtime
+        /// </summary>
+        [JsonIgnore] 
         public string Namespace { get; set; }
         [DataMember]
         public string DisplayName { get; internal set; }
