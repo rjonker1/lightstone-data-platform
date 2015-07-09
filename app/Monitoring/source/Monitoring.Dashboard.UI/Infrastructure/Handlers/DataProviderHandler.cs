@@ -59,7 +59,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occurred in the Monitoirng Handler because of {0}", ex.Message);
+                _log.ErrorFormat("An error occured in the Monitoirng Handler because of {0}", ex.Message);
             }
         }
 

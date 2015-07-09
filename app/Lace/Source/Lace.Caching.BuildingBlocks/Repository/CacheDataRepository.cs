@@ -10,21 +10,14 @@ namespace Lace.Caching.BuildingBlocks.Repository
 {
     public class CacheDataRepository : ICacheRepository
     {
-        //private readonly IDbConnection _connection;
         private readonly ILog _log;
         private const string CacheIp = "127.0.0.1:6379";
 
         public CacheDataRepository()
         {
-            //_connection = connection;
             _log = LogManager.GetLogger(GetType());
         }
-
-        //private CacheDataRepository()
-        //{
-            
-        //}
-
+        
         public static CacheDataRepository ForCacheOnly()
         {
             return new CacheDataRepository();
