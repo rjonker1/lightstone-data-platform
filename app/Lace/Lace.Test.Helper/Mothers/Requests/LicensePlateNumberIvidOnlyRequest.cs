@@ -1,6 +1,7 @@
 ﻿using System;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
+using Lace.Test.Helper.Mothers.Packages;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
@@ -11,7 +12,8 @@ namespace Lace.Test.Helper.Mothers.Requests
         {
             get
             {
-                return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage("CL49CTGP", "VVi+");
+               // return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage("CL49CTGP", "VVi+");
+                return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage("CN62KZGP", "VVi+");
             }
         }
 
