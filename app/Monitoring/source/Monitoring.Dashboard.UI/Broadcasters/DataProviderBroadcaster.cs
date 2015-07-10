@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Threading;
 using Common.Logging;
 using Microsoft.AspNet.SignalR;
@@ -19,7 +18,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         private readonly IHubConnectionContext<dynamic> _clients;
         private Uri _root = null;
-        private TimeSpan _interval = TimeSpan.FromMilliseconds(5000);
+        private TimeSpan _interval = TimeSpan.FromMilliseconds(60000);
         private Timer _monitoringTimer;
         private Timer _statisticsTimer;
         private bool _isFirstCall = true;

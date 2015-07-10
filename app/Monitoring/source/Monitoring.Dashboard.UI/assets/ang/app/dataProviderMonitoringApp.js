@@ -13,7 +13,7 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                 $rootScope.$emit("dataProviderStatisticsInfo", result);
             };
 
-            $.connection.hub.start().done(function() {
+            $.connection.hub.start({ transport: 'longPolling' }).done(function () {
                 hub.server.initRootUri();
             });
 
