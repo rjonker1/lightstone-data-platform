@@ -4,7 +4,6 @@ using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
 using Monitoring.Dashboard.UI.Infrastructure.Handlers;
 using Monitoring.Dashboard.UI.Infrastructure.Repository;
-using Monitoring.Dashboard.UI.Infrastructure.Repository.Framework.Connection;
 using Monitoring.Dashboard.UI.Infrastructure.Services;
 using Monitoring.Domain.Mappers;
 using Monitoring.Domain.Repository;
@@ -21,9 +20,8 @@ namespace Monitoring.Dashboard.UI
     {
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
-            container.Register<IDbConnection>(ConnectionFactory.ForMonitoringDatabase());
 
-            container.Register<ITransactionRepository>(new BillingTransactionRepository(ConnectionFactory.ForBillingDatabase()));
+            container.Register<ITransactionRepository>(new BillingTransactionRepository());
 
             container.Register<IRepositoryMapper, RepositoryMapper>();
             container.Register<IHaveTypeMappings, MappingForMonitoringTypes>();
@@ -36,7 +34,7 @@ namespace Monitoring.Dashboard.UI
 
             container.Register<IHandleDataProviderCaching, DataProviderCachingHandler>();
             container.Register<IPublishCacheMessages, DataProviderCommandPublisher>();
-            container.Register<IAdvancedBus>(BusFactory.CreateAdvancedBus("caching/dataprovider/queue"));
+            container.Register<IAdvancedBus>(BusFactory.CreateAdvancedBus(QueueConfigurationReader.CacheSender));
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

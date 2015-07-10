@@ -35,7 +35,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         public static DataProviderBroadcaster Instance
         {
-            get { return _instance.Value; }
+            get { return  _instance.Value; }
         }
 
         public Uri Root
@@ -119,7 +119,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             if (_isFirstCall)
             {
                 _isFirstCall = false;
-                _interval = TimeSpan.FromMilliseconds(30000);
+                _interval = TimeSpan.FromMilliseconds(60000);
                 SetStatisticsTimer();
             }
 

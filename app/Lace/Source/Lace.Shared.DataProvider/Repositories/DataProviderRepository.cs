@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Common.Logging;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
@@ -11,25 +10,25 @@ namespace Lace.Shared.DataProvider.Repositories
 {
     public class DataProviderRepository : IReadOnlyRepository
     {
-        //private readonly IDbConnection _connection;
         private const string CacheIp = "127.0.0.1:6379";
         private static readonly ILog Log = LogManager.GetLogger<DataProviderRepository>();
 
         public DataProviderRepository()
         {
-            //_connection = connection;
+           
         }
 
         public IEnumerable<TItem> GetAll<TItem>(Func<TItem, bool> predicate) where TItem : class
         {
             try
             {
-                using (var manager = new BasicRedisClientManager(CacheIp))
-                using (var client = manager.GetClient())
+                //using (var manager = new BasicRedisClientManager(CacheIp))
+                //using (var client = manager.GetClient())
+                using (var client = new RedisClient(CacheIp))
                 {
                     return predicate != null
-                        ? client.GetTypedClient<TItem>().GetAll().Where(predicate)
-                        : client.GetTypedClient<TItem>().GetAll();
+                        ? client.As<TItem>().GetAll().Where(predicate)
+                        : client.As<TItem>().GetAll();
                 }
             }
             catch (Exception ex)

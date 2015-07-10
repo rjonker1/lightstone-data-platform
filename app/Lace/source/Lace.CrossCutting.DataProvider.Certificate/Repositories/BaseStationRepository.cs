@@ -18,7 +18,7 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Repositories
 
         public BaseStation Find(double latitude, double longitude)
         {
-            using (var client = CacheConnectionFactory.LocalClient().GetReadOnlyClient())
+            using (var client = CacheConnectionFactory.LocalClient.GetReadOnlyClient())
             {
                 if (!client.ContinueUsingCache())
                 {
