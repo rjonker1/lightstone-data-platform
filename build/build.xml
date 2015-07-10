@@ -466,6 +466,7 @@
         <dependency id="Lightstone.DataPlatform.Workflow.BuildingBlocks" />
         <dependency id="RabbitMQ.Client"  />
         <dependency id="ServiceStack.Redis" version="3.9.71" />
+        <dependency id="ServiceStack.Common" version="3.9.71" />
       </dependencies>
     </nuget>
 
