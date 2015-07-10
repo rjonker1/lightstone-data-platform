@@ -118,7 +118,8 @@ window.userTransactionEditActionEvents = {
                 pageList: [10, 25, 50, 100, 'All'],
                 columns: [{
                     field: 'requestId',
-                    title: 'Request ID'
+                    title: 'Request ID',
+                    visible: false
                 }, {
                     field: 'packageName',
                     title: 'Package Name',
@@ -156,8 +157,7 @@ window.userTransactionEditActionEvents = {
             "<script>" +
             "$('.switch').ready(function() { $('#" + row.requestId + "').bootstrapSwitch('state', " + value + ", true); " +
                                             "$('#" + row.requestId + "').on('switchChange.bootstrapSwitch', function(event, state) { " +
-                                                "$('#userTransEdit-table').bootstrapTable('updateRow', { index: " + index + ", row: { requestId: '" + row.requestId + "'," +
-                                                                                                                                " packageName: '" + row.packageName + "'," +
+                                                "$('#userTransEdit-table').bootstrapTable('updateRow', { index: " + index + ", row: { packageName: '" + row.packageName + "'," +
                                                                                                                                 " isBillable: state }});" +
                                                 " });" +
                                             "});" +
@@ -300,7 +300,7 @@ window.invoiceActionEvents = {
     'click .invoice-view': function (e, value, row, index) {
 
         $.get('/StageBilling/Billable/Transactions/' + row.id, function (response) {
-
+            
             var data = '{' +
                 '"template": { "shortid" : "N190datG" },' +
                 '"data" : {' +
@@ -308,7 +308,7 @@ window.invoiceActionEvents = {
                         '"Name": "' + row.customerName + '",' +
                         '"TaxRegistration": 4190195679,' +
                         '"Packages" : [ ' +
-                            '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": ' + row.billedTransactions + ', "Price":' + response.data[0].price + ', "Vat": 0.00}' +
+                            '{"ItemCode": "' + response.data[0].packageName + '", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": ' + row.billedTransactions + ', "Price":' + response.data[0].packageRecommendedPrice + ', "Vat": 0.00}' +
                             ']  ' +
                     '} ' +
                 '}';
