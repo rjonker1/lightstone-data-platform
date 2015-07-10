@@ -1,5 +1,7 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
+using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
@@ -15,15 +17,17 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
     public class VechicleRetriever
     {
         private readonly ILogCommandTypes _logCommand;
+        private readonly ILog _log;
 
-        private VechicleRetriever(ILogCommandTypes logCommand)
+        private VechicleRetriever(ILogCommandTypes logCommand, ILog log)
         {
             _logCommand = logCommand;
+            _log = log;
         }
 
-        public static VechicleRetriever Start(ILogCommandTypes logCommand)
+        public static VechicleRetriever Start(ILogCommandTypes logCommand, ILog log)
         {
-            return new VechicleRetriever(logCommand);
+            return new VechicleRetriever(logCommand, log);
         }
 
         public VechicleRetriever FirstWithCache(HpiStandardQueryRequest request)
@@ -31,8 +35,15 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             var parameter = GetCacheSearch(request);
             if (string.IsNullOrEmpty(parameter))
                 return this;
-
-            CacheResponse = DataProviderRepository.GetKeyFromCache<IvidResponse>(string.Format(IvidResponse.CacheKey, parameter));
+            try
+            {
+                CacheResponse = DataProviderRepository.GetKeyFromCache<IvidResponse>(string.Format(IvidResponse.CacheKey, parameter));
+            }
+            catch(Exception ex)
+            {
+                _log.ErrorFormat("Cannot get Ivid Data from the cache because of {0}", ex, ex.Message);
+            }
+            
             return this;
         }
 
