@@ -391,7 +391,7 @@
         <dependency id="Lightstone.DataPlatform.Shared" />
         <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
         <dependency id="Lightstone.DataPlatform.Workflow.Billing.Messages" />
-        <dependency id="Newtonsoft.Json" version="6.0.5" />
+        <dependency id="Newtonsoft.Json" />
       </dependencies>
     </nuget>
 
