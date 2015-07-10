@@ -22,8 +22,6 @@ namespace Lace.Shared.DataProvider.Repositories
         {
             try
             {
-                //using (var manager = new BasicRedisClientManager(CacheIp))
-                //using (var client = manager.GetClient())
                 using (var client = new RedisClient(CacheIp))
                 {
                     return predicate != null
