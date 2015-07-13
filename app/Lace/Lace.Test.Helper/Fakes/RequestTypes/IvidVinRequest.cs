@@ -4,14 +4,13 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Test.Helper.Fakes.RequestTypes
 {
-    public class IvidVinRequest : IAmIvidStandardRequest
+    public class IvidStandardRequest : IAmIvidStandardRequest
     {
 
-
-        public IvidVinRequest(string vinNumber, string applicantName,
+        public IvidStandardRequest(string licensePlateNumber, string applicantName,
             string packageName, string requestorEmail, string requestorName, string requestorPhone)
         {
-            VinNumber = VinNumberRequestField.Get(vinNumber);
+            LicenceNumber = LicenceNumberField.Get(licensePlateNumber);
             ApplicantName = ApplicatonNameField.Get(applicantName);
             Label = PackageNameField.Get(packageName);
             RequesterEmail = EmailField.Get(requestorEmail);

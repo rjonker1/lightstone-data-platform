@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="DataSetExtensions.cs" />
     <Compile Include="JsonExtensions.cs" />
+    <Compile Include="ObjectExtensions.cs" />
     <Compile Include="RequestExtensions.cs" />
     <Compile Include="XmlExtensions.cs" />
   </ItemGroup>

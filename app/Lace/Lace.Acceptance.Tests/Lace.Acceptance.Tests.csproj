@@ -124,8 +124,10 @@
     <Compile Include="Caching\when_adding_bands_to_the_cache.cs" />
     <Compile Include="Caching\when_adding_sale_data_to_the_cache.cs" />
     <Compile Include="Caching\when_refreshing_objects_in_the_cache.cs" />
+    <Compile Include="Caching\when_requesting_ivid_data_from_the_cache.cs" />
     <Compile Include="Events\when_publlishing_lace_audatex_monitoring_commands_to_bus.cs" />
     <Compile Include="Events\when_publlishing_lace_ivid_monitoring_commands_to_bus.cs" />
+    <Compile Include="Helper\TestCacheRepository.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_director_search.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_company_search.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_source_chain_for_drivers_license_decryption.cs" />
