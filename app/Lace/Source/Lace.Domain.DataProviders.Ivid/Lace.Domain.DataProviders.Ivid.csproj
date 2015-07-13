@@ -114,7 +114,7 @@
     <Compile Include="Infrastructure\HandleIvidSourceCall.cs" />
     <Compile Include="Infrastructure\Management\DataChecks.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidResponse.cs" />
-    <Compile Include="Infrastructure\Management\VechicleRetriever.cs" />
+    <Compile Include="Infrastructure\Management\IvidDataRetriever.cs" />
     <Compile Include="Infrastructure\RequestDataFromIvidSource.cs" />
     <Compile Include="IvidDataProvider.cs" />
     <Compile Include="Service References\IvidServiceReference\Reference.cs">

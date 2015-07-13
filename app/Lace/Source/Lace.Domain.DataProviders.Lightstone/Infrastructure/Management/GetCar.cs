@@ -7,9 +7,9 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
 {
-    public static class RetrieveVechicle
+    public static class GetCar
     {
-        static RetrieveVechicle()
+        static GetCar()
         {
             
         }

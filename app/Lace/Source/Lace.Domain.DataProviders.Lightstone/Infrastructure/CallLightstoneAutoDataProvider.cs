@@ -46,10 +46,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {_dataProvider});
 
-                RetrieveVechicle.WithCarId(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation,
-                    RetrieveVechicle.WithVin(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation));
+                GetCar.WithCarId(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation,
+                    GetCar.WithVin(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation));
 
-                GetMetrics();
+                GetMetricType.OfBaseRetrievalMetric(_carInformation.CarInformationRequest, _repository, out _metrics);
 
                 _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
@@ -85,16 +85,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             var lightstoneResponse = new LightstoneAutoResponse();
             lightstoneResponse.HasBeenHandled();
             response.Add(lightstoneResponse);
-        }
-
-        private void GetMetrics()
-        {
-            _metrics =
-                new BaseRetrievalMetric(_carInformation.CarInformationRequest, new Valuation(),
-                    _repository)
-                    .SetupDataSources()
-                    .GenerateData()
-                    .BuildValuation();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Lace.Acceptance.Tests.Caching
         private IAmDataProvider _dataProvider;
         private readonly ISendCommandToBus _command;
         private HpiStandardQueryResponse _response;
-        private VechicleRetriever _retriever;
+        private IvidDataRetriever _retriever;
         private readonly ILog _log = LogManager.GetLogger<when_requesting_ivid_data_from_the_cache>();
         private ILogCommandTypes _logCommand;
 
@@ -40,7 +40,7 @@ namespace Lace.Acceptance.Tests.Caching
         {
             TestCacheRepository.ClearAll();
             _ividRequest = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
-            _retriever = VechicleRetriever.Start(_logCommand, _log).ThenWithApi(_ividRequest, _dataProvider, out _response);
+            _retriever = IvidDataRetriever.Start(_logCommand, _log).ThenWithApi(_ividRequest, _dataProvider, out _response);
             var transformer = new TransformIvidResponse(_response);
             transformer.Transform();
         }
@@ -50,7 +50,7 @@ namespace Lace.Acceptance.Tests.Caching
         {
             _request  = new[] { new LicensePlateNumberIvidOnlyRequest() };
             _ividRequest = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
-            var retriever = VechicleRetriever.Start(_logCommand, _log)
+            var retriever = IvidDataRetriever.Start(_logCommand, _log)
                 .FirstWithCache(_ividRequest);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();
@@ -63,7 +63,7 @@ namespace Lace.Acceptance.Tests.Caching
         {
             _request = new[] { new VinNumberIvidOnlyRequest() };
             _ividRequest = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
-            var retriever = VechicleRetriever.Start(_logCommand, _log)
+            var retriever = IvidDataRetriever.Start(_logCommand, _log)
                 .FirstWithCache(_ividRequest);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();
@@ -76,7 +76,7 @@ namespace Lace.Acceptance.Tests.Caching
         {
             _request = new[] { new RegisterNumberIvidOnlyRequest() };
             _ividRequest = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
-            var retriever = VechicleRetriever.Start(_logCommand, _log)
+            var retriever = IvidDataRetriever.Start(_logCommand, _log)
                 .FirstWithCache(_ividRequest);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();

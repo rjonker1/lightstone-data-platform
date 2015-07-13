@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             try
             {
                 _request = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
-                var retriever = VechicleRetriever.Start(_logCommand, _log)
+                var retriever = IvidDataRetriever.Start(_logCommand, _log)
                     .FirstWithCache(_request)
                     .ThenWithApi(_request, _dataProvider, out _response);
 

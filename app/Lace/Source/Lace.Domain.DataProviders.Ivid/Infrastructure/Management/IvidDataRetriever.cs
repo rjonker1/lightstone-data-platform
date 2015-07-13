@@ -18,23 +18,23 @@ using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {
-    public class VechicleRetriever
+    public sealed class IvidDataRetriever
     {
         private readonly ILogCommandTypes _logCommand;
         private readonly ILog _log;
 
-        private VechicleRetriever(ILogCommandTypes logCommand, ILog log)
+        private IvidDataRetriever(ILogCommandTypes logCommand, ILog log)
         {
             _logCommand = logCommand;
             _log = log;
         }
 
-        public static VechicleRetriever Start(ILogCommandTypes logCommand, ILog log)
+        public static IvidDataRetriever Start(ILogCommandTypes logCommand, ILog log)
         {
-            return new VechicleRetriever(logCommand, log);
+            return new IvidDataRetriever(logCommand, log);
         }
 
-        public VechicleRetriever FirstWithCache(HpiStandardQueryRequest request)
+        public IvidDataRetriever FirstWithCache(HpiStandardQueryRequest request)
         {
             try
             {
@@ -47,12 +47,13 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             catch (Exception ex)
             {
                 _log.ErrorFormat("Cannot get Ivid Data from the cache because of {0}", ex, ex.Message);
+                _logCommand.LogFault(ex, new { ErrorMessage = "Error getting Ivid data from the cache" });
             }
 
             return this;
         }
 
-        public VechicleRetriever ThenWithApi(HpiStandardQueryRequest request, IAmDataProvider dataProvider,
+        public IvidDataRetriever ThenWithApi(HpiStandardQueryRequest request, IAmDataProvider dataProvider,
             out HpiStandardQueryResponse response)
         {
             if (NoNeedToCallApi)
