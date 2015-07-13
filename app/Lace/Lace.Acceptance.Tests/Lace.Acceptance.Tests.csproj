@@ -155,6 +155,7 @@
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_Lightstone_property_request.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_with_carid.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_signio_drivers_license_decryption.cs" />

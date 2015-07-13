@@ -111,8 +111,11 @@
     </Compile>
     <Compile Include="Core\Contracts\IGetCarSpecifications.cs" />
     <Compile Include="Infrastructure\CallRgtDataProvider.cs" />
-    <Compile Include="Infrastructure\Dto\RgtRequest.cs" />
+    <None Include="Infrastructure\Dto\RgtRequest.cs.delete" />
+    <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\HandleRgtDataProviderCall.cs" />
+    <Compile Include="Infrastructure\Management\GetCar.cs" />
+    <Compile Include="Infrastructure\Management\GetSpecifications.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtSource.cs" />
     <Compile Include="RgtDataProvider.cs" />

@@ -21,11 +21,6 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
             
         }
 
-        //public static GetCarInformation Empty()
-        //{
-        //    return new GetCarInformation();
-        //}
-
         public GetCarInformation(string vinNumber, IReadOnlyRepository repository)
         {
             _repository = repository;

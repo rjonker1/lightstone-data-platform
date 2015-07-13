@@ -9,7 +9,6 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Rgt.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.UnitOfWork;
 using Lace.Shared.DataProvider.Models;
@@ -25,7 +24,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
-      
+
         private readonly IReadOnlyRepository _repository;
         private readonly IReadOnlyRepository _carRepository;
 
@@ -46,20 +45,13 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         {
             try
             {
-                var request = new RgtRequest(_dataProvider.GetRequest<IAmRgtRequest>(), response, _carRepository);
-                if (!request.IsValid)
-                {
-                    _logCommand.LogFault(new { _dataProvider, response }, new { InvalidRequest = "Cannot continue with RGT as the request is invalid" });
-                    throw new Exception("Cannot continue with RGT as the request is invalid");
-                }
-
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {_dataProvider});
 
-                _carInformation = request.CarInformation;
+                GetCar.WithCarId(response, _dataProvider.GetRequest<IAmRgtRequest>(), _carRepository, ref _carInformation,
+                    GetCar.WithVin(response, _dataProvider.GetRequest<IAmRgtRequest>(), _carRepository, ref _carInformation));
 
-                GetCarInformation();
-                GetCarSpecifics();
+                GetSpecifications.ForCar(_repository, _carInformation.CarInformationRequest, out _carSpecifications);
 
                 _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
@@ -91,14 +83,6 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             }
         }
 
-        private void GetCarSpecifics()
-        {
-            var carUow = new CarSpecificationsUnitOfWork(_repository);
-            carUow.GetCarSpecifications(_carInformation.CarInformationRequest);
-            _carSpecifications = carUow.CarSpecifications != null
-                ? carUow.CarSpecifications.ToList()
-                : new List<CarSpecification>();
-        }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
@@ -121,16 +105,5 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             rgtResponse.HasBeenHandled();
             response.Add(rgtResponse);
         }
-
-        private void GetCarInformation()
-        {
-            _carInformation
-                .SetupDataSources()
-                .GenerateData()
-                .BuildCarInformation()
-                .BuildCarInformationRequest();
-        }
-
-
     }
 }
