@@ -90,5 +90,11 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
             CostOfSale = costPrice;
             IsSelected = selected;
         }
+
+        //todo populate via AutoMapper in LaceResponseMap.cs
+        public void SetValue(string value)
+        {
+            Value = value;
+        }
     }
 }

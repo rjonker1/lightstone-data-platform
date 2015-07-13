@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Castle.Core.Internal;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders.Responses;
@@ -34,7 +33,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             var entity = new DataProvider(existing.Id, existing.Name, existing.Name.ToString(), 0, response.GetType(), "", DateTime.UtcNow, requestFields, dataFields);
 
             existing.DataFields.ToNamespace().Cast<DataField>()
-                               .ForEach(x => Mapper.Map(x, entity.DataFields.ToNamespace().Cast<DataField>().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault()));
+                               .RecursiveForEach(x => Mapper.Map(x, entity.DataFields.ToNamespace().Cast<DataField>().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault()));
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

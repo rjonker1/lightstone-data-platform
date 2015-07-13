@@ -86,6 +86,16 @@ namespace PackageBuilder.Domain.Entities
         //    }
         //}
 
+        public static void RecursiveForEach(this IEnumerable<IDataField> dataFields, Action<IDataField> action)
+        {
+            if (dataFields == null) return;
+            foreach (var dataField in dataFields.Where(dataField => dataField != null))
+            {
+                action(dataField);
+                dataField.DataFields.RecursiveForEach(action);
+            }
+        }
+
         public static IEnumerable<IDataField> ToNamespace(this IEnumerable<IDataField> dataFields, string namespaceRoot = "")
         {
             if (dataFields == null)
@@ -128,6 +138,23 @@ namespace PackageBuilder.Domain.Entities
                     yield return dataField;
 
                 var childResults = dataField.DataFields.Filter(predicate);
+                foreach (var childItem in childResults)
+                    yield return childItem;
+            }
+        }
+
+        public static IEnumerable<IDataFieldOverride> Filter(this IEnumerable<IDataFieldOverride> dataFields, Func<IDataFieldOverride, bool> predicate = null)
+        {
+            if (dataFields == null)
+                yield break;
+            if (predicate == null)
+                predicate = field => true;
+            foreach (var dataField in dataFields.Where(x => x != null))
+            {
+                if (predicate(dataField))
+                    yield return dataField;
+
+                var childResults = dataField.DataFieldOverrides.Filter(predicate);
                 foreach (var childItem in childResults)
                     yield return childItem;
             }

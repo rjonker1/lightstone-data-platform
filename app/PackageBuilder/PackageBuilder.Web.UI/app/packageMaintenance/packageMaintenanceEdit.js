@@ -61,6 +61,7 @@
         };
 
         $scope.filterIndustry = function (field) {
+            if (field == null) return null;
             var fieldIndustries = field.industries;
             for (var i = 0; i < fieldIndustries.length; i++) {
                 for (var j = 0; j < filterVal.length; j++) {
@@ -99,7 +100,9 @@
                         case true:
                             //Tier 1
                             for (var x = 0; x < (listItem.dataFields).length; x++) {
-
+                                if (listItem.dataFields[x] == null)
+                                    continue;
+                                
                                 if (listItem.dataFields[x].isSelected === true) {
 
                                     var parent = listItem.dataFields[x];
@@ -127,7 +130,8 @@
                                 }
                                 //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
-
+                                    if (listItem.dataFields[x].dataFields[j] == null)
+                                        continue;
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
                                         var child = listItem.dataFields[x].dataFields[j];
@@ -145,7 +149,8 @@
                                     }
                                     //Tier 3
                                     for (var k = 0; k < (listItem.dataFields[x].dataFields[j].dataFields).length; k++) {
-
+                                        if (listItem.dataFields[x].dataFields[j].dataFields[k] == null)
+                                            continue;
                                         if (listItem.dataFields[x].dataFields[j].dataFields[k].isSelected === true) {
 
                                             valueTotal += listItem.dataFields[x].dataFields[j].dataFields[k].costOfSale;
@@ -159,7 +164,8 @@
                         case false:
 
                             for (var x = 0; x < (listItem.dataFields).length; x++) {
-
+                                if (listItem.dataFields[x] == null)
+                                    continue;
                                 if (listItem.dataFields[x].isSelected === true) {
 
                                     valueTotal += listItem.costOfSale;
@@ -167,7 +173,8 @@
                                 }
 
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
-
+                                    if (listItem.dataFields[x].dataFields[j] == null)
+                                        continue;
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
                                         valueTotal += listItem.costOfSale;
@@ -224,7 +231,9 @@
                 if (response.status === 200) {
                     $scope.dataProvsPkg.Package = response.data.response;
                     //Manipulate current state of Pakage at load to reflect alias of enum from API
-
+                    var $lv1 = $(".angular-ui-tree");
+                    $lv1.attr('ui-tree-nodes', '');
+                    $lv1.find('li').attr('ui-tree-node', '');
                     //State comparison
                     for (var i = 0; i < $scope.states.length; i++) {
                         if ($scope.dataProvsPkg.Package[0].state.id == $scope.states[i].id) {
@@ -234,20 +243,6 @@
 
                     logSuccess('Data Providers loaded!');
                     //console.log($scope.dataProvsPkg.Package[0].state.id);
-                }
-
-                if (response.status === 404) {
-                    //Load MOCK data
-                    $http({
-                        method: 'GET',
-                        url: '/app/packageMaintenance/DataProviders.json'
-                    }).success(function (data, status, headers, config) {
-                        $scope.dataProvsPkg = data;
-                    }).error(function (data, status, headers, config) {
-
-                    });
-
-                    logError('Error 404. Please check your connection settings');
                 }
             }, function (error) {
                 logError(error.data.errorMessage);

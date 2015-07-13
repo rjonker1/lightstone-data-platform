@@ -41,14 +41,14 @@
 
         $scope.selectedGroupIndustry = {};
 
-        $scope.updateFieldIndustry = function (groupIndustry) {
+        $scope.updateFieldIndustry = function(groupIndustry) {
 
             var provider = null;
 
             try {
 
                 provider = $scope.dataProvider.response;
-            } catch (e) {
+            } catch(e) {
 
                 //console.log(e.message);
             }
@@ -60,22 +60,24 @@
                     var providerItem = provider[i];
 
                     for (var x = 0; x < (providerItem.dataFields).length; x++) {
+                        if (providerItem.dataFields[x] == null)
+                            continue;
 
                         providerItem.dataFields[x].industry = groupIndustry;
 
                         if ((providerItem.dataFields[x].dataFields).length > 0) {
 
                             for (var j = 0; j < (providerItem.dataFields[x].dataFields).length; j++) {
-
+                                if (providerItem.dataFields[x].dataFields[j] == null)
+                                    continue;
 
                                 providerItem.dataFields[x].dataFields[j].industry = groupIndustry;
                             }
                         }
                     }
-
                 }
             }
-        }
+        };
 
         $scope.total = function () {
 
@@ -101,7 +103,8 @@
                     var listItem = items[i];
 
                     for (var x = 0; x < (listItem.dataFields).length; x++) {
-
+                        if (listItem.dataFields[x] == null)
+                            continue;
 
                         valueTotal += listItem.dataFields[x].costOfSale;
 
@@ -130,8 +133,11 @@
         };
 
         $scope.totalParChar = function (dataItem) {
-
             var valueTotal = 0;
+
+            if (dataItem == null)
+                return valueTotal;
+            
             var items = dataItem;
             var subItems = items.dataFields;
 
@@ -145,9 +151,7 @@
 
                     valueTotal += subChildItems[j].costOfSale;
                 }
-
             }
-
 
             return valueTotal;
         };
@@ -199,7 +203,8 @@
                     var listItem = items[i];
 
                     for (var x = 0; x < (listItem.dataFields).length; x++) {
-
+                        if (listItem.dataFields[x] == null)
+                            continue;
 
                         if ((listItem.dataFields[x].dataFields).length > 0) {
 

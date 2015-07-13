@@ -17,5 +17,6 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataFields.Write
         string Type { get; }
         IEnumerable<IDataField> DataFields { get; }
         void OverrideValuesFromPackage(double costPrice, bool? selected);
+        void SetValue(string value);
     }
 }
