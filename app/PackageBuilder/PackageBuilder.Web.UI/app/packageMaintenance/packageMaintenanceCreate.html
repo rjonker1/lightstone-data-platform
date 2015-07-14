@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>    
-    <ul style="cursor:default" class="angular-ui-tree" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
+    <ul style="cursor:default; list-style-type: none;" class="angular-ui-tree" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
         <li style="cursor:default" class="category-title" ng-repeat="dataField in provider.dataFields | filter:filterIndustry" ng-include="'parentFields_renderer.html'">
 
         </li>
@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-    <ul style="cursor:default" class="angular-ui-tree" ng-model="dataField.dataFields" data-nodrag type="category" ng-class="{hidden: !collapsed}">
+    <ul style="cursor:default; list-style-type: none;" class="angular-ui-tree" ng-model="dataField.dataFields" data-nodrag type="category" ng-class="{hidden: !collapsed}">
         <li style="cursor:default" class="category-title" ng-repeat="dataField in dataField.dataFields | filter:filterIndustry" ng-include="'childrenFields_renderer.html'">
 
         </li>
@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-    <ul data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: !collapsed}">
+    <ul style="list-style-type: none;" data-nodrag type="category" class="angular-ui-tree" ng-class="{hidden: !collapsed}">
         <li style="cursor:default; border: none;" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields | filter:filterIndustry" ng-include="'subChildrenFields_renderer.html'">
 
         </li>
@@ -260,9 +260,9 @@
                             <div class="col-lg-12">
                                 <div ui-tree ng-model="dataProvsPkg">
                                     <div ng-repeat="(key,value) in filterDataProviders(dataProvsPkg.Package)">
-                                        <ol ui-tree-nodes="" ng-model="value">
+                                        <ul ui-tree-nodes="" ng-model="value">
                                             <li ng-repeat="provider in value" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
-                                        </ol>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
