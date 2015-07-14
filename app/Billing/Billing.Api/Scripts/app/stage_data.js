@@ -206,9 +206,9 @@ window.packageGridActionEvents = {
                     name: 'packageName',
                     placement: 'right',
                     params: function (params) {
-                        //originally params contain pk, name and value
+                        // originally params contain pk, name and value
                         params.PackageId = window.editRow.packageId;
-                        params.PackageName = params.value;
+                        params.PackageName = params.value; 
                         params.originalValue = window.editRow.packageName;
 
                         return params;
