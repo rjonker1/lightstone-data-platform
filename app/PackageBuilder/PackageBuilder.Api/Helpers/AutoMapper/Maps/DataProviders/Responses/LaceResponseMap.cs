@@ -51,10 +51,20 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                 {
                     if (s.DataFields != null)
                     {
-                        var objects = s.DataFields.ToNamespace()
-                                        .Select(x => (IDataField)Mapper.Map(x, d.DataFields.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault(), typeof(IDataField), typeof(DataField)))
-                                        .ToList();
-                        d.DataFields = objects.Filter(x => x.IsSelected == true);
+                        s.DataFields.ToNamespace().ToList()
+                               .RecursiveForEach(laceResponseField =>
+                               {
+                                   var value = laceResponseField.Value;
+                                   var destField = d.DataFields
+                                       .ToNamespace()
+                                       .ToList()
+                                       .Filter(f => f.Namespace == laceResponseField.Namespace)
+                                       .FirstOrDefault();
+                                   // todo Map via AutoMapper as soon as bug with BindingFlags has been resolved in newer release
+                                   //var field = Mapper.Map(destField, laceResponseField, typeof(DataField), typeof(DataField));
+                                   if (destField != null) destField.SetValue(value);
+                               });
+                        d.DataFields = d.DataFields.Filter(x => x.IsSelected == true);
                     }
                 })
             .ForMember(d => d.DataFields, opt => opt.Ignore());

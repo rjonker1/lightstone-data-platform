@@ -13,6 +13,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
     {
         public void CreateMaps()
         {
+            Mapper.CreateMap<IDataFieldOverride, DataField>();
+
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()
                 .ConstructUsing(Mapper.Map<DataProviderFieldItemDto, DataField>);
             Mapper.CreateMap<DataProviderFieldItemDto, DataField>()

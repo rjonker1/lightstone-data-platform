@@ -181,6 +181,8 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingSignioDataProvider.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakePCubedDataProvider.cs" />
     <Compile Include="Fakes\RequestTypes\AudatexRequestTypes.cs" />
+    <Compile Include="Fakes\RequestTypes\IvidRegisterNoRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\IvidVinRequest.cs" />
     <Compile Include="Fakes\RequestTypes\IvidStandardRequest.cs" />
     <Compile Include="Fakes\RequestTypes\IvidTitleHolderRequestType.cs" />
     <Compile Include="Fakes\RequestTypes\LighstonePropertyRequest.cs" />

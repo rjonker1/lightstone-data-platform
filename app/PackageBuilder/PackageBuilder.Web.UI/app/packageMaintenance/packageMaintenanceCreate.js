@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-
+    
     var controllerId = 'packageMaintenanceCreate';
 
     angular
@@ -10,10 +10,6 @@
     packageMaintenanceCreate.$inject = ['$scope', '$location', '$timeout', '$parse', '$http', 'common', 'datacontext'];
 
     function packageMaintenanceCreate($scope, $location, $timeout, $parse, $http, common, datacontext) {
-        $scope.tt = function(item) {
-            console.log(item);
-        };
-
         $scope.title = 'Package Maintenance - Create';
         var filterVal = {};
         var getLogFn = common.logger.getLogFn;
@@ -33,9 +29,10 @@
         $scope.dataProvsPkg = {};
         // Prevent $modelValue undefined error
         $scope.dataProvsPkg.Package = { };
+
         //http://stackoverflow.com/questions/14788652/how-to-filter-key-value-with-ng-repeat-in-angularjs
         //pre-filter method
-        $scope.filterDataProviders = function(items) {
+        $scope.filterDataProviders = function (items) {
             var result = {};
             angular.forEach(items, function (value, key) {
                 var propertyName = key;
@@ -46,18 +43,17 @@
             return result;
         };
 
-        $scope.createPackage = function(packageData) {
-            return datacontext.createPackage(packageData).then(function(response) {
+        $scope.createPackage = function (packageData) {
+            return datacontext.createPackage(packageData).then(function (response) {
                 console.log(response);
                 if (response.status === 200) {
                     logSuccess('Package Created!');
                     $location.path('/packages');
-                } else
-                {
+                } else {
                     logError('Error 404. Please check your connection settings');
                 }
 
-            }, function(errorCallback) {
+            }, function (errorCallback) {
                 logError(errorCallback.data.errorMessage);
             });
         };
@@ -68,6 +64,7 @@
         };
 
         $scope.filterIndustry = function (field) {
+            if (field == null) return null;
             var fieldIndustries = field.industries;
 
             for (var i = 0; i < fieldIndustries.length; i++) {
@@ -77,11 +74,11 @@
                     }
                 }
             }
-            
+
             return null;
         };
 
-        $scope.filterData = function(filterIndustries) {
+        $scope.filterData = function (filterIndustries) {
 
             filterVal = filterIndustries;
             $scope.dataProvsPkg.Package.Industries = filterIndustries;
@@ -111,6 +108,8 @@
                         case true:
                             //Tier 1
                             for (var x = 0; x < (listItem.dataFields).length; x++) {
+                                if (listItem.dataFields[x] == null)
+                                    continue;
 
                                 if (listItem.dataFields[x].isSelected === true) {
 
@@ -125,13 +124,13 @@
 
                                             //subChildren override
                                             if (children[m].dataFields.length > 0) {
-                                                
+
                                                 for (var n = 0; n < children[m].dataFields.length; n++) {
 
                                                     children[m].dataFields[n].isSelected = false;
                                                 }
                                             }
-                                            
+
                                         }
                                     }
 
@@ -139,6 +138,8 @@
                                 }
                                 //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
+                                    if (listItem.dataFields[x].dataFields[j] == null)
+                                        continue;
 
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
@@ -157,6 +158,8 @@
                                     }
                                     //Tier 3
                                     for (var k = 0; k < (listItem.dataFields[x].dataFields[j].dataFields).length; k++) {
+                                        if (listItem.dataFields[x].dataFields[j].dataFields[k] == null)
+                                            continue;
 
                                         if (listItem.dataFields[x].dataFields[j].dataFields[k].isSelected === true) {
 
@@ -171,6 +174,8 @@
                         case false:
 
                             for (var x = 0; x < (listItem.dataFields).length; x++) {
+                                if (listItem.dataFields[x] == null)
+                                    continue;
 
                                 if (listItem.dataFields[x].isSelected === true) {
 
@@ -179,6 +184,8 @@
                                 }
 
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
+                                    if (listItem.dataFields[x].dataFields[j] == null)
+                                        continue;
 
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
@@ -186,14 +193,14 @@
                                     }
                                 }
                             }
-                            
+
                             break;
-                        
+
                         default:
                             break;
                     }
                 }
-            } 
+            }
 
             $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
 
@@ -210,7 +217,7 @@
             return valueTotal;
         };
 
-        $scope.totalChildren = function(parent, children) {
+        $scope.totalChildren = function (parent, children) {
             var totalChildrenVal = 0;
 
             for (var i = 0; i < children.length; i++) {
@@ -223,38 +230,25 @@
         };
 
         activate();
-      
+
         function activate() {
             common.activateController([getDataProviders(), getStates(), getIndustries()], controllerId).then(function () {
-                   log('Activated Package Maintenance View');
-               }, function (error) {
-                   logError(error.data.errorMessage);
-               });
+                log('Activated Package Maintenance View');
+            }, function (error) {
+                logError(error.data.errorMessage);
+            });
         }
 
         function getDataProviders() {
+
             return datacontext.getDataProviderSources().then(function (response) {
                 if (response.status === 200) {
                     $scope.dataProvsPkg.Package.DataProviders = response.data;
+                    var $lv1 = $(".angular-ui-tree");
+                    $lv1.attr('ui-tree-nodes', '');
+                    $lv1.find('li').attr('ui-tree-node', '');
                     //$scope.dataProvsPkg.Package.state = 'Draft';
                     logSuccess('Data Providers loaded!');
-                }
-
-                if (response.status === 404) {
-                    //Load MOCK data
-                    $http({
-                        method: 'GET',
-                        url: '/app/packageMaintenance/DataProviders.json'
-                    }).success(function (data, status, headers, config) {
-
-                        $scope.dataProvsPkg = data;
-
-                    }).error(function (data, status, headers, config) {
-
-
-                    });
-
-                    logError('Error 404. Please check your connection settings');
                 }
             }, function (error) {
                 logError(error.data.errorMessage);

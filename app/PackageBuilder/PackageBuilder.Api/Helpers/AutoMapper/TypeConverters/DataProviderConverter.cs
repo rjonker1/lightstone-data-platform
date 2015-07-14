@@ -3,6 +3,7 @@ using AutoMapper;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
@@ -22,21 +23,11 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 
             dataProvider.OverrideCostValuesFromPackage(source.CostOfSale);
 
-            var currentRequestFields = dataProvider.RequestFields.ToNamespace().ToList();
-            foreach (var requestFieldOverrides in source.RequestFieldOverrides.ToNamespace())
-            {
-                var requestField = currentRequestFields.FirstOrDefault(fld => fld != null && fld.Namespace.Trim().ToLower() == requestFieldOverrides.Namespace.Trim().ToLower());
-                if (requestField != null)
-                    requestField.OverrideValuesFromPackage(requestFieldOverrides.CostOfSale, requestFieldOverrides.IsSelected);
-            }
+            dataProvider.RequestFields.ToNamespace().ToList().Cast<DataField>()
+                               .RecursiveForEach(x => Mapper.Map(source.RequestFieldOverrides.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault(), x));
 
-            var currentDataFields = dataProvider.DataFields.ToNamespace().ToList();
-            foreach (var dataFieldValueOverride in source.DataFieldOverrides.ToNamespace())
-            {
-                var dataField = currentDataFields.FirstOrDefault(fld => fld.Namespace.Trim().ToLower() == dataFieldValueOverride.Namespace.Trim().ToLower());
-                if (dataField != null)
-                    dataField.OverrideValuesFromPackage(dataFieldValueOverride.CostOfSale, dataFieldValueOverride.IsSelected);
-            }
+            dataProvider.DataFields.ToNamespace().ToList().Cast<DataField>()
+                               .RecursiveForEach(x => Mapper.Map(source.DataFieldOverrides.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault(), x));
 
             return dataProvider;
         }

@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Rgt
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Rgt);
                 _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.Rgt, _dataProvider);
 
-                _logCommand.LogBegin(new {_dataProvider, IvidResponse = response.OfType<IProvideDataFromIvid>()});
+                _logCommand.LogBegin(new {_dataProvider });
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_dataProvider, new DataProviderRepository(), new DataProviderRepository(), _logCommand));

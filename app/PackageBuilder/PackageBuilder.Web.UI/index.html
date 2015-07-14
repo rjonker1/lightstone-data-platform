@@ -146,6 +146,14 @@
                 withCredentials: true
             };
         });
+
+        function toggleTreeNode(el) {
+            var $self = $(el);
+            $self.children("span").toggleClass("glyphicon-chevron-right");
+            $self.children("span").toggleClass("glyphicon-chevron-down");
+            var $li = $self.closest("li");
+            $li.children("ul").first().toggleClass("hidden");
+        }
     </script>
 </body>
 </html>

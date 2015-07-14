@@ -137,7 +137,5 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
         {
             return new ImageGaugesMetric(_getStatistics.Statistics, _getMetrics.Metrics).Get().MetricResult;
         }
-
-        
     }
 }

@@ -34,12 +34,11 @@
             </div>
         </div>
     </div>
-    <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
-        <li ui-tree-node style="cursor:default" class="category-title " ng-repeat="dataField in provider.dataFields | filter:filterIndustry"
-            ng-include="'parentFields_renderer.html'">
+    <ul style="cursor:default" class="angular-ui-tree" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
+        <li style="cursor:default" class="category-title " ng-repeat="dataField in provider.dataFields | filter:filterIndustry" ng-include="'parentFields_renderer.html'">
 
         </li>
-    </ol>
+    </ul>
 
 </script>
 
@@ -50,7 +49,7 @@
         <div class="row">
 
             <div class="col-md-4">
-                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag onclick="toggleTreeNode(this); return false;">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
                 </a>
 
@@ -63,8 +62,6 @@
                 </div>
             </div>
 
-            <!--<div class="col-md-2"></div>-->
-
             <div ng-show="provider.fieldLevelCostPriceOverride == true">
                 <label class="col-md-4">Cost:</label>
 
@@ -76,12 +73,11 @@
         </div>
     </div>
 
-    <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree" ng-model="dataField.dataFields" data-nodrag type="category" ng-class="{hidden: !collapsed}">
-        <li ui-tree-node style="cursor:default" class="category-title " ng-repeat="dataField in dataField.dataFields | filter:filterIndustry"
-            ng-include="'childrenFields_renderer.html'">
+    <ul style="cursor:default" class="angular-ui-tree" ng-model="dataField.dataFields" data-nodrag type="category" ng-class="{hidden: !collapsed}">
+        <li style="cursor:default" class="category-title " ng-repeat="dataField in dataField.dataFields | filter:filterIndustry" ng-include="'childrenFields_renderer.html'">
 
         </li>
-    </ol>
+    </ul>
 
 </script>
 
@@ -92,8 +88,8 @@
         <div class="row">
 
             <div class="col-md-4">
-                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
-                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag onclick="toggleTreeNode(this); return false;">
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
                 </a>
                 <div>
                     <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
@@ -114,41 +110,40 @@
             </div>
         </div>
     </div>
+    <ul data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: !collapsed}">
+        <li style="cursor:default; border: none;" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields | filter:filterIndustry" ng-include="'subChildrenFields_renderer.html'">
 
-    <li ng-include="'subChildrenFields_renderer.html'"></li>
+        </li>
+    </ul>
 </script>
 
 <!-- SubChildren -->
 
 <script type="text/ng-template" id="subChildrenFields_renderer.html">
-
-    <ol data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: !collapsed}">
-        <li style="cursor:default; border: none;" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields">
-            <div style="cursor:default" class=" angular-ui-tree-handle" data-nodrag>
-                <div style="margin-left: -15px; margin-right: 0;" class="row">
-                    <div class="col-md-4">
-                        <a ng-if="subDF.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
-                            <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
-                        </a>
-                        <div>
-                            <input class="col-md-2" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
-                            <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">{{subDF.name}}</div>
-                            <div ng-if="subDF.label.length > 0" class="col-md-6">{{subDF.label}}</div>
-                        </div>
-                    </div>
-                    <div class="col-md-2"></div>
-                    <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                        <label class="col-md-4">Cost:</label>
-
-                        <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
-                               value="{{totalChildren(subDF, subDF.dataFields)}}" />
-
-                        <input ng-if="subDF.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.costOfSale" />
-                    </div>
+    
+    <div style="cursor:default" class=" angular-ui-tree-handle" data-nodrag>
+        <div style="margin-left: -15px; margin-right: 0;" class="row">
+            <div class="col-md-4">
+                <a ng-if="subDF.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag onclick="toggleTreeNode(this); return false;">
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                </a>
+                <div>
+                    <input class="col-md-2" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
+                    <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">{{subDF.name}}</div>
+                    <div ng-if="subDF.label.length > 0" class="col-md-6">{{subDF.label}}</div>
                 </div>
             </div>
-        </li>
-    </ol>
+            <div class="col-md-2"></div>
+            <div ng-show="provider.fieldLevelCostPriceOverride == true">
+                <label class="col-md-4">Cost:</label>
+
+                <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
+                        value="{{totalChildren(subDF, subDF.dataFields)}}" />
+
+                <input ng-if="subDF.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.costOfSale" />
+            </div>
+        </div>
+    </div>
 
 </script>
 

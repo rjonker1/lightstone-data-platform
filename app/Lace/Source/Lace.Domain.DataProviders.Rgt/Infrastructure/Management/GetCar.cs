@@ -5,17 +5,17 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Shared.DataProvider.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
-namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
+namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
 {
-    public static class RetrieveVechicle
+    public static class GetCar
     {
-        static RetrieveVechicle()
+        static GetCar()
         {
-            
+
         }
 
-        public static bool WithVin(ICollection<IPointToLaceProvider> response, IAmLightstoneAutoRequest request, IReadOnlyRepository carRepository,
-            ref IRetrieveCarInformation carInformation)
+        public static bool WithVin(ICollection<IPointToLaceProvider> response, IAmRgtRequest request, IReadOnlyRepository carRepository,
+           ref IRetrieveCarInformation carInformation)
         {
             var vinnumber = HandleRequest.GetVinNumber(response, request);
 
@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
             return carInformation.IsSatisfied;
         }
 
-        public static bool WithCarId(ICollection<IPointToLaceProvider> response, IAmLightstoneAutoRequest request, IReadOnlyRepository carRepository, ref IRetrieveCarInformation carInformation, bool stop)
+        public static bool WithCarId(ICollection<IPointToLaceProvider> response, IAmRgtRequest request, IReadOnlyRepository carRepository, ref IRetrieveCarInformation carInformation, bool stop)
         {
             if (stop) return false;
 
