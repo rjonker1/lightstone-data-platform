@@ -5,6 +5,8 @@ using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Workflow.Billing.Domain.Entities;
+using Workflow.Reporting.Dtos;
+using Workflow.Reporting.Entities;
 
 namespace Billing.Api.Modules
 {
@@ -21,7 +23,7 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in transactions)
                 {
-                    // Return Pacakge details without price, if non-billabl  e
+                    // Return Pacakge details without price, if non-billable
                     if (transactions.Count(x => x.IsBillable).Equals(0))
                     {
                         var emptyPackage = new PackageDto
@@ -54,6 +56,29 @@ namespace Billing.Api.Modules
 
                     // Index restriction for new record
                     if (packageIndex < 0) packagesDetailList.Add(package);
+
+                    var packagesList = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                            .Select(x => new ReportPackage
+                            {
+                                ItemCode = x.PackageName,
+                                ItemDescription = x.PackageName,
+                                Price = x.PackageRecommendedPrice,
+                                //Vat = 2284
+                            }).Distinct();
+
+                    var reportData = new ReportDto
+                    {
+                        Template = new ReportTemplate { ShortId = "N190datG" },
+                        Data = new ReportData
+                        {
+                            Customer = new ReportCustomer
+                            {
+                                Name = transaction.ClientName,
+                                TaxRegistration = 4190195679,
+                                Packages = packagesList.ToList()
+                            }
+                        }
+                    };
                 }
 
                 //return Response.AsJson(new { data = packagesDetailList });

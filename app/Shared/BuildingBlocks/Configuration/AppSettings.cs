@@ -14,6 +14,7 @@ namespace Shared.Configuration
             Api = new ApiSettings(reader);
             PackageBuilderApi = new PackageBuilderApiSettings(reader);
             UserManagementApi = new UserManagementApiSettings(reader);
+            ReportApi = new ReportApiSettings(reader);
         }
 
         public ServiceAppSettings Service { get; private set; }
@@ -22,5 +23,6 @@ namespace Shared.Configuration
         public ApiSettings Api { get; private set; }
         public UserManagementApiSettings UserManagementApi { get; private set; }
         public PackageBuilderApiSettings PackageBuilderApi { get; private set; }
+        public ReportApiSettings ReportApi { get; private set; }
     }
 }
