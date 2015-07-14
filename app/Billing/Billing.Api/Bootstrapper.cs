@@ -44,8 +44,8 @@ namespace Billing.Api
                 new BusInstaller(),
                 new AutoMapperInstaller(),
                 new UpdateBillingTransactionInstaller(),
-                new AuthenticationInstaller()
-                );
+                new AuthenticationInstaller(),
+                new ApiClientInstaller());
 
             //Drop create
             //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
