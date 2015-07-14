@@ -111,7 +111,6 @@
     </Compile>
     <Compile Include="Core\Contracts\IGetCarSpecifications.cs" />
     <Compile Include="Infrastructure\CallRgtDataProvider.cs" />
-    <None Include="Infrastructure\Dto\RgtRequest.cs.delete" />
     <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\HandleRgtDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\GetCar.cs" />

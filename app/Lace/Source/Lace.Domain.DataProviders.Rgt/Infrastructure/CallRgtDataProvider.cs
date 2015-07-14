@@ -51,7 +51,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 GetCar.WithCarId(response, _dataProvider.GetRequest<IAmRgtRequest>(), _carRepository, ref _carInformation,
                     GetCar.WithVin(response, _dataProvider.GetRequest<IAmRgtRequest>(), _carRepository, ref _carInformation));
 
-                GetSpecifications.ForCar(_repository, _carInformation.CarInformationRequest, out _carSpecifications);
+                GetSpecifications.ForCar(new CarSpecificationsUnitOfWork(_repository), _carInformation.CarInformationRequest, out _carSpecifications);
 
                 _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
