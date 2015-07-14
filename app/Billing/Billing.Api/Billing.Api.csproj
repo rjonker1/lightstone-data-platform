@@ -646,8 +646,8 @@
     <Compile Include="Modules\PreBillingModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Ping.cs" />
+    <Compile Include="Modules\ReportModule.cs" />
     <Compile Include="Modules\StageBillingModule.cs" />
-    <Compile Include="Modules\Transaction.cs" />
     <Compile Include="ViewModels\DataTablesViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
   </ItemGroup>
