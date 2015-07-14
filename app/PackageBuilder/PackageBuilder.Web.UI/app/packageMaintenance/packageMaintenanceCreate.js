@@ -247,7 +247,6 @@
                     var $lv1 = $(".angular-ui-tree");
                     $lv1.attr('ui-tree-nodes', '');
                     $lv1.find('li').attr('ui-tree-node', '');
-                    //$scope.dataProvsPkg.Package.state = 'Draft';
                     logSuccess('Data Providers loaded!');
                 }
             }, function (error) {

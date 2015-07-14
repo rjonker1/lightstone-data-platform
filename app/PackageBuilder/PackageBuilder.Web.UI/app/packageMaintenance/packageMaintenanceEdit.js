@@ -217,7 +217,7 @@
         activate();
 
         function activate() {
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates()], controllerId).then(function () {
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId).then(function () {
                 log('Activated Package Maintenance View');
             }, function(error) {
                 logError(error.data.errorMessage);
@@ -228,13 +228,15 @@
             return datacontext.getPackage(id, version).then(function (response) {
                 console.log(response);
 
+                //$scope.dataProvsPkg.Package.state = 'Draft';
+
                 if (response.status === 200) {
                     $scope.dataProvsPkg.Package = response.data.response;
-                    //Manipulate current state of Pakage at load to reflect alias of enum from API
+                    // Manipulate current state of Pakage at load to reflect alias of enum from API
                     var $lv1 = $(".angular-ui-tree");
                     $lv1.attr('ui-tree-nodes', '');
                     $lv1.find('li').attr('ui-tree-node', '');
-                    //State comparison
+                    // State comparison
                     for (var i = 0; i < $scope.states.length; i++) {
                         if ($scope.dataProvsPkg.Package[0].state.id == $scope.states[i].id) {
                             $scope.dataProvsPkg.Package[0].state = $scope.states[i];
@@ -242,7 +244,6 @@
                     }
 
                     logSuccess('Data Providers loaded!');
-                    //console.log($scope.dataProvsPkg.Package[0].state.id);
                 }
             }, function (error) {
                 logError(error.data.errorMessage);
@@ -257,22 +258,22 @@
             });
         }
         
-        //function getRequestFields() {
-        //    return datacontext.getRequestFields().then(function (response) {
-        //        $scope.requestFields = response;
-        //        //$scope.filteredConstraint = $scope.industries[0];
+        function getIndustries() {
+            return datacontext.getIndustries().then(function (response) {
+                $scope.industries = response;
 
-        //        //var bootFilters = [];
+                var bootFilters = [];
 
-        //        //for (var i = 0; i < $scope.requestFields.length; i++) {
-        //        //    $scope.requestFields[i].isSelected = true;
-        //        //    //bootFilters.push($scope.requestFields[i]);
-        //        //}
+                for (var i = 0; i < $scope.industries.length; i++) {
 
-        //        //$scope.filterData(bootFilters);
-        //    }, function (error) {
-        //        logError(error.data.errorMessage);
-        //    });
-        //}
+                    $scope.industries[i].isSelected = true;
+                    bootFilters.push($scope.industries[i]);
+                }
+
+                $scope.filterData(bootFilters);
+            }, function (error) {
+                logError(error.data.errorMessage);
+            });
+        }
     }
 })();
