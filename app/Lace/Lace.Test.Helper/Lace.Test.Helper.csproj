@@ -222,6 +222,7 @@
     <Compile Include="Mothers\Requests\Dto\RequestDriversLicenseInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestFicaInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestJisInformation.cs" />
+    <Compile Include="Mothers\Requests\VinNumberLSAutoRgtAndRgtVinProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberAllDataProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberLightstoneOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.cs" />

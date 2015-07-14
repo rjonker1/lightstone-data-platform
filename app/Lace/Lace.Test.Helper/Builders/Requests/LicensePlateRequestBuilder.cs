@@ -16,13 +16,13 @@ namespace Lace.Test.Helper.Builders.Requests
 
         public ICollection<IPointToLaceRequest> ForAudatex()
         {
-            _request = new[] { new LicensePlateNumberAudatexOnlyRequest()};
+            _request = new[] {new LicensePlateNumberAudatexOnlyRequest()};
             return _request;
         }
 
         public ICollection<IPointToLaceRequest> ForIvidTitleHolder()
         {
-            _request = new[] { new LicensePlateNumberIvidTitleHolderOnlyRequest()};
+            _request = new[] {new LicensePlateNumberIvidTitleHolderOnlyRequest()};
             return _request;
         }
 
@@ -34,7 +34,7 @@ namespace Lace.Test.Helper.Builders.Requests
 
         public ICollection<IPointToLaceRequest> ForRgtVin()
         {
-            _request = new[] { new LicensePlateNumberRgtVinOnlyRequest() };
+            _request = new[] {new LicensePlateNumberRgtVinOnlyRequest()};
             return _request;
         }
 
@@ -52,13 +52,26 @@ namespace Lace.Test.Helper.Builders.Requests
 
         public ICollection<IPointToLaceRequest> ForLightstoneVinNumber()
         {
-            _request = new[] { new VinNumberLighstoneOnlyRequest(),  };
+            _request = new[] {new VinNumberLighstoneOnlyRequest(),};
             return _request;
         }
 
         public ICollection<IPointToLaceRequest> ForAllSources()
         {
             _request = new[] {new LicensePlateNumberAllDataProvidersRequest()};
+            return _request;
+        }
+
+
+    }
+
+    public class VinRequestBuilder
+    {
+        private ICollection<IPointToLaceRequest> _request;
+
+        public ICollection<IPointToLaceRequest> ForLsAutoRgtAndRgtVin()
+        {
+            _request = new[] {new VinNumberLSAutoRgtAndRgtVinProvidersRequest()};
             return _request;
         }
     }
