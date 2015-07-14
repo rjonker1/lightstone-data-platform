@@ -55,6 +55,12 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         }
 
         [Observation]
+        public void rgt_vin_car_full_name_should_be_correct()
+        {
+            _response.OfType<IProvideDataFromRgtVin>().First().CarFullname.ShouldEqual("OPEL Astra 1.4T Enjoy 5-dr MY13");
+        }
+
+        [Observation]
         public void rgt_vin_consumer_fallback_source_must_be_null()
         {
             _consumer.FallBack.ShouldBeNull();

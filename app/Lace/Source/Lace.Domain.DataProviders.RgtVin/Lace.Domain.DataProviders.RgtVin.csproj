@@ -113,7 +113,8 @@
     </Compile>
     <Compile Include="Core\Contracts\IGetVehicleFromVin.cs" />
     <Compile Include="Infrastructure\CallRgtVinDataProvider.cs" />
-    <Compile Include="Infrastructure\Dto\RgtVinRequestMessage.cs" />
+    <Compile Include="Infrastructure\HandleRequest.cs" />
+    <Compile Include="Infrastructure\Management\GetVin.cs" />
     <Compile Include="UnitOfWork\VehicleVinUnitOfWork.cs" />
     <Compile Include="Infrastructure\HandleRgtVinDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtVinResponse.cs" />

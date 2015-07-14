@@ -8,8 +8,6 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
-using Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
 using Lace.Shared.DataProvider.Models;
@@ -42,19 +40,16 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         {
             try
             {
-                var vin = new RgtVinRequestMessage(_dataProvider.GetRequest<IAmRgtVinRequest>(), response).Vin;
-
-                _logCommand.LogConfiguration(new {VinNumber = vin}, null);
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
-                    .ForDatabaseType(), new {VinNumber = vin});
+                    .ForDatabaseType(), new { _dataProvider });
 
-                GetListOfVin(vin);
+                GetVin.AsAList(response, _dataProvider.GetRequest<IAmRgtVinRequest>(), new VehicleVinUnitOfWork(_repository), out _vins);
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {_vins});
 
                 if (_vins == null || !_vins.Any())
-                    _logCommand.LogFault(new {VinNumber = vin},
+                    _logCommand.LogFault(new { _dataProvider },
                         new {ErrorMessage = "No VINs were received"});
 
                 _logCommand.LogResponse(_vins != null && _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
@@ -70,13 +65,6 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                 _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling RGT Vin Data Provider"});
                 RgtVinResponseFailed(response);
             }
-        }
-
-        private void GetListOfVin(string vin)
-        {
-            var worker = new VehicleVinUnitOfWork(_repository);
-            worker.GetVin(vin);
-            _vins = worker.Vins != null ? worker.Vins.ToList() : new List<Vin>();
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
