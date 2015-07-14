@@ -60,4 +60,22 @@
             get { return _reader.GetString("umApi/config/redisServers", () => "UNKNOWN_REDIS_SERVERS"); }
         }
     }
+
+    public class ReportApiSettings
+    {
+        private readonly AppSettingsReader _reader;
+
+        internal ReportApiSettings(AppSettingsReader reader)
+        {
+            _reader = reader;
+        }
+
+        /// <summary>
+        /// Finds an appSetting called reportApi/config/baseUrl
+        /// </summary>
+        public string BaseUrl
+        {
+            get { return _reader.GetString("reportApi/config/baseUrl", () => "UNKNOWN_BASE_URL"); }
+        }
+    }
 }
