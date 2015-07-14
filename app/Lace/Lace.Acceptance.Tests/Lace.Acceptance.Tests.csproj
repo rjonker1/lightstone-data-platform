@@ -131,6 +131,7 @@
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_director_search.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_company_search.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_source_chain_for_drivers_license_decryption.cs" />
+    <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_vin_rgt_ls_rgt_vin_search.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider_with_license_number_mismatch.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_source_with_financed_interest.cs" />

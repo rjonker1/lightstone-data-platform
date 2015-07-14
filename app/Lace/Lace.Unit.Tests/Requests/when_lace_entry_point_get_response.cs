@@ -36,6 +36,5 @@ namespace Lace.Unit.Tests.Requests
         {
             _response.Count.ShouldEqual(8);
         }
-        
     }
 }

@@ -11,6 +11,11 @@ namespace Lace.Test.Helper.Fakes.RequestTypes
         {
         }
 
+        public static IAmRgtRequest Empty()
+        {
+            return new RgtRequestType();
+        }
+
         public static IAmRgtRequest WithCarId(string carId)
         {
             return new RgtRequestType()

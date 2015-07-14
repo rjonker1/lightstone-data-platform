@@ -11,6 +11,11 @@ namespace Lace.Test.Helper.Fakes.RequestTypes
             
         }
 
+        public static IAmRgtVinRequest Empty()
+        {
+            return new RgtVinRequest();
+        }
+
         public static IAmRgtVinRequest WithVin(string vinNumber)
         {
             return new RgtVinRequest()

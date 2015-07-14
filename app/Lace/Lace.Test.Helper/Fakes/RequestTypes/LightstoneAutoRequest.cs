@@ -12,6 +12,11 @@ namespace Lace.Test.Helper.Fakes.RequestTypes
             
         }
 
+        public static IAmLightstoneAutoRequest Empty()
+        {
+            return new LightstoneAutoRequest();
+        }
+
         public static IAmLightstoneAutoRequest WithVin(string vinNumber)
         {
             return new LightstoneAutoRequest()

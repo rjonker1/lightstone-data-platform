@@ -8,6 +8,5 @@ namespace Lace.Shared.Extensions
         {
             return obj == null || String.IsNullOrEmpty(obj.ToString());
         }
-
     }
 }

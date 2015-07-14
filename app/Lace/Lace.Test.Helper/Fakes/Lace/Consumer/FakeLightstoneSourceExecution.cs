@@ -46,8 +46,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                 _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
                 var consumer = new ConsumeSource(new FakeHandleLighstoneSourceCall(),
-                    new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(),
-                        new FakeVin12CarInfoRepository(_dataProvider.GetRequest<IAmLightstoneAutoRequest>().VinNumber.Field), _logCommand));
+                    new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(),new FakeDataProviderRepository(), _logCommand));
                 consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() || response.OfType<IProvideDataFromLightstoneAuto>().First() == null)

@@ -6,12 +6,12 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 namespace Lace.Test.Helper.Mothers.Requests
 {
 
-    public class LicensePlateNumberAllDataProvidersRequest : IPointToLaceRequest
+    public class VinNumberLSAutoRgtAndRgtVinProvidersRequest : IPointToLaceRequest
     {
         private readonly IHaveRequestContext _aggregation;
         private readonly DateTime _requestDate;
 
-        public LicensePlateNumberAllDataProvidersRequest()
+        public VinNumberLSAutoRgtAndRgtVinProvidersRequest()
         {
             _aggregation = new RequestContextInformation();
             _requestDate = DateTime.Now;
@@ -34,10 +34,9 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHavePackageForRequest Package
         {
-            get { return LicensePlateNumberAllRequestPackage.LicenseNumberOnlyPackage("CN62KZGP", "VVi+Adx"); } //
+            get { return VinNumberRequestPackage.LsAutoRgtAndRgitVinPackage("3C4PDCKG7DT526617"); }
         }
-
-
+        
         public IHaveContract Contract
         {
             get { return new RequestContractInformation(); }

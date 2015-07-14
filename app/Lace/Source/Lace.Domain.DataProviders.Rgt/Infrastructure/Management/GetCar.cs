@@ -36,7 +36,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
         {
             if (stop) return false;
 
-            var carId = HandleRequest.GetCarId(request);
+            var carId = HandleRequest.GetCarId(response, request);
 
             if (carId == 0) return false;
 
