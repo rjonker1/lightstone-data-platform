@@ -91,6 +91,7 @@
     <Compile Include="Infrastructure\Dto\Director.cs" />
     <Compile Include="Infrastructure\Extensions\DataSetExtensions.cs" />
     <Compile Include="Infrastructure\HandleLightstoneDirectorCall.cs" />
+    <Compile Include="Infrastructure\Management\DirectorDataRetriever.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneDirectorResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneDirector.cs" />
     <Compile Include="LightstoneDirectorDataProvider.cs" />
