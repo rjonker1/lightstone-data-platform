@@ -6,11 +6,11 @@ namespace UserManagement.Domain.Core.Tests
     public class when_hashing_password : Specification
     {
         private SaltedHash _saltedHash = new SaltedHash();
-        private string _hash = "VyzZX98egf9lVB+HcO8svMY6y9jEkH5yKdZf59cSce8=";
-        private string _salt = "ivcPLQ==";
+        private string _hash;
+        private string _salt;
         public override void Observe()
         {
-            _saltedHash.GetHashAndSaltString("123456", out _hash, out _salt);
+           _saltedHash.GetHashAndSaltString("123456", out _hash, out _salt);
         }
 
         [Observation]

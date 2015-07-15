@@ -83,34 +83,6 @@ namespace UserManagement.Api.Modules
 
             Get["/Users/Add"] = _ => View["Save", new UserDto()];
 
-            Post["/Users"] = _ =>
-            {
-                var dto = this.BindAndValidate<UserDto>();
-                dto.CreatedBy = Context.CurrentUser.UserName;
-                dto.IsActive = true;
-
-                if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
-
-                if (ModelValidationResult.IsValid)
-                {
-                    //var clientUsersDto = this.Bind<List<ClientUserDto>>();
-                    //dto.ClientUsers = clientUsersDto;
-
-                    var entity = Mapper.Map(dto, userRepository.Get(dto.Id) ?? new User());
-
-                    bus.Publish(new CreateUpdateEntity(entity, "Create"));
-
-                    ////RabbitMQ
-                    var metaEntity = Mapper.Map(entity, new UserMessage());
-                    var advancedBus = new TransactionBus(eBus);
-                    advancedBus.SendDynamic(metaEntity);
-
-                    return View["Index"];
-                }
-
-                return View["Save", dto];
-            };
-
             Get["/Users/{id:guid}"] = parameters =>
             {
                 var guid = (Guid)parameters.id;
@@ -127,10 +99,44 @@ namespace UserManagement.Api.Modules
                 return Response.AsJson(dto);
             };
 
+            Post["/Users"] = _ =>
+            {
+                var dto = this.BindAndValidate<UserDto>();
+                dto.CreatedBy = Context.CurrentUser.UserName;
+                dto.IsActive = true;
+
+                if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
+
+                if (ModelValidationResult.IsValid)
+                {
+                    //var clientUsersDto = this.Bind<List<ClientUserDto>>();
+                    //dto.ClientUsers = clientUsersDto;
+
+                    var entity = Mapper.Map(dto, userRepository.Get(dto.Id) ?? new User());
+                    entity.HashPassword();
+
+                    bus.Publish(new CreateUpdateEntity(entity, "Create"));
+
+                    ////RabbitMQ
+                    var metaEntity = Mapper.Map(entity, new UserMessage());
+                    var advancedBus = new TransactionBus(eBus);
+                    advancedBus.SendDynamic(metaEntity);
+
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
+            };
+
             Put["/Users/{id}"] = parameters =>
             {
                 var dto = this.BindAndValidate<UserDto>();
                 dto.ModifiedBy = Context.CurrentUser.UserName;
+
+                if (dto.ResetPassword != null)
+                {
+                    dto.Password = dto.ResetPassword;
+                }
 
                 if (dto.TrialExpiration == null) dto.TrialExpiration = DateTime.UtcNow.Date;
 
@@ -139,6 +145,7 @@ namespace UserManagement.Api.Modules
                     //var clientUsersDto = this.Bind<List<ClientUserDto>>();
                     //dto.ClientUsers = clientUsersDto;
                     var entity = Mapper.Map(dto, userRepository.Get(dto.Id));
+                    if (dto.ResetPassword != null) entity.HashPassword();
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
