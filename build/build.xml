@@ -215,8 +215,8 @@
       <description>Lightstone.DataPlatform.Workflow.Reporting.Consumer</description>
       <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
-        <include pattern="*" to="content\bin"/>
-        <include pattern="*.config" to="content\bin"/>
+        <include pattern="*" to="content"/>
+        <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
 
