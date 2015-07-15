@@ -5,7 +5,6 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
@@ -31,16 +30,16 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         {
             try
             {
-                _request = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
-                var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                    .FirstWithCache(_request)
+                _request = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
+                var data = IvidDataRetriever.Start(_logCommand, _log)
+                    .CheckInCache(_request)
                     .ThenWithApi(_request, _dataProvider, out _response);
 
-                if (retriever.NoNeedToCallApi)
+                if (data.NoNeedToCallApi)
                 {
-                    _logCommand.LogTransformation(retriever.CacheResponse, new {CacheResponse = "Response retrieved from Ivid's Cache"});
-                    retriever.CacheResponse.HasBeenHandled();
-                    response.Add(retriever.CacheResponse);
+                    _logCommand.LogTransformation(data.CacheResponse, new {CacheResponse = "Response retrieved from Ivid's Cache"});
+                    data.CacheResponse.HasBeenHandled();
+                    response.Add(data.CacheResponse);
                     return;
                 }
 

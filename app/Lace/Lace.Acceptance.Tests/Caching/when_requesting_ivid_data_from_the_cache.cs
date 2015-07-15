@@ -6,7 +6,7 @@ using Lace.Acceptance.Tests.Helper;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
+using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
@@ -39,7 +39,7 @@ namespace Lace.Acceptance.Tests.Caching
         public override void Observe()
         {
             TestCacheRepository.ClearAll();
-            _ividRequest = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
+            _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             _retriever = IvidDataRetriever.Start(_logCommand, _log).ThenWithApi(_ividRequest, _dataProvider, out _response);
             var transformer = new TransformIvidResponse(_response);
             transformer.Transform();
@@ -49,9 +49,9 @@ namespace Lace.Acceptance.Tests.Caching
         public void then_request_for_license_number_should_exist_in_cache()
         {
             _request  = new[] { new LicensePlateNumberIvidOnlyRequest() };
-            _ividRequest = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
+            _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .FirstWithCache(_ividRequest);
+                .CheckInCache(_ividRequest);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();
             retriever.CacheResponse.ShouldNotBeNull();
@@ -62,9 +62,9 @@ namespace Lace.Acceptance.Tests.Caching
         public void then_request_for_vin_number_should_exist_in_cache()
         {
             _request = new[] { new VinNumberIvidOnlyRequest() };
-            _ividRequest = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
+            _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .FirstWithCache(_ividRequest);
+                .CheckInCache(_ividRequest);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();
             retriever.CacheResponse.ShouldNotBeNull();
@@ -75,9 +75,9 @@ namespace Lace.Acceptance.Tests.Caching
         public void then_request_for_register_no_should_exist_in_cache()
         {
             _request = new[] { new RegisterNumberIvidOnlyRequest() };
-            _ividRequest = new IvidRequestMessage(_dataProvider.GetRequest<IAmIvidStandardRequest>()).HpiQueryRequest;
+            _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .FirstWithCache(_ividRequest);
+                .CheckInCache(_ividRequest);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();
             retriever.CacheResponse.ShouldNotBeNull();

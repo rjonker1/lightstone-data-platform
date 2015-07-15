@@ -94,8 +94,8 @@
     </Compile>
     <Compile Include="Infrastructure\CallIvidTitleHolderDataProvider.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureIvidTitleHolder.cs" />
-    <Compile Include="Infrastructure\Dto\IvidTitleHolderRequestMessage.cs" />
     <Compile Include="Infrastructure\HandleIvidTitleHolderSourceCall.cs" />
+    <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidTitleHolderResponse.cs" />
     <Compile Include="Infrastructure\RequestDatafromIvidTitleHolderSource.cs" />
     <Compile Include="IvidTitleHolderDataProvider.cs" />
