@@ -204,8 +204,8 @@
       <description>Lightstone.DataPlatform.Workflow.Billing.Consumer</description>
       <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
-        <include pattern="*" to="content"/>
-        <include pattern="*.config" to="content"/>
+        <include pattern="*" to="content/bin"/>
+        <include pattern="*.config" to="content/bin"/>
       </includes>
     </nuget>
     <nuget deploy="false">
@@ -215,8 +215,8 @@
       <description>Lightstone.DataPlatform.Workflow.Reporting.Consumer</description>
       <deploymentProject>LightstoneDataPlatform</deploymentProject>
       <includes>
-        <include pattern="*" to="content"/>
-        <include pattern="*.config" to="content"/>
+        <include pattern="*" to="content/bin"/>
+        <include pattern="*.config" to="content/bin"/>
       </includes>
     </nuget>
 
