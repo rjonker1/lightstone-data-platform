@@ -37,6 +37,7 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Password is required")]
         public string Password { get; set; }
+        public string ResetPassword { get; set; }
         public string ActivationStatusType { get; set; }
         public bool? IsActive { get; set; }
         public bool IsLocked { get; set; }

@@ -28,7 +28,7 @@
 
     <form action="@url" method="@method" class="form-horizontal">
         @Html.HiddenFor(x => x.IsActive)
-        
+
         @Html.HiddenFor(x => x.AssemblyQualifiedName)
 
         <div class="box-body">
@@ -103,7 +103,14 @@
                     <span class="input-group-addon glyphicon glyphicon-certificate" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
                         @*@Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "" })*@
-                        <input type="password" class="form-control" name="password" value="@Model.Password">
+                        @if (isCreate)
+                        {
+                            <input type="password" class="form-control" name="password" value="@Model.Password" />
+                        }
+                        @if (!isCreate)
+                        {
+                            <input type="password" class="form-control" name="password" value="@Model.Password" readonly />
+                        }
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -111,6 +118,24 @@
                 </div>
 
             </div>
+
+            @if (!isCreate)
+            {
+                <div class="form-group">
+
+                    <label class="control-label col-lg-4"> Reset Password</label>
+                    <div class="input-group col-lg-2">
+                        <span class="input-group-addon glyphicon glyphicon-certificate" id="basic-addon1"></span>
+                        <div aria-describedby="basic-addon1">
+                            <input type="password" class="form-control" name="resetPassword" value="@Model.ResetPassword">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.ValidationMessageFor(x => x.ResetPassword)
+                    </div>
+
+                </div>
+            }
             <div class="form-group">
 
                 <label class="control-label col-lg-4">ID Number</label>
@@ -143,7 +168,7 @@
                 </div>
 
             </div>
-            
+
             <div class="form-group trial-expiration">
 
                 <label class="control-label col-lg-4">Trial Expiration Date</label>
@@ -220,6 +245,7 @@
         </div>
         @Html.Partial("Shared/BoxFooter")
     </form>
+
 </div>
 
 <script>

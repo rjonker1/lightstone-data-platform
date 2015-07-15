@@ -46,12 +46,12 @@ namespace UserManagement.Api.Helpers.Security
             var isValid = _hashProvider.VerifyHashString(password, user.Password, user.Salt);
 
             return isValid
-                ? null
-                : new UserIdentity(user.UserName)
+                ? new UserIdentity(user.UserName)
                 {
                     Id = user.Id,
                     Claims = user.Roles != null ? user.Roles.ToList().Select(x => x.Value) : Enumerable.Empty<string>()
-                };
+                }
+                : null;
         }
     }
 }

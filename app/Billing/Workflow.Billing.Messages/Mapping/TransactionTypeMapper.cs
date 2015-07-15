@@ -63,7 +63,7 @@ namespace Workflow.Billing.Messages.Mapping
             if (match == null)
                 return null;
 
-            return new InvoiceTransaction(match.Id, match.Date, new PackageIdentifier(match.PackageId, new VersionIdentifier(match.PackageVersion)),
+            return new InvoiceTransaction(match.Id, match.Date, new PackageIdentifier(match.PackageId, new VersionIdentifier(match.PackageVersion), match.PackageCostPrice, match.PackageRecommendedPrice),
                 new RequestIdentifier(match.RequestId, new SystemIdentifier(match.System)), new UserIdentifier(match.UserId), new StateIdentifier(match.StateId, match.State), new ContractIdentifier(match.ContractId, match.ContractVersion), new AccountIdentifier(match.AccountNumber));
         }
     }

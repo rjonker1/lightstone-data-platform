@@ -4,6 +4,8 @@ using System.Linq;
 using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
 using Nancy;
+using Shared.BuildingBlocks.Api.ApiClients;
+using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
@@ -12,7 +14,7 @@ namespace Billing.Api.Modules
 {
     public class ReportModule : NancyModule
     {
-        public ReportModule(IRepository<StageBilling> stageBillingRepository)
+        public ReportModule(IRepository<StageBilling> stageBillingRepository, IReportApiClient reportApiClient)
         {
             Get["/Reports/Customer/Transactions/{searchId}"] = parameters =>
             {
@@ -57,7 +59,9 @@ namespace Billing.Api.Modules
                     // Index restriction for new record
                     if (packageIndex < 0) packagesDetailList.Add(package);
 
-                    var packagesList = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                }
+
+                var packagesList = stageBillingRepository.Where(x => x.CustomerId == searchId)
                             .Select(x => new ReportPackage
                             {
                                 ItemCode = x.PackageName,
@@ -66,20 +70,27 @@ namespace Billing.Api.Modules
                                 //Vat = 2284
                             }).Distinct();
 
-                    var reportData = new ReportDto
+                var reportData = new ReportDto
+                {
+                    Template = new ReportTemplate { ShortId = "N190datG" },
+                    Data = new ReportData
                     {
-                        Template = new ReportTemplate { ShortId = "N190datG" },
-                        Data = new ReportData
+                        Customer = new ReportCustomer
                         {
-                            Customer = new ReportCustomer
-                            {
-                                Name = transaction.ClientName,
-                                TaxRegistration = 4190195679,
-                                Packages = packagesList.ToList()
-                            }
+                            Name = "TEST",
+                            TaxRegistration = 4190195679,
+                            Packages = packagesList.ToList()
                         }
-                    };
-                }
+                    }
+                };
+
+                var token = Context.AuthorizationHeaderToken();
+                var htmlReport = reportApiClient.Post("", "/ReportHTML", reportData,
+                    new[]
+                        {
+                            new KeyValuePair<string, string>("Authorization", "Token " + token),
+                            new KeyValuePair<string, string>("Content-Type", "application/json"),
+                        });
 
                 //return Response.AsJson(new { data = packagesDetailList });
                 return null;
