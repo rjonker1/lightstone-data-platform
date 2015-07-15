@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Extensions;
-using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
@@ -10,50 +10,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
     {
         public static string GetVinNumber(ICollection<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
         {
-            return !string.IsNullOrEmpty(GetValue(request.VinNumber)) ? GetValue(request.VinNumber) : ResponseDataDigger.Dig().ForVin(response);
+            return !string.IsNullOrEmpty(request.VinNumber.GetValue()) ? request.VinNumber.GetValue() : ResponseDataMiner.Mine().ForVin(response);
         }
 
         public static int GetCarId(IAmLightstoneAutoRequest request)
         {
             int carId;
-            int.TryParse(GetValue(request.CarId), out carId);
+            int.TryParse(request.CarId.GetValue(), out carId);
             return carId;
         }
-
-        private static string GetValue(IAmRequestField field)
-        {
-            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
-        }
-        
-
-        //public static bool IsSatisfied(ICollection<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
-        //{
-        //    return !string.IsNullOrEmpty(GetVinNumber(response, request));
-        //}
-
-        //public static string GetVinNumber(ICollection<IPointToLaceProvider> response, IAmLightstoneAutoRequest request)
-        //{
-        //    return string.IsNullOrEmpty(GetValue(request.VinNumber))
-        //        ? ContinueWithIvid(response) ? response.OfType<IProvideDataFromIvid>().First().Vin : string.Empty
-        //        : GetValue(request.VinNumber);
-        //}
-
-        //public static int GetCarId(IAmLightstoneAutoRequest request)
-        //{
-        //    int carId;
-        //    int.TryParse(GetValue(request.CarId), out carId);
-        //    return carId;
-        //}
-
-        //private static string GetValue(IAmRequestField field)
-        //{
-        //    return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
-        //}
-
-        //private static bool ContinueWithIvid(ICollection<IPointToLaceProvider> response)
-        //{
-        //    return response != null && response.OfType<IProvideDataFromIvid>().Any() && response.OfType<IProvideDataFromIvid>().First() != null &&
-        //           response.OfType<IProvideDataFromIvid>().First().Handled;
-        //}
     }
 }

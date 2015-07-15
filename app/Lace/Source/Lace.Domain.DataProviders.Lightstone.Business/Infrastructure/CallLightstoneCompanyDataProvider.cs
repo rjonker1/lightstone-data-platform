@@ -43,9 +43,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
                 if (api.UserToken == Guid.Empty)
                     throw new Exception("Cannot continue calling Lightstone Business Api. User is not valid");
 
-                if (api.Client.State == CommunicationState.Closed)
-                    api.Client.Open();
-
                 _logCommand.LogSecurity(new {Credentials = new {api.Username, api.Password}},
                     new {Message = "Lightstone Business Data Provider Credentials"});
 
@@ -56,24 +53,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(),
                     new {_dataProvider});
 
-                var companiesDs = api.Client.returnCompanies(api.UserToken.ToString(), request.CompanyName, request.CompanyRegnum,
-                    request.CompanyVatnumber);
-                var company = Dto.Company.GetFromDataset(companiesDs);
-                if (!company.Valid())
-                    throw new Exception(string.Format("Company with Name {0} could not be found", request.CompanyName));
-
-                var confirmation = api.Client.confirmCompany(api.UserToken.ToString(), company.CompanyId, Guid.NewGuid().ToString());
-                var confirm = Confirmation.Get(confirmation);
-                if (!confirm.Valid())
-                    throw new Exception(string.Format("Company with Id {0} could not be confirmed", company.CompanyId));
-
-                _result = api.Client.returnCompanyReport(confirm.ReportGuid.ToString());
+                CompanyDataRetriever.Start(api, request).WithReturnCompanies().ThenConfirmCompany().FinallyGetCompanyReport(out _result);
 
                 _logCommand.LogResponse(_result == null || _result.Tables.Count == 0 ? DataProviderState.Failed : DataProviderState.Successful,
                     new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result});
 
                 TransformResponse(response);
-
             }
             catch (Exception ex)
             {

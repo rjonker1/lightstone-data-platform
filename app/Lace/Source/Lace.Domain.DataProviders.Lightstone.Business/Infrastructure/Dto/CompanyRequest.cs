@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
@@ -21,9 +22,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
         public CompanyRequest Map()
         {
             //IdNumber = GetValue(_request.IdNumber);
-            CompanyName = GetValue(_request.CompanyName);
-            CompanyRegnum = GetValue(_request.CompanyRegistrationNumber);
-            CompanyVatnumber = GetValue(_request.CompanyVatNumber);
+            CompanyName =_request.CompanyName.GetValue();
+            CompanyRegnum = _request.CompanyRegistrationNumber.GetValue();
+            CompanyVatnumber = _request.CompanyVatNumber.GetValue();
             return this;
         }
 
@@ -31,11 +32,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.D
         {
             IsValid = !string.IsNullOrEmpty(CompanyName) || !string.IsNullOrEmpty(CompanyRegnum) || !string.IsNullOrEmpty(CompanyVatnumber);
             return this;
-        }
-
-        private static string GetValue(IAmRequestField field)
-        {
-            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
         }
 
         [DataMember]

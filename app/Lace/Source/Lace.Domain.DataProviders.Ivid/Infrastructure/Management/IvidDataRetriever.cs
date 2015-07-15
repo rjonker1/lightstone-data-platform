@@ -34,7 +34,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             return new IvidDataRetriever(logCommand, log);
         }
 
-        public IvidDataRetriever FirstWithCache(HpiStandardQueryRequest request)
+        public IvidDataRetriever CheckInCache(HpiStandardQueryRequest request)
         {
             try
             {

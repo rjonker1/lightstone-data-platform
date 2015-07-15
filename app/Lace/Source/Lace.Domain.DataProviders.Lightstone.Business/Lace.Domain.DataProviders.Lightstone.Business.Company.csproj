@@ -103,6 +103,7 @@
     <Compile Include="Infrastructure\Dto\Director.cs" />
     <Compile Include="Infrastructure\Extensions\DataSetExtensions.cs" />
     <Compile Include="Infrastructure\HandleLightstoneCompanyCall.cs" />
+    <Compile Include="Infrastructure\Management\CompanyDataRetriever.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneCompanyResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneCompany.cs" />
     <Compile Include="LightstoneCompanyDataProvider.cs" />

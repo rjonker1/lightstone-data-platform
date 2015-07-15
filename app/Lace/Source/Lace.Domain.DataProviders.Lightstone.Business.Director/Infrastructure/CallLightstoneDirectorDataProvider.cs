@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
@@ -40,9 +39,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
                 if (api.UserToken == Guid.Empty)
                     throw new Exception("Cannot continue calling Lightstone Business Directory Api. User is not valid");
 
-                if (api.Client.State == CommunicationState.Closed)
-                    api.Client.Open();
-
                 _logCommand.LogSecurity(new {Credentials = new {api.Username, api.Password}},
                     new {Message = "Lightstone Business Data Provider Credentials"});
 
@@ -53,19 +49,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(),
                     new {_dataProvider});
 
-                var directorDs = api.Client.returnDirectors(api.UserToken.ToString(), request.FirstName, request.FirstName, request.IdNumber);
-                var director = Dto.Director.GetFromDataset(directorDs);
-                if (!director.Valid())
-                    throw new Exception(string.Format("Director with Id Number {0} is not valid", request.IdNumber));
-
-                var confirmReport = api.Client.confirmDirector(api.UserToken.ToString(), director.DirectorId, director.IdNumber.ToString(),
-                    Guid.NewGuid().ToString());
-
-                var confirm = Confirmation.Get(confirmReport);
-                if (!confirm.Valid())
-                    throw new Exception(string.Format("Director with Id {0} could not be confirmed", director.DirectorId));
-
-                _result = api.Client.returnDirectorReport(confirm.ReportGuid.ToString());
+                DirectorDataRetriever.Start(api, request).WithReturnDirectors().ThenConfirmDirector().FinallyGetDirectorReport(out _result);
 
                 _logCommand.LogResponse(_result == null || _result.Tables.Count == 0 ? DataProviderState.Failed : DataProviderState.Successful,
                     new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result});
