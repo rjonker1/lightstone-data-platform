@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DataPlatform.Shared.Helpers.Extensions;
 using Nancy.Security;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
@@ -41,7 +42,10 @@ namespace UserManagement.Api.Helpers.Security
         {
             var user = _repository.FirstOrDefault(x => (x.UserName + "").Trim().ToLower() == (username + "").Trim().ToLower());
             if (user == null)
-                return null;
+            {
+                this.Error(() => "User not found: {0}".FormatWith(username));
+                return null;                
+            }
 
             var isValid = _hashProvider.VerifyHashString(password, user.Password, user.Salt);
 

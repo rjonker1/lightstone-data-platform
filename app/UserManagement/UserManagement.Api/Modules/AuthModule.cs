@@ -61,6 +61,8 @@ namespace UserManagement.Api.Modules
                 var password = Context.Request.Headers["Password"].FirstOrDefault();
                 var userIdentity = authenticator.GetUserIdentity(username, password);
 
+                this.Info(() => "UserIdentity: {0}, log in attempt".FormatWith(userIdentity));
+
                 if (userIdentity != null)
                 {
                     var user = users.FirstOrDefault(x => x.UserName == userIdentity.UserName);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using DataPlatform.Shared.Helpers.Extensions;
 
 namespace UserManagement.Domain.Core.Security
 {
@@ -129,12 +130,20 @@ namespace UserManagement.Domain.Core.Security
             byte[] NewHash = ComputeHash(Data, Salt);
 
             //  No easy array comparison in C# -- we do the legwork
-            if (NewHash.Length != Hash.Length) return false;
+            if (NewHash.Length != Hash.Length)
+            {
+                this.Error(() => "Hash compare failed.");
+                return false;
+            }
 
             for (int Lp = 0; Lp < Hash.Length; Lp++ )
                 if (!Hash[Lp].Equals(NewHash[Lp]))
+                {
+                    this.Error(() => "Hash verfication failed.");
                     return false;
+                }
 
+            this.Info(() => "Hash verified.");
             return true;
         }
 
