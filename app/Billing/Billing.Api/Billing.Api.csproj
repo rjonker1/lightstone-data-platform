@@ -391,47 +391,58 @@
     </Content>
     <Content Include="AppSettings.config">
       <TransformOnBuild>true</TransformOnBuild>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="AppSettings.Debug.config">
       <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppSettings.Prod.config">
       <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppSettings.Release.config">
       <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppSettings.TeamCity.config">
       <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppSettings.Test.config">
       <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <None Include="connectionStrings.Debug.config">
       <DependentUpon>connectionStrings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="connectionStrings.Prod.config">
       <DependentUpon>connectionStrings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="connectionStrings.Release.config">
       <DependentUpon>connectionStrings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="connectionStrings.TeamCity.config">
       <DependentUpon>connectionStrings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="connectionStrings.Test.config">
       <DependentUpon>connectionStrings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\app\app.js" />
@@ -665,6 +676,7 @@
     <Content Include="packages.config" />
     <Content Include="connectionStrings.config">
       <TransformOnBuild>true</TransformOnBuild>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
