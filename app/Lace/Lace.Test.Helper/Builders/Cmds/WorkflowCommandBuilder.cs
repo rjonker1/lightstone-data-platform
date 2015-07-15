@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
+using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
@@ -100,11 +101,10 @@ namespace Lace.Test.Helper.Builders.Cmds
             var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
             queue.InitQueue(_bus)
                 .Configuration(
-                    new IvidRequestMessage(
+                    HandleRequest.GetHpiStandardQueryRequest(
                         new LicensePlateRequestBuilder().ForIvid()
                             .GetFromRequest<IPointToLaceRequest>()
-                            .Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>())
-                        .HpiQueryRequest, null);
+                            .Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>()), null);
             return this;
         }
 

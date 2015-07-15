@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Lace.Domain.Core.Requests.Contracts;
+﻿using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
@@ -14,8 +13,7 @@ namespace Lace.Test.Helper.Builders.DataProviders
         public static HpiStandardQueryRequest IvidHpiStandardQueryRequest(IAmDataProvider dataProviders)
         {
             return
-                new IvidRequestMessage(dataProviders.GetRequest<IAmIvidStandardRequest>())
-                    .HpiQueryRequest;
+                HandleRequest.GetHpiStandardQueryRequest(dataProviders.GetRequest<IAmIvidStandardRequest>());
         }
     }
 

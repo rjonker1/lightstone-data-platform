@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Linq;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration;
-using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
+using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Responses;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
@@ -23,40 +19,7 @@ namespace Lace.Test.Helper.Builders.Cmds
         {
             _aggregateId = aggregateId;
         }
-
-
-        //public MonitoringCommandBuilder ForAudatex()
-        //{
-        //    var queue = new MonitoirngQueueSender(DataProviderCommandSource.Audatex, _aggregateId);
-        //    queue.InitQueue(MonitoringBusBuilder.ForAudatexCommands(_aggregateId))
-        //        .InitStopWatch()
-        //        .StartingExecution(new LicensePlateRequestBuilder().ForAudatex())
-        //        .Configuration(
-        //            new ConfigureRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
-        //                .AudatexRequest, null)
-        //        .StartCall(
-        //            new ConfigureRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
-        //                .AudatexRequest, null)
-        //        .Error(new {NoRequestReceived = "No response received from Audatex Data Provider"}, null)
-        //        .EndCall(FakeAudatexWebResponseData.GetAudatextWebServiceResponse())
-        //        .Transform(
-        //            new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
-        //                new LaceResponseBuilder().WithIvidResponseHandled(),
-        //                new LicensePlateRequestBuilder().ForAudatex()
-        //                    .GetFromRequest<IPointToVehicleRequest>().Vehicle).Result,
-        //            new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
-        //                new LaceResponseBuilder().WithIvidResponseHandled(),
-        //                new LicensePlateRequestBuilder().ForAudatex()
-        //                    .GetFromRequest<IPointToVehicleRequest>().Vehicle))
-        //        .EndExecution(
-        //            new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
-        //                new LaceResponseBuilder().WithIvidResponseHandled(),
-        //                new LicensePlateRequestBuilder().ForAudatex()
-        //                    .GetFromRequest<IPointToVehicleRequest>().Vehicle).Result);
-
-        //    return this;
-        //}
-
+        
         public MonitoringCommandBuilder ForIvid()
         {
             var request = new LicensePlateRequestBuilder().ForIvid();
@@ -77,9 +40,8 @@ namespace Lace.Test.Helper.Builders.Cmds
                     },
                     new {ContextMessage = "Ivid Data Provider Credentials"})
                 .StartCall(
-                    new IvidRequestMessage(
-                        request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>())
-                        .HpiQueryRequest, null)
+                    HandleRequest.GetHpiStandardQueryRequest(
+                        request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>()), null)
                 .Error(new {NoRequestReceived = "No response received from Ivid Data Provider"}, null)
                 .EndCall(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp())
                 .Transform(

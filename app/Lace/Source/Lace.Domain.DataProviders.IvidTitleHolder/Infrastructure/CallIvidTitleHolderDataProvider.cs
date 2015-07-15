@@ -9,7 +9,6 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Configuration;
-using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Shared.Extensions;
@@ -57,7 +56,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     webService.RequestMessageProperty;
 
                 var request =
-                    new IvidTitleHolderRequestMessage(_dataProvider.GetRequest<IAmIvidTitleholderRequest>(), response).TitleholderQueryRequest;
+                    HandleRequest.GetTitleholderQueryRequest(response,_dataProvider.GetRequest<IAmIvidTitleholderRequest>());
 
                 _logCommand.LogConfiguration(new {request}, null);
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});

@@ -109,9 +109,9 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Infrastructure\CallIvidDataProvider.cs" />
-    <Compile Include="Infrastructure\Dto\IvidRequestMessage.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureIvid.cs" />
     <Compile Include="Infrastructure\HandleIvidSourceCall.cs" />
+    <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\Management\DataChecks.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidResponse.cs" />
     <Compile Include="Infrastructure\Management\IvidDataRetriever.cs" />

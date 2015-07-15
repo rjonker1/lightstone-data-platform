@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
+using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
+using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
@@ -17,8 +17,8 @@ namespace Lace.Unit.Tests.SourceRequests
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICollection<IPointToLaceProvider> _response;
-        private IvidTitleHolderRequestMessage _configureRequestMessage;
         private readonly IAmDataProvider _dataProvider;
+        private TitleholderQueryRequest _configureRequestMessage;
 
 
         public when_configuring_ivid_title_holder_request_message()
@@ -32,24 +32,24 @@ namespace Lace.Unit.Tests.SourceRequests
         public override void Observe()
         {
            _configureRequestMessage =
-                new IvidTitleHolderRequestMessage(_dataProvider.GetRequest<IAmIvidTitleholderRequest>(), _response);
+                HandleRequest.GetTitleholderQueryRequest(_response,_dataProvider.GetRequest<IAmIvidTitleholderRequest>());
         }
 
         [Observation]
         public void ivid_title_holder_request_message_mapped_vin_should_be_valid()
         {
-            _configureRequestMessage.TitleholderQueryRequest.vin.ShouldEqual("SB1KV58E40F039277");
+            _configureRequestMessage.vin.ShouldEqual("SB1KV58E40F039277");
         }
 
         [Observation]
         public void ivid_title_holder_request_message_mapped_requestor_details_should_be_valid()
         {
-            _configureRequestMessage.TitleholderQueryRequest.requesterDetails.ShouldNotBeNull();
+            _configureRequestMessage.requesterDetails.ShouldNotBeNull();
 
-            _configureRequestMessage.TitleholderQueryRequest.requesterDetails.requesterEmail.ShouldEqual(
+            _configureRequestMessage.requesterDetails.requesterEmail.ShouldEqual(
                 "murrayw@lightstone.co.za");
-            _configureRequestMessage.TitleholderQueryRequest.requesterDetails.requesterPhone.ShouldBeEmpty();
-            _configureRequestMessage.TitleholderQueryRequest.requesterDetails.requesterName.ShouldEqual("Murray Woolfson");
+            _configureRequestMessage.requesterDetails.requesterPhone.ShouldBeEmpty();
+            _configureRequestMessage.requesterDetails.requesterName.ShouldEqual("Murray Woolfson");
         }
     }
 }

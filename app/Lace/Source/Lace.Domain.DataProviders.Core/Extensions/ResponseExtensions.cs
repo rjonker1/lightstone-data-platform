@@ -6,20 +6,20 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Core.Extensions
 {
-    public sealed class ResponseDataDigger
+    public sealed class ResponseDataMiner
     {
-        static ResponseDataDigger()
+        static ResponseDataMiner()
         {
             
         }
 
-        private ResponseDataDigger()
+        private ResponseDataMiner()
         {
         }
 
-        public static ResponseDataDigger Dig()
+        public static ResponseDataMiner Mine()
         {
-            return new ResponseDataDigger();
+            return new ResponseDataMiner();
         }
 
         public string ForVin(ICollection<IPointToLaceProvider> response)

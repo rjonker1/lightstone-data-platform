@@ -2,7 +2,7 @@
 using System.Linq;
 using DataPlatform.Shared.Enums;
 using EasyNetQ;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
+using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Mothers.Requests;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -31,34 +31,12 @@ namespace Lace.Unit.Tests.Workflow
                     DataProviderAction.Request, DataProviderState.Successful), DateTime.UtcNow,
                 new ConnectionTypeIdentifier("test.co.za", "API"),
                 new PayloadIdentifier(new MetadataContainer().ObjectToJson(),
-                    new IvidRequestMessage(
+                    HandleRequest.GetHpiStandardQueryRequest(
                         new LicensePlateNumberIvidOnlyRequest().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid)
                             .GetRequest<IAmIvidStandardRequest>()).ObjectToJson(),
                     "testing message to bus"));
             _bus = BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowSender);
         }
-
-        //public static IAdvancedBus CreateAdvancedBus(IDefineQueue queue)
-        //{
-        //    var appSettings = new AppSettings();
-        //    var connectionString = appSettings.ConnectionStrings.Get(queue.ConnectionStringKey, () => "");
-
-        //    IConventions conventions = new Conventions(new TypeNameSerializer())
-        //    {
-        //        ExchangeNamingConvention = type => "DataPlatform.DataProvider.Sender",
-        //        QueueNamingConvention = (type, info) => "DataPlatform.DataProvider.Sender",
-        //        TopicNamingConvention = type => ExchangeType.Fanout,
-        //        ErrorExchangeNamingConvention = info => queue.ErrorExchangeName,
-        //        ErrorQueueNamingConvention = () => queue.ErrorQueueName
-        //    };
-
-        //    var bus = RabbitHutch.CreateBus(connectionString, x =>
-        //    {
-        //        x.Register(provider => conventions);
-        //        x.Register<IEasyNetQLogger, RabbitMQLogger>();
-        //    }).Advanced;
-        //    return bus;
-        //}
 
         public override void Observe()
         {
