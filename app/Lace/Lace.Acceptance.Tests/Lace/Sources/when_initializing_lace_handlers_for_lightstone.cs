@@ -58,11 +58,11 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AccidentDistribution.ShouldNotBeNull();
         }
 
-        [Observation]
-        public void lace_lightstone_response_vehicle_valuation_AmortisationFactors_should_not_be_null()
-        {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AmortisationFactors.ShouldNotBeNull();
-        }
+        //[Observation]
+        //public void lace_lightstone_response_vehicle_valuation_AmortisationFactors_should_not_be_null()
+        //{
+        //    _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AmortisationFactors.ShouldNotBeNull();
+        //}
 
         [Observation]
         public void lace_lightstone_response_vehicle_valuation_AmortisedValues_should_not_be_null()

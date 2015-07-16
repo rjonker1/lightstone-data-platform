@@ -119,7 +119,7 @@
     <Compile Include="Contracts\DataProviders\Metric\IPair.cs" />
     <Compile Include="Contracts\DataProviders\Specifics\IAddValuationItem.cs" />
     <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAccidentDistributionModel.cs" />
-    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAmortisationFactorModel.cs" />
+    <None Include="Contracts\DataProviders\Specifics\IRespondWithAmortisationFactorModel.cs.old20150716" />
     <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAmortisedValueModel.cs" />
     <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAreaFactorModel.cs" />
     <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAuctionFactorModel.cs" />

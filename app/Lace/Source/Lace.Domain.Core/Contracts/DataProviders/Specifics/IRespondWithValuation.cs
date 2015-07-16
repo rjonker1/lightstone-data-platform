@@ -5,7 +5,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Specifics
 {
     public interface IRespondWithValuation : IAddValuationItem, IProvideType
     {
-        IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; }
+        //IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; }
         IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; }
         IEnumerable<IRespondWithAuctionFactorModel> AuctionFactors { get; }
         IEnumerable<IRespondWithAccidentDistributionModel> AccidentDistribution { get; }

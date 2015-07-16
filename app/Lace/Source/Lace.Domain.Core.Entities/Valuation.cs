@@ -10,7 +10,7 @@ namespace Lace.Domain.Core.Entities
     {
         public Valuation()
         {
-            AmortisationFactors = new List<AmortisationFactorModel>();
+            //AmortisationFactors = new List<AmortisationFactorModel>();
             AreaFactors = new List<AreaFactorModel>();
             AuctionFactors = new List<AuctionFactorModel>();
             AccidentDistribution = new List<AccidentDistributionModel>();
@@ -26,10 +26,10 @@ namespace Lace.Domain.Core.Entities
             LastFiveSales = new List<SaleModel>();
         }
 
-        public void AddAmortisationFactors(IEnumerable<IRespondWithAmortisationFactorModel> model)
-        {
-            AmortisationFactors = model;
-        }
+        //public void AddAmortisationFactors(IEnumerable<IRespondWithAmortisationFactorModel> model)
+        //{
+        //    AmortisationFactors = model;
+        //}
 
         public void AddPrices(IEnumerable<IRespondWithPriceModel> model)
         {
@@ -96,8 +96,8 @@ namespace Lace.Domain.Core.Entities
             LastFiveSales = model;
         }
 
-        [DataMember]
-        public IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; private set; }
+        //[DataMember]
+        //public IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; private set; }
         [DataMember]
         public IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; private set; }
         [DataMember]

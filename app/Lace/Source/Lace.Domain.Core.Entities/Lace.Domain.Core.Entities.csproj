@@ -93,7 +93,7 @@
     </Compile>
     <Compile Include="AccidentClaim.cs" />
     <Compile Include="AccidentDistributionModel.cs" />
-    <Compile Include="AmortisationFactorModel.cs" />
+    <None Include="AmortisationFactorModel.cs.old20150716" />
     <Compile Include="AmortisedValueModel.cs" />
     <Compile Include="AnprResponse.cs" />
     <Compile Include="AreaFactorModel.cs" />
