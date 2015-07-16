@@ -1,12 +1,19 @@
-﻿using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+﻿using System.Runtime.Serialization;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.Dto
 {
-    public class DirectorRequest
+    [DataContract]
+    public sealed class DirectorRequest
     {
         //const string idNumber = "7902065199085";
         private readonly IAmLightstoneBusinessDirectorRequest _request;
+
+        public DirectorRequest()
+        {
+        }
+
         public DirectorRequest(IAmLightstoneBusinessDirectorRequest request)
         {
             _request = request;
@@ -38,12 +45,16 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.
             return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
         }
 
+        [DataMember]
         public bool IsValid { get; private set; }
 
+        [DataMember]
         public string IdNumber { get; private set; }
 
+        [DataMember]
         public string FirstName { get; private set; }
 
+        [DataMember]
         public string Surname { get; private set; }
     }
 }

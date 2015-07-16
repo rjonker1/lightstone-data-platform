@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Lace.Shared.DataProvider.Models;
 using Lace.Shared.DataProvider.Repositories;
 
@@ -29,7 +28,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return (IEnumerable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformation();
+            if(typeof(TItem) == (typeof(CarInformation)))
+                return (IEnumerable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformation();
+
+            if(typeof(TItem) == (typeof(Statistic)))
+                return (IEnumerable<TItem>)Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
+
+            return Enumerable.Empty<TItem>();
         }
     }
 }

@@ -18,7 +18,7 @@ using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 {
-    public class CallRgtVinDataProvider : ICallTheDataProviderSource
+    public sealed class CallRgtVinDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
 
@@ -84,7 +84,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
         private static void RgtVinResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var rgtVinResponse = new RgtVinResponse();
+            var rgtVinResponse = RgtVinResponse.Empty();
             rgtVinResponse.HasBeenHandled();
             response.Add(rgtVinResponse);
         }

@@ -17,7 +17,7 @@ using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 {
-    public class DataProviderSpecification
+    public static class DataProviderSpecification
     {
         public static readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
             Chain =

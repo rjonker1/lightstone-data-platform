@@ -9,7 +9,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.
 {
     [Serializable]
     [DataContract]
-    public class ConfigureApi
+    public sealed class ConfigureApi
     {
         // email: murray@lightstone.co.za
         //pass: Pass!1234

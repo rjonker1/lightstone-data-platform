@@ -10,11 +10,10 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
 using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder
 {
-    public class IvidTitleHolderDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class IvidTitleHolderDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
@@ -58,7 +57,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var ividTitleHolderResponse = new IvidTitleHolderResponse();
+            var ividTitleHolderResponse = IvidTitleHolderResponse.Empty();
             ividTitleHolderResponse.HasNotBeenHandled();
             response.Add(ividTitleHolderResponse);
         }

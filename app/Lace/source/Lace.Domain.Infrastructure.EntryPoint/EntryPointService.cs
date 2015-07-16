@@ -17,9 +17,8 @@ using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
-    public class EntryPointService : IEntryPoint
+    public sealed class EntryPointService : IEntryPoint
     {
-        private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private readonly ILog _log;
         private readonly IAdvancedBus _bus;
         private ISendCommandToBus _command;
@@ -31,26 +30,17 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         {
             _log = LogManager.GetLogger(GetType());
             _bus = bus;
-            _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
         public ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request)
         {
             try
             {
-                if (request.First().Request.RequestId == Guid.Empty)
-                {
-                    _log.ErrorFormat("Request Id for Aggregation is required. Cannot complete request");
-                    return EmptyResponse;
-                }
-
                 Init(request.First().Request.RequestId);
 
-               _logCommand.LogBegin(request);
+                _logCommand.LogBegin(request);
 
-                if (ChainIsNotAvailable(request) || RequestIsDuplicated(request))
-                    return EmptyResponse;
-
+                _dataProviderChain = new CreateSourceChain();
                 _logCommand.LogEntryPointRequest(request);
 
                 _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _dataProviderChain);
@@ -68,7 +58,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             {
                 _logCommand.LogFault(ex.Message, request);
                 _logCommand.LogEnd(request);
-                _log.ErrorFormat("Error occurred receiving request {0}",ex,request.ObjectToJson());
+                _log.ErrorFormat("Error occurred receiving request {0}", ex, request.ObjectToJson());
                 LogResponse(request);
                 CreateTransaction(request, DataProviderState.Failed);
                 return EmptyResponse;
@@ -102,31 +92,6 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber,
                 request.GetFromRequest<IPointToLaceRequest>().Package.PackageCostPrice,
                 request.GetFromRequest<IPointToLaceRequest>().Package.PackageRecommendedPrice);
-        }
-
-        private bool ChainIsNotAvailable(IEnumerable<IPointToLaceRequest> request)
-        {
-            //_dataProviderChain = new CreateSourceChain(request.First().Package);
-            //_dataProviderChain.Build();
-
-            _dataProviderChain = new CreateSourceChain();
-
-            if (_dataProviderChain.SourceChain != null)
-                return false;
-
-            _logCommand.LogFault(request, new {ChainBuilderError = "Source chain could not be built"});
-            _logCommand.LogEnd(request);
-            return true;
-        }
-
-        private bool RequestIsDuplicated(IEnumerable<IPointToLaceRequest> request)
-        {
-            if (!_checkForDuplicateRequests.IsRequestDuplicated(request.First()))
-                return false;
-
-            _logCommand.LogFault(request, new {DuplicateRequest = "This Request is duplicated and will not be executed"});
-            _logCommand.LogEnd(request);
-            return true;
         }
 
         private static ICollection<IPointToLaceProvider> EmptyResponse

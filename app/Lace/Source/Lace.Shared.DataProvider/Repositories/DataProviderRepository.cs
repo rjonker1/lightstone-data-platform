@@ -8,7 +8,7 @@ using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Lace.Shared.DataProvider.Repositories
 {
-    public class DataProviderRepository : IReadOnlyRepository
+    public sealed class DataProviderRepository : IReadOnlyRepository
     {
         private const string CacheIp = "127.0.0.1:6379";
         private static readonly ILog Log = LogManager.GetLogger<DataProviderRepository>();

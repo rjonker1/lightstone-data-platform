@@ -18,7 +18,7 @@ using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
-    public class CallLightstoneAutoDataProvider : ICallTheDataProviderSource
+    public sealed class CallLightstoneAutoDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
@@ -27,15 +27,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private IRetrieveCarInformation _carInformation;
 
         private readonly IReadOnlyRepository _repository;
-        private readonly IReadOnlyRepository _carRepository;
 
-        public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository,
-            IReadOnlyRepository carRepository, ILogCommandTypes logCommand)
+        public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository,ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repository = repository;
-            _carRepository = carRepository;
             _logCommand = logCommand;
         }
 
@@ -46,8 +43,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {_dataProvider});
 
-                GetCar.WithCarId(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation,
-                    GetCar.WithVin(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _carRepository, ref _carInformation));
+                GetCar.WithCarId(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _repository, ref _carInformation,
+                    GetCar.WithVin(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _repository, ref _carInformation));
 
                 GetMetricType.OfBaseRetrievalMetric(_carInformation.CarInformationRequest, _repository, out _metrics);
 

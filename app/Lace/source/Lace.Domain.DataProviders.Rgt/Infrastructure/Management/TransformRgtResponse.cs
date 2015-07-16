@@ -7,7 +7,7 @@ using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
 {
-    public class TransformRgtResponse : ITransformResponseFromDataProvider
+    public sealed class TransformRgtResponse : ITransformResponseFromDataProvider
     {
         public bool Continue { get; private set; }
         public IProvideDataFromRgt Result { get; private set; }

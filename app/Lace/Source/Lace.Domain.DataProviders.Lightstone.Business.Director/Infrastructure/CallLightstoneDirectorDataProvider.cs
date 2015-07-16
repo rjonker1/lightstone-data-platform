@@ -17,7 +17,7 @@ using DataSet = System.Data.DataSet;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
 {
-    public class CallLightstoneBusinessDirectorDataProvider : ICallTheDataProviderSource
+    public sealed class CallLightstoneBusinessDirectorDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
@@ -66,7 +66,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
 
         private static void LightstoneDirectorResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneDirectorResponse = new LightstoneBusinessDirectorResponse();
+            var lightstoneDirectorResponse = LightstoneBusinessDirectorResponse.Empty();
             lightstoneDirectorResponse.HasBeenHandled();
             response.Add(lightstoneDirectorResponse);
         }
@@ -80,7 +80,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
                 transformer.Transform();
             }
 
-            _logCommand.LogTransformation(transformer.Result ?? new LightstoneBusinessDirectorResponse(new List<IProvideDirector>()), null);
+            _logCommand.LogTransformation(transformer.Result ?? LightstoneBusinessDirectorResponse.Empty(), null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

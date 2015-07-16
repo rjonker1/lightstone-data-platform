@@ -12,6 +12,11 @@ namespace Lace.Domain.Core.Entities
         {
         }
 
+        public static RgtResponse Empty()
+        {
+            return new RgtResponse();
+        }
+
         public RgtResponse(string manufacturer, int modelYear, string modelType, string topSpeed, string kilowatts, string fuelEconomy,
             string acceleration, string torque, string emissions,
             string engineSize, string bodyShape, string fuelType, string transmissionType, string carFullName,

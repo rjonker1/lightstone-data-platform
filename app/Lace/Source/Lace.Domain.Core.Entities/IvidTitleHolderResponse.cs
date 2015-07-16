@@ -11,6 +11,11 @@ namespace Lace.Domain.Core.Entities
     {
         private const string NotAvailableError = "Error - Not Available";
 
+        public IvidTitleHolderResponse()
+        {
+            
+        }
+
         public void Build(string bankName, bool flaggedOnAnpr, string accountNumber, DateTime accountOpenDate, DateTime accountCloseDate, string yearOfLiablilityForLicensing)
         {
             BankName = CheckPartial(bankName);
@@ -19,6 +24,11 @@ namespace Lace.Domain.Core.Entities
             AccountOpenDate = FormatDate(accountOpenDate);
             AccountClosedDate = FormatDate(accountCloseDate);
             YearOfLiabilityForLicensing = CheckPartial(yearOfLiablilityForLicensing);
+        }
+
+        public static IvidTitleHolderResponse Empty()
+        {
+            return new IvidTitleHolderResponse();
         }
 
 

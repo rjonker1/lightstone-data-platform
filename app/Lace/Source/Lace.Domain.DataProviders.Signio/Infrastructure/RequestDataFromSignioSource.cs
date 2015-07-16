@@ -5,7 +5,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 {
-    public class RequestDataFromSignioSource : IRequestDataFromDataProviderSource
+    public sealed class RequestDataFromSignioSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalSource)
         {

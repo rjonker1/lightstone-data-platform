@@ -26,18 +26,15 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         private readonly ILogCommandTypes _logCommand;
 
         private readonly IReadOnlyRepository _repository;
-        private readonly IReadOnlyRepository _carRepository;
 
         private IRetrieveCarInformation _carInformation;
         private IList<CarSpecification> _carSpecifications;
 
-        public CallRgtDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository,
-            IReadOnlyRepository carRepository, ILogCommandTypes logCommand)
+        public CallRgtDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repository = repository;
-            _carRepository = carRepository;
             _logCommand = logCommand;
         }
 
@@ -48,8 +45,8 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
                     .ForDatabaseType(), new {_dataProvider});
 
-                GetCar.WithCarId(response, _dataProvider.GetRequest<IAmRgtRequest>(), _carRepository, ref _carInformation,
-                    GetCar.WithVin(response, _dataProvider.GetRequest<IAmRgtRequest>(), _carRepository, ref _carInformation));
+                GetCar.WithCarId(response, _dataProvider.GetRequest<IAmRgtRequest>(), _repository, ref _carInformation,
+                    GetCar.WithVin(response, _dataProvider.GetRequest<IAmRgtRequest>(), _repository, ref _carInformation));
 
                 GetSpecifications.ForCar(new CarSpecificationsUnitOfWork(_repository), _carInformation.CarInformationRequest, out _carSpecifications);
 
@@ -101,7 +98,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         private static void RgtResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var rgtResponse = new RgtResponse();
+            var rgtResponse = RgtResponse.Empty();
             rgtResponse.HasBeenHandled();
             response.Add(rgtResponse);
         }

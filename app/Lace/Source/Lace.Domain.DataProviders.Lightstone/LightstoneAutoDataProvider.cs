@@ -14,7 +14,7 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Lightstone
 {
-    public class LightstoneAutoDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class LightstoneAutoDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
@@ -45,10 +45,7 @@ namespace Lace.Domain.DataProviders.Lightstone
 
                 _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
-                    new CallLightstoneAutoDataProvider(_dataProvider,
-                        new DataProviderRepository(),
-                        new DataProviderRepository(), _logCommand));
+                var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(), new CallLightstoneAutoDataProvider(_dataProvider, new DataProviderRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
@@ -64,7 +61,7 @@ namespace Lace.Domain.DataProviders.Lightstone
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneResponse = new LightstoneAutoResponse();
+            var lightstoneResponse = LightstoneAutoResponse.Empty();
             lightstoneResponse.HasNotBeenHandled();
             response.Add(lightstoneResponse);
         }

@@ -6,7 +6,7 @@ using Lace.Domain.DataProviders.Core.Shared;
 
 namespace Lace.Domain.DataProviders.Core.Consumer
 {
-    public class CanHandlePackageSpecification
+    public sealed class CanHandlePackageSpecification
     {
         private readonly DataProviderName _dataProvider;
         private readonly ICollection<IPointToLaceRequest> _request;

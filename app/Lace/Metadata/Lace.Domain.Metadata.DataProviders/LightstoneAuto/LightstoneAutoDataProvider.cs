@@ -47,8 +47,7 @@ namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto
                 _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
                 var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
-                    new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(),
-                        new FakeCarInfoRepository(), _logCommand));
+                    new CallLightstoneAutoDataProvider(_dataProvider, new FakeCarInfoRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 

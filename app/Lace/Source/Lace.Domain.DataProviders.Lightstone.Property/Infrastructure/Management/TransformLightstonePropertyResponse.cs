@@ -8,7 +8,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Management
 {
-    public class TransformLightstonePropertyResponse : ITransformResponseFromDataProvider
+    public sealed class TransformLightstonePropertyResponse : ITransformResponseFromDataProvider
     {
         public DataSet Response { get; private set; }
         public IProvideDataFromLightstoneProperty Result { get; private set; }

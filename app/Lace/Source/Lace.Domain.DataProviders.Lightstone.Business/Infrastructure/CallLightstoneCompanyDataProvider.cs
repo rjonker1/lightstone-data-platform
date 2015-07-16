@@ -13,7 +13,6 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Management;
-using Lace.Domain.DataProviders.Lightstone.Business.Company.LightstoneBusinessServiceReference;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
@@ -21,7 +20,7 @@ using DataSet = System.Data.DataSet;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
 {
-    public class CallLightstoneBusinessCompanyDataProvider : ICallTheDataProviderSource
+    public sealed class CallLightstoneBusinessCompanyDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
@@ -70,7 +69,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
 
         private static void LightstoneBusinessResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneBusinessResponse = new LightstoneBusinessCompanyResponse();
+            var lightstoneBusinessResponse = LightstoneBusinessCompanyResponse.Empty();
             lightstoneBusinessResponse.HasBeenHandled();
             response.Add(lightstoneBusinessResponse);
         }
@@ -84,7 +83,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
                 transformer.Transform();
             }
 
-            _logCommand.LogTransformation(transformer.Result ?? new LightstoneBusinessCompanyResponse(new List<IProvideCompany>()), null);
+            _logCommand.LogTransformation(transformer.Result ?? LightstoneBusinessCompanyResponse.Empty(), null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

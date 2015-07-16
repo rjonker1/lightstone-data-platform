@@ -12,7 +12,7 @@ using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Core.Shared
 {
-    public class LogCommandTypes : ILogCommandTypes
+    public sealed class LogCommandTypes : ILogCommandTypes
     {
         private readonly ISendCommandToBus _commands;
         private readonly DataProviderCommandSource _dataProviderName;

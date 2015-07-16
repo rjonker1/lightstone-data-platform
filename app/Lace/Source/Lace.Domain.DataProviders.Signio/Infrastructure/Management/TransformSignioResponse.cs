@@ -5,7 +5,7 @@ using Lace.Shared.Extensions;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Management
 {
-    public class TransformSignioResponse : ITransformResponseFromDataProvider
+    public sealed class TransformSignioResponse : ITransformResponseFromDataProvider
     {
         public string Message { get; private set; }
         public IProvideDataFromSignioDriversLicenseDecryption Result { get; private set; }

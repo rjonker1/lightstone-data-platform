@@ -14,7 +14,7 @@ using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 {
-    public class CallSignioDataProvider : ICallTheDataProviderSource
+    public sealed class CallSignioDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
@@ -71,7 +71,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 
         private static void SignioResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var signioDriversLicenseDecryptionResponse = new SignioDriversLicenseDecryptionResponse();
+            var signioDriversLicenseDecryptionResponse = SignioDriversLicenseDecryptionResponse.Empty();
             signioDriversLicenseDecryptionResponse.HasBeenHandled();
             response.Add(signioDriversLicenseDecryptionResponse);
         }
@@ -85,7 +85,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                 transformer.Transform();
             }
 
-            _logCommand.LogTransformation(transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), null);
+            _logCommand.LogTransformation(transformer.Result ?? SignioDriversLicenseDecryptionResponse.Empty(), null);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

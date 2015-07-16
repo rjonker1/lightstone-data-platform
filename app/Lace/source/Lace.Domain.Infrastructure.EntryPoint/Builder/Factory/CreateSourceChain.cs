@@ -8,7 +8,7 @@ using Lace.Domain.Infrastructure.EntryPoint.Specification;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
 {
-    public class CreateSourceChain : IBuildSourceChain
+    public sealed class CreateSourceChain : IBuildSourceChain
     {
         public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> SourceChain
         {

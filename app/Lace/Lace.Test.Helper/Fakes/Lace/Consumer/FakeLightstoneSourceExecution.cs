@@ -9,10 +9,8 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
-using Lace.Shared.Extensions;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
-using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
@@ -46,7 +44,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                 _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
                 var consumer = new ConsumeSource(new FakeHandleLighstoneSourceCall(),
-                    new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(),new FakeDataProviderRepository(), _logCommand));
+                    new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(), _logCommand));
                 consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() || response.OfType<IProvideDataFromLightstoneAuto>().First() == null)

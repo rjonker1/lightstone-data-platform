@@ -13,9 +13,8 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense
 {
-    public class SignioDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class SignioDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private ILogCommandTypes _logCommand;
@@ -58,7 +57,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var signioDriversLicenseDecryptionResponse = new SignioDriversLicenseDecryptionResponse();
+            var signioDriversLicenseDecryptionResponse = SignioDriversLicenseDecryptionResponse.Empty();
             signioDriversLicenseDecryptionResponse.HasNotBeenHandled();
             response.Add(signioDriversLicenseDecryptionResponse);
         }
