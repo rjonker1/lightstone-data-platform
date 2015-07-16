@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -15,7 +14,7 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Rgt
 {
-    public class RgtDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class RgtDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
@@ -45,8 +44,7 @@ namespace Lace.Domain.DataProviders.Rgt
 
                 _logCommand.LogBegin(new {_dataProvider });
 
-                var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
-                    new CallRgtDataProvider(_dataProvider, new DataProviderRepository(), new DataProviderRepository(), _logCommand));
+                var consumer = new ConsumeSource(new HandleRgtDataProviderCall(), new CallRgtDataProvider(_dataProvider, new DataProviderRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
@@ -61,7 +59,7 @@ namespace Lace.Domain.DataProviders.Rgt
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var rgtResponse = new RgtResponse();
+            var rgtResponse = RgtResponse.Empty();
             rgtResponse.HasNotBeenHandled();
             response.Add(rgtResponse);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
@@ -14,6 +15,11 @@ namespace Lace.Domain.Core.Entities
         public LightstoneBusinessDirectorResponse()
         {
             
+        }
+
+        public static LightstoneBusinessDirectorResponse Empty()
+        {
+            return new LightstoneBusinessDirectorResponse(Enumerable.Empty<IProvideDirector>());
         }
 
         public LightstoneBusinessDirectorResponse(IEnumerable<IProvideDirector> directors)

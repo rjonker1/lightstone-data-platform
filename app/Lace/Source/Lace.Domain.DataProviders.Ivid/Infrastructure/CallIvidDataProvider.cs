@@ -11,7 +11,7 @@ using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
-    public class CallIvidDataProvider : ICallTheDataProviderSource
+    public sealed class CallIvidDataProvider : ICallTheDataProviderSource
     {
         private HpiStandardQueryResponse _response;
         private HpiStandardQueryRequest _request;

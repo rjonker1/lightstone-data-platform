@@ -4,8 +4,7 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configuration
 {
-
-    public class ConfigureSignioClient
+    public sealed class ConfigureSignioClient
     {
         public readonly string Url = Credentials.DecryptyDriversLicenseApiUrl();
         public readonly string Suffix;

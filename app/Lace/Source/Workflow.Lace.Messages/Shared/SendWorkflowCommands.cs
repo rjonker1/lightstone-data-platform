@@ -16,7 +16,7 @@ using Workflow.Lace.Messages.Infrastructure;
 
 namespace Workflow.Lace.Messages.Shared
 {
-    public class SendWorkflowCommands : ISendWorkflowCommand
+    public sealed class SendWorkflowCommands : ISendWorkflowCommand
     {
         private readonly IPublishCommandMessages _publisher;
         private readonly ILog _log;

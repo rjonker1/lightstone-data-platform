@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Acceptance.Tests.Helper;
@@ -53,6 +55,8 @@ namespace Lace.Acceptance.Tests.Caching
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
                 .CheckInCache(_ividRequest);
 
+            Task.Delay(5000);
+
             retriever.NoNeedToCallApi.ShouldBeTrue();
             retriever.CacheResponse.ShouldNotBeNull();
             retriever.CacheResponse.Vin.ShouldEqual("3C4PDCKG7DT526617");
@@ -65,6 +69,7 @@ namespace Lace.Acceptance.Tests.Caching
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
                 .CheckInCache(_ividRequest);
+            Task.Delay(5000);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();
             retriever.CacheResponse.ShouldNotBeNull();
@@ -78,6 +83,7 @@ namespace Lace.Acceptance.Tests.Caching
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
                 .CheckInCache(_ividRequest);
+            Task.Delay(5000);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();
             retriever.CacheResponse.ShouldNotBeNull();

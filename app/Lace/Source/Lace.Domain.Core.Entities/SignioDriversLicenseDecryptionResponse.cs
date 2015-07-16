@@ -12,6 +12,11 @@ namespace Lace.Domain.Core.Entities
             
         }
 
+        public static SignioDriversLicenseDecryptionResponse Empty()
+        {
+            return new SignioDriversLicenseDecryptionResponse(null,null);
+        }
+
         public SignioDriversLicenseDecryptionResponse(IRespondWithDriversLicenseCard driversLicense, string decodedData)
         {
             DrivingLicense = driversLicense;

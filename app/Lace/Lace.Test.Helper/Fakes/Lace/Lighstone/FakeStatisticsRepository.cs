@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Lace.Shared.DataProvider.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
@@ -16,5 +15,4 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             return (IEnumerable<TItem>)Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
         }
     }
-
 }

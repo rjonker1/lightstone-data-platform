@@ -4,7 +4,7 @@ using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management
 {
-    public class TransformIvidTitleHolderResponse : ITransformResponseFromDataProvider
+    public sealed class TransformIvidTitleHolderResponse : ITransformResponseFromDataProvider
     {
         public TitleholderQueryResponse Message { get; private set; }
         public IvidTitleHolderResponse Result { get; private set; }
@@ -13,7 +13,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management
         public TransformIvidTitleHolderResponse(TitleholderQueryResponse response)
         {
             Continue = response != null;
-            Result = Continue ? new IvidTitleHolderResponse() : null;
+            Result = Continue ? IvidTitleHolderResponse.Empty() : null;
             Message = response;
         }
 

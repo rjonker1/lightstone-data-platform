@@ -4,11 +4,11 @@ using System.Data.SqlClient;
 
 namespace Lace.CrossCutting.Infrastructure.Orm.Connections
 {
-    public sealed class ConnectionFactoryManager
+    public static class ConnectionFactoryManager
     {
         private static readonly IDbConnection _autocarStatsConnection;
 
-        private ConnectionFactoryManager()
+        static ConnectionFactoryManager()
         {
 
         }

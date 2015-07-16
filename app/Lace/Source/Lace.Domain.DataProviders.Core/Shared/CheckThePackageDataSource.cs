@@ -5,7 +5,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Core.Shared
 {
-    public class CheckThePackageDataSource : ICheckThePackageDataSource
+    public sealed class CheckThePackageDataSource : ICheckThePackageDataSource
     {
 
         private static readonly ICheckThePackageDataSource PackageDataSourceCheck = new CheckThePackageDataSource();

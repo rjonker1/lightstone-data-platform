@@ -159,9 +159,7 @@
     <None Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberSourceChain.cs.old" />
     <Compile Include="Fakes\Lace\Lighstone\FakeBandsRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeBaseRetrievalMetric.cs" />
-    <Compile Include="Fakes\Lace\Lighstone\FakeCarInfoRepository.cs" />
-    <Compile Include="Fakes\Lace\Lighstone\FakeCarRepository.cs" />
-    <Compile Include="Fakes\Lace\Lighstone\FakeCarTypeRepository.cs" />
+    <Compile Include="Fakes\Lace\Lighstone\FakeAutoCarStatsRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMakeRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMetricRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMunicipalityRepository.cs" />

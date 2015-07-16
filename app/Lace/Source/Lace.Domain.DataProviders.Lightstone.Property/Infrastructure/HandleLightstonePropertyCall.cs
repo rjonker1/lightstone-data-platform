@@ -3,7 +3,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 {
-    public class HandleLightstonePropertyCall : IHandleDataProviderSourceCall
+    public sealed class HandleLightstonePropertyCall : IHandleDataProviderSourceCall
     {
         public void Request(Action<IRequestDataFromDataProviderSource> action)
         {

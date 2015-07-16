@@ -41,8 +41,7 @@ namespace Lace.Unit.Tests.Sources
                 .Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
             _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
 
-            _callTheSource = new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(),
-                new FakeCarInfoRepository(), _logCommand);
+            _callTheSource = new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(), _logCommand);
         }
 
         public override void Observe()

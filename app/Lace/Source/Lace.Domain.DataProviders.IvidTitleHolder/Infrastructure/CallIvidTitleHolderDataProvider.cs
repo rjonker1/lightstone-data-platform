@@ -17,7 +17,7 @@ using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
-    public class CallIvidTitleHolderDataProvider : ICallTheDataProviderSource
+    public sealed class CallIvidTitleHolderDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
         private TitleholderQueryResponse _response;
@@ -78,7 +78,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 
         private static void IvidTitleHolderResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var ividTitleHolderResponse = new IvidTitleHolderResponse();
+            var ividTitleHolderResponse = IvidTitleHolderResponse.Empty();
             ividTitleHolderResponse.HasBeenHandled();
             response.Add(ividTitleHolderResponse);
         }

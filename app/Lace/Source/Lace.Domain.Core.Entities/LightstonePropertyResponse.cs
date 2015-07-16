@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Property;
@@ -14,6 +15,11 @@ namespace Lace.Domain.Core.Entities
         public LightstonePropertyResponse()
         {
             
+        }
+
+        public static LightstonePropertyResponse Empty()
+        {
+            return new LightstonePropertyResponse(Enumerable.Empty<IRespondWithProperty>());
         }
 
         public LightstonePropertyResponse(IEnumerable<IRespondWithProperty> properties)

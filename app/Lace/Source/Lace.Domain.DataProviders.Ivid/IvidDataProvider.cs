@@ -13,7 +13,7 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Ivid
 {
-    public class IvidDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class IvidDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;

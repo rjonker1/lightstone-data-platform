@@ -13,7 +13,7 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Company
 {
-    public class LightstoneCompanyDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class LightstoneCompanyDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
@@ -60,7 +60,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var businessResponse = new LightstoneBusinessCompanyResponse();
+            var businessResponse = LightstoneBusinessCompanyResponse.Empty();
             businessResponse.HasNotBeenHandled();
             response.Add(businessResponse);
         }

@@ -12,6 +12,11 @@ namespace Lace.Domain.Core.Entities
         {
         }
 
+        public static RgtVinResponse Empty()
+        {
+            return new RgtVinResponse();
+        }
+
         public RgtVinResponse(string color, int month, int price, int quarter, int rgtCode, string vehicleMake,
             string vechicleModel, string vehicleType, string vin, int year)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Models;
@@ -8,7 +9,7 @@ using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {
-    public class TransformIvidResponse : ITransformResponseFromDataProvider
+    public sealed class TransformIvidResponse : ITransformResponseFromDataProvider
     {
         public HpiStandardQueryResponse Message { get; private set; }
         public IvidResponse Result { get; private set; }
@@ -75,17 +76,12 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
         {
             if(Result.HasNoRecords)
                 return;
-
-            Result.AddToCache(CacheDataRepository.ForCacheOnly());
-
-            //try
-            //{
-            //    Task.Run(() => Result.AddToCache(CacheDataRepository.ForCacheOnly()));
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
+            //Result.AddToCache(CacheDataRepository.ForCacheOnly());
+            try
+            {
+                Task.Run(() => Result.AddToCache(CacheDataRepository.ForCacheOnly()));
+            }
+            catch {}
         }
 
         private static IvidCodePair BuildIvidCodePair(CodeDescription description)

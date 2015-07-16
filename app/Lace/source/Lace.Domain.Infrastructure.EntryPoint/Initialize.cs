@@ -9,7 +9,7 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
-    public class Initialize : IBootstrap
+    public sealed class Initialize : IBootstrap
     {
         public ICollection<IPointToLaceProvider> DataProviderResponses { get; private set; }
         private readonly ILog _log;

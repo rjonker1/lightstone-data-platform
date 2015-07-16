@@ -11,6 +11,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
     {
         public IEnumerable<TItem> GetAll<TItem>(Func<TItem, bool> predicate) where TItem : class
         {
+            if (typeof (TItem) == (typeof (CarInformation)))
+                return new FakeCarInfoRepository().GetAll(predicate);
+
             var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
             return (IEnumerable<TItem>)data;
         }
@@ -29,7 +32,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             {typeof(Municipality), MuncipalityDataBuilder.ForAllMunicipalities()},
             {typeof(Sale), SaleDataBuilder.ForCarSalesOnCarId_107483()},
             {typeof(Statistic), StatisticsDataBuilder.ForCarId_107483()},
+            {typeof(CarInformation),Mothers.Sources.Lightstone.CarInfoData.CarInformation() }
         };
-
     }
 }

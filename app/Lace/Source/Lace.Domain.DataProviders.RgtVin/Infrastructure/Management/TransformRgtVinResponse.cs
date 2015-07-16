@@ -6,7 +6,7 @@ using Lace.Shared.DataProvider.Models;
 
 namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Management
 {
-    public class TransformRgtVinResponse : ITransformResponseFromDataProvider
+    public sealed class TransformRgtVinResponse : ITransformResponseFromDataProvider
     {
         private readonly Vin _vin;
 

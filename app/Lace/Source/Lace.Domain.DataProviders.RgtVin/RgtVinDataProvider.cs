@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -15,7 +14,7 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.RgtVin
 {
-    public class RgtVinDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class RgtVinDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
@@ -60,7 +59,7 @@ namespace Lace.Domain.DataProviders.RgtVin
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var rgtVinResponse = new RgtVinResponse();
+            var rgtVinResponse = RgtVinResponse.Empty();
             rgtVinResponse.HasNotBeenHandled();
             response.Add(rgtVinResponse);
         }

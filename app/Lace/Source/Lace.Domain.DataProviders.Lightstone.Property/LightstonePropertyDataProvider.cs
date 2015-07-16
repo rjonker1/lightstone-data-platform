@@ -13,9 +13,8 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property
 {
-    public class LightstonePropertyDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class LightstonePropertyDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private ILogCommandTypes _logCommand;
@@ -59,7 +58,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var lightstonePropertyResponse = new LightstonePropertyResponse();
+            var lightstonePropertyResponse = LightstonePropertyResponse.Empty();
             lightstonePropertyResponse.HasNotBeenHandled();
             response.Add(lightstonePropertyResponse);
         }

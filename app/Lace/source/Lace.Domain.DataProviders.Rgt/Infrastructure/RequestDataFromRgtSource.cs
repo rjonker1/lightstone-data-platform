@@ -4,7 +4,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 {
-    public class RequestDataFromRgtSource : IRequestDataFromDataProviderSource
+    public sealed class RequestDataFromRgtSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalSource)
         {

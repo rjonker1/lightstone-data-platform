@@ -15,6 +15,11 @@ namespace Lace.Domain.Core.Entities
         {
         }
 
+        public static LightstoneAutoResponse Empty()
+        {
+            return new LightstoneAutoResponse();
+        }
+
         public LightstoneAutoResponse(int carId, int year, string vin, string imageUrl, string quarter, string carFullName,
             string model, IRespondWithValuation vehicleValuation)
         {
