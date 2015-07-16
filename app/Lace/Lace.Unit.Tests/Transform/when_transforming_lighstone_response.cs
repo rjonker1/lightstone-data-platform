@@ -56,11 +56,11 @@ namespace Lace.Unit.Tests.Transform
             _transform.Result.VehicleValuation.ShouldNotBeNull();
         }
 
-        [Observation]
-        public void lighstone_transformer_vechicle_valuation_must_have_accident_distribution()
-        {
-            _transform.Result.VehicleValuation.AccidentDistribution.Count().ShouldEqual(3);
-        }
+        //[Observation]
+        //public void lighstone_transformer_vechicle_valuation_must_have_accident_distribution()
+        //{
+        //    _transform.Result.VehicleValuation.AccidentDistribution.Count().ShouldEqual(3);
+        //}
 
         [Observation]
         public void lighstone_transformer_vechicle_valuation_must_have_amortised_values()
@@ -68,11 +68,11 @@ namespace Lace.Unit.Tests.Transform
             _transform.Result.VehicleValuation.AmortisedValues.Count().ShouldEqual(4);
         }
 
-        [Observation]
-        public void lighstone_transformer_vechicle_valuation_must_have_area_factors()
-        {
-            _transform.Result.VehicleValuation.AreaFactors.Count().ShouldEqual(121);
-        }
+        //[Observation]
+        //public void lighstone_transformer_vechicle_valuation_must_have_area_factors()
+        //{
+        //    _transform.Result.VehicleValuation.AreaFactors.Count().ShouldEqual(121);
+        //}
 
         [Observation]
         public void lighstone_transformer_vechicle_valuation_must_have_estimated_value()
@@ -92,11 +92,11 @@ namespace Lace.Unit.Tests.Transform
             _transform.Result.VehicleValuation.LastFiveSales.Count().ShouldEqual(5);
         }
 
-        [Observation]
-        public void lighstone_transformer_vechicle_valuation_must_have_repair_index()
-        {
-            _transform.Result.VehicleValuation.RepairIndex.Count().ShouldEqual(9);
-        }
+        //[Observation]
+        //public void lighstone_transformer_vechicle_valuation_must_have_repair_index()
+        //{
+        //    _transform.Result.VehicleValuation.RepairIndex.Count().ShouldEqual(9);
+        //}
 
         [Observation]
         public void lightstone_transformer_must_have_car_information()

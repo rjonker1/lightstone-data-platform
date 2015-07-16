@@ -92,12 +92,12 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AccidentClaim.cs" />
-    <Compile Include="AccidentDistributionModel.cs" />
+    <None Include="AccidentDistributionModel.cs.old20150716" />
     <None Include="AmortisationFactorModel.cs.old20150716" />
     <Compile Include="AmortisedValueModel.cs" />
     <Compile Include="AnprResponse.cs" />
-    <Compile Include="AreaFactorModel.cs" />
-    <Compile Include="AuctionFactorModel.cs" />
+    <None Include="AreaFactorModel.cs.old20150716" />
+    <None Include="AuctionFactorModel.cs.old20150716" />
     <Compile Include="AudatexResponse.cs" />
     <Compile Include="CompanyResponse.cs" />
     <Compile Include="ConfidenceModel.cs" />
@@ -118,14 +118,14 @@
     <Compile Include="PCubedFicaVerficationResponse.cs" />
     <Compile Include="PriceModel.cs" />
     <Compile Include="PropertyModel.cs" />
-    <Compile Include="RepairIndexModel.cs" />
+    <None Include="RepairIndexModel.cs.old20150716" />
     <Compile Include="RgtResponse.cs" />
     <Compile Include="RgtVinResponse.cs" />
     <Compile Include="SaleModel.cs" />
     <Compile Include="LightstonePropertyResponse.cs" />
     <Compile Include="SignioDriversLicenseDecryptionResponse.cs" />
-    <Compile Include="TotalSalesByAgeModel.cs" />
-    <Compile Include="TotalSalesByGenderModel.cs" />
+    <None Include="TotalSalesByAgeModel.cs.old20150716" />
+    <None Include="TotalSalesByGenderModel.cs.old20150716" />
     <Compile Include="Valuation.cs" />
     <Compile Include="VehicleSpecificInformation.cs" />
   </ItemGroup>

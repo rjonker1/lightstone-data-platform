@@ -11,12 +11,12 @@ namespace Lace.Domain.Core.Entities
         public Valuation()
         {
             //AmortisationFactors = new List<AmortisationFactorModel>();
-            AreaFactors = new List<AreaFactorModel>();
-            AuctionFactors = new List<AuctionFactorModel>();
-            AccidentDistribution = new List<AccidentDistributionModel>();
-            RepairIndex = new List<RepairIndexModel>();
-            TotalSalesByAge = new List<TotalSalesByAgeModel>();
-            TotalSalesByGender = new List<TotalSalesByGenderModel>();
+            //AreaFactors = new List<AreaFactorModel>();
+            //AuctionFactors = new List<AuctionFactorModel>();
+            //AccidentDistribution = new List<AccidentDistributionModel>();
+            //RepairIndex = new List<RepairIndexModel>();
+            //TotalSalesByAge = new List<TotalSalesByAgeModel>();
+            //TotalSalesByGender = new List<TotalSalesByGenderModel>();
             Prices = new List<PriceModel>();
             Frequency = new List<FrequencyModel>();
             Confidence = new List<ConfidenceModel>();
@@ -51,40 +51,40 @@ namespace Lace.Domain.Core.Entities
             ImageGauges = model;
         }
 
-        public void AddAccidentDistribution(IEnumerable<IRespondWithAccidentDistributionModel> model)
-        {
-            AccidentDistribution = model;
-        }
+        //public void AddAccidentDistribution(IEnumerable<IRespondWithAccidentDistributionModel> model)
+        //{
+        //    AccidentDistribution = model;
+        //}
 
         public void AddAmortisedValues(IEnumerable<IRespondWithAmortisedValueModel> model)
         {
             AmortisedValues = model;
         }
 
-        public void AddAreaFactors(IEnumerable<IRespondWithAreaFactorModel> model)
-        {
-            AreaFactors = model;
-        }
+        //public void AddAreaFactors(IEnumerable<IRespondWithAreaFactorModel> model)
+        //{
+        //    AreaFactors = model;
+        //}
 
-        public void AddAuctionFactors(IEnumerable<IRespondWithAuctionFactorModel> model)
-        {
-            AuctionFactors = model;
-        }
+        //public void AddAuctionFactors(IEnumerable<IRespondWithAuctionFactorModel> model)
+        //{
+        //    AuctionFactors = model;
+        //}
 
-        public void AddRepairIndex(IEnumerable<IRespondWithRepairIndexModel> model)
-        {
-            RepairIndex = model;
-        }
+        //public void AddRepairIndex(IEnumerable<IRespondWithRepairIndexModel> model)
+        //{
+        //    RepairIndex = model;
+        //}
 
-        public void AddTotalSalesByAge(IEnumerable<IRespondWithTotalSalesByAgeModel> model)
-        {
-            TotalSalesByAge = model;
-        }
+        //public void AddTotalSalesByAge(IEnumerable<IRespondWithTotalSalesByAgeModel> model)
+        //{
+        //    TotalSalesByAge = model;
+        //}
 
-        public void AddTotalSalesByGender(IEnumerable<IRespondWithTotalSalesByGenderModel> model)
-        {
-            TotalSalesByGender = model;
-        }
+        //public void AddTotalSalesByGender(IEnumerable<IRespondWithTotalSalesByGenderModel> model)
+        //{
+        //    TotalSalesByGender = model;
+        //}
 
         public void AddEstimatedValue(IEnumerable<IRespondWithEstimatedValueModel> model)
         {
@@ -98,18 +98,18 @@ namespace Lace.Domain.Core.Entities
 
         //[DataMember]
         //public IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; private set; }
-        [DataMember]
-        public IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; private set; }
-        [DataMember]
-        public IEnumerable<IRespondWithAuctionFactorModel> AuctionFactors { get; private set; }
-        [DataMember]
-        public IEnumerable<IRespondWithAccidentDistributionModel> AccidentDistribution { get; private set; }
-        [DataMember]
-        public IEnumerable<IRespondWithRepairIndexModel> RepairIndex { get; private set; }
-        [DataMember]
-        public IEnumerable<IRespondWithTotalSalesByAgeModel> TotalSalesByAge { get; private set; }
-        [DataMember]
-        public IEnumerable<IRespondWithTotalSalesByGenderModel> TotalSalesByGender { get; private set; }
+        //[DataMember]
+        //public IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; private set; }
+        //[DataMember]
+        //public IEnumerable<IRespondWithAuctionFactorModel> AuctionFactors { get; private set; }
+        //[DataMember]
+        //public IEnumerable<IRespondWithAccidentDistributionModel> AccidentDistribution { get; private set; }
+        //[DataMember]
+        //public IEnumerable<IRespondWithRepairIndexModel> RepairIndex { get; private set; }
+        //[DataMember]
+        //public IEnumerable<IRespondWithTotalSalesByAgeModel> TotalSalesByAge { get; private set; }
+        //[DataMember]
+        //public IEnumerable<IRespondWithTotalSalesByGenderModel> TotalSalesByGender { get; private set; }
         [DataMember]
         public IEnumerable<IRespondWithEstimatedValueModel> EstimatedValue { get; private set; }
         [DataMember]

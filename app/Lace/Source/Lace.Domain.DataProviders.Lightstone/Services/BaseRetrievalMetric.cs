@@ -68,13 +68,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
         public IRetrieveValuationFromMetrics BuildValuation()
         {
             Valuation.AddImageGauages(GetImageGaugeMetrics());
-            Valuation.AddAccidentDistribution(GetAccidentDistributionMetrics());
+            //Valuation.AddAccidentDistribution(GetAccidentDistributionMetrics());
             Valuation.AddAmortisedValues(GetAmortisedValues());
-            Valuation.AddAreaFactors(GetAreaFactors());
-            Valuation.AddAuctionFactors(GetAuctionFactors());
-            Valuation.AddRepairIndex((GetRepairIndex()));
-            Valuation.AddTotalSalesByAge(GetTotalSalesByAge());
-            Valuation.AddTotalSalesByGender(GetTotalSalesByGender());
+            //Valuation.AddAreaFactors(GetAreaFactors());
+            //Valuation.AddAuctionFactors(GetAuctionFactors());
+            //Valuation.AddRepairIndex((GetRepairIndex()));
+            //Valuation.AddTotalSalesByAge(GetTotalSalesByAge());
+            //Valuation.AddTotalSalesByGender(GetTotalSalesByGender());
             Valuation.AddEstimatedValue(GetEstimatedValues());
             Valuation.AddLastFiveSales(GetLastFiveSales());
 
@@ -93,45 +93,45 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
             return new EstimatedValuesMetric(_request, _getStatistics.Statistics).Get().MetricResult;
         }
 
-        private IEnumerable<IRespondWithTotalSalesByGenderModel> GetTotalSalesByGender()
-        {
-            return
-                new TotalSalesByGenderMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get()
-                    .MetricResult;
-        }
+        //private IEnumerable<IRespondWithTotalSalesByGenderModel> GetTotalSalesByGender()
+        //{
+        //    return
+        //        new TotalSalesByGenderMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get()
+        //            .MetricResult;
+        //}
 
-        private IEnumerable<IRespondWithTotalSalesByAgeModel> GetTotalSalesByAge()
-        {
-            return
-                new TotalSalesByAgeMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get()
-                    .MetricResult;
-        }
+        //private IEnumerable<IRespondWithTotalSalesByAgeModel> GetTotalSalesByAge()
+        //{
+        //    return
+        //        new TotalSalesByAgeMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get()
+        //            .MetricResult;
+        //}
 
-        private IEnumerable<IRespondWithRepairIndexModel> GetRepairIndex()
-        {
-            return new RepairIndexMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
-        }
+        //private IEnumerable<IRespondWithRepairIndexModel> GetRepairIndex()
+        //{
+        //    return new RepairIndexMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
+        //}
 
-        private IEnumerable<IRespondWithAuctionFactorModel> GetAuctionFactors()
-        {
-            return new AuctionFactorsMetric(_request, _getStatistics.Statistics, _getMakes.Makes).Get().MetricResult;
-        }
+        //private IEnumerable<IRespondWithAuctionFactorModel> GetAuctionFactors()
+        //{
+        //    return new AuctionFactorsMetric(_request, _getStatistics.Statistics, _getMakes.Makes).Get().MetricResult;
+        //}
 
-        private IEnumerable<IRespondWithAreaFactorModel> GetAreaFactors()
-        {
-            return new AreaFactorsMetric(_getStatistics.Statistics, _getMuncipalities.Municipalities).Get().MetricResult;
-        }
+        //private IEnumerable<IRespondWithAreaFactorModel> GetAreaFactors()
+        //{
+        //    return new AreaFactorsMetric(_getStatistics.Statistics, _getMuncipalities.Municipalities).Get().MetricResult;
+        //}
 
         private IEnumerable<IRespondWithAmortisedValueModel> GetAmortisedValues()
         {
             return new AmortisedValueMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
         }
 
-        private IEnumerable<IRespondWithAccidentDistributionModel> GetAccidentDistributionMetrics()
-        {
-            return
-                new AccidentDistributionMetric(_getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
-        }
+        //private IEnumerable<IRespondWithAccidentDistributionModel> GetAccidentDistributionMetrics()
+        //{
+        //    return
+        //        new AccidentDistributionMetric(_getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
+        //}
 
         private IEnumerable<IRespondWithImageGaugeModel> GetImageGaugeMetrics()
         {

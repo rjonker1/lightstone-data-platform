@@ -68,7 +68,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers
         }
     }
 
-    public class when_amending_data_provider_structure : when_persisting_entities_to_memory
+    public class when_amending_data_provider_structure : when_persisting_entities_to_db
     {
         private readonly Guid _id = Guid.NewGuid();
         private IEnumerable<IDataField> _originalFields;
@@ -133,7 +133,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers
         [Observation]
         public void should_amend_dataField_structure_based_on_new_dataProvider_response_object()
         {
-            _originalFields.Count().ShouldEqual(33);
+            _originalFields.Count().ShouldEqual(35);
             _newFields.Count().ShouldEqual(23);
         }
 

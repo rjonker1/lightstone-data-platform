@@ -52,11 +52,11 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.ShouldNotBeNull();
         }
 
-        [Observation]
-        public void lace_lightstone_response_vehicle_valuation_AccidentDistribution_should_not_be_null()
-        {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AccidentDistribution.ShouldNotBeNull();
-        }
+        //[Observation]
+        //public void lace_lightstone_response_vehicle_valuation_AccidentDistribution_should_not_be_null()
+        //{
+        //    _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AccidentDistribution.ShouldNotBeNull();
+        //}
 
         //[Observation]
         //public void lace_lightstone_response_vehicle_valuation_AmortisationFactors_should_not_be_null()
@@ -70,17 +70,17 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AmortisedValues.ShouldNotBeNull();
         }
 
-        [Observation]
-        public void lace_lightstone_response_vehicle_valuation_AreaFactors_should_not_be_null()
-        {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AreaFactors.ShouldNotBeNull();
-        }
+        //[Observation]
+        //public void lace_lightstone_response_vehicle_valuation_AreaFactors_should_not_be_null()
+        //{
+        //    _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AreaFactors.ShouldNotBeNull();
+        //}
 
-        [Observation]
-        public void lace_lightstone_response_vehicle_valuation_AuctionFactors_should_not_be_null()
-        {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AuctionFactors.ShouldNotBeNull();
-        }
+        //[Observation]
+        //public void lace_lightstone_response_vehicle_valuation_AuctionFactors_should_not_be_null()
+        //{
+        //    _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AuctionFactors.ShouldNotBeNull();
+        //}
 
         [Observation]
         public void lace_lightstone_response_vehicle_valuation_EstimatedValue_should_not_be_null()
@@ -112,22 +112,22 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.Prices.ShouldNotBeNull();
         }
 
-        [Observation]
-        public void lace_lightstone_response_vehicle_valuation_RepairIndex_should_not_be_null()
-        {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.RepairIndex.ShouldNotBeNull();
-        }
+        //[Observation]
+        //public void lace_lightstone_response_vehicle_valuation_RepairIndex_should_not_be_null()
+        //{
+        //    _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.RepairIndex.ShouldNotBeNull();
+        //}
 
-        [Observation]
-        public void lace_lightstone_response_vehicle_valuation_TotalSalesByAge_should_not_be_null()
-        {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.TotalSalesByAge.ShouldNotBeNull();
-        }
+        //[Observation]
+        //public void lace_lightstone_response_vehicle_valuation_TotalSalesByAge_should_not_be_null()
+        //{
+        //    _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.TotalSalesByAge.ShouldNotBeNull();
+        //}
 
-        [Observation]
-        public void lace_lightstone_response_vehicle_valuation_TotalSalesByGender_should_not_be_null()
-        {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.TotalSalesByGender.ShouldNotBeNull();
-        }
+        //[Observation]
+        //public void lace_lightstone_response_vehicle_valuation_TotalSalesByGender_should_not_be_null()
+        //{
+        //    _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.TotalSalesByGender.ShouldNotBeNull();
+        //}
     }
 }

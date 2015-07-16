@@ -32,8 +32,13 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             var dataFields = Mapper.Map(response, response.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>;
             var entity = new DataProvider(existing.Id, existing.Name, existing.Name.ToString(), 0, response.GetType(), "", DateTime.UtcNow, requestFields, dataFields, existing.Version + 1);
 
-            entity.DataFields.ToNamespace().Cast<DataField>()
-                               .RecursiveForEach(x => Mapper.Map(x, entity.DataFields.ToNamespace().Cast<DataField>().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault()));
+            existing.DataFields.ToNamespace().Cast<DataField>()
+                               .RecursiveForEach(oldField =>
+                               {
+                                   var newField = entity.DataFields.ToNamespace().Cast<DataField>().Filter(f => oldField != null && f.Namespace == oldField.Namespace).FirstOrDefault();
+                                   if (newField != null)
+                                    Mapper.Map(oldField, newField);
+                               });
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }
