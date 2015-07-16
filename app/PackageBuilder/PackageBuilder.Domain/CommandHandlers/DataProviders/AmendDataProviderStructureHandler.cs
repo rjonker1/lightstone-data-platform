@@ -37,7 +37,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                                {
                                    var newField = entity.DataFields.ToNamespace().Cast<DataField>().Filter(f => oldField != null && f.Namespace == oldField.Namespace).FirstOrDefault();
                                    if (newField != null)
-                                    Mapper.Map(oldField, newField);
+                                       Mapper.Map(oldField, newField, typeof(DataField), typeof(DataField));
                                });
 
             _writeRepo.Save(entity, Guid.NewGuid());

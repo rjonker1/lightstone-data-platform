@@ -8,12 +8,12 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
         {
             var vehicleValuation = new Valuation();
             //vehicleValuation.AddAmortisationFactors(new[] { new AmortisationFactorModel(0, 0d) });
-            vehicleValuation.AddAreaFactors(new[] { new AreaFactorModel("", 0d) });
-            vehicleValuation.AddAuctionFactors(new[] { new AuctionFactorModel("", 0m) });
-            vehicleValuation.AddAccidentDistribution(new[] { new AccidentDistributionModel("", 0d) });
-            vehicleValuation.AddRepairIndex(new[] { new RepairIndexModel(0, "", 0d) });
-            vehicleValuation.AddTotalSalesByAge(new[] { new TotalSalesByAgeModel() });
-            vehicleValuation.AddTotalSalesByGender(new[] { new TotalSalesByGenderModel("", "", 0d) });
+            //vehicleValuation.AddAreaFactors(new[] { new AreaFactorModel("", 0d) });
+            //vehicleValuation.AddAuctionFactors(new[] { new AuctionFactorModel("", 0m) });
+            //vehicleValuation.AddAccidentDistribution(new[] { new AccidentDistributionModel("", 0d) });
+            //vehicleValuation.AddRepairIndex(new[] { new RepairIndexModel(0, "", 0d) });
+            //vehicleValuation.AddTotalSalesByAge(new[] { new TotalSalesByAgeModel() });
+            //vehicleValuation.AddTotalSalesByGender(new[] { new TotalSalesByGenderModel("", "", 0d) });
             vehicleValuation.AddPrices(new[] { new PriceModel("", 0m) });
             vehicleValuation.AddFrequency(new[] { new FrequencyModel("", 0, 0d) });
             vehicleValuation.AddConfidence(new[] { new ConfidenceModel("", 0, 0d) });

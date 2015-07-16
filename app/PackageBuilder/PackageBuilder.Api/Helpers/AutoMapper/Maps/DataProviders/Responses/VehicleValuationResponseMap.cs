@@ -20,46 +20,46 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             //Mapper.CreateMap<IRespondWithAmortisationFactorModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region AreaFactors
-            Mapper.CreateMap<IEnumerable<IRespondWithAreaFactorModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "AreaFactors"))
-                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAreaFactorModel>()));
-            Mapper.CreateMap<IRespondWithAreaFactorModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            //Mapper.CreateMap<IEnumerable<IRespondWithAreaFactorModel>, DataField>()
+            //    .ForMember(s => s.Name, opt => opt.MapFrom(x => "AreaFactors"))
+            //    .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+            //    .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAreaFactorModel>()));
+            //Mapper.CreateMap<IRespondWithAreaFactorModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region AuctionFactors
-            Mapper.CreateMap<IEnumerable<IRespondWithAuctionFactorModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "AuctionFactors"))
-                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAuctionFactorModel>()));
-            Mapper.CreateMap<IRespondWithAuctionFactorModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            //Mapper.CreateMap<IEnumerable<IRespondWithAuctionFactorModel>, DataField>()
+            //    .ForMember(s => s.Name, opt => opt.MapFrom(x => "AuctionFactors"))
+            //    .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+            //    .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAuctionFactorModel>()));
+            //Mapper.CreateMap<IRespondWithAuctionFactorModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region AccidentDistribution
-            Mapper.CreateMap<IEnumerable<IRespondWithAccidentDistributionModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "AccidentDistribution"))
-                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAccidentDistributionModel>()));
-            Mapper.CreateMap<IRespondWithAccidentDistributionModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            //Mapper.CreateMap<IEnumerable<IRespondWithAccidentDistributionModel>, DataField>()
+            //    .ForMember(s => s.Name, opt => opt.MapFrom(x => "AccidentDistribution"))
+            //    .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+            //    .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAccidentDistributionModel>()));
+            //Mapper.CreateMap<IRespondWithAccidentDistributionModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region RepairIndex
-            Mapper.CreateMap<IEnumerable<IRespondWithRepairIndexModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "RepairIndex"))
-                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithRepairIndexModel>()));
-            Mapper.CreateMap<IRespondWithRepairIndexModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            //Mapper.CreateMap<IEnumerable<IRespondWithRepairIndexModel>, DataField>()
+            //    .ForMember(s => s.Name, opt => opt.MapFrom(x => "RepairIndex"))
+            //    .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+            //    .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithRepairIndexModel>()));
+            //Mapper.CreateMap<IRespondWithRepairIndexModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region TotalSalesByAge
-            Mapper.CreateMap<IEnumerable<IRespondWithTotalSalesByAgeModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "TotalSalesByAge"))
-                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithTotalSalesByAgeModel>()));
-            Mapper.CreateMap<IRespondWithTotalSalesByAgeModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            //Mapper.CreateMap<IEnumerable<IRespondWithTotalSalesByAgeModel>, DataField>()
+            //    .ForMember(s => s.Name, opt => opt.MapFrom(x => "TotalSalesByAge"))
+            //    .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+            //    .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithTotalSalesByAgeModel>()));
+            //Mapper.CreateMap<IRespondWithTotalSalesByAgeModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region TotalSalesByGender
-            Mapper.CreateMap<IEnumerable<IRespondWithTotalSalesByGenderModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "TotalSalesByGender"))
-                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithTotalSalesByGenderModel>()));
-            Mapper.CreateMap<IRespondWithTotalSalesByGenderModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            //Mapper.CreateMap<IEnumerable<IRespondWithTotalSalesByGenderModel>, DataField>()
+            //    .ForMember(s => s.Name, opt => opt.MapFrom(x => "TotalSalesByGender"))
+            //    .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+            //    .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithTotalSalesByGenderModel>()));
+            //Mapper.CreateMap<IRespondWithTotalSalesByGenderModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region EstimatedValue
             Mapper.CreateMap<IEnumerable<IRespondWithEstimatedValueModel>, DataField>()

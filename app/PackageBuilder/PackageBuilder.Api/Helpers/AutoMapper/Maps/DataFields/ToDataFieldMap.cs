@@ -13,6 +13,12 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
     {
         public void CreateMaps()
         {
+            Mapper.CreateMap<DataField, DataField>()
+                .BeforeMap((s, d) =>
+                {
+
+                })
+                .ForMember(d => d.DataFields, opt => opt.Ignore());
             Mapper.CreateMap<IDataFieldOverride, DataField>();
 
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()
