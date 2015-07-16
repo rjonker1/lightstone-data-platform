@@ -1,7 +1,8 @@
 ﻿function initializeRoutes(sammy) {
 
-    sammy.get('/', function () {
+    sammy.get('/', function (context) {
         this.$element().html('Welcome!');
+        context.redirect('#/PreBilling');
     });
 
     initializePreBilling(sammy);
