@@ -30,7 +30,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             var response = _dataProviderResponseRepository.GetDataProvider(existing.Name);
             var requestFields = Mapper.Map(response, response.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
             var dataFields = Mapper.Map(response, response.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>;
-            var entity = new DataProvider(existing.Id, existing.Name, existing.Name.ToString(), 0, response.GetType(), "", DateTime.UtcNow, requestFields, dataFields);
+            var entity = new DataProvider(existing.Id, existing.Name, existing.Name.ToString(), 0, response.GetType(), "", DateTime.UtcNow, requestFields, dataFields, existing.Version + 1);
 
             existing.DataFields.ToNamespace().Cast<DataField>()
                                .RecursiveForEach(x => Mapper.Map(x, entity.DataFields.ToNamespace().Cast<DataField>().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault()));

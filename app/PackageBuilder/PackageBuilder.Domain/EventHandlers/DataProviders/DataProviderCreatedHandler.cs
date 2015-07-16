@@ -16,7 +16,7 @@ namespace PackageBuilder.Domain.EventHandlers.DataProviders
 
         public override void Handle(DataProviderCreated command)
         {
-            _repository.Save(new DataProvider(command.Id, command.Name, command.Description, command.CostPrice, 1, command.Owner, command.CreatedDate, null));
+            _repository.Save(new DataProvider(command.Id, command.Name, command.Description, command.CostPrice, command.Version, command.Owner, command.CreatedDate, null));
         }
     }
 }

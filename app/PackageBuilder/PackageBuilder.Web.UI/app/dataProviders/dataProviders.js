@@ -28,10 +28,16 @@
             $location.path('/data-provider-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
         };
 
-        $scope.viewDataProvider = function (row) {
+        $scope.viewDataProvider = function(row) {
             console.log(row);
             $location.path('/data-provider-view/' + row.entity.dataProviderId + '/' + row.entity.version);
-        }
+        };
+
+        $scope.amendStructure = function (row) {
+            return datacontext.amendDataProvider(row.entity.dataProviderId).then(function (data) {
+                window.location.reload();
+            });
+        };
 
         $scope.canEdit = function () {
 
@@ -65,18 +71,25 @@
          displayName: ' ',
          width: 280,
          cellTemplate:
-             '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) == row.entity.version">' +
+             '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) == row.entity.version" style="float:left;">' +
                 '<input id="{{row.entity.description}}_edit" dp_Id="{{row.entity.dataProviderId}}" dp_version="{{row.entity.version}}" ' +
                     'type="button" class="btn btn-success grid-btn" name="edit" ng-click="getExternalScopes().notify(row)" value="Edit" />' +
                 //'<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
                 //'<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" />' +
-             '</div>' +
+             '</div>'
 
-             '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) != row.entity.version">' +
+             +
+
+             '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) != row.entity.version" style="float:left;">' +
                 '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewDataProvider(row)" value="View" />' +
              '</div>'
 
-             
+             +
+
+             '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) == row.entity.version" style="float:left;">' +
+                '<input id="{{row.entity.description}}_amendStructure" dp_Id="{{row.entity.dataProviderId}}" dp_version="{{row.entity.version}}" ' +
+                 'type="button" class="btn btn-warning grid-btn" name="AmendStructure" ng-click="getExternalScopes().amendStructure(row)" value="Amend" />' +
+             '</div>'
              
      }
             ]

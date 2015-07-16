@@ -42,7 +42,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 
             var entity = new DataProvider(command.Id, command.Name,
                 command.Description, command.CostOfSale, response.GetType(),
-                command.Owner, command.CreatedDate, requestFields, dataFields);
+                command.Owner, command.CreatedDate, requestFields, dataFields, 1);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

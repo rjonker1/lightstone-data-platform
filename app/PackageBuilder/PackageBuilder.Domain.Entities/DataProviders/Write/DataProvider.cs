@@ -78,10 +78,10 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             DataFields = dataFields;
         }
 
-        public DataProvider(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields) 
+        public DataProvider(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields, int version) 
             : this(id)
         {
-            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, responseType, owner, createdDate, requestFields, dataFields));
+            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, responseType, owner, createdDate, requestFields, dataFields, version));
         }
 
         public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields)

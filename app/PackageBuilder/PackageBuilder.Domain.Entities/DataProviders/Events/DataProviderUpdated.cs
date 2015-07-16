@@ -10,7 +10,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
         public bool FieldLevelCostPriceOverride;
         public DateTime? EditedDate;
         public DataProviderUpdated(Guid id, DataProviderName name, string description, decimal costPrice, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields)
-            : base(id, name, description, costPrice, responseType, owner, createdDate, requestFields, dataFields)
+            : base(id, name, description, costPrice, responseType, owner, createdDate, requestFields, dataFields, version)
         {
             Version = version;
             FieldLevelCostPriceOverride = fieldLevelCostPriceOverride;

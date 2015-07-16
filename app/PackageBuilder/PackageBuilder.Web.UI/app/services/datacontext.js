@@ -16,16 +16,20 @@
         var data = {};
 
         var service = {
-            getPackage: getPackage,
+            
             getDataProvider: getDataProvider,
             getAllDataProviders: getAllDataProviders,
             getDataProviderSources: getDataProviderSources,
             getAllPackages: getAllPackages,
             editDataProvider: editDataProvider,
-            editPackage: editPackage,
+            amendDataProvider: amendDataProvider,
+            
+            getPackage: getPackage,
             createPackage: createPackage,
+            editPackage: editPackage,
             clonePackage: clonePackage,
             deletePackage: deletePackage,
+            
 
             getStates: getStates,
             getIndustries: getIndustries,
@@ -112,6 +116,18 @@
             $http.put( config.apiUri + '/DataProviders/' + _id + '', providerData).then(function (result) {
                 deferred.resolve(result);
             }, function(error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+        
+        function amendDataProvider(_id) {
+            var deferred = $q.defer();
+
+            $http.put(config.apiUri + '/DataProviders/' + _id + '/amend').then(function (result) {
+                deferred.resolve(result);
+            }, function (error) {
                 deferred.reject(error);
             });
 

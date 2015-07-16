@@ -16,7 +16,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
         public readonly DateTime CreatedDate;
         public readonly IEnumerable<IDataField> RequestFields;
         public readonly IEnumerable<IDataField> DataFields;
-        public DataProviderCreated(Guid id, DataProviderName name, string description, decimal costPrice, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields)
+        public DataProviderCreated(Guid id, DataProviderName name, string description, decimal costPrice, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields, int version)
         {
 			Id = id;
 			Name = name;
@@ -27,6 +27,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
             CreatedDate = createdDate;
             RequestFields = requestFields;
             DataFields = dataFields;
+            Version = version;
         }
     }
 }

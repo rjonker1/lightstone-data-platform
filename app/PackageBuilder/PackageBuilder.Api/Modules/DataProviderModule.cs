@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
-using FluentNHibernate.Conventions.AcceptanceCriteria;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
@@ -104,7 +103,7 @@ namespace PackageBuilder.Api.Modules
             {
                 var id = (Guid) _.id;
                 publisher.Publish(new AmendDataProviderStructure(id));
-                return null;
+                return Response.AsJson(new { msg = "Amended" });
             };
 
             Post["DataProvider/Clone/{id}/{cloneName}"] = ParametersBackTrackExtensions =>

@@ -26,7 +26,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
             var id = Guid.NewGuid();
             var entity = new DataProvider(id, dataProvider.Name,
                 dataProvider.Description, dataProvider.CostOfSale, dataProvider.ResponseType,
-                dataProvider.Owner, dataProvider.CreatedDate, null, dataProvider.DataFields);
+                dataProvider.Owner, dataProvider.CreatedDate, null, dataProvider.DataFields, 2);
 
             var repository = Container.Resolve<INEventStoreRepository<DataProvider>>();
 
