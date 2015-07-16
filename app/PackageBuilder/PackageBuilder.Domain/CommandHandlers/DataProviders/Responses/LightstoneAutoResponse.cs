@@ -7,7 +7,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
         public Lace.Domain.Core.Entities.LightstoneAutoResponse DefaultLightstoneResponse()
         {
             var vehicleValuation = new Valuation();
-            vehicleValuation.AddAmortisationFactors(new[] { new AmortisationFactorModel(0, 0d) });
+            //vehicleValuation.AddAmortisationFactors(new[] { new AmortisationFactorModel(0, 0d) });
             vehicleValuation.AddAreaFactors(new[] { new AreaFactorModel("", 0d) });
             vehicleValuation.AddAuctionFactors(new[] { new AuctionFactorModel("", 0m) });
             vehicleValuation.AddAccidentDistribution(new[] { new AccidentDistributionModel("", 0d) });

@@ -13,11 +13,11 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
         public void CreateMaps()
         {
             #region AmortisationFactors
-            Mapper.CreateMap<IEnumerable<IRespondWithAmortisationFactorModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "AmortisationFactors"))
-                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAmortisationFactorModel>()));
-            Mapper.CreateMap<IRespondWithAmortisationFactorModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            //Mapper.CreateMap<IEnumerable<IRespondWithAmortisationFactorModel>, DataField>()
+            //    .ForMember(s => s.Name, opt => opt.MapFrom(x => "AmortisationFactors"))
+            //    .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+            //    .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAmortisationFactorModel>()));
+            //Mapper.CreateMap<IRespondWithAmortisationFactorModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region AreaFactors
             Mapper.CreateMap<IEnumerable<IRespondWithAreaFactorModel>, DataField>()
