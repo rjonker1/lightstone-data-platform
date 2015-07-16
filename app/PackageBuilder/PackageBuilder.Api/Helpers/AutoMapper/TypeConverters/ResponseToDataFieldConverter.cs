@@ -15,6 +15,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
     public class ResponseToDataFieldConverter : TypeConverter<object, IEnumerable<DataField>>
     {
         private readonly IRepository<Industry> _industryRepository;
+        private readonly string[] _blackListedProperties = new[] { "Type", "TypeName" };
 
         public ResponseToDataFieldConverter(IRepository<Industry> industryRepository)
         {

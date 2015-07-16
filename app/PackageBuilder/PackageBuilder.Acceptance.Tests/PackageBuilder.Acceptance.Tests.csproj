@@ -82,6 +82,10 @@
     <Reference Include="FluentMigrator.Runner">
       <HintPath>..\..\packages\FluentMigrator.Runner.1.2.1.0\lib\40\FluentMigrator.Runner.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
       <Private>True</Private>
@@ -121,6 +125,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -144,8 +152,15 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AutoMapper\DataFields\when_mapping_to_a_single_data_field_dto.cs" />
+    <Compile Include="AutoMapper\DataProviders\when_mapping_an_override_to_a_single_data_provider.cs" />
+    <Compile Include="AutoMapper\Packages\when_mapping_to_package.cs" />
+    <Compile Include="AutoMapper\Packages\when_mapping_to_package_dto.cs" />
     <Compile Include="Fakes\TestBootstrapper.cs" />
     <Compile Include="Handlers\when_amending_data_provider_structure.cs" />
+    <Compile Include="Modules\States\when_invoking_state_add_route.cs" />
+    <Compile Include="Modules\States\when_invoking_state_edit_route.cs" />
+    <Compile Include="Modules\States\when_invoking_state_route.cs" />
     <Compile Include="when_envoking_License_plate_search_as_authorized_user.cs" />
     <Compile Include="when_envoking_License_plate_search_as_unauthorized_user.cs" />
     <Compile Include="when_envoking_getUserMetaData_as_authorized_user.cs" />
@@ -178,9 +193,17 @@
       <Project>{361D1B44-9C69-4FBC-8FFA-184909E28D19}</Project>
       <Name>PackageBuilder.Domain.Core.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Dtos\PackageBuilder.Domain.Dtos.csproj">
+      <Project>{3ed18243-3a71-4e3f-adfb-fc6777af5225}</Project>
+      <Name>PackageBuilder.Domain.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
       <Project>{15EA3113-E3A9-4BAA-8746-A92973E7D3C0}</Project>
       <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
+      <Project>{90905013-B92B-44B2-8099-EB31042EE399}</Project>
+      <Name>PackageBuilder.Domain.Entities.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{AF32C137-D01E-4243-8DE5-6920113CFC6A}</Project>
@@ -201,6 +224,10 @@
     <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
       <Project>{F29A3A51-343E-428F-A592-F7845E99B4AE}</Project>
       <Name>PackageBuilder.TestHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
+      <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
+      <Name>PackageBuilder.TestObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
