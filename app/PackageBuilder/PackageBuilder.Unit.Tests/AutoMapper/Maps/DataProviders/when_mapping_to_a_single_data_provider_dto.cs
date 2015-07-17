@@ -33,8 +33,8 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
             _dto.Name.ShouldEqual("Ivid");
             _dto.Description.ShouldEqual("Ivid");
             _dto.SourceConfigurationIsApiConfiguration.ShouldBeTrue();
-            _dto.SourceConfigurationUrl.ShouldEqual("IvidUrlTest");
-            _dto.SourceConfigurationUsername.ShouldEqual("IvidUsernameTest");
+            _dto.SourceConfigurationUrl.ShouldEqual("authenticate");
+            _dto.SourceConfigurationUsername.ShouldEqual("authenticate");
             _dto.CostOfSale.ShouldEqual(10m);
             _dto.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _dto.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.AddDays(1).Date);

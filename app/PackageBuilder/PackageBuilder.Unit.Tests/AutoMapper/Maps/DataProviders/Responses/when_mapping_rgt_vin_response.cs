@@ -24,7 +24,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses
         [Observation]
         public void should_map_all_rgt_vin_data_fields()
         {
-            _dataFields.Count().ShouldEqual(12);
+            _dataFields.Count().ShouldEqual(11);
 
             _dataFields.FirstOrDefault(x => x.Name == "Vin").Name.ShouldEqual("Vin");
             _dataFields.FirstOrDefault(x => x.Name == "Vin").Type.ShouldEqual(typeof(string).ToString());
@@ -50,8 +50,8 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses
             _dataFields.FirstOrDefault(x => x.Name == "RgtCode").Name.ShouldEqual("RgtCode");
             _dataFields.FirstOrDefault(x => x.Name == "RgtCode").Type.ShouldEqual(typeof(int?).ToString());
 
-            _dataFields.FirstOrDefault(x => x.Name == "CostOfSale").Name.ShouldEqual("CostOfSale");
-            _dataFields.FirstOrDefault(x => x.Name == "CostOfSale").Type.ShouldEqual(typeof(decimal?).ToString());
+            _dataFields.FirstOrDefault(x => x.Name == "Price").Name.ShouldEqual("Price");
+            _dataFields.FirstOrDefault(x => x.Name == "Price").Type.ShouldEqual(typeof(decimal?).ToString());
 
             _dataFields.FirstOrDefault(x => x.Name == "Colour").Name.ShouldEqual("Colour");
             _dataFields.FirstOrDefault(x => x.Name == "Colour").Type.ShouldEqual(typeof(string).ToString());

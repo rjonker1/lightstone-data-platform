@@ -19,7 +19,9 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 
         protected override IEnumerable<IIndustry> ConvertCore(DataProviderFieldItemDto source)
         {
-            return source.Industries.ToList().Where(x => x.IsSelected).Select(x => _repository.Get(x.Id));
+            return source.Industries != null 
+                ? source.Industries.ToList().Where(x => x.IsSelected).Select(x => _repository.Get(x.Id)) 
+                : Enumerable.Empty<IIndustry>();
         }
     }
 }

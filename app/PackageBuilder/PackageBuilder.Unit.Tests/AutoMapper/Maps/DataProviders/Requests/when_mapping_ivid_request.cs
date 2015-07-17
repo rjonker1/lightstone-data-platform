@@ -39,14 +39,15 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Requests
         [Observation]
         public void should_map_all_ivid_data_fields()
         {
-            _dataFields.Count().ShouldEqual(13);
-            _dataFields.FirstOrDefault(x => x.Name == "Requester Name").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "Requester Phone").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "Requester Email").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "Request Reference").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "Applicant Name").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "Reason For Application").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "Label").ShouldNotBeNull();
+            _dataFields.Count().ShouldEqual(6);
+
+            //_dataFields.FirstOrDefault(x => x.Name == "Requester Name").ShouldNotBeNull();
+            //_dataFields.FirstOrDefault(x => x.Name == "Requester Phone").ShouldNotBeNull();
+            //_dataFields.FirstOrDefault(x => x.Name == "Requester Email").ShouldNotBeNull();
+            //_dataFields.FirstOrDefault(x => x.Name == "Request Reference").ShouldNotBeNull();
+            //_dataFields.FirstOrDefault(x => x.Name == "Applicant Name").ShouldNotBeNull();
+            //_dataFields.FirstOrDefault(x => x.Name == "Reason For Application").ShouldNotBeNull();
+            //_dataFields.FirstOrDefault(x => x.Name == "Label").ShouldNotBeNull();
             _dataFields.FirstOrDefault(x => x.Name == "Vin Number").ShouldNotBeNull();
             _dataFields.FirstOrDefault(x => x.Name == "Chassis Number").ShouldNotBeNull();
             _dataFields.FirstOrDefault(x => x.Name == "Register Number").ShouldNotBeNull();
@@ -56,14 +57,14 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Requests
             var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(_dataFields);
 
             var types = requestFields.Select(x => x.GetType());
-            types.Count().ShouldEqual(13);
-            types.ShouldContain(typeof(RequesterNameRequestField));
-            types.ShouldContain(typeof(RequesterPhoneRequestField));
-            types.ShouldContain(typeof(RequesterEmailRequestField));
-            types.ShouldContain(typeof(RequestReferenceRequestField));
-            types.ShouldContain(typeof(ApplicantNameRequestField));
-            types.ShouldContain(typeof(ReasonForApplicationRequestField));
-            types.ShouldContain(typeof(LabelRequestField));
+            types.Count().ShouldEqual(6);
+            //types.ShouldContain(typeof(RequesterNameRequestField));
+            //types.ShouldContain(typeof(RequesterPhoneRequestField));
+            //types.ShouldContain(typeof(RequesterEmailRequestField));
+            //types.ShouldContain(typeof(RequestReferenceRequestField));
+            //types.ShouldContain(typeof(ApplicantNameRequestField));
+            //types.ShouldContain(typeof(ReasonForApplicationRequestField));
+            //types.ShouldContain(typeof(LabelRequestField));
             types.ShouldContain(typeof(VinNumberRequestField));
             types.ShouldContain(typeof(ChassisNumberRequestField));
             types.ShouldContain(typeof(EngineNumberRequestField));

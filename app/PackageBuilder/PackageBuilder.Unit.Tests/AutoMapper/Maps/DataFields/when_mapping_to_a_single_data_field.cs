@@ -5,6 +5,7 @@ using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
+using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
@@ -16,8 +17,9 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataFields
         public override void Observe()
         {
             var container = new WindsorContainer();
-
-            container.Install(new ServiceLocatorInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
+            container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
+            container.Install(new ServiceLocatorInstaller(), new NHibernateInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
+            OverrideHelper.OverrideNhibernateCfg(container);
 
             _dataField = Mapper.Map<DataProviderFieldItemDto, DataField>(DataFieldDtoMother.SpecificInformation);
         }
@@ -28,9 +30,9 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataFields
             _dataField.Name.ShouldEqual("SpecificInformation");
             _dataField.Label.ShouldEqual("Label");
             _dataField.Definition.ShouldEqual("Definition");
-            _dataField.CostOfSale.ShouldEqual(0);
+            _dataField.CostOfSale.ShouldEqual(10);
             _dataField.IsSelected.Value.ShouldBeTrue();
-            _dataField.Industries.Count().ShouldEqual(2);
+            _dataField.Industries.Count().ShouldEqual(0);
             _dataField.DataFields.Count().ShouldEqual(6);
             //_dataField.Type.ToString().ShouldEqual("System.String");
         }

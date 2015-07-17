@@ -3,17 +3,17 @@ using PackageBuilder.TestObjects.Builders.DataProviderResponses.Valuations;
 
 namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations
 {
-    public class AccidentDistributionModelMother
-    {
-        public static IRespondWithAccidentDistributionModel AccidentDistribution
-        {
-            get
-            {
-                return new AccidentDistributionBuilder()
-                    .With("")
-                    .With(0d)
-                    .Build();
-            }
-        }
-    }
+    //public class AccidentDistributionModelMother
+    //{
+    //    public static IRespondWithAccidentDistributionModel AccidentDistribution
+    //    {
+    //        get
+    //        {
+    //            return new AccidentDistributionBuilder()
+    //                .With("")
+    //                .With(0d)
+    //                .Build();
+    //        }
+    //    }
+    //}
 }

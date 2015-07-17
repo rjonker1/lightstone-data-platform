@@ -32,10 +32,9 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps
         [Observation]
         public void should_map_all_data_fields()
         {
-            _dataFields.Count().ShouldEqual(35);
-            var dataField = _dataFields.FirstOrDefault(x => x.Name == "CarFullname");
-            dataField.Type.ToString().ShouldEqual(typeof(string).ToString());
-            _dataFields.First(x => x.Name == "SpecificInformation").DataFields.Count().ShouldEqual(8);
+            _dataFields.Count().ShouldEqual(32);
+            _dataFields.FirstOrDefault(x => x.Name == "CarFullname").Type.ShouldEqual(typeof(string).ToString());
+            _dataFields.First(x => x.Name == "SpecificInformation").DataFields.Count().ShouldEqual(7);
         }
     }
 }

@@ -14,11 +14,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
         public void CreateMaps()
         {
             Mapper.CreateMap<DataField, DataField>()
-                .BeforeMap((s, d) =>
-                {
-
-                })
-                .ForMember(d => d.DataFields, opt => opt.Ignore());
+                .ForMember(d => d.DataFields, opt => opt.Ignore()); // Needs to ignore for amending DP structure functionality
             Mapper.CreateMap<IDataFieldOverride, DataField>();
 
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()

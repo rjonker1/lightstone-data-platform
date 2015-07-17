@@ -24,7 +24,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses
         [Observation]
         public void should_map_all_rgt_data_fields()
         {
-            _dataFields.Count().ShouldEqual(22);
+            _dataFields.Count().ShouldEqual(21);
 
             _dataFields.FirstOrDefault(x => x.Name == "Manufacturer").Name.ShouldEqual("Manufacturer");
             _dataFields.FirstOrDefault(x => x.Name == "Manufacturer").Type.ShouldEqual(typeof(string).ToString());

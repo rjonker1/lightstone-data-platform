@@ -25,7 +25,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         [Observation]
         public void should_map_all_lightstone_fields()
         {
-            _dataFields.Count().ShouldEqual(9);
+            _dataFields.Count().ShouldEqual(8);
 
             _dataFields.FirstOrDefault(x => x.Name == "CarId").Name.ShouldEqual("CarId");
             _dataFields.FirstOrDefault(x => x.Name == "CarId").Type.ShouldEqual(typeof(int?).ToString());

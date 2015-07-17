@@ -30,19 +30,19 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Requests
         [Observation]
         public void should_map_all_ivid_titleholder_data_fields()
         {
-            _dataFields.Count().ShouldEqual(4);
-            _dataFields.FirstOrDefault(x => x.Name == "Requester Name").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "Requester Phone").ShouldNotBeNull();
-            _dataFields.FirstOrDefault(x => x.Name == "Requester Email").ShouldNotBeNull();
+            _dataFields.Count().ShouldEqual(1);
+            //_dataFields.FirstOrDefault(x => x.Name == "Requester Name").ShouldNotBeNull();
+            //_dataFields.FirstOrDefault(x => x.Name == "Requester Phone").ShouldNotBeNull();
+            //_dataFields.FirstOrDefault(x => x.Name == "Requester Email").ShouldNotBeNull();
             _dataFields.FirstOrDefault(x => x.Name == "Vin Number").ShouldNotBeNull();
 
             var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(_dataFields);
 
             var types = requestFields.Select(x => x.GetType());
-            types.Count().ShouldEqual(4);
-            types.ShouldContain(typeof(RequesterNameRequestField));
-            types.ShouldContain(typeof(RequesterPhoneRequestField));
-            types.ShouldContain(typeof(RequesterEmailRequestField));
+            types.Count().ShouldEqual(1);
+            //types.ShouldContain(typeof(RequesterNameRequestField));
+            //types.ShouldContain(typeof(RequesterPhoneRequestField));
+            //types.ShouldContain(typeof(RequesterEmailRequestField));
             types.ShouldContain(typeof(VinNumberRequestField));
         }
     }

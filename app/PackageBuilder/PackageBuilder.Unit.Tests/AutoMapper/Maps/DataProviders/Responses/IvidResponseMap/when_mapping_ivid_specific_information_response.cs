@@ -29,7 +29,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ivid
 
             var dataFields = _dataField.DataFields;
 
-            dataFields.Count().ShouldEqual(8);
+            dataFields.Count().ShouldEqual(7);
 
             dataFields.FirstOrDefault(x => x.Name == "Odometer").Name.ShouldEqual("Odometer");
             dataFields.FirstOrDefault(x => x.Name == "Odometer").Type.ShouldEqual(typeof(string).ToString());

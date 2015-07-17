@@ -26,7 +26,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         {
             var dataFields = _dataField.DataFields;
 
-            dataFields.Count().ShouldEqual(14);
+            dataFields.Count().ShouldEqual(7);
 
             #region Deprecated fields
 
