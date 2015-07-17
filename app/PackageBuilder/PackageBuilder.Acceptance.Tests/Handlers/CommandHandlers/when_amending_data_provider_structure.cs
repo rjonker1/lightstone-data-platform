@@ -17,7 +17,7 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests.Handlers
+namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
 {
     public class VehicleData
     {

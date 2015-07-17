@@ -1,7 +1,5 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Entities;
 using MemBus;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.Repositories;
@@ -12,7 +10,7 @@ using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Tests.CommandHandlers.CommandStore
+namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
 {
     public class when_storing_a_command : when_persisting_entities_to_db
     {

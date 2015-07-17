@@ -115,21 +115,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandlers\CommandStore\when_storing_a_command.cs" />
-    <Compile Include="CommandHandlers\DataProviders\when_updating_a_data_provider.cs" />
-    <Compile Include="CommandHandlers\DataProviders\when_creating_a_data_provider.cs" />
-    <Compile Include="CommandHandlers\Industries\when_renaming_an_industry.cs" />
-    <Compile Include="CommandHandlers\Industries\when_creating_an_industry.cs" />
-    <Compile Include="CommandHandlers\Industries\when_renaming_an_industry_that_does_not_exist.cs" />
-    <Compile Include="CommandHandlers\Packages\when_updating_a_package.cs" />
-    <Compile Include="CommandHandlers\Packages\when_creating_a_package.cs" />
-    <Compile Include="CommandHandlers\States\when_creating_a_state.cs" />
-    <Compile Include="CommandHandlers\States\when_renaming_an_state.cs" />
-    <Compile Include="CommandHandlers\States\when_renaming_a_state_that_does_not_exist.cs" />
-    <Compile Include="EventHandlers\DataProviders\when_updating_a_data_provider.cs" />
-    <Compile Include="EventHandlers\DataProviders\when_creating_a_data_provider.cs" />
-    <Compile Include="EventHandlers\Packages\when_creating_a_package.cs" />
-    <Compile Include="EventHandlers\Packages\when_updating_a_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -116,8 +116,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
@@ -208,6 +209,20 @@
     <Compile Include="Entities\DataProviders\when_reading_rgt_source_configuration.cs" />
     <Compile Include="Entities\DataProviders\when_reading_rgt_vin_source_configuration.cs" />
     <Compile Include="Fakes\TestBootstrapper.cs" />
+    <Compile Include="Handlers\CommandHandlers\DataProviders\when_creating_a_data_provider.cs" />
+    <Compile Include="Handlers\CommandHandlers\DataProviders\when_updating_a_data_provider.cs" />
+    <Compile Include="Handlers\CommandHandlers\Industries\when_creating_an_industry.cs" />
+    <Compile Include="Handlers\CommandHandlers\Industries\when_renaming_an_industry.cs" />
+    <Compile Include="Handlers\CommandHandlers\Industries\when_renaming_an_industry_that_does_not_exist.cs" />
+    <Compile Include="Handlers\CommandHandlers\Packages\when_creating_a_package.cs" />
+    <Compile Include="Handlers\CommandHandlers\Packages\when_updating_a_package.cs" />
+    <Compile Include="Handlers\CommandHandlers\States\when_creating_a_state.cs" />
+    <Compile Include="Handlers\CommandHandlers\States\when_renaming_an_state.cs" />
+    <Compile Include="Handlers\CommandHandlers\States\when_renaming_a_state_that_does_not_exist.cs" />
+    <Compile Include="Handlers\EventHandlers\DataProviders\when_creating_a_data_provider.cs" />
+    <Compile Include="Handlers\EventHandlers\DataProviders\when_updating_a_data_provider.cs" />
+    <Compile Include="Handlers\EventHandlers\Packages\when_creating_a_package.cs" />
+    <Compile Include="Handlers\EventHandlers\Packages\when_updating_a_package.cs" />
     <Compile Include="Installers\when_installing_auto_mapper.cs" />
     <Compile Include="Installers\when_installing_a_bus.cs" />
     <Compile Include="Installers\when_installing_command_handlers.cs" />
@@ -215,6 +230,8 @@
     <Compile Include="Installers\when_installing_nventstore_dependency.cs" />
     <Compile Include="Installers\when_installing_repositories.cs" />
     <Compile Include="Installers\when_installing_service_locator.cs" />
+    <Compile Include="TestObjects\Builders\when_calling_write_package_builder.cs" />
+    <Compile Include="TestObjects\Mothers\when_calling_write_package_mother.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\PackageBuilder.Api\appSettings.config">
@@ -235,6 +252,10 @@
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Core.Contracts\PackageBuilder.Domain.Core.Contracts.csproj">
+      <Project>{361D1B44-9C69-4FBC-8FFA-184909E28D19}</Project>
+      <Name>PackageBuilder.Domain.Core.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Dtos\PackageBuilder.Domain.Dtos.csproj">
       <Project>{3ed18243-3a71-4e3f-adfb-fc6777af5225}</Project>

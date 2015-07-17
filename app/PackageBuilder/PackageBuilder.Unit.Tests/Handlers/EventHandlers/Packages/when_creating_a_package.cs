@@ -7,7 +7,7 @@ using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Tests.EventHandlers.Packages
+namespace PackageBuilder.Unit.Tests.Handlers.EventHandlers.Packages
 {
     public class when_creating_a_package : Specification
     {

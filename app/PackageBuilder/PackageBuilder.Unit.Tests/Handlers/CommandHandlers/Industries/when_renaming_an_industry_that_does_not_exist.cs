@@ -7,7 +7,7 @@ using PackageBuilder.Domain.Entities.Industries.Read;
 using Xunit;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
+namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.Industries
 {
     public class when_renaming_an_industry_that_does_not_exist : Specification
     {

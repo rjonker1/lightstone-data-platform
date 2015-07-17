@@ -7,7 +7,7 @@ using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
+namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.Industries
 {
     public class when_renaming_an_existing_industry : Specification
     {

@@ -9,7 +9,7 @@ using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
+namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.DataProviders
 {
     public class when_creating_a_data_provider : when_not_persisting_entities
     {

@@ -8,7 +8,7 @@ using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Tests.CommandHandlers.States
+namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.States
 {
     public class when_creating_a_state : when_not_persisting_entities
     {

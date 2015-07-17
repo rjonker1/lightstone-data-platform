@@ -6,7 +6,7 @@ using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
+namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.Industries
 {
     public class when_creating_an_industry : Specification
     {

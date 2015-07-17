@@ -9,7 +9,7 @@ using PackageBuilder.Domain.EventHandlers.DataProviders;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Tests.EventHandlers.DataProviders
+namespace PackageBuilder.Unit.Tests.Handlers.EventHandlers.DataProviders
 {
     public class when_updating_a_data_provider : Specification
     {
