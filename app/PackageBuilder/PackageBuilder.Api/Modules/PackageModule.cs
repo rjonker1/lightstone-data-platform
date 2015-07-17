@@ -122,6 +122,7 @@ namespace PackageBuilder.Api.Modules
             Post["/Packages/Execute"] = parameters =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
+                this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 var package = writeRepo.GetById(apiRequest.PackageId);
 
@@ -157,6 +158,7 @@ namespace PackageBuilder.Api.Modules
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, requestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
+                this.Info(() => "Package Execute Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
                 return filteredResponse;
             };
 
