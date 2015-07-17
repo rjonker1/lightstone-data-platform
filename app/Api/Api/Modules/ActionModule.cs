@@ -40,7 +40,7 @@ namespace Api.Modules
             {
                 try
                 {
-                    this.Info(() => "Api action started.");
+                    this.Info(() => "Api action started. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
                     var apiRequest = this.Bind<ApiRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
@@ -57,15 +57,17 @@ namespace Api.Modules
                             throw new LightstoneAutoException(valid.Error);
                     });
 
+                    this.Info(() => "Api to PackageBuilder Execute Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
                     var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest,
                         new[]
                         {
                             new KeyValuePair<string, string>("Authorization", "Token " + token),
                             new KeyValuePair<string, string>("Content-Type", "application/json"),
                         });
+                    this.Info(() => "Api to PackageBuilder Execute Completed. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
                     this.Info(() => "Api responses: {0}".FormatWith(responses));
-                    this.Info(() => "Api action completed.");
+                    this.Info(() => "Api action completed. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
                     return responses;
                 }
