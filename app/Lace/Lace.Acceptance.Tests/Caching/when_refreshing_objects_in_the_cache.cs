@@ -1,7 +1,9 @@
-﻿using Lace.Caching.BuildingBlocks.Handlers;
+﻿using System.Linq;
+using Lace.Caching.BuildingBlocks.Handlers;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Caching;
+using Lace.Shared.DataProvider.Models;
 using Lace.Shared.DataProvider.Repositories;
 using Xunit.Extensions;
 
@@ -66,26 +68,26 @@ namespace Lace.Acceptance.Tests.Caching
         [Observation]
         public void then_all_cachable_data_should_be_cached()
         {
-            //_clearing.Handle();
-           // _refreshing.Handle();
+            _clearing.Handle();
+            _refreshing.Handle();
 
-            //var bands = _readRepository.GetAll<Band>(Band.SelectAll);
-            //bands.Count().ShouldNotEqual(0);
+            var bands = _readRepository.GetAll<Band>(null);
+            bands.Count().ShouldNotEqual(0);
 
-            //var carSpecs = _readRepository.GetAll<CarSpecification>(CarSpecification.SelectAll);
-            //carSpecs.Count().ShouldNotEqual(0);
+            var carSpecs = _readRepository.GetAll<CarSpecification>(null);
+            carSpecs.Count().ShouldNotEqual(0);
 
-            //var make = _readRepository.GetAll<Make>(Make.SelectAll);
-            //make.Count().ShouldNotEqual(0);
+            var make = _readRepository.GetAll<Make>(null);
+            make.Count().ShouldNotEqual(0);
 
-            //var metric = _readRepository.GetAll<Metric>(Metric.SelectAll);
-            //metric.Count().ShouldNotEqual(0);
+            var metric = _readRepository.GetAll<Metric>(null);
+            metric.Count().ShouldNotEqual(0);
 
-            //var muncip = _readRepository.GetAll<Municipality>(Municipality.SelectAll);
-            //muncip.Count().ShouldNotEqual(0);
+            var muncip = _readRepository.GetAll<Municipality>(null);
+            muncip.Count().ShouldNotEqual(0);
 
-            //var sale = _readRepository.GetAll<Sale>(Sale.SelectAllSales);
-            //sale.Count().ShouldNotEqual(0);
+            var sale = _readRepository.GetAll<Sale>(null);
+            sale.Count().ShouldNotEqual(0);
 
             //var carInfo = _readRepository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear);
             //var count = carInfo.Count();
