@@ -195,9 +195,11 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             return request;
         }
 
-        private IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders)
+        private IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders, Guid requestId)
         {
             if (dataProviders == null) yield break;
+
+            this.Info(() => "Map LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             foreach (var dataProvider in dataProviders.Where(x => x.Handled))
             {
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
@@ -206,6 +208,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
                 if (response.DataFields.Any())
                     yield return response;
             }
+            this.Info(() => "Map LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
         }
 
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
@@ -213,15 +216,19 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
             IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
         {
+            this.Info(() => "Form LACE Request Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
                 contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice);
+            this.Info(() => "Form LACE Request Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
             if (request == null)
                 throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
 
+            this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
+            this.Info(() => "EntryPoint Get LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
-            return MapLaceResponses(responses).ToList();
+            return MapLaceResponses(responses, requestId).ToList();
         }
 
         public IEnumerable<IDataProvider> ExecuteMeta(MetadataEntryPointService entryPoint, Guid userId, string userName,
@@ -237,7 +244,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
             var responses = entryPoint.GetResponsesFromLace(new[] { request });
 
-            return MapLaceResponses(responses).ToList();
+            return MapLaceResponses(responses, requestId).ToList();
         }
 
         public override string ToString()
