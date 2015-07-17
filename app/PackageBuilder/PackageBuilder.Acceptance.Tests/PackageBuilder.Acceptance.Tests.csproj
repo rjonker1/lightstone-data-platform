@@ -82,6 +82,10 @@
     <Reference Include="FluentMigrator.Runner">
       <HintPath>..\..\packages\FluentMigrator.Runner.1.2.1.0\lib\40\FluentMigrator.Runner.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
@@ -157,11 +161,19 @@
     <Compile Include="AutoMapper\DataProviders\when_mapping_an_override_to_a_single_data_provider.cs" />
     <Compile Include="AutoMapper\Packages\when_mapping_to_package.cs" />
     <Compile Include="AutoMapper\Packages\when_mapping_to_package_dto.cs" />
+    <Compile Include="Entities\DataProviders\Read\when_persisting_a_data_provider.cs" />
+    <Compile Include="Entities\Industries\Read\when_persisting_a_industry.cs" />
+    <Compile Include="Entities\Packages\Read\when_persisting_a_package.cs" />
+    <Compile Include="Entities\States\Read\when_persisting_a_state.cs" />
     <Compile Include="Fakes\TestBootstrapper.cs" />
     <Compile Include="Handlers\when_amending_data_provider_structure.cs" />
     <Compile Include="Modules\States\when_invoking_state_add_route.cs" />
     <Compile Include="Modules\States\when_invoking_state_edit_route.cs" />
     <Compile Include="Modules\States\when_invoking_state_route.cs" />
+    <Compile Include="Repositories\Base\when_implementing_base_repository.cs" />
+    <Compile Include="Repositories\DataProviders\when_querying_data_providers.cs" />
+    <Compile Include="Repositories\Packages\when_querying_packages.cs" />
+    <Compile Include="Repositories\States\when_querying_state.cs" />
     <Compile Include="when_envoking_License_plate_search_as_authorized_user.cs" />
     <Compile Include="when_envoking_License_plate_search_as_unauthorized_user.cs" />
     <Compile Include="when_envoking_getUserMetaData_as_authorized_user.cs" />

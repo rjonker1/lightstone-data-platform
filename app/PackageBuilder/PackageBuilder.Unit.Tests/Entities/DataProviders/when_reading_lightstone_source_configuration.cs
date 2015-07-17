@@ -2,14 +2,14 @@
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Entities.Tests.DataProviders
+namespace PackageBuilder.Unit.Tests.Entities.DataProviders
 {
-    public class when_reading_rgt_vin_source_configuration : Specification
+    public class when_reading_lightstone_source_configuration : Specification
     {
         private SourceConfiguration _sourceConfiguration;
         public override void Observe()
         {
-            _sourceConfiguration = new SourceConfiguration(DataProviderName.RgtVin);
+            _sourceConfiguration = new SourceConfiguration(DataProviderName.LightstoneAuto);
         }
 
         [Observation]

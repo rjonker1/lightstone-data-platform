@@ -5,7 +5,7 @@ using PackageBuilder.Domain.Entities.DataProviders.Read;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Entities.Tests.DataProviders.Read
+namespace PackageBuilder.Acceptance.Tests.Entities.DataProviders.Read
 {
     public class when_persisting_a_data_provider : when_persisting_entities_to_memory
     {

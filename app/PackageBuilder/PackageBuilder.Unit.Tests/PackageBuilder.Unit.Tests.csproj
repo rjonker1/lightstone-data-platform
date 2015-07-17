@@ -202,6 +202,11 @@
     <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider_override.cs" />
     <Compile Include="AutoMapper\Maps\when_mapping_a_complex_object_to_a_data_field.cs" />
     <Compile Include="AutoMapper\when_creating_maps.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_ivid_data_provider_source_configuration.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_ivid_title_holder_data_provider_source_configuration.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_lightstone_source_configuration.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_rgt_source_configuration.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_rgt_vin_source_configuration.cs" />
     <Compile Include="Fakes\TestBootstrapper.cs" />
     <Compile Include="Installers\when_installing_auto_mapper.cs" />
     <Compile Include="Installers\when_installing_a_bus.cs" />

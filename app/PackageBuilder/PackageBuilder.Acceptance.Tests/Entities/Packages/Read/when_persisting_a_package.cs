@@ -7,7 +7,7 @@ using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestHelper.Helpers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Entities.Tests.Packages.Read
+namespace PackageBuilder.Acceptance.Tests.Entities.Packages.Read
 {
     public class when_persisting_a_package : when_persisting_entities_to_memory
     {

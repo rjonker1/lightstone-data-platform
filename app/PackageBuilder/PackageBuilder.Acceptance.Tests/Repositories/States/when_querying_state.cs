@@ -5,7 +5,7 @@ using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Infrastructure.Tests.Repositories.States
+namespace PackageBuilder.Acceptance.Tests.Repositories.States
 {
     public class when_querying_state : when_persisting_entities_to_memory
     {

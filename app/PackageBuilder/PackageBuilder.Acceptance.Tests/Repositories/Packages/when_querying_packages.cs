@@ -4,7 +4,7 @@ using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Infrastructure.Tests.Repositories.Packages
+namespace PackageBuilder.Acceptance.Tests.Repositories.Packages
 {
     public class when_querying_packages : when_persisting_entities_to_memory
     {

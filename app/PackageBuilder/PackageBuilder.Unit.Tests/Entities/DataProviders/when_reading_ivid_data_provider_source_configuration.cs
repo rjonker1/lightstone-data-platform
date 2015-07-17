@@ -2,7 +2,7 @@
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Entities.Tests.DataProviders
+namespace PackageBuilder.Unit.Tests.Entities.DataProviders
 {
     public class when_reading_ivid_data_provider_source_configuration : Specification
     {

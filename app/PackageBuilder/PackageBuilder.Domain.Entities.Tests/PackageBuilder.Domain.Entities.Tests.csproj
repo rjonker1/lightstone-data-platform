@@ -93,15 +93,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProviders\Read\when_persisting_a_data_provider.cs" />
-    <Compile Include="DataProviders\when_reading_ivid_data_provider_source_configuration.cs" />
-    <Compile Include="DataProviders\when_reading_ivid_title_holder_data_provider_source_configuration.cs" />
-    <Compile Include="DataProviders\when_reading_lightstone_source_configuration.cs" />
-    <Compile Include="DataProviders\when_reading_rgt_source_configuration.cs" />
-    <Compile Include="DataProviders\when_reading_rgt_vin_source_configuration.cs" />
-    <Compile Include="Industries\Write\when_persisting_a_industry.cs" />
-    <Compile Include="States\Write\when_persisting_a_state.cs" />
-    <Compile Include="Packages\Read\when_persisting_a_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +137,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Packages\Write\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

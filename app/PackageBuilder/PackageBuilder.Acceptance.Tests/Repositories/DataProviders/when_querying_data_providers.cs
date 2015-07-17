@@ -5,7 +5,7 @@ using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Infrastructure.Tests.Repositories.DataProviders
+namespace PackageBuilder.Acceptance.Tests.Repositories.DataProviders
 {
     public class when_querying_data_providers : when_persisting_entities_to_memory
     {

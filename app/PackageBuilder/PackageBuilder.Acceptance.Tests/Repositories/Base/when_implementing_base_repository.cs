@@ -8,7 +8,7 @@ using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Infrastructure.Tests.Repositories.Base
+namespace PackageBuilder.Acceptance.Tests.Repositories.Base
 {
     public class when_implementing_base_repository : when_persisting_entities_to_memory
     {

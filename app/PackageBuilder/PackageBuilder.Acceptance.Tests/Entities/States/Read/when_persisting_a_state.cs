@@ -5,7 +5,7 @@ using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Entities.Tests.States.Write
+namespace PackageBuilder.Acceptance.Tests.Entities.States.Read
 {
     public class when_persisting_a_state : when_persisting_entities_to_memory
     {
