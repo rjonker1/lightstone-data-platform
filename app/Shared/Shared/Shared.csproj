@@ -75,6 +75,7 @@
     <Compile Include="Enums\SystemType.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
     <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
+    <Compile Include="Helpers\Builders\PredicateBuilder.cs" />
     <Compile Include="Helpers\DynamicTypeCreator.cs" />
     <Compile Include="Helpers\Builders\LinqList.cs" />
     <Compile Include="Helpers\Extensions\LoggingExtensions.cs" />
