@@ -134,11 +134,11 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
 
-            this.Info(() => "Attempting to map data provider overrides from PackageCreated event");
+            this.Info(() => "Attempting to map data provider overrides from PackageCreated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
             DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>(@event.DataProviderValueOverrides);
 
-            this.Info(() => "Successfully mapped data provider overrides from PackageCreated event");
+            this.Info(() => "Successfully mapped data provider overrides from PackageCreated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
         }
 
         private void Apply(PackageUpdated @event)
@@ -156,11 +156,11 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
 
-            this.Info(() => "Attempting to map data provider overrides from PackageUpdated event");
+            this.Info(() => "Attempting to map data provider overrides from PackageUpdated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
             DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>(@event.DataProviderValueOverrides);
 
-            this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
+            this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
         }
 
         private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string firstName, Guid requestId, string accountNumber,
