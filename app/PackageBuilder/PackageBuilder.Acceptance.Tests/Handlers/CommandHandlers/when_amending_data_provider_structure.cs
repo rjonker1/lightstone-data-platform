@@ -133,8 +133,8 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
         [Observation]
         public void should_amend_dataField_structure_based_on_new_dataProvider_response_object()
         {
-            _originalFields.Count().ShouldEqual(35);
-            _newFields.Count().ShouldEqual(23);
+            _originalFields.Count().ShouldEqual(32);
+            _newFields.Count().ShouldEqual(22);
         }
 
         [Observation]

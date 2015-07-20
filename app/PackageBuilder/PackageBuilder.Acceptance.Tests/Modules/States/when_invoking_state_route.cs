@@ -37,7 +37,6 @@ namespace PackageBuilder.Acceptance.Tests.Modules.States
         }
 
         [Fact(Skip = "Not necessary could be double work effort, decided to rely on ui tests as acceptance tests")]
-        [Observation]
         public void should_return_all_states_as_json()
         {
             _response.Body.AsString().ShouldNotBeNull();

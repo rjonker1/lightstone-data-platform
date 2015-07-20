@@ -38,7 +38,7 @@ namespace PackageBuilder.Acceptance.Tests.AutoMapper.Packages
             _package.CostOfSale.ShouldEqual(10m);
             _package.RecommendedSalePrice.ShouldEqual(20m);
             _package.Notes.ShouldEqual("Notes");
-            _package.Industries.Count().ShouldEqual(1);
+            _package.Industries.Count().ShouldEqual(0);
             _package.State.Name.ShouldEqual(StateName.Published);
             _package.DisplayVersion.ShouldEqual(0.1m);
             _package.Owner.ShouldEqual("Owner");

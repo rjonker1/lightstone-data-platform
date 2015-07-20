@@ -12,7 +12,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
 {
-    public class when_storing_a_command : when_persisting_entities_to_db
+    public class when_storing_a_command : when_persisting_entities_to_memory
     {
         private StoreCommandHandler _handler;
         private IRepository<Command> _repository;
@@ -38,7 +38,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
         }
     }
 
-    public class when_replaying_a_command : when_persisting_entities_to_db
+    public class when_replaying_a_command : when_persisting_entities_to_memory
     {
         private ReplayCommandHandler _replayCommandHandler;
         private IBus _bus;

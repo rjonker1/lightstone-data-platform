@@ -233,6 +233,7 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="DataProviders\Commands\AmendDataProviderStructure.cs" />
+    <Compile Include="DataProviders\Write\DataProviderConnectionStringRepository.cs" />
     <Compile Include="DataProviders\Write\SourceConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandStore\Command.cs" />

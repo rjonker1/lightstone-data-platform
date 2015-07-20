@@ -20,7 +20,7 @@ namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataProviders
         {
             base.Observe();
 
-            Container.Install(new RepositoryInstaller(), new CommandInstaller(), new BusInstaller(), new NEventStoreInstaller(), new AutoMapperInstaller());
+            Container.Install(new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new CommandInstaller(), new AutoMapperInstaller());
 
             var dataProvider = WriteDataProviderMother.Ivid;
             var id = Guid.NewGuid();
@@ -44,8 +44,8 @@ namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataProviders
             _dataProvider.Name.ShouldEqual(DataProviderName.Ivid);
             //_dataProvider.Description.ShouldEqual("Ivid");
             _dataProvider.SourceConfiguration.IsApiConfiguration.ShouldBeTrue();
-            _dataProvider.SourceConfiguration.Url.ShouldEqual("IvidUrlTest");
-            _dataProvider.SourceConfiguration.Username.ShouldEqual("IvidUsernameTest");
+            _dataProvider.SourceConfiguration.Url.ShouldEqual("authenticate");
+            _dataProvider.SourceConfiguration.Username.ShouldEqual("authenticate");
             //_dataProvider.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _dataProvider.FieldLevelCostPriceOverride.ShouldBeFalse();
         }

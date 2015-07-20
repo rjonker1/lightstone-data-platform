@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System.Web;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using FluentNHibernate.Automapping;
@@ -40,14 +41,18 @@ namespace PackageBuilder.Api.Installers
                     //cfg.FluentMappings.AddFromAssemblyOf<Entity>();
                 })
                 .ExposeConfiguration(TreatConfiguration).BuildConfiguration()));
-                
 
             container.Register(Component.For<ISessionFactory>()
                 .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
                 .LifestyleSingleton());
-            container.Register(Component.For<ISession>()
-                .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
-                .LifestylePerWebRequest());
+            if (HttpContext.Current != null)
+                container.Register(Component.For<ISession>()
+                    .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
+                    .LifestylePerWebRequest());
+            else // Sets lifestyle for testing to avoid -> Castle.MicroKernel.ComponentResolutionException, Looks like you forgot to register the http module Castle.MicroKernel.Lifestyle.PerWebRequestLifestyleModule
+                container.Register(Component.For<ISession>()
+                    .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
+                    .LifestyleTransient());
         }
 
         protected virtual void TreatConfiguration(Configuration configuration)
