@@ -24,7 +24,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.States
         [Observation]
         public void should_throw_exception()
         {
-            _exception.Message.ShouldContain("Could not load state with id");
+            _exception.Message.ShouldContain("Could not retrieve state with id");
         }
     }
 }

@@ -25,7 +25,6 @@ namespace PackageBuilder.Unit.Tests.Installers
 
         public override void Observe()
         {
-            _container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
             _container.Install(new WindsorInstaller(), new BusInstaller(),new CommandInstaller(), new RavenDbInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new NHibernateInstaller());
             OverrideHelper.OverrideNhibernateCfg(_container);
         }

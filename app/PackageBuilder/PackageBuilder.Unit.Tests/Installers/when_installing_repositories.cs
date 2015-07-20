@@ -13,7 +13,6 @@ namespace PackageBuilder.Unit.Tests.Installers
 
         public override void Observe()
         {
-            _container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
             _container.Install(new NHibernateInstaller(), new RepositoryInstaller());
             OverrideHelper.OverrideNhibernateCfg(_container);
 

@@ -51,7 +51,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 
             this.Info(() => "Successfully mapped {0} to IEnumerable<IDataField>".FormatWith(source));
 
-            return list.Where(x => x != null);
+            return list.Where(x => x != null).ToList();
         }
     }
 }

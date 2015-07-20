@@ -18,7 +18,6 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
         public override void Observe()
         {
             var container = new WindsorContainer();
-            container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
             container.Install(new NHibernateInstaller());
             OverrideHelper.OverrideNhibernateCfg(container);
 
