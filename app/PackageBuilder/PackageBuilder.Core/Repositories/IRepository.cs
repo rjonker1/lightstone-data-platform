@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace PackageBuilder.Core.Repositories
 {
-    public interface IRepository<T> : IQueryable<T>
+    public interface IRepository<T> : IQueryable<T>, ICacheRepository<T>
     {
         T Get(object id);
         T Load(object id);

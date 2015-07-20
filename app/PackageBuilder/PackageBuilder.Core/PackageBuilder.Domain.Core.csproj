@@ -93,6 +93,7 @@
     <Compile Include="NEventStore\NEventStoreRepository.cs" />
     <Compile Include="NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ICacheRepository.cs" />
     <Compile Include="Repositories\INamedEntityRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\NamedEntityRepository.cs" />

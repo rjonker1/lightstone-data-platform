@@ -111,5 +111,22 @@ namespace PackageBuilder.Core.Repositories
         }
 
         #endregion
+
+        #region ICacheRepository members
+        public T CacheGet(object key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T CacheSave(object key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T CacheDelete(object key)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
