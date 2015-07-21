@@ -39,7 +39,6 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
                 command.CreatedDate, command.EditedDate, command.DataProviderValueOverrides);
 
             _writeRepo.Save(entity, Guid.NewGuid());
-            //_writeRepo.CacheSave(entity);
         }
     }
 }
