@@ -106,6 +106,8 @@
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="NEventStore\AggregateFactory.cs" />
+    <Compile Include="NEventStore\CacheProvider.cs" />
+    <Compile Include="NEventStore\ICacheProvider.cs" />
     <Compile Include="NEventStore\NEventStoreRepository.cs" />
     <Compile Include="NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
