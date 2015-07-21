@@ -38,13 +38,8 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Cache
         {
             packageClient.Store(package);
             packageClient.GetById(package.Id).ShouldNotBeNull();
-        }
 
-        [Observation]
-        public void should_remove_from_redis_cache()
-        {
-            packageClient.Delete(package);
-            packageClient.GetById(package.Id).ShouldBeNull();
+            should_remove_from_redis_cache();
         }
 
         [Observation]
@@ -52,22 +47,19 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Cache
         {
             var preCache = packageClient.GetAll();
 
-            WriteRepository.CacheSave(package);
-
-            //WriteRepository.CacheSave(WritePackageMother.EzScorePackage);
-            //WriteRepository.CacheSave(WritePackageMother.FicaVerificationPackage);
-            //WriteRepository.CacheSave(WritePackageMother.FullVerificationPackage);
-            //WriteRepository.CacheSave(WritePackageMother.LicensePlateSearchPackage);
-            //WriteRepository.CacheSave(WritePackageMother.LicenseScanPackage);
-            //WriteRepository.CacheSave(WritePackageMother.PartialVerificationPackage);
-            //WriteRepository.CacheSave(WritePackageMother.PropertyPackage);
+            WriteRepository.Save(package, Guid.NewGuid());
 
             var postCache = packageClient.GetAll();
 
             Assert.True(postCache.Count == preCache.Count + 1);
 
-            //Clean-up
-            WriteRepository.CacheDelete(package.Id);
+           should_remove_from_redis_cache();
+        }
+
+        [Observation]
+        public void should_remove_from_redis_cache()
+        {
+            packageClient.DeleteById(package.Id);
             packageClient.GetById(package.Id).ShouldBeNull();
         }
     }

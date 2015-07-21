@@ -17,7 +17,7 @@ namespace PackageBuilder.Unit.Tests.Installers
         public readonly IWindsorContainer _container = new WindsorContainer();
         public override void Observe()
         {
-            _container.Install(new BusInstaller() ,new NEventStoreInstaller());
+            _container.Install(new BusInstaller(), new CacheProviderInstaller() ,new NEventStoreInstaller());
         }
 
         [Observation]
