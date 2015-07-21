@@ -65,6 +65,10 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Cache
             var postCache = packageClient.GetAll();
 
             Assert.True(postCache.Count == preCache.Count + 1);
+
+            //Clean-up
+            WriteRepository.CacheDelete(package.Id);
+            packageClient.GetById(package.Id).ShouldBeNull();
         }
     }
 }

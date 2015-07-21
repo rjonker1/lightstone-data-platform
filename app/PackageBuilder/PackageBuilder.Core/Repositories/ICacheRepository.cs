@@ -6,6 +6,6 @@ namespace PackageBuilder.Core.Repositories
     {
         T CacheGet(Guid entityId);
         void CacheSave(T entity);
-        T CacheDelete(Guid entityId);
+        void CacheDelete(Guid entityId);
     }
 }

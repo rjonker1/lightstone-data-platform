@@ -124,16 +124,9 @@ namespace PackageBuilder.Api.Modules
                 var apiRequest = this.Bind<ApiRequestDto>();
                 this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
-                this.Info(() => "Package Cache Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                var package = writeRepo.CacheGet(apiRequest.PackageId);
-                this.Info(() => "Package Cache Read Completed, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-
-                if (package == null)
-                {
-                    this.Info(() => "Package DB Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                    package = writeRepo.GetById(apiRequest.PackageId);
-                    this.Info(() => "Package DB Read Completed, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                }
+                this.Info(() => "Package Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
+                var package = writeRepo.GetById(apiRequest.PackageId);
+                this.Info(() => "Package Read Completed, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
                 if (package == null)
                 {

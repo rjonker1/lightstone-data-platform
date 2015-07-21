@@ -30,7 +30,17 @@ namespace PackageBuilder.Core.NEventStore
         {
             this.Info(() => string.Format("Attempting to get aggregate: {0}", id));
 
-            var aggregate = GetById<T>(typeof(T).Name, id);
+            this.Info(() => string.Format("Aggregate Cache Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
+            var aggregate = CacheGet(id);
+
+            if (aggregate == null)
+            {
+                this.Info(() => string.Format("Aggregate DB Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
+                aggregate = GetById<T>(typeof(T).Name, id);
+
+                // Load aggregate into cache, if it was found in the DB and not originally from Cache
+                if (aggregate != null) CacheSave(aggregate);
+            }
 
             this.Info(() => string.Format("Successfully got aggregate: {0}", id));
 
@@ -53,6 +63,7 @@ namespace PackageBuilder.Core.NEventStore
             this.Info(() => string.Format("Attempting to save {0}", aggregate));
 
             this.Save(typeof(T).Name, aggregate, commitId);
+            CacheSave(aggregate as T);
 
             this.Info(() => string.Format("Successfully to saved {0}", aggregate));
         }
@@ -74,12 +85,14 @@ namespace PackageBuilder.Core.NEventStore
         {
             this.Info(() => string.Format("Attempting to save {0}, to cache", entity.Id));
             packageClient.Store(entity);
-            this.Info(() => string.Format("Successfully saveed {0}, to cache", entity.Id));
+            this.Info(() => string.Format("Successfully saved {0}, to cache", entity.Id));
         }
 
-        public T CacheDelete(Guid entityId)
+        public void CacheDelete(Guid entityId)
         {
-            throw new NotImplementedException();
+            this.Info(() => string.Format("Attempting to delete {0}, from cache", entityId));
+            packageClient.DeleteById(entityId);
+            this.Info(() => string.Format("Successfully deleted {0}, from cache", entityId));
         }
         #endregion
     }
