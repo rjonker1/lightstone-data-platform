@@ -75,8 +75,11 @@ namespace PackageBuilder.Core.NEventStore
         private static RedisClient _redisClient = new RedisClient(host);
         private IRedisTypedClient<T> packageClient = _redisClient.As<T>();
 
+        private static bool useCache = true;
+
         public T CacheGet(Guid entityId)
         {
+            if (!useCache) return null;
             try
             {
                 this.Info(() => string.Format("Attempting to retrieve {0}, from cache", entityId));
@@ -87,12 +90,14 @@ namespace PackageBuilder.Core.NEventStore
             catch (Exception e)
             {
                 this.Error(() => string.Format("Failed to retrieve from cache. {0}", e.Message));
+                useCache = false;
                 return null;
             }
         }
 
         public void CacheSave(T entity)
         {
+            if (!useCache) return;
             try
             {
                 this.Info(() => string.Format("Attempting to save {0}, to cache", entity.Id));
@@ -102,11 +107,13 @@ namespace PackageBuilder.Core.NEventStore
             catch (Exception e)
             {
                 this.Error(() => string.Format("Failed to save to cache. {0}", e.Message));
+                useCache = false;
             }
         }
 
         public void CacheDelete(Guid entityId)
         {
+            if (!useCache) return;
             try
             {
                 this.Info(() => string.Format("Attempting to delete {0}, from cache", entityId));
@@ -116,6 +123,7 @@ namespace PackageBuilder.Core.NEventStore
             catch (Exception e)
             {
                 this.Error(() => string.Format("Failed to delete from cache. {0}", e.Message));
+                useCache = false;
             }
         }
         #endregion
