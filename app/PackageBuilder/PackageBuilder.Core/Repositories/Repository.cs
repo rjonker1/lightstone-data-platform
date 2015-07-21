@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
 using DataPlatform.Shared.Helpers.Extensions;
 using NHibernate;
 using NHibernate.Linq;
 using PackageBuilder.Core.Entities;
+using ServiceStack.Redis;
+using ServiceStack.Redis.Generic;
 
 namespace PackageBuilder.Core.Repositories
 {
@@ -110,23 +113,6 @@ namespace PackageBuilder.Core.Repositories
             return _session.Query<T>();
         }
 
-        #endregion
-
-        #region ICacheRepository members
-        public T CacheGet(object key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T CacheSave(object key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T CacheDelete(object key)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }

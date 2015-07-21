@@ -1,9 +1,11 @@
-﻿namespace PackageBuilder.Core.Repositories
+﻿using System;
+
+namespace PackageBuilder.Core.Repositories
 {
     public interface ICacheRepository <T>
     {
-        T CacheGet(object key);
-        T CacheSave(object key);
-        T CacheDelete(object key);
+        T CacheGet(Guid entityId);
+        void CacheSave(T entity);
+        T CacheDelete(Guid entityId);
     }
 }

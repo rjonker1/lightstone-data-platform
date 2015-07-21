@@ -262,12 +262,16 @@
       <Name>PackageBuilder.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
-      <Project>{F29A3A51-343E-428F-A592-F7845E99B4AE}</Project>
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
       <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
       <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
       <Name>PackageBuilder.TestObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Unit.Tests\PackageBuilder.Unit.Tests.csproj">
+      <Project>{08C6C489-5BDD-44A5-B8DC-499A77FC445E}</Project>
+      <Name>PackageBuilder.Unit.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
