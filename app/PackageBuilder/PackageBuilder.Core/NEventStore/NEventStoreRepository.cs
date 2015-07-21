@@ -4,6 +4,7 @@ using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using NEventStore;
 using PackageBuilder.Core.Repositories;
@@ -76,23 +77,45 @@ namespace PackageBuilder.Core.NEventStore
 
         public T CacheGet(Guid entityId)
         {
-            this.Info(() => string.Format("Attempting to retrieve {0}, from cache", entityId));
-            var cachedPackage = packageClient.GetById(entityId);
-            return cachedPackage;
+            try
+            {
+                this.Info(() => string.Format("Attempting to retrieve {0}, from cache", entityId));
+                var cachedPackage = packageClient.GetById(entityId);
+                this.Info(() => string.Format("Successfully retrieved {0}, from cache", entityId));
+                return cachedPackage;
+            }
+            catch (Exception e)
+            {
+                throw new LightstoneAutoException(string.Format("Failed to retrieve from cache. {0}", e.Message));
+            }
         }
 
         public void CacheSave(T entity)
         {
-            this.Info(() => string.Format("Attempting to save {0}, to cache", entity.Id));
-            packageClient.Store(entity);
-            this.Info(() => string.Format("Successfully saved {0}, to cache", entity.Id));
+            try
+            {
+                this.Info(() => string.Format("Attempting to save {0}, to cache", entity.Id));
+                packageClient.Store(entity);
+                this.Info(() => string.Format("Successfully saved {0}, to cache", entity.Id));
+            }
+            catch (Exception e)
+            {
+                throw new LightstoneAutoException(string.Format("Failed to save to cache. {0}", e.Message));
+            }
         }
 
         public void CacheDelete(Guid entityId)
         {
-            this.Info(() => string.Format("Attempting to delete {0}, from cache", entityId));
-            packageClient.DeleteById(entityId);
-            this.Info(() => string.Format("Successfully deleted {0}, from cache", entityId));
+            try
+            {
+                this.Info(() => string.Format("Attempting to delete {0}, from cache", entityId));
+                packageClient.DeleteById(entityId);
+                this.Info(() => string.Format("Successfully deleted {0}, from cache", entityId));
+            }
+            catch (Exception e)
+            {
+                throw new LightstoneAutoException(string.Format("Failed to delete from cache. {0}", e.Message));
+            }
         }
         #endregion
     }
