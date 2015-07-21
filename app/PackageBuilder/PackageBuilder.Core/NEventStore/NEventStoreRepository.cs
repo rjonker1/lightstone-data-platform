@@ -86,7 +86,8 @@ namespace PackageBuilder.Core.NEventStore
             }
             catch (Exception e)
             {
-                throw new LightstoneAutoException(string.Format("Failed to retrieve from cache. {0}", e.Message));
+                this.Error(() => string.Format("Failed to retrieve from cache. {0}", e.Message));
+                return null;
             }
         }
 
@@ -100,7 +101,7 @@ namespace PackageBuilder.Core.NEventStore
             }
             catch (Exception e)
             {
-                throw new LightstoneAutoException(string.Format("Failed to save to cache. {0}", e.Message));
+                this.Error(() => string.Format("Failed to save to cache. {0}", e.Message));
             }
         }
 
@@ -114,7 +115,7 @@ namespace PackageBuilder.Core.NEventStore
             }
             catch (Exception e)
             {
-                throw new LightstoneAutoException(string.Format("Failed to delete from cache. {0}", e.Message));
+                this.Error(() => string.Format("Failed to delete from cache. {0}", e.Message));
             }
         }
         #endregion
