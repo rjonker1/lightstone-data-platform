@@ -12,10 +12,11 @@ using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.Read;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class IndustryModule : NancyModule// : SecureModule
+    public class IndustryModule : SecureModule
     {
         public IndustryModule(IPublishStorableCommands publisher, IRepository<Industry> repository)
         {

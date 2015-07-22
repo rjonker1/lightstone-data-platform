@@ -17,11 +17,12 @@ using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.Repositories;
+using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Read.DataProviderDto;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class DataProviderModule : NancyModule// : SecureModule
+    public class DataProviderModule : SecureModule
     {
         private static int _defaultJsonMaxLength;
 

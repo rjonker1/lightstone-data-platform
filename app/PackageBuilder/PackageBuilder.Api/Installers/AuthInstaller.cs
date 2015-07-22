@@ -14,7 +14,8 @@ namespace PackageBuilder.Api.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             var userAgent = ConfigurationManager.AppSettings["TokenAuthUserAgentValue"];
-            container.Register(Component.For<ITokenizer>().Instance(new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = userAgent).WithKeyCache(new FileSystemTokenKeyStore(new RootPathProvider())))).LifestyleTransient());
+            var tokenizer = new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = userAgent).WithKeyCache(new FileSystemTokenKeyStore(new RootPathProvider())));
+            container.Register(Component.For<ITokenizer>().Instance(tokenizer).LifestyleTransient());
         }
     }
 

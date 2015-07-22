@@ -43,9 +43,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
             //    with.Module(new DataProviderModule(Container.Resolve<IPublishStorableCommands>(), Container.Resolve<IDataProviderRepository>(), _writeRepo, Container.Resolve<IRepository<State>>()));
             //});
 
-            var bootstrapper = new TestBootstrapper("");
-            
-            _browser = new Browser(new Bootstrapper());
+            _browser = new Browser(new TestBootstrapper());
 
             Transaction(Session =>
             {

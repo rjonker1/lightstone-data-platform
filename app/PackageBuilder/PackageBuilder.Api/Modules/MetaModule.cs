@@ -5,23 +5,22 @@ using AutoMapper;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
-using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Metadata.Entrypoint;
 using Lace.Shared.Extensions;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
 using Nancy;
 using Nancy.ModelBinding;
-using PackageBuilder.Api.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using Shared.BuildingBlocks.Api.ApiClients;
+using Shared.BuildingBlocks.Api.Security;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class MetaModule : NancyModule
+    public class MetaModule : SecureModule
     {
         public MetaModule(INEventStoreRepository<Package> writeRepo, IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
         {
@@ -33,7 +32,7 @@ namespace PackageBuilder.Api.Modules
 
                 if (package == null)
                 {
-                    this.Error(() => "Package not found:".FormatWith(apiRequest.PackageId));
+                    this.Error(() => "Package meta data not found for id {0}".FormatWith(apiRequest.PackageId));
                     throw new LightstoneAutoException("Package could not be found");
                 }
 
@@ -48,7 +47,7 @@ namespace PackageBuilder.Api.Modules
                 var userId = new Guid();
                 const string accountNumber = "META";
 
-                var responses = ((Package)package).ExecuteMeta(new MetadataEntryPointService(), userId, Context.CurrentUser.UserName,
+                var responses = ((Package)package).Execute(new MetadataEntryPointService(), userId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, requestId, accountNumber, contractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice);
 
@@ -58,7 +57,7 @@ namespace PackageBuilder.Api.Modules
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     responses.Any() ? responses.AsJsonString() : string.Empty, requestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
-                return filteredResponse;
+                return Response.AsJson(filteredResponse);
             };
         }
     }
