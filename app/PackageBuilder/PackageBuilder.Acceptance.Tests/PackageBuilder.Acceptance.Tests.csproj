@@ -143,6 +143,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\packages\ServiceStack.Text.3.9.44\lib\net35\ServiceStack.Text.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NHibernate.Caches.SysCache">
       <HintPath>..\..\packages\NHibernate.Caches.SysCache.4.0.0.4000\lib\net40\NHibernate.Caches.SysCache.dll</HintPath>
     </Reference>
@@ -151,6 +167,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
       <HintPath>..\..\packages\System.Data.SQLite.Core.1.0.97.0\lib\net45\System.Data.SQLite.dll</HintPath>
@@ -188,6 +205,7 @@
     <Compile Include="Modules\States\when_invoking_state_edit_route.cs" />
     <Compile Include="Modules\States\when_invoking_state_route.cs" />
     <Compile Include="Repositories\Base\when_implementing_base_repository.cs" />
+    <Compile Include="Repositories\Cache\when_implementing_cache_repository.cs" />
     <Compile Include="Repositories\DataProviders\when_querying_data_providers.cs" />
     <Compile Include="Repositories\Packages\when_querying_packages.cs" />
     <Compile Include="Repositories\States\when_querying_state.cs" />
@@ -248,12 +266,16 @@
       <Name>PackageBuilder.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
-      <Project>{F29A3A51-343E-428F-A592-F7845E99B4AE}</Project>
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
       <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
       <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
       <Name>PackageBuilder.TestObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Unit.Tests\PackageBuilder.Unit.Tests.csproj">
+      <Project>{08C6C489-5BDD-44A5-B8DC-499A77FC445E}</Project>
+      <Name>PackageBuilder.Unit.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.IO;
 using Castle.Windsor;
+using FluentNHibernate.Utils;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.Entities;
+using PackageBuilder.Core.NEventStore;
 using PackageBuilder.TestHelper.Extensions;
 using Xunit.Extensions;
+using PackageBuilder.Domain.Entities.Packages.Write;
 
 namespace PackageBuilder.TestHelper.BaseTests
 {
@@ -22,6 +25,7 @@ namespace PackageBuilder.TestHelper.BaseTests
                 Container.Kernel.ComponentModelCreated += OverrideHelper.OverrideNhibernateSessionLifestyle;
 
             Container.Install(new NHibernateInstaller());
+            Container.Install(new NEventStoreInstaller());
             OverrideHelper.OverrideNhibernateCfg(Container);
         }
 

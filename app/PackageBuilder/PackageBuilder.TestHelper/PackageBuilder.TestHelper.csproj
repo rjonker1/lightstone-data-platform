@@ -93,6 +93,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Nancy.Authentication.Token.1.1\lib\net40\Nancy.Authentication.Token.dll</HintPath>
     </Reference>
+    <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
@@ -142,6 +146,14 @@
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{A3368386-392B-476D-8B6C-910E73A9C21C}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
+      <Project>{15EA3113-E3A9-4BAA-8746-A92973E7D3C0}</Project>
+      <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
+      <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
+      <Name>PackageBuilder.Domain.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

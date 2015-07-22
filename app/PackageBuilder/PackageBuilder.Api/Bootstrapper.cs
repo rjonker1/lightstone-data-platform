@@ -41,6 +41,7 @@ namespace PackageBuilder.Api
                 new RepositoryInstaller(),
                 new CommandInstaller(),
                 new BusInstaller(),
+                new CacheProviderInstaller(),
                 new NEventStoreInstaller(),
                 new ServiceLocatorInstaller(),
                 new AutoMapperInstaller(),
