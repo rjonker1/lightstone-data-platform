@@ -25,17 +25,32 @@ namespace Billing.Api.Modules
                     var userList = new List<User>();
 
                     // Transactions total for customer
-                    var customerTransactionsTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
+                    //var customerTransactionsTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                    //                                    .Select(x => x.TransactionId).Distinct().Count();
+                    
+                    //DB Query
+                    IQueryable<PreBilling> customerTransactions = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId);
                     // Products total for customer
-                    var customerPackagesTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                    //var customerPackagesTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                    //                                    .Select(x => x.PackageId).Distinct().Count();
+
+                    //In-Memory
+                    var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
                     // Transactions total for client
-                    var clientTransactionsTotal = preBillingRepository.Where(x => x.ClientId == transaction.ClientId)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
+                    //var clientTransactionsTotal = preBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                    //                                    .Select(x => x.TransactionId).Distinct().Count();
+
+                    //DB Query
+                    IQueryable<PreBilling> clientTransactions = preBillingRepository.Where(x => x.ClientId == transaction.ClientId);
+
                     // Products total for client
-                    var clientPackagesTotal = preBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                    //var clientPackagesTotal = preBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                    //                                    .Select(x => x.PackageId).Distinct().Count(); 
+
+                    //In-Memory
+                    var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
                     var customer = new PreBillingDto();
@@ -46,8 +61,8 @@ namespace Billing.Api.Modules
                         {
                             Id = transaction.CustomerId,
                             CustomerName = transaction.CustomerName,
-                            Transactions = customerTransactionsTotal,
-                            Products = customerPackagesTotal
+                            Transactions = customerTransactions.Count(),
+                            Products = customerPackages
                         };
                     }
 
@@ -58,7 +73,7 @@ namespace Billing.Api.Modules
                         {
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
-                            Transactions = clientTransactionsTotal,
+                            Transactions = clientTransactions.Count(),
                             Products = clientPackagesTotal
                         };
                     }
