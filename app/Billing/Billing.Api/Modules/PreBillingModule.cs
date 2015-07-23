@@ -95,7 +95,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
-                IQueryable<PreBilling> preBillingRepo = preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+                var preBillingRepo = preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in preBillingRepo)
                 {
@@ -140,7 +140,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                IQueryable<PreBilling> preBillingRepo = preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+                var preBillingRepo = preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in preBillingRepo)
                 {

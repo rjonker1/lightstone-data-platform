@@ -108,7 +108,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
-                IQueryable<StageBilling> stageBillingRepo = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+                var stageBillingRepo = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in stageBillingRepo)
                 {
@@ -153,7 +153,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                IQueryable<StageBilling> stageBillingRepo = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+                var stageBillingRepo = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in stageBillingRepo)
                 {
@@ -174,7 +174,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var packagesDetailList = new List<PackageDto>();
 
-                var transactions = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+                var transactions = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in transactions)
                 {

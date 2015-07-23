@@ -5,6 +5,7 @@ using AutoMapper;
 using Billing.Domain.Dtos;
 using DataPlatform.Shared.Repositories;
 using Nancy;
+using Nancy.Extensions;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
@@ -26,12 +27,13 @@ namespace Billing.Api.Modules
                     var customerClient = new FinalBillingDto();
                     var userList = new List<User>();
 
-                    IQueryable<FinalBilling> customerTransactions = finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId);
+                    var customerTransactions = finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId).DistinctBy(x => x.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
-                    IQueryable<FinalBilling> clientTransactions = finalBillingRepository.Where(x => x.ClientId == transaction.ClientId);
+
+                    var clientTransactions = finalBillingRepository.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.TransactionId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.PackageId).Distinct().Count();
@@ -92,7 +94,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
-                IQueryable<FinalBilling> finalBillingRepo = finalBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+                var finalBillingRepo = finalBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in finalBillingRepo)
                 {
@@ -137,7 +139,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                IQueryable<FinalBilling> finalBillingRepo = finalBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+                var finalBillingRepo = finalBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in finalBillingRepo)
                 {
