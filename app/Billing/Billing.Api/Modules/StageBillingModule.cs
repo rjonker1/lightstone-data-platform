@@ -35,15 +35,20 @@ namespace Billing.Api.Modules
                     var customerClient = new StageBillingDto();
                     var userList = new List<User>();
 
-                    IQueryable<StageBilling> customerTransactions = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId);
+                    var customerTransactions = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId).DistinctBy(x => x.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
-                    IQueryable<StageBilling> clientTransactions = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId);
+                    var billedCustomerTransactionsTotal = customerTransactions.Where(x => x.IsBillable);
+
+
+                    var clientTransactions = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.TransactionId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.PackageId).Distinct().Count();
+
+                    var billedClientTransactionsTotal = clientTransactions.Where(x => x.IsBillable);
 
                     // Customer
                     if (transaction.ClientId == new Guid())
@@ -53,6 +58,7 @@ namespace Billing.Api.Modules
                             Id = transaction.CustomerId,
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactions.Count(),
+                            BilledTransactions = billedCustomerTransactionsTotal.Count(),
                             Products = customerPackages
                         };
                     }
@@ -65,6 +71,7 @@ namespace Billing.Api.Modules
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
                             Transactions = clientTransactions.Count(),
+                            BilledTransactions = billedClientTransactionsTotal.Count(),
                             Products = clientPackagesTotal
                         };
                     }
