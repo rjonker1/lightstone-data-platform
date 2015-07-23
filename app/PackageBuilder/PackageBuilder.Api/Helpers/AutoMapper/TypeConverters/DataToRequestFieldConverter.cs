@@ -11,6 +11,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
     {
         protected override IAmRequestField ConvertCore(IDataField source)
         {
+            if (source == null) return null;
             var requestType = (RequestFieldType)Enum.Parse(typeof(RequestFieldType), source.Type);
             switch (requestType)
             {

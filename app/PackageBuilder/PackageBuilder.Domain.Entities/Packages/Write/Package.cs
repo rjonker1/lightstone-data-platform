@@ -9,7 +9,6 @@ using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-//using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Metadata.Entrypoint;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
@@ -134,11 +133,11 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
 
-            this.Info(() => "Attempting to map data provider overrides from PackageCreated event");
+            this.Info(() => "Attempting to map data provider overrides from PackageCreated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
             DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>(@event.DataProviderValueOverrides);
 
-            this.Info(() => "Successfully mapped data provider overrides from PackageCreated event");
+            this.Info(() => "Successfully mapped data provider overrides from PackageCreated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
         }
 
         private void Apply(PackageUpdated @event)
@@ -156,11 +155,11 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
 
-            this.Info(() => "Attempting to map data provider overrides from PackageUpdated event");
+            this.Info(() => "Attempting to map data provider overrides from PackageUpdated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
             DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>(@event.DataProviderValueOverrides);
 
-            this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
+            this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
         }
 
         private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string firstName, Guid requestId, string accountNumber,
@@ -195,7 +194,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             return request;
         }
 
-        private IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders, Guid requestId)
+        public IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders, Guid requestId)
         {
             if (dataProviders == null) yield break;
 
@@ -227,22 +226,6 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var responses = entryPoint.GetResponsesFromLace(new[] {request});
             this.Info(() => "EntryPoint Get LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
-
-            return MapLaceResponses(responses, requestId).ToList();
-        }
-
-        public IEnumerable<IDataProvider> ExecuteMeta(MetadataEntryPointService entryPoint, Guid userId, string userName,
-            string firstName, Guid requestId, string accountNumber, Guid contractId,
-            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
-            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
-        {
-            var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
-                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice);
-
-            if (request == null)
-                throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
-
-            var responses = entryPoint.GetResponsesFromLace(new[] { request });
 
             return MapLaceResponses(responses, requestId).ToList();
         }

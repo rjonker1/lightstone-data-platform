@@ -76,17 +76,17 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1357, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1357, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -145,74 +145,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_single_data_field_override.cs" />
-    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_single_data_field.cs" />
-    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_data_field_collection.cs" />
-    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_data_field_dto_collection.cs" />
-    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_single_data_field_dto.cs" />
-    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_single_data_field_override_collection.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_ivid_request.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_ivid_titleholder_request.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_lightstone_auto_request.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_rgt_request.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_rgt_vin_request.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_price_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_data_provider_dto_collection.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_data_provider_collection.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_an_override_to_a_single_data_provider.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider_override.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider_dto.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_accident_dist_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_amortised_value_coll_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_area_factor_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_auction_factor_coll_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_confidence_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_estimated_value_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_frequency_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_image_gauge_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_repair_index_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_sale_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_total_sales_by_age_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_total_sales_by_gender_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_image_gauge_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_accident_distribution_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_amortisation_factor_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_amortised_value_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_area_factor_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_auction_factor_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_confidence_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_estimated_value_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_frequency_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_price_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_repair_index_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_sale_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_total_sales_by_age_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_total_sales_by_gender_response.cs" />
-    <Compile Include="AutoMapper\Maps\Packages\when_mapping_to_package_dto.cs" />
-    <Compile Include="AutoMapper\Maps\Packages\when_mapping_to_package.cs" />
-    <Compile Include="AutoMapper\Maps\when_mapping_a_complex_object_to_a_data_field.cs" />
-    <Compile Include="AutoMapper\when_creating_maps.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\IvidResponseMap\when_mapping_ivid_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\IvidResponseMap\when_mapping_ivid_specific_information_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_ivid_title_holder_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\when_mapping_lightsone_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\when_mapping_lightsone_vehicle_valuation_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_amortisation_factor_collection_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_rgt_response.cs" />
-    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_rgt_vin_response.cs" />
-    <Compile Include="Installers\when_installing_auto_mapper.cs" />
-    <Compile Include="Installers\when_installing_service_locator.cs" />
-    <Compile Include="Installers\when_installing_repositories.cs" />
-    <Compile Include="Installers\when_installing_nhibernate.cs" />
-    <Compile Include="Installers\when_installing_a_bus.cs" />
-    <Compile Include="Installers\when_installing_command_handlers.cs" />
-    <Compile Include="Installers\when_installing_nventstore_dependency.cs" />
-    <Compile Include="Modules\States\when_invoking_state_add_route.cs" />
-    <Compile Include="Modules\States\when_invoking_state_edit_route.cs" />
-    <Compile Include="Modules\States\when_invoking_state_route.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="when_exporting_nhibernate_schema.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PackageBuilder.Api\PackageBuilder.Api.csproj">

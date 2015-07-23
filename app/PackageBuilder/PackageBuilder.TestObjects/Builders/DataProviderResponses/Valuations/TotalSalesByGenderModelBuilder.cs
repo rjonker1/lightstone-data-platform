@@ -3,29 +3,29 @@ using Lace.Domain.Core.Entities;
 
 namespace PackageBuilder.TestObjects.Builders.DataProviderResponses.Valuations
 {
-    public class TotalSalesByGenderModelBuilder
-    {
-        private string _carType;
-        private string _band;
-        private double _value;
+    //public class TotalSalesByGenderModelBuilder
+    //{
+    //    private string _carType;
+    //    private string _band;
+    //    private double _value;
 
-        public IRespondWithTotalSalesByGenderModel Build()
-        {
-            return new TotalSalesByGenderModel(_carType, _band, _value);
-        }
+    //    public IRespondWithTotalSalesByGenderModel Build()
+    //    {
+    //        return new TotalSalesByGenderModel(_carType, _band, _value);
+    //    }
 
-        public TotalSalesByGenderModelBuilder With(string carType, string band)
-        {
-            _carType = carType;
-            _band = band;
+    //    public TotalSalesByGenderModelBuilder With(string carType, string band)
+    //    {
+    //        _carType = carType;
+    //        _band = band;
 
-            return this;
-        }
+    //        return this;
+    //    }
 
-        public TotalSalesByGenderModelBuilder With(double value)
-        {
-            _value = value;
-            return this;
-        }
-    }
+    //    public TotalSalesByGenderModelBuilder With(double value)
+    //    {
+    //        _value = value;
+    //        return this;
+    //    }
+    //}
 }

@@ -12,7 +12,7 @@ using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class StateModule : NancyModule// : SecureModule
+    public class StateModule : SecureModule
     {
         public StateModule(IPublishStorableCommands publisher, IRepository<State> repository)
         {

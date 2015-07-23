@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Helpers.Extensions;
-using PackageBuilder.Api.Modules;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.Enums.Requests;
@@ -63,20 +62,20 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.IdentityNumber));
             Mapper.CreateMap<IAmFirstNameRequestField, DataField>()
-               .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-               .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.FirstName));
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int) RequestFieldType.FirstName));
             Mapper.CreateMap<IAmSurnameRequestField, DataField>()
-              .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-              .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.Surname));
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int) RequestFieldType.Surname));
             Mapper.CreateMap<IAmCompanyNameRequestField, DataField>()
-              .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-              .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.CompanyName));
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int) RequestFieldType.CompanyName));
             Mapper.CreateMap<IAmCompanyRegistrationNumberRequestField, DataField>()
-             .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-             .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.CompanyRegistrationNumber));
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int) RequestFieldType.CompanyRegistrationNumber));
             Mapper.CreateMap<IAmCompanyVatNumberRequestField, DataField>()
-             .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-             .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.CompanyVatNumber));
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int) RequestFieldType.CompanyVatNumber));
 
             Mapper.CreateMap<IDataField, IAmRequestField>()
                 .ConvertUsing<ITypeConverter<IDataField, IAmRequestField>>();

@@ -38,7 +38,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
                 command.SalePrice, command.Notes, command.Industries, command.State, command.Owner,
                 command.CreatedDate, command.EditedDate, command.DataProviderValueOverrides);
 
-            _writeRepo.Save(entity, Guid.NewGuid());
+            _writeRepo.Save(entity, Guid.NewGuid(), true);
         }
     }
 }

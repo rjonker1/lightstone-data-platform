@@ -71,21 +71,21 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1357, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="MemBus">
       <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
@@ -115,21 +115,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandlers\CommandStore\when_storing_a_command.cs" />
-    <Compile Include="CommandHandlers\DataProviders\when_updating_a_data_provider.cs" />
-    <Compile Include="CommandHandlers\DataProviders\when_creating_a_data_provider.cs" />
-    <Compile Include="CommandHandlers\Industries\when_renaming_an_industry.cs" />
-    <Compile Include="CommandHandlers\Industries\when_creating_an_industry.cs" />
-    <Compile Include="CommandHandlers\Industries\when_renaming_an_industry_that_does_not_exist.cs" />
-    <Compile Include="CommandHandlers\Packages\when_updating_a_package.cs" />
-    <Compile Include="CommandHandlers\Packages\when_creating_a_package.cs" />
-    <Compile Include="CommandHandlers\States\when_creating_a_state.cs" />
-    <Compile Include="CommandHandlers\States\when_renaming_an_state.cs" />
-    <Compile Include="CommandHandlers\States\when_renaming_a_state_that_does_not_exist.cs" />
-    <Compile Include="EventHandlers\DataProviders\when_updating_a_data_provider.cs" />
-    <Compile Include="EventHandlers\DataProviders\when_creating_a_data_provider.cs" />
-    <Compile Include="EventHandlers\Packages\when_creating_a_package.cs" />
-    <Compile Include="EventHandlers\Packages\when_updating_a_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

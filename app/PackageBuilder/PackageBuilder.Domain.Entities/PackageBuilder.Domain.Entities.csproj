@@ -80,17 +80,17 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.1405\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1405, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.1405\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1428, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1428\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1405, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.1405\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1428, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1428\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.1405, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.1405\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex, Version=1.0.0.1405, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.1405\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll</HintPath>
@@ -168,8 +168,9 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Metadata.Entrypoint.1.0.0.1405\lib\net45\Lightstone.DataPlatform.Lace.Test.Helper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1426, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1426\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1371, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1371\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
@@ -232,6 +233,7 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="DataProviders\Commands\AmendDataProviderStructure.cs" />
+    <Compile Include="DataProviders\Write\DataProviderConnectionStringRepository.cs" />
     <Compile Include="DataProviders\Write\SourceConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandStore\Command.cs" />

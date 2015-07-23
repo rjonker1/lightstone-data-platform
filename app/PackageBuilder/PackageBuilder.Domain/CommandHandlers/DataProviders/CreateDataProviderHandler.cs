@@ -44,7 +44,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 command.Description, command.CostOfSale, response.GetType(),
                 command.Owner, command.CreatedDate, requestFields, dataFields, 1);
 
-            _writeRepo.Save(entity, Guid.NewGuid());
+            _writeRepo.Save(entity, Guid.NewGuid(), true);
         }
     }
 }

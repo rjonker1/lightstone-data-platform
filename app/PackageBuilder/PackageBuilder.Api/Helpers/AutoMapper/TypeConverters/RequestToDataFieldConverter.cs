@@ -14,8 +14,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
         protected override IEnumerable<IDataField> ConvertCore(IAmDataProviderRequest source)
         {
             var properties = source.GetType().GetPublicProperties();
-
-            return properties.Select(property => AmRequestField(source, property)).ToList();
+            var dataFields = properties.Select(property => AmRequestField(source, property));
+            return dataFields.Where(x => x != null).ToList();
         }
 
         private static IDataField AmRequestField(IAmDataProviderRequest source, PropertyInfo property)

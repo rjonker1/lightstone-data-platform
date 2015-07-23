@@ -99,7 +99,9 @@ namespace PackageBuilder.Domain.Entities.Requests
             IHaveUser user, string packageName, IBuildRequestTypes requestTypes)
         {
             Name = name;
-            Request = new[] {requestTypes.RequestTypes.FirstOrDefault(w => w.Key == name).Value(requestFields.ToList(), user, packageName)};
+            var requestType = requestTypes.RequestTypes.FirstOrDefault(w => w.Key == name);
+            if (requestType.Value != null)
+                Request = new[] {requestType.Value(requestFields.ToList(), user, packageName)};
             CostPrice = costPrice;
             RecommendedPrice = recommendedPrice;
         }

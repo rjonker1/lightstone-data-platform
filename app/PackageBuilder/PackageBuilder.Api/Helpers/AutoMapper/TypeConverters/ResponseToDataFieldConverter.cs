@@ -15,6 +15,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
     public class ResponseToDataFieldConverter : TypeConverter<object, IEnumerable<DataField>>
     {
         private readonly IRepository<Industry> _industryRepository;
+        private readonly string[] _blackListedProperties = { "Type", "TypeName", "Handled", "Request" };
 
         public ResponseToDataFieldConverter(IRepository<Industry> industryRepository)
         {
@@ -38,7 +39,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
         {
             this.Info(() => "Attempting to map {0} to IEnumerable<IDataField>".FormatWith(source));
 
-            var properties = source.GetType().GetPublicProperties().Where(x => x.Name != "Type" && x.Name != "TypeName"); //Type & TypeName are used for deserialization via DataPlatform.Shared.Helpers.Json.JsonTypeResolverConverter
+            var properties = source.GetType().GetPublicProperties().AsQueryable().Where(x => !_blackListedProperties.Contains(x.Name)).ToList(); 
             var complexProperties = properties.Where(property =>
                         (property.PropertyType.IsClass || property.PropertyType.IsInterface) &&
                         !TypeExtensions.IsSimple(property.PropertyType) && 
@@ -50,7 +51,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 
             this.Info(() => "Successfully mapped {0} to IEnumerable<IDataField>".FormatWith(source));
 
-            return list;
+            return list.Where(x => x != null).ToList();
         }
     }
 }

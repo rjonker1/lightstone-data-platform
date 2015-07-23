@@ -124,7 +124,9 @@ namespace PackageBuilder.Api.Modules
                 var apiRequest = this.Bind<ApiRequestDto>();
                 this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
-                var package = writeRepo.GetById(apiRequest.PackageId);
+                this.Info(() => "Package Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
+                var package = writeRepo.GetById(apiRequest.PackageId, true);
+                this.Info(() => "Package Read Completed, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
                 if (package == null)
                 {
@@ -132,6 +134,7 @@ namespace PackageBuilder.Api.Modules
                     throw new LightstoneAutoException("Package could not be found");
                 }
 
+                this.Info(() => "PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 var resource = string.Format("CustomerClient/{0}", apiRequest.CustomerClientId);
                 var accountNumber = userManagementApi.Get("", resource, "", new[]
@@ -139,6 +142,7 @@ namespace PackageBuilder.Api.Modules
                     new KeyValuePair<string, string>("Authorization", "Token " + token),
                     new KeyValuePair<string, string>("Content-Type", "application/json")
                 });
+                this.Info(() => "PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 //TODO: Get these values from request or user management                
                 const long contractVersion = (long)1.0;
@@ -153,7 +157,9 @@ namespace PackageBuilder.Api.Modules
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice);
 
                 // Filter responses for cleaner api payload
+                this.Info(() => "Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
                 var filteredResponse = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>(responses);
+                this.Info(() => "Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, requestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));

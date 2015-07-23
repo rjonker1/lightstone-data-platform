@@ -20,7 +20,8 @@ namespace PackageBuilder.TestObjects.Builders
                 Namespace = _namespace,
                 DisplayName = _displayName,
                 CostOfSale = _costOfSale,
-                DataFieldOverrides = _dataFieldOverrides
+                DataFieldOverrides = _dataFieldOverrides,
+                IsSelected = true
             };
         }
 

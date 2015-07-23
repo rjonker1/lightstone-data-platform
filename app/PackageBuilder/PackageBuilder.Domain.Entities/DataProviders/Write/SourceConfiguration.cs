@@ -67,7 +67,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             {
                 this.Info(() => "Attempting to find data provider ConnectionString for {0}".FormatWith(_name));
 
-                var value = ConfigurationManager.ConnectionStrings[_name.ToString()];
+                var value = ConfigurationManager.ConnectionStrings[new DataProviderConnectionStringRepository()[_name]];
 
                 this.Info(() => "Successfully found data provider ConnectionString for {0}".FormatWith(_name));
 

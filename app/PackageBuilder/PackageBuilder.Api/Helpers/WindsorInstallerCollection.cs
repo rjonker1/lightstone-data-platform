@@ -1,0 +1,23 @@
+﻿using Castle.MicroKernel.Registration;
+using PackageBuilder.Api.Installers;
+
+namespace PackageBuilder.Api.Helpers
+{
+    public class WindsorInstallerCollection
+    {
+        public static IWindsorInstaller[] Installers =
+        {
+            new NHibernateInstaller(),
+            new RepositoryInstaller(),
+            new CommandInstaller(),
+            new BusInstaller(),
+            new CacheProviderInstaller(),
+            new NEventStoreInstaller(),
+            new ServiceLocatorInstaller(),
+            new AutoMapperInstaller(),
+            new LaceInstaller(),
+            new AuthInstaller(),
+            new ApiInstaller()
+        };
+    }
+}

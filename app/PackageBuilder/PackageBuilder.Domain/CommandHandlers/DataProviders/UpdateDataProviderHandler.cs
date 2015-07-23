@@ -35,7 +35,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                command.ResponseType, command.FieldLevelCostPriceOverride, entity.Version,
                command.Owner, command.CreatedDate, command.EditedDate, command.RequestFields, command.DataFields);
 
-            _writeRepo.Save(entity, Guid.NewGuid());
+            _writeRepo.Save(entity, Guid.NewGuid(), true);
         }
     }
 }

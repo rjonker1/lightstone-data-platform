@@ -6,6 +6,7 @@ using DataPlatform.Shared.Enums;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
+using PackageBuilder.Api.Helpers.Constants;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
@@ -16,11 +17,12 @@ using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.Repositories;
+using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Read.DataProviderDto;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class DataProviderModule : NancyModule// : SecureModule
+    public class DataProviderModule : SecureModule
     {
         private static int _defaultJsonMaxLength;
 
@@ -80,7 +82,7 @@ namespace PackageBuilder.Api.Modules
             Get["/DataProviders/{id}/{version}"] = _ =>
                 Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id, _.version)) } });
 
-            Put["/Dataproviders/{id}"] = _ =>
+            Put[RouteConstants.DataProviderEditRoute] = _ =>
             {
                 var dto = this.Bind<Domain.Dtos.Write.DataProviderDto>();
                 var rFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(dto.RequestFields);

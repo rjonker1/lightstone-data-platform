@@ -17,4 +17,15 @@ namespace Lace.Test.Helper.Builders.Requests
                     Guid.NewGuid());
         }
     }
+
+    //public class VinNumberRgtRequestPackage
+    //{
+    //    public static IHavePackageForRequest VinNumbePackage(string vinumber)
+    //    {
+    //        return
+    //            new LicensePlateNumberPackage(
+    //                new IAmDataProvider[] { new DataProvider(DataProviderName.Rgt, 17, 33, RgtRequestType.WithCarId(carId.ToString())) },
+    //                Guid.NewGuid());
+    //    }
+    //}
 }

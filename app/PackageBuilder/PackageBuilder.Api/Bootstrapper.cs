@@ -10,8 +10,8 @@ using Nancy.Bootstrappers.Windsor;
 using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
+using PackageBuilder.Api.Helpers;
 using PackageBuilder.Api.Helpers.Extensions;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Entities.DataImports;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -36,18 +36,7 @@ namespace PackageBuilder.Api
             base.ConfigureApplicationContainer(container);
 
             //container.Install(FromAssembly.InThisApplication());
-            container.Install(
-                new NHibernateInstaller(),
-                new RepositoryInstaller(),
-                new CommandInstaller(),
-                new BusInstaller(),
-                new NEventStoreInstaller(),
-                new ServiceLocatorInstaller(),
-                new AutoMapperInstaller(),
-                new LaceInstaller(),
-                new AuthInstaller(),
-                new ApiInstaller()
-                );
+            container.Install(WindsorInstallerCollection.Installers);
 
           //  container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)

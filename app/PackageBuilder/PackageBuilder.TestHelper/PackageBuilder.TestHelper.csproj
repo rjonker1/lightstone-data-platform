@@ -71,13 +71,38 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1428, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1428\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1428\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.1428, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1428\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Nancy.1.1\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Authentication.Stateless">
+      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Authentication.Token, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Nancy.Authentication.Token.1.1\lib\net40\Nancy.Authentication.Token.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -90,10 +115,11 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BaseTests\when_not_persisting_entities.cs" />
+    <Compile Include="BaseTests\BaseTestHelper.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
-    <Compile Include="BaseTests\when_persisting_entities_to_db.cs" />
-    <Compile Include="BaseTests\when_persisting_entities_to_memory.cs" />
+    <Compile Include="BaseTests\PhysicalTestDataBaseHelper.cs" />
+    <Compile Include="BaseTests\MemoryTestDataBaseHelper.cs" />
+    <Compile Include="Fakes\FakeTokenizer.cs" />
     <Compile Include="Helpers\CustomEqualityComparer.cs" />
     <Compile Include="OverrideHelper.cs" />
   </ItemGroup>
@@ -109,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Builders\Repositories\" />
-    <Folder Include="Fakes\" />
     <Folder Include="Mothers\" />
     <Folder Include="Properties\" />
   </ItemGroup>
@@ -121,6 +146,14 @@
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{A3368386-392B-476D-8B6C-910E73A9C21C}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
+      <Project>{15EA3113-E3A9-4BAA-8746-A92973E7D3C0}</Project>
+      <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
+      <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
+      <Name>PackageBuilder.Domain.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
