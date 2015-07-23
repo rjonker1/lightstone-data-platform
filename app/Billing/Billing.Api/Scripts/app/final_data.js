@@ -149,21 +149,23 @@ window.invoiceActionEvents = {
 
         $.get('/FinalBilling/CustomerClient/' + row.id + '/Packages', function (response) {
 
+            var packages = '';
+
+            for (var i = 0; i < response.data.length; i++) {
+                packages += '{"ItemCode": "' + response.data[i].packageName + '", "ItemDescription": "' + response.data[i].packageName + '", "QuantityUnit": ' + response.data[i].packageTransactions + ', "Price":' + response.data[i].packageRecommendedPrice + ', "Vat": 0.00},';
+            }
+
             var data = '{' +
                 '"template": { "shortid" : "N190datG" },' +
                 '"data" : {' +
-                    '"Customer": { ' +
-                       ' "Name": "' + row.customerName + '",' +
+                    '"Customer": {' +
+                        '"Name": "' + row.customerName + '",' +
                         '"TaxRegistration": 4190195679,' +
                         '"Packages" : [ ' +
-                            '{"ItemCode": "1000/200/002", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": "' + row.transactions + '", "Price": 16314.67, "Vat": 2284.00}' +
-                        ']  ' +
+                            packages +
+                            ']  ' +
                     '} ' +
                 '}';
-
-            //$.get("http://localhost:8856/templates/N190datG", function (response) {
-            //    $('.modal-body').html(response);
-            //});
 
             $.post(reportingApi + "/ReportHTML", data)
                 .done(function (response) {

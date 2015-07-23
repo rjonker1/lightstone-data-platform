@@ -316,8 +316,6 @@ window.invoiceActionEvents = {
             var packages = '';
 
             for (var i = 0; i < response.data.length; i++) {
-                console.log(i);
-                console.log(packages);
                 packages += '{"ItemCode": "' + response.data[i].packageName + '", "ItemDescription": "' + response.data[i].packageName + '", "QuantityUnit": ' + response.data[i].packageTransactions + ', "Price":' + response.data[i].packageRecommendedPrice + ', "Vat": 0.00},';
             }
             
@@ -329,7 +327,6 @@ window.invoiceActionEvents = {
                         '"TaxRegistration": 4190195679,' +
                         '"Packages" : [ ' +
                             packages +
-                            //'{"ItemCode": "' + response.data[0].packageName + '", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": ' + row.billedTransactions + ', "Price":' + response.data[0].packageRecommendedPrice + ', "Vat": 0.00}' +
                             ']  ' +
                     '} ' +
                 '}';
