@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AutoMapper;
 using Billing.Domain.Dtos;
 using Billing.Domain.Entities;
 using DataPlatform.Shared.Repositories;
@@ -27,54 +28,43 @@ namespace Billing.Api.Modules
 
             Get["/StageBilling/"] = _ =>
             {
-                var customerList = new List<StageBillingDto>();
+                var customerClientList = new List<StageBillingDto>();
 
                 foreach (var transaction in stageBillingRepository)
                 {
-                   
+                    var customerClient = new StageBillingDto();
                     var userList = new List<User>();
 
-                    // Transactions total for customer
-                    var customerTransactionsTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
-                    var billedCustomerTransactionsTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
-                    // Products total for customer
-                    var customerPackagesTotal = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                    IQueryable<StageBilling> customerTransactions = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId);
+
+                    var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
-                    // Transactions total for client
-                    var clientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
-                    var billedClientTransactionsTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId && x.IsBillable)
-                                                        .Select(x => x.TransactionId).Distinct().Count();
-                    // Products total for client
-                    var clientPackagesTotal = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId)
+                    IQueryable<StageBilling> clientTransactions = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId);
+
+                    var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
-                    var customer = new StageBillingDto();
                     // Customer
                     if (transaction.ClientId == new Guid())
                     {
-                        customer = new StageBillingDto
+                        customerClient = new StageBillingDto
                         {
                             Id = transaction.CustomerId,
                             CustomerName = transaction.CustomerName,
-                            Transactions = customerTransactionsTotal,
-                            BilledTransactions = billedCustomerTransactionsTotal,
-                            Products = customerPackagesTotal
+                            Transactions = customerTransactions.Count(),
+                            Products = customerPackages
                         };
                     }
 
                     // Client
                     if (transaction.CustomerId == new Guid())
                     {
-                        customer = new StageBillingDto
+                        customerClient = new StageBillingDto
                         {
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
-                            Transactions = clientTransactionsTotal,
-                            BilledTransactions = billedClientTransactionsTotal,
+                            Transactions = clientTransactions.Count(),
                             Products = clientPackagesTotal
                         };
                     }
@@ -84,25 +74,25 @@ namespace Billing.Api.Modules
                     {
                         UserId = transaction.UserId,
                         Username = transaction.Username,
-                        HasTransactions = transaction.HasTransactions
+                        HasTransactions = true
                     };
 
-                    //Indices
+                    // Indices
                     var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
-                    var customerIndex = customerList.FindIndex(x => x.Id == customer.Id);
+                    var customerClientIndex = customerClientList.FindIndex(x => x.Id == customerClient.Id);
 
-                    //Index restrictions for new records
-                    //if (userIndex < 0 && user.HasTransactions) userList.Add(user);
+
+                    // Index restrictions for new records
                     if (userIndex < 0) userList.Add(user);
 
-                    customer.Users = userList;
-                    if (customerIndex < 0 && customer.Users.Any()) customerList.Add(customer);
+                    customerClient.Users = userList;
+
+                    if (customerClientIndex < 0) customerClientList.Add(customerClient);
                 }
 
-                //return Response.AsJson(new { data = customerList });
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customerList });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customerClientList });
             };
 
 
@@ -111,21 +101,20 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
-                foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
-                {
+                IQueryable<StageBilling> stageBillingRepo = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
 
+                foreach (var transaction in stageBillingRepo)
+                {
                     var userTransactionsList = new List<TransactionDto>();
 
-                    // Get User Meta data
                     var userMeta = userMetaRepository.FirstOrDefault(x => x.Id == transaction.UserId) ?? new UserMeta
                     {
                         Id = transaction.UserId,
                         Username = transaction.Username
                     };
 
-                    // Filter repo for user transaction; For specified customer | client
-                    var userTransactions = stageBillingRepository.Where(x => x.UserId == transaction.UserId
-                        && (x.CustomerId == searchId || x.ClientId == searchId))
+                    // Filter repo for user transaction;
+                    var userTransactions = stageBillingRepo.Where(x => x.UserId == transaction.UserId)
                                             .Select(x =>
                                             new TransactionDto
                                             {
@@ -136,26 +125,15 @@ namespace Billing.Api.Modules
 
                     foreach (var userTransaction in userTransactions)
                     {
-
-                        // Index
                         var userTransIndex = userTransactionsList.FindIndex(x => x.TransactionId == userTransaction.TransactionId);
                         if (userTransIndex < 0) userTransactionsList.Add(userTransaction);
                     }
 
-                    // User
-                    var user = new UserDto
-                    {
-                        UserId = transaction.UserId,
-                        Username = transaction.Username,
-                        FirstName = userMeta.FirstName,
-                        LastName = userMeta.LastName,
-                        Transactions = userTransactionsList
-                    };
+                    var user = Mapper.Map<StageBilling, UserDto>(transaction);
+                    Mapper.Map(userMeta, user);
+                    user.Transactions = userTransactionsList;
 
-                    // Index
                     var userIndex = customerUsersDetailList.FindIndex(x => x.UserId == user.UserId);
-
-                    // Index restriction for new record
                     if (userIndex < 0) customerUsersDetailList.Add(user);
                 }
 
@@ -168,37 +146,13 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                foreach (var transaction in stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId))
+                IQueryable<StageBilling> stageBillingRepo = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId);
+
+                foreach (var transaction in stageBillingRepo)
                 {
+                    var package = Mapper.Map<StageBilling, PackageDto>(transaction);
 
-                    //var dataProviderList = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId)
-                    //                        .Select(x =>
-                    //                            new DataProviderDto()
-                    //                            {
-                    //                                DataProviderId = x.DataProviderId,
-                    //                                DataProviderName = x.DataProviderName,
-                    //                                CostPrice = x.CostPrice,
-                    //                                RecommendedPrice = x.RecommendedPrice,
-
-                    //                                PackageId = x.PackageId,
-                    //                                PackageName = x.PackageName
-
-                    //                            }).Distinct();
-
-                    //Package
-                    var package = new PackageDto()
-                    {
-                        PackageId = transaction.PackageId,
-                        PackageName = transaction.PackageName,
-                        PackageCostPrice = transaction.PackageCostPrice,
-                        PackageRecommendedPrice = transaction.PackageRecommendedPrice
-                        //DataProviders = dataProviderList
-                    };
-
-                    //Package Index
                     var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
-
-                    //Index restriction for new record
                     if (packageIndex < 0) customerPackagesDetailList.Add(package);
                 }
 
@@ -234,41 +188,9 @@ namespace Billing.Api.Modules
                         break;
                     }
 
-                    //var dataProviderList = stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId) && x.IsBillable)
-                    //                        .Select(x =>
-                    //                            new DataProviderDto()
-                    //                            {
-                    //                                DataProviderId = x.DataProviderId,
-                    //                                DataProviderName = x.DataProviderName,
-                    //                                CostPrice = x.CostPrice,
-                    //                                RecommendedPrice = x.RecommendedPrice,
+                    var package = Mapper.Map<StageBilling, PackageDto>(transaction);
 
-                    //                                PackageId = x.PackageId,
-                    //                                PackageName = x.PackageName
-
-                    //                            }).Distinct();
-
-
-                    //var packageTotal = 0.00;
-
-                    //foreach (var dataProvider in dataProviderList)
-                    //{
-                    //    packageTotal += Convert.ToDouble(dataProvider.RecommendedPrice);
-                    //}
-
-                    // Package
-                    var package = new PackageDto
-                    {
-                        PackageId = transaction.PackageId,
-                        PackageName = transaction.PackageName,
-                        PackageCostPrice = transaction.PackageCostPrice,
-                        PackageRecommendedPrice = transaction.PackageRecommendedPrice
-                    };
-
-                    // Package Index
                     var packageIndex = packagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
-
-                    // Index restriction for new record
                     if (packageIndex < 0) packagesDetailList.Add(package);
                 }
 

@@ -91,6 +91,7 @@
     <Compile Include="CustomerClientTransactionDto.cs" />
     <Compile Include="DataProviderDto.cs" />
     <Compile Include="DataProviderTransactionDto.cs" />
+    <Compile Include="FinalBillingDto.cs" />
     <Compile Include="PackageTransactionDto.cs" />
     <Compile Include="PreBillingDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
