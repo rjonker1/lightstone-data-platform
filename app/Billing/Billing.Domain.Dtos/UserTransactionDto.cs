@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Workflow.Billing.Domain.Dtos;
 
 namespace Billing.Domain.Dtos
 {

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Billing.Domain.Dtos
+namespace Workflow.Billing.Domain.Dtos
 {
     public class PackageDto
     {

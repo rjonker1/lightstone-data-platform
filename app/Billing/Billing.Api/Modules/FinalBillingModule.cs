@@ -6,6 +6,7 @@ using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules

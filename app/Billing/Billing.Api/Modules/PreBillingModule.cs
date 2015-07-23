@@ -7,7 +7,9 @@ using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
+using PreBillingDto = Billing.Domain.Dtos.PreBillingDto;
 
 namespace Billing.Api.Modules
 {

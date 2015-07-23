@@ -6,6 +6,7 @@ using DataPlatform.Shared.Repositories;
 using Nancy;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;

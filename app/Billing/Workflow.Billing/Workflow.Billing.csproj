@@ -61,9 +61,6 @@
       <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Billing.Domain.Dtos">
-      <HintPath>..\Billing.Api\Bin\Billing.Domain.Dtos.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
@@ -116,7 +113,10 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Domain\Dtos\PackageDto.cs" />
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
+    <Compile Include="Domain\Dtos\TransactionDto.cs" />
+    <Compile Include="Domain\Dtos\UserDto.cs" />
     <Compile Include="Domain\Entities\AccountMeta.cs" />
     <Compile Include="Domain\Entities\AuditLog.cs" />
     <Compile Include="Domain\Entities\BillingTransaction.cs" />

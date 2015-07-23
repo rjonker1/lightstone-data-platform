@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Workflow.Billing.Domain.Entities;
 
-namespace Billing.Domain.Dtos
+namespace Workflow.Billing.Domain.Dtos
 {
     public class UserDto
     {

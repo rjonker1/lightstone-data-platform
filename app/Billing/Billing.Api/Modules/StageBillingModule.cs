@@ -12,6 +12,7 @@ using Nancy.Responses.Negotiation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Api.Modules

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Billing.Domain.Dtos
+namespace Workflow.Billing.Domain.Dtos
 {
     public class TransactionDto
     {

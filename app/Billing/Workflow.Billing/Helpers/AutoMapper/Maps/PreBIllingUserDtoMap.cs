@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Billing.Domain.Dtos;
+using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Helpers.AutoMapper.Maps
