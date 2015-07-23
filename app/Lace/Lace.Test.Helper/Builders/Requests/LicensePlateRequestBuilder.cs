@@ -80,5 +80,11 @@ namespace Lace.Test.Helper.Builders.Requests
             _request = new[] {new VinNumberLSAutoRgtAndRgtVinProvidersRequest()};
             return _request;
         }
+
+        public ICollection<IPointToLaceRequest> ForRgtAndRgtVin()
+        {
+            _request = new[] { new VinNumbeRgtAndRgtVinProvidersRequest() };
+            return _request;
+        }
     }
 }

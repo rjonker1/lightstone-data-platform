@@ -130,6 +130,7 @@
     <Compile Include="Helper\TestCacheRepository.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_director_search.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_company_search.cs" />
+    <Compile Include="Lace\Chain\when_initalizing_lace_source_chain_for_vin_rgt_vin_rgt_search.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_vin_rgt_ls_rgt_vin_search.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />

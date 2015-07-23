@@ -50,5 +50,14 @@ namespace Lace.Test.Helper.Builders.Requests
                 new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty())
             }, Guid.NewGuid());
         }
+
+        public static IHavePackageForRequest RgtAndRgtVinPackage(string vinNumber)
+        {
+            return new LicensePlateNumberPackage(new IAmDataProvider[]
+            {
+                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.WithVin(vinNumber)),
+                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty())
+            }, Guid.NewGuid());
+        }
     }
 }

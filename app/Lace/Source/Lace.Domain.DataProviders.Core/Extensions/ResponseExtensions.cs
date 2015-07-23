@@ -54,7 +54,8 @@ namespace Lace.Domain.DataProviders.Core.Extensions
             <int, Func<ICollection<IPointToLaceProvider>, string>>()
         {
             {0, VinFromLighstoneAuto},
-            {1, VinFromIvid}
+            {1, VinFromIvid},
+            {2, VinFromRgtVin}
         };
 
         private readonly IDictionary<int, Func<ICollection<IPointToLaceProvider>, int>> _carIdProviders = new Dictionary
@@ -77,6 +78,11 @@ namespace Lace.Domain.DataProviders.Core.Extensions
         private static readonly Func<ICollection<IPointToLaceProvider>, string> VinFromIvid =
             (response) => response.Exists<IProvideDataFromIvid>() && response.OfType<IProvideDataFromIvid>().First().Handled
                 ? response.OfType<IProvideDataFromIvid>().First().Vin
+                : string.Empty;
+
+        private static readonly Func<ICollection<IPointToLaceProvider>, string> VinFromRgtVin =
+            (response) => response.Exists<IProvideDataFromRgtVin>() && response.OfType<IProvideDataFromRgtVin>().First().Handled
+                ? response.OfType<IProvideDataFromRgtVin>().First().Vin
                 : string.Empty;
 
         private static readonly Func<ICollection<IPointToLaceProvider>, int> CarIdFromLighstoneAuto =
