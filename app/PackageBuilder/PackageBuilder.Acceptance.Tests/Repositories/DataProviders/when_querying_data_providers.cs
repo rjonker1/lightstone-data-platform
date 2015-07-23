@@ -7,12 +7,13 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.DataProviders
 {
-    public class when_querying_data_providers : when_persisting_entities_to_memory
+    public class when_querying_data_providers : MemoryTestDataBaseHelper
     {
         private DataProviderRepository _repository;
+
         public override void Observe()
         {
-            base.Observe();
+            RefreshDb();
 
             SaveAndFlush(ReadDataProviderMother.Ivid, ReadDataProviderMother.Rgt);
 

@@ -11,15 +11,13 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.DataProviders
 {
-    public class when_creating_a_data_provider : when_not_persisting_entities
+    public class when_creating_a_data_provider : BaseTestHelper
     {
         private CreateDataProviderHandler _handler;
         private readonly Mock<IDataProviderRepository> _readRepository = new Mock<IDataProviderRepository>();
         private readonly Mock<INEventStoreRepository<DataProvider>> _writeRepository = new Mock<INEventStoreRepository<DataProvider>>();
         public override void Observe()
         {
-            base.Observe();
-
             var command = new CreateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, 10m, "User", DateTime.UtcNow);
             _handler = new CreateDataProviderHandler(_writeRepository.Object, _readRepository.Object);
             _handler.Handle(command);

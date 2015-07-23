@@ -1,25 +1,19 @@
 ﻿using System.Linq;
 using AutoMapper;
-using Castle.Windsor;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
-using PackageBuilder.TestHelper;
+using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataFields
 {
-    public class when_mapping_to_a_single_data_field : Specification
+    public class when_mapping_to_a_single_data_field : BaseTestHelper
     {
         private IDataField _dataField;
         public override void Observe()
         {
-            var container = new WindsorContainer();
-            container.Install(new ServiceLocatorInstaller(), new NHibernateInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
-            OverrideHelper.OverrideNhibernateCfg(container);
-
             _dataField = Mapper.Map<DataProviderFieldItemDto, DataField>(DataFieldDtoMother.SpecificInformation);
         }
 

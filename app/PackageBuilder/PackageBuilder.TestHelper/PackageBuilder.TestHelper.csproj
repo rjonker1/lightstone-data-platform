@@ -115,10 +115,10 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BaseTests\when_not_persisting_entities.cs" />
+    <Compile Include="BaseTests\BaseTestHelper.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
-    <Compile Include="BaseTests\when_persisting_entities_to_db.cs" />
-    <Compile Include="BaseTests\when_persisting_entities_to_memory.cs" />
+    <Compile Include="BaseTests\PhysicalTestDataBaseHelper.cs" />
+    <Compile Include="BaseTests\MemoryTestDataBaseHelper.cs" />
     <Compile Include="Fakes\FakeTokenizer.cs" />
     <Compile Include="Helpers\CustomEqualityComparer.cs" />
     <Compile Include="OverrideHelper.cs" />

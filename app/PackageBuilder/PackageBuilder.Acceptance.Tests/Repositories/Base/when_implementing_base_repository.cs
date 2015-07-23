@@ -10,13 +10,14 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.Base
 {
-    public class when_implementing_base_repository : when_persisting_entities_to_memory
+    public class when_implementing_base_repository : MemoryTestDataBaseHelper
     {
-        private IRepository<DataProvider> _repository;
-        private Guid _id;
-        public override void Observe()
+        private readonly IRepository<DataProvider> _repository;
+        private readonly Guid _id;
+
+        public when_implementing_base_repository() 
         {
-            base.Observe();
+            RefreshDb();
 
             _repository = new DataProviderRepository(Session);
             var dataProvider = ReadDataProviderMother.Ivid;
@@ -26,6 +27,11 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Base
             Session.Flush();
 
             _id = GetFromDb(dataProvider).Id;
+        }
+
+        public override void Observe()
+        {
+            
         }
 
         [Observation]

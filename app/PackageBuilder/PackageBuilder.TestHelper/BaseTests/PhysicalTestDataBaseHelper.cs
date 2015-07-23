@@ -1,35 +1,24 @@
 ﻿using System;
 using System.IO;
-using Castle.Windsor;
-using FluentNHibernate.Utils;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.Entities;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.TestHelper.Extensions;
-using Xunit.Extensions;
-using PackageBuilder.Domain.Entities.Packages.Write;
 
 namespace PackageBuilder.TestHelper.BaseTests
 {
-    public class when_persisting_entities_to_db : Specification
+    public abstract class PhysicalTestDataBaseHelper : BaseTestHelper
     {
-        public IWindsorContainer Container = new WindsorContainer();
         protected ISession Session;
 
-        public when_persisting_entities_to_db(bool useSingleSession = false)
+        protected PhysicalTestDataBaseHelper(bool useSingleSession = false)
         {
             if (useSingleSession)
                 Container.Kernel.ComponentModelCreated += OverrideHelper.OverrideNhibernateSessionLifestyle;
-
-            Container.Install(new NHibernateInstaller());
-            Container.Install(new NEventStoreInstaller());
-            OverrideHelper.OverrideNhibernateCfg(Container);
         }
 
-        public override void Observe()
+        public void RefreshDb()
         {
             Session = Container.Resolve<ISessionFactory>().OpenSession();
             // select * from dbo.sysobjects where id = object_id(N'PackageBuilderCommandStore.dbo.[Command]') and OBJECTPROPERTY(id, N'IsUserTable') = 1

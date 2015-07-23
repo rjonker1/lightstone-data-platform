@@ -12,14 +12,12 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.AutoMapper.Packages
 {
-    public class when_mapping_to_package : when_persisting_entities_to_memory
+    public class when_mapping_to_package : MemoryTestDataBaseHelper
     {
         private IPackage _package;
         public override void Observe()
         {
-            base.Observe();
-
-            Container.Install(new ServiceLocatorInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
+            RefreshDb();
 
             var state = StateMother.Published;
             SaveAndFlush(state);

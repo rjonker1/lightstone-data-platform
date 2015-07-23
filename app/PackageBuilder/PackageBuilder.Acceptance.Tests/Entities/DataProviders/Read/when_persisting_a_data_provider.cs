@@ -7,11 +7,11 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Entities.DataProviders.Read
 {
-    public class when_persisting_a_data_provider : when_persisting_entities_to_memory
+    public class when_persisting_a_data_provider : MemoryTestDataBaseHelper
     {
         public override void Observe()
         {
-            base.Observe();
+            RefreshDb();
         }
 
         [Observation]

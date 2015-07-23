@@ -7,12 +7,13 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.States
 {
-    public class when_querying_state : when_persisting_entities_to_memory
+    public class when_querying_state : MemoryTestDataBaseHelper
     {
         private StateRepository _repository;
+
         public override void Observe()
         {
-            base.Observe();
+            RefreshDb();
 
             SaveAndFlush(StateMother.Draft, StateMother.Published);
 

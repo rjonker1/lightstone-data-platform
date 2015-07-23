@@ -11,13 +11,11 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Requests
 {
-    public class when_mapping_lightstone_auto_request : when_not_persisting_entities
+    public class when_mapping_lightstone_auto_request : BaseTestHelper
     {
         private IEnumerable<IDataField> _dataFields;
         public override void Observe()
         {
-            base.Observe();
-
             _dataFields = Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(new LightstoneAutoRequest(new CarIdRequestField(""), new YearRequestField(""), new MakeRequestField(""), new VinNumberRequestField("")));
         }
 

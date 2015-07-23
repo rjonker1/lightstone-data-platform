@@ -8,18 +8,19 @@ using PackageBuilder.Domain.Entities.CommandStore;
 using PackageBuilder.Domain.Entities.CommandStore.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.TestHelper.BaseTests;
+using Xunit;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
 {
-    public class when_storing_a_command : when_persisting_entities_to_memory
+    public class when_storing_a_command : MemoryTestDataBaseHelper
     {
         private StoreCommandHandler _handler;
         private IRepository<Command> _repository;
 
         public override void Observe()
         {
-            base.Observe();
+            base.RefreshDb();
 
             _repository = new Repository<Command>(Session);
 
@@ -31,14 +32,14 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
             Session.Flush();
         }
 
-        [Observation]
+        [Fact(Skip = "Manual Test")]
         public void should_store_command()
         {
             
         }
     }
 
-    public class when_replaying_a_command : when_persisting_entities_to_memory
+    public class when_replaying_a_command : MemoryTestDataBaseHelper
     {
         private ReplayCommandHandler _replayCommandHandler;
         private IBus _bus;
@@ -46,7 +47,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
 
         public override void Observe()
         {
-            base.Observe();
+            base.RefreshDb();
 
             Container.Install(new WindsorInstaller(), new CommandInstaller(), new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
@@ -59,7 +60,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
             _replayCommandHandler.Handle(new ReplayCommand());
         }
 
-        [Observation]
+        [Fact(Skip = "Manual Test")]
         public void should_replay_command()
         {
 

@@ -10,14 +10,12 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.LightstoneResponseMap
 {
-    public class when_mapping_lightsone_vehicle_valuation_response : when_not_persisting_entities
+    public class when_mapping_lightsone_vehicle_valuation_response : BaseTestHelper
     {
         private IDataField _dataField;
 
         public override void Observe()
         {
-            base.Observe();
-
             _dataField = Mapper.Map<IRespondWithValuation, DataField>(LightstoneResponseMother.Response.VehicleValuation);
         }
 

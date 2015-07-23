@@ -10,14 +10,12 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.LightstoneResponseMap.VehicleValuationResponseMap.Items
 {
-    public class when_mapping_image_gauge_response : when_not_persisting_entities
+    public class when_mapping_image_gauge_response : BaseTestHelper
     {
         private IEnumerable<IDataField> _dataField;
 
         public override void Observe()
         {
-            base.Observe();
-
             _dataField = Mapper.Map<IRespondWithImageGaugeModel, IEnumerable<DataField>>(LightstoneResponseMother.Response.VehicleValuation.ImageGauges.First());
         }
 

@@ -1,23 +1,20 @@
-﻿using Castle.Windsor;
-using MemBus;
-using PackageBuilder.Api.Installers;
+﻿using MemBus;
+using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.Installers
 {
-    public class when_installing_a_bus : Specification
+    public class when_installing_a_bus : BaseTestHelper
     {
-        readonly IWindsorContainer _container = new WindsorContainer();
-
         public override void Observe()
         {
-            _container.Install(new BusInstaller());
+
         }
 
         [Observation]
         public void should_resolve_IBus()
         {
-            _container.Resolve<IBus>().ShouldNotBeNull();
+            Container.Resolve<IBus>().ShouldNotBeNull();
         }
     }
 }

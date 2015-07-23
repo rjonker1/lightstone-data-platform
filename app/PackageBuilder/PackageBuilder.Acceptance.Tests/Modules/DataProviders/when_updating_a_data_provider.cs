@@ -1,26 +1,17 @@
 ﻿using System;
-using DataPlatform.Shared.Enums;
 using Nancy.Testing;
 using PackageBuilder.Acceptance.Tests.Fakes;
-using PackageBuilder.Api;
 using PackageBuilder.Api.Helpers.Constants;
-using PackageBuilder.Api.Installers;
-using PackageBuilder.Api.Modules;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
-using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.CommandHandlers;
-using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.States.Read;
-using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
 {
-    public class when_updating_the_lightStone_data_provider : when_persisting_entities_to_memory
+    public class when_updating_the_lightStone_data_provider : MemoryTestDataBaseHelper
     {
         private Guid _id = Guid.NewGuid();
         private Browser _browser;
@@ -30,7 +21,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
 
         public when_updating_the_lightStone_data_provider()
         {
-            base.Observe();
+            base.RefreshDb();
 
             //Container.Install(new WindsorInstaller(), new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new CommandInstaller());
 
@@ -55,6 +46,11 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
                     //with.Header("Authorization", "ApiKey 4E7106BA-16B6-44F2-AF4C-D1C411440F8E");
                 });
             });
+        }
+
+        public override void Observe()
+        {
+            
         }
 
         [Fact(Skip = "Not necessary could be double work effort, decided to rely on ui tests as acceptance tests")]

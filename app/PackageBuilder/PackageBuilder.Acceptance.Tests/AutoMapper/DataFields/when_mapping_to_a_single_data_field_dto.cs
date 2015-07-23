@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using AutoMapper;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
@@ -9,14 +8,12 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataFields
 {
-    public class when_mapping_to_a_single_data_field_dto : when_persisting_entities_to_memory
+    public class when_mapping_to_a_single_data_field_dto : MemoryTestDataBaseHelper
     {
         private DataProviderFieldItemDto _dto;
         public override void Observe()
         {
-            base.Observe();
-
-            Container.Install(new RepositoryInstaller(), new AutoMapperInstaller());
+            RefreshDb();
 
             SaveAndFlush(IndustryMother.All);
 

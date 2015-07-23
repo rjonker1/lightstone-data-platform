@@ -373,6 +373,7 @@
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Helpers\Extensions\ResponseExtensions.cs" />
     <Compile Include="Helpers\Constants\RouteConstants.cs" />
+    <Compile Include="Helpers\WindsorInstallerCollection.cs" />
     <Compile Include="Installers\ApiInstaller.cs" />
     <Compile Include="Installers\AuthInstaller.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />

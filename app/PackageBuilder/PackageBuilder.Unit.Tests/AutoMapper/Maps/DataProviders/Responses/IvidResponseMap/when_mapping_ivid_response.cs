@@ -11,14 +11,18 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.IvidResponseMap
 {
-    public class when_mapping_ivid_response : when_not_persisting_entities
+    public class when_mapping_ivid_response : BaseTestHelper
     {
-        private IEnumerable<IDataField> _dataFields;
+        private readonly IEnumerable<IDataField> _dataFields;
+
+        public when_mapping_ivid_response()
+        {
+            _dataFields = Mapper.Map<IProvideDataFromIvid, IEnumerable<DataField>>(IvidResponseMother.Response);
+        }
+
         public override void Observe()
         {
-            base.Observe();
-
-            _dataFields = Mapper.Map<IProvideDataFromIvid, IEnumerable<DataField>>(IvidResponseMother.Response);
+            
         }
 
         [Observation]

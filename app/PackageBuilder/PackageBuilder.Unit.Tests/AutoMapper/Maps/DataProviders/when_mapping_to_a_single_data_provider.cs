@@ -1,29 +1,22 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
-using Castle.Windsor;
 using DataPlatform.Shared.Enums;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.TestHelper;
+using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
 {
-    public class when_mapping_to_a_single_data_provider : Specification
+    public class when_mapping_to_a_single_data_provider : BaseTestHelper
     {
         private IDataProvider _dataProvider;
 
         public override void Observe()
         {
-            var container = new WindsorContainer();
-            container.Install(new ServiceLocatorInstaller(), new BusInstaller(), new NEventStoreInstaller(), new NHibernateInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
-
-            OverrideHelper.OverrideNhibernateCfg(container);
-
             _dataProvider = Mapper.Map<DataProviderDto, DataProvider>(DataProviderDtoMother.Ivid);
         }
 

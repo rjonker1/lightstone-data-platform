@@ -7,8 +7,7 @@ namespace PackageBuilder.Unit.Tests.Installers
 {
     public class when_installing_nhibernate : Specification
     {
-        readonly IWindsorContainer _container = new WindsorContainer();
-
+        private readonly IWindsorContainer _container = new WindsorContainer();
         public override void Observe()
         {
             _container.Install(new NHibernateInstaller());

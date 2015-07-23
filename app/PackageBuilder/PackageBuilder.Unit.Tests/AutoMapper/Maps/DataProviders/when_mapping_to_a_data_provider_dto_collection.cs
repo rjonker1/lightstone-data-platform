@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Castle.Windsor;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
-using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
@@ -17,11 +14,6 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
 
         public override void Observe()
         {
-            var container = new WindsorContainer();
-            container.Install(new ServiceLocatorInstaller(), new BusInstaller(), new NEventStoreInstaller(), new NHibernateInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
-
-            OverrideHelper.OverrideNhibernateCfg(container);
-
             _dtos = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<DataProviderDto>>(new[] { WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder});
         }
 

@@ -6,13 +6,14 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.Packages
 {
-    public class when_querying_packages : when_persisting_entities_to_memory
+    public class when_querying_packages : MemoryTestDataBaseHelper
     {
-        private Guid _id;
-        private PackageRepository _repository;
-        public override void Observe()
+        private readonly Guid _id;
+        private readonly PackageRepository _repository;
+
+        public when_querying_packages()
         {
-            base.Observe();
+            RefreshDb();
 
             var state = StateMother.Published;
             SaveAndFlush(state);
@@ -23,6 +24,11 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Packages
             Session.Flush();
 
             _repository = new PackageRepository(Session);
+        }
+
+        public override void Observe()
+        {
+            
         }
 
         [Observation]

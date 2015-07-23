@@ -2,42 +2,40 @@
 using System.Configuration;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Packages.Write;
-using PackageBuilder.Unit.Tests.Installers;
+using PackageBuilder.TestHelper.BaseTests;
 using ServiceStack.Redis;
 using ServiceStack.Redis.Generic;
-using Xunit;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.Cache
 {
-    public class when_implementing_cache_repository : when_installing_nventstore_dependency
+    public class when_implementing_cache_repository : MemoryTestDataBaseHelper
     {
-        private static readonly string host = ConfigurationManager.ConnectionStrings["workflow/redis/cache"].ConnectionString;
+        private readonly string _host = ConfigurationManager.ConnectionStrings["workflow/redis/cache"].ConnectionString;
 
-        private static RedisClient _redisClient;
-        private static Package package;
+        private RedisClient _redisClient;
+        private Package _package;
 
-        private static IRedisTypedClient<Package> packageClient;
-        protected INEventStoreRepository<Package> WriteRepository; 
+        private IRedisTypedClient<Package> _packageClient;
+        private INEventStoreRepository<Package> _writeRepository; 
 
         public override void Observe()
         {
-            base.Observe();
+            RefreshDb();
 
-            _redisClient = new RedisClient(host);
-            packageClient = _redisClient.As<Package>();
+            _redisClient = new RedisClient(_host);
+            _packageClient = _redisClient.As<Package>();
 
-            package = new Package();
-            package.Id = Guid.NewGuid();
+            _package = new Package {Id = Guid.NewGuid()};
 
-            WriteRepository = _container.Resolve<INEventStoreRepository<Package>>();
+            _writeRepository = Container.Resolve<INEventStoreRepository<Package>>();
         }
 
         [Observation]
         public void should_persist_to_redis_cache()
         {
-            packageClient.Store(package);
-            packageClient.GetById(package.Id).ShouldNotBeNull();
+            _packageClient.Store(_package);
+            _packageClient.GetById(_package.Id).ShouldNotBeNull();
 
             should_remove_from_redis_cache();
         }
@@ -45,13 +43,12 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Cache
         [Observation]
         public void should_persist_through_implementation()
         {
-            var preCache = packageClient.GetAll();
+            var preCache = _packageClient.GetAll();
 
-            WriteRepository.Save(package, Guid.NewGuid());
+            _writeRepository.Save(_package, Guid.NewGuid());
 
-            var postCache = packageClient.GetAll();
-
-            Assert.True(postCache.Count == preCache.Count + 1);
+            var postCache = _packageClient.GetAll();
+            postCache.Count.ShouldEqual(preCache.Count + 1);
 
            should_remove_from_redis_cache();
         }
@@ -59,8 +56,8 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Cache
         [Observation]
         public void should_remove_from_redis_cache()
         {
-            packageClient.DeleteById(package.Id);
-            packageClient.GetById(package.Id).ShouldBeNull();
+            _packageClient.DeleteById(_package.Id);
+            _packageClient.GetById(_package.Id).ShouldBeNull();
         }
     }
 }

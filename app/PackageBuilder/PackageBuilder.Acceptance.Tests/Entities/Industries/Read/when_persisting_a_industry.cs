@@ -6,11 +6,11 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Entities.Industries.Read
 {
-    public class when_persisting_a_industry : when_persisting_entities_to_memory
+    public class when_persisting_a_industry : MemoryTestDataBaseHelper
     {
         public override void Observe()
         {
-            base.Observe();
+            RefreshDb();
         }
 
         [Observation]

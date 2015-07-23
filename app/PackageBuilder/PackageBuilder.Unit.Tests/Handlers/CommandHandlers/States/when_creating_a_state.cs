@@ -5,21 +5,24 @@ using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.States.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.Repositories;
-using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.States
 {
-    public class when_creating_a_state : when_not_persisting_entities
+    public class when_creating_a_state : Specification
     {
-        private CreateStateHandler _handler;
         private readonly Mock<IStateRepository> _repo = new Mock<IStateRepository>();
+
+        public when_creating_a_state()
+        {
+            var command = new CreateState(Guid.NewGuid(), StateName.Published);
+            var handler = new CreateStateHandler(_repo.Object);
+            handler.Handle(command);
+        }
+
         public override void Observe()
         {
-            base.Observe();
-            var command = new CreateState(Guid.NewGuid(), StateName.Published);
-            _handler = new CreateStateHandler(_repo.Object);
-            _handler.Handle(command);
+
         }
 
         [Observation]

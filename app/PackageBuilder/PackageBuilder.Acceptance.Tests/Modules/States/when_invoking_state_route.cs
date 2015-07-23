@@ -11,14 +11,14 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Modules.States
 {
-    public class when_invoking_state_route : when_persisting_entities_to_memory
+    public class when_invoking_state_route : MemoryTestDataBaseHelper
     {
         private Browser _browser;
         private BrowserResponse _response;
 
         public override void Observe()
         {
-            base.Observe();
+            base.RefreshDb();
 
             Container.Install(new BusInstaller(), new RepositoryInstaller());
 

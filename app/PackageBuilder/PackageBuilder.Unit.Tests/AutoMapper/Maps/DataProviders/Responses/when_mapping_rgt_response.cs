@@ -10,14 +10,12 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses
 {
-    public class when_mapping_rgt_response : when_not_persisting_entities
+    public class when_mapping_rgt_response : BaseTestHelper
     {
         private IEnumerable<IDataField> _dataFields;
 
         public override void Observe()
         {
-            base.Observe();
-
             _dataFields = Mapper.Map<IProvideDataFromRgt, IEnumerable<DataField>>(RgtResponseMother.Response);
         }
 

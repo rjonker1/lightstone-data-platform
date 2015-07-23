@@ -2,7 +2,6 @@
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
@@ -12,15 +11,13 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataProviders
 {
-    public class when_mapping_an_override_to_a_single_data_provider : when_persisting_entities_to_memory
+    public class when_mapping_an_override_to_a_single_data_provider : MemoryTestDataBaseHelper
     {
-        private IDataProvider _dataProvider;
+        private readonly IDataProvider _dataProvider;
 
-        public override void Observe()
+        public when_mapping_an_override_to_a_single_data_provider()
         {
-            base.Observe();
-
-            Container.Install(new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new CommandInstaller(), new AutoMapperInstaller());
+            RefreshDb();
 
             var dataProvider = WriteDataProviderMother.Ivid;
             var id = Guid.NewGuid();
@@ -35,6 +32,11 @@ namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataProviders
             var dataProviderOverride = (DataProviderOverride)DataProviderOverrideMother.Ivid;
             dataProviderOverride.Id = id;
             _dataProvider = Mapper.Map<IDataProviderOverride, DataProvider>(dataProviderOverride);
+        }
+
+        public override void Observe()
+        {
+            
         }
 
         [Observation]
@@ -97,6 +99,5 @@ namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataProviders
             _dataProvider.DataFields.First(x => x.Name == "SpecificInformation").DataFields.First(x => x.Name == "RegistrationNumber").CostOfSale.ShouldEqual(25d);
             _dataProvider.DataFields.First(x => x.Name == "SpecificInformation").DataFields.First(x => x.Name == "VinNumber").CostOfSale.ShouldEqual(25d);
         }
-
     }
 }

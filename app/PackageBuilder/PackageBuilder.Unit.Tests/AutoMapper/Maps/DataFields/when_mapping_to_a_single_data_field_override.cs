@@ -1,24 +1,19 @@
 ﻿using System.Linq;
 using AutoMapper;
-using Castle.Windsor;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
+using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataFields
 {
-    public class when_mapping_to_a_single_data_field_override : Specification
+    public class when_mapping_to_a_single_data_field_override : BaseTestHelper
     {
         private IDataFieldOverride _dataFieldOverride;
         public override void Observe()
         {
-            var container = new WindsorContainer();
-
-            container.Install(new ServiceLocatorInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
-
             _dataFieldOverride = Mapper.Map<DataProviderFieldItemDto, DataFieldOverride>(DataFieldDtoMother.SpecificInformation);
         }
 

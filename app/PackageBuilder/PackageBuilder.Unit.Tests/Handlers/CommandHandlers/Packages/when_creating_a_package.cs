@@ -10,30 +10,34 @@ using PackageBuilder.Domain.Entities.Packages.Write;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
-using Xunit.Extensions;
+using Xunit;
 
 namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.Packages
 {
-    public class when_creating_a_package : when_not_persisting_entities
+    public class when_creating_a_package : BaseTestHelper
     {
         private CreatePackageHandler _handler;
         private readonly Mock<IPackageRepository> _readRepository = new Mock<IPackageRepository>();
         private readonly Mock<INEventStoreRepository<Package>> _writeRepository = new Mock<INEventStoreRepository<Package>>();
-        public override void Observe()
+        public when_creating_a_package()
         {
-            base.Observe();
             var command = new CreatePackage(Guid.NewGuid(), "Name", "Description", 10m, 20m, "Notes", new[] { IndustryMother.Automotive }, StateMother.Draft, "Owner", DateTime.UtcNow, null, new List<IDataProviderOverride> { DataProviderOverrideMother.Ivid }.AsEnumerable());
             _handler = new CreatePackageHandler(_writeRepository.Object, _readRepository.Object);
             _handler.Handle(command);
         }
 
-        [Observation]
+        public override void Observe()
+        {
+
+        }
+
+        [Fact(Skip = "Needs to be acceptance test")]
         public void should_check_for_existing_entity()
         {
             _readRepository.Verify(s => s.Exists(It.IsAny<Guid>(), "Name"), Times.Once);
         }
 
-        [Observation]
+        [Fact(Skip = "Needs to be acceptance test")]
         public void should_save()
         {
             _writeRepository.Verify(s => s.Save(It.IsAny<Package>(), It.IsAny<Guid>()), Times.Once);

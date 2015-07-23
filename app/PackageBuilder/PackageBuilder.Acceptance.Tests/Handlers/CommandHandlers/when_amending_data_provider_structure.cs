@@ -68,7 +68,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
         }
     }
 
-    public class when_amending_data_provider_structure : when_persisting_entities_to_db
+    public class when_amending_data_provider_structure : MemoryTestDataBaseHelper
     {
         private readonly Guid _id = Guid.NewGuid();
         private IEnumerable<IDataField> _originalFields;
@@ -86,21 +86,9 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
 
         public when_amending_data_provider_structure()
         {
-            base.Observe();
+            RefreshDb();
 
-            Container.Install(
-                new WindsorInstaller(), 
-                new RepositoryInstaller(),
-                new CommandInstaller(),
-                new BusInstaller(),
-                new NEventStoreInstaller(),
-                new ServiceLocatorInstaller(),
-                new AutoMapperInstaller(),
-                new LaceInstaller(),
-                new AuthInstaller(),
-                new ApiInstaller()
-                );
-
+            Container.Install(new WindsorInstaller());
             _handler = Container.Resolve<IHandleMessages>();
             _writeRepo = Container.Resolve<INEventStoreRepository<DataProvider>>();
             _amendHandler = new AmendDataProviderStructureHandler(_writeRepo, new DataProviderResponseRepository());
@@ -115,7 +103,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
 
         public override void Observe()
         {
-            base.Observe();
+            RefreshDb();
 
             _handler.Handle(new CreateDataProvider(_id, DataProviderName.Ivid, 0, "", DateTime.UtcNow));
 

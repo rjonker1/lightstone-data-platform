@@ -11,13 +11,11 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Requests
 {
-    public class when_mapping_ivid_titleholder_request : when_not_persisting_entities
+    public class when_mapping_ivid_titleholder_request : BaseTestHelper
     {
         private IEnumerable<IDataField> _dataFields;
         public override void Observe()
         {
-            base.Observe();
-
             _dataFields =
                 Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(
                     new IvidTitleholderRequest(

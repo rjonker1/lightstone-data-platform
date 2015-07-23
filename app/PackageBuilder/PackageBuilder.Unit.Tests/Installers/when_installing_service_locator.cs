@@ -1,23 +1,21 @@
-﻿using Castle.Windsor;
-using Microsoft.Practices.ServiceLocation;
-using PackageBuilder.Api.Installers;
+﻿using Microsoft.Practices.ServiceLocation;
+using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.Installers
 {
-    public class when_installing_service_locator : Specification
+    public class when_installing_service_locator : BaseTestHelper
     {
-        readonly IWindsorContainer _container = new WindsorContainer();
 
         public override void Observe()
         {
-            _container.Install(new ServiceLocatorInstaller());
+            
         }
 
         [Observation]
         public void should_resolve_IServiceLocator()
         {
-            _container.Resolve<IServiceLocator>().ShouldNotBeNull();
+            Container.Resolve<IServiceLocator>().ShouldNotBeNull();
         }
     }
 }
