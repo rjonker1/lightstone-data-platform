@@ -45,7 +45,7 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Cache
         {
             var preCache = _packageClient.GetAll();
 
-            _writeRepository.Save(_package, Guid.NewGuid());
+            _writeRepository.Save(_package, Guid.NewGuid(), true);
 
             var postCache = _packageClient.GetAll();
             postCache.Count.ShouldEqual(preCache.Count + 1);

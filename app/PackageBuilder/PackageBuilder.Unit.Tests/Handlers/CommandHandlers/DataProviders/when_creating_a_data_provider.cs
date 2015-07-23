@@ -32,7 +32,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.DataProviders
         [Observation]
         public void should_save()
         {
-            _writeRepository.Verify(s => s.Save(It.IsAny<DataProvider>(), It.IsAny<Guid>()), Times.Once);
+            _writeRepository.Verify(s => s.Save(It.IsAny<DataProvider>(), It.IsAny<Guid>(), true), Times.Once);
         }
     }
 }

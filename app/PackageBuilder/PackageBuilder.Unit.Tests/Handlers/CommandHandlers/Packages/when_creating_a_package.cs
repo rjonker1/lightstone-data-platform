@@ -40,7 +40,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.Packages
         [Fact(Skip = "Needs to be acceptance test")]
         public void should_save()
         {
-            _writeRepository.Verify(s => s.Save(It.IsAny<Package>(), It.IsAny<Guid>()), Times.Once);
+            _writeRepository.Verify(s => s.Save(It.IsAny<Package>(), It.IsAny<Guid>(), false), Times.Once);
         }
     }
 }

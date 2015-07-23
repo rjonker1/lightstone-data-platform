@@ -125,7 +125,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 this.Info(() => "Package Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                var package = writeRepo.GetById(apiRequest.PackageId);
+                var package = writeRepo.GetById(apiRequest.PackageId, true);
                 this.Info(() => "Package Read Completed, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
                 if (package == null)

@@ -230,7 +230,7 @@
       <Name>PackageBuilder.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
-      <Project>{A3368386-392B-476D-8B6C-910E73A9C21C}</Project>
+      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Core.Contracts\PackageBuilder.Domain.Core.Contracts.csproj">

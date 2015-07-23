@@ -24,7 +24,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.Packages
             var command = new UpdatePackage(Guid.NewGuid(), "Name", "Description", 10m, 20m, "Notes", new[] { IndustryMother.Automotive }, StateMother.Draft, 1, "Owner", DateTime.UtcNow, DateTime.UtcNow, new List<IDataProviderOverride> { DataProviderOverrideMother.Ivid }.AsEnumerable());
             _handler = new UpdatePackageHandler(_writeRepository.Object, _readRepository.Object);
 
-            _writeRepository.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(WritePackageMother.FullVerificationPackage);
+            _writeRepository.Setup(x => x.GetById(It.IsAny<Guid>(), false)).Returns(WritePackageMother.FullVerificationPackage);
 
             _handler.Handle(command);
         }
@@ -38,13 +38,13 @@ namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.Packages
         [Fact(Skip = "Needs to be acceptance test")]
         public void should_get_latest_version()
         {
-            _writeRepository.Verify(s => s.GetById(It.IsAny<Guid>()), Times.Once);
+            _writeRepository.Verify(s => s.GetById(It.IsAny<Guid>(), false), Times.Once);
         }
 
         [Fact(Skip = "Needs to be acceptance test")]
         public void should_save()
         {
-            _writeRepository.Verify(s => s.Save(It.IsAny<Package>(), It.IsAny<Guid>()), Times.Once);
+            _writeRepository.Verify(s => s.Save(It.IsAny<Package>(), It.IsAny<Guid>(), false), Times.Once);
         }
     }
 }
