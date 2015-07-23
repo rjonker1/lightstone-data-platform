@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Core.Extensions
         {
             var vinnumber = string.Empty;
 
-            foreach (var provider in VinProviders)
+            foreach (var provider in _vinProviders)
             {
                 vinnumber = provider.Value(response);
                 if (!string.IsNullOrEmpty(vinnumber))
@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.Core.Extensions
         public int ForCarId(ICollection<IPointToLaceProvider> response)
         {
             var carid = 0;
-            foreach (var provider in CarIdProviders)
+            foreach (var provider in _carIdProviders)
             {
                 carid = provider.Value(response);
                 if (carid > 0)
@@ -50,17 +50,18 @@ namespace Lace.Domain.DataProviders.Core.Extensions
         }
 
 
-        private readonly IDictionary<int, Func<ICollection<IPointToLaceProvider>, string>> VinProviders = new Dictionary
+        private readonly IDictionary<int, Func<ICollection<IPointToLaceProvider>, string>> _vinProviders = new Dictionary
             <int, Func<ICollection<IPointToLaceProvider>, string>>()
         {
             {0, VinFromLighstoneAuto},
             {1, VinFromIvid}
         };
 
-        private readonly IDictionary<int, Func<ICollection<IPointToLaceProvider>, int>> CarIdProviders = new Dictionary
+        private readonly IDictionary<int, Func<ICollection<IPointToLaceProvider>, int>> _carIdProviders = new Dictionary
             <int, Func<ICollection<IPointToLaceProvider>, int>>()
         {
-            {0, CarIdFromLighstoneAuto}
+            {0, CarIdFromLighstoneAuto},
+            {1, CarIdFromRgtVin}
         };
 
         private static int GetNumber(int? value)
@@ -81,6 +82,11 @@ namespace Lace.Domain.DataProviders.Core.Extensions
         private static readonly Func<ICollection<IPointToLaceProvider>, int> CarIdFromLighstoneAuto =
             (response) => response.Exists<IProvideDataFromLightstoneAuto>() && response.OfType<IProvideDataFromLightstoneAuto>().First().Handled
                 ? GetNumber(response.OfType<IProvideDataFromLightstoneAuto>().First().CarId)
+                : 0;
+
+        private static readonly Func<ICollection<IPointToLaceProvider>, int> CarIdFromRgtVin =
+            (response) => response.Exists<IProvideDataFromRgtVin>() && response.OfType<IProvideDataFromRgtVin>().First().Handled && response.OfType<IProvideDataFromRgtVin>().First().RgtCode.HasValue
+                ? GetNumber(response.OfType<IProvideDataFromRgtVin>().First().RgtCode)
                 : 0;
     }
 
