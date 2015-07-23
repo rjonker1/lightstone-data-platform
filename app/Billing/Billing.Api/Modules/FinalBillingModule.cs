@@ -141,7 +141,10 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in finalBillingRepo)
                 {
+                    var packageTransactions = finalBillingRepo.Where(x => x.PackageId == transaction.PackageId).Distinct();
+
                     var package = Mapper.Map<FinalBilling, PackageDto>(transaction);
+                    package.PackageTransactions = packageTransactions.Count();
 
                     var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
                     if (packageIndex < 0) customerPackagesDetailList.Add(package);

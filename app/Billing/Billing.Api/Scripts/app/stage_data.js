@@ -246,6 +246,11 @@ window.packageGridActionEvents = {
                 title: 'Recommended Price',
                 sortable: true
             }, {
+                field: 'packageTransactions',
+                title: '# Transactions',
+                formatter: 'packageTransactionsFormatter',
+                sortable: true
+            }, {
                 field: 'packageEdit',
                 formatter: packageEditFormatter,
                 events: packageEditActionEvents
@@ -256,6 +261,13 @@ window.packageGridActionEvents = {
 
     }
 };
+
+function packageTransactionsFormatter(value, row, index) {
+
+    return [
+        'Total Transactions: ( ' + row.packageTransactions + ' ) '
+    ].join('');
+}
 
 function packageEditFormatter(value, row, index) {
     return [
@@ -300,6 +312,14 @@ window.invoiceActionEvents = {
     'click .invoice-view': function (e, value, row, index) {
 
         $.get('/StageBilling/Billable/Transactions/' + row.id, function (response) {
+
+            var packages = '';
+
+            for (var i = 0; i < response.data.length; i++) {
+                console.log(i);
+                console.log(packages);
+                packages += '{"ItemCode": "' + response.data[i].packageName + '", "ItemDescription": "' + response.data[i].packageName + '", "QuantityUnit": ' + response.data[i].packageTransactions + ', "Price":' + response.data[i].packageRecommendedPrice + ', "Vat": 0.00},';
+            }
             
             var data = '{' +
                 '"template": { "shortid" : "N190datG" },' +
@@ -308,7 +328,8 @@ window.invoiceActionEvents = {
                         '"Name": "' + row.customerName + '",' +
                         '"TaxRegistration": 4190195679,' +
                         '"Packages" : [ ' +
-                            '{"ItemCode": "' + response.data[0].packageName + '", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": ' + row.billedTransactions + ', "Price":' + response.data[0].packageRecommendedPrice + ', "Vat": 0.00}' +
+                            packages +
+                            //'{"ItemCode": "' + response.data[0].packageName + '", "ItemDescription": "' + response.data[0].packageName + '", "QuantityUnit": ' + row.billedTransactions + ', "Price":' + response.data[0].packageRecommendedPrice + ', "Vat": 0.00}' +
                             ']  ' +
                     '} ' +
                 '}';

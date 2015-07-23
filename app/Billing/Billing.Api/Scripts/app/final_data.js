@@ -114,13 +114,23 @@ window.packageGridActionEvents = {
                 field: 'packageRecommendedPrice',
                 title: 'Recommended Price',
                 sortable: true
+            }, {
+                field: 'packageTransactions',
+                title: '# Transactions',
+                formatter: 'packageTransactionsFormatter',
+                sortable: true
             }]
-        }).on('click-row.bs.table', function (e, row, $element) {
-            window.editRow = row;
         });
 
     }
 };
+
+function packageTransactionsFormatter(value, row, index) {
+
+    return [
+        'Total Transactions: ( ' + row.packageTransactions + ' ) '
+    ].join('');
+}
 
 function invoiceFormatter(value, row, index) {
     return [

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Workflow.Billing.Domain.Dtos
 {
@@ -8,5 +9,6 @@ namespace Workflow.Billing.Domain.Dtos
         public string PackageName { get; set; }
         public double PackageCostPrice { get; set; }
         public double PackageRecommendedPrice { get; set; }
+        public int PackageTransactions { get; set; }
     }
 }
