@@ -19,19 +19,19 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
 
         public override void Observe()
         {
-            var bus = new TransactionBus(_bus);
 
-            //Customer
-            transaction = new InvoiceTransactionCreated(new Guid("4B905242-4352-4A36-B1CD-CF6832606703"));
-
-            ////Client
-            //transaction = new InvoiceTransactionCreated(new Guid("FD720634-2959-480A-BA45-96D970DA885C"));
-            bus.SendDynamic(transaction);
         }
 
         [Observation]
         public void it_should_publish_a_transaction()
         {
+            var bus = new TransactionBus(_bus);
+
+            // Customer
+            transaction = new InvoiceTransactionCreated(new Guid("4B905242-4352-4A36-B1CD-CF6832606703"));
+
+            bus.SendDynamic(transaction);
+
             _bus.ShouldNotBeNull();
         }
     }
