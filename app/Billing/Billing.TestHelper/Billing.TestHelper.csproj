@@ -127,6 +127,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BaseTests\BaseTestHelper.cs" />
     <Compile Include="BaseTests\when_persisting_entities_to_db.cs" />
     <Compile Include="Extensions\SessionExtentions.cs" />
     <Compile Include="Fakes\FailingMessagePublisher.cs" />

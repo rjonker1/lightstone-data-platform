@@ -172,6 +172,7 @@
     <Compile Include="Api\Transaction\when_creating_a_new_billing_transaction_as_an_unauthorised_user.cs" />
     <Compile Include="Consumers\Entity\when_executing_bill_run_from_pre_to_stage.cs" />
     <Compile Include="Consumers\Entity\when_receiving_new_user_message.cs" />
+    <Compile Include="Workflow\when_implementing_cache_provider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

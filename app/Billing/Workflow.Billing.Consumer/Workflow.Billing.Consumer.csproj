@@ -149,6 +149,7 @@
     <Compile Include="Installers\ApiClientInstaller.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
+    <Compile Include="Installers\CacheProviderInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
     <None Include="appSettings.Debug.config">
       <DependentUpon>appSettings.config</DependentUpon>
