@@ -175,7 +175,6 @@ namespace Billing.Api.Modules
                 var packagesDetailList = new List<PackageDto>();
 
                 var transactions = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
-                var billedTransactionsTotal = transactions.Where(x => x.IsBillable);
 
                 foreach (var transaction in transactions)
                 {
@@ -200,7 +199,7 @@ namespace Billing.Api.Modules
                     }
 
                     var package = Mapper.Map<StageBilling, PackageDto>(transaction);
-                    package.PackageTransactions = billedTransactionsTotal.Count();
+                    package.PackageTransactions = transactions.Count(x => x.PackageId == transaction.PackageId);
 
                     var packageIndex = packagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
                     if (packageIndex < 0) packagesDetailList.Add(package);
