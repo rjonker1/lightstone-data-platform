@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Repositories;
 
 namespace Workflow.Billing.Repository
 {
@@ -7,5 +8,6 @@ namespace Workflow.Billing.Repository
         T CacheGet(Guid entityId);
         void CacheSave(T entity);
         void CacheDelete(Guid entityId);
+        void CachePipelineInsert(IRepository<T> typedEntityRepository);
     }
 }

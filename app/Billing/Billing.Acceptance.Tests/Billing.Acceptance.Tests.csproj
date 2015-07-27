@@ -170,7 +170,9 @@
     <Compile Include="Transaction\when_persisting_transaction_with_products.cs" />
     <Compile Include="Transaction\when_persisting_user.cs" />
     <Compile Include="Workflow\when_implementing_cache_provider.cs" />
-    <Compile Include="Workflow\when_persiting_billing_repository_with_cache.cs" />
+    <Compile Include="Workflow\when_persisting_finalBilling_repository_with_cache.cs" />
+    <Compile Include="Workflow\when_persisting_stageBilling_repository_with_cache.cs" />
+    <Compile Include="Workflow\when_persiting_preBilling_repository_with_cache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Repositories;
 using ServiceStack.Redis;
 using ServiceStack.Redis.Generic;
 
@@ -77,6 +79,21 @@ namespace Workflow.Billing.Repository
             {
                 this.Error(() => string.Format("Failed to delete from cache. {0}", e.Message));
                 useCache = false;
+            }
+        }
+
+        public void CachePipelineInsert(IRepository<T> typedEntityRepository)
+        {
+            using (var client = CacheClient)
+            using (var pipeline = client.CreatePipeline())
+            {
+                foreach (var record in typedEntityRepository)
+                {
+                    if (record != null)
+                        pipeline.QueueCommand(c => c.Store(record));
+                }
+
+                pipeline.Flush();
             }
         }
     }

@@ -12,15 +12,18 @@ using Workflow.Billing.Helpers.Extensions;
 
 namespace Workflow.Billing.Repository
 {
+    
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ISession _session;
+        private readonly ICacheProvider<T> _cacheProvider; 
 
         private PipelineExtensions pipelineExtensions;
 
-        public Repository(ISession session)
+        public Repository(ISession session, ICacheProvider<T> cacheProvider)
         {
             _session = session;
+            _cacheProvider = cacheProvider;
             pipelineExtensions = new PipelineExtensions();
         }
 
@@ -41,13 +44,14 @@ namespace Workflow.Billing.Repository
             return entity;
         }
 
-        public void Save(T entity)
+        public virtual void Save(T entity)
         {
             //ValidateEntity(entity);
 
             var currSession = pipelineExtensions.BeforeTransaction(_session);
 
             currSession.Save(entity);
+            _cacheProvider.CacheSave(entity);
 
             pipelineExtensions.AfterTransaction(currSession);
         }
@@ -66,6 +70,7 @@ namespace Workflow.Billing.Repository
 
             //currSession.SaveOrUpdate(entity);
             currSession.Merge(entity);
+            _cacheProvider.CacheSave(entity);
 
             pipelineExtensions.AfterTransaction(currSession);
         }
