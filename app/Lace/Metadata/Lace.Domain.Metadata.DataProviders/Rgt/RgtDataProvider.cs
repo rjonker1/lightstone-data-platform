@@ -36,7 +36,7 @@ namespace Lace.Domain.Metadata.DataProviders.Rgt
             }
             else
             {
-                var consumer = new ConsumeSource(new FakeHandleRgtVinServiceCall(),
+                var consumer = new ConsumeSource(new FakeHandleRgtServiceCall(),
                     new FakeCallingRgtDataProvider(_command));
                 consumer.ConsumeDataProvider(response);
 
