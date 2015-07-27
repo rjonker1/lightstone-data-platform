@@ -140,7 +140,20 @@
     <Reference Include="RestSharp">
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.44.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ServiceStack.Text.3.9.44\lib\net35\ServiceStack.Text.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -172,7 +185,7 @@
     <Compile Include="Api\Transaction\when_creating_a_new_billing_transaction_as_an_unauthorised_user.cs" />
     <Compile Include="Consumers\Entity\when_executing_bill_run_from_pre_to_stage.cs" />
     <Compile Include="Consumers\Entity\when_receiving_new_user_message.cs" />
-    <Compile Include="Workflow\when_implementing_cache_provider.cs" />
+    <Compile Include="Workflow\when_installing_cache_provider_dependency.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

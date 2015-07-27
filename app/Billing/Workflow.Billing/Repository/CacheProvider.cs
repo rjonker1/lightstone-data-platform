@@ -8,8 +8,10 @@ namespace Workflow.Billing.Repository
 {
     public class CacheProvider<T> : ICacheProvider<T> where T : class 
     {
-        private static RedisClient _redisClient;
-        private readonly IRedisTypedClient<T> cacheClient;
+        public static RedisClient _redisClient;
+        //public readonly IRedisTypedClient<T> cacheClient;
+
+        public IRedisTypedClient<T> CacheClient { get; set; }
 
         private static bool useCache = true;
 
@@ -19,7 +21,7 @@ namespace Workflow.Billing.Repository
             {
                 string host = ConfigurationManager.ConnectionStrings["workflow/redis/cache"].ConnectionString;
                 _redisClient = new RedisClient(host);
-                cacheClient = _redisClient.As<T>();
+                CacheClient = _redisClient.As<T>();
             }
             catch (Exception ex)
             {
@@ -34,7 +36,7 @@ namespace Workflow.Billing.Repository
             try
             {
                 this.Info(() => string.Format("Attempting to retrieve {0}, from cache", entityId));
-                var cachedEntity = cacheClient.GetById(entityId);
+                var cachedEntity = CacheClient.GetById(entityId);
                 this.Info(() => string.Format("Successfully retrieved {0}, from cache", entityId));
                 return cachedEntity;
             }
@@ -52,7 +54,7 @@ namespace Workflow.Billing.Repository
             try
             {
                 this.Info(() => string.Format("Attempting to save {0}, to cache", entity));
-                cacheClient.Store(entity);
+                CacheClient.Store(entity);
                 this.Info(() => string.Format("Successfully saved {0}, to cache", entity));
             }
             catch (Exception e)
@@ -68,7 +70,7 @@ namespace Workflow.Billing.Repository
             try
             {
                 this.Info(() => string.Format("Attempting to delete {0}, from cache", entityId));
-                cacheClient.DeleteById(entityId);
+                CacheClient.DeleteById(entityId);
                 this.Info(() => string.Format("Successfully deleted {0}, from cache", entityId));
             }
             catch (Exception e)

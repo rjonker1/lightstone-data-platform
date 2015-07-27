@@ -14,7 +14,7 @@ namespace Billing.TestHelper.BaseTests
             // NB: When running multiple unit tests, all dependencies are required as some static classes such as AutoMapper selects any random Windsor Container to resolve its dependencies,
             // and based on the specific test that created that particular Windsor Container with it's specific dependencies may not be the Container used by AutoMapper for that particular test.
             Container.Install(
-                //new NHibernateInstaller(),
+                new NHibernateInstaller(),
                 new WindsorInstaller(),
                 new CacheProviderInstaller(),
                 new RepositoryInstaller(),

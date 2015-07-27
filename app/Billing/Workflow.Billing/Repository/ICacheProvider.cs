@@ -1,11 +1,10 @@
 ﻿using System;
+using ServiceStack.Redis.Generic;
 
 namespace Workflow.Billing.Repository
 {
-    public interface ICacheProvider<T>
+    public interface ICacheProvider<T> : ICacheRepository<T> 
     {
-        T CacheGet(Guid entityId);
-        void CacheSave(T entity);
-        void CacheDelete(Guid entityId);
+        IRedisTypedClient<T> CacheClient { get; set; }
     }
 }

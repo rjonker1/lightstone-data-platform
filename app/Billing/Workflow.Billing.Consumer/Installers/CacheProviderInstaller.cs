@@ -9,7 +9,7 @@ namespace Workflow.Billing.Consumer.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For(typeof (ICacheProvider<>)).ImplementedBy(typeof (CacheProvider<>)));
+            container.Register(Component.For(typeof(ICacheProvider<>)).ImplementedBy(typeof(CacheProvider<>)));
         }
     }
 }
