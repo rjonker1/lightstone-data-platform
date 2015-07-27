@@ -40,6 +40,7 @@ namespace Billing.Api
 
             container.Install(
                 new NHibernateInstaller(),
+                new CacheProviderInstaller(),
                 new RepositoryInstaller(),
                 new BusInstaller(),
                 new AutoMapperInstaller(),

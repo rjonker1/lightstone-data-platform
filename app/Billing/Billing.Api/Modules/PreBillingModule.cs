@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
-using Billing.Domain.Dtos;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
@@ -10,14 +11,34 @@ using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
+using Workflow.Billing.Repository;
 using PreBillingDto = Billing.Domain.Dtos.PreBillingDto;
 
 namespace Billing.Api.Modules
 {
     public class PreBillingModule : SecureModule
     {
-        public PreBillingModule(IRepository<PreBilling> preBillingRepository, IRepository<UserMeta> userMetaRepository)
+        public PreBillingModule(IRepository<PreBilling> preBillingDBRepository, 
+                                IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider)
         {
+            IList<PreBilling> preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();
+
+            try
+            {
+                if (preBillingRepository.Count <= 0)
+                {
+                    this.Info(() => "Cache not available. Switching to DB repository.");
+
+                    preBillingRepository = preBillingDBRepository.ToList();
+                    //preBillingCacheProvider.CachePipelineInsert(preBillingDBRepository);
+                    DBtoCache(preBillingDBRepository, preBillingCacheProvider);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Error(() => ex.Message);
+            }
+
 
             Get["/PreBilling/"] = _ =>
             {
@@ -155,6 +176,12 @@ namespace Billing.Api.Modules
 
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
+
+        }
+
+        private Task<bool> DBtoCache(IRepository<PreBilling> repository, ICacheProvider<PreBilling> cacheProvider)
+        {
+            return cacheProvider.CachePipelineInsert(repository);
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading.Tasks;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using ServiceStack.Redis;
@@ -8,7 +9,7 @@ using ServiceStack.Redis.Generic;
 
 namespace Workflow.Billing.Repository
 {
-    public class CacheProvider<T> : ICacheProvider<T> where T : class 
+    public class CacheProvider<T> : ICacheProvider<T> where T : class
     {
         public static RedisClient _redisClient;
         //public readonly IRedisTypedClient<T> cacheClient;
@@ -82,18 +83,26 @@ namespace Workflow.Billing.Repository
             }
         }
 
-        public void CachePipelineInsert(IRepository<T> typedEntityRepository)
+        public async Task<bool> CachePipelineInsert(IRepository<T> typedEntityRepository)
         {
-            using (var client = CacheClient)
-            using (var pipeline = client.CreatePipeline())
+            try
             {
-                foreach (var record in typedEntityRepository)
+                using (var client = CacheClient)
+                using (var pipeline = client.CreatePipeline())
                 {
-                    if (record != null)
-                        pipeline.QueueCommand(c => c.Store(record));
-                }
+                    foreach (var record in typedEntityRepository)
+                    {
+                        if (record != null)
+                            pipeline.QueueCommand(c => c.Store(record));
+                    }
 
-                pipeline.Flush();
+                    pipeline.Flush();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }
