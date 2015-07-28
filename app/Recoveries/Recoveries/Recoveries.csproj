@@ -68,7 +68,6 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <None Include="ArgumentParser.cs.delete" />
     <Compile Include="Domain\Extensions.cs" />
     <Compile Include="EasyNetQHosepipeException.cs" />
     <Compile Include="ErrorRetry.cs" />

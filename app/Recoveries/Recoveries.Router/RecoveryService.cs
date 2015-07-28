@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Common.Logging;
 using EasyNetQ;
@@ -122,15 +123,15 @@ namespace Recoveries.Router
         private void Delete(IQueueOptions options)
         {
             var count = 0;
-            WithEach(_errorDelete.DeleteMessages(options), () => count++);
-            _log.InfoFormat("{0} Error messages from direcotry '{1}' have been deleted", count, options.MessageFilePath);
+            var files = WithEach(_errorDelete.DeleteMessages(options), () => count++).ToList();
+            _log.InfoFormat("{0}/{2} Error messages from directory '{1}' have been deleted", count, options.MessageFilePath, files.Any() ? files.Max() : 0);
         }
 
         private void Purge(IQueueOptions options)
         {
             var count = 0;
-            WithEach(_errorPurge.PurgeQueue(options), () => count++);
-            _log.InfoFormat("{0} messages from Queue '{1}' have been Purged", count, options.ErrorQueueName);
+            var messages =  WithEach(_errorPurge.PurgeQueue(options), () => count++).ToList();
+            _log.InfoFormat("{0}/{2} messages from Queue '{1}' have been Purged", count, options.ErrorQueueName, messages.Any() ? messages.Max() : 0);
 
         }
 
@@ -143,14 +144,24 @@ namespace Recoveries.Router
             }
         }
 
-        private static void WithEach(IEnumerable<int> counts, Action action)
+        private static IEnumerable<int> WithEach(IEnumerable<int> counts, Action action)
         {
-            action();
+            foreach (var count in counts)
+            {
+                action();
+                yield return count;
+            }
+           
         }
 
-        private static void WithEach(IEnumerable<uint> counts, Action action)
+        private static IEnumerable<uint> WithEach(IEnumerable<uint> counts, Action action)
         {
-            action();
+            foreach (var count in counts)
+            {
+                action();
+                yield return count;
+            }
+            
         }
 
         public void Stop()

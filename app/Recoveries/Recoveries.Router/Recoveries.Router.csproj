@@ -150,6 +150,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
+    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Recoveries.ErrorQueues\Recoveries.ErrorQueues.csproj">

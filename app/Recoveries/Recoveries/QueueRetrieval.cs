@@ -22,7 +22,6 @@ namespace Recoveries
             {
                 try
                 {
-                   // channel.QueueDeclarePassive(options.QueueName);
                     channel.QueueDeclarePassive(options.ErrorQueueName);
                 }
                 catch (OperationInterruptedException exception)
