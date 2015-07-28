@@ -104,6 +104,48 @@
             </div>
         </div>
     </div>
+
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-gears"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">PreBilling Cache Settings</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-gears"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">StageBilling Cache Settings</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-gears"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">FinalBilling Cache Settings</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- Modal -->
@@ -161,7 +203,7 @@
                         </div>
                     </div>
                     <script type="text/javascript">
-                        
+
                         $(function () {
 
                             later.date.localTime();
@@ -201,7 +243,7 @@
                                         format: 'DD [of each Month at] HH:mm',
                                         defaultDate: moment(result)
 
-                                    }).on('dp.change',function(e) {
+                                    }).on('dp.change', function (e) {
                                         monthlySchedule = moment(e.date).format('DD-MM-YYYY HH:mm');
                                     });
 

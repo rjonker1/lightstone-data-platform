@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -18,44 +19,46 @@ namespace Billing.Api.Modules
 {
     public class PreBillingModule : SecureModule
     {
+        private readonly IRepository<PreBilling> _preBillingDBRepository;
+        private readonly ICacheProvider<PreBilling> _preBillingCacheProvider;
+        private IList<PreBilling> _preBillingRepository;
+
         public PreBillingModule(IRepository<PreBilling> preBillingDBRepository, 
                                 IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider)
         {
-            IList<PreBilling> preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();
+            _preBillingDBRepository = preBillingDBRepository;
+            _preBillingCacheProvider = preBillingCacheProvider;
+            _preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();
 
-            try
+            Before += async (ctx, ct) =>
             {
-                if (preBillingRepository.Count <= 0)
-                {
-                    this.Info(() => "Cache not available. Switching to DB repository.");
+                await CheckCache(ct);
+                this.Info(() => "Before Hook - PreBilling");
+                return null;
+            };
 
-                    preBillingRepository = preBillingDBRepository.ToList();
-                    //preBillingCacheProvider.CachePipelineInsert(preBillingDBRepository);
-                    DBtoCache(preBillingDBRepository, preBillingCacheProvider);
-                }
-            }
-            catch (Exception ex)
+            After += async (ctx, ct) =>
             {
-                this.Error(() => ex.Message);
-            }
+                ct.ThrowIfCancellationRequested();
+                this.Info(() => "After Hook - PreBilling");
+            };
 
-
-            Get["/PreBilling/"] = _ =>
+            Get["/PreBilling/", true] = async (parameters, ct) =>
             {
                 var customerClientList = new List<PreBillingDto>();
 
-                foreach (var transaction in preBillingRepository)
+                foreach (var transaction in _preBillingRepository)
                 {
                     var customerClient = new PreBillingDto();
                     var userList = new List<User>();
 
-                    var customerTransactions = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId).DistinctBy(x => x.TransactionId);
+                    var customerTransactions = _preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId).DistinctBy(x => x.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
 
-                    var clientTransactions = preBillingRepository.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.TransactionId);
+                    var clientTransactions = _preBillingRepository.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.TransactionId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.PackageId).Distinct().Count();
@@ -116,7 +119,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
-                var preBillingRepo = preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
+                var preBillingRepo = _preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in preBillingRepo)
                 {
@@ -161,7 +164,7 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                var preBillingRepo = preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
+                var preBillingRepo = _preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in preBillingRepo)
                 {
@@ -179,9 +182,34 @@ namespace Billing.Api.Modules
 
         }
 
-        private Task<bool> DBtoCache(IRepository<PreBilling> repository, ICacheProvider<PreBilling> cacheProvider)
+        private async Task CheckCache(CancellationToken ct)
         {
-            return cacheProvider.CachePipelineInsert(repository);
+            ct.ThrowIfCancellationRequested();
+
+            if (_preBillingRepository.Count <= 0) _preBillingRepository = _preBillingDBRepository.ToList();
+
+            //try
+            //{
+            //    if (_preBillingRepository.Count <= 0)
+            //    {
+            //        this.Info(() => "Cache not available. Switching to DB repository.");
+
+            //        var cache = await DBtoCache(_preBillingDBRepository, _preBillingCacheProvider);
+            //        ct.ThrowIfCancellationRequested();
+
+            //        if (cache) this.Info(() => "PreBilling loaded to cache.");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.Error(() => ex.Message);
+            //    _preBillingRepository = _preBillingDBRepository.ToList();
+            //}
+        }
+
+        private async Task<bool> DBtoCache(IRepository<PreBilling> repository, ICacheProvider<PreBilling> cacheProvider)
+        {
+            return await cacheProvider.CachePipelineInsert(repository);
         }
     }
 
