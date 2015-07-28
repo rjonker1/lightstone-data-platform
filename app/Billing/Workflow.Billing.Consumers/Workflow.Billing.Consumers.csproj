@@ -130,6 +130,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ConsumerTypes\BillCacheConsumer.cs" />
     <Compile Include="ConsumerTypes\BillRunConsumer.cs" />
     <Compile Include="ConsumerTypes\BillTransactionConsumer.cs" />
     <Compile Include="ConsumerTypes\ClientConsumer.cs" />

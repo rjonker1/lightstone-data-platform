@@ -5,6 +5,8 @@ using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
 using Workflow.Billing.Consumer.Installers;
 using Workflow.Billing.Consumers;
+using Workflow.Billing.Consumers.ConsumerTypes;
+using Workflow.Billing.Messages.Publishable;
 
 namespace Workflow.Billing.Consumer
 {
@@ -22,6 +24,7 @@ namespace Workflow.Billing.Consumer
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
                 // new MappingTypeInstaller(), //TODO: remove
+                new CacheProviderInstaller(),
                 new RepositoryInstaller(),
                 new AutoMapperInstaller(),
                 new ConsumerInstaller(),
@@ -32,6 +35,8 @@ namespace Workflow.Billing.Consumer
             //bus = container.Resolve<IBus>();
             advancedBus = container.Resolve<IAdvancedBus>();
             var q = advancedBus.QueueDeclare("DataPlatform.Transactions.Billing");
+            var cache = advancedBus.QueueDeclare("DataPlatform.Cache.Billing");
+
             //advancedBus.Consume(q, x => container.Resolve(typeof(IConsume<>)));
             //advancedBus.Consume(q, x => container.Resolve<TransactionConsumer>());
             advancedBus.Consume(q, x => x
@@ -42,6 +47,9 @@ namespace Workflow.Billing.Consumer
                 .Add<ClientMessage>((message, info) => new TransactionConsumer<ClientMessage>(message, container))
                 .Add<PackageMessage>((message, info) => new TransactionConsumer<PackageMessage>(message, container))
                 .Add<ContractMessage>((message, info) => new TransactionConsumer<ContractMessage>(message, container)));
+
+            advancedBus.Consume(cache, x => x
+                .Add<BillCacheMessage>((message, info) => new TransactionConsumer<BillCacheMessage>(message, container)));
 
             _log.DebugFormat("Billing service started");
         }

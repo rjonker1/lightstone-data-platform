@@ -1,8 +1,11 @@
-﻿using DataPlatform.Shared.Repositories;
+﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
+using DataPlatform.Shared.Repositories;
+using EasyNetQ;
 using Nancy;
 using Nancy.Responses.Negotiation;
 using Workflow.Billing.Domain.Entities;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow.Billing.Messages.Publishable;
 using Workflow.Billing.Repository;
 
 
@@ -10,14 +13,9 @@ namespace Billing.Api.Modules
 {
     public class AdminBillingModule : SecureModule
     {
-        public AdminBillingModule(IRepository<AuditLog> auditLogs,
-                                    IRepository<PreBilling> preBillingRepository,
-                                    IRepository<StageBilling> stageBillingRepository,
-                                    IRepository<FinalBilling> finalBillingRepository,
-                                    ICacheProvider<PreBilling> preBillingCacheProvider,
-                                    ICacheProvider<StageBilling> stageBillingCacheProvider,
-                                    ICacheProvider<FinalBilling> finalBillingCacheProvider )
+        public AdminBillingModule(IRepository<AuditLog> auditLogs, IAdvancedBus eBus)
         {
+            var advancedBus = new TransactionBus(eBus);
 
             Get["/Admin/Billing"] = _ =>  Negotiate.WithView("Index");
             Get["/Admin/AuditLog"] = _ =>
@@ -34,19 +32,19 @@ namespace Billing.Api.Modules
                 switch (billingCycle)
                 {
                     case "preBilling":
-                        preBillingCacheProvider.FlushCacheProvider(preBillingCacheProvider);
+                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(PreBilling), Command = BillingCacheCommand.Flush });
                         break;
 
                     case "stageBilling":
-                        stageBillingCacheProvider.FlushCacheProvider(stageBillingCacheProvider);
+                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(StageBilling), Command = BillingCacheCommand.Flush });
                         break;
 
                     case "finalBilling":
-                        finalBillingCacheProvider.FlushCacheProvider(finalBillingCacheProvider);
+                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(FinalBilling), Command = BillingCacheCommand.Flush });
                         break;
                 }
 
-                return Response.AsJson(new { data = "Success"});
+                return Response.AsJson(new { data = "Success" });
             };
 
             Post["/Admin/Cache/Reload/{cycle}"] = param =>
@@ -56,15 +54,15 @@ namespace Billing.Api.Modules
                 switch (billingCycle)
                 {
                     case "preBilling":
-                        preBillingCacheProvider.CachePipelineInsert(preBillingRepository);
+                        advancedBus.SendDynamic(new BillCacheMessage {BillingType = typeof(PreBilling), Command = BillingCacheCommand.Reload});
                         break;
 
                     case "stageBilling":
-                        stageBillingCacheProvider.CachePipelineInsert(stageBillingRepository);
+                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(StageBilling), Command = BillingCacheCommand.Reload });
                         break;
 
                     case "finalBilling":
-                        finalBillingCacheProvider.CachePipelineInsert(finalBillingRepository);
+                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(FinalBilling), Command = BillingCacheCommand.Reload });
                         break;
                 }
 

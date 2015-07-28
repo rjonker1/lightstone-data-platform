@@ -106,10 +106,6 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.1384\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Reporting">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1384\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1199\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
@@ -746,6 +742,10 @@
     <ProjectReference Include="..\Workflow.Billing.Consumer\Workflow.Billing.Consumer.csproj">
       <Project>{ee01f6ba-d18f-4958-81e3-0b9984f6f5ed}</Project>
       <Name>Workflow.Billing.Consumer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
+      <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>
+      <Name>Workflow.Billing.Messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing\Workflow.Billing.csproj">
       <Project>{74859ecc-2e2e-4016-8689-2fb29cdbbb02}</Project>

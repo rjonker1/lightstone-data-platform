@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Threading.Tasks;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
@@ -19,7 +17,7 @@ namespace Workflow.Billing.Repository
 
         private static bool useCache = true;
 
-        public CacheProvider()
+        public void Initialize()
         {
             try
             {
@@ -32,6 +30,11 @@ namespace Workflow.Billing.Repository
                 this.Error(() => string.Format("Failed to initialize CacheProvider. {0}", ex.Message));
                 useCache = false;
             }
+        }
+
+        public CacheProvider()
+        {
+            Initialize();
         }
 
         public T CacheGet(Guid entityId)

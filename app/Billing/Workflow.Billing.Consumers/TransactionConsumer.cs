@@ -3,6 +3,7 @@ using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
 using Workflow.Billing.Consumers.ConsumerTypes;
+using Workflow.Billing.Messages.Publishable;
 
 namespace Workflow.Billing.Consumers
 {
@@ -18,6 +19,7 @@ namespace Workflow.Billing.Consumers
             if (message is IMessage<ClientMessage>) container.Resolve<ClientConsumer>().Consume(message as IMessage<ClientMessage>);
             if (message is IMessage<PackageMessage>) container.Resolve<PackageConsumer>().Consume(message as IMessage<PackageMessage>);
             if (message is IMessage<ContractMessage>) container.Resolve<ContractConsumer>().Consume(message as IMessage<ContractMessage>);
+            if (message is IMessage<BillCacheMessage>) container.Resolve<BillCacheConsumer>().Consume(message as IMessage<BillCacheMessage>);
         }
     }
 
