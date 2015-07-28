@@ -113,8 +113,8 @@
                 <span class="info-box-text">PreBilling Cache Settings</span>
                 <br />
                 <span class="info-box-text">
-                    <button type="button" class="btn btn-primary btn-md">Flush Cache</button>
-                    <button type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                    <button id="preBillingFlush" type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button id="preBillingReload" type="button" class="btn btn-primary btn-md">Reload Cache</button>
                 </span>
             </div>
         </div>
@@ -126,8 +126,8 @@
                 <span class="info-box-text">StageBilling Cache Settings</span>
                 <br />
                 <span class="info-box-text">
-                    <button type="button" class="btn btn-primary btn-md">Flush Cache</button>
-                    <button type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                    <button id="stageBillingFlush" type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button id="stageBillingReload" type="button" class="btn btn-primary btn-md">Reload Cache</button>
                 </span>
             </div>
         </div>
@@ -139,14 +139,40 @@
                 <span class="info-box-text">FinalBilling Cache Settings</span>
                 <br />
                 <span class="info-box-text">
-                    <button type="button" class="btn btn-primary btn-md">Flush Cache</button>
-                    <button type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                    <button id="finalBillingFlush" type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button id="finalBillingReload" type="button" class="btn btn-primary btn-md">Reload Cache</button>
                 </span>
             </div>
         </div>
     </div>
 
 </div>
+
+<script>
+    $('#preBillingFlush').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Flush/preBilling", function (response) { });
+    });
+
+    $('#preBillingReload').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Reload/preBilling", function (response) { });
+    });
+
+    $('#stageBillingFlush').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Flush/stageBilling", function (response) { });
+    });
+
+    $('#stageBillingReload').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Reload/stageBilling", function (response) { });
+    });
+
+    $('#finalBillingFlush').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Flush/finalBilling", function (response) { });
+    });
+
+    $('#finalBillingReload').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Reload/finalBilling", function (response) { });
+    });
+</script>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -29,7 +29,7 @@ namespace Billing.Api.Modules
 
             Post["/Admin/Cache/Flush/{cycle}"] = param =>
             {
-                string billingCycle = param.billingCycle;
+                string billingCycle = param.cycle;
 
                 switch (billingCycle)
                 {
@@ -51,7 +51,7 @@ namespace Billing.Api.Modules
 
             Post["/Admin/Cache/Reload/{cycle}"] = param =>
             {
-                string billingCycle = param.billingCycle;
+                string billingCycle = param.cycle;
 
                 switch (billingCycle)
                 {

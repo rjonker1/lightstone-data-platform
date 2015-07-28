@@ -89,20 +89,22 @@ namespace Workflow.Billing.Repository
             try
             {
                 using (var client = CacheClient)
-                using (var pipeline = client.CreatePipeline())
+                using (var pipeline = client.CreateTransaction())
                 {
+                    pipeline.QueueCommand(c => c.DeleteAll());
+
                     foreach (var record in typedEntityRepository)
                     {
                         if (record != null)
-                            pipeline.QueueCommand(c => c.Store(record));
+                            pipeline.QueueCommand(c => c.StoreAsHash(record));
                     }
 
-                    pipeline.Flush();
+                    pipeline.Commit();
                 }
             }
             catch (Exception ex)
             {
-               throw new LightstoneAutoException(ex.Message);
+                throw new LightstoneAutoException(ex.Message);
             }
         }
 
@@ -114,6 +116,7 @@ namespace Workflow.Billing.Repository
             }
             catch (Exception ex)
             {
+                CacheClient.Dispose();
                 throw new LightstoneAutoException(ex.Message);
             }
         }
