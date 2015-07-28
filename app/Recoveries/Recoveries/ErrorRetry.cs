@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Common.Logging;
 using EasyNetQ;
@@ -10,7 +9,7 @@ namespace Recoveries
 {
     public interface IErrorRetry
     {
-        void RetryErrors(IEnumerable<HosepipeMessage> rawErrorMessages, IQueueOptions options);
+        void RetryErrors(IEnumerable<RecoveryMessage> rawErrorMessages, IQueueOptions options);
     }
 
     public class ErrorRetry : IErrorRetry
@@ -23,7 +22,7 @@ namespace Recoveries
             _serializer = serializer;
         }
 
-        public void RetryErrors(IEnumerable<HosepipeMessage> rawErrorMessages, IQueueOptions options)
+        public void RetryErrors(IEnumerable<RecoveryMessage> rawErrorMessages, IQueueOptions options)
         {
             foreach (var rawErrorMessage in rawErrorMessages)
             {
@@ -35,7 +34,7 @@ namespace Recoveries
 
         public void RepublishError(Error error, IQueueOptions options)
         {
-            using (var connection = HosepipeConnection.FromParamters(options))
+            using (var connection = RabbitConnection.FromOptions(options))
             using (var model = connection.CreateModel())
             {
                 try

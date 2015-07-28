@@ -8,16 +8,16 @@ namespace Recoveries
 {
     public interface IQueueRetrieval
     {
-        IEnumerable<HosepipeMessage> GetMessagesFromQueue(IQueueOptions options);
+        IEnumerable<RecoveryMessage> GetMessagesFromQueue(IQueueOptions options);
     }
 
     public class QueueRetrieval : IQueueRetrieval
     {
         private readonly ILog _log = LogManager.GetLogger<QueueRetrieval>();
 
-        public IEnumerable<HosepipeMessage> GetMessagesFromQueue(IQueueOptions options)
+        public IEnumerable<RecoveryMessage> GetMessagesFromQueue(IQueueOptions options)
         {
-            using (var connection = HosepipeConnection.FromParamters(options))
+            using (var connection = RabbitConnection.FromOptions(options))
             using (var channel = connection.CreateModel())
             {
                 try
@@ -45,7 +45,7 @@ namespace Recoveries
                         basicGetResult.RoutingKey,
                         options.ErrorQueueName);
 
-                    yield return new HosepipeMessage(Encoding.UTF8.GetString(basicGetResult.Body), properties, info);
+                    yield return new RecoveryMessage(Encoding.UTF8.GetString(basicGetResult.Body), properties, info);
                 }
             }
         }

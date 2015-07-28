@@ -80,7 +80,7 @@ namespace Recoveries.Router
                 Purge(options);
                 Retry(options);
             }
-            catch (EasyNetQHosepipeException ex)
+            catch (EasyNetQException ex)
             {
                 _log.ErrorFormat("Operation Failed in Recovery Service because of {0}", ex, ex.Message);
             }
@@ -135,7 +135,7 @@ namespace Recoveries.Router
 
         }
 
-        private static IEnumerable<HosepipeMessage> WithEach(IEnumerable<HosepipeMessage> messages, Action action)
+        private static IEnumerable<RecoveryMessage> WithEach(IEnumerable<RecoveryMessage> messages, Action action)
         {
             foreach (var message in messages)
             {

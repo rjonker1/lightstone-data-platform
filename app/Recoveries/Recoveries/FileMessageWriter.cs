@@ -7,7 +7,7 @@ namespace Recoveries
 {
     public interface IMessageWriter
     {
-        void Write(IEnumerable<HosepipeMessage> messages, IQueueOptions options);
+        void Write(IEnumerable<RecoveryMessage> messages, IQueueOptions options);
     }
 
     public class FileMessageWriter : IMessageWriter
@@ -16,7 +16,7 @@ namespace Recoveries
 
         private static readonly Regex InvalidCharRegex = new Regex(@"[\\\/:\*\?\""\<\>|]");
 
-        public void Write(IEnumerable<HosepipeMessage> messages, IQueueOptions options)
+        public void Write(IEnumerable<RecoveryMessage> messages, IQueueOptions options)
         {
             var count = 0;
             foreach (var message in messages)
@@ -38,8 +38,7 @@ namespace Recoveries
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    throw new EasyNetQHosepipeException(
-                        string.Format("Directory '{0}' does not exist", options.MessageFilePath));
+                    throw new EasyNetQException(string.Format("Directory '{0}' does not exist", options.MessageFilePath));
                 }
                 count++;
             }

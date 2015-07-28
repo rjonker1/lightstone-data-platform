@@ -69,12 +69,12 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Domain\Extensions.cs" />
-    <Compile Include="EasyNetQHosepipeException.cs" />
+    <Compile Include="EasyNetQException.cs" />
     <Compile Include="ErrorRetry.cs" />
     <Compile Include="FileDelete.cs" />
     <Compile Include="FileMessageWriter.cs" />
-    <Compile Include="HosepipeConnection.cs" />
-    <Compile Include="HosepipeMessage.cs" />
+    <Compile Include="RabbitConnection.cs" />
+    <Compile Include="RecoveryMessage.cs" />
     <Compile Include="MessageReader.cs" />
     <Compile Include="QueueInsertion.cs" />
     <Compile Include="QueueOptions.cs" />

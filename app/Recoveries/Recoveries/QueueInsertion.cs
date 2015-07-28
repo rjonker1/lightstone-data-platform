@@ -6,14 +6,14 @@ namespace Recoveries
 {
     public interface IQueueInsertion
     {
-        void PublishMessagesToQueue(IEnumerable<HosepipeMessage> messages, IQueueOptions options);
+        void PublishMessagesToQueue(IEnumerable<RecoveryMessage> messages, IQueueOptions options);
     }
 
     public class QueueInsertion : IQueueInsertion
     {
-        public void PublishMessagesToQueue(IEnumerable<HosepipeMessage> messages, IQueueOptions options)
+        public void PublishMessagesToQueue(IEnumerable<RecoveryMessage> messages, IQueueOptions options)
         {
-            using (var connection = HosepipeConnection.FromParamters(options))
+            using (var connection = RabbitConnection.FromOptions(options))
             using (var channel = connection.CreateModel())
             {
                 foreach (var message in messages)

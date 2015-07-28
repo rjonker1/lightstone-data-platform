@@ -8,19 +8,19 @@ namespace Recoveries
 {
     public interface IMessageReader
     {
-        IEnumerable<HosepipeMessage> ReadMessages(IQueueOptions options);
-        IEnumerable<HosepipeMessage> ReadMessages(IQueueOptions options, string messageName);
+        IEnumerable<RecoveryMessage> ReadMessages(IQueueOptions options);
+        IEnumerable<RecoveryMessage> ReadMessages(IQueueOptions options, string messageName);
     }
 
     public class MessageReader : IMessageReader
     {
         private readonly ILog _log = LogManager.GetLogger<MessageReader>();
-        public IEnumerable<HosepipeMessage> ReadMessages(IQueueOptions options)
+        public IEnumerable<RecoveryMessage> ReadMessages(IQueueOptions options)
         {
             return ReadMessages(options, null);
         }
 
-        public IEnumerable<HosepipeMessage> ReadMessages(IQueueOptions options, string messageName)
+        public IEnumerable<RecoveryMessage> ReadMessages(IQueueOptions options, string messageName)
         {
             if (!Directory.Exists(options.MessageFilePath))
             {
@@ -46,7 +46,7 @@ namespace Recoveries
                 var infoJson = File.ReadAllText(infoFileName);
                 var info = Newtonsoft.Json.JsonConvert.DeserializeObject<MessageReceivedInfo>(infoJson);
 
-                yield return new HosepipeMessage(body, properties, info);
+                yield return new RecoveryMessage(body, properties, info);
             }
         }
     }

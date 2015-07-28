@@ -15,7 +15,7 @@ namespace Recoveries
         public IEnumerable<uint> PurgeQueue(IQueueOptions options)
         {
             
-            using (var connection = HosepipeConnection.FromParamters(options))
+            using (var connection = RabbitConnection.FromOptions(options))
             using (var channel = connection.CreateModel())
             {
                 uint count = 0;

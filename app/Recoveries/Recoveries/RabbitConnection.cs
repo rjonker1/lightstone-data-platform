@@ -3,9 +3,9 @@ using RabbitMQ.Client.Exceptions;
 
 namespace Recoveries
 {
-    public class HosepipeConnection
+    public class RabbitConnection
     {
-        public static IConnection FromParamters(IQueueOptions options)
+        public static IConnection FromOptions(IQueueOptions options)
         {
             var connectionFactory = new ConnectionFactory
             {
@@ -14,17 +14,16 @@ namespace Recoveries
                 UserName = options.Username,
                 Password = options.Password
             };
+
             try
             {
                 return connectionFactory.CreateConnection();
             }
             catch (BrokerUnreachableException)
             {
-                throw new EasyNetQHosepipeException(string.Format(
-                    "The broker at '{0}', VirtualHost '{1}', is unreachable. This message can also be caused " +
-                    "by incorrect credentials.",
-                    options.HostName,
-                    options.VirtualHost));
+                throw new EasyNetQException(
+                    string.Format("The broker at '{0}', VirtualHost '{1}', is unreachable. This message can also be caused by incorrect credentials.",
+                        options.HostName, options.VirtualHost));
             }
         }
     }
