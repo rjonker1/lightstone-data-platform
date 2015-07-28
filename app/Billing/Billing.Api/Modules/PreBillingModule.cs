@@ -207,10 +207,10 @@ namespace Billing.Api.Modules
             //}
         }
 
-        private async Task<bool> DBtoCache(IRepository<PreBilling> repository, ICacheProvider<PreBilling> cacheProvider)
-        {
-            return await cacheProvider.CachePipelineInsert(repository);
-        }
+        //private async Task<bool> DBtoCache(IRepository<PreBilling> repository, ICacheProvider<PreBilling> cacheProvider)
+        //{
+        //    return await cacheProvider.CachePipelineInsert(repository);
+        //}
     }
 
 }

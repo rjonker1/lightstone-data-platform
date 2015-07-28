@@ -27,14 +27,12 @@ namespace Billing.Acceptance.Tests.Workflow
             _finalBilling = new FinalBilling { Id = Guid.NewGuid() };
         }
 
+        // Persistence
         [Observation]
         public void should_persist_preBilling_record_to_redis_cache()
         {
             _preBillingCacheProvider.CacheClient.Store(_preBilling);
             _preBillingCacheProvider.CacheClient.GetById(_preBilling.Id).ShouldNotBeNull();
-
-            _preBillingCacheProvider.CacheClient.DeleteById(_preBilling.Id);
-            _preBillingCacheProvider.CacheClient.GetById(_preBilling.Id).ShouldBeNull();
         }
         
         [Observation]
@@ -42,9 +40,6 @@ namespace Billing.Acceptance.Tests.Workflow
         {
             _stageBillingCacheProvider.CacheClient.Store(_stageBilling);
             _stageBillingCacheProvider.CacheClient.GetById(_stageBilling.Id).ShouldNotBeNull();
-
-            _stageBillingCacheProvider.CacheClient.DeleteById(_stageBilling.Id);
-            _stageBillingCacheProvider.CacheClient.GetById(_stageBilling.Id).ShouldBeNull();
         }
         
         [Observation]
@@ -52,9 +47,25 @@ namespace Billing.Acceptance.Tests.Workflow
         {
             _finalBillingCacheProvider.CacheClient.Store(_finalBilling);
             _finalBillingCacheProvider.CacheClient.GetById(_finalBilling.Id).ShouldNotBeNull();
+        }
 
-            _finalBillingCacheProvider.CacheClient.DeleteById(_finalBilling.Id);
-            _finalBillingCacheProvider.CacheClient.GetById(_finalBilling.Id).ShouldBeNull();
+        // Flush
+        [Observation]
+        public void should_flush_preBilling_records_from_redis_cache()
+        {
+            _preBillingCacheProvider.FlushCacheProvider(_preBillingCacheProvider);
+        }
+
+        [Observation]
+        public void should_flush_stageBilling_records_from_redis_cache()
+        {
+            _stageBillingCacheProvider.FlushCacheProvider(_stageBillingCacheProvider);
+        }
+
+        [Observation]
+        public void should_flush_finalBilling_records_from_redis_cache()
+        {
+            _finalBillingCacheProvider.FlushCacheProvider(_finalBillingCacheProvider);
         }
     }
 }

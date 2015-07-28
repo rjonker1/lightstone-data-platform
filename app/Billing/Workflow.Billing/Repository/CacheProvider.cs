@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using ServiceStack.Redis;
@@ -83,7 +84,7 @@ namespace Workflow.Billing.Repository
             }
         }
 
-        public async Task<bool> CachePipelineInsert(IRepository<T> typedEntityRepository)
+        public void CachePipelineInsert(IRepository<T> typedEntityRepository)
         {
             try
             {
@@ -97,13 +98,17 @@ namespace Workflow.Billing.Repository
                     }
 
                     pipeline.Flush();
-                    return true;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+               throw new LightstoneAutoException(ex.Message);
             }
+        }
+
+        public void FlushCacheProvider(ICacheProvider<T> cacheProvider)
+        {
+            cacheProvider.CacheClient.DeleteAll();
         }
     }
 }
