@@ -92,10 +92,10 @@ namespace Recoveries.Router
 
             try
             {
-                Dump(options);
-                Insert(options);
-                ErrorDump(options);
-                Retry(options);
+               // Dump(options);
+               // Insert(options);
+               //ErrorDump(options);
+               Retry(options);
 
                 //arguments.At(0, "dump", () => arguments.WithKey("q", a =>
                 //{
@@ -130,7 +130,7 @@ namespace Recoveries.Router
             _messageWriter.Write(WithEach(_queueRetreival.GetMessagesFromQueue(options), () => count++), options);
 
             _log.InfoFormat("{0} Messages from queue '{1}'\r\noutput to directory '{2}'",
-                count, options.QueueName, options.MessageFilePath);
+                count, options.ErrorQueueName, options.MessageFilePath);
         }
 
         private void Insert(IQueueOptions options)
@@ -145,18 +145,23 @@ namespace Recoveries.Router
 
         private void ErrorDump(IQueueOptions options)
         {
-            options.SetQueueName(_conventions.ErrorQueueNamingConvention()); // options.QueueName = _conventions.ErrorQueueNamingConvention();
+           // options.SetQueueName(_conventions.ErrorQueueNamingConvention()); // options.QueueName = _conventions.ErrorQueueNamingConvention();
             Dump(options);
         }
 
         private void Retry(IQueueOptions options)
         {
             var count = 0;
+            //_errorRetry.RetryErrors(
+            //    WithEach(
+            //        _messageReader.ReadMessages(options, _conventions.ErrorQueueNamingConvention()),
+            //        () => count++),
+            //    options);
             _errorRetry.RetryErrors(
-                WithEach(
-                    _messageReader.ReadMessages(options, _conventions.ErrorQueueNamingConvention()),
-                    () => count++),
-                options);
+               WithEach(
+                   _messageReader.ReadMessages(options, options.ErrorQueueName),
+                   () => count++),
+               options);
 
             _log.InfoFormat("{0} Error messages from directory '{1}' republished",
                 count, options.MessageFilePath);

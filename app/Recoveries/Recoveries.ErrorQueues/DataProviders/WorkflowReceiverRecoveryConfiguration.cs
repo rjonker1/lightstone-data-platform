@@ -4,8 +4,8 @@
     {
         public WorkflowReceiverRecoveryConfiguration()
         {
-            Options = new QueueOptions("DataPlatform.DataProvider.Receiver.Error", "localhost", "/", "guest", "guest", false, 10000,
-                @"D:\DataplatformRecoveries\DataProviders\");
+            Options = new QueueOptions("DataPlatform.DataProvider.Receiver", "localhost", "/", "guest", "guest", false, 10000,
+                @"D:\DataplatformRecoveries\DataProviders\Receiver", "DataPlatform.DataProvider.Receiver.Error");
         }
 
         public IQueueOptions Options { get; private set; }

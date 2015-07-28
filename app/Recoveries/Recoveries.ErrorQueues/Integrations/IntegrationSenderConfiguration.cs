@@ -4,8 +4,8 @@
     {
         public IntegrationSenderConfiguration()
         {
-            Options = new QueueOptions("DataPlatform.Integration.Sender.Error", "localhost", "/", "guest", "guest", false, 10000,
-                @"D:\DataplatformRecoveries\Integrations\");
+            Options = new QueueOptions("DataPlatform.Integration.Sender", "localhost", "/", "guest", "guest", false, 10000,
+                @"D:\DataplatformRecoveries\Integrations\", "DataPlatform.Integration.Sender.Error");
         }
         public IQueueOptions Options { get; private set; }
     }

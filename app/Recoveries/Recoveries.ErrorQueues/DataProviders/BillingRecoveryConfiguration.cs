@@ -4,8 +4,8 @@
     {
         public BillingRecoveryConfiguration()
         {
-            Options = new QueueOptions("DataPlatform.Transactions.Billing.Error", "localhost", "/", "guest", "guest", false, 10000,
-                @"D:\DataplatformRecoveries\DataProviders\");
+            Options = new QueueOptions("DataPlatform.Transactions.Billing", "localhost", "/", "guest", "guest", false, 10000,
+                @"D:\DataplatformRecoveries\DataProviders\Billing", "DataPlatform.Transactions.Billing.Error");
         }
 
         public IQueueOptions Options { get; private set; }

@@ -22,7 +22,8 @@ namespace Recoveries
             {
                 try
                 {
-                    channel.QueueDeclarePassive(options.QueueName);
+                   // channel.QueueDeclarePassive(options.QueueName);
+                    channel.QueueDeclarePassive(options.ErrorQueueName);
                 }
                 catch (OperationInterruptedException exception)
                 {
@@ -33,7 +34,8 @@ namespace Recoveries
                 var count = 0;
                 while (count++ < options.MaxNumberOfMessagesToRetrieve)
                 {
-                    var basicGetResult = channel.BasicGet(options.QueueName, noAck: options.Purge);
+                    //var basicGetResult = channel.BasicGet(options.QueueName, noAck: options.Purge);
+                    var basicGetResult = channel.BasicGet(options.ErrorQueueName, noAck: options.Purge);
                     if (basicGetResult == null) break; // no more messages on the queue
 
                     var properties = new MessageProperties(basicGetResult.BasicProperties);
@@ -43,7 +45,7 @@ namespace Recoveries
                         basicGetResult.Redelivered,
                         basicGetResult.Exchange,
                         basicGetResult.RoutingKey,
-                        options.QueueName);
+                        options.ErrorQueueName);
 
                     yield return new HosepipeMessage(Encoding.UTF8.GetString(basicGetResult.Body), properties, info);
                 }

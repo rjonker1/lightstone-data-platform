@@ -21,7 +21,7 @@ namespace Recoveries
             var count = 0;
             foreach (var message in messages)
             {
-                var uniqueFileName = SanitiseQueueName(options.QueueName) + "." + count.ToString();
+                var uniqueFileName = SanitiseQueueName(options.ErrorQueueName) + "." + count.ToString();
 
                 var bodyPath = Path.Combine(options.MessageFilePath, uniqueFileName + ".message.txt");
                 var propertiesPath = Path.Combine(options.MessageFilePath, uniqueFileName + ".properties.txt");

@@ -1,5 +1,4 @@
-﻿using System;
-namespace Recoveries
+﻿namespace Recoveries
 {
     public interface IQueueOptions
     {
@@ -8,11 +7,12 @@ namespace Recoveries
         string Username { get; }
         string Password { get; }
         string QueueName { get; }
+        string ErrorQueueName { get; }
         bool Purge { get; }
         int MaxNumberOfMessagesToRetrieve { get; }
         string MessageFilePath { get; }
 
-        void SetQueueName(string name);
+       // void SetQueueName(string name);
     }
 
     public class QueueOptions : IQueueOptions
@@ -30,27 +30,28 @@ namespace Recoveries
         //  //  Commands = new[] {QueueCommand.Dump, QueueCommand.Insert, QueueCommand.Error, QueueCommand.Retry, QueueCommand.Print};
         //}
 
-        public QueueOptions(string queueName, string hostname, string vHost, string username, string password, bool purge,
+        public QueueOptions(string queueName, string hostname, string virturalHost, string username, string password, bool purge,
             int numberOfMessagesToRetrieve,
-            string messageFilePath //, QueueCommand[] commands
+            string messageFilePath, string errorQueueName //, QueueCommand[] commands
             )
         {
             QueueName = queueName;
             HostName = hostname;
-            VirtualHost = vHost;
+            VirtualHost = virturalHost;
             Username = username;
             Password = password;
             Purge = purge;
             MaxNumberOfMessagesToRetrieve = numberOfMessagesToRetrieve;
             MessageFilePath = messageFilePath;
-           // Commands = commands;
+            ErrorQueueName = errorQueueName;
+            // Commands = commands;
         }
 
 
-        public void SetQueueName(string name)
-        {
-            QueueName = name;
-        }
+        //public void SetQueueName(string name)
+        //{
+        //    QueueName = name;
+        //}
 
         public string HostName { get; private set; }
         public string VirtualHost { get; private set; }
@@ -60,6 +61,6 @@ namespace Recoveries
         public bool Purge { get; private set; }
         public int MaxNumberOfMessagesToRetrieve { get; private set; }
         public string MessageFilePath { get; private set; }
-        //  public QueueCommand[] Commands { get; private set; }
+        public string ErrorQueueName { get; private set; }
     }
 }
