@@ -108,7 +108,14 @@ namespace Workflow.Billing.Repository
 
         public void FlushCacheProvider(ICacheProvider<T> cacheProvider)
         {
-            cacheProvider.CacheClient.DeleteAll();
+            try
+            {
+                cacheProvider.CacheClient.DeleteAll();
+            }
+            catch (Exception ex)
+            {
+                throw new LightstoneAutoException(ex.Message);
+            }
         }
     }
 }
