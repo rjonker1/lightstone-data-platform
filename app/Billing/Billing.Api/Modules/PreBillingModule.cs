@@ -20,14 +20,12 @@ namespace Billing.Api.Modules
     public class PreBillingModule : SecureModule
     {
         private readonly IRepository<PreBilling> _preBillingDBRepository;
-        private readonly ICacheProvider<PreBilling> _preBillingCacheProvider;
         private IList<PreBilling> _preBillingRepository;
 
         public PreBillingModule(IRepository<PreBilling> preBillingDBRepository, 
                                 IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider)
         {
             _preBillingDBRepository = preBillingDBRepository;
-            _preBillingCacheProvider = preBillingCacheProvider;
             _preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();
 
             Before += async (ctx, ct) =>
@@ -187,24 +185,6 @@ namespace Billing.Api.Modules
             ct.ThrowIfCancellationRequested();
 
             if (_preBillingRepository.Count <= 0) _preBillingRepository = _preBillingDBRepository.ToList();
-
-            //try
-            //{
-            //    if (_preBillingRepository.Count <= 0)
-            //    {
-            //        this.Info(() => "Cache not available. Switching to DB repository.");
-
-            //        var cache = await DBtoCache(_preBillingDBRepository, _preBillingCacheProvider);
-            //        ct.ThrowIfCancellationRequested();
-
-            //        if (cache) this.Info(() => "PreBilling loaded to cache.");
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    this.Error(() => ex.Message);
-            //    _preBillingRepository = _preBillingDBRepository.ToList();
-            //}
         }
 
         //private async Task<bool> DBtoCache(IRepository<PreBilling> repository, ICacheProvider<PreBilling> cacheProvider)
