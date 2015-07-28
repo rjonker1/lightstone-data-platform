@@ -34,8 +34,7 @@ namespace Recoveries
                 var count = 0;
                 while (count++ < options.MaxNumberOfMessagesToRetrieve)
                 {
-                    //var basicGetResult = channel.BasicGet(options.QueueName, noAck: options.Purge);
-                    var basicGetResult = channel.BasicGet(options.ErrorQueueName, noAck: options.Purge);
+                    var basicGetResult = channel.BasicGet(options.ErrorQueueName, noAck: options.RequireHandshake);
                     if (basicGetResult == null) break; // no more messages on the queue
 
                     var properties = new MessageProperties(basicGetResult.BasicProperties);

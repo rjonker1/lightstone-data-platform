@@ -72,14 +72,14 @@
     <Compile Include="Domain\Extensions.cs" />
     <Compile Include="EasyNetQHosepipeException.cs" />
     <Compile Include="ErrorRetry.cs" />
+    <Compile Include="FileDelete.cs" />
     <Compile Include="FileMessageWriter.cs" />
     <Compile Include="HosepipeConnection.cs" />
     <Compile Include="HosepipeMessage.cs" />
     <Compile Include="MessageReader.cs" />
-    <Compile Include="Messages\IRecoverRoutingMessage.cs" />
-    <Compile Include="Messages\IRecoveryRouter.cs" />
     <Compile Include="QueueInsertion.cs" />
     <Compile Include="QueueOptions.cs" />
+    <Compile Include="PurgeQueue.cs" />
     <Compile Include="QueueRetrieval.cs" />
   </ItemGroup>
   <ItemGroup />
