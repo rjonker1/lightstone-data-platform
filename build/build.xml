@@ -219,6 +219,16 @@
         <include pattern="*.config" to="content/bin"/>
       </includes>
     </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Recoveries.Router</name>
+      <folder>app/Recoveries/Recoveries.Router</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Recoveries.Router</description>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
+      <includes>
+       <include pattern="*" to="content\bin"/>
+      </includes>
+    </nuget>
 
     <!-- BILLING START -->
     <nuget deploy="false">
