@@ -99,7 +99,7 @@ namespace Workflow.Billing.Repository
                     foreach (var record in typedEntityRepository)
                     {
                         if (record != null)
-                            pipeline.QueueCommand(c => c.StoreAsHash(record));
+                            pipeline.QueueCommand(c => c.Store(record));
                     }
 
                     pipeline.Commit();

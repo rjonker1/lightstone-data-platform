@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using Billing.Domain.Dtos;
 using Billing.Domain.Entities;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
@@ -15,17 +18,33 @@ using Newtonsoft.Json.Serialization;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
+using Workflow.Billing.Repository;
 
 namespace Billing.Api.Modules
 {
     public class StageBillingModule : SecureModule
     {
-        public StageBillingModule(IRepository<StageBilling> stageBillingRepository, IRepository<AuditLog> auditLogs, IRepository<UserMeta> userMetaRepository,
+        private readonly IRepository<StageBilling> _stageBillingDBRepository;
+        private IList<StageBilling> stageBillingRepository;
+
+        public StageBillingModule(IRepository<StageBilling> stageBillingDBRepository, IRepository<AuditLog> auditLogs, IRepository<UserMeta> userMetaRepository,
                                     ICommitBillingTransaction<UserTransactionDto> userBillingTransaction,
                                     ICommitBillingTransaction<CustomerClientTransactionDto> customerClientBillingTransaction,
-                                    ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction)
+                                    ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction,
+                                    ICacheProvider<StageBilling> stageBillingCacheProvider)
         {
+            _stageBillingDBRepository = stageBillingDBRepository;
+            stageBillingRepository = stageBillingCacheProvider.CacheClient.GetAll();
 
+            Before += async (ctx, ct) =>
+            {
+                await CheckCache(ct);
+                this.Info(() => "Before Hook - PreBilling");
+                return null;
+            };
+
+            After += async (ctx, ct) => this.Info(() => "After Hook - PreBilling");
+            
             Get["/StageBilling/"] = _ =>
             {
                 var customerClientList = new List<StageBillingDto>();
@@ -279,6 +298,13 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = "Success" });
             };
 
+        }
+
+        private async Task CheckCache(CancellationToken ct)
+        {
+            ct.ThrowIfCancellationRequested();
+
+            if (stageBillingRepository.Count <= 0) stageBillingRepository = _stageBillingDBRepository.ToList();
         }
     }
 

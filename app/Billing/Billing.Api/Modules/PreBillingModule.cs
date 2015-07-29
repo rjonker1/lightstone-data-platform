@@ -9,6 +9,7 @@ using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.Responses.Negotiation;
+using ServiceStack.Redis.Generic;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
@@ -35,13 +36,9 @@ namespace Billing.Api.Modules
                 return null;
             };
 
-            After += async (ctx, ct) =>
-            {
-                ct.ThrowIfCancellationRequested();
-                this.Info(() => "After Hook - PreBilling");
-            };
+            After += async (ctx, ct) => this.Info(() => "After Hook - PreBilling");
 
-            Get["/PreBilling/", true] = async (parameters, ct) =>
+            Get["/PreBilling/"] = _ =>
             {
                 var customerClientList = new List<PreBillingDto>();
 
