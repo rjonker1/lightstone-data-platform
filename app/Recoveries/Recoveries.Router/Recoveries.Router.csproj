@@ -116,6 +116,30 @@
       <DependentUpon>app.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="appSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TransformOnBuild>true</TransformOnBuild>
+    </None>
+    <None Include="appSettings.Debug.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="appSettings.Prod.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="appSettings.Release.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="appSettings.TeamCity.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="appSettings.Test.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="connectionStrings.config">
       <TransformOnBuild>true</TransformOnBuild>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

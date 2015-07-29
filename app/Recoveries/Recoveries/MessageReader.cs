@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Common.Logging;
 using EasyNetQ;
+using Recoveries.Domain;
 
 namespace Recoveries
 {
@@ -25,7 +25,9 @@ namespace Recoveries
             if (!Directory.Exists(options.MessageFilePath))
             {
                 _log.ErrorFormat("Directory '{0}' does not exist", options.MessageFilePath);
-                yield break;
+                _log.InfoFormat("Creating Directory at '{0}'", options.MessageFilePath);
+                options.MessageFilePath.CreateDirectory();
+                _log.InfoFormat("Directory created at '{0}'", options.MessageFilePath);
             }
 
             var bodyPattern = (messageName ?? "*") + ".*.message.txt";

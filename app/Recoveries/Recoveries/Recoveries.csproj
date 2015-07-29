@@ -62,12 +62,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Domain\AppSettingsReader.cs" />
+    <Compile Include="Domain\ConnectionStringsReader.cs" />
     <Compile Include="Domain\Extensions.cs" />
     <Compile Include="EasyNetQException.cs" />
     <Compile Include="ErrorRetry.cs" />
