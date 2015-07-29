@@ -29,7 +29,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     if (stageEntity.BillingType.Contains("INTERNAL"))
                         stageEntity.IsBillable = false;
 
-                    _stageBillingRepository.SaveOrUpdate(stageEntity);
+                    _stageBillingRepository.SaveOrUpdate(stageEntity, true);
                 }
             }
         }

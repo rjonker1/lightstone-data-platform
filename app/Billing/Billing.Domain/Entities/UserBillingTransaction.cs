@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Billing.Domain.Dtos;
@@ -56,7 +55,7 @@ namespace Billing.Domain.Entities
                     transactionRequest.Modified = DateTime.UtcNow;
                     transactionRequest.ModifiedBy = CurrentUser;
 
-                    _stageBillingRepository.SaveOrUpdate(transactionRequest);
+                    _stageBillingRepository.SaveOrUpdate(transactionRequest, true);
                 }
 
                 auditLogsList.ForEach(x => _auditLogs.SaveOrUpdate(x));

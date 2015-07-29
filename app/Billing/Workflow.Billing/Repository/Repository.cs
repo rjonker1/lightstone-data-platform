@@ -51,7 +51,16 @@ namespace Workflow.Billing.Repository
             var currSession = pipelineExtensions.BeforeTransaction(_session);
 
             currSession.Save(entity);
-            _cacheProvider.CacheSave(entity);
+
+            pipelineExtensions.AfterTransaction(currSession);
+        }
+
+        public void Save(T entity, bool useCache = false)
+        {
+            var currSession = pipelineExtensions.BeforeTransaction(_session);
+
+            currSession.Save(entity);
+            if (useCache) _cacheProvider.CacheSave(entity);
 
             pipelineExtensions.AfterTransaction(currSession);
         }
@@ -70,7 +79,18 @@ namespace Workflow.Billing.Repository
 
             //currSession.SaveOrUpdate(entity);
             currSession.Merge(entity);
-            _cacheProvider.CacheSave(entity);
+
+            pipelineExtensions.AfterTransaction(currSession);
+        }
+
+        public void SaveOrUpdate(T entity, bool useCache = false)
+        {
+            ValidateEntity(entity);
+
+            var currSession = pipelineExtensions.BeforeTransaction(_session);
+
+            currSession.Merge(entity);
+            if (useCache) _cacheProvider.CacheSave(entity);
 
             pipelineExtensions.AfterTransaction(currSession);
         }
@@ -88,6 +108,11 @@ namespace Workflow.Billing.Repository
         {
             ValidateEntity(entity);
             _session.Delete(entity);
+        }
+
+        public void Delete(T entity, bool useCache = false)
+        {
+            throw new NotImplementedException();
         }
 
         private void ValidateEntity(T entity)

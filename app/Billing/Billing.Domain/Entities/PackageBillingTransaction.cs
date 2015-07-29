@@ -27,7 +27,7 @@ namespace Billing.Domain.Entities
 
                 transactionRequest.PackageName = entity.PackageName;
 
-                _stageBillingRepository.SaveOrUpdate(transactionRequest);
+                _stageBillingRepository.SaveOrUpdate(transactionRequest, true);
             }
         }
     }

@@ -231,13 +231,13 @@ namespace Billing.Api.Modules
             {
                 var dto = this.Bind<UserDto>();
 
-                var packageTransaction = new List<UserTransaction>();
+                var userTransactions = new List<UserTransaction>();
 
                 foreach (var transaction in dto.Transactions)
                 {
                     foreach (var billTransaction in stageBillingRepository.Where(x => x.RequestId == transaction.RequestId).DistinctBy(x => x.PackageId))
                     {
-                        packageTransaction.Add(new UserTransaction
+                        userTransactions.Add(new UserTransaction
                         {
                             RequestId = transaction.RequestId,
                             PackageName = billTransaction.PackageName,
@@ -246,7 +246,7 @@ namespace Billing.Api.Modules
                     }
                 }
 
-                return Response.AsJson(new { data = packageTransaction });
+                return Response.AsJson(new { data = userTransactions });
             };
 
             // User billable transactions

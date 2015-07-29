@@ -35,8 +35,6 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
         public void Consume(IMessage<InvoiceTransactionCreated> message)
         {
-
-            //var customerId = new Guid("03641AC6-1561-4F1A-8AE5-7EB391541ABB");
             var transactionId = message.Body.TransactionId;
             var currentTransaction = _transactions.Where(x => x.Id == transactionId);
 
@@ -99,7 +97,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         RecommendedPrice = product.RecommendedPrice
                     };
 
-                    _preBillingRepository.Save(preBillingTransaction);
+                    _preBillingRepository.Save(preBillingTransaction, true);
                 }
 
                 return;

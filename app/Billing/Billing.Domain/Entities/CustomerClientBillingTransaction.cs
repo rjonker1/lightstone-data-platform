@@ -28,7 +28,7 @@ namespace Billing.Domain.Entities
 
                 transactionRequest.CustomerName = entity.Value;
 
-                _stageBillingRepository.SaveOrUpdate(transactionRequest);
+                _stageBillingRepository.SaveOrUpdate(transactionRequest, true);
             }
         }
     }
