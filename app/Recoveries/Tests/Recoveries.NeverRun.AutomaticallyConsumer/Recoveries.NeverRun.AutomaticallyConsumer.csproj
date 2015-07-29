@@ -231,10 +231,10 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="IConsume.cs" />
+    <Compile Include="IConsumeMessagesToPutOnErrorQueues.cs" />
     <Compile Include="Progam.cs" />
-    <Compile Include="ReceiverConsumers.cs" />
-    <Compile Include="SenderConsumers.cs" />
+    <Compile Include="ReceiverCauseFailureConsumers.cs" />
+    <Compile Include="SenderCauseFailureConsumers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

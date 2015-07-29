@@ -4,9 +4,9 @@ using Workflow.Lace.Messages.Commands;
 
 namespace Recoveries.NeverRun.AutomaticallyConsumer
 {
-    public class SenderConsumers<T>
+    public class SenderCauseFailureConsumers<T>
     {
-        public SenderConsumers(IMessage<T> message)
+        public SenderCauseFailureConsumers(IMessage<T> message)
         {
 
             if (message is IMessage<SendRequestToDataProviderCommand>)

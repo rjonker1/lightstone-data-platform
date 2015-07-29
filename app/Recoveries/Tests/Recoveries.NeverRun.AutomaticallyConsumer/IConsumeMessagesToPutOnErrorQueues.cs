@@ -33,50 +33,50 @@ namespace Recoveries.NeverRun.AutomaticallyConsumer
 
             _bus.Consume(senderQueue, x => x
                 .Add<SendRequestToDataProviderCommand>(
-                    (message, info) => new SenderConsumers<SendRequestToDataProviderCommand>(message))
+                    (message, info) => new SenderCauseFailureConsumers<SendRequestToDataProviderCommand>(message))
                 .Add<GetResponseFromDataProviderCommmand>(
-                    (message, info) => new SenderConsumers<GetResponseFromDataProviderCommmand>(message))
+                    (message, info) => new SenderCauseFailureConsumers<GetResponseFromDataProviderCommmand>(message))
                 .Add<CreateTransactionCommand>(
-                    (message, info) => new SenderConsumers<CreateTransactionCommand>(message))
+                    (message, info) => new SenderCauseFailureConsumers<CreateTransactionCommand>(message))
                 .Add<ReceiveEntryPointRequest>(
-                    (message, info) => new SenderConsumers<ReceiveEntryPointRequest>(message))
+                    (message, info) => new SenderCauseFailureConsumers<ReceiveEntryPointRequest>(message))
                 .Add<ReturnEntryPointResponse>(
-                    (message, info) => new SenderConsumers<ReturnEntryPointResponse>(message))
+                    (message, info) => new SenderCauseFailureConsumers<ReturnEntryPointResponse>(message))
                 .Add<RaisingSecurityFlagCommand>(
-                    (message, info) => new SenderConsumers<RaisingSecurityFlagCommand>(message))
+                    (message, info) => new SenderCauseFailureConsumers<RaisingSecurityFlagCommand>(message))
                 .Add<ConfiguringDataProviderCommand>(
-                    (message, info) => new SenderConsumers<ConfiguringDataProviderCommand>(message))
+                    (message, info) => new SenderCauseFailureConsumers<ConfiguringDataProviderCommand>(message))
                 .Add<TransformingDataProviderResponseCommand>(
-                    (message, info) => new SenderConsumers<TransformingDataProviderResponseCommand>(message))
+                    (message, info) => new SenderCauseFailureConsumers<TransformingDataProviderResponseCommand>(message))
                 .Add<ErrorInDataProviderCommand>(
-                    (message, info) => new SenderConsumers<ErrorInDataProviderCommand>(message))
+                    (message, info) => new SenderCauseFailureConsumers<ErrorInDataProviderCommand>(message))
                 .Add<StartingCallCommand>(
-                    (message, info) => new SenderConsumers<StartingCallCommand>(message))
-                .Add<EndingCallCommand>((message, info) => new SenderConsumers<EndingCallCommand>(message)));
+                    (message, info) => new SenderCauseFailureConsumers<StartingCallCommand>(message))
+                .Add<EndingCallCommand>((message, info) => new SenderCauseFailureConsumers<EndingCallCommand>(message)));
 
             _bus.Consume(receiverQueue, x => x
                 .Add<RequestToDataProvider>(
-                    (message, info) => new ReceiverConsumers<RequestToDataProvider>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<RequestToDataProvider>(message))
                 .Add<EntryPointReceivedRequest>(
-                    (message, info) => new ReceiverConsumers<EntryPointReceivedRequest>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<EntryPointReceivedRequest>(message))
                 .Add<ResponseFromDataProvider>(
-                    (message, info) => new ReceiverConsumers<ResponseFromDataProvider>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<ResponseFromDataProvider>(message))
                 .Add<EntryPointReturnedResponse>(
-                    (message, info) => new ReceiverConsumers<EntryPointReturnedResponse>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<EntryPointReturnedResponse>(message))
                 //.Add<BillTransactionMessage>(
                 //    (message, info) => new ReceiverConsumers<BillTransactionMessage>(message))
                 .Add<SecurityFlagRaised>(
-                    (message, info) => new ReceiverConsumers<SecurityFlagRaised>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<SecurityFlagRaised>(message))
                 .Add<DataProviderCallEnded>(
-                    (message, info) => new ReceiverConsumers<DataProviderCallEnded>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<DataProviderCallEnded>(message))
                 .Add<DataProviderCallStarted>(
-                    (message, info) => new ReceiverConsumers<DataProviderCallStarted>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<DataProviderCallStarted>(message))
                 .Add<DataProviderError>(
-                    (message, info) => new ReceiverConsumers<DataProviderError>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<DataProviderError>(message))
                 .Add<DataProviderResponseTransformed>(
-                    (message, info) => new ReceiverConsumers<DataProviderResponseTransformed>(message))
+                    (message, info) => new ReceiverCauseFailureConsumers<DataProviderResponseTransformed>(message))
                 .Add<DataProviderConfigured>(
-                    (message, info) => new ReceiverConsumers<DataProviderConfigured>(message)));
+                    (message, info) => new ReceiverCauseFailureConsumers<DataProviderConfigured>(message)));
 
             _log.DebugFormat("Data Provider Command Processor Service Started");
         }

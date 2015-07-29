@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Common.Logging;
+using Recoveries.Domain;
 
 namespace Recoveries
 {
@@ -19,7 +20,9 @@ namespace Recoveries
             if (!Directory.Exists(options.MessageFilePath))
             {
                 _log.ErrorFormat("Directory '{0}' does not exist", options.MessageFilePath);
-                throw new Exception(string.Format("Directory '{0}' does not exist", options.MessageFilePath));
+                _log.InfoFormat("Creating Directory at '{0}'", options.MessageFilePath);
+                options.MessageFilePath.CreateDirectory();
+                _log.InfoFormat("Directory created at '{0}'", options.MessageFilePath);
             }
             var count = 0;
             foreach (var file in new DirectoryInfo(options.MessageFilePath).GetFiles())

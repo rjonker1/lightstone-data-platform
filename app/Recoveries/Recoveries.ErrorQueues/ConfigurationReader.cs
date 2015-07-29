@@ -6,7 +6,7 @@ namespace Recoveries.ErrorQueues
     public static class ConfigurationReader
     {
         public static readonly IErrorQueueConfiguration[] Configurations;
-
+   
         static ConfigurationReader()
         {
             Configurations = new IErrorQueueConfiguration[]
@@ -14,7 +14,8 @@ namespace Recoveries.ErrorQueues
                 new WorkflowReceiverRecoveryConfiguration(),
                 new WorkflowSenderRecoveryConfiguration(),
                 new BillingRecoveryConfiguration(),
-                new IntegrationSenderConfiguration()
+                new IntegrationSenderConfiguration(),
+                new IntegrationReceiverConfiguration()
             };
         }
     }

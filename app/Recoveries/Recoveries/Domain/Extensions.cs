@@ -1,4 +1,6 @@
-﻿namespace Recoveries.Domain
+﻿using System.IO;
+
+namespace Recoveries.Domain
 {
     public static class Extensions
     {
@@ -6,6 +8,14 @@
         {
             var obj = options.GetType().GetProperty(property).GetValue(options, null);
             return (T)obj;
+        }
+
+        public static void CreateDirectory(this string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
     }
 }

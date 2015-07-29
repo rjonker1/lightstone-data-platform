@@ -4,9 +4,9 @@ using Workflow.Lace.Messages.Events;
 
 namespace Recoveries.NeverRun.AutomaticallyConsumer
 {
-    public class ReceiverConsumers<T>
+    public class ReceiverCauseFailureConsumers<T>
     {
-        public ReceiverConsumers(IMessage<T> message)
+        public ReceiverCauseFailureConsumers(IMessage<T> message)
         {
             if (message is IMessage<RequestToDataProvider>)
                 new RequestsReceiver().Consume((IMessage<RequestToDataProvider>)message);
