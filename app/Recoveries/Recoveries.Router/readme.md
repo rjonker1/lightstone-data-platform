@@ -1,7 +1,7 @@
 ## Background ##
-*	An modification from EasyNetQ.Hosepipe
+*	Adaptation from EasyNetQ.Hosepipe
 *	https://github.com/EasyNetQ/EasyNetQ/wiki/Re-Submitting-Error-Messages-With-EasyNetQ.Hosepipe
-*	Modified to run as a service and get a list of configurations to re-process errors on error message queues
+*	Adapted to run as a service and get a list of configurations to re-process errors on error message queues
 *	Some functionality that was not required has been removed; while additional functions to suit the requirements of LS Dataplatform project have been added
 
 ## Infrastructure ##
