@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using Billing.Domain.Dtos;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
@@ -10,13 +13,28 @@ using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
+using Workflow.Billing.Repository;
 
 namespace Billing.Api.Modules
 {
     public class FinalBillingModule : SecureModule
     {
-        public FinalBillingModule(IRepository<FinalBilling> finalBillingRepository, IRepository<UserMeta> userMetaRepository)
+        private readonly IRepository<FinalBilling> _finalBillingDBRepository;
+        private IList<FinalBilling> finalBillingRepository;
+
+        public FinalBillingModule(IRepository<FinalBilling> finalBillingDBRepository, IRepository<UserMeta> userMetaRepository, ICacheProvider<FinalBilling> finalBillingCacheProvider)
         {
+            _finalBillingDBRepository = finalBillingDBRepository;
+            finalBillingRepository = finalBillingCacheProvider.CacheClient.GetAll();
+
+            Before += async (ctx, ct) =>
+            {
+                await CheckCache(ct);
+                this.Info(() => "Before Hook - PreBilling");
+                return null;
+            };
+
+            After += async (ctx, ct) => this.Info(() => "After Hook - PreBilling");
 
             Get["/FinalBilling/"] = _ =>
             {
@@ -155,6 +173,13 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
 
+        }
+
+        private async Task CheckCache(CancellationToken ct)
+        {
+            ct.ThrowIfCancellationRequested();
+
+            if (finalBillingRepository.Count <= 0) finalBillingRepository = _finalBillingDBRepository.ToList();
         }
     }
 
