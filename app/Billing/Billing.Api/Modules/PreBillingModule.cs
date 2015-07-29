@@ -9,7 +9,6 @@ using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.Responses.Negotiation;
-using ServiceStack.Redis.Generic;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;

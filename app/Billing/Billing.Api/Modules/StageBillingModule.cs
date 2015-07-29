@@ -11,6 +11,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
+using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Newtonsoft.Json;
@@ -27,12 +28,20 @@ namespace Billing.Api.Modules
         private readonly IRepository<StageBilling> _stageBillingDBRepository;
         private IList<StageBilling> stageBillingRepository;
 
+        private static int _defaultJsonMaxLength;
+
         public StageBillingModule(IRepository<StageBilling> stageBillingDBRepository, IRepository<AuditLog> auditLogs, IRepository<UserMeta> userMetaRepository,
                                     ICommitBillingTransaction<UserTransactionDto> userBillingTransaction,
                                     ICommitBillingTransaction<CustomerClientTransactionDto> customerClientBillingTransaction,
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction,
                                     ICacheProvider<StageBilling> stageBillingCacheProvider)
         {
+            if (_defaultJsonMaxLength == 0)
+                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
+
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
+            JsonSettings.MaxJsonLength = Int32.MaxValue;
+
             _stageBillingDBRepository = stageBillingDBRepository;
             stageBillingRepository = stageBillingCacheProvider.CacheClient.GetAll();
 
