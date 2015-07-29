@@ -11,7 +11,7 @@ namespace PackageBuilder.Core.NEventStore
     public interface INEventStoreRepository<T> : IRepository
     {
         T GetById(Guid id, bool useCache = false);
-        T GetById(Guid id, int version);
+        T GetById(Guid id, int version, bool useCache = false);
         void Save(IAggregate aggregate, Guid commitId, bool useCache = false);
     }
 
@@ -48,7 +48,7 @@ namespace PackageBuilder.Core.NEventStore
             return aggregate;
         }
 
-        public T GetById(Guid id, int version)
+        public T GetById(Guid id, int version, bool useCache = false)
         {
             this.Info(() => string.Format("Attempting to get aggregate: {0} version: {1}", id, version));
 
