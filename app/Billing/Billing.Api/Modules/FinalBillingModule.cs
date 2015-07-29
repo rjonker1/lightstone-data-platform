@@ -29,12 +29,12 @@ namespace Billing.Api.Modules
 
             Before += async (ctx, ct) =>
             {
+                this.Info(() => "Before Hook - FinalBilling");
                 await CheckCache(ct);
-                this.Info(() => "Before Hook - PreBilling");
                 return null;
             };
 
-            After += async (ctx, ct) => this.Info(() => "After Hook - PreBilling");
+            After += async (ctx, ct) => this.Info(() => "After Hook - FinalBilling");
 
             Get["/FinalBilling/"] = _ =>
             {
@@ -178,8 +178,17 @@ namespace Billing.Api.Modules
         private async Task CheckCache(CancellationToken ct)
         {
             ct.ThrowIfCancellationRequested();
+            this.Info(() => "Checking FinalBilling Cache");
 
-            if (finalBillingRepository.Count <= 0) finalBillingRepository = _finalBillingDBRepository.ToList();
+            if (finalBillingRepository.Count <= 0)
+            {
+                this.Info(() => "No FinalBilling records in cache. Switching to FinalBilling DB Repository");
+                finalBillingRepository = _finalBillingDBRepository.ToList();
+            }
+            else
+            {
+                this.Info(() => "FinalBilling Cache loaded");
+            }
         }
     }
 

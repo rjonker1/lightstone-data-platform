@@ -38,12 +38,12 @@ namespace Billing.Api.Modules
 
             Before += async (ctx, ct) =>
             {
+                this.Info(() => "Before Hook - StageBilling");
                 await CheckCache(ct);
-                this.Info(() => "Before Hook - PreBilling");
                 return null;
             };
 
-            After += async (ctx, ct) => this.Info(() => "After Hook - PreBilling");
+            After += async (ctx, ct) => this.Info(() => "After Hook - StageBilling");
             
             Get["/StageBilling/"] = _ =>
             {
@@ -303,8 +303,17 @@ namespace Billing.Api.Modules
         private async Task CheckCache(CancellationToken ct)
         {
             ct.ThrowIfCancellationRequested();
+            this.Info(() => "Checking StageBilling Cache");
 
-            if (stageBillingRepository.Count <= 0) stageBillingRepository = _stageBillingDBRepository.ToList();
+            if (stageBillingRepository.Count <= 0)
+            {
+                this.Info(() => "No StageBilling records in cache. Switching to StageBilling DB Repository");
+                stageBillingRepository = _stageBillingDBRepository.ToList();
+            }
+            else
+            {
+                this.Info(() => "StageBilling Cache loaded");
+            }
         }
     }
 

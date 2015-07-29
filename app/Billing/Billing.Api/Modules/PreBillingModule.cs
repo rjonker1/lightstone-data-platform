@@ -31,8 +31,8 @@ namespace Billing.Api.Modules
 
             Before += async (ctx, ct) =>
             {
-                await CheckCache(ct);
                 this.Info(() => "Before Hook - PreBilling");
+                await CheckCache(ct);
                 return null;
             };
 
@@ -180,8 +180,17 @@ namespace Billing.Api.Modules
         private async Task CheckCache(CancellationToken ct)
         {
             ct.ThrowIfCancellationRequested();
+            this.Info(() => "Checking PreBilling Cache");
 
-            if (_preBillingRepository.Count <= 0) _preBillingRepository = _preBillingDBRepository.ToList();
+            if (_preBillingRepository.Count <= 0)
+            {
+                this.Info(() => "No PreBilling records in cache. Switching to PreBilling DB Repository");
+                _preBillingRepository = _preBillingDBRepository.ToList();
+            }
+            else
+            {
+                this.Info(() => "PreBilling Cache loaded");
+            }
         }
 
         //private async Task<bool> DBtoCache(IRepository<PreBilling> repository, ICacheProvider<PreBilling> cacheProvider)
