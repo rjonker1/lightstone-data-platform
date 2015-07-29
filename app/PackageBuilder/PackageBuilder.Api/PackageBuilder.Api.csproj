@@ -185,8 +185,8 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Metadata.Entrypoint.1.0.0.1405\lib\net45\Lightstone.DataPlatform.Lace.Test.Helper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lim.Domain.Messaging">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lim.Domain.Messaging.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Lim.Domain.Messaging.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lim.Domain.Messaging, Version=1.0.0.1449, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lim.Domain.Messaging.1.0.0.1449\lib\net45\Lightstone.DataPlatform.Lim.Domain.Messaging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1426, Culture=neutral, processorArchitecture=MSIL">
