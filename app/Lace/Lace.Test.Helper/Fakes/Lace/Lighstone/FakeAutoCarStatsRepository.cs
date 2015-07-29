@@ -13,6 +13,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         {
             //PropertyInfo[] props = param.GetType().GetProperties();
             //var vin = props[0].GetValue(param);
+            if (predicate == null)
+                return Enumerable.Empty<TItem>();
+
+            if (typeof(TItem) == (typeof(Sale)))
+                return (IEnumerable<TItem>)Builders.Sources.Lightstone.SaleDataBuilder.ForCarSalesOnCarId_107483();
 
             var data =
                 Mothers.Sources.Lightstone.CarInfoData.CarInformationWithVin()
@@ -23,7 +28,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                                 s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
                                 s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId)).ToList();
 
-            return (IEnumerable<TItem>)data.Where((Func<CarInformation, bool>)predicate);
+            
+
+            return (IEnumerable<TItem>) data.Where((Func<CarInformation, bool>) predicate);
         }
 
         public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
@@ -33,6 +40,21 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
             if(typeof(TItem) == (typeof(Statistic)))
                 return (IEnumerable<TItem>)Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
+
+            if (typeof(TItem) == (typeof(Metric)))
+                return (IEnumerable<TItem>)Builders.Sources.Lightstone.MetricDataBuilder.ForAllMetrics();
+
+            if (typeof(TItem) == (typeof(Sale)))
+                return (IEnumerable<TItem>)Builders.Sources.Lightstone.SaleDataBuilder.ForCarSalesOnCarId_107483();
+
+            if (typeof(TItem) == (typeof(Make)))
+                return (IEnumerable<TItem>)Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
+
+            if (typeof(TItem) == (typeof(Municipality)))
+                return (IEnumerable<TItem>)Builders.Sources.Lightstone.MuncipalityDataBuilder.ForAllMunicipalities();
+
+            if (typeof(TItem) == (typeof(Band)))
+                return (IEnumerable<TItem>)Builders.Sources.Lightstone.BandsDataBuilder.ForAllBands();
 
             return Enumerable.Empty<TItem>();
         }
