@@ -89,6 +89,9 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Consumers\AbstractConsumer.cs" />
+    <Compile Include="Consumers\RetryErrorsConsumers.cs" />
+    <Compile Include="ErrorMessageRecoveryHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="RecoveryService.cs" />
   </ItemGroup>
