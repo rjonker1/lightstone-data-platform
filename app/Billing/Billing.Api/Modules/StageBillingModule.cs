@@ -210,15 +210,23 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in transactions)
                 {
-                    var contractId = transaction.ContractId;
+                    var contractId = new Guid("DE3B6DF3-C19A-41FD-8943-F6E915D71B58");//transaction.ContractId;
+
+                    var package = Mapper.Map<StageBilling, PackageDto>(transaction);
+                    var packageTransactions = transactions.Count(x => x.PackageId == transaction.PackageId);
+
+                    package.PackageDescription = package.PackageName;
+                    package.PackageTransactions = packageTransactions;
 
                     // Return Pacakge details without price, if non-billable
-                    if (transactions.Count(x => x.IsBillable).Equals(0))
+                    if (!transaction.IsBillable)
                     {
                         var emptyPackage = new PackageDto
                         {
-                            PackageId = transaction.PackageId,
-                            PackageName = transaction.PackageName,
+                            PackageId = package.PackageId,
+                            PackageName = package.PackageName,
+                            PackageDescription = "Non-billable",
+                            PackageTransactions = packageTransactions,
                             PackageCostPrice = 0.00,
                             PackageRecommendedPrice = 0.00
                         };
@@ -228,12 +236,8 @@ namespace Billing.Api.Modules
 
                         //Index restriction for new record
                         if (emptyPackageIndex < 0) packagesDetailList.Add(emptyPackage);
-                        break;
+                        continue;
                     }
-
-                    var package = Mapper.Map<StageBilling, PackageDto>(transaction);
-                    var packageTransactions = transactions.Count(x => x.PackageId == transaction.PackageId);
-                    package.PackageTransactions = packageTransactions;
 
                     var packageIndex = packagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
                     if (packageIndex < 0)
@@ -248,28 +252,50 @@ namespace Billing.Api.Modules
 
                         if (contractMeta != null)
                         {
-                            packagesDetailList.Clear();
+                            foreach (var packageDto in packagesDetailList)
+                            {
+                                packageDto.PackageDescription = "Pacakge bundled";
+                                packageDto.PackageCostPrice = 0;
+                                packageDto.PackageRecommendedPrice = 0;
+                            }
+
+                            if (transactionsTotal <= contractMeta.ContractBundleTransactionLimit)
+                            {
+                                var inBundle = new PackageDto
+                                {
+                                    PackageId = Guid.NewGuid(),
+                                    PackageName = contractMeta.ContractBundleName,
+                                    PackageDescription = contractMeta.ContractBundleTransactionLimit + " Transactions @ R" + Math.Round(contractMeta.ContractBundlePrice, 2),
+                                    PackageCostPrice = 0,
+                                    PackageRecommendedPrice = Math.Round(contractMeta.ContractBundlePrice, 2),
+                                    PackageTransactions = 1
+                                };
+
+                                packagesDetailList.Add(inBundle);
+                            }
 
                             if (transactionsTotal > contractMeta.ContractBundleTransactionLimit)
                             {
                                 var diff = transactionsTotal - contractMeta.ContractBundleTransactionLimit;
-                                var outOfBundleRate = (contractMeta.ContractBundlePrice / contractMeta.ContractBundleTransactionLimit);
+                                double outOfBundleRate = (contractMeta.ContractBundlePrice / contractMeta.ContractBundleTransactionLimit);
 
                                 var inBundle = new PackageDto
                                 {
                                     PackageId = Guid.NewGuid(),
                                     PackageName = contractMeta.ContractBundleName,
+                                    PackageDescription = contractMeta.ContractBundleTransactionLimit + " Transactions @ R" + Math.Round(contractMeta.ContractBundlePrice, 2),
                                     PackageCostPrice = 0,
-                                    PackageRecommendedPrice = contractMeta.ContractBundlePrice,
+                                    PackageRecommendedPrice = Math.Round(contractMeta.ContractBundlePrice, 2),
                                     PackageTransactions = 1
                                 };
 
                                 var outBundle = new PackageDto
                                 {
                                     PackageId = Guid.NewGuid(),
-                                    PackageName = diff + " extra @ " + outOfBundleRate,
+                                    PackageName = "Out of Bundle",
+                                    PackageDescription = diff + " Extra transactions @ R" + Math.Round(outOfBundleRate, 2),
                                     PackageCostPrice = 0,
-                                    PackageRecommendedPrice = (diff * outOfBundleRate),
+                                    PackageRecommendedPrice = Math.Round(outOfBundleRate, 2),
                                     PackageTransactions = diff
                                 };
 
