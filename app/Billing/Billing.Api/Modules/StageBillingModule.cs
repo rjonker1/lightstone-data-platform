@@ -31,6 +31,7 @@ namespace Billing.Api.Modules
         private static int _defaultJsonMaxLength;
 
         public StageBillingModule(IRepository<StageBilling> stageBillingDBRepository, IRepository<AuditLog> auditLogs, IRepository<UserMeta> userMetaRepository,
+                                    IRepository<ContractMeta> contracMetaRepository,
                                     ICommitBillingTransaction<UserTransactionDto> userBillingTransaction,
                                     ICommitBillingTransaction<CustomerClientTransactionDto> customerClientBillingTransaction,
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction,
@@ -53,7 +54,7 @@ namespace Billing.Api.Modules
             };
 
             After += async (ctx, ct) => this.Info(() => "After Hook - StageBilling");
-            
+
             Get["/StageBilling/"] = _ =>
             {
                 var customerClientList = new List<StageBillingDto>();
@@ -197,6 +198,7 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
 
+            // Report build-up
             Get["/StageBilling/Billable/Transactions/{searchId}"] = param =>
             {
                 var searchId = new Guid(param.searchId);
@@ -204,8 +206,11 @@ namespace Billing.Api.Modules
 
                 var transactions = stageBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
 
+                var transactionsTotal = 0;
+
                 foreach (var transaction in transactions)
                 {
+                    var contractId = transaction.ContractId;
 
                     // Return Pacakge details without price, if non-billable
                     if (transactions.Count(x => x.IsBillable).Equals(0))
@@ -227,10 +232,53 @@ namespace Billing.Api.Modules
                     }
 
                     var package = Mapper.Map<StageBilling, PackageDto>(transaction);
-                    package.PackageTransactions = transactions.Count(x => x.PackageId == transaction.PackageId);
+                    var packageTransactions = transactions.Count(x => x.PackageId == transaction.PackageId);
+                    package.PackageTransactions = packageTransactions;
 
                     var packageIndex = packagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
-                    if (packageIndex < 0) packagesDetailList.Add(package);
+                    if (packageIndex < 0)
+                    {
+                        packagesDetailList.Add(package);
+                        transactionsTotal += package.PackageTransactions;
+                    }
+
+                    if (transaction.Equals(transactions.Last()))
+                    {
+                        var contractMeta = contracMetaRepository.FirstOrDefault(x => x.ContractId == contractId && x.IsActive && x.HasPackagePriceOverride);
+
+                        if (contractMeta != null)
+                        {
+                            packagesDetailList.Clear();
+
+                            if (transactionsTotal > contractMeta.ContractBundleTransactionLimit)
+                            {
+                                var diff = transactionsTotal - contractMeta.ContractBundleTransactionLimit;
+                                var outOfBundleRate = (contractMeta.ContractBundlePrice / contractMeta.ContractBundleTransactionLimit);
+
+                                var inBundle = new PackageDto
+                                {
+                                    PackageId = Guid.NewGuid(),
+                                    PackageName = contractMeta.ContractBundleName,
+                                    PackageCostPrice = 0,
+                                    PackageRecommendedPrice = contractMeta.ContractBundlePrice,
+                                    PackageTransactions = 1
+                                };
+
+                                var outBundle = new PackageDto
+                                {
+                                    PackageId = Guid.NewGuid(),
+                                    PackageName = diff + " extra @ " + outOfBundleRate,
+                                    PackageCostPrice = 0,
+                                    PackageRecommendedPrice = (diff * outOfBundleRate),
+                                    PackageTransactions = diff
+                                };
+
+                                packagesDetailList.Add(inBundle);
+                                packagesDetailList.Add(outBundle);
+                            }
+                        }
+                    }
+
                 }
 
                 return Response.AsJson(new { data = packagesDetailList });
@@ -266,7 +314,7 @@ namespace Billing.Api.Modules
 
                 userBillingTransaction.Commit(body);
 
-                return Response.AsJson(new {data = "Success"});
+                return Response.AsJson(new { data = "Success" });
             };
 
             // Customer | Client
@@ -287,7 +335,7 @@ namespace Billing.Api.Modules
 
                 return Response.AsJson(new { data = "Success" });
             };
-            
+
             // Package detail
             Post["/StageBilling/Package/Transaction/Update"] = param =>
             {
