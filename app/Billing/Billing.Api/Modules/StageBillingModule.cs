@@ -210,7 +210,7 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in transactions)
                 {
-                    var contractId = new Guid("DE3B6DF3-C19A-41FD-8943-F6E915D71B58");//transaction.ContractId;
+                    var contractId = transaction.ContractId;
 
                     var package = Mapper.Map<StageBilling, PackageDto>(transaction);
                     var packageTransactions = transactions.Count(x => x.PackageId == transaction.PackageId);
