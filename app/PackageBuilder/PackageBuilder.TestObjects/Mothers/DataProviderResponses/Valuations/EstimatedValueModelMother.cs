@@ -10,7 +10,7 @@ namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations
             get
             {
                 return new EstimatedValueModelBuilder()
-                    .With("", "", "", "", "")
+                    .With("R 88 100,00", "R 79 300,00", "R 96 900,00", "", "", "R 78 600,00", "R 70 800,00", "R 86 500,00", "", "")
                     .Build();
             }
         }

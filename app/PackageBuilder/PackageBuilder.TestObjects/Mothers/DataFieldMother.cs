@@ -1,4 +1,5 @@
-﻿using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+﻿using System.Collections.Generic;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers

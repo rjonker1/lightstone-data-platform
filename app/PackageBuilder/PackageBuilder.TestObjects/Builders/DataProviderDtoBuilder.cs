@@ -19,6 +19,7 @@ namespace PackageBuilder.TestObjects.Builders
         private DateTime _createdDate;
         private DateTime? _editedDate;
         private int _version;
+        private IEnumerable<DataProviderFieldItemDto> _requestFields;
         private IEnumerable<DataProviderFieldItemDto> _dataFields;
 
         public DataProviderDto Build()
@@ -34,6 +35,7 @@ namespace PackageBuilder.TestObjects.Builders
                 CreatedDate = _createdDate,
                 EditedDate = _editedDate,
                 Version = _version,
+                RequestFields = _requestFields,
                 DataFields = _dataFields,
             };
         }
@@ -87,8 +89,10 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public DataProviderDtoBuilder With(params DataProviderFieldItemDto[] dataFields)
+        public DataProviderDtoBuilder With(bool isRequestField = false, params DataProviderFieldItemDto[] dataFields)
         {
+            if (isRequestField)
+                _requestFields = dataFields;
             _dataFields = dataFields;
             return this;
         }

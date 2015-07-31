@@ -1,5 +1,4 @@
-﻿using DataPlatform.Shared.Helpers.Builders;
-using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+﻿using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using PackageBuilder.TestObjects.Builders.DataProviderResponses;
 
 namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations
@@ -11,20 +10,20 @@ namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations
             get
             {
                 return new VehicleValuationBuilder()
-                    //.With(LinqList.Build(AmortisationFactorModelMother.AmortisationFactor))
-                    //.With(LinqList.Build(AreaFactorModelMother.AreaFactor))
-                    //.With(LinqList.Build(AuctionFactorModelMother.AuctionFactor))
-                    //.With(LinqList.Build(AccidentDistributionModelMother.AccidentDistribution))
-                    //.With(LinqList.Build(RepairIndexModelMother.RepairIndex))
-                    //.With(LinqList.Build(TotalSalesByAgeModelMother.TotalSalesByAge))
-                    //.With(LinqList.Build(TotalSalesByGenderModelMother.TotalSalesByGender))
-                    .With(LinqList.Build(PriceModelMother.Price))
-                    .With(LinqList.Build(FrequencyModelMother.Frequency))
-                    .With(LinqList.Build(ConfidenceModelMother.Confidence))
-                    .With(LinqList.Build(AmortisedValueModelMother.AmortisedValue))
-                    .With(LinqList.Build(ImageGaugeModelMother.ImageGauge))
-                    .With(LinqList.Build(EstimatedValueModelMother.EstimatedValue))
-                    .With(LinqList.Build(SaleModelMother.Sale))
+                    //.With(AmortisationFactorModelMother.AmortisationFactor))
+                    //.With(AreaFactorModelMother.AreaFactor))
+                    //.With(AuctionFactorModelMother.AuctionFactor))
+                    //.With(AccidentDistributionModelMother.AccidentDistribution))
+                    //.With(RepairIndexModelMother.RepairIndex))
+                    //.With(TotalSalesByAgeModelMother.TotalSalesByAge))
+                    //.With(TotalSalesByGenderModelMother.TotalSalesByGender))
+                    .With(PriceModelMother.Price)
+                    .With(FrequencyModelMother.Frequency)
+                    .With(ConfidenceModelMother.Confidence)
+                    .With(AmortisedValueModelMother.AmortisedValue)
+                    .With(ImageGaugeModelMother.ImageGauge)
+                    .With(EstimatedValueModelMother.EstimatedValue)
+                    .With(SaleModelMother.Sale)
                     .Build();
             }
         }

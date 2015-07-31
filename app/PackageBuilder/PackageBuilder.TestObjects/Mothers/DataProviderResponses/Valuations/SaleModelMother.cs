@@ -10,7 +10,7 @@ namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations
             get
             {
                 return new SaleModelBuilder()
-                    .With("", "", "")
+                    .With("Jul 30 2014 12:00AM", "108", "98900.00")
                     .Build();
             }
         }
