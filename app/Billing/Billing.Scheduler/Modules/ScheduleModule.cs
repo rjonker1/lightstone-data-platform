@@ -8,6 +8,8 @@ using Hangfire;
 using Hangfire.Storage;
 using Nancy;
 using RestSharp;
+using Workflow.Billing.Domain.Entities;
+using Workflow.Billing.Messages.Publishable;
 using Workflow.BuildingBlocks;
 
 using CronExpressionDescriptor;
@@ -65,7 +67,7 @@ namespace Billing.Scheduler.Modules
 
             Post["/Schedules/BillingRun/Force"] = parameters =>
             {
-                BackgroundJob.Enqueue(() => new MessageSchedule().Send(new BillingMessage() { RunType = "Stage",Schedule = null }));
+                BackgroundJob.Enqueue(() => new MessageSchedule().Send(new BillingMessage() { RunType = "Stage", Schedule = null }));
                 return Response.AsJson(new { data = "StageBilling Run Executed" });
             };
 
@@ -91,10 +93,19 @@ namespace Billing.Scheduler.Modules
                     return Response.AsJson(new { data = "Error while parsing DateTime variable" });
                 }
 
-                var billRun = new BillingMessage() { RunType = "Stage",Schedule = null };
+                var billRun = new BillingMessage { RunType = "Stage", Schedule = null };
+                var prebillCacheRun = new BillCacheMessage { BillingType = typeof(PreBilling), Command = BillingCacheCommand.Reload };
+                var stagebillCacheRun = new BillCacheMessage { BillingType = typeof(StageBilling), Command = BillingCacheCommand.Reload };
+                var finalbillCacheRun = new BillCacheMessage { BillingType = typeof(FinalBilling), Command = BillingCacheCommand.Reload };
+
                 var cronExpression = "" + dt.Minute + " " + dt.Hour + " * * *";
+                var cronExpressionCache = "" + dt.Minute + " " + (dt.Hour + 2) + " * * *";
 
                 RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
+
+                RecurringJob.AddOrUpdate<CacheSchedule>("PreBilling Cache Reload", x => x.Send(prebillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                RecurringJob.AddOrUpdate<CacheSchedule>("StageBilling Cache Reload", x => x.Send(stagebillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                RecurringJob.AddOrUpdate<CacheSchedule>("FinalBilling Cache Reload", x => x.Send(finalbillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
 
                 return Response.AsJson(new { data = "Schedule Added/Updated" });
             };
@@ -122,7 +133,7 @@ namespace Billing.Scheduler.Modules
                 }
 
                 var billRun = new BillingMessage() { RunType = "Final", Schedule = null };
-                var cronExpression = "" + dt.Minute + " " + dt.Hour + " "+dt.Day+" * *";
+                var cronExpression = "" + dt.Minute + " " + dt.Hour + " " + dt.Day + " * *";
 
                 RecurringJob.AddOrUpdate<MessageSchedule>("FinalBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
 
@@ -150,17 +161,15 @@ namespace Billing.Scheduler.Modules
             bus.SendDynamic(new BillingMessage() { RunType = message.RunType, Schedule = message.Schedule });
         }
     }
+
+    public class CacheSchedule
+    {
+        IAdvancedBus _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
+
+        public void Send(BillCacheMessage message)
+        {
+            var bus = new TransactionBus(_bus);
+            bus.SendDynamic(new BillCacheMessage { BillingType = message.BillingType, Command = message.Command });
+        }
+    }
 }
-
-
-//var runType = parameters.runType;
-//var dateTime = this.Request.Query["schedule_time"];
-
-//var test = DateTime.Now.AddMinutes(1);
-//var billRun = new BillingMessage()
-//{
-//    RunType = "Stage",
-//    Schedule = null
-//};
-
-//if (runType == "StageBilling") BackgroundJob.Schedule<MessageSchedule>(x => x.Send(billRun), test);

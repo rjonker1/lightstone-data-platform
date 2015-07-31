@@ -176,6 +176,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
+      <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>
+      <Name>Workflow.Billing.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Billing\Workflow.Billing.csproj">
+      <Project>{74859ECC-2E2E-4016-8689-2FB29CDBBB02}</Project>
+      <Name>Workflow.Billing</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
