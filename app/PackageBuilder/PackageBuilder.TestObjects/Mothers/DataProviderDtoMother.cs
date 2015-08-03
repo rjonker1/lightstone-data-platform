@@ -19,7 +19,41 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(1)
                     .With(DateTime.UtcNow)
                     .With((DateTime?)DateTime.UtcNow.AddDays(1))
-                    .With(false, DataFieldDtoMother.CarFullname, DataFieldDtoMother.SpecificInformation)
+                    .With(true, RequestFieldDtoMother.EngineNumber, RequestFieldDtoMother.ChassisNumber, RequestFieldDtoMother.VinNumber, 
+                            RequestFieldDtoMother.LicenseNumber, RequestFieldDtoMother.RegisterNumber, RequestFieldDtoMother.Make)
+                    .With(false
+                    , DataFieldDtoMother.SpecificInformation
+                    , DataFieldDtoMother.StatusMessage
+                    , DataFieldDtoMother.Reference
+                    , DataFieldDtoMother.License
+                    , DataFieldDtoMother.Registration
+                    , DataFieldDtoMother.RegistrationDate
+                    , DataFieldDtoMother.Vin
+                    , DataFieldDtoMother.Engine
+                    , DataFieldDtoMother.Displacement
+                    , DataFieldDtoMother.Tare
+                    , DataFieldDtoMother.MakeCode
+                    , DataFieldDtoMother.MakeDescription
+                    , DataFieldDtoMother.ModelCode
+                    , DataFieldDtoMother.ModelDescription
+                    , DataFieldDtoMother.ColourCode
+                    , DataFieldDtoMother.ColourDescription
+                    , DataFieldDtoMother.DrivenCode
+                    , DataFieldDtoMother.DrivenDescription
+                    , DataFieldDtoMother.CategoryCode
+                    , DataFieldDtoMother.CategoryDescription
+                    , DataFieldDtoMother.DescriptionCode
+                    , DataFieldDtoMother.Description
+                    , DataFieldDtoMother.EconomicSectorCode
+                    , DataFieldDtoMother.EconomicSectorDescription
+                    , DataFieldDtoMother.LifeStatusCode
+                    , DataFieldDtoMother.LifeStatusDescription
+                    , DataFieldDtoMother.SapMarkCode
+                    , DataFieldDtoMother.SapMarkDescription
+                    , DataFieldDtoMother.HasIssues
+                    , DataFieldDtoMother.HasErrors
+                    , DataFieldDtoMother.HasNoRecords
+                    , DataFieldDtoMother.CarFullname)
                     .Build();
             }
         }
@@ -36,7 +70,22 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(1)
                     .With(DateTime.UtcNow)
                     .With((DateTime?)DateTime.UtcNow.AddDays(1))
-                    .With(false, DataFieldDtoMother.CategoryCode)
+                    .With(true, DataFieldDtoMother.VinNumber)
+                    .With(false
+                    , DataFieldDtoMother.BankName
+                    , DataFieldDtoMother.AccountNumber
+                    , DataFieldDtoMother.DateOpened
+                    , DataFieldDtoMother.FlaggedOnAnpr
+                    , DataFieldDtoMother.FinancialInterestsHeading
+                    , DataFieldDtoMother.AccountOpenDate
+                    , DataFieldDtoMother.AccountClosedDate
+                    , DataFieldDtoMother.AgreementType
+                    , DataFieldDtoMother.YearOfLiabilityForLicensing
+                    , DataFieldDtoMother.RequestFinancialInterestInvite
+                    , DataFieldDtoMother.FinancialInterestAvailable
+                    , DataFieldDtoMother.PartialResponse
+                    , DataFieldDtoMother.HasErrors
+                    , DataFieldDtoMother.ExpiredMessage)
                     .Build();
             }
         }

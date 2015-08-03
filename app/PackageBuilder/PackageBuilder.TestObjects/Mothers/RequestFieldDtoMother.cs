@@ -46,5 +46,45 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto RegisterNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("RegisterNumber", "RegisterNumber", "Definition")
+                    .With(((int)RequestFieldType.RegisterNumber).ToString())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto EngineNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("EngineNumber", "EngineNumber", "Definition")
+                    .With(((int)RequestFieldType.EngineNumber).ToString())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ChassisNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ChassisNumber", "ChassisNumber", "Definition")
+                    .With(((int)RequestFieldType.ChassisNumber).ToString())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto LicenseNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("LicenseNumber", "LicenseNumber", "Definition")
+                    .With(((int)RequestFieldType.LicenseNumber).ToString())
+                    .Build();
+            }
+        }
     }
 }

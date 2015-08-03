@@ -1,10 +1,375 @@
-﻿using PackageBuilder.Domain.Dtos.Write;
+﻿using System;
+using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers
 {
     public class DataFieldDtoMother
     {
+        public static DataProviderFieldItemDto StatusMessage
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("StatusMessage", "StatusMessage Label", "StatusMessage Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Reference
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Reference", "Reference Label", "Reference Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto License
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("License", "License Label", "License Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Registration
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Registration", "Registration Label", "Registration Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto RegistrationDate
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("RegistrationDate", "RegistrationDate Label", "RegistrationDate Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Engine
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Engine", "Engine Label", "Engine Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Displacement
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Displacement", "Displacement Label", "Displacement Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Tare
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Tare", "Tare Label", "Tare Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto MakeCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("MakeCode", "MakeCode Label", "MakeCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto MakeDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("MakeDescription", "MakeDescription Label", "MakeDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ModelCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ModelCode", "ModelCode Label", "ModelCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ModelDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ModelDescription", "ModelDescription Label", "ModelDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ColourCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ColourCode", "ColourCode Label", "ColourCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ColourDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ColourDescription", "ColourDescription Label", "ColourDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DrivenCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DrivenCode", "DrivenCode Label", "DrivenCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DrivenDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DrivenDescription", "DrivenDescription Label", "DrivenDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto CategoryDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("CategoryDescription", "CategoryDescription Label", "CategoryDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DescriptionCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DescriptionCode", "DescriptionCode Label", "DescriptionCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Description
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Description", "Description Label", "Description Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto EconomicSectorCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("EconomicSectorCode", "EconomicSectorCode Label", "EconomicSectorCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto EconomicSectorDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("EconomicSectorDescription", "EconomicSectorDescription Label", "EconomicSectorDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto LifeStatusCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("LifeStatusCode", "LifeStatusCode Label", "LifeStatusCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto LifeStatusDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("LifeStatusDescription", "LifeStatusDescription Label", "LifeStatusDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SapMarkCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SapMarkCode", "SapMarkCode Label", "SapMarkCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SapMarkDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SapMarkDescription", "SapMarkDescription Label", "SapMarkDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto HasIssues
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("HasIssues", "HasIssues Label", "HasIssues Definition")
+                    .With(true)
+                    .With(typeof(bool).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto HasErrors
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("HasErrors", "HasErrors Label", "HasErrors Definition")
+                    .With(true)
+                    .With(typeof(bool).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto HasNoRecords
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("HasNoRecords", "HasNoRecords Label", "HasNoRecords Definition")
+                    .With(true)
+                    .With(typeof(bool).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
         public static DataProviderFieldItemDto CarFullname
         {
             get
@@ -37,6 +402,175 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldDtoBuilder()
                     .With("CategoryCode", "CategoryCode Label", "CategoryCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto BankName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("BankName", "BankName Label", "BankName Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto AccountNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("AccountNumber", "AccountNumber Label", "AccountNumber Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DateOpened
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DateOpened", "DateOpened Label", "DateOpened Definition")
+                    .With(true)
+                    .With(typeof(DateTime?).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto FlaggedOnAnpr
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FlaggedOnAnpr", "FlaggedOnAnpr Label", "FlaggedOnAnpr Definition")
+                    .With(true)
+                    .With(typeof(bool).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto FinancialInterestsHeading
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FinancialInterestsHeading", "FinancialInterestsHeading Label", "FinancialInterestsHeading Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto AccountOpenDate
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("AccountOpenDate", "AccountOpenDate Label", "AccountOpenDate Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto AccountClosedDate
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("AccountClosedDate", "AccountClosedDate Label", "AccountClosedDate Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto AgreementType
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("AgreementType", "AgreementType Label", "AgreementType Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto YearOfLiabilityForLicensing
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("YearOfLiabilityForLicensing", "YearOfLiabilityForLicensing Label", "YearOfLiabilityForLicensing Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto RequestFinancialInterestInvite
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("RequestFinancialInterestInvite", "RequestFinancialInterestInvite Label", "RequestFinancialInterestInvite Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto FinancialInterestAvailable
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FinancialInterestAvailable", "FinancialInterestAvailable Label", "FinancialInterestAvailable Definition")
+                    .With(true)
+                    .With(typeof(bool).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PartialResponse
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PartialResponse", "PartialResponse Label", "PartialResponse Definition")
+                    .With(true)
+                    .With(typeof(bool).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ExpiredMessage
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ExpiredMessage", "ExpiredMessage Label", "ExpiredMessage Definition")
                     .With(true)
                     .With(typeof(string).ToString())
                     .With(10d)
@@ -244,7 +778,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldDtoBuilder()
-                    .With("RetailEstimatedValue", "RetailEstimatedValue Label", "RetailEstimatedValue Definition")
+                    .With("RetailConfidenceValue", "RetailConfidenceValue Label", "RetailConfidenceValue Definition")
                     .With(true)
                     .With(typeof(string).ToString())
                     .With(10d)
@@ -440,7 +974,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("Frequency", "Frequency Label", "Frequency Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .With(CarType, Year, ValueDouble)
                     .Build();
@@ -453,7 +987,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("Confidence", "Confidence Label", "Confidence Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .With(CarType, Year, ValueDouble)
                     .Build();
@@ -466,7 +1000,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("AmortisedValues", "AmortisedValues Label", "AmortisedValues Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .With(Year, ValueDecimal)
                     .Build();
@@ -479,7 +1013,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("CarType", "CarType Label", "CarType Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .Build();
             }
@@ -491,7 +1025,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("ImageGauges", "ImageGauges Label", "ImageGauges Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .With(MinValue, MaxValue, ValueDoubleNullable, QuarterDoubleNullable, GaugeName)
                     .Build();
@@ -528,7 +1062,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("GaugeName", "GaugeName Label", "GaugeName Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .Build();
             }
@@ -557,7 +1091,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(true)
                     .With(new IndustryDto())
                     .With(typeof(string).ToString())
-                    .With(Colour, EngineNumber, LicenseNumber, Odometer, RegistrationNumber, VinNumber)
+                    .With(Odometer, Colour, RegistrationNumber, VinNumber, LicenseNumber, EngineNumber, CategoryDescription)
                     .Build();
             }
         }
