@@ -202,6 +202,7 @@
     <Compile Include="Handlers\CommandHandlers\when_amending_data_provider_structure.cs" />
     <Compile Include="Bases\BaseModuleTest.cs" />
     <Compile Include="Bases\BaseDataProviderTest.cs" />
+    <Compile Include="Modules\DataProviders\when_updating_the_ivid_titleholder_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_lightStone_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_ivid_data_provider.cs" />
     <Compile Include="Modules\States\when_invoking_state_add_route.cs" />

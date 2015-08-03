@@ -70,7 +70,22 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(1)
                     .With(DateTime.UtcNow)
                     .With((DateTime?)DateTime.UtcNow.AddDays(1))
-                    .With(false, DataFieldDtoMother.CategoryCode)
+                    .With(true, DataFieldDtoMother.VinNumber)
+                    .With(false
+                    , DataFieldDtoMother.BankName
+                    , DataFieldDtoMother.AccountNumber
+                    , DataFieldDtoMother.DateOpened
+                    , DataFieldDtoMother.FlaggedOnAnpr
+                    , DataFieldDtoMother.FinancialInterestsHeading
+                    , DataFieldDtoMother.AccountOpenDate
+                    , DataFieldDtoMother.AccountClosedDate
+                    , DataFieldDtoMother.AgreementType
+                    , DataFieldDtoMother.YearOfLiabilityForLicensing
+                    , DataFieldDtoMother.RequestFinancialInterestInvite
+                    , DataFieldDtoMother.FinancialInterestAvailable
+                    , DataFieldDtoMother.PartialResponse
+                    , DataFieldDtoMother.HasErrors
+                    , DataFieldDtoMother.ExpiredMessage)
                     .Build();
             }
         }
