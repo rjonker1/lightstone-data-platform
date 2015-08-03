@@ -121,6 +121,7 @@
     <Compile Include="BaseTests\MemoryTestDataBaseHelper.cs" />
     <Compile Include="Fakes\FakeTokenizer.cs" />
     <Compile Include="Helpers\CustomEqualityComparer.cs" />
+    <Compile Include="Helpers\Extensions\DataFieldExtensions.cs" />
     <Compile Include="OverrideHelper.cs" />
   </ItemGroup>
   <ItemGroup>

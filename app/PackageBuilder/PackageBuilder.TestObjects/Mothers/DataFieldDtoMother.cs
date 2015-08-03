@@ -244,7 +244,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldDtoBuilder()
-                    .With("RetailEstimatedValue", "RetailEstimatedValue Label", "RetailEstimatedValue Definition")
+                    .With("RetailConfidenceValue", "RetailConfidenceValue Label", "RetailConfidenceValue Definition")
                     .With(true)
                     .With(typeof(string).ToString())
                     .With(10d)
@@ -440,7 +440,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("Frequency", "Frequency Label", "Frequency Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .With(CarType, Year, ValueDouble)
                     .Build();
@@ -453,7 +453,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("Confidence", "Confidence Label", "Confidence Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .With(CarType, Year, ValueDouble)
                     .Build();
@@ -466,7 +466,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("AmortisedValues", "AmortisedValues Label", "AmortisedValues Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .With(Year, ValueDecimal)
                     .Build();
@@ -479,7 +479,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("CarType", "CarType Label", "CarType Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .Build();
             }
@@ -491,7 +491,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("ImageGauges", "ImageGauges Label", "ImageGauges Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .With(MinValue, MaxValue, ValueDoubleNullable, QuarterDoubleNullable, GaugeName)
                     .Build();
@@ -528,7 +528,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldDtoBuilder()
                     .With("GaugeName", "GaugeName Label", "GaugeName Definition")
                     .With(true)
-                    .With(typeof(decimal).ToString())
+                    .With(typeof(string).ToString())
                     .With(10d)
                     .Build();
             }
