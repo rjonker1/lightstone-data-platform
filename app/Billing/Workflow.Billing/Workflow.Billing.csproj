@@ -233,7 +233,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Installers\MappingInstaller.cs.delete" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

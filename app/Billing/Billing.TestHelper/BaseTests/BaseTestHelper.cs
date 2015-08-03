@@ -1,5 +1,4 @@
-﻿using Billing.TestHelper.Helpers;
-using Castle.Windsor;
+﻿using Castle.Windsor;
 using Workflow.Billing.Consumers.Installers;
 using Workflow.Billing.Installers;
 using Xunit.Extensions;
