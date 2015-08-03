@@ -15,7 +15,7 @@ namespace Workflow.Billing.Cache.Consumer
 
         public void Start()
         {
-            _log.DebugFormat("Started billing service");
+            _log.DebugFormat("Started billing cache service");
 
             var container = new WindsorContainer().Install(
                 new NHibernateInstaller(),
@@ -32,7 +32,7 @@ namespace Workflow.Billing.Cache.Consumer
             advancedBus.Consume(cache, x => x
                 .Add<BillCacheMessage>((message, info) => new TransactionConsumer<BillCacheMessage>(message, container)));
 
-            _log.DebugFormat("Billing service started");
+            _log.DebugFormat("Billing cache service started");
         }
 
         public void Stop()
@@ -42,7 +42,7 @@ namespace Workflow.Billing.Cache.Consumer
                 advancedBus.Dispose();
             }
 
-            _log.DebugFormat("Stopped billing service");
+            _log.DebugFormat("Stopped billing cache service");
         }
     }
 

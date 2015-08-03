@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Repositories;
+﻿using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Messages.Publishable;
@@ -37,22 +38,28 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 case "PreBilling":
                     _preBillingCacheProvider.Initialize();
 
+                    this.Info(() => "Processing PreBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     if (message.Body.Command.Equals(BillingCacheCommand.Reload)) _preBillingCacheProvider.CachePipelineInsert(_preBillingRepository);
                     if (message.Body.Command.Equals(BillingCacheCommand.Flush)) _preBillingCacheProvider.FlushCacheProvider(_preBillingCacheProvider);
+                    this.Info(() => "Completed PreBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     break;
 
                 case "StageBilling":
                     _stageBillingCacheProvider.Initialize();
-                    
+
+                    this.Info(() => "Processing StageBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     if (message.Body.Command.Equals(BillingCacheCommand.Reload)) _stageBillingCacheProvider.CachePipelineInsert(_stageBillingRepository);
                     if (message.Body.Command.Equals(BillingCacheCommand.Flush)) _stageBillingCacheProvider.FlushCacheProvider(_stageBillingCacheProvider);
+                    this.Info(() => "Completed StageBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     break;
 
                 case "FinalBilling":
                     _finalBillingCacheProvider.Initialize();
-                    
+
+                    this.Info(() => "Processing FinalBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     if (message.Body.Command.Equals(BillingCacheCommand.Reload)) _finalBillingCacheProvider.CachePipelineInsert(_finalBillingRepository);
                     if (message.Body.Command.Equals(BillingCacheCommand.Flush)) _finalBillingCacheProvider.FlushCacheProvider(_finalBillingCacheProvider);
+                    this.Info(() => "Completed FinalBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     break;
             }
         }
