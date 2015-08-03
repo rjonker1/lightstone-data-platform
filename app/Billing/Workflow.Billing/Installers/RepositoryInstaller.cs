@@ -17,16 +17,6 @@ namespace Workflow.Billing.Installers
             log.InfoFormat("Installing SQL Server connection");
             var appSettings = new AppSettings();
 
-            //container.Register(
-            //    Component.For<IDbConnection>()
-            //        .UsingFactoryMethod(
-            //            () =>
-            //                new SqlConnection(appSettings.ConnectionStrings.Get("workflow/billing/database",
-            //                    () => string.Empty))));
-
-            //container.Register(Component.For<IRepositoryMapper>().ImplementedBy<RepositoryMapper>());
-            //container.Register(Component.For<IRepository>().ImplementedBy<Repository.Repository>());
-
             container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestyleTransient());
         }
     }

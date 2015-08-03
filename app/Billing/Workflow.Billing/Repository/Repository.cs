@@ -8,6 +8,7 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Repositories;
 using NHibernate;
 using NHibernate.Linq;
+using ServiceStack.Common.Utils;
 using Workflow.Billing.Helpers.Extensions;
 
 namespace Workflow.Billing.Repository
@@ -112,7 +113,9 @@ namespace Workflow.Billing.Repository
 
         public void Delete(T entity, bool useCache = false)
         {
-            throw new NotImplementedException();
+            ValidateEntity(entity);
+            _session.Delete(entity);
+            if (useCache) _cacheProvider.CacheDelete(new Guid(entity.GetId().ToString()));
         }
 
         private void ValidateEntity(T entity)
