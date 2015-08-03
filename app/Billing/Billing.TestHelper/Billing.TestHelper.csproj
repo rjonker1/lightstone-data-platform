@@ -145,6 +145,10 @@
     <Compile Include="Mothers\CreatTransactionDto\IDefineCreateTransactionData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Workflow.Billing.Consumers\Workflow.Billing.Consumers.csproj">
+      <Project>{7BA3EBC5-1B9C-44BD-848A-C8D15C25A216}</Project>
+      <Name>Workflow.Billing.Consumers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing.Consumer\Workflow.Billing.Consumer.csproj">
       <Project>{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}</Project>
       <Name>Workflow.Billing.Consumer</Name>
@@ -152,6 +156,10 @@
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
       <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>
       <Name>Workflow.Billing.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Billing\Workflow.Billing.csproj">
+      <Project>{74859ECC-2E2E-4016-8689-2FB29CDBBB02}</Project>
+      <Name>Workflow.Billing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

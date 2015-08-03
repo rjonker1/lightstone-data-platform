@@ -33,7 +33,7 @@ namespace Billing.Acceptance.Tests.Workflow
         {
             var finalSave = _finalBillingClient.GetAll();
 
-            _finalBillingRepository.SaveOrUpdate(_finalBilling);
+            _finalBillingRepository.SaveOrUpdate(_finalBilling, true);
 
             var postSave = _finalBillingClient.GetAll();
 

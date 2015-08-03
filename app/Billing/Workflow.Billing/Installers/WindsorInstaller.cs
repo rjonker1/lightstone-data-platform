@@ -2,7 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Installers
 {
     public class WindsorInstaller : IWindsorInstaller
     {

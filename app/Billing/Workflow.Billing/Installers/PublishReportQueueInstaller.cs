@@ -2,9 +2,8 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Workflow.Billing.Domain.Helpers.BillingRunHelpers;
-using Workflow.Reporting.Dtos;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Installers
 {
     public class PublishReportQueueInstaller : IWindsorInstaller
     {

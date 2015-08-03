@@ -5,7 +5,7 @@ using Common.Logging;
 using EasyNetQ;
 using Workflow.BuildingBlocks;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Installers
 {
     public class BusInstaller : IWindsorInstaller
     {

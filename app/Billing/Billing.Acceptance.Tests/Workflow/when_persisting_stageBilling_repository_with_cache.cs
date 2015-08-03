@@ -33,7 +33,7 @@ namespace Billing.Acceptance.Tests.Workflow
         {
             var stageSave = _stageBillingClient.GetAll();
 
-            _stageBillingRepository.SaveOrUpdate(_stageBilling);
+            _stageBillingRepository.SaveOrUpdate(_stageBilling, true);
 
             var postSave = _stageBillingClient.GetAll();
 

@@ -33,7 +33,7 @@ namespace Billing.Acceptance.Tests.Workflow
         {
             var preSave = _preBillingClient.GetAll();
 
-            _preBillingRepository.SaveOrUpdate(_preBilling);
+            _preBillingRepository.SaveOrUpdate(_preBilling, true);
 
             var postSave = _preBillingClient.GetAll();
 

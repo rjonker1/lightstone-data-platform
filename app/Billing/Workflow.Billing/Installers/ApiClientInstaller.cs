@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Shared.BuildingBlocks.Api.ApiClients;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Installers
 {
     public class ApiClientInstaller : IWindsorInstaller
     {

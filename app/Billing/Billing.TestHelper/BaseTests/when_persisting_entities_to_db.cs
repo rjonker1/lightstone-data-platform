@@ -7,7 +7,7 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using Workflow.Billing.Consumer.Installers;
+using Workflow.Billing.Installers;
 using Xunit.Extensions;
 
 namespace Billing.TestHelper.BaseTests

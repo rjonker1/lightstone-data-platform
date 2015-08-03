@@ -1,6 +1,7 @@
 ﻿using Billing.TestHelper.Helpers;
 using Castle.Windsor;
-using Workflow.Billing.Consumer.Installers;
+using Workflow.Billing.Consumers.Installers;
+using Workflow.Billing.Installers;
 using Xunit.Extensions;
 
 namespace Billing.TestHelper.BaseTests

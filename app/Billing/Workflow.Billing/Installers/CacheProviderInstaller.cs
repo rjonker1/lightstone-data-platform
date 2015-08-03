@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Workflow.Billing.Repository;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Installers
 {
     public class CacheProviderInstaller : IWindsorInstaller
     {

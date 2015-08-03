@@ -1,6 +1,4 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
@@ -8,7 +6,7 @@ using DataPlatform.Shared.Repositories;
 using Shared.Configuration;
 using Workflow.Billing.Repository;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Installers
 {
     public class RepositoryInstaller : IWindsorInstaller
     {

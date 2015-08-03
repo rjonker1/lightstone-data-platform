@@ -8,7 +8,7 @@ using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Workflow.Billing.Infrastructure.NHibernate;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Installers
 {
     public class NHibernateInstaller : IWindsorInstaller
     {

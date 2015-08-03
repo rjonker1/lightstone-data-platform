@@ -2,11 +2,9 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
-using EasyNetQ.AutoSubscribe;
-using Workflow.Billing.Consumers;
 using Workflow.Billing.Consumers.ConsumerTypes;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Consumers.Installers
 {
     public class ConsumerInstaller : IWindsorInstaller
     {

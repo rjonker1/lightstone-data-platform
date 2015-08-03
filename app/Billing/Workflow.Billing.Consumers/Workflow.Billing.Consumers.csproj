@@ -139,6 +139,7 @@
     <Compile Include="ConsumerTypes\InvoiceTransactionConsumer.cs" />
     <Compile Include="ConsumerTypes\PackageConsumer.cs" />
     <Compile Include="ConsumerTypes\UserConsumer.cs" />
+    <Compile Include="Installers\ConsumerInstaller.cs" />
     <Compile Include="SqlServerConnectionController.cs" />
     <Compile Include="TransactionConsumer.cs" />
   </ItemGroup>

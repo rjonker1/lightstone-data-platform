@@ -15,7 +15,7 @@ using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
-using Workflow.Billing.Consumer.Installers;
+using Workflow.Billing.Installers;
 
 namespace Billing.Api
 {

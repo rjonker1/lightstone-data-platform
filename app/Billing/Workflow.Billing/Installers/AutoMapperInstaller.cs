@@ -4,7 +4,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Workflow.Billing.Helpers.AutoMapper.Maps;
 
-namespace Workflow.Billing.Consumer.Installers
+namespace Workflow.Billing.Installers
 {
     public class AutoMapperInstaller : IWindsorInstaller
     {

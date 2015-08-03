@@ -162,11 +162,6 @@
     </Compile>
     <Compile Include="BillingService.cs" />
     <Compile Include="IBillingService.cs" />
-    <Compile Include="Installers\ApiClientInstaller.cs" />
-    <Compile Include="Installers\AutoMapperInstaller.cs" />
-    <Compile Include="Installers\BusInstaller.cs" />
-    <Compile Include="Installers\CacheProviderInstaller.cs" />
-    <Compile Include="Installers\ConsumerInstaller.cs" />
     <None Include="appSettings.Debug.config">
       <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -217,12 +212,6 @@
       <IsTransformFile>True</IsTransformFile>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Installers\MappingInstaller.cs.delete" />
-    <Compile Include="Installers\NHibernateInstaller.cs" />
-    <Compile Include="Installers\PivotInstaller.cs" />
-    <Compile Include="Installers\PublishReportQueueInstaller.cs" />
-    <Compile Include="Installers\RepositoryInstaller.cs" />
-    <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

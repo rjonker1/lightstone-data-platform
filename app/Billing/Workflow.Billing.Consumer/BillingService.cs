@@ -3,9 +3,9 @@ using Common.Logging;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
-using Workflow.Billing.Consumer.Installers;
 using Workflow.Billing.Consumers;
-using Workflow.Billing.Consumers.ConsumerTypes;
+using Workflow.Billing.Consumers.Installers;
+using Workflow.Billing.Installers;
 using Workflow.Billing.Messages.Publishable;
 
 namespace Workflow.Billing.Consumer
