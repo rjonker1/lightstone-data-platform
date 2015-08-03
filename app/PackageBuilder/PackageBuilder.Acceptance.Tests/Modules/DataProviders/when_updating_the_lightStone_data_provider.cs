@@ -1,53 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
 using Nancy.Testing;
-using PackageBuilder.Acceptance.Tests.Fakes;
+using PackageBuilder.Acceptance.Tests.Bases;
 using PackageBuilder.Api.Helpers.Constants;
-using PackageBuilder.Api.Installers;
-using PackageBuilder.Core.MessageHandling;
-using PackageBuilder.Core.NEventStore;
-using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.Requests;
-using PackageBuilder.TestHelper.BaseTests;
-using PackageBuilder.TestHelper.Helpers.Extensions;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
 {
-    public class when_updating_the_lightStone_data_provider : MemoryTestDataBaseHelper
+    public class when_updating_the_lightStone_data_provider : BaseDataProviderTest
     {
-        private Guid _id = Guid.NewGuid();
-        private readonly Browser _browser = new Browser(new TestBootstrapper());
-        private BrowserResponse _response;
-        private INEventStoreRepository<DataProvider> _writeRepo;
-        private IHandleMessages _handler;
-        private readonly DataProvider _dataProvider;
-
         public when_updating_the_lightStone_data_provider()
         {
-            RefreshDb();
-
-            Container.Install(new WindsorInstaller());
-
-            _writeRepo = Container.Resolve<INEventStoreRepository<DataProvider>>();
-            _handler = Container.Resolve<IHandleMessages>();
-            _handler.Handle(new CreateDataProvider(_id, DataProviderName.LightstoneAuto, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LightstoneAuto, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
-                _response = _browser.Put(RouteConstants.DataProviderEditRoute.Replace("{id}", _id.ToString()), with =>
+                Response = Browser.Put(RouteConstants.DataProviderEditRoute.Replace("{id}", Id.ToString()), with =>
                 {
                     with.Header("Accept", "application/json");
                     with.JsonBody(DataProviderDtoMother.LightstoneAuto);
                 });
             });
 
-            _dataProvider = _writeRepo.GetById(_id);
+            DataProvider = WriteRepo.GetById(Id);
         }
 
         public override void Observe()
@@ -55,55 +34,35 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
             
         }
 
-        private void AssertRequestField(string name, RequestFieldType type)
-        {
-            var field = _dataProvider.RequestFields.Get(name);
-            field.ShouldNotBeNull();
-
-            //todo: check type
-            //field.Type.ShouldEqual(((int)type).ToString());
-        }
-
-        private IDataField AssertDataField(string name, string definition, string label, double costOfSale, bool isSelected, int order, Type type, int industryCount = 0, int dataFieldCount = 0, IEnumerable<IDataField> dataFields = null)
-        {
-            dataFields = dataFields ?? _dataProvider.DataFields;
-            var field = dataFields.Get(name);
-            field.Definition.ShouldEqual(definition);
-            field.Label.ShouldEqual(label);
-            field.CostOfSale.ShouldEqual(costOfSale);
-            field.IsSelected.ShouldEqual(isSelected);
-            field.Namespace.ShouldBeNull();
-            field.Order.ShouldEqual(order);
-            field.Type.ShouldEqual(type.ToString());
-            field.Value.ShouldBeNull();
-            field.Industries.Count().ShouldEqual(industryCount);
-            field.DataFields.Count().ShouldEqual(dataFieldCount);
-            return field;
-        }
-
         [Observation]
         public void should_return_success_response()
         {
-            _response.Body.AsString().ShouldNotBeNull();
-            _response.Body.AsString().ShouldContain("Success");
+            Response.Body.AsString().ShouldNotBeNull();
+            Response.Body.AsString().ShouldContain("Success");
         }
 
         [Observation]
         public void should_update_root_properties()
         {
-            _dataProvider.Name.ShouldEqual(DataProviderName.LightstoneAuto);
-            _dataProvider.Description.ShouldEqual("Lightstone Auto");
-            _dataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
-            _dataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);
-            _dataProvider.Owner.ShouldEqual("Owner");
-            _dataProvider.Version.ShouldEqual(2);
-            _dataProvider.CostOfSale.ShouldEqual(10);
+            DataProvider.Name.ShouldEqual(DataProviderName.LightstoneAuto);
+            DataProvider.Description.ShouldEqual("Lightstone Auto");
+            DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
+            DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);
+            DataProvider.Owner.ShouldEqual("Owner");
+            DataProvider.Version.ShouldEqual(2);
+            DataProvider.CostOfSale.ShouldEqual(10);
         }
 
         [Observation]
         public void should_contain_all_request_fields()
         {
-            _dataProvider.RequestFields.Count().ShouldEqual(4);
+            DataProvider.RequestFields.Count().ShouldEqual(4);
+        }
+
+        [Observation]
+        public void should_contain_all_data_fields()
+        {
+            DataProvider.DataFields.Count().ShouldEqual(8);
         }
 
         [Observation]
@@ -128,12 +87,6 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         public void should_update_request_field_vin()
         {
             AssertRequestField("VinNumber", RequestFieldType.VinNumber);
-        }
-
-        [Observation]
-        public void should_contain_all_data_fields()
-        {
-            _dataProvider.DataFields.Count().ShouldEqual(8);
         }
 
         [Observation]
