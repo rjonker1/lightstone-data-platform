@@ -104,7 +104,8 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DateTime.UtcNow)
                     .With((DateTime?)DateTime.UtcNow.AddDays(1))
                     .With(true, RequestFieldDtoMother.CarId, RequestFieldDtoMother.Make, RequestFieldDtoMother.Year, RequestFieldDtoMother.VinNumber)
-                    .With(false, DataFieldDtoMother.CarId
+                    .With(false
+                    , DataFieldDtoMother.CarId
                     , DataFieldDtoMother.Year
                     , DataFieldDtoMother.Vin
                     , DataFieldDtoMother.ImageUrl
@@ -112,6 +113,46 @@ namespace PackageBuilder.TestObjects.Mothers
                     , DataFieldDtoMother.CarFullname
                     , DataFieldDtoMother.Model
                     , DataFieldDtoMother.VehicleValuation)
+                    .Build();
+            }
+        }
+
+        public static DataProviderDto Rgt
+        {
+            get
+            {
+                return new DataProviderDtoBuilder()
+                    .With(Guid.NewGuid())
+                    .With("Rgt", "Rgt")
+                    .With("Owner")
+                    .With(10m)
+                    .With(true)
+                    .With(2)
+                    .With(DateTime.UtcNow)
+                    .With((DateTime?)DateTime.UtcNow.AddDays(1))
+                    .With(true, RequestFieldDtoMother.CarId)
+                    .With(false
+                    , DataFieldDtoMother.Manufacturer
+                    , DataFieldDtoMother.ModelYear
+                    , DataFieldDtoMother.ModelType
+                    , DataFieldDtoMother.TopSpeed
+                    , DataFieldDtoMother.Kilowatts
+                    , DataFieldDtoMother.FuelEconomy
+                    , DataFieldDtoMother.Acceleration
+                    , DataFieldDtoMother.Torque
+                    , DataFieldDtoMother.Emissions
+                    , DataFieldDtoMother.EngineSize
+                    , DataFieldDtoMother.BodyShape
+                    , DataFieldDtoMother.FuelType
+                    , DataFieldDtoMother.TransmissionType
+                    , DataFieldDtoMother.CarFullname
+                    , DataFieldDtoMother.Colour
+                    , DataFieldDtoMother.RainSensorWindscreenWipers
+                    , DataFieldDtoMother.HeadUpDisplay
+                    , DataFieldDtoMother.VehicleType
+                    , DataFieldDtoMother.Model
+                    , DataFieldDtoMother.Make
+                    , DataFieldDtoMother.CarType)
                     .Build();
             }
         }

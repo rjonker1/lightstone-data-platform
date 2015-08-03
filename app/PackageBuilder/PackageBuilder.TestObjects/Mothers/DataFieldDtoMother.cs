@@ -640,6 +640,227 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto Manufacturer
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Manufacturer", "Manufacturer Label", "Manufacturer Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ModelYear
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ModelYear", "ModelYear Label", "ModelYear Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ModelType
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ModelType", "ModelType Label", "ModelType Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Make
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Make", "Make Label", "Make Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto TopSpeed
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("TopSpeed", "TopSpeed Label", "TopSpeed Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Kilowatts
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Kilowatts", "Kilowatts Label", "Kilowatts Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto FuelEconomy
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FuelEconomy", "FuelEconomy Label", "FuelEconomy Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Acceleration
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Acceleration", "Acceleration Label", "Acceleration Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Torque
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Torque", "Torque Label", "Torque Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Emissions
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Emissions", "Emissions Label", "Emissions Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto EngineSize
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("EngineSize", "EngineSize Label", "EngineSize Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto BodyShape
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("BodyShape", "BodyShape Label", "BodyShape Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto FuelType
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FuelType", "FuelType Label", "FuelType Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto TransmissionType
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("TransmissionType", "TransmissionType Label", "TransmissionType Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto RainSensorWindscreenWipers
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("RainSensorWindscreenWipers", "RainSensorWindscreenWipers Label", "RainSensorWindscreenWipers Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto HeadUpDisplay
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("HeadUpDisplay", "HeadUpDisplay Label", "HeadUpDisplay Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto VehicleType
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("VehicleType", "VehicleType Label", "VehicleType Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
         public static DataProviderFieldItemDto LicenseNumber
         {
             get
