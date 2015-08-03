@@ -1,15 +1,49 @@
-﻿namespace Workflow.Billing.Cache.Consumer
+﻿using Castle.Windsor;
+using Common.Logging;
+using EasyNetQ;
+using Workflow.Billing.Consumers;
+using Workflow.Billing.Consumers.Installers;
+using Workflow.Billing.Installers;
+using Workflow.Billing.Messages.Publishable;
+
+namespace Workflow.Billing.Cache.Consumer
 {
     public class BillingCacheService : IBillingCacheService
     {
+        private readonly ILog _log = LogManager.GetLogger<BillingCacheService>();
+        private IAdvancedBus advancedBus;
+
         public void Start()
         {
-            throw new System.NotImplementedException();
+            _log.DebugFormat("Started billing service");
+
+            var container = new WindsorContainer().Install(
+                new NHibernateInstaller(),
+                new WindsorInstaller(),
+                new CacheProviderInstaller(),
+                new RepositoryInstaller(),
+                new ConsumerInstaller(),
+                new BusInstaller());
+
+            //bus = container.Resolve<IBus>();
+            advancedBus = container.Resolve<IAdvancedBus>();
+            var cache = advancedBus.QueueDeclare("DataPlatform.Cache.Billing");
+
+            advancedBus.Consume(cache, x => x
+                .Add<BillCacheMessage>((message, info) => new TransactionConsumer<BillCacheMessage>(message, container)));
+
+            _log.DebugFormat("Billing service started");
         }
 
         public void Stop()
         {
-            throw new System.NotImplementedException();
+            if (advancedBus != null)
+            {
+                advancedBus.Dispose();
+            }
+
+            _log.DebugFormat("Stopped billing service");
         }
     }
+
 }

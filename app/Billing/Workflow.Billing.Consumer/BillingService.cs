@@ -13,7 +13,6 @@ namespace Workflow.Billing.Consumer
     public class BillingService : IBillingService
     {
         private readonly ILog _log = LogManager.GetLogger<BillingService>();
-        //private IBus bus;
         private IAdvancedBus advancedBus;
 
         public void Start()
@@ -23,7 +22,6 @@ namespace Workflow.Billing.Consumer
             var container = new WindsorContainer().Install(
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
-                // new MappingTypeInstaller(), //TODO: remove
                 new CacheProviderInstaller(),
                 new RepositoryInstaller(),
                 new AutoMapperInstaller(),
@@ -35,7 +33,7 @@ namespace Workflow.Billing.Consumer
             //bus = container.Resolve<IBus>();
             advancedBus = container.Resolve<IAdvancedBus>();
             var q = advancedBus.QueueDeclare("DataPlatform.Transactions.Billing");
-            var cache = advancedBus.QueueDeclare("DataPlatform.Cache.Billing");
+            //var cache = advancedBus.QueueDeclare("DataPlatform.Cache.Billing");
 
             //advancedBus.Consume(q, x => container.Resolve(typeof(IConsume<>)));
             //advancedBus.Consume(q, x => container.Resolve<TransactionConsumer>());
@@ -48,8 +46,8 @@ namespace Workflow.Billing.Consumer
                 .Add<PackageMessage>((message, info) => new TransactionConsumer<PackageMessage>(message, container))
                 .Add<ContractMessage>((message, info) => new TransactionConsumer<ContractMessage>(message, container)));
 
-            advancedBus.Consume(cache, x => x
-                .Add<BillCacheMessage>((message, info) => new TransactionConsumer<BillCacheMessage>(message, container)));
+            //advancedBus.Consume(cache, x => x
+            //    .Add<BillCacheMessage>((message, info) => new TransactionConsumer<BillCacheMessage>(message, container)));
 
             _log.DebugFormat("Billing service started");
         }
