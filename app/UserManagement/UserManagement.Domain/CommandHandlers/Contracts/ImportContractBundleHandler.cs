@@ -18,10 +18,11 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
 
         public override void Handle(ImportContractBundle command)
         {
-            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(1000, 200, "Bundle 1"), "Create")));
-            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(3500, 600, "Bundle 2"), "Create")));
-            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(6000, 1200, "Bundle 3"), "Create")));
-            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(17500, 3500, "Bundle 4"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(235, 5, "Bundle 1"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(500, 11, "Bundle 2"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(730, 17, "Bundle 3"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(1000, 24, "Bundle 4"), "Create")));
+            ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new ContractBundle(2000, 50, "Bundle 5"), "Create")));
         }
     }
 }
