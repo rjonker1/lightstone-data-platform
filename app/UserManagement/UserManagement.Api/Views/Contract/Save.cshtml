@@ -46,7 +46,7 @@
         <div class="col-md-4">
             <form action="@url" method="@method" class="form-horizontal">
                 @Html.HiddenFor(x => x.IsActive)
-                
+
                 @Html.HiddenFor(x => x.AssemblyQualifiedName)
 
                 @Html.HiddenFor(x => x.HasPackagePriceOverride, new { @class = "hasPackagePriceOverride" })
@@ -268,6 +268,18 @@
                         </div>
 
                     </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-4 col-md-4"></label>
+                        <div id="bundleWarning" class="input-group col-md-4 packag-autocomplete">
+                            
+                        </div>
+                        <div class="col-md-6">
+                            
+                        </div>
+
+                    </div>
+
                 </div>
                 @Html.Partial("Shared/BoxFooter")
             </form>
@@ -363,6 +375,25 @@
                         </div>
                     }
 
+                    if (bundle.Name == "Bundle 5")
+                    {
+                        <div class="col-sm-6 col-md-3">
+                            <div id="bundle5" class="well">
+                                <h2 class="text-purple">@bundle.Name</h2>
+                                <div id="bundleId" style="display: none">@bundle.Id</div>
+                                <p><span class="label label-info">OVERVIEW</span></p>
+                                <ul>
+                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
+                                    <li>Pro rata thereafter</li>
+                                </ul>
+                                <p></p>
+                                <hr>
+                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
+                                <hr>
+                                <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
+                            </div>
+                        </div>
+                    }
                 }
 
             </div>
@@ -373,6 +404,25 @@
 </div>
 
 <script>
+
+    $(document).ready(function() {
+
+        if ($('.hasPackagePriceOverride').val() == 'True') {
+
+            var bundleId = $('.contractBundleId').val();
+
+            $("div[id='bundleId']").each(function () {
+
+                if ($(this)[0].innerHTML == bundleId) {
+                    $(this).parent().css('border-color', 'green');
+                }
+            });
+
+            $('#bundleWarning').html('<p>Please note: This contract has been assigned a bundle pricing scheme.</p>' +
+                '<p><a class="btn btn-warning btn-md" onclick="removeBundle()"><i class="icon-ok"></i> Remove Bundled Pricing</a></p>');
+        }
+    });
+
     function bundleSelect(bundleElement) {
 
         var bundleWell = $(bundleElement).parent().parent();
@@ -385,5 +435,26 @@
         $('.contractBundleTransactionLimit').val($('#' + bundleWell[0].id + ' #transactionLimit').text());
         $('.contractBundlePrice').val($('#' + bundleWell[0].id + ' #bundlePrice').text());
 
+        $('#bundleWarning').html('<p>Please note: This contract has been assigned a bundle pricing scheme.</p>' +
+                '<p><a class="btn btn-warning btn-md" onclick="removeBundle()"><i class="icon-ok"></i> Remove Bundled Pricing</a></p>');
+    };
+
+    function removeBundle() {
+        $('.hasPackagePriceOverride').val(false);
+
+        var bundleId = $('.contractBundleId').val();
+
+        $("div[id='bundleId']").each(function () {
+
+            if ($(this)[0].innerHTML == bundleId) {
+                $(this).parent().css('border-color', '#e3e3e3');
+            }
+        });
+
+        $('.contractBundleId').val('00000000-0000-0000-0000-000000000000');
+        $('.contractBundleTransactionLimit').val(0);
+        $('.contractBundlePrice').val(0);
+
+        $('#bundleWarning').html('');
     };
 </script>
