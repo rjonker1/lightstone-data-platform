@@ -186,5 +186,32 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static DataProviderDto PCubedFica
+        {
+            get
+            {
+                return new DataProviderDtoBuilder()
+                    .With(Guid.NewGuid())
+                    .With("PCubedFica", "PCubedFica")
+                    .With("Owner")
+                    .With(10m)
+                    .With(true)
+                    .With(2)
+                    .With(DateTime.UtcNow)
+                    .With((DateTime?)DateTime.UtcNow.AddDays(1))
+                    //.With(true, RequestFieldDtoMother.VinNumber)
+                    .With(false
+                    , DataFieldDtoMother.TransactionToken
+                    , DataFieldDtoMother.IdNumber
+                    , DataFieldDtoMother.Initials
+                    , DataFieldDtoMother.Surname
+                    , DataFieldDtoMother.CellNumber
+                    , DataFieldDtoMother.LifeStatus
+                    , DataFieldDtoMother.DateOfBirth
+                    , DataFieldDtoMother.ResponseDate)
+                    .Build();
+            }
+        }
     }
 }

@@ -948,6 +948,102 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto TransactionToken
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("TransactionToken", "TransactionToken Label", "TransactionToken Definition")
+                    .With(true)
+                    .With(typeof(Guid).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto IdNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("IdNumber", "IdNumber Label", "IdNumber Definition")
+                    .With(true)
+                    .With(typeof(Int64).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Initials
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Initials", "Initials Label", "Initials Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Surname
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Surname", "Surname Label", "Surname Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto CellNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("CellNumber", "CellNumber Label", "CellNumber Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto LifeStatus
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("LifeStatus", "LifeStatus Label", "LifeStatus Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DateOfBirth
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DateOfBirth", "DateOfBirth Label", "DateOfBirth Definition")
+                    .With(true)
+                    .With(typeof(DateTime?).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ResponseDate
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ResponseDate", "ResponseDate Label", "ResponseDate Definition")
+                    .With(true)
+                    .With(typeof(DateTime).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
         public static DataProviderFieldItemDto VinNumber
         {
             get
