@@ -156,5 +156,35 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static DataProviderDto RgtVin
+        {
+            get
+            {
+                return new DataProviderDtoBuilder()
+                    .With(Guid.NewGuid())
+                    .With("RgtVin", "RgtVin")
+                    .With("Owner")
+                    .With(10m)
+                    .With(true)
+                    .With(2)
+                    .With(DateTime.UtcNow)
+                    .With((DateTime?)DateTime.UtcNow.AddDays(1))
+                    .With(true, RequestFieldDtoMother.VinNumber)
+                    .With(false
+                    , DataFieldDtoMother.Vin
+                    , DataFieldDtoMother.VehicleMake
+                    , DataFieldDtoMother.VehicleType
+                    , DataFieldDtoMother.VehicleModel
+                    , DataFieldDtoMother.Year
+                    , DataFieldDtoMother.Month
+                    , DataFieldDtoMother.QuarterIntNullable
+                    , DataFieldDtoMother.RgtCode
+                    , DataFieldDtoMother.Price
+                    , DataFieldDtoMother.Colour
+                    , DataFieldDtoMother.CarFullname)
+                    .Build();
+            }
+        }
     }
 }

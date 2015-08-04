@@ -206,6 +206,7 @@
     <Compile Include="Modules\DataProviders\when_updating_the_lightStone_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_ivid_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_rgt_data_provider.cs" />
+    <Compile Include="Modules\DataProviders\when_updating_the_rgt_vin_data_provider.cs" />
     <Compile Include="Modules\States\when_invoking_state_add_route.cs" />
     <Compile Include="Modules\States\when_invoking_state_edit_route.cs" />
     <Compile Include="Modules\States\when_invoking_state_route.cs" />

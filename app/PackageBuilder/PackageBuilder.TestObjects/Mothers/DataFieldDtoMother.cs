@@ -627,6 +627,19 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto Month
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Month", "Month Label", "Month Definition")
+                    .With(true)
+                    .With(typeof(int?).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
         public static DataProviderFieldItemDto Model
         {
             get
@@ -861,6 +874,32 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto VehicleModel
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("VehicleModel", "VehicleModel Label", "VehicleModel Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto VehicleMake
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("VehicleMake", "VehicleMake Label", "VehicleMake Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
         public static DataProviderFieldItemDto LicenseNumber
         {
             get
@@ -941,6 +980,42 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With("Quarter", "Quarter Label", "Quarter Definition")
                     .With(true)
                     .With(typeof(double?).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto QuarterIntNullable
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Quarter", "Quarter Label", "Quarter Definition")
+                    .With(true)
+                    .With(typeof(int?).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto RgtCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("RgtCode", "RgtCode Label", "RgtCode Definition")
+                    .With(true)
+                    .With(typeof(int?).ToString())
+                    .With(10d)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Price
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Price", "Price Label", "Price Definition")
+                    .With(true)
+                    .With(typeof(decimal?).ToString())
                     .With(10d)
                     .Build();
             }
