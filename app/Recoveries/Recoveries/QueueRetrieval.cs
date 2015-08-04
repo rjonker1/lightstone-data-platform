@@ -38,7 +38,7 @@ namespace Recoveries
 
                     var properties = new MessageProperties(basicGetResult.BasicProperties);
                     var info = new MessageReceivedInfo(
-                        "hosepipe",
+                        "recoveries",
                         basicGetResult.DeliveryTag,
                         basicGetResult.Redelivered,
                         basicGetResult.Exchange,
