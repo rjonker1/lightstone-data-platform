@@ -155,6 +155,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Fixtures\RebuildBillingEnvironment.cs" />
+    <Compile Include="Transaction\Billing\when_replaying_transactions_to_billingTransaction.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_client_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_customer_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_package_to_queue.cs" />

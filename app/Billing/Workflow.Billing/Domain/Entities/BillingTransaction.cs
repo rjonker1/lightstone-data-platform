@@ -14,6 +14,9 @@ namespace Workflow.Billing.Domain.Entities
         public virtual string BillingType { get; set; }
         public virtual Guid ContractId { get; set; }
 
-        public BillingTransaction() { }
+        public BillingTransaction()
+        {
+            Created = DateTime.UtcNow;
+        }
     }
 }
