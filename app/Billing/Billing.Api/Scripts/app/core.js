@@ -349,3 +349,91 @@
 
     return Billing;
 })(jQuery, Billing || {});
+
+
+(function ($, Billing) {
+    "use strict";
+    Billing.Common = function () {
+
+        var startDateFilter = moment().subtract(29, 'days').format('YYYY-MM-DD');
+        var endDateFilter = moment().format('YYYY-MM-DD');;
+
+        $('#table').bootstrapTable({
+            url: "/MI",
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'totalCoS',
+                title: 'Cost Of Sale (Total)',
+                sortable: true,
+                //formatter: gridCOSFormatter
+            }, {
+                field: 'totalRevenue',
+                title: 'Revenue (Total)',
+                sortable: true
+            }, {
+                field: 'nonBillable',
+                title: 'Non-Billable (Total)',
+                sortable: true
+            }]
+        });
+
+        Billing.overrideDataTablesStyling();
+
+
+        $(function () {
+
+            $('#transactionRange span').html(moment({ day: 26 }).subtract(1, 'month').format('MMMM D, YYYY') + ' - ' + moment({ day: 25 }).format('MMMM D, YYYY'));
+
+            $('#transactionRange').daterangepicker({
+                format: 'MM/DD/YYYY',
+                startDate: moment({ day: 26 }).subtract(1, 'month'),
+                endDate: moment({ day: 25 }),
+                minDate: '01/01/2012',
+                maxDate: '12/31/2020',
+                dateLimit: { days: 60 },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    //'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Billing Month': [moment({ day: 26 }).subtract(1, 'month'), moment({ day: 25 })],
+                    'Last Billing Month': [moment({ day: 26 }).subtract(2, 'month'), moment({ day: 25 }).subtract(1, 'month')]
+                },
+                opens: 'right',
+                buttonClasses: ['btn', 'btn-sm'],
+                applyClass: 'btn-primary',
+                cancelClass: 'btn-default',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Submit',
+                    cancelLabel: 'Cancel',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            }, function (start, end, label) {
+                //console.log(start.toISOString(), end.toISOString(), label);
+                $('#transactionRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            });
+
+        });
+    };
+})(jQuery, Billing || {});

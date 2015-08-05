@@ -28,6 +28,9 @@ namespace Billing.Api.Modules
             _preBillingDBRepository = preBillingDBRepository;
             _preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();
 
+            var endDateFilter = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
+            var startDateFilter = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
+
             Before += async (ctx, ct) =>
             {
                 this.Info(() => "Before Hook - PreBilling");
@@ -39,6 +42,12 @@ namespace Billing.Api.Modules
 
             Get["/PreBilling/"] = _ =>
             {
+                var preBillStartDateFilter = Request.Query["startDate"];
+                var preBillEndDateFilter = Request.Query["endDate"];
+
+                if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
+                if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
+
                 var customerClientList = new List<PreBillingDto>();
 
                 foreach (var transaction in _preBillingRepository)
@@ -46,13 +55,15 @@ namespace Billing.Api.Modules
                     var customerClient = new PreBillingDto();
                     var userList = new List<User>();
 
-                    var customerTransactions = _preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId).DistinctBy(x => x.TransactionId);
+                    var customerTransactions = _preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
 
-                    var clientTransactions = _preBillingRepository.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.TransactionId);
+                    var clientTransactions = _preBillingRepository.Where(x => x.ClientId == transaction.ClientId
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.PackageId).Distinct().Count();
@@ -113,7 +124,8 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
-                var preBillingRepo = _preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
+                var preBillingRepo = _preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId
+                                        && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in preBillingRepo)
                 {
@@ -158,7 +170,8 @@ namespace Billing.Api.Modules
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                var preBillingRepo = _preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
+                var preBillingRepo = _preBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId
+                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in preBillingRepo)
                 {

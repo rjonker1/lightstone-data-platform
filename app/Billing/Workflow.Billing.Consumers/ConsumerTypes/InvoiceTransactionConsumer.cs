@@ -72,6 +72,8 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     {
                         //General
                         Id = Guid.NewGuid(),
+                        Created = transaction.Date,
+                        CreatedBy = user.Username,
                         BillingId = 101,
                         //Customer implementation
                         CustomerId = customer.CustomerId,
