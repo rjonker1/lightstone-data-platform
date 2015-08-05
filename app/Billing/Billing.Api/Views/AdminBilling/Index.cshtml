@@ -145,6 +145,18 @@
             </div>
         </div>
     </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-gray-active"><i class="fa fa-stack-exchange"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Replay Billing Transactions</span>
+                <br />
+                <span class="info-box-text">
+                    <button id="replayBilling" type="button" class="btn btn-primary btn-md">Replay</button>
+                </span>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -171,6 +183,10 @@
 
     $('#finalBillingReload').click(function () {
         $.post(apiEndpoint + "/Admin/Cache/Reload/finalBilling", function (response) { });
+    });
+
+    $('#replayBilling').click(function () {
+        $.post(apiEndpoint + "/Admin/Replay/BillingTransactions", function (response) { });
     });
 </script>
 

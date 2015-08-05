@@ -355,9 +355,6 @@
     "use strict";
     Billing.Common = function () {
 
-        var startDateFilter = moment().subtract(29, 'days').format('YYYY-MM-DD');
-        var endDateFilter = moment().format('YYYY-MM-DD');;
-
         $('#table').bootstrapTable({
             url: "/MI",
             search: true,
@@ -431,6 +428,8 @@
                 }
             }, function (start, end, label) {
                 //console.log(start.toISOString(), end.toISOString(), label);
+                startDateFilter = start;
+                endDateFilter = end;
                 $('#transactionRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             });
 

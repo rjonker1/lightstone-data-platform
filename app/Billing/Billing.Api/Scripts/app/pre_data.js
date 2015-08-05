@@ -25,7 +25,7 @@ window.userGridActionEvents = {
         $('#detail-table-header').text('Users Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/PreBilling/CustomerClient/' + row.id + '/Users',
+            url: '/PreBilling/CustomerClient/' + row.id + '/Users?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
             cache: false,
             search: true,
             showRefresh: true,
@@ -89,7 +89,7 @@ window.packageGridActionEvents = {
         $('#detail-table-header').text('DataProviders Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/PreBilling/CustomerClient/' + row.id + '/Packages',
+            url: '/PreBilling/CustomerClient/' + row.id + '/Packages?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
             //responseHandler: packageResponseHandler,
             cache: false,
             search: true,

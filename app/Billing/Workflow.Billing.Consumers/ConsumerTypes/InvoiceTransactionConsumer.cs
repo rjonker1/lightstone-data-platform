@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using Billing.Domain.Dtos;
 using DataPlatform.Shared.Messaging.Billing.Messages;
@@ -51,7 +53,8 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 foreach (var account in _clientAccounts.Where(account => account.AccountNumber == transaction.AccountNumber))
                     client = account;
 
-                var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.StateId == 1 && 
+                var products = new List<DataProviderTransactionDto>();
+                var prods = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.StateId == 1 && 
                                                 //(x.Action == customer.BillingType || x.Action == client.BillingType))
                                                 x.Action == "Request")
                                                 .Select(x => new DataProviderTransactionDto
@@ -61,6 +64,14 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                                     CostPrice = x.CostPrice,
                                                     RecommendedPrice = x.RecommendedPrice
                                                 });
+
+                foreach (var dataProviderTransaction in prods)
+                {
+                    var checkDup = products.Where(x => x.DataProviderName == dataProviderTransaction.DataProviderName);
+                    if (checkDup.Any()) continue;
+
+                    products.Add(dataProviderTransaction);
+                }
 
                 var user = Mapper.Map<UserMeta, User>(_users.Get(transaction.UserId));
                 var package = Mapper.Map<PackageMeta, Package>(_pacakges.Get(transaction.PackageId));
