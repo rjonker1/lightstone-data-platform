@@ -928,12 +928,662 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto SrId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SrId", "SrId Label", "SrId Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PropertyId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PropertyId", "PropertyId Label", "PropertyId Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DeedId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DeedId", "DeedId Label", "DeedId Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PropertyTypeId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PropertyTypeId", "PropertyTypeId Label", "PropertyTypeId Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SsId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SsId", "SsId Label", "SsId Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto NadId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("NadId", "NadId Label", "NadId Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PropertyType
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PropertyType", "PropertyType Label", "PropertyType Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Province
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Province", "Province Label", "Province Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Muncipality
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Muncipality", "Muncipality Label", "Muncipality Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Deedtown
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Deedtown", "Deedtown Label", "Deedtown Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto FarmName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FarmName", "FarmName Label", "FarmName Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SectionalTitle
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SectionalTitle", "SectionalTitle Label", "SectionalTitle Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Unit
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Unit", "Unit Label", "Unit Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Portion
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Portion", "Portion Label", "Portion Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto BuyerName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("BuyerName", "BuyerName Label", "BuyerName Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto FirstName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FirstName", "FirstName Label", "FirstName Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SecondMiddleName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SecondMiddleName", "SecondMiddleName Label", "SecondMiddleName Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ThirdMiddleName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ThirdMiddleName", "ThirdMiddleName Label", "ThirdMiddleName Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PersonTypeId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PersonTypeId", "PersonTypeId Label", "PersonTypeId Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto BuyerIdCk
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("BuyerIdCk", "BuyerIdCk Label", "BuyerIdCk Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto MunicId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("MunicId", "MunicId Label", "MunicId Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ProvId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ProvId", "ProvId Label", "ProvId Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto StreetNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("StreetNumber", "StreetNumber Label", "StreetNumber Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto StreetType
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("StreetType", "StreetType Label", "StreetType Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Suburb
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Suburb", "Suburb Label", "Suburb Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PostalCode
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PostalCode", "PostalCode Label", "PostalCode Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto TitleDeedNo
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("TitleDeedNo", "TitleDeedNo Label", "TitleDeedNo Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Township
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Township", "Township Label", "Township Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto UserId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("UserId", "UserId Label", "UserId Definition")
+                    .With(true)
+                    .With(typeof(Guid).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PurchasePrice
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PurchasePrice", "PurchasePrice Label", "PurchasePrice Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PurchaseDate
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PurchaseDate", "PurchaseDate Label", "PurchaseDate Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Garage
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Garage", "Garage Label", "Garage Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Size
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Size", "Size Label", "Size Definition")
+                    .With(true)
+                    .With(typeof(double).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto XCoOrdinates
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("XCoOrdinates", "XCoOrdinates Label", "XCoOrdinates Definition")
+                    .With(true)
+                    .With(typeof(double).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto YCoOrdinates
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("YCoOrdinates", "YCoOrdinates Label", "YCoOrdinates Definition")
+                    .With(true)
+                    .With(typeof(double).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SectionalSchemeUnitTo
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SectionalSchemeUnitTo", "SectionalSchemeUnitTo Label", "SectionalSchemeUnitTo Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SectionlSchemeUnitNoFrom
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SectionlSchemeUnitNoFrom", "SectionlSchemeUnitNoFrom Label", "SectionlSchemeUnitNoFrom Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SectionSchemeNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SectionSchemeNumber", "SectionSchemeNumber Label", "SectionSchemeNumber Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
         public static DataProviderFieldItemDto Number
         {
             get
             {
                 return new DataFieldDtoBuilder()
                     .With("Number", "Number Label", "Number Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto BondNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("BondNumber", "BondNumber Label", "BondNumber Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto TownshipAlt
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("TownshipAlt", "TownshipAlt Label", "TownshipAlt Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto RemainingExtent
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("RemainingExtent", "RemainingExtent Label", "RemainingExtent Definition")
+                    .With(true)
+                    .With(typeof(bool).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto AdditionalDescription
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("AdditionalDescription", "AdditionalDescription Label", "AdditionalDescription Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto SuburbId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("SuburbId", "SuburbId Label", "SuburbId Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto MiddleName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("MiddleName", "MiddleName Label", "MiddleName Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto EstimatedCoOrdinates
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("EstimatedCoOrdinates", "EstimatedCoOrdinates Label", "EstimatedCoOrdinates Definition")
+                    .With(true)
+                    .With(typeof(bool).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto StreetId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("StreetId", "StreetId Label", "StreetId Definition")
+                    .With(true)
+                    .With(typeof(decimal).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ReqStatusId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ReqStatusId", "ReqStatusId Label", "ReqStatusId Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto EstateId
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("EstateId", "EstateId Label", "EstateId Definition")
+                    .With(true)
+                    .With(typeof(int).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto EstateName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("EstateName", "EstateName Label", "EstateName Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ActiveStatus
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ActiveStatus", "ActiveStatus Label", "ActiveStatus Definition")
                     .With(true)
                     .With(typeof(string).ToString())
                     .With(10d)
@@ -1056,6 +1706,73 @@ namespace PackageBuilder.TestObjects.Mothers
                     , Photo
                     , Cellphone
                     , EmailAddress
+                    )
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PropertyInformation
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PropertyInformation", "PropertyInformation Label", "PropertyInformation Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(
+                      SrId
+                    , PropertyId
+                    , DeedId
+                    , PropertyTypeId
+                    , SsId
+                    , NadId
+                    , PropertyType
+                    , Province
+                    , Muncipality
+                    , Deedtown
+                    , FarmName
+                    , SectionalTitle
+                    , Unit
+                    , Portion
+                    , BuyerName
+                    , FirstName
+                    , SecondMiddleName
+                    , ThirdMiddleName
+                    , Surname
+                    , PersonTypeId
+                    , BuyerIdCk
+                    , MunicId
+                    , ProvId
+                    , StreetNumber
+                    , StreetType
+                    , PostalCode
+                    , UserId
+                    , Garage
+                    , SectionSchemeNumber
+                    , SectionlSchemeUnitNoFrom
+                    , SectionalSchemeUnitTo
+                    , Size
+                    , XCoOrdinates
+                    , YCoOrdinates
+                    , Suburb
+                    , TitleDeedNo
+                    , RegistrationDate
+                    , Township
+                    , PurchasePrice
+                    , PurchaseDate
+                    , BondNumber
+                    , TownshipAlt
+                    , RemainingExtent
+                    , AdditionalDescription
+                    , SuburbId
+                    , StreetId
+                    , ActiveStatus
+                    , EstateName
+                    , EstateId
+                    , ReqStatusId
+                    , EstimatedCoOrdinates
+                    , MiddleName
                     )
                     .Build();
             }

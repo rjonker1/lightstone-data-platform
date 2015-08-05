@@ -86,5 +86,15 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto IdentityNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("IdentityNumber", "IdentityNumber", "Definition")
+                    .With(((int)RequestFieldType.IdentityNumber).ToString())
+                    .Build();
+            }
+        }
     }
 }

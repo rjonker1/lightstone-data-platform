@@ -232,5 +232,24 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static DataProviderDto LightstoneProperty
+        {
+            get
+            {
+                return new DataProviderDtoBuilder()
+                    .With(Guid.NewGuid())
+                    .With("LightstoneProperty", "LightstoneProperty")
+                    .With("Owner")
+                    .With(10m)
+                    .With(true)
+                    .With(2)
+                    .With(DateTime.UtcNow)
+                    .With((DateTime?)DateTime.UtcNow.AddDays(1))
+                    .With(true, RequestFieldDtoMother.IdentityNumber)
+                    .With(false, DataFieldDtoMother.PropertyInformation)
+                    .Build();
+            }
+        }
     }
 }
