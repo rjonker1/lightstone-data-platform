@@ -900,6 +900,406 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto DrivingLicense
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DrivingLicense", "DrivingLicense Label", "DrivingLicense Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(CertificateNumber, CountryOfIssue)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto IdentityDocument
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("IdentityDocument", "IdentityDocument Label", "IdentityDocument Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(Number, IdentityType)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Number
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Number", "Number Label", "Number Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto IdentityType
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("IdentityType", "IdentityType Label", "IdentityType Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Person
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Person", "Person Label", "Person Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(Surname, Initials, DriverRestriction1, DriverRestriction2, DateOfBirthString, PreferenceLanguage, Gender)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DriverRestriction1
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DriverRestriction1", "DriverRestriction1 Label", "DriverRestriction1 Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DriverRestriction2
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DriverRestriction2", "DriverRestriction2 Label", "DriverRestriction2 Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DateOfBirthString
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DateOfBirth", "DateOfBirth Label", "DateOfBirth Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto PreferenceLanguage
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("PreferenceLanguage", "PreferenceLanguage Label", "PreferenceLanguage Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Gender
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Gender", "Gender Label", "Gender Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DrivingLicenseCard
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DrivingLicense", "DrivingLicense Label", "DrivingLicense Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(
+                      IdentityDocument
+                    , Person
+                    , DrivingLicense
+                    , Card
+                    , ProfessionalDrivingPermit
+                    , VehicleClass1
+                    , VehicleClass2
+                    , VehicleClass3
+                    , VehicleClass4
+                    , Photo
+                    , Cellphone
+                    , EmailAddress
+                    )
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto CertificateNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("CertificateNumber", "CertificateNumber Label", "CertificateNumber Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto CountryOfIssue
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("CountryOfIssue", "CountryOfIssue Label", "CountryOfIssue Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DateValidFrom
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DateValidFrom", "DateValidFrom Label", "DateValidFrom Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto DateValidUntil
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("DateValidUntil", "DateValidUntil Label", "DateValidUntil Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto ProfessionalDrivingPermit
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("ProfessionalDrivingPermit", "ProfessionalDrivingPermit Label", "ProfessionalDrivingPermit Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(Category, DateValidUntil)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Category
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Category", "Category Label", "Category Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Code
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Code", "Code Label", "Code Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto VehicleRestriction
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("VehicleRestriction", "VehicleRestriction Label", "VehicleRestriction Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Photo
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Photo", "Photo Label", "Photo Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Cellphone
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Cellphone", "Cellphone Label", "Cellphone Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto EmailAddress
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("EmailAddress", "EmailAddress Label", "EmailAddress Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto FirstIssueDate
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FirstIssueDate", "FirstIssueDate Label", "FirstIssueDate Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto VehicleClass1
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("VehicleClass1", "VehicleClass1 Label", "VehicleClass1 Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(Code, VehicleRestriction, FirstIssueDate)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto VehicleClass2
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("VehicleClass2", "VehicleClass2 Label", "VehicleClass2 Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(Code, VehicleRestriction, FirstIssueDate)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto VehicleClass3
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("VehicleClass3", "VehicleClass3 Label", "VehicleClass3 Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(Code, VehicleRestriction, FirstIssueDate)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto VehicleClass4
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("VehicleClass4", "VehicleClass4 Label", "VehicleClass4 Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(Code, VehicleRestriction, FirstIssueDate)
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto IssueNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("IssueNumber", "IssueNumber Label", "IssueNumber Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Card
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Card", "Card Label", "Card Definition")
+                    .With(true)
+                    .With(typeof(string).ToString())
+                    .With(10d)
+                    .With(new IndustryDto())
+                    .With(IssueNumber, DateValidFrom, DateValidUntil)
+                    .Build();
+            }
+        }
         public static DataProviderFieldItemDto LicenseNumber
         {
             get

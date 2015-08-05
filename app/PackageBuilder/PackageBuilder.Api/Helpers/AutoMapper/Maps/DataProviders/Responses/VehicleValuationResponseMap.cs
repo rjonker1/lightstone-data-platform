@@ -63,49 +63,42 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             #endregion
             #region EstimatedValue
             Mapper.CreateMap<IEnumerable<IRespondWithEstimatedValueModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "EstimatedValue"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithEstimatedValueModel>()));
             Mapper.CreateMap<IRespondWithEstimatedValueModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region LastFiveSales
             Mapper.CreateMap<IEnumerable<IRespondWithSaleModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "LastFiveSales"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithSaleModel>()));
             Mapper.CreateMap<IRespondWithSaleModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region Prices
             Mapper.CreateMap<IEnumerable<IRespondWithPriceModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "Prices"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithPriceModel>()));
             Mapper.CreateMap<IRespondWithPriceModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region Frequency
             Mapper.CreateMap<IEnumerable<IRespondWithFrequencyModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "Frequency"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithFrequencyModel>()));
             Mapper.CreateMap<IRespondWithFrequencyModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region Confidence
             Mapper.CreateMap<IEnumerable<IRespondWithConfidenceModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "Confidence"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithConfidenceModel>()));
             Mapper.CreateMap<IRespondWithConfidenceModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region AmortisedValues
             Mapper.CreateMap<IEnumerable<IRespondWithAmortisedValueModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "AmortisedValues"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithAmortisedValueModel>()));
             Mapper.CreateMap<IRespondWithAmortisedValueModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region ImageGauges
             Mapper.CreateMap<IEnumerable<IRespondWithImageGaugeModel>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "ImageGauges"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithImageGaugeModel>()));
             Mapper.CreateMap<IRespondWithImageGaugeModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);

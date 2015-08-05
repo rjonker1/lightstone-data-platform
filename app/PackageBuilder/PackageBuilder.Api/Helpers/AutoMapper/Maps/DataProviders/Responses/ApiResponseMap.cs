@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using AutoMapper;
-using DataPlatform.Shared.Enums;
+﻿using AutoMapper;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;

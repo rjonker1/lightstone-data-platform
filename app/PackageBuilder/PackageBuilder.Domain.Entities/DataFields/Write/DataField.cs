@@ -91,6 +91,11 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
             IsSelected = selected;
         }
 
+        public void SetName(string name)
+        {
+            Name = name;
+        }
+
         //todo populate via AutoMapper in LaceResponseMap.cs
         public void SetValue(string value)
         {

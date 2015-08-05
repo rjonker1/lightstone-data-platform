@@ -12,7 +12,6 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             Mapper.CreateMap<IProvideDataFromIvid, IEnumerable<DataField>>()
                 .ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             Mapper.CreateMap<IProvideVehicleSpecificInformation, DataField>()
-                .ForMember(d => d.Name, opt => opt.MapFrom(x => "SpecificInformation"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
         }

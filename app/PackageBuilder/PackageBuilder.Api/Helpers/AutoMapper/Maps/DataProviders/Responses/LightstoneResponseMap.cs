@@ -13,7 +13,6 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             Mapper.CreateMap<IProvideDataFromLightstoneAuto, IEnumerable<DataField>>()
                 .ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             Mapper.CreateMap<IRespondWithValuation, DataField>()
-                .ForMember(d => d.Name, opt => opt.MapFrom(x => "VehicleValuation"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
         }

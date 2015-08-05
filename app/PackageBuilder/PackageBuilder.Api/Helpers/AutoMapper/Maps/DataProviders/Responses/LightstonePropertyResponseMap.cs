@@ -15,7 +15,6 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             Mapper.CreateMap<IProvideDataFromLightstoneProperty, IEnumerable<DataField>>()
                 .ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             Mapper.CreateMap<IEnumerable<IRespondWithProperty>, DataField>()
-                .ForMember(s => s.Name, opt => opt.MapFrom(x => "PropertyInformation"))
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x != null ? x.SelectMany(Mapper.Map<object, IEnumerable<DataField>>).ToList() : Enumerable.Empty<IDataField>()));
             Mapper.CreateMap<IRespondWithProperty, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);

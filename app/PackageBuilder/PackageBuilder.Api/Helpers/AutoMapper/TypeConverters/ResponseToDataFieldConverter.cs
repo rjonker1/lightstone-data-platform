@@ -46,7 +46,13 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                         !property.PropertyType.IsInstanceOfType(Type.GetType("System.Type")) &&
                         property.PropertyType.GetInterface(typeof(IAmDataProviderRequest).FullName) == null &&
                         property.PropertyType != typeof (IPair<string, double>[])).ToList();
-            var list = complexProperties.Select(property => Mapper.Map(property.GetValue(source), property.PropertyType, typeof (DataField)) as DataField).ToList();
+            var list = complexProperties.Select(property => Mapper.Map(property.GetValue(source), property.PropertyType, typeof(DataField), options => options.AfterMap(
+                (s, d) =>
+                {
+                    var dataField = d as DataField;
+                    if (dataField != null) dataField.SetName(property.Name);
+                }
+                )) as DataField).ToList();
             list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType.ToString(), _industryRepository.ToList(), field.GetValue(source) + "")).ToList());
 
             this.Info(() => "Successfully mapped {0} to IEnumerable<IDataField>".FormatWith(source));
