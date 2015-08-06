@@ -30,6 +30,11 @@ namespace Lace.Domain.Core.Entities
             RetailConfidenceValue = retailConfidenceValue;
         }
 
+        public void SetAuctionEstimatedValues(string auctionEstimate)
+        {
+            AuctionEstimate = auctionEstimate;
+        }
+
         [DataMember]
         public string RetailEstimatedValue { get; private set; }
 
@@ -61,6 +66,9 @@ namespace Lace.Domain.Core.Entities
         public string TradeConfidenceLevel { get; set; }
 
         [DataMember]
+        public string AuctionEstimate { get; set; }
+
+        [DataMember]
         public string TypeName
         {
             get { return GetType().Name; }
@@ -71,6 +79,5 @@ namespace Lace.Domain.Core.Entities
         {
             get { return GetType(); }
         }
-
     }
 }

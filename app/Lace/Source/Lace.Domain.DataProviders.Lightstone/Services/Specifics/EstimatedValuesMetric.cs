@@ -34,6 +34,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
             SetRetailEstimatedValues(estimatedValues);
             SetTradeEstimatedValues(estimatedValues);
+            SetAuctionEstimatedValues(estimatedValues);
 
             MetricResult.Add(estimatedValues);
 
@@ -74,6 +75,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
                 salePriceHigh.MoneyValue.HasValue ? salePriceHigh.MoneyValue.Value.ToString("C") : "",
                 confidence.FloatValue.HasValue ? confidence.FloatValue.Value.ToString(CultureInfo.CurrentCulture) : "",
                 GetConfidenceLevel(confidence.FloatValue.HasValue ? confidence.FloatValue.Value : 0.00));
+        }
+
+        private void SetAuctionEstimatedValues(IRespondWithEstimatedValueModel model)
+        {
+            var auctionEstimate = _gauges.FirstOrDefault(w => w.MetricId == (int) MetricTypes.AuctionEstimate);
+            if (auctionEstimate == null) return;
+            model.SetAuctionEstimatedValues(auctionEstimate.MoneyValue.HasValue ? auctionEstimate.MoneyValue.Value.ToString("C") : "");
         }
 
         private IList<Statistic> GetGauges()
