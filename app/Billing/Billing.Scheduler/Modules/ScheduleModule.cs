@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
@@ -100,11 +101,29 @@ namespace Billing.Scheduler.Modules
                 var cronExpression = "" + dt.Minute + " " + dt.Hour + " * * *";
                 var cronExpressionCache = "" + dt.Minute + " " + (dt.Hour + 2) + " * * *";
 
-                RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
+                this.Info(() => "Attempting to add schedules");
+                try
+                {
+                    this.Info(() => "Adding StageBilling Schedule");
+                    RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(billRun), cronExpression, TimeZoneInfo.Local);
+                    this.Info(() => "Successfully added StageBilling Run Schedule");
 
-                RecurringJob.AddOrUpdate<CacheSchedule>("PreBilling Cache Reload", x => x.Send(prebillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
-                RecurringJob.AddOrUpdate<CacheSchedule>("StageBilling Cache Reload", x => x.Send(stagebillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
-                RecurringJob.AddOrUpdate<CacheSchedule>("FinalBilling Cache Reload", x => x.Send(finalbillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                    this.Info(() => "Adding PreBilling Cache Schedule");
+                    RecurringJob.AddOrUpdate<CacheSchedule>("PreBilling Cache Reload", x => x.Send(prebillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                    this.Info(() => "Successfully added PreBilling Cache Schedule");
+
+                    this.Info(() => "Adding StageBilling Cache Schedule");
+                    RecurringJob.AddOrUpdate<CacheSchedule>("StageBilling Cache Reload", x => x.Send(stagebillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                    this.Info(() => "Successfully added StageBilling Cache Schedule");
+
+                    this.Info(() => "Adding FinalBilling Cache Schedule");
+                    RecurringJob.AddOrUpdate<CacheSchedule>("FinalBilling Cache Reload", x => x.Send(finalbillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                    this.Info(() => "Successfully added FinalBilling Cache Schedule");
+                }
+                catch (Exception ex)
+                {
+                    return Response.AsJson(new { data = ex.Message });
+                }
 
                 return Response.AsJson(new { data = "Schedule Added/Updated" });
             };
@@ -156,8 +175,10 @@ namespace Billing.Scheduler.Modules
 
         public void Send(BillingMessage message)
         {
+            this.Info(() => "Attempting to send BillingMessage: {0} to queue.".FormatWith(message.RunType));
             var bus = new TransactionBus(_bus);
             bus.SendDynamic(new BillingMessage() { RunType = message.RunType, Schedule = message.Schedule });
+            this.Info(() => "Successfully sent BillingMessage: {0} to queue.".FormatWith(message.RunType));
         }
     }
 
@@ -167,8 +188,10 @@ namespace Billing.Scheduler.Modules
 
         public void Send(BillCacheMessage message)
         {
+            this.Info(() => "Attempting to send BillCacheMessage: {0} to queue.".FormatWith(message.BillingType));
             var bus = new TransactionBus(_bus);
             bus.SendDynamic(new BillCacheMessage { BillingType = message.BillingType, Command = message.Command });
+            this.Info(() => "Successfully sent BillCacheMessage: {0} to queue.".FormatWith(message.BillingType));
         }
     }
 }
