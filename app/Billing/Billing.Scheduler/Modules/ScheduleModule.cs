@@ -7,12 +7,11 @@ using EasyNetQ;
 using Hangfire;
 using Hangfire.Storage;
 using Nancy;
-using RestSharp;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Messages.Publishable;
-using Workflow.BuildingBlocks;
 
 using CronExpressionDescriptor;
+using Workflow.BuildingBlocks;
 
 namespace Billing.Scheduler.Modules
 {
