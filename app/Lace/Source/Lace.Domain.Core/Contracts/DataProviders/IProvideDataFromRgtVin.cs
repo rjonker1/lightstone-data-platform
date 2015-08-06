@@ -17,5 +17,6 @@ namespace Lace.Domain.Core.Contracts.DataProviders
         decimal? Price { get; }
         string Colour { get; }
         string CarFullname { get; }
+        void SetCarName();
     }
 }

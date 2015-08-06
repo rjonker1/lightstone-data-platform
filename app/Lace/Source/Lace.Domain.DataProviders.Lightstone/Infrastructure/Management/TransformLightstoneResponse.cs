@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
             IRetrieveCarInformation carInformation)
         {
             Continue = metricResponse != null && metricResponse.IsSatisfied;
-            Result = Continue ? new LightstoneAutoResponse() : null;
+            Result = Continue ? null : new LightstoneAutoResponse() ;
 
             _metricResponse = metricResponse;
             _carInformation = carInformation;

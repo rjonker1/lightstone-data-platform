@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.DataProvider.Models;
@@ -10,13 +11,13 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Management
     {
         private readonly Vin _vin;
 
-        public RgtVinResponse Result { get; private set; }
+        public IProvideDataFromRgtVin Result { get; private set; }
         public bool Continue { get; private set; }
 
         public TransformRgtVinResponse(IEnumerable<Vin> response)
         {
             Continue = response != null && response.Any();
-            Result = Continue ? new RgtVinResponse() : null;
+            Result = Continue ? null : new RgtVinResponse();
 
             _vin = Continue ? response.FirstOrDefault() : new Vin();
         }

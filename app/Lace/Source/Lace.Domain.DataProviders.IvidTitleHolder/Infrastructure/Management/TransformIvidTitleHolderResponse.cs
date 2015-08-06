@@ -13,7 +13,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management
         public TransformIvidTitleHolderResponse(TitleholderQueryResponse response)
         {
             Continue = response != null;
-            Result = Continue ? IvidTitleHolderResponse.Empty() : null;
+            Result = IvidTitleHolderResponse.Empty();
             Message = response;
         }
 

@@ -25,7 +25,9 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         //        2SNAZI4GP   BP48JXGP    
         //        yxn332gp    DZD309FS    
         //        HJF622MP    HHS608EC    
-        //        Bz24tggp    ND509499  
+        //        Bz24tggp    ND509499
+        //        HLX051GP
+
         public when_consuming_ivid_data_provider_with_license_number_mismatch()
         {
             _command = MonitoringBusBuilder.ForIvidCommands(Guid.NewGuid());

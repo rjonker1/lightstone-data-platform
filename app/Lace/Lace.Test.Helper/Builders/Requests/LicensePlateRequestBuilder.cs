@@ -68,7 +68,11 @@ namespace Lace.Test.Helper.Builders.Requests
             return _request;
         }
 
-
+        public ICollection<IPointToLaceRequest> ForAllSourcesWithMisMatchLicensePlate()
+        {
+            _request = new[] { new LicensePlateNumberMisMatchAllDataProvidersRequest() };
+            return _request;
+        }
     }
 
     public class VinRequestBuilder
