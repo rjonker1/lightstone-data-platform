@@ -15,6 +15,7 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 
         private IGetCarInformation _getCarInformation;
         private readonly IReadOnlyRepository _repository;
+        private readonly int _year;
 
         private GetCarInformation()
         {
@@ -25,6 +26,13 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
         {
             _repository = repository;
             CarInformationRequest = new CarInformationRequest(vinNumber);
+        }
+
+        public GetCarInformation(int carId, int year, IReadOnlyRepository repository)
+        {
+            _repository = repository;
+            _year = year;
+            CarInformationRequest = new CarInformationRequest(carId, year);
         }
 
         public GetCarInformation(int carId, IReadOnlyRepository repository)
@@ -41,9 +49,8 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 
         public IRetrieveCarInformation BuildCarInformation()
         {
-            IsSatisfied = _getCarInformation.Cars.Any();
-
-            CarInformation = IsSatisfied ? _getCarInformation.Cars.FirstOrDefault() : new CarInformation();
+            IsSatisfied = _getCarInformation.Cars.Any() && _getCarInformation.Cars.FirstOrDefault() != null;
+            CarInformation = IsSatisfied ? _getCarInformation.Cars.FirstOrDefault().SetYear(_year) : new CarInformation();
             return this;
         }
 

@@ -19,5 +19,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             int.TryParse(request.CarId.GetValue(), out carId);
             return carId;
         }
+
+        public static int GetYear(IAmLightstoneAutoRequest request)
+        {
+            int year;
+            int.TryParse(request.Year.GetValue(), out year);
+            return year;
+        }
     }
 }

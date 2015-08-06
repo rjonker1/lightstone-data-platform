@@ -37,11 +37,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
             if (stop) return false;
 
             var carId = HandleRequest.GetCarId(request);
+            var year = HandleRequest.GetYear(request);
 
             if (carId == 0) return false;
 
             carInformation =
-                new GetCarInformation(carId,
+                new GetCarInformation(carId,year,
                     carRepository)
                     .SetupDataSources()
                     .GenerateData()

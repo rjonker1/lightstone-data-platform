@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
@@ -42,37 +44,37 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         [Observation]
         public void lightstone_retail_estimated_high_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().RetailEstimatedHigh.ShouldEqual("R 96 900,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedHigh, @"\s+", "").ShouldEqual("R96900,00");
         }
 
         [Observation]
         public void lightstone_retail_estimated_low_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().RetailEstimatedLow.ShouldEqual("R 79 300,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedLow, @"\s+", "").ShouldEqual("R79300,00");
         }
 
         [Observation]
         public void lightstone_retail_estimated_value_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().RetailEstimatedValue.ShouldEqual("R 88 100,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedValue, @"\s+", "").ShouldEqual("R88100,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().TradeEstimatedValue.ShouldEqual("R 78 600,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedValue, @"\s+", "").ShouldEqual("R78600,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_low_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().TradeEstimatedLow.ShouldEqual("R 70 800,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedLow, @"\s+", "").ShouldEqual("R70800,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_high_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().TradeEstimatedHigh.ShouldEqual("R 86 500,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedHigh, @"\s+", "").ShouldEqual("R86500,00");
         }
     }
 }
