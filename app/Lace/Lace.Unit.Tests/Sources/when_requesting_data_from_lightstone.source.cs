@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -126,15 +127,15 @@ namespace Lace.Unit.Tests.Sources
         [Observation]
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_high_must_be_correct()
         {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
-                .RetailEstimatedHigh.ShouldEqual("R 96 900,00");
+            Regex.Replace(_response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
+                .RetailEstimatedHigh, @"\s+", "").ShouldEqual("R96900,00");
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_low_must_be_correct()
         {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
-                .RetailEstimatedLow.ShouldEqual("R 79 300,00");
+            Regex.Replace(_response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
+                .RetailEstimatedLow, @"\s+", "").ShouldEqual("R79300,00");
         }
 
         [Observation]

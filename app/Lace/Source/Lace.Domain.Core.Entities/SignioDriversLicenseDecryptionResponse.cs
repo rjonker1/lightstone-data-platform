@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.DriversLicense;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -22,6 +23,9 @@ namespace Lace.Domain.Core.Entities
             DrivingLicense = driversLicense;
             DecodedData = decodedData;
         }
+
+        [DataMember]
+        public IAmSignioDriversLicenseDecryptionRequest Request { get; private set; }
 
         [DataMember]
         public IRespondWithDriversLicenseCard DrivingLicense { get; private set; }

@@ -78,6 +78,13 @@ namespace Lace.Shared.DataProvider.Models
             IsVin12 = true;
         }
 
+        public CarInformation SetYear(int year)
+        {
+            if (year == 0) return this;
+            Year = year;
+            return this;
+        }
+
         public string Vin { get; set; }
         public int CarId { get; set; }
         public int Year { get; set; }

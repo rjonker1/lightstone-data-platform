@@ -1,4 +1,5 @@
-﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+﻿using Castle.MicroKernel.SubSystems.Conversion;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto
 {
@@ -12,6 +13,12 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto
         public CarInformationRequest(string vin)
         {
             Vin = vin;
+        }
+
+        public CarInformationRequest(int carId, int year)
+        {
+            CarId = carId;
+            Year = year;
         }
 
         public CarInformationRequest(int carId)
