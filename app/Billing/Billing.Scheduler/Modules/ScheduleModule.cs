@@ -99,7 +99,6 @@ namespace Billing.Scheduler.Modules
                 var finalbillCacheRun = new BillCacheMessage { BillingType = typeof(FinalBilling), Command = BillingCacheCommand.Reload };
 
                 var cronExpression = "" + dt.Minute + " " + dt.Hour + " * * *";
-                var cronExpressionCache = "" + dt.Minute + " " + (dt.Hour + 2) + " * * *";
 
                 this.Info(() => "Attempting to add schedules");
                 try
@@ -109,19 +108,20 @@ namespace Billing.Scheduler.Modules
                     this.Info(() => "Successfully added StageBilling Run Schedule");
 
                     this.Info(() => "Adding PreBilling Cache Schedule");
-                    RecurringJob.AddOrUpdate<CacheSchedule>("PreBilling Cache Reload", x => x.Send(prebillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                    RecurringJob.AddOrUpdate<CacheSchedule>("PreBilling Cache Reload", x => x.Send(prebillCacheRun), cronExpression, TimeZoneInfo.Local);
                     this.Info(() => "Successfully added PreBilling Cache Schedule");
 
                     this.Info(() => "Adding StageBilling Cache Schedule");
-                    RecurringJob.AddOrUpdate<CacheSchedule>("StageBilling Cache Reload", x => x.Send(stagebillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                    RecurringJob.AddOrUpdate<CacheSchedule>("StageBilling Cache Reload", x => x.Send(stagebillCacheRun), cronExpression, TimeZoneInfo.Local);
                     this.Info(() => "Successfully added StageBilling Cache Schedule");
 
                     this.Info(() => "Adding FinalBilling Cache Schedule");
-                    RecurringJob.AddOrUpdate<CacheSchedule>("FinalBilling Cache Reload", x => x.Send(finalbillCacheRun), cronExpressionCache, TimeZoneInfo.Local);
+                    RecurringJob.AddOrUpdate<CacheSchedule>("FinalBilling Cache Reload", x => x.Send(finalbillCacheRun), cronExpression, TimeZoneInfo.Local);
                     this.Info(() => "Successfully added FinalBilling Cache Schedule");
                 }
                 catch (Exception ex)
                 {
+                    this.Error(() => ex.Message);
                     return Response.AsJson(new { data = ex.Message });
                 }
 
