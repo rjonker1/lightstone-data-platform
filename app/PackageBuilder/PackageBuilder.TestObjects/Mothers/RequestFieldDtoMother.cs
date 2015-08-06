@@ -96,5 +96,35 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto CompanyName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("CompanyName", "CompanyName", "Definition")
+                    .With(((int)RequestFieldType.CompanyName).ToString())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto CompanyRegistrationNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("CompanyRegistrationNumber", "CompanyRegistrationNumber", "Definition")
+                    .With(((int)RequestFieldType.CompanyRegistrationNumber).ToString())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto CompanyVatNumber
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("CompanyVatNumber", "CompanyVatNumber", "CompanyVatNumber")
+                    .With(((int)RequestFieldType.CompanyVatNumber).ToString())
+                    .Build();
+            }
+        }
     }
 }

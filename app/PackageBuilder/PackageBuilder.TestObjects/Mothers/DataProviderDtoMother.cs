@@ -251,5 +251,24 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static DataProviderDto LightstoneBusinessCompany
+        {
+            get
+            {
+                return new DataProviderDtoBuilder()
+                    .With(Guid.NewGuid())
+                    .With("LightstoneBusinessCompany", "LightstoneBusinessCompany")
+                    .With("Owner")
+                    .With(10m)
+                    .With(true)
+                    .With(2)
+                    .With(DateTime.UtcNow)
+                    .With((DateTime?)DateTime.UtcNow.AddDays(1))
+                    .With(true, RequestFieldDtoMother.CompanyName, RequestFieldDtoMother.CompanyRegistrationNumber, RequestFieldDtoMother.CompanyVatNumber)
+                    .With(false, DataFieldDtoMother.Companies)
+                    .Build();
+            }
+        }
     }
 }
