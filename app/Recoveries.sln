@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recoveries.Test.Helper", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recoveries.NeverRun.AutomaticallyConsumer", "Recoveries\Tests\Recoveries.NeverRun.AutomaticallyConsumer\Recoveries.NeverRun.AutomaticallyConsumer.csproj", "{E35208DE-1211-4CCA-95CE-4BB3FBA12A2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recoveries.Core", "Recoveries\Recoveries.Core\Recoveries.Core.csproj", "{AB586FC6-B803-4024-B864-5E567BD0B960}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,16 @@ Global
 		{E35208DE-1211-4CCA-95CE-4BB3FBA12A2A}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{E35208DE-1211-4CCA-95CE-4BB3FBA12A2A}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{E35208DE-1211-4CCA-95CE-4BB3FBA12A2A}.Test|Any CPU.Build.0 = Release|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{AB586FC6-B803-4024-B864-5E567BD0B960}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

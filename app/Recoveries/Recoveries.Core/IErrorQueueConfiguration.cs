@@ -1,4 +1,4 @@
-﻿namespace Recoveries.ErrorQueues
+﻿namespace Recoveries.Core
 {
     public interface IErrorQueueConfiguration
     {

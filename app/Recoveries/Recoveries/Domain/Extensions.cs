@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Recoveries.Core;
 
 namespace Recoveries.Domain
 {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using RabbitMQ.Client.Framing;
+using Recoveries.Core;
 
 namespace Recoveries
 {

@@ -1,4 +1,5 @@
-﻿using Recoveries.Domain;
+﻿using Recoveries.Core;
+using Recoveries.Domain;
 
 namespace Recoveries.ErrorQueues.Integrations
 {

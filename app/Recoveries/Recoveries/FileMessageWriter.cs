@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using Common.Logging;
+using Recoveries.Core;
 
 namespace Recoveries
 {
