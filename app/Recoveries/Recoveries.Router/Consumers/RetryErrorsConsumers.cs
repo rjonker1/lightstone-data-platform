@@ -5,7 +5,7 @@ using Recoveries.ErrorQueues.Messages;
 
 namespace Recoveries.Router.Consumers
 {
-    public class RetryErrorsOnAllQueuesConsumer : AbstractConsumer<RetryErrorsOnAllQueuesMessage>
+    public class RetryErrorsOnAllQueuesConsumer: AbstractConsumer<RetryErrorsOnAllQueuesMessage>
     {
         private static readonly ILog Log = LogManager.GetLogger<RetryErrorsOnAllQueuesConsumer>();
 

@@ -1,4 +1,6 @@
-﻿using Topshelf;
+﻿using Castle.Windsor;
+using Castle.Windsor.Installer;
+using Topshelf;
 
 namespace Recoveries.Router
 {
@@ -6,11 +8,12 @@ namespace Recoveries.Router
     {
         private static void Main(string[] args)
         {
+            var container = new WindsorContainer().Install(FromAssembly.This());
             HostFactory.Run(runner =>
             {
                 runner.Service<IRecoveryService>(service =>
                 {
-                    service.ConstructUsing(name => new RecoveryService());
+                    service.ConstructUsing(name => container.Resolve<IRecoveryService>());
                     service.WhenStarted(tc => tc.Start());
                     service.WhenStopped(tc => tc.Stop());
                 });
