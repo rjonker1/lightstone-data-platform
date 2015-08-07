@@ -1,5 +1,7 @@
-﻿using Common.Logging;
+﻿using Castle.Windsor;
+using Common.Logging;
 using EasyNetQ;
+using EasyNetQ.Consumer;
 using EasyNetQ.Topology;
 using Recoveries.Core;
 using Recoveries.ErrorQueues;
@@ -21,13 +23,15 @@ namespace Recoveries.Router
         private readonly IAdvancedBus _bus;
         private readonly IQueue _queue;
         private readonly IExchange _exchange;
+        private readonly IWindsorContainer _container;
 
         private readonly string _queueName = AppSettingsReader.GetString("dataplatform/queues/recoveries/receiver", () => "Dataplatform.DataProvider.Recoveries.Reciever");
         private readonly string _exchangeName = AppSettingsReader.GetString("dataplatform/queues/recoveries/exchange", () => "Dataplatform.DataProvider.Recoveries.Reciever");
 
-        public RecoveryService(IAdvancedBus bus)
+        public RecoveryService(IAdvancedBus bus, IWindsorContainer container)
         {
             _bus = bus;
+            _container = container;
             _queue = _bus.QueueDeclare(_queueName);
             _exchange = _bus.ExchangeDeclare(_exchangeName, ExchangeType.Fanout);
         }
@@ -62,10 +66,14 @@ namespace Recoveries.Router
 
         private void BindConsumers()
         {
+            //_bus.Consume(_queue,
+            //    consumers => consumers
+            //        .Add<RetryErrorsOnAllQueuesMessage>((message, info) => new RetryErrorsOnAllQueuesConsumer())
+            //        .Add<RetryErrorsOnAQueueMessage>((message, info) => new RetryErrorsOnAQueuesConsumer()));
             _bus.Consume(_queue,
                 consumers => consumers
-                    .Add<RetryErrorsOnAllQueuesMessage>((message, info) => new RetryErrorsOnAllQueuesConsumer())
-                    .Add<RetryErrorsOnAQueueMessage>((message, info) => new RetryErrorsOnAQueuesConsumer()));
+                    .Add<RetryErrorsOnAllQueuesMessage>((message, info) => new ConsumerFactory<RetryErrorsOnAllQueuesMessage>(message, _container))
+                    .Add<RetryErrorsOnAQueueMessage>((message, info) => new ConsumerFactory<RetryErrorsOnAQueueMessage>(message, _container)));
         }
 
         public void Stop()

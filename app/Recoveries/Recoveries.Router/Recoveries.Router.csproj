@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Configuration\RecoveryQueuesConfigurations.cs" />
     <Compile Include="Consumers\AbstractConsumer.cs" />
+    <Compile Include="Consumers\ConsumerFactory.cs" />
     <Compile Include="Consumers\RetryErrorsConsumers.cs" />
     <Compile Include="ErrorMessageRecoveryHandler.cs" />
     <Compile Include="Installers\BusInstaller.cs" />

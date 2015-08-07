@@ -1,8 +1,9 @@
-﻿using Recoveries.Core;
-using Recoveries.Domain;
+﻿using System.Runtime.Serialization;
+using Recoveries.Core;
 
 namespace Recoveries.ErrorQueues.Integrations
 {
+    [DataContract]
     public class IntegrationReceiverConfiguration: IErrorQueueConfiguration
     {
         public IntegrationReceiverConfiguration()
@@ -19,6 +20,8 @@ namespace Recoveries.ErrorQueues.Integrations
                     () => @"D:\DataplatformRecoveries\Integrations\Receiver"),
                 AppSettingsReader.GetString("errors/dataplatform/integration/receiver/errorQueueName", () => "DataPlatform.Integration.Receiver.Error"));
         }
+        
+        [DataMember]
         public IQueueOptions Options { get; private set; }
     }
 }

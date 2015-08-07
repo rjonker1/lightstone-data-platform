@@ -1,9 +1,10 @@
-﻿using Recoveries.Core;
-using Recoveries.Domain;
+﻿using System.Runtime.Serialization;
+using Recoveries.Core;
 
 namespace Recoveries.ErrorQueues.DataProviders
 {
-    public sealed class BillingRecoveryConfiguration : IErrorQueueConfiguration
+    [DataContract]
+    public class BillingRecoveryConfiguration : IErrorQueueConfiguration
     {
         public BillingRecoveryConfiguration()
         {
@@ -20,6 +21,7 @@ namespace Recoveries.ErrorQueues.DataProviders
                 AppSettingsReader.GetString("errors/dataplatform/billing/transactions/errorQueueName", () => "DataPlatform.Transactions.Billing.Error"));
         }
 
+        [DataMember]
         public IQueueOptions Options { get; private set; }
     }
 }
