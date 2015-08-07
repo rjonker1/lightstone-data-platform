@@ -10,8 +10,6 @@ using Hangfire.Storage;
 using Nancy;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Messages.Publishable;
-
-using CronExpressionDescriptor;
 using Workflow.BuildingBlocks;
 
 namespace Billing.Scheduler.Modules

@@ -25,7 +25,7 @@ window.userGridActionEvents = {
         $('#detail-table-header').text('Users Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/StageBilling/CustomerClient/' + row.id + '/Users',
+            url: '/StageBilling/CustomerClient/' + row.id + '/Users?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
             cache: false,
             search: true,
             showRefresh: true,
@@ -88,7 +88,7 @@ window.userTransactionEditActionEvents = {
         console.log(data);
 
         $.ajax({
-            url: apiEndpoint + '/StageBilling/User/Transactions',
+            url: apiEndpoint + '/StageBilling/User/Transactions?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
             type: 'POST',
             data: data,
             contentType: 'application/json; charset=utf-8',
@@ -185,7 +185,7 @@ window.packageGridActionEvents = {
         $('#detail-table-header').text('Packages Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/StageBilling/CustomerClient/' + row.id + '/Packages',
+            url: '/StageBilling/CustomerClient/' + row.id + '/Packages?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
             //responseHandler: packageResponseHandler,
             cache: false,
             search: true,
@@ -311,7 +311,7 @@ function invoiceFormatter(value, row, index) {
 window.invoiceActionEvents = {
     'click .invoice-view': function (e, value, row, index) {
 
-        $.get('/StageBilling/Billable/Transactions/' + row.id, function (response) {
+        $.get('/StageBilling/Billable/Transactions/' + row.id + '?startDate=' + startDateFilter + '&endDate=' + endDateFilter, function (response) {
 
             var packages = '';
 
