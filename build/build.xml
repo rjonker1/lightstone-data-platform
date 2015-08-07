@@ -616,40 +616,23 @@
         <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
       </dependencies>
     </nuget>
-    <!--
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Monitoring</name>
-      <folder>app/Monitoring/Monitoring</folder>
-      <author>CustomApp</author>
-      <description>Monitoring</description>
-      <includes>
-        <include pattern="Lightstone.DataPlatform.Monitoring.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Monitoring.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Lightstone.DataPlatform.Shared" />
-      </dependencies>
-    </nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Monitoring.Consumer.Lace</name>
-			<folder>app/Monitoring/Monitoring.Consumer.Lace</folder>
-			<author>CustomApp</author>
-			<description>Monitoring.Consumer.Lace</description>
-			<includes>
-        <include pattern="Lightstone.DataPlatform.Monitoring.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Monitoring.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.pdb" to="lib\net45"/>
-				<include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll" to="lib\net45"/>
-				<include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-        <dependency id="EventStore.Client" version="2.0.2" />
-				<dependency id="Lightstone.DataPlatform.Shared" />
-				<dependency id="Lightstone.DataPlatform.EventTracking.Domain.Persistence" />
-			</dependencies>
-		</nuget>-->
+    
 		<!-- MONITORING END -->
+
+    <!--RECOVERIES START -->
+    
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Recoveries.Core</name>
+      <folder>app/Recoveries/Recoveries.Core</folder>
+      <author>CustomApp</author>
+      <description>Recover queue messages sent to the error queues</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Recoveries.Core.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Recoveries.Core.dll" to="lib\net45"/>
+      </includes>
+    </nuget>
+
+    <!--RECOVERIES END -->
 
 
     <!-- SHARED START -->
