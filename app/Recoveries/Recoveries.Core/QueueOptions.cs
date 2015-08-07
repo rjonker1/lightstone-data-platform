@@ -1,4 +1,4 @@
-﻿namespace Recoveries
+﻿namespace Recoveries.Core
 {
     public interface IQueueOptions
     {

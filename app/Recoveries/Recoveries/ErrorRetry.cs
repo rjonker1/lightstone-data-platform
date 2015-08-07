@@ -4,6 +4,7 @@ using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.SystemMessages;
 using RabbitMQ.Client.Exceptions;
+using Recoveries.Core;
 
 namespace Recoveries
 {

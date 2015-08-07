@@ -2,6 +2,7 @@
 using System.IO;
 using Common.Logging;
 using EasyNetQ;
+using Recoveries.Core;
 using Recoveries.Domain;
 
 namespace Recoveries

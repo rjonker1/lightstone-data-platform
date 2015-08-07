@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Recoveries.Core;
 
 namespace Recoveries.ErrorQueues.Messages
 {
@@ -15,9 +16,9 @@ namespace Recoveries.ErrorQueues.Messages
     }
 
     [DataContract]
-    public class RetryErrorsOnQueueMessage
+    public class RetryErrorsOnAQueueMessage
     {
-        public RetryErrorsOnQueueMessage(IErrorQueueConfiguration configuration)
+        public RetryErrorsOnAQueueMessage(IErrorQueueConfiguration configuration)
         {
             Configuration = configuration;
         }

@@ -33,7 +33,6 @@ namespace Workflow.Lace.Messages.Shared
             try
             {
                 _bus.Publish<T>(_exchange, "", true, false, new Message<T>(message));
-                // _bus.Send("DataPlatform.DataProvider.Sender", message);
             }
             catch (Exception ex)
             {

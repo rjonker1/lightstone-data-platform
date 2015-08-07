@@ -66,12 +66,15 @@
     <Compile Include="DataProviders\BillingRecoveryConfiguration.cs" />
     <Compile Include="DataProviders\WorkflowSenderRecoveryConfiguration.cs" />
     <Compile Include="DataProviders\WorkflowReceiverRecoveryConfiguration.cs" />
-    <Compile Include="IErrorQueueConfiguration.cs" />
     <Compile Include="Integrations\IntegrationReceiverConfiguration.cs" />
     <Compile Include="Integrations\IntegrationSenderConfiguration.cs" />
     <Compile Include="Messages\RetryErrorMessages.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Recoveries.Core\Recoveries.Core.csproj">
+      <Project>{ab586fc6-b803-4024-b864-5e567bd0b960}</Project>
+      <Name>Recoveries.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Recoveries\Recoveries.csproj">
       <Project>{3f11c22c-2cbb-466b-bfee-7f530b267038}</Project>
       <Name>Recoveries</Name>

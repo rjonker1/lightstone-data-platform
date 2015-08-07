@@ -3,6 +3,7 @@ using System.Text;
 using Common.Logging;
 using EasyNetQ;
 using RabbitMQ.Client.Exceptions;
+using Recoveries.Core;
 
 namespace Recoveries
 {

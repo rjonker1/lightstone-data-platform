@@ -1,8 +1,11 @@
-﻿using Recoveries.Domain;
+﻿using System.Runtime.Serialization;
+using Recoveries.Core;
+using Recoveries.Domain;
 
 namespace Recoveries.ErrorQueues.DataProviders
 {
-    public sealed class WorkflowReceiverRecoveryConfiguration : IErrorQueueConfiguration
+    [DataContract]
+    public class WorkflowReceiverRecoveryConfiguration : IErrorQueueConfiguration
     {
         public WorkflowReceiverRecoveryConfiguration()
         {
@@ -19,6 +22,7 @@ namespace Recoveries.ErrorQueues.DataProviders
                 AppSettingsReader.GetString("errors/dataplatform/workflow/receiver/errorQueueName", () => "DataPlatform.DataProvider.Receiver.Error"));
         }
 
+        [DataMember]
         public IQueueOptions Options { get; private set; }
     }
 }

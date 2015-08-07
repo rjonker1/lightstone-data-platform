@@ -1,16 +1,17 @@
 ﻿namespace Recoveries.Router.Consumers
 {
-    public interface IConsumeMessage
+
+    public interface IConsumeMessages
     {
         void Consume(object message);
     }
 
-    public interface IConsumeMessage<in TMessage> : IConsumeMessage where TMessage : class
+    public interface IConsumeMessages<in TMessage> : IConsumeMessages where TMessage : class
     {
         void Consume(TMessage message);
     }
 
-    public abstract class AbstractConsumer<TMessage> : IConsumeMessage<TMessage> where TMessage : class
+    public abstract class AbstractConsumer<TMessage> : IConsumeMessages<TMessage> where TMessage : class
     {
         public abstract void Consume(TMessage message);
 

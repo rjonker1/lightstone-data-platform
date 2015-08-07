@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Common.Logging;
+using Recoveries.Core;
 using Recoveries.Domain;
 
 namespace Recoveries

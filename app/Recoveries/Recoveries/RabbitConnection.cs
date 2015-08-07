@@ -1,5 +1,6 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
+using Recoveries.Core;
 
 namespace Recoveries
 {

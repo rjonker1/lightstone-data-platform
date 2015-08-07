@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Common.Logging;
 using EasyNetQ;
+using Recoveries.Core;
 using Recoveries.ErrorQueues;
 
 namespace Recoveries.Router

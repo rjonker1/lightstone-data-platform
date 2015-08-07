@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Common.Logging;
 using RabbitMQ.Client.Exceptions;
+using Recoveries.Core;
 
 namespace Recoveries
 {

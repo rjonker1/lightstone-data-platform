@@ -1,7 +1,9 @@
-﻿using Recoveries.Domain;
+﻿using System.Runtime.Serialization;
+using Recoveries.Core;
 
 namespace Recoveries.ErrorQueues.Integrations
 {
+    [DataContract]
     public class IntegrationSenderConfiguration: IErrorQueueConfiguration
     {
         public IntegrationSenderConfiguration()
@@ -18,6 +20,7 @@ namespace Recoveries.ErrorQueues.Integrations
                     () => @"D:\DataplatformRecoveries\Integrations\Sender"),
                 AppSettingsReader.GetString("errors/dataplatform/integration/sender/errorQueueName", () => "DataPlatform.Integration.Sender.Error"));
         }
+        [DataMember]
         public IQueueOptions Options { get; private set; }
     }
 }

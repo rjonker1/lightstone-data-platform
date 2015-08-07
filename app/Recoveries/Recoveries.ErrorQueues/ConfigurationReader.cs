@@ -1,4 +1,5 @@
-﻿using Recoveries.ErrorQueues.DataProviders;
+﻿using Recoveries.Core;
+using Recoveries.ErrorQueues.DataProviders;
 using Recoveries.ErrorQueues.Integrations;
 
 namespace Recoveries.ErrorQueues

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace Recoveries.Domain
+namespace Recoveries.Core
 {
     public sealed class AppSettingsReader
     {
