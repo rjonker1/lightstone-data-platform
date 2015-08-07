@@ -27,6 +27,9 @@ namespace Billing.Api.Modules
             _finalBillingDBRepository = finalBillingDBRepository;
             finalBillingRepository = finalBillingCacheProvider.CacheClient.GetAll();
 
+            var endDateFilter = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
+            var startDateFilter = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
+
             Before += async (ctx, ct) =>
             {
                 this.Info(() => "Before Hook - FinalBilling");
@@ -38,6 +41,12 @@ namespace Billing.Api.Modules
 
             Get["/FinalBilling/"] = _ =>
             {
+                var finalBillingStartDateFilter = Request.Query["startDate"];
+                var finalBillingEndDateFilter = Request.Query["endDate"];
+
+                if (finalBillingStartDateFilter.HasValue) endDateFilter = finalBillingStartDateFilter;
+                if (finalBillingEndDateFilter.HasValue) startDateFilter = finalBillingEndDateFilter;
+
                 var customerClientList = new List<FinalBillingDto>();
 
                 foreach (var transaction in finalBillingRepository)
@@ -45,7 +54,8 @@ namespace Billing.Api.Modules
                     var customerClient = new FinalBillingDto();
                     var userList = new List<User>();
 
-                    var customerTransactions = finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId).DistinctBy(x => x.TransactionId);
+                    var customerTransactions = finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
@@ -109,10 +119,17 @@ namespace Billing.Api.Modules
 
             Get["/FinalBilling/CustomerClient/{searchId}/Users"] = param =>
             {
+                var finalBillingStartDateFilter = Request.Query["startDate"];
+                var finalBillingEndDateFilter = Request.Query["endDate"];
+
+                if (finalBillingStartDateFilter.HasValue) endDateFilter = finalBillingStartDateFilter;
+                if (finalBillingEndDateFilter.HasValue) startDateFilter = finalBillingEndDateFilter;
+
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
 
-                var finalBillingRepo = finalBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
+                var finalBillingRepo = finalBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId)
+                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in finalBillingRepo)
                 {
@@ -154,10 +171,17 @@ namespace Billing.Api.Modules
 
             Get["/FinalBilling/CustomerClient/{searchId}/Packages"] = param =>
             {
+                var finalBillingStartDateFilter = Request.Query["startDate"];
+                var finalBillingEndDateFilter = Request.Query["endDate"];
+
+                if (finalBillingStartDateFilter.HasValue) endDateFilter = finalBillingStartDateFilter;
+                if (finalBillingEndDateFilter.HasValue) startDateFilter = finalBillingEndDateFilter;
+
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
-                var finalBillingRepo = finalBillingRepository.Where(x => x.CustomerId == searchId || x.ClientId == searchId).DistinctBy(x => x.TransactionId);
+                var finalBillingRepo = finalBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId)
+                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
 
                 foreach (var transaction in finalBillingRepo)
                 {

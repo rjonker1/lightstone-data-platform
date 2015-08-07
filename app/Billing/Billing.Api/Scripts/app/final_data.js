@@ -25,7 +25,7 @@ window.userGridActionEvents = {
         $('#detail-table-header').text('Users Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/FinalBilling/CustomerClient/' + row.id + '/Users',
+            url: '/FinalBilling/CustomerClient/' + row.id + '/Users?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
             cache: false,
             search: true,
             showRefresh: true,
@@ -89,7 +89,7 @@ window.packageGridActionEvents = {
         $('#detail-table-header').text('Packages Detail For : ' + row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/FinalBilling/CustomerClient/' + row.id + '/Packages',
+            url: '/FinalBilling/CustomerClient/' + row.id + '/Packages?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
             //responseHandler: packageResponseHandler,
             cache: false,
             search: true,
@@ -147,7 +147,7 @@ function invoiceFormatter(value, row, index) {
 window.invoiceActionEvents = {
     'click .invoice-view': function (e, value, row, index) {
 
-        $.get('/FinalBilling/CustomerClient/' + row.id + '/Packages', function (response) {
+        $.get('/FinalBilling/CustomerClient/' + row.id + '/Packages?startDate=' + startDateFilter + '&endDate=' + endDateFilter, function (response) {
 
             var packages = '';
 
