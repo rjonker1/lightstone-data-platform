@@ -713,7 +713,7 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\PageHeader.cshtml" />
     <Content Include="Views\Shared\Sidebar.cshtml" />
-    <Content Include="Views\PreBIlling\Index.cshtml" />
+    <Content Include="Views\PreBilling\Index.cshtml" />
     <Content Include="Views\MI\Index.cshtml" />
     <Content Include="Views\AdminBilling\Index.cshtml" />
     <Content Include="Views\StageBilling\Index.cshtml" />
