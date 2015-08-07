@@ -101,6 +101,7 @@ namespace Billing.Scheduler.Modules
                 var cronExpression = "" + dt.Minute + " " + dt.Hour + " * * *";
 
                 this.Info(() => "Attempting to add schedules");
+
                 try
                 {
                     this.Info(() => "Adding StageBilling Schedule");
