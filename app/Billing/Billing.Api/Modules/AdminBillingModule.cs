@@ -1,14 +1,14 @@
-﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
+﻿using System;
+using DataPlatform.Shared.ExceptionHandling;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Nancy;
-using Nancy.Extensions;
 using Nancy.Responses.Negotiation;
 using Workflow.Billing.Domain.Entities;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Messages.Publishable;
-using Workflow.Billing.Repository;
 
 
 namespace Billing.Api.Modules
@@ -29,11 +29,19 @@ namespace Billing.Api.Modules
 
             Post["/Admin/Replay/BillingTransactions"] = _ =>
             {
-                foreach (var transaction in transactions)
+                try
                 {
-                    var message = new InvoiceTransactionCreated(transaction.Id);
-                    advancedBus.SendDynamic(message);
+                    foreach (var transaction in transactions)
+                    {
+                        var message = new InvoiceTransactionCreated(transaction.Id);
+                        advancedBus.SendDynamic(message);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    throw new LightstoneAutoException(ex.Message);
+                }
+
                 return Response.AsJson(new { data = "Success" });
             };
 
@@ -41,19 +49,26 @@ namespace Billing.Api.Modules
             {
                 string billingCycle = param.cycle;
 
-                switch (billingCycle)
+                try
                 {
-                    case "preBilling":
-                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(PreBilling), Command = BillingCacheCommand.Flush });
-                        break;
+                    switch (billingCycle)
+                    {
+                        case "preBilling":
+                            advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(PreBilling), Command = BillingCacheCommand.Flush });
+                            break;
 
-                    case "stageBilling":
-                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(StageBilling), Command = BillingCacheCommand.Flush });
-                        break;
+                        case "stageBilling":
+                            advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(StageBilling), Command = BillingCacheCommand.Flush });
+                            break;
 
-                    case "finalBilling":
-                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(FinalBilling), Command = BillingCacheCommand.Flush });
-                        break;
+                        case "finalBilling":
+                            advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(FinalBilling), Command = BillingCacheCommand.Flush });
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new LightstoneAutoException(ex.Message);
                 }
 
                 return Response.AsJson(new { data = "Success" });
@@ -63,19 +78,26 @@ namespace Billing.Api.Modules
             {
                 string billingCycle = param.cycle;
 
-                switch (billingCycle)
+                try
                 {
-                    case "preBilling":
-                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(PreBilling), Command = BillingCacheCommand.Reload });
-                        break;
+                    switch (billingCycle)
+                    {
+                        case "preBilling":
+                            advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(PreBilling), Command = BillingCacheCommand.Reload });
+                            break;
 
-                    case "stageBilling":
-                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(StageBilling), Command = BillingCacheCommand.Reload });
-                        break;
+                        case "stageBilling":
+                            advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(StageBilling), Command = BillingCacheCommand.Reload });
+                            break;
 
-                    case "finalBilling":
-                        advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(FinalBilling), Command = BillingCacheCommand.Reload });
-                        break;
+                        case "finalBilling":
+                            advancedBus.SendDynamic(new BillCacheMessage { BillingType = typeof(FinalBilling), Command = BillingCacheCommand.Reload });
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new LightstoneAutoException(ex.Message);
                 }
 
                 return Response.AsJson(new { data = "Success" });
