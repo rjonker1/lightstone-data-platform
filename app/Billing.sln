@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Unit.Tests", "Billi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Cache.Consumer", "Billing\Workflow.Billing.Cache.Consumer\Workflow.Billing.Cache.Consumer.csproj", "{80D06F1D-1B0E-4E0D-8BF2-153CCA5076E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.BillingRun.Consumer", "Billing\Workflow.Billing.BillRun.Consumer\Workflow.Billing.BillingRun.Consumer.csproj", "{634E2D98-3275-4AB4-808C-24B1A00491F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,6 +221,16 @@ Global
 		{80D06F1D-1B0E-4E0D-8BF2-153CCA5076E6}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{80D06F1D-1B0E-4E0D-8BF2-153CCA5076E6}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{80D06F1D-1B0E-4E0D-8BF2-153CCA5076E6}.Test|Any CPU.Build.0 = Release|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,5 +250,6 @@ Global
 		{1F5E930A-B926-4E97-B512-6A9508293EA1} = {0CD1CFE3-2C52-4038-88BB-60E528A6C77D}
 		{1AC6A459-024B-4465-B2FC-0C9B7494FF91} = {89F5585A-CB90-4899-8E1D-DC1CDDF45F4A}
 		{80D06F1D-1B0E-4E0D-8BF2-153CCA5076E6} = {44768077-851B-45EB-8AD8-0B5FE98E7B79}
+		{634E2D98-3275-4AB4-808C-24B1A00491F2} = {44768077-851B-45EB-8AD8-0B5FE98E7B79}
 	EndGlobalSection
 EndGlobal
