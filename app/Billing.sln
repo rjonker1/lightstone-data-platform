@@ -50,7 +50,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Unit.Tests", "Billi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Cache.Consumer", "Billing\Workflow.Billing.Cache.Consumer\Workflow.Billing.Cache.Consumer.csproj", "{80D06F1D-1B0E-4E0D-8BF2-153CCA5076E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.BillingRun.Consumer", "Billing\Workflow.Billing.BillRun.Consumer\Workflow.Billing.BillingRun.Consumer.csproj", "{634E2D98-3275-4AB4-808C-24B1A00491F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.BillingRun.Consumer", "Billing\Workflow.Billing.BillingRun.Consumer\Workflow.Billing.BillingRun.Consumer.csproj", "{634E2D98-3275-4AB4-808C-24B1A00491F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
