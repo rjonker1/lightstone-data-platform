@@ -15,7 +15,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
 
-        private readonly IPublishReportQueue<BillingReport> _report; 
+        private readonly IPublishReportQueue<BillingReport> _report;
 
         public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IPublishReportQueue<BillingReport> report)
         {
@@ -34,12 +34,22 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
             this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
 
-            foreach (var stageBilling in _stageBillingRepository)
+            try
             {
-                var finalEntity = Mapper.Map(stageBilling, new FinalBilling());
+                // Archive and clean Final Billing for new month
+                foreach (var archiveRecord in _finalBillingRepository)
+                {
+                    _finalBillingRepository.Delete(archiveRecord);
+                }
 
-                if (!_finalBillingRepository.Any(x => x.StageBillingId == finalEntity.StageBillingId))
+                foreach (var record in _stageBillingRepository)
+                {
+                    if (record.Created <= previousBillMonth) continue;
+
+                    var finalEntity = Mapper.Map(record, new FinalBilling());
+
                     _finalBillingRepository.SaveOrUpdate(finalEntity);
+                }
 
                 foreach (var transaction in _finalBillingRepository)
                 {
@@ -47,9 +57,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                     if (transaction.CustomerId != new Guid())
                     {
+                        this.Info(() => "FinalBilling initiated for Customer: {0}".FormatWith(transaction.CustomerName));
                         var billedCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable
-                                                                && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
-                                                    .Select(x => x.TransactionId).Distinct().Count();
+                                                                                                 && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
+                            .Select(x => x.TransactionId).Distinct().Count();
 
                         var packagesList =
                             _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
@@ -89,10 +100,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         var invoice = new ReportInvoice
                         {
                             DOCTYPE = "INV",
-                            INVNUMBER = "",
+                            INVNUMBER = transaction.RequestId.ToString(),
                             ACCOUNTID = transaction.AccountNumber,
                             DESCRIPTION = "",
-                            INVDATE = "",
+                            INVDATE = DateTime.UtcNow.ToString(),
                             TAXINCLUSIVE = "",
                             ORDERNUM = "",
                             CDESCRIPTION = "",
@@ -123,6 +134,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         if (csvReportIndex < 0) csvReportList.Add(csvReportData);
 
                         #endregion
+
+                        this.Info(() => "FinalBilling completed for Customer: {0}".FormatWith(transaction.CustomerName));
                     }
                     #endregion
 
@@ -130,10 +143,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                     if (transaction.ClientId != new Guid())
                     {
-
+                        this.Info(() => "FinalBilling initiated for Client: {0}".FormatWith(transaction.ClientName));
                         var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable
-                                                                && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
-                                                    .Select(x => x.TransactionId).Distinct().Count();
+                                                                                               && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
+                            .Select(x => x.TransactionId).Distinct().Count();
 
                         var packagesList = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId)
                             .Select(x => new ReportPackage
@@ -206,10 +219,15 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         if (csvReportIndex < 0) csvReportList.Add(csvReportData);
 
                         #endregion
+
+                        this.Info(() => "FinalBilling completed for Client: {0}".FormatWith(transaction.ClientName));
                     }
                     #endregion
                 }
-
+            }
+            catch (Exception ex)
+            {
+                this.Error(() => ex.Message);
             }
 
             this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));

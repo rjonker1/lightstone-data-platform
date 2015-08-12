@@ -1,8 +1,11 @@
-﻿using Castle.Windsor;
+﻿using System;
+using Castle.Windsor;
 using Common.Logging;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
 using Workflow.Billing.Consumers;
+using Workflow.Billing.Consumers.ConsumerTypes;
 using Workflow.Billing.Consumers.Installers;
 using Workflow.Billing.Installers;
 
@@ -22,15 +25,24 @@ namespace Workflow.Billing.BillingRun.Consumer
                 new WindsorInstaller(),
                 new CacheProviderInstaller(),
                 new RepositoryInstaller(),
+                new AutoMapperInstaller(),
                 new ConsumerInstaller(),
-                new BusInstaller());
+                new BusInstaller(),
+                new PublishReportQueueInstaller(),
+                new PivotInstaller());
 
-            advancedBus = container.Resolve<IAdvancedBus>();
-            var cache = advancedBus.QueueDeclare("DataPlatform.BillingRun");
+            try
+            {
+                advancedBus = container.Resolve<IAdvancedBus>();
+                var q = advancedBus.QueueDeclare("DataPlatform.Transactions.Billing");
 
-            advancedBus.Consume(cache, x => x
-                .Add<BillingMessage>((message, info) => new TransactionConsumer<BillingMessage>(message, container)));
-
+                advancedBus.Consume(q, x => x
+                    .Add<BillingMessage>((message, info) => new TransactionConsumer<BillingMessage>(message, container)));
+            }
+            catch (Exception e)
+            {
+                this.Error(() => e.Message);
+            }
             _log.DebugFormat("Billing run service started");
         }
 

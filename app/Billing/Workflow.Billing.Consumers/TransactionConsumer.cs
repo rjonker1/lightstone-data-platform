@@ -1,4 +1,6 @@
-﻿using Castle.Windsor;
+﻿using System;
+using Castle.Windsor;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
