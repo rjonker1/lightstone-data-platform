@@ -6,7 +6,7 @@ namespace PackageBuilder.Domain.Requests.Contracts.Requests
     {
         IAmScanDataRequestField ScanData { get; }
         IAmRegistrationCodeRequestField RegistrationCode { get; }
-        IAmUsernameRequestField Username { get; }
+        IAmUserNameRequestField Username { get; }
         IAmUserIdRequestField UserId { get; }
     }
 }

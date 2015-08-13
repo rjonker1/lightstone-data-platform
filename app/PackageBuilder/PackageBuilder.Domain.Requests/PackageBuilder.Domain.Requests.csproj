@@ -55,6 +55,8 @@
     <Compile Include="Fields\CompanyRegistrationNumberRequestField.cs" />
     <Compile Include="Fields\CompanyVatNumberRequestField.cs" />
     <Compile Include="Fields\EngineNumberRequestField.cs" />
+    <Compile Include="Fields\RegistrationCodeRequestField.cs" />
+    <Compile Include="Fields\ScanDataRequestField.cs" />
     <Compile Include="Fields\SurnameRequestField.cs" />
     <Compile Include="Fields\FirstNameRequestField.cs" />
     <Compile Include="Fields\IdentityNumberRequestField.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Fields\RequestReferenceRequestField.cs" />
     <Compile Include="Fields\TrackingNumberRequestField.cs" />
     <Compile Include="Fields\UserIdRequestField.cs" />
+    <Compile Include="Fields\UsernameRequestField.cs" />
     <Compile Include="Fields\VinNumberRequestField.cs" />
     <Compile Include="Fields\YearRequestField.cs" />
     <Compile Include="IvidStandardRequest.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RgtRequest.cs" />
     <Compile Include="RgtVinRequest.cs" />
+    <Compile Include="SignioDriversLicenseRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PackageBuilder.Domain.Requests.Contracts\PackageBuilder.Domain.Requests.Contracts.csproj">
