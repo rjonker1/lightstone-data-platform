@@ -96,6 +96,26 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+        public static DataProviderFieldItemDto FirstName
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("FirstName", "FirstName", "Definition")
+                    .With(((int)RequestFieldType.FirstName).ToString())
+                    .Build();
+            }
+        }
+        public static DataProviderFieldItemDto Surname
+        {
+            get
+            {
+                return new DataFieldDtoBuilder()
+                    .With("Surname", "Surname", "Definition")
+                    .With(((int)RequestFieldType.Surname).ToString())
+                    .Build();
+            }
+        }
         public static DataProviderFieldItemDto CompanyName
         {
             get

@@ -76,6 +76,18 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IAmCompanyVatNumberRequestField, DataField>()
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => (int) RequestFieldType.CompanyVatNumber));
+            Mapper.CreateMap<IAmScanDataRequestField, DataField>()
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.ScanData)); 
+            Mapper.CreateMap<IAmRegistrationCodeRequestField, DataField>()
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.RegistrationCode)); 
+            Mapper.CreateMap<IAmUserNameRequestField, DataField>()
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.UserName)); 
+            Mapper.CreateMap<IAmUserIdRequestField, DataField>()
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.UserId));
 
             Mapper.CreateMap<IDataField, IAmRequestField>()
                 .ConvertUsing<ITypeConverter<IDataField, IAmRequestField>>();

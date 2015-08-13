@@ -33,16 +33,8 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
             _dataProvider.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _dataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.AddDays(1).Date);
             _dataProvider.FieldLevelCostPriceOverride.ShouldBeTrue();
-            _dataProvider.DataFields.Count().ShouldEqual(2);
-            _dataProvider.DataFields.ElementAt(0).Name.ShouldEqual("CarFullname");
-            _dataProvider.DataFields.ElementAt(1).Name.ShouldEqual("SpecificInformation");
-            _dataProvider.DataFields.ElementAt(1).DataFields.Count().ShouldEqual(6);
-            _dataProvider.DataFields.ElementAt(1).DataFields.ElementAt(0).Name.ShouldEqual("Colour");
-            _dataProvider.DataFields.ElementAt(1).DataFields.ElementAt(1).Name.ShouldEqual("EngineNumber");
-            _dataProvider.DataFields.ElementAt(1).DataFields.ElementAt(2).Name.ShouldEqual("LicenseNumber");
-            _dataProvider.DataFields.ElementAt(1).DataFields.ElementAt(3).Name.ShouldEqual("Odometer");
-            _dataProvider.DataFields.ElementAt(1).DataFields.ElementAt(4).Name.ShouldEqual("RegistrationNumber");
-            _dataProvider.DataFields.ElementAt(1).DataFields.ElementAt(5).Name.ShouldEqual("VinNumber");
+            _dataProvider.RequestFields.Count().ShouldEqual(6);
+            _dataProvider.DataFields.Count().ShouldEqual(32);
         }
     }
 }

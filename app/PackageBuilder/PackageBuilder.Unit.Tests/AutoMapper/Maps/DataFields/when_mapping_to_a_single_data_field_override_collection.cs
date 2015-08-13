@@ -22,7 +22,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataFields
         public void should_map_all_properties()
         {
             _dataFieldOverrides.Count().ShouldEqual(4);
-            _dataFieldOverrides.First(x => x.Name == "SpecificInformation").DataFieldOverrides.Count().ShouldEqual(6);
+            _dataFieldOverrides.First(x => x.Name == "SpecificInformation").DataFieldOverrides.Count().ShouldEqual(7);
         }
     }
 }

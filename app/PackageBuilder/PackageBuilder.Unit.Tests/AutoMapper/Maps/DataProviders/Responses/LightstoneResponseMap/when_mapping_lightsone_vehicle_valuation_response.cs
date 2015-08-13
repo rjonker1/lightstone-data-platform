@@ -52,25 +52,25 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
             #endregion
 
             dataFields.FirstOrDefault(x => x.Name == "EstimatedValue").Name.ShouldEqual("EstimatedValue");
-            dataFields.FirstOrDefault(x => x.Name == "EstimatedValue").Type.ShouldEqual(typeof(List<IRespondWithEstimatedValueModel>).ToString());
+            dataFields.FirstOrDefault(x => x.Name == "EstimatedValue").Type.ShouldEqual(typeof(IRespondWithEstimatedValueModel[]).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "LastFiveSales").Name.ShouldEqual("LastFiveSales");
-            dataFields.FirstOrDefault(x => x.Name == "LastFiveSales").Type.ShouldEqual(typeof(List<IRespondWithSaleModel>).ToString());
+            dataFields.FirstOrDefault(x => x.Name == "LastFiveSales").Type.ShouldEqual(typeof(IRespondWithSaleModel[]).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Prices").Name.ShouldEqual("Prices");
-            dataFields.FirstOrDefault(x => x.Name == "Prices").Type.ShouldEqual(typeof(List<IRespondWithPriceModel>).ToString());
+            dataFields.FirstOrDefault(x => x.Name == "Prices").Type.ShouldEqual(typeof(IRespondWithPriceModel[]).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Frequency").Name.ShouldEqual("Frequency");
-            dataFields.FirstOrDefault(x => x.Name == "Frequency").Type.ShouldEqual(typeof(List<IRespondWithFrequencyModel>).ToString());
+            dataFields.FirstOrDefault(x => x.Name == "Frequency").Type.ShouldEqual(typeof(IRespondWithFrequencyModel[]).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "Confidence").Name.ShouldEqual("Confidence");
-            dataFields.FirstOrDefault(x => x.Name == "Confidence").Type.ShouldEqual(typeof(List<IRespondWithConfidenceModel>).ToString());
+            dataFields.FirstOrDefault(x => x.Name == "Confidence").Type.ShouldEqual(typeof(IRespondWithConfidenceModel[]).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "AmortisedValues").Name.ShouldEqual("AmortisedValues");
-            dataFields.FirstOrDefault(x => x.Name == "AmortisedValues").Type.ShouldEqual(typeof(List<IRespondWithAmortisedValueModel>).ToString());
+            dataFields.FirstOrDefault(x => x.Name == "AmortisedValues").Type.ShouldEqual(typeof(IRespondWithAmortisedValueModel[]).ToString());
 
             dataFields.FirstOrDefault(x => x.Name == "ImageGauges").Name.ShouldEqual("ImageGauges");
-            dataFields.FirstOrDefault(x => x.Name == "ImageGauges").Type.ShouldEqual(typeof(List<IRespondWithImageGaugeModel>).ToString());
+            dataFields.FirstOrDefault(x => x.Name == "ImageGauges").Type.ShouldEqual(typeof(IRespondWithImageGaugeModel[]).ToString());
         }
     }
 }

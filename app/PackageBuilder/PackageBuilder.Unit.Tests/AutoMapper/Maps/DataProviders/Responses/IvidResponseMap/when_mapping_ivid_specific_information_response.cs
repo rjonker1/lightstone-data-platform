@@ -27,7 +27,6 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ivid
         [Observation]
         public void should_map_specific_information_data_fields()
         {
-            _dataField.Name.ShouldEqual("SpecificInformation");
             _dataField.Type.ShouldEqual(typeof(VehicleSpecificInformation).ToString());
 
             var dataFields = _dataField.DataFields;

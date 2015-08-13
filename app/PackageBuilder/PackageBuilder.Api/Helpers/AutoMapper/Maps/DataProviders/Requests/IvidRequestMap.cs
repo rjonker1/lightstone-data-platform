@@ -6,6 +6,22 @@ using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Requests;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Requests.Fields;
+using CarIdRequestField = PackageBuilder.Domain.Requests.Fields.CarIdRequestField;
+using CompanyNameRequestField = PackageBuilder.Domain.Requests.Fields.CompanyNameRequestField;
+using CompanyRegistrationNumberRequestField = PackageBuilder.Domain.Requests.Fields.CompanyRegistrationNumberRequestField;
+using CompanyVatNumberRequestField = PackageBuilder.Domain.Requests.Fields.CompanyVatNumberRequestField;
+using FirstNameRequestField = PackageBuilder.Domain.Requests.Fields.FirstNameRequestField;
+using IdentityNumberRequestField = PackageBuilder.Domain.Requests.Fields.IdentityNumberRequestField;
+using IvidStandardRequest = PackageBuilder.Domain.Requests.IvidStandardRequest;
+using LighstonePropertyRequest = PackageBuilder.Domain.Requests.LighstonePropertyRequest;
+using LightstoneAutoRequest = PackageBuilder.Domain.Requests.LightstoneAutoRequest;
+using MakeRequestField = PackageBuilder.Domain.Requests.Fields.MakeRequestField;
+using RegisterNumberRequestField = PackageBuilder.Domain.Requests.Fields.RegisterNumberRequestField;
+using RgtVinRequest = PackageBuilder.Domain.Requests.RgtVinRequest;
+using SurnameRequestField = PackageBuilder.Domain.Requests.Fields.SurnameRequestField;
+using UserIdRequestField = PackageBuilder.Domain.Requests.Fields.UserIdRequestField;
+using VinNumberRequestField = PackageBuilder.Domain.Requests.Fields.VinNumberRequestField;
+using YearRequestField = PackageBuilder.Domain.Requests.Fields.YearRequestField;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
 {
@@ -46,8 +62,16 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                     var request = s.Request ?? new RgtVinRequest(new VinNumberRequestField(""));
                     return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
                 });
+            //Mapper.CreateMap<IProvideDataFromSignioDriversLicenseDecryption, IEnumerable<IDataField>>()
+            //    .ConvertUsing(s => Enumerable.Empty<IDataField>());
             Mapper.CreateMap<IProvideDataFromSignioDriversLicenseDecryption, IEnumerable<IDataField>>()
-                .ConvertUsing(s => Enumerable.Empty<IDataField>());
+                .ConvertUsing(s =>
+                {
+                    var request = s.Request ??
+                                  new SignioDriversLicenseRequest(new ScanDataRequestField(""), new RegistrationCodeRequestField(""),
+                                      new UsernameRequestField(""), new UserIdRequestField(""));
+                    return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
+                });
             Mapper.CreateMap<IProvideDataFromIvid, IEnumerable<IDataField>>()
                 .ConvertUsing(s =>
                 {

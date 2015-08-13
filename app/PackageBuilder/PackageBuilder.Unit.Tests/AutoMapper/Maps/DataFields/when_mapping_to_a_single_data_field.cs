@@ -21,12 +21,12 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataFields
         public void should_map_all_properties()
         {
             _dataField.Name.ShouldEqual("SpecificInformation");
-            _dataField.Label.ShouldEqual("Label");
-            _dataField.Definition.ShouldEqual("Definition");
+            _dataField.Label.ShouldEqual("SpecificInformation Label");
+            _dataField.Definition.ShouldEqual("SpecificInformation Definition");
             _dataField.CostOfSale.ShouldEqual(10);
             _dataField.IsSelected.Value.ShouldBeTrue();
             _dataField.Industries.Count().ShouldEqual(0);
-            _dataField.DataFields.Count().ShouldEqual(6);
+            _dataField.DataFields.Count().ShouldEqual(7);
             //_dataField.Type.ToString().ShouldEqual("System.String");
         }
     }

@@ -90,9 +90,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1416, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1416\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1495, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1495\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1426, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -204,6 +204,7 @@
     <Compile Include="Bases\BaseDataProviderTest.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_ivid_titleholder_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_lightstone_business_company_data_provider.cs" />
+    <Compile Include="Modules\DataProviders\when_updating_the_lightstone_business_director_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_lightStone_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_ivid_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_lightstone_property_data_provider.cs" />
