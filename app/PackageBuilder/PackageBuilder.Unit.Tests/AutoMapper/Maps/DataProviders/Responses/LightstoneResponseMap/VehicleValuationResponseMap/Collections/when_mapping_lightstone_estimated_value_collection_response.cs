@@ -22,12 +22,11 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         [Observation]
         public void should_map_estimated_value_data_fields()
         {
-            _dataField.Name.ShouldEqual("EstimatedValue");
             _dataField.Type.ShouldEqual(typeof(IRespondWithEstimatedValueModel[]).ToString());
 
             var dataFields = _dataField.DataFields;
 
-            dataFields.Count().ShouldEqual(10);
+            dataFields.Count().ShouldEqual(11);
 
             dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedValue").Name.ShouldEqual("RetailEstimatedValue");
             dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedValue").Type.ShouldEqual(typeof(string).ToString());
@@ -58,6 +57,9 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
 
             dataFields.FirstOrDefault(x => x.Name == "TradeConfidenceLevel").Name.ShouldEqual("TradeConfidenceLevel");
             dataFields.FirstOrDefault(x => x.Name == "TradeConfidenceLevel").Type.ShouldEqual(typeof(string).ToString());
+
+            dataFields.FirstOrDefault(x => x.Name == "AuctionEstimate").Name.ShouldEqual("AuctionEstimate");
+            dataFields.FirstOrDefault(x => x.Name == "AuctionEstimate").Type.ShouldEqual(typeof(string).ToString());
         }
     }
 }

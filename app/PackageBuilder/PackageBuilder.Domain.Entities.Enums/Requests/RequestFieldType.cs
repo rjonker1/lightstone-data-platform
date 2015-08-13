@@ -22,6 +22,10 @@
         Surname = 17,
         CompanyName = 18,
         CompanyRegistrationNumber = 19,
-        CompanyVatNumber = 20
+        CompanyVatNumber = 20,
+        ScanData = 21,
+        RegistrationCode = 22,
+        UserName = 23,
+        UserId = 24,
     }
 }

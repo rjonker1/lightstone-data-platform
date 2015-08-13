@@ -22,7 +22,6 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         [Observation]
         public void should_map_sale_data_fields()
         {
-            _dataField.Name.ShouldEqual("LastFiveSales");
             _dataField.Type.ShouldEqual(typeof(IRespondWithSaleModel[]).ToString());
 
             var dataFields = _dataField.DataFields;

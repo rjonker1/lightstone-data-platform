@@ -22,7 +22,6 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         [Observation]
         public void should_map_confidence_data_fields()
         {
-            _dataField.Name.ShouldEqual("Confidence");
             _dataField.Type.ShouldEqual(typeof(IRespondWithConfidenceModel[]).ToString());
 
             var dataFields = _dataField.DataFields;

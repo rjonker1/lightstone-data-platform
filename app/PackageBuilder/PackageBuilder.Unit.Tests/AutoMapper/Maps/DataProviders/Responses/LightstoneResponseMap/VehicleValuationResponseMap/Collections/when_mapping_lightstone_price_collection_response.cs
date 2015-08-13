@@ -22,7 +22,6 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         [Observation]
         public void should_map_price_data_fields()
         {
-            _dataField.Name.ShouldEqual("Prices");
             _dataField.Type.ShouldEqual(typeof(IRespondWithPriceModel[]).ToString());
 
             var dataFields = _dataField.DataFields;

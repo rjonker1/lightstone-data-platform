@@ -22,8 +22,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         [Observation]
         public void should_map_amortised_value_data_fields()
         {
-            _dataField.Name.ShouldEqual("AmortisedValues");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithAmortisedValueModel>).ToString());
+            _dataField.Type.ShouldEqual(typeof(IRespondWithAmortisedValueModel[]).ToString());
 
             var dataFields = _dataField.DataFields;
 

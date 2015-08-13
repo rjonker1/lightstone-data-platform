@@ -23,15 +23,10 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
         {
             _dto.Id.ShouldNotBeNull();;
             _dto.CostOfSale.ShouldEqual(10m);
+            _dto.RequestFieldOverrides.Count().ShouldEqual(6);
             _dto.DataFieldOverrides.Count().ShouldEqual(32);
             _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "CarFullname").Name.ShouldNotBeNull();
-            _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.Count().ShouldEqual(6);
-            _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.FirstOrDefault(x => x.Name == "Colour").ShouldNotBeNull();
-            _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.FirstOrDefault(x => x.Name == "EngineNumber").ShouldNotBeNull();
-            _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.FirstOrDefault(x => x.Name == "LicenseNumber").ShouldNotBeNull();
-            _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.FirstOrDefault(x => x.Name == "Odometer").ShouldNotBeNull();
-            _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.FirstOrDefault(x => x.Name == "RegistrationNumber").ShouldNotBeNull();
-            _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.FirstOrDefault(x => x.Name == "VinNumber").ShouldNotBeNull();
+            _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "SpecificInformation").DataFieldOverrides.Count().ShouldEqual(7);
         }
     }
 }

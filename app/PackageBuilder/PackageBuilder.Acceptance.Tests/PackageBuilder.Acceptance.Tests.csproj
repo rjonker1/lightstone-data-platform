@@ -204,6 +204,7 @@
     <Compile Include="Bases\BaseDataProviderTest.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_ivid_titleholder_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_lightstone_business_company_data_provider.cs" />
+    <Compile Include="Modules\DataProviders\when_updating_the_lightstone_business_director_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_lightStone_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_ivid_data_provider.cs" />
     <Compile Include="Modules\DataProviders\when_updating_the_lightstone_property_data_provider.cs" />

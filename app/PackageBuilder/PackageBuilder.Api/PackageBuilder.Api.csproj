@@ -263,10 +263,6 @@
     <Reference Include="NHibernate.Caches.SysCache">
       <HintPath>..\..\packages\NHibernate.Caches.SysCache.4.0.0.4000\lib\net40\NHibernate.Caches.SysCache.dll</HintPath>
     </Reference>
-    <Reference Include="PackageBuilder.Domain.Entities.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.1224\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
@@ -458,6 +454,10 @@
     <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
       <Project>{15ea3113-e3a9-4baa-8746-a92973e7d3c0}</Project>
       <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
+      <Project>{90905013-b92b-44b2-8099-eb31042ee399}</Project>
+      <Name>PackageBuilder.Domain.Entities.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>

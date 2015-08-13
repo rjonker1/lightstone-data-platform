@@ -22,7 +22,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataFields
         {
             _dataFieldOverride.Name.ShouldEqual("SpecificInformation");
             _dataFieldOverride.CostOfSale.ShouldEqual(10d);
-            _dataFieldOverride.DataFieldOverrides.Count().ShouldEqual(6);
+            _dataFieldOverride.DataFieldOverrides.Count().ShouldEqual(7);
         }
     }
 }

@@ -22,7 +22,6 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         [Observation]
         public void should_map_frequency_data_fields()
         {
-            _dataField.Name.ShouldEqual("Frequency");
             _dataField.Type.ShouldEqual(typeof(IRespondWithFrequencyModel[]).ToString());
 
             var dataFields = _dataField.DataFields;
