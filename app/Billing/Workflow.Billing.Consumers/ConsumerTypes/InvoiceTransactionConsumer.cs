@@ -85,7 +85,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         Id = Guid.NewGuid(),
                         Created = transaction.Date,
                         CreatedBy = user.Username,
-                        BillingId = 101,
+                        //BillingId = 101,
                         //Customer implementation
                         CustomerId = customer.CustomerId,
                         CustomerName = customer.CustomerName,
@@ -96,18 +96,18 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         AccountNumber = transaction.AccountNumber,
                         ContractId = transaction.ContractId,
                         BillingType = (client.ClientId == new Guid()) ? customer.BillingType : client.BillingType,
-                        UserId = transaction.UserId,
-                        Username = user.Username,
-                        TransactionId = transaction.Id,
-                        PackageId = package.PackageId,
-                        PackageName = package.PackageName,
-                        PackageCostPrice = transaction.PackageCostPrice,
-                        PackageRecommendedPrice = transaction.PackageRecommendedPrice,
-                        RequestId = transaction.RequestId,
-                        DataProviderId = product.Id,
-                        DataProviderName = product.DataProviderName,
-                        CostPrice = product.CostPrice,
-                        RecommendedPrice = product.RecommendedPrice
+                        //UserId = transaction.UserId,
+                        //Username = user.Username,
+                        //TransactionId = transaction.Id,
+                        //PackageId = package.PackageId,
+                        //PackageName = package.PackageName,
+                        //PackageCostPrice = transaction.PackageCostPrice,
+                        //PackageRecommendedPrice = transaction.PackageRecommendedPrice,
+                        //RequestId = transaction.RequestId,
+                        //DataProviderId = product.Id,
+                        //DataProviderName = product.DataProviderName,
+                        //CostPrice = product.CostPrice,
+                        //RecommendedPrice = product.RecommendedPrice
                     };
 
                     _preBillingRepository.Save(preBillingTransaction, true);

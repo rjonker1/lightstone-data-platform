@@ -9,7 +9,7 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
     public class when_persisting_stagebilling_transaction : when_persisting_entities_to_db
     {
         [Observation]
-        public void should_persist()
+        public void should_persist_customer()
         {
             new PersistenceSpecification<StageBilling>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
@@ -23,18 +23,22 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
                 .CheckProperty(c => c.DataProviderName, "Customer Product")
                 .CheckProperty(c => c.RecommendedPrice, 100.00)
                 .VerifyTheMappings();
-
+        }
+        
+        [Observation]
+        public void should_persist_client()
+        {
             new PersistenceSpecification<StageBilling>(Session)
-                .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.BillingId, 102)
-                .CheckProperty(c => c.ClientId, Guid.NewGuid())
-                .CheckProperty(c => c.ClientName, "ClientName")
-                .CheckProperty(c => c.UserId, Guid.NewGuid())
-                .CheckProperty(c => c.Username, "Username")
-                .CheckProperty(c => c.TransactionId, Guid.NewGuid())
-                .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
-                .CheckProperty(c => c.DataProviderName, "Client Product")
-                .VerifyTheMappings();
+               .CheckProperty(c => c.Id, Guid.NewGuid())
+               .CheckProperty(c => c.BillingId, 102)
+               .CheckProperty(c => c.ClientId, Guid.NewGuid())
+               .CheckProperty(c => c.ClientName, "ClientName")
+               .CheckProperty(c => c.UserId, Guid.NewGuid())
+               .CheckProperty(c => c.Username, "Username")
+               .CheckProperty(c => c.TransactionId, Guid.NewGuid())
+               .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
+               .CheckProperty(c => c.DataProviderName, "Client Product")
+               .VerifyTheMappings();
         } 
     }
 }
