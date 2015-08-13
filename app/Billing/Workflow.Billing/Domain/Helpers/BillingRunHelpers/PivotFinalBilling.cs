@@ -14,13 +14,16 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
+        private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository; 
 
         private readonly IPublishReportQueue<BillingReport> _report;
 
-        public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IPublishReportQueue<BillingReport> report)
+        public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository,  IRepository<ArchiveBillingTransaction> archiveBillingRepository,
+                                    IPublishReportQueue<BillingReport> report)
         {
             _stageBillingRepository = stageBillingRepository;
             _finalBillingRepository = finalBillingRepository;
+            _archiveBillingRepository = archiveBillingRepository;
             _report = report;
         }
 
@@ -39,6 +42,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 // Archive and clean Final Billing for new month
                 foreach (var archiveRecord in _finalBillingRepository)
                 {
+                    _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
                     _finalBillingRepository.Delete(archiveRecord);
                 }
 

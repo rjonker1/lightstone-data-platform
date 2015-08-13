@@ -13,6 +13,9 @@ namespace Workflow.Billing.Domain.Entities
         public virtual string BillingType { get; set; }
         public virtual Guid ContractId { get; set; }
 
+        public virtual string Type { get; set; }
+        public virtual int BillingId { get; set; }
+
         public virtual Package Package { get; set; }
 
         public virtual DataProvider DataProvider { get; set; }

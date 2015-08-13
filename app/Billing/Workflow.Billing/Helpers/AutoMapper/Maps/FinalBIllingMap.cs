@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using FluentNHibernate.Conventions.Instances;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Helpers.AutoMapper.Maps
@@ -11,6 +12,9 @@ namespace Workflow.Billing.Helpers.AutoMapper.Maps
             Mapper.CreateMap<StageBilling, FinalBilling>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(s => Guid.NewGuid()))
                 .ForMember(dest => dest.StageBillingId, opt => opt.MapFrom(s => s.Id));
+
+            Mapper.CreateMap<FinalBilling, ArchiveBillingTransaction>()
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(s => typeof(FinalBilling).Name));
         }
     }
 }
