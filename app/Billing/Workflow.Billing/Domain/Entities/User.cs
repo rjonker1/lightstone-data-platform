@@ -12,5 +12,14 @@ namespace Workflow.Billing.Domain.Entities
         public virtual bool HasTransactions { get; set; }
 
         public User() { }
+
+        public User(Guid userId, string username, string firstName, string lastName, bool hasTransactions)
+        {
+            UserId = userId;
+            Username = username;
+            FirstName = firstName;
+            LastName = lastName;
+            HasTransactions = hasTransactions;
+        }
     }
 }

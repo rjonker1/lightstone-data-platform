@@ -16,12 +16,12 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
                 .CheckProperty(c => c.BillingId, 101)
                 .CheckProperty(c => c.CustomerId, Guid.NewGuid())
                 .CheckProperty(c => c.CustomerName, "CustomerName")
-                .CheckProperty(c => c.UserId, Guid.NewGuid())
-                .CheckProperty(c => c.Username, "Username")
-                .CheckProperty(c => c.TransactionId, Guid.NewGuid())
-                .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
-                .CheckProperty(c => c.DataProviderName, "Customer Product")
-                .CheckProperty(c => c.RecommendedPrice, 100.00)
+                .CheckProperty(c => c.User.UserId, Guid.NewGuid())
+                .CheckProperty(c => c.User.Username, "Username")
+                .CheckProperty(c => c.UserTransaction.TransactionId, Guid.NewGuid())
+                .CheckProperty(c => c.DataProvider.DataProviderId, Guid.NewGuid())
+                .CheckProperty(c => c.DataProvider.DataProviderName, "Customer Product")
+                .CheckProperty(c => c.DataProvider.RecommendedPrice, 100.00)
                 .VerifyTheMappings();
         }
         
@@ -33,11 +33,11 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
                .CheckProperty(c => c.BillingId, 102)
                .CheckProperty(c => c.ClientId, Guid.NewGuid())
                .CheckProperty(c => c.ClientName, "ClientName")
-               .CheckProperty(c => c.UserId, Guid.NewGuid())
-               .CheckProperty(c => c.Username, "Username")
-               .CheckProperty(c => c.TransactionId, Guid.NewGuid())
-               .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
-               .CheckProperty(c => c.DataProviderName, "Client Product")
+               .CheckProperty(c => c.User.UserId, Guid.NewGuid())
+               .CheckProperty(c => c.User.Username, "Username")
+               .CheckProperty(c => c.UserTransaction.TransactionId, Guid.NewGuid())
+               .CheckProperty(c => c.DataProvider.DataProviderId, Guid.NewGuid())
+               .CheckProperty(c => c.DataProvider.DataProviderName, "Client Product")
                .VerifyTheMappings();
         } 
     }

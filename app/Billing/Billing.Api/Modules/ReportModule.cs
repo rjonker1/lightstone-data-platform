@@ -26,12 +26,12 @@ namespace Billing.Api.Modules
                 foreach (var transaction in transactions)
                 {
                     // Return Pacakge details without price, if non-billable
-                    if (transactions.Count(x => x.IsBillable).Equals(0))
+                    if (transactions.Count(x => x.UserTransaction.IsBillable).Equals(0))
                     {
                         var emptyPackage = new PackageDto
                         {
-                            PackageId = transaction.PackageId,
-                            PackageName = transaction.PackageName,
+                            PackageId = transaction.Package.PackageId,
+                            PackageName = transaction.Package.PackageName,
                             PackageCostPrice = 0.00,
                             PackageRecommendedPrice = 0.00
                         };
@@ -47,10 +47,10 @@ namespace Billing.Api.Modules
                     // Package
                     var package = new PackageDto
                     {
-                        PackageId = transaction.PackageId,
-                        PackageName = transaction.PackageName,
-                        PackageCostPrice = transaction.PackageCostPrice,
-                        PackageRecommendedPrice = transaction.PackageRecommendedPrice
+                        PackageId = transaction.Package.PackageId,
+                        PackageName = transaction.Package.PackageName,
+                        PackageCostPrice = transaction.Package.PackageCostPrice,
+                        PackageRecommendedPrice = transaction.Package.PackageRecommendedPrice
                     };
 
                     // Package Index
@@ -64,9 +64,9 @@ namespace Billing.Api.Modules
                 var packagesList = stageBillingRepository.Where(x => x.CustomerId == searchId)
                             .Select(x => new ReportPackage
                             {
-                                ItemCode = x.PackageName,
-                                ItemDescription = x.PackageName,
-                                Price = x.PackageRecommendedPrice,
+                                ItemCode = x.Package.PackageName,
+                                ItemDescription = x.Package.PackageName,
+                                Price = x.Package.PackageRecommendedPrice,
                                 //Vat = 2284
                             }).Distinct();
 

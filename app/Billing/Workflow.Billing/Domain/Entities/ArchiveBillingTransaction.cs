@@ -24,7 +24,6 @@ namespace Workflow.Billing.Domain.Entities
         public ArchiveBillingTransaction()
         {
             Created = DateTime.UtcNow;
-
             Package = new Package();
             DataProvider = new DataProvider();
             UserTransaction = new UserTransaction();

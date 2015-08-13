@@ -12,8 +12,10 @@ namespace Workflow.Billing.Helpers.AutoMapper.Maps
             Mapper.CreateMap<PreBilling, StageBilling>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(s => Guid.NewGuid()))
                 .ForMember(dest => dest.PreBillingId, opt => opt.MapFrom(s => s.Id))
-                .ForMember(dest => dest.HasTransactions, opt => opt.MapFrom(s => true))
-                .ForMember(dest => dest.IsBillable, opt => opt.MapFrom(s => true));
+                .ForMember(dest => dest.User, opt => opt.MapFrom(s => s))
+                .ForMember(dest => dest.UserTransaction, opt => opt.MapFrom(s => s))
+                .AfterMap((src, dest) => dest.User.HasTransactions = true)
+                .AfterMap((src, dest) => dest.UserTransaction.IsBillable = true);
         }
     }
 }

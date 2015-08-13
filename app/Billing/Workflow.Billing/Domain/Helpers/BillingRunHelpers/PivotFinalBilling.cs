@@ -58,18 +58,18 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     if (transaction.CustomerId != new Guid())
                     {
                         this.Info(() => "FinalBilling initiated for Customer: {0}".FormatWith(transaction.CustomerName));
-                        var billedCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable
+                        var billedCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.UserTransaction.IsBillable
                                                                                                  && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
-                            .Select(x => x.TransactionId).Distinct().Count();
+                            .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
                         var packagesList =
                             _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                 .Select(x => new ReportPackage
                                 {
-                                    ItemCode = x.PackageName,
-                                    ItemDescription = x.PackageName,
+                                    ItemCode = x.Package.PackageName,
+                                    ItemDescription = x.Package.PackageName,
                                     QuantityUnit = billedCustomerTransactionsTotal,
-                                    Price = x.PackageRecommendedPrice,
+                                    Price = x.Package.PackageRecommendedPrice,
                                     //Vat = 0
                                 }).Distinct();
 
@@ -100,7 +100,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         var invoice = new ReportInvoice
                         {
                             DOCTYPE = "INV",
-                            INVNUMBER = transaction.RequestId.ToString(),
+                            INVNUMBER = transaction.UserTransaction.RequestId.ToString(),
                             ACCOUNTID = transaction.AccountNumber,
                             DESCRIPTION = "",
                             INVDATE = DateTime.UtcNow.ToString(),
@@ -144,17 +144,17 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     if (transaction.ClientId != new Guid())
                     {
                         this.Info(() => "FinalBilling initiated for Client: {0}".FormatWith(transaction.ClientName));
-                        var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.IsBillable
+                        var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.UserTransaction.IsBillable
                                                                                                && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
-                            .Select(x => x.TransactionId).Distinct().Count();
+                            .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
                         var packagesList = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId)
                             .Select(x => new ReportPackage
                             {
-                                ItemCode = x.PackageName,
-                                ItemDescription = x.PackageName,
+                                ItemCode = x.Package.PackageName,
+                                ItemDescription = x.Package.PackageName,
                                 QuantityUnit = billedClientTransactionsTotal,
-                                Price = x.PackageRecommendedPrice,
+                                Price = x.Package.PackageRecommendedPrice,
                                 //Vat = 2284
                             }).Distinct();
 

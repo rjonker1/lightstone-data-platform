@@ -27,7 +27,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 {
                     // Internal transactions - non-billable
                     if (stageEntity.BillingType.Contains("INTERNAL"))
-                        stageEntity.IsBillable = false;
+                        stageEntity.UserTransaction.IsBillable = false;
 
                     _stageBillingRepository.SaveOrUpdate(stageEntity, true);
                 }

@@ -74,20 +74,20 @@ namespace Billing.Api.Modules
                     var userList = new List<User>();
 
                     var customerTransactions = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
-                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
-                                                        .Select(x => x.PackageId).Distinct().Count();
+                                                        .Select(x => x.Package.PackageId).Distinct().Count();
 
-                    var billedCustomerTransactionsTotal = customerTransactions.Where(x => x.IsBillable);
+                    var billedCustomerTransactionsTotal = customerTransactions.Where(x => x.UserTransaction.IsBillable);
 
 
-                    var clientTransactions = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.TransactionId);
+                    var clientTransactions = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.UserTransaction.TransactionId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
-                                                        .Select(x => x.PackageId).Distinct().Count();
+                                                        .Select(x => x.Package.PackageId).Distinct().Count();
 
-                    var billedClientTransactionsTotal = clientTransactions.Where(x => x.IsBillable);
+                    var billedClientTransactionsTotal = clientTransactions.Where(x => x.UserTransaction.IsBillable);
 
                     // Customer
                     if (transaction.ClientId == new Guid())
@@ -118,8 +118,8 @@ namespace Billing.Api.Modules
                     // User
                     var user = new User
                     {
-                        UserId = transaction.UserId,
-                        Username = transaction.Username,
+                        UserId = transaction.User.UserId,
+                        Username = transaction.User.Username,
                         HasTransactions = true
                     };
 
@@ -154,26 +154,26 @@ namespace Billing.Api.Modules
                 var customerUsersDetailList = new List<UserDto>();
 
                 var stageBillingRepo = stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId)
-                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
+                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
 
                 foreach (var transaction in stageBillingRepo)
                 {
                     var userTransactionsList = new List<TransactionDto>();
 
-                    var userMeta = userMetaRepository.FirstOrDefault(x => x.Id == transaction.UserId) ?? new UserMeta
+                    var userMeta = userMetaRepository.FirstOrDefault(x => x.Id == transaction.User.UserId) ?? new UserMeta
                     {
-                        Id = transaction.UserId,
-                        Username = transaction.Username
+                        Id = transaction.User.UserId,
+                        Username = transaction.User.Username
                     };
 
                     // Filter repo for user transaction;
-                    var userTransactions = stageBillingRepo.Where(x => x.UserId == transaction.UserId)
+                    var userTransactions = stageBillingRepo.Where(x => x.User.UserId == transaction.User.UserId)
                                             .Select(x =>
                                             new TransactionDto
                                             {
-                                                TransactionId = x.TransactionId,
-                                                RequestId = x.RequestId,
-                                                IsBillable = x.IsBillable
+                                                TransactionId = x.UserTransaction.TransactionId,
+                                                RequestId = x.UserTransaction.RequestId,
+                                                IsBillable = x.UserTransaction.IsBillable
                                             }).Distinct();
 
                     foreach (var userTransaction in userTransactions)
@@ -200,11 +200,11 @@ namespace Billing.Api.Modules
                 var customerPackagesDetailList = new List<PackageDto>();
 
                 var stageBillingRepo = stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId)
-                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
+                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
 
                 foreach (var transaction in stageBillingRepo)
                 {
-                    var packageTransactions = stageBillingRepo.Where(x => x.PackageId == transaction.PackageId).Distinct();
+                    var packageTransactions = stageBillingRepo.Where(x => x.Package.PackageId == transaction.Package.PackageId).Distinct();
 
                     var package = Mapper.Map<StageBilling, PackageDto>(transaction);
                     package.PackageTransactions = packageTransactions.Count();
@@ -229,7 +229,7 @@ namespace Billing.Api.Modules
                 var packagesDetailList = new List<PackageDto>();
 
                 var transactions = stageBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId)
-                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
+                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
 
                 var transactionsTotal = 0;
 
@@ -238,13 +238,13 @@ namespace Billing.Api.Modules
                     var contractId = transaction.ContractId;
 
                     var package = Mapper.Map<StageBilling, PackageDto>(transaction);
-                    var packageTransactions = transactions.Count(x => x.PackageId == transaction.PackageId);
+                    var packageTransactions = transactions.Count(x => x.Package.PackageId == transaction.Package.PackageId);
 
                     package.PackageDescription = package.PackageName;
                     package.PackageTransactions = packageTransactions;
 
                     // Return Pacakge details without price, if non-billable
-                    if (!transaction.IsBillable)
+                    if (!transaction.UserTransaction.IsBillable)
                     {
                         var emptyPackage = new PackageDto
                         {
@@ -349,14 +349,14 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in dto.Transactions)
                 {
-                    foreach (var billTransaction in stageBillingRepository.Where(x => x.RequestId == transaction.RequestId 
-                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.PackageId))
+                    foreach (var billTransaction in stageBillingRepository.Where(x => x.UserTransaction.RequestId == transaction.RequestId 
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.Package.PackageId))
                     {
                         userTransactions.Add(new UserTransaction
                         {
                             RequestId = transaction.RequestId,
-                            PackageName = billTransaction.PackageName,
-                            IsBillable = billTransaction.IsBillable
+                            PackageName = billTransaction.Package.PackageName,
+                            IsBillable = billTransaction.UserTransaction.IsBillable
                         });
                     }
                 }

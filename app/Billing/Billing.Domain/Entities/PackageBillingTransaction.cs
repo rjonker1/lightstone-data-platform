@@ -18,14 +18,14 @@ namespace Billing.Domain.Entities
 
         public void Commit(PackageTransactionDto entity)
         {
-            var transactions = _stageBillingRepository.Where(x => x.PackageId == entity.PackageId);
+            var transactions = _stageBillingRepository.Where(x => x.Package.PackageId == entity.PackageId);
 
             foreach (var transactionRequest in transactions)
             {
                 transactionRequest.Modified = DateTime.UtcNow;
                 transactionRequest.ModifiedBy = "dev.billing.api.lightstone.co.za";
 
-                transactionRequest.PackageName = entity.PackageName;
+                transactionRequest.Package.PackageName = entity.PackageName;
 
                 _stageBillingRepository.SaveOrUpdate(transactionRequest, true);
             }

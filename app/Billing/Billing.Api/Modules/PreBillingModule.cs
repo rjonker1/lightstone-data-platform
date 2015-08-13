@@ -56,17 +56,17 @@ namespace Billing.Api.Modules
                     var userList = new List<User>();
 
                     var customerTransactions = _preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
-                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
-                                                        .Select(x => x.PackageId).Distinct().Count();
+                                                        .Select(x => x.Package.PackageId).Distinct().Count();
 
 
                     var clientTransactions = _preBillingRepository.Where(x => x.ClientId == transaction.ClientId
-                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
-                                                        .Select(x => x.PackageId).Distinct().Count();
+                                                        .Select(x => x.Package.PackageId).Distinct().Count();
 
                     // Customer
                     if (transaction.ClientId == new Guid())
@@ -95,8 +95,8 @@ namespace Billing.Api.Modules
                     // User
                     var user = new User
                     {
-                        UserId = transaction.UserId,
-                        Username = transaction.Username,
+                        UserId = transaction.User.UserId,
+                        Username = transaction.User.Username,
                         HasTransactions = true
                     };
 
@@ -131,26 +131,26 @@ namespace Billing.Api.Modules
                 var customerUsersDetailList = new List<UserDto>();
 
                 var preBillingRepo = _preBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId)
-                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
+                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
 
                 foreach (var transaction in preBillingRepo)
                 {
                     var userTransactionsList = new List<TransactionDto>();
 
-                    var userMeta = userMetaRepository.FirstOrDefault(x => x.Id == transaction.UserId) ?? new UserMeta
+                    var userMeta = userMetaRepository.FirstOrDefault(x => x.Id == transaction.User.UserId) ?? new UserMeta
                     {
-                        Id = transaction.UserId,
-                        Username = transaction.Username
+                        Id = transaction.User.UserId,
+                        Username = transaction.User.Username
                     };
 
                     // Filter repo for user transaction;
-                    var userTransactions = preBillingRepo.Where(x => x.UserId == transaction.UserId)
+                    var userTransactions = preBillingRepo.Where(x => x.User.UserId == transaction.User.UserId)
                                             .Select(x =>
                                             new TransactionDto
                                             {
-                                                TransactionId = x.TransactionId,
-                                                RequestId = x.RequestId,
-                                                IsBillable = x.IsBillable
+                                                TransactionId = x.UserTransaction.TransactionId,
+                                                RequestId = x.UserTransaction.RequestId,
+                                                IsBillable = x.UserTransaction.IsBillable
                                             }).Distinct();
 
                     foreach (var userTransaction in userTransactions)
@@ -183,11 +183,11 @@ namespace Billing.Api.Modules
                 var customerPackagesDetailList = new List<PackageDto>();
 
                 var preBillingRepo = _preBillingRepository.Where(x => (x.CustomerId == searchId || x.ClientId == searchId)
-                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.TransactionId);
+                                                                    && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
 
                 foreach (var transaction in preBillingRepo)
                 {
-                    var packageTransactions = preBillingRepo.Where(x => x.PackageId == transaction.PackageId).Distinct();
+                    var packageTransactions = preBillingRepo.Where(x => x.Package.PackageId == transaction.Package.PackageId).Distinct();
 
                     var package = Mapper.Map<PreBilling, PackageDto>(transaction);
                     package.PackageTransactions = packageTransactions.Count();

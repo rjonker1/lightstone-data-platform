@@ -27,31 +27,31 @@ namespace Billing.Domain.Entities
 
             foreach (var userTransaction in userTransactions.Transactions)
             {
-                var transactionRequests = _stageBillingRepository.Where(x => x.RequestId == userTransaction.RequestId);
+                var transactionRequests = _stageBillingRepository.Where(x => x.UserTransaction.RequestId == userTransaction.RequestId);
 
                 foreach (var transactionRequest in transactionRequests)
                 {
 
-                    if (transactionRequest.IsBillable != userTransaction.IsBillable)
+                    if (transactionRequest.UserTransaction.IsBillable != userTransaction.IsBillable)
                     {
                         var auditLog = new AuditLog
                         {
                             Id = Guid.NewGuid(),
-                            TransactionId = transactionRequest.TransactionId,
-                            RequestId = transactionRequest.RequestId,
+                            TransactionId = transactionRequest.UserTransaction.TransactionId,
+                            RequestId = transactionRequest.UserTransaction.RequestId,
                             Modified = DateTime.UtcNow,
                             ModifiedBy = userTransactions.UserName,
                             FieldName = "isBillable",
                             NewValue = userTransaction.IsBillable.ToString(),
-                            OriginalValue = transactionRequest.IsBillable.ToString()
+                            OriginalValue = transactionRequest.UserTransaction.IsBillable.ToString()
                         };
 
-                        var logIndex = auditLogsList.FindIndex(x => x.TransactionId == transactionRequest.TransactionId);
+                        var logIndex = auditLogsList.FindIndex(x => x.TransactionId == transactionRequest.UserTransaction.TransactionId);
                         if (logIndex < 0) auditLogsList.Add(auditLog);
 
                     }
 
-                    transactionRequest.IsBillable = userTransaction.IsBillable;
+                    transactionRequest.UserTransaction.IsBillable = userTransaction.IsBillable;
                     transactionRequest.Modified = DateTime.UtcNow;
                     transactionRequest.ModifiedBy = CurrentUser;
 

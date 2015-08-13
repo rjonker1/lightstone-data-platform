@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using Billing.Domain.Dtos;
 using DataPlatform.Shared.Messaging.Billing.Messages;
@@ -85,7 +84,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         Id = Guid.NewGuid(),
                         Created = transaction.Date,
                         CreatedBy = user.Username,
-                        //BillingId = 101,
+                        BillingId = 101,
                         //Customer implementation
                         CustomerId = customer.CustomerId,
                         CustomerName = customer.CustomerName,
@@ -96,18 +95,30 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                         AccountNumber = transaction.AccountNumber,
                         ContractId = transaction.ContractId,
                         BillingType = (client.ClientId == new Guid()) ? customer.BillingType : client.BillingType,
-                        //UserId = transaction.UserId,
-                        //Username = user.Username,
-                        //TransactionId = transaction.Id,
-                        //PackageId = package.PackageId,
-                        //PackageName = package.PackageName,
-                        //PackageCostPrice = transaction.PackageCostPrice,
-                        //PackageRecommendedPrice = transaction.PackageRecommendedPrice,
-                        //RequestId = transaction.RequestId,
-                        //DataProviderId = product.Id,
-                        //DataProviderName = product.DataProviderName,
-                        //CostPrice = product.CostPrice,
-                        //RecommendedPrice = product.RecommendedPrice
+                        User = new User
+                        {
+                            UserId = transaction.UserId,
+                            Username = user.Username
+                        },
+                        UserTransaction = new UserTransaction
+                        {
+                            TransactionId = transaction.Id,
+                            RequestId = transaction.RequestId
+                        },
+                        Package = new Package
+                        {
+                            PackageId = package.PackageId,
+                            PackageName = package.PackageName,
+                            PackageCostPrice = transaction.PackageCostPrice,
+                            PackageRecommendedPrice = transaction.PackageRecommendedPrice,
+                        },
+                        DataProvider = new DataProvider
+                        {
+                            DataProviderId = product.Id,
+                            DataProviderName = product.DataProviderName,
+                            CostPrice = product.CostPrice,
+                            RecommendedPrice = product.RecommendedPrice
+                        }
                     };
 
                     _preBillingRepository.Save(preBillingTransaction, true);
