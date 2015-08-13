@@ -23,7 +23,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         public void should_map_estimated_value_data_fields()
         {
             _dataField.Name.ShouldEqual("EstimatedValue");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithEstimatedValueModel>).ToString());
+            _dataField.Type.ShouldEqual(typeof(IRespondWithEstimatedValueModel[]).ToString());
 
             var dataFields = _dataField.DataFields;
 

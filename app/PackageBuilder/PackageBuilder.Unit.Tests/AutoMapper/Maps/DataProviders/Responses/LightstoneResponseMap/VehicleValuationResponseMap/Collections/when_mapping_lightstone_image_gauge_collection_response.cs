@@ -23,7 +23,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         public void should_map_image_gauge_data_fields()
         {
             _dataField.Name.ShouldEqual("ImageGauges");
-            _dataField.Type.ShouldEqual(typeof(List<IRespondWithImageGaugeModel>).ToString());
+            _dataField.Type.ShouldEqual(typeof(IRespondWithImageGaugeModel[]).ToString());
 
             var dataFields = _dataField.DataFields;
 
