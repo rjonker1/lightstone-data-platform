@@ -167,6 +167,7 @@
     <Compile Include="Domain\Dtos\TransactionDto.cs" />
     <Compile Include="Domain\Dtos\UserDto.cs" />
     <Compile Include="Domain\Entities\AccountMeta.cs" />
+    <Compile Include="Domain\Entities\ArchiveBillingTransaction.cs" />
     <Compile Include="Domain\Entities\AuditLog.cs" />
     <Compile Include="Domain\Entities\BillingTransaction.cs" />
     <Compile Include="Domain\Entities\Client.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\AccountMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\ArchiveBillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionOverrideMapping.cs" />

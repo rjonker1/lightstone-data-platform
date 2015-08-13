@@ -1,20 +1,8 @@
-﻿
-using System;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
+﻿using System;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public interface IUser
-    {
-        Guid UserId { get; set; }
-        string Username { get; set; }
-        string FirstName { get; set; }
-        string LastName { get; set; }
-
-        bool HasTransactions { get; set; }
-    }
-
-    public class User : IUser //: UserTransaction
+    public class User
     {
         public virtual Guid UserId { get; set; }
         public virtual string Username { get; set; }

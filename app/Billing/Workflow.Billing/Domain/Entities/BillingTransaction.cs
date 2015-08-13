@@ -9,7 +9,6 @@ namespace Workflow.Billing.Domain.Entities
         public virtual string CustomerName { get; set; }
         public virtual Guid ClientId { get; set; }
         public virtual string ClientName { get; set; }
-
         public virtual string AccountNumber { get; set; }
         public virtual string BillingType { get; set; }
         public virtual Guid ContractId { get; set; }
