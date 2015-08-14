@@ -206,7 +206,7 @@ namespace Billing.Api.Modules
                 {
                     var packageTransactions = stageBillingRepo.Where(x => x.Package.PackageId == transaction.Package.PackageId).Distinct();
 
-                    var package = Mapper.Map<StageBilling, PackageDto>(transaction);
+                    var package = Mapper.Map<Package, PackageDto>(transaction.Package);
                     package.PackageTransactions = packageTransactions.Count();
 
                     var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
@@ -237,7 +237,7 @@ namespace Billing.Api.Modules
                 {
                     var contractId = transaction.ContractId;
 
-                    var package = Mapper.Map<StageBilling, PackageDto>(transaction);
+                    var package = Mapper.Map<Package, PackageDto>(transaction.Package);
                     var packageTransactions = transactions.Count(x => x.Package.PackageId == transaction.Package.PackageId);
 
                     package.PackageDescription = package.PackageName;

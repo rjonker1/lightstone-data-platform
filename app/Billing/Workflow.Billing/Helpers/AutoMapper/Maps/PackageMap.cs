@@ -4,11 +4,11 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Helpers.AutoMapper.Maps
 {
-    public class StageBillingPackageDtoMap : ICreateAutoMapperMaps
+    public class PackageMap : ICreateAutoMapperMaps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<StageBilling, PackageDto>();
+            Mapper.CreateMap<Package, PackageDto>();
         }
     }
 }
