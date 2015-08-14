@@ -42,7 +42,9 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 // Archive and clean Final Billing for new month
                 foreach (var archiveRecord in _finalBillingRepository)
                 {
-                    _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
+                    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId)) 
+                            _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
+
                     _finalBillingRepository.Delete(archiveRecord);
                 }
 
