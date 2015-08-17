@@ -22,7 +22,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
         [Observation]
         public void should_map_estimated_value_data_fields()
         {
-            _dataField.Count().ShouldEqual(11);
+            _dataField.Count().ShouldEqual(14);
 
             //_dataField.FirstOrDefault(x => x.Name == "EstimatedValue").Name.ShouldEqual("EstimatedValue");
             //_dataField.FirstOrDefault(x => x.Name == "EstimatedValue").Type.ShouldEqual(typeof(string));

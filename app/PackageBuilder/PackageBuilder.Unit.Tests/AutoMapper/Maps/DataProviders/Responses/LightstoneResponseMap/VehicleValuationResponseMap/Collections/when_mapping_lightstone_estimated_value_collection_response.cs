@@ -26,7 +26,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
 
             var dataFields = _dataField.DataFields;
 
-            dataFields.Count().ShouldEqual(11);
+            dataFields.Count().ShouldEqual(14);
 
             dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedValue").Name.ShouldEqual("RetailEstimatedValue");
             dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedValue").Type.ShouldEqual(typeof(string).ToString());
@@ -60,6 +60,15 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
 
             dataFields.FirstOrDefault(x => x.Name == "AuctionEstimate").Name.ShouldEqual("AuctionEstimate");
             dataFields.FirstOrDefault(x => x.Name == "AuctionEstimate").Type.ShouldEqual(typeof(string).ToString());
+
+            dataFields.FirstOrDefault(x => x.Name == "CostLow").Name.ShouldEqual("CostLow");
+            dataFields.FirstOrDefault(x => x.Name == "CostLow").Type.ShouldEqual(typeof(string).ToString());
+
+            dataFields.FirstOrDefault(x => x.Name == "CostHigh").Name.ShouldEqual("CostHigh");
+            dataFields.FirstOrDefault(x => x.Name == "CostHigh").Type.ShouldEqual(typeof(string).ToString());
+
+            dataFields.FirstOrDefault(x => x.Name == "CostValue").Name.ShouldEqual("CostValue");
+            dataFields.FirstOrDefault(x => x.Name == "CostValue").Type.ShouldEqual(typeof(string).ToString());
         }
     }
 }
