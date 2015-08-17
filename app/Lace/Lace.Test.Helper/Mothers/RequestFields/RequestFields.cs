@@ -228,14 +228,14 @@ namespace Lace.Test.Helper.Mothers.RequestFields
         public string Field { get; private set; }
     }
 
-    public class UsernameRequestField : IAmUsernameRequestField
+    public class UsernameRequestField : IAmUserNameRequestField
     {
         private UsernameRequestField(string field)
         {
             Field = field;
         }
 
-        public static IAmUsernameRequestField Get(string field)
+        public static IAmUserNameRequestField Get(string field)
         {
             return new UsernameRequestField(field);
         }

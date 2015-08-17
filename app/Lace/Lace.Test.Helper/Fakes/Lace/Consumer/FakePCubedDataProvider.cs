@@ -7,7 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.PCubed.Infrastructure;
+using Lace.Domain.DataProviders.PCubed.Fica.Infrastructure;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 using Workflow.Lace.Messages.Core;
 
@@ -35,7 +35,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             }
             else
             {
-                var consumer = new ConsumeSource(new HandlePCubedSourceCall(), new FakeCallingPCubedDataProvider());
+                var consumer = new ConsumeSource(new HandlePCubedFicaSourceCall(), new FakeCallingPCubedDataProvider());
                 consumer.ConsumeDataProvider(response);
 
                 if (!response.OfType<IProvideDataFromPCubedFicaVerfication>().Any() ||

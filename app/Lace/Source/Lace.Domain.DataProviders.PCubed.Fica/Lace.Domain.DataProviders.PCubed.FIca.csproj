@@ -7,8 +7,8 @@
     <ProjectGuid>{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Domain.DataProviders.PCubed</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed</AssemblyName>
+    <RootNamespace>Lace.Domain.DataProviders.PCubed.Fica</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.Fica</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
@@ -60,7 +60,7 @@
       <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1215\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1505\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
@@ -89,11 +89,11 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Infrastructure\CallPCubedDataProvider.cs" />
-    <Compile Include="Infrastructure\HandlePCubedSourceCall.cs" />
-    <Compile Include="Infrastructure\Management\TransformPCubedResponse.cs" />
-    <Compile Include="Infrastructure\RequestDataFromPCubedSource.cs" />
-    <Compile Include="PCubedDataProvider.cs" />
+    <Compile Include="Infrastructure\CallPCubedFicaDataProvider.cs" />
+    <Compile Include="Infrastructure\HandlePCubedFicaSourceCall.cs" />
+    <Compile Include="Infrastructure\Management\TransformPCubedFicaResponse.cs" />
+    <Compile Include="Infrastructure\RequestDataFromPCubedFicaSource.cs" />
+    <Compile Include="PCubedFicaDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">

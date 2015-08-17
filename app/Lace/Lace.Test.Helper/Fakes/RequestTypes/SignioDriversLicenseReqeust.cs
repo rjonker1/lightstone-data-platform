@@ -26,6 +26,6 @@ namespace Lace.Test.Helper.Fakes.RequestTypes
 
         public IAmUserIdRequestField UserId { get; private set; }
 
-        public IAmUsernameRequestField Username { get; private set; }
+        public IAmUserNameRequestField Username { get; private set; }
     }
 }

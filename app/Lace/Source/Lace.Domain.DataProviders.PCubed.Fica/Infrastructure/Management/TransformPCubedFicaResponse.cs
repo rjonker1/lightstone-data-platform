@@ -2,16 +2,16 @@
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 
-namespace Lace.Domain.DataProviders.PCubed.Infrastructure.Management
+namespace Lace.Domain.DataProviders.PCubed.Fica.Infrastructure.Management
 {
-    public class TransformPCubedResponse : ITransformResponseFromDataProvider
+    public class TransformPCubedFicaResponse : ITransformResponseFromDataProvider
     {
         public string Message { get; private set; }
         public IProvideDataFromPCubedFicaVerfication Result { get; private set; }
 
         public bool Continue { get; private set; }
 
-        public TransformPCubedResponse(string response)
+        public TransformPCubedFicaResponse(string response)
         {
             Continue = !string.IsNullOrWhiteSpace(response);
             Message = response;

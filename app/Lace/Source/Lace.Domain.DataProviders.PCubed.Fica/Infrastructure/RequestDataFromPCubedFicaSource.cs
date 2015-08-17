@@ -3,9 +3,9 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 
 
-namespace Lace.Domain.DataProviders.PCubed.Infrastructure
+namespace Lace.Domain.DataProviders.PCubed.Fica.Infrastructure
 {
-    public class RequestDataFromPCubedSource : IRequestDataFromDataProviderSource
+    public class RequestDataFromPCubedFicaSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalSource)
         {

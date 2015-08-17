@@ -8,19 +8,19 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
-using Lace.Domain.DataProviders.PCubed.Infrastructure;
+using Lace.Domain.DataProviders.PCubed.Fica.Infrastructure;
 using Workflow.Lace.Messages.Core;
 
-namespace Lace.Domain.DataProviders.PCubed
+namespace Lace.Domain.DataProviders.PCubed.Fica
 {
-    public class PCubedDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public class PCubedFicaDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
-        public PCubedDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
+        public PCubedFicaDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.PCubed
 
                 _logCommand.LogBegin(new {_request});
 
-                var consumer = new ConsumeSource(new HandlePCubedSourceCall(), new CallPCubedDataProvider(_dataProvider, _logCommand));
+                var consumer = new ConsumeSource(new HandlePCubedFicaSourceCall(), new CallPCubedFicaDataProvider(_dataProvider, _logCommand));
                 consumer.ConsumeDataProvider(response);
 
                 _logCommand.LogBegin(new {response});

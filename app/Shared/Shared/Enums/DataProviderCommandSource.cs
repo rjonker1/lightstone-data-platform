@@ -19,6 +19,8 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] SignioDecryptDriversLicense,
         [EnumMember] LightstoneProperty,
         [EnumMember] LightstoneBusinessCompany,
-        [EnumMember] LightstoneBusinessDirector
+        [EnumMember] LightstoneBusinessDirector,
+        [EnumMember] PCubedEzScore,
+        [EnumMember] LightstoneConsumerSpecifications
     }
 }

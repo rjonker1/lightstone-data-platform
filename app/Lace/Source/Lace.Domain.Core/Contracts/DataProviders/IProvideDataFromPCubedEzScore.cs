@@ -1,8 +1,9 @@
 ﻿using System;
+using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromPCubedEzScore
+    public interface IProvideDataFromPCubedEzScore : IPointToLaceProvider
     {
         Guid EzScoreRecordId { get; }
         Guid DriverLicenceScanId { get; }

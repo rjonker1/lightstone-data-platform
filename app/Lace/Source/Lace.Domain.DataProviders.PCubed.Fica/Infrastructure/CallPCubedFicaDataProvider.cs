@@ -5,11 +5,11 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.PCubed.Infrastructure.Management;
+using Lace.Domain.DataProviders.PCubed.Fica.Infrastructure.Management;
 
-namespace Lace.Domain.DataProviders.PCubed.Infrastructure
+namespace Lace.Domain.DataProviders.PCubed.Fica.Infrastructure
 {
-    public class CallPCubedDataProvider : ICallTheDataProviderSource
+    public class CallPCubedFicaDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
@@ -17,7 +17,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
        
         private string _response;
 
-        public CallPCubedDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
+        public CallPCubedFicaDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
@@ -74,7 +74,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformPCubedResponse(_response);
+            var transformer = new TransformPCubedFicaResponse(_response);
 
             if (transformer.Continue)
             {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.PCubed.Infrastructure.Management;
+using Lace.Domain.DataProviders.PCubed.Fica.Infrastructure.Management;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
@@ -19,7 +19,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformPCubedResponse(_response);
+            var transformer = new TransformPCubedFicaResponse(_response);
 
             if (transformer.Continue)
             {
