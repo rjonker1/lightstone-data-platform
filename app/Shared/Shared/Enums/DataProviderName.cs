@@ -15,5 +15,7 @@
         LightstoneProperty,
         LightstoneBusinessCompany,
         LightstoneBusinessDirector,
+        LightstoneConsumerSpecifications,
+        PCubedEzScore
     }
 }

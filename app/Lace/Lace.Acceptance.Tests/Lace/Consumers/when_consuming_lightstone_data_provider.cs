@@ -79,5 +79,22 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
             Regex.Replace(estimatedValue.TradeEstimatedLow, @"\s+", "").ShouldEqual("R70800,00");
             Regex.Replace(estimatedValue.TradeEstimatedValue, @"\s+", "").ShouldEqual("R78600,00");
         }
+
+        [Observation]
+        public void lightstone_response_from_consumer_must_have_correct_cost_values()
+        {
+            var estimatedValue = _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault();
+            Regex.Replace(estimatedValue.CostHigh, @"\s+", "").ShouldEqual("R81300,00");
+            Regex.Replace(estimatedValue.CostLow, @"\s+", "").ShouldEqual("R66500,00");
+            Regex.Replace(estimatedValue.CostValue, @"\s+", "").ShouldEqual("R73900,00");
+        }
+
+        [Observation]
+        public void lightstone_response_from_consumer_must_have_correct_auction_values()
+        {
+            var estimatedValue = _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault();
+            Regex.Replace(estimatedValue.AuctionEstimate, @"\s+", "").ShouldEqual("R65200,00");
+        }
+
     }
 }

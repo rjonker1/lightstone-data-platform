@@ -35,6 +35,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
             SetRetailEstimatedValues(estimatedValues);
             SetTradeEstimatedValues(estimatedValues);
             SetAuctionEstimatedValues(estimatedValues);
+            SetCostValues(estimatedValues);
 
             MetricResult.Add(estimatedValues);
 
@@ -82,6 +83,18 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
             var auctionEstimate = _gauges.FirstOrDefault(w => w.MetricId == (int) MetricTypes.AuctionEstimate);
             if (auctionEstimate == null) return;
             model.SetAuctionEstimatedValues(auctionEstimate.MoneyValue.HasValue ? auctionEstimate.MoneyValue.Value.ToString("C") : "");
+        }
+
+        private void SetCostValues(IRespondWithEstimatedValueModel model)
+        {
+            var estimatedCost = _gauges.FirstOrDefault(w => w.MetricId == (int) MetricTypes.CostEstimate);
+            var costPriceHigh = _gauges.FirstOrDefault(w => w.MetricId == (int) MetricTypes.CostHigh);
+            var costPriceLow = _gauges.FirstOrDefault(w => w.MetricId == (int) MetricTypes.CostLow);
+
+            if (estimatedCost == null || costPriceHigh == null || costPriceLow == null) return;
+            model.SetCostValues(costPriceLow.MoneyValue.HasValue ? costPriceLow.MoneyValue.Value.ToString("C") : "",
+                costPriceHigh.MoneyValue.HasValue ? costPriceHigh.MoneyValue.Value.ToString("C") : "",
+                estimatedCost.MoneyValue.HasValue ? estimatedCost.MoneyValue.Value.ToString("C") : "");
         }
 
         private IList<Statistic> GetGauges()

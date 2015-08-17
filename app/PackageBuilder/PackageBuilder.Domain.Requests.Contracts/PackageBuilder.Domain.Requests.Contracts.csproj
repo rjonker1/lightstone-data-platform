@@ -49,13 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestFields\IAmAccessKeyRequestField.cs" />
     <Compile Include="RequestFields\IAmApplicantNameRequestField.cs" />
     <Compile Include="RequestFields\IAmCarIdRequestField.cs" />
     <Compile Include="RequestFields\IAmChassisNumberRequestField.cs" />
     <Compile Include="RequestFields\IAmCompanyNameRequestField.cs" />
     <Compile Include="RequestFields\IAmCompanyRegistrationNumberRequestField.cs" />
     <Compile Include="RequestFields\IAmCompanyVatNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmEmailAddressRequestField.cs" />
     <Compile Include="RequestFields\IAmEngineNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmPhoneNumberRequestField.cs" />
     <Compile Include="RequestFields\IAmSurnameRequestField.cs" />
     <Compile Include="RequestFields\IAmFirstNameRequestField.cs" />
     <Compile Include="RequestFields\IAmIdentityNumberRequestField.cs" />
@@ -90,7 +93,9 @@
     <Compile Include="Requests\IAmLightstoneAutoRequest.cs" />
     <Compile Include="Requests\IAmLightstoneBusinessDirectorRequest.cs" />
     <Compile Include="Requests\IAmLightstoneBusinessCompanyRequest.cs" />
+    <Compile Include="Requests\IAmLightstoneConsumerSpecificationsRequest.cs" />
     <Compile Include="Requests\IAmLightstonePropertyRequest.cs" />
+    <Compile Include="Requests\IAmPCubedEzScoreRequest.cs" />
     <Compile Include="Requests\IAmRgtRequest.cs" />
     <Compile Include="Requests\IAmRgtVinRequest.cs" />
     <Compile Include="Requests\IAmSignioDriversLicenseDecryptionRequest.cs" />

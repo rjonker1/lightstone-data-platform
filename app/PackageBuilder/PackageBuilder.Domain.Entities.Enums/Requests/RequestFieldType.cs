@@ -27,5 +27,8 @@
         RegistrationCode = 22,
         UserName = 23,
         UserId = 24,
+        PhoneNumber = 25,
+        EmailAddress = 26,
+        AccessKey = 27
     }
 }

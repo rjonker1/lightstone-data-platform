@@ -16,6 +16,9 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Specifics
         string TradeConfidenceValue { get; }
         string TradeConfidenceLevel { get; }
         string AuctionEstimate { get; }
+        string CostLow { get; }
+        string CostHigh { get; }
+        string CostValue { get; }
 
         void SetTradeEstimatedValues(string tradeEstimatedValue, string tradeEstimatedLow, string tradeEstimatedHigh,
             string tradeConfidenceValue, string tradeConfidenceLevel);
@@ -23,5 +26,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Specifics
         void SetRetailEstimatedValues(string retailEstimatedValue, string retailEstimatedLow, string retailEstimatedHigh,
             string retailConfidenceValue, string retailConfidenceLevel);
         void SetAuctionEstimatedValues(string auctionEstimate);
+
+        void SetCostValues(string costLow, string costHigh, string costValue);
     }
 }

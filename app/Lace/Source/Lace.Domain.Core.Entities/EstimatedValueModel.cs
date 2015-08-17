@@ -35,6 +35,13 @@ namespace Lace.Domain.Core.Entities
             AuctionEstimate = auctionEstimate;
         }
 
+        public void SetCostValues(string costLow, string costHigh, string costValue)
+        {
+            CostLow = costLow;
+            CostHigh = costHigh;
+            CostValue = costValue;
+        }
+
         [DataMember]
         public string RetailEstimatedValue { get; private set; }
 
@@ -51,22 +58,32 @@ namespace Lace.Domain.Core.Entities
         public string RetailConfidenceLevel { get; private set; }
 
         [DataMember]
-        public string TradeEstimatedValue { get; set; }
+        public string TradeEstimatedValue { get; private set; }
 
         [DataMember]
-        public string TradeEstimatedLow { get; set; }
+        public string TradeEstimatedLow { get; private set; }
 
         [DataMember]
-        public string TradeEstimatedHigh { get; set; }
+        public string TradeEstimatedHigh { get; private set; }
 
         [DataMember]
-        public string TradeConfidenceValue { get; set; }
+        public string TradeConfidenceValue { get; private set; }
 
         [DataMember]
-        public string TradeConfidenceLevel { get; set; }
+        public string TradeConfidenceLevel { get; private set; }
 
         [DataMember]
-        public string AuctionEstimate { get; set; }
+        public string AuctionEstimate { get; private set; }
+
+        [DataMember]
+        public string CostLow { get; private set; }
+
+        [DataMember]
+        public string CostHigh { get; private set; }
+
+        [DataMember]
+        public string CostValue { get; private set; }
+        
 
         [DataMember]
         public string TypeName
@@ -79,5 +96,8 @@ namespace Lace.Domain.Core.Entities
         {
             get { return GetType(); }
         }
+
+
+     
     }
 }
