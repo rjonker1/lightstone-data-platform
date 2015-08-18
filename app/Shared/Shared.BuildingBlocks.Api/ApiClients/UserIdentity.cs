@@ -18,7 +18,6 @@ namespace Shared.BuildingBlocks.Api.ApiClients
 
         public Guid CustomerClientId { get; private set; }
         public Guid ContractId { get; private set; }
-        public Guid PackageId { get; private set; }
         public Guid UserId { get; private set; }
         public string UserName { get; set; }
         public IEnumerable<string> Claims { get; set; }
