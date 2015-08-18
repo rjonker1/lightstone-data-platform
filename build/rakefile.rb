@@ -20,7 +20,7 @@ require 'fileutils'
 	},
 	:octupus => {
   		:server => 'http://dev.lsa.octopus/api',
-+  		:apiKey => 'API-RC2X3OCLSRMQKYRCWENMLLT7FU'
+  		:apiKey => 'API-RC2X3OCLSRMQKYRCWENMLLT7FU'
  	}
 }
 
