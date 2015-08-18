@@ -119,6 +119,14 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                                   new SurnameRequestField(""));
                 return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
             });
+
+            Mapper.CreateMap<IProvideDataFromPCubedEzScore, IEnumerable<IDataField>>().ConvertUsing(s =>
+            {
+                var request = s.Request ??
+                              new PCubedEzScoreRequest(new IdentityNumberRequestField(""), new PhoneNumberRequestField(""), 
+                                  new EmailAddressRequestField(""));
+                return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
+            });
         }
     }
 }

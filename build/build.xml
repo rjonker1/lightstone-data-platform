@@ -467,6 +467,10 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Company.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Director.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Director.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.EzScore.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.EzScore.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Toolbox.PCubed.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Toolbox.PCubed.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll" to="lib\net45"/>
@@ -495,6 +499,7 @@
         <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
         <dependency id="Lightstone.DataPlatform.Workflow.BuildingBlocks" />
         <dependency id="RabbitMQ.Client"  />
+        <dependency id="RestSharp" version="105.0.1" />
         <dependency id="ServiceStack.Redis" version="3.9.71" />
         <dependency id="ServiceStack.Common" version="3.9.71" />
       </dependencies>

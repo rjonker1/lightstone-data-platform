@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Consumer;
@@ -27,7 +28,7 @@ namespace Lace.Domain.Core.Entities
 
         public static PCubedEzScoreResponse WithRecords(IEnumerable<IRespondWithEzScore> ezScoreRecords)
         {
-            return new PCubedEzScoreResponse(ezScoreRecords);
+            return new PCubedEzScoreResponse(ezScoreRecords.ToList());
         }
 
 

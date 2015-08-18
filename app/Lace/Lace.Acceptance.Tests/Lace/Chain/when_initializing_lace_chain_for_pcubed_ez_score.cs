@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using EasyNetQ;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
@@ -31,6 +33,21 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         {
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command, _buildSourceChain);
             _initialize.Execute();
+        }
+
+        [Observation]
+        public void lace_data_providers_for_pcubed_ez_score_search_should_loaded_correctly()
+        {
+            _initialize.DataProviderResponses.ShouldNotBeNull();
+            _initialize.DataProviderResponses.Count.ShouldEqual(10);
+            _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(1);
+
+            _initialize.DataProviderResponses.OfType<IProvideDataFromPCubedEzScore>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromPCubedEzScore>().First().Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromPCubedEzScore>().First().EzScoreRecords.Count().ShouldEqual(1);
+            _initialize.DataProviderResponses.OfType<IProvideDataFromPCubedEzScore>().First().EzScoreRecords.First().FirstName.ShouldEqual("Peggy");
+            //		FirstName	"Peggy"	string
+
         }
     }
 }

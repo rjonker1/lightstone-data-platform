@@ -36,7 +36,7 @@ namespace Lace.Acceptance.Tests.Requests
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_company_search_sources()
         {
             _responses.ShouldNotBeNull();
-            _responses.Count.ShouldEqual(9);
+            _responses.Count.ShouldEqual(10);
             _responses.Count(c => c.Handled).ShouldEqual(1);
 
 
