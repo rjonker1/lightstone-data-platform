@@ -10,6 +10,12 @@ namespace Shared.BuildingBlocks.Api.ApiClients
         {
         }
 
+        public UserIdentity(string userName)
+        {
+            UserName = userName;
+            Claims = new List<string>();
+        }
+
         public UserIdentity(bool hasMultipleCustomersClients, bool hasMultipleContracts, bool hasMultiplePackages, Guid customerClientId, Guid contractId, Guid packageId, Guid userId, string userName, IEnumerable<string> claims)
         {
             HasMultipleCustomersClients = hasMultipleCustomersClients;
