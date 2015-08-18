@@ -17,6 +17,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
                 .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.CustomerAccountNumber.ToString()))
+                .ForMember(dest => dest.AccountOwner, opt => opt.MapFrom(x => x.AccountOwner.FirstName + " " + x.AccountOwner.LastName))
                 .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(x => x.Name));
 
@@ -25,6 +26,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
                 .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.ClientAccountNumber.ToString()))
+                .ForMember(dest => dest.AccountOwner, opt => opt.MapFrom(x => x.AccountOwner.FirstName + " " + x.AccountOwner.LastName))
                 .ForMember(dest => dest.ClientId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.ClientName, opt => opt.MapFrom(x => x.Name));
 
@@ -42,6 +44,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
                 .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.CustomerAccountNumber.ToString()))
+                .ForMember(dest => dest.AccountOwner, opt => opt.MapFrom(x => x.AccountOwnerName))
                 .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(x => x.Name));
 
@@ -50,6 +53,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
                 .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.ClientAccountNumber.ToString()))
+                .ForMember(dest => dest.AccountOwner, opt => opt.MapFrom(x => x.AccountOwnerName))
                 .ForMember(dest => dest.ClientId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.ClientName, opt => opt.MapFrom(x => x.Name));
 

@@ -14,6 +14,7 @@ namespace Billing.Acceptance.Tests.Transaction
             new PersistenceSpecification<Customer>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.AccountNumber, "CUS001")
+                .CheckProperty(c => c.AccountOwner, "AccountOwner1")
                 .CheckProperty(c => c.CustomerId, Guid.NewGuid())
                 .CheckProperty(c => c.CustomerName, "Customer 1")
                 .VerifyTheMappings();
@@ -21,6 +22,7 @@ namespace Billing.Acceptance.Tests.Transaction
             new PersistenceSpecification<Client>(Session)
                .CheckProperty(c => c.Id, Guid.NewGuid())
                .CheckProperty(c => c.AccountNumber, "CLIENT001")
+               .CheckProperty(c => c.AccountOwner, "AccountOwner1")
                .CheckProperty(c => c.ClientId, Guid.NewGuid())
                .CheckProperty(c => c.ClientName, "Client 1")
                .VerifyTheMappings();
