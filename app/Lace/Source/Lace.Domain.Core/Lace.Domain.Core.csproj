@@ -89,6 +89,7 @@
     <Compile Include="Contracts\Caching\ICacheRepository.cs" />
     <Compile Include="Contracts\DataProviders\Business\IProvideDirector.cs" />
     <Compile Include="Contracts\DataProviders\Business\IProvideCompany.cs" />
+    <Compile Include="Contracts\DataProviders\Consumer\IRespondWithEzScore.cs" />
     <Compile Include="Contracts\DataProviders\DriversLicense\IRespondWithDriversLicenseInformation.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneBusinessDirector.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneProperty.cs" />
@@ -147,6 +148,7 @@
       <Name>Lace.Domain.Core.Requests</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

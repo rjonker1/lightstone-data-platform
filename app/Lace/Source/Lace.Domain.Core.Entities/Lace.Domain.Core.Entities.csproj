@@ -104,6 +104,7 @@
     <Compile Include="DirectorResponse.cs" />
     <Compile Include="DriversLicenseModels.cs" />
     <Compile Include="EstimatedValueModel.cs" />
+    <Compile Include="EzScoreRecord.cs" />
     <Compile Include="FinancedInterestValidation.cs" />
     <Compile Include="FrequencyModel.cs" />
     <Compile Include="ImageGaugeModel.cs" />

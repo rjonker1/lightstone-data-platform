@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lace.Domain.DataProviders.PCubed.EzScore</RootNamespace>
-    <AssemblyName>Lace.Domain.DataProviders.PCubed.EzScore</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.EzScore</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
@@ -76,6 +76,10 @@
       <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
@@ -86,6 +90,7 @@
     </Compile>
     <Compile Include="Infrastructure\CallPCubedEzScoreDataProvider.cs" />
     <Compile Include="Infrastructure\HandlePCubedEzScoreSourceCall.cs" />
+    <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\Management\TransformPCubedEzScoreResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromPCubedEzScore.cs" />
     <Compile Include="PCubedEzScoreDataProvider.cs" />
@@ -110,6 +115,14 @@
     <ProjectReference Include="..\Lace.Shared.DataProvider\Lace.Shared.DataProvider.csproj">
       <Project>{b2049e92-cf9a-40d5-9ade-d9bfc8ecd00c}</Project>
       <Name>Lace.Shared.DataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+      <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
+      <Name>Lace.Shared.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Toolbox.PCubed\Lace.Toolbox.PCubed.csproj">
+      <Project>{182c2b39-29e7-4290-afb4-7b703bc1ceb9}</Project>
+      <Name>Lace.Toolbox.PCubed</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>

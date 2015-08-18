@@ -6,6 +6,11 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure.Management;
+using Lace.Shared.Extensions;
+using Lace.Toolbox.PCubed;
+using Lace.Toolbox.PCubed.Domain;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
+using RestSharp;
 
 namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
 {
@@ -14,6 +19,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
+        private IRestResponse<ConsumerViewResponse> _response;
 
         public CallPCubedEzScoreDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
@@ -26,6 +32,9 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
         {
             try
             {
+                _response =
+                    new ConsumerViewService(new RestClient()).Search(HandleRequest.GetQuery(_dataProvider.GetRequest<IAmPCubedEzScoreRequest>()));
+
                 TransformResponse(response);
             }
             catch (Exception ex)

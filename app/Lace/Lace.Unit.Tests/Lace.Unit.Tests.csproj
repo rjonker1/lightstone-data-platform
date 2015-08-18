@@ -75,12 +75,20 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Common">
       <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
@@ -135,6 +143,12 @@
     <Compile Include="Sources\Lightstone\when_getting_metrics.cs" />
     <None Include="Sources\Lightstone\when_getting_total_sales_by_age_metrics.cs.old20150716" />
     <None Include="Sources\Lightstone\when_getting_total_sales_by_gender_metric.cs.old20150716" />
+    <Compile Include="Sources\PCubed\Constants.cs" />
+    <Compile Include="Sources\PCubed\Results\when_search_returns_a_single_result.cs" />
+    <Compile Include="Sources\PCubed\when_creating_combined_query_to_search.cs" />
+    <Compile Include="Sources\PCubed\when_creating_email_query.cs" />
+    <Compile Include="Sources\PCubed\when_creating_idnum_query.cs" />
+    <Compile Include="Sources\PCubed\when_creating_phone_query.cs" />
     <Compile Include="Sources\when_getting_request_fields_from_reqeust.cs" />
     <Compile Include="Sources\when_requesting_data_from_lightsone_business_director_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_lightsone_business_compan_source.cs" />
@@ -245,6 +259,10 @@
     <ProjectReference Include="..\source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Toolbox.PCubed\Lace.Toolbox.PCubed.csproj">
+      <Project>{182c2b39-29e7-4290-afb4-7b703bc1ceb9}</Project>
+      <Name>Lace.Toolbox.PCubed</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
