@@ -1,4 +1,5 @@
-﻿using Nancy.Security;
+﻿using System;
+using Nancy.Security;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -15,7 +16,7 @@ namespace Shared.Public.TestHelpers.Security
 
         public IUserIdentity GetUserIdentity(string token)
         {
-            return new UserIdentity(_username);
+            return new UserIdentity(new Guid(), _username);
         }
     }
 }

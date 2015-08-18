@@ -1,41 +1,11 @@
 ﻿using System;
-using System.Linq;
-using Nancy;
 using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
-using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Shared.BuildingBlocks.Api.Security
 {
     public static class PiplineExtensions
     {
-        public static IPipelines EnableStatelessAuthentication(this IPipelines pipelines)
-        {
-            var configuration = new StatelessAuthenticationConfiguration(ctx =>
-            {
-                var apiKey = ctx.Request.Headers.Any(h => h.Key.Equals("apikey", StringComparison.InvariantCultureIgnoreCase));
-
-                if (!apiKey)
-                {
-                    return null;
-                }
-
-                return new UserIdentity("Testing");
-            });
-
-            StatelessAuthentication.Enable(pipelines, configuration);
-
-            pipelines.BeforeRequest += ctx =>
-            {
-                if (ctx.CurrentUser == null)
-                    return HttpStatusCode.Unauthorized;
-
-                return null;
-            };
-
-            return pipelines;
-        }
-
         public static IPipelines EnableStatelessAuthentication(this IPipelines pipelines, IAuthenticateUser authenticator)
         {
             var configuration = new StatelessAuthenticationConfiguration(context =>
