@@ -58,6 +58,15 @@ namespace UserManagement.Domain.Entities
             }
         }
 
+        [DoNotMap]
+        public virtual IEnumerable<Package> Packages
+        {
+            get
+            {
+                return Contracts.SelectMany(x => x.Packages);
+            }
+        }
+
         public User() { }
 
         public User(string firstName, string lastName, string idNumber, string contactNumber, string userName, string password, 
