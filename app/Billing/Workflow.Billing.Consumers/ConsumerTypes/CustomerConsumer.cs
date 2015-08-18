@@ -19,7 +19,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
         public void Consume(IMessage<CustomerMessage> message)
         {
-            //New Customer
+            // New Customer
             var entity = Mapper.Map<CustomerMessage, Customer>(message.Body);
             var dbEntity = _accountRepository.Select(x => x).Where(x => x.CustomerId == message.Body.CustomerId);
 
@@ -30,6 +30,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 {
                     Id = dbEntity.FirstOrDefault().Id,
                     AccountNumber = dbEntity.FirstOrDefault().AccountNumber,
+                    AccountOwner = entity.AccountOwner,
                     BillingType = entity.BillingType,
                     Created = dbEntity.FirstOrDefault().Created,
                     CreatedBy = dbEntity.FirstOrDefault().CreatedBy,
