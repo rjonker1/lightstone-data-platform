@@ -2,7 +2,7 @@
 
 namespace PackageBuilder.Domain.Requests.Contracts.Requests
 {
-    public interface IAmPCubedEzScoreRequest
+    public interface IAmPCubedEzScoreRequest : IAmDataProviderRequest
     {
         IAmIdentityNumberRequestField IdNumber { get; }
         IAmPhoneNumberRequestField PhoneNumber { get; }
