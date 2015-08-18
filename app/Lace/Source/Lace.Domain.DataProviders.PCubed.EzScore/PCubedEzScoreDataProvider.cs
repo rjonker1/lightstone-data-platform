@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure;
 using Workflow.Lace.Messages.Core;
 
@@ -36,7 +37,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedEzScore);
-              //  _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubed, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedEzScore, _dataProvider);
 
                 _logCommand.LogBegin(new { _request });
 

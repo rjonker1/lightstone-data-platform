@@ -11,7 +11,7 @@ namespace Lace.Unit.Tests.Sources.PCubed
 
         public when_creating_phone_query()
         {
-            query = new ConsumerViewQuery { PhoneNumber = Constants.SearchPhone };
+            query = new ConsumerViewQuery("",Constants.SearchPhone,"");
         }
 
         public override void Observe()

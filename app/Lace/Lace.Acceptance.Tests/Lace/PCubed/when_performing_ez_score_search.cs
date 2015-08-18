@@ -18,7 +18,8 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         }
         public override void Observe()
         {
-            var query = new ConsumerViewQuery { IdNumber = "4810100045085" }; // live example
+            //var query = new ConsumerViewQuery { IdNumber = "4810100045085" }; // live example
+            var query = new ConsumerViewQuery("4810100045085"); // live example
             response = service.Search(query);
         }
 

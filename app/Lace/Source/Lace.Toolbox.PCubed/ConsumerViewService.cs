@@ -41,35 +41,6 @@ namespace Lace.Toolbox.PCubed
         public IRestResponse<ConsumerViewResponse> Search(ConsumerViewQuery query)
         {
             IRestResponse<ConsumerViewResponse> response = new RestResponse<ConsumerViewResponse>();
-            //var metadata = new MonitoringMetadata(CreateParameters(query), MonitoringCategory, CreateSubCategory(query), query.AssociationId);
-            //var monitors = new Dictionary<Func<IRestResponse<ConsumerViewResponse>, bool>, Func<MonitoringMetadata, IRestResponse<ConsumerViewResponse>, bool>>();
-
-            //monitors.Add(r => r.Data == null, (m, r) =>
-            //{
-            //    Report.CustomEvent()
-            //        .Event(new NoDataReturnedExternalServiceCallEvent())
-            //        .InCategory(MonitoringCategory)
-            //        .InSubCategory(m.SubCategory)
-            //        .RelateTo(query.AssociationId)
-            //        .WithDescription(m.Parameters, string.Empty)
-            //        .Publish();
-
-            //    return false;
-            //});
-
-            //monitors.Add(r => r.Data != null && r.Data.IndividualData == null, (m, r) =>
-            //{
-            //    Report.CustomEvent()
-            //        .Event(new NoDataReturnedExternalServiceCallEvent())
-            //        .InCategory(MonitoringCategory)
-            //        .InSubCategory(m.SubCategory)
-            //        .RelateTo(query.AssociationId)
-            //        .WithDescription(m.Parameters, string.Empty)
-            //        .Publish();
-
-            //    return false;
-            //});
-
             try
             {
                 response = Client.Setup(Configuration).Execute<ConsumerViewResponse>(query.CreateRequest());
@@ -77,6 +48,7 @@ namespace Lace.Toolbox.PCubed
             catch (Exception e)
             {
                 LogException(CreateParameters(query), e);
+                throw;
             }
 
             return response;
@@ -85,16 +57,14 @@ namespace Lace.Toolbox.PCubed
         public IRestResponse SearchAsString(ConsumerViewQuery query, ConsumerViewQuery.ResponseFormat format)
         {
             IRestResponse response = new RestResponse();
-            //var metadata = new MonitoringMetadata(CreateParameters(query), MonitoringCategory, CreateSubCategory(query));
-
             try
             {
-                //response = monitoring.Execute(() => Client.Setup(Configuration).Execute(query.CreateRequest(format)), metadata);
                 response = Client.Setup(Configuration).Execute(query.CreateRequest(format));
             }
             catch (Exception e)
             {
                 LogException(CreateParameters(query), e);
+                throw;
             }
 
             return response;

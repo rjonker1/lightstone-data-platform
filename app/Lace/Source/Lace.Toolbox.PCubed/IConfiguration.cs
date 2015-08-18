@@ -36,6 +36,7 @@ namespace Lace.Toolbox.PCubed
         {
             get { return ConfigurationHelper.Read<string>("ConsumerViewApiPassword", false, null); }
         }
-    }
 
+        public static readonly string ConsumerViewApiUrl = ConfigurationHelper.Read<string>("ConsumerViewApiUrl", true, null);
+    }
 }

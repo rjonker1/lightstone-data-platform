@@ -1,6 +1,5 @@
-﻿using System.Net;
-using System.Net.NetworkInformation;
-using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Net;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Consumer;
 using Lace.Domain.Core.Entities;
@@ -23,43 +22,41 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure.Management
 
         public void Transform()
         {
-            Result = PCubedEzScoreResponse.Empty();
 
-            GetIndividual();
+            if (_response == null || _response.IndividualData == null || _response.IndividualData.Individuals == null)
+            {
+                Result = PCubedEzScoreResponse.Empty();
+                return;
+            }
 
-            
-
-            //foreach (Individual individual in reponse.IndividualData.Individuals.Individual)
-            //{
-            //    var record = new EZScoreRecord();
-            //    foreach (PropertyInfo propertyInfo in individual.PCubed.Header.GetType().GetProperties())
-            //    {
-            //        var propValue = propertyInfo.GetValue(individual.PCubed.Header);
-
-            //        var _propertyInfo = record.GetType().GetProperty(propertyInfo.Name);
-            //        _propertyInfo.SetValue(record, propValue);
-            //    }
-
-            //    if (individual.PCubed.Detail != null)
-            //    {
-            //        foreach (PropertyInfo propertyInfo in individual.PCubed.Detail.GetType().GetProperties())
-            //        {
-            //            var propValue = propertyInfo.GetValue(individual.PCubed.Detail);
-
-            //            var _propertyInfo = record.GetType().GetProperty(propertyInfo.Name);
-            //            _propertyInfo.SetValue(record, propValue);
-            //        }
-            //    }
-            //    searchResults.Add(record);
-            //}
+            Result =  PCubedEzScoreResponse.WithRecords(GetConsumerViewRecords());
         }
 
-        private void GetIndividual()
+        private IEnumerable<IRespondWithEzScore> GetConsumerViewRecords()
         {
             foreach (var individual in _response.IndividualData.Individuals.Individual)
             {
-
+                yield return GetDetail(individual.PCubed.Detail, GetHeader(individual.PCubed.Header));
             }
+        }
+
+        private static EzScoreRecord GetHeader(Header header)
+        {
+            var record = new EzScoreRecord();
+            return header == null ? record : record.WithHeader(header.Phone1, header.Phone2, header.Phone3, header.EmailAddress1, header.EmailAddress2,
+                header.EmailAddress3, header.Surname, header.FirstName, header.IDNumber);
+        }
+
+        private static IRespondWithEzScore GetDetail(Detail detail, EzScoreRecord record)
+        {
+            return detail == null
+                ? record
+                : record.WithDetail(detail.DemLSM, detail.FASNonCPAGroupDescriptionShort, detail.MosaicCPAGroupMerged, detail.WealthIndex,
+                    detail.CreditGradeNonCPA, detail.DemHomeOwner, detail.DemDeceased,
+                    detail.DemPredictedRace, detail.DemGender, detail.PostalAddressPostCode, detail.PostalAddressProvince,
+                    detail.PostalAddressTownCity, detail.PostalAddressSuburb, detail.PostalAddressLine2, detail.PostalAddressLine1,
+                    detail.AddressPostCode, detail.AddressProvince, detail.AddressTownCity, detail.AddressSuburb, detail.AddressLine2,
+                    detail.AddressLine1, detail.ExtractDate);
         }
 
        

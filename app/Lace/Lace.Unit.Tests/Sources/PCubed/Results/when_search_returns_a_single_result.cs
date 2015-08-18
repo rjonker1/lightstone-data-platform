@@ -43,11 +43,11 @@ namespace Lace.Unit.Tests.Sources.PCubed.Results
 
         public override void Observe()
         {
-            var query = new ConsumerViewQuery { IdNumber = "4810100045085" }; // example query
+            var query = new ConsumerViewQuery("4810100045085"); // example query
             response = service.Search(query);
         }
 
-        [Observation(Skip="Need to implement")]
+        [Observation(Skip = "Need to implement")]
         public void the_result_must_contain_the_individual_header_and_details()
         {
             response.StatusCode.ShouldEqual(HttpStatusCode.OK);
@@ -109,9 +109,8 @@ namespace Lace.Unit.Tests.Sources.PCubed.Results
             person.PCubed.Detail.DemLSM.ShouldEqual("LSM9L-9H");
             person.PCubed.Detail.FASNonCPAGroupDescriptionShort.ShouldEqual("Very High");
         }
-    
 
-}
 
     }
+
 }

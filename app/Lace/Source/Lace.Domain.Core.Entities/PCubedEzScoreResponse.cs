@@ -12,16 +12,24 @@ namespace Lace.Domain.Core.Entities
     {
         public PCubedEzScoreResponse()
         {
-        }
-        public static PCubedEzScoreResponse Empty()
-        {
-            return new PCubedEzScoreResponse();
+            
         }
 
         public PCubedEzScoreResponse(IEnumerable<IRespondWithEzScore> ezScoreRecords)
         {
             EzScoreRecords = ezScoreRecords;
         }
+
+        public static PCubedEzScoreResponse Empty()
+        {
+            return new PCubedEzScoreResponse(new List<IRespondWithEzScore>());
+        }
+
+        public static PCubedEzScoreResponse WithRecords(IEnumerable<IRespondWithEzScore> ezScoreRecords)
+        {
+            return new PCubedEzScoreResponse(ezScoreRecords);
+        }
+
 
         [DataMember]
         public IAmPCubedEzScoreRequest Request { get; private set; }

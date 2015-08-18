@@ -5,10 +5,10 @@ namespace Lace.Toolbox.PCubed.Domain
     public class Detail
     {
         private string _demLsm;
-        private string _fasNonCPAGroupDescriptionShort;
-        private string _mosaicCPAGroupMerged;
+        private string _fasNonCpaGroupDescriptionShort;
+        private string _mosaicCpaGroupMerged;
         private string _wealthIndex;
-        private string _creditGradeNonCPA;
+        private string _creditGradeNonCpa;
         private string _demHomeOwner;
         private string _demDeceased;
         private string _demPredictedRace;
@@ -19,13 +19,13 @@ namespace Lace.Toolbox.PCubed.Domain
         private string _postalAddressSuburb;
         private string _postalAddressLine2;
         private string _postalAddressLine1;
-        private string addressPostCode;
-        private string addressProvince;
-        private string addressTownCity;
-        private string addressSuburb;
-        private string addressLine2;
-        private string addressLine1;
-        private string extractDate;
+        private string _addressPostCode;
+        private string _addressProvince;
+        private string _addressTownCity;
+        private string _addressSuburb;
+        private string _addressLine2;
+        private string _addressLine1;
+        private string _extractDate;
 
         public bool DemMaritalStatus { get; set; }
 
@@ -41,44 +41,44 @@ namespace Lace.Toolbox.PCubed.Domain
 
         public string ExtractDate
         {
-            get { return extractDate.Fix(); }
-            set { extractDate = value; }
+            get { return _extractDate.Fix(); }
+            set { _extractDate = value; }
         }
 
         public string AddressLine1
         {
-            get { return addressLine1.Fix(); }
-            set { addressLine1 = value; }
+            get { return _addressLine1.Fix(); }
+            set { _addressLine1 = value; }
         }
 
         public string AddressLine2
         {
-            get { return addressLine2.Fix(); }
-            set { addressLine2 = value; }
+            get { return _addressLine2.Fix(); }
+            set { _addressLine2 = value; }
         }
 
         public string AddressSuburb
         {
-            get { return addressSuburb.Fix(); }
-            set { addressSuburb = value; }
+            get { return _addressSuburb.Fix(); }
+            set { _addressSuburb = value; }
         }
 
         public string AddressTownCity
         {
-            get { return addressTownCity.Fix(); }
-            set { addressTownCity = value; }
+            get { return _addressTownCity.Fix(); }
+            set { _addressTownCity = value; }
         }
 
         public string AddressProvince
         {
-            get { return addressProvince.Fix(); }
-            set { addressProvince = value; }
+            get { return _addressProvince.Fix(); }
+            set { _addressProvince = value; }
         }
 
         public string AddressPostCode
         {
-            get { return addressPostCode.Fix(); }
-            set { addressPostCode = value; }
+            get { return _addressPostCode.Fix(); }
+            set { _addressPostCode = value; }
         }
 
         public string PostalAddressLine1
@@ -143,8 +143,8 @@ namespace Lace.Toolbox.PCubed.Domain
 
         public string CreditGradeNonCPA
         {
-            get { return _creditGradeNonCPA.Fix(); }
-            set { _creditGradeNonCPA = value; }
+            get { return _creditGradeNonCpa.Fix(); }
+            set { _creditGradeNonCpa = value; }
         }
 
         public string WealthIndex
@@ -155,14 +155,14 @@ namespace Lace.Toolbox.PCubed.Domain
 
         public string MosaicCPAGroupMerged
         {
-            get { return _mosaicCPAGroupMerged.Fix(); }
-            set { _mosaicCPAGroupMerged = value; }
+            get { return _mosaicCpaGroupMerged.Fix(); }
+            set { _mosaicCpaGroupMerged = value; }
         }
 
         public string FASNonCPAGroupDescriptionShort
         {
-            get { return _fasNonCPAGroupDescriptionShort.Fix(); }
-            set { _fasNonCPAGroupDescriptionShort = value; }
+            get { return _fasNonCpaGroupDescriptionShort.Fix(); }
+            set { _fasNonCpaGroupDescriptionShort = value; }
         }
 
         public string DemLSM

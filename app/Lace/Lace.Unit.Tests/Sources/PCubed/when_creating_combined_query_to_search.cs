@@ -11,12 +11,7 @@ namespace Lace.Unit.Tests.Sources.PCubed
 
         public when_creating_combined_query_to_search()
         {
-            query = new ConsumerViewQuery
-            {
-                IdNumber = Constants.SearchID,
-                PhoneNumber = Constants.SearchPhone,
-                EmailAddress = Constants.SearchEmail
-            };
+            query = new ConsumerViewQuery(Constants.SearchID, Constants.SearchPhone, Constants.SearchEmail);
         }
         public override void Observe()
         {

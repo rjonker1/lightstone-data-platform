@@ -12,7 +12,7 @@ namespace Lace.Domain.Core.Entities
             
         }
 
-        public void SetIndividual(string phone1, string phone2, string phone3, string emailAddress1, string emailAddress2, string emailAddress3,
+        public EzScoreRecord WithHeader(string phone1, string phone2, string phone3, string emailAddress1, string emailAddress2, string emailAddress3,
             string surname, string firstName, string idnumber)
         {
             Phone1 = phone1;
@@ -24,9 +24,10 @@ namespace Lace.Domain.Core.Entities
             Surname = surname;
             FirstName = firstName;
             IdNumber = idnumber;
+            return this;
         }
 
-        public void SetDetail(string demLsm, string fasNonCpaGroupDescriptionShort, string mosaicCpaGroupMerged, string wealthIndex,string creditGradeNonCpa,string demHomeOwner,string demDeceased,string demPredictedRace,string demGender,
+        public EzScoreRecord WithDetail(string demLsm, string fasNonCpaGroupDescriptionShort, string mosaicCpaGroupMerged, string wealthIndex, string creditGradeNonCpa, string demHomeOwner, string demDeceased, string demPredictedRace, string demGender,
             string postalAddressPostCode,string postalAddressProvince,string postalAddressTownCity,string postalAddressSuburb,string postalAddressLine2,string postalAddressLine1,string addressPostCode,string addressProvince,
             string addressTownCity,string addressSuburb,string addressLine2,string addressLine1,string extractDate)
         {
@@ -52,6 +53,7 @@ namespace Lace.Domain.Core.Entities
             AddressLine2 = addressLine2;
             AddressLine1 = addressLine1;
             ExtractDate = extractDate;
+            return this;
         }
 
         private static bool GetBool(string value)

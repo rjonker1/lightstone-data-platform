@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -11,6 +13,7 @@ using Lace.Toolbox.PCubed;
 using Lace.Toolbox.PCubed.Domain;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using RestSharp;
+using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
 {
@@ -32,8 +35,15 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
         {
             try
             {
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
+                   .ForWebApiType(), new { _dataProvider });
+
                 _response =
                     new ConsumerViewService(new RestClient()).Search(HandleRequest.GetQuery(_dataProvider.GetRequest<IAmPCubedEzScoreRequest>()));
+
+                _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                   new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
+                       .ForDatabaseType(), new { _response });
 
                 TransformResponse(response);
             }
@@ -47,7 +57,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformPCubedEzScoreResponse();
+            var transformer = new TransformPCubedEzScoreResponse(_response);
 
             if (transformer.Continue)
             {
@@ -62,7 +72,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
 
         private static void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var ezScoreResponse = new PCubedEzScoreResponse();
+            var ezScoreResponse = PCubedEzScoreResponse.Empty();
             ezScoreResponse.HasBeenHandled();
             response.Add(ezScoreResponse);
         }

@@ -11,7 +11,7 @@ namespace Lace.Unit.Tests.Sources.PCubed
 
         public when_creating_email_query()
         {
-            _query = new ConsumerViewQuery { EmailAddress = Constants.SearchEmail };
+            _query = new ConsumerViewQuery("", "", Constants.SearchEmail);
         }
 
         public override void Observe()
