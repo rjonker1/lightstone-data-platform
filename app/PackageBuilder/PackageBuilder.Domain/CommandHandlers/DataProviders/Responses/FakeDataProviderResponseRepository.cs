@@ -73,7 +73,9 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         audatexResponse.HasBeenHandled();
                         return audatexResponse;
                     case DataProviderName.PCubedFica:
-                        return new PCubedFicaVerficationResponse();
+                        return new PCubedFicaVerficationResponse().DefaultFicaResponse();
+                    case DataProviderName.PCubedEzScore:
+                        return new PCubedEzScoreResponse().DefaultEzScoreResponse();
                     case DataProviderName.SignioDecryptDriversLicense:
                         return new SignioDriversLicenseDecryptionResponse().DefaultSignioDriversLicenseDecryptionResponse();
                     case DataProviderName.LightstoneProperty:

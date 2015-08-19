@@ -32,8 +32,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return new RgtVinResponse();
                     case DataProviderName.Audatex:
                         return new AudatexResponse().DefaultAudatexResponse();
-                    case DataProviderName.PCubedFica:
-                        return new PCubedFicaVerficationResponse();
+                    //case DataProviderName.PCubedFica:
+                    //    return new PCubedFicaVerficationResponse().DefaultFicaResponse(); 
+                    case DataProviderName.PCubedEzScore:
+                        return new PCubedEzScoreResponse().DefaultEzScoreResponse();
                     case DataProviderName.SignioDecryptDriversLicense:
                         return new SignioDriversLicenseDecryptionResponse().DefaultSignioDriversLicenseDecryptionResponse();
                     case DataProviderName.LightstoneProperty:
