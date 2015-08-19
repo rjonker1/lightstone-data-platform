@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Threading.Tasks;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
@@ -87,23 +88,49 @@ namespace Workflow.Billing.Repository
             }
         }
 
-        public void CachePipelineInsert(IRepository<T> typedEntityRepository)
+        //public void CachePipelineInsert(IRepository<T> typedEntityRepository)
+        //{
+        //    try
+        //    {
+        //        using (var client = CacheClient)
+        //        using (var pipeline = client.CreateTransaction())
+        //        {
+        //            pipeline.QueueCommand(c => c.DeleteAll());
+
+        //            foreach (var record in typedEntityRepository)
+        //            {
+        //                if (record != null)
+        //                    pipeline.QueueCommand(c => c.Store(record));
+        //            }
+
+        //            pipeline.Commit();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new LightstoneAutoException(ex.Message);
+        //    }
+        //}
+
+        public async Task CachePipelineInsert(IRepository<T> typedEntityRepository)
         {
             try
             {
-                using (var client = CacheClient)
-                using (var pipeline = client.CreateTransaction())
+                await Task.Factory.StartNew(() =>
                 {
-                    pipeline.QueueCommand(c => c.DeleteAll());
-
-                    foreach (var record in typedEntityRepository)
+                    using (var client = CacheClient)
+                    using (var pipeline = client.CreateTransaction())
                     {
-                        if (record != null)
-                            pipeline.QueueCommand(c => c.Store(record));
-                    }
+                        pipeline.QueueCommand(c => c.DeleteAll());
 
-                    pipeline.Commit();
-                }
+                        foreach (var record in typedEntityRepository)
+                        {
+                            if (record != null) pipeline.QueueCommand(c => c.Store(record));
+                        }
+
+                        pipeline.Commit();
+                    }
+                });
             }
             catch (Exception ex)
             {

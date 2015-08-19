@@ -17,7 +17,7 @@ using Shared.BuildingBlocks.Api.Validation;
 
 namespace Api.Modules
 {
-    public class ActionModule : NancyModule // SecureModule
+    public class ActionModule : SecureModule
     {
         private static int _defaultJsonMaxLength;
 

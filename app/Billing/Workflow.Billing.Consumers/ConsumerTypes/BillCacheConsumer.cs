@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Helpers.Extensions;
+﻿using System.Threading.Tasks;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Workflow.Billing.Domain.Entities;
@@ -31,7 +32,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
             _finalBillingRepository = finalBillingRepository;
         }
 
-        public void Consume(IMessage<BillCacheMessage> message)
+        public async Task Consume(IMessage<BillCacheMessage> message)
         {
             switch (message.Body.BillingType.Name)
             {
@@ -39,7 +40,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     _preBillingCacheProvider.Initialize();
 
                     this.Info(() => "Processing PreBilling - {0}".FormatWith(message.Body.Command.ToString()));
-                    if (message.Body.Command.Equals(BillingCacheCommand.Reload)) _preBillingCacheProvider.CachePipelineInsert(_preBillingRepository);
+                    if (message.Body.Command.Equals(BillingCacheCommand.Reload)) await _preBillingCacheProvider.CachePipelineInsert(_preBillingRepository);
                     if (message.Body.Command.Equals(BillingCacheCommand.Flush)) _preBillingCacheProvider.FlushCacheProvider(_preBillingCacheProvider);
                     this.Info(() => "Completed PreBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     break;
@@ -48,7 +49,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     _stageBillingCacheProvider.Initialize();
 
                     this.Info(() => "Processing StageBilling - {0}".FormatWith(message.Body.Command.ToString()));
-                    if (message.Body.Command.Equals(BillingCacheCommand.Reload)) _stageBillingCacheProvider.CachePipelineInsert(_stageBillingRepository);
+                    if (message.Body.Command.Equals(BillingCacheCommand.Reload)) await _stageBillingCacheProvider.CachePipelineInsert(_stageBillingRepository);
                     if (message.Body.Command.Equals(BillingCacheCommand.Flush)) _stageBillingCacheProvider.FlushCacheProvider(_stageBillingCacheProvider);
                     this.Info(() => "Completed StageBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     break;
@@ -57,7 +58,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     _finalBillingCacheProvider.Initialize();
 
                     this.Info(() => "Processing FinalBilling - {0}".FormatWith(message.Body.Command.ToString()));
-                    if (message.Body.Command.Equals(BillingCacheCommand.Reload)) _finalBillingCacheProvider.CachePipelineInsert(_finalBillingRepository);
+                    if (message.Body.Command.Equals(BillingCacheCommand.Reload)) await _finalBillingCacheProvider.CachePipelineInsert(_finalBillingRepository);
                     if (message.Body.Command.Equals(BillingCacheCommand.Flush)) _finalBillingCacheProvider.FlushCacheProvider(_finalBillingCacheProvider);
                     this.Info(() => "Completed FinalBilling - {0}".FormatWith(message.Body.Command.ToString()));
                     break;
