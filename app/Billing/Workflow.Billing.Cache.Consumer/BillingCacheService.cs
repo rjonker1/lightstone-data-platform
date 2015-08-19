@@ -25,7 +25,6 @@ namespace Workflow.Billing.Cache.Consumer
                 new ConsumerInstaller(),
                 new BusInstaller());
 
-            //bus = container.Resolve<IBus>();
             advancedBus = container.Resolve<IAdvancedBus>();
             var cache = advancedBus.QueueDeclare("DataPlatform.Cache.Billing");
 

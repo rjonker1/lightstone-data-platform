@@ -84,8 +84,8 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1453, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1453\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1517, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1517\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -93,7 +93,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1384\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1517\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
@@ -157,6 +157,8 @@
     <Compile Include="Fixtures\RebuildBillingEnvironment.cs" />
     <Compile Include="Transaction\Billing\when_persisting_transaction_archive.cs" />
     <Compile Include="Transaction\Billing\when_replaying_transactions_to_billingTransaction.cs" />
+    <Compile Include="Transaction\EasyNetQ\when_publishing_cache_flush.cs" />
+    <Compile Include="Transaction\EasyNetQ\when_publishing_cache_reload.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_client_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_customer_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_package_to_queue.cs" />
@@ -201,6 +203,10 @@
     <ProjectReference Include="..\Billing.TestHelper\Billing.TestHelper.csproj">
       <Project>{920B81A8-7088-4E8B-8170-228906CD127E}</Project>
       <Name>Billing.TestHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
+      <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>
+      <Name>Workflow.Billing.Messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing\Workflow.Billing.csproj">
       <Project>{74859ECC-2E2E-4016-8689-2FB29CDBBB02}</Project>

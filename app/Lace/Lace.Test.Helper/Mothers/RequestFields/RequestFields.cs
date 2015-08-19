@@ -2,6 +2,36 @@
 
 namespace Lace.Test.Helper.Mothers.RequestFields
 {
+    public class EmailAddressRequestField : IAmEmailAddressRequestField
+    {
+        private EmailAddressRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmEmailAddressRequestField Get(string field)
+        {
+            return new EmailAddressRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
+    public class PhoneNumberRequestField : IAmPhoneNumberRequestField
+    {
+        private PhoneNumberRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmPhoneNumberRequestField Get(string field)
+        {
+            return new PhoneNumberRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
     public class VinNumberRequestField : IAmVinNumberRequestField
     {
         private VinNumberRequestField(string field)

@@ -26,6 +26,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.RgtVin, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.Audatex, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.PCubedFica, 0, "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.PCubedEzScore, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.SignioDecryptDriversLicense, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LightstoneProperty, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LightstoneBusinessCompany, 0, "Owner", DateTime.UtcNow));

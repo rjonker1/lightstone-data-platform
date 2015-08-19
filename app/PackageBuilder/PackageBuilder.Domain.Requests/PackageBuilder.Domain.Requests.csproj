@@ -54,7 +54,9 @@
     <Compile Include="Fields\CompanyNameRequestField.cs" />
     <Compile Include="Fields\CompanyRegistrationNumberRequestField.cs" />
     <Compile Include="Fields\CompanyVatNumberRequestField.cs" />
+    <Compile Include="Fields\EmailAddressRequestField.cs" />
     <Compile Include="Fields\EngineNumberRequestField.cs" />
+    <Compile Include="Fields\PhoneNumberRequestField.cs" />
     <Compile Include="Fields\RegistrationCodeRequestField.cs" />
     <Compile Include="Fields\ScanDataRequestField.cs" />
     <Compile Include="Fields\SurnameRequestField.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="LightstoneAutoRequest.cs" />
     <Compile Include="LightstoneDirectorRequest.cs" />
     <Compile Include="LightstoneCompanyRequest.cs" />
+    <Compile Include="PCubedEzScoreRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RgtRequest.cs" />
     <Compile Include="RgtVinRequest.cs" />

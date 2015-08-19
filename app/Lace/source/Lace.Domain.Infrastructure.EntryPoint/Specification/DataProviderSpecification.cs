@@ -10,6 +10,7 @@ using Lace.Domain.DataProviders.Lightstone;
 using Lace.Domain.DataProviders.Lightstone.Business.Company;
 using Lace.Domain.DataProviders.Lightstone.Business.Director;
 using Lace.Domain.DataProviders.Lightstone.Property;
+using Lace.Domain.DataProviders.PCubed.EzScore;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
 using Lace.Domain.DataProviders.Signio.DriversLicense;
@@ -31,7 +32,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                             new SignioDataProvider(request,
                                                 new LightstonePropertyDataProvider(request,
                                                     new LightstoneCompanyDataProvider(request,
-                                                        new LightstoneDirectorDataProvider(request, null, null,
+                                                        new LightstoneDirectorDataProvider(request,
+                                                            new PCubedEzScoreDataProvider(request, null, null,
+                                                                CommandSender.InitCommandSender(bus, requestId,
+                                                                    DataProviderCommandSource.PCubedEzScore)), null,
                                                             CommandSender.InitCommandSender(bus, requestId,
                                                                 DataProviderCommandSource.LightstoneBusinessDirector)), null,
                                                         CommandSender.InitCommandSender(bus, requestId,

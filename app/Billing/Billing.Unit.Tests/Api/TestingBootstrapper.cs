@@ -19,7 +19,7 @@ namespace Billing.Api.Tests.Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            pipelines.EnableStatelessAuthentication();
+            //pipelines.EnableStatelessAuthentication();
         }
 
 

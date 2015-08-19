@@ -103,7 +103,6 @@ namespace UserManagement.Api.Helpers.Extensions
 
                     foreach (var customer in customers)
                     {
-
                         // Set new customer AccountNumber
                         // Send to Queue
                         if (customer.CustomerAccountNumber.Customer == null)
