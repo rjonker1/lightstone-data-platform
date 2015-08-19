@@ -29,13 +29,9 @@ namespace UserManagement.Api.Helpers.Security
         public IUserIdentity GetUserIdentity(string token)
         {
             var user = _repository.Get(new Guid(token));
-            return user == null
-                ? null
-                : new UserIdentity(user.UserName)
-                {
-                    Id = user.Id,
-                    Claims = user.Roles != null ? user.Roles.ToList().Select(x => x.Value) : Enumerable.Empty<string>()
-                };
+            return user != null
+                ? new UserIdentity(user.Id, user.UserName, user.Roles != null ? user.Roles.ToList().Select(x => x.Value).ToArray() : Enumerable.Empty<string>().ToArray())
+                : null;
         }
 
         public IUserIdentity GetUserIdentity(string username, string password)
@@ -50,11 +46,7 @@ namespace UserManagement.Api.Helpers.Security
             var isValid = _hashProvider.VerifyHashString(password, user.Password, user.Salt);
 
             return isValid
-                ? new UserIdentity(user.UserName)
-                {
-                    Id = user.Id,
-                    Claims = user.Roles != null ? user.Roles.ToList().Select(x => x.Value) : Enumerable.Empty<string>()
-                }
+                ? new UserIdentity(user.Id, user.UserName, user.Roles != null ? user.Roles.ToList().Select(x => x.Value).ToArray() : Enumerable.Empty<string>().ToArray())
                 : null;
         }
     }

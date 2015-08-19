@@ -11,7 +11,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataProviders
 {
-    public class when_mapping_an_override_to_a_single_data_provider : MemoryTestDataBaseHelper
+    public class when_mapping_an_override_to_a_single_data_provider : TestDataBaseHelper
     {
         private readonly IDataProvider _dataProvider;
 

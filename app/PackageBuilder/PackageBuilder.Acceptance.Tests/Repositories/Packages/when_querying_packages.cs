@@ -6,7 +6,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.Packages
 {
-    public class when_querying_packages : MemoryTestDataBaseHelper
+    public class when_querying_packages : TestDataBaseHelper
     {
         private readonly Guid _id;
         private readonly PackageRepository _repository;

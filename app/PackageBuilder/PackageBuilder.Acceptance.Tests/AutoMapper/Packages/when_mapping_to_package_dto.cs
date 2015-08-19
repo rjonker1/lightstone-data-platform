@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
-using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.TestHelper.BaseTests;
@@ -10,7 +9,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.AutoMapper.Packages
 {
-    public class when_mapping_to_package_dto : MemoryTestDataBaseHelper
+    public class when_mapping_to_package_dto : TestDataBaseHelper
     {
         private PackageDto _packageDto;
         public override void Observe()

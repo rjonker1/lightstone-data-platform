@@ -7,7 +7,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.States
 {
-    public class when_querying_state : MemoryTestDataBaseHelper
+    public class when_querying_state : TestDataBaseHelper
     {
         private StateRepository _repository;
 

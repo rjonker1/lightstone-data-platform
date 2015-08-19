@@ -7,7 +7,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.DataProviders
 {
-    public class when_querying_data_providers : MemoryTestDataBaseHelper
+    public class when_querying_data_providers : TestDataBaseHelper
     {
         private DataProviderRepository _repository;
 

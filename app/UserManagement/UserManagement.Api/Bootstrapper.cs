@@ -13,8 +13,8 @@ using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
+using UserManagement.Api.Helpers;
 using UserManagement.Api.Helpers.Extensions;
-using UserManagement.Api.Installers;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.DataImports;
 using UserManagement.Infrastructure.Helpers;
@@ -22,7 +22,6 @@ using IBus = MemBus.IBus;
 
 namespace UserManagement.Api
 {
-
     public class Bootstrapper : WindsorNancyBootstrapper
     {
         // The bootstrapper enables you to reconfigure the composition of the framework,
@@ -43,20 +42,7 @@ namespace UserManagement.Api
             // Perform registations that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
-            container.Install(
-                new NHibernateInstaller(),
-                new RepositoryInstaller(),
-                new CommandInstaller(),
-                new BusInstaller(),
-                new ServiceLocatorInstaller(),
-                new AutoMapperInstaller(),
-                new HelperInstaller(),
-                new ApiClientInstaller(),
-                new RedisInstaller(),
-                new AuthenticationInstaller(),
-                new HashProviderInstaller(),
-                new AuthInstaller()
-                );
+            container.Install(WindsorInstallerCollection.Installers);
 
             //Drop create
             //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);

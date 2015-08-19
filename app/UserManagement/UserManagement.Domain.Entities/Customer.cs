@@ -29,7 +29,8 @@ namespace UserManagement.Domain.Entities
         {
             get
             {
-                var activated = Contracts != null && (Contracts.Any() && Contracts.SelectMany(x => x.Packages).Any());
+                var packages = Contracts != null ? Contracts.SelectMany(x => x.Packages != null ? x.Packages.Where(p => p != null) : Enumerable.Empty<Package>()) : Enumerable.Empty<Package>();
+                var activated = Contracts != null && (Contracts.Any() && packages.Any());
                 _platformStatus = activated ? PlatformStatusType.Activated : PlatformStatusType.Incomplete;
                 if (IsLocked) _platformStatus = PlatformStatusType.Locked;
                 return _platformStatus;

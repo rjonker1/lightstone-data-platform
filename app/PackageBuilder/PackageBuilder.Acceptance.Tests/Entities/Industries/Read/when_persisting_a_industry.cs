@@ -6,7 +6,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Entities.Industries.Read
 {
-    public class when_persisting_a_industry : MemoryTestDataBaseHelper
+    public class when_persisting_a_industry : TestDataBaseHelper
     {
         public override void Observe()
         {

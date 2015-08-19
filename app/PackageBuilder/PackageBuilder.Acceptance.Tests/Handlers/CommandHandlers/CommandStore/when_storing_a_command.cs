@@ -9,11 +9,10 @@ using PackageBuilder.Domain.Entities.CommandStore.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit;
-using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
 {
-    public class when_storing_a_command : MemoryTestDataBaseHelper
+    public class when_storing_a_command : TestDataBaseHelper
     {
         private StoreCommandHandler _handler;
         private IRepository<Command> _repository;
@@ -39,7 +38,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
         }
     }
 
-    public class when_replaying_a_command : MemoryTestDataBaseHelper
+    public class when_replaying_a_command : TestDataBaseHelper
     {
         private ReplayCommandHandler _replayCommandHandler;
         private IBus _bus;

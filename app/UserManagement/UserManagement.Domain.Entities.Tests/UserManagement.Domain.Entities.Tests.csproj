@@ -82,22 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValueTypes\when_persisting_commercial_state.cs" />
-    <Compile Include="ValueTypes\when_persisting_country.cs" />
-    <Compile Include="ValueTypes\when_persisting_contract_type.cs" />
-    <Compile Include="ValueTypes\when_persisting_province.cs" />
-    <Compile Include="when_persisting_address.cs" />
-    <Compile Include="when_persisting_audit_log.cs" />
-    <Compile Include="when_persisting_billing.cs" />
-    <Compile Include="when_persisting_client.cs" />
-    <Compile Include="when_persisting_contact_detail.cs" />
-    <Compile Include="when_persisting_contract.cs" />
-    <Compile Include="when_persisting_customer.cs" />
-    <Compile Include="when_persisting_customer_account_number.cs" />
-    <Compile Include="when_persisting_package.cs" />
-    <Compile Include="when_persisting_user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValueTypes\when_persisting_role.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

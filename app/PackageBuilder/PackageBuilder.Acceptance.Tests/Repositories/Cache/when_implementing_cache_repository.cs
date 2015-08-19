@@ -9,7 +9,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.Cache
 {
-    public class when_implementing_cache_repository : MemoryTestDataBaseHelper
+    public class when_implementing_cache_repository : TestDataBaseHelper
     {
         private readonly string _host = ConfigurationManager.ConnectionStrings["workflow/redis/cache"].ConnectionString;
 

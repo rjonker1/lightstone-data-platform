@@ -12,7 +12,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Modules.States
 {
-    public class when_invoking_state_edit_route : MemoryTestDataBaseHelper
+    public class when_invoking_state_edit_route : TestDataBaseHelper
     {
         private Browser _browser;
         private BrowserResponse _response;

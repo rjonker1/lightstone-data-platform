@@ -10,7 +10,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Repositories.Base
 {
-    public class when_implementing_base_repository : MemoryTestDataBaseHelper
+    public class when_implementing_base_repository : TestDataBaseHelper
     {
         private readonly IRepository<DataProvider> _repository;
         private readonly Guid _id;

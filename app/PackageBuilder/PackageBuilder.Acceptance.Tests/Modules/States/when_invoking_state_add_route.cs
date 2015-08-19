@@ -10,7 +10,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Modules.States
 {
-    public class when_invoking_state_add_route : MemoryTestDataBaseHelper
+    public class when_invoking_state_add_route : TestDataBaseHelper
     {
         private Browser _browser;
         private BrowserResponse _response;

@@ -9,7 +9,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Entities.Packages.Read
 {
-    public class when_persisting_a_package : MemoryTestDataBaseHelper
+    public class when_persisting_a_package : TestDataBaseHelper
     {
         public override void Observe()
         {

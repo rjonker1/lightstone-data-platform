@@ -93,17 +93,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1515, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1515\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1515, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1515\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1200\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.1515, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1515\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.1307, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -171,9 +171,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.0.316.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -596,6 +596,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\Contracts\ContractMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataTables\DataTablesMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Messages\MessageMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\RequestInfo\RequestInfoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Users\UserAliasMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ValueEntities\ValueEntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\PackageMap.cs" />
@@ -628,6 +629,7 @@
     <Compile Include="Helpers\NancyRazorHelpers\ValidationMessageExtensions.cs" />
     <Compile Include="Helpers\Security\RedisAuthenticator.cs" />
     <Compile Include="Helpers\Security\UmAuthenticator.cs" />
+    <Compile Include="Helpers\WindsorInstallerCollection.cs" />
     <Compile Include="Installers\ApiClientInstaller.cs" />
     <Compile Include="Installers\AuthenticationInstaller.cs" />
     <Compile Include="Installers\AuthInstaller.cs" />
@@ -650,6 +652,7 @@
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\IntegrationModule.cs" />
     <Compile Include="Modules\NamedEntityModule.cs" />
+    <Compile Include="Modules\RequestInfoModule.cs" />
     <Compile Include="Modules\UserAliasModule.cs" />
     <Compile Include="Modules\ValueEntityModule.cs" />
     <Compile Include="ViewModels\DataTablesViewModel.cs" />

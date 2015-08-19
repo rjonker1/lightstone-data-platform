@@ -7,7 +7,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Entities.States.Read
 {
-    public class when_persisting_a_state : MemoryTestDataBaseHelper
+    public class when_persisting_a_state : TestDataBaseHelper
     {
         public override void Observe()
         {

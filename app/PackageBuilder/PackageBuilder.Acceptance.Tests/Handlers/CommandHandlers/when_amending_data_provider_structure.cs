@@ -68,7 +68,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
         }
     }
 
-    public class when_amending_data_provider_structure : MemoryTestDataBaseHelper
+    public class when_amending_data_provider_structure : TestDataBaseHelper
     {
         private readonly Guid _id = Guid.NewGuid();
         private IEnumerable<IDataField> _originalFields;

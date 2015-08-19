@@ -11,9 +11,9 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
 {
-    public class when_updating_the_lightStone_data_provider : BaseDataProviderTest
+    public class when_updating_the_lightstone_data_provider : BaseDataProviderTest
     {
-        public when_updating_the_lightStone_data_provider()
+        public when_updating_the_lightstone_data_provider()
         {
             Handler.Handle(new CreateDataProvider(Id, DataProviderName.LightstoneAuto, 0, "Owner", DateTime.UtcNow));
 

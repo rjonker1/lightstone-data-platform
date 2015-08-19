@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Helpers;
+﻿using System.Linq;
+using DataPlatform.Shared.Helpers;
 using NHibernate;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
@@ -8,6 +9,7 @@ namespace UserManagement.Infrastructure.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
+        User Get(string username);
         PagedList<User> Search(string searchValue, int pageIndex, int pageSize);
     }
 
@@ -16,6 +18,11 @@ namespace UserManagement.Infrastructure.Repositories
         public UserRepository(ISession session)
             : base(session)
         {
+        }
+
+        public User Get(string username)
+        {
+            return this.FirstOrDefault(x => (x.UserName + "").Trim().ToLower() == (username + "").Trim().ToLower());
         }
 
         public PagedList<User> Search(string searchValue, int pageIndex, int pageSize)

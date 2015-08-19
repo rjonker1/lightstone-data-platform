@@ -8,7 +8,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataFields
 {
-    public class when_mapping_to_a_single_data_field_dto : MemoryTestDataBaseHelper
+    public class when_mapping_to_a_single_data_field_dto : TestDataBaseHelper
     {
         private DataProviderFieldItemDto _dto;
         public override void Observe()
