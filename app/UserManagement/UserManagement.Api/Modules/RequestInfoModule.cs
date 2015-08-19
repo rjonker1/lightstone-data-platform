@@ -10,9 +10,10 @@ namespace UserManagement.Api.Modules
     {
         public RequestInfoModule(IUserRepository userRepository)
         {
-            Get["/RequestInfo/"] = _ =>
+            Get["/RequestInfo/{username}"] = _ =>
             {
-                var user = userRepository.Get(Context.CurrentUser.UserName);
+                //var user = userRepository.Get(Context.CurrentUser.UserName);
+                var user = userRepository.Get(_.username);
                 return user == null ? null : Mapper.Map<User, RequestInfoDto>(user);
             };
         }

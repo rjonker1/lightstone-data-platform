@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using RestSharp;
 using Shared.Configuration;
 
@@ -9,10 +8,10 @@ namespace Shared.BuildingBlocks.Api.ApiClients
 {
     public interface IApiClient
     {
-        string Get(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers);
-        string Post(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers);
-        T Get<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new();
-        T Post<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new();
+        string Get(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers);
+        string Post(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers);
+        T Get<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers) where T : new();
+        T Post<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient
@@ -29,52 +28,51 @@ namespace Shared.BuildingBlocks.Api.ApiClients
             _client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
         }
 
-        private T Data<T>(string token, string resource, object body, Method method = Method.GET, params KeyValuePair<string, string>[] headers) where T : new()
+        public T Get<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
-            var request = RestRequest(resource, token, body, method, headers);
+            var request = RestRequest(token, resource, Method.GET, DataFormat.Json, null, headers);
 
             return _client.Execute<T>(request).Data;
         }
 
-        public T Get<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new()
+        public T Post<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
-            return Data<T>(token, resource, body, Method.GET, headers);
+            var request = RestRequest(token, resource, Method.POST, DataFormat.Json, parameters, body, headers);
+
+            return _client.Execute<T>(request).Data;
         }
 
-        public T Post<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new()
+        public string Get(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers)
         {
-            return Data<T>(token, resource, body, Method.POST, headers);
-        }
-
-        private string Content(string token, string resource, object body, Method method = Method.GET, params KeyValuePair<string, string>[] headers)
-        {
-            var request = RestRequest(resource, token, body, method, headers);
-
+            var request = RestRequest(token, resource, Method.GET, DataFormat.Json, parameters, null, headers);
             return _client.Execute(request).Content;
         }
 
-        public string Get(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers)
+        public string Post(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers)
         {
-            return Content(token, resource, body, Method.GET, headers);
+            var request = RestRequest(token, resource, Method.POST, DataFormat.Json, parameters, body, headers);
+            return _client.Execute(request).Content;
         }
 
-        public string Post(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers)
-        {
-            return Content(token, resource, body, Method.POST, headers);
-        }
-
-        private static RestRequest RestRequest(string resource, string token, object body = null,
-            Method method = Method.GET, params KeyValuePair<string, string>[] headers)
+        private static RestRequest RestRequest(string token, string resource = "", Method method = Method.GET, DataFormat dataFormat = DataFormat.Json, IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers)
         {
             var request = new RestRequest(resource, method);
-            //request.AddHeader("Authorization", "ApiKey " + token);
+
+            if (!string.IsNullOrEmpty(token))
+                request.AddHeader("Authorization", "Token " + token);
+
             foreach (var valuePair in headers)
                 request.AddHeader(valuePair.Key, valuePair.Value);
-            var contentType = headers.FirstOrDefault(x => (x.Key + "").Trim().ToLower() == "content-type").Value;
-            if (contentType != null && contentType.Contains("json"))
-                request.RequestFormat = DataFormat.Json;
+
+            parameters = parameters ?? Enumerable.Empty<KeyValuePair<string, string>>();
+            foreach (var parameter in parameters)
+                request.AddParameter(parameter.Key, parameter.Value);
+
             if (body != null)
+            {
+                request.RequestFormat = dataFormat;
                 request.AddBody(body);
+            }
 
             return request;
         }
