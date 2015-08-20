@@ -6,32 +6,6 @@ using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
 {
-    public class RequestInfoDto
-    {
-        public IEnumerable<RequestInfoCustomerDto> Customers { get; set; }
-    }
-
-    public class RequestInfoCustomerDto : NamedEntityDto
-    {
-        public IEnumerable<RequestInfoContractDto> Contracts { get; set; }
-    }
-
-    public class RequestInfoContractDto : NamedEntityDto
-    {
-        public IEnumerable<RequestInfoPackageDto> Packages { get; set; }
-    }
-
-    public class RequestInfoPackageDto : NamedEntityDto
-    {
-        public IEnumerable<RequestInfoRequestFieldDto> RequestFields { get; set; }
-    }
-
-    public class RequestInfoRequestFieldDto
-    {
-        public int Index { get; set; }
-        public string Name { get; set; }
-    }
-
     public class CustomerDto : NamedEntityDto
     {
         public Guid Id { get; set; }

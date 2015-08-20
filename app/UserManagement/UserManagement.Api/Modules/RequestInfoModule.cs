@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using DataPlatform.Shared.Dtos.RequestInfo;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Infrastructure.Repositories;
 

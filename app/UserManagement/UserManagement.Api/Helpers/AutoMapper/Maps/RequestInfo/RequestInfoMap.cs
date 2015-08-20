@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using UserManagement.Domain.Dtos;
+using DataPlatform.Shared.Dtos.RequestInfo;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.RequestInfo
