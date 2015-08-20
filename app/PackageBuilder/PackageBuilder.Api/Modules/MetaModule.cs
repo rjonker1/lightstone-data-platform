@@ -22,7 +22,7 @@ namespace PackageBuilder.Api.Modules
 {
     public class MetaModule : SecureModule
     {
-        public MetaModule(INEventStoreRepository<Package> writeRepo, IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
+        public MetaModule(INEventStoreRepository<Package> writeRepo, IPublishIntegrationMessages integration)
         {
             Post["/Packages/Execute/Meta"] = parameters =>
             {

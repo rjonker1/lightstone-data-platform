@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using System;
+using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Security;
 using Shared.BuildingBlocks.Api.ApiClients;
@@ -14,7 +15,7 @@ namespace PackageBuilder.TestHelper.Fakes
 
         public IUserIdentity Detokenize(string token, NancyContext context, IUserIdentityResolver userIdentityResolver)
         {
-            return new UserIdentity("FakeUser");
+            return new UserIdentity(new Guid(), "FakeUser");
         }
     }
 }

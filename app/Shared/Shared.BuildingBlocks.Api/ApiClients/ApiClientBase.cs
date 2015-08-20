@@ -30,7 +30,7 @@ namespace Shared.BuildingBlocks.Api.ApiClients
 
         public T Get<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
-            var request = RestRequest(token, resource, Method.GET, DataFormat.Json, null, headers);
+            var request = RestRequest(token, resource, Method.GET, DataFormat.Json, parameters, null, headers);
 
             return _client.Execute<T>(request).Data;
         }
@@ -63,10 +63,10 @@ namespace Shared.BuildingBlocks.Api.ApiClients
 
             foreach (var valuePair in headers)
                 request.AddHeader(valuePair.Key, valuePair.Value);
-
+            
             parameters = parameters ?? Enumerable.Empty<KeyValuePair<string, string>>();
             foreach (var parameter in parameters)
-                request.AddParameter(parameter.Key, parameter.Value);
+                request.AddUrlSegment(parameter.Key, parameter.Value);
 
             if (body != null)
             {

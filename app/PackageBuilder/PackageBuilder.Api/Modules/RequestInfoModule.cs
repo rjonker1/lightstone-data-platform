@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoMapper;
-using PackageBuilder.Domain.Entities.Requests;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -11,10 +9,10 @@ namespace PackageBuilder.Api.Modules
     {
         public RequestInfoModule(IUserManagementApiClient userManagementApi)
         {
-            Get["/RequestInfo/"] = _ =>
+            Get["/RequestInfo"] = _ =>
             {
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var user = userManagementApi.Get<RequestInfoDto>(token, "RequestInfo", new []{ new KeyValuePair<string, string>("username", Context.CurrentUser.UserName) });
+                var user = userManagementApi.Get<RequestInfoDto>(token, "/RequestInfo/{username}", new[] { new KeyValuePair<string, string>("username", Context.CurrentUser.UserName) });
                 return user;
             };
         }
