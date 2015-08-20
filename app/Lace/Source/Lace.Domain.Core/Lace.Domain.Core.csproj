@@ -92,6 +92,7 @@
     <Compile Include="Contracts\DataProviders\Consumer\IRespondWithEzScore.cs" />
     <Compile Include="Contracts\DataProviders\DriversLicense\IRespondWithDriversLicenseInformation.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneBusinessDirector.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneConsumerSpecifications.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneProperty.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneBusinessCompany.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedEzScore.cs" />

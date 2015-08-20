@@ -10,5 +10,6 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
         {
             return new ConsumerViewQuery(request.IdNumber.GetValue(), request.PhoneNumber.GetValue(), request.EmailAddress.GetValue());
         }
+        
     }
 }

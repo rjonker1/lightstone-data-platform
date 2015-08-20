@@ -114,6 +114,7 @@
     <Compile Include="JisResponse.cs" />
     <Compile Include="LightstoneBusinessDirectorResponse.cs" />
     <Compile Include="LightstoneBusinessCompanyResponse.cs" />
+    <Compile Include="LightstoneConsumerSpecificationsResponse.cs" />
     <Compile Include="LightstoneResponse.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="PCubedEzScoreResponse.cs" />
