@@ -33,7 +33,7 @@ namespace Api.Helpers.Validators
             #region isLocked Validation
 
             // Validate User
-            var user = JsonConvert.DeserializeObject<ValidationDto>(_userManagementApiClient.Get("", "/Users/Details/" + userId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
+            var user = _userManagementApiClient.Get<ValidationDto>(authToken, "/Users/Details/{id}", new[] { new KeyValuePair<string, string>("id", userId + "") });
             
             if (user == null) throw new LightstoneAutoException("User: " + userId + " not found. Please make sure the UserId entered is correct. Alternatively please re-authenticate token.");
             if (user.IsLocked) throw new LightstoneAutoException("User: " + userId + " is locked");
@@ -41,12 +41,12 @@ namespace Api.Helpers.Validators
             //Validate Customer|Client
             var client = new ValidationDto();
 
-            var customer = JsonConvert.DeserializeObject<ValidationDto>(_userManagementApiClient.Get("", "/Customers/Details/" + customerClientId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
+            var customer = _userManagementApiClient.Get<ValidationDto>(authToken, "Customers/Details/{id}", new[] { new KeyValuePair<string, string>("id", customerClientId + "") });
             if (customer != null && customer.IsLocked) throw new LightstoneAutoException("Customer: " + customerClientId + " is locked");
 
             if (customer == null)
             {
-                client = JsonConvert.DeserializeObject<ValidationDto>(_userManagementApiClient.Get("", "/Clients/Details/" + customerClientId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
+                client = _userManagementApiClient.Get<ValidationDto>(authToken, "/Clients/Details/{id}", new[] { new KeyValuePair<string, string>("id", customerClientId + "") });
 
                 if (client == null) throw new LightstoneAutoException("CustomerClientId: " + customerClientId + " not found");
                 
@@ -79,7 +79,7 @@ namespace Api.Helpers.Validators
             #region Contract relationship validation
 
             // Validate Contract
-            var contract = JsonConvert.DeserializeObject<ValidationDto>(_userManagementApiClient.Get("", "/Contracts/Details/" + contractId, "", new[] { new KeyValuePair<string, string>("Authorization", "Token " + authToken), new KeyValuePair<string, string>("Content-Type", "application/json"), }));
+            var contract = _userManagementApiClient.Get<ValidationDto>(authToken, "/Contracts/Details/{id}", new[] { new KeyValuePair<string, string>("id", contractId + "") });
 
             // Package, Customer, Client relationship check
             if (contract != null)

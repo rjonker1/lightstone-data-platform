@@ -58,12 +58,7 @@ namespace Api.Modules
                     });
 
                     this.Info(() => "Api to PackageBuilder Execute Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                    var responses = packageBuilderApi.Post("", "/Packages/Execute", apiRequest,
-                        new[]
-                        {
-                            new KeyValuePair<string, string>("Authorization", "Token " + token),
-                            new KeyValuePair<string, string>("Content-Type", "application/json"),
-                        });
+                    var responses = packageBuilderApi.Post(token, "/Packages/Execute", null, apiRequest);
                     this.Info(() => "Api to PackageBuilder Execute Completed. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
                     this.Info(() => "Api responses: {0}".FormatWith(responses));

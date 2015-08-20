@@ -3,7 +3,6 @@ using System.Linq;
 using AutoMapper;
 using Nancy;
 using Nancy.ModelBinding;
-using Shared.BuildingBlocks.Api.ApiClients;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -17,7 +16,7 @@ namespace UserManagement.Api.Modules
 
     public class PackageModule : NancyModule //: SecureModule
     {
-        public PackageModule(IPackageBuilderApiClient packageBuilderApi, IRepository<User> users)
+        public PackageModule(IRepository<User> users)
         {
             Post["/Packages/GetPackage"] = parameters =>
             {
