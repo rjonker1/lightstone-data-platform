@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 
 namespace Billing.Domain.Dtos
@@ -12,8 +13,10 @@ namespace Billing.Domain.Dtos
         public string Type { get; set; }
         public string Owner { get; set; }
         public int Products { get; set; }
+        public IEnumerable<PackageDto> ProductsDetail { get; set; }
         public int Transactions { get; set; }
         public string UserType { get; set; }
         public int Total { get; set; } 
     }
+
 }

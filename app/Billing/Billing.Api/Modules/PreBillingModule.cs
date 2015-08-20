@@ -199,6 +199,63 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = customerPackagesDetailList });
             };
 
+            Get["/PreBillingDump"] = _ =>
+            {
+                //var customers = new List<PreBillingDto>();
+                //var customerClientList = _preBillingRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter).Select(x => x.CustomerId).Distinct();
+                var preBilling = _preBillingRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
+
+                //foreach (var guid in customerClientList)
+                //{
+                //    var customerPackagesDetailList = new List<PackageDto>();
+                //    var customerUsersDetailList = new List<User>();
+
+                //    var preBillingRepo = _preBillingRepository.Where(x => (x.CustomerId == guid || x.ClientId == guid)
+                //                                                      && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
+
+                //    var customer = new PreBillingDto();
+                //    var transactionsTotal = 0;
+
+                //    customer.Id = guid;
+
+                //    foreach (var transaction in preBillingRepo)
+                //    {
+                //        customer.CustomerName = transaction.CustomerName;
+
+                //        // User
+                //        var user = new User
+                //        {
+                //            UserId = transaction.User.UserId,
+                //            Username = transaction.User.Username,
+                //            HasTransactions = true
+                //        };
+
+                //        // Indices
+                //        var userIndex = customerUsersDetailList.FindIndex(x => x.UserId == user.UserId);
+                //        if (userIndex < 0) customerUsersDetailList.Add(user);
+
+                //        var packageTransactions = preBillingRepo.Where(x => x.Package.PackageId == transaction.Package.PackageId).Distinct();
+
+                //        var package = Mapper.Map<Package, PackageDto>(transaction.Package);
+                //        package.PackageTransactions = packageTransactions.Count();
+
+                //        var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
+                //        if (packageIndex < 0) customerPackagesDetailList.Add(package);
+
+                //        transactionsTotal++;
+                //    }
+
+                //    customer.Users = customerUsersDetailList;
+                //    customer.Products = customerPackagesDetailList.Count;
+                //    customer.ProductsDetail = customerPackagesDetailList;
+                //    customer.Transactions = transactionsTotal;
+
+                //    customers.Add(customer);
+                //}
+
+                return Response.AsJson(new {data = preBilling});
+            };
+
         }
 
         private async Task CheckCache(CancellationToken ct)
