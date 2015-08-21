@@ -197,6 +197,21 @@ namespace Lace.Test.Helper.Mothers.RequestFields
         public string Field { get; private set; }
     }
 
+    public class AccessKeyRequestField : IAmAccessKeyRequestField
+    {
+        private AccessKeyRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static AccessKeyRequestField Get(string field)
+        {
+            return new AccessKeyRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
     public class IdentityNumberRequestField : IAmIdentityNumberRequestField
     {
         private IdentityNumberRequestField(string field)
