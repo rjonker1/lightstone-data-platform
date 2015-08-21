@@ -14,11 +14,10 @@ namespace Api.Modules
                 var username = Context.Request.Headers["Username"].FirstOrDefault();
                 var password = Context.Request.Headers["Password"].FirstOrDefault();
 
-                var response = userManagementApi.Post(null, "/login/api", null, new[]
+                var response = userManagementApi.Post("", "/login/api", null, null, new[]
                 {
-                    new KeyValuePair<string, string>("Username", username),
-                    new KeyValuePair<string, string>("Password", password),
-                    new KeyValuePair<string, string>("Content-Type", "application/json")
+                    new KeyValuePair<string, string>("Username", username), 
+                    new KeyValuePair<string, string>("Password", password)
                 });
 
                 return response;
