@@ -36,7 +36,7 @@ namespace Shared.BuildingBlocks.Api.Validation
         public static ValidationResult Validate(int type, string field)
         {
             var validator = Validators.FirstOrDefault(w => w.Key == type);
-            return validator.Key > 0 && validator.Value != null
+            return validator.Key >= 0 && validator.Value != null
                 ? new ValidationResult(validator.Value().RulesPass(RemoveWhitespace(field)), validator.Value().RuleError)
                 : new ValidationResult(true, string.Empty);
         }
