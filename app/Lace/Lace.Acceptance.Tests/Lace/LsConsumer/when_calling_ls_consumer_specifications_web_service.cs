@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Consumer.Specifications;
@@ -29,6 +31,18 @@ namespace Lace.Acceptance.Tests.Lace.LsConsumer
         {
             _consumer = new ConsumerSpecificationsDataProvider(_request, null, null, _command);
             _consumer.CallSource(_response);
+        }
+
+        [Observation]
+        public void lightstone_consumer_must_be_handled()
+        {
+            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().Handled.ShouldBeTrue();
+        }
+
+        [Observation]
+        public void lightstone_response_from_consumer_must_not_be_null()
+        {
+            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();
         }
     }
 }

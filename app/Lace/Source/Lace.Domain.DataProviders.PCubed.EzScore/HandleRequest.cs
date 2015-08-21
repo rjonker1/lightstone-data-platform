@@ -2,7 +2,7 @@
 using Lace.Toolbox.PCubed;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
-namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
+namespace Lace.Domain.DataProviders.PCubed.EzScore
 {
     public static class HandleRequest
     {
@@ -10,6 +10,5 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
         {
             return new ConsumerViewQuery(request.IdNumber.GetValue(), request.PhoneNumber.GetValue(), request.EmailAddress.GetValue());
         }
-        
     }
 }

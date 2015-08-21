@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -33,19 +34,18 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
             try
             {
                 var api = new ConfigureSource();
+
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
+                   .ForWebApiType(), new { _dataProvider });
+
                 var history =
                     api.Client.getRepairHistory(
                         Guid.Parse(_dataProvider.GetRequest<IAmLightstoneConsumerSpecificationsRequest>().AccessKey.GetValue()),
                         _dataProvider.GetRequest<IAmLightstoneConsumerSpecificationsRequest>().VinNumber.GetValue());
 
-                //_logCommand.LogRequest(new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
-                //   .ForWebApiType(), new { _dataProvider });
-
-              
-
-                //_logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                //   new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
-                //       .ForDatabaseType(), new { _response });
+                _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                   new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
+                       .ForDatabaseType(), new { history });
 
                 TransformResponse(response);
             }
@@ -77,6 +77,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
             var specificationsResponse = LightstoneConsumerSpecificationsResponse.Empty();
             specificationsResponse.HasBeenHandled();
             response.Add(specificationsResponse);
+        }
+
+        private static string ValidateAccessKey(string key)
+        {
+            return !string.IsNullOrEmpty(key) ? key : ConfigurationManager.AppSettings["lightstone/conumser/specifications/accesskey"];
         }
     }
 }

@@ -42,8 +42,8 @@ namespace Lace.Test.Helper.Builders.Consumers
                 {
                     return new IAmDataProvider[]
                     {
-                        //new DataProvider(DataProviderName.LightstoneConsumerSpecifications, 50, 27,
-                        //    LightstoneConsumerSpecificationsRequest.WithDefault(_accessKey, _vinNumber))
+                        new DataProvider(DataProviderName.LightstoneConsumerSpecifications, 50, 27,
+                            LightstoneConsumerSpecificationsRequest.WithDefault(_accessKey, _vinNumber))
                         
                     };
                 }

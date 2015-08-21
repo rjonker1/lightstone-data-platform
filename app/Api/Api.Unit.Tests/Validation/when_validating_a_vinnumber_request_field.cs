@@ -11,7 +11,7 @@ namespace Api.Unit.Tests.Validation
 
         }
 
-        [Observation(Skip="Update shared building blocks api nuget")]
+        [Observation]
         public void then_number_only_vin_number_should_not_be_valid()
         {
             _validation = ValidationManager.Validate(0, "123456789");
@@ -19,7 +19,7 @@ namespace Api.Unit.Tests.Validation
             _validation.Error.ShouldEqual("Vin number is not alphanumeric");
         }
 
-        [Observation(Skip = "Update shared building blocks api nuget")]
+        [Observation]
         public void then_vin_number_greater_than_17_characters_should_not_be_valid()
         {
             _validation = ValidationManager.Validate(0, "SB1KV58E40F0392779");
@@ -27,7 +27,7 @@ namespace Api.Unit.Tests.Validation
             _validation.Error.ShouldEqual("Vin number cannot be greater than 17 characters");
         }
 
-        [Observation(Skip = "Update shared building blocks api nuget")]
+        [Observation]
         public void then_vin_number_less_than_6_characters_should_not_be_valid()
         {
             _validation = ValidationManager.Validate(0, "SB1KV");
@@ -35,14 +35,14 @@ namespace Api.Unit.Tests.Validation
             _validation.Error.ShouldEqual("Vin number cannot be smaller than 6 characters");
         }
 
-        [Observation(Skip = "Update shared building blocks api nuget")]
+        [Observation]
         public void then_vin_number_less_than_17_characters_but_greater_than_6_should_be_valid()
         {
             _validation = ValidationManager.Validate(0, "SB1KV58E40F0");
             _validation.IsValid.ShouldBeTrue();
         }
 
-        [Observation(Skip = "Update shared building blocks api nuget")]
+        [Observation]
         public void then_vin_number_should_be_valid()
         {
             _validation = ValidationManager.Validate(0, "SB1KV58E40F039277");
