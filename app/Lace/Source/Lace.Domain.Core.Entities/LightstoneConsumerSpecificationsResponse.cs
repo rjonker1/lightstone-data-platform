@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.DataProviders.Consumer;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -10,13 +12,21 @@ namespace Lace.Domain.Core.Entities
     {
         public LightstoneConsumerSpecificationsResponse()
         {
-            
+            RepairData = new List<IRespondWithRepairData>();
         }
 
         public static LightstoneConsumerSpecificationsResponse Empty()
         {
             return new LightstoneConsumerSpecificationsResponse();
         }
+
+        public LightstoneConsumerSpecificationsResponse(IEnumerable<IRespondWithRepairData> repairData)
+        {
+            RepairData = repairData;
+        }
+
+        [DataMember]
+        public IEnumerable<IRespondWithRepairData> RepairData { get; private set; }
 
         [DataMember]
         public IAmLightstoneConsumerSpecificationsRequest Request { get; private set; }

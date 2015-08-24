@@ -85,6 +85,10 @@
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -111,6 +115,7 @@
     <Compile Include="Builders\Property\LspRequestBuilder.cs" />
     <Compile Include="Builders\Property\LspSourcePackage.cs" />
     <Compile Include="Builders\Requests\CompanyRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\ConsumerRequestBuilder.cs" />
     <Compile Include="Builders\Requests\DirectorRequestBuilder.cs" />
     <Compile Include="Builders\Requests\EzScoreRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
@@ -199,7 +204,9 @@
     <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeLightstoneBusinessCompanyResponse.cs" />
     <Compile Include="Fakes\Responses\FakeLightstoneBusinessDirectorResponse.cs" />
+    <Compile Include="Fakes\Responses\FakeLightstoneConsumerSpecificationsResponse.cs" />
     <Compile Include="Fakes\Responses\FakeLightstonePropertyResponse.cs" />
+    <Compile Include="Fakes\Responses\FakePcubedEzScoreResponse.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
     <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />
@@ -359,6 +366,10 @@
     <ProjectReference Include="..\source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Toolbox.PCubed\Lace.Toolbox.PCubed.csproj">
+      <Project>{182c2b39-29e7-4290-afb4-7b703bc1ceb9}</Project>
+      <Name>Lace.Toolbox.PCubed</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>

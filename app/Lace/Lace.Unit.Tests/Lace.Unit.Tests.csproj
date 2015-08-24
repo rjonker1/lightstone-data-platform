@@ -161,6 +161,8 @@
     <Compile Include="Transform\when_transforming_lighstone_response.cs" />
     <Compile Include="Transform\when_transforming_lightstone_business_director_response.cs" />
     <Compile Include="Transform\when_transforming_lightstone_business_company_response.cs" />
+    <Compile Include="Transform\when_transforming_lightstone_consumer_specifications_response.cs" />
+    <Compile Include="Transform\when_transforming_pcubed_ezscore_response.cs" />
     <Compile Include="Transform\when_transforming_rgt_vin_response.cs" />
     <Compile Include="Transform\when_transforming_audatex_response.cs" />
     <Compile Include="Transform\when_transforming_ivid_response.cs" />
@@ -232,9 +234,21 @@
       <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone.Business.Company</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.csproj">
+      <Project>{f281c6fb-b038-43a6-8ece-158da7ee02d4}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Consumer.Specifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone.Property\Lace.Domain.DataProviders.Lightstone.Property.csproj">
+      <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Property</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Domain.DataProviders.PCubed.EzScore\Lace.Domain.DataProviders.PCubed.EzScore.csproj">
+      <Project>{3f37004f-e209-47d3-93be-4b796c6e4e66}</Project>
+      <Name>Lace.Domain.DataProviders.PCubed.EzScore</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
       <Project>{ae3f8127-622b-4e02-a21f-6ee7bea123e2}</Project>

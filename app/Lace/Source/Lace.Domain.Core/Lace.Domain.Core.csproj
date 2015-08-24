@@ -90,6 +90,7 @@
     <Compile Include="Contracts\DataProviders\Business\IProvideDirector.cs" />
     <Compile Include="Contracts\DataProviders\Business\IProvideCompany.cs" />
     <Compile Include="Contracts\DataProviders\Consumer\IRespondWithEzScore.cs" />
+    <Compile Include="Contracts\DataProviders\Consumer\IRespondWithRepairData.cs" />
     <Compile Include="Contracts\DataProviders\DriversLicense\IRespondWithDriversLicenseInformation.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneBusinessDirector.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneConsumerSpecifications.cs" />

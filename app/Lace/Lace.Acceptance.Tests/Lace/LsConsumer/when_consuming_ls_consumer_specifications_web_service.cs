@@ -13,14 +13,14 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.LsConsumer
 {
-    public class when_calling_ls_consumer_specifications_web_service :Specification
+    public class when_consuming_ls_consumer_specifications_web_service :Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private readonly ICollection<IPointToLaceProvider> _response;
         private ConsumerSpecificationsDataProvider _consumer;
 
-        public when_calling_ls_consumer_specifications_web_service()
+        public when_consuming_ls_consumer_specifications_web_service()
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _request = new[] { new SpecificationsRequest() };
@@ -43,6 +43,14 @@ namespace Lace.Acceptance.Tests.Lace.LsConsumer
         public void lightstone_response_from_consumer_must_not_be_null()
         {
             _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lightstone_response_from_consumer_must_not_be_empty()
+        {
+            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("HYUNDAI TUCSON");
+            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().DriversName.ShouldEqual("Cannings");
         }
     }
 }

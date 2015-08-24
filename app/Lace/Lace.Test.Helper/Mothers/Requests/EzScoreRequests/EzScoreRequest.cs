@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Test.Helper.Builders.Business;
 using Lace.Test.Helper.Builders.EzScore;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 

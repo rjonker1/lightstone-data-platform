@@ -111,6 +111,7 @@
     <Compile Include="CommandHandlers\DataProviders\Responses\IvidResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneAutoResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneBusinessResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneConsumerSpecificationsResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneDirectorResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\LightstonePropertyResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\PCubedEzScoreResponse.cs" />
