@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Mail;
 using System.Text;
 using jsreport.Client;
@@ -77,36 +78,36 @@ namespace Reporting.Api
             };
 
 
-            Get["/ReportHTML"] = parameters =>
-            {
+            //Get["/ReportHTML"] = parameters =>
+            //{
 
-                string urlAddress = "http://localhost:8856/templates/N190datG";
+            //    string urlAddress = "http://localhost:8856/templates/N190datG";
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
+            //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
 
-                Stream receiveStream = response.GetResponseStream();
-                StreamReader readStream = null;
+            //    Stream receiveStream = response.GetResponseStream();
+            //    StreamReader readStream = null;
 
-                if (response.CharacterSet == null)
-                {
-                    readStream = new StreamReader(receiveStream);
-                }
-                else
-                {
-                    readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
-                }
+            //    if (response.CharacterSet == null)
+            //    {
+            //        readStream = new StreamReader(receiveStream);
+            //    }
+            //    else
+            //    {
+            //        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+            //    }
 
-                string report = readStream.ReadToEnd();
+            //    string report = readStream.ReadToEnd();
 
-                response.Close();
-                readStream.Close();
+            //    response.Close();
+            //    readStream.Close();
 
-                return report;
-            };
+            //    return report;
+            //};
 
-            Post["/ReportHTML"] = parameters =>
+            Post["/ReportOutput"] = parameters =>
             {
 
                 var body = Request.Body<dynamic>();

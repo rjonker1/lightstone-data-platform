@@ -7,18 +7,18 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 {
     public class PivotStageBilling : IPivotBilling<PivotStageBilling>
     {
-        private readonly IRepository<PreBilling> _preBillingrRepository;
+        private readonly IRepository<PreBilling> _preBillingRepository;
         private readonly IRepository<StageBilling> _stageBillingRepository;
 
-        public PivotStageBilling(IRepository<PreBilling> preBillingrRepository, IRepository<StageBilling> stageBillingRepository)
+        public PivotStageBilling(IRepository<PreBilling> preBillingRepository, IRepository<StageBilling> stageBillingRepository)
         {
-            _preBillingrRepository = preBillingrRepository;
+            _preBillingRepository = preBillingRepository;
             _stageBillingRepository = stageBillingRepository;
         }
 
         public void Pivot()
         {
-            foreach (var preBilling in _preBillingrRepository)
+            foreach (var preBilling in _preBillingRepository)
             {
                 var stageEntity = Mapper.Map(preBilling, new StageBilling());
 

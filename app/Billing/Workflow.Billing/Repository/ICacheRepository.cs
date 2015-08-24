@@ -9,7 +9,7 @@ namespace Workflow.Billing.Repository
         T CacheGet(Guid entityId);
         void CacheSave(T entity);
         void CacheDelete(Guid entityId);
-        Task CachePipelineInsert(IRepository<T> typedEntityRepository);
+        void CachePipelineInsert(IRepository<T> typedEntityRepository);
         void FlushCacheProvider(ICacheProvider<T> cacheProvider);
     }
 }

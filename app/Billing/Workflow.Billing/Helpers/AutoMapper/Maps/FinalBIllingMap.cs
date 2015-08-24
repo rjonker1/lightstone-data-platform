@@ -1,6 +1,5 @@
 ﻿using System;
 using AutoMapper;
-using FluentNHibernate.Conventions.Instances;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Helpers.AutoMapper.Maps

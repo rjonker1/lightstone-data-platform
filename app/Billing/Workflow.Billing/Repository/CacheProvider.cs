@@ -88,55 +88,55 @@ namespace Workflow.Billing.Repository
             }
         }
 
-        //public void CachePipelineInsert(IRepository<T> typedEntityRepository)
-        //{
-        //    try
-        //    {
-        //        using (var client = CacheClient)
-        //        using (var pipeline = client.CreateTransaction())
-        //        {
-        //            pipeline.QueueCommand(c => c.DeleteAll());
-
-        //            foreach (var record in typedEntityRepository)
-        //            {
-        //                if (record != null)
-        //                    pipeline.QueueCommand(c => c.Store(record));
-        //            }
-
-        //            pipeline.Commit();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new LightstoneAutoException(ex.Message);
-        //    }
-        //}
-
-        public async Task CachePipelineInsert(IRepository<T> typedEntityRepository)
+        public void CachePipelineInsert(IRepository<T> typedEntityRepository)
         {
             try
             {
-                await Task.Factory.StartNew(() =>
+                using (var client = CacheClient)
+                using (var pipeline = client.CreateTransaction())
                 {
-                    using (var client = CacheClient)
-                    using (var pipeline = client.CreateTransaction())
+                    pipeline.QueueCommand(c => c.DeleteAll());
+
+                    foreach (var record in typedEntityRepository)
                     {
-                        pipeline.QueueCommand(c => c.DeleteAll());
-
-                        foreach (var record in typedEntityRepository)
-                        {
-                            if (record != null) pipeline.QueueCommand(c => c.Store(record));
-                        }
-
-                        pipeline.Commit();
+                        if (record != null)
+                            pipeline.QueueCommand(c => c.Store(record));
                     }
-                });
+
+                    pipeline.Commit();
+                }
             }
             catch (Exception ex)
             {
                 throw new LightstoneAutoException(ex.Message);
             }
         }
+
+        //public async Task CachePipelineInsert(IRepository<T> typedEntityRepository)
+        //{
+        //    try
+        //    {
+        //        await Task.Factory.StartNew(() =>
+        //        {
+        //            using (var client = CacheClient)
+        //            using (var pipeline = client.CreateTransaction())
+        //            {
+        //                pipeline.QueueCommand(c => c.DeleteAll());
+
+        //                foreach (var record in typedEntityRepository)
+        //                {
+        //                    if (record != null) pipeline.QueueCommand(c => c.Store(record));
+        //                }
+
+        //                pipeline.Commit();
+        //            }
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new LightstoneAutoException(ex.Message);
+        //    }
+        //}
 
         public void FlushCacheProvider(ICacheProvider<T> cacheProvider)
         {

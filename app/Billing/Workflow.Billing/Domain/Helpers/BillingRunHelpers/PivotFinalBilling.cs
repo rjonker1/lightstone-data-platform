@@ -87,7 +87,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 Customer = new ReportCustomer
                                 {
                                     Name = transaction.CustomerName,
-                                    TaxRegistration = 4190195679,
+                                    TaxRegistration = 0,
                                     Packages = packagesList.ToList()
                                 }
                             }
@@ -172,7 +172,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 Customer = new ReportCustomer
                                 {
                                     Name = transaction.ClientName,
-                                    TaxRegistration = 4190195679,
+                                    TaxRegistration = 0,
                                     Packages = packagesList.ToList()
                                 }
                             }

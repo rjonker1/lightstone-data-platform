@@ -167,7 +167,7 @@ window.invoiceActionEvents = {
                     '} ' +
                 '}';
 
-            $.post(reportingApi + "/ReportHTML", data)
+            $.post(reportingApi + "/ReportOutput", data)
                 .done(function (response) {
                     $('.modal-body').html(response);
                 });

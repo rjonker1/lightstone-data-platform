@@ -13,6 +13,7 @@ using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Repository;
+using Workflow.Reporting.Entities;
 using PreBillingDto = Billing.Domain.Dtos.PreBillingDto;
 
 namespace Billing.Api.Modules
@@ -91,6 +92,8 @@ namespace Billing.Api.Modules
                             Products = clientPackagesTotal
                         };
                     }
+
+                    //if ((transaction.ClientId == new Guid()) && (transaction.CustomerId == new Guid())) continue;
 
                     // User
                     var user = new User
@@ -201,59 +204,18 @@ namespace Billing.Api.Modules
 
             Get["/PreBillingDump"] = _ =>
             {
-                //var customers = new List<PreBillingDto>();
-                //var customerClientList = _preBillingRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter).Select(x => x.CustomerId).Distinct();
                 var preBilling = _preBillingRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
 
-                //foreach (var guid in customerClientList)
-                //{
-                //    var customerPackagesDetailList = new List<PackageDto>();
-                //    var customerUsersDetailList = new List<User>();
+                var report = new ReportDto<PreBilling>
+                {
+                    Template = new ReportTemplate { ShortId = "418Ky2Cj" },
+                    Data = new ReportData<PreBilling>
+                    {
+                        BillingData = preBilling
+                    }
+                };
 
-                //    var preBillingRepo = _preBillingRepository.Where(x => (x.CustomerId == guid || x.ClientId == guid)
-                //                                                      && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
-
-                //    var customer = new PreBillingDto();
-                //    var transactionsTotal = 0;
-
-                //    customer.Id = guid;
-
-                //    foreach (var transaction in preBillingRepo)
-                //    {
-                //        customer.CustomerName = transaction.CustomerName;
-
-                //        // User
-                //        var user = new User
-                //        {
-                //            UserId = transaction.User.UserId,
-                //            Username = transaction.User.Username,
-                //            HasTransactions = true
-                //        };
-
-                //        // Indices
-                //        var userIndex = customerUsersDetailList.FindIndex(x => x.UserId == user.UserId);
-                //        if (userIndex < 0) customerUsersDetailList.Add(user);
-
-                //        var packageTransactions = preBillingRepo.Where(x => x.Package.PackageId == transaction.Package.PackageId).Distinct();
-
-                //        var package = Mapper.Map<Package, PackageDto>(transaction.Package);
-                //        package.PackageTransactions = packageTransactions.Count();
-
-                //        var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
-                //        if (packageIndex < 0) customerPackagesDetailList.Add(package);
-
-                //        transactionsTotal++;
-                //    }
-
-                //    customer.Users = customerUsersDetailList;
-                //    customer.Products = customerPackagesDetailList.Count;
-                //    customer.ProductsDetail = customerPackagesDetailList;
-                //    customer.Transactions = transactionsTotal;
-
-                //    customers.Add(customer);
-                //}
-
-                return Response.AsJson(new {data = preBilling});
+                return Response.AsJson(report);
             };
 
         }
@@ -273,11 +235,24 @@ namespace Billing.Api.Modules
                 this.Info(() => "PreBilling Cache loaded");
             }
         }
+    }
 
-        //private async Task<bool> DBtoCache(IRepository<PreBilling> repository, ICacheProvider<PreBilling> cacheProvider)
-        //{
-        //    return await cacheProvider.CachePipelineInsert(repository);
-        //}
+    public class ReportDto<T> where T : class
+    {
+        public ReportTemplate Template { get; set; }
+        public ReportData<T> Data { get; set; }
+    }
+
+    public class ReportTemplate
+    {
+        public string ShortId { get; set; }
+    }
+
+    public class ReportData<T> where T : class
+    {
+        public ReportCustomer Customer { get; set; }
+        public IEnumerable<ReportInvoice> Invoices { get; set; }
+        public IEnumerable<T> BillingData { get; set; }
     }
 
 }
