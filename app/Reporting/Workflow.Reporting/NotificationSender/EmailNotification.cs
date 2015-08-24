@@ -31,6 +31,7 @@ namespace Workflow.Reporting.NotificationSender
                         From = new MailAddress("mvpreporting@lightstone.co.za")
                     };
                     mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to"].ToLower());
+                    mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to/secondary"].ToLower());
                     mailMessage.Attachments.Add(new Attachment(report.Content,
                         ""+ dto.Data.Customer.Name + " - Invoice.pdf"));
 
