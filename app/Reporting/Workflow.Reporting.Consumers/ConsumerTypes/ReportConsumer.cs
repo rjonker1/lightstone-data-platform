@@ -45,8 +45,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                         {
                             // Try to create the directory.
                             DirectoryInfo di = Directory.CreateDirectory(path);
-                            this.Info(
-                                () => "The directory was created successfully at " + Directory.GetCreationTime(path));
+                            this.Info(() => "The directory was created successfully at " + Directory.GetCreationTime(path));
                         }
 
                         //Store to disk
@@ -56,8 +55,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                             var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
                             report.Content.CopyTo(fileStream);
 
-                            this.Info(
-                                () => "Report : BillingOutput.csv was created successfully");
+                            this.Info(() => "Report : BillingOutput.csv was created successfully");
                         }
 
                     }
@@ -69,8 +67,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                         {
                             // Try to create the directory.
                             DirectoryInfo di = Directory.CreateDirectory(path);
-                            this.Info(
-                                () => "The directory was created successfully at " + Directory.GetCreationTime(path));
+                            this.Info(() => "The directory was created successfully at " + Directory.GetCreationTime(path));
                         }
 
                         //Store to disk
@@ -80,8 +77,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                             var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
                             report.Content.CopyTo(fileStream);
 
-                            this.Info(
-                                () => "Report : " + dto.Data.Customer.Name + " - Invoice.pdf was created successfully");
+                            this.Info(() => "Report : " + dto.Data.Customer.Name + " - Invoice.pdf was created successfully");
                         }
 
                         //Send Email

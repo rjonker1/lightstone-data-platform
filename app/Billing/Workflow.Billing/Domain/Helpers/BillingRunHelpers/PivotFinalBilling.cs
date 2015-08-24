@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
+using NHibernate.Criterion;
+using ServiceStack.Common.Utils;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
@@ -14,11 +17,11 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
-        private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository; 
+        private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository;
 
         private readonly IPublishReportQueue<BillingReport> _report;
 
-        public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository,  IRepository<ArchiveBillingTransaction> archiveBillingRepository,
+        public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IRepository<ArchiveBillingTransaction> archiveBillingRepository,
                                     IPublishReportQueue<BillingReport> report)
         {
             _stageBillingRepository = stageBillingRepository;
@@ -40,22 +43,22 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             try
             {
                 // Archive and clean Final Billing for new month
-                foreach (var archiveRecord in _finalBillingRepository)
-                {
-                    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId)) 
-                            _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
+                //foreach (var archiveRecord in _finalBillingRepository)
+                //{
+                //    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId)) 
+                //            _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
 
-                    _finalBillingRepository.Delete(archiveRecord);
-                }
+                //    _finalBillingRepository.Delete(archiveRecord);
+                //}
 
-                foreach (var record in _stageBillingRepository)
-                {
-                    if (record.Created <= previousBillMonth) continue;
+                //foreach (var record in _stageBillingRepository)
+                //{
+                //    if (record.Created <= previousBillMonth) continue;
 
-                    var finalEntity = Mapper.Map(record, new FinalBilling());
+                //    var finalEntity = Mapper.Map(record, new FinalBilling());
 
-                    _finalBillingRepository.SaveOrUpdate(finalEntity);
-                }
+                //    _finalBillingRepository.SaveOrUpdate(finalEntity);
+                //}
 
                 foreach (var transaction in _finalBillingRepository)
                 {
@@ -68,16 +71,46 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                                                                                  && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
                             .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
-                        var packagesList =
-                            _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                        var nonBillableCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && !x.UserTransaction.IsBillable
+                                                                                                 && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
+                            .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
+
+                        var test = new List<ReportPackage>();
+
+                        if (billedCustomerTransactionsTotal > 0)
+                        {
+
+                            test.AddRange(_finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                 .Select(x => new ReportPackage
                                 {
                                     ItemCode = x.Package.PackageName,
                                     ItemDescription = x.Package.PackageName,
-                                    QuantityUnit = billedCustomerTransactionsTotal,
+                                    QuantityUnit = _finalBillingRepository.Where(
+                                        y => y.CustomerId == transaction.CustomerId && y.UserTransaction.IsBillable
+                                             && (y.Created >= previousBillMonth && y.Created <= currentBillMonth)
+                                             && (y.Package.PackageId == x.Package.PackageId))
+                                        .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
                                     Price = x.Package.PackageRecommendedPrice,
                                     //Vat = 0
-                                }).Distinct();
+                                }).Distinct());
+                        }
+
+                        if (nonBillableCustomerTransactionsTotal > 0)
+                        {
+
+                            test.AddRange(_finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                                .Select(x => new ReportPackage
+                                {
+                                    ItemCode = x.Package.PackageName,
+                                    ItemDescription = x.Package.PackageName + " - Non-Billable",
+                                    QuantityUnit = _finalBillingRepository.Where(
+                                        y => y.CustomerId == transaction.CustomerId && !y.UserTransaction.IsBillable
+                                             && (y.Created >= previousBillMonth && y.Created <= currentBillMonth)
+                                             && (y.Package.PackageId == x.Package.PackageId))
+                                        .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
+                                    Price = 0,
+                                }).Distinct());
+                        }
 
                         var reportData = new ReportDto()
                         {
@@ -88,7 +121,15 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 {
                                     Name = transaction.CustomerName,
                                     TaxRegistration = 0,
-                                    Packages = packagesList.ToList()
+                                    //Packages = packagesList.ToList()
+                                    Packages = test.Select(y => new ReportPackage
+                                    {
+                                        ItemCode = y.ItemCode,
+                                        ItemDescription = y.ItemDescription,
+                                        QuantityUnit = y.QuantityUnit,
+                                        Price = y.Price,
+                                        Vat = y.Vat
+                                    }).ToList()
                                 }
                             }
                         };
