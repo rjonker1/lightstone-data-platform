@@ -44,6 +44,12 @@ namespace PackageBuilder.Domain.Entities.Requests
                 },
                 {
                     DataProviderName.LightstoneBusinessDirector, LightstoneDirectors
+                },
+                {
+                    DataProviderName.PCubedEzScore, PCubedEzScore
+                },
+                {
+                    DataProviderName.LightstoneConsumerSpecifications, LightstoneConsumerSpecifications
                 }
             };
 
@@ -76,6 +82,12 @@ namespace PackageBuilder.Domain.Entities.Requests
         private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> LightstoneDirectors =
             (requests, user, packageName) => new LightstoneDirectorRequest(requests);
 
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> LightstoneConsumerSpecifications =
+            (requests, user, packageName) => new LightstoneConsumerSpecificationsRequest(requests);
+
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> PCubedEzScore =
+            (requests, user, packageName) => new PCubedEzScoreRequest(requests);
+
         public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes
         {
             get { return _requestTypes; }
@@ -91,7 +103,6 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
-
     public class RgtLaceRequest : IAmRgtRequest
     {
         public RgtLaceRequest(ICollection<IAmRequestField> requestFields)
@@ -101,7 +112,6 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmCarIdRequestField CarId { get; private set; }
     }
-
     public class IvidTitleHolderLaceRequest : IAmIvidTitleholderRequest
     {
         public IvidTitleHolderLaceRequest(ICollection<IAmRequestField> requestFields, IHaveUser user)
@@ -119,7 +129,6 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
-
     public class LightstoneAutoLaceRequest : IAmLightstoneAutoRequest
     {
         public LightstoneAutoLaceRequest(ICollection<IAmRequestField> requestFields)
@@ -138,7 +147,6 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
-
     public class LightstonePropertyLaceRequest : IAmLightstonePropertyRequest
     {
         public LightstonePropertyLaceRequest(ICollection<IAmRequestField> requestFields)
@@ -158,7 +166,6 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmMaxRowsToReturnRequestField MaxRowsToReturn { get; private set; }
     }
-
     public class IvidLaceRequest : IAmIvidStandardRequest
     {
         public IvidLaceRequest(ICollection<IAmRequestField> requestFields, string pacakgeName, IHaveUser user)
@@ -196,7 +203,6 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmMakeRequestField Make { get; private set; }
     }
-
     public class LightstoneDirectorRequest : IAmLightstoneBusinessDirectorRequest
     {
         public LightstoneDirectorRequest(ICollection<IAmRequestField> requestFields)
@@ -210,7 +216,30 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmFirstNameRequestField FirstName { get; private set; }
         public IAmSurnameRequestField Surname { get; private set; }
     }
+    public class LightstoneConsumerSpecificationsRequest : IAmLightstoneConsumerSpecificationsRequest
+    {
+        public LightstoneConsumerSpecificationsRequest(ICollection<IAmRequestField> requestFields)
+        {
+            VinNumber = requestFields.GetRequestField<IAmVinNumberRequestField>();
+            AccessKey = requestFields.GetRequestField<IAmAccessKeyRequestField>();
+        }
 
+        public IAmVinNumberRequestField VinNumber { get; private set; }
+        public IAmAccessKeyRequestField AccessKey { get; private set; }
+    }
+    public class PCubedEzScoreRequest : IAmPCubedEzScoreRequest
+    {
+        public PCubedEzScoreRequest(ICollection<IAmRequestField> requestFields)
+        {
+            IdNumber = requestFields.GetRequestField<IAmIdentityNumberRequestField>();
+            PhoneNumber = requestFields.GetRequestField<IAmPhoneNumberRequestField>();
+            EmailAddress = requestFields.GetRequestField<IAmEmailAddressRequestField>();
+        }
+
+        public IAmIdentityNumberRequestField IdNumber { get; private set; }
+        public IAmPhoneNumberRequestField PhoneNumber { get; private set; }
+        public IAmEmailAddressRequestField EmailAddress { get; private set; }
+    }
     public class LightstoneCompanyRequest : IAmLightstoneBusinessCompanyRequest
     {
         public LightstoneCompanyRequest(ICollection<IAmRequestField> requestFields)

@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fields\AccessKeyRequestField.cs" />
     <Compile Include="Fields\ApplicantNameRequestField.cs" />
     <Compile Include="Fields\CarIdRequestField.cs" />
     <Compile Include="Fields\ChassisNumberRequestField.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="IvidTitleholderRequest.cs" />
     <Compile Include="LighstonePropertyRequest.cs" />
     <Compile Include="LightstoneAutoRequest.cs" />
+    <Compile Include="LightstoneConsumerSpecificationsRequest.cs" />
     <Compile Include="LightstoneDirectorRequest.cs" />
     <Compile Include="LightstoneCompanyRequest.cs" />
     <Compile Include="PCubedEzScoreRequest.cs" />

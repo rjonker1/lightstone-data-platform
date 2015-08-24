@@ -62,7 +62,7 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1520\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1536\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1519, Culture=neutral, processorArchitecture=MSIL">
@@ -105,6 +105,7 @@
     <Compile Include="Builders\Business\DirectorSourcePackage.cs" />
     <Compile Include="Builders\Cmds\MonitoringCommandBuilder.cs" />
     <Compile Include="Builders\Cmds\WorkflowCommandBuilder.cs" />
+    <Compile Include="Builders\Consumers\LighstoneConsumerSpecificationsRequest.cs" />
     <Compile Include="Builders\DataProviders\DataProviderResponseBuilder.cs" />
     <Compile Include="Builders\EzScore\PCubedSourcePackage.cs" />
     <Compile Include="Builders\Property\LspRequestBuilder.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Fakes\RequestTypes\LightstoneAutoRequest.cs" />
     <Compile Include="Fakes\RequestTypes\LightstoneBusinessDirectorRequest.cs" />
     <Compile Include="Fakes\RequestTypes\LightstoneBusinessRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\LightstoneConsumerSpecificationsRequest.cs" />
     <Compile Include="Fakes\RequestTypes\PCubedEzScoreRequest.cs" />
     <Compile Include="Fakes\RequestTypes\RgtRequestType.cs" />
     <Compile Include="Fakes\RequestTypes\RgtVinRequest.cs" />
@@ -213,6 +215,7 @@
     <Compile Include="Mothers\RequestFields\RequestFields.cs" />
     <Compile Include="Mothers\Requests\BusinessRequests\DirectorRequest.cs" />
     <Compile Include="Mothers\Requests\BusinessRequests\CompaniesRequest.cs" />
+    <Compile Include="Mothers\Requests\ConsumerRequests\SpecificationsRequest.cs" />
     <Compile Include="Mothers\Requests\DriversLicenseRequests\DriversLicenseDecryptionRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483ButNoVin.cs" />

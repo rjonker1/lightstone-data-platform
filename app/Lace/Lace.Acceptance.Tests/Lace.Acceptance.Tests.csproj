@@ -63,7 +63,7 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1520\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1536\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1519, Culture=neutral, processorArchitecture=MSIL">
@@ -151,6 +151,7 @@
     <Compile Include="Lace\Consumers\when_consuming_audatex_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider.cs" />
+    <Compile Include="Lace\LsConsumer\when_calling_ls_consumer_specifications_web_service.cs" />
     <Compile Include="Lace\Sources\Lightstone\when_getting_statistics_data_to_build_vendor_valuation.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_data_providers_in_vvi_products.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder_with_absa_financed_interest.cs" />
@@ -240,6 +241,10 @@
     <ProjectReference Include="..\Source\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.Company.csproj">
       <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone.Business.Company</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.csproj">
+      <Project>{f281c6fb-b038-43a6-8ece-158da7ee02d4}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Consumer.Specifications</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone.Property\Lace.Domain.DataProviders.Lightstone.Property.csproj">
       <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>

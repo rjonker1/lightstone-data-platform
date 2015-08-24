@@ -2,7 +2,7 @@
 
 namespace PackageBuilder.Domain.Requests.Contracts.Requests
 {
-    public interface IAmLightstoneConsumerSpecificationsRequest
+    public interface IAmLightstoneConsumerSpecificationsRequest : IAmDataProviderRequest
     {
         IAmVinNumberRequestField VinNumber { get; }
         IAmAccessKeyRequestField AccessKey { get; }

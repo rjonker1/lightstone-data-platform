@@ -59,7 +59,7 @@
       <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1520\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1536\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1519, Culture=neutral, processorArchitecture=MSIL">
