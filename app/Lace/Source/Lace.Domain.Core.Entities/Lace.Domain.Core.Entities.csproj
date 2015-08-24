@@ -122,6 +122,7 @@
     <Compile Include="PriceModel.cs" />
     <Compile Include="PropertyModel.cs" />
     <None Include="RepairIndexModel.cs.old20150716" />
+    <Compile Include="RepairData.cs" />
     <Compile Include="RgtResponse.cs" />
     <Compile Include="RgtVinResponse.cs" />
     <Compile Include="SaleModel.cs" />

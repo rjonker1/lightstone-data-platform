@@ -156,6 +156,10 @@
       <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone.Business.Company</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.csproj">
+      <Project>{f281c6fb-b038-43a6-8ece-158da7ee02d4}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Consumer.Specifications</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone.Property\Lace.Domain.DataProviders.Lightstone.Property.csproj">
       <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone.Property</Name>

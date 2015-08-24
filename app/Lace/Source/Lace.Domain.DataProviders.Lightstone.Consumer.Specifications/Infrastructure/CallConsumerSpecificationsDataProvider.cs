@@ -21,6 +21,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
+        private string _jsonRepairHistory;
 
         public CallConsumerSpecificationsDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
@@ -38,14 +39,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
                    .ForWebApiType(), new { _dataProvider });
 
-                var history =
+                _jsonRepairHistory =
                     api.Client.getRepairHistory(
                         Guid.Parse(_dataProvider.GetRequest<IAmLightstoneConsumerSpecificationsRequest>().AccessKey.GetValue()),
                         _dataProvider.GetRequest<IAmLightstoneConsumerSpecificationsRequest>().VinNumber.GetValue());
 
                 _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
                    new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
-                       .ForDatabaseType(), new { history });
+                       .ForDatabaseType(), new { _jsonRepairHistory });
 
                 TransformResponse(response);
             }
@@ -59,7 +60,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformConsumerSpecificationsResponse();
+            var transformer = new TransformConsumerSpecificationsResponse(_jsonRepairHistory);
 
             if (transformer.Continue)
             {

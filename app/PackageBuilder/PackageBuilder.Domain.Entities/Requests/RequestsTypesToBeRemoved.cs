@@ -50,6 +50,9 @@ namespace PackageBuilder.Domain.Entities.Requests
                 },
                 {
                     DataProviderName.LightstoneConsumerSpecifications, LightstoneConsumerSpecifications
+                },
+                {
+                    DataProviderName.SignioDecryptDriversLicense, SignioDecryptDriversLicense
                 }
             };
 
@@ -88,6 +91,9 @@ namespace PackageBuilder.Domain.Entities.Requests
         private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> PCubedEzScore =
             (requests, user, packageName) => new PCubedEzScoreRequest(requests);
 
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> SignioDecryptDriversLicense =
+            (requests, user, packageName) => new SignioDriversLicenseRequest(requests);
+
         public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes
         {
             get { return _requestTypes; }
@@ -103,6 +109,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
+
     public class RgtLaceRequest : IAmRgtRequest
     {
         public RgtLaceRequest(ICollection<IAmRequestField> requestFields)
@@ -112,6 +119,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmCarIdRequestField CarId { get; private set; }
     }
+
     public class IvidTitleHolderLaceRequest : IAmIvidTitleholderRequest
     {
         public IvidTitleHolderLaceRequest(ICollection<IAmRequestField> requestFields, IHaveUser user)
@@ -129,6 +137,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
+
     public class LightstoneAutoLaceRequest : IAmLightstoneAutoRequest
     {
         public LightstoneAutoLaceRequest(ICollection<IAmRequestField> requestFields)
@@ -147,6 +156,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
+
     public class LightstonePropertyLaceRequest : IAmLightstonePropertyRequest
     {
         public LightstonePropertyLaceRequest(ICollection<IAmRequestField> requestFields)
@@ -166,6 +176,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmMaxRowsToReturnRequestField MaxRowsToReturn { get; private set; }
     }
+
     public class IvidLaceRequest : IAmIvidStandardRequest
     {
         public IvidLaceRequest(ICollection<IAmRequestField> requestFields, string pacakgeName, IHaveUser user)
@@ -203,6 +214,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public IAmMakeRequestField Make { get; private set; }
     }
+
     public class LightstoneDirectorRequest : IAmLightstoneBusinessDirectorRequest
     {
         public LightstoneDirectorRequest(ICollection<IAmRequestField> requestFields)
@@ -216,6 +228,7 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmFirstNameRequestField FirstName { get; private set; }
         public IAmSurnameRequestField Surname { get; private set; }
     }
+
     public class LightstoneConsumerSpecificationsRequest : IAmLightstoneConsumerSpecificationsRequest
     {
         public LightstoneConsumerSpecificationsRequest(ICollection<IAmRequestField> requestFields)
@@ -227,6 +240,7 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmVinNumberRequestField VinNumber { get; private set; }
         public IAmAccessKeyRequestField AccessKey { get; private set; }
     }
+
     public class PCubedEzScoreRequest : IAmPCubedEzScoreRequest
     {
         public PCubedEzScoreRequest(ICollection<IAmRequestField> requestFields)
@@ -240,6 +254,7 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmPhoneNumberRequestField PhoneNumber { get; private set; }
         public IAmEmailAddressRequestField EmailAddress { get; private set; }
     }
+
     public class LightstoneCompanyRequest : IAmLightstoneBusinessCompanyRequest
     {
         public LightstoneCompanyRequest(ICollection<IAmRequestField> requestFields)
@@ -254,6 +269,25 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmCompanyRegistrationNumberRequestField CompanyRegistrationNumber { get; private set; }
 
         public IAmCompanyVatNumberRequestField CompanyVatNumber { get; private set; }
+    }
+
+    public class SignioDriversLicenseRequest : IAmSignioDriversLicenseDecryptionRequest
+    {
+        public SignioDriversLicenseRequest(ICollection<IAmRequestField> requestFields)
+        {
+            ScanData = requestFields.GetRequestField<IAmScanDataRequestField>();
+            RegistrationCode = requestFields.GetRequestField<IAmRegistrationCodeRequestField>();
+            Username = requestFields.GetRequestField<IAmUserNameRequestField>();
+            UserId = requestFields.GetRequestField<IAmUserIdRequestField>();
+        }
+
+        public IAmScanDataRequestField ScanData { get; private set; }
+
+        public IAmRegistrationCodeRequestField RegistrationCode { get; private set; }
+
+        public IAmUserNameRequestField Username { get; private set; }
+
+        public IAmUserIdRequestField UserId { get; private set; }
     }
 
     public static class RequestFieldExtensions

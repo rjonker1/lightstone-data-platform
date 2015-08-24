@@ -12,18 +12,17 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Requests
 {
-    public class when_sending_company_request_to_lace_entry_point : Specification
+    public class when_sending_consumer_specifications_to_lace_entry_point : Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private ICollection<IPointToLaceProvider> _responses;
         private readonly IEntryPoint _entryPoint;
         private readonly IAdvancedBus _bus;
 
-        public when_sending_company_request_to_lace_entry_point()
+        public when_sending_consumer_specifications_to_lace_entry_point()
         {
             _bus = BusFactory.WorkflowBus();
-
-            _request = new CompanyRequestBuilder().ForLightstoneCompany();
+            _request = new ConsumerRequestBuilder().ForSpecifications();
             _entryPoint = new EntryPointService(_bus);
         }
 
@@ -33,18 +32,18 @@ namespace Lace.Acceptance.Tests.Requests
         }
 
         [Observation]
-        public void lace_request_to_be_loaded_and_responses_to_be_returned_for_company_search_sources()
+        public void lace_request_to_be_loaded_and_responses_to_be_returned_for_all_sources()
         {
             _responses.ShouldNotBeNull();
             _responses.Count.ShouldEqual(11);
             _responses.Count(c => c.Handled).ShouldEqual(1);
 
-
-            _responses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Handled.ShouldBeTrue();
-            _responses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Companies.ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Companies.Count().ShouldEqual(1);
-
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().Handled.ShouldBeTrue();
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.Count().ShouldEqual(1);
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldNotBeNull();
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("HYUNDAI TUCSON");
         }
     }
 }

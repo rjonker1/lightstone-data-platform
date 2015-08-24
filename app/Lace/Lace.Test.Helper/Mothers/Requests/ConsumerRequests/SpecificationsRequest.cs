@@ -14,7 +14,11 @@ namespace Lace.Test.Helper.Mothers.Requests.ConsumerRequests
 
         public IHavePackageForRequest Package
         {
-            get { return LighstoneConsumerSpecificationsRequest.LighstoneConsumerSpecificationsRequestPackage("KMHJN81BRU245395", "99167DC9-A09D-4582-AECA-AE5D42B7F201"); }
+            get
+            {
+                return LighstoneConsumerSpecificationsRequest.LighstoneConsumerSpecificationsRequestPackage("KMHJN81BRU245395",
+                    "99167DC9-A09D-4582-AECA-AE5D42B7F201");
+            }
         }
 
         public IHaveRequestContext Request

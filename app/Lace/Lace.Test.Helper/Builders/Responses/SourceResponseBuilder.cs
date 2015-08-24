@@ -8,6 +8,9 @@ using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Shared.DataProvider.Models;
 using Lace.Test.Helper.Fakes.Responses;
+using Lace.Toolbox.PCubed;
+using Lace.Toolbox.PCubed.Domain;
+using RestSharp;
 
 namespace Lace.Test.Helper.Builders.Responses
 {
@@ -77,6 +80,16 @@ namespace Lace.Test.Helper.Builders.Responses
         public System.Data.DataSet ForLightstoneDirectorResponse()
         {
             return FakeLightstoneDirectorResponse.ReturnDirectorReport();
+        }
+
+        public IRestResponse<ConsumerViewResponse> ForPcubedEzScore()
+        {
+            return FakePcubedEzScoreResponse.SuccessfulConsumerViewResponse();
+        }
+
+        public string ForLightstoneConsumerSpecificationsResponse()
+        {
+            return FakeLightstoneConsumerSpecificationsResponse.GetLightoneConsumerRepairHistoryResponse();
         }
     }
 }

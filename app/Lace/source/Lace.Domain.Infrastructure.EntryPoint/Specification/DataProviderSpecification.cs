@@ -9,6 +9,7 @@ using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Domain.DataProviders.Lightstone;
 using Lace.Domain.DataProviders.Lightstone.Business.Company;
 using Lace.Domain.DataProviders.Lightstone.Business.Director;
+using Lace.Domain.DataProviders.Lightstone.Consumer.Specifications;
 using Lace.Domain.DataProviders.Lightstone.Property;
 using Lace.Domain.DataProviders.PCubed.EzScore;
 using Lace.Domain.DataProviders.Rgt;
@@ -33,7 +34,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                                 new LightstonePropertyDataProvider(request,
                                                     new LightstoneCompanyDataProvider(request,
                                                         new LightstoneDirectorDataProvider(request,
-                                                            new PCubedEzScoreDataProvider(request, null, null,
+                                                            new PCubedEzScoreDataProvider(request,
+                                                                new ConsumerSpecificationsDataProvider(request, null, null,
+                                                                    CommandSender.InitCommandSender(bus, requestId,
+                                                                        DataProviderCommandSource.LightstoneConsumerSpecifications)), null,
                                                                 CommandSender.InitCommandSender(bus, requestId,
                                                                     DataProviderCommandSource.PCubedEzScore)), null,
                                                             CommandSender.InitCommandSender(bus, requestId,

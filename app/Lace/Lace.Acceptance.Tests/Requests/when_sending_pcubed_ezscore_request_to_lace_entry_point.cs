@@ -12,18 +12,17 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Requests
 {
-    public class when_sending_company_request_to_lace_entry_point : Specification
+    public class when_sending_pcubed_ezscore_request_to_lace_entry_point : Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private ICollection<IPointToLaceProvider> _responses;
         private readonly IEntryPoint _entryPoint;
         private readonly IAdvancedBus _bus;
 
-        public when_sending_company_request_to_lace_entry_point()
+        public when_sending_pcubed_ezscore_request_to_lace_entry_point()
         {
             _bus = BusFactory.WorkflowBus();
-
-            _request = new CompanyRequestBuilder().ForLightstoneCompany();
+            _request = new PCubedRequestBuilder().ForEzScore();
             _entryPoint = new EntryPointService(_bus);
         }
 
@@ -33,17 +32,18 @@ namespace Lace.Acceptance.Tests.Requests
         }
 
         [Observation]
-        public void lace_request_to_be_loaded_and_responses_to_be_returned_for_company_search_sources()
+        public void lace_request_to_be_loaded_and_responses_to_be_returned_for_pcubed_ezscore_search_sources()
         {
             _responses.ShouldNotBeNull();
             _responses.Count.ShouldEqual(11);
             _responses.Count(c => c.Handled).ShouldEqual(1);
 
 
-            _responses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Handled.ShouldBeTrue();
-            _responses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Companies.ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Companies.Count().ShouldEqual(1);
+            _responses.OfType<IProvideDataFromPCubedEzScore>().First().ShouldNotBeNull();
+            _responses.OfType<IProvideDataFromPCubedEzScore>().First().Handled.ShouldBeTrue();
+            _responses.OfType<IProvideDataFromPCubedEzScore>().First().EzScoreRecords.ShouldNotBeNull();
+            _responses.OfType<IProvideDataFromPCubedEzScore>().First().EzScoreRecords.Count().ShouldEqual(1);
+            _responses.OfType<IProvideDataFromPCubedEzScore>().First().EzScoreRecords.First().FirstName.ShouldNotBeNull();
 
         }
     }

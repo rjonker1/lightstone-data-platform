@@ -44,6 +44,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return new LightstoneBusinessResponse().LightstoneCompanyResponse();
                     case DataProviderName.LightstoneBusinessDirector:
                         return new LightstoneDirectorResponse().LightstoneCompanyResponse();
+                    case DataProviderName.LightstoneConsumerSpecifications:
+                        return new LightstoneConsumerResponse().EmptyLightstoneConsumerSpecifications();
                     default:
                         return null;
                 }
