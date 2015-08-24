@@ -57,6 +57,10 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                     return new CompanyRegistrationNumberRequestField(source.Value);
                 case RequestFieldType.CompanyVatNumber:
                     return new CompanyVatNumberRequestField(source.Value);
+                case RequestFieldType.ScanData:
+                    return new ScanDataRequestField(source.Value);
+                case RequestFieldType.UserId:
+                    return new UserIdRequestField(source.Value);
             }
 
             return null;

@@ -28,6 +28,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
                         return "";
                     case DataProviderName.PCubedFica:
                         return "";
+                    case DataProviderName.PCubedEzScore:
+                        return "";
                     case DataProviderName.SignioDecryptDriversLicense:
                         return "";
                     case DataProviderName.LightstoneProperty:
@@ -35,6 +37,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
                     case DataProviderName.LightstoneBusinessCompany:
                         return "";
                     case DataProviderName.LightstoneBusinessDirector:
+                        return "";
+                    case DataProviderName.LightstoneConsumerSpecifications:
                         return "";
                     default:
                         return null;
