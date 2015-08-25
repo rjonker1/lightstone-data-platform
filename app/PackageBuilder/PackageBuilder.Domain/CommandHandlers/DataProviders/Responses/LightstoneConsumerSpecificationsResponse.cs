@@ -1,4 +1,6 @@
-﻿using Lace.Domain.Core.Entities;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.DataProviders.Consumer;
+using Lace.Domain.Core.Entities;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
 {
@@ -6,7 +8,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
     {
         public LightstoneConsumerSpecificationsResponse EmptyLightstoneConsumerSpecifications()
         {
-            return new LightstoneConsumerSpecificationsResponse();
+            return new LightstoneConsumerSpecificationsResponse(new List<IRespondWithRepairData>()
+            {
+                new RepairDataResponse("", "", 0, "", "")
+            });
         }
     }
 }
