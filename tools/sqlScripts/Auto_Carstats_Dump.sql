@@ -6,7 +6,7 @@ SELECT
 	s.Year_ID as 'Year',
 	MAX(CASE s.Metric_ID WHEN (8) THEN cast(s.MoneyValue AS decimal(18,2)) WHEN isnull(s.Metric_ID, 0) then 0 END) as SalePriceNew,
 	MAX(CASE s.Metric_ID WHEN (11) THEN cast(s.MoneyValue AS decimal(18,2)) WHEN isnull(s.Metric_ID, 0) then 0 END) as RetailValue,
-	MAX(CASE s.Metric_ID WHEN (35) THEN cast(s.MoneyValue AS decimal(18,2)) ELSE 0 END) as TradeValue,
+	MAX(CASE s.Metric_ID WHEN (37) THEN cast(s.MoneyValue AS decimal(18,2)) ELSE 0 END) as TradeValue,
 	MAX(CASE s.Metric_ID WHEN (41) THEN cast(s.MoneyValue AS decimal(18,2)) ELSE 0 END) as CostValue,
 	MAX(CASE s.Metric_ID WHEN (45) THEN cast(s.MoneyValue AS decimal(18,2)) ELSE 0 END) as AuctionValue
 
