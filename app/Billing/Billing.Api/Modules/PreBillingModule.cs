@@ -93,7 +93,7 @@ namespace Billing.Api.Modules
                         };
                     }
 
-                    //if ((transaction.ClientId == new Guid()) && (transaction.CustomerId == new Guid())) continue;
+                   if ((transaction.ClientId == new Guid()) && (transaction.CustomerId == new Guid())) continue;
 
                     // User
                     var user = new User
