@@ -61,6 +61,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                     return new ScanDataRequestField(source.Value);
                 case RequestFieldType.UserId:
                     return new UserIdRequestField(source.Value);
+                case RequestFieldType.AccessKey:
+                    return new AccessKeyRequestField(source.Value);
             }
 
             return null;
