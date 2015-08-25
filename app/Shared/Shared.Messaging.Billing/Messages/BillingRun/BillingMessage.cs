@@ -4,7 +4,7 @@ using EasyNetQ;
 
 namespace DataPlatform.Shared.Messaging.Billing.Messages.BillingRun
 {
-    [Queue("DataPlatform.Transactions.Billing", ExchangeName = "DataPlatform.Transactions.Billing")]
+    [Queue("DataPlatform.Transactions.BillingRun", ExchangeName = "DataPlatform.Transactions.BillingRun")]
     public class BillingMessage : Entity
     {
         public virtual string RunType { get; set; }

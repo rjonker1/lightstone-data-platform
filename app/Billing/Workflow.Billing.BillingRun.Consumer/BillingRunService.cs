@@ -5,7 +5,6 @@ using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
 using Workflow.Billing.Consumers;
-using Workflow.Billing.Consumers.ConsumerTypes;
 using Workflow.Billing.Consumers.Installers;
 using Workflow.Billing.Installers;
 
@@ -34,7 +33,7 @@ namespace Workflow.Billing.BillingRun.Consumer
             try
             {
                 advancedBus = container.Resolve<IAdvancedBus>();
-                var q = advancedBus.QueueDeclare("DataPlatform.Transactions.Billing");
+                var q = advancedBus.QueueDeclare("DataPlatform.Transactions.BillingRun");
 
                 advancedBus.Consume(q, x => x
                     .Add<BillingMessage>((message, info) => new TransactionConsumer<BillingMessage>(message, container)));
