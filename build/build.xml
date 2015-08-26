@@ -445,8 +445,6 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid.dll" to="lib\net45"/>
@@ -524,8 +522,6 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid.dll" to="lib\net45"/>
