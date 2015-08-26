@@ -4,7 +4,6 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.Audatex.Infrastructure;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;

@@ -29,35 +29,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Infrastructure.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataProviders", "DataProviders", "{61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Core", "Lace\source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj", "{F9080E76-2491-4361-A915-E87262D900BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Core", "Lace\source\DataProviders.Core\DataProviders.Core.csproj", "{F9080E76-2491-4361-A915-E87262D900BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Audatex", "Lace\source\Lace.Domain.DataProviders.Audatex\Lace.Domain.DataProviders.Audatex.csproj", "{C591B1F8-1490-4CAD-8842-DDD642D004B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Ivid", "Lace\source\DataProviders.Ivid\DataProviders.Ivid.csproj", "{3180C3D9-5F65-4AB3-9111-1144F96A352C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Ivid", "Lace\source\Lace.Domain.DataProviders.Ivid\Lace.Domain.DataProviders.Ivid.csproj", "{3180C3D9-5F65-4AB3-9111-1144F96A352C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.IvidTitleHolder", "Lace\source\DataProviders.IvidTitleHolder\DataProviders.IvidTitleHolder.csproj", "{CF5345CA-1B8A-41B5-B85C-A9031D3EA174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.IvidTitleHolder", "Lace\source\Lace.Domain.DataProviders.IvidTitleHolder\Lace.Domain.DataProviders.IvidTitleHolder.csproj", "{CF5345CA-1B8A-41B5-B85C-A9031D3EA174}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Lightstone", "Lace\source\DataProviders.Lightstone\DataProviders.Lightstone.csproj", "{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone", "Lace\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj", "{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.RgtVin", "Lace\source\DataProviders.RgtVin\DataProviders.RgtVin.csproj", "{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Anpr", "Lace\source\Lace.Domain.DataProviders.Anpr\Lace.Domain.DataProviders.Anpr.csproj", "{B3C39DE4-4B23-4604-8732-06ED64A790B4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Jis", "Lace\source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj", "{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.RgtVin", "Lace\source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj", "{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Rgt", "Lace\source\Lace.Domain.DataProviders.Rgt\Lace.Domain.DataProviders.Rgt.csproj", "{52A528C9-B875-4487-A5F0-3820CB98ACFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Rgt", "Lace\source\DataProviders.Rgt\DataProviders.Rgt.csproj", "{52A528C9-B875-4487-A5F0-3820CB98ACFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.Infrastructure.Orm", "Lace\source\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj", "{7B07823D-3F48-470B-9A43-739D9EB9DC22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Car", "Lace\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj", "{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Certificate", "Lace\source\Lace.CrossCutting.DataProvider.Certificate\Lace.CrossCutting.DataProvider.Certificate.csproj", "{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Core.Entities", "Lace\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj", "{E18650C0-3965-4793-891B-20F3A0DFBA9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Core.Requests", "Lace\source\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj", "{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Signio.DriversLicense", "Lace\source\Lace.Domain.DataProviders.Signio\Lace.Domain.DataProviders.Signio.DriversLicense.csproj", "{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Signio.DriversLicense", "Lace\source\DataProviders.Signio\DataProviders.Signio.DriversLicense.csproj", "{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A01E79A2-4A20-4FCD-8C48-688B62B69010}"
 	ProjectSection(SolutionItems) = preProject
@@ -74,9 +66,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Lace", "Lace\source\Workflow.Lace\Workflow.Lace.csproj", "{758EEE8F-B527-4446-B499-29CAD8D63B2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Property", "Lace\source\Lace.Domain.DataProviders.Lightstone.Property\Lace.Domain.DataProviders.Lightstone.Property.csproj", "{FB2933C0-2D3D-4ACC-80DC-7162BE740442}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Lightstone.Property", "Lace\source\DataProviders.Lightstone.Property\DataProviders.Lightstone.Property.csproj", "{FB2933C0-2D3D-4ACC-80DC-7162BE740442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Business.Company", "Lace\Source\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.Company.csproj", "{B1093454-D552-434B-A474-F1CAA7A3FC42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Lightstone.Business.Company", "Lace\Source\DataProviders.Lightstone.Business\DataProviders.Lightstone.Business.Company.csproj", "{B1093454-D552-434B-A474-F1CAA7A3FC42}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Transactions.Shared", "Lace\Source\Workflow.Transactions.Shared\Workflow.Transactions.Shared.csproj", "{3047F71B-9F70-4824-B4E4-4F00BC0CD1C5}"
 EndProject
@@ -102,7 +94,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.DataProvider", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Caching.BuildingBlocks", "Lace\Source\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj", "{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Business.Director", "Lace\Source\Lace.Domain.DataProviders.Lightstone.Business.Director\Lace.Domain.DataProviders.Lightstone.Business.Director.csproj", "{F8A50911-4066-4ECA-BA26-42AEF9C3A521}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Lightstone.Business.Director", "Lace\Source\DataProviders.Lightstone.Business.Director\DataProviders.Lightstone.Business.Director.csproj", "{F8A50911-4066-4ECA-BA26-42AEF9C3A521}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Metadata", "Metadata", "{78179D8A-3C63-449A-9FE8-B6ADAE7F8E65}"
 EndProject
@@ -110,13 +102,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Metadata.Entryp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Metadata.DataProviders", "Lace\Metadata\Lace.Domain.Metadata.DataProviders\Lace.Domain.Metadata.DataProviders.csproj", "{029714DA-F831-4F1B-864D-CFED5910B443}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.PCubed.EzScore", "Lace\Source\Lace.Domain.DataProviders.PCubed.EzScore\Lace.Domain.DataProviders.PCubed.EzScore.csproj", "{3F37004F-E209-47D3-93BE-4B796C6E4E66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.PCubed.EzScore", "Lace\Source\DataProviders.PCubed.EzScore\DataProviders.PCubed.EzScore.csproj", "{3F37004F-E209-47D3-93BE-4B796C6E4E66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.PCubed.FIca", "Lace\Source\Lace.Domain.DataProviders.PCubed.Fica\Lace.Domain.DataProviders.PCubed.FIca.csproj", "{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.PCubed.FIca", "Lace\Source\DataProviders.PCubed.Fica\DataProviders.PCubed.FIca.csproj", "{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Toolbox.PCubed", "Lace\Source\Lace.Toolbox.PCubed\Lace.Toolbox.PCubed.csproj", "{182C2B39-29E7-4290-AFB4-7B703BC1CEB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Consumer.Specifications", "Lace\Source\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.csproj", "{F281C6FB-B038-43A6-8ECE-158DA7EE02D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Lightstone.Consumer.Specifications", "Lace\Source\DataProviders.Lightstone.Consumer.Specifications\DataProviders.Lightstone.Consumer.Specifications.csproj", "{F281C6FB-B038-43A6-8ECE-158DA7EE02D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Bmw.FinancedInterests", "Lace\Source\DataProviders.Bmw.FinancedInterests\DataProviders.Bmw.FinancedInterests.csproj", "{0C723D05-D0FF-47AE-B551-A670F771F9F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -207,16 +201,6 @@ Global
 		{F9080E76-2491-4361-A915-E87262D900BF}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
 		{F9080E76-2491-4361-A915-E87262D900BF}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{F9080E76-2491-4361-A915-E87262D900BF}.Test|Any CPU.Build.0 = Test|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.Prod|Any CPU.Build.0 = Prod|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.Test|Any CPU.ActiveCfg = Test|Any CPU
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5}.Test|Any CPU.Build.0 = Test|Any CPU
 		{3180C3D9-5F65-4AB3-9111-1144F96A352C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3180C3D9-5F65-4AB3-9111-1144F96A352C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3180C3D9-5F65-4AB3-9111-1144F96A352C}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
@@ -247,26 +231,6 @@ Global
 		{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
 		{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1}.Test|Any CPU.Build.0 = Test|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Prod|Any CPU.Build.0 = Prod|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Test|Any CPU.ActiveCfg = Test|Any CPU
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Test|Any CPU.Build.0 = Test|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Prod|Any CPU.Build.0 = Prod|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Test|Any CPU.ActiveCfg = Test|Any CPU
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Test|Any CPU.Build.0 = Test|Any CPU
 		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
@@ -307,16 +271,6 @@ Global
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.Test|Any CPU.Build.0 = Test|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Prod|Any CPU.Build.0 = Prod|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Test|Any CPU.ActiveCfg = Test|Any CPU
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Test|Any CPU.Build.0 = Test|Any CPU
 		{E18650C0-3965-4793-891B-20F3A0DFBA9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E18650C0-3965-4793-891B-20F3A0DFBA9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E18650C0-3965-4793-891B-20F3A0DFBA9E}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
@@ -557,6 +511,16 @@ Global
 		{F281C6FB-B038-43A6-8ECE-158DA7EE02D4}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{F281C6FB-B038-43A6-8ECE-158DA7EE02D4}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{F281C6FB-B038-43A6-8ECE-158DA7EE02D4}.Test|Any CPU.Build.0 = Release|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -571,7 +535,6 @@ Global
 		{129BBFFE-0D3E-4CC5-95B4-5C466669421D} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{7B07823D-3F48-470B-9A43-739D9EB9DC22} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B} = {C6E762ED-2030-40CF-A694-8F6C44800226}
-		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{B2049E92-CF9A-40D5-9ADE-D9BFC8ECD00C} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{182C2B39-29E7-4290-AFB4-7B703BC1CEB9} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{CA721B03-EFC7-45CE-A70E-BB9EF72C075B} = {87DF0D42-4BA9-42DD-8A56-91238364B357}
@@ -580,12 +543,9 @@ Global
 		{7F252FE1-1AB1-42FB-AEBD-EAC952E71664} = {837B64CA-81D7-498F-B88F-386D186E9F35}
 		{AE8A5548-01CC-481F-935F-66BF89B08081} = {837B64CA-81D7-498F-B88F-386D186E9F35}
 		{F9080E76-2491-4361-A915-E87262D900BF} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
-		{C591B1F8-1490-4CAD-8842-DDD642D004B5} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{3180C3D9-5F65-4AB3-9111-1144F96A352C} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{CF5345CA-1B8A-41B5-B85C-A9031D3EA174} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
-		{B3C39DE4-4B23-4604-8732-06ED64A790B4} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
-		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{52A528C9-B875-4487-A5F0-3820CB98ACFF} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
@@ -595,6 +555,7 @@ Global
 		{3F37004F-E209-47D3-93BE-4B796C6E4E66} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{F281C6FB-B038-43A6-8ECE-158DA7EE02D4} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
+		{0C723D05-D0FF-47AE-B551-A670F771F9F3} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{BDF29B6A-E38E-4D86-B386-2BE6EB60E7E3} = {19FB4BB8-3AF1-41CC-A029-C6D3B6A89235}
 		{9218740B-F966-408E-975A-AC7F68824C3A} = {19FB4BB8-3AF1-41CC-A029-C6D3B6A89235}
 		{C1EBA18A-743A-45EF-9F0A-6615E916B6CE} = {19FB4BB8-3AF1-41CC-A029-C6D3B6A89235}

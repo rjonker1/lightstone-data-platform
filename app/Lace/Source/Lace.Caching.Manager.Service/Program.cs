@@ -2,6 +2,7 @@
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using Castle.Windsor.Installer;
+using Lace.Domain.DataProviders.Core.Configuration;
 using Topshelf;
 
 namespace Lace.Caching.Manager.Service
@@ -29,9 +30,9 @@ namespace Lace.Caching.Manager.Service
                 });
                 x.RunAsLocalSystem();
 
-                x.SetDescription(System.Configuration.ConfigurationManager.AppSettings["service/config/description"]);
-                x.SetDisplayName(System.Configuration.ConfigurationManager.AppSettings["service/config/displayName"]);
-                x.SetServiceName(System.Configuration.ConfigurationManager.AppSettings["service/config/name"]);
+                x.SetDescription(CachingConfiguration.ServiceDescription);
+                x.SetDisplayName(CachingConfiguration.ServiceDisplayName);
+                x.SetServiceName(CachingConfiguration.ServiceName);
             });
         }
     }

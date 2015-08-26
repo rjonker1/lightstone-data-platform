@@ -128,9 +128,9 @@
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
+    <ProjectReference Include="..\..\source\DataProviders.Core\DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
-      <Name>Lace.Domain.DataProviders.Core</Name>
+      <Name>DataProviders.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
       <Project>{ae8a5548-01cc-481f-935f-66bf89b08081}</Project>

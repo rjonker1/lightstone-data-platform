@@ -21,6 +21,7 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] LightstoneBusinessCompany,
         [EnumMember] LightstoneBusinessDirector,
         [EnumMember] PCubedEzScore,
-        [EnumMember] LightstoneConsumerSpecifications
+        [EnumMember] LightstoneConsumerSpecifications,
+        [EnumMember] BmwFinancedInterests
     }
 }

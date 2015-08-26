@@ -110,13 +110,13 @@
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
+    <ProjectReference Include="..\..\source\DataProviders.Core\DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
-      <Name>Lace.Domain.DataProviders.Core</Name>
+      <Name>DataProviders.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
+    <ProjectReference Include="..\..\source\DataProviders.Lightstone\DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
-      <Name>Lace.Domain.DataProviders.Lightstone</Name>
+      <Name>DataProviders.Lightstone</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\Lace.Shared.DataProvider\Lace.Shared.DataProvider.csproj">
       <Project>{b2049e92-cf9a-40d5-9ade-d9bfc8ecd00c}</Project>

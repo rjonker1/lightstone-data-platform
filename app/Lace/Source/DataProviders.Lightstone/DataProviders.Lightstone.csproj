@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lace.Domain.DataProviders.Lightstone</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
+    <OutputPath>bin\TeamCity\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ, Version=0.32.2.271, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1536\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1519, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1519\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1296, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1296\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.3.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Infrastructure\CallLightstoneAutoDataProvider.cs" />
+    <Compile Include="Infrastructure\HandleRequest.cs" />
+    <Compile Include="Infrastructure\HandleLightstoneAutoSourceCall.cs" />
+    <Compile Include="Infrastructure\Management\GetCar.cs" />
+    <Compile Include="Infrastructure\Management\GetMetrics.cs" />
+    <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />
+    <Compile Include="Infrastructure\RequestDataFromLightstoneAuto.cs" />
+    <Compile Include="Services\BaseRetrievalMetric.cs" />
+    <Compile Include="Services\IRetrieveATypeOfMetric.cs" />
+    <Compile Include="Services\IRetrieveValuationFromMetrics.cs" />
+    <Compile Include="Services\MetricTypes.cs" />
+    <None Include="Services\Specifics\AccidentDistributionMetric.cs.old20150716" />
+    <Compile Include="Services\Specifics\AmortisedValueMetric.cs" />
+    <None Include="Services\Specifics\AreaFactorsMetric.cs.old20150716" />
+    <None Include="Services\Specifics\AuctionFactorsMetric.cs.old20150716" />
+    <Compile Include="Services\Specifics\EstimatedValuesMetric.cs" />
+    <Compile Include="Services\Specifics\ImageGaugesMetric.cs" />
+    <Compile Include="Services\Specifics\LastFiveSalesMetric.cs" />
+    <None Include="Services\Specifics\RepairIndexMetric.cs.old20150716" />
+    <None Include="Services\Specifics\TotalSalesByAgeMetric.cs.old20150716" />
+    <None Include="Services\Specifics\TotalSalesByGenderMetric.cs.old20150716" />
+    <Compile Include="LightstoneAutoDataProvider.cs" />
+    <Compile Include="UnitOfWork\BandUnitOfWork.cs" />
+    <Compile Include="Core\Contracts\IGetBands.cs" />
+    <Compile Include="Core\Contracts\IGetMakes.cs" />
+    <Compile Include="Core\Contracts\IGetMetrics.cs" />
+    <Compile Include="Core\Contracts\IGetMuncipalities.cs" />
+    <Compile Include="Core\Contracts\IGetSales.cs" />
+    <Compile Include="Core\Contracts\IGetStatistics.cs" />
+    <Compile Include="UnitOfWork\MakeUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\MetricUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\MuncipalityUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\SaleUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\StatisticsUnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
+      <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>
+      <Name>Lace.CrossCutting.DataProvider.Car</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj">
+      <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
+      <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
+      <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
+      <Name>Lace.Domain.Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
+      <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
+      <Name>Lace.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataProviders.Core\DataProviders.Core.csproj">
+      <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
+      <Name>DataProviders.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared.DataProvider\Lace.Shared.DataProvider.csproj">
+      <Project>{b2049e92-cf9a-40d5-9ade-d9bfc8ecd00c}</Project>
+      <Name>Lace.Shared.DataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+      <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
+      <Name>Lace.Shared.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
+      <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
+      <Name>Workflow.Lace.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Lace\Workflow.Lace.csproj">
+      <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
+      <Name>Workflow.Lace</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

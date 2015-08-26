@@ -2,8 +2,6 @@
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
-using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
@@ -13,17 +11,17 @@ namespace Lace.Unit.Tests.Transform
 {
     public class when_transforming_audatex_response : Specification
     {
-        private readonly GetDataResult _audatexWebServiceResponse;
-        private TransformAudatexResponse _transformer;
+        //private readonly GetDataResult _audatexWebServiceResponse;
+        //private TransformAudatexResponse _transformer;
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ICollection<IPointToLaceRequest> _request;
 
 
         public when_transforming_audatex_response()
         {
-            _response = new SourceResponseBuilder().ForAudatexWithLaceResponse();
-            _request = new LicensePlateRequestBuilder().ForAudatex();
-            _audatexWebServiceResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
+            //_response = new SourceResponseBuilder().ForAudatexWithLaceResponse();
+            //_request = new LicensePlateRequestBuilder().ForAudatex();
+            //_audatexWebServiceResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
         }
 
         public override void Observe()

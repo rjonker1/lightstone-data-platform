@@ -1,4 +1,5 @@
-﻿using Topshelf;
+﻿using Lace.Domain.DataProviders.Core.Configuration;
+using Topshelf;
 using Workflow.DataProvider.Bus.Consumer;
 
 namespace Workflow.DataProvider.Bus
@@ -18,9 +19,9 @@ namespace Workflow.DataProvider.Bus
 
                 x.RunAsLocalSystem();
 
-                x.SetDescription(System.Configuration.ConfigurationManager.AppSettings["service/config/description"]);
-                x.SetDisplayName(System.Configuration.ConfigurationManager.AppSettings["service/config/displayName"]);
-                x.SetServiceName(System.Configuration.ConfigurationManager.AppSettings["service/config/name"]);
+                x.SetDescription(WorkflowConfiguration.ServiceDescription);
+                x.SetDisplayName(WorkflowConfiguration.ServiceDisplayName);
+                x.SetServiceName(WorkflowConfiguration.ServiceName);
             });
         }
     }

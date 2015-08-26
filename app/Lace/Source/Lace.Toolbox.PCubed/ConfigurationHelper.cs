@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Lace.Toolbox.PCubed
 {
-    public class ConfigurationHelper
+    public static class ConfigurationHelper
     {
         public static TReturnType Read<TReturnType>(string name, bool required, TReturnType defaultValue)
         {

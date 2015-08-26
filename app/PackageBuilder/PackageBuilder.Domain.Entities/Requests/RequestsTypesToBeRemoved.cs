@@ -94,6 +94,9 @@ namespace PackageBuilder.Domain.Entities.Requests
         private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> SignioDecryptDriversLicense =
             (requests, user, packageName) => new SignioDriversLicenseRequest(requests);
 
+        private static readonly Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest> BmwFinancedInterests =
+           (requests, user, packageName) => new BmwFinancedInterestRequest(requests);
+
         public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes
         {
             get { return _requestTypes; }
@@ -288,6 +291,25 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmUserNameRequestField Username { get; private set; }
 
         public IAmUserIdRequestField UserId { get; private set; }
+    }
+
+    public class BmwFinancedInterestRequest : IAmBmwFinancedInterestRequest
+    {
+        public BmwFinancedInterestRequest(ICollection<IAmRequestField> requestFields)
+        {
+            AccountNumber = requestFields.GetRequestField<IAmAccountNumberField>();
+            VinNumber = requestFields.GetRequestField<IAmVinNumberRequestField>();
+            IdNumber = requestFields.GetRequestField<IAmIdentityNumberRequestField>();
+            LicenceNumber = requestFields.GetRequestField<IAmLicenceNumberRequestField>();
+        }
+
+        public IAmAccountNumberField AccountNumber { get; private set; }
+
+        public IAmVinNumberRequestField VinNumber { get; private set; }
+
+        public IAmIdentityNumberRequestField IdNumber { get; private set; }
+
+        public IAmLicenceNumberRequestField LicenceNumber { get; private set; }
     }
 
     public static class RequestFieldExtensions

@@ -2,7 +2,6 @@
 using DataPlatform.Shared.Dtos;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
@@ -36,10 +35,10 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoNrb891W();
         }
 
-        public GetDataResult ForAudatexWithHuyandaiHistory()
-        {
-            return FakeAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();
-        }
+        //public GetDataResult ForAudatexWithHuyandaiHistory()
+        //{
+        //    return FakeAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();
+        //}
 
         public ICollection<IPointToLaceProvider> ForAudatexWithLaceResponse()
         {

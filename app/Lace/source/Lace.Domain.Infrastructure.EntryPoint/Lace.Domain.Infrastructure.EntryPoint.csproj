@@ -132,57 +132,53 @@
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Audatex\Lace.Domain.DataProviders.Audatex.csproj">
-      <Project>{c591b1f8-1490-4cad-8842-ddd642d004b5}</Project>
-      <Name>Lace.Domain.DataProviders.Audatex</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
+    <ProjectReference Include="..\DataProviders.Core\DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
-      <Name>Lace.Domain.DataProviders.Core</Name>
+      <Name>DataProviders.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.IvidTitleHolder\Lace.Domain.DataProviders.IvidTitleHolder.csproj">
+    <ProjectReference Include="..\DataProviders.IvidTitleHolder\DataProviders.IvidTitleHolder.csproj">
       <Project>{cf5345ca-1b8a-41b5-b85c-a9031d3ea174}</Project>
-      <Name>Lace.Domain.DataProviders.IvidTitleHolder</Name>
+      <Name>DataProviders.IvidTitleHolder</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Ivid\Lace.Domain.DataProviders.Ivid.csproj">
+    <ProjectReference Include="..\DataProviders.Ivid\DataProviders.Ivid.csproj">
       <Project>{3180c3d9-5f65-4ab3-9111-1144f96a352c}</Project>
-      <Name>Lace.Domain.DataProviders.Ivid</Name>
+      <Name>DataProviders.Ivid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone.Business.Director\Lace.Domain.DataProviders.Lightstone.Business.Director.csproj">
+    <ProjectReference Include="..\DataProviders.Lightstone.Business.Director\DataProviders.Lightstone.Business.Director.csproj">
       <Project>{f8a50911-4066-4eca-ba26-42aef9c3a521}</Project>
-      <Name>Lace.Domain.DataProviders.Lightstone.Business.Director</Name>
+      <Name>DataProviders.Lightstone.Business.Director</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone.Business\Lace.Domain.DataProviders.Lightstone.Business.Company.csproj">
+    <ProjectReference Include="..\DataProviders.Lightstone.Business\DataProviders.Lightstone.Business.Company.csproj">
       <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>
-      <Name>Lace.Domain.DataProviders.Lightstone.Business.Company</Name>
+      <Name>DataProviders.Lightstone.Business.Company</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications\Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.csproj">
+    <ProjectReference Include="..\DataProviders.Lightstone.Consumer.Specifications\DataProviders.Lightstone.Consumer.Specifications.csproj">
       <Project>{f281c6fb-b038-43a6-8ece-158da7ee02d4}</Project>
-      <Name>Lace.Domain.DataProviders.Lightstone.Consumer.Specifications</Name>
+      <Name>DataProviders.Lightstone.Consumer.Specifications</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone.Property\Lace.Domain.DataProviders.Lightstone.Property.csproj">
+    <ProjectReference Include="..\DataProviders.Lightstone.Property\DataProviders.Lightstone.Property.csproj">
       <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>
-      <Name>Lace.Domain.DataProviders.Lightstone.Property</Name>
+      <Name>DataProviders.Lightstone.Property</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
+    <ProjectReference Include="..\DataProviders.Lightstone\DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
-      <Name>Lace.Domain.DataProviders.Lightstone</Name>
+      <Name>DataProviders.Lightstone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.PCubed.EzScore\Lace.Domain.DataProviders.PCubed.EzScore.csproj">
+    <ProjectReference Include="..\DataProviders.PCubed.EzScore\DataProviders.PCubed.EzScore.csproj">
       <Project>{3f37004f-e209-47d3-93be-4b796c6e4e66}</Project>
-      <Name>Lace.Domain.DataProviders.PCubed.EzScore</Name>
+      <Name>DataProviders.PCubed.EzScore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
+    <ProjectReference Include="..\DataProviders.RgtVin\DataProviders.RgtVin.csproj">
       <Project>{ae3f8127-622b-4e02-a21f-6ee7bea123e2}</Project>
-      <Name>Lace.Domain.DataProviders.RgtVin</Name>
+      <Name>DataProviders.RgtVin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Rgt\Lace.Domain.DataProviders.Rgt.csproj">
+    <ProjectReference Include="..\DataProviders.Rgt\DataProviders.Rgt.csproj">
       <Project>{52a528c9-b875-4487-a5f0-3820cb98acff}</Project>
-      <Name>Lace.Domain.DataProviders.Rgt</Name>
+      <Name>DataProviders.Rgt</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Domain.DataProviders.Signio\Lace.Domain.DataProviders.Signio.DriversLicense.csproj">
+    <ProjectReference Include="..\DataProviders.Signio\DataProviders.Signio.DriversLicense.csproj">
       <Project>{8bf3d0cf-01e3-4397-bdaf-1b20d9bd7934}</Project>
-      <Name>Lace.Domain.DataProviders.Signio.DriversLicense</Name>
+      <Name>DataProviders.Signio.DriversLicense</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
       <Project>{ae8a5548-01cc-481f-935f-66bf89b08081}</Project>

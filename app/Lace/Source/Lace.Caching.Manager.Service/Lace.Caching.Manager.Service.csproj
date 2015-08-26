@@ -207,6 +207,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataProviders.Core\DataProviders.Core.csproj">
+      <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
+      <Name>DataProviders.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj">
       <Project>{cbb5ee23-8ec8-45f7-b173-a268bfe9d23b}</Project>
       <Name>Lace.Caching.BuildingBlocks</Name>

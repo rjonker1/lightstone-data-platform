@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestFields\IAmAccessKeyRequestField.cs" />
+    <Compile Include="RequestFields\IAmAccountNumberField.cs" />
     <Compile Include="RequestFields\IAmApplicantNameRequestField.cs" />
     <Compile Include="RequestFields\IAmCarIdRequestField.cs" />
     <Compile Include="RequestFields\IAmChassisNumberRequestField.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="RequestFields\IAmYearRequestField.cs" />
     <Compile Include="RequestFields\IAmScanDataRequestField.cs" />
     <Compile Include="Requests\IAmAnprRequest.cs" />
+    <Compile Include="Requests\IAmBmwFinancedInterestRequest.cs" />
     <Compile Include="Requests\IAmDataProviderRequest.cs" />
     <Compile Include="Requests\IAmIvidTitleholderRequest.cs" />
     <Compile Include="Requests\IAmJisRequest.cs" />

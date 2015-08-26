@@ -206,6 +206,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\DataProviders.Core\DataProviders.Core.csproj">
+      <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
+      <Name>DataProviders.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>

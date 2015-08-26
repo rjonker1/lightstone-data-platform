@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Lace.Domain.DataProviders.Core.Configuration;
 
 namespace Lace.CrossCutting.Infrastructure.Orm.Connections
 {
@@ -17,8 +18,7 @@ namespace Lace.CrossCutting.Infrastructure.Orm.Connections
         {
             get
             {
-                return _autocarStatsConnection ?? new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["lace/source/database/auto-car-stats"].ToString());
+                return _autocarStatsConnection ?? new SqlConnection(AutoCarstatsConfiguration.Database);
             }
         }
     }
