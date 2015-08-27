@@ -16,7 +16,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 {
     public class when_initalizing_lace_chain_for_company_search : Specification
     {
-        //
+        
         private IBootstrap _initialize;
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly IAdvancedBus _command;
