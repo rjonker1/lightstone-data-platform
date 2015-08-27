@@ -1,4 +1,8 @@
-﻿<!-- TOP lvl -->
+﻿<script type="text/ng-template" id="data_field_renderer.html">
+    <i ng-if="dataField.isSelected">{{dataField.name}} |</i>
+    <span ng-repeat="dataField in dataField.dataFields" ng-include="'data_field_renderer.html'"></span>
+</script>
+<!-- TOP lvl -->
 <script type="text/ng-template" id="proivder_nodes_renderer.html">
 
     <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
@@ -205,8 +209,8 @@
                                     <label>Package Industry:</label>
                                     <div>
                                         <!--<select class="form-control" ng-model="dataProvsPkg.Package.industry" ng-selected="dataProvsPkg.Package.industry">
-                                            <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
-                                        </select>-->
+                                                <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
+                                            </select>-->
 
                                         <div multi-select
                                              input-model="industries"
@@ -224,13 +228,13 @@
                                 <br />
 
                                 <!--<div>
-                                    <label>Owner:</label>
-                                    <div>
-                                        <select class="form-control" ng-model="dataProvsPkg.Package.owner" ng-selected="dataProvsPkg.Package.owner">
-                                            <option ng-repeat="user in users" value="{{user.name}}">{{user.name}}</option>
-                                        </select>
-                                    </div>
-                                </div>-->
+                                        <label>Owner:</label>
+                                        <div>
+                                            <select class="form-control" ng-model="dataProvsPkg.Package.owner" ng-selected="dataProvsPkg.Package.owner">
+                                                <option ng-repeat="user in users" value="{{user.name}}">{{user.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>-->
 
                                 <div>
                                     <label>COS:</label>
@@ -250,6 +254,14 @@
 
                                 </div>
                             </div>
+                            <div id="3" class="col-lg-3 col-md-6">
+                                <div ng-repeat="dataProviders in filterDataProviders(dataProvsPkg.Package)">
+                                    <div ng-repeat="dataProvider in dataProviders">
+                                        <label>{{dataProvider.name}}: </label>
+                                        <span ng-repeat="dataField in dataProvider.dataFields" ng-include="'data_field_renderer.html'"></span>
+                                    </div>
+                                </div>
+                            </div> 
                         </div> <!--End Info-->
                         <br />
                         <!-- DataProvider -->
