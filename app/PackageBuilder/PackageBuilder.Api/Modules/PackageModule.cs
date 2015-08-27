@@ -16,7 +16,6 @@ using Lim.Domain.Messaging.Publishing;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
-using PackageBuilder.Api.Helpers;
 using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
@@ -50,8 +49,15 @@ namespace PackageBuilder.Api.Modules
             //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
-            Get["/Packages"] = parameters =>
-                Response.AsJson(readRepo.Where(x => !x.IsDeleted));
+            Get["/Packages/{showAll?false}"] = _ =>
+            {
+                return _.showAll
+                    ? Response.AsJson(
+                        from p1 in readRepo
+                        where p1.Version == (from p2 in readRepo where p2.PackageId == p1.PackageId && !p2.IsDeleted select p2.Version).Max()
+                        select p1)
+                    : Response.AsJson(readRepo.Where(x => !x.IsDeleted));
+            };
 
             Get["/PackageLookup/{industryIds?}"] = parameters =>
             {

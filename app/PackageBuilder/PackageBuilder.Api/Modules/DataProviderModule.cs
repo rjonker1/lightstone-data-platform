@@ -36,9 +36,15 @@ namespace PackageBuilder.Api.Modules
             //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
-            Get["/DataProviders"] = _ => {
-                var test = Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>(readRepo));
-                return test;
+            Get["/DataProviders/{showAll?false}"] = _ =>
+            {
+                return _.showAll
+                    ? Response.AsJson(
+                        Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>
+                            (from d1 in readRepo
+                             where d1.Version == (from d2 in readRepo where d2.DataProviderId == d1.DataProviderId select d2.Version).Max()
+                             select d1).ToList())
+                    : Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>(readRepo));
             };
 
             Get["/DataProviders/Latest"] = _ =>
@@ -76,7 +82,7 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProviders/{id}"] = _ => 
+            Get["/DataProviders/{id:guid}"] = _ => 
                 Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id)) } });
 
             Get["/DataProviders/{id}/{version}"] = _ =>

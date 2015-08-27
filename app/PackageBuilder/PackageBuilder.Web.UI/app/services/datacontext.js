@@ -68,10 +68,10 @@
         }
 
         //GET *
-        function getAllDataProviders() {
+        function getAllDataProviders(showAll) {
             var deferred = $q.defer();
 
-            $http.get( config.apiUri + '/DataProviders').then(function (result) {
+            $http.get(config.apiUri + '/DataProviders/' + showAll).then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
             }, function (error) {
@@ -96,10 +96,10 @@
         }
 
         //GET
-        function getAllPackages() {
+        function getAllPackages(showAll) {
             var deferred = $q.defer();
             
-            $http.get( config.apiUri + '/Packages').then(function (result) {
+            $http.get(config.apiUri + '/Packages/' + showAll).then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
             }, function (error) {

@@ -35,6 +35,14 @@
         };
 
         $scope.selectedDatasource = [];
+        
+        // Defaulted postion for toggle-switch
+        $scope.switch = 'false';
+        $scope.switchAlternate = 'Show New';
+        $scope.toggle = function (state) {
+            (state == true) ? $scope.switch = false : $scope.switch = true;
+            $scope.dPackagesData = getAllPackages(state);
+        };
 
         $scope.items = ['item1', 'item2', 'item3'];
 
@@ -129,8 +137,8 @@
                 .then(function () { log('Activated Data Providers View'); });
         }
 
-        function getAllPackages() {
-            return datacontext.getAllPackages().then(function (result) {
+        function getAllPackages(showAll) {
+            return datacontext.getAllPackages(showAll).then(function (result) {
                 var distinctProviders = Enumerable.From(result)
                     .Distinct(function (x) {
                         return x.packageId;
@@ -151,9 +159,16 @@
                     });
                 
                 (result.indexOf('Error') > -1) ? logError(result) : $scope.dPackagesData = result;
+                reSize(result.length);
             }, function (error) {
                 logError(error.data.errorMessage);
             });
         }
+        
+        function reSize(rows) {
+            // This will adjust the css after the Data is loaded
+            var newHeight = (rows * 30) + 80;
+            angular.element(document.getElementById('dsGrid')).css('height', newHeight + 'px');
+        };
     }
 })();
