@@ -275,5 +275,14 @@
                 logError(error.data.errorMessage);
             });
         }
+        
+        $scope.filterDataProvierFields = function (dp) {
+            for (var i = 0; i < dp.dataFields.length; i++) {
+                if (dp.dataFields[i].isSelected) {
+                    return true;
+                }
+            }
+            return false; 
+        };
     }
 })();

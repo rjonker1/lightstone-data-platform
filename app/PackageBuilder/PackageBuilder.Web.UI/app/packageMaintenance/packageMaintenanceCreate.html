@@ -256,7 +256,7 @@
                             </div>
                             <div id="3" class="col-lg-3 col-md-6">
                                 <div ng-repeat="dataProviders in filterDataProviders(dataProvsPkg.Package)">
-                                    <div ng-repeat="dataProvider in dataProviders">
+                                    <div ng-repeat="dataProvider in dataProviders | filter:filterDataProvierFields">
                                         <label>{{dataProvider.name}}: </label>
                                         <span ng-repeat="dataField in dataProvider.dataFields" ng-include="'data_field_renderer.html'"></span>
                                     </div>
