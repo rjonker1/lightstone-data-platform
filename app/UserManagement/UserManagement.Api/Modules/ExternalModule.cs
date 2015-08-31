@@ -13,7 +13,10 @@ namespace UserManagement.Api.Modules
         {
             Get["/CustomerClient/{id}"] = param =>
             {
-                var searchId = new Guid(param.id);
+                Guid paramId;
+                Guid.TryParse(param.id, out paramId);
+                var searchId = paramId;
+
                 this.Info(() => "Searching for Customer | Client {0}".FormatWith(searchId));
 
                 var customerAcc = customers.FirstOrDefault(x => x.Id == searchId);

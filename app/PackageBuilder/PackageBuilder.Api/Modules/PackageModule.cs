@@ -149,7 +149,8 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => "PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var accountNumber = userManagementApi.Get(token, "CustomerClient/{0}", new []{new KeyValuePair<string, string>("CustomerClientId", apiRequest.CustomerClientId + "") });
+                var accountNumber = userManagementApi.Get(token, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
+
                 this.Info(() => "PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 //TODO: Get these values from request or user management                
