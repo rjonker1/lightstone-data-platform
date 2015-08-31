@@ -61,8 +61,9 @@ namespace Shared.BuildingBlocks.Api.ApiClients
             if (!string.IsNullOrEmpty(token))
                 request.AddHeader("Authorization", "Token " + token);
 
-            foreach (var valuePair in headers)
-                request.AddHeader(valuePair.Key, valuePair.Value);
+            if (headers != null)
+                foreach (var valuePair in headers)
+                    request.AddHeader(valuePair.Key, valuePair.Value);
             
             parameters = parameters ?? Enumerable.Empty<KeyValuePair<string, string>>();
             foreach (var parameter in parameters)
