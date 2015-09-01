@@ -80,7 +80,6 @@ namespace Reporting.Api
 
             Get["/ReportDownload"] = parameters =>
             {
-
                 var file = new FileStream(@"C:\Development\JSReport\report.pdf", FileMode.Open);
                 string fileName = "report.pdf";
 
