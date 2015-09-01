@@ -123,11 +123,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dtos\ReportDto.cs" />
+    <Compile Include="Entities\DataProviderDetail.cs" />
+    <Compile Include="Entities\PackageDetail.cs" />
+    <Compile Include="Entities\PreBillingRecord.cs" />
     <Compile Include="Entities\ReportCustomer.cs" />
     <Compile Include="Entities\ReportData.cs" />
     <Compile Include="Entities\ReportInvoice.cs" />
     <Compile Include="Entities\ReportPackage.cs" />
     <Compile Include="Entities\ReportTemplate.cs" />
+    <Compile Include="Entities\UserDetail.cs" />
+    <Compile Include="Entities\UserTransactionDetail.cs" />
     <Compile Include="NotificationSender\EmailNotification.cs" />
     <Compile Include="NotificationSender\ISendNotifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

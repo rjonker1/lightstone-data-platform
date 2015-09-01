@@ -1,20 +1,32 @@
-﻿using System.IO;
+﻿using System;
+using System.Configuration;
+using System.IO;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Mail;
 using System.Text;
 using jsreport.Client;
 using Nancy;
+using Nancy.Json;
 using Nancy.Responses;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Workflow.Reporting.Dtos;
 
 namespace Reporting.Api
 {
     public class IndexModule : NancyModule
     {
+        private static int _defaultJsonMaxLength;
+
         public IndexModule()
         {
+            if (_defaultJsonMaxLength == 0)
+                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
+
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
+            JsonSettings.MaxJsonLength = Int32.MaxValue;
+
             Get["/Generate"] = parameters =>
                 {
                     var _reportingService = new ReportingService("http://localhost:8856");
@@ -77,35 +89,33 @@ namespace Reporting.Api
                 return response.AsAttachment(fileName);
             };
 
+            Post["/PreBillingReportDownload"] = parameters =>
+            {
+                var body = Request.Body<dynamic>().ToString();
+                var dto = JsonConvert.DeserializeObject<ReportDto>(body);
 
-            //Get["/ReportHTML"] = parameters =>
-            //{
+                var _reportingService = new ReportingService("http://localhost:8856");
+                var path = @"D:\";
 
-            //    string urlAddress = "http://localhost:8856/templates/N190datG";
+                //Store to disk
+                using (var fileStream = File.Create(path + @"\PreBilling.xlsx"))
+                {
+                    var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
+                    report.Content.CopyTo(fileStream);
+                }
 
-            //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
-            //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                return Response.AsJson(new { response =  dto.Data });
+            };
 
+            Get["PreBillingReportDownload"] = parameters =>
+            {
+                var file = new FileStream(@"D:\PreBilling.xlsx", FileMode.Open);
+                string fileName = "PreBilling.xlsx";
 
-            //    Stream receiveStream = response.GetResponseStream();
-            //    StreamReader readStream = null;
+                var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
 
-            //    if (response.CharacterSet == null)
-            //    {
-            //        readStream = new StreamReader(receiveStream);
-            //    }
-            //    else
-            //    {
-            //        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
-            //    }
-
-            //    string report = readStream.ReadToEnd();
-
-            //    response.Close();
-            //    readStream.Close();
-
-            //    return report;
-            //};
+                return response.AsAttachment(fileName);
+            };
 
             Post["/ReportOutput"] = parameters =>
             {

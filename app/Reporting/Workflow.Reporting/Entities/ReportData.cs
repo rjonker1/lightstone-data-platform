@@ -5,6 +5,7 @@ namespace Workflow.Reporting.Entities
     public class ReportData
     {
         public ReportCustomer Customer { get; set; }
-        public IEnumerable<ReportInvoice> Invoices { get; set; } 
+        public IEnumerable<ReportInvoice> Invoices { get; set; }
+        public IEnumerable<PreBillingRecord> PreBillingData { get; set; } 
     }
 }

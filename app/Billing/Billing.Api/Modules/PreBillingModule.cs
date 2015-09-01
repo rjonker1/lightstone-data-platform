@@ -215,6 +215,8 @@ namespace Billing.Api.Modules
                     }
                 };
 
+                //TODO: Report API call to generate excel output attachment file
+
                 return Response.AsJson(report);
             };
 
