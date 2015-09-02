@@ -11,6 +11,7 @@ using Nancy;
 using Nancy.Extensions;
 using Nancy.Responses;
 using Nancy.Responses.Negotiation;
+using ServiceStack.Text;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
@@ -209,6 +210,12 @@ namespace Billing.Api.Modules
 
             Get["/PreBillingDump"] = _ =>
             {
+                var preBillStartDateFilter = Request.Query["startDate"];
+                var preBillEndDateFilter = Request.Query["endDate"];
+
+                if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
+                if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
+
                 var preBilling = _preBillingRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
 
                 var report = new ReportDto
@@ -216,19 +223,22 @@ namespace Billing.Api.Modules
                     Template = new ReportTemplate { ShortId = "418Ky2Cj" },
                     Data = new ReportData
                     {
-                        //PreBillingData = preBilling
+                        PreBillingData = Mapper.Map<IEnumerable<PreBilling>, IEnumerable<PreBillingRecord>>(preBilling)
                     }
                 };
 
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 reportApiClient.Post(token, "/PreBillingReportDownload", null, report, null);
 
+
                 var file = new FileStream(@"D:\LSA Reports\PreBilling.xlsx", FileMode.Open);
                 string fileName = "PreBilling.xlsx";
 
                 var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
 
-                return response.AsAttachment(fileName);
+                response.WithCookie("fileDownload", "true", DateTime.Now.AddSeconds(10), "", "/");
+
+                return response; //.AsAttachment(fileName);
             };
 
         }
@@ -249,23 +259,5 @@ namespace Billing.Api.Modules
             }
         }
     }
-
-    //public class ReportDto<T> where T : class
-    //{
-    //    public ReportTemplate Template { get; set; }
-    //    public ReportData<T> Data { get; set; }
-    //}
-
-    //public class ReportTemplate
-    //{
-    //    public string ShortId { get; set; }
-    //}
-
-    //public class ReportData<T> where T : class
-    //{
-    //    public ReportCustomer Customer { get; set; }
-    //    public IEnumerable<ReportInvoice> Invoices { get; set; }
-    //    public IEnumerable<T> BillingData { get; set; }
-    //}
 
 }
