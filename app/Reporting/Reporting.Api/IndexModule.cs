@@ -94,7 +94,7 @@ namespace Reporting.Api
                 var dto = JsonConvert.DeserializeObject<ReportDto>(body);
 
                 var _reportingService = new ReportingService("http://localhost:8856");
-                var path = @"D:\";
+                var path = @"D:\LSA Reports";
 
                 //Store to disk
                 using (var fileStream = File.Create(path + @"\PreBilling.xlsx"))
@@ -108,7 +108,7 @@ namespace Reporting.Api
 
             Get["PreBillingReportDownload"] = parameters =>
             {
-                var file = new FileStream(@"D:\PreBilling.xlsx", FileMode.Open);
+                var file = new FileStream(@"D:\LSA Reports\PreBilling.xlsx", FileMode.Open);
                 string fileName = "PreBilling.xlsx";
 
                 var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
