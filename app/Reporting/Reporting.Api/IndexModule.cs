@@ -103,7 +103,15 @@ namespace Reporting.Api
                     report.Content.CopyTo(fileStream);
                 }
 
-                return Response.AsJson(new { response =  dto.Data });
+                return Response.AsJson(new { message = "Success" });
+
+                //// Read file after saved to disk
+                //var file = new FileStream(@"D:\LSA Reports\PreBilling.xlsx", FileMode.Open);
+                //string fileName = "PreBilling.xlsx";
+
+                //var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
+
+                //return response.AsAttachment(fileName);
             };
 
             Get["PreBillingReportDownload"] = parameters =>

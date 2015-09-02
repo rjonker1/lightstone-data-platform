@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,11 +9,14 @@ using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
+using Nancy.Responses;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Repository;
+using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
 using PreBillingDto = Billing.Domain.Dtos.PreBillingDto;
 
@@ -24,7 +28,8 @@ namespace Billing.Api.Modules
         private IList<PreBilling> _preBillingRepository;
 
         public PreBillingModule(IRepository<PreBilling> preBillingDBRepository, 
-                                IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider)
+                                IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider,
+                                IReportApiClient reportApiClient)
         {
             _preBillingDBRepository = preBillingDBRepository;
             _preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();
@@ -206,18 +211,24 @@ namespace Billing.Api.Modules
             {
                 var preBilling = _preBillingRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
 
-                var report = new ReportDto<PreBilling>
+                var report = new ReportDto
                 {
                     Template = new ReportTemplate { ShortId = "418Ky2Cj" },
-                    Data = new ReportData<PreBilling>
+                    Data = new ReportData
                     {
-                        BillingData = preBilling
+                        //PreBillingData = preBilling
                     }
                 };
 
-                //TODO: Report API call to generate excel output attachment file
+                var token = Context.Request.Headers.Authorization.Split(' ')[1];
+                reportApiClient.Post(token, "/PreBillingReportDownload", null, report, null);
 
-                return Response.AsJson(report);
+                var file = new FileStream(@"D:\LSA Reports\PreBilling.xlsx", FileMode.Open);
+                string fileName = "PreBilling.xlsx";
+
+                var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
+
+                return response.AsAttachment(fileName);
             };
 
         }
@@ -239,22 +250,22 @@ namespace Billing.Api.Modules
         }
     }
 
-    public class ReportDto<T> where T : class
-    {
-        public ReportTemplate Template { get; set; }
-        public ReportData<T> Data { get; set; }
-    }
+    //public class ReportDto<T> where T : class
+    //{
+    //    public ReportTemplate Template { get; set; }
+    //    public ReportData<T> Data { get; set; }
+    //}
 
-    public class ReportTemplate
-    {
-        public string ShortId { get; set; }
-    }
+    //public class ReportTemplate
+    //{
+    //    public string ShortId { get; set; }
+    //}
 
-    public class ReportData<T> where T : class
-    {
-        public ReportCustomer Customer { get; set; }
-        public IEnumerable<ReportInvoice> Invoices { get; set; }
-        public IEnumerable<T> BillingData { get; set; }
-    }
+    //public class ReportData<T> where T : class
+    //{
+    //    public ReportCustomer Customer { get; set; }
+    //    public IEnumerable<ReportInvoice> Invoices { get; set; }
+    //    public IEnumerable<T> BillingData { get; set; }
+    //}
 
 }
