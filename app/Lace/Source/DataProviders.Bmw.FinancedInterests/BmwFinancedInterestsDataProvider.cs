@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.BmwFinancedInterests, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.BmwFinance, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -40,8 +40,8 @@ namespace Lace.Domain.DataProviders.Bmw.Finance
             else
             {
 
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.BmwFinancedInterests);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.BmwFinancedInterests, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.BmwFinance);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.BmwFinance, _dataProvider);
 
                 _logCommand.LogBegin(new { _dataProvider });
 
