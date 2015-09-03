@@ -3,7 +3,7 @@ using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.DataProvider.Models;
+using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
 {

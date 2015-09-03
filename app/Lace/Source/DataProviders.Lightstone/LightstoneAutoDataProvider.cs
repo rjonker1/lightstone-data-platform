@@ -9,7 +9,7 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
-using Lace.Shared.DataProvider.Repositories;
+using Lace.Toolbox.Database.Repositories;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Lightstone

@@ -2,8 +2,8 @@
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
-using Lace.Shared.DataProvider.Models;
-using Lace.Shared.DataProvider.Repositories;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 {

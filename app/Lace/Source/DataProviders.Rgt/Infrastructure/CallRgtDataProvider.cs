@@ -4,16 +4,17 @@ using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.UnitOfWork;
-using Lace.Shared.DataProvider.Models;
-using Lace.Shared.DataProvider.Repositories;
 using Lace.Shared.Extensions;
+using Lace.Toolbox.Database.Factories;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
 
@@ -42,7 +43,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         {
             try
             {
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new {_dataProvider});
 
                 GetCar.WithCarId(response, _dataProvider.GetRequest<IAmRgtRequest>(), _repository, ref _carInformation,
@@ -51,7 +52,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 GetSpecifications.ForCar(new CarSpecificationsUnitOfWork(_repository), _carInformation.CarInformationRequest, out _carSpecifications);
 
                 _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
+                    new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                         .ForDatabaseType(), new {_carSpecifications});
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)

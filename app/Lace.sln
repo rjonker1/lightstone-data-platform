@@ -41,8 +41,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.RgtVin", "Lac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Rgt", "Lace\source\DataProviders.Rgt\DataProviders.Rgt.csproj", "{52A528C9-B875-4487-A5F0-3820CB98ACFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.Infrastructure.Orm", "Lace\source\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj", "{7B07823D-3F48-470B-9A43-739D9EB9DC22}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Car", "Lace\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj", "{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Core.Entities", "Lace\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj", "{E18650C0-3965-4793-891B-20F3A0DFBA9E}"
@@ -90,7 +88,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Caching.Manager.Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Caching", "Lace\Source\Lace.Caching\Lace.Caching.csproj", "{A38117CD-AFCD-4F1A-999C-0C390F6BE5AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.DataProvider", "Lace\Source\Lace.Shared.DataProvider\Lace.Shared.DataProvider.csproj", "{B2049E92-CF9A-40D5-9ADE-D9BFC8ECD00C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Toolbox.Database", "Lace\Source\Lace.Shared.DataProvider\Lace.Toolbox.Database.csproj", "{B2049E92-CF9A-40D5-9ADE-D9BFC8ECD00C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Caching.BuildingBlocks", "Lace\Source\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj", "{CBB5EE23-8EC8-45F7-B173-A268BFE9D23B}"
 EndProject
@@ -110,7 +108,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Toolbox.PCubed", "Lace
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Lightstone.Consumer.Specifications", "Lace\Source\DataProviders.Lightstone.Consumer.Specifications\DataProviders.Lightstone.Consumer.Specifications.csproj", "{F281C6FB-B038-43A6-8ECE-158DA7EE02D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Bmw.FinancedInterests", "Lace\Source\DataProviders.Bmw.FinancedInterests\DataProviders.Bmw.FinancedInterests.csproj", "{0C723D05-D0FF-47AE-B551-A670F771F9F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Bmw.Finance", "Lace\Source\DataProviders.Bmw.FinancedInterests\DataProviders.Bmw.Finance.csproj", "{0C723D05-D0FF-47AE-B551-A670F771F9F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Toolbox.Signio", "Lace\Source\Lace.Toolbox.Signio\Lace.Toolbox.Signio.csproj", "{FF02E06F-6212-417D-BC8C-B31DE2494C72}"
 EndProject
@@ -253,16 +251,6 @@ Global
 		{52A528C9-B875-4487-A5F0-3820CB98ACFF}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
 		{52A528C9-B875-4487-A5F0-3820CB98ACFF}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{52A528C9-B875-4487-A5F0-3820CB98ACFF}.Test|Any CPU.Build.0 = Test|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.Prod|Any CPU.Build.0 = Prod|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.Test|Any CPU.ActiveCfg = Test|Any CPU
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22}.Test|Any CPU.Build.0 = Test|Any CPU
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
@@ -554,7 +542,6 @@ Global
 		{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{52A528C9-B875-4487-A5F0-3820CB98ACFF} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{E18650C0-3965-4793-891B-20F3A0DFBA9E} = {87DF0D42-4BA9-42DD-8A56-91238364B357}
 		{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4} = {87DF0D42-4BA9-42DD-8A56-91238364B357}

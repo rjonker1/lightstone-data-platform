@@ -6,7 +6,7 @@ using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
-using Lace.Shared.DataProvider.Repositories;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services
 {

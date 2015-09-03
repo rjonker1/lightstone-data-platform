@@ -2,8 +2,8 @@
 using Lace.Caching.BuildingBlocks.Handlers;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.Domain.Core.Contracts.Caching;
-using Lace.Shared.DataProvider.Models;
-using Lace.Shared.DataProvider.Repositories;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Repositories;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Caching

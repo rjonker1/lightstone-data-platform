@@ -2,9 +2,9 @@
 
 namespace PackageBuilder.Domain.Requests.Contracts.Requests
 {
-    public interface IAmBmwFinancedInterestRequest : IAmDataProviderRequest
+    public interface IAmBmwFinanceRequest : IAmDataProviderRequest
     {
-        IAmAccountNumberField AccountNumber { get; }
+        IAmAccountNumberRequestField AccountNumberRequest { get; }
         IAmVinNumberRequestField VinNumber { get; }
         IAmIdentityNumberRequestField IdNumber { get; }
         IAmLicenceNumberRequestField LicenceNumber { get; }

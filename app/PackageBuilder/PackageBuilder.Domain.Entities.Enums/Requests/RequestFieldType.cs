@@ -29,6 +29,7 @@
         UserId = 24,
         PhoneNumber = 25,
         EmailAddress = 26,
-        AccessKey = 27
+        AccessKey = 27,
+        AccountNumber = 28
     }
 }

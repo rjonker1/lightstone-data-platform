@@ -4,15 +4,15 @@ using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
-using Lace.Shared.DataProvider.Repositories;
 using Lace.Shared.Extensions;
+using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
 
@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         {
             try
             {
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new {_dataProvider});
 
                 GetCar.WithCarId(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _repository, ref _carInformation,
@@ -49,7 +49,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 GetMetricType.OfBaseRetrievalMetric(_carInformation.CarInformationRequest, _repository, out _metrics);
 
                 _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
+                    new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                         .ForDatabaseType(), new {_carInformation, _metrics});
 
                 TransformResponse(response);
@@ -79,7 +79,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
         private static void LightstoneResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneResponse = new LightstoneAutoResponse();
+            var lightstoneResponse = LightstoneAutoResponse.Empty();
             lightstoneResponse.HasBeenHandled();
             response.Add(lightstoneResponse);
         }

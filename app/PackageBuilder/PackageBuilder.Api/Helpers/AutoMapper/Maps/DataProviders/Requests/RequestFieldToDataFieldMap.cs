@@ -90,16 +90,16 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.UserId));
             Mapper.CreateMap<IAmPhoneNumberRequestField, DataField>()
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.UserId));
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.PhoneNumber));
             Mapper.CreateMap<IAmEmailAddressRequestField, DataField>()
                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-               .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.UserId));
+               .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.EmailAddress));
             Mapper.CreateMap<IAmAccessKeyRequestField, DataField>()
                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-               .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.UserId));
-            Mapper.CreateMap<IAmAccountNumberField, DataField>()
+               .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.AccessKey));
+            Mapper.CreateMap<IAmAccountNumberRequestField, DataField>()
               .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
-              .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.UserId));
+              .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.AccountNumber));
 
             Mapper.CreateMap<IDataField, IAmRequestField>()
                 .ConvertUsing<ITypeConverter<IDataField, IAmRequestField>>();

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
-using Lace.Shared.DataProvider.Repositories;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using Lace.Toolbox.Database.Repositories;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources.Lightstone

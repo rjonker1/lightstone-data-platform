@@ -12,8 +12,8 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
-using Lace.Shared.DataProvider.Repositories;
 using Lace.Shared.Extensions;
+using Lace.Toolbox.Database.Repositories;
 using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management

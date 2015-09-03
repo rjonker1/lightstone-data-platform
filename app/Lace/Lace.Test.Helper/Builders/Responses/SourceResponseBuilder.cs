@@ -5,9 +5,8 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
-using Lace.Shared.DataProvider.Models;
 using Lace.Test.Helper.Fakes.Responses;
-using Lace.Toolbox.PCubed;
+using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.PCubed.Domain;
 using RestSharp;
 

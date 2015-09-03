@@ -435,8 +435,8 @@
       <includes>
         <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.dll" to="lib\net45" />
         <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.pdb" to="lib\net45" />
-        <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.dll" to="lib\net45" />
-        <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.pdb" to="lib\net45" />
+        <inclued pattern="Lightstone.DataPlatform.Lace.Toolbox.Database.dll" to="lib\net45" />
+        <inclued pattern="Lightstone.DataPlatform.Lace.Toolbox.Database.pdb" to="lib\net45" />
         <inclued pattern="Lightstone.DataPlatform.Lace.Caching.BuildingBlocks.dll" to="lib\net45" />
         <inclued pattern="Lightstone.DataPlatform.Lace.Caching.BuildingBlocks.pdb" to="lib\net45" />
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
@@ -481,8 +481,6 @@
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.Messages.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Shared.DataProvider.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Shared.DataProvider.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Metadata.DataProviders.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Metadata.DataProviders.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Metadata.Entrypoint.dll" to="lib\net45"/>
@@ -514,8 +512,8 @@
 			<includes>
         <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.dll" to="lib\net45" />
         <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.pdb" to="lib\net45" />
-        <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.dll" to="lib\net45" />
-        <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.pdb" to="lib\net45" />s
+        <inclued pattern="Lightstone.DataPlatform.Lace.Toolbox.Database.dll" to="lib\net45" />
+        <inclued pattern="Lightstone.DataPlatform.Lace.Toolbox.Database.pdb" to="lib\net45" />s
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll" to="lib\net45"/>
@@ -552,8 +550,6 @@
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.Messages.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Workflow.Lace.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Shared.DataProvider.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Shared.DataProvider.pdb" to="lib\net45"/>
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
 			</includes>
 			<dependencies>

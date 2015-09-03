@@ -1,5 +1,5 @@
 ﻿using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
-using Lace.Shared.DataProvider.Repositories;
+using Lace.Toolbox.Database.Repositories;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources.Lightstone

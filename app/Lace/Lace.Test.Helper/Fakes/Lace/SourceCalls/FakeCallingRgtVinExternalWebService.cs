@@ -2,8 +2,8 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
-using Lace.Shared.DataProvider.Models;
 using Lace.Test.Helper.Builders.Responses;
+using Lace.Toolbox.Database.Models;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {

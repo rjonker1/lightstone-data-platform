@@ -17,6 +17,6 @@
         LightstoneBusinessDirector,
         LightstoneConsumerSpecifications,
         PCubedEzScore,
-        BmwFinancedInterests
+        BmwFinance
     }
 }

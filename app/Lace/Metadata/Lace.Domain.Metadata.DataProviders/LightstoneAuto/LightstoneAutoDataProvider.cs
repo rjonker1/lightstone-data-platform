@@ -9,11 +9,7 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
-using Lace.Domain.Metadata.DataProviders.LightstoneAuto.Infrastructure;
-using Lace.Shared.DataProvider.Repositories;
-using Lace.Shared.Extensions;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
-using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto

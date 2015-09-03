@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
-using Lace.Shared.DataProvider.Models;
-using Lace.Shared.DataProvider.Repositories;
 using Lace.Shared.Extensions;
+using Lace.Toolbox.Database.Factories;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
 
@@ -40,12 +41,12 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         {
             try
             {
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new { _dataProvider });
 
                 GetVin.AsAList(response, _dataProvider.GetRequest<IAmRgtVinRequest>(), new VehicleVinUnitOfWork(_repository), out _vins);
 
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new {_vins});
 
                 if (_vins == null || !_vins.Any())
@@ -53,7 +54,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                         new {ErrorMessage = "No VINs were received"});
 
                 _logCommand.LogResponse(_vins != null && _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(ConnectionFactoryManager.AutocarStatsConnection.ConnectionString)
+                    new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                         .ForDatabaseType(), new {_vins});
 
                 TransformResponse(response);

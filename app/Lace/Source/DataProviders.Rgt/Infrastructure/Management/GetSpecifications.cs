@@ -2,7 +2,7 @@
 using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
-using Lace.Shared.DataProvider.Models;
+using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
 {
