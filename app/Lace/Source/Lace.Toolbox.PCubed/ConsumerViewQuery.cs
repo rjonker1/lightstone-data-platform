@@ -52,9 +52,9 @@ namespace Lace.Toolbox.PCubed
         public IRestRequest CreateRequest()
         {
             var request = new RestRequest(QueryPath);
-            request.AddUrlSegment("id", String.IsNullOrEmpty(IdNumber) ? "-" : IdNumber.Trim());
-            request.AddUrlSegment("phone", String.IsNullOrEmpty(PhoneNumber) ? "-" : PhoneNumber.Trim());
-            request.AddUrlSegment("email", String.IsNullOrEmpty(EmailAddress) ? "-" : EmailAddress.Trim());
+            request.AddUrlSegment("id", string.IsNullOrEmpty(IdNumber) ? "-" : IdNumber.Trim());
+            request.AddUrlSegment("phone", string.IsNullOrEmpty(PhoneNumber) ? "-" : PhoneNumber.Trim());
+            request.AddUrlSegment("email", string.IsNullOrEmpty(EmailAddress) ? "-" : EmailAddress.Trim());
             request.AddUrlSegment("format", _format.ToString().ToLower());
 
             return request;

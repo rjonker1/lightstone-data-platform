@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Lace.Shared.DataProvider.Repositories;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {

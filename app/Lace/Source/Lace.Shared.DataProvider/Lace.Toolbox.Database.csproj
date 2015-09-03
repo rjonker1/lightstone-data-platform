@@ -7,8 +7,8 @@
     <ProjectGuid>{B2049E92-CF9A-40D5-9ADE-D9BFC8ECD00C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Shared.DataProvider</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Shared.DataProvider</AssemblyName>
+    <RootNamespace>Lace.Toolbox.Database</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Toolbox.Database</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -98,7 +98,9 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Factories\Connections.cs" />
     <Compile Include="Models\Band.cs" />
+    <Compile Include="Models\BmwFinance.cs" />
     <Compile Include="Models\CarInformation.cs" />
     <Compile Include="Models\CarSpecification.cs" />
     <Compile Include="Models\Make.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\Statistic.cs" />
     <Compile Include="Models\Vin.cs" />
+    <Compile Include="Repositories\FinanceRepository.cs" />
     <Compile Include="Repositories\IReadOnlyRepository.cs" />
     <Compile Include="Repositories\DataProviderRepository.cs" />
   </ItemGroup>
@@ -114,9 +117,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj">
-      <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
-      <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
+    <ProjectReference Include="..\DataProviders.Core\DataProviders.Core.csproj">
+      <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
+      <Name>DataProviders.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>

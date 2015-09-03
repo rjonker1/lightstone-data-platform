@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lace.Shared.DataProvider.Models;
-using Lace.Shared.DataProvider.Repositories;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {

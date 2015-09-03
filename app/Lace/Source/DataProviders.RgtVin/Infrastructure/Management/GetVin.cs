@@ -2,7 +2,7 @@
 using System.Linq;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
-using Lace.Shared.DataProvider.Models;
+using Lace.Toolbox.Database.Models;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Management

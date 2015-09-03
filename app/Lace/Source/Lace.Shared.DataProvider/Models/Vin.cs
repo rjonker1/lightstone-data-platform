@@ -1,4 +1,4 @@
-﻿namespace Lace.Shared.DataProvider.Models
+﻿namespace Lace.Toolbox.Database.Models
 {
     public class Vin
     {

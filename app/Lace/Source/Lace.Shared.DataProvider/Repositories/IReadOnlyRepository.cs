@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lace.Shared.DataProvider.Repositories
+namespace Lace.Toolbox.Database.Repositories
 {
     public interface IReadOnlyRepository
     {

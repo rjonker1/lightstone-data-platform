@@ -5,7 +5,7 @@ using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.Core.Entities;
-using Lace.Shared.DataProvider.Models;
+using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 {

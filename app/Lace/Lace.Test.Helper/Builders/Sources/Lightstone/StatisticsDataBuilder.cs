@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Lace.Shared.DataProvider.Models;
 using Lace.Test.Helper.Mothers.Sources.Lightstone;
+using Lace.Toolbox.Database.Models;
 
 namespace Lace.Test.Helper.Builders.Sources.Lightstone
 {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
+using Lace.Toolbox.Database.Factories;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
-namespace Lace.Shared.DataProvider.Repositories
+namespace Lace.Toolbox.Database.Repositories
 {
     public sealed class DataProviderRepository : IReadOnlyRepository
     {
@@ -40,7 +40,7 @@ namespace Lace.Shared.DataProvider.Repositories
         {
             try
             {
-                using(var connection = ConnectionFactoryManager.AutocarStatsConnection)
+                using(var connection = DatabaseConnectionFactory.AutocarStatsConnection)
                     return connection.Query<TItem>(sql, param);
             }
             catch (Exception ex)

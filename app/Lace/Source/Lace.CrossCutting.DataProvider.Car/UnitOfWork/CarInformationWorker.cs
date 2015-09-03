@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.Shared.DataProvider.Models;
-using Lace.Shared.DataProvider.Repositories;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
 {

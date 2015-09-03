@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Lace.Domain.Core.Entities;
-using Lace.Shared.DataProvider.Models;
+using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
-using Lace.Shared.DataProvider.Models;
 using Lace.Test.Helper.Builders.Responses;
+using Lace.Toolbox.Database.Models;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Transform

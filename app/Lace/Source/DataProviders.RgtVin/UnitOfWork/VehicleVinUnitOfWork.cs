@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Common.Logging;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
-using Lace.Shared.DataProvider.Models;
-using Lace.Shared.DataProvider.Repositories;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Domain.DataProviders.RgtVin.UnitOfWork
 {

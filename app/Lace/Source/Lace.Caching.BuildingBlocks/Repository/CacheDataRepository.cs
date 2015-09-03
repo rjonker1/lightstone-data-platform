@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Common.Logging;
-using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Caching;
+using Lace.Toolbox.Database.Factories;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
@@ -33,7 +33,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
                     {
                         var type = redis.As<TItem>();
 
-                        using (var connection = ConnectionFactoryManager.AutocarStatsConnection)
+                        using (var connection = DatabaseConnectionFactory.AutocarStatsConnection)
                         {
                             var dbResponse = connection.Query<TItem>(sql).ToList();
 
@@ -62,7 +62,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
                     {
                         var type = redis.As<TItem>();
 
-                        using (var connection = ConnectionFactoryManager.AutocarStatsConnection)
+                        using (var connection = DatabaseConnectionFactory.AutocarStatsConnection)
                         {
                             var dbResponse = connection.Query<TItem>(sql).ToList();
 

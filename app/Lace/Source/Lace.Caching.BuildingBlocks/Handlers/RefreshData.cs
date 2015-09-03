@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Common.Logging;
 using Lace.Domain.Core.Contracts.Caching;
-using Lace.Shared.DataProvider.Models;
+using Lace.Toolbox.Database.Models;
 
 namespace Lace.Caching.BuildingBlocks.Handlers
 {

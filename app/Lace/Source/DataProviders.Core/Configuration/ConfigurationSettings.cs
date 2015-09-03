@@ -33,6 +33,12 @@
         public static readonly string Database = ConfigurationReader.ReadConnectionString("lace/source/database/auto-car-stats");
     }
 
+    public static class FinancedInterestsConfiguration
+    {
+        public static readonly string Database = ConfigurationReader.ReadConnectionString("lace/source/database/financed-interests");
+    }
+
+
     public static class WorkflowConfiguration
     {
         public static readonly string MonitoringDatabase = ConfigurationReader.ReadConnectionString("workflow/monitoring/database");
