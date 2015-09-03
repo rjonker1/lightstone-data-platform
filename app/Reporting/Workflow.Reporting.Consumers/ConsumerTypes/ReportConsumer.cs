@@ -49,13 +49,13 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                         }
 
                         //Store to disk
-                        using (var fileStream = File.Create(path + @"\BillingOutput.csv"))
+                        using (var fileStream = File.Create(path + @"\Pastel.csv"))
                         {
 
                             var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
                             report.Content.CopyTo(fileStream);
 
-                            this.Info(() => "Report : BillingOutput.csv was created successfully");
+                            this.Info(() => "Report : Pastel.csv was created successfully");
                         }
 
                     }
