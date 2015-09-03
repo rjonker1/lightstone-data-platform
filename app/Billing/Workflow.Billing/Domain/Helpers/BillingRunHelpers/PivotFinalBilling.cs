@@ -34,9 +34,12 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         {
             var reportList = new List<ReportDto>();
             var csvReportList = new List<ReportDto>();
+            var pastelInvoiceList = new List<ReportInvoice>();
 
             var currentBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
             var previousBillMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
+
+            var pastelCounter = 1;
 
             this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
 
@@ -75,12 +78,12 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                                                                                  && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
                             .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
-                        var test = new List<ReportPackage>();
+                        var reportPackageList = new List<ReportPackage>();
 
                         if (billedCustomerTransactionsTotal > 0)
                         {
 
-                            test.AddRange(_finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                            reportPackageList.AddRange(_finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                 .Select(x => new ReportPackage
                                 {
                                     ItemCode = x.Package.PackageName,
@@ -98,7 +101,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         if (nonBillableCustomerTransactionsTotal > 0)
                         {
 
-                            test.AddRange(_finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                            reportPackageList.AddRange(_finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                 .Select(x => new ReportPackage
                                 {
                                     ItemCode = x.Package.PackageName,
@@ -121,8 +124,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 {
                                     Name = transaction.CustomerName,
                                     TaxRegistration = 0,
-                                    //Packages = packagesList.ToList()
-                                    Packages = test.Select(y => new ReportPackage
+                                    Packages = reportPackageList.Select(y => new ReportPackage
                                     {
                                         ItemCode = y.ItemCode,
                                         ItemDescription = y.ItemDescription,
@@ -142,44 +144,30 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         #region CSV Report Build-up
 
-                        var invoiceList = new List<ReportInvoice>();
+                        
 
                         var invoice = new ReportInvoice
                         {
                             DOCTYPE = "INV",
-                            INVNUMBER = transaction.UserTransaction.RequestId.ToString(),
+                            INVNUMBER = pastelCounter.ToString(),
                             ACCOUNTID = transaction.AccountNumber,
                             DESCRIPTION = "Sale Invoice",
-                            INVDATE = DateTime.UtcNow.ToString(),
+                            INVDATE = DateTime.UtcNow.ToString("dd/MM/yyyy"),
                             TAXINCLUSIVE = "0",
                             ORDERNUM = "",
-                            CDESCRIPTION = "",
+                            CDESCRIPTION = transaction.Package.PackageName,
                             FQUANTITY = "1",
-                            FUNITPRICEEXCL = "",
+                            FUNITPRICEEXCL = transaction.Package.PackageRecommendedPrice.ToString(),
                             ITAXTYPEID = "1",
                             ISTOCKCODEID = "",
-                            Project = "",
+                            Project = "LIVE20",
                             Tax_Number = ""
                         };
 
-                        var invoiceListIndex = invoiceList.FindIndex(x => x.ACCOUNTID == transaction.AccountNumber);
-                        if (invoiceListIndex < 0) invoiceList.Add(invoice);
+                        var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.ACCOUNTID == transaction.AccountNumber);
+                        if (invoiceListIndex < 0) pastelInvoiceList.Add(invoice);
 
-                        var csvReportData = new ReportDto()
-                        {
-                            Template = new ReportTemplate { ShortId = "EJ-dvWnX" },
-                            Data = new ReportData
-                            {
-                                Invoices = invoiceList
-                            }
-                        };
-
-                        //Report Index
-                        var csvReportIndex = csvReportList.FindIndex(x => x.Data.Invoices.Any(i => i.ACCOUNTID == transaction.AccountNumber));
-
-                        //Index restriction for new record
-                        if (csvReportIndex < 0) csvReportList.Add(csvReportData);
-
+                        pastelCounter++;
                         #endregion
 
                         this.Info(() => "FinalBilling completed for Customer: {0}".FormatWith(transaction.CustomerName));
@@ -227,44 +215,28 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         #region CSV Report Build-up
 
-                        var invoiceList = new List<ReportInvoice>();
-
                         var invoice = new ReportInvoice
                         {
                             DOCTYPE = "INV",
-                            INVNUMBER = transaction.UserTransaction.RequestId.ToString(),
+                            INVNUMBER = pastelCounter.ToString(),
                             ACCOUNTID = transaction.AccountNumber,
                             DESCRIPTION = "Sale Invoice",
-                            INVDATE = DateTime.UtcNow.ToString(),
+                            INVDATE = DateTime.UtcNow.ToString("dd/MM/yyyy"),
                             TAXINCLUSIVE = "0",
                             ORDERNUM = "",
-                            CDESCRIPTION = "",
+                            CDESCRIPTION = transaction.Package.PackageName,
                             FQUANTITY = "1",
-                            FUNITPRICEEXCL = "",
+                            FUNITPRICEEXCL = transaction.Package.PackageRecommendedPrice.ToString(),
                             ITAXTYPEID = "1",
                             ISTOCKCODEID = "",
-                            Project = "",
+                            Project = "LIVE20",
                             Tax_Number = ""
                         };
 
-                        var invoiceListIndex = invoiceList.FindIndex(x => x.ACCOUNTID == transaction.AccountNumber);
-                        if (invoiceListIndex < 0) invoiceList.Add(invoice);
+                        var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.ACCOUNTID == transaction.AccountNumber);
+                        if (invoiceListIndex < 0) pastelInvoiceList.Add(invoice);
 
-                        var csvReportData = new ReportDto
-                        {
-                            Template = new ReportTemplate { ShortId = "EJ-dvWnX" },
-                            Data = new ReportData
-                            {
-                                Invoices = invoiceList
-                            }
-                        };
-
-                        //Report Index
-                        var csvReportIndex = csvReportList.FindIndex(x => x.Data.Invoices.Any(i => i.ACCOUNTID == transaction.AccountNumber));
-
-                        //Index restriction for new record
-                        if (csvReportIndex < 0) csvReportList.Add(csvReportData);
-
+                        pastelCounter++;
                         #endregion
 
                         this.Info(() => "FinalBilling completed for Client: {0}".FormatWith(transaction.ClientName));
@@ -277,9 +249,26 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 this.Error(() => ex.Message);
             }
 
+            var csvReportData = new ReportDto()
+            {
+                Template = new ReportTemplate { ShortId = "EJ-dvWnX" },
+                Data = new ReportData
+                {
+                    Invoices = pastelInvoiceList
+                }
+            };
+
+            csvReportList.Add(csvReportData);
+
+            ////Report Index
+            //var csvReportIndex = csvReportList.FindIndex(x => x.Data.Invoices.Any(i => i.ACCOUNTID == transaction.AccountNumber));
+
+            ////Index restriction for new record
+            //if (csvReportIndex < 0) csvReportList.Add(csvReportData);
+
             this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
 
-            _report.PublishToQueue(reportList, "pdf");
+            //_report.PublishToQueue(reportList, "pdf");
             _report.PublishToQueue(csvReportList, "csv");
         }
     }
