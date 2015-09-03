@@ -228,17 +228,17 @@ namespace Billing.Api.Modules
                 };
 
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                reportApiClient.Post(token, "/PreBillingReportDownload", null, report, null);
+                reportApiClient.Post(token, "/PreBillingReportDownload?startDate=" + startDateFilter + "&endDate="+ endDateFilter, null, report, null);
 
 
-                var file = new FileStream(@"D:\LSA Reports\PreBilling.xlsx", FileMode.Open);
-                string fileName = "PreBilling.xlsx";
+                var file = new FileStream(@"D:\LSA Reports\PreBilling " + startDateFilter.ToString("MMMM dd yyyy") + " - " + endDateFilter.ToString("MMMM dd yyyy") + ".xlsx", FileMode.Open);
+                string fileName = "PreBilling_" + startDateFilter.ToString("MMMM-dd-yyyy") + "_" + endDateFilter.ToString("MMMM-dd-yyyy") + ".xlsx";
 
                 var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
 
                 response.WithCookie("fileDownload", "true", DateTime.Now.AddSeconds(10), "", "/");
 
-                return response; //.AsAttachment(fileName);
+                return response.AsAttachment(fileName);
             };
 
         }

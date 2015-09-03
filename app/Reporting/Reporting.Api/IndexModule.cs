@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Net;
@@ -90,6 +91,9 @@ namespace Reporting.Api
 
             Post["/PreBillingReportDownload"] = parameters =>
             {
+                DateTime startDate = Convert.ToDateTime(Request.Query["startDate"].ToString());
+                DateTime endDate = Convert.ToDateTime(Request.Query["endDate"].ToString());
+
                 var body = Request.Body<dynamic>().ToString();
                 var dto = JsonConvert.DeserializeObject<ReportDto>(body);
 
@@ -97,21 +101,13 @@ namespace Reporting.Api
                 var path = @"D:\LSA Reports";
 
                 //Store to disk
-                using (var fileStream = File.Create(path + @"\PreBilling.xlsx"))
+                using (var fileStream = File.Create(path + @"\PreBilling " + startDate.ToString("MMMM dd yyyy") + " - " + endDate.ToString("MMMM dd yyyy") + ".xlsx"))
                 {
                     var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
                     report.Content.CopyTo(fileStream);
                 }
 
                 return Response.AsJson(new { message = "Success" });
-
-                //// Read file after saved to disk
-                //var file = new FileStream(@"D:\LSA Reports\PreBilling.xlsx", FileMode.Open);
-                //string fileName = "PreBilling.xlsx";
-
-                //var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
-
-                //return response.AsAttachment(fileName);
             };
 
             Get["PreBillingReportDownload"] = parameters =>
