@@ -12,11 +12,11 @@
         "items": []
     },
     "script": {},
-    "name": "LSA Invoice Template (CSV)",
-    "content": "DOCTYPE,INVNUMBER,ACCOUNTID,DESCRIPTION,INVDATE,TAXINCLUSIVE,ORDERNUM,CDESCRIPTION,FQUANTITY,FUNITPRICEEXCL,ITAXTYPEID,ISTOCKCODEID,Project,Tax_Number {{#each invoices}}\n{{DOCTYPE}},{{INVNUMBER}},{{ACCOUNTID}},{{DESCRIPTION}},{{INVDATE}},{{TAXINCLUSIVE}},{{ORDERNUM}},{{CDESCRIPTION}},{{FQUANTITY}},{{FUNITPRICEEXCL}},{{ITAXTYPEID}},{{ISTOCKCODEID}},{{Project}},{{Tax_Number}}{{/each}}",
+    "name": "LSA Pastel Template (CSV)",
+    "content": "DOCTYPE,INVNUMBER,ACCOUNTID,DESCRIPTION,INVDATE,TAXINCLUSIVE,ORDERNUM,CDESCRIPTION,FQUANTITY,FUNITPRICEEXCL,ITAXTYPEID,ISTOCKCODEID,Project,Tax_Number {{#each Invoices}}\n{{DOCTYPE}},{{INVNUMBER}},{{ACCOUNTID}},{{DESCRIPTION}},{{INVDATE}},{{TAXINCLUSIVE}},{{ORDERNUM}},{{CDESCRIPTION}},{{FQUANTITY}},{{FUNITPRICEEXCL}},{{ITAXTYPEID}},{{ISTOCKCODEID}},{{Project}},{{Tax_Number}}{{/each}}",
     "shortid": "EJ-dvWnX",
     "modificationDate": {
-        "$$date": 1440417795513
+        "$$date": 1441279241765
     },
     "_id": "8eDrZPto1MXZlAwU",
     "@odata": {
