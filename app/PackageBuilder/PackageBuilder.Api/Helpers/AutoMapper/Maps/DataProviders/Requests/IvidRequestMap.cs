@@ -16,11 +16,13 @@ using IvidStandardRequest = PackageBuilder.Domain.Requests.IvidStandardRequest;
 using LighstonePropertyRequest = PackageBuilder.Domain.Requests.LighstonePropertyRequest;
 using LightstoneAutoRequest = PackageBuilder.Domain.Requests.LightstoneAutoRequest;
 using LightstoneCompanyRequest = PackageBuilder.Domain.Requests.LightstoneCompanyRequest;
+using LightstoneConsumerSpecificationsRequest = PackageBuilder.Domain.Requests.LightstoneConsumerSpecificationsRequest;
 using LightstoneDirectorRequest = PackageBuilder.Domain.Requests.LightstoneDirectorRequest;
 using MakeRequestField = PackageBuilder.Domain.Requests.Fields.MakeRequestField;
 using PCubedEzScoreRequest = PackageBuilder.Domain.Requests.PCubedEzScoreRequest;
 using RegisterNumberRequestField = PackageBuilder.Domain.Requests.Fields.RegisterNumberRequestField;
 using RgtVinRequest = PackageBuilder.Domain.Requests.RgtVinRequest;
+using SignioDriversLicenseRequest = PackageBuilder.Domain.Requests.SignioDriversLicenseRequest;
 using SurnameRequestField = PackageBuilder.Domain.Requests.Fields.SurnameRequestField;
 using UserIdRequestField = PackageBuilder.Domain.Requests.Fields.UserIdRequestField;
 using VinNumberRequestField = PackageBuilder.Domain.Requests.Fields.VinNumberRequestField;
@@ -137,6 +139,13 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                               new LightstoneConsumerSpecificationsRequest(new VinNumberRequestField(""), new AccessKeyRequestField(""));
                 return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
             });
+
+            //Mapper.CreateMap<IProvideDataFromBmwFinance, IEnumerable<IDataField>>().ConvertUsing(s =>
+            //{
+            //    var request = s.Request ??
+            //                  new BmwFinanceRequest(new VinNumberRequestField(""), new AccountNumberRequestField(""), new IdentityNumberRequestField(""),new LicenceNumberRequestField("") );
+            //    return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
+            //});
         }
     }
 }

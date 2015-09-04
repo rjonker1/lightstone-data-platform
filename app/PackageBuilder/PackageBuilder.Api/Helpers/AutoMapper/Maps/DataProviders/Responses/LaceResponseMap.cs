@@ -29,7 +29,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                 .Include<IProvideDataFromPCubedEzScore, DataProviderName>()
                 .Include<IProvideDataFromLightstoneBusinessCompany, DataProviderName>()
                 .Include<IProvideDataFromLightstoneBusinessDirector, DataProviderName>()
-                .Include<IProvideDataFromLightstoneConsumerSpecifications, DataProviderName>();
+                .Include<IProvideDataFromLightstoneConsumerSpecifications, DataProviderName>()
+                .Include<IProvideDataFromBmwFinance, DataProviderName>();
                 
 
             Mapper.CreateMap<IProvideDataFromIvid, DataProviderName>().ConvertUsing(s => DataProviderName.Ivid);
@@ -45,6 +46,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             Mapper.CreateMap<IProvideDataFromLightstoneBusinessDirector, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneBusinessDirector);
             Mapper.CreateMap<IProvideDataFromLightstoneConsumerSpecifications, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneConsumerSpecifications);
             Mapper.CreateMap<IProvideDataFromPCubedEzScore, DataProviderName>().ConvertUsing(s => DataProviderName.PCubedEzScore);
+            Mapper.CreateMap<IProvideDataFromBmwFinance, DataProviderName>().ConvertUsing(s => DataProviderName.BmwFinance);
 
             Mapper.CreateMap<IPointToLaceProvider, DataProvider>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(x => Mapper.Map(x, x.GetType(), typeof(DataProviderName))))

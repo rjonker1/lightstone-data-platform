@@ -112,12 +112,14 @@
     <Compile Include="Builders\Consumers\LighstoneConsumerSpecificationsRequest.cs" />
     <Compile Include="Builders\DataProviders\DataProviderResponseBuilder.cs" />
     <Compile Include="Builders\EzScore\PCubedSourcePackage.cs" />
+    <Compile Include="Builders\Finance\BmwFinanceInterestsRequest.cs" />
     <Compile Include="Builders\Property\LspRequestBuilder.cs" />
     <Compile Include="Builders\Property\LspSourcePackage.cs" />
     <Compile Include="Builders\Requests\CompanyRequestBuilder.cs" />
     <Compile Include="Builders\Requests\ConsumerRequestBuilder.cs" />
     <Compile Include="Builders\Requests\DirectorRequestBuilder.cs" />
     <Compile Include="Builders\Requests\EzScoreRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\FinanceRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
@@ -187,6 +189,7 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingSignioDataProvider.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakePCubedDataProvider.cs" />
     <Compile Include="Fakes\RequestTypes\AudatexRequestTypes.cs" />
+    <Compile Include="Fakes\RequestTypes\BmwFinanceRequest.cs" />
     <Compile Include="Fakes\RequestTypes\IvidRegisterNoRequest.cs" />
     <Compile Include="Fakes\RequestTypes\IvidVinRequest.cs" />
     <Compile Include="Fakes\RequestTypes\IvidStandardRequest.cs" />
@@ -234,6 +237,7 @@
     <Compile Include="Mothers\Requests\Dto\RequestFicaInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestJisInformation.cs" />
     <Compile Include="Mothers\Requests\EzScoreRequests\EzScoreRequest.cs" />
+    <Compile Include="Mothers\Requests\FinanceRequests\BmwFinanceRequest.cs" />
     <Compile Include="Mothers\Requests\VinNumberLSAutoRgtAndRgtVinProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberAllDataProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberLightstoneOnlyRequest.cs" />

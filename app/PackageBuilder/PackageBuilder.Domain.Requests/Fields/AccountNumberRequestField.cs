@@ -2,7 +2,7 @@
 
 namespace PackageBuilder.Domain.Requests.Fields
 {
-    public class AccountNumberRequestField : IAmCarIdRequestField
+    public class AccountNumberRequestField : IAmAccountNumberRequestField
     {
         public AccountNumberRequestField(string field)
         {

@@ -40,6 +40,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
                         return "";
                     case DataProviderName.LightstoneConsumerSpecifications:
                         return "";
+                    case DataProviderName.BmwFinance:
+                        return "lace/source/database/financed-interests";
                     default:
                         return null;
                 }

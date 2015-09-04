@@ -61,11 +61,11 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BmwFinancedInterestsDataProvider.cs" />
-    <Compile Include="Infrastructure\CallBmwFinancedInterestsDataProvider.cs" />
-    <Compile Include="Infrastructure\HandleBmwFinancedInterestsSourceCall.cs" />
-    <Compile Include="Infrastructure\Management\TransformBmwFinancedInterestsResponse.cs" />
-    <Compile Include="Infrastructure\RequestDataFromBmwFinancedInterests.cs" />
+    <Compile Include="BmwFinanceDataProvider.cs" />
+    <Compile Include="Infrastructure\CallBmwFinanceDataProvider.cs" />
+    <Compile Include="Infrastructure\HandleBmwFinanceSourceCall.cs" />
+    <Compile Include="Infrastructure\Management\TransformBmwFinanceResponse.cs" />
+    <Compile Include="Infrastructure\RequestDataFromBmwFinance.cs" />
     <Compile Include="UnitOfWork\BmwFinanceUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

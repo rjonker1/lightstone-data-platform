@@ -35,15 +35,15 @@ namespace Lace.Acceptance.Tests.Requests
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_all_sources()
         {
             _responses.ShouldNotBeNull();
-            _responses.Count.ShouldEqual(11);
+            _responses.Count.ShouldEqual(12);
             _responses.Count(c => c.Handled).ShouldEqual(1);
 
             _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();
             _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().Handled.ShouldBeTrue();
             _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.Count().ShouldEqual(1);
-            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("HYUNDAI TUCSON");
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.Count().ShouldEqual(2);
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("TOYOTA FORTUNER");
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().DriversName.ShouldEqual("BB Cars (Pty) Ltd");
         }
     }
 }

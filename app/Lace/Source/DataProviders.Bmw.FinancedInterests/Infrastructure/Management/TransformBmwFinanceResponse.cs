@@ -7,11 +7,11 @@ using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Management
 {
-    public class TransformBmwFinancedInterestsResponse : ITransformResponseFromDataProvider
+    public class TransformBmwFinanceResponse : ITransformResponseFromDataProvider
     {
         private readonly IEnumerable<BmwFinance> _response;
 
-        public TransformBmwFinancedInterestsResponse(IList<BmwFinance> response)
+        public TransformBmwFinanceResponse(IList<BmwFinance> response)
         {
             Continue = response != null && response.Any();
             Result = Continue ? null : BmwFinanceResponse.Empty();

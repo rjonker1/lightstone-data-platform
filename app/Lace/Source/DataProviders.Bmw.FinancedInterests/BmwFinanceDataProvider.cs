@@ -14,14 +14,14 @@ using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Bmw.Finance
 {
-    public sealed class BmwFinancedInterestsDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public sealed class BmwFinanceDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
-        public BmwFinancedInterestsDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
+        public BmwFinanceDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
@@ -45,7 +45,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance
 
                 _logCommand.LogBegin(new { _dataProvider });
 
-                var consumer = new ConsumeSource(new HandleBmwFinancedInterestsSourceCall(), new CallBmwFinancedInterestsDataProvider(_dataProvider, new FinanceRepository(), _logCommand));
+                var consumer = new ConsumeSource(new HandleBmwFinanceSourceCall(), new CallBmwFinanceDataProvider(_dataProvider, new FinanceRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 

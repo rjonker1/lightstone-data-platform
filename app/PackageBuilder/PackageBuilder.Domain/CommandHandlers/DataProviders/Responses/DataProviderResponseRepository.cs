@@ -8,12 +8,14 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
     {
         IPointToLaceProvider GetDataProvider(DataProviderName name);
     }
+
     public class DataProviderResponseRepository : IAmDataProviderResponseRepository
     {
         public IPointToLaceProvider GetDataProvider(DataProviderName name)
         {
             return new DataProviderResponseRepository()[name];
         }
+
         public IPointToLaceProvider this[DataProviderName name]
         {
             get
@@ -33,7 +35,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                     case DataProviderName.Audatex:
                         return new AudatexResponse().DefaultAudatexResponse();
                     case DataProviderName.PCubedFica:
-                        return new PCubedFicaVerficationResponse().DefaultFicaResponse(); 
+                        return new PCubedFicaVerficationResponse().DefaultFicaResponse();
                     case DataProviderName.PCubedEzScore:
                         return new PCubedEzScoreResponse().DefaultEzScoreResponse();
                     case DataProviderName.SignioDecryptDriversLicense:
@@ -46,6 +48,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return new LightstoneDirectorResponse().LightstoneCompanyResponse();
                     case DataProviderName.LightstoneConsumerSpecifications:
                         return new LightstoneConsumerResponse().EmptyLightstoneConsumerSpecifications();
+                    case DataProviderName.BmwFinance:
+                        return new BmwFinanceResponse().EmptyBmwFinanceResponse();
                     default:
                         return null;
                 }

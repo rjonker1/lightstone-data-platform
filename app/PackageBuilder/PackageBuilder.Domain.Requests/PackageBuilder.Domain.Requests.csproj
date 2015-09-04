@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BmwFinanceRequest.cs" />
     <Compile Include="Fields\AccessKeyRequestField.cs" />
     <Compile Include="Fields\AccountNumberRequestField.cs" />
     <Compile Include="Fields\ApplicantNameRequestField.cs" />

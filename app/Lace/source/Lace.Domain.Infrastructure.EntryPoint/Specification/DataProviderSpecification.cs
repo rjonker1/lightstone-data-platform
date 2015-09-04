@@ -4,6 +4,7 @@ using DataPlatform.Shared.Enums;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Bmw.Finance;
 using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Domain.DataProviders.Lightstone;
@@ -35,7 +36,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                                     new LightstoneCompanyDataProvider(request,
                                                         new LightstoneDirectorDataProvider(request,
                                                             new PCubedEzScoreDataProvider(request,
-                                                                new ConsumerSpecificationsDataProvider(request, null, null,
+                                                                new ConsumerSpecificationsDataProvider(request,
+                                                                    new BmwFinanceDataProvider(request, null, null,
+                                                                        CommandSender.InitCommandSender(bus, requestId,
+                                                                            DataProviderCommandSource.BmwFinance)), null,
                                                                     CommandSender.InitCommandSender(bus, requestId,
                                                                         DataProviderCommandSource.LightstoneConsumerSpecifications)), null,
                                                                 CommandSender.InitCommandSender(bus, requestId,

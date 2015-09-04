@@ -151,6 +151,9 @@
     <Compile Include="Lace\Consumers\when_consuming_audatex_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider.cs" />
+    <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_account_number.cs" />
+    <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_license_number.cs" />
+    <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_vin_number.cs" />
     <Compile Include="Lace\LsConsumer\when_consuming_ls_consumer_specifications_web_service.cs" />
     <Compile Include="Lace\Sources\Lightstone\when_getting_statistics_data_to_build_vendor_valuation.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_data_providers_in_vvi_products.cs" />
@@ -169,6 +172,7 @@
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_signio_drivers_license_decryption.cs" />
+    <Compile Include="Requests\when_sending_bmw_finance_request_to_lace_entry_point.cs" />
     <Compile Include="Requests\when_sending_director_request_to_lace_entry_point.cs" />
     <Compile Include="Requests\when_sending_company_request_to_lace_entry_point.cs" />
     <Compile Include="Requests\when_sending_pcubed_ezscore_request_to_lace_entry_point.cs" />
@@ -191,6 +195,10 @@
     <ProjectReference Include="..\Lace.Test.Helper\Lace.Test.Helper.csproj">
       <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
       <Name>Lace.Test.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\DataProviders.Bmw.FinancedInterests\DataProviders.Bmw.Finance.csproj">
+      <Project>{0c723d05-d0ff-47ae-b551-a670f771f9f3}</Project>
+      <Name>DataProviders.Bmw.Finance</Name>
     </ProjectReference>
     <ProjectReference Include="..\Source\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj">
       <Project>{cbb5ee23-8ec8-45f7-b173-a268bfe9d23b}</Project>
@@ -299,6 +307,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\License\License.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
