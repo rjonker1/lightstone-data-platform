@@ -32,6 +32,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LightstoneBusinessCompany, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LightstoneBusinessDirector, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LightstoneConsumerSpecifications, 0, "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.BmwFinance, 0, "Owner", DateTime.UtcNow));
 
             this.Info(() => "Successfully imported data providers");
         }
