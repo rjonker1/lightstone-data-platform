@@ -243,6 +243,7 @@
     <Compile Include="DataProviders\Commands\AmendDataProviderStructure.cs" />
     <Compile Include="DataProviders\Write\DataProviderConnectionStringRepository.cs" />
     <Compile Include="DataProviders\Write\SourceConfiguration.cs" />
+    <Compile Include="Industries\Commands\ImportIndustry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandStore\Command.cs" />
     <Compile Include="CommandStore\Commands\ReplayCommand.cs" />
