@@ -1,5 +1,4 @@
-﻿using System;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+﻿using Lace.Toolbox.Database.Base;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {

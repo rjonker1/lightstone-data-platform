@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
-using PackageBuilder.Domain.Requests.Contracts.RequestFields;
-using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Bmw.Finance.UnitOfWork
 {
-    public interface IGetBmwFinance
+    public interface IBmwFinanceUnitOfWork
     {
         // IEnumerable<BmwFinance> Finances { get; }
         IEnumerable<BmwFinance> GetWithAccountNumber(string accountNumber);
@@ -18,41 +15,15 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.UnitOfWork
         IEnumerable<BmwFinance> GetWithLicenceNumber(string licenseNumber);
     }
 
-    public class BmwFinanceUnitOfWork : IGetBmwFinance
+    public class BmwFinanceUnitOfWork : IBmwFinanceUnitOfWork
     {
-        private readonly ILog Log = LogManager.GetLogger<BmwFinanceUnitOfWork>();
+        private static readonly ILog Log = LogManager.GetLogger<BmwFinanceUnitOfWork>();
         private readonly IReadOnlyRepository _repository;
 
-        private BmwFinanceUnitOfWork(IReadOnlyRepository repository)
+        public BmwFinanceUnitOfWork(IReadOnlyRepository repository)
         {
             _repository = repository;
         }
-
-        public static IEnumerable<BmwFinance> Get(IReadOnlyRepository repository, IAmBmwFinanceRequest request)
-        {
-            var worker = new BmwFinanceUnitOfWork(repository);
-
-            var value = request.LicenceNumber.GetValue();
-            if (!string.IsNullOrEmpty(value))
-                return Methods[typeof (IAmLicenceNumberRequestField)](value, worker);
-
-            value = request.VinNumber.GetValue();
-            if (!string.IsNullOrEmpty(value))
-                return Methods[typeof (IAmVinNumberRequestField)](value, worker);
-            value = request.AccountNumber.GetValue();
-
-            if(!string.IsNullOrEmpty(value))
-                return Methods[typeof (IAmAccountNumberRequestField)](value, worker);
-
-            throw new Exception("There are no populated request fields for BMW Finance Request");
-        }
-
-        private static readonly IDictionary<Type, Func<string, IGetBmwFinance, IEnumerable<BmwFinance>>> Methods = new Dictionary<Type, Func<string, IGetBmwFinance, IEnumerable<BmwFinance>>>()
-        {
-            { typeof(IAmLicenceNumberRequestField), (parameter, unit) => unit.GetWithLicenceNumber(parameter) },
-            { typeof(IAmVinNumberRequestField), (parameter, unit) => unit.GetWithVinNumber(parameter) },
-            { typeof(IAmAccountNumberRequestField), (parameter, unit) => unit.GetWithAccountNumber(parameter) }
-        };
 
         public IEnumerable<BmwFinance> GetWithAccountNumber(string accountNumber)
         {

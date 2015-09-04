@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using DataPlatform.Shared.Dtos;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Responses;
+using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.PCubed.Domain;
 using RestSharp;

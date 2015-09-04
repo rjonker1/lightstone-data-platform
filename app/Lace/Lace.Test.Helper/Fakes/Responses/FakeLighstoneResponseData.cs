@@ -1,8 +1,8 @@
-﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure;
-using Lace.Domain.Core.Entities;
+﻿using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using Lace.Toolbox.Database.Base;
+using Lace.Toolbox.Database.Domain;
 
 namespace Lace.Test.Helper.Fakes.Responses
 {

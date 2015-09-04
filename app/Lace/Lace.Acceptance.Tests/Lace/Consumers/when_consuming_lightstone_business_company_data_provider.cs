@@ -13,14 +13,14 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Consumers
 {
-    public class when_consuming_lightstone_business_company_data_provider : Specification
+    public class when_consuming_bmw_finance_with_ivid_vin_number : Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private readonly ICollection<IPointToLaceProvider> _response;
         private LightstoneCompanyDataProvider _dataProvider;
 
-        public when_consuming_lightstone_business_company_data_provider()
+        public when_consuming_bmw_finance_with_ivid_vin_number()
         {
             _command = MonitoringBusBuilder.ForLightstoneCompanyCommands(Guid.NewGuid());
             _request = new[] {new CompaniesRequest()};

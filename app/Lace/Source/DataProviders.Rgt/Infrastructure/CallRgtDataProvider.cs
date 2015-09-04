@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -12,6 +11,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.UnitOfWork;
 using Lace.Shared.Extensions;
+using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
@@ -46,8 +46,8 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new {_dataProvider});
 
-                GetCar.WithCarId(response, _dataProvider.GetRequest<IAmRgtRequest>(), _repository, ref _carInformation,
-                    GetCar.WithVin(response, _dataProvider.GetRequest<IAmRgtRequest>(), _repository, ref _carInformation));
+                _carInformation = new RgtVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmRgtRequest>(),
+                   _repository);
 
                 GetSpecifications.ForCar(new CarSpecificationsUnitOfWork(_repository), _carInformation.CarInformationRequest, out _carSpecifications);
 

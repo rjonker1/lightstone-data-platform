@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 
 namespace Lace.Test.Helper.Builders.Responses
@@ -26,7 +27,18 @@ namespace Lace.Test.Helper.Builders.Responses
 
         }
 
-        public ICollection<IPointToLaceProvider> WithIvidResponseHandledAndVin12()
+        public ICollection<IPointToLaceProvider> WithBmwFinanceIvidVinNumber()
+        {
+            var response = new Collection<IPointToLaceProvider>();
+            var ivid = IvidResponse.Build("", "", "", "", "", "WAUZZZ8T2CA058431", "", "", "");
+
+            ivid.HasBeenHandled();
+            response.Add(ivid);
+            return response;
+        }
+    
+
+    public ICollection<IPointToLaceProvider> WithIvidResponseHandledAndVin12()
         {
 
             var response = new Collection<IPointToLaceProvider>();

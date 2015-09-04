@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
+using Lace.Toolbox.Database.Base;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {

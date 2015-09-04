@@ -6,6 +6,7 @@ using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Bmw.Finance.Factory;
 using Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Management;
 using Lace.Domain.DataProviders.Bmw.Finance.UnitOfWork;
 using Lace.Domain.DataProviders.Core.Configuration;
@@ -20,7 +21,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 {
     public sealed class CallBmwFinanceDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallBmwFinanceDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
         private IList<BmwFinance> _bmwFinances;
@@ -29,7 +30,6 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 
         public CallBmwFinanceDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repository = repository;
             _logCommand = logCommand;
@@ -40,20 +40,22 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(FinancedInterestsConfiguration.Database)
-                    .ForDatabaseType(), new { _dataProvider });
-              
-                _bmwFinances = BmwFinanceUnitOfWork.Get(_repository, _dataProvider.GetRequest<IAmBmwFinanceRequest>()).ToList();
+                    .ForDatabaseType(), new {_dataProvider});
+
+                _bmwFinances =
+                    new BmwFinanceDataBasedOnRequestFactory().Get(new BmwFinanceUnitOfWork(_repository),
+                        _dataProvider.GetRequest<IAmBmwFinanceRequest>(), response).ToList();
 
                 _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(FinancedInterestsConfiguration.Database)
-                        .ForDatabaseType(), new { _bmwFinances });
+                        .ForDatabaseType(), new {_bmwFinances});
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling BMW Financed Interests Data Provider {0}", ex, ex.Message);
-                _logCommand.LogFault(ex, new {ErrorMessage = "Error calling BMW Financed Interests Data Provider" });
+                Log.ErrorFormat("Error calling BMW Financed Interests Data Provider {0}", ex, ex.Message);
+                _logCommand.LogFault(ex, new {ErrorMessage = "Error calling BMW Financed Interests Data Provider"});
                 BmwFinacedInterestsResponseFailed(response);
             }
         }

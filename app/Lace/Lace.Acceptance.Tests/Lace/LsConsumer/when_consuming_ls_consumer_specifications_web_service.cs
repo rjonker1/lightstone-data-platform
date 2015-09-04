@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -24,7 +25,7 @@ namespace Lace.Acceptance.Tests.Lace.LsConsumer
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _request = new[] { new SpecificationsRequest() };
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new Collection<IPointToLaceProvider>(); ;
         }
 
         public override void Observe()

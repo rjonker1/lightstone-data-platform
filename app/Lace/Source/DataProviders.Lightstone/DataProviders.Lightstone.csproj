@@ -112,9 +112,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Infrastructure\CallLightstoneAutoDataProvider.cs" />
-    <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\HandleLightstoneAutoSourceCall.cs" />
-    <Compile Include="Infrastructure\Management\GetCar.cs" />
     <Compile Include="Infrastructure\Management\GetMetrics.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneAuto.cs" />
@@ -147,10 +145,6 @@
     <Compile Include="UnitOfWork\StatisticsUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
-      <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>
-      <Name>Lace.CrossCutting.DataProvider.Car</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
       <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
       <Name>Lace.Domain.Core.Entities</Name>

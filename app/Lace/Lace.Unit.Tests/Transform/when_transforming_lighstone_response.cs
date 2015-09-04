@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -9,6 +8,7 @@ using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
 using Lace.Test.Helper.Mothers.Requests;
+using Lace.Toolbox.Database.Base;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Transform
