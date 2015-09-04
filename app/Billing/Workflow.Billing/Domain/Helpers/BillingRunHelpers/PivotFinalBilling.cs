@@ -94,7 +94,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                              && (y.Package.PackageId == x.Package.PackageId))
                                         .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
                                     Price = x.Package.PackageRecommendedPrice,
-                                    //Vat = 0
                                 }).Distinct());
                         }
 
@@ -154,7 +153,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             DESCRIPTION = "Sale Invoice",
                             INVDATE = DateTime.UtcNow.ToString("dd/MM/yyyy"),
                             TAXINCLUSIVE = "0",
-                            ORDERNUM = "",
+                            ORDERNUM = pastelCounter.ToString(),
                             CDESCRIPTION = transaction.Package.PackageName,
                             FQUANTITY = "1",
                             FUNITPRICEEXCL = transaction.Package.PackageRecommendedPrice.ToString(),
@@ -164,7 +163,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             Tax_Number = ""
                         };
 
-                        var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.ACCOUNTID == transaction.AccountNumber);
+                        var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.CDESCRIPTION == transaction.Package.PackageName);
                         if (invoiceListIndex < 0) pastelInvoiceList.Add(invoice);
 
                         pastelCounter++;
@@ -223,7 +222,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             DESCRIPTION = "Sale Invoice",
                             INVDATE = DateTime.UtcNow.ToString("dd/MM/yyyy"),
                             TAXINCLUSIVE = "0",
-                            ORDERNUM = "",
+                            ORDERNUM = pastelCounter.ToString(),
                             CDESCRIPTION = transaction.Package.PackageName,
                             FQUANTITY = "1",
                             FUNITPRICEEXCL = transaction.Package.PackageRecommendedPrice.ToString(),
@@ -233,7 +232,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             Tax_Number = ""
                         };
 
-                        var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.ACCOUNTID == transaction.AccountNumber);
+                        var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.CDESCRIPTION == transaction.Package.PackageName);
                         if (invoiceListIndex < 0) pastelInvoiceList.Add(invoice);
 
                         pastelCounter++;
@@ -260,15 +259,9 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
             csvReportList.Add(csvReportData);
 
-            ////Report Index
-            //var csvReportIndex = csvReportList.FindIndex(x => x.Data.Invoices.Any(i => i.ACCOUNTID == transaction.AccountNumber));
-
-            ////Index restriction for new record
-            //if (csvReportIndex < 0) csvReportList.Add(csvReportData);
-
             this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
 
-            //_report.PublishToQueue(reportList, "pdf");
+            _report.PublishToQueue(reportList, "pdf");
             _report.PublishToQueue(csvReportList, "csv");
         }
     }
