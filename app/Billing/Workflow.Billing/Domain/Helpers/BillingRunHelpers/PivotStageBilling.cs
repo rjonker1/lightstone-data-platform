@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Workflow.Billing.Domain.Entities;
 
@@ -18,6 +19,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
         public void Pivot()
         {
+            this.Info(() => "StageBilling Pivot Started");
+
             foreach (var preBilling in _preBillingRepository)
             {
                 var stageEntity = Mapper.Map(preBilling, new StageBilling());
@@ -25,6 +28,9 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 // Check if transaction has already been recorded
                 if (!_stageBillingRepository.Any(x => x.PreBillingId == stageEntity.PreBillingId))
                 {
+                    // Null check for rogue transactions (caused by inconsistent AccountNumber mapping)
+                    if (stageEntity.BillingType == null) continue;
+
                     // Internal transactions - non-billable
                     if (stageEntity.BillingType.Contains("INTERNAL"))
                         stageEntity.UserTransaction.IsBillable = false;
@@ -32,6 +38,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     _stageBillingRepository.SaveOrUpdate(stageEntity, true);
                 }
             }
+            this.Info(() => "StageBilling Pivot Completed");
         }
     }
 }
