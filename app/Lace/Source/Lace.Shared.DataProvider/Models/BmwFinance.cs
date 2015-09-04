@@ -8,7 +8,7 @@ namespace Lace.Toolbox.Database.Models
         public const string SelectAll = @"SELECT * FROM BmwFinance";
 
         public const string SelectWithAccountNumber = @"SELECT* FROM BmwFinance WHERE DealReference = @AccountNumber";
-        public const string SelectWithVinNumber = @"SELECT* FROM BmwFinance WHERE Vin = @VinNumber";
+        public const string SelectWithVinNumber = @"SELECT* FROM BmwFinance WHERE Chassis = @VinNumber";
         public const string SelectWithLicenceNumber = @"SELECT* FROM BmwFinance WHERE RegNumber = @LicenceNumber";
 
         public BmwFinance()

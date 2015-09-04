@@ -18,7 +18,7 @@ using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 {
-    public sealed class CallBmwFinancedInterestsDataProvider : ICallTheDataProviderSource
+    public sealed class CallBmwFinanceDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
@@ -27,7 +27,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 
         private readonly IReadOnlyRepository _repository;
 
-        public CallBmwFinancedInterestsDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
+        public CallBmwFinanceDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(FinancedInterestsConfiguration.Database)
                     .ForDatabaseType(), new { _dataProvider });
               
-                _bmwFinances = BmwFinanceUnitOfWork.Get(_repository, _dataProvider.GetRequest<IAmBmwFinancedInterestRequest>()).ToList();
+                _bmwFinances = BmwFinanceUnitOfWork.Get(_repository, _dataProvider.GetRequest<IAmBmwFinanceRequest>()).ToList();
 
                 _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderState.Successful : DataProviderState.Failed,
                     new ConnectionTypeIdentifier(FinancedInterestsConfiguration.Database)
@@ -60,7 +60,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformBmwFinancedInterestsResponse(_bmwFinances);
+            var transformer = new TransformBmwFinanceResponse(_bmwFinances);
 
             if (transformer.Continue)
             {

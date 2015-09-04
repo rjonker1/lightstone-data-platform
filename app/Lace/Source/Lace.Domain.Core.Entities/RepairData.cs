@@ -37,5 +37,9 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public string Location { get; private set; }
+
+        [DataMember]
+        [JsonProperty(PropertyName = "CarID")]
+        public int CarId { get; private set; }
     }
 }

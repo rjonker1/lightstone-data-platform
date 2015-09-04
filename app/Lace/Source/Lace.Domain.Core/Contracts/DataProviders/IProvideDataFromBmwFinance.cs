@@ -7,7 +7,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders
 {
     public interface IProvideDataFromBmwFinance : IPointToLaceProvider
     {
-        IAmBmwFinancedInterestRequest Request { get; }
+        IAmBmwFinanceRequest Request { get; }
         IEnumerable<IRespondWithBmwFinance> Finances { get; }
     }
 }

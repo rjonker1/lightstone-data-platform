@@ -4,7 +4,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 {
-    public class RequestDataFromBmwFinancedInterests : IRequestDataFromDataProviderSource
+    public class RequestDataFromBmwFinance : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalSource)
         {

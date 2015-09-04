@@ -27,7 +27,7 @@ namespace Lace.Domain.Core.Entities
         }
 
         [DataMember]
-        public IAmBmwFinancedInterestRequest Request { get; private set; }
+        public IAmBmwFinanceRequest Request { get; private set; }
 
         [DataMember]
         public IEnumerable<IRespondWithBmwFinance> Finances { get; private set; }

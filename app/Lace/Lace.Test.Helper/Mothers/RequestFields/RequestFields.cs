@@ -47,6 +47,21 @@ namespace Lace.Test.Helper.Mothers.RequestFields
         public string Field { get; private set; }
     }
 
+    public class AccountNumberRequestField : IAmAccountNumberRequestField
+    {
+        private AccountNumberRequestField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmAccountNumberRequestField Get(string field)
+        {
+            return new AccountNumberRequestField(field);
+        }
+
+        public string Field { get; private set; }
+    }
+
     public class RegisterNumberRequestField : IAmRegisterNumberRequestField
     {
         private RegisterNumberRequestField(string field)

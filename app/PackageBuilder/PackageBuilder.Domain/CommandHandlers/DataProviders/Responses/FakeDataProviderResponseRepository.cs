@@ -27,6 +27,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                 this[DataProviderName.LightstoneProperty],
                 this[DataProviderName.LightstoneBusinessCompany],
                 this[DataProviderName.LightstoneBusinessDirector],
+                this[DataProviderName.BmwFinance]
             };
         }
 
@@ -84,6 +85,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return new LightstoneBusinessResponse().LightstoneCompanyResponse();
                     case DataProviderName.LightstoneBusinessDirector:
                         return new LightstoneDirectorResponse().LightstoneCompanyResponse();
+                    case DataProviderName.BmwFinance:
+                        return new BmwFinanceResponse().EmptyBmwFinanceResponse();
                     default:
                         return null;
                 }

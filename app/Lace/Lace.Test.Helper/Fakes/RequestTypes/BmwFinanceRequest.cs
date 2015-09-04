@@ -1,0 +1,26 @@
+﻿using Lace.Test.Helper.Mothers.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
+
+namespace Lace.Test.Helper.Fakes.RequestTypes
+{
+    public class BmwFinanceRequest : IAmBmwFinanceRequest
+    {
+        public static BmwFinanceRequest WithDefault(string vinNumber, string idNumber, string licenseNumber, string accountNumber)
+        {
+            return new BmwFinanceRequest()
+            {
+                IdNumber = IdentityNumberRequestField.Get(idNumber),
+                LicenceNumber = LicenceNumberField.Get(licenseNumber),
+                VinNumber =  VinNumberRequestField.Get(vinNumber),
+                AccountNumberRequest = AccountNumberRequestField.Get(accountNumber)
+            };
+        }
+
+        public IAmAccountNumberRequestField AccountNumberRequest { get; private set; }
+        public IAmIdentityNumberRequestField IdNumber { get; private set; }
+        public IAmLicenceNumberRequestField LicenceNumber { get; private set; }
+        public IAmVinNumberRequestField VinNumber { get; private set; }
+    }
+}
+ 
