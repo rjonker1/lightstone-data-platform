@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
-using NHibernate.Criterion;
-using ServiceStack.Common.Utils;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
