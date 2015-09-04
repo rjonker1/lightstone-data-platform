@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.UnitOfWork
             value = request.VinNumber.GetValue();
             if (!string.IsNullOrEmpty(value))
                 return Methods[typeof (IAmVinNumberRequestField)](value, worker);
-            value = request.AccountNumberRequest.GetValue();
+            value = request.AccountNumber.GetValue();
 
             if(!string.IsNullOrEmpty(value))
                 return Methods[typeof (IAmAccountNumberRequestField)](value, worker);

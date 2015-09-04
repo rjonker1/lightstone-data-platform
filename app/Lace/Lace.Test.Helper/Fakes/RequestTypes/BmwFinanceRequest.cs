@@ -13,11 +13,11 @@ namespace Lace.Test.Helper.Fakes.RequestTypes
                 IdNumber = IdentityNumberRequestField.Get(idNumber),
                 LicenceNumber = LicenceNumberField.Get(licenseNumber),
                 VinNumber =  VinNumberRequestField.Get(vinNumber),
-                AccountNumberRequest = AccountNumberRequestField.Get(accountNumber)
+                AccountNumber = AccountNumberRequestField.Get(accountNumber)
             };
         }
 
-        public IAmAccountNumberRequestField AccountNumberRequest { get; private set; }
+        public IAmAccountNumberRequestField AccountNumber { get; private set; }
         public IAmIdentityNumberRequestField IdNumber { get; private set; }
         public IAmLicenceNumberRequestField LicenceNumber { get; private set; }
         public IAmVinNumberRequestField VinNumber { get; private set; }
