@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
+using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 

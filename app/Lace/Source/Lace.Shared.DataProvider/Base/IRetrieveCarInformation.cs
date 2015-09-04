@@ -1,7 +1,7 @@
 ﻿using Lace.Toolbox.Database.Models;
 
-namespace Lace.CrossCutting.DataProvider.Car.Core.Contracts
-{
+namespace Lace.Toolbox.Database.Base
+{ 
     public interface IRetrieveCarInformation
     {
         bool IsSatisfied { get; }

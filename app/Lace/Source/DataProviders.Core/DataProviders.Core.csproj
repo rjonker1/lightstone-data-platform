@@ -110,6 +110,7 @@
     <Compile Include="Contracts\ILogCommandTypes.cs" />
     <Compile Include="Contracts\ITransformResponseFromDataProvider.cs" />
     <Compile Include="Extensions\ResponseExtensions.cs" />
+    <Compile Include="Factories\ResponseDataMining.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="Shared\AuthenticationHeaders.cs" />
     <Compile Include="Shared\CheckThePackageDataSource.cs" />

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 
-namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
+namespace Lace.Toolbox.Database.Domain
 {
     public class CarInformationWorker : IGetCarInformation
     {

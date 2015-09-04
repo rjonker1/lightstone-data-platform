@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -12,6 +11,8 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Shared.Extensions;
+using Lace.Toolbox.Database.Base;
+using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
@@ -43,8 +44,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new {_dataProvider});
 
-                GetCar.WithCarId(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _repository, ref _carInformation,
-                    GetCar.WithVin(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(), _repository, ref _carInformation));
+                _carInformation = new LightstoneVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(),
+                    _repository);
 
                 GetMetricType.OfBaseRetrievalMetric(_carInformation.CarInformationRequest, _repository, out _metrics);
 

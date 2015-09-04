@@ -153,6 +153,7 @@
     <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider.cs" />
     <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_account_number.cs" />
     <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_license_number.cs" />
+    <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_ivid_vin_numbe.cs" />
     <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_vin_number.cs" />
     <Compile Include="Lace\LsConsumer\when_consuming_ls_consumer_specifications_web_service.cs" />
     <Compile Include="Lace\Sources\Lightstone\when_getting_statistics_data_to_build_vendor_valuation.cs" />
@@ -207,10 +208,6 @@
     <ProjectReference Include="..\Source\Lace.Caching\Lace.Caching.csproj">
       <Project>{a38117cd-afcd-4f1a-999c-0c390f6be5ae}</Project>
       <Name>Lace.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
-      <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>
-      <Name>Lace.CrossCutting.DataProvider.Car</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
       <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>

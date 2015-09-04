@@ -1,11 +1,9 @@
 ﻿using System.Linq;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto;
-using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
+using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 
-namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
+namespace Lace.Toolbox.Database.Domain
 {
     public class GetCarInformation : IRetrieveCarInformation
     {
@@ -17,7 +15,7 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
         private readonly IReadOnlyRepository _repository;
         private readonly int _year;
 
-        private GetCarInformation()
+        public GetCarInformation()
         {
             
         }

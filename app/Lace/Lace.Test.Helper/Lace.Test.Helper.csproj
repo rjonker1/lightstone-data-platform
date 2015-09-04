@@ -279,10 +279,6 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
-      <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>
-      <Name>Lace.CrossCutting.DataProvider.Car</Name>
-    </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
       <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
       <Name>Lace.Domain.Core.Entities</Name>

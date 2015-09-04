@@ -62,6 +62,8 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BmwFinanceDataProvider.cs" />
+    <Compile Include="Factory\BmwFinanceDataBasedOnRequest.cs" />
+    <Compile Include="Factory\IGetBmwFinanceData.cs" />
     <Compile Include="Infrastructure\CallBmwFinanceDataProvider.cs" />
     <Compile Include="Infrastructure\HandleBmwFinanceSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformBmwFinanceResponse.cs" />

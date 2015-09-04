@@ -111,9 +111,7 @@
     </Compile>
     <Compile Include="Core\Contracts\IGetCarSpecifications.cs" />
     <Compile Include="Infrastructure\CallRgtDataProvider.cs" />
-    <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\HandleRgtDataProviderCall.cs" />
-    <Compile Include="Infrastructure\Management\GetCar.cs" />
     <Compile Include="Infrastructure\Management\GetSpecifications.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtSource.cs" />
@@ -121,10 +119,6 @@
     <Compile Include="UnitOfWork\CarSpecificationsUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
-      <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>
-      <Name>Lace.CrossCutting.DataProvider.Car</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
       <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
       <Name>Lace.Domain.Core.Entities</Name>

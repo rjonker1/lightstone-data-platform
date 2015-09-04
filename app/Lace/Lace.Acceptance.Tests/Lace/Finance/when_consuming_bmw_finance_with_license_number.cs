@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -24,7 +25,7 @@ namespace Lace.Acceptance.Tests.Lace.Finance
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _request = new[] { new BmwFinanceRequestWithLicenseNumber(),  };
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new Collection<IPointToLaceProvider>();
         }
 
         public override void Observe()
@@ -34,19 +35,19 @@ namespace Lace.Acceptance.Tests.Lace.Finance
         }
 
         [Observation]
-        public void lightstone_consumer_must_be_handled()
+        public void bmw_finance_consumer_must_be_handled()
         {
             _response.OfType<IProvideDataFromBmwFinance>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
-        public void lightstone_response_from_consumer_must_not_be_null()
+        public void bmw_finance_response_from_consumer_must_not_be_null()
         {
             _response.OfType<IProvideDataFromBmwFinance>().First().ShouldNotBeNull();
         }
 
         [Observation]
-        public void lightstone_response_from_consumer_must_not_be_empty()
+        public void bmw_finance_response_from_consumer_must_not_be_empty()
         {
             _response.OfType<IProvideDataFromBmwFinance>().First().Finances.ShouldNotBeNull();
             _response.OfType<IProvideDataFromBmwFinance>().First().Finances.First().Description.ShouldEqual("BMW 320i M SPORT LINE A/T (F30)");

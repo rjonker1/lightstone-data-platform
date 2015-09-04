@@ -1,7 +1,6 @@
-﻿using Castle.MicroKernel.SubSystems.Conversion;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+﻿using Lace.Toolbox.Database.Base;
 
-namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto
+namespace Lace.Toolbox.Database.Domain
 {
     public class CarInformationRequest : IHaveCarInformation
     {

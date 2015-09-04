@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Core.Extensions;
+using Lace.Domain.DataProviders.Core.Factories;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -20,7 +20,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     requesterPhone = request.RequesterPhone.GetValue()
                 },
 
-                vin = !string.IsNullOrEmpty(request.VinNumber.GetValue()) ? request.VinNumber.GetValue() : ResponseDataMiner.Mine().ForVin(response)
+                vin = !string.IsNullOrEmpty(request.VinNumber.GetValue()) ? request.VinNumber.GetValue() : new ResponseDataMiningFactory().MineVinNumber(response)
             };
         }
     }
