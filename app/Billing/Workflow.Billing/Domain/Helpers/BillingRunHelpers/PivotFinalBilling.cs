@@ -143,30 +143,16 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         #region CSV Report Build-up
 
-                        
-
-                        var invoice = new ReportInvoice
-                        {
-                            DOCTYPE = "INV",
-                            INVNUMBER = pastelCounter.ToString(),
-                            ACCOUNTID = transaction.AccountNumber,
-                            DESCRIPTION = "Sale Invoice",
-                            INVDATE = DateTime.UtcNow.ToString("dd/MM/yyyy"),
-                            TAXINCLUSIVE = "0",
-                            ORDERNUM = pastelCounter.ToString(),
-                            CDESCRIPTION = transaction.Package.PackageName,
-                            FQUANTITY = "1",
-                            FUNITPRICEEXCL = transaction.Package.PackageRecommendedPrice.ToString(),
-                            ITAXTYPEID = "1",
-                            ISTOCKCODEID = "",
-                            Project = "LIVE20",
-                            Tax_Number = ""
-                        };
+                        var invoice = BuildReportInovice(pastelCounter, transaction.AccountNumber,
+                            transaction.Package.PackageName, transaction.Package.PackageRecommendedPrice);
 
                         var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.CDESCRIPTION == transaction.Package.PackageName);
-                        if (invoiceListIndex < 0) pastelInvoiceList.Add(invoice);
+                        if (invoiceListIndex < 0)
+                        {
+                            pastelInvoiceList.Add(invoice);
+                            pastelCounter++;
+                        }
 
-                        pastelCounter++;
                         #endregion
 
                         this.Info(() => "FinalBilling completed for Customer: {0}".FormatWith(transaction.CustomerName));
@@ -214,28 +200,16 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         #region CSV Report Build-up
 
-                        var invoice = new ReportInvoice
-                        {
-                            DOCTYPE = "INV",
-                            INVNUMBER = pastelCounter.ToString(),
-                            ACCOUNTID = transaction.AccountNumber,
-                            DESCRIPTION = "Sale Invoice",
-                            INVDATE = DateTime.UtcNow.ToString("dd/MM/yyyy"),
-                            TAXINCLUSIVE = "0",
-                            ORDERNUM = pastelCounter.ToString(),
-                            CDESCRIPTION = transaction.Package.PackageName,
-                            FQUANTITY = "1",
-                            FUNITPRICEEXCL = transaction.Package.PackageRecommendedPrice.ToString(),
-                            ITAXTYPEID = "1",
-                            ISTOCKCODEID = "",
-                            Project = "LIVE20",
-                            Tax_Number = ""
-                        };
+                        var invoice = BuildReportInovice(pastelCounter, transaction.AccountNumber,
+                            transaction.Package.PackageName, transaction.Package.PackageRecommendedPrice);
 
                         var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.CDESCRIPTION == transaction.Package.PackageName);
-                        if (invoiceListIndex < 0) pastelInvoiceList.Add(invoice);
+                        if (invoiceListIndex < 0)
+                        {
+                            pastelInvoiceList.Add(invoice);
+                            pastelCounter++;
+                        }
 
-                        pastelCounter++;
                         #endregion
 
                         this.Info(() => "FinalBilling completed for Client: {0}".FormatWith(transaction.ClientName));
@@ -263,6 +237,27 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
             _report.PublishToQueue(reportList, "pdf");
             _report.PublishToQueue(csvReportList, "csv");
+        }
+
+        private ReportInvoice BuildReportInovice(int invoiceNumber, string accountNumber, string productName, double productPrice)
+        {
+            return new ReportInvoice
+            {
+                DOCTYPE = "INV",
+                INVNUMBER = invoiceNumber.ToString(),
+                ACCOUNTID = accountNumber,
+                DESCRIPTION = "Sale Invoice",
+                INVDATE = DateTime.UtcNow.ToString("dd/MM/yyyy"),
+                TAXINCLUSIVE = "0",
+                ORDERNUM = invoiceNumber.ToString(),
+                CDESCRIPTION = productName,
+                FQUANTITY = "1",
+                FUNITPRICEEXCL = productPrice.ToString(),
+                ITAXTYPEID = "1",
+                ISTOCKCODEID = "",
+                Project = "LIVE20",
+                Tax_Number = ""
+            };
         }
     }
 }
