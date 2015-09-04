@@ -28,6 +28,8 @@
 
     <script src="~/Scripts/jquery-2.1.3.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/GreenSock/TweenMax.min.js"></script>
+    <script src="~/Scripts/GreenSock/UIpreloader.js"></script>
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/jquery.form.min.js"></script>
     <script src="~/Scripts/jquery.cookie.js"></script>
@@ -44,7 +46,13 @@
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
         $.removeCookie('token');
-    //document.domain = "lightstone.com";
+        //document.domain = "lightstone.com";
+        $(document).ajaxStart(function () {
+            preloader.active(true);
+        });
+        $(document).ajaxStop(function () {
+            preloader.active(false);
+        });
     </script>
 </body>
 </html>
