@@ -17,6 +17,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository;
 
         private readonly IPublishReportQueue<BillingReport> _report;
+        private readonly ReportBuilder _reportBuilder;
 
         public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IRepository<ArchiveBillingTransaction> archiveBillingRepository,
                                     IPublishReportQueue<BillingReport> report)
@@ -25,12 +26,13 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             _finalBillingRepository = finalBillingRepository;
             _archiveBillingRepository = archiveBillingRepository;
             _report = report;
+            _reportBuilder = new ReportBuilder();
         }
 
         public void Pivot()
         {
-            var reportList = new List<ReportDto>();
-            var csvReportList = new List<ReportDto>();
+            var invoicePdfList = new List<ReportDto>();
+            var pastelReportList = new List<ReportDto>();
             var pastelInvoiceList = new List<ReportInvoice>();
 
             var currentBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
@@ -111,10 +113,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 }).Distinct());
                         }
 
-                        var reportData = new ReportDto()
-                        {
-                            Template = new ReportTemplate { ShortId = "VJGAd9OM" },
-                            Data = new ReportData
+                        var report = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "VJGAd9OM" },
+                            new ReportData
                             {
                                 Customer = new ReportCustomer
                                 {
@@ -129,18 +129,17 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                         Vat = y.Vat
                                     }).ToList()
                                 }
-                            }
-                        };
+                            });
 
                         //Report Index
-                        var reportIndex = reportList.FindIndex(x => x.Data.Customer.Name == transaction.CustomerName);
+                        var reportIndex = invoicePdfList.FindIndex(x => x.Data.Customer.Name == transaction.CustomerName);
 
                         //Index restriction for new record
-                        if (reportIndex < 0) reportList.Add(reportData);
+                        if (reportIndex < 0) invoicePdfList.Add(report);
 
-                        #region CSV Report Build-up
+                        #region Pastel CSV Report Build-up
 
-                        var invoice = BuildReportInovice(pastelCounter, transaction.AccountNumber,
+                        var invoice = _reportBuilder.BuildPastelInvoice(pastelCounter, transaction.AccountNumber,
                             transaction.Package.PackageName, transaction.Package.PackageRecommendedPrice);
 
                         var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.CDESCRIPTION == transaction.Package.PackageName);
@@ -172,13 +171,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 ItemDescription = x.Package.PackageName,
                                 QuantityUnit = billedClientTransactionsTotal,
                                 Price = x.Package.PackageRecommendedPrice,
-                                //Vat = 2284
                             }).Distinct();
 
-                        var reportData = new ReportDto
-                        {
-                            Template = new ReportTemplate { ShortId = "VJGAd9OM" },
-                            Data = new ReportData
+                        var report = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "VJGAd9OM" },
+                            new ReportData
                             {
                                 Customer = new ReportCustomer
                                 {
@@ -186,18 +182,17 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                     TaxRegistration = 0,
                                     Packages = packagesList.ToList()
                                 }
-                            }
-                        };
+                            });
 
                         //Report Index
-                        var reportIndex = reportList.FindIndex(x => x.Data.Customer.Name == transaction.ClientName);
+                        var reportIndex = invoicePdfList.FindIndex(x => x.Data.Customer.Name == transaction.ClientName);
 
                         //Index restriction for new record
-                        if (reportIndex < 0) reportList.Add(reportData);
+                        if (reportIndex < 0) invoicePdfList.Add(report);
 
-                        #region CSV Report Build-up
+                        #region Pastel CSV Report Build-up
 
-                        var invoice = BuildReportInovice(pastelCounter, transaction.AccountNumber,
+                        var invoice = _reportBuilder.BuildPastelInvoice(pastelCounter, transaction.AccountNumber,
                             transaction.Package.PackageName, transaction.Package.PackageRecommendedPrice);
 
                         var invoiceListIndex = pastelInvoiceList.FindIndex(x => x.CDESCRIPTION == transaction.Package.PackageName);
@@ -219,42 +214,18 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 this.Error(() => ex.Message);
             }
 
-            var csvReportData = new ReportDto()
-            {
-                Template = new ReportTemplate { ShortId = "EJ-dvWnX" },
-                Data = new ReportData
-                {
-                    Invoices = pastelInvoiceList
-                }
-            };
+            var pastelReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "EJ-dvWnX" },
+                            new ReportData
+                            {
+                                Invoices = pastelInvoiceList
+                            });
 
-            csvReportList.Add(csvReportData);
+            pastelReportList.Add(pastelReport);
 
             this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
 
-            _report.PublishToQueue(reportList, "pdf");
-            _report.PublishToQueue(csvReportList, "csv");
-        }
-
-        private ReportInvoice BuildReportInovice(int invoiceNumber, string accountNumber, string productName, double productPrice)
-        {
-            return new ReportInvoice
-            {
-                DOCTYPE = "INV",
-                INVNUMBER = invoiceNumber.ToString(),
-                ACCOUNTID = accountNumber,
-                DESCRIPTION = "Sale Invoice",
-                INVDATE = DateTime.UtcNow.ToString("dd/MM/yyyy"),
-                TAXINCLUSIVE = "0",
-                ORDERNUM = invoiceNumber.ToString(),
-                CDESCRIPTION = productName,
-                FQUANTITY = "1",
-                FUNITPRICEEXCL = productPrice.ToString(),
-                ITAXTYPEID = "1",
-                ISTOCKCODEID = "",
-                Project = "LIVE20",
-                Tax_Number = ""
-            };
+            _report.PublishToQueue(invoicePdfList, "pdf");
+            _report.PublishToQueue(pastelReportList, "csv");
         }
     }
 }
