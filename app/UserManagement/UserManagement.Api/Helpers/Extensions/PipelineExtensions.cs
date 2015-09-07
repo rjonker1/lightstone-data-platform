@@ -98,7 +98,6 @@ namespace UserManagement.Api.Helpers.Extensions
                 // Customer
                 if (nancyContext.Request.Method == "POST" && nancyContext.Request.Url.Path.Contains("Customer"))
                 {
-
                     var customers = container.Resolve<ICustomerRepository>().Select(x => x);
 
                     foreach (var customer in customers)
@@ -120,7 +119,6 @@ namespace UserManagement.Api.Helpers.Extensions
 
                 if (nancyContext.Request.Method == "PUT" && nancyContext.Request.Url.Path.Contains("Customer"))
                 {
-
                     var valueArray = nancyContext.Request.Url.ToString().Split('/');
                     var customers = Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(container.Resolve<ICustomerRepository>());
 
@@ -129,14 +127,12 @@ namespace UserManagement.Api.Helpers.Extensions
                         Guid urlId;
                         if (Guid.TryParse(val, out urlId))
                         {
-
                             var dto = customers.FirstOrDefault(x => x.Id == urlId);
 
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(dto, new CustomerMessage());
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
-
                         }
                     }
                 }
@@ -144,12 +140,10 @@ namespace UserManagement.Api.Helpers.Extensions
                 // Client
                 if (nancyContext.Request.Method == "POST" && nancyContext.Request.Url.Path.Contains("Client"))
                 {
-
                     var clients = container.Resolve<IClientRepository>().Select(x => x);
 
                     foreach (var client in clients)
                     {
-
                         // Set new client AccountNumber
                         // Send to Queue
                         if (client.ClientAccountNumber.Client == null)
@@ -166,7 +160,6 @@ namespace UserManagement.Api.Helpers.Extensions
 
                 if (nancyContext.Request.Method == "PUT" && nancyContext.Request.Url.Path.Contains("Client"))
                 {
-
                     var valueArray = nancyContext.Request.Url.ToString().Split('/');
                     var clients = Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(container.Resolve<IClientRepository>());
 
@@ -175,15 +168,12 @@ namespace UserManagement.Api.Helpers.Extensions
                         Guid urlId;
                         if (Guid.TryParse(val, out urlId))
                         {
-
                             var dto = clients.FirstOrDefault(x => x.Id == urlId);
 
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(dto, new ClientMessage());
-                            //metaEntity.BillingType = dto.CommercialStateValue;
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
-
                         }
                     }
                 }
@@ -191,14 +181,11 @@ namespace UserManagement.Api.Helpers.Extensions
                 // Contract
                 if (nancyContext.Request.Method == "POST" && nancyContext.Request.Url.Path.Contains("Contract"))
                 {
-
                     var contracts = container.Resolve<IContractRepository>().Select(x => x);
                     var contractBundles = container.Resolve<IContractBundleRepository>().Select(x => x);
 
                     foreach (var contract in contracts)
                     {
-
-
                         var contractBundle = contractBundles.FirstOrDefault(x => x.Id == contract.ContractBundleId);
 
                         //////RabbitMQ
@@ -211,13 +198,11 @@ namespace UserManagement.Api.Helpers.Extensions
 
                         var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                         advancedBus.SendDynamic(metaEntity);
-
                     }
                 }
 
                 if (nancyContext.Request.Method == "PUT" && nancyContext.Request.Url.Path.Contains("Contract"))
                 {
-
                     var valueArray = nancyContext.Request.Url.ToString().Split('/');
                     var contracts = Mapper.Map<IEnumerable<Contract>, IEnumerable<ContractDto>>(container.Resolve<IContractRepository>());
                     var contractBundles = container.Resolve<IContractBundleRepository>().Select(x => x);
@@ -227,7 +212,6 @@ namespace UserManagement.Api.Helpers.Extensions
                         Guid urlId;
                         if (Guid.TryParse(val, out urlId))
                         {
-
                             var dto = contracts.FirstOrDefault(x => x.Id == urlId);
                             var contractBundle = contractBundles.FirstOrDefault(x => x.Id == dto.ContractBundleId);
 
@@ -240,7 +224,6 @@ namespace UserManagement.Api.Helpers.Extensions
                             });
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
-
                         }
                     }
                 }
