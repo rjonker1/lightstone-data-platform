@@ -18,6 +18,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
                 .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.CustomerAccountNumber.ToString()))
                 .ForMember(dest => dest.AccountOwner, opt => opt.MapFrom(x => x.AccountOwner.FirstName + " " + x.AccountOwner.LastName))
+                .ForMember(dest => dest.BillingType, opt => opt.MapFrom(x => x.CommercialState.Value))
+                .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(x => x.Billing.PaymentType))
                 .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(x => x.Name));
 
@@ -27,6 +29,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
                 .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.ClientAccountNumber.ToString()))
                 .ForMember(dest => dest.AccountOwner, opt => opt.MapFrom(x => x.AccountOwner.FirstName + " " + x.AccountOwner.LastName))
+                .ForMember(dest => dest.BillingType, opt => opt.MapFrom(x => x.CommercialState.Value))
+                .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(x => x.Billing.PaymentType))
                 .ForMember(dest => dest.ClientId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.ClientName, opt => opt.MapFrom(x => x.Name));
 
@@ -45,6 +49,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
                 .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.CustomerAccountNumber.ToString()))
                 .ForMember(dest => dest.AccountOwner, opt => opt.MapFrom(x => x.AccountOwnerName))
+                .ForMember(dest => dest.BillingType, opt => opt.MapFrom(x => x.CommercialStateValue))
+                .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(x => x.BillingPaymentType))
                 .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(x => x.Name));
 
@@ -54,6 +60,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => GetType().FullName))
                 .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.ClientAccountNumber.ToString()))
                 .ForMember(dest => dest.AccountOwner, opt => opt.MapFrom(x => x.AccountOwnerName))
+                .ForMember(dest => dest.BillingType, opt => opt.MapFrom(x => x.CommercialStateValue))
+                .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(x => x.BillingPaymentType))
                 .ForMember(dest => dest.ClientId, opt => opt.MapFrom(x => x.Id))
                 .ForMember(dest => dest.ClientName, opt => opt.MapFrom(x => x.Name));
 
