@@ -128,6 +128,7 @@
     <Compile Include="Entities\PreBillingRecord.cs" />
     <Compile Include="Entities\ReportCustomer.cs" />
     <Compile Include="Entities\ReportData.cs" />
+    <Compile Include="Entities\ReportDebitOrder.cs" />
     <Compile Include="Entities\ReportInvoice.cs" />
     <Compile Include="Entities\ReportPackage.cs" />
     <Compile Include="Entities\ReportTemplate.cs" />
