@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Workflow.Billing.Domain.Entities;
@@ -20,10 +21,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
         public void Pivot()
         {
-            this.Info(() => "StageBilling Pivot Started");
-
             try
             {
+                this.Info(() => "StageBilling Pivot Started");
+
                 foreach (var preBilling in _preBillingRepository)
                 {
                     var stageEntity = Mapper.Map(preBilling, new StageBilling());
@@ -41,13 +42,13 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         _stageBillingRepository.SaveOrUpdate(stageEntity, true);
                     }
                 }
+
+                this.Info(() => "StageBilling Pivot Completed");
             }
             catch (Exception e)
             {
                 this.Error(() => e.Message);
             }
-
-            this.Info(() => "StageBilling Pivot Completed");
         }
     }
 }
