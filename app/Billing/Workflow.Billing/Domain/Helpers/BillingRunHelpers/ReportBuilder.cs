@@ -31,14 +31,14 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         {
             return new ReportDebitOrder
             {
-                PastelAccountId = "",
-                AccountName = "",
-                AccountType = "",
-                BankAccountName = "",
-                BankAccountNumber = "",
-                BranchCode = "",
-                ContractAmount = "",
-                BatchAmount = ""
+                PastelAccountId = pastelId,
+                AccountName = accountName,
+                AccountType = accountType,
+                BankAccountName = bankAccountName,
+                BankAccountNumber = bankAccountNumber,
+                BranchCode = branchCode,
+                ContractAmount = contractAmount,
+                BatchAmount = batchAmount
             };
         }
 
