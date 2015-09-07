@@ -14,19 +14,21 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
+        private readonly IRepository<AccountMeta> _accountMetaReporRepository; 
         private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository;
 
         private readonly IPublishReportQueue<BillingReport> _report;
         private readonly ReportBuilder _reportBuilder;
 
         public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IRepository<ArchiveBillingTransaction> archiveBillingRepository,
-                                    IPublishReportQueue<BillingReport> report)
+                                    IPublishReportQueue<BillingReport> report, IRepository<AccountMeta> accountMetaReporRepository)
         {
             _stageBillingRepository = stageBillingRepository;
             _finalBillingRepository = finalBillingRepository;
             _archiveBillingRepository = archiveBillingRepository;
-            _report = report;
+            _accountMetaReporRepository = accountMetaReporRepository;
             _reportBuilder = new ReportBuilder();
+            _report = report;
         }
 
         public void Pivot()
@@ -34,11 +36,15 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             var invoicePdfList = new List<ReportDto>();
             var pastelReportList = new List<ReportDto>();
             var pastelInvoiceList = new List<ReportInvoice>();
+            var debitOrderReportList = new List<ReportDto>();
+            var debitOrderNotDoneReportList = new List<ReportDto>();
 
             var currentBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
             var previousBillMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
 
             var pastelCounter = 1;
+
+            var accounts = _accountMetaReporRepository;
 
             this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
 
@@ -77,6 +83,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                                                                                  && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
                             .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
+                        #region Invoice PDF Report Build-up
+
                         var reportPackageList = new List<ReportPackage>();
 
                         if (billedCustomerTransactionsTotal > 0)
@@ -113,6 +121,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 }).Distinct());
                         }
 
+                        
+
                         var report = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "VJGAd9OM" },
                             new ReportData
                             {
@@ -137,6 +147,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         //Index restriction for new record
                         if (reportIndex < 0) invoicePdfList.Add(report);
 
+                        #endregion
+
                         #region Pastel CSV Report Build-up
 
                         var invoice = _reportBuilder.BuildPastelInvoice(pastelCounter, transaction.AccountNumber,
@@ -151,6 +163,23 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         #endregion
 
+                        #region DebitOrder CSV Build-up
+
+                        if (accounts.Any(x => x.AccountNumber == transaction.AccountNumber))
+                        {
+                            var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
+                            if ((account.AccountName != string.Empty) || (account.BankAccountName != string.Empty) || (account.BranchCode != 0) || (account.BankAccountNumber != string.Empty))
+                            {
+                                // Debit order report
+                            }
+                            else
+                            {
+                                // Debit order not done report
+                            }
+                        }
+
+                        #endregion
+
                         this.Info(() => "FinalBilling completed for Customer: {0}".FormatWith(transaction.CustomerName));
                     }
                     #endregion
@@ -160,35 +189,79 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     if (transaction.ClientId != new Guid())
                     {
                         this.Info(() => "FinalBilling initiated for Client: {0}".FormatWith(transaction.ClientName));
-                        var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.UserTransaction.IsBillable
+                        var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId && x.UserTransaction.IsBillable
                                                                                                && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
                             .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
-                        var packagesList = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId)
-                            .Select(x => new ReportPackage
-                            {
-                                ItemCode = x.Package.PackageName,
-                                ItemDescription = x.Package.PackageName,
-                                QuantityUnit = billedClientTransactionsTotal,
-                                Price = x.Package.PackageRecommendedPrice,
-                            }).Distinct();
+                        var nonBillableClientTransactionsTotal = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId && !x.UserTransaction.IsBillable
+                                                                                                 && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
+                            .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
+
+                        #region Invoice PDF Report Build-up
+
+                        var reportPackageList = new List<ReportPackage>();
+
+                        if (billedClientTransactionsTotal > 0)
+                        {
+
+                            reportPackageList.AddRange(_finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                                .Select(x => new ReportPackage
+                                {
+                                    ItemCode = x.Package.PackageName,
+                                    ItemDescription = x.Package.PackageName,
+                                    QuantityUnit = _finalBillingRepository.Where(
+                                        y => y.CustomerId == transaction.CustomerId && y.UserTransaction.IsBillable
+                                             && (y.Created >= previousBillMonth && y.Created <= currentBillMonth)
+                                             && (y.Package.PackageId == x.Package.PackageId))
+                                        .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
+                                    Price = x.Package.PackageRecommendedPrice,
+                                }).Distinct());
+                        }
+
+                        if (nonBillableClientTransactionsTotal > 0)
+                        {
+
+                            reportPackageList.AddRange(_finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                                .Select(x => new ReportPackage
+                                {
+                                    ItemCode = x.Package.PackageName,
+                                    ItemDescription = x.Package.PackageName + " - Non-Billable",
+                                    QuantityUnit = _finalBillingRepository.Where(
+                                        y => y.CustomerId == transaction.CustomerId && !y.UserTransaction.IsBillable
+                                             && (y.Created >= previousBillMonth && y.Created <= currentBillMonth)
+                                             && (y.Package.PackageId == x.Package.PackageId))
+                                        .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
+                                    Price = 0,
+                                }).Distinct());
+                        }
+
+
 
                         var report = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "VJGAd9OM" },
                             new ReportData
                             {
                                 Customer = new ReportCustomer
                                 {
-                                    Name = transaction.ClientName,
+                                    Name = transaction.CustomerName,
                                     TaxRegistration = 0,
-                                    Packages = packagesList.ToList()
+                                    Packages = reportPackageList.Select(y => new ReportPackage
+                                    {
+                                        ItemCode = y.ItemCode,
+                                        ItemDescription = y.ItemDescription,
+                                        QuantityUnit = y.QuantityUnit,
+                                        Price = y.Price,
+                                        Vat = y.Vat
+                                    }).ToList()
                                 }
                             });
 
                         //Report Index
-                        var reportIndex = invoicePdfList.FindIndex(x => x.Data.Customer.Name == transaction.ClientName);
+                        var reportIndex = invoicePdfList.FindIndex(x => x.Data.Customer.Name == transaction.CustomerName);
 
                         //Index restriction for new record
                         if (reportIndex < 0) invoicePdfList.Add(report);
+
+                        #endregion
 
                         #region Pastel CSV Report Build-up
 
@@ -202,6 +275,9 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             pastelCounter++;
                         }
 
+                        #endregion
+
+                        #region DebitOrder CSV Build-up
                         #endregion
 
                         this.Info(() => "FinalBilling completed for Client: {0}".FormatWith(transaction.ClientName));
