@@ -106,7 +106,7 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.1562\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1583\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1587\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
