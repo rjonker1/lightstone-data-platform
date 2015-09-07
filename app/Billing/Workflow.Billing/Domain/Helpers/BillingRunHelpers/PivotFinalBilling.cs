@@ -14,7 +14,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
-        private readonly IRepository<AccountMeta> _accountMetaReporRepository; 
+        private readonly IRepository<AccountMeta> _accountMetaReporRepository;
         private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository;
 
         private readonly IPublishReportQueue<BillingReport> _report;
@@ -36,8 +36,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             var invoicePdfList = new List<ReportDto>();
             var pastelReportList = new List<ReportDto>();
             var pastelInvoiceList = new List<ReportInvoice>();
-            var debitOrderReportList = new List<ReportDto>();
-            var debitOrderNotDoneReportList = new List<ReportDto>();
+            var debitOrderReportList = new List<ReportDebitOrder>();
+            var debitOrderNotDoneReportList = new List<ReportDebitOrder>();
 
             var currentBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
             var previousBillMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
@@ -121,7 +121,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 }).Distinct());
                         }
 
-                        
+
 
                         var report = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "VJGAd9OM" },
                             new ReportData
@@ -168,13 +168,20 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         if (accounts.Any(x => x.AccountNumber == transaction.AccountNumber))
                         {
                             var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
-                            if ((account.AccountName != string.Empty) || (account.BankAccountName != string.Empty) || (account.BranchCode != 0) || (account.BankAccountNumber != string.Empty))
+
+                            var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, account.AccountName, "1", account.BankAccountName,
+                                                                                        account.BankAccountNumber, account.BranchCode.ToString(), "0", "0");
+
+                            if ((debitOrderRecord.AccountName != string.Empty) || (debitOrderRecord.BankAccountName != string.Empty)
+                                || (debitOrderRecord.BranchCode != "0") || (debitOrderRecord.BankAccountNumber != string.Empty))
                             {
-                                // Debit order report
+                                var debitOrderIndex = debitOrderReportList.FindIndex(x => x.PastelAccountId == debitOrderRecord.PastelAccountId);
+                                if (debitOrderIndex < 0) debitOrderReportList.Add(debitOrderRecord);
                             }
                             else
                             {
-                                // Debit order not done report
+                                var debitOrderNotDoneIndex = debitOrderNotDoneReportList.FindIndex(x => x.PastelAccountId == debitOrderRecord.PastelAccountId);
+                                if (debitOrderNotDoneIndex < 0) debitOrderNotDoneReportList.Add(debitOrderRecord);
                             }
                         }
 
@@ -297,6 +304,12 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             });
 
             pastelReportList.Add(pastelReport);
+
+            var debitOrderReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "" },
+                new ReportData
+                {
+                    
+                });
 
             this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
 

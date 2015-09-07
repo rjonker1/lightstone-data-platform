@@ -27,6 +27,21 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             };
         }
 
+        public ReportDebitOrder BuilDebitOrderRecord(string pastelId, string accountName, string accountType, string bankAccountName, string bankAccountNumber, string branchCode, string contractAmount, string batchAmount)
+        {
+            return new ReportDebitOrder
+            {
+                PastelAccountId = "",
+                AccountName = "",
+                AccountType = "",
+                BankAccountName = "",
+                BankAccountNumber = "",
+                BranchCode = "",
+                ContractAmount = "",
+                BatchAmount = ""
+            };
+        }
+
         public ReportDto BuildReport(ReportTemplate template, ReportData data)
         {
             return new ReportDto
