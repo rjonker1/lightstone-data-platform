@@ -32,6 +32,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     AccountNumber = dbEntity.FirstOrDefault().AccountNumber,
                     AccountOwner = entity.AccountOwner,
                     BillingType = entity.BillingType,
+                    PaymentType = entity.PaymentType,
                     Created = dbEntity.FirstOrDefault().Created,
                     CreatedBy = dbEntity.FirstOrDefault().CreatedBy,
                     CustomerId = dbEntity.FirstOrDefault().CustomerId,

@@ -7,6 +7,7 @@ namespace Workflow.Billing.Domain.Entities
         public virtual string AccountNumber { get; set; }
         public virtual string AccountOwner { get; set; }
         public virtual string BillingType { get; set; }
+        public virtual string PaymentType { get; set; }
 
         public AccountMeta()
         {
