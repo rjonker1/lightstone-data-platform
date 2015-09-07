@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
@@ -21,23 +22,31 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         {
             this.Info(() => "StageBilling Pivot Started");
 
-            foreach (var preBilling in _preBillingRepository)
+            try
             {
-                var stageEntity = Mapper.Map(preBilling, new StageBilling());
-
-                // Check if transaction has already been recorded
-                if (!_stageBillingRepository.Any(x => x.PreBillingId == stageEntity.PreBillingId))
+                foreach (var preBilling in _preBillingRepository)
                 {
-                    // Null check for rogue transactions (caused by inconsistent AccountNumber mapping)
-                    if (stageEntity.BillingType == null) continue;
+                    var stageEntity = Mapper.Map(preBilling, new StageBilling());
 
-                    // Internal transactions - non-billable
-                    if (stageEntity.BillingType.Contains("INTERNAL"))
-                        stageEntity.UserTransaction.IsBillable = false;
+                    // Check if transaction has already been recorded
+                    if (!_stageBillingRepository.Any(x => x.PreBillingId == stageEntity.PreBillingId))
+                    {
+                        // Null check for rogue transactions (caused by inconsistent AccountNumber mapping)
+                        if (stageEntity.BillingType == null) continue;
 
-                    _stageBillingRepository.SaveOrUpdate(stageEntity, true);
+                        // Internal transactions - non-billable
+                        if (stageEntity.BillingType.Contains("INTERNAL"))
+                            stageEntity.UserTransaction.IsBillable = false;
+
+                        _stageBillingRepository.SaveOrUpdate(stageEntity, true);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                this.Error(() => e.Message);
+            }
+
             this.Info(() => "StageBilling Pivot Completed");
         }
     }
