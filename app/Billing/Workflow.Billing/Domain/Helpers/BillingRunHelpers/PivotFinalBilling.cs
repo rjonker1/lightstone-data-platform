@@ -36,8 +36,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             var invoicePdfList = new List<ReportDto>();
             var pastelReportList = new List<ReportDto>();
             var pastelInvoiceList = new List<ReportInvoice>();
-            var debitOrderReportList = new List<ReportDebitOrder>();
-            var debitOrderNotDoneReportList = new List<ReportDebitOrder>();
+            var debitOrderReportList = new List<ReportDto>();
+            var debitOrderRecordList = new List<ReportDebitOrder>();
+            var debitOrderNotDoneReportList = new List<ReportDto>();
+            var debitOrderNotDoneRecordList = new List<ReportDebitOrder>();
 
             var currentBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
             var previousBillMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
@@ -175,13 +177,13 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             if ((debitOrderRecord.AccountName != string.Empty) || (debitOrderRecord.BankAccountName != string.Empty)
                                 || (debitOrderRecord.BranchCode != "0") || (debitOrderRecord.BankAccountNumber != string.Empty))
                             {
-                                var debitOrderIndex = debitOrderReportList.FindIndex(x => x.PastelAccountId == debitOrderRecord.PastelAccountId);
-                                if (debitOrderIndex < 0) debitOrderReportList.Add(debitOrderRecord);
+                                var debitOrderIndex = debitOrderRecordList.FindIndex(x => x.PastelAccountId == debitOrderRecord.PastelAccountId);
+                                if (debitOrderIndex < 0) debitOrderRecordList.Add(debitOrderRecord);
                             }
                             else
                             {
-                                var debitOrderNotDoneIndex = debitOrderNotDoneReportList.FindIndex(x => x.PastelAccountId == debitOrderRecord.PastelAccountId);
-                                if (debitOrderNotDoneIndex < 0) debitOrderNotDoneReportList.Add(debitOrderRecord);
+                                var debitOrderNotDoneIndex = debitOrderNotDoneRecordList.FindIndex(x => x.PastelAccountId == debitOrderRecord.PastelAccountId);
+                                if (debitOrderNotDoneIndex < 0) debitOrderNotDoneRecordList.Add(debitOrderRecord);
                             }
                         }
 
@@ -285,6 +287,27 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         #endregion
 
                         #region DebitOrder CSV Build-up
+
+                        if (accounts.Any(x => x.AccountNumber == transaction.AccountNumber))
+                        {
+                            var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
+
+                            var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, account.AccountName, "1", account.BankAccountName,
+                                                                                        account.BankAccountNumber, account.BranchCode.ToString(), "0", "0");
+
+                            if ((debitOrderRecord.AccountName != string.Empty) || (debitOrderRecord.BankAccountName != string.Empty)
+                                || (debitOrderRecord.BranchCode != "0") || (debitOrderRecord.BankAccountNumber != string.Empty))
+                            {
+                                var debitOrderIndex = debitOrderRecordList.FindIndex(x => x.PastelAccountId == debitOrderRecord.PastelAccountId);
+                                if (debitOrderIndex < 0) debitOrderRecordList.Add(debitOrderRecord);
+                            }
+                            else
+                            {
+                                var debitOrderNotDoneIndex = debitOrderNotDoneRecordList.FindIndex(x => x.PastelAccountId == debitOrderRecord.PastelAccountId);
+                                if (debitOrderNotDoneIndex < 0) debitOrderNotDoneRecordList.Add(debitOrderRecord);
+                            }
+                        }
+
                         #endregion
 
                         this.Info(() => "FinalBilling completed for Client: {0}".FormatWith(transaction.ClientName));
@@ -303,18 +326,29 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 Invoices = pastelInvoiceList
                             });
 
-            pastelReportList.Add(pastelReport);
-
             var debitOrderReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "" },
                 new ReportData
                 {
-                    
+                    DebitOrders = debitOrderRecordList
                 });
 
-            this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
+            var debitOrderNotDoneReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "" },
+                new ReportData
+                {
+                    DebitOrders = debitOrderNotDoneRecordList
+                });
 
+            pastelReportList.Add(pastelReport);
+            debitOrderReportList.Add(debitOrderReport);
+            debitOrderNotDoneReportList.Add(debitOrderNotDoneReport);
+
+            // Publish to Reporting for processing
             _report.PublishToQueue(invoicePdfList, "pdf");
             _report.PublishToQueue(pastelReportList, "csv");
+            _report.PublishToQueue(debitOrderReportList, "csv");
+            _report.PublishToQueue(debitOrderNotDoneReportList, "csv");
+
+            this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
         }
     }
 }

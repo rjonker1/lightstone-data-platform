@@ -19,6 +19,11 @@ namespace Billing.Acceptance.Tests.Transaction
                 .CheckProperty(c => c.BillingType, "INTERNAL")
                 .CheckProperty(c => c.CustomerId, Guid.NewGuid())
                 .CheckProperty(c => c.CustomerName, "Customer 1")
+                .CheckProperty(c => c.AccountName, "Customer 1")
+                .CheckProperty(c => c.AccountType, 1)
+                .CheckProperty(c => c.BankAccountName, "TCC 132")
+                .CheckProperty(c => c.BankAccountNumber, "124598")
+                .CheckProperty(c => c.BranchCode, 011452)
                 .VerifyTheMappings();
 
             new PersistenceSpecification<Client>(Session)
@@ -29,6 +34,11 @@ namespace Billing.Acceptance.Tests.Transaction
                 .CheckProperty(c => c.BillingType, "INTERNAL")
                .CheckProperty(c => c.ClientId, Guid.NewGuid())
                .CheckProperty(c => c.ClientName, "Client 1")
+               .CheckProperty(c => c.AccountName, "Client 1")
+                .CheckProperty(c => c.AccountType, 1)
+                .CheckProperty(c => c.BankAccountName, "TCL 132")
+                .CheckProperty(c => c.BankAccountNumber, "124598")
+                .CheckProperty(c => c.BranchCode, 022548)
                .VerifyTheMappings();
         }
     }
