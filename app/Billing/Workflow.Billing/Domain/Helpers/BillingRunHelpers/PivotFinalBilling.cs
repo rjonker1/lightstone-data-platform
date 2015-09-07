@@ -329,14 +329,16 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             var debitOrderReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "4ksFqmUp" },
                 new ReportData
                 {
-                    BillDateTime1 = Convert.ToDateTime(DateTime.UtcNow.ToString("yyyyMMdd")),
-                    BillDateTime2 = Convert.ToDateTime(DateTime.UtcNow.ToString("yyyy-MM-dd")),
+                    BillDateTime1 = DateTime.UtcNow.ToString("yyyyMMdd"),
+                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy-MM-dd"),
                     DebitOrders = debitOrderRecordList
                 });
 
             var debitOrderNotDoneReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "4ksFqmUp" },
                 new ReportData
                 {
+                    BillDateTime1 = DateTime.UtcNow.ToString("yyyyMMdd"),
+                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy-MM-dd"),
                     DebitOrders = debitOrderNotDoneRecordList
                 });
 
