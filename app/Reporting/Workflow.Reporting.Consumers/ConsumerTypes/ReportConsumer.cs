@@ -37,8 +37,8 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                     {
                         CreateFile(dto, path, dto.Data.Customer.Name + " - Invoice.pdf");
 
-                        ////Send Email
-                        //_emailPdfNotifications.Send(dto);
+                        //Send Email
+                        _emailPdfNotifications.Send(dto);
                     }
 
                     if (message.Body.ReportType.Equals("pastel")) CreateFile(dto, path, "Pastel.csv");
