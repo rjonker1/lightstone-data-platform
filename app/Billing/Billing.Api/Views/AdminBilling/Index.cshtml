@@ -281,6 +281,8 @@
                                     var schedule = later.parse.cron('' + response.data, false);
                                     var result = later.schedule(schedule).next();
 
+                                    monthlySchedule = moment(result).format('DD-MM-YYYY HH:mm');
+
                                     $('#monthlyBillingRun').datetimepicker({
                                         format: 'DD [of each Month at] HH:mm',
                                         defaultDate: moment(result)
