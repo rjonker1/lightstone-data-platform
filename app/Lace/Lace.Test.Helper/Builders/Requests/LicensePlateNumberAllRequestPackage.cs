@@ -19,8 +19,8 @@ namespace Lace.Test.Helper.Builders.Requests
                 new DataProvider(DataProviderName.LightstoneAuto, 6, 12, LightstoneAutoRequest.Empty()),
                 new DataProvider(DataProviderName.IvidTitleHolder, 7, 14,
                     IvidTitleHolderRequest.WithVin(null, "murrayw@lightstone.co.za", "Murray")),
-                new DataProvider(DataProviderName.VinMaster, 8, 16, RgtVinRequest.Empty()),
-                new DataProvider(DataProviderName.LsaSpecifications, 9, 18, RgtRequestType.Empty())
+                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.Empty()),
+                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty())
             }, Guid.NewGuid());
         }
         public static IHavePackageForRequest LicenseNumberPackage(string licensePlate, string packageName)
@@ -33,8 +33,8 @@ namespace Lace.Test.Helper.Builders.Requests
                 new DataProvider(DataProviderName.LightstoneAuto, 6, 12, LightstoneAutoRequest.Empty()),
                 new DataProvider(DataProviderName.IvidTitleHolder, 7, 14,
                     IvidTitleHolderRequest.WithVin(null, "murrayw@lightstone.co.za", "Murray")),
-                new DataProvider(DataProviderName.VinMaster, 8, 16, RgtVinRequest.Empty()),
-                new DataProvider(DataProviderName.LsaSpecifications, 9, 18, RgtRequestType.Empty()) 
+                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.Empty()),
+                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty()) 
             }, Guid.NewGuid());
         }
     }
@@ -46,8 +46,8 @@ namespace Lace.Test.Helper.Builders.Requests
             return new LicensePlateNumberPackage(new IAmDataProvider[]
             {
                 new DataProvider(DataProviderName.LightstoneAuto, 6, 12, LightstoneAutoRequest.WithVin(vinNumber)),
-                new DataProvider(DataProviderName.VinMaster, 8, 16, RgtVinRequest.Empty()),
-                new DataProvider(DataProviderName.LsaSpecifications, 9, 18, RgtRequestType.Empty())
+                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.Empty()),
+                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty())
             }, Guid.NewGuid());
         }
 
@@ -55,8 +55,8 @@ namespace Lace.Test.Helper.Builders.Requests
         {
             return new LicensePlateNumberPackage(new IAmDataProvider[]
             {
-                new DataProvider(DataProviderName.VinMaster, 8, 16, RgtVinRequest.WithVin(vinNumber)),
-                new DataProvider(DataProviderName.LsaSpecifications, 9, 18, RgtRequestType.Empty())
+                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.WithVin(vinNumber)),
+                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty())
             }, Guid.NewGuid());
         }
     }

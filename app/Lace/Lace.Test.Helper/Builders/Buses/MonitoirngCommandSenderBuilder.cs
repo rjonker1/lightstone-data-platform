@@ -20,12 +20,12 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public static ISendCommandToBus ForRgtCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LsaSpecifications);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Rgt);
         }
 
         public static ISendCommandToBus ForRgtVinCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.VinMaster);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin);
         }
 
 

@@ -40,8 +40,8 @@ namespace Lace.Domain.Metadata.EntryPoint.Specification
                                                 null,
                                                 CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.SignioDecryptDriversLicense)),
                                             null,
-                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LsaSpecifications)), null,
-                                        CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.VinMaster)), null,
+                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Rgt)), null,
+                                        CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin)), null,
                                     CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IvidTitleHolder)), null,
                                 CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneAuto)), null,
                             CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Ivid))

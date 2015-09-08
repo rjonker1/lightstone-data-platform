@@ -28,7 +28,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.LsaSpecifications, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.Rgt, _request);
 
             if (!spec.IsSatisfied)
             {
