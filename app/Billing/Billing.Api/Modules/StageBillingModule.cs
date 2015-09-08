@@ -66,6 +66,8 @@ namespace Billing.Api.Modules
                 if (stageBillingStartDateFilter.HasValue) endDateFilter = stageBillingStartDateFilter;
                 if (stageBillingEndDateFilter.HasValue) startDateFilter = stageBillingEndDateFilter;
 
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
+
                 var customerClientList = new List<StageBillingDto>();
 
                 foreach (var transaction in stageBillingRepository)

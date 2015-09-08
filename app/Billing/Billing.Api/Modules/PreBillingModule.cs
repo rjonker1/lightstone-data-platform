@@ -55,6 +55,8 @@ namespace Billing.Api.Modules
                 if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
                 if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
 
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
+
                 var customerClientList = new List<PreBillingDto>();
 
                 foreach (var transaction in _preBillingRepository)
