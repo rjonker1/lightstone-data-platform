@@ -8,14 +8,10 @@ namespace Workflow.Billing.Scheduler.Service
 {
     class Program
     {
+        private BackgroundJobServer _server;
+
         static void Main(string[] args)
         {
-            //var appSettings = new AppSettings();
-
-            GlobalConfiguration.Configuration
-            .UseLogProvider(new ColouredConsoleLogProvider())
-            .UseSqlServerStorage(ConfigurationManager.ConnectionStrings["billingScheduler"].ConnectionString);
-
             HostFactory.Run(x =>
             {
                 x.RunAsPrompt();
