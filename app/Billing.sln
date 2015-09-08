@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Cache.Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.BillingRun.Consumer", "Billing\Workflow.Billing.BillingRun.Consumer\Workflow.Billing.BillingRun.Consumer.csproj", "{634E2D98-3275-4AB4-808C-24B1A00491F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Scheduler.Service", "Billing\Workflow.Billing.Scheduler.Service\Workflow.Billing.Scheduler.Service.csproj", "{3A09EA53-3599-4CF2-8078-A5C251F1021A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -231,6 +233,16 @@ Global
 		{634E2D98-3275-4AB4-808C-24B1A00491F2}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{634E2D98-3275-4AB4-808C-24B1A00491F2}.Test|Any CPU.Build.0 = Release|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -251,5 +263,6 @@ Global
 		{1AC6A459-024B-4465-B2FC-0C9B7494FF91} = {89F5585A-CB90-4899-8E1D-DC1CDDF45F4A}
 		{80D06F1D-1B0E-4E0D-8BF2-153CCA5076E6} = {44768077-851B-45EB-8AD8-0B5FE98E7B79}
 		{634E2D98-3275-4AB4-808C-24B1A00491F2} = {44768077-851B-45EB-8AD8-0B5FE98E7B79}
+		{3A09EA53-3599-4CF2-8078-A5C251F1021A} = {44768077-851B-45EB-8AD8-0B5FE98E7B79}
 	EndGlobalSection
 EndGlobal

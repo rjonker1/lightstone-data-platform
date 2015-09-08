@@ -217,6 +217,8 @@
     <Compile Include="Helpers\AutoMapper\Maps\StageBillingUserDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\UserMetaMaps.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
+    <Compile Include="Helpers\Schedules\CacheSchedule.cs" />
+    <Compile Include="Helpers\Schedules\MessageSchedule.cs" />
     <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\PrimaryKeyConvention.cs" />
@@ -241,6 +243,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\NHibernate\MappingOverrides\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
+      <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>
+      <Name>Workflow.Billing.Messages</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
