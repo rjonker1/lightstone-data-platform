@@ -8,8 +8,8 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] Audatex,
         [EnumMember] Ivid,
         [EnumMember] IvidTitleHolder,
-        [EnumMember] VinMaster,
-        [EnumMember] LsaSpecifications,
+        [EnumMember] RgtVin,
+        [EnumMember] Rgt,
         [EnumMember] LightstoneAuto,
         [EnumMember] EntryPoint,
         [EnumMember] Initialization,
@@ -21,7 +21,7 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] LightstoneBusinessCompany,
         [EnumMember] LightstoneBusinessDirector,
         [EnumMember] PCubedEzScore,
-        [EnumMember] LightstoneConsumerRepair,
-        [EnumMember] BmwFsTitle
+        [EnumMember] LightstoneConsumerSpecifications,
+        [EnumMember] BmwFinance
     }
 }

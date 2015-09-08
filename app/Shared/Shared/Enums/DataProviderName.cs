@@ -4,8 +4,8 @@
     {
         Ivid,
         IvidTitleHolder,
-        LsaSpecifications,
-        VinMaster,
+        Rgt,
+        RgtVin,
         LightstoneAuto,
         Audatex,
         Jis,
@@ -15,8 +15,8 @@
         LightstoneProperty,
         LightstoneBusinessCompany,
         LightstoneBusinessDirector,
-        LightstoneConsumerRepair,
+        LightstoneConsumerSpecifications,
         PCubedEzScore,
-        BmwFsTitle
+        BmwFinance
     }
 }
