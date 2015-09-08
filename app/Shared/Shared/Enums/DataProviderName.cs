@@ -4,8 +4,8 @@
     {
         Ivid,
         IvidTitleHolder,
-        Rgt,
-        RgtVin,
+        LsaSpecifications,
+        VinMaster,
         LightstoneAuto,
         Audatex,
         Jis,
