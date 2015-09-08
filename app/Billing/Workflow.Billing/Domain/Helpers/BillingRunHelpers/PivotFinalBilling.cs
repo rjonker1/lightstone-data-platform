@@ -330,7 +330,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 new ReportData
                 {
                     BillDateTime1 = DateTime.UtcNow.ToString("yyyyMMdd"),
-                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy/MM/dd"),
                     DebitOrders = debitOrderRecordList
                 });
 
@@ -338,7 +338,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 new ReportData
                 {
                     BillDateTime1 = DateTime.UtcNow.ToString("yyyyMMdd"),
-                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy/MM/dd"),
                     DebitOrders = debitOrderNotDoneRecordList
                 });
 
