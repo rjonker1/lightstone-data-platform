@@ -13,7 +13,7 @@ namespace Lace.Test.Helper.Builders.Requests
             return
                 new LicensePlateNumberPackage(
                     new IAmDataProvider[]
-                    {new DataProvider(DataProviderName.RgtVin, 5, 10, RgtVinRequest.WithVin(null))},
+                    {new DataProvider(DataProviderName.VinMaster, 5, 10, RgtVinRequest.WithVin(null))},
                     Guid.NewGuid());
         }
 
@@ -21,7 +21,7 @@ namespace Lace.Test.Helper.Builders.Requests
         {
             return
                 new LicensePlateNumberPackage(
-                    new IAmDataProvider[] {new DataProvider(DataProviderName.RgtVin, 5, 10, RgtVinRequest.WithVin(vinNumber))},
+                    new IAmDataProvider[] {new DataProvider(DataProviderName.VinMaster, 5, 10, RgtVinRequest.WithVin(vinNumber))},
                     Guid.NewGuid());
         }
     }

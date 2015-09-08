@@ -35,13 +35,13 @@ namespace Lace.Test.Helper.Builders.Buses
         public static ISendCommandToBus ForRgtCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Rgt);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LsaSpecifications);
         }
 
         public static ISendCommandToBus ForRgtVinCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.VinMaster);
         }
 
         public static ISendCommandToBus ForSignioDriversLicenseCommands(Guid requestId)

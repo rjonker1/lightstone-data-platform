@@ -167,7 +167,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForSuccessfulCallRgt()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Rgt);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LsaSpecifications);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -180,7 +180,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForFailedCallRgt()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Rgt);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LsaSpecifications);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -194,7 +194,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForSuccessfulCallRgtVin()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.RgtVin);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.VinMaster);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -208,7 +208,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForFailedCallRgtVin()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.RgtVin);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.VinMaster);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
