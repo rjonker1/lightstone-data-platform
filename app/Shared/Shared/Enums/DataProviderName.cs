@@ -15,8 +15,8 @@
         LightstoneProperty,
         LightstoneBusinessCompany,
         LightstoneBusinessDirector,
-        LightstoneConsumerSpecifications,
+        LightstoneConsumerRepair,
         PCubedEzScore,
-        BmwFinance
+        BmwFsTitle
     }
 }
