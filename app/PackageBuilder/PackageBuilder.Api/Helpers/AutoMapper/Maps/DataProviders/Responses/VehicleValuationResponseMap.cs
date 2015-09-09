@@ -70,7 +70,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             #region LastFiveSales
             Mapper.CreateMap<IEnumerable<IRespondWithSaleModel>, DataField>()
                 .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(SourceMember<IRespondWithSaleModel>()));
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => SourceMember(x)));
             Mapper.CreateMap<IRespondWithSaleModel, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
             #endregion
             #region Prices
@@ -105,9 +105,18 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             #endregion
         }
 
+        private static IEnumerable<DataField> SourceMember<T>(IEnumerable<T> objects)
+        {
+            return objects != null 
+                ? objects.Select(dataField => new DataField(dataField.GetType().Name, dataField.GetType().ToString(), Mapper.Map<object, IEnumerable<DataField>>(dataField))) 
+                : Enumerable.Empty<DataField>();
+        }
+
         private static Expression<Func<IEnumerable<T>, IEnumerable<DataField>>> SourceMember<T>()
         {
-            return x => x != null ? x.SelectMany(arg => Mapper.Map<object, IEnumerable<DataField>>(arg)).ToList() : Enumerable.Empty<DataField>();
+            return x => x != null 
+                ? x.Select(dataField => new DataField(dataField.GetType().Name, dataField.GetType().ToString(), Mapper.Map<object, IEnumerable<DataField>>(dataField))) 
+                : Enumerable.Empty<DataField>();
         }
     }
 }

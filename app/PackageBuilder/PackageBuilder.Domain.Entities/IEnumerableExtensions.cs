@@ -159,5 +159,22 @@ namespace PackageBuilder.Domain.Entities
                     yield return childItem;
             }
         }
+
+        public static void RemoveFields(this IEnumerable<IDataField> dataFields, Func<IDataField, bool> predicate = null)
+        {
+            if (dataFields == null)
+                return;
+            if (predicate == null)
+                predicate = field => true;
+
+            var fields = dataFields as IList<IDataField> ?? dataFields.ToList();
+            foreach (var dataField in fields.Where(x => x != null))
+            {
+                if (predicate(dataField))
+                    fields.Remove(dataField);
+
+                dataField.DataFields.RemoveFields(predicate);
+            }
+        }
     }
 }

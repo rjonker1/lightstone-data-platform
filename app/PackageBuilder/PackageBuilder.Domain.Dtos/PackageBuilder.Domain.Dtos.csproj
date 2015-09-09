@@ -63,6 +63,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="MetaDataDto.cs" />
     <Compile Include="Read\DataProviderDto.cs" />
     <Compile Include="Read\DataProviderRequestDto.cs" />

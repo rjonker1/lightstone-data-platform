@@ -7,6 +7,19 @@
         .ng-hide {
             display: none!important;
         }
+
+        .parent {
+            color: #31708F;
+            font-weight: bold;
+        }
+
+        .parent .child {
+            color: #555555;
+        }
+
+        .child .child {
+            color: grey;
+        }
     </style>
     <title data-ng-bind="title">Lightstone Auto: PackageBuilder</title>
     <meta charset="utf-8" />
