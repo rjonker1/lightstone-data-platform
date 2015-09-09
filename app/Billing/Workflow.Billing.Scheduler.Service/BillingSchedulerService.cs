@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Common.Logging;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using Hangfire;
@@ -14,7 +15,7 @@ namespace Workflow.Billing.Scheduler.Service
     public class BillingSchedulerService : IBillingSchedulerService
     {
         private readonly ILog _log = LogManager.GetLogger<BillingSchedulerService>();
-        Url url = "http://dev.billing.scheduler.lightstone.co.za/";
+        Url url = ConfigurationManager.AppSettings["owinUrl"];
 
         // Required for proper Job server instantiation and disposal
         private BackgroundJobServer _server;
