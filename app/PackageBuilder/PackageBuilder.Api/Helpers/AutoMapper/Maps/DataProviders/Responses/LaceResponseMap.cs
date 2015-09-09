@@ -31,7 +31,6 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                 .Include<IProvideDataFromLightstoneBusinessDirector, DataProviderName>()
                 .Include<IProvideDataFromLightstoneConsumerSpecifications, DataProviderName>()
                 .Include<IProvideDataFromBmwFinance, DataProviderName>();
-                
 
             Mapper.CreateMap<IProvideDataFromIvid, DataProviderName>().ConvertUsing(s => DataProviderName.Ivid);
             Mapper.CreateMap<IProvideDataFromIvidTitleHolder, DataProviderName>().ConvertUsing(s => DataProviderName.IvidTitleHolder);
@@ -61,17 +60,15 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                         s.DataFields.ToNamespace().ToList()
                                .RecursiveForEach(laceResponseField =>
                                {
-                                   var value = laceResponseField.Value;
                                    var destField = d.DataFields
                                        .ToNamespace()
                                        .ToList()
                                        .Filter(f => f.Namespace == laceResponseField.Namespace)
                                        .FirstOrDefault();
-                                   // todo Map via AutoMapper as soon as bug with BindingFlags has been resolved in newer release
-                                   //var field = Mapper.Map(destField, laceResponseField, typeof(DataField), typeof(DataField));
-                                   if (destField != null) destField.SetValue(value);
+                                   if (destField != null)
+                                       Mapper.Map(destField, laceResponseField, typeof (DataField), typeof (DataField), options => options.BeforeMap((src, des) => destField.SetValue(laceResponseField.Value)));
                                });
-                        d.DataFields = d.DataFields.Filter(x => x.IsSelected == true);
+                        s.DataFields.RemoveFields(x => !x.IsSelected.HasValue || (x.IsSelected.HasValue && !x.IsSelected.Value));
                     }
                 })
             .ForMember(d => d.DataFields, opt => opt.Ignore());

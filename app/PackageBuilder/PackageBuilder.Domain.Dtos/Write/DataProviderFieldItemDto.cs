@@ -11,6 +11,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         }
 
         public string Name { get; set; }
+        public string Namespace { get; set; }
         public string Type { get; set; }
         public string Label { get; set; }
         public string Definition { get; set; }

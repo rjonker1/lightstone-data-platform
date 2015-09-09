@@ -32,12 +32,12 @@
         //$scope.switch = 'true';
         //$scope.switchAlternate = 'Per Field';
 
-        $scope.toggle = function (state) {
+        $scope.toggle = function(state) {
 
             (state == true) ? $scope.switch = false : $scope.switch = true;
             $scope.dataProvider.response[0].fieldLevelCostPriceOverride = $scope.switch;
             $scope.dataProvider.response[0].costOfSale = 0;
-        }
+        };
 
         $scope.selectedGroupIndustry = {};
 
@@ -138,116 +138,85 @@
             if (dataItem == null)
                 return valueTotal;
             
-            var items = dataItem;
-            var subItems = items.dataFields;
-
+            var subItems = dataItem.dataFields;
             for (var i = 0; i < subItems.length; i++) {
 
                 valueTotal += subItems[i].costOfSale;
-
-                var subChildItems = subItems[i].dataFields;
-
-                for (var j = 0; j < subChildItems.length; j++) {
-
-                    valueTotal += subChildItems[j].costOfSale;
-                }
+                valueTotal += $scope.totalParChar(subItems[i]);
             }
 
             return valueTotal;
         };
-
-
-        $scope.childIndustryChanged = function (childIndustry, parent) {
-
-            console.log(parent);
+        
+        $scope.childIndustryChanged = function (childIndustry, dataField) {
+            console.log(dataField);
             console.log(childIndustry);
 
-            var industries = $scope.industries;
-
-            for (var i = 0; i < industries.length; i++) {
-
-                if (industries[i].id == childIndustry.id) {
-
-                    //Returns an Array of the fields that currently occupy said Industry.
-                    var getChildrenSelected = $scope.checkChildren(childIndustry.name);
-                    if (getChildrenSelected.length <= 0) {
-
-                        parent.industries[i].isSelected = false;
-                        continue;
-                    }
-
-                    parent.industries[i].isSelected = true;
-                }
-
-            }
-
+            selectParentIndustries(dataField);
         };
-
-        $scope.checkChildren = function(childIndusName) {
-
-            var childArray = [];
-            var items = null;
-
-            try {
-
-                items = $scope.dataProvider.response;
-            } catch(e) {
-
-                //console.log(e.message);
+        
+        function selectParentIndustries(dataField) {
+            var parentFieldNames = dataField.namespace.split(".");
+            var parentFieldName = parentFieldNames[0];
+            for (var i = 1; i < parentFieldNames.length - 1; i++) {
+                if (i != parentFieldNames.length - 1)
+                    parentFieldName = parentFieldName + "." + parentFieldNames[i];
             }
 
-            if (items != null) {
+            var parentField = filterDataFields($scope.dataProvider.response[0].dataFields, 'namespace', parentFieldName)[0];
+            if (parentField == null)
+                return;
 
-                for (var i = 0; i < items.length; i++) {
+            //var selectedIndustries = [];
+            //Enumerable.From(parentField.dataFields)
+            //    .SelectMany(function(x) { return x.industries; })
+            //    .ToLookup(function(x) { return x.isSelected; })
+            //    .ToEnumerable()
+            //    .ForEach(function(x) {
+            //        if (x.Key() == false)
+            //            unselectedIndustries.push(x.Distinct("$.name"));
+            //        if (x.Key() == true)
+            //            selectedIndustries.push(x.Distinct("$.name"));
+            //    });
 
-                    var listItem = items[i];
+            var selectedIndustries = Enumerable.From(parentField.dataFields)
+                .SelectMany(function(x) { return x.industries; })
+                .Where("$.isSelected==true")
+                .Distinct("$.name")
+                .Select(function (x) { return x; });
 
-                    for (var x = 0; x < (listItem.dataFields).length; x++) {
-                        if (listItem.dataFields[x] == null)
-                            continue;
+            Enumerable.From(parentField.industries).ForEach(function(parentIndustry) {
+                parentIndustry.isSelected = false;
+                var industry = selectedIndustries.Where(function (selectedIndustry) {
+                    return selectedIndustry.id == parentIndustry.id;
+                }).FirstOrDefault();
+                if (industry)
+                    parentIndustry.isSelected = industry.isSelected;
+            });
 
-                        if ((listItem.dataFields[x].dataFields).length > 0) {
+            //Enumerable.From(dataField.industries).ForEach(function (ind) {
+            //    var industry = Enumerable.From(parentField.industries).Where(function (i) {
+            //        return i.id == ind.id;
+            //    }).FirstOrDefault();
+            //    industry.isSelected = ind.isSelected;
+            //});
 
-                            var subFields = listItem.dataFields[x].dataFields;
-
-                            for (var j = 0; j < (subFields).length; j++) {
-
-                                var industries = subFields[j].industries;
-
-                                //Child Industries
-                                for (var k = 0; k < (industries).length; k++) {
-
-                                    if ((industries[k].name == childIndusName) && (industries[k].isSelected == true)) {
-
-                                        childArray.push(subFields[j].name);
-                                    } else {
-
-                                        var subChildFields = subFields[j].dataFields;
-                                        for (var l = 0; l < (subChildFields).length; l++) {
-
-                                            //Sub-child Industries
-                                            var subIndustries = subChildFields[l].industries;
-                                            for (var kk = 0; kk < (industries).length; kk++) {
-
-                                                if ((subIndustries[kk].name == childIndusName) && (subIndustries[kk].isSelected == true)) {
-
-                                                    childArray.push(subChildFields[l].name);
-                                                }
-                                            }
-
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-
+            if (parentField.namespace != parentFieldNames[0])
+                selectParentIndustries(parentField);
+        }
+        
+        function filterDataFields(obj, key, val) {
+            var objects = [];
+            for (var i in obj) {
+                if (!obj.hasOwnProperty(i)) continue;
+                if (typeof obj[i] == 'object') {
+                    objects = objects.concat(filterDataFields(obj[i], key, val));
+                } else if (i == key && obj[key] == val) {
+                    objects.push(obj);
                 }
             }
-
-            return childArray;
-        };
+            return objects;
+        }
 
         $scope.editProvider = function (providerData) {
             return datacontext.editDataProvider($routeParams.id, providerData).then(function (response) {

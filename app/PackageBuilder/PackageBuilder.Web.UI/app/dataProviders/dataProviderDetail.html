@@ -1,18 +1,22 @@
-﻿<script type="text/ng-template" id="dField_renderer.html">
-
-    <tr>
-        <td><b style="color: green;">{{dField.name}}</b></td>
-        <td><!--{{dField.type}}--></td>
-        <td>
-            <input class="form-control" ng-model="dField.label" type="text">
-        </td>
-        <td>
-            <input class="form-control" ng-model="dField.definition" type="text">
-        </td>
-        <td>
-            <input class="form-control" ng-model="dField.order" spinner-only type="number">
-        </td>
-        <td>
+﻿<script type="text/ng-template" id="field_render.html">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-1" style="margin-left: 15px;">
+            {{dField.name}}
+        </div>
+        <div class="col-md-3">
+            {{dField.type}}
+        </div>
+        <div class="col-md-1" style="margin-left: -7px;">
+            <input class="form-control" style="width: 100%;" ng-model="dField.label" type="text">
+        </div>
+        <div class="col-md-1" style="margin-left: -5px;">
+            <input class="form-control" style="width: 100%;" ng-model="dField.definition" type="text">
+        </div>
+        <div class="col-md-1" style="margin-left: 0px;">
+            <input class="form-control" style="width: 100%;" ng-model="dField.order" spinner-only type="number">
+        </div>
+        <div class="col-md-2" style="margin-left: -5px;">
             <div ng-show="(dField.dataFields).length <= 0"
                  multi-select
                  input-model="dField.industries"
@@ -20,7 +24,8 @@
                  item-label="name maker"
                  max-labels="1"
                  tick-property="isSelected"
-                 is-disabled="false">
+                 is-disabled="false"
+                 on-item-click="childIndustryChanged(data, dField)">
             </div>
             <div ng-show="(dField.dataFields).length > 0"
                  multi-select
@@ -29,62 +34,17 @@
                  item-label="name maker"
                  max-labels="1"
                  tick-property="isSelected"
-                 is-disabled="true">
-            </div>
-        </td>
-        <td ng-show="switch == true">
-            <input ng-show="(dField.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.costOfSale" />
-            <label ng-show="(dField.dataFields).length > 0" class="form-control" style="width: 40% !important;">{{totalParChar(dField)}}</label>
-        </td>
-    </tr>
-
-    <tr ng-repeat-start="subDF in dField.dataFields">
-        <td><b>{{subDF.name}}</b></td>
-        <td></td>
-        <td><input class="form-control" ng-model="subDF.label" type="text"></td>
-        <td><input class="form-control" ng-model="subDF.definition" type="text"></td>
-        <td><input class="form-control" ng-model="subDF.order" spinner-only type="number"></td>
-        <td>
-            <div multi-select
-                 input-model="subDF.industries"
-                 button-label="name"
-                 item-label="name maker"
-                 max-labels="1"
-                 tick-property="isSelected"
-                 output-model="dField.selectedChildren"
+                 is-disabled="true"
                  on-item-click="childIndustryChanged(data, dField)">
             </div>
-        </td>
-        <td ng-show="switch == true">
-            <input ng-show="(subDF.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subDF.costOfSale" />
-            <label ng-show="(subDF.dataFields).length > 0" class="form-control" style="width: 40% !important;">{{totalParChar(subDF)}}</label>
-        </td>
-    </tr>
-    <tr ng-repeat-end ng-repeat-start="subChildDF in subDF.dataFields">
-        <td>{{subChildDF.name}}</td>
-        <td>System.Type</td>
-        <td><input class="form-control" ng-model="subChildDF.label" type="text"></td>
-        <td><input class="form-control" ng-model="subChildDF.definition" type="text"></td>
-        <td><input class="form-control" ng-model="subChildDF.order" spinner-only type="number"></td>
-        <td>
-            <div multi-select
-                 input-model="subChildDF.industries"
-                 button-label="name"
-                 item-label="name maker"
-                 max-labels="1"
-                 tick-property="isSelected"
-                 on-item-click="childIndustryChanged(data, subDF)">
-
-            </div>
-        </td>
-        <td ng-show="switch == true">
-            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subChildDF.costOfSale" />
-        </td>
-    </tr>
-    <tr ng-repeat-end></tr>
-
+        </div>
+        <div class="col-md-1" style="margin-left: -5px;" ng-show="switch == true">
+            <input ng-show="(dField.dataFields).length <= 0" class="form-control" style="width: 100% !important;" type="number" min="0" ng-model="dField.costOfSale" />
+            <label ng-show="(dField.dataFields).length > 0" class="form-control" style="width: 100% !important;">{{totalParChar(dField)}}</label>
+        </div>
+    </div>
+    <div ng-repeat="dField in dField.dataFields" class="child" ng-include="'field_render.html'"></div>
 </script>
-
 
 <section class="mainbar" data-ng-controller="dataProviderDetail">
     <!--<div ng-model="dataProvider">
@@ -123,7 +83,7 @@
                                         <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProv.description"></textarea>
                                     </div>
                                 </div>
-                                <br/>
+                                <br />
                                 <div>
                                     <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
                                     <button type="button" class="btn btn-success" ng-click="editProvider(dataProv)">Save Data Provider</button>
@@ -185,35 +145,30 @@
                                 <div class="widget wblue">
                                     <div id="field_table_title" data-cc-widget-header title="Response fields" allow-collapse="true"></div>
                                     <div class="widget-content text-left text-info">
-
-                                        <table class="table" style="padding-top: 20px;">
-                                            <thead>
-                                                <tr>
-                                                    <th>Field</th>
-                                                    <th>Type</th>
-                                                    <th>Label</th>
-                                                    <th>Definition</th>
-                                                    <th>Order</th>
-                                                    <th>Industry</th>
-                                                    <!--<th style="width: 18%;">
-                                                        <div style="float: left;">
-                                                            <label>Industry</label>
-                                                        </div>
-                                                        <div style="float: right;">
-                                                            <select class="form-control" style="width: 100% !important;" ng-model="selectedGroupIndustry"
-                                                                    ng-options="industry.name as industry.name for industry in industries"
-                                                                    ng-change="updateFieldIndustry(selectedGroupIndustry)" />
-                                                        </div>
-                                                    </th>-->
-                                                    <th ng-show="switch == true">Price (Total: R {{total()}})</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'">
-
-                                                <!-- <tr ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'"></tr>-->
-                                            </tbody>
-                                        </table>
-
+                                        <div>
+                                            <div class="col-md-1">
+                                                <label>Field</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Type</label>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Label</label>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Definition</label>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Order</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>Industry</label>
+                                            </div>
+                                            <div class="col-md-1" ng-show="switch == true">
+                                                <label>Price (Total: R 0)</label>
+                                            </div>
+                                        </div>
+                                        <div class="parent" ng-repeat="dField in dataProv.dataFields" ng-include="'field_render.html'"></div>
                                     </div>
                                     <!--<div class="widget-foot">
                                             <div class="clearfix"></div>

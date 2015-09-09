@@ -23,7 +23,7 @@ namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations
                     .With(AmortisedValueModelMother.AmortisedValue)
                     .With(ImageGaugeModelMother.ImageGauge)
                     .With(EstimatedValueModelMother.EstimatedValue)
-                    .With(SaleModelMother.Sale)
+                    .With(SaleModelMother.Sale1, SaleModelMother.Sale2)
                     .Build();
             }
         }

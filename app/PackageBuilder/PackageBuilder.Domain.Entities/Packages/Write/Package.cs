@@ -202,10 +202,10 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             foreach (var dataProvider in dataProviders.Where(x => x.Handled))
             {
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
-                IDataProvider response = (IDataProvider) Mapper.Map(laceResponse, DataProviders.FirstOrDefault(x => x.Name == laceResponse.Name), typeof(IDataProvider), typeof(DataProvider));
+                Mapper.Map(laceResponse, DataProviders.FirstOrDefault(x => x.Name == laceResponse.Name), typeof(IDataProvider), typeof(DataProvider));
 
-                if (response.DataFields.Any())
-                    yield return response;
+                if (laceResponse.DataFields.Any())
+                    yield return laceResponse;
             }
             this.Info(() => "Map LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
         }

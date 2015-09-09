@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
@@ -15,7 +16,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write
                 //.ForMember(d => d.CostOfSale, opt => opt.ResolveUsing(new DataProviderCostPriceResolver()))
                 //.ForMember(d => d.FieldLevelCostPriceOverride, opt => opt.ResolveUsing(new DataProviderCostPriceOverrideResolver()))
                 .ForMember(d => d.RequestFields, opt => opt.MapFrom(x => x.RequestFields != null ? Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(x.RequestFields.Where(fld => fld != null)) : Enumerable.Empty<DataProviderFieldItemDto>()))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(x.DataFields)));
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(x.DataFields)))
+                .AfterMap((s, d) => d.DataFields.ToNamespace());
             //.BeforeMap((src, dest) =>
             //{
             //    var dataProvider = ServiceLocator.Current.GetInstance<INEventStoreRepository<DataProvider>>().GetById(src.Id);

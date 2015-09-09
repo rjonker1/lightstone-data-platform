@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Helpers.Json;
 using Newtonsoft.Json;
 using PackageBuilder.Core.Attributes;
@@ -100,6 +101,11 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         public void SetValue(string value)
         {
             Value = value;
+        }
+
+        public override string ToString()
+        {
+            return "{0} - {1}".FormatWith(GetType().FullName, Name);
         }
     }
 }
