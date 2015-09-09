@@ -12,6 +12,8 @@ namespace Workflow.Billing.Scheduler.Service
 
         static void Main(string[] args)
         {
+            var appSettings = new AppSettings();
+
             HostFactory.Run(x =>
             {
                 x.RunAsPrompt();
@@ -23,12 +25,11 @@ namespace Workflow.Billing.Scheduler.Service
                     s.WhenStopped(tc => tc.Stop());
                 });
 
-                //x.RunAsLocalSystem();
                 x.RunAsPrompt();
 
-                //x.SetDescription(appSettings.Service.Description);
-                //x.SetDisplayName(appSettings.Service.DisplayName);
-                //x.SetServiceName(appSettings.Service.Name);
+                x.SetDescription(appSettings.Service.Description);
+                x.SetDisplayName(appSettings.Service.DisplayName);
+                x.SetServiceName(appSettings.Service.Name);
             });
         }
     }
