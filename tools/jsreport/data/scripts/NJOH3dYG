@@ -1,0 +1,10 @@
+{
+    "content": "//send the pdf report by mail\nfunction afterRender(done) {\n    \n        var mandrill = require('mandrill-api/mandrill');\n        var mandrill_client = new mandrill.Mandrill('DV416ErBhBibQe6DdmnTCg');\n    \n        var message = {\n            \"html\": \"Example HTML content\",\n            \"subject\": \"example subject\",\n            \"from_email\": \"mvpreport@lightstone.co.za\",\n            \"from_name\": \"Report Test\",\n            \"to\": [{\n                    \"email\": \"allistairec@lightstone.co.za\",\n                    \"type\": \"to\"\n                }],\n            \"important\": true,\n            \"attachments\": [{\n                    \"type\": \"text/plain\",\n                    \"name\": \"textFile.txt\",\n                    \"content\": response.content\n                }]\n        };\n        \n        var async = false;\n        mandrill_client.messages.send({\"message\": message, \"async\": async}, function(result) {\n            done();\n        });\n}    \n",
+    "name": "Email attachment",
+    "shortid": "NJOH3dYG",
+    "creationDate": "2015-04-29T07:50:00.000Z",
+    "modificationDate": {
+        "$$date": 1430297224063
+    },
+    "_id": "x4Mlo4T20Ruojesv"
+}
