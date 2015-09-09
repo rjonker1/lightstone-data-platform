@@ -14,14 +14,13 @@ namespace Workflow.Billing.Scheduler.Service
     public class BillingSchedulerService : IBillingSchedulerService
     {
         private readonly ILog _log = LogManager.GetLogger<BillingSchedulerService>();
-        Url url = "http://hangfire.owin.selfhosted.with.nancy/";
+        Url url = "http://dev.billing.scheduler.lightstone.co.za/";
 
         // Required for proper Job server instantiation and disposal
         private BackgroundJobServer _server;
 
         public void Start()
         {
-            // Nancy Instantiation
             WebApp.Start<Startup>(url);
 
             // HangFire Instantiation

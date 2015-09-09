@@ -139,6 +139,7 @@
     <Compile Include="BillingSchedulerService.cs" />
     <Compile Include="IBillingSchedulerService.cs" />
     <Compile Include="Modules\Index.cs" />
+    <Compile Include="Modules\ScheduleModule.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
