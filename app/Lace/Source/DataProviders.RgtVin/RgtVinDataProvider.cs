@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.RgtVin
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.VinMaster, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.RgtVin, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -39,8 +39,8 @@ namespace Lace.Domain.DataProviders.RgtVin
             }
             else
             {
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.VinMaster);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.VinMaster, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.RgtVin);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.RgtVin, _dataProvider);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

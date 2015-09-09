@@ -32,7 +32,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.VinMaster, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.RgtVin, _request);
 
             if (!spec.IsSatisfied)
             {
