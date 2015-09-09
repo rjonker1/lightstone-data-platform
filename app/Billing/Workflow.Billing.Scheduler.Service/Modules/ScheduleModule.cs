@@ -76,6 +76,9 @@ namespace Workflow.Billing.Scheduler.Service.Modules
                 if (disableFlag == "false")
                 {
                     RecurringJob.RemoveIfExists("StageBilling Run");
+                    RecurringJob.RemoveIfExists("PreBilling Cache Reload");
+                    RecurringJob.RemoveIfExists("StageBilling Cache Reload");
+                    RecurringJob.RemoveIfExists("FinalBilling Cache Reload");
                     return Response.AsJson(new { data = "Schedule removed" });
                 }
 
