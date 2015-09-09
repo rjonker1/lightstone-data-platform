@@ -168,7 +168,7 @@ namespace PackageBuilder.Domain.Entities
                 predicate = field => true;
 
             var fields = dataFields as IList<IDataField> ?? dataFields.ToList();
-            foreach (var dataField in fields.Where(x => x != null))
+            foreach (var dataField in fields.Where(x => x != null).ToList())
             {
                 if (predicate(dataField))
                     fields.Remove(dataField);

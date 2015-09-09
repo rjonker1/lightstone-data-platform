@@ -2,9 +2,8 @@
     <i ng-if="dataField.isSelected">{{dataField.name}} |</i>
     <span ng-repeat="dataField in dataField.dataFields" ng-include="'data_field_renderer.html'"></span>
 </script>
-<!-- TOP lvl -->
-<script type="text/ng-template" id="proivder_nodes_renderer.html">
 
+<script type="text/ng-template" id="proivder_nodes_renderer.html">
     <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
             <div class="col-md-6">
@@ -37,22 +36,20 @@
                 *Per field requested
             </div>
         </div>
-    </div>    
+    </div>
     <ul style="cursor:default; list-style-type: none;" class="angular-ui-tree" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
-        <li style="cursor:default" class="category-title" ng-repeat="dataField in provider.dataFields | filter:filterIndustry" ng-include="'parentFields_renderer.html'">
+        <li style="cursor:default" class="category-title" ng-repeat="dataField in provider.dataFields | filter:filterIndustry" ng-include="'field_render.html'">
 
         </li>
     </ul>
-
 </script>
 
-<!-- PARENT -->
-<script type="text/ng-template" id="parentFields_renderer.html">
+<script type="text/ng-template" id="field_render.html">
     <div style="cursor:default; background-color: #4C7E80 !important;" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
 
             <div class="col-md-6">
-                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs toggle-tree-node" data-nodrag" onClick="toggleTreeNode(this); return false;" >
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs toggle-tree-node" data-nodrag" onclick="toggleTreeNode(this); return false;">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
 
@@ -78,76 +75,10 @@
         </div>
     </div>
     <ul style="cursor:default; list-style-type: none;" class="angular-ui-tree" ng-model="dataField.dataFields" data-nodrag type="category" ng-class="{hidden: !collapsed}">
-        <li style="cursor:default" class="category-title" ng-repeat="dataField in dataField.dataFields | filter:filterIndustry" ng-include="'childrenFields_renderer.html'">
-
-        </li>
-    </ul>    
-</script>
-
-<!-- Children -->
-<script type="text/ng-template" id="childrenFields_renderer.html">
-
-    <div style="cursor:default;" ng-class="{'toggled-child-selected': collapsed, 'toggled-child-rest': !collapsed}" class="group-title angular-ui-tree-handle" data-nodrag>
-        <div class="row">
-
-            <div class="col-md-6">
-                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag onclick="toggleTreeNode(this); return false;">
-                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
-                </a>
-                <div>
-                    <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-                    <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
-                    <div ng-if="dataField.label.length > 0" class="col-md-6">{{dataField.label}}</div>
-                </div>
-            </div>
-
-            <div class="col-md-1"></div>
-
-            <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-2">Cost:</label>
-
-                <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
-                       value="{{totalChildren(dataField, dataField.dataFields)}}" readonly />
-
-                <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="dataField.costOfSale" readonly />
-            </div>
-        </div>
-    </div>
-    <ul style="list-style-type: none;" data-nodrag type="category" class="angular-ui-tree" ng-class="{hidden: !collapsed}">
-        <li style="cursor:default; border: none;" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields | filter:filterIndustry" ng-include="'subChildrenFields_renderer.html'">
+        <li style="cursor:default" class="category-title" ng-repeat="dataField in dataField.dataFields | filter:filterIndustry" ng-include="'field_render.html'">
 
         </li>
     </ul>
-</script>
-
-<!-- SubChildren -->
-
-<script type="text/ng-template" id="subChildrenFields_renderer.html">
-
-    <div style="cursor:default" class=" angular-ui-tree-handle" data-nodrag>
-        <div style="margin-left: -15px; margin-right: 0;" class="row">
-            <div class="col-md-6">
-                <a ng-if="subDF.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag onclick="toggleTreeNode(this); return false;">
-                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
-                </a>
-                <div>
-                    <input class="col-md-2" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
-                    <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">{{subDF.name}}</div>
-                    <div ng-if="subDF.label.length > 0" class="col-md-6">{{subDF.label}}</div>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-2">Cost:</label>
-
-                <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
-                        value="{{totalChildren(subDF, subDF.dataFields)}}" readonly />
-
-                <input ng-if="subDF.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="subDF.costOfSale" readonly />
-            </div>
-        </div>
-    </div>
-
 </script>
 
 <section class="mainbar" data-ng-controller="packageMaintenanceCreate">
@@ -261,7 +192,7 @@
                                         <span ng-repeat="dataField in dataProvider.dataFields" ng-include="'data_field_renderer.html'"></span>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div> <!--End Info-->
                         <br />
                         <!-- DataProvider -->
