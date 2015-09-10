@@ -18,16 +18,17 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository;
 
         private readonly IPublishReportQueue<BillingReport> _report;
-        private readonly ReportBuilder _reportBuilder;
+        private readonly IReportBuilder _reportBuilder;
 
         public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IRepository<ArchiveBillingTransaction> archiveBillingRepository,
-                                    IPublishReportQueue<BillingReport> report, IRepository<AccountMeta> accountMetaReporRepository)
+                                    IRepository<AccountMeta> accountMetaReporRepository,
+                                    IPublishReportQueue<BillingReport> report, IReportBuilder reportBuilder)
         {
             _stageBillingRepository = stageBillingRepository;
             _finalBillingRepository = finalBillingRepository;
             _archiveBillingRepository = archiveBillingRepository;
             _accountMetaReporRepository = accountMetaReporRepository;
-            _reportBuilder = new ReportBuilder();
+            _reportBuilder = reportBuilder;
             _report = report;
         }
 
@@ -41,14 +42,14 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             var debitOrderNotDoneReportList = new List<ReportDto>();
             var debitOrderNotDoneRecordList = new List<ReportDebitOrder>();
 
-            var currentBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
-            var previousBillMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
+            var endBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
+            var startBillMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
 
             var pastelCounter = 1;
 
             var accounts = _accountMetaReporRepository;
 
-            this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
+            this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(startBillMonth, endBillMonth));
 
             try
             {
@@ -63,7 +64,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                 foreach (var record in _stageBillingRepository)
                 {
-                    if (record.Created <= previousBillMonth) continue;
+                    if (record.Created <= startBillMonth) continue;
 
                     var finalEntity = Mapper.Map(record, new FinalBilling());
 
@@ -78,11 +79,11 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     {
                         this.Info(() => "FinalBilling initiated for Customer: {0}".FormatWith(transaction.CustomerName));
                         var billedCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && x.UserTransaction.IsBillable
-                                                                                                 && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
+                                                                                                 && (x.Created >= startBillMonth && x.Created <= endBillMonth))
                             .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
                         var nonBillableCustomerTransactionsTotal = _finalBillingRepository.Where(x => x.CustomerId == transaction.CustomerId && !x.UserTransaction.IsBillable
-                                                                                                 && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
+                                                                                                 && (x.Created >= startBillMonth && x.Created <= endBillMonth))
                             .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
                         #region Invoice PDF Report Build-up
@@ -99,7 +100,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                     ItemDescription = x.Package.PackageName,
                                     QuantityUnit = _finalBillingRepository.Where(
                                         y => y.CustomerId == transaction.CustomerId && y.UserTransaction.IsBillable
-                                             && (y.Created >= previousBillMonth && y.Created <= currentBillMonth)
+                                             && (y.Created >= startBillMonth && y.Created <= endBillMonth)
                                              && (y.Package.PackageId == x.Package.PackageId))
                                         .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
                                     Price = x.Package.PackageRecommendedPrice,
@@ -116,7 +117,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                     ItemDescription = x.Package.PackageName + " - Non-Billable",
                                     QuantityUnit = _finalBillingRepository.Where(
                                         y => y.CustomerId == transaction.CustomerId && !y.UserTransaction.IsBillable
-                                             && (y.Created >= previousBillMonth && y.Created <= currentBillMonth)
+                                             && (y.Created >= startBillMonth && y.Created <= endBillMonth)
                                              && (y.Package.PackageId == x.Package.PackageId))
                                         .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
                                     Price = 0,
@@ -199,11 +200,11 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     {
                         this.Info(() => "FinalBilling initiated for Client: {0}".FormatWith(transaction.ClientName));
                         var billedClientTransactionsTotal = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId && x.UserTransaction.IsBillable
-                                                                                               && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
+                                                                                               && (x.Created >= startBillMonth && x.Created <= endBillMonth))
                             .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
                         var nonBillableClientTransactionsTotal = _finalBillingRepository.Where(x => x.ClientId == transaction.ClientId && !x.UserTransaction.IsBillable
-                                                                                                 && (x.Created >= previousBillMonth && x.Created <= currentBillMonth))
+                                                                                                 && (x.Created >= startBillMonth && x.Created <= endBillMonth))
                             .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
 
                         #region Invoice PDF Report Build-up
@@ -220,7 +221,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                     ItemDescription = x.Package.PackageName,
                                     QuantityUnit = _finalBillingRepository.Where(
                                         y => y.CustomerId == transaction.CustomerId && y.UserTransaction.IsBillable
-                                             && (y.Created >= previousBillMonth && y.Created <= currentBillMonth)
+                                             && (y.Created >= startBillMonth && y.Created <= endBillMonth)
                                              && (y.Package.PackageId == x.Package.PackageId))
                                         .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
                                     Price = x.Package.PackageRecommendedPrice,
@@ -237,7 +238,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                     ItemDescription = x.Package.PackageName + " - Non-Billable",
                                     QuantityUnit = _finalBillingRepository.Where(
                                         y => y.CustomerId == transaction.CustomerId && !y.UserTransaction.IsBillable
-                                             && (y.Created >= previousBillMonth && y.Created <= currentBillMonth)
+                                             && (y.Created >= startBillMonth && y.Created <= endBillMonth)
                                              && (y.Package.PackageId == x.Package.PackageId))
                                         .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
                                     Price = 0,
@@ -352,7 +353,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             _report.PublishToQueue(debitOrderReportList, "debitOrder");
             _report.PublishToQueue(debitOrderNotDoneReportList, "debitOrderND");
 
-            this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(previousBillMonth, currentBillMonth));
+            this.Info(() => "FinalBilling process completed for : {0} - to - {1}".FormatWith(startBillMonth, endBillMonth));
         }
     }
 }

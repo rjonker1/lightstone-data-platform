@@ -135,8 +135,11 @@
     <Compile Include="Entities\ReportTemplate.cs" />
     <Compile Include="Entities\UserDetail.cs" />
     <Compile Include="Entities\UserTransactionDetail.cs" />
+    <Compile Include="Helpers\EmailBuilder.cs" />
+    <Compile Include="Helpers\ReportBuilder.cs" />
     <Compile Include="NotificationSender\EmailNotification.cs" />
-    <Compile Include="NotificationSender\ISendNotifications.cs" />
+    <Compile Include="NotificationSender\EmailNotificationWithAttachment.cs" />
+    <Compile Include="NotificationSender\ISendNotificationsWithAttachment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

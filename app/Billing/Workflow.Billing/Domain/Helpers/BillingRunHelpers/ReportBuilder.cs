@@ -4,7 +4,7 @@ using Workflow.Reporting.Entities;
 
 namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 {
-    public class ReportBuilder
+    public class ReportBuilder : IReportBuilder
     {
         public ReportInvoice BuildPastelInvoice(int invoiceNumber, string accountNumber, string productName, double productPrice)
         {

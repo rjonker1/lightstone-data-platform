@@ -29,6 +29,7 @@ namespace Workflow.Billing.BillingRun.Consumer
                 new BusInstaller(),
                 new PublishReportQueueInstaller(),
                 new PivotInstaller(),
+                new ReportBuilderInstaller(),
                 new NotificationInstaller());
 
             try

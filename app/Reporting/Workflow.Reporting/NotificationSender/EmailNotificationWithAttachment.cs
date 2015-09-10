@@ -1,28 +1,36 @@
 ﻿using System;
 using System.Configuration;
 using System.Net.Mail;
+using System.Text;
 using DataPlatform.Shared.Helpers.Extensions;
+using jsreport.Client;
+using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Helpers;
 
 namespace Workflow.Reporting.NotificationSender
 {
-    public class EmailNotification : ISendNotifications
+    public class EmailNotificationWithAttachment<T> : ISendNotificationsWithAttachment<ReportDto>
     {
+
+        ReportingService _reportingService = new ReportingService(ConfigurationManager.ConnectionStrings["workflow/reporting/jsreport"].ConnectionString);
         private IEmailBuilder _emailBuilder;
 
-        public EmailNotification(IEmailBuilder emailBuilder)
+        public EmailNotificationWithAttachment(IEmailBuilder emailBuilder)
         {
             _emailBuilder = emailBuilder;
         }
 
-        public void Send(string subject, string body)
+        public void Send(ReportDto dto)
         {
             try
             {
                 using (var client = new SmtpClient())
                 {
-                    _emailBuilder.MailSubject = subject;
-                    _emailBuilder.MailBody = body;
+                    var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
+
+                    _emailBuilder.MailSubject = dto.Data.Customer.Name + " Invoice";
+                    _emailBuilder.MailBody = "Please see attached for Billing Invoice Report";
+                    _emailBuilder.AddAttachment(new Attachment(report.Content, "" + dto.Data.Customer.Name + " - Invoice.pdf"));
 
                     var mailMessage = _emailBuilder.BuildMessage();
 

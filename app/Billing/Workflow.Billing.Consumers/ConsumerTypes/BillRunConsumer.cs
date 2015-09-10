@@ -28,6 +28,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
             {
                 _pivotStageBilling.Pivot();
 
+                //TODO: Move logic to scheduler
                 if (DateTime.Now.Day == 26)
                 {
                     var mailMessage = new MailMessage
@@ -41,9 +42,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     };
 
                     mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to"].ToLower());
-                    //mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to/secondary"].ToLower());
-                    //mailMessage.Attachments.Add(new Attachment(report.Content,
-                    //    "" + dto.Data.Customer.Name + " - Invoice.pdf"));
+                    mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to/secondary"].ToLower());
 
                     _emailNotification.Send(mailMessage);
                 }
