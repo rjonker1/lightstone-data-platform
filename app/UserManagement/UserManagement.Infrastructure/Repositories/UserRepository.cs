@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DataPlatform.Shared.Helpers;
 using NHibernate;
 using UserManagement.Domain.Core.Repositories;
@@ -9,7 +10,8 @@ namespace UserManagement.Infrastructure.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        User Get(string username);
+        User GetByUserName(string username);
+        User GetByResetToken(Guid resetToken);
         PagedList<User> Search(string searchValue, int pageIndex, int pageSize);
     }
 
@@ -20,9 +22,14 @@ namespace UserManagement.Infrastructure.Repositories
         {
         }
 
-        public User Get(string username)
+        public User GetByUserName(string username)
         {
             return this.FirstOrDefault(x => (x.UserName + "").Trim().ToLower() == (username + "").Trim().ToLower());
+        }
+
+        public User GetByResetToken(Guid resetToken)
+        {
+            return this.FirstOrDefault(x => x.ResetPasswordToken  == resetToken);
         }
 
         public PagedList<User> Search(string searchValue, int pageIndex, int pageSize)

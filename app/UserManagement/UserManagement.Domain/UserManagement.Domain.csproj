@@ -131,6 +131,7 @@
     <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Roles\ImportRoleHandler.cs" />
     <Compile Include="CommandHandlers\UserAliases\LinkUserAliasCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Email\EmailMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

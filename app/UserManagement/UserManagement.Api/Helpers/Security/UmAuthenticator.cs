@@ -4,9 +4,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using Nancy.Security;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Core.Security;
-using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Helpers.Security
 {
@@ -17,13 +15,11 @@ namespace UserManagement.Api.Helpers.Security
 
     public class UmAuthenticator : IUmAuthenticator
     {
-        private readonly IRepository<User> _repository;
-        private readonly IHashProvider _hashProvider;
+        private readonly IUserRepository _repository;
 
-        public UmAuthenticator(IRepository<User> repository, IHashProvider hashProvider)
+        public UmAuthenticator(IUserRepository repository)
         {
             _repository = repository;
-            _hashProvider = hashProvider;
         }
 
         public IUserIdentity GetUserIdentity(string token)
@@ -36,14 +32,14 @@ namespace UserManagement.Api.Helpers.Security
 
         public IUserIdentity GetUserIdentity(string username, string password)
         {
-            var user = _repository.FirstOrDefault(x => (x.UserName + "").Trim().ToLower() == (username + "").Trim().ToLower());
+            var user = _repository.GetByUserName(username);
             if (user == null)
             {
                 this.Error(() => "User not found: {0}".FormatWith(username));
                 return null;                
             }
 
-            var isValid = _hashProvider.VerifyHashString(password, user.Password, user.Salt);
+            var isValid = user.ValidatePassword(password);
 
             return isValid
                 ? new UserIdentity(user.Id, user.UserName, user.Roles != null ? user.Roles.ToList().Select(x => x.Value).ToArray() : Enumerable.Empty<string>().ToArray())

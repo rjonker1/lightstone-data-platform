@@ -82,6 +82,7 @@
     <Compile Include="PagedCollectionDto.cs" />
     <Compile Include="PlatformStatusDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResetPasswordDto.cs" />
     <Compile Include="UserAliasDto.cs" />
     <Compile Include="UserDto.cs" />
     <Compile Include="ValueEntityDto.cs" />

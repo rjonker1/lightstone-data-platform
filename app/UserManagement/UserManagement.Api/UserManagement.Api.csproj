@@ -595,6 +595,7 @@
     <Compile Include="Helpers\AutoMapper\Converters\StringToPackageConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Contracts\ContractMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataTables\DataTablesMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Email\EmailMessageMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Messages\MessageMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\RequestInfo\RequestInfoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Users\UserAliasMap.cs" />
@@ -758,6 +759,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UserManagement.Api.Routes\UserManagement.Api.Routes.csproj">
+      <Project>{3AF78E96-47C3-48E9-AD8E-BFF49D6B3F50}</Project>
+      <Name>UserManagement.Api.Routes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserManagement.Domain.Core\UserManagement.Domain.Core.csproj">
       <Project>{4ca5036f-e26d-4345-ab68-d670e948f50f}</Project>
       <Name>UserManagement.Domain.Core</Name>

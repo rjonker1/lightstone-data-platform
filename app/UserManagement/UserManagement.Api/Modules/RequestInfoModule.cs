@@ -13,7 +13,7 @@ namespace UserManagement.Api.Modules
             Get["/RequestInfo/{username}"] = _ =>
             {
                 //var user = userRepository.Get(Context.CurrentUser.UserName);
-                var user = userRepository.Get(_.username);
+                var user = userRepository.GetByUserName(_.username);
                 return user == null ? null : Mapper.Map<User, RequestInfoDto>(user);
             };
         }

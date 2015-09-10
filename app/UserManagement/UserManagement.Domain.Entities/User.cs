@@ -18,6 +18,7 @@ namespace UserManagement.Domain.Entities
         public virtual string UserName { get; protected internal set; }
         public virtual string Password { get; protected internal set; }
         public virtual string Salt { get; protected internal set; }
+        public virtual Guid ResetPasswordToken { get; protected internal set; }
         public virtual ActivationStatusType ActivationStatusType { get; protected internal set; }
         public virtual bool? IsActive { get; set; }
         public virtual bool IsLocked { get; set; }
@@ -25,18 +26,22 @@ namespace UserManagement.Domain.Entities
         public virtual UserType UserType { get; protected internal set; }
         public virtual ISet<Role> Roles { get; protected internal set; }
         public virtual ISet<CustomerUser> CustomerUsers { get; protected internal set; }
+
         [DoNotMap]
         public virtual IEnumerable<Customer> Customers
         {
             get
             {
-                return CustomerUsers != null ? CustomerUsers.Where(x => x.Customer != null).Select(x => x.Customer).ToList() : Enumerable.Empty<Customer>();
+                return CustomerUsers != null
+                    ? CustomerUsers.Where(x => x.Customer != null).Select(x => x.Customer).ToList()
+                    : Enumerable.Empty<Customer>();
             }
             set
             {
                 CustomerUsers = new HashSet<CustomerUser>(value.Select(x => new CustomerUser(x, this, false)).ToList());
             }
         }
+
         [DoNotMap]
         public virtual IEnumerable<Client> Clients
         {
@@ -44,7 +49,8 @@ namespace UserManagement.Domain.Entities
             {
                 return Customers.SelectMany(x => x.Clients);
             }
-        } 
+        }
+
         public virtual ISet<ClientUserAlias> ClientUserAliases { get; protected internal set; }
 
         [DoNotMap]
@@ -69,7 +75,8 @@ namespace UserManagement.Domain.Entities
 
         public User() { }
 
-        public User(string firstName, string lastName, string idNumber, string contactNumber, string userName, string password, 
+        public User(string firstName, string lastName, string idNumber, string contactNumber, string userName,
+            string password,
             bool? isActive, UserType userType, HashSet<Role> roles, Guid id = new Guid())
             : base(id)
         {
@@ -84,13 +91,24 @@ namespace UserManagement.Domain.Entities
             Roles = roles;
         }
 
-        public virtual void HashPassword()
+        public virtual void HashPassword(string password)
         {
             string hash;
             string salt;
-            new SaltedHash().GetHashAndSaltString(Password, out hash, out salt);
+            new SaltedHash().GetHashAndSaltString(password, out hash, out salt);
             Password = hash;
             Salt = salt;
+        }
+
+        public virtual bool ValidatePassword(string password)
+        {
+            return new SaltedHash().VerifyHashString(password, Password, Salt);
+        }
+
+        public virtual Guid AssignResetPasswordToken()
+        {
+            ResetPasswordToken = Guid.NewGuid();
+            return ResetPasswordToken;
         }
     }
 }

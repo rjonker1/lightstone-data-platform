@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
@@ -11,9 +13,11 @@ using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
+using UserManagement.Api.Routes;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
+using UserManagement.Domain.Entities.Commands.Email;
 using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Repositories;
@@ -113,7 +117,7 @@ namespace UserManagement.Api.Modules
                     //dto.ClientUsers = clientUsersDto;
 
                     var entity = Mapper.Map(dto, userRepository.Get(dto.Id) ?? new User());
-                    entity.HashPassword();
+                    entity.HashPassword(dto.Password);
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
@@ -145,7 +149,7 @@ namespace UserManagement.Api.Modules
                     //var clientUsersDto = this.Bind<List<ClientUserDto>>();
                     //dto.ClientUsers = clientUsersDto;
                     var entity = Mapper.Map(dto, userRepository.Get(dto.Id));
-                    if (dto.ResetPassword != null) entity.HashPassword();
+                    if (dto.ResetPassword != null) entity.HashPassword(dto.Password);
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -196,6 +200,31 @@ namespace UserManagement.Api.Modules
                 bus.Publish(new SoftDeleteEntity(entity));
 
                 return Response.AsJson("User has been soft deleted");
+            };
+
+            Put[UserManagementApiRoute.User.RequestResetPassword] = _ =>
+            {
+                var username = (string)(_.username + "");
+                var entity = userRepository.GetByUserName(username);
+                if (entity == null) throw new LightstoneAutoException("Could not find username {0}".FormatWith(username));
+                var token = entity.AssignResetPasswordToken();
+                var link = Context.Request.Url.ToString().Replace(username, token + "");
+
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+                bus.Publish(new EmailMessage(new[] { entity.UserName }, "Password reset", link));
+
+                return Response.AsJson("Password reset mail sent");
+            };
+
+            Put[UserManagementApiRoute.User.ResetPassword] = _ =>
+            {
+                var model = this.Bind<ResetPasswordDto>();
+                var token = (Guid)_.token;
+                var user = userRepository.GetByResetToken(token);
+
+                user.HashPassword(model.Password);
+
+                return Response.AsJson("Password changed");
             };
         }
     }
