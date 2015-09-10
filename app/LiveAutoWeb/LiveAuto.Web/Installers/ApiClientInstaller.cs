@@ -3,9 +3,9 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Shared.BuildingBlocks.Api.ApiClients;
 
-namespace PackageBuilder.Api.Installers
+namespace LiveAuto.Web.Installers
 {
-    public class ApiInstaller : IWindsorInstaller
+    public class ApiClientInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {

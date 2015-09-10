@@ -915,5 +915,31 @@
          <dependency id="NEventStore" version="5.1.0" />
       </dependencies>
     </nuget>
+
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.LiveAuto.Api.Routes</name>
+      <folder>app/LiveAutoWeb/LiveAuto.Api.Routes</folder>
+      <author>CustomApp</author>
+      <description>LiveAuto.Api.Routes</description>
+      <includes>
+        <include pattern="*.dll" to="lib\net45" />
+        <include pattern="*.pdb" to="lib\net45" />
+      </includes>
+      <dependencies>
+      </dependencies>
+    </nuget>
+
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.UserManagement.Api.Routes</name>
+      <folder>app/UserManagement/UserManagement.Api.Routes</folder>
+      <author>CustomApp</author>
+      <description>UserManagement.Api.Routes</description>
+      <includes>
+        <include pattern="*.dll" to="lib\net45" />
+        <include pattern="*.pdb" to="lib\net45" />
+      </includes>
+      <dependencies>
+      </dependencies>
+    </nuget>
 	</nugets>
 </build>
