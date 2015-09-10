@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
@@ -9,6 +11,13 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
     {
         public void CreateMaps()
         {
+            // NB: Work around
+            // Bug: Would map multiple destination items of the 1st item in the source collection
+            // Eg: Source containing 2 data providers Ivid & LightstoneAuto, would map and return 2 destination items of Ivid instead of Ivid & LightstoneAuto
+            Mapper.CreateMap<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>()
+                .ConvertUsing(x => x.Select(Mapper.Map<IDataProvider, ResponseDataProviderDto>));
+            // End of work around
+
             Mapper.CreateMap<IDataProvider, ResponseDataProviderDto>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(x => x.Name.ToString()));
 
