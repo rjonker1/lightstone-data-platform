@@ -183,6 +183,7 @@
     <Compile Include="Domain\Entities\Transaction.cs" />
     <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\IReportBuilder.cs" />
     <Compile Include="Domain\Helpers\BillingRunHelpers\ReportBuilder.cs" />
     <Compile Include="Domain\Helpers\BillingRunHelpers\IPivotBilling.cs" />
     <Compile Include="Domain\Helpers\BillingRunHelpers\IPublishReportQueue.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Installers\NotificationInstaller.cs" />
     <Compile Include="Installers\PivotInstaller.cs" />
     <Compile Include="Installers\PublishReportQueueInstaller.cs" />
+    <Compile Include="Installers\ReportBuilderInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Repository\CacheProvider.cs" />

@@ -28,6 +28,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
             {
                 _pivotStageBilling.Pivot();
 
+                //TODO: Move logic to scheduler
                 if (DateTime.Now.Day == 26)
                 {
                     var mailMessage = new MailMessage
