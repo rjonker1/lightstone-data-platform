@@ -219,7 +219,9 @@
     <Compile Include="Helpers\AutoMapper\Maps\UserMetaMaps.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Helpers\Schedules\CacheSchedule.cs" />
+    <Compile Include="Helpers\Schedules\EmailSchedule.cs" />
     <Compile Include="Helpers\Schedules\MessageSchedule.cs" />
+    <Compile Include="Helpers\Schedules\SimpleMailMessage.cs" />
     <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\PrimaryKeyConvention.cs" />

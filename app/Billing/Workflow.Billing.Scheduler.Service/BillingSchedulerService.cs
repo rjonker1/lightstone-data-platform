@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Text;
 using Common.Logging;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using Hangfire;
@@ -14,7 +15,9 @@ namespace Workflow.Billing.Scheduler.Service
 {
     public class BillingSchedulerService : IBillingSchedulerService
     {
+        //private ISendNotifications _emailNotifications = new EmailNotification();
         private readonly ILog _log = LogManager.GetLogger<BillingSchedulerService>();
+
         Url url = ConfigurationManager.AppSettings["owinUrl"];
 
         // Required for proper Job server instantiation and disposal
@@ -69,7 +72,7 @@ namespace Workflow.Billing.Scheduler.Service
                 }
             }
 
-            //RecurringJob.AddOrUpdate(() => Console.WriteLine("Hangfire Responding"), Cron.Minutely);
+            RecurringJob.AddOrUpdate<EmailSchedule>("Monthly StageBilling Notification", x => x.SendStageBillingNotification(), "0 8 26 * *", TimeZoneInfo.Local);
 
             Console.WriteLine("\r");
             Console.WriteLine("Running on {0}", url);
