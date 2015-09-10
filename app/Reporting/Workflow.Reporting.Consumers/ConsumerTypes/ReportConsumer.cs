@@ -16,11 +16,11 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
     {
         private readonly ReportingService _reportingService = new ReportingService(ConfigurationManager.ConnectionStrings["workflow/reporting/jsreport"].ConnectionString);
 
-        private readonly ISendNotifications<ReportDto> _emailPdfNotifications;
+        private readonly ISendNotificationsWithAttachment<ReportDto> _emailPdfNotificationsWithAttachment;
 
-        public ReportConsumer(ISendNotifications<ReportDto> emailPdfNotifications)
+        public ReportConsumer(ISendNotificationsWithAttachment<ReportDto> emailPdfNotificationsWithAttachment)
         {
-            _emailPdfNotifications = emailPdfNotifications;
+            _emailPdfNotificationsWithAttachment = emailPdfNotificationsWithAttachment;
         }
 
         public async Task Consume(IMessage<ReportMessage> message)
@@ -38,7 +38,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                         CreateFile(dto, path, dto.Data.Customer.Name + " - Invoice.pdf");
 
                         //Send Email
-                        _emailPdfNotifications.Send(dto);
+                        _emailPdfNotificationsWithAttachment.Send(dto);
                     }
 
                     if (message.Body.ReportType.Equals("pastel")) CreateFile(dto, path, "Pastel.csv");

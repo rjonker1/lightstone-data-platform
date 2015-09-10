@@ -43,8 +43,6 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
                     mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to"].ToLower());
                     //mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to/secondary"].ToLower());
-                    //mailMessage.Attachments.Add(new Attachment(report.Content,
-                    //    "" + dto.Data.Customer.Name + " - Invoice.pdf"));
 
                     _emailNotification.Send(mailMessage);
                 }
