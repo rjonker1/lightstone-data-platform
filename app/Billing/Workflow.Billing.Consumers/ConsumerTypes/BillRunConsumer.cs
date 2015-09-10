@@ -42,7 +42,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     };
 
                     mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to"].ToLower());
-                    //mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to/secondary"].ToLower());
+                    mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to/secondary"].ToLower());
 
                     _emailNotification.Send(mailMessage);
                 }
