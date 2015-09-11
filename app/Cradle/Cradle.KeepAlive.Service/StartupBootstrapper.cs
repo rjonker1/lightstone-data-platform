@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin;
+﻿using System.Configuration;
+using Hangfire;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(Cradle.KeepAlive.Service.StartupBootstrapper))]
@@ -9,6 +11,10 @@ namespace Cradle.KeepAlive.Service
     {
         public void Configuration(IAppBuilder app)
         {
+            GlobalConfiguration.Configuration
+            .UseSqlServerStorage(ConfigurationManager.ConnectionStrings["billingScheduler"].ConnectionString);
+
+            app.UseHangfireDashboard("/hangfire");
             app.UseNancy();
         }
     }
