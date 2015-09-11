@@ -10,8 +10,10 @@ namespace Shared.BuildingBlocks.Api.ApiClients
     {
         string Get(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers);
         string Post(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers);
+        string Put(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers);
         T Get<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers) where T : new();
         T Post<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers) where T : new();
+        T Put<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient
@@ -28,6 +30,8 @@ namespace Shared.BuildingBlocks.Api.ApiClients
             _client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
         }
 
+        
+
         public T Get<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
             var request = RestRequest(token, resource, Method.GET, DataFormat.Json, parameters, null, headers);
@@ -42,6 +46,14 @@ namespace Shared.BuildingBlocks.Api.ApiClients
             return _client.Execute<T>(request).Data;
         }
 
+        public T Put<T>(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null,
+            params KeyValuePair<string, string>[] headers) where T : new()
+        {
+            var request = RestRequest(token, resource, Method.PUT, DataFormat.Json, parameters, body, headers);
+
+            return _client.Execute<T>(request).Data;
+        }
+
         public string Get(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, params KeyValuePair<string, string>[] headers)
         {
             var request = RestRequest(token, resource, Method.GET, DataFormat.Json, parameters, null, headers);
@@ -51,6 +63,13 @@ namespace Shared.BuildingBlocks.Api.ApiClients
         public string Post(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null, params KeyValuePair<string, string>[] headers)
         {
             var request = RestRequest(token, resource, Method.POST, DataFormat.Json, parameters, body, headers);
+            return _client.Execute(request).Content;
+        }
+
+        public string Put(string token, string resource = "", IEnumerable<KeyValuePair<string, string>> parameters = null, object body = null,
+            params KeyValuePair<string, string>[] headers)
+        {
+            var request = RestRequest(token, resource, Method.PUT, DataFormat.Json, parameters, body, headers);
             return _client.Execute(request).Content;
         }
 
