@@ -1,10 +1,22 @@
-﻿using Nancy.Bootstrappers.Windsor;
+﻿using Castle.Windsor;
+using LiveAuto.Web.Installers;
+using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
 
 namespace LiveAuto.Web
 {
     public class Bootstrapper : WindsorNancyBootstrapper
     {
+        protected override void ConfigureApplicationContainer(IWindsorContainer container)
+        {
+            // Perform registations that should have an application lifetime
+            base.ConfigureApplicationContainer(container);
+
+            container.Install(new ApiClientInstaller());
+
+            //Drop create
+            //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
+        }
         protected override void ConfigureConventions(NancyConventions nancyConventions)
         {
             base.ConfigureConventions(nancyConventions);

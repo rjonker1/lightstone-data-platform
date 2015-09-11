@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
-using PackageBuilder.Core.Entities;
 
 namespace PackageBuilder.Domain.Dtos
 {

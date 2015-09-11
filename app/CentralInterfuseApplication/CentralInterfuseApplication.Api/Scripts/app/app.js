@@ -14,6 +14,7 @@
             //context.load('/logout', { dataType: 'html', cache: false }).swap();
         });
         this.post('/login', function (context) {
+            $.removeCookie('token', { domain: 'lightstone.co.za' });
             $(context.target).ajaxSubmit({
                 success: function (data) {
                     $.cookie('token', data, { domain: 'lightstone.co.za' });

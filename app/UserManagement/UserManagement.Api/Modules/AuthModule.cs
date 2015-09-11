@@ -1,17 +1,26 @@
-﻿using System.Linq;
+﻿using System;
+using System.Configuration;
+using System.Linq;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using LiveAuto.Api.Routes;
+using MemBus;
 using Nancy;
 using Nancy.Authentication.Token;
+using Nancy.ModelBinding;
 using UserManagement.Api.Helpers.Security;
-using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Entities;
+using UserManagement.Api.Routes;
+using UserManagement.Domain.Dtos;
+using UserManagement.Domain.Entities.Commands.Email;
+using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Enums;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
     public class AuthModule : NancyModule
     {
-        public AuthModule(IUmAuthenticator authenticator, IRepository<User> users, IRepository<Role> roles, ITokenizer tokenizer)
+        public AuthModule(IUmAuthenticator authenticator, IUserRepository userRepository, ITokenizer tokenizer, IBus bus)
         {
             //Post["/authenticate"] = parameters =>
             //{
@@ -38,7 +47,7 @@ namespace UserManagement.Api.Modules
 
                 if (userIdentity != null)
                 {
-                    var user = users.FirstOrDefault(x => x.UserName == userIdentity.UserName);
+                    var user = userRepository.GetByUserName(userIdentity.UserName);
                     if (user != null)
                     {
                         var userType = user.UserType;
@@ -65,7 +74,7 @@ namespace UserManagement.Api.Modules
 
                 if (userIdentity != null)
                 {
-                    var user = users.FirstOrDefault(x => x.UserName == userIdentity.UserName);
+                    var user = userRepository.GetByUserName(userIdentity.UserName);
                     if (user != null)
                     {
                         var userType = user.UserType;
@@ -80,6 +89,31 @@ namespace UserManagement.Api.Modules
                 return userIdentity == null
                     ? HttpStatusCode.Unauthorized
                     : Response.AsText(tokenizer.Tokenize(userIdentity, Context));
+            };
+
+            Put[UserManagementApiRoute.User.RequestResetPassword] = _ =>
+            {
+                var username = (string)(_.username + "");
+                var entity = userRepository.GetByUserName(username);
+                if (entity == null) throw new LightstoneAutoException("Could not find username {0}".FormatWith(username));
+                var token = entity.AssignResetPasswordToken();
+                var url = ConfigurationManager.AppSettings["LiveAutoBaseUrl"] + LiveAutoApiRoute.Authorization.ChangePassword + "/" + token;
+
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
+                bus.Publish(new EmailMessage(new[] { entity.UserName }, "Password reset", url));
+
+                return Response.AsJson("Password reset mail sent");
+            };
+
+            Put[UserManagementApiRoute.User.ResetPassword] = _ =>
+            {
+                var model = this.Bind<ResetPasswordDto>();
+                var token = (Guid)_.token;
+                var user = userRepository.GetByResetToken(token);
+
+                user.HashPassword(model.Password);
+
+                return Response.AsText("Password changed");
             };
         }
     }

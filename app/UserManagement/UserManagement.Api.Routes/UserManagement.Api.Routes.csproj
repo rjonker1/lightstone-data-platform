@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UserManagement.Api.Routes</RootNamespace>
-    <AssemblyName>UserManagement.Api.Routes</AssemblyName>
+    <AssemblyName>Lightstone.Dataplatform.UserManagement.Api.Routes</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

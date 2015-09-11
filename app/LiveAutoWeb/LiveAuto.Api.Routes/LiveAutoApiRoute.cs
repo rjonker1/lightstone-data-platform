@@ -5,12 +5,19 @@
         public struct Authorization
         {
             /// <summary>
-            /// Verb: PUT
-            /// Purpose: Used to generate and email the user the reset password link
-            /// Parameters: username
-            /// Route: /Users/ResetPassword/{username}
+            /// Verb: GET
+            /// Purpose: Used to render change password page
+            /// Parameters: reset password token
+            /// Route: /Authorizations/ChangePassword/{token:guid}
             /// </summary>
-            public const string ChangePassword = "/Authorizations/ChangePassword";
+            public const string GetChangePassword = "/Authorizations/ChangePassword/{token:guid}";
+            /// <summary>
+            /// Verb: PUT
+            /// Purpose: Used to change password
+            /// Parameters: reset password token, new password
+            /// Route: /Authorizations/ChangePassword
+            /// </summary>
+            public const string PutChangePassword = "/Authorizations/ChangePassword";
         }
     }
 }

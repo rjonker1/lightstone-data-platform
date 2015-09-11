@@ -45,8 +45,6 @@
     
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
-        $.removeCookie('token');
-        //document.domain = "lightstone.com";
         $(document).ajaxStart(function () {
             preloader.active(true);
         });
