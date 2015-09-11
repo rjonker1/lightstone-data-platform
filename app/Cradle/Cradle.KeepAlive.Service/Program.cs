@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
+using Topshelf;
 
 namespace Cradle.KeepAlive.Service
 {
@@ -7,14 +8,23 @@ namespace Cradle.KeepAlive.Service
     {
         static void Main(string[] args)
         {
-            var url = "http://+:8080";
-
-            using (WebApp.Start<StartupBootstrapper>(url))
+            HostFactory.Run(x =>
             {
-                Console.WriteLine("Running on {0}", url);
-                Console.WriteLine("Press enter to exit");
-                Console.ReadLine();
-            }
+                x.RunAsPrompt();
+
+                x.Service<IKeepAliveService>(s =>
+                {
+                    s.ConstructUsing(name => new KeepAliveService());
+                    s.WhenStarted(tc => tc.Start());
+                    s.WhenStopped(tc => tc.Stop());
+                });
+
+                //x.RunAsPrompt();
+
+                //x.SetDescription(appSettings.Service.Description);
+                //x.SetDisplayName(appSettings.Service.DisplayName);
+                //x.SetServiceName(appSettings.Service.Name);
+            });
         }
     }
 }
