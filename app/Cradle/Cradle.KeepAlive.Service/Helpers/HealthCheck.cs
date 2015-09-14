@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Configuration;
+using Cradle.KeepAlive.Service.Helpers.Notifications;
 using RestSharp;
 
 namespace Cradle.KeepAlive.Service.Helpers
@@ -8,6 +9,12 @@ namespace Cradle.KeepAlive.Service.Helpers
     public class HealthCheck
     {
         private readonly CheckEndpoint _checkEndpoint = new CheckEndpoint();
+        private readonly ISendNotifications _emailNotifications;
+
+        public HealthCheck(ISendNotifications emailNotifications)
+        {
+            _emailNotifications = emailNotifications;
+        }
 
         public void PingDataPlatform()
         {
