@@ -283,6 +283,7 @@
     <Compile Include="Modules\MailModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\ApiModule.cs" />
+    <Compile Include="Modules\PingModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\integrations\ftp\" />

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Owin.Hosting;
+﻿using Shared.Configuration;
 using Topshelf;
 
 namespace Cradle.KeepAlive.Service
@@ -8,6 +7,8 @@ namespace Cradle.KeepAlive.Service
     {
         static void Main(string[] args)
         {
+            var appSettings = new AppSettings();
+
             HostFactory.Run(x =>
             {
                 x.RunAsPrompt();
@@ -19,11 +20,11 @@ namespace Cradle.KeepAlive.Service
                     s.WhenStopped(tc => tc.Stop());
                 });
 
-                //x.RunAsPrompt();
+                x.RunAsPrompt();
 
-                //x.SetDescription(appSettings.Service.Description);
-                //x.SetDisplayName(appSettings.Service.DisplayName);
-                //x.SetServiceName(appSettings.Service.Name);
+                x.SetDescription(appSettings.Service.Description);
+                x.SetDisplayName(appSettings.Service.DisplayName);
+                x.SetServiceName(appSettings.Service.Name);
             });
         }
     }

@@ -140,6 +140,7 @@
     <Compile Include="Modules\ActionModule.cs" />
     <Compile Include="Modules\AuthModule.cs" />
     <Compile Include="Modules\MetaModule.cs" />
+    <Compile Include="Modules\PingModule.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

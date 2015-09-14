@@ -656,6 +656,7 @@
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\IntegrationModule.cs" />
     <Compile Include="Modules\NamedEntityModule.cs" />
+    <Compile Include="Modules\PingModule.cs" />
     <Compile Include="Modules\RequestInfoModule.cs" />
     <Compile Include="Modules\UserAliasModule.cs" />
     <Compile Include="Modules\ValueEntityModule.cs" />

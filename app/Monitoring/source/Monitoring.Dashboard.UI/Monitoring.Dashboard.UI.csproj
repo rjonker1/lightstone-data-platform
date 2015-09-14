@@ -314,6 +314,7 @@
     <Compile Include="Modules\DataProviderCachingModule.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\PingModule.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

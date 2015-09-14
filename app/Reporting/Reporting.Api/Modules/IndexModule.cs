@@ -1,9 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Configuration;
 using System.IO;
 using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Mail;
 using System.Text;
 using jsreport.Client;
@@ -14,7 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Workflow.Reporting.Dtos;
 
-namespace Reporting.Api
+namespace Reporting.Api.Modules
 {
     public class IndexModule : NancyModule
     {

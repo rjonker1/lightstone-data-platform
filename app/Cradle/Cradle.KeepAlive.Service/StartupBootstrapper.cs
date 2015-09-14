@@ -12,7 +12,7 @@ namespace Cradle.KeepAlive.Service
         public void Configuration(IAppBuilder app)
         {
             GlobalConfiguration.Configuration
-            .UseSqlServerStorage(ConfigurationManager.ConnectionStrings["billingScheduler"].ConnectionString);
+            .UseSqlServerStorage(ConfigurationManager.ConnectionStrings["keepAliveScheduler"].ConnectionString);
 
             app.UseHangfireDashboard("/hangfire");
             app.UseNancy();

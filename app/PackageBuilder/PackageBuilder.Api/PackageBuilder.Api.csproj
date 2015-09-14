@@ -360,6 +360,7 @@
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\MetaModule.cs" />
+    <Compile Include="Modules\PingModule.cs" />
     <Compile Include="Modules\ReplayCommandModule.cs" />
     <Compile Include="Modules\RequestInfoModule.cs" />
     <Compile Include="Modules\StateModule.cs" />
