@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -51,7 +52,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
     public class RequestContext : IHaveRequestContext
     {
-        public RequestContext(Guid requestId, Lace.Domain.Core.Requests.DeviceTypes fromDevice, string fromIpAddress, string osVersion, Lace.Domain.Core.Requests.SystemType system)
+        public RequestContext(Guid requestId, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
         {
             RequestId = requestId;
             FromDeviceType = fromDevice;
@@ -60,7 +61,7 @@ namespace PackageBuilder.Domain.Entities.Requests
             System = system;
         }
 
-        public Lace.Domain.Core.Requests.DeviceTypes FromDeviceType { get; private set; }
+        public DeviceTypes FromDeviceType { get; private set; }
 
         public string FromIpAddress { get; private set; }
 
@@ -68,7 +69,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public Guid RequestId { get; private set; }
 
-        public Lace.Domain.Core.Requests.SystemType System { get; private set; }
+        public SystemType System { get; private set; }
     }
 
     public class Contract : IHaveContract

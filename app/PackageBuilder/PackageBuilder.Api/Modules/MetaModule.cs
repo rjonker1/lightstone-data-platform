@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Dtos;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Metadata.Entrypoint;
@@ -37,10 +38,10 @@ namespace PackageBuilder.Api.Modules
                 }
 
                 const long contractVersion = (long)1.0;
-                const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
+                const DeviceTypes fromDevice = DeviceTypes.ApiClient;
                 const string fromIpAddress = "127.0.0.1";
                 const string osVersion = "";
-                const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
+                const SystemType systemType = SystemType.Api;
 
                 var requestId = Guid.NewGuid();
                 var contractId = new Guid();

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using AutoMapper;
 using CommonDomain.Core;
 using DataPlatform.Shared.Dtos;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests;

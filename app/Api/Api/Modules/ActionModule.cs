@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
 using Api.Domain.Infrastructure.Dto;
+using Api.Extensions;
 using Api.Helpers.Validators;
 using Castle.Core.Internal;
 using DataPlatform.Shared.Dtos;
@@ -50,12 +51,9 @@ namespace Api.Modules
                     this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
-                    apiRequest.RequestFields.ForEach(f =>
-                    {
-                        var valid = ValidationManager.Validate(int.Parse(f.Type), f.Value);
-                        if (!valid.IsValid)
-                            throw new LightstoneAutoException(valid.Error);
-                    });
+                    apiRequest.Validate();
+                    apiRequest.Metadata("127.0.0.1");
+                    apiRequest.ContractVersion((long)1.0); //TODO: Set here or in PB?
 
                     this.Info(() => "Api to PackageBuilder Execute Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
                     var responses = packageBuilderApi.Post(token, "/Packages/Execute", null, apiRequest);
