@@ -7,24 +7,38 @@ namespace DataPlatform.Shared.Dtos
     [DataContract]
     public class ApiRequestDto
     {
+        public ApiRequestDto()
+        {
+            RequestId = RequestId == Guid.Empty ? Guid.NewGuid() : RequestId;
+        }
+
         [DataMember]
         public Guid CustomerClientId { get; private set; }
+
         [DataMember]
         public Guid UserId { get; private set; }
+
         [DataMember]
         public Guid ContractId { get; private set; }
+
         [DataMember]
         public Guid PackageId { get; private set; }
+
         [DataMember]
         public Guid RequestId { get; private set; }
+
         [DataMember]
         public Guid SourceId { get; private set; }
+
         [DataMember]
         public string SearchTerm { get; private set; }
+
         [DataMember]
         public string Username { get; set; }
+
         [DataMember]
         public string SourceIPAddress { get; set; }
+
         [DataMember]
         public IEnumerable<RequestFieldDto> RequestFields { get; private set; }
 
