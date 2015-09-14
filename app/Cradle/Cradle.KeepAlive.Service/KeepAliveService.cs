@@ -1,62 +1,37 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 using Cradle.KeepAlive.Service.Helpers;
 using Hangfire;
 using Microsoft.Owin.Hosting;
 using Nancy;
-using RestSharp;
-using HttpStatusCode = System.Net.HttpStatusCode;
 
 namespace Cradle.KeepAlive.Service
 {
     public class KeepAliveService : IKeepAliveService
     {
         private BackgroundJobServer _server;
-        private CheckEndpoint _checkEndpoint = new CheckEndpoint();
-        private readonly Url _url = "http://+8081";
+        Url url = ConfigurationManager.AppSettings["owinUrl"];
 
         public void Start()
         {
-            WebApp.Start<StartupBootstrapper>(_url);
+            WebApp.Start<StartupBootstrapper>(url);
 
             _server = new BackgroundJobServer();
 
-            var token = new Login().GetToken();
-            var statusCheckList = new List<HttpStatusCode>();
+            RecurringJob.AddOrUpdate<HealthCheck>("DataPlatform HealthCheck", x => x.PingDataPlatform(), ConfigurationManager.AppSettings["keepAliveCron"], TimeZoneInfo.Local);
 
-            if (token != null)
-            {
-                // Check CIA
-                var statusCIA = _checkEndpoint.Invoke(token, ConfigurationManager.AppSettings["endpoint/url/cia"], "ping", Method.GET);
-                // Check UserManagement
-                var statusUM = _checkEndpoint.Invoke(token, ConfigurationManager.AppSettings["endpoint/url/usermanagement"], "ping", Method.GET);
-                // Check PackageBuilder
-                var statusPB = _checkEndpoint.Invoke(token, ConfigurationManager.AppSettings["endpoint/url/packagebuilder"], "ping", Method.GET);
-                // Check Billing
-                var statusBill = _checkEndpoint.Invoke(token, ConfigurationManager.AppSettings["endpoint/url/billing"], "ping", Method.GET);
-                // Check Reporting
-                var statusReport = _checkEndpoint.Invoke(token, ConfigurationManager.AppSettings["endpoint/url/reporting"], "ping", Method.GET);
-                // Check Monitoring
-                var statusMonitor = _checkEndpoint.Invoke(token, ConfigurationManager.AppSettings["endpoint/url/monitoring"], "ping", Method.GET);
-                // Check LIM
-                var statusLIM = _checkEndpoint.Invoke(token, ConfigurationManager.AppSettings["endpoint/url/lim"], "ping", Method.GET);
-
-                statusCheckList.AddRange(new List<HttpStatusCode>
-                {
-                    statusCIA,
-                    statusUM,
-                    statusPB,
-                    statusBill, 
-                    statusReport, 
-                    statusMonitor,
-                    statusLIM
-                });
-            }
-
-            Console.WriteLine("Running on {0}", _url);
+            Console.WriteLine("\r");
+            Console.WriteLine("Running on {0}", url);
+            Console.WriteLine("\r\n");
+            Console.WriteLine("*----------------------------------------------------------------------------*");
+            Console.WriteLine("127.0.0.1 " + url + " <-- Required Hosts Entry!");
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine("\r");
             Console.WriteLine("Press Ctrl + c to exit");
-            Console.ReadLine();
         }
 
         public void Stop()

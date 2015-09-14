@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\CheckEndpoint.cs" />
+    <Compile Include="Helpers\HealthCheck.cs" />
     <Compile Include="Helpers\Login.cs" />
     <Compile Include="IKeepAliveService.cs" />
     <Compile Include="KeepAliveService.cs" />
