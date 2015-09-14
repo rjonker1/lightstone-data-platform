@@ -282,6 +282,7 @@
     <Compile Include="Helpers\UserMapper.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\AuthModule.cs" />
+    <Compile Include="Modules\PingModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\TileViewModel.cs" />
   </ItemGroup>

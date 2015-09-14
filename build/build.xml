@@ -242,6 +242,17 @@
       </includes>
     </nuget>
     <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Cradle.KeepAlive.Service</name>
+      <folder>app/Cradle/Cradle.KeepAlive.Service</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Cradle.KeepAlive.Service - Self Hosted</description>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="*" to="content/bin"/>
+        <include pattern="*.config" to="content/bin"/>
+      </includes>
+    </nuget>
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.Workflow.Reporting.Consumer</name>
       <folder>app/Reporting/Workflow.Reporting.Consumer</folder>
       <author>CustomApp</author>

@@ -58,8 +58,8 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Hangfire.Core, Version=1.4.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HangFire.Core.1.4.6\lib\net45\Hangfire.Core.dll</HintPath>
+    <Reference Include="Hangfire.Core, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Hangfire.Core.1.4.1\lib\net45\Hangfire.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Hangfire.SqlServer, Version=1.4.6.0, Culture=neutral, processorArchitecture=MSIL">
