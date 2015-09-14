@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Configuration;
-using Cradle.KeepAlive.Service.Helpers.Notifications;
+using System.Net.Mail;
+using System.Text;
 using RestSharp;
 
 namespace Cradle.KeepAlive.Service.Helpers
@@ -9,12 +10,6 @@ namespace Cradle.KeepAlive.Service.Helpers
     public class HealthCheck
     {
         private readonly CheckEndpoint _checkEndpoint = new CheckEndpoint();
-        private readonly ISendNotifications _emailNotifications;
-
-        public HealthCheck(ISendNotifications emailNotifications)
-        {
-            _emailNotifications = emailNotifications;
-        }
 
         public void PingDataPlatform()
         {
@@ -31,8 +26,27 @@ namespace Cradle.KeepAlive.Service.Helpers
 
             foreach (DictionaryEntry endPointStatus in statusCheckList)
             {
-                Console.WriteLine(endPointStatus.Key + " - " + endPointStatus.Value);
+                if ((int)endPointStatus.Value != 200) SendEmailAlert("API ALERT - " + endPointStatus.Key, 
+                                                                        "API Endpoint: " + endPointStatus.Key + "returned the follow status code: " + endPointStatus.Value);
             }
-        } 
+        }
+
+        private void SendEmailAlert(string subject, string body)
+        {
+            using (var client = new SmtpClient())
+            {
+                var mailMessage = new MailMessage
+                {
+                    From = new MailAddress(ConfigurationManager.AppSettings["report/email/from"].ToLower()),
+                    Subject = "BETA ALERT NOTIFICATION - " + subject,
+                    IsBodyHtml = true,
+                    Body = body,
+                    BodyEncoding = Encoding.UTF8
+                };
+                mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to"].ToLower());
+
+                client.Send(mailMessage);
+            }
+        }
     }
 }
