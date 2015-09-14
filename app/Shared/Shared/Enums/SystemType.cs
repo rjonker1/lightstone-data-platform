@@ -6,7 +6,7 @@ namespace DataPlatform.Shared.Enums
     public enum SystemType
     {
         [EnumMember] Api,
-        [EnumMember] Limm,
+        [EnumMember] Lim,
         [EnumMember] Web
     }
 }

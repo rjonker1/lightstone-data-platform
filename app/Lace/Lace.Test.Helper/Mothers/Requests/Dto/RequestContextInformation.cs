@@ -1,5 +1,5 @@
 ﻿using System;
-using Lace.Domain.Core.Requests;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto

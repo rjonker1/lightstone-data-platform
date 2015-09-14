@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 
 namespace DataPlatform.Shared.Dtos
 {
@@ -9,7 +10,10 @@ namespace DataPlatform.Shared.Dtos
     {
         public ApiRequestDto()
         {
-            RequestId = RequestId == Guid.Empty ? Guid.NewGuid() : RequestId;
+            RequestId = Guid.NewGuid();
+            FromIpAddress = "127.0.0.1";
+            DeviceType = DeviceTypes.ApiClient;
+            SystemType = SystemType.Api;
         }
 
         [DataMember]
@@ -37,7 +41,13 @@ namespace DataPlatform.Shared.Dtos
         public string Username { get; set; }
 
         [DataMember]
-        public string SourceIPAddress { get; set; }
+        public string FromIpAddress { get; private set; }
+        [DataMember]
+        public long ContractVersion { get; private set; }
+        [DataMember]
+        public DeviceTypes DeviceType { get; private set; }
+        [DataMember]
+        public SystemType SystemType { get; private set; }
 
         [DataMember]
         public IEnumerable<RequestFieldDto> RequestFields { get; private set; }
@@ -46,6 +56,18 @@ namespace DataPlatform.Shared.Dtos
         {
             return ContractId != Guid.Empty && SourceId != Guid.Empty && !string.IsNullOrEmpty(SearchTerm) &&
                    !string.IsNullOrEmpty(Username);
+        }
+
+        public void SetContractVersion(long version)
+        {
+            ContractVersion = version;
+        }
+
+        public void SetRequestMetadata(DeviceTypes deviceType, SystemType systemType, string fromIpAddress)
+        {
+            FromIpAddress = fromIpAddress;
+            DeviceType = deviceType;
+            SystemType = systemType;
         }
     }
 }

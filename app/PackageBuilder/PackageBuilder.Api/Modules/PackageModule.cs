@@ -160,9 +160,9 @@ namespace PackageBuilder.Api.Modules
                 const string osVersion = "";
                 const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
 
-                var requestId = Guid.NewGuid();
+               
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
-                    Context.CurrentUser.UserName, requestId, accountNumber, apiRequest.ContractId, contractVersion,
+                    Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, contractVersion,
                     fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice);
 
                 // Filter responses for cleaner api payload
@@ -171,7 +171,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => "Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
-                    filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, requestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
+                    filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
                 this.Info(() => "Package Execute Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
                 return filteredResponse;

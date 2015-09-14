@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+using DataPlatform.Shared.Enums;
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
