@@ -25,6 +25,9 @@
             // always return false to prevent standard browser submit and page navigation
             return false;
         });
+        this.get('/forgotPassword/:username', function (context) {
+            context.load('/forgotPassword/' + context.params.username, { dataType: 'html', cache: false }).swap();
+        });
     }).run('#/');
 
 })(jQuery);

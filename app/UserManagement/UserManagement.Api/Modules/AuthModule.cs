@@ -102,7 +102,7 @@ namespace UserManagement.Api.Modules
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
                 bus.Publish(new EmailMessage(new[] { entity.UserName }, "Password reset", url));
 
-                return Response.AsJson("Password reset mail sent");
+                return Response.AsText("Password reset mail sent");
             };
 
             Put[UserManagementApiRoute.User.ResetPassword] = _ =>
@@ -112,6 +112,7 @@ namespace UserManagement.Api.Modules
                 var user = userRepository.GetByResetToken(token);
 
                 user.HashPassword(model.Password);
+                user.ClearResetPasswordToken();
 
                 return Response.AsText("Password changed");
             };
