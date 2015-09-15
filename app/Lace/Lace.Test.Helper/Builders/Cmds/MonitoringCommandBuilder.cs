@@ -24,7 +24,7 @@ namespace Lace.Test.Helper.Builders.Cmds
         {
             var request = new LicensePlateRequestBuilder().ForIvid();
 
-            var queue = new MonitoirngQueueSender(DataProviderCommandSource.Ivid, _aggregateId);
+            var queue = new MonitoirngQueueSender(DataProviderCommandSource.IVIDVerify_E_WS, _aggregateId);
             queue.InitQueue(MonitoringBusBuilder.ForIvidCommands(_aggregateId))
                 .InitStopWatch()
                 .StartingExecution(new LicensePlateRequestBuilder().ForIvid())
@@ -41,7 +41,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     new {ContextMessage = "Ivid Data Provider Credentials"})
                 .StartCall(
                     HandleRequest.GetHpiStandardQueryRequest(
-                        request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>()), null)
+                        request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS).GetRequest<IAmIvidStandardRequest>()), null)
                 .Error(new {NoRequestReceived = "No response received from Ivid Data Provider"}, null)
                 .EndCall(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp())
                 .Transform(

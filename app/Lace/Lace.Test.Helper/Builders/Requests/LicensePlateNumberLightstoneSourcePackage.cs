@@ -14,7 +14,7 @@ namespace Lace.Test.Helper.Builders.Requests
                 new LicensePlateNumberPackage(
                     new IAmDataProvider[]
                     {
-                        new DataProvider(DataProviderName.LightstoneAuto, 90, 92,
+                        new DataProvider(DataProviderName.LSAutoCarStats_I_DB, 90, 92,
                             LightstoneAutoRequest.WithCarIdAndYear(carid, year))
                     }, Guid.NewGuid());
         }
@@ -28,7 +28,7 @@ namespace Lace.Test.Helper.Builders.Requests
                 new LicensePlateNumberPackage(
                     new IAmDataProvider[]
                     {
-                        new DataProvider(DataProviderName.LightstoneAuto, 90, 92,
+                        new DataProvider(DataProviderName.LSAutoCarStats_I_DB, 90, 92,
                             LightstoneAutoRequest.WithVin(vinNumber))
                     }, Guid.NewGuid());
         }

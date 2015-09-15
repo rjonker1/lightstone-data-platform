@@ -61,7 +61,7 @@ namespace Lace.Test.Helper.Builders.Finance
                 {
                     return new IAmDataProvider[]
                     {
-                        new DataProvider(DataProviderName.BmwFinance, 50, 27,
+                        new DataProvider(DataProviderName.BMWFSTitle_E_DB, 50, 27,
                             BmwFinanceRequest.WithDefault(_vinNumber, _idNumber,_licenseNumber, _accountNumber))
 
                     };

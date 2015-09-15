@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.Lightstone
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneAuto, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoCarStats_I_DB, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -40,8 +40,8 @@ namespace Lace.Domain.DataProviders.Lightstone
             else
             {
 
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoCarStats_I_DB);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoCarStats_I_DB, _dataProvider);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

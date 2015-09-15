@@ -13,28 +13,28 @@ namespace Lace.Test.Helper.Builders.Requests
         {
             return new LicensePlateNumberPackage(new IAmDataProvider[]
             {
-                new DataProvider(DataProviderName.Ivid, 5, 10,
+                new DataProvider(DataProviderName.IVIDVerify_E_WS, 5, 10,
                     new IvidStandardRequest(licensePlate, "Murray", packageName,
                         "murrayw@lightstone.co.za", "Murray", string.Empty)),
-                new DataProvider(DataProviderName.LightstoneAuto, 6, 12, LightstoneAutoRequest.Empty()),
-                new DataProvider(DataProviderName.IvidTitleHolder, 7, 14,
+                new DataProvider(DataProviderName.LSAutoCarStats_I_DB, 6, 12, LightstoneAutoRequest.Empty()),
+                new DataProvider(DataProviderName.IVIDTitle_E_WS, 7, 14,
                     IvidTitleHolderRequest.WithVin(null, "murrayw@lightstone.co.za", "Murray")),
-                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.Empty()),
-                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty())
+                new DataProvider(DataProviderName.LSAutoVINMaster_I_DB, 8, 16, RgtVinRequest.Empty()),
+                new DataProvider(DataProviderName.LSAutoSpecs_I_DB, 9, 18, RgtRequestType.Empty())
             }, Guid.NewGuid());
         }
         public static IHavePackageForRequest LicenseNumberPackage(string licensePlate, string packageName)
         {
             return new LicensePlateNumberPackage(new IAmDataProvider[]
             {
-                new DataProvider(DataProviderName.Ivid, 5, 10,
+                new DataProvider(DataProviderName.IVIDVerify_E_WS, 5, 10,
                     new IvidStandardRequest(licensePlate, "Murray", packageName,
                         "murrayw@lightstone.co.za", "Murray", string.Empty)),
-                new DataProvider(DataProviderName.LightstoneAuto, 6, 12, LightstoneAutoRequest.Empty()),
-                new DataProvider(DataProviderName.IvidTitleHolder, 7, 14,
+                new DataProvider(DataProviderName.LSAutoCarStats_I_DB, 6, 12, LightstoneAutoRequest.Empty()),
+                new DataProvider(DataProviderName.IVIDTitle_E_WS, 7, 14,
                     IvidTitleHolderRequest.WithVin(null, "murrayw@lightstone.co.za", "Murray")),
-                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.Empty()),
-                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty()) 
+                new DataProvider(DataProviderName.LSAutoVINMaster_I_DB, 8, 16, RgtVinRequest.Empty()),
+                new DataProvider(DataProviderName.LSAutoSpecs_I_DB, 9, 18, RgtRequestType.Empty()) 
             }, Guid.NewGuid());
         }
     }
@@ -45,9 +45,9 @@ namespace Lace.Test.Helper.Builders.Requests
         {
             return new LicensePlateNumberPackage(new IAmDataProvider[]
             {
-                new DataProvider(DataProviderName.LightstoneAuto, 6, 12, LightstoneAutoRequest.WithVin(vinNumber)),
-                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.Empty()),
-                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty())
+                new DataProvider(DataProviderName.LSAutoCarStats_I_DB, 6, 12, LightstoneAutoRequest.WithVin(vinNumber)),
+                new DataProvider(DataProviderName.LSAutoVINMaster_I_DB, 8, 16, RgtVinRequest.Empty()),
+                new DataProvider(DataProviderName.LSAutoSpecs_I_DB, 9, 18, RgtRequestType.Empty())
             }, Guid.NewGuid());
         }
 
@@ -55,8 +55,8 @@ namespace Lace.Test.Helper.Builders.Requests
         {
             return new LicensePlateNumberPackage(new IAmDataProvider[]
             {
-                new DataProvider(DataProviderName.RgtVin, 8, 16, RgtVinRequest.WithVin(vinNumber)),
-                new DataProvider(DataProviderName.Rgt, 9, 18, RgtRequestType.Empty())
+                new DataProvider(DataProviderName.LSAutoVINMaster_I_DB, 8, 16, RgtVinRequest.WithVin(vinNumber)),
+                new DataProvider(DataProviderName.LSAutoSpecs_I_DB, 9, 18, RgtRequestType.Empty())
             }, Guid.NewGuid());
         }
     }

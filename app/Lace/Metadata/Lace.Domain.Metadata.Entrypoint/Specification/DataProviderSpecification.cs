@@ -33,18 +33,18 @@ namespace Lace.Domain.Metadata.EntryPoint.Specification
                                                     new LightstoneCompanyDataProvider(request,
                                                         new LightstoneDirectorDataProvider(request, null, null,
                                                             CommandSender.InitCommandSender(bus, requestId,
-                                                                DataProviderCommandSource.LightstoneBusinessDirector)), null,
+                                                                DataProviderCommandSource.LSBusinessDirector_E_WS)), null,
                                                         CommandSender.InitCommandSender(bus, requestId,
-                                                            DataProviderCommandSource.LightstoneBusinessCompany)), null,
-                                                    CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneProperty)),
+                                                            DataProviderCommandSource.LSBusinessCompany_E_WS)), null,
+                                                    CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSPropertySearch_E_WS)),
                                                 null,
-                                                CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.SignioDecryptDriversLicense)),
+                                                CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoDecryptDriverLic_I_WS)),
                                             null,
-                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Rgt)), null,
-                                        CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin)), null,
-                                    CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IvidTitleHolder)), null,
-                                CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneAuto)), null,
-                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Ivid))
+                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoSpecs_I_DB)), null,
+                                        CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoVINMaster_I_DB)), null,
+                                    CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDTitle_E_WS)), null,
+                                CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoCarStats_I_DB)), null,
+                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDVerify_E_WS))
                             .CallSource(response);
 
     }

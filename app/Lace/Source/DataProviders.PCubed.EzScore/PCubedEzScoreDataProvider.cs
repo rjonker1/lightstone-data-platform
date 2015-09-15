@@ -29,15 +29,15 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore
         }
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.PCubedEzScore, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.PCubedEZScore_E_WS, _request);
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedEzScore);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedEzScore, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedEZScore_E_WS);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedEZScore_E_WS, _dataProvider);
 
                 _logCommand.LogBegin(new { _request });
 

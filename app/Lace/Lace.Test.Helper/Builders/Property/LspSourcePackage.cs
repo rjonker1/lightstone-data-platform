@@ -45,7 +45,7 @@ namespace Lace.Test.Helper.Builders.Property
 
         public IAmDataProvider[] DataProviders
         {
-            get { return new IAmDataProvider[] { new DataProvider(DataProviderName.LightstoneProperty, 19, 38, LighstonePropertyRequest.WithDefault(_idNumber,_maxrows,_trackingNumber,_userid)) }; }
+            get { return new IAmDataProvider[] { new DataProvider(DataProviderName.LSPropertySearch_E_WS, 19, 38, LighstonePropertyRequest.WithDefault(_idNumber, _maxrows, _trackingNumber, _userid)) }; }
         }
 
         public string Name

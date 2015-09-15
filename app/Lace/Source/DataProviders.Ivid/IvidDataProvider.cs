@@ -29,7 +29,7 @@ namespace Lace.Domain.DataProviders.Ivid
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.Ivid, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.IVIDVerify_E_WS, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -37,8 +37,8 @@ namespace Lace.Domain.DataProviders.Ivid
             }
             else
             {
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.Ivid, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDVerify_E_WS, _dataProvider);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

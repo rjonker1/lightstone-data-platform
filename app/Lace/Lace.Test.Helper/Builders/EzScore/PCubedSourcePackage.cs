@@ -41,7 +41,7 @@ namespace Lace.Test.Helper.Builders.EzScore
 
             public IAmDataProvider[] DataProviders
             {
-                get { return new IAmDataProvider[] { new DataProvider(DataProviderName.PCubedEzScore, 50, 27, PCubedEzScoreRequest.WithDefault(_emailAddress, _idNumber, _phoneNumber)) }; }
+                get { return new IAmDataProvider[] { new DataProvider(DataProviderName.PCubedEZScore_E_WS, 50, 27, PCubedEzScoreRequest.WithDefault(_emailAddress, _idNumber, _phoneNumber)) }; }
             }
 
             public string Name

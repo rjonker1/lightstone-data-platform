@@ -28,7 +28,7 @@ namespace Lace.Domain.Metadata.DataProviders.Lightstone.Business.Director
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneBusinessDirector, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSBusinessDirector_E_WS, _request);
 
             if (!spec.IsSatisfied)
             {

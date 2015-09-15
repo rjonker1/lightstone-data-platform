@@ -31,7 +31,7 @@ namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneAuto, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoCarStats_I_DB, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -39,8 +39,8 @@ namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto
             }
             else
             {
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoCarStats_I_DB);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoCarStats_I_DB, _dataProvider);
 
                 var consumer = new ConsumeSource(new HandleLightstoneAutoSourceCall(),
                     new CallLightstoneAutoDataProvider(_dataProvider, new FakeCarInfoRepository(), _logCommand));

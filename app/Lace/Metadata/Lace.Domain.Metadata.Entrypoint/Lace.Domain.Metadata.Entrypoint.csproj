@@ -67,7 +67,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1594\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1617\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1227, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1227\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>

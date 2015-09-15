@@ -42,7 +42,7 @@ namespace Lace.Test.Helper.Builders.Business
 
         public IAmDataProvider[] DataProviders
         {
-            get { return new IAmDataProvider[] { new DataProvider(DataProviderName.LightstoneBusinessDirector, 50, 27, LightstoneBusinessDirectorRequest.WithDefault(_firstName,_surname,_idNumber)) }; }
+            get { return new IAmDataProvider[] { new DataProvider(DataProviderName.LSBusinessDirector_E_WS, 50, 27, LightstoneBusinessDirectorRequest.WithDefault(_firstName,_surname,_idNumber)) }; }
         }
 
         public string Name

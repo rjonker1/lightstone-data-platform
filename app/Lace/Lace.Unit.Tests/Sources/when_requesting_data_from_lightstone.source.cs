@@ -39,8 +39,8 @@ namespace Lace.Unit.Tests.Sources
             _response = new Collection<IPointToLaceProvider>();
 
             _dataProvider = _request.GetFromRequest<IPointToLaceRequest>()
-                .Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneAuto);
-            _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneAuto, _dataProvider);
+                .Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoCarStats_I_DB);
+            _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoCarStats_I_DB, _dataProvider);
 
             _callTheSource = new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(), _logCommand);
         }

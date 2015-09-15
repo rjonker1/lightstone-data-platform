@@ -28,7 +28,7 @@ namespace Lace.Domain.Metadata.DataProviders.Rgt
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.Rgt, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoSpecs_I_DB, _request);
 
             if (!spec.IsSatisfied)
             {

@@ -69,7 +69,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForSuccessfulCallIvid()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.IVIDVerify_E_WS);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl", DataProviderAction.Request,
@@ -84,7 +84,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForFailedCallIvid()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.IVIDVerify_E_WS);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl", DataProviderAction.Request,
@@ -98,19 +98,19 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForIvidConfiguration()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.IVIDVerify_E_WS);
             queue.InitQueue(_bus)
                 .Configuration(
                     HandleRequest.GetHpiStandardQueryRequest(
                         new LicensePlateRequestBuilder().ForIvid()
                             .GetFromRequest<IPointToLaceRequest>()
-                            .Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid).GetRequest<IAmIvidStandardRequest>()), null);
+                            .Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS).GetRequest<IAmIvidStandardRequest>()), null);
             return this;
         }
 
         public WorkflowCommandBuilder ForIvidSecurity()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.IVIDVerify_E_WS);
             queue.InitQueue(_bus)
                 .Security(new
                 {
@@ -126,7 +126,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForIvidTransformation()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.IVIDVerify_E_WS);
             queue.InitQueue(_bus)
                 .Transformation(
                     new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
@@ -136,7 +136,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForSuccessfulCallLightstoneAuto()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.LightstoneAuto);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LSAutoCarStats_I_DB);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -154,7 +154,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForFailedCallLightstoneAuto()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.LightstoneAuto);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LSAutoCarStats_I_DB);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -167,7 +167,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForSuccessfulCallRgt()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Rgt);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LSAutoSpecs_I_DB);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -180,7 +180,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForFailedCallRgt()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Rgt);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LSAutoSpecs_I_DB);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -194,7 +194,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForSuccessfulCallRgtVin()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.RgtVin);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LSAutoVINMaster_I_DB);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -208,7 +208,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForFailedCallRgtVin()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.RgtVin);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LSAutoVINMaster_I_DB);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
@@ -238,7 +238,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForSuccessfulCallToIvidTitleHolder()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.IvidTitleHolder);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.IVIDTitle_E_WS);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za:443/ivid/ws/", DataProviderAction.Request,
@@ -253,7 +253,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForFailedCallToIvidTitleHolder()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.IvidTitleHolder);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.IVIDTitle_E_WS);
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za:443/ivid/ws/", DataProviderAction.Request,

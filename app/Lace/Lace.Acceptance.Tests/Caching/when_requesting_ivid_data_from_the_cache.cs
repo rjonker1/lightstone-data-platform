@@ -34,8 +34,8 @@ namespace Lace.Acceptance.Tests.Caching
         public when_requesting_ivid_data_from_the_cache()
         {
             _request = new[] { new LicensePlateNumberIvidOnlyRequest() };
-            _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid);
-            _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.Ivid, _dataProvider);
+            _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS);
+            _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDVerify_E_WS, _dataProvider);
         }
 
         public override void Observe()

@@ -30,7 +30,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneBusinessCompany, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSBusinessCompany_E_WS, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -38,8 +38,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company
             }
             else
             {
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LightstoneBusinessCompany);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LightstoneBusinessCompany, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSBusinessCompany_E_WS);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSBusinessCompany_E_WS, _dataProvider);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

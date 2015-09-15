@@ -14,7 +14,7 @@ namespace Lace.Test.Helper.Builders.Requests
                 new LicensePlateNumberPackage(
                     new IAmDataProvider[]
                     {
-                        new DataProvider(DataProviderName.IvidTitleHolder, 18, 36,
+                        new DataProvider(DataProviderName.IVIDTitle_E_WS, 18, 36,
                             IvidTitleHolderRequest.WithVin(vinNumber, "murrayw@lightstone.co.za", "Murray Woolfson"))
                     },
                     Guid.NewGuid());

@@ -28,7 +28,7 @@ namespace Lace.Domain.Metadata.DataProviders.Ivid
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.Ivid, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.IVIDVerify_E_WS, _request);
 
             if (!spec.IsSatisfied)
             {

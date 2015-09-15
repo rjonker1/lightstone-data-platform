@@ -26,13 +26,13 @@ namespace Lace.Unit.Tests.Workflow
         public when_sending_data_provider_command_bus()
         {
             _command = new SendRequestToDataProviderCommand(Guid.NewGuid(), Guid.NewGuid(),
-                new DataProviderIdentifier((int) DataProviderCommandSource.Ivid,
-                    DataProviderCommandSource.Ivid.ToString(), 55, 100,
+                new DataProviderIdentifier((int)DataProviderCommandSource.IVIDVerify_E_WS,
+                    DataProviderCommandSource.IVIDVerify_E_WS.ToString(), 55, 100,
                     DataProviderAction.Request, DataProviderState.Successful), DateTime.UtcNow,
                 new ConnectionTypeIdentifier("test.co.za", "API"),
                 new PayloadIdentifier(new MetadataContainer().ObjectToJson(),
                     HandleRequest.GetHpiStandardQueryRequest(
-                        new LicensePlateNumberIvidOnlyRequest().Package.DataProviders.Single(w => w.Name == DataProviderName.Ivid)
+                        new LicensePlateNumberIvidOnlyRequest().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS)
                             .GetRequest<IAmIvidStandardRequest>()).ObjectToJson(),
                     "testing message to bus"));
             _bus = BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowSender);

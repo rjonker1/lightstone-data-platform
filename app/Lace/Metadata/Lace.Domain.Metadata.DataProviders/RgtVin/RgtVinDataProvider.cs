@@ -35,7 +35,7 @@ namespace Lace.Domain.Metadata.DataProviders.RgtVin
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.RgtVin, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoVINMaster_I_DB, _request);
 
             if (!spec.IsSatisfied)
             {

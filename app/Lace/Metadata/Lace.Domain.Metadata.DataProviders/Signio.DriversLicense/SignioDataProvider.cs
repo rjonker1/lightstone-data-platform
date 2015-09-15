@@ -28,7 +28,7 @@ namespace Lace.Domain.Metadata.DataProviders.Signio.DriversLicense
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.SignioDecryptDriversLicense, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoDecryptDriverLic_I_WS, _request);
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);

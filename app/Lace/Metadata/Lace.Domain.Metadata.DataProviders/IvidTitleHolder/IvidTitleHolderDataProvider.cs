@@ -28,7 +28,7 @@ namespace Lace.Domain.Metadata.DataProviders.IvidTitleHolder
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.IvidTitleHolder, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.IVIDTitle_E_WS, _request);
 
             if (!spec.IsSatisfied)
             {

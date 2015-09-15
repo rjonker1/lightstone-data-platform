@@ -26,7 +26,7 @@ namespace Lace.Unit.Tests.SourceRequests
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolder();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _dataProvider =
-                _request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(w => w.Name == DataProviderName.IvidTitleHolder);
+                _request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDTitle_E_WS);
         }
 
         public override void Observe()

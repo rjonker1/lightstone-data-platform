@@ -30,15 +30,15 @@ namespace Lace.Domain.DataProviders.PCubed.Fica
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.PCubedFica, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.PCubedFica_E_WS, _request);
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedFica);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedFica, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedFica_E_WS);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedFica_E_WS, _dataProvider);
 
                 _logCommand.LogBegin(new {_request});
 

@@ -10,28 +10,28 @@ namespace Lace.Test.Helper.Builders.Buses
     {
         public static ISendCommandToBus ForIvidCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Ivid);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDVerify_E_WS);
         }
 
         public static ISendCommandToBus ForIvidTitleHolderCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IvidTitleHolder);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDTitle_E_WS);
         }
 
         public static ISendCommandToBus ForRgtCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Rgt);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoSpecs_I_DB);
         }
 
         public static ISendCommandToBus ForRgtVinCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoVINMaster_I_DB);
         }
 
 
         public static ISendCommandToBus ForLighstoneCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneAuto);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoCarStats_I_DB);
         }
 
         public static ISendCommandToBus ForAudatexCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
@@ -41,12 +41,12 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public static ISendCommandToBus ForSignioCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.SignioDecryptDriversLicense);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoDecryptDriverLic_I_WS);
         }
 
         public static ISendCommandToBus ForPCubedCommands(IAdvancedBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.PCubedFica);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.PCubedFica_E_WS);
         }
     }
 }

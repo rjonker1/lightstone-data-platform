@@ -12,8 +12,7 @@ namespace Lace.Test.Helper.Builders.Requests
         {
             return
                 new LicensePlateNumberPackage(
-                    new IAmDataProvider[]
-                    {new DataProvider(DataProviderName.Rgt, 17, 33, RgtRequestType.WithCarId(carId.ToString()))},
+                    new IAmDataProvider[] { new DataProvider(DataProviderName.LSAutoSpecs_I_DB, 17, 33, RgtRequestType.WithCarId(carId.ToString())) },
                     Guid.NewGuid());
         }
     }

@@ -23,7 +23,7 @@ namespace Lace.Unit.Tests.Sources
         {
             requestFields = new Collection<IAmRequestField>();
             dataProviders = LicensePlateNumberAllRequestPackage.LicenseNumberPackage("xmc167gp", "licensnumberpackage").DataProviders;
-            var dataProvider = dataProviders.Single(w => w.Name == DataProviderName.Ivid);
+            var dataProvider = dataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS);
             var request = dataProvider.GetRequest<IAmIvidStandardRequest>();
          //   requestFields.Add(request.EngineNumber);
         //    requestFields.Add(request.VinNumber);

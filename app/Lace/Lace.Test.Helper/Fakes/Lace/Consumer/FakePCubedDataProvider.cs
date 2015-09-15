@@ -28,7 +28,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.PCubedFica, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.PCubedFica_E_WS, _request);
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);

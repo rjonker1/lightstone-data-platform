@@ -30,7 +30,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.IvidTitleHolder, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.IVIDTitle_E_WS, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -38,8 +38,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             }
             else
             {
-                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IvidTitleHolder);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IvidTitleHolder, _dataProvider);
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDTitle_E_WS);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDTitle_E_WS, _dataProvider);
 
                 _logCommand.LogBegin(new { _dataProvider });
 

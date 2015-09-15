@@ -13,7 +13,7 @@ namespace Lace.Test.Helper.Builders.Requests
             return new LicensePlateNumberPackage(
                 new IAmDataProvider[]
                 {
-                    new DataProvider(DataProviderName.Ivid, 7, 14,
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
                         new IvidStandardRequest(licensePlate, "Murray", packageName,
                             "murrayw@lightstone.co.za", "Murray", string.Empty))
                 }, Guid.NewGuid());
@@ -27,7 +27,7 @@ namespace Lace.Test.Helper.Builders.Requests
             return new LicensePlateNumberPackage(
                 new IAmDataProvider[]
                 {
-                    new DataProvider(DataProviderName.Ivid, 7, 14,
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
                         new IvidVinRequest(vinNumber, "Murray", packageName,
                             "murrayw@lightstone.co.za", "Murray", string.Empty))
                 }, Guid.NewGuid());
@@ -41,7 +41,7 @@ namespace Lace.Test.Helper.Builders.Requests
             return new LicensePlateNumberPackage(
                 new IAmDataProvider[]
                 {
-                    new DataProvider(DataProviderName.Ivid, 7, 14,
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
                         new IvidRegisterNoRequest(registerNumber, "Murray", packageName,
                             "murrayw@lightstone.co.za", "Murray", string.Empty))
                 }, Guid.NewGuid());

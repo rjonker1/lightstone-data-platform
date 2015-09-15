@@ -28,7 +28,7 @@ namespace Lace.Domain.Metadata.DataProviders.Lighstone.Property
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneProperty, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSPropertySearch_E_WS, _request);
 
             if (!spec.IsSatisfied)
             {
