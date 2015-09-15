@@ -15,7 +15,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
     {
         public when_updating_the_lightstone_business_director_data_provider()
         {
-            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LightstoneBusinessDirector, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LSBusinessDirector_E_WS, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
@@ -44,7 +44,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_root_properties()
         {
-            DataProvider.Name.ShouldEqual(DataProviderName.LightstoneBusinessDirector);
+            DataProvider.Name.ShouldEqual(DataProviderName.LSBusinessDirector_E_WS);
             DataProvider.Description.ShouldEqual("LightstoneBusinessDirector");
             DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
             DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);

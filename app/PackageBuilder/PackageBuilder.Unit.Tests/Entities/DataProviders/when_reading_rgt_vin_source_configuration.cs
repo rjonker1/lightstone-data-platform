@@ -9,7 +9,7 @@ namespace PackageBuilder.Unit.Tests.Entities.DataProviders
         private SourceConfiguration _sourceConfiguration;
         public override void Observe()
         {
-            _sourceConfiguration = new SourceConfiguration(DataProviderName.RgtVin);
+            _sourceConfiguration = new SourceConfiguration(DataProviderName.LSAutoVINMaster_I_DB);
         }
 
         [Observation]

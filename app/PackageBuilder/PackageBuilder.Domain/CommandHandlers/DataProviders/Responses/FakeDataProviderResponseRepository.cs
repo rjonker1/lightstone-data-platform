@@ -16,18 +16,18 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
         {
             DataProviderResponses = new[]
             {
-                this[DataProviderName.Ivid],
-                this[DataProviderName.IvidTitleHolder],
-                this[DataProviderName.LightstoneAuto],
-                this[DataProviderName.Rgt],
-                this[DataProviderName.RgtVin],
+                this[DataProviderName.IVIDVerify_E_WS],
+                this[DataProviderName.IVIDTitle_E_WS],
+                this[DataProviderName.LSAutoCarStats_I_DB],
+                this[DataProviderName.LSAutoSpecs_I_DB],
+                this[DataProviderName.LSAutoVINMaster_I_DB],
                 this[DataProviderName.Audatex],
-                this[DataProviderName.PCubedFica],
-                this[DataProviderName.SignioDecryptDriversLicense],
-                this[DataProviderName.LightstoneProperty],
-                this[DataProviderName.LightstoneBusinessCompany],
-                this[DataProviderName.LightstoneBusinessDirector],
-                this[DataProviderName.BmwFinance]
+                this[DataProviderName.PCubedFica_E_WS],
+                this[DataProviderName.LSAutoDecryptDriverLic_I_WS],
+                this[DataProviderName.LSPropertySearch_E_WS],
+                this[DataProviderName.LSBusinessCompany_E_WS],
+                this[DataProviderName.LSBusinessDirector_E_WS],
+                this[DataProviderName.BMWFSTitle_E_DB]
             };
         }
 
@@ -41,24 +41,24 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
             {
                 switch (name)
                 {
-                    case DataProviderName.Ivid:
+                    case DataProviderName.IVIDVerify_E_WS:
                         var ividResponse = Lace.Domain.Core.Entities.IvidResponse.Build("NO_ISSUES", "IVD - 01468460493", "XMC167GP", "CNC407L", "2/18/2014", "SB1KV58E40F039277", "1ZRU041295", "1598", "1276");
                         ividResponse.HasBeenHandled();
                         return ividResponse;
-                    case DataProviderName.IvidTitleHolder:
+                    case DataProviderName.IVIDTitle_E_WS:
                         var ividTitleHolderResponse = new IvidTitleHolderResponse();
                         ividTitleHolderResponse.Build("WesBank", false, "00009009838", DateTime.Now.AddYears(-10), DateTime.Now.AddYears(-5), "");
                         ividTitleHolderResponse.HasBeenHandled();
                         return ividTitleHolderResponse;
-                    case DataProviderName.LightstoneAuto:
+                    case DataProviderName.LSAutoCarStats_I_DB:
                         var lightstoneAutoResponse = new Lace.Domain.Core.Entities.LightstoneAutoResponse(107483, DateTime.Now.Year, "SB1KV58E40F039277", "", "3rd Quarter", "TOYOTA Auris 1.6 RT 5-dr", "Auris 1.6 RT 5-dr", null);
                         lightstoneAutoResponse.HasBeenHandled();
                         return lightstoneAutoResponse;
-                    case DataProviderName.Rgt:
+                    case DataProviderName.LSAutoSpecs_I_DB:
                         var rgtResponse = new RgtResponse("TOYOTA", 2008, "Hatch back", "190", "91", "6.2", "10.4", "157", "166", "1598", "Hatch (5-dr)", "Petrol", "Man", "Toyota AURIS", "STANDARD WHITE", "", "", "", "D166", "T05", "Auris");
                         rgtResponse.HasBeenHandled();
                         return rgtResponse;
-                    case DataProviderName.RgtVin:
+                    case DataProviderName.LSAutoVINMaster_I_DB:
                         var rgtVinResponse = new RgtVinResponse("Super White II", 8, 0, 3, 0, "TOYOTA", "Auris 1.6 RT 5-dr", "Auris", "SB1KV58E40F039277", 2008);
                         rgtVinResponse.HasBeenHandled();
                         return rgtVinResponse;
@@ -73,19 +73,19 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         });
                         audatexResponse.HasBeenHandled();
                         return audatexResponse;
-                    case DataProviderName.PCubedFica:
+                    case DataProviderName.PCubedFica_E_WS:
                         return new PCubedFicaVerficationResponse().DefaultFicaResponse();
-                    case DataProviderName.PCubedEzScore:
+                    case DataProviderName.PCubedEZScore_E_WS:
                         return new PCubedEzScoreResponse().DefaultEzScoreResponse();
-                    case DataProviderName.SignioDecryptDriversLicense:
+                    case DataProviderName.LSAutoDecryptDriverLic_I_WS:
                         return new SignioDriversLicenseDecryptionResponse().DefaultSignioDriversLicenseDecryptionResponse();
-                    case DataProviderName.LightstoneProperty:
+                    case DataProviderName.LSPropertySearch_E_WS:
                         return new LightstonePropertyResponse().DefaultLightstonePropertyResponse();
-                    case DataProviderName.LightstoneBusinessCompany:
+                    case DataProviderName.LSBusinessCompany_E_WS:
                         return new LightstoneBusinessResponse().LightstoneCompanyResponse();
-                    case DataProviderName.LightstoneBusinessDirector:
+                    case DataProviderName.LSBusinessDirector_E_WS:
                         return new LightstoneDirectorResponse().LightstoneCompanyResponse();
-                    case DataProviderName.BmwFinance:
+                    case DataProviderName.BMWFSTitle_E_DB:
                         return new BmwFinanceResponse().EmptyBmwFinanceResponse();
                     default:
                         return null;

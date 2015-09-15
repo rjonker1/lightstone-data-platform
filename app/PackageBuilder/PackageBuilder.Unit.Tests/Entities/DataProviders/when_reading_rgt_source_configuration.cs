@@ -9,7 +9,7 @@ namespace PackageBuilder.Unit.Tests.Entities.DataProviders
         private SourceConfiguration _sourceConfiguration;
         public override void Observe()
         {
-            _sourceConfiguration = new SourceConfiguration(DataProviderName.Rgt);
+            _sourceConfiguration = new SourceConfiguration(DataProviderName.LSAutoSpecs_I_DB);
         }
 
         [Observation]

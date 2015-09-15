@@ -15,7 +15,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
     {
         public when_updating_the_ivid_data_provider()
         {
-            Handler.Handle(new CreateDataProvider(Id, DataProviderName.Ivid, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.IVIDVerify_E_WS, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
@@ -44,7 +44,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_root_properties()
         {
-            DataProvider.Name.ShouldEqual(DataProviderName.Ivid);
+            DataProvider.Name.ShouldEqual(DataProviderName.IVIDVerify_E_WS);
             DataProvider.Description.ShouldEqual("Ivid");
             DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
             DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);

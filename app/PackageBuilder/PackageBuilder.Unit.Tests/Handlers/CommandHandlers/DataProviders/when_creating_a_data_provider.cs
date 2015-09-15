@@ -18,7 +18,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.DataProviders
         private readonly Mock<INEventStoreRepository<DataProvider>> _writeRepository = new Mock<INEventStoreRepository<DataProvider>>();
         public override void Observe()
         {
-            var command = new CreateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, 10m, "User", DateTime.UtcNow);
+            var command = new CreateDataProvider(Guid.NewGuid(), DataProviderName.IVIDVerify_E_WS, 10m, "User", DateTime.UtcNow);
             _handler = new CreateDataProviderHandler(_writeRepository.Object, _readRepository.Object);
             _handler.Handle(command);
         }
@@ -26,7 +26,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.DataProviders
         [Observation]
         public void should_check_for_existing_entity()
         {
-            _readRepository.Verify(s => s.Exists(It.IsAny<Guid>(), DataProviderName.Ivid), Times.Once);
+            _readRepository.Verify(s => s.Exists(It.IsAny<Guid>(), DataProviderName.IVIDVerify_E_WS), Times.Once);
         }
 
         [Observation]

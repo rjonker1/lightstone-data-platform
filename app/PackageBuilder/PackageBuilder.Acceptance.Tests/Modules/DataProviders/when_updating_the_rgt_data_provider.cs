@@ -15,7 +15,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
     {
         public when_updating_the_rgt_data_provider()
         {
-            Handler.Handle(new CreateDataProvider(Id, DataProviderName.Rgt, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LSAutoSpecs_I_DB, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
@@ -44,7 +44,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_root_properties()
         {
-            DataProvider.Name.ShouldEqual(DataProviderName.Rgt);
+            DataProvider.Name.ShouldEqual(DataProviderName.LSAutoSpecs_I_DB);
             DataProvider.Description.ShouldEqual("Rgt");
             DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
             DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);

@@ -18,7 +18,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.EventHandlers.DataProviders
 
         public override void Observe()
         {
-            var command = new DataProviderCreated(Guid.NewGuid(), DataProviderName.Ivid, "Ivid", 10m, typeof(IProvideDataFromIvid), "Owner", DateTime.UtcNow, null, new []{ DataFieldMother.LicenseField }, 1);
+            var command = new DataProviderCreated(Guid.NewGuid(), DataProviderName.IVIDVerify_E_WS, "Ivid", 10m, typeof(IProvideDataFromIvid), "Owner", DateTime.UtcNow, null, new[] { DataFieldMother.LicenseField }, 1);
             _handler = new DataProviderCreatedHandler(_repository.Object);
             _handler.Handle(command);
         }

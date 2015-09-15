@@ -59,6 +59,9 @@ namespace UserManagement.Api.Modules
                     }
                 }
 
+                var test = tokenizer.Tokenize(userIdentity, Context);
+                var userDes = tokenizer.Detokenize(test, Context, new DefaultUserIdentityResolver());
+
                 return userIdentity == null
                     ? HttpStatusCode.Unauthorized
                     : Response.AsText(tokenizer.Tokenize(userIdentity, Context));

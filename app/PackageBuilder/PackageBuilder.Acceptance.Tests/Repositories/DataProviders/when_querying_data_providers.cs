@@ -23,7 +23,7 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.DataProviders
         [Observation]
         public void should_return_true_if_exists()
         {
-            _repository.Exists(Guid.NewGuid(), DataProviderName.Ivid).ShouldBeTrue();
+            _repository.Exists(Guid.NewGuid(), DataProviderName.IVIDVerify_E_WS).ShouldBeTrue();
         }
     }
 }

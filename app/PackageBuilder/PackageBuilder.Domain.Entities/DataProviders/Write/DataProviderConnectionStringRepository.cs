@@ -14,33 +14,33 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             {
                 switch (name)
                 {
-                    case DataProviderName.Ivid:
+                    case DataProviderName.IVIDVerify_E_WS:
                         return "";
-                    case DataProviderName.IvidTitleHolder:
+                    case DataProviderName.IVIDTitle_E_WS:
                         return "";
-                    case DataProviderName.LightstoneAuto:
+                    case DataProviderName.LSAutoCarStats_I_DB:
                         return "lace/source/database/auto-car-stats";
-                    case DataProviderName.Rgt:
+                    case DataProviderName.LSAutoSpecs_I_DB:
                         return "lace/source/database/auto-car-stats";
-                    case DataProviderName.RgtVin:
+                    case DataProviderName.LSAutoVINMaster_I_DB:
                         return "lace/source/database/auto-car-stats";
                     case DataProviderName.Audatex:
                         return "";
-                    case DataProviderName.PCubedFica:
+                    case DataProviderName.PCubedFica_E_WS:
                         return "";
-                    case DataProviderName.PCubedEzScore:
+                    case DataProviderName.PCubedEZScore_E_WS:
                         return "";
-                    case DataProviderName.SignioDecryptDriversLicense:
+                    case DataProviderName.LSAutoDecryptDriverLic_I_WS:
                         return "";
-                    case DataProviderName.LightstoneProperty:
+                    case DataProviderName.LSPropertySearch_E_WS:
                         return "";
-                    case DataProviderName.LightstoneBusinessCompany:
+                    case DataProviderName.LSBusinessCompany_E_WS:
                         return "";
-                    case DataProviderName.LightstoneBusinessDirector:
+                    case DataProviderName.LSBusinessDirector_E_WS:
                         return "";
-                    case DataProviderName.LightstoneConsumerSpecifications:
+                    case DataProviderName.LSConsumerRepair_E_WS:
                         return "";
-                    case DataProviderName.BmwFinance:
+                    case DataProviderName.BMWFSTitle_E_DB:
                         return "lace/source/database/financed-interests";
                     default:
                         return null;

@@ -24,7 +24,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
         public void should_map_all_fields()
         {
             _dataProvider.Id.ShouldNotBeNull();
-            _dataProvider.Name.ShouldEqual(DataProviderName.Ivid);
+            _dataProvider.Name.ShouldEqual(DataProviderName.IVIDVerify_E_WS);
             _dataProvider.Description.ShouldEqual("Ivid");
             _dataProvider.SourceConfiguration.IsApiConfiguration.ShouldBeTrue();
             _dataProvider.SourceConfiguration.Url.ShouldEqual("authenticate");

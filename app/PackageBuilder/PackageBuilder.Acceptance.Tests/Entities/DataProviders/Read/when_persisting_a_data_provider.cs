@@ -20,7 +20,7 @@ namespace PackageBuilder.Acceptance.Tests.Entities.DataProviders.Read
             new PersistenceSpecification<DataProvider>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
-                .CheckProperty(c => c.Name, DataProviderName.Ivid)
+                .CheckProperty(c => c.Name, DataProviderName.IVIDVerify_E_WS)
                 .CheckProperty(c => c.Description, "Description")
                 .CheckProperty(c => c.Version, 1)
                 .CheckProperty(c => c.Owner, "Owner")

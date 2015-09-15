@@ -23,7 +23,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers.CommandStore
 
             _repository = new Repository<Command>(Session);
 
-            var createDataProvider = new CreateDataProvider(Guid.NewGuid(), DataProviderName.Rgt, 0m, "Owner", DateTime.UtcNow);
+            var createDataProvider = new CreateDataProvider(Guid.NewGuid(), DataProviderName.LSAutoSpecs_I_DB, 0m, "Owner", DateTime.UtcNow);
             var command = new StoreCommand(Guid.NewGuid(), createDataProvider);
             _handler = new StoreCommandHandler(_repository);
             _handler.Handle(command);

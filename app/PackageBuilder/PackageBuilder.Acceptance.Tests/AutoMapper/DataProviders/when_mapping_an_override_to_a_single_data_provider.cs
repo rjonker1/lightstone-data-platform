@@ -43,7 +43,7 @@ namespace PackageBuilder.Acceptance.Tests.AutoMapper.DataProviders
         public void should_data_provider_properties()
         {
             _dataProvider.Id.ShouldNotBeNull();
-            _dataProvider.Name.ShouldEqual(DataProviderName.Ivid);
+            _dataProvider.Name.ShouldEqual(DataProviderName.IVIDVerify_E_WS);
             //_dataProvider.Description.ShouldEqual("Ivid");
             _dataProvider.SourceConfiguration.IsApiConfiguration.ShouldBeTrue();
             _dataProvider.SourceConfiguration.Url.ShouldEqual("authenticate");

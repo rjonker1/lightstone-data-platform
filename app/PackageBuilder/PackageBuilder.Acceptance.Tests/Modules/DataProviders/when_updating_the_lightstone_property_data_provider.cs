@@ -15,7 +15,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
     {
         public when_updating_the_lightstone_property_data_provider()
         {
-            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LightstoneProperty, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LSPropertySearch_E_WS, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
@@ -44,7 +44,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_root_properties()
         {
-            DataProvider.Name.ShouldEqual(DataProviderName.LightstoneProperty);
+            DataProvider.Name.ShouldEqual(DataProviderName.LSPropertySearch_E_WS);
             DataProvider.Description.ShouldEqual("LightstoneProperty");
             DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
             DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);

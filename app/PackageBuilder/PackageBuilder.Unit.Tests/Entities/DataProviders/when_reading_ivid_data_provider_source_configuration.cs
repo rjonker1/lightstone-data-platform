@@ -9,7 +9,7 @@ namespace PackageBuilder.Unit.Tests.Entities.DataProviders
         private SourceConfiguration _sourceConfiguration;
         public override void Observe()
         {
-            _sourceConfiguration = new SourceConfiguration(DataProviderName.Ivid);
+            _sourceConfiguration = new SourceConfiguration(DataProviderName.IVIDVerify_E_WS);
         }
 
         [Observation]

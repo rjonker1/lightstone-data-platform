@@ -14,7 +14,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
     {
         public when_updating_the_pcubed_fica_data_provider()
         {
-            Handler.Handle(new CreateDataProvider(Id, DataProviderName.PCubedFica, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.PCubedFica_E_WS, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
@@ -43,7 +43,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_root_properties()
         {
-            DataProvider.Name.ShouldEqual(DataProviderName.PCubedFica);
+            DataProvider.Name.ShouldEqual(DataProviderName.PCubedFica_E_WS);
             DataProvider.Description.ShouldEqual("PCubedFica");
             DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
             DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);

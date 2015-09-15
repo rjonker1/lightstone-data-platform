@@ -15,7 +15,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
     {
         public when_updating_the_rgt_vin_data_provider()
         {
-            Handler.Handle(new CreateDataProvider(Id, DataProviderName.RgtVin, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LSAutoVINMaster_I_DB, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
@@ -44,7 +44,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_root_properties()
         {
-            DataProvider.Name.ShouldEqual(DataProviderName.RgtVin);
+            DataProvider.Name.ShouldEqual(DataProviderName.LSAutoVINMaster_I_DB);
             DataProvider.Description.ShouldEqual("RgtVin");
             DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
             DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);

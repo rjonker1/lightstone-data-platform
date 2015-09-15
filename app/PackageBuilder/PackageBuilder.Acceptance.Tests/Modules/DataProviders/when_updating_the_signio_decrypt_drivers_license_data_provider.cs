@@ -14,7 +14,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
     {
         public when_updating_the_signio_decrypt_drivers_license_data_provider()
         {
-            Handler.Handle(new CreateDataProvider(Id, DataProviderName.SignioDecryptDriversLicense, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LSAutoDecryptDriverLic_I_WS, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
@@ -43,7 +43,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_root_properties()
         {
-            DataProvider.Name.ShouldEqual(DataProviderName.SignioDecryptDriversLicense);
+            DataProvider.Name.ShouldEqual(DataProviderName.LSAutoDecryptDriverLic_I_WS);
             DataProvider.Description.ShouldEqual("SignioDecryptDriversLicense");
             DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
             DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);

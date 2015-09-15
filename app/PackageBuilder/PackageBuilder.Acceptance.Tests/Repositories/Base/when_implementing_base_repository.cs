@@ -43,7 +43,7 @@ namespace PackageBuilder.Acceptance.Tests.Repositories.Base
         [Observation]
         public void should_get()
         {
-            _repository.Get(_id).Name.ShouldEqual(DataProviderName.Ivid);
+            _repository.Get(_id).Name.ShouldEqual(DataProviderName.IVIDVerify_E_WS);
         }
     }
 }

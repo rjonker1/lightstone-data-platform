@@ -9,7 +9,7 @@ namespace PackageBuilder.Unit.Tests.Entities.DataProviders
         private SourceConfiguration _sourceConfiguration;
         public override void Observe()
         {
-            _sourceConfiguration = new SourceConfiguration(DataProviderName.LightstoneAuto);
+            _sourceConfiguration = new SourceConfiguration(DataProviderName.LSAutoCarStats_I_DB);
         }
 
         [Observation]

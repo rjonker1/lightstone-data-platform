@@ -105,13 +105,13 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
         {
             RefreshDb();
 
-            _handler.Handle(new CreateDataProvider(_id, DataProviderName.Ivid, 0, "", DateTime.UtcNow));
+            _handler.Handle(new CreateDataProvider(_id, DataProviderName.IVIDVerify_E_WS, 0, "", DateTime.UtcNow));
 
             _originalFields = _writeRepo.GetById(_id).DataFields.ToList();
             var field = _originalFields.Filter(x => x.Name == "MakeDescription").FirstOrDefault() as DataField;
             field.Label = "Test Label";
 
-            _handler.Handle(new UpdateDataProvider(_id, DataProviderName.Ivid, "Test", 0, null, false, null, 2, "Owner", DateTime.UtcNow, null, null, _originalFields));
+            _handler.Handle(new UpdateDataProvider(_id, DataProviderName.IVIDVerify_E_WS, "Test", 0, null, false, null, 2, "Owner", DateTime.UtcNow, null, null, _originalFields));
 
             _amendHandler.Handle(new AmendDataProviderStructure(_id));
 

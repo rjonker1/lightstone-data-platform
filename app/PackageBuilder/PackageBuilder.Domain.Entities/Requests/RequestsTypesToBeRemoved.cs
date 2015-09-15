@@ -21,42 +21,42 @@ namespace PackageBuilder.Domain.Entities.Requests
             _requestTypes = new Dictionary<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>()
             {
                 {
-                    DataProviderName.Ivid, (requests, user, packageName) => new IvidRequest(requests, packageName, user)
+                    DataProviderName.IVIDVerify_E_WS, (requests, user, packageName) => new IvidRequest(requests, packageName, user)
                 },
                 {
-                    DataProviderName.LightstoneAuto, (requests, user, packageName) => new LightstoneAutoRequest(requests)
+                    DataProviderName.LSAutoCarStats_I_DB, (requests, user, packageName) => new LightstoneAutoRequest(requests)
                 },
                 {
-                    DataProviderName.IvidTitleHolder, (requests, user, packageName) => new IvidTitleHolderRequest(requests, user)
+                    DataProviderName.IVIDTitle_E_WS, (requests, user, packageName) => new IvidTitleHolderRequest(requests, user)
                 },
                 {
-                    DataProviderName.Rgt, (requests, user, packageName) => new RgtRequest(requests)
+                    DataProviderName.LSAutoSpecs_I_DB, (requests, user, packageName) => new RgtRequest(requests)
                 }
                 ,
                 {
-                    DataProviderName.RgtVin, (requests, user, packageName) => new RgtVinRequest(requests)
+                    DataProviderName.LSAutoVINMaster_I_DB, (requests, user, packageName) => new RgtVinRequest(requests)
                 },
                 {
-                    DataProviderName.LightstoneProperty, (requests, user, packageName) => new LightstonePropertyRequest(requests)
+                    DataProviderName.LSPropertySearch_E_WS, (requests, user, packageName) => new LightstonePropertyRequest(requests)
                 },
                 {
-                    DataProviderName.LightstoneBusinessCompany, (requests, user, packageName) => new LightstoneCompanyRequest(requests)
+                    DataProviderName.LSBusinessCompany_E_WS, (requests, user, packageName) => new LightstoneCompanyRequest(requests)
                 },
                 {
-                    DataProviderName.LightstoneBusinessDirector, (requests, user, packageName) => new LightstoneDirectorRequest(requests)
+                    DataProviderName.LSBusinessDirector_E_WS, (requests, user, packageName) => new LightstoneDirectorRequest(requests)
                 },
                 {
-                    DataProviderName.PCubedEzScore, (requests, user, packageName) => new PCubedEzScoreRequest(requests)
+                    DataProviderName.PCubedEZScore_E_WS, (requests, user, packageName) => new PCubedEzScoreRequest(requests)
                 },
                 {
-                    DataProviderName.LightstoneConsumerSpecifications,
+                    DataProviderName.LSConsumerRepair_E_WS,
                     (requests, user, packageName) => new LightstoneConsumerSpecificationsRequest(requests)
                 },
                 {
-                    DataProviderName.SignioDecryptDriversLicense, (requests, user, packageName) => new SignioDriversLicenseRequest(requests)
+                    DataProviderName.LSAutoDecryptDriverLic_I_WS, (requests, user, packageName) => new SignioDriversLicenseRequest(requests)
                 },
                 {
-                    DataProviderName.BmwFinance, (requests, user, packageName) => new BmwFinanceRequest(requests)
+                    DataProviderName.BMWFSTitle_E_DB, (requests, user, packageName) => new BmwFinanceRequest(requests)
                 }
             };
 

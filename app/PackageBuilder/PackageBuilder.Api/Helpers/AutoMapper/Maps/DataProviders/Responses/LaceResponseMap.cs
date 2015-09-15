@@ -32,20 +32,20 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                 .Include<IProvideDataFromLightstoneConsumerSpecifications, DataProviderName>()
                 .Include<IProvideDataFromBmwFinance, DataProviderName>();
 
-            Mapper.CreateMap<IProvideDataFromIvid, DataProviderName>().ConvertUsing(s => DataProviderName.Ivid);
-            Mapper.CreateMap<IProvideDataFromIvidTitleHolder, DataProviderName>().ConvertUsing(s => DataProviderName.IvidTitleHolder);
-            Mapper.CreateMap<IProvideDataFromLightstoneAuto, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneAuto);
-            Mapper.CreateMap<IProvideDataFromRgt, DataProviderName>().ConvertUsing(s => DataProviderName.Rgt);
-            Mapper.CreateMap<IProvideDataFromRgtVin, DataProviderName>().ConvertUsing(s => DataProviderName.RgtVin);
+            Mapper.CreateMap<IProvideDataFromIvid, DataProviderName>().ConvertUsing(s => DataProviderName.IVIDVerify_E_WS);
+            Mapper.CreateMap<IProvideDataFromIvidTitleHolder, DataProviderName>().ConvertUsing(s => DataProviderName.IVIDTitle_E_WS);
+            Mapper.CreateMap<IProvideDataFromLightstoneAuto, DataProviderName>().ConvertUsing(s => DataProviderName.LSAutoCarStats_I_DB);
+            Mapper.CreateMap<IProvideDataFromRgt, DataProviderName>().ConvertUsing(s => DataProviderName.LSAutoSpecs_I_DB);
+            Mapper.CreateMap<IProvideDataFromRgtVin, DataProviderName>().ConvertUsing(s => DataProviderName.LSAutoVINMaster_I_DB);
             Mapper.CreateMap<IProvideDataFromAudatex, DataProviderName>().ConvertUsing(s => DataProviderName.Audatex);
-            Mapper.CreateMap<IProvideDataFromLightstoneProperty, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneProperty);
-            Mapper.CreateMap<IProvideDataFromLightstoneBusinessCompany, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneBusinessCompany);
-            Mapper.CreateMap<IProvideDataFromSignioDriversLicenseDecryption, DataProviderName>().ConvertUsing(s => DataProviderName.SignioDecryptDriversLicense);
-            Mapper.CreateMap<IProvideDataFromPCubedFicaVerfication, DataProviderName>().ConvertUsing(s => DataProviderName.PCubedFica);
-            Mapper.CreateMap<IProvideDataFromLightstoneBusinessDirector, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneBusinessDirector);
-            Mapper.CreateMap<IProvideDataFromLightstoneConsumerSpecifications, DataProviderName>().ConvertUsing(s => DataProviderName.LightstoneConsumerSpecifications);
-            Mapper.CreateMap<IProvideDataFromPCubedEzScore, DataProviderName>().ConvertUsing(s => DataProviderName.PCubedEzScore);
-            Mapper.CreateMap<IProvideDataFromBmwFinance, DataProviderName>().ConvertUsing(s => DataProviderName.BmwFinance);
+            Mapper.CreateMap<IProvideDataFromLightstoneProperty, DataProviderName>().ConvertUsing(s => DataProviderName.LSPropertySearch_E_WS);
+            Mapper.CreateMap<IProvideDataFromLightstoneBusinessCompany, DataProviderName>().ConvertUsing(s => DataProviderName.LSBusinessCompany_E_WS);
+            Mapper.CreateMap<IProvideDataFromSignioDriversLicenseDecryption, DataProviderName>().ConvertUsing(s => DataProviderName.LSAutoDecryptDriverLic_I_WS);
+            Mapper.CreateMap<IProvideDataFromPCubedFicaVerfication, DataProviderName>().ConvertUsing(s => DataProviderName.PCubedFica_E_WS);
+            Mapper.CreateMap<IProvideDataFromLightstoneBusinessDirector, DataProviderName>().ConvertUsing(s => DataProviderName.LSBusinessDirector_E_WS);
+            Mapper.CreateMap<IProvideDataFromLightstoneConsumerSpecifications, DataProviderName>().ConvertUsing(s => DataProviderName.LSConsumerRepair_E_WS);
+            Mapper.CreateMap<IProvideDataFromPCubedEzScore, DataProviderName>().ConvertUsing(s => DataProviderName.PCubedEZScore_E_WS);
+            Mapper.CreateMap<IProvideDataFromBmwFinance, DataProviderName>().ConvertUsing(s => DataProviderName.BMWFSTitle_E_DB);
 
             Mapper.CreateMap<IPointToLaceProvider, DataProvider>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(x => Mapper.Map(x, x.GetType(), typeof(DataProviderName))))

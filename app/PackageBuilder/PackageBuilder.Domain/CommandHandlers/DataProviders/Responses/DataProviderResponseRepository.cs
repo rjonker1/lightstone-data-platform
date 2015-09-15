@@ -22,33 +22,33 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
             {
                 switch (name)
                 {
-                    case DataProviderName.Ivid:
+                    case DataProviderName.IVIDVerify_E_WS:
                         return new IvidResponse().DefaultIvidResponse();
-                    case DataProviderName.IvidTitleHolder:
+                    case DataProviderName.IVIDTitle_E_WS:
                         return new IvidTitleHolderResponse();
-                    case DataProviderName.LightstoneAuto:
+                    case DataProviderName.LSAutoCarStats_I_DB:
                         return new LightstoneAutoResponse().DefaultLightstoneResponse();
-                    case DataProviderName.Rgt:
+                    case DataProviderName.LSAutoSpecs_I_DB:
                         return new RgtResponse();
-                    case DataProviderName.RgtVin:
+                    case DataProviderName.LSAutoVINMaster_I_DB:
                         return new RgtVinResponse();
                     case DataProviderName.Audatex:
                         return new AudatexResponse().DefaultAudatexResponse();
-                    case DataProviderName.PCubedFica:
+                    case DataProviderName.PCubedFica_E_WS:
                         return new PCubedFicaVerficationResponse().DefaultFicaResponse();
-                    case DataProviderName.PCubedEzScore:
+                    case DataProviderName.PCubedEZScore_E_WS:
                         return new PCubedEzScoreResponse().DefaultEzScoreResponse();
-                    case DataProviderName.SignioDecryptDriversLicense:
+                    case DataProviderName.LSAutoDecryptDriverLic_I_WS:
                         return new SignioDriversLicenseDecryptionResponse().DefaultSignioDriversLicenseDecryptionResponse();
-                    case DataProviderName.LightstoneProperty:
+                    case DataProviderName.LSPropertySearch_E_WS:
                         return new LightstonePropertyResponse().DefaultLightstonePropertyResponse();
-                    case DataProviderName.LightstoneBusinessCompany:
+                    case DataProviderName.LSBusinessCompany_E_WS:
                         return new LightstoneBusinessResponse().LightstoneCompanyResponse();
-                    case DataProviderName.LightstoneBusinessDirector:
+                    case DataProviderName.LSBusinessDirector_E_WS:
                         return new LightstoneDirectorResponse().LightstoneCompanyResponse();
-                    case DataProviderName.LightstoneConsumerSpecifications:
+                    case DataProviderName.LSConsumerRepair_E_WS:
                         return new LightstoneConsumerResponse().EmptyLightstoneConsumerSpecifications();
-                    case DataProviderName.BmwFinance:
+                    case DataProviderName.BMWFSTitle_E_DB:
                         return new BmwFinanceResponse().EmptyBmwFinanceResponse();
                     default:
                         return null;

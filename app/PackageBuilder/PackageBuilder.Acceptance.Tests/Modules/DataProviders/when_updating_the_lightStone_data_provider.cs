@@ -15,7 +15,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
     {
         public when_updating_the_lightstone_data_provider()
         {
-            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LightstoneAuto, 0, "Owner", DateTime.UtcNow));
+            Handler.Handle(new CreateDataProvider(Id, DataProviderName.LSAutoCarStats_I_DB, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {
@@ -44,7 +44,7 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_root_properties()
         {
-            DataProvider.Name.ShouldEqual(DataProviderName.LightstoneAuto);
+            DataProvider.Name.ShouldEqual(DataProviderName.LSAutoCarStats_I_DB);
             DataProvider.Description.ShouldEqual("Lightstone Auto");
             DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
             DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);

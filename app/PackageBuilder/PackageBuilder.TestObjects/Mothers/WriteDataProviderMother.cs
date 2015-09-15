@@ -14,7 +14,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.Ivid)
+                    .With(DataProviderName.IVIDVerify_E_WS)
                     .With("Ivid")
                     .With("Ivid", "Owner")
                     .With(DateTime.UtcNow)
@@ -34,7 +34,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.IvidTitleHolder)
+                    .With(DataProviderName.IVIDTitle_E_WS)
                     .With("IvidTitleHolder")
                     .With(10m)
                     .With(typeof (IProvideDataFromIvidTitleHolder))
@@ -47,7 +47,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.RgtVin)
+                    .With(DataProviderName.LSAutoVINMaster_I_DB)
                     .With("RgtVin")
                     .With(10m)
                     .With(typeof (IProvideDataFromRgtVin))
@@ -60,7 +60,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.Rgt)
+                    .With(DataProviderName.LSAutoSpecs_I_DB)
                     .With("Rgt")
                     .With(10m)
                     .With(typeof (IProvideDataFromRgt))
@@ -86,7 +86,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.LightstoneAuto)
+                    .With(DataProviderName.LSAutoCarStats_I_DB)
                     .With("Lightstone")
                     .With(10m)
                     .With(typeof (IProvideDataFromLightstoneAuto))
@@ -99,7 +99,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.SignioDecryptDriversLicense)
+                    .With(DataProviderName.LSAutoDecryptDriverLic_I_WS)
                     .With("Signio")
                     .With(10m)
                     .With(typeof (IProvideDataFromSignioDriversLicenseDecryption))
@@ -112,7 +112,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.PCubedFica)
+                    .With(DataProviderName.PCubedFica_E_WS)
                     .With("PCubed")
                     .With(10m)
                     .With(typeof (IProvideDataFromPCubedFicaVerfication))
@@ -125,7 +125,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.LightstoneProperty)
+                    .With(DataProviderName.LSPropertySearch_E_WS)
                     .With("LightstoneProperty")
                     .With(10m)
                     .With(typeof (IProvideDataFromLightstoneProperty))
