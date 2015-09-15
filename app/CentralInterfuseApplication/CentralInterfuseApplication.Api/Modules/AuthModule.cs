@@ -28,7 +28,7 @@ namespace CentralInterfuseApplication.Api.Modules
             {
                 var model = this.Bind<AuthModel>();
 
-                var token = client.Post("", "/login", null, new[] { new KeyValuePair<string, string>("Username", model.Username), new KeyValuePair<string, string>("Password", model.Password) }, null);
+                var token = client.Post("", "/login", null, null, new[] { new KeyValuePair<string, string>("Username", model.Username), new KeyValuePair<string, string>("Password", model.Password) });
 
                 var userIdentity = tokenizer.Detokenize(token, Context, new DefaultUserIdentityResolver());
 
