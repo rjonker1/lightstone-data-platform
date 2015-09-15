@@ -21,11 +21,11 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
         {
             new PersistenceSpecification<Contract>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.CommencementDate, DateTime.Now.Date)
+                .CheckProperty(c => c.CommencementDate, DateTime.UtcNow.Date)
                 .CheckProperty(c => c.Name, "Name")
                 .CheckProperty(c => c.Description, "Description")
                 .CheckProperty(c => c.EnteredIntoBy, "EnteredIntoBy")
-                .CheckProperty(c => c.OnlineAcceptance, DateTime.Now.Date)
+                .CheckProperty(c => c.OnlineAcceptance, DateTime.UtcNow.Date)
                 .CheckProperty(c => c.RegisteredName, "RegisteredName")
                 .CheckProperty(c => c.RegistrationNumber, "RegistrationNumber")
                 .CheckReference(c => c.ContractType, new ContractType("ContractType"))

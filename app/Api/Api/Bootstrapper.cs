@@ -1,11 +1,15 @@
-﻿using Api.Domain.Infrastructure.Automapping;
+﻿using System.Configuration;
+using Api.Domain.Infrastructure.Automapping;
+using Api.Domain.Infrastructure.Bus;
 using Api.Domain.Infrastructure.Extensions;
+using Api.Domain.Infrastructure.Messages;
 using Api.Domain.Infrastructure.Metadata;
 using Api.Helpers.Installers;
 using Api.Infrastructure.Metadata;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
+using EasyNetQ;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
@@ -15,6 +19,7 @@ using Nancy.Routing;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow.BuildingBlocks;
 
 namespace Api
 {
@@ -91,43 +96,9 @@ namespace Api
                 Component.For<IUserManagementApiClient>().ImplementedBy<UserManagementApiClient>().LifestyleTransient());
             container.Register(
                 Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
+            container.Register(Component.For<IAdvancedBus>().Instance(BusFactory.CreateAdvancedBus(ConfigurationManager.ConnectionStrings["api/bus/host"].ConnectionString)).LifestyleSingleton());
+            container.Register(Component.For<IDispatchMessagesToBus<RequestReportMessage>>().ImplementedBy<RequestMessageDispatcher>().LifestyleSingleton());
 
-            //var assembliesToScan =
-            //    AllAssemblies.Matching("Lightstone.DataPlatform.Workflow.Lace.Messages")
-            //        .And("NServiceBus.NHibernate")
-            //        .And("NServiceBus.Transports.RabbitMQ");
-
-            //container.Register(
-            //    Component.For<IBus>()
-            //        .Instance(
-            //            new BusFactory("Workflow.Lace.Messages.Commands", assembliesToScan, "DataPlatform.Transactions.Host.Write")
-            //                .CreateBusWithNHibernatePersistence()));
-            //container.Register(Component.For<IEntryPoint>().ImplementedBy<EntryPointService>().LifestyleTransient());
-
-
-            //container.Register(
-            //    Component.For<IConnectToBilling>()
-            //        .Instance(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration())));
-            //container.Register(
-            //    Component.For<ICreateBillingTransaction>()
-            //        .ImplementedBy<CreateBillingTransaction>()
-            //        .LifestyleTransient());
-
-            //container.Register(
-            //    Component.For<ICallFicaVerification>().ImplementedBy<FicaVerificationService>().LifestyleTransient());
-            //container.Register(
-            //    Component.For<IHandleFicaVerficationRequests>()
-            //        .ImplementedBy<FicaVerificationHandler>()
-            //        .LifestyleTransient());
-
-            //container.Register(
-            //    Component.For<ICallDriversLicenseVerification>()
-            //        .ImplementedBy<DriversLicenseVerificationService>()
-            //        .LifestyleTransient());
-            //container.Register(
-            //    Component.For<IHandleDriversLicenseVerficationRequests>()
-            //        .ImplementedBy<DriversLicenseVerificationHandler>()
-            //        .LifestyleTransient());
         }
 
         protected override IRootPathProvider RootPathProvider

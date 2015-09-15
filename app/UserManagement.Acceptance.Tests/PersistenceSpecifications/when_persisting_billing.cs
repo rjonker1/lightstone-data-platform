@@ -23,7 +23,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
                 .CheckProperty(c => c.LegalEntityName, "LegalEntityName")
                 .CheckProperty(c => c.AccountContactName, "AccountContactName")
                 .CheckProperty(c => c.CompanyRegistration, "CompanyRegistration")
-                .CheckProperty(c => c.DebitOrderDate, DateTime.Now.Date)
+                .CheckProperty(c => c.DebitOrderDate, DateTime.UtcNow.Date)
                 .CheckProperty(c => c.PastelId, "PastelId")
                 .CheckProperty(c => c.VatNumber, "VatNumber")
                 .CheckProperty(c => c.PaymentType, PaymentType.Eft)

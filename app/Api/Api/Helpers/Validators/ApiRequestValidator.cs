@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Api.Domain.Infrastructure.Dto;
 using DataPlatform.Shared.ExceptionHandling;
-using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Api.Helpers.Validators
