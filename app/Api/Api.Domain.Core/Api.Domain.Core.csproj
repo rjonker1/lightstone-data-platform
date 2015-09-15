@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
@@ -53,6 +54,9 @@
     </Compile>
     <Compile Include="Contracts\IRequest.cs" />
     <Compile Include="Contracts\IResponse.cs" />
+    <Compile Include="Dto\RequestDto.cs" />
+    <Compile Include="Dto\ResponseDto.cs" />
+    <Compile Include="Messages\RequestReportMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

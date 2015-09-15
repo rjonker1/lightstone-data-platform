@@ -1,5 +1,7 @@
 ﻿using System;
 using Api.Domain.Core.Contracts;
+using Api.Domain.Infrastructure.Bus;
+using Api.Domain.Infrastructure.Messages;
 using AutoMapper;
 using Nancy;
 using Nancy.Bootstrapper;
@@ -17,9 +19,7 @@ namespace Api.Domain.Infrastructure.Extensions
             {
                 var iRequest = Mapper.Map<Request, IRequest>(context.Request);
                 var request = JsonConvert.SerializeObject(iRequest);
-
-                log.InfoFormat("Request date {0}: {1}", DateTime.UtcNow, request);
-
+                log.InfoFormat("Request date {0}: {1}", DateTime.Now, request);
                 return null;
             };
 

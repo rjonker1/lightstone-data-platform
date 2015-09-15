@@ -1,16 +1,16 @@
-﻿using Castle.Core.Internal;
+﻿using System.Linq;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Validation;
 
-namespace Api.Extensions
+namespace Api.Domain.Infrastructure.Extensions
 {
     public static class ApiRequestExtensions
     {
         public static void Validate(this ApiRequestDto request)
         {
-            request.RequestFields.ForEach(f =>
+            request.RequestFields.ToList().ForEach(f =>
             {
                 var valid = ValidationManager.Validate(int.Parse(f.Type), f.Value);
                 if (!valid.IsValid)
