@@ -14,7 +14,7 @@ namespace Lim.Schedule.Service.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             _log.InfoFormat("Installing Database");
-            container.Register(Component.For<Configuration>().UsingFactoryMethod(c => FactoryManager.BuildConfiguration("lim/schedule/database")).LifestyleTransient());
+            container.Register(Component.For<Configuration>().UsingFactoryMethod(c => FactoryManager.BuildConfiguration()).LifestyleTransient());
             _log.InfoFormat("Installed Database");
         }
     }

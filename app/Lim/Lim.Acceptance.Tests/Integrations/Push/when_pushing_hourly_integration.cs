@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Lim.Core;
+using Lim.Domain.Base;
 using Lim.Domain.Entities.Factory;
 using Lim.Domain.Entities.Repository;
 using Lim.Enums;
@@ -24,7 +26,7 @@ namespace Lim.Acceptance.Tests.Integrations.Push
      
         private readonly IDbConnection _connection;
         private readonly IAuditIntegration _audit;
-        private readonly IAmRepository _entityRepository;
+        private readonly IRepository _entityRepository;
         private readonly ITrackIntegration _tracking;
         private readonly ISession _session;
 

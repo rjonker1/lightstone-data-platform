@@ -1,6 +1,6 @@
-﻿using Lim.Domain.Dto;
-using Lim.Domain.Entities.Contracts;
-using Lim.Domain.Entities.Factory;
+﻿using Lim.Core;
+using Lim.Domain.Base;
+using Lim.Domain.Dto;
 using Lim.Domain.Entities.Repository;
 using Lim.Web.UI.Commits;
 using Lim.Web.UI.Handlers;
@@ -9,7 +9,6 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
-using NHibernate;
 using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Lim.Web.UI
@@ -24,13 +23,9 @@ namespace Lim.Web.UI
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
-            //container.Register<IDbConnection>(ConnectionFactory.ForLimDatabase());
-            //container.Register<ISessionFactory>(FactoryManager.Instance);
-            //container.Register<ISession>(container.Resolve<ISessionFactory>().OpenSession());
-            container.Register<IAmRepository, LimRepository>();
+            container.Register<IRepository, LimRepository>();
             container.Register<IUserManagementApiClient, UserManagementApiClient>();
             container.Register<ISaveApiConfiguration, SaveApiConfiguration>();
-            //container.Register<IReadLimRepository>(new LimReadRepository(ConnectionFactory.ForLimDatabase()));
             container.Register<IHandleGettingDataPlatformClient, GetDataPlatformClientHandler>();
             container.Register<IHandleGettingIntegrationClient, GetIntegrationClientHandler>();
             container.Register<IHandleGettingConfiguration, GetConfigurationHandler>();

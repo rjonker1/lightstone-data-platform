@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using Lim.Core;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Identifiers;
 
@@ -12,10 +12,10 @@ namespace Lim.Schedule.Core.Handlers
 {
     public class HandleFetchingApiPullConfiguration : IHandleFetchingApiPullConfiguration
     {
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
         private readonly ILog _log;
 
-        public HandleFetchingApiPullConfiguration(IAmRepository repository)
+        public HandleFetchingApiPullConfiguration(IRepository repository)
         {
             _repository = repository;
             _log = LogManager.GetLogger(GetType());

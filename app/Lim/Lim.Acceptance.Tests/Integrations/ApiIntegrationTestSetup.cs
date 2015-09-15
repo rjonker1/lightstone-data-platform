@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using Lim.Core;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
 using NHibernate;
 
 namespace Lim.Acceptance.Tests.Integrations
@@ -8,8 +8,8 @@ namespace Lim.Acceptance.Tests.Integrations
     public class ApiIntegrationTestSetup
     {
         private readonly ISession _session;
-        private readonly IAmRepository _repository;
-        public ApiIntegrationTestSetup(ISession session, IAmRepository repository)
+        private readonly IRepository _repository;
+        public ApiIntegrationTestSetup(ISession session, IRepository repository)
         {
             _session = session;
             _repository = repository;

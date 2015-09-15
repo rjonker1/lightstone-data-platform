@@ -1,5 +1,5 @@
 ﻿using System;
-using Lim.Domain.Entities.Contracts;
+using Lim.Core;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Models.Api;
 

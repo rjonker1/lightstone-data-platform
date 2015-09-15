@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Logging;
+using Lim.Core;
 using Lim.Domain.Entities;
 using Lim.Domain.Entities.Repository;
 using Lim.Schedule.Core.Commands;
@@ -15,9 +16,9 @@ namespace Lim.Schedule.Core.Tracking
     public class TrackIntegration : ITrackIntegration
     {
         private readonly ILog _log;
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
 
-        public TrackIntegration(IAmRepository repository)
+        public TrackIntegration(IRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
             _repository = repository;

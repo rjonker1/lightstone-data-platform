@@ -1,13 +1,12 @@
 ﻿using System;
+using Lim.Core;
 using Lim.Domain.Dto;
-using Lim.Domain.Entities.Contracts;
 using Lim.Web.UI.Commands;
 
 namespace Lim.Web.UI.Handlers
 {
     public class SavingClientHandler : IHandleSavingClient
     {
-        //private readonly IDbConnection _connection;
         private readonly IPersistObject<ClientDto> _client;
 
         public bool IsSaved { get; private set; }

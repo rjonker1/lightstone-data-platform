@@ -3,8 +3,8 @@ using System.Linq;
 using System.Text;
 using Common.Logging;
 using EasyNetQ;
+using Lim.Core;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
 
@@ -13,10 +13,10 @@ namespace Lim.Domain.Sender.Handlers
     public class ResponseFromPackageConsumer
     {
         private readonly ILog _log;
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
         private readonly IPublishConfigurationMessages _publisher;
 
-        public ResponseFromPackageConsumer(IAmRepository repository, IPublishConfigurationMessages publisher)
+        public ResponseFromPackageConsumer(IRepository repository, IPublishConfigurationMessages publisher)
         {
             _repository = repository;
             _publisher = publisher;

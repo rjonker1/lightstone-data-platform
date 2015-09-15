@@ -92,6 +92,10 @@
       <Project>{6ee18788-1427-4ed7-a5ad-2af7cda4429d}</Project>
       <Name>Lim.Domain.Messaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

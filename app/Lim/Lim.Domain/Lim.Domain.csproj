@@ -71,11 +71,15 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Base\AbstractFileReadingFactory.cs" />
+    <Compile Include="Base\AbstractPersistenceRepository.cs" />
+    <Compile Include="Commands\GetContentsFromZippedExcelFile.cs" />
     <Compile Include="Dto\ClientDto.cs" />
     <Compile Include="Dto\ConfigurationDto.cs" />
     <Compile Include="Dto\ConfigurationForApiDto.cs" />
     <Compile Include="Dto\DataPlatformClientDto.cs" />
     <Compile Include="Dto\EnumTypes.cs" />
+    <Compile Include="Dto\ConfigurationForZippedExcelFileDto.cs" />
     <Compile Include="Dto\IntegrationClientDto.cs" />
     <Compile Include="Dto\IntegrationContractDto.cs" />
     <Compile Include="Dto\IntegrationPackageDto.cs" />

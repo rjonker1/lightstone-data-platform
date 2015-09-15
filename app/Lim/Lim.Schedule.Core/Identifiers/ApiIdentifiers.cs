@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using Common.Logging;
+using Lim.Core;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
 using Lim.Push.RestApi;
 using Lim.Schedule.Core.Commands;
 using Newtonsoft.Json;
@@ -50,7 +50,7 @@ namespace Lim.Schedule.Core.Identifiers
                 PushClient.PushWithStateless(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
                     configuration.Authentication.AuthenticationToken);
 
-        //private DateTime GetDateRange(IAmRepository repository)
+        //private DateTime GetDateRange(IRepository repository)
         //{
         //    var tracking = repository.Find<IntegrationTracking>(w => w.Configuration.Id == ConfigurationId);
         //    return tracking == null ? DateTime.Now.AddYears(-10) : tracking.MaxTransactionDate.AddSeconds(1);
@@ -64,7 +64,7 @@ namespace Lim.Schedule.Core.Identifiers
             return Encoding.UTF8.GetString(payload);
         }
 
-        public void Get(IAmRepository repository, DateTime dateRange)
+        public void Get(IRepository repository, DateTime dateRange)
         {
             _transaction = new List<PackageTransactionDto>();
             if (!Packages.Packages.Any())

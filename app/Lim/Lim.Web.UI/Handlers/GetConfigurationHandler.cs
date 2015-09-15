@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Lim.Core;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Models.Api;
 
@@ -10,9 +10,9 @@ namespace Lim.Web.UI.Handlers
 {
     public class GetConfigurationHandler : IHandleGettingConfiguration
     {
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
 
-        public GetConfigurationHandler(IAmRepository repository)
+        public GetConfigurationHandler(IRepository repository)
         {
             _repository = repository;
         }

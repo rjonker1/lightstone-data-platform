@@ -1,24 +1,23 @@
 ﻿using System;
 using Common.Logging;
+using Lim.Core;
+using Lim.Domain.Base;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Contracts;
-using Lim.Domain.Entities.Repository;
-
 namespace Lim.Web.UI.Commits
 {
-    public class ClientCommit : IPersistObject<ClientDto>
+    public class ClientCommit : AbstractPersistenceRepository<ClientDto>
     {
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
         private readonly ILog _log;
 
-        public ClientCommit(IAmRepository repository)
+        public ClientCommit(IRepository repository)
         {
             _repository = repository;
             _log = LogManager.GetLogger(GetType());
         }
 
-        public bool Persist(ClientDto clientDto)
+        public override bool Persist(ClientDto clientDto)
         {
             try
             {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Common.Logging;
+using Lim.Core;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
 using Lim.Enums;
 using Lim.Schedule.Core.Audits;
 using Lim.Schedule.Core.Commands;
@@ -14,11 +14,11 @@ namespace Lim.Schedule.Core.Handlers
     public class HandleExecutingApiConfiguration : IHandleExecutingApiConfiguration
     {
         private readonly ILog _log;
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
         private readonly IAuditIntegration _auditLog;
         private readonly ITrackIntegration _tracking;
 
-        public HandleExecutingApiConfiguration(IAmRepository repository, IAuditIntegration auditLog, ITrackIntegration tracking)
+        public HandleExecutingApiConfiguration(IRepository repository, IAuditIntegration auditLog, ITrackIntegration tracking)
         {
             _repository = repository;
             _auditLog = auditLog;

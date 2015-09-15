@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using Lim.Infrastructure;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 
@@ -7,7 +8,7 @@ namespace Lim.Domain.Entities.Factory
 {
     public sealed class FactoryManager
     {
-        private static readonly ISessionFactory _instance = BuildSession("lim/schedule/database");
+        private static readonly ISessionFactory _instance = BuildSession();
         static FactoryManager()
         {
         }
@@ -20,10 +21,10 @@ namespace Lim.Domain.Entities.Factory
             }
         }
 
-        private static ISessionFactory BuildSession(string connectionString)
+        private static ISessionFactory BuildSession()
         {
             return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(System.Configuration.ConfigurationManager.ConnectionStrings[connectionString].ConnectionString))
+                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(Configurations.Lim.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.ActionTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.AuthenticationTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.FrequencyTypeMap>())
@@ -42,12 +43,11 @@ namespace Lim.Domain.Entities.Factory
                 .BuildSessionFactory();
         }
 
-        public static NHibernate.Cfg.Configuration BuildConfiguration(string connectionString)
+        public static NHibernate.Cfg.Configuration BuildConfiguration()
         {
             return Fluently.Configure()
                 .Database(
-                    MsSqlConfiguration.MsSql2012.ConnectionString(
-                        System.Configuration.ConfigurationManager.ConnectionStrings[connectionString].ConnectionString))
+                    MsSqlConfiguration.MsSql2012.ConnectionString(Configurations.Lim.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.ActionTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.AuthenticationTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.FrequencyTypeMap>())

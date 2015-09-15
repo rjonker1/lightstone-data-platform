@@ -43,15 +43,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Core\IRepository.cs" />
+    <Compile Include="Core\IPersistObject.cs" />
+    <Compile Include="Core\IReadFile.cs" />
     <Compile Include="Enums\Integrations.cs" />
     <Compile Include="Enums\Times.cs" />
+    <Compile Include="Infrastructure\AbstractConfigurationReader.cs" />
+    <Compile Include="Infrastructure\BmwConfiguration.cs" />
+    <Compile Include="Infrastructure\Configurations.cs" />
+    <Compile Include="Infrastructure\LimConfiguration.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
