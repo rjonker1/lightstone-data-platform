@@ -2,21 +2,42 @@
 {
     public enum DataProviderName
     {
-        Ivid,
-        IvidTitleHolder,
-        Rgt,
-        RgtVin,
-        LightstoneAuto,
+        IVIDVerify_E_WS,
+        IVIDTitle_E_WS,
+        LSAutoSpecs_I_DB,
+        LSAutoVINMaster_I_DB,
+        LSAutoCarStats_I_DB,
         Audatex,
         Jis,
         Anpr,
-        PCubedFica,
-        SignioDecryptDriversLicense,
-        LightstoneProperty,
-        LightstoneBusinessCompany,
-        LightstoneBusinessDirector,
-        LightstoneConsumerSpecifications,
-        PCubedEzScore,
-        BmwFinance
+        PCubedFica_E_WS,
+        LSAutoDecryptDriverLic_I_WS,
+        LSPropertySearch_E_WS,
+        LSBusinessCompany_E_WS,
+        LSBusinessDirector_E_WS,
+        LSConsumerRepair_E_WS,
+        PCubedEZScore_E_WS,
+        BMWFSTitle_E_DB
     }
+
+    // Legacy - 15/09/2015
+    //public enum DataProviderName
+    //{
+    //    Ivid,
+    //    IvidTitleHolder,
+    //    Rgt,
+    //    RgtVin,
+    //    LightstoneAuto,
+    //    Audatex,
+    //    Jis,
+    //    Anpr,
+    //    PCubedFica,
+    //    SignioDecryptDriversLicense,
+    //    LightstoneProperty,
+    //    LightstoneBusinessCompany,
+    //    LightstoneBusinessDirector,
+    //    LightstoneConsumerSpecifications,
+    //    PCubedEzScore,
+    //    BmwFinance
+    //}
 }
