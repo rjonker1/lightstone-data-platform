@@ -266,7 +266,7 @@
     <!-- API  Start -->
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Api.Domain.Core</name>
-      <folder>app/Billing/Billing.Api.Dtos</folder>
+      <folder>app/Api/Api.Domain.Core</folder>
       <author>CustomApp</author>
       <description>Api.Domain.Core</description>
       <includes>
