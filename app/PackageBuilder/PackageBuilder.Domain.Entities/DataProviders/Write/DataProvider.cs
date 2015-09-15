@@ -89,11 +89,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, responseType, fieldLevelCostPriceOverride, version, owner, createdDate, editedDate, requestFields, dataFields));
         }
 
-        public void OverrideCostValuesFromPackage(decimal costOfSale)
-        {
-            CostOfSale = costOfSale;
-        }
-
         private void Apply(DataProviderCreated @event)
         {
             Id = @event.Id;

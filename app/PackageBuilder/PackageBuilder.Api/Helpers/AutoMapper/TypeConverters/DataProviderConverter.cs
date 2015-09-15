@@ -17,11 +17,19 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             _repository = repository;
         }
 
+        /// <summary>
+        /// Maps the current package data provider values onto the latest data provider structure so that at any given time,  
+        /// a package will have the latest changes made to any of the data providers available. eg:
+        /// 
+        /// If a package is created with the 1st initial version of the IVID data provider and 2 months from now the package is 
+        /// edited, this method will map and make the latest structure or changes made to the IVID data provider available to 
+        /// the package.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         protected override DataProvider ConvertCore(IDataProviderOverride source)
         {
             var dataProvider = _repository.GetById(source.Id);
-
-            dataProvider.OverrideCostValuesFromPackage(source.CostOfSale);
 
             dataProvider.RequestFields.ToNamespace().ToList().Cast<DataField>()
                                .RecursiveForEach(x => Mapper.Map(source.RequestFieldOverrides.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault(), x));
