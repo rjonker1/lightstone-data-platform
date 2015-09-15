@@ -45,8 +45,8 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         {
             DataProvider.Name.ShouldEqual(DataProviderName.PCubedFica);
             DataProvider.Description.ShouldEqual("PCubedFica");
-            DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
-            DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);
+            DataProvider.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
+            DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.Date);
             DataProvider.Owner.ShouldEqual("Owner");
             DataProvider.Version.ShouldEqual(2);
             DataProvider.CostOfSale.ShouldEqual(10);

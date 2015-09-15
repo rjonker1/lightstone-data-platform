@@ -47,11 +47,11 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return ividResponse;
                     case DataProviderName.IvidTitleHolder:
                         var ividTitleHolderResponse = new IvidTitleHolderResponse();
-                        ividTitleHolderResponse.Build("WesBank", false, "00009009838", DateTime.Now.AddYears(-10), DateTime.Now.AddYears(-5), "");
+                        ividTitleHolderResponse.Build("WesBank", false, "00009009838", DateTime.UtcNow.AddYears(-10), DateTime.UtcNow.AddYears(-5), "");
                         ividTitleHolderResponse.HasBeenHandled();
                         return ividTitleHolderResponse;
                     case DataProviderName.LightstoneAuto:
-                        var lightstoneAutoResponse = new Lace.Domain.Core.Entities.LightstoneAutoResponse(107483, DateTime.Now.Year, "SB1KV58E40F039277", "", "3rd Quarter", "TOYOTA Auris 1.6 RT 5-dr", "Auris 1.6 RT 5-dr", null);
+                        var lightstoneAutoResponse = new Lace.Domain.Core.Entities.LightstoneAutoResponse(107483, DateTime.UtcNow.Year, "SB1KV58E40F039277", "", "3rd Quarter", "TOYOTA Auris 1.6 RT 5-dr", "Auris 1.6 RT 5-dr", null);
                         lightstoneAutoResponse.HasBeenHandled();
                         return lightstoneAutoResponse;
                     case DataProviderName.Rgt:

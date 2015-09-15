@@ -18,7 +18,7 @@ namespace Api.Domain.Infrastructure.Extensions
                 var iRequest = Mapper.Map<Request, IRequest>(context.Request);
                 var request = JsonConvert.SerializeObject(iRequest);
 
-                log.InfoFormat("Request date {0}: {1}", DateTime.Now, request);
+                log.InfoFormat("Request date {0}: {1}", DateTime.UtcNow, request);
 
                 return null;
             };
@@ -26,7 +26,7 @@ namespace Api.Domain.Infrastructure.Extensions
             pipelines.AfterRequest += context =>
             {
                 var response = Mapper.Map<Response, IResponse>(context.Response);
-                log.InfoFormat("Response date {0}: {1}", DateTime.Now, response);
+                log.InfoFormat("Response date {0}: {1}", DateTime.UtcNow, response);
             };
 
             pipelines.OnError += (context, ex) =>
@@ -34,7 +34,7 @@ namespace Api.Domain.Infrastructure.Extensions
                 var iRequest = Mapper.Map<Request, IRequest>(context.Request);
                 var request = JsonConvert.SerializeObject(iRequest);
 
-                log.ErrorFormat("Request date {0}: {1}", DateTime.Now, request);
+                log.ErrorFormat("Request date {0}: {1}", DateTime.UtcNow, request);
 
                 return HttpStatusCode.InternalServerError;
             };

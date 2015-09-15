@@ -46,8 +46,8 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         {
             DataProvider.Name.ShouldEqual(DataProviderName.LightstoneBusinessCompany);
             DataProvider.Description.ShouldEqual("LightstoneBusinessCompany");
-            DataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
-            DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.Date);
+            DataProvider.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
+            DataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.Date);
             DataProvider.Owner.ShouldEqual("Owner");
             DataProvider.Version.ShouldEqual(2);
             DataProvider.CostOfSale.ShouldEqual(10);
