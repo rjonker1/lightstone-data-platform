@@ -59,9 +59,6 @@ namespace UserManagement.Api.Modules
                     }
                 }
 
-                var test = tokenizer.Tokenize(userIdentity, Context);
-                var userDes = tokenizer.Detokenize(test, Context, new DefaultUserIdentityResolver());
-
                 return userIdentity == null
                     ? HttpStatusCode.Unauthorized
                     : Response.AsText(tokenizer.Tokenize(userIdentity, Context));
@@ -100,7 +97,7 @@ namespace UserManagement.Api.Modules
                 var entity = userRepository.GetByUserName(username);
                 if (entity == null) throw new LightstoneAutoException("Could not find username {0}".FormatWith(username));
                 var token = entity.AssignResetPasswordToken();
-                var url = ConfigurationManager.AppSettings["LiveAutoBaseUrl"] + LiveAutoApiRoute.Authorization.ChangePassword + "/" + token;
+                var url = ConfigurationManager.AppSettings["LiveAutoBaseUrl"] + LiveAutoApiRoute.Authorization.GetChangePassword + "/" + token;
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
                 bus.Publish(new EmailMessage(new[] { entity.UserName }, "Password reset", url));
