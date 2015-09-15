@@ -263,6 +263,22 @@
       </includes>
     </nuget>
 
+    <!-- API  Start -->
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Api.Domain.Core</name>
+      <folder>app/Billing/Billing.Api.Dtos</folder>
+      <author>CustomApp</author>
+      <description>Api.Domain.Core</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Api.Domain.Core.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Api.Domain.Core.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+         <dependency id="Nancy" version="1.1" />
+      </dependencies>
+    </nuget>
+    <!-- API End -->
+
     <!-- BILLING START -->
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Api.Dtos</name>

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
-using Api.Domain.Infrastructure.Dto;
-using Api.Extensions;
+using Api.Domain.Infrastructure.Bus;
+using Api.Domain.Infrastructure.Extensions;
+using Api.Domain.Infrastructure.Messages;
 using Api.Helpers.Validators;
-using Castle.Core.Internal;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -14,7 +13,6 @@ using Nancy.Json;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
-using Shared.BuildingBlocks.Api.Validation;
 
 namespace Api.Modules
 {
@@ -22,7 +20,7 @@ namespace Api.Modules
     {
         private static int _defaultJsonMaxLength;
 
-        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi)
+        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi, IDispatchMessagesToBus<RequestReportMessage> dispatcher)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -52,8 +50,8 @@ namespace Api.Modules
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
                     apiRequest.Validate();
-                    apiRequest.Metadata("127.0.0.1");
                     apiRequest.ContractVersion((long)1.0); //TODO: Set here or in PB?
+                    Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Execute Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
                     var responses = packageBuilderApi.Post(token, "/Packages/Execute", null, apiRequest);
