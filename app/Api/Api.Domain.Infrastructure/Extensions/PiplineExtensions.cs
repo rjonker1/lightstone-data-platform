@@ -1,7 +1,5 @@
 ﻿using System;
 using Api.Domain.Core.Contracts;
-using Api.Domain.Infrastructure.Bus;
-using Api.Domain.Infrastructure.Messages;
 using AutoMapper;
 using Nancy;
 using Nancy.Bootstrapper;

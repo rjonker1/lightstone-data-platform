@@ -5,11 +5,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Billing.Domain.Dtos;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.Responses.Negotiation;
+using Nancy.Security;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
@@ -24,6 +26,8 @@ namespace Billing.Api.Modules
 
         public FinalBillingModule(IRepository<FinalBilling> finalBillingDBRepository, IRepository<UserMeta> userMetaRepository, ICacheProvider<FinalBilling> finalBillingCacheProvider)
         {
+            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+
             _finalBillingDBRepository = finalBillingDBRepository;
             finalBillingRepository = finalBillingCacheProvider.CacheClient.GetAll();
 

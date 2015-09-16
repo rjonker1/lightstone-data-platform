@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Billing.Domain.Dtos;
 using Billing.Domain.Entities;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy;
@@ -14,6 +15,7 @@ using Nancy.Extensions;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Nancy.Security;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Shared.BuildingBlocks.Api.Security;
@@ -37,6 +39,8 @@ namespace Billing.Api.Modules
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction,
                                     ICacheProvider<StageBilling> stageBillingCacheProvider)
         {
+            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
 
