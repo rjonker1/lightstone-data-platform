@@ -27,6 +27,11 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
             StatusCode = statusCode;
             ContentType = "text/html; charset=utf-8";
             Contents = Render;
+
+            // Enable CORS
+            Headers.Add("Access-Control-Allow-Origin", "*");
+            Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+            Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
         }
 
         public string Title { get; set; }
