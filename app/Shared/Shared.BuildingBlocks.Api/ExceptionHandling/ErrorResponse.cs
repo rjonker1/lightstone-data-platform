@@ -13,11 +13,15 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
     {
         readonly Error _error;
 
-        private ErrorResponse(Error error)
-            : base(error, new DefaultJsonSerializer())
+        private ErrorResponse(Error error) : base(error, new DefaultJsonSerializer())
         {
             Guard.AgainstNull(error, "error");
             _error = error;
+
+            // Enable CORS
+            Headers.Add("Access-Control-Allow-Origin", "*");
+            Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+            Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
         }
 
         public string ErrorMessage { get { return _error.ErrorMessage; } }

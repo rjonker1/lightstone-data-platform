@@ -1,13 +1,10 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using Castle.Windsor;
 using MemBus;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
-using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using PackageBuilder.Api.Helpers;
@@ -92,20 +89,7 @@ namespace PackageBuilder.Api
 
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
-            pipelines.AfterRequest.AddItemToEndOfPipeline(GetRedirectToLoginHook());
-
             base.RequestStartup(container, pipelines, context);
-        }
-
-        private static Action<NancyContext> GetRedirectToLoginHook()
-        {
-            return context =>
-            {
-                var contentTypes = context.Request.Headers.FirstOrDefault(x => x.Key == "Accept");
-                var isHtml = (contentTypes.Value.FirstOrDefault(x => x.Contains("text/html")) + "").Any();
-                if (context.Response.StatusCode == HttpStatusCode.Unauthorized && isHtml)
-                    context.Response = context.GetRedirect(ConfigurationManager.AppSettings["cia/auth"]);
-            };
         }
 
         protected override IRootPathProvider RootPathProvider
