@@ -77,6 +77,7 @@ namespace PackageBuilder.Api
                 fromException.Headers.Add("Access-Control-Allow-Origin", "*");
                 fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
                 fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+                fromException.StatusCode = HttpStatusCode.InternalServerError;
                 return fromException;
             });
 
