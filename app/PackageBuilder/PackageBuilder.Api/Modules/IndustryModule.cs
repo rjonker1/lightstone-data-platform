@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using Nancy;
 using Nancy.Extensions;
+using Nancy.Security;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
@@ -20,6 +22,8 @@ namespace PackageBuilder.Api.Modules
     {
         public IndustryModule(IPublishStorableCommands publisher, IRepository<Industry> repository)
         {
+            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
+
             const string industriesRoute = "/Industries";
 
             Get[industriesRoute + "/{industryIds?}"] = parameters =>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using Nancy;
+using Nancy.Security;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
@@ -16,6 +18,8 @@ namespace PackageBuilder.Api.Modules
     {
         public StateModule(IPublishStorableCommands publisher, IRepository<State> repository)
         {
+            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
+
             const string statesRoute = "/States";
 
             Get[statesRoute] = parameters =>

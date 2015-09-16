@@ -17,6 +17,7 @@ using Lim.Domain.Messaging.Publishing;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
+using Nancy.Security;
 using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
@@ -239,6 +240,8 @@ namespace PackageBuilder.Api.Modules
 
             Delete["/Packages/Delete/{id}"] = parameters =>
             {
+                this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+
                 publisher.Publish(new DeletePackage(new Guid(parameters.id)));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " deleted" });
