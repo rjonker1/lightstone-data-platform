@@ -449,6 +449,13 @@ function initializeLookupRoutes(sammy) {
 }
 
 function initializePlugins() {
+    $.ajaxSetup({
+        //crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        }
+    });
+    
     $(".chosen-select").chosen({ width: "100%" });
     $('.input-group.date').bootstrapdatepicker({ autoclose: true, format: "yyyy-mm-dd" });
     UserManagement.panelBodyCollapse();
@@ -654,13 +661,6 @@ function initializePlugins() {
     $('#AccountOwnerId').val(accountOwnerUserId);
     $('#AccountOwnerName').text(accountOwnerUserName);
     $('#accountownerlastname_primary_key').val(accountOwnerUserId);
-    
-    $.ajaxSetup({
-        //crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        }
-    });
 
     var packageLookupUri = '#{Lightstone.dp.pb.api.url}/PackageLookup/';
 

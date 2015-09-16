@@ -1,4 +1,6 @@
-﻿using Nancy;
+﻿using DataPlatform.Shared.Enums;
+using Nancy;
+using Nancy.Security;
 
 namespace Monitoring.Dashboard.UI.Modules
 {
@@ -6,6 +8,8 @@ namespace Monitoring.Dashboard.UI.Modules
     {
         public IndexModule()
         {
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+
             Get["/"] = _ =>
             {
                 // var model = new MonitoringStorageModel(Guid.NewGuid());

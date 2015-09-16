@@ -1,9 +1,11 @@
-﻿using Lim.Domain.Dto;
+﻿using DataPlatform.Shared.Enums;
+using Lim.Domain.Dto;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
 using Lim.Web.UI.Models.LimClients;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Security;
 
 namespace Lim.Web.UI.Modules
 {
@@ -11,6 +13,8 @@ namespace Lim.Web.UI.Modules
     {
         public ClientModule(IHandleGettingIntegrationClient client, IHandleSavingClient save)
         {
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+
             Get["/client/new"] = _ => View["client/client", ClientDto.Create()];
 
             Get["/client/edit/{id}"] = _ => View["client/client", LimClientView.Existing(client, new GetIntegrationClient(_.Id))];

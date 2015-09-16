@@ -1,7 +1,9 @@
 ﻿using System.Text;
+using DataPlatform.Shared.Enums;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
 using Monitoring.Dashboard.UI.Core.Extensions;
 using Nancy;
+using Nancy.Security;
 
 namespace Monitoring.Dashboard.UI.Modules
 {
@@ -9,6 +11,7 @@ namespace Monitoring.Dashboard.UI.Modules
     {
         public DataProviderModule(ICallMonitoringService service)
         {
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             Get["/dataProviders/log"] = _ => View["DataProviders"];
 
