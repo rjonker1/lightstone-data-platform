@@ -42,8 +42,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             var debitOrderNotDoneReportList = new List<ReportDto>();
             var debitOrderNotDoneRecordList = new List<ReportDebitOrder>();
 
-            var endBillMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
-            var startBillMonth = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
+            var endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
+            var startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
 
             var pastelCounter = 1;
 

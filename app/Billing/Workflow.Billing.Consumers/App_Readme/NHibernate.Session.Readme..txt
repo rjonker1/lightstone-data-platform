@@ -56,5 +56,5 @@ void Application_EndRequest(Object source, EventArgs e)
 //usage:
 
 var c = new Cat("meow") 
-{ BirthDate = DateTime.Now.AddYears(-2), Gender = "Female", Name = "Fluffy" };
+{ BirthDate = DateTime.UtcNow.AddYears(-2), Gender = "Female", Name = "Fluffy" };
 UnitOfWork.Session.Save(c);

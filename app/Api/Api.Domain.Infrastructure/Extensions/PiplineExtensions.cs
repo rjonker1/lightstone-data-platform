@@ -19,7 +19,7 @@ namespace Api.Domain.Infrastructure.Extensions
             {
                 var iRequest = Mapper.Map<Request, IRequest>(context.Request);
                 var request = JsonConvert.SerializeObject(iRequest);
-                log.InfoFormat("Request date {0}: {1}", DateTime.Now, request);
+                log.InfoFormat("Request date {0}: {1}", DateTime.UtcNow, request);
                 return null;
             };
 

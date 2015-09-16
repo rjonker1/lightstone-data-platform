@@ -39,8 +39,8 @@ namespace Billing.Api.Modules
             //{
                 //var results = new Hashtable();
 
-                //var lastMonthBillingEnd = new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 26);
-                //var monthBillingEnd = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
+                //var lastMonthBillingEnd = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month - 1, 26);
+                //var monthBillingEnd = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25);
 
 
                 ////var totalCustomers = customers.Select(x => x.Transactions

@@ -35,8 +35,8 @@ namespace Billing.Api.Modules
             _preBillingDBRepository = preBillingDBRepository;
             _preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();
 
-            var endDateFilter = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
-            var startDateFilter = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
+            var endDateFilter = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25);
+            var startDateFilter = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
 
             Before += async (ctx, ct) =>
             {
@@ -238,7 +238,7 @@ namespace Billing.Api.Modules
 
                 var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
 
-                response.WithCookie("fileDownload", "true", DateTime.Now.AddSeconds(10), "", "/");
+                response.WithCookie("fileDownload", "true", DateTime.UtcNow.AddSeconds(10), "", "/");
 
                 return response.AsAttachment(fileName);
             };

@@ -27,8 +27,8 @@ namespace Billing.Api.Modules
             _finalBillingDBRepository = finalBillingDBRepository;
             finalBillingRepository = finalBillingCacheProvider.CacheClient.GetAll();
 
-            var endDateFilter = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
-            var startDateFilter = new DateTime(DateTime.Now.Year, (DateTime.Now.Month - 1), 26);
+            var endDateFilter = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25);
+            var startDateFilter = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
 
             Before += async (ctx, ct) =>
             {

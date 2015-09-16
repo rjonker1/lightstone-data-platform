@@ -28,7 +28,7 @@ namespace Billing.Api.Tests.Api.Transaction
 
                 if (!(this is AsUnautorisedUser))
                 {
-                    with.Header("apikey", DateTime.Now.Millisecond.ToString());
+                    with.Header("apikey", DateTime.UtcNow.Millisecond.ToString());
                 }
 
             };
