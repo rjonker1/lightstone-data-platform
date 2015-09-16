@@ -1,18 +1,18 @@
-﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
+﻿using Billing.TestHelper.BaseTests;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
-using Workflow.BuildingBlocks;
 using Xunit.Extensions;
 
-namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
+namespace Billing.Api.Tests.Consumers.EasyNetQ
 {
-    public class when_publishing_stage_bill_run : Specification
+    public class when_publishing_final_bill_run : BaseTestHelper
     {
         private readonly IAdvancedBus _bus;
 
-        public when_publishing_stage_bill_run()
+        public when_publishing_final_bill_run()
         {
-            _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
+            _bus = Container.Resolve<IAdvancedBus>();
         }
 
         public override void Observe()
@@ -21,7 +21,7 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
 
             var billRun = new BillingMessage()
             {
-                RunType = "Stage",
+                RunType = "Final",
                 Schedule = null
             };
 

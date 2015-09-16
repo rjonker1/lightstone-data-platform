@@ -37,6 +37,8 @@ namespace Api.Modules
 
             Post["/action"] = parameters =>
             {
+                if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"])) return Response.AsJson(new { data = "Service unavailable - Maintenance in progress" }, HttpStatusCode.ServiceUnavailable);
+                
                 try
                 {
                     this.Info(() => "Api action started. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
@@ -64,11 +66,11 @@ namespace Api.Modules
                 }
                 catch (LightstoneAutoException ex)
                 {
-                    return Response.AsJson(new {error = ex.Message});
+                    return Response.AsJson(new { error = ex.Message });
                 }
                 catch (TargetInvocationException)
                 {
-                    return Response.AsJson(new {error = "Ensure all properties are populated"});
+                    return Response.AsJson(new { error = "Ensure all properties are populated" });
                 }
             };
         }

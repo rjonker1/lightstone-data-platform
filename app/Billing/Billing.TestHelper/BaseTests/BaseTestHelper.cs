@@ -22,7 +22,9 @@ namespace Billing.TestHelper.BaseTests
                 new ConsumerInstaller(),
                 new BusInstaller(),
                 new PublishReportQueueInstaller(),
-                new PivotInstaller());
+                new PivotInstaller(),
+                new ReportBuilderInstaller(),
+                new NotificationInstaller());
 
             //OverrideHelper.OverrideNhibernateCfg(Container);
         }

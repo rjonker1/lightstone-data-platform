@@ -133,7 +133,7 @@
     </Compile>
     <Compile Include="ConsumerTypes\BillCacheConsumer.cs" />
     <Compile Include="ConsumerTypes\BillRunConsumer.cs" />
-    <Compile Include="ConsumerTypes\BillTransactionConsumer.cs" />
+    <None Include="ConsumerTypes\BillTransactionConsumer.cs.old" />
     <Compile Include="ConsumerTypes\ClientConsumer.cs" />
     <Compile Include="ConsumerTypes\ContractConsumer.cs" />
     <Compile Include="ConsumerTypes\CustomerConsumer.cs" />
