@@ -130,6 +130,8 @@
 
                 (data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
                 reSize(data.length);
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         }
         
