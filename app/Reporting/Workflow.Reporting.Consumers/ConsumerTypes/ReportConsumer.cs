@@ -25,7 +25,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
 
         public async Task Consume(IMessage<ReportMessage> message)
         {
-            var date = DateTime.Now.ToString("MMMM yyyy");
+            var date = DateTime.UtcNow.ToString("MMMM yyyy");
             var dto = JsonConvert.DeserializeObject<ReportDto>(message.Body.ReportBody);
             var path = @"D:\LSA Reports\Invoices " + date;
 
