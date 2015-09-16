@@ -10,9 +10,8 @@ using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Nancy.Security;
+using Shared.BuildingBlocks.Api.Extensions;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -192,7 +191,7 @@ namespace UserManagement.Api.Modules
 
             Delete["/Users/{id}"] = _ =>
             {
-                this.RequiresRoles(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+                this.RequiresRequestClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
                 var dto = this.Bind<UserDto>();
                 var entity = userRepository.Get(dto.Id);

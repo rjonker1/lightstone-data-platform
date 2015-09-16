@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Repositories;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Nancy.Security;
+using Shared.BuildingBlocks.Api.Extensions;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.ViewModels;
-using UserManagement.Domain.CommandHandlers.Contracts;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Entities.Commands.Contracts;
 using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Repositories;
@@ -111,7 +107,7 @@ namespace UserManagement.Api.Modules
 
             Delete["/Contracts/{id}"] = _ =>
             {
-                this.RequiresRoles(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+                this.RequiresRequestClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
                 var dto = this.Bind<ContractDto>();
                 var entity = contracts.Get(dto.Id);

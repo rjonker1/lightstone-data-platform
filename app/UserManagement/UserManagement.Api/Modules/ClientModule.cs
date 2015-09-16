@@ -7,9 +7,8 @@ using DataPlatform.Shared.Helpers;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Nancy.Security;
+using Shared.BuildingBlocks.Api.Extensions;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
@@ -191,7 +190,7 @@ namespace UserManagement.Api.Modules
 
             Delete["/Clients/{id}"] = _ =>
             {
-                this.RequiresRoles(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+                this.RequiresRequestClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
                 var dto = this.Bind<ClientDto>();
                 var entity = clientRepository.Get(dto.Id);
