@@ -39,7 +39,7 @@ namespace Billing.Api.Modules
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction,
                                     ICacheProvider<StageBilling> stageBillingCacheProvider)
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;

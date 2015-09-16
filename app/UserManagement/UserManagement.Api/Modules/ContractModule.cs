@@ -108,7 +108,7 @@ namespace UserManagement.Api.Modules
 
             Delete["/Contracts/{id}"] = _ =>
             {
-                this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+                this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
                 var dto = this.Bind<ContractDto>();
                 var entity = contracts.Get(dto.Id);

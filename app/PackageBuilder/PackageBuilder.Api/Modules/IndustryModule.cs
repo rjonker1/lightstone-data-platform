@@ -22,7 +22,7 @@ namespace PackageBuilder.Api.Modules
     {
         public IndustryModule(IPublishStorableCommands publisher, IRepository<Industry> repository)
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
 
             const string industriesRoute = "/Industries";
 

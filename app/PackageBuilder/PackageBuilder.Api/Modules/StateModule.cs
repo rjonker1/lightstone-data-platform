@@ -18,7 +18,7 @@ namespace PackageBuilder.Api.Modules
     {
         public StateModule(IPublishStorableCommands publisher, IRepository<State> repository)
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
 
             const string statesRoute = "/States";
 

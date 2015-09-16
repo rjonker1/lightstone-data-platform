@@ -34,7 +34,7 @@ namespace Billing.Api.Modules
                                 IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider,
                                 IReportApiClient reportApiClient)
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             _preBillingDBRepository = preBillingDBRepository;
             _preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();

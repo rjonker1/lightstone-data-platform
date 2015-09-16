@@ -19,7 +19,7 @@ namespace Billing.Api.Modules
     {
         public AdminBillingModule(IRepository<AuditLog> auditLogs, IRepository<Transaction> transactions, IAdvancedBus eBus)
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             var advancedBus = new TransactionBus(eBus);
 

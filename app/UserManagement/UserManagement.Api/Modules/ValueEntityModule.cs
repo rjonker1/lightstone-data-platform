@@ -23,7 +23,7 @@ namespace UserManagement.Api.Modules
     {
         public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
 
             Get["/ValueEntities/{type}"] = parameters =>
             {

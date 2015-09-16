@@ -26,7 +26,7 @@ namespace Billing.Api.Modules
 
         public FinalBillingModule(IRepository<FinalBilling> finalBillingDBRepository, IRepository<UserMeta> userMetaRepository, ICacheProvider<FinalBilling> finalBillingCacheProvider)
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             _finalBillingDBRepository = finalBillingDBRepository;
             finalBillingRepository = finalBillingCacheProvider.CacheClient.GetAll();

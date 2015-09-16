@@ -240,7 +240,7 @@ namespace PackageBuilder.Api.Modules
 
             Delete["/Packages/Delete/{id}"] = parameters =>
             {
-                this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+                this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
                 publisher.Publish(new DeletePackage(new Guid(parameters.id)));
 

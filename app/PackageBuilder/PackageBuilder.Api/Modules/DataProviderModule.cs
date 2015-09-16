@@ -31,7 +31,7 @@ namespace PackageBuilder.Api.Modules
             IDataProviderRepository readRepo,
             INEventStoreRepository<DataProvider> writeRepo, IRepository<State> stateRepo)
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;

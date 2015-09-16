@@ -10,7 +10,7 @@ namespace Billing.Api.Modules
     {
         public IndexModule()
         {
-            this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             Get["/"] = parameters =>
             {
