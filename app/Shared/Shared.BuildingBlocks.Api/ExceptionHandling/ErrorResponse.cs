@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Authentication;
 using DataPlatform.Shared.ExceptionHandling;
 using Nancy.Responses;
 using Newtonsoft.Json;
@@ -46,6 +47,11 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
             else if (exception is NotImplementedException)
                 statusCode = HttpStatusCode.NotImplemented;
             else if (exception is UnauthorizedAccessException)
+            {
+                statusCode = HttpStatusCode.Forbidden;
+                error.ErrorMessage = "Sorry, you do not have permission to perform that action. Please contact Lightstone Auto.";
+            }
+            else if (exception is AuthenticationException)
                 statusCode = HttpStatusCode.Unauthorized;
             else if (exception is ArgumentException)
                 statusCode = HttpStatusCode.BadRequest;

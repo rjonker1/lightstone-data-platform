@@ -50,11 +50,6 @@ namespace UserManagement.Api
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            //pipelines.BeforeRequest.AddItemToStartOfPipeline((ctx, response) =>
-            //{
-
-            //    return null;
-            //});
             pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
                 this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
@@ -74,6 +69,7 @@ namespace UserManagement.Api
                     
                 return null;
             });
+
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {

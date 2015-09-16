@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
 using AutoMapper;
 using Castle.Windsor;
@@ -11,7 +10,6 @@ using EasyNetQ;
 using Nancy;
 using Nancy.Bootstrapper;
 using NHibernate;
-using NHibernate.Util;
 using UserManagement.Api.Helpers.NancyRazorHelpers;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using Nancy;
 using Nancy.ErrorHandling;
 using Nancy.Responses;
@@ -37,7 +38,7 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
             switch (statusCode)
             {
                 case HttpStatusCode.Unauthorized:
-                    context.Response = new RedirectResponse("");
+                    context.Response = new RedirectResponse(ConfigurationManager.AppSettings["cia/auth"]);
                     break;
                 case HttpStatusCode.Forbidden:
                     context.Response = new ErrorHtmlPageResponse(statusCode)

@@ -609,6 +609,8 @@
     <Compile Include="Helpers\AutoMapper\Maps\Entities\EntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\Extensions\EnumExtensions.cs" />
+    <Compile Include="Helpers\Extensions\ModuleExtensions.cs" />
+    <Compile Include="Helpers\Extensions\ModuleHooks.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Helpers\NancyRazorHelpers\EditorExtensions.cs" />
     <Compile Include="Helpers\NancyRazorHelpers\Extensions\ExpressionExtensions.cs" />
