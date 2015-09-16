@@ -1,10 +1,10 @@
-﻿using MemBus;
+﻿using DataPlatform.Shared.Enums;
+using MemBus;
 using UserManagement.Domain.Core.Helpers;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Entities.Commands.Roles;
-using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.CommandHandlers.Roles
 {

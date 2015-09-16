@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers;
 using Nancy;
 using Nancy.ModelBinding;

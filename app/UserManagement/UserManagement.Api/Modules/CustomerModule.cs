@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
