@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 

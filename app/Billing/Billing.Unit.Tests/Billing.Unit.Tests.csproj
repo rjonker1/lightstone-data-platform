@@ -199,8 +199,26 @@
     <Compile Include="Api\Transaction\when_creating_a_new_billing_transaction.cs" />
     <Compile Include="Api\Transaction\when_creating_a_new_billing_transaction_and_a_failure_occurs.cs" />
     <Compile Include="Api\Transaction\when_creating_a_new_billing_transaction_as_an_unauthorised_user.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_publishing_cache_flush.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_publishing_cache_reload.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_publishing_final_bill_run.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_publishing_new_client_to_queue.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_publishing_new_customer_to_queue.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_publishing_new_package_to_queue.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_publishing_new_transaction_to_queue.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_publishing_stage_bill_run.cs" />
+    <Compile Include="Consumers\EasyNetQ\when_registering_multiple_exchanges_queues_for_message_types.cs" />
     <Compile Include="Consumers\Entity\when_executing_bill_run_from_pre_to_stage.cs" />
     <Compile Include="Consumers\Entity\when_receiving_new_user_message.cs" />
+    <Compile Include="Workflow\AutoMapperMaps\when_using_mapping_within_billing.cs" />
+    <Compile Include="Workflow\Schedules\when_invoking_final_billing_flush_cache_schedule.cs" />
+    <Compile Include="Workflow\Schedules\when_invoking_final_billing_reload_cache_schedule.cs" />
+    <Compile Include="Workflow\Schedules\when_invoking_final_message_schedule.cs" />
+    <Compile Include="Workflow\Schedules\when_invoking_pre_billing_flush_cache_schedule.cs" />
+    <Compile Include="Workflow\Schedules\when_invoking_pre_billing_reload_cache_schedule.cs" />
+    <Compile Include="Workflow\Schedules\when_invoking_stage_billing_flush_cache_schedule.cs" />
+    <Compile Include="Workflow\Schedules\when_invoking_stage_billing_reload_cache_schedule.cs" />
+    <Compile Include="Workflow\Schedules\when_invoking_stage_message_schedule.cs" />
     <Compile Include="Workflow\when_installing_repository_dependencies.cs" />
     <Compile Include="Workflow\when_installing_cache_provider_dependency.cs" />
   </ItemGroup>

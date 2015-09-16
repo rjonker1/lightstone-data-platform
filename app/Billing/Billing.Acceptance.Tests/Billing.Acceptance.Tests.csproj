@@ -153,24 +153,27 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Fixtures\RebuildBillingEnvironment.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_client_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_contract_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_customer_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_final_billing_cache_flush_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_final_billing_cache_reload_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_final_billing_run_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_invoice_transaction_created_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_package_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_pre_billing_cache_flush_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_pre_billing_cache_reload_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_stage_billing_cache_flush_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_stage_billing_cache_reload_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_stage_billing_run_message.cs" />
+    <Compile Include="Transaction\Billing\Consumers\when_consuming_user_message.cs" />
     <Compile Include="Transaction\Billing\when_persisting_transaction_archive.cs" />
     <Compile Include="Transaction\Billing\when_replaying_transactions_to_billingTransaction.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_publishing_cache_flush.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_publishing_cache_reload.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_publishing_new_client_to_queue.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_publishing_new_customer_to_queue.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_publishing_new_package_to_queue.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_publishing_new_transaction_to_queue.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_publishing_final_bill_run.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_publishing_stage_bill_run.cs" />
-    <Compile Include="Transaction\EasyNetQ\when_registering_multiple_exchanges_queues_for_message_types.cs" />
-    <Compile Include="Transaction\when_create_a_new_transaction.cs" />
     <Compile Include="Transaction\Billing\when_persisting_prebilling_transaction.cs" />
-    <Compile Include="Transaction\when_persisting_new_customer_client.cs" />
-    <Compile Include="Transaction\when_persisting_product.cs" />
+    <Compile Include="Transaction\Billing\Meta\when_persisting_new_account_meta.cs" />
+    <Compile Include="Transaction\Billing\Meta\when_persisting_package_meta.cs" />
     <Compile Include="Transaction\Billing\when_persisting_stagebilling_transaction.cs" />
-    <Compile Include="Transaction\when_persisting_transaction_with_products.cs" />
-    <Compile Include="Transaction\when_persisting_user.cs" />
+    <Compile Include="Transaction\Billing\Meta\when_persisting_user_meta.cs" />
     <Compile Include="Workflow\when_implementing_cache_provider.cs" />
     <Compile Include="Workflow\when_persisting_finalBilling_repository_with_cache.cs" />
     <Compile Include="Workflow\when_persisting_stageBilling_repository_with_cache.cs" />
@@ -201,6 +204,10 @@
     <ProjectReference Include="..\Billing.TestHelper\Billing.TestHelper.csproj">
       <Project>{920B81A8-7088-4E8B-8170-228906CD127E}</Project>
       <Name>Billing.TestHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Billing.Consumers\Workflow.Billing.Consumers.csproj">
+      <Project>{7BA3EBC5-1B9C-44BD-848A-C8D15C25A216}</Project>
+      <Name>Workflow.Billing.Consumers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
       <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>

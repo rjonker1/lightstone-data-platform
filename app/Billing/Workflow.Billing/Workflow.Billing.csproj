@@ -209,7 +209,6 @@
     <Compile Include="Helpers\AutoMapper\Maps\FinalBIllingMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\FinalBillingUserDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviderMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PackageMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PackageMetaMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />

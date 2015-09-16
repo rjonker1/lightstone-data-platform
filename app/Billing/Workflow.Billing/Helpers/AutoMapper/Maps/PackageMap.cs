@@ -4,7 +4,7 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Helpers.AutoMapper.Maps
 {
-    public class PackageMap : ICreateAutoMapperMaps
+    public class PackageMap : Profile, ICreateAutoMapperMaps
     {
         public void CreateMaps()
         {

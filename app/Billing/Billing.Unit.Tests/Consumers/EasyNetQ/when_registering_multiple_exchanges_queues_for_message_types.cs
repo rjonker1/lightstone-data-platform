@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Billing.TestHelper.BaseTests;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
-using Workflow.BuildingBlocks;
 using Xunit.Extensions;
 
-namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
+namespace Billing.Api.Tests.Consumers.EasyNetQ
 {
-    public class when_registering_multiple_exchanges_queues_for_message_types : Specification
+    public class when_registering_multiple_exchanges_queues_for_message_types : BaseTestHelper
     {
         private readonly IAdvancedBus _bus;
         private InvoiceTransactionCreated transaction;
 
         public when_registering_multiple_exchanges_queues_for_message_types()
         {
-            _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
+            _bus = Container.Resolve<IAdvancedBus>();
         }
 
         public override void Observe()
