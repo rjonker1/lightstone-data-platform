@@ -70,8 +70,6 @@
     <Compile Include="ExceptionHandling\ErrorResponse.cs" />
     <Compile Include="ExceptionHandling\ErrorStatusCodeHandler.cs" />
     <Compile Include="ApiClients\PackageBuilderApiClient.cs" />
-    <Compile Include="Extensions\ModuleExtensions.cs" />
-    <Compile Include="Security\ModuleHooks.cs" />
     <Compile Include="Security\SecureModule.cs" />
     <Compile Include="ApiClients\UserIdentity.cs" />
     <Compile Include="CannedResponses.cs" />
