@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Lim.Domain.Extensions;
 
 namespace Lim.Domain.Messaging.Messages
 {
@@ -10,7 +11,7 @@ namespace Lim.Domain.Messaging.Messages
             PackageId = packageId;
             UserId = userId;
             ContractId = contractId;
-            AccountNumber = !string.IsNullOrEmpty(accountNumber) && HasDigit(accountNumber) ? int.Parse(string.Join("", accountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1;
+            AccountNumber = accountNumber.HasDigit() ? (string.Join("", accountNumber.Where(Char.IsNumber)).TrimStart('0')).Check() : -1;
             ResponseDate = DateTime.UtcNow;
             RequestId = requestId;
         }

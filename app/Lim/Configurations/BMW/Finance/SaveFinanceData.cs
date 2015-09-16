@@ -37,6 +37,9 @@ namespace Toolbox.Bmw.Finance
                 using (var session = BmwFactoryManager.BmwInstance.OpenSession())
                 using (var transaction = session.BeginTransaction())
                 {
+
+                    session.Delete("delete from Finances");
+
                     foreach (var entity in financeEntities)
                     {
                         session.Save(entity);

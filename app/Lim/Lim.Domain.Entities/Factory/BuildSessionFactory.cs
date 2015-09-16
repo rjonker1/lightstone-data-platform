@@ -24,7 +24,7 @@ namespace Lim.Domain.Entities.Factory
         private static ISessionFactory BuildSession()
         {
             return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(Configurations.Lim.ConnectionString))
+                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.Lim.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.ActionTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.AuthenticationTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.FrequencyTypeMap>())
@@ -39,7 +39,7 @@ namespace Lim.Domain.Entities.Factory
                 .Mappings(m => m.FluentMappings.Add<Maps.AuditApiIntegrationMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.IntegrationTrackingMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.PackageMetadataMap>())
-                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false,true))
+                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.Lim.UpdateDatabase))
                 .BuildSessionFactory();
         }
 
@@ -47,7 +47,7 @@ namespace Lim.Domain.Entities.Factory
         {
             return Fluently.Configure()
                 .Database(
-                    MsSqlConfiguration.MsSql2012.ConnectionString(Configurations.Lim.ConnectionString))
+                    MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.Lim.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.ActionTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.AuthenticationTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.FrequencyTypeMap>())
@@ -62,7 +62,7 @@ namespace Lim.Domain.Entities.Factory
                 .Mappings(m => m.FluentMappings.Add<Maps.AuditApiIntegrationMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.IntegrationTrackingMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.PackageMetadataMap>())
-                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, true))
+                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.Lim.UpdateDatabase))
                 .BuildConfiguration();
         }
     }

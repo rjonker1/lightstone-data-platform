@@ -70,6 +70,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
@@ -81,24 +82,38 @@
     <Compile Include="Commands\FetchConfiguration.cs" />
     <Compile Include="Commands\TrackIntegration.cs" />
     <Compile Include="Handlers\HandleExecutingApiConfiguration.cs" />
+    <Compile Include="Handlers\HandleExecutingFlatFileConfiguration.cs" />
     <Compile Include="Handlers\HandleFetchingApiPullConfiguration.cs" />
     <Compile Include="Handlers\HandleFetchingApiPushConfiguration.cs" />
+    <Compile Include="Handlers\HandleFetchingFlatFilePullConfiguration.cs" />
     <Compile Include="Identifiers\ApiAuthenticationIdentifier.cs" />
     <Compile Include="Identifiers\ApiAuthenticationTypeIdentifier.cs" />
     <Compile Include="Identifiers\ApiConfigurationIdentifier.cs" />
     <Compile Include="Identifiers\ApiIdentifiers.cs" />
     <Compile Include="Identifiers\ApiPullIntegration.cs" />
     <Compile Include="Identifiers\ClientIdentifier.cs" />
+    <Compile Include="Identifiers\FlatFileIndentifier.cs" />
+    <Compile Include="Identifiers\FlatFilePullIntegration.cs" />
     <Compile Include="Identifiers\IntegrationActionIdentifiers.cs" />
     <Compile Include="Identifiers\IntegrationClientIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationFrequencyIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationPackageIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationTypeIdentifier.cs" />
+    <None Include="app.config" />
+    <None Include="Identifiers\ZippedFileIndentifier.cs.delete" />
     <Compile Include="IHandleConfigurationExecution.cs" />
     <Compile Include="IHandleFetchingConfiguration.cs" />
     <Compile Include="Tracking\ITrackIntegration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configurations\BMW\BMW.Entities\Toolbox.Bmw.Entities.csproj">
+      <Project>{ac7a58b5-bc2a-40dc-8b8f-ffc6d3d51775}</Project>
+      <Name>Toolbox.Bmw.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Configurations\BMW\Toolbox.Bmw.csproj">
+      <Project>{9ce35e56-55a7-4c15-82ad-1ed6ec631945}</Project>
+      <Name>Toolbox.Bmw</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
       <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
       <Name>Lim.Domain.Entities</Name>

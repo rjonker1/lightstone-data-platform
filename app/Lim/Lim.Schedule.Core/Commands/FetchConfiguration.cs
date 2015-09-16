@@ -18,6 +18,20 @@ namespace Lim.Schedule.Core.Commands
         public readonly Frequency Frequency;
     }
 
+    public class FetchConfigurationForAlwaysOnCommand
+    {
+        public FetchConfigurationForAlwaysOnCommand(IntegrationAction action, IntegrationType type, Frequency frequency)
+        {
+            Type = type;
+            Action = action;
+            Frequency = frequency;
+        }
+
+        public readonly IntegrationType Type;
+        public readonly IntegrationAction Action;
+        public readonly Frequency Frequency;
+    }
+
     public class FetchConfigurationForCustomCommand
     {
         public FetchConfigurationForCustomCommand(IntegrationAction action, IntegrationType type, Frequency frequency, string customDay)

@@ -23,20 +23,25 @@ namespace Toolbox.Bmw.Entities.Factory
         {
             return Fluently.Configure()
                 .Database(
-                    MsSqlConfiguration.MsSql2012.ConnectionString(Configurations.Bmw.ConnectionString))
+                    MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.Bmw.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.FinanceMap>())
-                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, true))
+                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.Bmw.UpdateDatabase))
                 .BuildSessionFactory();
         }
 
-        public static NHibernate.Cfg.Configuration BuildConfiguration(string connectionString)
+        public static BmwConfiguration BuildConfiguration()
         {
-            return Fluently.Configure()
+            return (BmwConfiguration)Fluently.Configure()
                 .Database(
-                    MsSqlConfiguration.MsSql2012.ConnectionString(
-                        System.Configuration.ConfigurationManager.ConnectionStrings[connectionString].ConnectionString))
-                .Mappings(m => m.FluentMappings.Add<Maps.FinanceMap>()).ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, true))
+                    MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.Bmw.ConnectionString))
+                .Mappings(m => m.FluentMappings.Add<Maps.FinanceMap>())
+                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.Bmw.UpdateDatabase))
                 .BuildConfiguration();
         }
+    }
+
+    public class BmwConfiguration : NHibernate.Cfg.Configuration
+    {
+        
     }
 }

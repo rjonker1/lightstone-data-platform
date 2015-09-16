@@ -113,14 +113,17 @@
     <Compile Include="Consumers\ReceiverConsumers.cs" />
     <Compile Include="Consumers\SenderConsumers.cs" />
     <Compile Include="Installers\AuditInstallers.cs" />
+    <Compile Include="Installers\BmwInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
     <Compile Include="Installers\DatabaseInstaller.cs" />
+    <Compile Include="Installers\FactoryInstaller.cs" />
     <Compile Include="Installers\HandlerInstaller.cs" />
     <Compile Include="Installers\JobInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\TrackingInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Jobs\Integrations\AlwaysOn\FlatFile\PullJob.cs" />
     <Compile Include="Jobs\Integrations\Custom\Api\PullJob.cs" />
     <Compile Include="Jobs\Integrations\Custom\Api\PushJob.cs" />
     <Compile Include="Jobs\Integrations\Daily\Api\PullJob.cs" />
@@ -132,6 +135,10 @@
     <Compile Include="Jobs\JobFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Reader\ConfigurationReader.cs" />
+    <Compile Include="Resolvers\BackupFileResolver.cs" />
+    <Compile Include="Resolvers\DirectoryWatcherResolver.cs" />
+    <Compile Include="Resolvers\PersistFactoryResolver.cs" />
+    <Compile Include="Resolvers\ReadFileFactoryResolver.cs" />
     <Compile Include="ScheduleWorker.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +253,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configurations\BMW\BMW.Entities\Toolbox.Bmw.Entities.csproj">
+      <Project>{ac7a58b5-bc2a-40dc-8b8f-ffc6d3d51775}</Project>
+      <Name>Toolbox.Bmw.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Configurations\BMW\Toolbox.Bmw.csproj">
+      <Project>{9ce35e56-55a7-4c15-82ad-1ed6ec631945}</Project>
+      <Name>Toolbox.Bmw</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
       <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
       <Name>Lim.Domain.Entities</Name>

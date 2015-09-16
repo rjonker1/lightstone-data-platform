@@ -50,14 +50,16 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Core\IBackupFile.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\IPersistObject.cs" />
     <Compile Include="Core\IReadFile.cs" />
+    <Compile Include="Core\IWatchDirectory.cs" />
     <Compile Include="Enums\Integrations.cs" />
     <Compile Include="Enums\Times.cs" />
     <Compile Include="Infrastructure\AbstractConfigurationReader.cs" />
     <Compile Include="Infrastructure\BmwConfiguration.cs" />
-    <Compile Include="Infrastructure\Configurations.cs" />
+    <Compile Include="Infrastructure\ConfigurationReader.cs" />
     <Compile Include="Infrastructure\LimConfiguration.cs" />
   </ItemGroup>
   <ItemGroup />

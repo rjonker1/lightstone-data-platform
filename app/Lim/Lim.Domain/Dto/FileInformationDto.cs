@@ -3,21 +3,21 @@
 namespace Lim.Domain.Dto
 {
     [DataContract]
-    public class ConfigurationForZippedExcelFileDto
+    public class FileInformationDto
     {
-        public ConfigurationForZippedExcelFileDto(string filePath, string zippedFileName, string fileName, string password)
+        public FileInformationDto(string filePath, string fileName, string password, string fileExtension, bool firstRowIsColumn)
         {
             FilePath = filePath;
-            ZippedFileName = zippedFileName;
             FileName = fileName;
             Password = password;
+            FileExtension = fileExtension;
+            FirstRowIsColumnName = firstRowIsColumn;
         }
 
         [DataMember] public readonly string FilePath;
-        [DataMember] public readonly string ZippedFileName;
-        [DataMember] public readonly string ZippedFilePath;
         [DataMember] public readonly string FileName;
         [DataMember] public readonly string Password;
         [DataMember] public readonly bool FirstRowIsColumnName;
+        [DataMember] public readonly string FileExtension;
     }
 }

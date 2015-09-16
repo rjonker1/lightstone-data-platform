@@ -1,8 +1,8 @@
 ﻿namespace Lim.Infrastructure
 {
-    public static class Configurations
+    public static class ConfigurationReader
     {
-        static Configurations()
+        static ConfigurationReader()
         {
             Bmw = new BmwConfiguration();
             Lim = new LimConfiguration();

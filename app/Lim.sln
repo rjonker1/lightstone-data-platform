@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Bmw.Entities", "Lim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Emailing", "Lim\Toolbox.Emailing\Toolbox.Emailing.csproj", "{73F1DC06-BFA6-446B-B77F-296BF526DD16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.IO", "Lim\Toolbox.IO\Toolbox.IO.csproj", "{459709BF-547F-4EC7-B529-A92A469B7223}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -243,6 +245,16 @@ Global
 		{73F1DC06-BFA6-446B-B77F-296BF526DD16}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{73F1DC06-BFA6-446B-B77F-296BF526DD16}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{73F1DC06-BFA6-446B-B77F-296BF526DD16}.Test|Any CPU.Build.0 = Release|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{459709BF-547F-4EC7-B529-A92A469B7223}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,4 +8,11 @@ namespace Lim.Schedule.Core
         void Handle(ExecuteApiPullConfigurationCommand command);
         bool IsHandled { get; }
     }
+
+    public interface IHandleExecutingFlatFileConfiguration
+    {
+        void Handle(ExecuteFlatFilePullConfigurationCommand command);
+        void Handle(ExecuteFlatFilePushConfigurationCommand command);
+        bool IsHandled { get; }
+    }
 }

@@ -4,6 +4,8 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Entities.Repository;
+using Lim.Schedule.Service.Resolvers;
+using Toolbox.Bmw.Finance;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -15,6 +17,13 @@ namespace Lim.Schedule.Service.Installers
         {
             _log.InfoFormat("Installing Repositories");
             container.Register(Component.For<IRepository>().UsingFactoryMethod(() => new LimRepository()));
+
+            container.Register(Classes.FromAssemblyContaining<SaveFinanceData>()
+               .BasedOn(typeof(IPersistObject<>))
+               .WithServiceAllInterfaces()
+               .LifestyleTransient());
+
+         
             _log.InfoFormat("Repositories Installed");
         }
     }

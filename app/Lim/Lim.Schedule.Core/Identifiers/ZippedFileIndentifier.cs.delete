@@ -1,0 +1,22 @@
+﻿using System.Runtime.Serialization;
+
+namespace Lim.Schedule.Core.Identifiers
+{
+    [DataContract]
+    public class ZippedFileIndentifier
+    {
+
+        public ZippedFileIndentifier(string filePath, string fileName, string password, bool hasPassword)
+        {
+            FilePath = filePath;
+            FileName = fileName;
+            Password = password;
+            HasPassword = hasPassword;
+        }
+
+        [DataMember] public readonly string FilePath;
+        [DataMember] public readonly string FileName;
+        [DataMember] public readonly string Password;
+        [DataMember] public readonly bool HasPassword;
+    }
+}

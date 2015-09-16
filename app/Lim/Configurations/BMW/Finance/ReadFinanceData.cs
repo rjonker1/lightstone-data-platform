@@ -13,23 +13,23 @@ using Toolbox.Bmw.Extensions;
 
 namespace Toolbox.Bmw.Finance
 {
-    public class ReadFinanceDataFactory : AbstractFileReadingFactory<GetContentsFromZippedExcelFile, IEnumerable<BmwFinanceDataDto>>
+    public class ReadFinanceDataFactory : AbstractFileReadingFactory<ReadFile, IEnumerable<BmwFinanceDataDto>>
     {
         private readonly ILog _log = LogManager.GetLogger<ReadFinanceDataFactory>();
 
-        public override IEnumerable<BmwFinanceDataDto> ReadFile(GetContentsFromZippedExcelFile command)
+        public override IEnumerable<BmwFinanceDataDto> ReadFile(ReadFile command)
         {
             try
             {
                 using (var ms = new MemoryStream())
-                using (var zip = ZipFile.Read(Path.Combine(command.ZippedExcelFile.FilePath, command.ZippedExcelFile.ZippedFileName)))
+                using (var zip = ZipFile.Read(Path.Combine(command.File.FilePath, command.File.FileName)))
                 {
                     var file = zip[0];
-                    file.Password = command.ZippedExcelFile.Password;
+                    file.Password = command.File.Password;
                     file.Extract(ms);
 
                     var reader = ExcelReaderFactory.CreateOpenXmlReader(ms);
-                    reader.IsFirstRowAsColumnNames = command.ZippedExcelFile.FirstRowIsColumnName;
+                    reader.IsFirstRowAsColumnNames = command.File.FirstRowIsColumnName;
                     var result = reader.AsDataSet();
                     return result.Tables[0].AsEnumerable().Select(s => new BmwFinanceDataDto(
                         s.GetString("Chassis"),

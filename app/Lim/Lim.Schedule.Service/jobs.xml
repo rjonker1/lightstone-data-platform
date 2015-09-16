@@ -167,4 +167,22 @@
     </trigger>
   </schedule>
 
+  <schedule>
+    <job>
+      <name>FlatFilePullIntegrationAlwaysOn</name>
+      <group>FlatFilePullIntegrationAlwaysOnGroup</group>
+      <description>Run Pull Flat File Integrations for Always On</description>
+      <job-type>Lim.Schedule.Service.Jobs.Integrations.AlwaysOn.FlatFile.PullJob, Lightstone.DataPlatform.Lim.Schedule.Service</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <simple>
+        <name>FlatFilePullIntegrationAlwaysOnTrigger</name>
+        <job-name>FlatFilePullIntegrationAlwaysOn</job-name>
+        <job-group>FlatFilePullIntegrationAlwaysOnGroup</job-group>
+      </simple>
+    </trigger>
+  </schedule>
+
 </job-scheduling-data>
