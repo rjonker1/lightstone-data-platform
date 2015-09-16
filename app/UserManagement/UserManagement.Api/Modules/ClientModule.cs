@@ -8,7 +8,7 @@ using DataPlatform.Shared.Helpers;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Shared.BuildingBlocks.Api.Extensions;
+using Nancy.Security;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
@@ -191,7 +191,7 @@ namespace UserManagement.Api.Modules
 
             Delete["/Clients/{id}"] = _ =>
             {
-                this.RequiresRequestClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+                this.RequiresClaims(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
                 var dto = this.Bind<ClientDto>();
                 var entity = clientRepository.Get(dto.Id);
@@ -201,7 +201,5 @@ namespace UserManagement.Api.Modules
                 return Response.AsJson("Client has been soft deleted");
             };
         }
-
-        
     }
 }
