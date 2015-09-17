@@ -137,11 +137,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 Customer = new ReportCustomer
                                 {
                                     Name = transaction.CustomerName,
-<<<<<<< Updated upstream
-                                    TaxRegistration = 0,
-=======
                                     TaxRegistration = account.BillingVatNumber != null ? account.BillingVatNumber.ToInt64() : 0000,
->>>>>>> Stashed changes
                                     Packages = reportPackageList.Select(y => new ReportPackage
                                     {
                                         ItemCode = y.ItemCode,
@@ -289,11 +285,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 Customer = new ReportCustomer
                                 {
                                     Name = transaction.CustomerName,
-<<<<<<< Updated upstream
-                                    TaxRegistration = 0,
-=======
                                     TaxRegistration = account.BillingVatNumber != null ? account.BillingVatNumber.ToInt64() : 0000,
->>>>>>> Stashed changes
                                     Packages = reportPackageList.Select(y => new ReportPackage
                                     {
                                         ItemCode = y.ItemCode,
