@@ -1,7 +1,4 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.Web.Configuration;
+﻿using System.Linq;
 using Billing.Api.Installers;
 using Castle.Windsor;
 using DataPlatform.Shared.ExceptionHandling;
@@ -11,7 +8,6 @@ using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
-using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;

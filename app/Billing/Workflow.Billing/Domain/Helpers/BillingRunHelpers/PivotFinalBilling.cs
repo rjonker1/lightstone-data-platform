@@ -173,7 +173,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
 
                             var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, transaction.CustomerName, "1", account.BankAccountName,
-                                                                                        account.BankAccountNumber, account.BranchCode.ToString(), "0", "0");
+                                                                                        account.BillingDebitOrderAccountNumber, account.BillingDebitOrderBranchCode, "0", "0");
 
                             if ((debitOrderRecord.AccountName != null) && (debitOrderRecord.BankAccountName != null)
                                 && (debitOrderRecord.BranchCode != "0") && (debitOrderRecord.BankAccountNumber != null))
@@ -294,7 +294,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
 
                             var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, transaction.CustomerName, "1", account.BankAccountName,
-                                                                                        account.BankAccountNumber, account.BranchCode.ToString(), "0", "0");
+                                                                                        account.BillingDebitOrderAccountNumber, account.BillingDebitOrderBranchCode, "0", "0");
 
                             if ((debitOrderRecord.AccountName != string.Empty) || (debitOrderRecord.BankAccountName != string.Empty)
                                 || (debitOrderRecord.BranchCode != "0") || (debitOrderRecord.BankAccountNumber != string.Empty))
