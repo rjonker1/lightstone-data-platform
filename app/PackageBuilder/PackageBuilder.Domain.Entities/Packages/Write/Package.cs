@@ -81,9 +81,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         {
             Id = id;
         }
-        
+
         //TODO: Remove - Constructor used for testing in LACE
-        public Package(Guid id, string name, IAction action, IEnumerable<IDataProvider> dataProviders) 
+        public Package(Guid id, string name, IAction action, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
             Id = id;
@@ -92,7 +92,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             DataProviders = dataProviders;
         }
 
-        public Package(Guid id, string name, State state, IEnumerable<IDataProvider> dataProviders) 
+        public Package(Guid id, string name, State state, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
             Id = id;
@@ -109,7 +109,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         public void CreatePackageRevision(Guid id, string name, string description, decimal costPrice, decimal salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
         {
-            if (state.Name == StateName.Published) 
+            if (state.Name == StateName.Published)
                 DisplayVersion = Math.Ceiling(DisplayVersion);
             else
             {
@@ -168,40 +168,32 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             Guid contractId, long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
             IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
         {
-            try
+            if (DataProviders == null)
+                return null;
+
+            var dataProviders = DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
+            var laceProviders = new List<IAmDataProvider>();
+            var fields = Mapper.Map<IEnumerable<RequestFieldDto>, IEnumerable<DataField>>(requestFieldsDtos);
+
+            var user = new User(userId, userName, firstName);
+            var requestTypes = new RequestTypeBuilder();
+
+            foreach (var dataProvider in dataProviders.ToList())
             {
-                if (DataProviders == null)
-                    return null;
-
-                var dataProviders = DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
-                var laceProviders = new List<IAmDataProvider>();
-                var fields = Mapper.Map<IEnumerable<RequestFieldDto>, IEnumerable<DataField>>(requestFieldsDtos);
-
-                var user = new User(userId, userName, firstName);
-                var requestTypes = new RequestTypeBuilder();
-
-                foreach (var dataProvider in dataProviders.ToList())
-                {
-                    //var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true); // todo: Validate & compare to api request fields 
-                    var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(fields);
-                    laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice, user, Name,
-                        requestTypes));
-                }
-
-                var request = new LaceRequest(
-                    user,
-                    new Contract(contractVersion, accountNumber, contractId),
-                    new RequestPackage(laceProviders.ToArray(), Id, Name, (long) DisplayVersion, packageCostPrice, packageRecommendedPrice),
-                    new RequestContext(requestId, fromDevice, fromIpAddress, osVersion, system),
-                    DateTime.UtcNow);
-
-                return request;
+                //var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true); // todo: Validate & compare to api request fields 
+                var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(fields);
+                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice, user, Name,
+                    requestTypes));
             }
-            catch (Exception e)
-            {
-                this.Error(() => e);
-                throw new LightstoneAutoException(e.Message);
-            }
+
+            var request = new LaceRequest(
+                user,
+                new Contract(contractVersion, accountNumber, contractId),
+                new RequestPackage(laceProviders.ToArray(), Id, Name, (long)DisplayVersion, packageCostPrice, packageRecommendedPrice),
+                new RequestContext(requestId, fromDevice, fromIpAddress, osVersion, system),
+                DateTime.UtcNow);
+
+            return request;
         }
 
         public IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders, Guid requestId)
@@ -225,27 +217,19 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
             IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
         {
-            try
-            {
-                this.Info(() => "Form LACE Request Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
-                var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
-                    contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice);
-                this.Info(() => "Form LACE Request Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "Form LACE Request Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
+                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice);
+            this.Info(() => "Form LACE Request Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
-                if (request == null)
-                    throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
+            if (request == null)
+                throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
 
-                this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
-                var responses = entryPoint.GetResponsesFromLace(new[] {request});
-                this.Info(() => "EntryPoint Get LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            var responses = entryPoint.GetResponsesFromLace(new[] { request });
+            this.Info(() => "EntryPoint Get LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
-                return MapLaceResponses(responses, requestId).ToList();
-            }
-            catch (Exception e)
-            {
-                this.Error(() => e);
-                throw new LightstoneAutoException(e.Message);
-            }
+            return MapLaceResponses(responses, requestId).ToList();
         }
 
         public override string ToString()

@@ -12,7 +12,7 @@ namespace UserManagement.Acceptance.Tests.Repositories
         private Guid _id = Guid.NewGuid();
         public override void Observe()
         {
-            RefreshDb(false);
+            RefreshDb();
             _repository = new ValueEntityRepository<Role>(Session);
             SaveAndFlush(new Role { Id = _id, Value = "Admin" });
         }

@@ -10,7 +10,6 @@ namespace UserManagement.Domain.BusinessRules.Contracts
 {
     public class SoftDeleteContractRuleHandler : AbstractMessageHandler<SoftDeleteContractRule>
     {
-
         private readonly IRepository<Contract> _contracts;
 
         public SoftDeleteContractRuleHandler(IRepository<Contract> contracts)
@@ -20,7 +19,6 @@ namespace UserManagement.Domain.BusinessRules.Contracts
 
         public override void Handle(SoftDeleteContractRule command)
         {
-
             var entity = command.Entity;
 
             var hasClients = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Clients.Where(cl => cl.IsActive)).ToList();
@@ -48,7 +46,7 @@ namespace UserManagement.Domain.BusinessRules.Contracts
                 throw exception;
             }
 
-            entity.IsActive = false;
+            entity.Activate(false);
         }
     }
 }

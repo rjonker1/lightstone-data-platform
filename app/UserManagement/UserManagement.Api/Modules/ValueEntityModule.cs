@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Nancy.Security;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api.Modules
@@ -20,6 +23,8 @@ namespace UserManagement.Api.Modules
     {
         public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
         {
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
+
             Get["/ValueEntities/{type}"] = parameters =>
             {
                 var model = this.Bind<DataTablesViewModel>();

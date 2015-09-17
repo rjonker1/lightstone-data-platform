@@ -63,8 +63,8 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1625, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1625\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1651, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1651\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MemBus">
@@ -110,6 +110,7 @@
     <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRule.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRule.cs" />
     <Compile Include="ClientAccountNumber.cs" />
+    <Compile Include="ClientAddress.cs" />
     <Compile Include="ClientIndustry.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
     <Compile Include="Commands\CommercialStates\ImportCommercialState.cs" />
@@ -128,11 +129,16 @@
     <Compile Include="ContractPackage.cs" />
     <Compile Include="AccountNumber.cs" />
     <Compile Include="CustomerAccountNumber.cs" />
+    <Compile Include="CustomerAddress.cs" />
     <Compile Include="CustomerIndustry.cs" />
     <Compile Include="CustomerUser.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="ClientUserAlias.cs" />
     <Compile Include="IIndustry.cs" />
+    <Compile Include="Individual.cs" />
+    <Compile Include="IndividualAddress.cs" />
+    <Compile Include="IndividualContactNumber.cs" />
+    <Compile Include="IndividualEmail.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />

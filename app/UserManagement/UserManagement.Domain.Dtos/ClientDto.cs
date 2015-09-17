@@ -47,7 +47,7 @@ namespace UserManagement.Domain.Dtos
         public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingDebitOrderAccountOwner { get; set; }
         public string BillingDebitOrderAccountNumber { get; set; }
-        public ContactType ContactDetailContactType { get; set; }
+        public ContactNumberType ContactNumberDetailContactNumberType { get; set; }
         [Required]
         [Display(Name = "Contact person is required")]
         public string ContactDetailContactPerson { get; set; }

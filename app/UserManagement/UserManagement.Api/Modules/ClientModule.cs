@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Nancy.Security;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
@@ -111,7 +113,7 @@ namespace UserManagement.Api.Modules
                 {
                     var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, clientRepository.Get(dto.Id) ?? new Client());
-                    entity.AccountOwner = user;
+                    entity.SetAccountOwner(user);
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
@@ -149,7 +151,7 @@ namespace UserManagement.Api.Modules
                 {
                     var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, clientRepository.Get(dto.Id));
-                    entity.AccountOwner = user;
+                    entity.SetAccountOwner(user);
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -166,7 +168,7 @@ namespace UserManagement.Api.Modules
                 var entity = clientRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
                 entity.ModifiedBy = Context.CurrentUser.UserName;
-                entity.IsLocked = true;
+                entity.Lock(true);
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -180,7 +182,7 @@ namespace UserManagement.Api.Modules
                 var entity = clientRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
                 entity.ModifiedBy = Context.CurrentUser.UserName;
-                entity.IsLocked = false;
+                entity.Lock(false);
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -189,6 +191,7 @@ namespace UserManagement.Api.Modules
 
             Delete["/Clients/{id}"] = _ =>
             {
+                this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
                 var dto = this.Bind<ClientDto>();
                 var entity = clientRepository.Get(dto.Id);
@@ -198,7 +201,5 @@ namespace UserManagement.Api.Modules
                 return Response.AsJson("Client has been soft deleted");
             };
         }
-
-        
     }
 }

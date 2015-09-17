@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using Nancy;
 using Nancy.ErrorHandling;
 using Nancy.Responses;
@@ -18,6 +19,10 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
 
         public void Handle(HttpStatusCode statusCode, NancyContext context)
         {
+            const string forbiddenMsg = "Sorry, you do not have the required roles to perform this action.";
+            const string notFoundMsg = "Sorry, the resource you requested was not found.";
+            const string internalMsg = "Sorry, something went wrong. An unexpected error occurred.";
+
             var clientWantsHtml = ShouldRenderFriendlyErrorPage(context);
             if (!clientWantsHtml)
             {
@@ -28,6 +33,21 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
                     // When this happens we still want to return our nice JSON response.
                     context.Response = ErrorResponse.FromMessage("The resource you requested was not found.").WithStatusCode(statusCode);
                 }
+                switch (statusCode)
+                {
+                    case HttpStatusCode.Unauthorized:
+                        context.Response = ErrorResponse.FromMessage("Sorry, you do not have permission to perform this action.").WithStatusCode(HttpStatusCode.Unauthorized);
+                        break;
+                    case HttpStatusCode.Forbidden:
+                        context.Response = ErrorResponse.FromMessage(forbiddenMsg).WithStatusCode(HttpStatusCode.Forbidden);
+                        break;
+                    case HttpStatusCode.NotFound:
+                        context.Response = context.Response = ErrorResponse.FromMessage(notFoundMsg).WithStatusCode(HttpStatusCode.NotFound);
+                        break;
+                    case HttpStatusCode.InternalServerError:
+                        context.Response = ErrorResponse.FromMessage(internalMsg).WithStatusCode(HttpStatusCode.InternalServerError);
+                        break;
+                }
 
                 // Pass the existing response through
                 return;
@@ -37,27 +57,27 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
             switch (statusCode)
             {
                 case HttpStatusCode.Unauthorized:
-                    context.Response = new RedirectResponse("");
+                    context.Response = new RedirectResponse(ConfigurationManager.AppSettings["cia/auth"]);
                     break;
                 case HttpStatusCode.Forbidden:
                     context.Response = new ErrorHtmlPageResponse(statusCode)
                     {
                         Title = "Permission",
-                        Summary = error == null ? "Sorry, you do not have permission to perform that action. Please contact Lightstone Auto." : error.ErrorMessage
+                        Summary = error == null ? forbiddenMsg : error.ErrorMessage
                     };
                     break;
                 case HttpStatusCode.NotFound:
                     context.Response = new ErrorHtmlPageResponse(statusCode)
                     {
-                        Title = "404 Not found",
-                        Summary = "Sorry, the resource you requested was not found."
+                        Title = "Not found",
+                        Summary = notFoundMsg
                     };
                     break;
                 case HttpStatusCode.InternalServerError:
                     context.Response = new ErrorHtmlPageResponse(statusCode)
                     {
-                        Title = "Sorry, something went wrong",
-                        Summary = error == null ? "An unexpected error occurred." : error.ErrorMessage,
+                        Title = "Error",
+                        Summary = error == null ? internalMsg : error.ErrorMessage,
                         Details = error == null ? null : error.FullException
                     };
                     break;

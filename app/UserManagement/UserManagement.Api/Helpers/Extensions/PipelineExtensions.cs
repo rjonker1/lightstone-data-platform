@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
 using AutoMapper;
 using Castle.Windsor;
@@ -11,7 +10,6 @@ using EasyNetQ;
 using Nancy;
 using Nancy.Bootstrapper;
 using NHibernate;
-using NHibernate.Util;
 using UserManagement.Api.Helpers.NancyRazorHelpers;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
@@ -94,7 +92,6 @@ namespace UserManagement.Api.Helpers.Extensions
         {
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-
                 // Customer
                 if (nancyContext.Request.Method == "POST" && nancyContext.Request.Url.Path.Contains("Customer"))
                 {
@@ -102,7 +99,7 @@ namespace UserManagement.Api.Helpers.Extensions
 
                     foreach (var customer in customers)
                     {
-                        // Set new customer AccountNumber
+                        // Set new customer AccountNumber - initialized when invoked
                         // Send to Queue
                         if (customer.CustomerAccountNumber.Customer == null)
                         {
@@ -110,7 +107,6 @@ namespace UserManagement.Api.Helpers.Extensions
 
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(customer, new CustomerMessage());
-                            //metaEntity.BillingType = customer.CommercialState.Value;
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
                         }

@@ -64,8 +64,8 @@
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1625\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1651, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1651\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MemBus">
@@ -107,12 +107,20 @@
     <Compile Include="NHibernate\MappingOverrides\AddressOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\BillingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\ClientAccountNumberMappingOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\ClientAddressOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\ClientIndustryOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\ClientMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\ContactDetailOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\ContractMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerAccountNumberMappingOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\CustomerAddressOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\CustomerIndustryOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerUserOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\IndividualAddressOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\IndividualContactNumberOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\IndividualEmailOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\IndividualOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\NamedEntityOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserAliasMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />

@@ -5,8 +5,8 @@ namespace UserManagement.Domain.Entities
 {
     public class CustomerIndustry : Entity
     {
-        public virtual Customer Customer { get; set; }
-        public virtual Guid IndustryId { get; set; }
+        public virtual Customer Customer { get; protected internal set; }
+        public virtual Guid IndustryId { get; protected internal set; }
 
         protected CustomerIndustry()
         {

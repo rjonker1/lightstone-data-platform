@@ -45,6 +45,13 @@ namespace CentralInterfuseApplication.Api
             //    UserMapper = container.Resolve<IUserMapper>(),
             //};
             //FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
+
+            pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
+            {
+                if (ctx.CurrentUser != null) ctx.ViewBag.UserName = ctx.CurrentUser.UserName;
+                return null;
+            });
+
             pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
                 //nancyContext.Request.Headers.UserAgent = "Lightstone";

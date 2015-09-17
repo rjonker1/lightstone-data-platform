@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.Responses;
 using Nancy.Responses.Negotiation;
+using Nancy.Security;
 using ServiceStack.Text;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
@@ -32,6 +34,8 @@ namespace Billing.Api.Modules
                                 IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider,
                                 IReportApiClient reportApiClient)
         {
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+
             _preBillingDBRepository = preBillingDBRepository;
             _preBillingRepository = preBillingCacheProvider.CacheClient.GetAll();
 

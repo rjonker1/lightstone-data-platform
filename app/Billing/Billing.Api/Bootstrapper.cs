@@ -1,16 +1,13 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.Web.Configuration;
+﻿using System.Linq;
 using Billing.Api.Installers;
 using Castle.Windsor;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
-using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
@@ -30,7 +27,6 @@ namespace Billing.Api
 
             this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
-
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -75,29 +71,17 @@ namespace Billing.Api
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
                 this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                var fromException = ErrorResponse.FromException(exception);
-                fromException.Headers.Add("Access-Control-Allow-Origin", "*");
-                fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-                fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
-                return fromException;
+                var errorResponse = ErrorResponse.FromException(exception);
+                if (exception is LightstoneAutoException)
+                    errorResponse.StatusCode = HttpStatusCode.ImATeapot;
+
+                return errorResponse;
             });
             pipelines.EnableCors(); // cross origin resource sharing
 
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
-            pipelines.AfterRequest.AddItemToEndOfPipeline(GetRedirectToLoginHook(null));
 
             base.RequestStartup(container, pipelines, context);
-        }
-
-        private static Action<NancyContext> GetRedirectToLoginHook(FormsAuthenticationConfiguration configuration)
-        {
-            return context =>
-            {
-                var contentTypes = context.Request.Headers.FirstOrDefault(x => x.Key == "Accept");
-                var isHtml = (contentTypes.Value.FirstOrDefault(x => x.Contains("text/html")) + "").Any();
-                if (context.Response.StatusCode == HttpStatusCode.Unauthorized && isHtml)
-                    context.Response = context.GetRedirect(ConfigurationManager.AppSettings["cia/auth"]);
-            };
         }
 
         protected override IRootPathProvider RootPathProvider
@@ -118,6 +102,5 @@ namespace Billing.Api
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/font-awesome"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
         }
-
     }
 }

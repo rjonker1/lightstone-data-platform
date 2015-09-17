@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
@@ -23,10 +22,10 @@ namespace UserManagement.Domain.CommandHandlers.UserAliases
         public override void Handle(LinkUserAliasCommand command)
         {
             var alias = _userAliasRepository.Get(command.AliasId);
-            alias.User = _userRepository.Get(command.UserId);
+            alias.SetUser(_userRepository.Get(command.UserId));
 
             var customerUser = _customerUserRepository.FirstOrDefault(x => x.Customer.Id == command.CustomerId && x.User.Id == command.UserId);
-            if (customerUser != null) customerUser.IsDefault = true;
+            if (customerUser != null) customerUser.SetDefault(true);
         }
     }
 }

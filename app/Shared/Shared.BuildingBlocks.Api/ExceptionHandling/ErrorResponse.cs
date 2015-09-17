@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Authentication;
 using DataPlatform.Shared.ExceptionHandling;
 using Nancy.Responses;
 using Newtonsoft.Json;
@@ -12,11 +13,15 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
     {
         readonly Error _error;
 
-        private ErrorResponse(Error error)
-            : base(error, new DefaultJsonSerializer())
+        private ErrorResponse(Error error) : base(error, new DefaultJsonSerializer())
         {
             Guard.AgainstNull(error, "error");
             _error = error;
+
+            // Enable CORS
+            Headers.Add("Access-Control-Allow-Origin", "*");
+            Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+            Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
         }
 
         public string ErrorMessage { get { return _error.ErrorMessage; } }
@@ -46,6 +51,11 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
             else if (exception is NotImplementedException)
                 statusCode = HttpStatusCode.NotImplemented;
             else if (exception is UnauthorizedAccessException)
+            {
+                statusCode = HttpStatusCode.Forbidden;
+                error.ErrorMessage = "Sorry, you do not have permission to perform that action. Please contact Lightstone Auto.";
+            }
+            else if (exception is AuthenticationException)
                 statusCode = HttpStatusCode.Unauthorized;
             else if (exception is ArgumentException)
                 statusCode = HttpStatusCode.BadRequest;

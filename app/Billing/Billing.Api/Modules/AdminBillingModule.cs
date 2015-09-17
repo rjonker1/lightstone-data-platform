@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
@@ -6,6 +7,7 @@ using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Nancy;
 using Nancy.Responses.Negotiation;
+using Nancy.Security;
 using Workflow.Billing.Domain.Entities;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow.Billing.Messages.Publishable;
@@ -17,6 +19,8 @@ namespace Billing.Api.Modules
     {
         public AdminBillingModule(IRepository<AuditLog> auditLogs, IRepository<Transaction> transactions, IAdvancedBus eBus)
         {
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+
             var advancedBus = new TransactionBus(eBus);
 
             Get["/Admin/Billing"] = _ => Negotiate.WithView("Index");

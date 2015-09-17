@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
-using System.Web.Configuration;
 using Castle.Windsor;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
-using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
@@ -50,11 +48,6 @@ namespace UserManagement.Api
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            //pipelines.BeforeRequest.AddItemToStartOfPipeline((ctx, response) =>
-            //{
-
-            //    return null;
-            //});
             pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
                 this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
@@ -74,15 +67,16 @@ namespace UserManagement.Api
                     
                 return null;
             });
+
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
                 this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                var fromException = ErrorResponse.FromException(exception);
-                fromException.Headers.Add("Access-Control-Allow-Origin", "*");
-                fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-                fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
-                return fromException;
+                var errorResponse = ErrorResponse.FromException(exception);
+                if (exception is LightstoneAutoException)
+                    errorResponse.StatusCode = HttpStatusCode.ImATeapot;
+
+                return errorResponse;
             });
             //pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
@@ -98,28 +92,15 @@ namespace UserManagement.Api
            
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
-            pipelines.AfterRequest.AddItemToEndOfPipeline(GetRedirectToLoginHook(null));
-
             pipelines.PublishTransactionToQueue(container);
 
             pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
             {
-                if (ctx.CurrentUser != null) ctx.ViewBag["UserName"] = ctx.CurrentUser.UserName;
+                if (ctx.CurrentUser != null) ctx.ViewBag.UserName = ctx.CurrentUser.UserName;
                 return null;
             });
 
             base.RequestStartup(container, pipelines, context);
-        }
-
-        private static Action<NancyContext> GetRedirectToLoginHook(FormsAuthenticationConfiguration configuration)
-        {
-            return context =>
-            {
-                var contentTypes = context.Request.Headers.FirstOrDefault(x => x.Key == "Accept");
-                var isHtml = (contentTypes.Value.FirstOrDefault(x => x.Contains("text/html")) + "").Any();
-                if (context.Response.StatusCode == HttpStatusCode.Unauthorized && isHtml)
-                    context.Response = context.GetRedirect(ConfigurationManager.AppSettings["cia/auth"]);
-            };
         }
 
         private static void AddLookupData(IPipelines pipelines, IRetrieveEntitiesByType entityRetriever)

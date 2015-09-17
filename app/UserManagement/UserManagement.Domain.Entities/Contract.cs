@@ -29,9 +29,9 @@ namespace UserManagement.Domain.Entities
         }
         public virtual bool HasPackagePriceOverride { get; protected internal set; }
         //public virtual ContractBundle ContractBundle { get; protected internal set; }
-        public virtual Guid? ContractBundleId { get; set; }
+        public virtual Guid? ContractBundleId { get; protected internal set; }
 
-        public virtual bool IsActive { get; set; }
+        public virtual bool IsActive { get; protected internal set; }
         //public virtual ISet<ContractPackage> ContractPackages { get; set; }
         //public virtual IEnumerable<Guid> ContractPackageIds
         //{
@@ -59,6 +59,11 @@ namespace UserManagement.Domain.Entities
             ContractType = contractType;
             EscalationType = escalationType;
             ContractDuration = contractDuration;
+        }
+
+        public virtual void Activate(bool activate)
+        {
+            IsActive = activate;
         }
     }
 }

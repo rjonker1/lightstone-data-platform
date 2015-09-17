@@ -6,17 +6,18 @@ namespace UserManagement.Domain.Entities
 {
     public class Billing : Entity
     {
-        public virtual string LegalEntityName { get; set; }
-        public virtual string AccountContactName { get; set; }
-        public virtual string AccountContactNumber { get; set; }
-        public virtual string AccountContactEmail { get; set; }
-        public virtual string CompanyRegistration { get; set; }
-        public virtual DateTime? DebitOrderDate { get; set; }
-        public virtual string DebitOrderAccountOwner { get; set; }
-        public virtual string DebitOrderAccountNumber { get; set; }
-        public virtual string PastelId { get; set; }
-        public virtual string VatNumber { get; set; }
-        public virtual PaymentType PaymentType { get; set; }
+        public virtual string LegalEntityName { get; protected internal set; }
+        public virtual string AccountContactName { get; protected internal set; }
+        public virtual string AccountContactNumber { get; protected internal set; }
+        public virtual string AccountContactEmail { get; protected internal set; }
+        public virtual string CompanyRegistration { get; protected internal set; }
+        public virtual DateTime? DebitOrderDate { get; protected internal set; }
+        public virtual string DebitOrderAccountOwner { get; protected internal set; }
+        public virtual string DebitOrderAccountNumber { get; protected internal set; }
+        public virtual string DebitOrderBranchCode { get; protected internal set; }
+        public virtual string PastelId { get; protected internal set; }
+        public virtual string VatNumber { get; protected internal set; }
+        public virtual PaymentType PaymentType { get; protected internal set; }
 
         protected internal Billing() { }
 

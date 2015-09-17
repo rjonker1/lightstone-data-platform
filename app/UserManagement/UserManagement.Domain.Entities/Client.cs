@@ -8,7 +8,7 @@ namespace UserManagement.Domain.Entities
 {
     public class Client : NamedEntity, IIndustry
     {
-        public virtual User AccountOwner { get; set; }
+        public virtual User AccountOwner { get; protected internal set; }
         public virtual string Notes { get; protected internal set; }
         private ClientAccountNumber _clientAccountNumber = new ClientAccountNumber();
         public virtual ClientAccountNumber ClientAccountNumber
@@ -24,10 +24,11 @@ namespace UserManagement.Domain.Entities
         public virtual ISet<Customer> Customers { get; protected internal set; }
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual ISet<ClientUserAlias> UserAliases { get; protected internal set; }
-        public virtual bool IsActive { get; set; }
-        public virtual bool IsLocked { get; set; }
-        public virtual DateTime? TrialExpiration { get; set; }
-		public virtual ISet<ClientIndustry> Industries { get; set; }
+        public virtual bool IsActive { get; protected internal set; }
+        public virtual bool IsLocked { get; protected internal set; }
+        public virtual DateTime? TrialExpiration { get; protected internal set; }
+        public virtual ISet<ClientIndustry> Industries { get; protected internal set; }
+        public virtual ISet<ClientAddress> Addresses { get; protected internal set; }
 
         [DoNotMap]
         public virtual IEnumerable<User> Users
@@ -39,8 +40,16 @@ namespace UserManagement.Domain.Entities
         }
         public Client() { }
 
-        public Client(string clientName) : base(clientName)
+        public Client(string clientName) : base(clientName) { }
+
+        public virtual void SetAccountOwner(User accountOwner)
         {
+            AccountOwner = accountOwner;
+        }
+
+        public virtual void Lock(bool @lock)
+        {
+            IsLocked = @lock;
         }
     }
 }

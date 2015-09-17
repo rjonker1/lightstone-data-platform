@@ -1,6 +1,6 @@
-﻿using Lim.Domain.Dto;
+﻿using DataPlatform.Shared.Helpers.Extensions;
+using Lim.Domain.Dto;
 using Lim.Domain.Entities.Contracts;
-using Lim.Domain.Entities.Factory;
 using Lim.Domain.Entities.Repository;
 using Lim.Web.UI.Commits;
 using Lim.Web.UI.Handlers;
@@ -9,8 +9,8 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
-using NHibernate;
 using Shared.BuildingBlocks.Api.ApiClients;
+using Shared.BuildingBlocks.Api.ExceptionHandling;
 
 namespace Lim.Web.UI
 {
@@ -20,6 +20,15 @@ namespace Lim.Web.UI
         {
             base.ApplicationStartup(container, pipelines);
             StaticConfiguration.DisableErrorTraces = false;
+        }
+
+        protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
+        {
+            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
+            {
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                return ErrorResponse.FromException(exception);
+            });
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)

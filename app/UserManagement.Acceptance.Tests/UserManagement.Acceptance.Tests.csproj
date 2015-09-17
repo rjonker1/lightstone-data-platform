@@ -94,11 +94,17 @@
     <Compile Include="PersistenceSpecifications\when_persisting_audit_log.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_billing.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_client.cs" />
+    <Compile Include="PersistenceSpecifications\when_persisting_client_address.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_contact_detail.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_contract.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_country.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_customer.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_customer_account_number.cs" />
+    <Compile Include="PersistenceSpecifications\when_persisting_customer_address.cs" />
+    <Compile Include="PersistenceSpecifications\when_persisting_individual.cs" />
+    <Compile Include="PersistenceSpecifications\when_persisting_individual_address.cs" />
+    <Compile Include="PersistenceSpecifications\when_persisting_individual_contact_number.cs" />
+    <Compile Include="PersistenceSpecifications\when_persisting_individual_email.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_package.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

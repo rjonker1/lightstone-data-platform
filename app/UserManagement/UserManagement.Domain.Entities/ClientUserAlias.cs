@@ -10,8 +10,13 @@ namespace UserManagement.Domain.Entities
         public virtual string LastName { get; protected internal set; }
         [Unique]
         public virtual string UserName { get; protected internal set; }
-        public virtual User User { get; set; }
+        public virtual User User { get; protected internal set; }
         [Unique]
         public virtual Client Client { get; protected internal set; }
+
+        public virtual void SetUser(User user)
+        {
+            User = user;
+        }
     }
 }

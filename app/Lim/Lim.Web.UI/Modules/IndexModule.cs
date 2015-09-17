@@ -1,4 +1,6 @@
-﻿using Nancy;
+﻿using DataPlatform.Shared.Enums;
+using Nancy;
+using Nancy.Security;
 
 namespace Lim.Web.UI.Modules
 {
@@ -6,6 +8,8 @@ namespace Lim.Web.UI.Modules
     {
         public IndexModule()
         {
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+
             Get["/"] = _ => View["Index"];
 
             Get["/cia"] = parameters => Response.AsRedirect(System.Configuration.ConfigurationManager.AppSettings["url/cia"]);

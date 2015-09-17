@@ -1,13 +1,11 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using Castle.Windsor;
+using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
-using Nancy.Extensions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using PackageBuilder.Api.Helpers;
@@ -73,12 +71,11 @@ namespace PackageBuilder.Api
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
                 this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                var fromException = ErrorResponse.FromException(exception);
-                fromException.Headers.Add("Access-Control-Allow-Origin", "*");
-                fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-                fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
-                fromException.StatusCode = HttpStatusCode.InternalServerError;
-                return fromException;
+                var errorResponse = ErrorResponse.FromException(exception);
+                if (exception is LightstoneAutoException)
+                    errorResponse.StatusCode = HttpStatusCode.ImATeapot;
+
+                return errorResponse;
             });
 
             //pipelines.EnableCors(); // cross origin resource sharing
@@ -93,20 +90,7 @@ namespace PackageBuilder.Api
 
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
-            pipelines.AfterRequest.AddItemToEndOfPipeline(GetRedirectToLoginHook());
-
             base.RequestStartup(container, pipelines, context);
-        }
-
-        private static Action<NancyContext> GetRedirectToLoginHook()
-        {
-            return context =>
-            {
-                var contentTypes = context.Request.Headers.FirstOrDefault(x => x.Key == "Accept");
-                var isHtml = (contentTypes.Value.FirstOrDefault(x => x.Contains("text/html")) + "").Any();
-                if (context.Response.StatusCode == HttpStatusCode.Unauthorized && isHtml)
-                    context.Response = context.GetRedirect(ConfigurationManager.AppSettings["cia/auth"]);
-            };
         }
 
         protected override IRootPathProvider RootPathProvider

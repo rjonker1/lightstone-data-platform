@@ -7,11 +7,9 @@ namespace UserManagement.Domain.Entities
     {
         public virtual Customer Customer { get; protected internal set; }
         public virtual User User { get; protected internal set; }
-        public virtual bool IsDefault { get; set; }
+        public virtual bool IsDefault { get; protected internal set; }
 
-        protected CustomerUser()
-        {
-        }
+        protected CustomerUser() { }
 
         public CustomerUser(Customer customer, User user, bool isDefault)
         {
@@ -19,6 +17,11 @@ namespace UserManagement.Domain.Entities
             Customer = customer;
             User = user;
             IsDefault = isDefault;
+        }
+
+        public virtual void SetDefault(bool @default)
+        {
+            IsDefault = @default;
         }
     }
 }

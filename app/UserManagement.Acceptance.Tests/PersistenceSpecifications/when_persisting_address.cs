@@ -1,7 +1,6 @@
 ﻿using System;
 using FluentNHibernate.Testing;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Enums;
 using UserManagement.TestHelper.BaseTests;
 using UserManagement.TestHelper.Helpers;
 using Xunit.Extensions;
@@ -12,7 +11,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
     {
         public override void Observe()
         {
-            RefreshDb(false);
+            RefreshDb();
         }
 
         [Observation]
@@ -20,7 +19,6 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
         {
             new PersistenceSpecification<Address>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.Type, AddressType.Physical)
                 .CheckProperty(c => c.Line1, "Line1")
                 .CheckProperty(c => c.Line2, "Line2")
                 .CheckProperty(c => c.Suburb, "Suburb")
