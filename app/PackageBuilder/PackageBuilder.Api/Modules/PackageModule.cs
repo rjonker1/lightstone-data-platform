@@ -17,12 +17,7 @@ using Lim.Domain.Messaging.Publishing;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
-<<<<<<< HEAD
 using Nancy.Security;
-=======
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
->>>>>>> PilotPerformanceTunning
 using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
