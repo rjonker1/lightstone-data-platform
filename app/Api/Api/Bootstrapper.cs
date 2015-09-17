@@ -30,19 +30,6 @@ namespace Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            //var configuration = new StatelessAuthenticationConfiguration(context =>
-            //{
-            //    var token = context.AuthorizationHeaderToken();
-            //    var authenticator = container.Resolve<IAuthenticateUser>();
-            //    return string.IsNullOrWhiteSpace(token)
-            //        ? null
-            //        : authenticator != null ? authenticator.GetUserIdentity(token) : null;
-            //});
-
-            //StatelessAuthentication.Enable(pipelines, configuration);
-
-            //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
-
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
@@ -64,14 +51,6 @@ namespace Api
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
             });
             pipelines.EnableMonitoring();
-
-            //Make every request SSL based
-            //pipelines.BeforeRequest += ctx =>
-            //{
-            //    return (!ctx.Request.Url.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)) ?
-            //        (Response)HttpStatusCode.Unauthorized :
-            //        null;
-            //};
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -84,7 +63,6 @@ namespace Api
 
             container.Register(
                 Component.For<IAuthenticateUser>().ImplementedBy<UerManagementAuthenticator>().LifestyleTransient());
-            //container.Register(Component.For<IRouteMetadataProvider>().ImplementedBy<DefaultRouteMetadataProvider>().LifestyleTransient());
             container.Register(
                 Component.For<IRouteDescriptionProvider>()
                     .ImplementedBy<ApiRouteDescriptionProvider>()

@@ -99,7 +99,7 @@ namespace UserManagement.Api.Helpers.Extensions
 
                     foreach (var customer in customers)
                     {
-                        // Set new customer AccountNumber
+                        // Set new customer AccountNumber - initialized when invoked
                         // Send to Queue
                         if (customer.CustomerAccountNumber.Customer == null)
                         {
@@ -107,7 +107,6 @@ namespace UserManagement.Api.Helpers.Extensions
 
                             ////RabbitMQ
                             var metaEntity = Mapper.Map(customer, new CustomerMessage());
-                            //metaEntity.BillingType = customer.CommercialState.Value;
                             var advancedBus = new TransactionBus(container.Resolve<IAdvancedBus>());
                             advancedBus.SendDynamic(metaEntity);
                         }
