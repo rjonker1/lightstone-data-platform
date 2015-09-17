@@ -8,7 +8,7 @@ using Xunit.Extensions;
 
 namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
 {
-    public class when_persisting_individual_address : TestDataBaseHelper
+    public class when_persisting_client_address : TestDataBaseHelper
     {
         public override void Observe()
         {
@@ -18,9 +18,9 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
         [Observation]
         public void should_persist()
         {
-            new PersistenceSpecification<IndividualAddress>(Session, new CustomEqualityComparer())
+            new PersistenceSpecification<ClientAddress>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckReference(c => c.Individual, new Individual("Name", "Surname", "IdNumber"))
+                .CheckReference(c => c.Client, new Client("Name"))
                 .CheckReference(c => c.Address, new Address("Line1", "Line2", "Suburb", "City", new Country("South Africa"), "Postal code", new Province("Gauteng")))
                 .CheckProperty(c => c.AddressType, AddressType.Physical)
                 .VerifyTheMappings();
