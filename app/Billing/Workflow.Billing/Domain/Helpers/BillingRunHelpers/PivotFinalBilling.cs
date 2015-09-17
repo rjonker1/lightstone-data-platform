@@ -15,6 +15,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
         private readonly IRepository<AccountMeta> _accountMetaReporRepository;
+        private readonly IRepository<ContractMeta> _contractRepository;
+        private readonly IRepository<UserMeta> _userMetaRepository;
         private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository;
 
         private readonly IPublishReportQueue<BillingReport> _report;
@@ -22,19 +24,22 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
         public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IRepository<ArchiveBillingTransaction> archiveBillingRepository,
                                     IRepository<AccountMeta> accountMetaReporRepository,
-                                    IPublishReportQueue<BillingReport> report, IReportBuilder reportBuilder)
+                                    IPublishReportQueue<BillingReport> report, IReportBuilder reportBuilder, IRepository<ContractMeta> contractRepository, IRepository<UserMeta> userMetaRepository)
         {
             _stageBillingRepository = stageBillingRepository;
             _finalBillingRepository = finalBillingRepository;
             _archiveBillingRepository = archiveBillingRepository;
             _accountMetaReporRepository = accountMetaReporRepository;
             _reportBuilder = reportBuilder;
+            _contractRepository = contractRepository;
+            _userMetaRepository = userMetaRepository;
             _report = report;
         }
 
         public void Pivot()
         {
             var invoicePdfList = new List<ReportDto>();
+            var statementPdfList = new List<ReportDto>();
             var pastelReportList = new List<ReportDto>();
             var pastelInvoiceList = new List<ReportInvoice>();
             var debitOrderReportList = new List<ReportDto>();
@@ -54,22 +59,22 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             try
             {
                 // Archive and clean Final Billing for new month
-                foreach (var archiveRecord in _finalBillingRepository)
-                {
-                    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId))
-                        _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
+                //foreach (var archiveRecord in _finalBillingRepository)
+                //{
+                //    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId))
+                //        _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
 
-                    _finalBillingRepository.Delete(archiveRecord);
-                }
+                //    _finalBillingRepository.Delete(archiveRecord);
+                //}
 
-                foreach (var record in _stageBillingRepository)
-                {
-                    if (record.Created <= startBillMonth) continue;
+                //foreach (var record in _stageBillingRepository)
+                //{
+                //    if (record.Created <= startBillMonth) continue;
 
-                    var finalEntity = Mapper.Map(record, new FinalBilling());
+                //    var finalEntity = Mapper.Map(record, new FinalBilling());
 
-                    _finalBillingRepository.SaveOrUpdate(finalEntity);
-                }
+                //    _finalBillingRepository.SaveOrUpdate(finalEntity);
+                //}
 
                 foreach (var transaction in _finalBillingRepository)
                 {
@@ -132,7 +137,11 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 Customer = new ReportCustomer
                                 {
                                     Name = transaction.CustomerName,
+<<<<<<< Updated upstream
                                     TaxRegistration = 0,
+=======
+                                    TaxRegistration = account.BillingVatNumber != null ? account.BillingVatNumber.ToInt64() : 0000,
+>>>>>>> Stashed changes
                                     Packages = reportPackageList.Select(y => new ReportPackage
                                     {
                                         ItemCode = y.ItemCode,
@@ -149,6 +158,33 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         //Index restriction for new record
                         if (reportIndex < 0) invoicePdfList.Add(report);
+
+                        #endregion
+
+                        #region Statement PDF Report Build-up
+
+                        var contract = _contractRepository.FirstOrDefault(x => x.ContractId == transaction.ContractId);
+                        var userTransactions = new List<ContractUserTransactions>();
+
+                        //TODO: Complete user transaction setup for statement
+                        //var userTransaction = _finalBillingRepository.Count(x => x.User.UserId == transaction.User.UserId);
+
+                        var statement = _reportBuilder.BuildStatement(transaction.CustomerName, null, contract.ContractName, userTransactions);
+
+                        var statementList = new List<ContractStatement>();
+                        var statementIndex = statementList.FindIndex(x => x.Customer == transaction.CustomerName);
+
+                        if (statementIndex < 0) statementList.Add(statement);
+
+                        var statementReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "VkTYTvzp" },
+                            new ReportData
+                            {
+                                ContractStatements = statementList
+                            });
+
+                        var statementReportIndex = statementPdfList.FindIndex(x => x.Data.ContractStatements.Any(s => s.Customer == transaction.CustomerName));
+
+                        if (statementReportIndex < 0) statementPdfList.Add(statementReport);
 
                         #endregion
 
@@ -253,7 +289,11 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 Customer = new ReportCustomer
                                 {
                                     Name = transaction.CustomerName,
+<<<<<<< Updated upstream
                                     TaxRegistration = 0,
+=======
+                                    TaxRegistration = account.BillingVatNumber != null ? account.BillingVatNumber.ToInt64() : 0000,
+>>>>>>> Stashed changes
                                     Packages = reportPackageList.Select(y => new ReportPackage
                                     {
                                         ItemCode = y.ItemCode,
@@ -348,7 +388,9 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             debitOrderNotDoneReportList.Add(debitOrderNotDoneReport);
 
             // Publish to Reporting for processing
+            // Note Pdf report types get emailed to relevant mailing contacts
             _report.PublishToQueue(invoicePdfList, "pdf");
+            _report.PublishToQueue(statementPdfList, "pdf");
             _report.PublishToQueue(pastelReportList, "pastel");
             _report.PublishToQueue(debitOrderReportList, "debitOrder");
             _report.PublishToQueue(debitOrderNotDoneReportList, "debitOrderND");

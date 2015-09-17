@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
 
@@ -24,6 +25,17 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 ISTOCKCODEID = "",
                 Project = "LIVE20",
                 Tax_Number = ""
+            };
+        }
+
+        public ContractStatement BuildStatement(string customerName, string clientName, string contractName, IEnumerable<ContractUserTransactions> userTransactions)
+        {
+            return new ContractStatement()
+            {
+                Customer = customerName,
+                Client = clientName,
+                ContractName = contractName,
+                UserTransactions = userTransactions
             };
         }
 

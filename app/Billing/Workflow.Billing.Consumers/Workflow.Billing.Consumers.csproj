@@ -101,7 +101,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1604\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1659\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Moq">
