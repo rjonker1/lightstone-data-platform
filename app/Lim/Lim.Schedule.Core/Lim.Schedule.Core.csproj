@@ -80,7 +80,11 @@
     <Compile Include="Commands\AuditIntegration.cs" />
     <Compile Include="Commands\ExecuteConfiguration.cs" />
     <Compile Include="Commands\FetchConfiguration.cs" />
+    <Compile Include="Commands\FlatFileInitialize.cs" />
     <Compile Include="Commands\TrackIntegration.cs" />
+    <Compile Include="Factories\FlatFilePullFactory.cs" />
+    <Compile Include="Factories\FlatFilePushFactory.cs" />
+    <Compile Include="Factories\FlatFilePullInitializationFactory.cs" />
     <Compile Include="Handlers\HandleExecutingApiConfiguration.cs" />
     <Compile Include="Handlers\HandleExecutingFlatFileConfiguration.cs" />
     <Compile Include="Handlers\HandleFetchingApiPullConfiguration.cs" />
@@ -92,6 +96,7 @@
     <Compile Include="Identifiers\ApiIdentifiers.cs" />
     <Compile Include="Identifiers\ApiPullIntegration.cs" />
     <Compile Include="Identifiers\ClientIdentifier.cs" />
+    <Compile Include="Identifiers\DirectoryWatcherIndentifier.cs" />
     <Compile Include="Identifiers\FlatFileIndentifier.cs" />
     <Compile Include="Identifiers\FlatFilePullIntegration.cs" />
     <Compile Include="Identifiers\IntegrationActionIdentifiers.cs" />
@@ -100,7 +105,6 @@
     <Compile Include="Identifiers\IntegrationPackageIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationTypeIdentifier.cs" />
     <None Include="app.config" />
-    <None Include="Identifiers\ZippedFileIndentifier.cs.delete" />
     <Compile Include="IHandleConfigurationExecution.cs" />
     <Compile Include="IHandleFetchingConfiguration.cs" />
     <Compile Include="Tracking\ITrackIntegration.cs" />

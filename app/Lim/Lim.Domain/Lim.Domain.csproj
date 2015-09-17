@@ -74,7 +74,10 @@
     <Compile Include="Base\AbstractDirectoryWatcherFactory.cs" />
     <Compile Include="Base\AbstractFileBackupFactory.cs" />
     <Compile Include="Base\AbstractFileReadingFactory.cs" />
+    <Compile Include="Base\AbstractInitilizationFactory.cs" />
     <Compile Include="Base\AbstractPersistenceRepository.cs" />
+    <Compile Include="Base\AbstractPullFactory.cs" />
+    <Compile Include="Base\AbstractPushFactory.cs" />
     <Compile Include="Commands\BackupFile.cs" />
     <Compile Include="Commands\ReadFile.cs" />
     <Compile Include="Dto\ClientDto.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Dto\WeekdayDto.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">

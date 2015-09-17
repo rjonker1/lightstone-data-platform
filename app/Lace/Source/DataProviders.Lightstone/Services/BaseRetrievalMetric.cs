@@ -58,7 +58,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
             _getMetrics.GetMetrics(_request);
             _getBands.GetBands(_request);
             _getMuncipalities.GetMunicipalities(_request);
-            _getMakes.GetMakes(_request);
+            _getMakes.GetMakes(_request); //TODO: This might not be relevant any more. Need to see if it can be removed!
             _getSales.GetSales(_request);
 
             return this;

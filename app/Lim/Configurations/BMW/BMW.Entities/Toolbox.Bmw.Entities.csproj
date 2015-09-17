@@ -66,7 +66,6 @@
     <Compile Include="Factory\BuildBmwSession.cs" />
     <Compile Include="Finance.cs" />
     <Compile Include="Maps\FinanceMap.cs" />
-    <None Include="Repository\BmwRepository.cs.delete" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

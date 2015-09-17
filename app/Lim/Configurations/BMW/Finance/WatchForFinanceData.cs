@@ -36,7 +36,7 @@ namespace Toolbox.Bmw.Finance
             _watcher.IncludeSubdirectories = true;
             _watcher.EnableRaisingEvents = true;
             _watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.CreationTime;
-             _watcher.Filter = "*.zip"; // command.FileExtensions;
+             _watcher.Filter = command.FileExtension;
             _watcher.Created += Created;
             _watcher.Changed += Changed;
             _watcher.Deleted += Deleted;
@@ -47,17 +47,21 @@ namespace Toolbox.Bmw.Finance
         {
             try
             {
+                var dto = new FileInformationDto(_command.FilePath, args.Name, _command.Password, "", true);
                 var data = _bmwFileReader.ReadFile(
-                    new ReadFile(new FileInformationDto(_command.FilePath, args.Name,_command.Password, "", true))).ToList();
+                    new ReadFile(dto)).ToList();
 
                 if (!data.Any())
                 {
-                    Log.InfoFormat("File has been created in Path {0} but cannot be read", args.FullPath);
+                    Log.ErrorFormat("File has been created in Path {0} but cannot be read", args.FullPath);
                     return;
                 }
 
                 if (!_persist.Persist(data))
+                {
+                    Log.ErrorFormat("File has been created in Path {0} and has been read but cannot be saved to the database.", args.FullPath);
                     return;
+                }
 
                 _backup.Backup(new BackupFile(_command,
                     new FileInformationDto(ConfigurationReader.Bmw.BackupFilePath, args.Name, "", "", true)));
@@ -72,8 +76,9 @@ namespace Toolbox.Bmw.Finance
         {
             try
             {
+                var dto = new FileInformationDto(_command.FilePath, args.Name, _command.Password, "", true);
                 var data = _bmwFileReader.ReadFile(
-                    new ReadFile(new FileInformationDto(_command.FilePath, args.Name, _command.Password, "", true))).ToList();
+                    new ReadFile(dto)).ToList();
 
                 if (!data.Any())
                 {
@@ -84,7 +89,7 @@ namespace Toolbox.Bmw.Finance
                 if (!_persist.Persist(data))
                     return;
 
-                _backup.Backup(new BackupFile(_command,
+                _backup.Backup(new BackupFile(dto,
                     new FileInformationDto(ConfigurationReader.Bmw.BackupFilePath, args.Name, "","", true)));
             }
             catch (Exception ex)
@@ -102,8 +107,9 @@ namespace Toolbox.Bmw.Finance
         {
             try
             {
+                var dto = new FileInformationDto(_command.FilePath, args.Name, _command.Password, "", true);
                 var data = _bmwFileReader.ReadFile(
-                    new ReadFile(new FileInformationDto(_command.FilePath, args.Name, _command.Password, "",true))).ToList();
+                    new ReadFile(dto)).ToList();
 
                 if (!data.Any())
                 {
@@ -114,7 +120,7 @@ namespace Toolbox.Bmw.Finance
                 if (!_persist.Persist(data))
                     return;
 
-                _backup.Backup(new BackupFile(_command,
+                _backup.Backup(new BackupFile(dto,
                     new FileInformationDto(ConfigurationReader.Bmw.BackupFilePath, args.Name, "", "", true)));
             }
             catch (Exception ex)

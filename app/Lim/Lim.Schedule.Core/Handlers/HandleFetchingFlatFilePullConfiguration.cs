@@ -5,6 +5,7 @@ using Common.Logging;
 using Lim.Infrastructure;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Identifiers;
+using Toolbox.Bmw.Finance;
 
 namespace Lim.Schedule.Core.Handlers
 {
@@ -25,7 +26,9 @@ namespace Lim.Schedule.Core.Handlers
                 new FlatFilePullIntegration(Guid.NewGuid(),
                     new FlatFileIndentifier(ConfigurationReader.Bmw.FilePath, ConfigurationReader.Bmw.FileName,
                         ConfigurationReader.Bmw.FirstRowIsColumnName, ConfigurationReader.Bmw.FilePassword, true,
-                        ConfigurationReader.Bmw.FileExtension), true)
+                        ConfigurationReader.Bmw.FileExtension),
+                    new DirectoryWatcherIndentifier(new WatchForFinanceDataFactory(new SaveFinanceData(), new ReadFinanceDataFactory(),
+                        new BackupFinanceDataFactory())), true)
             };
 
             HasConfiguration = Configurations.Any();

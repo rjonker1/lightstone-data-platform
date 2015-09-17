@@ -8,7 +8,7 @@ namespace Toolbox.Bmw.Entities.Maps
         {
             Table("Finances");
             Not.LazyLoad();
-            Id(x => x.Id).GeneratedBy.Identity().Column("Id");
+            Id(x => x.Id).GeneratedBy.Guid().Column("Id");
             Map(x => x.Chassis).Column("Chassis").Nullable().Length(100);
             Map(x => x.Engine).Column("Engine").Nullable().Length(100);
             Map(x => x.RegistrationNumber).Column("RegistrationNumber").Nullable().Length(100);
@@ -16,8 +16,7 @@ namespace Toolbox.Bmw.Entities.Maps
             Map(x => x.RegistrationYear).Column("RegistrationYear").Nullable();
             Map(x => x.DealType).Column("DealType").Nullable().Length(100);
             Map(x => x.DealStatus).Column("DealStatus").Nullable().Length(10);
-            Map(x => x.VinEngineId).Column("VinEngineId").Nullable().Length(10);
+            Map(x => x.VinEngineId).Column("VinEngineId").Nullable().Length(50);
         }
-
     }
 }

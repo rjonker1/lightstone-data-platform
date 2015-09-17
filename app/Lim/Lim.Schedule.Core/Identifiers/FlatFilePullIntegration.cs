@@ -7,12 +7,17 @@ namespace Lim.Schedule.Core.Identifiers
     public class FlatFilePullIntegration
     {
 
-        public FlatFilePullIntegration(Guid key, FlatFileIndentifier file, bool needToUnzip)
+        public FlatFilePullIntegration(Guid key, FlatFileIndentifier file, DirectoryWatcherIndentifier watcher, bool needToUnzip)
         {
             Key = key;
             File = file;
             NeedToUnzip = needToUnzip;
+            Watcher = watcher;
         }
+
+        public void Pull()
+        { }
+
 
         [DataMember]
         public Guid Key { get; private set; }
@@ -22,6 +27,8 @@ namespace Lim.Schedule.Core.Identifiers
 
         [DataMember]
         public FlatFileIndentifier File { get; private set; }
+        [DataMember]
+        public DirectoryWatcherIndentifier Watcher { get; private set; }
     }
 
     [DataContract]
@@ -34,6 +41,9 @@ namespace Lim.Schedule.Core.Identifiers
             File = file;
             NeedToUnzip = needToUnzip;
         }
+
+        public void Push()
+        { }
 
         [DataMember]
         public Guid Key { get; private set; }

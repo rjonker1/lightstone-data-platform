@@ -51,6 +51,9 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Core\IBackupFile.cs" />
+    <Compile Include="Core\IInitialize.cs" />
+    <Compile Include="Core\IPullConfiguration.cs" />
+    <Compile Include="Core\IPushConfiguration.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\IPersistObject.cs" />
     <Compile Include="Core\IReadFile.cs" />

@@ -9,12 +9,9 @@ namespace Lim.Schedule.Core.Handlers
     public class HandleExecutingFlatFileConfiguration : IHandleExecutingFlatFileConfiguration
     {
         private static readonly ILog Log = LogManager.GetLogger<HandleExecutingFlatFileConfiguration>();
-        private readonly IWatchDirectory<FileInformationDto> _watchDirectory;
 
-
-        public HandleExecutingFlatFileConfiguration(IWatchDirectory<FileInformationDto> watchDirectory)
+        public HandleExecutingFlatFileConfiguration()
         {
-            _watchDirectory = watchDirectory;
         }
 
         public void Handle(ExecuteFlatFilePullConfigurationCommand command)
@@ -23,7 +20,8 @@ namespace Lim.Schedule.Core.Handlers
 
             command.Configurations.ToList().ForEach(f =>
             {
-                _watchDirectory.Intialize(new FileInformationDto(f.File.FilePath,f.File.FileName,f.File.Password,f.File.Extension, f.File.FirstRowIsColumnName));
+                f.Watcher.Watcher.Intialize(new FileInformationDto(f.File.FilePath, f.File.FileName, f.File.Password, f.File.Extension,
+                    f.File.FirstRowIsColumnName));
             });
 
             IsHandled = true;

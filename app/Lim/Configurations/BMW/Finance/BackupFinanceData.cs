@@ -18,7 +18,7 @@ namespace Toolbox.Bmw.Finance
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            var fileCount = Directory.GetFiles(path).Any() ? Directory.GetFiles(path).Count() : 1;
+            var fileCount = Directory.GetFiles(path).Any() ? Directory.GetFiles(path).Count() : 0;
             var backupFileName = Path.GetFileNameWithoutExtension(command.FileBackup.FileName) + "_" + fileCount +
                                  Path.GetExtension(command.FileBackup.FileName);
 
@@ -27,7 +27,7 @@ namespace Toolbox.Bmw.Finance
             if (!Directory.GetFiles(path).Any() && Directory.GetFiles(path).Count() == fileCount)
                 return false;
 
-            Directory.Delete(Path.Combine(command.File.FilePath, command.File.FileName));
+            File.Delete(Path.Combine(command.File.FilePath, command.File.FileName));
 
             return true;
         }

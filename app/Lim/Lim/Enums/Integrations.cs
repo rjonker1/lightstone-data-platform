@@ -21,4 +21,9 @@
         Basic = 2,
         Stateless = 3
     }
+
+    public enum PullClient
+    {
+        Bmw = 1
+    }
 }
