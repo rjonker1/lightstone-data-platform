@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Castle.Windsor;
+using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
 using Nancy.Authentication.Token;
@@ -70,12 +71,11 @@ namespace PackageBuilder.Api
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
                 this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                var fromException = ErrorResponse.FromException(exception);
-                fromException.Headers.Add("Access-Control-Allow-Origin", "*");
-                fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-                fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
-                fromException.StatusCode = HttpStatusCode.InternalServerError;
-                return fromException;
+                var errorResponse = ErrorResponse.FromException(exception);
+                if (exception is LightstoneAutoException)
+                    errorResponse.StatusCode = HttpStatusCode.ImATeapot;
+
+                return errorResponse;
             });
 
             //pipelines.EnableCors(); // cross origin resource sharing
