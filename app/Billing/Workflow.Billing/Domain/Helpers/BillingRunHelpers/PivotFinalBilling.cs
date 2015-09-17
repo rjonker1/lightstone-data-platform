@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
+using ServiceStack.Common;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
@@ -75,6 +76,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 {
                     #region Customer Transactions
 
+                    var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
+
                     if (transaction.CustomerId != new Guid())
                     {
                         this.Info(() => "FinalBilling initiated for Customer: {0}".FormatWith(transaction.CustomerName));
@@ -124,15 +127,13 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 }).Distinct());
                         }
 
-
-
                         var report = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "VJGAd9OM" },
                             new ReportData
                             {
                                 Customer = new ReportCustomer
                                 {
                                     Name = transaction.CustomerName,
-                                    TaxRegistration = 0,
+                                    TaxRegistration =  account.BillingVatNumber.ToInt64(),
                                     Packages = reportPackageList.Select(y => new ReportPackage
                                     {
                                         ItemCode = y.ItemCode,
@@ -170,8 +171,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         if (accounts.Any(x => x.AccountNumber == transaction.AccountNumber))
                         {
-                            var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
-
                             var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, transaction.CustomerName, "1", account.BankAccountName,
                                                                                         account.BillingDebitOrderAccountNumber, account.BillingDebitOrderBranchCode, "0", "0");
 
@@ -253,7 +252,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 Customer = new ReportCustomer
                                 {
                                     Name = transaction.CustomerName,
-                                    TaxRegistration = 0,
+                                    TaxRegistration = account.BillingVatNumber.ToInt64(),
                                     Packages = reportPackageList.Select(y => new ReportPackage
                                     {
                                         ItemCode = y.ItemCode,
@@ -291,8 +290,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         if (accounts.Any(x => x.AccountNumber == transaction.AccountNumber))
                         {
-                            var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
-
                             var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, transaction.CustomerName, "1", account.BankAccountName,
                                                                                         account.BillingDebitOrderAccountNumber, account.BillingDebitOrderBranchCode, "0", "0");
 
