@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Configuration;
 using Billing.Api.Installers;
 using Castle.Windsor;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Authentication.Token;
@@ -74,7 +75,11 @@ namespace Billing.Api
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
                 this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                return ErrorResponse.FromException(exception);
+                var errorResponse = ErrorResponse.FromException(exception);
+                if (exception is LightstoneAutoException)
+                    errorResponse.StatusCode = HttpStatusCode.ImATeapot;
+
+                return errorResponse;
             });
             pipelines.EnableCors(); // cross origin resource sharing
 
