@@ -80,6 +80,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 {
                     #region Customer Transactions
 
+                    var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
+
                     if (transaction.CustomerId != new Guid())
                     {
                         this.Info(() => "FinalBilling initiated for Customer: {0}".FormatWith(transaction.CustomerName));
@@ -202,8 +204,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         if (accounts.Any(x => x.AccountNumber == transaction.AccountNumber))
                         {
-                            var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
-
                             var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, transaction.CustomerName, "1", account.BankAccountName,
                                                                                         account.BankAccountNumber, account.BranchCode.ToString(), "0", "0");
 
@@ -323,8 +323,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         if (accounts.Any(x => x.AccountNumber == transaction.AccountNumber))
                         {
-                            var account = accounts.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
-
                             var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, transaction.CustomerName, "1", account.BankAccountName,
                                                                                         account.BankAccountNumber, account.BranchCode.ToString(), "0", "0");
 
