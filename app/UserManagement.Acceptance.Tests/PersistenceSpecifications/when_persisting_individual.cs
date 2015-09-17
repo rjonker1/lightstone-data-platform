@@ -18,7 +18,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
         [Observation]
         public void should_persist()
         {
-            var individual = new Individual();
+            var individual = new Individual("Name", "Surname", "IdNumber");
             new PersistenceSpecification<Individual>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Name, "Name")
                 .CheckProperty(c => c.Surname, "Surname")

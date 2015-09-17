@@ -20,7 +20,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
         {
             new PersistenceSpecification<IndividualContactNumber>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckReference(c => c.Individual, new Individual())
+                .CheckReference(c => c.Individual, new Individual("Name", "Surname", "IdNumber"))
                 .CheckProperty(c => c.ContactNumber, "082123456")
                 .CheckProperty(c => c.ContactNumberType, ContactNumberType.Work)
                 .VerifyTheMappings();

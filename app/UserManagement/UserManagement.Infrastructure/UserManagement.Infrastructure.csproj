@@ -113,6 +113,10 @@
     <Compile Include="NHibernate\MappingOverrides\CustomerAccountNumberMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerUserOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\IndividualAddressOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\IndividualContactNumberOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\IndividualEmailOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\IndividualOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\NamedEntityOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserAliasMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />

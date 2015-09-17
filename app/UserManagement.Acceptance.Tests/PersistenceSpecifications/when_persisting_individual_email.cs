@@ -19,7 +19,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
         {
             new PersistenceSpecification<IndividualEmail>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckReference(c => c.Individual, new Individual())
+                .CheckReference(c => c.Individual, new Individual("Name", "Surname", "IdNumber"))
                 .CheckProperty(c => c.Email, "Email")
                 .VerifyTheMappings();
         }

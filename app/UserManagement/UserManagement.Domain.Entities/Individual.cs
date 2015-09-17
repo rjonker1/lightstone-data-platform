@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Core.NHibernate.Attributes;
 
 namespace UserManagement.Domain.Entities
 {
     public class Individual : Entity, INamedEntity
     {
+        [Unique]
         public virtual string Name { get; protected internal set; }
         public virtual string Surname { get; protected internal set; }
         public virtual string IdNumber { get; protected internal set; }
@@ -15,8 +17,11 @@ namespace UserManagement.Domain.Entities
 
         protected Individual() { }
 
-        public Individual(Guid id = new Guid()) : base(id)
+        public Individual(string name, string surname, string idNumber, Guid id = new Guid()) : base(id)
         {
+            Name = name;
+            Surname = surname;
+            IdNumber = idNumber;
         }
     }
 }
