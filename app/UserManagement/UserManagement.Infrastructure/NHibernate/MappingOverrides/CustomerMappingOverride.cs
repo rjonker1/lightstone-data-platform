@@ -20,7 +20,8 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
             //    .AsSet()
             //    .LazyLoad()
             //    .KeyColumn("CustomerId");
-            mapping.HasMany(x => x.Industries).Cascade.SaveUpdate(); 
+            mapping.HasMany(x => x.Industries).Cascade.SaveUpdate();
+            mapping.HasMany(x => x.Addresses).Cascade.SaveUpdate(); 
         }
     }
 }

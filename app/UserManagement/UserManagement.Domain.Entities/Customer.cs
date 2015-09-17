@@ -66,6 +66,7 @@ namespace UserManagement.Domain.Entities
         public virtual bool IsActive { get; protected internal set; }
         public virtual ISet<CustomerIndustry> Industries { get; protected internal set; }
         public virtual DateTime? TrialExpiration { get; protected internal set; }
+        public virtual ISet<CustomerAddress> Addresses { get; protected internal set; }
 
         protected Customer() { }
 

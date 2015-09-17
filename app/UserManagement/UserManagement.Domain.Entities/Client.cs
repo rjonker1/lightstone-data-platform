@@ -28,6 +28,7 @@ namespace UserManagement.Domain.Entities
         public virtual bool IsLocked { get; protected internal set; }
         public virtual DateTime? TrialExpiration { get; protected internal set; }
         public virtual ISet<ClientIndustry> Industries { get; protected internal set; }
+        public virtual ISet<ClientAddress> Addresses { get; protected internal set; }
 
         [DoNotMap]
         public virtual IEnumerable<User> Users
