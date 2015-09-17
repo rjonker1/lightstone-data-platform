@@ -153,6 +153,12 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         #endregion
 
+                        #region Statement PDF Report Build-up
+
+
+
+                        #endregion
+
                         #region Pastel CSV Report Build-up
 
                         var invoice = _reportBuilder.BuildPastelInvoice(pastelCounter, transaction.AccountNumber,
