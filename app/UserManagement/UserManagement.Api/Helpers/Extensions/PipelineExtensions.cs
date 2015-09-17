@@ -92,7 +92,6 @@ namespace UserManagement.Api.Helpers.Extensions
         {
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-
                 // Customer
                 if (nancyContext.Request.Method == "POST" && nancyContext.Request.Url.Path.Contains("Customer"))
                 {

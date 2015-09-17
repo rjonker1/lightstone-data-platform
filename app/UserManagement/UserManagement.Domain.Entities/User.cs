@@ -10,19 +10,19 @@ namespace UserManagement.Domain.Entities
 {
     public class User : Entity
     {
-        public virtual string FirstName { get; set; }
-        public virtual string LastName { get; set; }
-        public virtual string IdNumber { get; set; }
-        public virtual string ContactNumber { get; set; }
+        public virtual string FirstName { get; protected internal set; }
+        public virtual string LastName { get; protected internal set; }
+        public virtual string IdNumber { get; protected internal set; }
+        public virtual string ContactNumber { get; protected internal set; }
         [Unique]
         public virtual string UserName { get; protected internal set; }
         public virtual string Password { get; protected internal set; }
         public virtual string Salt { get; protected internal set; }
         public virtual Guid? ResetPasswordToken { get; protected internal set; }
         public virtual ActivationStatusType ActivationStatusType { get; protected internal set; }
-        public virtual bool? IsActive { get; set; }
-        public virtual bool IsLocked { get; set; }
-        public virtual DateTime? TrialExpiration { get; set; }
+        public virtual bool? IsActive { get; protected internal set; }
+        public virtual bool IsLocked { get; protected internal set; }
+        public virtual DateTime? TrialExpiration { get; protected internal set; }
         public virtual UserType UserType { get; protected internal set; }
         public virtual ISet<Role> Roles { get; protected internal set; }
         public virtual ISet<CustomerUser> CustomerUsers { get; protected internal set; }
@@ -114,6 +114,16 @@ namespace UserManagement.Domain.Entities
         public virtual void ClearResetPasswordToken()
         {
             ResetPasswordToken = null;
+        }
+
+        public virtual void Activate(bool activate)
+        {
+            IsActive = activate;
+        }
+
+        public virtual void Lock(bool @lock)
+        {
+            IsLocked = @lock;
         }
     }
 }

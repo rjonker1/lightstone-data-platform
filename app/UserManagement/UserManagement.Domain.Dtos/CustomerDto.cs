@@ -51,7 +51,7 @@ namespace UserManagement.Domain.Dtos
         public string BillingDebitOrderAccountNumber { get; set; }
         [Phone(ErrorMessage = "Contact Info Contact Number is not a valid phone number")]
         public string ContactDetailContactNumber { get; set; }
-        public ContactType ContactDetailContactType { get; set; }
+        public ContactNumberType ContactNumberDetailContactNumberType { get; set; }
         [Required]
         [Display(Name = "Contact person is required")]
         public string ContactDetailContactPerson { get; set; }  

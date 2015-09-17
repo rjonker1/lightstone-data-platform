@@ -12,7 +12,7 @@ namespace UserManagement.Acceptance.Tests.Repositories
         private Guid _id = Guid.NewGuid();
         public override void Observe()
         {
-            RefreshDb(false);
+            RefreshDb();
             _repository = new NamedEntityRepository<Client>(Session);
             SaveAndFlush(new Client { Id = _id, Name = "Test Client" });
         }

@@ -13,15 +13,15 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
     {
         public override void Observe()
         {
-            RefreshDb(false);
+            RefreshDb();
         }
 
         [Observation]
         public void should_persist()
         {
             var customer = new Customer("Name");
-            var physicalAddress = new Address(AddressType.Physical, "Line1", "Line2", "PostalCode", "City", new Country("South Africa"), "PostalCode", new Province("Limpopo"));
-            var postalAddress = new Address(AddressType.Postal, "Line1", "Line2", "PostalCode", "City", new Country("Botswana"), "PostalCode", new Province("Gauteng"));
+            var physicalAddress = new Address("Line1", "Line2", "PostalCode", "City", new Country("South Africa"), "PostalCode", new Province("Limpopo"));
+            var postalAddress = new Address("Line1", "Line2", "PostalCode", "City", new Country("Botswana"), "PostalCode", new Province("Gauteng"));
             var billing = new Billing("ContactNumber", "ContactPerson", "RegistrationNumber", DateTime.UtcNow, "PastelId", "VatNumber", PaymentType.DebitOrder);
             var roles = new HashSet<Role>{new Role("Role")};
             var user = new User("FirstName", "LastName", "IdNumber", "ContactNumber", "UserName", "Password", false, UserType.Internal, roles);

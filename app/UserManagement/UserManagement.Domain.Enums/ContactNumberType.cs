@@ -1,6 +1,6 @@
 ﻿namespace UserManagement.Domain.Enums
 {
-    public enum ContactType
+    public enum ContactNumberType
     {
         Work,
         Home,

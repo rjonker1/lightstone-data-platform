@@ -43,9 +43,9 @@
             <div class="input-group col-lg-2">
                 <select id="contactTypeSelect" name="ContactDetailContactType" data-placeholder="Select contact type" class="chosen-select">
                     <option value=""></option>
-                    @foreach (var item in Enum.GetValues(typeof(ContactType)))
+                    @foreach (var item in Enum.GetValues(typeof(ContactNumberType)))
                     {
-                        var isSelected = item.ToString() == Model.ContactDetailContactType.ToString();
+                        var isSelected = item.ToString() == Model.ContactNumberDetailContactNumberType.ToString();
                         <option selected="@isSelected" value="@item">@item</option>
                     }
                 </select>

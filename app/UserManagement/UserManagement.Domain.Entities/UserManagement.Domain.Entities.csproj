@@ -133,6 +133,10 @@
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="ClientUserAlias.cs" />
     <Compile Include="IIndustry.cs" />
+    <Compile Include="Individual.cs" />
+    <Compile Include="IndividualAddress.cs" />
+    <Compile Include="IndividualContactNumber.cs" />
+    <Compile Include="IndividualEmail.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />

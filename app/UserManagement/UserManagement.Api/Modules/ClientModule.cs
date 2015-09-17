@@ -113,7 +113,7 @@ namespace UserManagement.Api.Modules
                 {
                     var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, clientRepository.Get(dto.Id) ?? new Client());
-                    entity.AccountOwner = user;
+                    entity.SetAccountOwner(user);
 
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
@@ -151,7 +151,7 @@ namespace UserManagement.Api.Modules
                 {
                     var user = userRepository.Get(dto.accountownerlastname_primary_key);
                     var entity = Mapper.Map(dto, clientRepository.Get(dto.Id));
-                    entity.AccountOwner = user;
+                    entity.SetAccountOwner(user);
 
                     bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -168,7 +168,7 @@ namespace UserManagement.Api.Modules
                 var entity = clientRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
                 entity.ModifiedBy = Context.CurrentUser.UserName;
-                entity.IsLocked = true;
+                entity.Lock(true);
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -182,7 +182,7 @@ namespace UserManagement.Api.Modules
                 var entity = clientRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
                 entity.ModifiedBy = Context.CurrentUser.UserName;
-                entity.IsLocked = false;
+                entity.Lock(false);
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
 

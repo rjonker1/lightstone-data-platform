@@ -28,7 +28,7 @@ namespace UserManagement.Domain.BusinessRules.Users
             //    throw exception;
             //}
 
-            entity.IsActive = false;
+            entity.Activate(false);
         }
     }
 }

@@ -6,12 +6,12 @@ namespace UserManagement.Domain.Entities
 {
     public class ContactDetail : Entity
     {
-        public virtual string ContactPerson { get; set; }
-        public virtual string ContactNumber { get; set; }
-        public virtual string EmailAddress { get; set; }
-        public virtual ContactType ContactType { get; set; }
-        public virtual Address PhysicalAddress { get; set; }
-        public virtual Address PostalAddress { get; set; }
+        public virtual string ContactPerson { get; protected internal set; }
+        public virtual string ContactNumber { get; protected internal set; }
+        public virtual string EmailAddress { get; protected internal set; }
+        public virtual ContactNumberType ContactNumberType { get; protected internal set; }
+        public virtual Address PhysicalAddress { get; protected internal set; }
+        public virtual Address PostalAddress { get; protected internal set; }
 
         protected internal ContactDetail() { }
 

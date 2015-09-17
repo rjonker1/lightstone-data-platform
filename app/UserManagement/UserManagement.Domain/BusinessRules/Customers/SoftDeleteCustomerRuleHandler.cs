@@ -31,7 +31,7 @@ namespace UserManagement.Domain.BusinessRules.Customers
                 throw exception;
             }
 
-            entity.IsActive = false;
+            entity.Activate(false);
         }
     }
 }

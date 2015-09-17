@@ -13,14 +13,14 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
     {
         public override void Observe()
         {
-            RefreshDb(false);
+            RefreshDb();
         }
 
         [Observation]
         public void should_persist()
         {
-            var physicalAddress = new Address(AddressType.Physical, "Line1", "Line2", "PostalCode", "City", new Country("South Africa"), "PostalCode", new Province("Gauteng"));
-            var postalAddress = new Address(AddressType.Postal, "Line1", "Line2", "PostalCode", "City", new Country("Botswana"), "PostalCode", new Province("KZN"));
+            var physicalAddress = new Address("Line1", "Line2", "PostalCode", "City", new Country("South Africa"), "PostalCode", new Province("Gauteng"));
+            var postalAddress = new Address("Line1", "Line2", "PostalCode", "City", new Country("Botswana"), "PostalCode", new Province("KZN"));
             var id = Guid.NewGuid();
             var client = new Client("Client");
             new PersistenceSpecification<Client>(Session, new CustomEqualityComparer())

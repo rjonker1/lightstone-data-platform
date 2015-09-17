@@ -169,7 +169,7 @@ namespace UserManagement.Api.Modules
                 var entity = userRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
                 entity.ModifiedBy = Context.CurrentUser.UserName;
-                entity.IsLocked = true;
+                entity.Lock(true);
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
@@ -183,7 +183,7 @@ namespace UserManagement.Api.Modules
                 var entity = userRepository.Get(dto.Id);
                 entity.Modified = DateTime.UtcNow;
                 entity.ModifiedBy = Context.CurrentUser.UserName;
-                entity.IsLocked = false;
+                entity.Lock(false);
 
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
 

@@ -7,19 +7,20 @@ using Xunit.Extensions;
 
 namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
 {
-    public class when_persisting_country : TestDataBaseHelper
+    public class when_persisting_individual_email : TestDataBaseHelper
     {
         public override void Observe()
         {
-            RefreshDb();
+            RefreshDb(false);
         }
 
         [Observation]
         public void should_persist()
         {
-            new PersistenceSpecification<Country>(Session, new CustomEqualityComparer())
+            new PersistenceSpecification<IndividualEmail>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.Value, "South Africa")
+                .CheckReference(c => c.Individual, new Individual())
+                .CheckProperty(c => c.Email, "Email")
                 .VerifyTheMappings();
         }
     }

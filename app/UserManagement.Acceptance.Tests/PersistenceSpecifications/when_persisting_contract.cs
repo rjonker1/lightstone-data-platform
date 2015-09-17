@@ -13,7 +13,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
     {
         public override void Observe()
         {
-            RefreshDb(false);
+            RefreshDb();
         }
 
         [Observation]
