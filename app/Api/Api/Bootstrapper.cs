@@ -8,6 +8,7 @@ using Api.Helpers.Installers;
 using Api.Infrastructure.Metadata;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using EasyNetQ;
 using Nancy;
@@ -48,7 +49,11 @@ namespace Api
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
                 this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                return ErrorResponse.FromException(exception);
+                var errorResponse = ErrorResponse.FromException(exception);
+                if (exception is LightstoneAutoException)
+                    errorResponse.StatusCode = HttpStatusCode.ImATeapot;
+
+                return errorResponse;
             });
 
             //pipelines.EnableCors(); // cross origin resource sharing
