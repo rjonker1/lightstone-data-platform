@@ -2,7 +2,7 @@
 
 namespace Lim.Domain.Base
 {
-    public abstract class AbstractFetchConfigurationFactory<T, TResult> : IFetchConfiguration<T, TResult>
+    public abstract class AbstractFetchFactory<T, TResult> : IFetch<T, TResult>
     {
         public abstract TResult Fetch(T command);
 

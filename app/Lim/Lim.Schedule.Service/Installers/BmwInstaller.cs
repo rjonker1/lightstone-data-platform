@@ -4,7 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Core;
 using Toolbox.Bmw.Entities.Factory;
-using Toolbox.Bmw.Finance;
+using Toolbox.Bmw.Factories;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -19,17 +19,22 @@ namespace Lim.Schedule.Service.Installers
             container.Register(Component.For<BmwConfiguration>().UsingFactoryMethod(c => BmwFactoryManager.BuildConfiguration()).LifestyleTransient());
 
             container.Register(Classes.FromAssemblyContaining<ReadFinanceDataFactory>()
-                .BasedOn(typeof (IReadFile<,>))
+                .BasedOn(typeof (IRead<,>))
                 .WithServiceAllInterfaces()
                 .LifestyleTransient());
 
             container.Register(Classes.FromAssemblyContaining<BackupFinanceDataFactory>()
-                .BasedOn(typeof (IBackupFile<>))
+                .BasedOn(typeof (IBackup<>))
                 .WithServiceAllInterfaces()
                 .LifestyleTransient());
 
+            container.Register(Classes.FromAssemblyContaining<FailFinanceFactory>()
+               .BasedOn(typeof(IFail<>))
+               .WithServiceAllInterfaces()
+               .LifestyleTransient());
+
             container.Register(Classes.FromAssemblyContaining<WatchForFinanceDataFactory>()
-               .BasedOn(typeof(IWatchDirectory<>))
+               .BasedOn(typeof(IWatch<>))
                .WithServiceAllInterfaces()
                .LifestyleTransient());
 

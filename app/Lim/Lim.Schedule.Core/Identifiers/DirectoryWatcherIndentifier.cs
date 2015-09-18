@@ -7,11 +7,11 @@ namespace Lim.Schedule.Core.Identifiers
     [DataContract]
     public class DirectoryWatcherIndentifier
     {
-        public DirectoryWatcherIndentifier(IWatchDirectory<FileInformationDto> watcher)
+        public DirectoryWatcherIndentifier(IWatch<FileInformationDto> watcher)
         {
             Watcher = watcher;
         }
 
-        [DataMember] public readonly IWatchDirectory<FileInformationDto> Watcher;
+        [DataMember] public readonly IWatch<FileInformationDto> Watcher;
     }
 }

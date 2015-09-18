@@ -118,6 +118,7 @@
     <Compile Include="Installers\ConsumerInstaller.cs" />
     <Compile Include="Installers\DatabaseInstaller.cs" />
     <Compile Include="Installers\FactoryInstaller.cs" />
+    <Compile Include="Installers\FlatFileInstallers.cs" />
     <Compile Include="Installers\HandlerInstaller.cs" />
     <Compile Include="Installers\JobInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
@@ -135,10 +136,16 @@
     <Compile Include="Jobs\JobFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Reader\ConfigurationReader.cs" />
-    <Compile Include="Resolvers\BackupFileResolver.cs" />
-    <Compile Include="Resolvers\DirectoryWatcherResolver.cs" />
+    <Compile Include="Resolvers\AuditorResolver.cs" />
+    <Compile Include="Resolvers\FailFactoryResolver.cs" />
+    <Compile Include="Resolvers\BackupFactoryResolver.cs" />
+    <Compile Include="Resolvers\FetchFactoryResolver.cs" />
+    <Compile Include="Resolvers\InitializationResolver.cs" />
+    <Compile Include="Resolvers\PullResolver.cs" />
+    <Compile Include="Resolvers\PushResolver.cs" />
+    <Compile Include="Resolvers\WatcherResolver.cs" />
     <Compile Include="Resolvers\PersistFactoryResolver.cs" />
-    <Compile Include="Resolvers\ReadFileFactoryResolver.cs" />
+    <Compile Include="Resolvers\ReadFactoryResolver.cs" />
     <Compile Include="ScheduleWorker.cs" />
   </ItemGroup>
   <ItemGroup>

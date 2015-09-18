@@ -5,7 +5,7 @@ using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Entities.Repository;
 using Lim.Schedule.Service.Resolvers;
-using Toolbox.Bmw.Finance;
+using Toolbox.Bmw.Factories;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -19,7 +19,7 @@ namespace Lim.Schedule.Service.Installers
             container.Register(Component.For<IRepository>().UsingFactoryMethod(() => new LimRepository()));
 
             container.Register(Classes.FromAssemblyContaining<SaveFinanceData>()
-               .BasedOn(typeof(IPersistObject<>))
+               .BasedOn(typeof(IPersist<>))
                .WithServiceAllInterfaces()
                .LifestyleTransient());
 

@@ -3,11 +3,11 @@ using Lim.Domain.Base;
 using Lim.Domain.Dto;
 using Lim.Schedule.Core.Commands;
 
-namespace Lim.Schedule.Core.Factories
+namespace Lim.Schedule.Core.Factories.FlatFile
 {
-    public class FlatFilePushFactory : AbstractPushFactory<FlatFilePushInitializeCommand>
+    public class PushFactory : AbstractPushFactory<FlatFilePushInitializeCommand>
     {
-        public FlatFilePushFactory()
+        public PushFactory()
         {
             
         }

@@ -15,7 +15,7 @@ namespace Lim.Domain.Entities.Maps {
             Map(x => x.DateCreated).Column("DateCreated").Default("GETUTCDATE()").Not.Nullable().Generated.Insert();
 			Map(x => x.IsActive).Column("IsActive").Not.Nullable();
 			Map(x => x.DateModified).Column("DateModified");
-            Map(x => x.ModifiedBy).Column("ModifiedBy").Length(50); ;
+            Map(x => x.ModifiedBy).Column("ModifiedBy").Length(50);
         }
     }
 }

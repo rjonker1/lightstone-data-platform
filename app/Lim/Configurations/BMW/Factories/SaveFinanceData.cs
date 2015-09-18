@@ -7,7 +7,7 @@ using Lim.Domain.Extensions;
 using Toolbox.Bmw.Dtos;
 using Toolbox.Bmw.Entities.Factory;
 
-namespace Toolbox.Bmw.Finance
+namespace Toolbox.Bmw.Factories
 {
     public class SaveFinanceData : AbstractPersistenceRepository<List<BmwFinanceDataDto>>
     {

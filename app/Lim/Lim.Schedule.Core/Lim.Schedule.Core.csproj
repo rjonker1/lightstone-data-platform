@@ -82,9 +82,10 @@
     <Compile Include="Commands\FetchConfiguration.cs" />
     <Compile Include="Commands\FlatFileInitialize.cs" />
     <Compile Include="Commands\TrackIntegration.cs" />
-    <Compile Include="Factories\FlatFilePullFactory.cs" />
-    <Compile Include="Factories\FlatFilePushFactory.cs" />
-    <Compile Include="Factories\FlatFilePullInitializationFactory.cs" />
+    <Compile Include="Factories\FlatFile\FetchFactory.cs" />
+    <Compile Include="Factories\FlatFile\PullFactory.cs" />
+    <Compile Include="Factories\FlatFile\PushFactory.cs" />
+    <Compile Include="Factories\FlatFile\InitializePullFactory.cs" />
     <Compile Include="Handlers\HandleExecutingApiConfiguration.cs" />
     <Compile Include="Handlers\HandleExecutingFlatFileConfiguration.cs" />
     <Compile Include="Handlers\HandleFetchingApiPullConfiguration.cs" />
@@ -99,10 +100,11 @@
     <Compile Include="Identifiers\DirectoryWatcherIndentifier.cs" />
     <Compile Include="Identifiers\FlatFileIndentifier.cs" />
     <Compile Include="Identifiers\FlatFilePullIntegration.cs" />
-    <Compile Include="Identifiers\IntegrationActionIdentifiers.cs" />
+    <Compile Include="Identifiers\ActionIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationClientIdentifier.cs" />
-    <Compile Include="Identifiers\IntegrationFrequencyIdentifier.cs" />
+    <Compile Include="Identifiers\FrequencyIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationPackageIdentifier.cs" />
+    <Compile Include="Identifiers\PullClientIdentifier.cs" />
     <Compile Include="Identifiers\IntegrationTypeIdentifier.cs" />
     <None Include="app.config" />
     <Compile Include="IHandleConfigurationExecution.cs" />

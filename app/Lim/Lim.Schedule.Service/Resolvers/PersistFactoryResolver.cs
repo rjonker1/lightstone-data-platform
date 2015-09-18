@@ -3,7 +3,7 @@ using Lim.Core;
 
 namespace Lim.Schedule.Service.Resolvers
 {
-    public class PersistFactoryResolver : IPersistObject
+    public class PersistFactoryResolver : IPersist
     {
         private readonly IWindsorContainer _container;
 
@@ -15,12 +15,12 @@ namespace Lim.Schedule.Service.Resolvers
         public bool Persist(object obj)
         {
             var type = obj.GetType();
-            var executorType = typeof (IPersistObject<>).MakeGenericType(type);
-            var executor = (IPersistObject) _container.Resolve(executorType);
+            var executorType = typeof (IPersist<>).MakeGenericType(type);
+            var executor = (IPersist) _container.Resolve(executorType);
             return ExecuteHandler(obj, executor);
         }
 
-        public bool ExecuteHandler(object obj, IPersistObject executor)
+        public bool ExecuteHandler(object obj, IPersist executor)
         {
             try
             {

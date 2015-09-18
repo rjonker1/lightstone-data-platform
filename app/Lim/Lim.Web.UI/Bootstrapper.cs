@@ -32,8 +32,8 @@ namespace Lim.Web.UI
             container.Register<IHandleSavingConfiguration, SavingConfigurationHandler>();
             container.Register<IHandleSavingClient, SavingClientHandler>();
             container.Register<IHandleGettingMetadata, GetMetadataHandler>();
-            container.Register<IPersistObject<PushConfiguration>, ApiPushCommit>();
-            container.Register<IPersistObject<ClientDto>, ClientCommit>();
+            container.Register<IPersist<PushConfiguration>, ApiPushCommit>();
+            container.Register<IPersist<ClientDto>, ClientCommit>();
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

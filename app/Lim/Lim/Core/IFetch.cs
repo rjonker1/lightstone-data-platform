@@ -1,11 +1,11 @@
 ﻿namespace Lim.Core
 {
-    public interface IFetchConfiguration
+    public interface IFetch
     {
         object Fetch(object command);
     }
 
-    public interface IFetchConfiguration<in T, out TResult> : IFetchConfiguration
+    public interface IFetch<in T, out TResult> : IFetch
     {
         TResult Fetch(T command);
     }

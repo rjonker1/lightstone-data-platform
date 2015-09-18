@@ -7,11 +7,11 @@ namespace Lim.Web.UI.Handlers
 {
     public class SavingClientHandler : IHandleSavingClient
     {
-        private readonly IPersistObject<ClientDto> _client;
+        private readonly IPersist<ClientDto> _client;
 
         public bool IsSaved { get; private set; }
 
-        public SavingClientHandler(IPersistObject<ClientDto> client)
+        public SavingClientHandler(IPersist<ClientDto> client)
         {
             _client = client;
         }

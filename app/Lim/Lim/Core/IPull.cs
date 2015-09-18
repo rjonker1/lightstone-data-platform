@@ -1,11 +1,11 @@
 ﻿namespace Lim.Core
 {
-    public interface IPullConfiguration
+    public interface IPull
     {
         void Pull(object command);
     }
 
-    public interface IPullConfiguration<in T> : IPullConfiguration
+    public interface IPull<in T> : IPull
     {
         void Pull(T command);
     }

@@ -3,28 +3,28 @@ using Lim.Core;
 
 namespace Lim.Schedule.Service.Resolvers
 {
-    public class DirectoryWatcherResolver : IWatchDirectory
+    public class InitializeResolver : IInitialize
     {
         private readonly IWindsorContainer _container;
 
-        public DirectoryWatcherResolver(IWindsorContainer container)
+        public InitializeResolver(IWindsorContainer container)
         {
             _container = container;
         }
 
-        public void Intialize(object command)
+        public void Init(object command)
         {
             var type = command.GetType();
-            var executorType = typeof (IWatchDirectory).MakeGenericType(type);
-            var executor = (IWatchDirectory) _container.Resolve(executorType);
+            var executorType = typeof(IInitialize<>).MakeGenericType(type);
+            var executor = (IInitialize)_container.Resolve(executorType);
             Execute(command, executor);
         }
 
-        public void Execute(object command, IWatchDirectory executor)
+        public void Execute(object command, IInitialize executor)
         {
             try
             {
-               executor.Intialize(command);
+                executor.Init(command);
             }
             finally
             {

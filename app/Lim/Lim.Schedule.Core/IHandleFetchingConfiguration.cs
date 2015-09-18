@@ -25,6 +25,6 @@ namespace Lim.Schedule.Core
     {
         IEnumerable<FlatFilePullIntegration> Configurations { get; }
         bool HasConfiguration { get; }
-        void Handle(FetchConfigurationForAlwaysOnCommand command);
+        void Handle(FetchConfigurationCommand command);
     }
 }

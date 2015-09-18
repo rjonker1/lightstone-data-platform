@@ -11,13 +11,13 @@ using Toolbox.Bmw.Dtos;
 using System.Linq;
 using Toolbox.Bmw.Extensions;
 
-namespace Toolbox.Bmw.Finance
+namespace Toolbox.Bmw.Factories
 {
-    public class ReadFinanceDataFactory : AbstractFileReadingFactory<ReadFile, IEnumerable<BmwFinanceDataDto>>
+    public class ReadFinanceDataFactory : AbstractReadingFactory<ReadFile, IEnumerable<BmwFinanceDataDto>>
     {
         private readonly ILog _log = LogManager.GetLogger<ReadFinanceDataFactory>();
 
-        public override IEnumerable<BmwFinanceDataDto> ReadFile(ReadFile command)
+        public override IEnumerable<BmwFinanceDataDto> Read(ReadFile command)
         {
             try
             {

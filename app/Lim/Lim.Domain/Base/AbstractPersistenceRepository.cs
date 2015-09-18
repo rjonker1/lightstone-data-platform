@@ -2,7 +2,7 @@
 
 namespace Lim.Domain.Base
 {
-    public abstract class AbstractPersistenceRepository<T> : IPersistObject<T>
+    public abstract class AbstractPersistenceRepository<T> : IPersist<T>
     {
         public abstract bool Persist(T obj);
 

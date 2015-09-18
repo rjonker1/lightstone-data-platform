@@ -12,7 +12,6 @@ namespace Lim.Schedule.Service.Jobs.Integrations.AlwaysOn.FlatFile
         private static readonly ILog Log = LogManager.GetLogger<PullJob>();
         private readonly IHandleFetchingFlatFilePullConfiguration _fetch;
         private readonly IHandleExecutingFlatFileConfiguration _execute;
-
         public PullJob(IHandleFetchingFlatFilePullConfiguration fetch, IHandleExecutingFlatFileConfiguration execute)
         {
             _fetch = fetch;
@@ -22,7 +21,7 @@ namespace Lim.Schedule.Service.Jobs.Integrations.AlwaysOn.FlatFile
         public void Execute(IJobExecutionContext context)
         {
             Log.InfoFormat("Executing the Flat File Always On Integration");
-            _fetch.Handle(new FetchConfigurationForAlwaysOnCommand(IntegrationAction.Pull, IntegrationType.FlatFile, Frequency.AlwaysOn));
+            _fetch.Handle(new FetchConfigurationCommand(IntegrationAction.Pull, IntegrationType.FlatFile, Frequency.AlwaysOn));
 
             if (!_fetch.Configurations.Any())
             {

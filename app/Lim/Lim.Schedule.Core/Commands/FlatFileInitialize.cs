@@ -3,9 +3,9 @@ using Lim.Enums;
 
 namespace Lim.Schedule.Core.Commands
 {
-    public class FlatFilePullInitializeCommand
+    public class FlatFileInitializePullCommand
     {
-        public FlatFilePullInitializeCommand(Frequency frequency, PullClient client, FileInformationDto fileInformation)
+        public FlatFileInitializePullCommand(Frequency frequency, PullClient client, FileInformationDto fileInformation)
         {
             Frequency = frequency;
             Client = client;

@@ -71,10 +71,11 @@
     </Compile>
     <Compile Include="Dtos\BmwFinanceDataDto.cs" />
     <Compile Include="Extensions\DatasetExtensions.cs" />
-    <Compile Include="Finance\BackupFinanceData.cs" />
-    <Compile Include="Finance\ReadFinanceData.cs" />
-    <Compile Include="Finance\SaveFinanceData.cs" />
-    <Compile Include="Finance\WatchForFinanceData.cs" />
+    <Compile Include="Factories\BackupFinanceData.cs" />
+    <Compile Include="Factories\FailFinanceFactory.cs" />
+    <Compile Include="Factories\ReadFinanceData.cs" />
+    <Compile Include="Factories\SaveFinanceData.cs" />
+    <Compile Include="Factories\WatchForFinanceData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Lim.Domain\Lim.Domain.csproj">

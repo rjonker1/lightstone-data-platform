@@ -1,11 +1,11 @@
 ﻿namespace Lim.Core
 { 
-    public interface IPersistObject
+    public interface IPersist
     {
         bool Persist(object obj);
     }
 
-    public interface IPersistObject<in T> : IPersistObject
+    public interface IPersist<in T> : IPersist
     {
         bool Persist(T obj);
     }

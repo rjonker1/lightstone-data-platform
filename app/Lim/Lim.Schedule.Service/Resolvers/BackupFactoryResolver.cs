@@ -3,11 +3,11 @@ using Lim.Core;
 
 namespace Lim.Schedule.Service.Resolvers
 {
-    public class BackupFileResolver : IBackupFile
+    public class BackupFactoryResolver : IBackup
     {
         private readonly IWindsorContainer _container;
 
-        public BackupFileResolver(IWindsorContainer container)
+        public BackupFactoryResolver(IWindsorContainer container)
         {
             _container = container;
         }
@@ -15,12 +15,12 @@ namespace Lim.Schedule.Service.Resolvers
         public bool Backup(object command)
         {
             var type = command.GetType();
-            var executorType = typeof (IBackupFile<>).MakeGenericType(type);
-            var executor = (IBackupFile) _container.Resolve(executorType);
+            var executorType = typeof (IBackup<>).MakeGenericType(type);
+            var executor = (IBackup) _container.Resolve(executorType);
             return ExecuteHandler(command, executor);
         }
 
-        private bool ExecuteHandler(object command, IBackupFile executor)
+        private bool ExecuteHandler(object command, IBackup executor)
         {
             try
             {

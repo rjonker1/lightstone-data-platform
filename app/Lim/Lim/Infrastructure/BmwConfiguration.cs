@@ -49,6 +49,11 @@
             get { return GetAppSetting("lim/schedule/bmw/backupFilePath", @"C:\11-Lightstone\BmwBackups"); }
         }
 
+        public string FailFilePath
+        {
+            get { return GetAppSetting("lim/schedule/bmw/failFilePath", @"C:\11-Lightstone\BmwFailure"); }
+        }
+
         public string FileExtension
         {
             get { return GetAppSetting("lim/schedule/bmw/fileExtensions", @"*.zip"); }

@@ -13,6 +13,7 @@ namespace Toolbox.Bmw.Entities
         public virtual string DealType { get; set; }
         public virtual string DealStatus { get; set; }
         public virtual string VinEngineId { get; set; }
+        public virtual string DateAdded { get; set; }
 
         public Finance SetVinEngineId()
         {

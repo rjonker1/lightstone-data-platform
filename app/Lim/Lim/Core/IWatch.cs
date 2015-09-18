@@ -1,11 +1,11 @@
 ﻿namespace Lim.Core
 {
-    public interface IWatchDirectory
+    public interface IWatch
     {
         void Intialize(object command);
     }
 
-    public interface IWatchDirectory<in T> : IWatchDirectory
+    public interface IWatch<in T> : IWatch
     {
         void Intialize(T command);
     }

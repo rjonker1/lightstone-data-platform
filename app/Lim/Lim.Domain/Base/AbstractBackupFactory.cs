@@ -2,7 +2,7 @@
 
 namespace Lim.Domain.Base
 {
-    public abstract class AbstractFileBackupFactory<T> : IBackupFile<T>
+    public abstract class AbstractBackupFactory<T> : IBackup<T>
     {
         public abstract bool Backup(T command);
 

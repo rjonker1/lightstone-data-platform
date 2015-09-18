@@ -1,36 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lim.Infrastructure;
+using Lim.Core;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Identifiers;
-using Toolbox.Bmw.Finance;
 
 namespace Lim.Schedule.Core.Handlers
 {
     public class HandleFetchingFlatFilePullConfiguration : IHandleFetchingFlatFilePullConfiguration
     {
         private static readonly ILog Log = LogManager.GetLogger<HandleFetchingFlatFilePullConfiguration>();
+        
+        private readonly IFetch<FetchConfigurationCommand, List<FlatFilePullIntegration>> _fetcher;
 
-        public HandleFetchingFlatFilePullConfiguration()
+        public HandleFetchingFlatFilePullConfiguration(IFetch<FetchConfigurationCommand, List<FlatFilePullIntegration>> fetcher)
         {
-            
+            _fetcher = fetcher;
         }
 
-        public void Handle(FetchConfigurationForAlwaysOnCommand command)
+        public void Handle(FetchConfigurationCommand command)
         {
-            //TODO: This needs to read from the database. Its like this for now to get to work for LIVE 1.0
-            Configurations = new List<FlatFilePullIntegration>()
-            {
-                new FlatFilePullIntegration(Guid.NewGuid(),
-                    new FlatFileIndentifier(ConfigurationReader.Bmw.FilePath, ConfigurationReader.Bmw.FileName,
-                        ConfigurationReader.Bmw.FirstRowIsColumnName, ConfigurationReader.Bmw.FilePassword, true,
-                        ConfigurationReader.Bmw.FileExtension),
-                    new DirectoryWatcherIndentifier(new WatchForFinanceDataFactory(new SaveFinanceData(), new ReadFinanceDataFactory(),
-                        new BackupFinanceDataFactory())), true)
-            };
-
+            Configurations = _fetcher.Fetch(command);
             HasConfiguration = Configurations.Any();
         }
 

@@ -20,8 +20,7 @@ namespace Lim.Schedule.Core.Handlers
 
             command.Configurations.ToList().ForEach(f =>
             {
-                f.Watcher.Watcher.Intialize(new FileInformationDto(f.File.FilePath, f.File.FileName, f.File.Password, f.File.Extension,
-                    f.File.FirstRowIsColumnName));
+                f.Puller.Pull(f.Command);
             });
 
             IsHandled = true;

@@ -3,33 +3,34 @@ using Lim.Core;
 
 namespace Lim.Schedule.Service.Resolvers
 {
-    public class ReadFileFactoryResolver : IReadFile
+    public class FailFactoryResolver : IFail
     {
         private readonly IWindsorContainer _container;
 
-        public ReadFileFactoryResolver(IWindsorContainer container)
+        public FailFactoryResolver(IWindsorContainer container)
         {
             _container = container;
         }
 
-        public object ReadFile(object command)
+        public bool Fail(object command)
         {
             var type = command.GetType();
-            var executorType = typeof (IReadFile<,>).MakeGenericType(type);
-            var executor = (IReadFile)_container.Resolve(executorType);
+            var executorType = typeof (IFail<>).MakeGenericType(type);
+            var executor = (IFail) _container.Resolve(executorType);
             return ExecuteHandler(command, executor);
         }
 
-        private object ExecuteHandler(object command, IReadFile executor)
+        private bool ExecuteHandler(object command, IFail executor)
         {
             try
             {
-                return executor.ReadFile(command);
+                return executor.Fail(command);
             }
             finally
             {
                 _container.Release(executor);
             }
         }
+
     }
 }

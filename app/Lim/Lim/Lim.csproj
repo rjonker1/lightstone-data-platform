@@ -50,14 +50,18 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Core\IBackupFile.cs" />
+    <Compile Include="Core\IAudit.cs" />
+    <Compile Include="Core\IBackup.cs" />
+    <Compile Include="Core\IFail.cs" />
+    <Compile Include="Core\IFetch.cs" />
     <Compile Include="Core\IInitialize.cs" />
-    <Compile Include="Core\IPullConfiguration.cs" />
-    <Compile Include="Core\IPushConfiguration.cs" />
+    <Compile Include="Core\IIntegrate.cs" />
+    <Compile Include="Core\IPull.cs" />
+    <Compile Include="Core\IPush.cs" />
     <Compile Include="Core\IRepository.cs" />
-    <Compile Include="Core\IPersistObject.cs" />
-    <Compile Include="Core\IReadFile.cs" />
-    <Compile Include="Core\IWatchDirectory.cs" />
+    <Compile Include="Core\IPersist.cs" />
+    <Compile Include="Core\IRead.cs" />
+    <Compile Include="Core\IWatch.cs" />
     <Compile Include="Enums\Integrations.cs" />
     <Compile Include="Enums\Times.cs" />
     <Compile Include="Infrastructure\AbstractConfigurationReader.cs" />

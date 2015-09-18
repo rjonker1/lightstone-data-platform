@@ -6,7 +6,7 @@ namespace Lim.Schedule.Core.Identifiers
     public class ApiConfigurationIdentifier
     {
         public ApiConfigurationIdentifier(string baseAddress, string suffix, ApiAuthenticationIdentifier authentication,
-            IntegrationActionIdentifier action, IntegrationTypeIdentifier type, IntegrationFrequencyIdentifier frequency)
+            ActionIdentifier action, IntegrationTypeIdentifier type, FrequencyIdentifier frequency)
         {
             BaseAddress = baseAddress;
             Suffix = suffix;
@@ -26,12 +26,12 @@ namespace Lim.Schedule.Core.Identifiers
         public ApiAuthenticationIdentifier Authentication { get; private set; }
 
         [DataMember]
-        public IntegrationActionIdentifier Action { get; private set; }
+        public ActionIdentifier Action { get; private set; }
 
         [DataMember]
         public IntegrationTypeIdentifier Type { get; private set; }
 
         [DataMember]
-        public IntegrationFrequencyIdentifier Frequency { get; private set; }
+        public FrequencyIdentifier Frequency { get; private set; }
     }
 }

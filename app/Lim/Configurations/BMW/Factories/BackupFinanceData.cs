@@ -6,9 +6,9 @@ using Lim.Domain.Base;
 using Lim.Domain.Commands;
 using Lim.Domain.Extensions;
 
-namespace Toolbox.Bmw.Finance
+namespace Toolbox.Bmw.Factories
 {
-    public class BackupFinanceDataFactory : AbstractFileBackupFactory<BackupFile>
+    public class BackupFinanceDataFactory : AbstractBackupFactory<BackupFile>
     {
         private readonly ILog _log = LogManager.GetLogger<ReadFinanceDataFactory>();
 

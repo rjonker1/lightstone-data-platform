@@ -2,7 +2,7 @@
 
 namespace Lim.Domain.Base
 {
-    public abstract class AbstractPushFactory<T> : IPushConfiguration<T>
+    public abstract class AbstractPushFactory<T> : IPush<T>
     {
         public abstract void Push(T command);
 

@@ -71,14 +71,18 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Base\AbstractDirectoryWatcherFactory.cs" />
-    <Compile Include="Base\AbstractFileBackupFactory.cs" />
-    <Compile Include="Base\AbstractFileReadingFactory.cs" />
+    <Compile Include="Base\AbstractAuditor.cs" />
+    <Compile Include="Base\AbstractFailFactory.cs" />
+    <Compile Include="Base\AbstractWatcherFactory.cs" />
+    <Compile Include="Base\AbstractFetchFactory.cs" />
+    <Compile Include="Base\AbstractBackupFactory.cs" />
+    <Compile Include="Base\AbstractReadingFactory.cs" />
     <Compile Include="Base\AbstractInitilizationFactory.cs" />
     <Compile Include="Base\AbstractPersistenceRepository.cs" />
     <Compile Include="Base\AbstractPullFactory.cs" />
     <Compile Include="Base\AbstractPushFactory.cs" />
     <Compile Include="Commands\BackupFile.cs" />
+    <Compile Include="Commands\FailFile.cs" />
     <Compile Include="Commands\ReadFile.cs" />
     <Compile Include="Dto\ClientDto.cs" />
     <Compile Include="Dto\ConfigurationDto.cs" />

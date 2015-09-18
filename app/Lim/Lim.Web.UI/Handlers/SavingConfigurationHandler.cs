@@ -8,9 +8,9 @@ namespace Lim.Web.UI.Handlers
     public class SavingConfigurationHandler : IHandleSavingConfiguration
     {
         //private readonly IDbConnection _connection;
-        private readonly IPersistObject<PushConfiguration> _persistence;
+        private readonly IPersist<PushConfiguration> _persistence;
 
-        public SavingConfigurationHandler(IPersistObject<PushConfiguration> persistence)
+        public SavingConfigurationHandler(IPersist<PushConfiguration> persistence)
         {
             _persistence = persistence;
         }

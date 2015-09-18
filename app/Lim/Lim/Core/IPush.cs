@@ -1,11 +1,11 @@
 ﻿namespace Lim.Core
 {
-    public interface IPushConfiguration
+    public interface IPush
     {
         void Push(object command);
     }
 
-    public interface IPushConfiguration<in T> : IPushConfiguration
+    public interface IPush<in T> : IPush
     {
         void Push(T command);
     }
