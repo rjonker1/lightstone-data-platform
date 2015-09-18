@@ -13,9 +13,9 @@ using Toolbox.Bmw.Extensions;
 
 namespace Toolbox.Bmw.Factories
 {
-    public class ReadFinanceDataFactory : AbstractReadingFactory<ReadFile, IEnumerable<BmwFinanceDataDto>>
+    public class ReadFinanceDataFileFactory : AbstractReadingFactory<ReadFile, IEnumerable<BmwFinanceDataDto>>
     {
-        private readonly ILog _log = LogManager.GetLogger<ReadFinanceDataFactory>();
+        private readonly ILog _log = LogManager.GetLogger<ReadFinanceDataFileFactory>();
 
         public override IEnumerable<BmwFinanceDataDto> Read(ReadFile command)
         {

@@ -8,8 +8,7 @@ using Toolbox.Bmw.Factories;
 
 namespace Lim.Schedule.Service.Installers
 {
-    //TODO: This installer is only temporary and needs to be removed
-    public class BmwInstaller : IWindsorInstaller
+    public class BmwPullInstaller : IWindsorInstaller
     {
         private readonly ILog _log = LogManager.GetLogger<HandlerInstaller>();
 
@@ -18,22 +17,22 @@ namespace Lim.Schedule.Service.Installers
             _log.Info("Installing BMW Installers");
             container.Register(Component.For<BmwConfiguration>().UsingFactoryMethod(c => BmwFactoryManager.BuildConfiguration()).LifestyleTransient());
 
-            container.Register(Classes.FromAssemblyContaining<ReadFinanceDataFactory>()
+            container.Register(Classes.FromAssemblyContaining<ReadFinanceDataFileFactory>()
                 .BasedOn(typeof (IRead<,>))
                 .WithServiceAllInterfaces()
                 .LifestyleTransient());
 
-            container.Register(Classes.FromAssemblyContaining<BackupFinanceDataFactory>()
+            container.Register(Classes.FromAssemblyContaining<BackupFinanceDataFileFactory>()
                 .BasedOn(typeof (IBackup<>))
                 .WithServiceAllInterfaces()
                 .LifestyleTransient());
 
-            container.Register(Classes.FromAssemblyContaining<FailFinanceFactory>()
+            container.Register(Classes.FromAssemblyContaining<FailFinanceDataFileFactory>()
                .BasedOn(typeof(IFail<>))
                .WithServiceAllInterfaces()
                .LifestyleTransient());
 
-            container.Register(Classes.FromAssemblyContaining<WatchForFinanceDataFactory>()
+            container.Register(Classes.FromAssemblyContaining<WatchForFinanceDataFileFactory>()
                .BasedOn(typeof(IWatch<>))
                .WithServiceAllInterfaces()
                .LifestyleTransient());

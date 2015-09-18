@@ -113,7 +113,7 @@
     <Compile Include="Consumers\ReceiverConsumers.cs" />
     <Compile Include="Consumers\SenderConsumers.cs" />
     <Compile Include="Installers\AuditInstallers.cs" />
-    <Compile Include="Installers\BmwInstaller.cs" />
+    <Compile Include="Installers\BmwPullInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
     <Compile Include="Installers\DatabaseInstaller.cs" />
@@ -121,6 +121,7 @@
     <Compile Include="Installers\FlatFileInstallers.cs" />
     <Compile Include="Installers\HandlerInstaller.cs" />
     <Compile Include="Installers\JobInstaller.cs" />
+    <Compile Include="Installers\ApiInstallers.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\TrackingInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />

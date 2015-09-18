@@ -22,7 +22,7 @@
 
         public string FilePath
         {
-            get { return GetAppSetting("lim/schedule/bmw/filePath", @"C:\11-Lightstone\Ftp\Bmw\"); }
+            get { return GetAppSetting("lim/schedule/bmw/filePath", @"D:\BMWFinSFTP\"); }
         }
 
         public string FileName
@@ -46,12 +46,12 @@
 
         public string BackupFilePath
         {
-            get { return GetAppSetting("lim/schedule/bmw/backupFilePath", @"C:\11-Lightstone\BmwBackups"); }
+            get { return GetAppSetting("lim/schedule/bmw/backupFilePath", @"D:\BMWFin\Backups"); }
         }
 
         public string FailFilePath
         {
-            get { return GetAppSetting("lim/schedule/bmw/failFilePath", @"C:\11-Lightstone\BmwFailure"); }
+            get { return GetAppSetting("lim/schedule/bmw/failFilePath", @"D:\BMWFin\Failures"); }
         }
 
         public string FileExtension

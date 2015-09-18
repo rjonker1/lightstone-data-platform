@@ -12,9 +12,9 @@ using Toolbox.Bmw.Dtos;
 
 namespace Toolbox.Bmw.Factories
 {
-    public class WatchForFinanceDataFactory : AbstractWatcherFactory<FileInformationDto>
+    public class WatchForFinanceDataFileFactory : AbstractWatcherFactory<FileInformationDto>
     {
-        private static readonly ILog Log = LogManager.GetLogger<WatchForFinanceDataFactory>();
+        private static readonly ILog Log = LogManager.GetLogger<WatchForFinanceDataFileFactory>();
         private readonly IRead<ReadFile, IEnumerable<BmwFinanceDataDto>> _bmwReader;
         private readonly IBackup<BackupFile> _backup;
         private readonly IFail<FailFile> _fail; 
@@ -22,7 +22,7 @@ namespace Toolbox.Bmw.Factories
         private readonly FileSystemWatcher _watcher;
         private FileInformationDto _command;
 
-        public WatchForFinanceDataFactory(IPersist<List<BmwFinanceDataDto>> persist, IRead<ReadFile, IEnumerable<BmwFinanceDataDto>> bmwReader, IBackup<BackupFile> backup, IFail<FailFile> fail)
+        public WatchForFinanceDataFileFactory(IPersist<List<BmwFinanceDataDto>> persist, IRead<ReadFile, IEnumerable<BmwFinanceDataDto>> bmwReader, IBackup<BackupFile> backup, IFail<FailFile> fail)
         {
             _watcher = new FileSystemWatcher();
             _persist = persist;
