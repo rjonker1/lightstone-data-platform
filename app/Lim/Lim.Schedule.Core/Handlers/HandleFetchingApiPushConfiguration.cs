@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using Lim.Core;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Identifiers;
 
@@ -12,10 +12,10 @@ namespace Lim.Schedule.Core.Handlers
 {
     public class HandleFetchingApiPushConfiguration : IHandleFetchingApiPushConfiguration
     {
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
         private readonly ILog _log;
 
-        public HandleFetchingApiPushConfiguration(IAmRepository repository)
+        public HandleFetchingApiPushConfiguration(IRepository repository)
         {
             _repository = repository;
             _log = LogManager.GetLogger(GetType());
@@ -134,9 +134,9 @@ namespace Lim.Schedule.Core.Handlers
                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
                             (((Enums.AuthenticationType) s.AuthenticationType)).ToString()), s.Username, s.Password,
                         s.AuthenticationKey, s.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
+                    new ActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction) s.IntegrationType).ToString()),
-                    new IntegrationFrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(),s.FrequencyType)),
+                    new FrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(),s.FrequencyType)),
                     new IntegrationClientIdentifier(_repository.Get<IntegrationClient>(w => w.Configuration.Id == s.Id && w.IsActive)
                         .Select(
                             c =>
@@ -166,9 +166,9 @@ namespace Lim.Schedule.Core.Handlers
                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
                             (((Enums.AuthenticationType) s.AuthenticationType)).ToString()), s.Username, s.Password,
                         s.AuthenticationKey, s.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction) s.Action).ToString(),s.Action),
+                    new ActionIdentifier(((Enums.IntegrationAction) s.Action).ToString(),s.Action),
                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction) s.IntegrationType).ToString()),
-                    new IntegrationFrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(),s.FrequencyType)),
+                    new FrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(),s.FrequencyType)),
                     new IntegrationClientIdentifier(_repository.Get<IntegrationClient>(w => w.Configuration.Id == s.Id && w.IsActive)
                         .Select(
                             c =>

@@ -20,4 +20,11 @@ namespace Lim.Schedule.Core
         void Handle(FetchConfigurationForClientCommand command);
         void Handle(FetchConfigurationForCustomCommand command);
     }
+
+    public interface IHandleFetchingFlatFilePullConfiguration
+    {
+        IEnumerable<FlatFilePullIntegration> Configurations { get; }
+        bool HasConfiguration { get; }
+        void Handle(FetchConfigurationCommand command);
+    }
 }

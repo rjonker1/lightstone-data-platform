@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Domain.Entities.Factory;
 using NHibernate.Cfg;
+using Toolbox.Bmw.Entities.Factory;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -14,7 +15,7 @@ namespace Lim.Schedule.Service.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             _log.InfoFormat("Installing Database");
-            container.Register(Component.For<Configuration>().UsingFactoryMethod(c => FactoryManager.BuildConfiguration("lim/schedule/database")).LifestyleTransient());
+            container.Register(Component.For<Configuration>().UsingFactoryMethod(c => FactoryManager.BuildConfiguration()).LifestyleTransient());
             _log.InfoFormat("Installed Database");
         }
     }

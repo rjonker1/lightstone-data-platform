@@ -5,7 +5,8 @@
         Api = 1,
         Email = 2,
         FlatFile = 3,
-        Notificaiton = 4
+        Notificaiton = 4,
+        Ftp = 5
     }
 
     public enum IntegrationAction
@@ -19,5 +20,10 @@
         None = 1,
         Basic = 2,
         Stateless = 3
+    }
+
+    public enum PullClient
+    {
+        Bmw = 1
     }
 }

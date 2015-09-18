@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using EasyNetQ;
+using Lim.Core;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Factory;
 using Lim.Domain.Entities.Repository;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
@@ -20,7 +20,7 @@ namespace Lim.Acceptance.Tests.Bus
         private readonly IAdvancedBus _bus;
         private Exception _exception;
 
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
 
         private readonly Guid _packageId = new Guid("390CD416-FC52-4A0B-98CE-8E8940212354");
         private readonly Guid _userId = new Guid("A8085D55-DF0E-4875-A81C-26892126C01C");

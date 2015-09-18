@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using Common.Logging;
+using Lim.Core;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
 using Lim.Push.RestApi;
 using Lim.Schedule.Core.Commands;
 using Newtonsoft.Json;
@@ -32,29 +32,20 @@ namespace Lim.Schedule.Core.Identifiers
         private readonly IDictionary<Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>> _pushClients = new Dictionary
             <Enums.AuthenticationType, Func<ApiConfigurationIdentifier, PushClient>>()
         {
-            {Enums.AuthenticationType.Basic, Basic},
-            {Enums.AuthenticationType.None, Standard},
-            {Enums.AuthenticationType.Stateless, Stateless}
+            {
+                Enums.AuthenticationType.Basic, (configuration) =>
+                    PushClient.PushWithBasic(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
+                        configuration.Authentication.AuthenticationToken, configuration.Authentication.Username, configuration.Authentication.Password)
+            },
+            {Enums.AuthenticationType.None, (configuration) => PushClient.Push(configuration.BaseAddress, configuration.Suffix)},
+            {
+                Enums.AuthenticationType.Stateless, (configuration) =>
+                    PushClient.PushWithStateless(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
+                        configuration.Authentication.AuthenticationToken)
+            }
         };
 
-        private static readonly Func<ApiConfigurationIdentifier, PushClient> Standard =
-            (configuration) => PushClient.Push(configuration.BaseAddress, configuration.Suffix);
-
-        private static readonly Func<ApiConfigurationIdentifier, PushClient> Basic =
-            (configuration) =>
-                PushClient.PushWithBasic(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
-                    configuration.Authentication.AuthenticationToken, configuration.Authentication.Username, configuration.Authentication.Password);
-
-        private static readonly Func<ApiConfigurationIdentifier, PushClient> Stateless =
-            (configuration) =>
-                PushClient.PushWithStateless(configuration.BaseAddress, configuration.Suffix, configuration.Authentication.AuthenticationKey,
-                    configuration.Authentication.AuthenticationToken);
-
-        //private DateTime GetDateRange(IAmRepository repository)
-        //{
-        //    var tracking = repository.Find<IntegrationTracking>(w => w.Configuration.Id == ConfigurationId);
-        //    return tracking == null ? DateTime.Now.AddYears(-10) : tracking.MaxTransactionDate.AddSeconds(1);
-        //}
+     
 
         private static string GetPayload(byte[] payload, bool hasResponse)
         {
@@ -64,7 +55,7 @@ namespace Lim.Schedule.Core.Identifiers
             return Encoding.UTF8.GetString(payload);
         }
 
-        public void Get(IAmRepository repository, DateTime dateRange)
+        public void Get(IRepository repository, DateTime dateRange)
         {
             _transaction = new List<PackageTransactionDto>();
             if (!Packages.Packages.Any())

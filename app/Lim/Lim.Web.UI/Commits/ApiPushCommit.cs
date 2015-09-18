@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
+using Lim.Domain.Base;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Contracts;
 using Lim.Domain.Entities.Repository;
 using Lim.Enums;
 using Lim.Web.UI.Models.Api;
 
 namespace Lim.Web.UI.Commits
 {
-    public class ApiPushCommit : IPersistObject<PushConfiguration>
+    public class ApiPushCommit : AbstractPersistenceRepository<PushConfiguration>
     {
         private readonly ISaveApiConfiguration _save;
 
@@ -17,7 +17,7 @@ namespace Lim.Web.UI.Commits
             _save = save;
         }
 
-        public bool Persist(PushConfiguration pushConfig)
+        public override bool Persist(PushConfiguration pushConfig)
         {
             var configuration = new Configuration()
             {

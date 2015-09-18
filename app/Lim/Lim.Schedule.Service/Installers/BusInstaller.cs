@@ -22,8 +22,7 @@ namespace Lim.Schedule.Service.Installers
                     .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus(ConfigurationReader.LimSender))
                     .LifestyleSingleton()
                 );
-
-            //container.Register(Component.For<IPublishConfigurationMessages>().ImplementedBy<ConfigurationMessagePublisher>());
+            
             container.Register(Component.For<IPublishConfigurationMessages>().UsingFactoryMethod(
                 () =>
                     new ConfigurationMessagePublisher(

@@ -3,17 +3,17 @@
 namespace Lim.Schedule.Core.Identifiers
 {
     [DataContract]
-    public class IntegrationActionIdentifier
+    public class FrequencyIdentifier
     {
-        [DataMember]
-        public string Action { get; private set; }
+         [DataMember]
+        public string Frequency { get; private set; }
 
         [DataMember]
         public short Id { get; private set; }
 
-        public IntegrationActionIdentifier(string action, short id)
+        public FrequencyIdentifier(string frequency, short id)
         {
-            Action = action;
+            Frequency = frequency;
             Id = id;
         }
     }

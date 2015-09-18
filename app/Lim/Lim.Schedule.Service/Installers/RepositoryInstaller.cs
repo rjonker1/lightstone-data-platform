@@ -2,7 +2,10 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
+using Lim.Core;
 using Lim.Domain.Entities.Repository;
+using Lim.Schedule.Service.Resolvers;
+using Toolbox.Bmw.Factories;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -13,7 +16,14 @@ namespace Lim.Schedule.Service.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             _log.InfoFormat("Installing Repositories");
-            container.Register(Component.For<IAmRepository>().UsingFactoryMethod(() => new LimRepository()));
+            container.Register(Component.For<IRepository>().UsingFactoryMethod(() => new LimRepository()));
+
+            container.Register(Classes.FromAssemblyContaining<SaveFinanceData>()
+               .BasedOn(typeof(IPersist<>))
+               .WithServiceAllInterfaces()
+               .LifestyleTransient());
+
+         
             _log.InfoFormat("Repositories Installed");
         }
     }

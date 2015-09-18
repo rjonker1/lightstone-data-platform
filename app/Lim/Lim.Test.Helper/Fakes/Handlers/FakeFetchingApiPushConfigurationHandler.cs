@@ -49,9 +49,9 @@ namespace Lim.Test.Helper.Fakes.Handlers
                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
                             (((Enums.AuthenticationType)s.AuthenticationType)).ToString()), s.Username, s.Password,
                         s.AuthenticationKey, s.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
+                    new ActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction)s.IntegrationType).ToString()),
-                    new IntegrationFrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(), s.FrequencyType)),
+                    new FrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(), s.FrequencyType)),
                     new IntegrationClientIdentifier(LimDatabase.Clients().Where(w => w.Configuration.Id == s.Id && w.IsActive)
                         .Select(
                             c =>
@@ -95,9 +95,9 @@ namespace Lim.Test.Helper.Fakes.Handlers
                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
                             (((Enums.AuthenticationType)s.AuthenticationType)).ToString()), s.Username, s.Password,
                         s.AuthenticationKey, s.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
+                    new ActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction)s.IntegrationType).ToString()),
-                    new IntegrationFrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(), s.FrequencyType)),
+                    new FrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(), s.FrequencyType)),
                     new IntegrationClientIdentifier(LimDatabase.Clients().Where(w => w.Configuration.Id == s.Id && w.IsActive)
                         .Select(
                             c =>
@@ -125,9 +125,9 @@ namespace Lim.Test.Helper.Fakes.Handlers
                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
                             (((Enums.AuthenticationType)s.AuthenticationType)).ToString()), s.Username, s.Password,
                         s.AuthenticationKey, s.AuthenticationToken),
-                    new IntegrationActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
+                    new ActionIdentifier(((Enums.IntegrationAction)s.Action).ToString(), s.Action),
                     new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationAction)s.IntegrationType).ToString()),
-                    new IntegrationFrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(), s.FrequencyType)),
+                    new FrequencyIdentifier(((Enums.Frequency)s.FrequencyType).ToString(), s.FrequencyType)),
                     new IntegrationClientIdentifier(LimDatabase.Clients().Where(w => w.Configuration.Id == s.Id && w.IsActive)
                         .Select(
                             c =>

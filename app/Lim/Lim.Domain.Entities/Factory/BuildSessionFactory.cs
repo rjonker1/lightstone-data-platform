@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using Lim.Infrastructure;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 
@@ -7,7 +8,7 @@ namespace Lim.Domain.Entities.Factory
 {
     public sealed class FactoryManager
     {
-        private static readonly ISessionFactory _instance = BuildSession("lim/schedule/database");
+        private static readonly ISessionFactory _instance = BuildSession();
         static FactoryManager()
         {
         }
@@ -20,10 +21,10 @@ namespace Lim.Domain.Entities.Factory
             }
         }
 
-        private static ISessionFactory BuildSession(string connectionString)
+        private static ISessionFactory BuildSession()
         {
             return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(System.Configuration.ConfigurationManager.ConnectionStrings[connectionString].ConnectionString))
+                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.Lim.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.ActionTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.AuthenticationTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.FrequencyTypeMap>())
@@ -38,16 +39,15 @@ namespace Lim.Domain.Entities.Factory
                 .Mappings(m => m.FluentMappings.Add<Maps.AuditApiIntegrationMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.IntegrationTrackingMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.PackageMetadataMap>())
-                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false,true))
+                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.Lim.UpdateDatabase))
                 .BuildSessionFactory();
         }
 
-        public static NHibernate.Cfg.Configuration BuildConfiguration(string connectionString)
+        public static NHibernate.Cfg.Configuration BuildConfiguration()
         {
             return Fluently.Configure()
                 .Database(
-                    MsSqlConfiguration.MsSql2012.ConnectionString(
-                        System.Configuration.ConfigurationManager.ConnectionStrings[connectionString].ConnectionString))
+                    MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.Lim.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.ActionTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.AuthenticationTypeMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.FrequencyTypeMap>())
@@ -62,7 +62,7 @@ namespace Lim.Domain.Entities.Factory
                 .Mappings(m => m.FluentMappings.Add<Maps.AuditApiIntegrationMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.IntegrationTrackingMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.PackageMetadataMap>())
-                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, true))
+                .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.Lim.UpdateDatabase))
                 .BuildConfiguration();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using Lim.Core;
 using Lim.Domain.Dto;
 using Lim.Domain.Entities;
 using Lim.Domain.Entities.Repository;
@@ -51,9 +52,9 @@ namespace Lim.Web.UI.Handlers
 
     public class GetIntegrationClientHandler : IHandleGettingIntegrationClient
     {
-        private readonly IAmRepository _repository;
+        private readonly IRepository _repository;
 
-        public GetIntegrationClientHandler(IAmRepository repository)
+        public GetIntegrationClientHandler(IRepository repository)
         {
             _repository = repository;
         }

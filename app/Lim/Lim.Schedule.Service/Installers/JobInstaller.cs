@@ -22,6 +22,8 @@ namespace Lim.Schedule.Service.Installers
             container.Register(Component.For<Jobs.Integrations.Hourly.Api.PullJob>().ImplementedBy<Jobs.Integrations.Hourly.Api.PullJob>().LifestyleTransient());
             container.Register(Component.For<Jobs.Integrations.Custom.Api.PullJob>().ImplementedBy<Jobs.Integrations.Custom.Api.PullJob>().LifestyleTransient());
 
+            container.Register(Component.For<Jobs.Integrations.AlwaysOn.FlatFile.PullJob>().ImplementedBy<Jobs.Integrations.AlwaysOn.FlatFile.PullJob>().LifestyleTransient());
+
             _log.Info("Jobs Installed");
         }
     }

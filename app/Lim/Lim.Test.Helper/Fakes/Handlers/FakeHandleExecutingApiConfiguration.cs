@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Common.Logging;
-using Lim.Domain.Entities.Repository;
+using Lim.Core;
 using Lim.Enums;
 using Lim.Schedule.Core;
 using Lim.Schedule.Core.Commands;
@@ -11,7 +11,7 @@ namespace Lim.Test.Helper.Fakes.Handlers
 {
     public class FakeHandleExecutingApiConfiguration : IHandleExecutingApiConfiguration
     {
-        private readonly IAmRepository _repository = new FakeLimPackageResponseRepository();
+        private readonly IRepository _repository = new FakeLimPackageResponseRepository();
         private readonly ILog _log = LogManager.GetLogger<FakeHandleExecutingApiConfiguration>();
 
         public void Handle(ExecuteApiPushConfigurationCommand command)
