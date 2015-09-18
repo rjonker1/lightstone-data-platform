@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages;
@@ -35,7 +36,13 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                 {
                     if (message.Body.ReportType.Equals("pdf"))
                     {
-                        CreateFile(dto, path, dto.Data.Customer.Name + " - Invoice.pdf");
+                        if (dto.Data.Customer != null) CreateFile(dto, path, dto.Data.Customer.Name + " - Invoice.pdf");
+
+                        if (dto.Data.ContractStatements != null)
+                        {
+                            var fileName = dto.Data.ContractStatements.Select(x => x.ContractName);
+                            CreateFile(dto, path, fileName.FirstOrDefault() + " - Contract Statement.pdf");
+                        }
 
                         //Send Email
                         _emailPdfNotificationsWithAttachment.Send(dto);

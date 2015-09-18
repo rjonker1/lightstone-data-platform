@@ -60,22 +60,22 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             try
             {
                 // Archive and clean Final Billing for new month
-                //foreach (var archiveRecord in _finalBillingRepository)
-                //{
-                //    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId))
-                //        _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
+                foreach (var archiveRecord in _finalBillingRepository)
+                {
+                    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId))
+                        _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
 
-                //    _finalBillingRepository.Delete(archiveRecord);
-                //}
+                    _finalBillingRepository.Delete(archiveRecord);
+                }
 
-                //foreach (var record in _stageBillingRepository)
-                //{
-                //    if (record.Created <= startBillMonth) continue;
+                foreach (var record in _stageBillingRepository)
+                {
+                    if (record.Created <= startBillMonth) continue;
 
-                //    var finalEntity = Mapper.Map(record, new FinalBilling());
+                    var finalEntity = Mapper.Map(record, new FinalBilling());
 
-                //    _finalBillingRepository.SaveOrUpdate(finalEntity);
-                //}
+                    _finalBillingRepository.SaveOrUpdate(finalEntity);
+                }
 
                 foreach (var transaction in _finalBillingRepository)
                 {
@@ -161,12 +161,46 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         #region Statement PDF Report Build-up
 
                         var contract = _contractRepository.FirstOrDefault(x => x.ContractId == transaction.ContractId);
-                        var userTransactions = new List<ContractUserTransactions>();
+                        var userTransactionsList = new List<ContractUserTransactions>();
 
                         //TODO: Complete user transaction setup for statement
-                        //var userTransaction = _finalBillingRepository.Count(x => x.User.UserId == transaction.User.UserId);
+                        var userTransactions = _finalBillingRepository.Where(x => x.User.UserId == transaction.User.UserId && x.CustomerId == transaction.CustomerId);
+                        var userPackageNames = userTransactions.Where(x => x.User.Username == transaction.User.Username).Select(x => x.Package).Distinct();
 
-                        var statement = _reportBuilder.BuildStatement(transaction.CustomerName, null, contract.ContractName, userTransactions);
+                        var userProductList = new List<ContractProductDetail>();
+
+                        foreach (var userPackage in userPackageNames)
+                        {
+                            var index = userProductList.FindIndex(x => x.PackageName == userPackage.PackageName);
+
+                            if (index < 0)
+                            {
+                                userProductList.Add(new ContractProductDetail
+                                {
+                                    PackageName = userPackage.PackageName,
+                                    TransactionCount = userTransactions.Count(x => (x.User.UserId == transaction.User.UserId) 
+                                                                                   && (x.Package.PackageId == userPackage.PackageId))
+                                });
+                            }
+                        }
+
+                        foreach (var userTransaction in userTransactions)
+                        {
+                            var index = userTransactionsList.FindIndex(x => x.User == userTransaction.User.Username);
+                            
+                            if (index < 0)
+                            {
+                                var contractUserTransactions = new ContractUserTransactions
+                                {
+                                    User = userTransaction.User.Username,
+                                    Products = userProductList
+                                };
+
+                                userTransactionsList.Add(contractUserTransactions);
+                            }
+                        }
+
+                        var statement = _reportBuilder.BuildStatement(transaction.CustomerName, null, contract.ContractName, userTransactionsList);
 
                         var statementList = new List<ContractStatement>();
                         var statementIndex = statementList.FindIndex(x => x.Customer == transaction.CustomerName);
