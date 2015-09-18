@@ -53,7 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Bmw", "Lim\Configurations\BMW\Toolbox.Bmw.csproj", "{9CE35E56-55A7-4C15-82AD-1ED6EC631945}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Bmw.Entities", "Lim\Configurations\BMW\BMW.Entities\Toolbox.Bmw.Entities.csproj", "{AC7A58B5-BC2A-40DC-8B8F-FFC6D3D51775}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Bmw.Entities", "Lim\Configurations\BMW.Entities\Toolbox.Bmw.Entities.csproj", "{AC7A58B5-BC2A-40DC-8B8F-FFC6D3D51775}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Emailing", "Lim\Toolbox.Emailing\Toolbox.Emailing.csproj", "{73F1DC06-BFA6-446B-B77F-296BF526DD16}"
 EndProject

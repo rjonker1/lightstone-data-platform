@@ -86,7 +86,7 @@
       <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
       <Name>Lim</Name>
     </ProjectReference>
-    <ProjectReference Include="BMW.Entities\Toolbox.Bmw.Entities.csproj">
+    <ProjectReference Include="..\BMW.Entities\Toolbox.Bmw.Entities.csproj">
       <Project>{ac7a58b5-bc2a-40dc-8b8f-ffc6d3d51775}</Project>
       <Name>Toolbox.Bmw.Entities</Name>
     </ProjectReference>

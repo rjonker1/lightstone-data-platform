@@ -122,7 +122,7 @@
     <Compile Include="Tracking\ITrackIntegration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Configurations\BMW\BMW.Entities\Toolbox.Bmw.Entities.csproj">
+    <ProjectReference Include="..\Configurations\BMW.Entities\Toolbox.Bmw.Entities.csproj">
       <Project>{ac7a58b5-bc2a-40dc-8b8f-ffc6d3d51775}</Project>
       <Name>Toolbox.Bmw.Entities</Name>
     </ProjectReference>
