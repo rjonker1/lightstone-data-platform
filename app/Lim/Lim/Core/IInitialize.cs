@@ -9,5 +9,4 @@
     {
         void Init(T command);
     }
-
 }

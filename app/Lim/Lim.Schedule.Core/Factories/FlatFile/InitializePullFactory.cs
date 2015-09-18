@@ -44,8 +44,8 @@ namespace Lim.Schedule.Core.Factories.FlatFile
             <PullClient, Func<IWatch<FileInformationDto>>>()
         {
             {
-                PullClient.Bmw, () => new WatchForFinanceDataFactory(new SaveFinanceData(), new ReadFinanceDataFactory(),
-                    new BackupFinanceDataFactory(), new FailFinanceFactory())
+                PullClient.Bmw, () => new WatchForFinanceDataFileFactory(new SaveFinanceData(), new ReadFinanceDataFileFactory(),
+                    new BackupFinanceDataFileFactory(), new FailFinanceDataFileFactory())
             }
         };
     }

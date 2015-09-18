@@ -8,9 +8,9 @@ using Lim.Domain.Extensions;
 
 namespace Toolbox.Bmw.Factories
 {
-    public class FailFinanceFactory : AbstractFailFactory<FailFile>
+    public class FailFinanceDataFileFactory : AbstractFailFactory<FailFile>
     {
-        private readonly ILog _log = LogManager.GetLogger<FailFinanceFactory>();
+        private readonly ILog _log = LogManager.GetLogger<FailFinanceDataFileFactory>();
 
         public override bool Fail(FailFile command)
         {

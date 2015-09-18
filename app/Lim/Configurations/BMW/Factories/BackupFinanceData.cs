@@ -8,9 +8,9 @@ using Lim.Domain.Extensions;
 
 namespace Toolbox.Bmw.Factories
 {
-    public class BackupFinanceDataFactory : AbstractBackupFactory<BackupFile>
+    public class BackupFinanceDataFileFactory : AbstractBackupFactory<BackupFile>
     {
-        private readonly ILog _log = LogManager.GetLogger<ReadFinanceDataFactory>();
+        private readonly ILog _log = LogManager.GetLogger<ReadFinanceDataFileFactory>();
 
         public override bool Backup(BackupFile command)
         {

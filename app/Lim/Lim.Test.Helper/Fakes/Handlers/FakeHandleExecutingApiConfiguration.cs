@@ -18,13 +18,8 @@ namespace Lim.Test.Helper.Fakes.Handlers
         {
             command.Configurations.ToList().ForEach(f =>
             {
-                var audit = new AuditIntegrationCommand(f.Client.ClientId, f.ConfigurationId, DateTime.UtcNow, (short)IntegrationAction.Push,
-                    (short)IntegrationType.Api,
-                    f.Configuration.BaseAddress, f.Configuration.Suffix);
-
-                f.Get(_repository, DateTime.Now.AddYears(-10));
-                f.Push(audit, _log);
-                audit.Successful();
+                f.Pusher.Push(f.Command);
+                f.Audit.Successful();
             });
 
             IsHandled = true;

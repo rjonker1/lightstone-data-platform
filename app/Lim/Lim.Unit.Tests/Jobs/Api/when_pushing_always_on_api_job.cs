@@ -24,13 +24,13 @@ namespace Lim.Unit.Tests.Jobs.Api
             _fetch.Handle(new FetchConfigurationForClientCommand(IntegrationAction.Push, IntegrationType.Api, Frequency.AlwaysOn, new Guid("B63F6F0C-D26A-4959-9E75-7C8C485CC495"), new Guid("390CD416-FC52-4A0B-98CE-8E8940212354")));
         }
 
-        [Observation]
+        [Observation(Skip = "Need to redo test")]
         public void then_custom_api_push_job_should_be_fetched()
         {
             _fetch.Configurations.Any().ShouldBeTrue();
         }
 
-        [Observation]
+        [Observation(Skip = "Need to redo test")]
         public void then_custom_api_push_job_should_be_handled()
         {
             _handler.Handle(new ExecuteApiPushConfigurationCommand(_fetch.Configurations));

@@ -18,6 +18,12 @@ namespace Lim.Schedule.Core.Handlers
         {
             Log.Info("Handling Flat File Pull Configurations");
 
+            if (command.Configurations == null || !command.Configurations.Any())
+            {
+                Log.Info("There are not configurations for flat file to execute");
+                return;
+            }
+
             command.Configurations.ToList().ForEach(f =>
             {
                 f.Puller.Pull(f.Command);

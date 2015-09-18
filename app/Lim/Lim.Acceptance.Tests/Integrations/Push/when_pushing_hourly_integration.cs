@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,7 +11,9 @@ using Lim.Enums;
 using Lim.Schedule.Core;
 using Lim.Schedule.Core.Audits;
 using Lim.Schedule.Core.Commands;
+using Lim.Schedule.Core.Factories.Api;
 using Lim.Schedule.Core.Handlers;
+using Lim.Schedule.Core.Identifiers;
 using Lim.Schedule.Core.Tracking;
 using NHibernate;
 using Xunit.Extensions;
@@ -18,25 +21,28 @@ using IntegrationType = Lim.Enums.IntegrationType;
 
 namespace Lim.Acceptance.Tests.Integrations.Push
 {
-    public class when_pushing_hourly_integration :  Specification
+    public class when_pushing_hourly_integration : Specification
     {
-       // private readonly IJob _job; 
+        // private readonly IJob _job; 
         private readonly IHandleFetchingApiPushConfiguration _fetch;
         private readonly IHandleExecutingApiConfiguration _execute;
-     
+
         private readonly IDbConnection _connection;
         private readonly IAuditIntegration _audit;
         private readonly IRepository _entityRepository;
         private readonly ITrackIntegration _tracking;
         private readonly ISession _session;
 
-        private readonly FetchConfigurationCommand _fetchCommand = new FetchConfigurationCommand(IntegrationAction.Push, IntegrationType.Api, Frequency.Hourly);
+        private readonly FetchConfigurationCommand _fetchCommand = new FetchConfigurationCommand(IntegrationAction.Push, IntegrationType.Api,
+            Frequency.Hourly);
+
         private ExecuteApiPushConfigurationCommand _executeCommand;
 
         private readonly ApiIntegrationTestSetup _setup;
 
         public when_pushing_hourly_integration()
         {
+
             //_entityRepository = new LimRepository(SessionFactory.BuildSession("lim/schedule/database").OpenSession());
             _entityRepository = new LimRepository();
             _session = FactoryManager.Instance.OpenSession();
@@ -46,8 +52,12 @@ namespace Lim.Acceptance.Tests.Integrations.Push
             _audit = new StoreIntegrationAudit(_entityRepository);
             _tracking = new TrackIntegration(_entityRepository);
 
-            _fetch = new HandleFetchingApiPushConfiguration(_entityRepository);
-            _execute = new HandleExecutingApiConfiguration(_entityRepository, _audit, _tracking);
+            _fetch =
+                new HandleFetchingApiPushConfiguration(
+                    new FetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository))),
+                    new CustomFetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository))),
+                    new ClientFetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository))));
+            _execute = new HandleExecutingApiConfiguration(_audit, _tracking);
 
             _setup = new ApiIntegrationTestSetup(_session, _entityRepository);
         }
@@ -74,6 +84,5 @@ namespace Lim.Acceptance.Tests.Integrations.Push
             }
         }
 
-       
     }
 }
