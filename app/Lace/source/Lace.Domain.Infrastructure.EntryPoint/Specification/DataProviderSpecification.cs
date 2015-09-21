@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
+using DataProviders.Lightstone.MMCode;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -37,7 +38,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                                         new LightstoneDirectorDataProvider(request,
                                                             new PCubedEzScoreDataProvider(request,
                                                                 new ConsumerSpecificationsDataProvider(request,
-                                                                    new BmwFinanceDataProvider(request, null, null,
+                                                                    new BmwFinanceDataProvider(request, 
+                                                                        new MMCodeDataProvider(request, null, null, 
+                                                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.MMCode_E_DB)), null,
                                                                         CommandSender.InitCommandSender(bus, requestId,
                                                                             DataProviderCommandSource.BMWFSTitle_E_DB)), null,
                                                                     CommandSender.InitCommandSender(bus, requestId,
