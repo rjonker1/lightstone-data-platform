@@ -17,7 +17,8 @@
         LSBusinessDirector_E_WS,
         LSConsumerRepair_E_WS,
         PCubedEZScore_E_WS,
-        BMWFSTitle_E_DB
+        BMWFSTitle_E_DB,
+        MMCode_E_DB
     }
 
     // Legacy - 15/09/2015
