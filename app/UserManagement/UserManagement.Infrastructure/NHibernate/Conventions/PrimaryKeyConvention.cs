@@ -9,7 +9,8 @@ namespace UserManagement.Infrastructure.NHibernate.Conventions
         {
             if (instance.EntityType.BaseType != typeof (IntEntity))
                 instance.GeneratedBy.Assigned();
-            instance.UniqueKey(instance.EntityType.Name + "_PK_UK");
+
+            instance.UniqueKey("PK_" + instance.EntityType.Name);
         }
     }
 }

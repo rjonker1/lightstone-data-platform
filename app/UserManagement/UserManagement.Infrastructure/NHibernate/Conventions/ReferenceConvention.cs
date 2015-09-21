@@ -12,7 +12,7 @@ namespace UserManagement.Infrastructure.NHibernate.Conventions
             if (Attribute.IsDefined(instance.Property.MemberInfo, typeof(RequiredAttribute)))
                 instance.Not.Nullable();
 
-            instance.ForeignKey(string.Format("{0}_{1}_{2}_FK", instance.EntityType.Name , instance.Class.Name, instance.Property.Name));
+            instance.ForeignKey(string.Format("FK_{0}_{1}_{2}", instance.EntityType.Name, instance.Class.Name, instance.Property.Name));
         }
     }
 }

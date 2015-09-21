@@ -4,7 +4,7 @@ using UserManagement.Domain.Entities;
 using UserManagement.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace UserManagement.Acceptance.Tests.Repositories
+namespace UserManagement.Acceptance.Tests.Repositories.ValueEntities
 {
     public class when_checking_for_existing_value_entities : TestDataBaseHelper
     {

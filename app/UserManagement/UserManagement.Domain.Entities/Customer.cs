@@ -12,7 +12,6 @@ namespace UserManagement.Domain.Entities
     {
         public virtual User AccountOwner { get; protected internal set; }
         public virtual string Notes { get; protected internal set; }
-
         private CustomerAccountNumber _customerAccountNumber = new CustomerAccountNumber();
         public virtual CustomerAccountNumber CustomerAccountNumber
         {
@@ -21,7 +20,6 @@ namespace UserManagement.Domain.Entities
                 return _customerAccountNumber ?? (_customerAccountNumber = new CustomerAccountNumber());
             }
         }
-
         public virtual Billing Billing { get; protected internal set; }
         public virtual CommercialState CommercialState { get; protected internal set; }
         private PlatformStatusType _platformStatus;
@@ -40,8 +38,6 @@ namespace UserManagement.Domain.Entities
                 _platformStatus = value;
             }
         }
-
-        public virtual ContactDetail ContactDetail { get; protected internal set; }
         public virtual CreateSourceType CreateSource { get; protected internal set; }
         public virtual ISet<CustomerUser> CustomerUsers { get; protected internal set; }
         [DoNotMap]
@@ -66,11 +62,31 @@ namespace UserManagement.Domain.Entities
         public virtual bool IsActive { get; protected internal set; }
         public virtual ISet<CustomerIndustry> Industries { get; protected internal set; }
         public virtual DateTime? TrialExpiration { get; protected internal set; }
+        public virtual Individual Individual { get; protected internal set; }
         public virtual ISet<CustomerAddress> Addresses { get; protected internal set; }
+        [DoNotMap]
+        public virtual Address PhysicalAddress
+        {
+            get
+            {
+                var customerAddress = Addresses.FirstOrDefault(x => x.AddressType == AddressType.Physical);
+                return customerAddress != null ? customerAddress.Address : null;
+            }
+        }
+        [DoNotMap]
+        public virtual Address PostalAddress
+        {
+            get
+            {
+                var customerAddress = Addresses.FirstOrDefault(x => x.AddressType == AddressType.Postal);
+                return customerAddress != null ? customerAddress.Address : null;
+            }
+        }
 
         protected Customer() { }
 
         public Customer(string name) : base(name) { }
+        public Customer(string name, Guid id = new Guid()) : base(name, id) { }
 
         public virtual void SetCreateSource(CreateSourceType createSource)
         {
@@ -90,6 +106,17 @@ namespace UserManagement.Domain.Entities
         public virtual void Activate(bool activate)
         {
             IsActive = activate;
+        }
+
+        public virtual void SetAddress(Address address, AddressType type)
+        {
+            var customerAddress = Addresses.FirstOrDefault(x => Equals(x.Address, address));
+            if (customerAddress == null)
+            {
+                customerAddress = new CustomerAddress(this, address, type);
+                Addresses.Add(customerAddress);
+            }
+            customerAddress.Address = address;
         }
     }
 }

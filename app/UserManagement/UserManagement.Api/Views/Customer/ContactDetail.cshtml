@@ -8,36 +8,56 @@
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contact Info", "", "glyphicon glyphicon-book", Model))
     <div class="box-body">
-        @Html.HiddenFor(x => x.ContactDetailId)
+        @Html.HiddenFor(x => x.IndividualId)
         <div class="form-group">
-
-            <label class="control-label col-lg-4"><span class="required-field">*</span> Contact Person</label>
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailContactPerson, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.IndividualName, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailContactPerson)
+                @Html.ValidationMessageFor(x => x.IndividualName)
             </div>
-
         </div>
         <div class="form-group">
-
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Surname</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.IndividualSurname, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.IndividualSurname)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-4"><span class="required-field">*</span> ID Number</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.IndividualIdNumber, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.IndividualIdNumber)
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label col-lg-4">Contact Number</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon" id="basic-addon1"><b>123</b></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailContactNumber, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.IndividualContactNumber, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailContactNumber)
+                @Html.ValidationMessageFor(x => x.IndividualContactNumber)
             </div>
-
         </div> 
-        <div class="form-group">
+        @*<div class="form-group">
 
             <label class="control-label col-lg-4">Contact Type</label>
             <div class="input-group col-lg-2">
@@ -50,23 +70,21 @@
                     }
                 </select>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6">*@
                 @*@Html.ValidationMessageFor(x => x.UserTypeId)*@
-            </div>
-        </div>     
+            @*</div>
+        </div>*@     
         <div class="form-group">
-
             <label class="control-label col-lg-4">Email Address</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailEmailAddress, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.IndividualEmail, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailEmailAddress)
+                @Html.ValidationMessageFor(x => x.IndividualEmail)
             </div>
-
         </div>
         @Html.Partial("Shared/BoxFooter")
     </div>

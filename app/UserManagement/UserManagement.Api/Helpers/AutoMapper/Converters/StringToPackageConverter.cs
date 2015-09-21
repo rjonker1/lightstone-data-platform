@@ -9,7 +9,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Converters
 {
     public class StringToPackageConverter : TypeConverter<IEnumerable<string>, IEnumerable<Package>>
     {
-        private IRepository<Package> _repository;
+        private readonly IRepository<Package> _repository;
 
         public StringToPackageConverter(IRepository<Package> repository)
         {

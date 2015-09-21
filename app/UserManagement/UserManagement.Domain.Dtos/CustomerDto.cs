@@ -49,33 +49,41 @@ namespace UserManagement.Domain.Dtos
         public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingDebitOrderAccountOwner { get; set; }
         public string BillingDebitOrderAccountNumber { get; set; }
-        [Phone(ErrorMessage = "Contact Info Contact Number is not a valid phone number")]
-        public string ContactDetailContactNumber { get; set; }
-        public ContactNumberType ContactNumberDetailContactNumberType { get; set; }
+        //public ContactNumberType ContactNumberDetailContactNumberType { get; set; }
+        public Guid IndividualId { get; set; }
         [Required]
-        [Display(Name = "Contact person is required")]
-        public string ContactDetailContactPerson { get; set; }  
-        public Guid ContactDetailId { get; set; }
+        [Display(Name = "Contact name is required")]
+        public string IndividualName { get; set; }
+        [Required]
+        [Display(Name = "Contact surname is required")]
+        public string IndividualSurname { get; set; }
+        [Required]
+        [Display(Name = "Contact ID number is required")]
+        public string IndividualIdNumber { get; set; }
+        public Guid IndividualContactNumberId { get; set; }
+        [Phone(ErrorMessage = "Contact Info Contact Number is not a valid phone number")]
+        public string IndividualContactNumber { get; set; }
+        public Guid IndividualEmailId { get; set; }
         [EmailAddress]
-        public string ContactDetailEmailAddress { get; set; }
-        public Guid ContactDetailPhysicalAddressId { get; set; }
-        public string ContactDetailPhysicalAddressType { get; set; }
-        public string ContactDetailPhysicalAddressLine1 { get; set; }
-        public string ContactDetailPhysicalAddressLine2 { get; set; }
-        public string ContactDetailPhysicalAddressSuburb { get; set; }
-        public string ContactDetailPhysicalAddressCity { get; set; }
-        public Guid ContactDetailPhysicalAddressCountryId { get; set; }
-        public string ContactDetailPhysicalAddressPostalCode { get; set; }
-        public Guid ContactDetailPhysicalAddressProvinceId { get; set; }
-        public Guid ContactDetailPostalAddressId { get; set; }
-        public string ContactDetailPostalAddressType { get; set; }
-        public string ContactDetailPostalAddressLine1 { get; set; }
-        public string ContactDetailPostalAddressLine2 { get; set; }
-        public string ContactDetailPostalAddressSuburb { get; set; }
-        public string ContactDetailPostalAddressCity { get; set; }
-        public Guid ContactDetailPostalAddressCountryId { get; set; }
-        public string ContactDetailPostalAddressPostalCode { get; set; }
-        public Guid ContactDetailPostalAddressProvinceId { get; set; }
+        public string IndividualEmail { get; set; }
+        public Guid PhysicalAddressId { get; set; }
+        public string CustomerPhysicalAddressType { get; set; }
+        public string PhysicalAddressLine1 { get; set; }
+        public string PhysicalAddressLine2 { get; set; }
+        public string PhysicalAddressSuburb { get; set; }
+        public string PhysicalAddressCity { get; set; }
+        public Guid PhysicalAddressCountryId { get; set; }
+        public string PhysicalAddressPostalCode { get; set; }
+        public Guid PhysicalAddressProvinceId { get; set; }
+        public Guid PostalAddressId { get; set; }
+        public string CustomerPostalAddressType { get; set; }
+        public string PostalAddressLine1 { get; set; }
+        public string PostalAddressLine2 { get; set; }
+        public string PostalAddressSuburb { get; set; }
+        public string PostalAddressCity { get; set; }
+        public Guid PostalAddressCountryId { get; set; }
+        public string PostalAddressPostalCode { get; set; }
+        public Guid PostalAddressProvinceId { get; set; }
         // Work around for AutoMapper to map address as Nancy does not support nested Model binding when using url encoded form posts
         public AddressDto PhysicalAddressDto { get; set; }
         // Work around for AutoMapper to map address as Nancy does not support nested Model binding when using url encoded form posts

@@ -14,7 +14,6 @@ using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities.Commands.Entities;
-using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api.Modules

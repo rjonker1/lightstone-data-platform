@@ -4,7 +4,7 @@ using UserManagement.Domain.Entities;
 using UserManagement.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace UserManagement.Acceptance.Tests.Repositories
+namespace UserManagement.Acceptance.Tests.Repositories.NamedEntities
 {
     public class when_checking_for_existing_named_entities : TestDataBaseHelper
     {

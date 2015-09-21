@@ -13,7 +13,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Addresses
         {
             Mapper.CreateMap<AddressDto, Address>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .ForMember(dest => dest.Province, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IValueEntityRepository<Province>>().Get(x.ProvinceId)));
+                .ForMember(dest => dest.Province, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IRepository<Province>>().Get(x.ProvinceId)))
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IRepository<Country>>().Get(x.CountryId)));
         }
     }
 }
