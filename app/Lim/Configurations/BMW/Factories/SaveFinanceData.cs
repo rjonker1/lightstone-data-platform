@@ -29,10 +29,15 @@ namespace Toolbox.Bmw.Factories
                     Chassis = s.Chassis.RemoveWhiteSpace(),
                     Engine = s.Engine.RemoveWhiteSpace(),
                     DealStatus = s.DealStatus.Fix(),
-                    DealType = s.DealType.Fix(),
+                  //  DealType = s.DealType.Fix(),
                     Description = s.Description.Fix(),
                     RegistrationNumber = s.RegistrationNumber.RemoveWhiteSpace(),
-                    RegistrationYear = s.RegistrationYear
+                    RegistrationYear = s.RegistrationYear,
+                    FinanceHouse = s.FinanceHouse.Fix(),
+                    StartDate = s.StartDate,
+                    DealReference = s.DealReference.Fix(),
+                    ExpireDate = s.ExpireDate,
+                    ProductCategory = s.ProductCategory.Fix()
                 }.SetVinEngineId()).ToList();
 
                 Log.InfoFormat("Inserting {0} records into the BMW Finance", financeEntities.Count);

@@ -14,6 +14,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
         ISourceConfiguration SourceConfiguration { get; }
         Type ResponseType { get; }
         bool FieldLevelCostPriceOverride { get; }
+        bool RequiresConsent { get; }
         int Version { get; }
         string Owner { get; }
         DateTime CreatedDate { get; }

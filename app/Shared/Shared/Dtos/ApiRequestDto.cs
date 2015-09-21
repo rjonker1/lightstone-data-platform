@@ -18,28 +18,20 @@ namespace DataPlatform.Shared.Dtos
 
         [DataMember]
         public Guid CustomerClientId { get; private set; }
-
         [DataMember]
         public Guid UserId { get; private set; }
-
         [DataMember]
         public Guid ContractId { get; private set; }
-
         [DataMember]
         public Guid PackageId { get; private set; }
-
         [DataMember]
         public Guid RequestId { get; private set; }
-
         [DataMember]
         public Guid SourceId { get; private set; }
-
         [DataMember]
         public string SearchTerm { get; private set; }
-
         [DataMember]
         public string Username { get; set; }
-
         [DataMember]
         public string FromIpAddress { get; private set; }
         [DataMember]
@@ -48,9 +40,10 @@ namespace DataPlatform.Shared.Dtos
         public DeviceTypes DeviceType { get; private set; }
         [DataMember]
         public SystemType SystemType { get; private set; }
-
         [DataMember]
         public IEnumerable<RequestFieldDto> RequestFields { get; private set; }
+        [DataMember]
+        public bool HasConsent { get; private set; }
 
         public bool IsValid()
         {

@@ -127,15 +127,25 @@
                                     <label>Override Data Provider Cost: {{switchAlternate}}</label>
                                     <div>
                                         <div class="toggle-bg toggle-alternate {{switch}}">
-
                                             <label class="{{switch}}">{{switchAlternate}}</label>
                                             <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle( true )">
                                             <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle( false )">
                                             <span class=" switch {{switch}} "></span>
-
                                         </div>
                                     </div>
-
+                                </div>
+                                <div class="clearfix"></div>
+                                <br/>
+                                <div>
+                                    <label>Requires Consent:</label>
+                                    <div>
+                                        <div class="toggle-bg toggle-alternate {{hasConsent}}">
+                                            <label class="{{hasConsent}}">{{consentAlternate}}</label>
+                                            <input type="radio" name="requiresConsent" value="NO" ng-model="consentAlternate" ng-click="toggleConsent(false)">
+                                            <input type="radio" name="requiresConsent" value="YES" ng-model="consentAlternate" ng-click="toggleConsent(true)">
+                                            <span class=" switch {{hasConsent}} "></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div> <!--End Info-->
@@ -150,8 +160,8 @@
                                                 <label>Field</label>
                                             </div>
                                             <!--<div class="col-md-3">
-                                                <label>Type</label>
-                                            </div>-->
+                                                    <label>Type</label>
+                                                </div>-->
                                             <div class="col-md-1">
                                                 <label>Label</label>
                                             </div>

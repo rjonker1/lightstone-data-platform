@@ -111,7 +111,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
             var field = _originalFields.Filter(x => x.Name == "MakeDescription").FirstOrDefault() as DataField;
             field.Label = "Test Label";
 
-            _handler.Handle(new UpdateDataProvider(_id, DataProviderName.IVIDVerify_E_WS, "Test", 0, null, false, null, 2, "Owner", DateTime.UtcNow, null, null, _originalFields));
+            _handler.Handle(new UpdateDataProvider(_id, DataProviderName.IVIDVerify_E_WS, "Test", 0, null, false, false, null, 2, "Owner", DateTime.UtcNow, null, null, _originalFields));
 
             _amendHandler.Handle(new AmendDataProviderStructure(_id));
 
