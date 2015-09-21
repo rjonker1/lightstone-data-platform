@@ -2,7 +2,7 @@
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromMMCode : IPointToLaceProvider
+    public interface IProvideDataFromMmCode : IPointToLaceProvider
     {
         int MMLId { get; set; }
         int CarId { get; set; }

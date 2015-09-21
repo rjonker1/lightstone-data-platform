@@ -63,7 +63,7 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1571\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1683, Culture=neutral, processorArchitecture=MSIL">
@@ -171,6 +171,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lace\PCubed\when_performing_ez_score_search.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_mmcode_with_carid.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_with_carid.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
@@ -202,6 +203,10 @@
     <ProjectReference Include="..\Source\DataProviders.Bmw.FinancedInterests\DataProviders.Bmw.Finance.csproj">
       <Project>{0c723d05-d0ff-47ae-b551-a670f771f9f3}</Project>
       <Name>DataProviders.Bmw.Finance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\DataProviders.Lightstone.MMCode\DataProviders.Lightstone.MMCode.csproj">
+      <Project>{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}</Project>
+      <Name>DataProviders.Lightstone.MMCode</Name>
     </ProjectReference>
     <ProjectReference Include="..\Source\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj">
       <Project>{cbb5ee23-8ec8-45f7-b173-a268bfe9d23b}</Project>

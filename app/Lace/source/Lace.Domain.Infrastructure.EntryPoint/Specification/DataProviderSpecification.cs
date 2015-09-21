@@ -39,7 +39,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                                             new PCubedEzScoreDataProvider(request,
                                                                 new ConsumerSpecificationsDataProvider(request,
                                                                     new BmwFinanceDataProvider(request, 
-                                                                        new MMCodeDataProvider(request, null, null, 
+                                                                        new MmCodeDataProvider(request, null, null, 
                                                                             CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.MMCode_E_DB)), null,
                                                                         CommandSender.InitCommandSender(bus, requestId,
                                                                             DataProviderCommandSource.BMWFSTitle_E_DB)), null,

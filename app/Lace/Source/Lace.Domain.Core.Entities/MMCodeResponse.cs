@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
     [DataContract]
-    public class MMCodeResponse : IProvideDataFromMMCode
+    public class MMCodeResponse : IProvideDataFromMmCode
     {
         public MMCodeResponse()
         {
@@ -23,6 +24,8 @@ namespace Lace.Domain.Core.Entities
             MMCode = mmCode;
         }
 
+        [DataMember]
+        public IAmMmCodeRequest Request { get; set; }
         [DataMember]
         public int MMLId { get; set; }
         [DataMember]

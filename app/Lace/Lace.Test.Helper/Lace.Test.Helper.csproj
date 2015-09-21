@@ -62,7 +62,7 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1571\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1683, Culture=neutral, processorArchitecture=MSIL">
@@ -124,6 +124,7 @@
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberMmCodeRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberRgtRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateRequestBuilder.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Fakes\RequestTypes\LightstoneBusinessDirectorRequest.cs" />
     <Compile Include="Fakes\RequestTypes\LightstoneBusinessRequest.cs" />
     <Compile Include="Fakes\RequestTypes\LightstoneConsumerSpecificationsRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\MmCodeRequestType.cs" />
     <Compile Include="Fakes\RequestTypes\PCubedEzScoreRequest.cs" />
     <Compile Include="Fakes\RequestTypes\RgtRequestType.cs" />
     <Compile Include="Fakes\RequestTypes\RgtVinRequest.cs" />
@@ -238,6 +240,7 @@
     <Compile Include="Mothers\Requests\Dto\RequestJisInformation.cs" />
     <Compile Include="Mothers\Requests\EzScoreRequests\EzScoreRequest.cs" />
     <Compile Include="Mothers\Requests\FinanceRequests\BmwFinanceRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberMmCodeOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\VinNumberLSAutoRgtAndRgtVinProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberAllDataProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberLightstoneOnlyRequest.cs" />
