@@ -11,7 +11,6 @@ namespace Lace.Unit.Tests.Sources.MmCode
     public class when_getting_mmcode: Specification
     {
         private readonly IReadOnlyRepository _repository;
-        //private readonly IReadOnlyRepository _vin12Repository;
         private readonly IGetCarInformation _getCarInformation;
         private readonly IHaveCarInformation _request;
 

@@ -63,10 +63,10 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         {
             var estimatedValue = _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault();
             Regex.Replace(estimatedValue.RetailConfidenceLevel, @"\s+", "").ShouldEqual("Medium");
-            Regex.Replace(estimatedValue.RetailConfidenceValue, @"\s+", "").ShouldEqual("74");
-            Regex.Replace(estimatedValue.RetailEstimatedHigh, @"\s+", "").ShouldEqual("R549200,00");
-            Regex.Replace(estimatedValue.RetailEstimatedLow, @"\s+", "").ShouldEqual("R459000,00");
-            Regex.Replace(estimatedValue.RetailEstimatedValue, @"\s+", "").ShouldEqual("R502100,00");
+            Regex.Replace(estimatedValue.RetailConfidenceValue, @"\s+", "").ShouldEqual("75");
+            Regex.Replace(estimatedValue.RetailEstimatedHigh, @"\s+", "").ShouldEqual("R542700,00");
+            Regex.Replace(estimatedValue.RetailEstimatedLow, @"\s+", "").ShouldEqual("R433900,00");
+            Regex.Replace(estimatedValue.RetailEstimatedValue, @"\s+", "").ShouldEqual("R485200,00");
         }
 
         [Observation]
@@ -75,9 +75,9 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
             var estimatedValue = _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault();
             estimatedValue.TradeConfidenceLevel.ShouldEqual("Low");
             estimatedValue.TradeConfidenceValue.ShouldEqual("50");
-            Regex.Replace(estimatedValue.TradeEstimatedHigh, @"\s+", "").ShouldEqual("R488200,00");
-            Regex.Replace(estimatedValue.TradeEstimatedLow, @"\s+", "").ShouldEqual("R408000,00");
-            Regex.Replace(estimatedValue.TradeEstimatedValue, @"\s+", "").ShouldEqual("R446300,00");
+            Regex.Replace(estimatedValue.TradeEstimatedHigh, @"\s+", "").ShouldEqual("R475500,00");
+            Regex.Replace(estimatedValue.TradeEstimatedLow, @"\s+", "").ShouldEqual("R390500,00");
+            Regex.Replace(estimatedValue.TradeEstimatedValue, @"\s+", "").ShouldEqual("R436700,00");
         }
     }
 }
