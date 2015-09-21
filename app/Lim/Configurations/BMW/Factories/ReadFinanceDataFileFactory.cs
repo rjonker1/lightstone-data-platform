@@ -37,8 +37,13 @@ namespace Toolbox.Bmw.Factories
                         s.GetString("RegNumber"),
                         s.GetString("Description"),
                         s.GetInt("RegYear"),
-                        s.GetString("Deal Type"),
-                        s.GetString("DealStatus")));
+                       // s.GetString("Deal Type"),
+                        s.GetString("DealStatus"),
+                        s.GetString("Finance House"),
+                        s.GetString("Dealref"),
+                        s.GetDate("Startdate"),
+                        s.GetDate("ExpireDate"),
+                        s.GetString("ProdCat")));
                 }
             }
             catch (Exception ex)
