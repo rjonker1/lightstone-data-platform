@@ -27,16 +27,16 @@
         { name: 'user2' },
         { name: 'user3' }
         ];
-
-        // Defaulted postion for toggle-switch
-        //$scope.switch = 'true';
-        //$scope.switchAlternate = 'Per Field';
-
+        
         $scope.toggle = function(state) {
-
             (state == true) ? $scope.switch = false : $scope.switch = true;
             $scope.dataProvider.response[0].fieldLevelCostPriceOverride = $scope.switch;
             $scope.dataProvider.response[0].costOfSale = 0;
+        };
+        
+        $scope.toggleConsent = function (state) {
+            $scope.hasConsent = state;
+            $scope.dataProvider.response[0].requiresConsent = $scope.hasConsent;
         };
 
         $scope.selectedGroupIndustry = {};
@@ -250,8 +250,10 @@
 
                 $scope.dataProvider = response.data;
                 $scope.switch = $scope.dataProvider.response[0].fieldLevelCostPriceOverride;
-
+                $scope.hasConsent = $scope.dataProvider.response[0].requiresConsent;
+                
                 ($scope.switch == true) ? $scope.switchAlternate = 'Per Field' : $scope.switchAlternate = 'Per Request';
+                ($scope.hasConsent == true) ? $scope.consentAlternate = 'YES' : $scope.consentAlternate = 'NO';
             });
         }
 

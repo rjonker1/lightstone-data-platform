@@ -89,7 +89,10 @@ namespace PackageBuilder.Api.Modules
                 Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id)) } });
 
             Get["/DataProviders/{id}/{version}"] = _ =>
-                Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id, _.version)) } });
+            {
+                var dataProvider = Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id, _.version));
+                return Response.AsJson(new { Response = new[] { dataProvider } });
+            };
 
             Put[RouteConstants.DataProviderEditRoute] = _ =>
             {
@@ -103,7 +106,7 @@ namespace PackageBuilder.Api.Modules
 
                 var command = new UpdateDataProvider(_.id,
                     (DataProviderName)Enum.Parse(typeof(DataProviderName), dto.Name, true), dto.Description,
-                    dto.CostOfSale, typeof(Domain.Dtos.Write.DataProviderDto), dto.FieldLevelCostPriceOverride,
+                    dto.CostOfSale, typeof(Domain.Dtos.Write.DataProviderDto), dto.FieldLevelCostPriceOverride, dto.RequiresConsent,
                     stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, rFields, dFields);
                 publisher.Publish(command);
 

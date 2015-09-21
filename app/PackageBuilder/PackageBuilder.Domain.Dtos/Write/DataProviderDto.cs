@@ -21,6 +21,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         public string SourceConfigurationUsername { get; set; }
         public string SourceConfigurationConnectionString { get; set; }
         public bool FieldLevelCostPriceOverride { get; set; }
+        public bool RequiresConsent { get; set; }
         public string Owner { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? EditedDate { get; set; }
