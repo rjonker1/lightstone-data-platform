@@ -19,13 +19,13 @@ namespace Toolbox.Bmw.Entities
         {
             if (string.IsNullOrEmpty(Chassis))
             {
-                VinEngineId = Engine ?? string.Empty;
+                VinEngineId = (Engine ?? string.Empty).TrimStart('0');
                 return this;
             }
 
             VinEngineId = (7 >= Chassis.Length)
-                ? string.Format("{0}{1}", Chassis, Engine ?? "")
-                : string.Format("{0}{1}", Chassis.Substring(Chassis.Length - 7), Engine ?? "");
+                ? string.Format("{0}{1}", Chassis, (Engine ?? "").TrimStart('0'))
+                : string.Format("{0}{1}", Chassis.Substring(Chassis.Length - 7), (Engine ?? "").TrimStart('0'));
             return this;
         }
     }
