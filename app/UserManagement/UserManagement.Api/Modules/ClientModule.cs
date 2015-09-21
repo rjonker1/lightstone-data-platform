@@ -73,7 +73,7 @@ namespace UserManagement.Api.Modules
                 var clientId = (Guid)_.clientId;
                 var clientUsers = clientRepository.Where(x => x.Id == clientId).SelectMany(x => x.Customers.SelectMany(c => c.CustomerUsers)).Select(x => x.User);
 
-                Expression<Func<User, bool>> predicate = x => x.IsActive == true && x.UserType == UserType.Internal && (x.FirstName.StartsWith(filter) || x.LastName.StartsWith(filter));
+                Expression<Func<User, bool>> predicate = x => x.IsActive == true && x.UserType == UserType.Internal && (x.Individual.Name.StartsWith(filter) || x.Individual.Surname.StartsWith(filter));
                 var users = new PagedList<User>(clientUsers, pageIndex != 0 ? pageIndex - 1 : pageIndex, pageSize == 0 ? 10 : pageSize, predicate);
 
                 return Negotiate

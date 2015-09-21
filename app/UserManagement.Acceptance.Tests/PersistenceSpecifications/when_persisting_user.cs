@@ -13,7 +13,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
     {
         public override void Observe()
         {
-            RefreshDb();
+            RefreshDb(false);
         }
 
         [Observation]
@@ -22,9 +22,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
             var roles = new HashSet<Role> { new Role("Admin") };
             new PersistenceSpecification<User>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.FirstName, "FirstName")
-                .CheckProperty(c => c.LastName, "LastName")
-                .CheckProperty(c => c.IdNumber, "IdNumber")
+                .CheckReference(c => c.Individual, new Individual("Name", "Surname", "IdNumber"))
                 .CheckProperty(c => c.ContactNumber, "ContactNumber")
                 .CheckProperty(c => c.UserName, "UserName")
                 .CheckProperty(c => c.Password, "Password")

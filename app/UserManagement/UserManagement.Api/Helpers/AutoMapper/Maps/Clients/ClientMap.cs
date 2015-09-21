@@ -17,10 +17,10 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Clients
         {
             Mapper.CreateMap<Client, ClientDto>()
                 .AfterMap((s, d) => Mapper.Map(s, d, typeof(Entity), typeof(EntityDto)))
-                .ForMember(dest => dest.AccountOwnerName, opt => opt.MapFrom(x => x.AccountOwner != null ? string.Format("{0} {1}", x.AccountOwner.FirstName, x.AccountOwner.LastName) : ""))
+                .ForMember(dest => dest.AccountOwnerName, opt => opt.MapFrom(x => x.AccountOwner != null ? x.AccountOwner.FullName : ""))
                 .ForMember(dest => dest.Industries, opt => opt.MapFrom(x => x.Industries.Select(cind => cind.IndustryId)))
                 .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)))
-                .ForMember(dest => dest.Users, opt => opt.MapFrom(x => x.Users.Select(r => string.Format("{0} {1}", r.FirstName, r.LastName))));
+                .ForMember(dest => dest.Users, opt => opt.MapFrom(x => x.Users.Select(r => r.FullName)));
             //.ForMember(dest => dest.UserAliases, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<Entity>, IEnumerable<EntityDto>>(x.UserAliases)));
 
             Mapper.CreateMap<ClientDto, Client>()

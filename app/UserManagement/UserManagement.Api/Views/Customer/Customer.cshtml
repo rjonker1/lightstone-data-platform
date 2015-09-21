@@ -131,7 +131,7 @@
                     @foreach (var item in Model.Users)
                     {
                         var isSelected = Model.Users != null && Model.Users.Select(x => x.Id).Contains(item.Id);
-                        <option selected="@isSelected" value="@item.Id">@item.LastName</option>
+                        <option selected="@isSelected" value="@item.Id">@item.IndividualSurname</option>
                     }
                 </select>
             </div>

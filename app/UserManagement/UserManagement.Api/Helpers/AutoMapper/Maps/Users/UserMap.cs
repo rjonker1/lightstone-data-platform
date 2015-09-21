@@ -23,6 +23,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
 
             Mapper.CreateMap<UserDto, User>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
+                .ForMember(dest => dest.Individual, opt => opt.MapFrom(x => Mapper.Map<UserDto, Individual>(x)))
                 .ForMember(dest => dest.Created, opt => opt.UseDestinationValue())
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(x =>
                     x.RoleIds != null
@@ -39,6 +40,9 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
                 {
                     dest.Created = dest.Created ?? DateTime.UtcNow;
                 });
+
+            Mapper.CreateMap<UserDto, Individual>()
+                .ConvertUsing<ITypeConverter<UserDto, Individual>>();
         }
     }
 }

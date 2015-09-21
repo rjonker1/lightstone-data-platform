@@ -10,9 +10,9 @@ namespace UserManagement.Domain.Entities
 {
     public class User : Entity
     {
-        public virtual string FirstName { get; protected internal set; }
-        public virtual string LastName { get; protected internal set; }
-        public virtual string IdNumber { get; protected internal set; }
+        //public virtual string FirstName { get; protected internal set; }
+        //public virtual string LastName { get; protected internal set; }
+        //public virtual string IdNumber { get; protected internal set; }
         public virtual string ContactNumber { get; protected internal set; }
         [Unique]
         public virtual string UserName { get; protected internal set; }
@@ -26,6 +26,16 @@ namespace UserManagement.Domain.Entities
         public virtual UserType UserType { get; protected internal set; }
         public virtual ISet<Role> Roles { get; protected internal set; }
         public virtual ISet<CustomerUser> CustomerUsers { get; protected internal set; }
+        public virtual Individual Individual { get; protected internal set; }
+
+        [DoNotMap]
+        public virtual string FullName
+        {
+            get
+            {
+                return Individual != null ? Individual.FullName : "";
+            }
+        }
 
         [DoNotMap]
         public virtual IEnumerable<Customer> Customers
@@ -80,9 +90,7 @@ namespace UserManagement.Domain.Entities
             bool? isActive, UserType userType, HashSet<Role> roles, Guid id = new Guid())
             : base(id)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            IdNumber = idNumber;
+            Individual = new Individual(firstName, lastName, idNumber);
             ContactNumber = contactNumber;
             UserName = userName;
             Password = password;

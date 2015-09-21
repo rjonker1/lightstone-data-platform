@@ -7,16 +7,16 @@ using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Converters
 {
-    public class CustomerIndividualConverter : TypeConverter<CustomerDto, Individual>
+    public class ClientIndividualConverter : TypeConverter<ClientDto, Individual>
     {
         private readonly IIndividualRepository _individuals;
 
-        public CustomerIndividualConverter(IIndividualRepository individuals)
+        public ClientIndividualConverter(IIndividualRepository individuals)
         {
             _individuals = individuals;
         }
 
-        protected override Individual ConvertCore(CustomerDto dto)
+        protected override Individual ConvertCore(ClientDto dto)
         {
             var individual = new Individual(dto.IndividualName, dto.IndividualSurname, dto.IndividualIdNumber, dto.IndividualId == new Guid() ? Guid.NewGuid() : dto.IndividualId);
             var existingIndividual = _individuals.GetExistingIndividual(individual);

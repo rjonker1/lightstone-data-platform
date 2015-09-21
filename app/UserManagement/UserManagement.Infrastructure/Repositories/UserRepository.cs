@@ -12,7 +12,7 @@ namespace UserManagement.Infrastructure.Repositories
     {
         User GetByUserName(string username);
         User GetByResetToken(Guid resetToken);
-        PagedList<User> Search(string searchValue, int pageIndex, int pageSize);
+        //PagedList<User> Search(string searchValue, int pageIndex, int pageSize);
     }
 
     public class UserRepository : Repository<User>, IUserRepository
@@ -32,13 +32,13 @@ namespace UserManagement.Infrastructure.Repositories
             return this.FirstOrDefault(x => x.ResetPasswordToken  == resetToken);
         }
 
-        public PagedList<User> Search(string searchValue, int pageIndex, int pageSize)
-        {
-            var predicate = PredicateBuilder.False<User>();
-            predicate = predicate.Or(x => (x.FirstName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-            predicate = predicate.Or(x => (x.LastName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-            predicate = predicate.Or(x => (x.UserName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-            return new PagedList<User>(this, pageIndex, pageSize, predicate);
-        }
+        //public PagedList<User> Search(string searchValue, int pageIndex, int pageSize)
+        //{
+        //    var predicate = PredicateBuilder.False<User>();
+        //    predicate = predicate.Or(x => (x.FirstName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
+        //    predicate = predicate.Or(x => (x.LastName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
+        //    predicate = predicate.Or(x => (x.UserName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
+        //    return new PagedList<User>(this, pageIndex, pageSize, predicate);
+        //}
     }
 }

@@ -11,6 +11,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
         {
             mapping.HasManyToMany(x => x.Roles).Cascade.SaveUpdate().Table("UserRole").ParentKeyColumn("UserId").ChildKeyColumn("RoleId"); ;
             mapping.HasMany(x => x.CustomerUsers).Cascade.SaveUpdate().Table("CustomerUser");
+            mapping.References(x => x.Individual).Cascade.SaveUpdate();
             //mapping.HasMany(x => x.Clients).Cascade.SaveUpdate().Table("ClientUser");
             //mapping.HasManyToMany(x => x.ClientUserAliases).Cascade.SaveUpdate().Table("UserAlias");
         }

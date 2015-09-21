@@ -39,11 +39,11 @@
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "" })
+                        @Html.TextBoxFor(x => x.IndividualName, new { @class = "form-control", placeholder = "" })
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.FirstName)
+                    @Html.ValidationMessageFor(x => x.IndividualName)
                 </div>
 
             </div>
@@ -53,11 +53,25 @@
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "" })
+                        @Html.TextBoxFor(x => x.IndividualSurname, new { @class = "form-control", placeholder = "" })
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.LastName)
+                    @Html.ValidationMessageFor(x => x.IndividualSurname)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label col-lg-4"><span class="required-field">*</span> ID Number</label>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.IndividualIdNumber, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.IndividualIdNumber)
                 </div>
 
             </div>
@@ -67,11 +81,11 @@
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-book" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control", placeholder = "" })
+                        @Html.TextBoxFor(x => x.IndividualContactNumber, new { @class = "form-control", placeholder = "" })
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.ContactNumber)
+                    @Html.ValidationMessageFor(x => x.IndividualContactNumber)
                 </div>
 
             </div>
@@ -136,20 +150,7 @@
 
                 </div>
             }
-            <div class="form-group">
-
-                <label class="control-label col-lg-4">ID Number</label>
-                <div class="input-group col-lg-2">
-                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
-                    <div aria-describedby="basic-addon1">
-                        @Html.TextBoxFor(x => x.IdNumber, new { @class = "form-control", placeholder = "" })
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessageFor(x => x.IdNumber)
-                </div>
-
-            </div>
+            
             <div class="form-group">
 
                 <label class="control-label col-lg-4">Activation Status</label>

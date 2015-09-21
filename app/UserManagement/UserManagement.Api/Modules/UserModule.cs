@@ -49,7 +49,7 @@ namespace UserManagement.Api.Modules
             Get["/UserLookup/{filter}"] = _ =>
             {
                 var filter = (string)_.filter;
-                var dto = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(userRepository.Where(x => x.IsActive == true && (x.FirstName.StartsWith(filter) || x.LastName.StartsWith(filter))));
+                var dto = Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(userRepository.Where(x => x.IsActive == true && (x.Individual.Name.StartsWith(filter) || x.Individual.Surname.StartsWith(filter))));
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
@@ -75,7 +75,7 @@ namespace UserManagement.Api.Modules
                 int.TryParse(Context.Request.Query["page_num"].Value, out pageIndex);
                 int.TryParse(Context.Request.Query["per_page"].Value, out pageSize);
 
-                Expression<Func<User, bool>> predicate = x => x.IsActive == true && x.UserType == UserType.Internal && (x.FirstName.StartsWith(filter) || x.LastName.StartsWith(filter));
+                Expression<Func<User, bool>> predicate = x => x.IsActive == true && x.UserType == UserType.Internal && (x.Individual.Name.StartsWith(filter) || x.Individual.Surname.StartsWith(filter));
                 var users = new PagedList<User>(userRepository, pageIndex != 0 ? pageIndex - 1 : pageIndex, pageSize == 0 ? 10 : pageSize, predicate);
 
                 return Negotiate

@@ -589,8 +589,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\AutoMapper\Converters\ClientIndividualConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\CustomerIndividualConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\StringToPackageConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\Converters\UserIndividualConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Contracts\ContractMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataTables\DataTablesMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Email\EmailMessageMap.cs" />

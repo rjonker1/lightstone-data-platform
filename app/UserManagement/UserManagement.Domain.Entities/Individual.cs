@@ -45,6 +45,15 @@ namespace UserManagement.Domain.Entities
             }
         }
 
+        [DoNotMap]
+        public virtual string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", Name, Surname);
+            }
+        }
+
         protected Individual() { }
 
         public Individual(string name, string surname, string idNumber, Guid id = new Guid()) : base(id)
@@ -56,24 +65,30 @@ namespace UserManagement.Domain.Entities
 
         public virtual void SetEmail(string email)
         {
-            var individualEmail = Emails.FirstOrDefault(x => x.Individual.Id == Id && (x.Email + "").Trim().ToLower() == (email + "").Trim().ToLower());
-            if (individualEmail == null)
+            if (Emails != null)
             {
-                individualEmail = new IndividualEmail(this, email);
-                Emails.Add(individualEmail);
+                var individualEmail = Emails.FirstOrDefault(x => x.Individual.Id == Id && (x.Email + "").Trim().ToLower() == (email + "").Trim().ToLower());
+                if (individualEmail == null)
+                {
+                    individualEmail = new IndividualEmail(this, email);
+                    Emails.Add(individualEmail);
+                }
+                individualEmail.Email = email;
             }
-            individualEmail.Email = email;
         }
 
         public virtual void SetContactNumber(string number, ContactNumberType type)
         {
-            var individualContactNumber = ContactNumbers.FirstOrDefault(x => x.Individual.Id == Id && (x.ContactNumber + "").Trim().ToLower() == (number + "").Trim().ToLower());
-            if (individualContactNumber == null)
+            if (ContactNumbers != null)
             {
-                individualContactNumber = new IndividualContactNumber(this, number, type);
-                ContactNumbers.Add(individualContactNumber);
+                var individualContactNumber = ContactNumbers.FirstOrDefault(x => x.Individual != null && (x.Individual.Id == Id && (x.ContactNumber + "").Trim().ToLower() == (number + "").Trim().ToLower()));
+                if (individualContactNumber == null)
+                {
+                    individualContactNumber = new IndividualContactNumber(this, number, type);
+                    ContactNumbers.Add(individualContactNumber);
+                }
+                individualContactNumber.ContactNumber = number;
             }
-            individualContactNumber.ContactNumber = number;
         }
     }
 }
