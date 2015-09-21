@@ -15,7 +15,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
         {
             Mapper.CreateMap<DataField, DataField>()
                 .ForMember(d => d.DataFields, opt => opt.Ignore()); // Needs to ignore for amending DP structure functionality
-            Mapper.CreateMap<IDataFieldOverride, DataField>();
+            Mapper.CreateMap<IDataFieldOverride, DataField>()
+                .ForMember(d => d.Industries, opt => opt.UseDestinationValue());
 
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()
                 .ConstructUsing(Mapper.Map<DataProviderFieldItemDto, DataField>);
