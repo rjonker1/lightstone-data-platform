@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{36AD2E0E-7B5A-4629-9408-4691B5BD0C68}"
 EndProject
@@ -109,6 +109,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Bmw.Finance", "Lace\Source\DataProviders.Bmw.FinancedInterests\DataProviders.Bmw.Finance.csproj", "{0C723D05-D0FF-47AE-B551-A670F771F9F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Toolbox.Signio", "Lace\Source\Lace.Toolbox.Signio\Lace.Toolbox.Signio.csproj", "{FF02E06F-6212-417D-BC8C-B31DE2494C72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviders.Lightstone.MMCode", "Lace\Source\DataProviders.Lightstone.MMCode\DataProviders.Lightstone.MMCode.csproj", "{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -509,6 +511,16 @@ Global
 		{FF02E06F-6212-417D-BC8C-B31DE2494C72}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{FF02E06F-6212-417D-BC8C-B31DE2494C72}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{FF02E06F-6212-417D-BC8C-B31DE2494C72}.Test|Any CPU.Build.0 = Release|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -559,5 +571,6 @@ Global
 		{F281C6FB-B038-43A6-8ECE-158DA7EE02D4} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{0C723D05-D0FF-47AE-B551-A670F771F9F3} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{FF02E06F-6212-417D-BC8C-B31DE2494C72} = {C6E762ED-2030-40CF-A694-8F6C44800226}
+		{263A9429-F6FF-4E9B-BA96-1944DA8FDF24} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 	EndGlobalSection
 EndGlobal
