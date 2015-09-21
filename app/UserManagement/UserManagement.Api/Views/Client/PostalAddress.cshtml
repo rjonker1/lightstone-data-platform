@@ -7,19 +7,19 @@
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Postal Address", "", "glyphicon glyphicon-tags", Model))
     <div class="box-body">
-        @Html.HiddenFor(x => x.ContactDetailPostalAddressId)
-        @Html.HiddenFor(x => x.ContactDetailPhysicalAddressType, new { value = AddressType.Postal })
+        @Html.HiddenFor(x => x.PostalAddressId)
+        @Html.HiddenFor(x => x.PhysicalAddressType, new { value = AddressType.Postal })
         <div class="form-group">
 
             <label class="control-label col-lg-4">Line1</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine1, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.PostalAddressLine1, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressLine1)
+                @Html.ValidationMessageFor(x => x.PostalAddressLine1)
             </div>
 
         </div>
@@ -29,11 +29,11 @@
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine2, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.PostalAddressLine2, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressLine2)
+                @Html.ValidationMessageFor(x => x.PostalAddressLine2)
             </div>
 
         </div>
@@ -43,11 +43,11 @@
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressSuburb, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.PostalAddressSuburb, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressSuburb)
+                @Html.ValidationMessageFor(x => x.PostalAddressSuburb)
             </div>
 
         </div>
@@ -57,29 +57,11 @@
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-tower" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressCity, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.PostalAddressCity, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressCity)
-            </div>
-
-        </div>
-        <div class="form-group">
-
-            <label class="control-label col-lg-4">Country</label>
-            <div class="input-group col-lg-2">
-                <select name="ContactDetailPostalAddressCountryId" data-placeholder="Select country" class="chosen-select">
-                    <option value=""></option>
-                    @foreach (var item in ViewBag.Countrys.Value)
-                    {
-                        var isSelected = item.Value == Model.ContactDetailPostalAddressCountryId.ToString();
-                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                    }
-                </select>
-            </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressCountryId)
+                @Html.ValidationMessageFor(x => x.PostalAddressCity)
             </div>
 
         </div>
@@ -89,11 +71,11 @@
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressPostalCode, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.PostalAddressPostalCode, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressPostalCode)
+                @Html.ValidationMessageFor(x => x.PostalAddressPostalCode)
             </div>
 
         </div>
@@ -101,17 +83,35 @@
 
             <label class="control-label col-lg-4">Province</label>
             <div class="input-group col-lg-2">
-                <select name="ContactDetailPostalAddressProvinceId" data-placeholder="Select province" class="chosen-select">
+                <select name="PostalAddressProvinceId" data-placeholder="Select province" class="chosen-select">
                     <option value=""></option>
                     @foreach (SelectListItem item in ViewBag.Provinces.Value)
                     {
-                        var isSelected = item.Value == Model.ContactDetailPostalAddressProvinceId.ToString();
+                        var isSelected = item.Value == Model.PostalAddressProvinceId.ToString();
                         <option selected="@isSelected" value="@item.Value">@item.Text</option>
                     }
                 </select>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressProvinceId)
+                @Html.ValidationMessageFor(x => x.PostalAddressProvinceId)
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="control-label col-lg-4">Country</label>
+            <div class="input-group col-lg-2">
+                <select name="PostalAddressCountryId" data-placeholder="Select country" class="chosen-select">
+                    <option value=""></option>
+                    @foreach (var item in ViewBag.Countrys.Value)
+                    {
+                        var isSelected = item.Value == Model.PostalAddressCountryId.ToString();
+                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.PostalAddressCountryId)
             </div>
 
         </div>

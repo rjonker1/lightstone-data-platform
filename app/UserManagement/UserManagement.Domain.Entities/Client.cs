@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {
@@ -20,7 +21,6 @@ namespace UserManagement.Domain.Entities
         }
         public virtual Billing Billing { get; protected internal set; }
         public virtual CommercialState CommercialState { get; protected internal set; }
-        public virtual ContactDetail ContactDetail { get; protected internal set; }
         public virtual ISet<Customer> Customers { get; protected internal set; }
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual ISet<ClientUserAlias> UserAliases { get; protected internal set; }
@@ -28,6 +28,7 @@ namespace UserManagement.Domain.Entities
         public virtual bool IsLocked { get; protected internal set; }
         public virtual DateTime? TrialExpiration { get; protected internal set; }
         public virtual ISet<ClientIndustry> Industries { get; protected internal set; }
+        public virtual Individual Individual { get; protected internal set; }
         public virtual ISet<ClientAddress> Addresses { get; protected internal set; }
 
         [DoNotMap]
@@ -38,6 +39,25 @@ namespace UserManagement.Domain.Entities
                 return Customers.SelectMany(c => c.Users);
             }
         }
+        [DoNotMap]
+        public virtual Address PhysicalAddress
+        {
+            get
+            {
+                var customerAddress = Addresses.FirstOrDefault(x => x.AddressType == AddressType.Physical);
+                return customerAddress != null ? customerAddress.Address : null;
+            }
+        }
+        [DoNotMap]
+        public virtual Address PostalAddress
+        {
+            get
+            {
+                var customerAddress = Addresses.FirstOrDefault(x => x.AddressType == AddressType.Postal);
+                return customerAddress != null ? customerAddress.Address : null;
+            }
+        }
+
         public Client() { }
 
         public Client(string clientName) : base(clientName) { }
@@ -50,6 +70,17 @@ namespace UserManagement.Domain.Entities
         public virtual void Lock(bool @lock)
         {
             IsLocked = @lock;
+        }
+
+        public virtual void SetAddress(Address address, AddressType type)
+        {
+            var customerAddress = Addresses.FirstOrDefault(x => Equals(x.Address, address));
+            if (customerAddress == null)
+            {
+                customerAddress = new ClientAddress(this, address, type);
+                Addresses.Add(customerAddress);
+            }
+            customerAddress.Address = address;
         }
     }
 }
