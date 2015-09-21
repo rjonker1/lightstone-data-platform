@@ -59,7 +59,7 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1571\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1683, Culture=neutral, processorArchitecture=MSIL">
@@ -144,6 +144,7 @@
     <Compile Include="Sources\Lightstone\when_getting_metrics.cs" />
     <None Include="Sources\Lightstone\when_getting_total_sales_by_age_metrics.cs.old20150716" />
     <None Include="Sources\Lightstone\when_getting_total_sales_by_gender_metric.cs.old20150716" />
+    <Compile Include="Sources\MmCode\when_getting_mmcode.cs" />
     <Compile Include="Sources\PCubed\Constants.cs" />
     <Compile Include="Sources\PCubed\Results\when_search_returns_a_single_result.cs" />
     <Compile Include="Sources\PCubed\when_creating_combined_query_to_search.cs" />

@@ -59,9 +59,8 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1575\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts">
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1683\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -123,6 +122,7 @@
     <Compile Include="Models\CarSpecification.cs" />
     <Compile Include="Models\Make.cs" />
     <Compile Include="Models\Metric.cs" />
+    <Compile Include="Models\MmCode.cs" />
     <Compile Include="Models\Municipality.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\Statistic.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Repositories\DataProviderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

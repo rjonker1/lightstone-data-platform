@@ -43,6 +43,12 @@ namespace Lace.Test.Helper.Builders.Requests
             _request = new[] {new LicensePlateNumberRgtOnlyRequest()};
             return _request;
         }
+        
+        public ICollection<IPointToLaceRequest> ForMmCode()
+        {
+            _request = new[] {new LicensePlateNumberMmCodeOnlyRequest()};
+            return _request;
+        }
 
         public ICollection<IPointToLaceRequest> ForRgtWithVin()
         {
