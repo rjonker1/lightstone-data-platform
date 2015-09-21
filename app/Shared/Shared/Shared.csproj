@@ -56,7 +56,7 @@
     </Compile>
     <Compile Include="Dtos\Action.cs" />
     <Compile Include="Dtos\ApiMetaData.cs" />
-    <Compile Include="Dtos\ApiRequest.cs" />
+    <Compile Include="Dtos\ApiRequestDto.cs" />
     <Compile Include="Dtos\Criteria.cs" />
     <Compile Include="Dtos\DataFieldDto.cs" />
     <Compile Include="Dtos\DataSet.cs" />

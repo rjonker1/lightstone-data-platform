@@ -43,7 +43,7 @@ namespace DataPlatform.Shared.Dtos
         [DataMember]
         public IEnumerable<RequestFieldDto> RequestFields { get; private set; }
         [DataMember]
-        public bool RequiresConsent { get; private set; }
+        public bool HasConsent { get; private set; }
 
         public bool IsValid()
         {

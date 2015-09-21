@@ -166,12 +166,16 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string firstName, Guid requestId, string accountNumber,
             Guid contractId, long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
-            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
+            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent)
         {
             if (DataProviders == null)
                 return null;
 
-            var dataProviders = DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
+            var dataProviders = Enumerable.Empty<IDataProvider>();
+            if (!hasConsent)
+                dataProviders = DataProviders = DataProviders.Where(dp => !dp.RequiresConsent);
+
+            dataProviders = dataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
             var laceProviders = new List<IAmDataProvider>();
             var fields = Mapper.Map<IEnumerable<RequestFieldDto>, IEnumerable<DataField>>(requestFieldsDtos);
 
@@ -215,11 +219,11 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string firstName, Guid requestId, string accountNumber, Guid contractId,
             long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
-            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice)
+            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent)
         {
             this.Info(() => "Form LACE Request Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
-                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice);
+                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice, hasConsent);
             this.Info(() => "Form LACE Request Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
             if (request == null)
