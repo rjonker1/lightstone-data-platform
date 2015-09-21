@@ -115,6 +115,7 @@
     <Compile Include="Factories\DatabaseConnections.cs" />
     <Compile Include="Base\IGetVehicleData.cs" />
     <Compile Include="Factories\LightstoneVehicleData.cs" />
+    <Compile Include="Factories\MMCodeDataFactory.cs" />
     <Compile Include="Factories\RgtVehicleData.cs" />
     <Compile Include="Models\Band.cs" />
     <Compile Include="Models\BmwFinance.cs" />

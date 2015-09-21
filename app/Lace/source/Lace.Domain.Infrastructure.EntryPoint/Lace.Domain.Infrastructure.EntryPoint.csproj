@@ -123,6 +123,10 @@
       <Project>{0c723d05-d0ff-47ae-b551-a670f771f9f3}</Project>
       <Name>DataProviders.Bmw.Finance</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataProviders.Lightstone.MMCode\DataProviders.Lightstone.MMCode.csproj">
+      <Project>{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}</Project>
+      <Name>DataProviders.Lightstone.MMCode</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
       <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
       <Name>Lace.Domain.Core.Entities</Name>
