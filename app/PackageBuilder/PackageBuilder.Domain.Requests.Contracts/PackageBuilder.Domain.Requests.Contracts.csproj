@@ -97,6 +97,7 @@
     <Compile Include="Requests\IAmLightstoneBusinessCompanyRequest.cs" />
     <Compile Include="Requests\IAmLightstoneConsumerSpecificationsRequest.cs" />
     <Compile Include="Requests\IAmLightstonePropertyRequest.cs" />
+    <Compile Include="Requests\IAmMmCodeRequest.cs" />
     <Compile Include="Requests\IAmPCubedEzScoreRequest.cs" />
     <Compile Include="Requests\IAmRgtRequest.cs" />
     <Compile Include="Requests\IAmRgtVinRequest.cs" />
