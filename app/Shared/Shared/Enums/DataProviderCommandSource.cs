@@ -22,7 +22,8 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] LSBusinessDirector_E_WS,
         [EnumMember] PCubedEZScore_E_WS,
         [EnumMember] LSConsumerRepair_E_WS,
-        [EnumMember] BMWFSTitle_E_DB
+        [EnumMember] BMWFSTitle_E_DB,
+        [EnumMember] MMCode_E_DB
     }
 
     // Legacy - 15/09/2015
