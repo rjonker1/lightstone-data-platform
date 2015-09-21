@@ -53,6 +53,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             get { return base.Version; }
             internal set { base.Version = value; }
         }
+        public bool RequiresConsent { get; internal set; }
 
         private DataProvider(Guid id)
         {
@@ -84,9 +85,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, responseType, owner, createdDate, requestFields, dataFields, version));
         }
 
-        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields)
+        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, bool requiresConsent, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields)
         {
-            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, responseType, fieldLevelCostPriceOverride, version, owner, createdDate, editedDate, requestFields, dataFields));
+            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, responseType, fieldLevelCostPriceOverride, requiresConsent, version, owner, createdDate, editedDate, requestFields, dataFields));
         }
 
         private void Apply(DataProviderCreated @event)
@@ -110,6 +111,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             CostOfSale = @event.CostPrice;
             ResponseType = @event.ResponseType;
             FieldLevelCostPriceOverride = @event.FieldLevelCostPriceOverride;
+            RequiresConsent = @event.RequiresConsent;
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
