@@ -35,7 +35,7 @@ namespace Lace.Acceptance.Tests.Requests
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_all_sources()
         {
             _response.ShouldNotBeNull();
-            _response.Count.ShouldEqual(12);
+            _response.Count.ShouldEqual(13);
             _response.Count(c => c.Handled).ShouldEqual(5);
             
             _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
@@ -58,6 +58,9 @@ namespace Lace.Acceptance.Tests.Requests
 
             _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
             _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeFalse();
+
+            _response.OfType<IProvideDataFromMmCode>().First().ShouldNotBeNull();
+            _response.OfType<IProvideDataFromMmCode>().First().Handled.ShouldBeFalse();
         }
     }
 }

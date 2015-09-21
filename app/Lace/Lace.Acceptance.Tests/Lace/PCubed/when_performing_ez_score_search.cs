@@ -48,27 +48,27 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             person.PCubed.Header.IDNumber.ShouldEqual("4810100045085");
             person.PCubed.Header.FirstName.ShouldEqual("Peggy");
             person.PCubed.Header.Surname.ShouldEqual("Marais");
-            person.PCubed.Header.Phone1.ShouldEqual("0831234567");
-            person.PCubed.Header.Phone2.ShouldEqual("0217851930");
-            person.PCubed.Header.Phone3.ShouldEqual("0217825600");
+            person.PCubed.Header.Phone1.ShouldEqual("0839890057");
+            person.PCubed.Header.Phone2.ShouldEqual("0831234567");
+            person.PCubed.Header.Phone3.ShouldEqual("0217851930");
             person.PCubed.Header.EmailAddress1.ShouldEqual("");
             person.PCubed.Header.EmailAddress2.ShouldEqual("");
             person.PCubed.Header.EmailAddress3.ShouldEqual("");
 
             // TODO: LIVE TEST: This will change as they update data
             person.PCubed.Detail.ShouldNotBeNull();
-            person.PCubed.Detail.AddressLine1.ShouldEqual("10 FOREST DRIVE");
-            person.PCubed.Detail.AddressSuburb.ShouldEqual("SILVERGLADE");
-            person.PCubed.Detail.AddressTownCity.ShouldEqual("FISH HOEK");
-            person.PCubed.Detail.AddressProvince.ShouldEqual("WESTERN CAPE");
-            person.PCubed.Detail.AddressPostCode.ShouldEqual("7975");
-            person.PCubed.Detail.PostalAddressLine1.ShouldEqual("");
+            person.PCubed.Detail.AddressLine1.ShouldEqual("3 SUIKERBEKKIE STR");
+            person.PCubed.Detail.AddressSuburb.ShouldEqual("");
+            person.PCubed.Detail.AddressTownCity.ShouldEqual("");
+            person.PCubed.Detail.AddressProvince.ShouldEqual("");
+            person.PCubed.Detail.AddressPostCode.ShouldEqual("7220");
+            person.PCubed.Detail.PostalAddressLine1.ShouldEqual("P O BOX 1390");
             person.PCubed.Detail.PostalAddressLine2.ShouldEqual("");
             person.PCubed.Detail.PostalAddressSuburb.ShouldEqual("");
             person.PCubed.Detail.PostalAddressTownCity.ShouldEqual("");
-            person.PCubed.Detail.PostalAddressProvince.ShouldEqual("");
-            person.PCubed.Detail.PostalAddressPostCode.ShouldEqual("");
-            person.PCubed.Detail.DemAge.ShouldEqual(65);
+            person.PCubed.Detail.PostalAddressProvince.ShouldEqual("WESTERN CAPE");
+            person.PCubed.Detail.PostalAddressPostCode.ShouldEqual("7220");
+            person.PCubed.Detail.DemAge.ShouldEqual(66);
             person.PCubed.Detail.DemGender.ShouldEqual("Female");
             person.PCubed.Detail.DemPredictedRace.ShouldEqual("White");
             person.PCubed.Detail.DemDeceased.ShouldEqual("Alive");
@@ -81,7 +81,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             person.PCubed.Detail.WealthIndex.ShouldEqual("R30K+");
             person.PCubed.Detail.CreditGradeNonCPA.ShouldEqual("Good");
             person.PCubed.Detail.CreditActiveNonCPA.ShouldEqual(true);
-            person.PCubed.Detail.MosaicCPAGroupMerged.ShouldEqual("B8:Feet Up Wealth.People enjoying the fruits of their labour, often in later stages of their lives");
+            person.PCubed.Detail.MosaicCPAGroupMerged.ShouldEqual("B7:Feet Up Wealth.People enjoying the fruits of their labour, often in later stages of their lives");
             person.PCubed.Detail.FASNonCPAGroupDescriptionShort.ShouldEqual("Premier Existence");
         }
     }

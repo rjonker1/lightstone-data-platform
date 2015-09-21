@@ -148,6 +148,7 @@
     <Compile Include="Lace\Consumers\when_consuming_lightstone_business_company_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_lightstone_data_provider_with_car_id.cs" />
     <Compile Include="Lace\Consumers\when_consuming_lightstone_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_mmcode_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_rgt_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_rgt_vin_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_audatex_data_provider.cs" />

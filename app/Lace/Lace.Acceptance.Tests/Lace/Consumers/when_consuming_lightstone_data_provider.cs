@@ -64,9 +64,9 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
             var estimatedValue = _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault();
             estimatedValue.RetailConfidenceLevel.Trim().ShouldEqual("Medium");
             estimatedValue.RetailConfidenceValue.Trim().ShouldEqual("60");
-            Regex.Replace(estimatedValue.RetailEstimatedHigh, @"\s+", "").ShouldEqual("R96900,00");
-            Regex.Replace(estimatedValue.RetailEstimatedLow, @"\s+", "").ShouldEqual("R79300,00");
-            Regex.Replace(estimatedValue.RetailEstimatedValue, @"\s+", "").ShouldEqual("R88100,00");
+            Regex.Replace(estimatedValue.RetailEstimatedHigh, @"\s+", "").ShouldEqual("R99700,00");
+            Regex.Replace(estimatedValue.RetailEstimatedLow, @"\s+", "").ShouldEqual("R81500,00");
+            Regex.Replace(estimatedValue.RetailEstimatedValue, @"\s+", "").ShouldEqual("R90600,00");
         }
 
         [Observation]
@@ -75,25 +75,25 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
             var estimatedValue = _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault();
             estimatedValue.TradeConfidenceLevel.Trim().ShouldEqual("Low");
             estimatedValue.TradeConfidenceValue.Trim().ShouldEqual("50");
-            Regex.Replace(estimatedValue.TradeEstimatedHigh, @"\s+", "").ShouldEqual("R86500,00");
-            Regex.Replace(estimatedValue.TradeEstimatedLow, @"\s+", "").ShouldEqual("R70800,00");
-            Regex.Replace(estimatedValue.TradeEstimatedValue, @"\s+", "").ShouldEqual("R78600,00");
+            Regex.Replace(estimatedValue.TradeEstimatedHigh, @"\s+", "").ShouldEqual("R89140,00");
+            Regex.Replace(estimatedValue.TradeEstimatedLow, @"\s+", "").ShouldEqual("R75000,00");
+            Regex.Replace(estimatedValue.TradeEstimatedValue, @"\s+", "").ShouldEqual("R83300,00");
         }
 
         [Observation]
         public void lightstone_response_from_consumer_must_have_correct_cost_values()
         {
             var estimatedValue = _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault();
-            Regex.Replace(estimatedValue.CostHigh, @"\s+", "").ShouldEqual("R81300,00");
-            Regex.Replace(estimatedValue.CostLow, @"\s+", "").ShouldEqual("R66500,00");
-            Regex.Replace(estimatedValue.CostValue, @"\s+", "").ShouldEqual("R73900,00");
+            Regex.Replace(estimatedValue.CostHigh, @"\s+", "").ShouldEqual("R84400,00");
+            Regex.Replace(estimatedValue.CostLow, @"\s+", "").ShouldEqual("R69000,00");
+            Regex.Replace(estimatedValue.CostValue, @"\s+", "").ShouldEqual("R76700,00");
         }
 
         [Observation]
         public void lightstone_response_from_consumer_must_have_correct_auction_values()
         {
             var estimatedValue = _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault();
-            Regex.Replace(estimatedValue.AuctionEstimate, @"\s+", "").ShouldEqual("R65200,00");
+            Regex.Replace(estimatedValue.AuctionEstimate, @"\s+", "").ShouldEqual("R65800,00");
         }
 
     }

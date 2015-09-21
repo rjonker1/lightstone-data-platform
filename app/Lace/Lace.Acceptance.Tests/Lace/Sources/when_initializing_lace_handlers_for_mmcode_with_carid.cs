@@ -7,7 +7,6 @@ using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Rgt;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Workflow.Lace.Messages.Core;
@@ -39,6 +38,12 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         public void lace_mmcode_response_should_be_handled()
         {
             _response.OfType<IProvideDataFromMmCode>().First().Handled.ShouldBeTrue();
+        }
+
+        [Observation]
+        public void lace_mmcode_response_should_not_be_null()
+        {
+            _response.OfType<IProvideDataFromMmCode>().First().ShouldNotBeNull();
         }
     }
 }
