@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Toolbox.Bmw.Entities
 {
     public class Finance
     {
         public virtual Guid Id { get; set; }
+        public virtual string FinanceHouse { get; set; }
+        public virtual string DealReference { get; set; }
+        public virtual DateTime? StartDate { get; set; }
+        public virtual DateTime? ExpireDate { get; set; }
         public virtual string Chassis { get; set; }
         public virtual string Engine { get; set; }
         public virtual string RegistrationNumber { get; set; }
@@ -13,6 +18,7 @@ namespace Toolbox.Bmw.Entities
         public virtual string DealType { get; set; }
         public virtual string DealStatus { get; set; }
         public virtual string VinEngineId { get; set; }
+        public virtual string ProductCategory { get; set; }
         public virtual DateTime DateAdded { get; set; }
 
         public Finance SetVinEngineId()

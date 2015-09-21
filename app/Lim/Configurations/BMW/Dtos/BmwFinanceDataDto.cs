@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Toolbox.Bmw.Dtos
 {
@@ -11,7 +12,7 @@ namespace Toolbox.Bmw.Dtos
         }
 
         public BmwFinanceDataDto(string chassis, string engine, string registrationNumber, string description, int registrationYear,
-            string dealType, string dealStatus)
+            string dealStatus, string financeHouse, string dealReference, DateTime startDate, DateTime expireDate, string productCategory)
         {
             Chassis = chassis;
             Engine = engine;
@@ -19,7 +20,24 @@ namespace Toolbox.Bmw.Dtos
             Description = description;
             RegistrationYear = registrationYear;
             DealStatus = dealStatus;
+          //  DealType = dealType;
+            FinanceHouse = financeHouse;
+            DealReference = dealReference;
+            StartDate =  startDate;
+            ExpireDate = expireDate;
+            ProductCategory = productCategory;
         }
+
+      
+
+        [DataMember]
+        public string FinanceHouse { get; private set; }
+        [DataMember]
+        public string DealReference { get; private set; }
+        [DataMember]
+        public DateTime StartDate { get; private set; }
+        [DataMember]
+        public DateTime ExpireDate { get; private set; }
 
         [DataMember]
         public string Chassis { get; private set; }
@@ -36,10 +54,13 @@ namespace Toolbox.Bmw.Dtos
         [DataMember]
         public int RegistrationYear { get; private set; }
 
-        [DataMember]
-        public string DealType { get; private set; }
+        //[DataMember]
+        //public string DealType { get; private set; }
 
         [DataMember]
         public string DealStatus { get; private set; }
+
+        [DataMember]
+        public string ProductCategory { get; set; }
     }
 }
