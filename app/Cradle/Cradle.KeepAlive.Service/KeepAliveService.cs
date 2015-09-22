@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using Cradle.KeepAlive.Service.Helpers;
+using DataPlatform.Shared.Helpers.Extensions;
 using Hangfire;
 using Microsoft.Owin.Hosting;
 using Nancy;
@@ -18,6 +19,7 @@ namespace Cradle.KeepAlive.Service
         public void Start()
         {
             WebApp.Start<StartupBootstrapper>(url);
+            this.Info(() => "Started Keep-Alive Service");
 
             _server = new BackgroundJobServer();
 
@@ -37,6 +39,7 @@ namespace Cradle.KeepAlive.Service
         public void Stop()
         {
             _server.Dispose();
+            this.Info(() => "Keep-Alive Service Stopped");
         }
     }
 }

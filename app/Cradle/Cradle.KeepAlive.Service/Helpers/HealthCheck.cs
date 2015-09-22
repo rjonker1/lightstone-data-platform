@@ -3,6 +3,7 @@ using System.Collections;
 using System.Configuration;
 using System.Net.Mail;
 using System.Text;
+using DataPlatform.Shared.Helpers.Extensions;
 using RestSharp;
 
 namespace Cradle.KeepAlive.Service.Helpers
@@ -20,6 +21,7 @@ namespace Cradle.KeepAlive.Service.Helpers
                 if (key.StartsWith("endpoint/url"))
                 {
                     var status = _checkEndpoint.Invoke("", ConfigurationManager.AppSettings[key], "ping", Method.GET);
+                    this.Info(() => "Checked " + ConfigurationManager.AppSettings[key] + " - Status: " + status);
                     statusCheckList.Add(ConfigurationManager.AppSettings[key], (int)status);
                 }
             }
@@ -27,7 +29,7 @@ namespace Cradle.KeepAlive.Service.Helpers
             foreach (DictionaryEntry endPointStatus in statusCheckList)
             {
                 if ((int)endPointStatus.Value != 200) SendEmailAlert("API ALERT - " + endPointStatus.Key, 
-                                                                        "API Endpoint: " + endPointStatus.Key + "returned the follow status code: " + endPointStatus.Value);
+                                                                        "API Endpoint: " + endPointStatus.Key + " returned the follow status code: " + endPointStatus.Value);
             }
         }
 
