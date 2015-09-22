@@ -52,6 +52,12 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
                     return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
                 });
 
+            Mapper.CreateMap<IProvideDataFromMmCode, IEnumerable<IDataField>>()
+                .ConvertUsing(s =>
+                {
+                    var request = s.Request ?? new MmCodeRequest(new CarIdRequestField(""));
+                    return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
+                });
 
             Mapper.CreateMap<IProvideDataFromPCubedFicaVerfication, IEnumerable<IDataField>>()
                 .ConvertUsing(s => Enumerable.Empty<IDataField>());
