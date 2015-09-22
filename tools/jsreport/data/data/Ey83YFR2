@@ -1,0 +1,12 @@
+{
+    "name": "Sample data",
+    "dataJson": "{\r\n  \"books\": [ \r\n    {\"name\": \"A Tale of Two Cities\", \"author\": \"Charles Dickens\", \"sales\": 351},\r\n    {\"name\": \"The Lord of the Rings\", \"author\": \"J. R. R. Tolkien\", \"sales\": 125},\r\n    {\"name\": \"The Da Vinci Code\", \"author\": \"Dan Brown\", \"sales\": 255},\r\n    {\"name\": \"The Hobbit\", \"author\": \"J. R. R. Tolkien\", \"sales\": 99}\r\n  ]  \r\n}",
+    "shortid": "Ey83YFR2",
+    "creationDate": {
+        "$$date": 1441110677763
+    },
+    "modificationDate": {
+        "$$date": 1441110677763
+    },
+    "_id": "cR6EfLdWo2JnzY7d"
+}
