@@ -65,6 +65,8 @@ namespace UserManagement.Domain.Entities
 
         public virtual void SetEmail(string email)
         {
+            if (string.IsNullOrEmpty(email)) return;
+
             Emails = Emails ?? new HashSet<IndividualEmail>();
             var individualEmail = Emails.FirstOrDefault(x => x.Individual.Id == Id && (x.Email + "").Trim().ToLower() == (email + "").Trim().ToLower());
             if (individualEmail == null)
@@ -77,6 +79,8 @@ namespace UserManagement.Domain.Entities
 
         public virtual void SetContactNumber(string number, ContactNumberType type)
         {
+            if (string.IsNullOrEmpty(number)) return;
+
             ContactNumbers = ContactNumbers ?? new HashSet<IndividualContactNumber>();
             var individualContactNumber = ContactNumbers.FirstOrDefault(x => x.Individual != null && (x.Individual.Id == Id && (x.ContactNumber + "").Trim().ToLower() == (number + "").Trim().ToLower()));
             if (individualContactNumber == null)

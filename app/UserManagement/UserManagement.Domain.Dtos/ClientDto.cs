@@ -9,55 +9,46 @@ namespace UserManagement.Domain.Dtos
     public class ClientDto : NamedEntityDto
     {
         public Guid Id { get; set; }
-        [Required]
-        [Display(Name = "Client name is required")]
+        [Required, Display(Name = "Client name is required")]
         public string Name { get; set; }
         public string ClientAccountNumber { get; set; }
-        [Required]
-        [Display(Name = "Account owner is required")]
+        [Required, Display(Name = "Account owner is required")]
         public Guid AccountOwnerId { get; set; }
         public string AccountOwnerName { get; set; }
-        public string AccountOwnerLastName { get; set; }
+        public string AccountOwnerIndividualSurname { get; set; }
         public Guid accountownerlastname_primary_key { get; set; }
         public IEnumerable<Guid> Industries { get; set; }
         public Guid IndividualId { get; set; }
         [Phone(ErrorMessage = "Contact Info Contact Number is not a valid phone number")]
         public string IndividualContactNumber { get; set; }
-        [Required]
-        [Display(Name = "Commercial state is required")]
+        [Required, Display(Name = "Commercial state is required")]
         public Guid? CommercialStateId { get; set; }
         public string CommercialStateValue { get; set; }
         public Guid BillingId { get; set; }
         public string BillingCompanyRegistration { get; set; }
         public string BillingPastelId { get; set; }
         public string BillingVatNumber { get; set; }
-        [Required]
-        [Display(Name = "Legal entity name is required")]
+        [Required, Display(Name = "Legal entity name is required")]
         public string BillingLegalEntityName { get; set; }
-        [Required]
-        [Display(Name = "Account contact name is required")]
+        [Required, Display(Name = "Account contact name is required")]
         public string BillingAccountContactName { get; set; }
         [Phone(ErrorMessage = "Billing Info Contact Number is not a valid phone number")]
         public string BillingAccountContactNumber { get; set; }
         [EmailAddress]
         public string BillingAccountContactEmail { get; set; }
-        [Required]
-        [Display(Name = "Payment type is required")]
+        [Required, Display(Name = "Payment type is required")]
         public PaymentType BillingPaymentType { get; set; }
         public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingDebitOrderAccountOwner { get; set; }
         public string BillingDebitOrderAccountNumber { get; set; }
         public ContactNumberType ContactNumberDetailContactNumberType { get; set; }
-        [Required]
-        [Display(Name = "Contact person name is required")]
+        [Required, Display(Name = "Contact person name is required")]
         public string IndividualName { get; set; }
-        [Required]
-        [Display(Name = "Contact person surname is required")]
+        [Required, Display(Name = "Contact person surname is required")]
         public string IndividualSurname { get; set; }
-        [Required]
-        [Display(Name = "Contact person ID Number is required")]
+        [Required, Display(Name = "Contact person ID Number is required")]
         public string IndividualIdNumber { get; set; }
-        [EmailAddress]
+        [Required, EmailAddress]
         public string IndividualEmail { get; set; }
         public Guid PhysicalAddressId { get; set; }
         public string PhysicalAddressType { get; set; }
