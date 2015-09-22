@@ -110,6 +110,7 @@ namespace UserManagement.Domain.Entities
 
         public virtual void SetAddress(Address address, AddressType type)
         {
+            Addresses = Addresses ?? new HashSet<CustomerAddress>();
             var customerAddress = Addresses.FirstOrDefault(x => Equals(x.Address, address));
             if (customerAddress == null)
             {
