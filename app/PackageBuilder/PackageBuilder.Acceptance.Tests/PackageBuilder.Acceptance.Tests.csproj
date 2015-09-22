@@ -194,10 +194,6 @@
     <Compile Include="AutoMapper\DataProviders\when_mapping_an_override_to_a_single_data_provider.cs" />
     <Compile Include="AutoMapper\Packages\when_mapping_to_package.cs" />
     <Compile Include="AutoMapper\Packages\when_mapping_to_package_dto.cs" />
-    <Compile Include="Entities\DataProviders\Read\when_persisting_a_data_provider.cs" />
-    <Compile Include="Entities\Industries\Read\when_persisting_a_industry.cs" />
-    <Compile Include="Entities\Packages\Read\when_persisting_a_package.cs" />
-    <Compile Include="Entities\States\Read\when_persisting_a_state.cs" />
     <Compile Include="Fakes\TestBootstrapper.cs" />
     <Compile Include="Handlers\CommandHandlers\CommandStore\when_storing_a_command.cs" />
     <Compile Include="Handlers\CommandHandlers\when_amending_data_provider_structure.cs" />
@@ -234,6 +230,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\" />
+    <Folder Include="Entities\DataProviders\Read\" />
+    <Folder Include="Entities\Industries\Read\" />
+    <Folder Include="Entities\Packages\Read\" />
+    <Folder Include="Entities\States\Read\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
