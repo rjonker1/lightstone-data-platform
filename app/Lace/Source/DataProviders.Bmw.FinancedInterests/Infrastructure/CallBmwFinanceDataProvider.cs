@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
         {
             try
             {
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(FinancedInterestsConfiguration.Database)
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(IntegrationBmwConfiguration.Database)
                     .ForDatabaseType(), new {_dataProvider});
 
                 _bmwFinances =
@@ -47,7 +47,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
                         _dataProvider.GetRequest<IAmBmwFinanceRequest>(), response).ToList();
 
                 _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(FinancedInterestsConfiguration.Database)
+                    new ConnectionTypeIdentifier(IntegrationBmwConfiguration.Database)
                         .ForDatabaseType(), new {_bmwFinances});
 
                 TransformResponse(response);

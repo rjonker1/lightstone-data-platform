@@ -5,11 +5,11 @@ namespace Lace.Toolbox.Database.Models
 {
     public class BmwFinance : IAmCachable
     {
-        public const string SelectAll = @"SELECT * FROM BmwFinance";
+        public const string SelectAll = @"SELECT * FROM Finances";
 
-        public const string SelectWithAccountNumber = @"SELECT* FROM BmwFinance WHERE DealReference = @AccountNumber";
-        public const string SelectWithVinNumber = @"SELECT* FROM BmwFinance WHERE Chassis = @VinNumber";
-        public const string SelectWithLicenceNumber = @"SELECT* FROM BmwFinance WHERE RegNumber = @LicenceNumber";
+        public const string SelectWithAccountNumber = @"SELECT * FROM Finances WHERE DealReference = @AccountNumber";
+        public const string SelectWithVinNumber = @"SELECT * FROM Finances WHERE Chassis = @VinNumber";
+        public const string SelectWithLicenceNumber = @"SELECT* FROM Finances WHERE RegistrationNumber = @LicenceNumber";
 
         public BmwFinance()
         {
@@ -17,7 +17,7 @@ namespace Lace.Toolbox.Database.Models
         }
 
         public BmwFinance(string financeHouse, decimal dealReference, DateTime startDate, DateTime expireDate, string chassis,
-            string engine, string registrationNumber, string description, int registrationYear, int productCategory, string dealStatus)
+            string engine, string registrationNumber, string description, int registrationYear, string productCategory, string dealStatus)
         {
             FinanceHouse = financeHouse;
             DealReference = dealReference;
@@ -47,7 +47,7 @@ namespace Lace.Toolbox.Database.Models
         public string RegistrationNumber { get; set; }
         public string Description { get; set; }
         public int RegistrationYear { get; set; }
-        public int ProductCategory { get; set; }
+        public string ProductCategory { get; set; }
         public string DealStatus { get; set; }
     }
 }
