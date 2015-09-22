@@ -158,7 +158,7 @@ namespace PackageBuilder.Api.Modules
 
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
-                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, true);
+                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, false);
 
                 // Filter responses for cleaner api payload
                 this.Info(() => "Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
