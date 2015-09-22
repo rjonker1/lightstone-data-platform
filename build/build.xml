@@ -491,6 +491,8 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.MMCode.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.MMCode.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.dll" to="lib\net45"/>
@@ -566,6 +568,8 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.MMCode.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.MMCode.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.dll" to="lib\net45"/>
