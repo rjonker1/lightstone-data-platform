@@ -53,6 +53,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
             get { return base.Version; }
             internal set { base.Version = value; }
         }
+        [DataMember]
         public bool RequiresConsent { get; internal set; }
 
         private DataProvider(Guid id)
@@ -61,9 +62,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         }
 
         //Default constructor for deserialization
-        public DataProvider()
-        {
-        }
+        public DataProvider() { }
 
         public DataProvider(Guid id, DataProviderName name, string description, decimal costOfSale, Type responseType, bool fieldLevelCostPriceOverride, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
             : this(id)
