@@ -42,6 +42,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
                         return "";
                     case DataProviderName.BMWFSTitle_E_DB:
                         return "lace/source/database/financed-interests";
+                    case DataProviderName.MMCode_E_DB:
+                        return "lace/source/database/auto-car-stats";
                     default:
                         return null;
                 }

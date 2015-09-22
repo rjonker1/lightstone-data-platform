@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
+using PackageBuilder.Domain.Requests;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Requests.Fields;
@@ -57,6 +58,9 @@ namespace PackageBuilder.Domain.Entities.Requests
                 },
                 {
                     DataProviderName.BMWFSTitle_E_DB, (requests, user, packageName) => new BmwFinanceRequest(requests)
+                },
+                {
+                    DataProviderName.MMCode_E_DB, (requests, user, packageName) => new MmCodeRequest(requests)
                 }
             };
 
@@ -79,6 +83,16 @@ namespace PackageBuilder.Domain.Entities.Requests
     public class RgtRequest : IAmRgtRequest
     {
         public RgtRequest(ICollection<IAmRequestField> requestFields)
+        {
+            CarId = requestFields.GetRequestField<IAmCarIdRequestField>();
+        }
+
+        public IAmCarIdRequestField CarId { get; private set; }
+    }
+    
+    public class MmCodeRequest : IAmMmCodeRequest
+    {
+        public MmCodeRequest(ICollection<IAmRequestField> requestFields)
         {
             CarId = requestFields.GetRequestField<IAmCarIdRequestField>();
         }

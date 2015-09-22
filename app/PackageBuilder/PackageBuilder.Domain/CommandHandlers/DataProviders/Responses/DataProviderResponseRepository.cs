@@ -50,6 +50,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return new LightstoneConsumerResponse().EmptyLightstoneConsumerSpecifications();
                     case DataProviderName.BMWFSTitle_E_DB:
                         return new BmwFinanceResponse().EmptyBmwFinanceResponse();
+                    case DataProviderName.MMCode_E_DB:
+                        return new MMCodeResponse();
                     default:
                         return null;
                 }
