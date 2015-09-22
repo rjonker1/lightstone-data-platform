@@ -74,6 +74,9 @@ namespace UserManagement.Domain.Entities
 
         public virtual void SetAddress(Address address, AddressType type)
         {
+            if (address == null) return;
+
+            Addresses = Addresses ?? new HashSet<ClientAddress>();
             var customerAddress = Addresses.FirstOrDefault(x => Equals(x.Address, address));
             if (customerAddress == null)
             {

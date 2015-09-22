@@ -171,9 +171,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             if (DataProviders == null)
                 return null;
 
-            var dataProviders = Enumerable.Empty<IDataProvider>();
+            var dataProviders = DataProviders;
             if (!hasConsent)
-                dataProviders = DataProviders = DataProviders.Where(dp => !dp.RequiresConsent);
+                dataProviders = DataProviders.Where(dp => !dp.RequiresConsent);
 
             dataProviders = dataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
             var laceProviders = new List<IAmDataProvider>();

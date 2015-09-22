@@ -11,7 +11,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
         {
             return new Lace.Domain.Core.Entities.BmwFinanceResponse(new List<IRespondWithBmwFinance>()
             {
-                new BmwFinanceRecord("",0.0M,DateTime.MinValue, DateTime.MinValue, "","","","",0,0,"")
+                new BmwFinanceRecord("",0.0M,DateTime.MinValue, DateTime.MinValue, "","","","",0,"","")
             });
         }
     }

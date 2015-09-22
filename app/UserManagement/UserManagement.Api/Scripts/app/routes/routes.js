@@ -566,7 +566,7 @@ function initializePlugins() {
                 success: function (data) {
                     response($.map(data.dto, function (item) {
                         return {
-                            label: item.lastName,
+                            label: item.individualSurname,
                             value: item.id
                         };
                     }));
@@ -645,13 +645,13 @@ function initializePlugins() {
             lang: 'en',
             //bind_to: 'select',
             primary_key: 'id',
-            field: 'lastName',
+            field: 'individualSurname',
             sub_info: true,
             sub_as: {
                 firstName: 'First Name',
                 idNumber: 'ID Number'
             },
-            show_field: 'firstName, idNumber',
+            show_field: 'individualName, individualIdNumber',
             //select_only: true,
             //init_record: [accountOwnerUserId],
             per_page: 10,

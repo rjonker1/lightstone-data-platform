@@ -53,7 +53,7 @@
 
             <label class="control-label col-lg-4"><span class="required-field">*</span> Account Owner</label>
             <div class="input-group col-lg-2">
-                @Html.TextBoxFor(x => x.AccountOwnerLastName, new { @class = "form-control", placeholder = "", id = "AccountOwnerName" })
+                @Html.TextBoxFor(x => x.AccountOwnerIndividualSurname, new { @class = "form-control", placeholder = "", id = "AccountOwnerName" })
                 @Html.HiddenFor(x => x.AccountOwnerId, new { id = "AccountOwnerId" })
             </div>
             <div class="col-lg-6">

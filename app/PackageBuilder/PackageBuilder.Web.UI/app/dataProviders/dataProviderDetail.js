@@ -166,18 +166,9 @@
             var parentField = filterDataFields($scope.dataProvider.response[0].dataFields, 'namespace', parentFieldName)[0];
             if (parentField == null)
                 return;
-
-            //var selectedIndustries = [];
-            //Enumerable.From(parentField.dataFields)
-            //    .SelectMany(function(x) { return x.industries; })
-            //    .ToLookup(function(x) { return x.isSelected; })
-            //    .ToEnumerable()
-            //    .ForEach(function(x) {
-            //        if (x.Key() == false)
-            //            unselectedIndustries.push(x.Distinct("$.name"));
-            //        if (x.Key() == true)
-            //            selectedIndustries.push(x.Distinct("$.name"));
-            //    });
+            
+            if (parentField.dataFields.length == 0)
+                return;
 
             var selectedIndustries = Enumerable.From(parentField.dataFields)
                 .SelectMany(function(x) { return x.industries; })
@@ -193,13 +184,6 @@
                 if (industry)
                     parentIndustry.isSelected = industry.isSelected;
             });
-
-            //Enumerable.From(dataField.industries).ForEach(function (ind) {
-            //    var industry = Enumerable.From(parentField.industries).Where(function (i) {
-            //        return i.id == ind.id;
-            //    }).FirstOrDefault();
-            //    industry.isSelected = ind.isSelected;
-            //});
 
             if (parentField.namespace != parentFieldNames[0])
                 selectParentIndustries(parentField);

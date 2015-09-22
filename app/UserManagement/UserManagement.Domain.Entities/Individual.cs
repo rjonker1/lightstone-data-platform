@@ -65,30 +65,30 @@ namespace UserManagement.Domain.Entities
 
         public virtual void SetEmail(string email)
         {
-            if (Emails != null)
+            if (string.IsNullOrEmpty(email)) return;
+
+            Emails = Emails ?? new HashSet<IndividualEmail>();
+            var individualEmail = Emails.FirstOrDefault(x => x.Individual.Id == Id && (x.Email + "").Trim().ToLower() == (email + "").Trim().ToLower());
+            if (individualEmail == null)
             {
-                var individualEmail = Emails.FirstOrDefault(x => x.Individual.Id == Id && (x.Email + "").Trim().ToLower() == (email + "").Trim().ToLower());
-                if (individualEmail == null)
-                {
-                    individualEmail = new IndividualEmail(this, email);
-                    Emails.Add(individualEmail);
-                }
-                individualEmail.Email = email;
+                individualEmail = new IndividualEmail(this, email);
+                Emails.Add(individualEmail);
             }
+            individualEmail.Email = email;
         }
 
         public virtual void SetContactNumber(string number, ContactNumberType type)
         {
-            if (ContactNumbers != null)
+            if (string.IsNullOrEmpty(number)) return;
+
+            ContactNumbers = ContactNumbers ?? new HashSet<IndividualContactNumber>();
+            var individualContactNumber = ContactNumbers.FirstOrDefault(x => x.Individual != null && (x.Individual.Id == Id && (x.ContactNumber + "").Trim().ToLower() == (number + "").Trim().ToLower()));
+            if (individualContactNumber == null)
             {
-                var individualContactNumber = ContactNumbers.FirstOrDefault(x => x.Individual != null && (x.Individual.Id == Id && (x.ContactNumber + "").Trim().ToLower() == (number + "").Trim().ToLower()));
-                if (individualContactNumber == null)
-                {
-                    individualContactNumber = new IndividualContactNumber(this, number, type);
-                    ContactNumbers.Add(individualContactNumber);
-                }
-                individualContactNumber.ContactNumber = number;
+                individualContactNumber = new IndividualContactNumber(this, number, type);
+                ContactNumbers.Add(individualContactNumber);
             }
+            individualContactNumber.ContactNumber = number;
         }
     }
 }

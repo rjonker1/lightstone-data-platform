@@ -7,7 +7,7 @@ using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestHelper.Helpers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests.Entities.Packages.Read
+namespace PackageBuilder.Acceptance.Tests.PersistenceSpecifications.Packages.Read
 {
     public class when_persisting_a_package : TestDataBaseHelper
     {

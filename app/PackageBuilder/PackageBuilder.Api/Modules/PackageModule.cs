@@ -125,14 +125,14 @@ namespace PackageBuilder.Api.Modules
                 Response.AsJson(
                     new
                     {
-                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version)) }
+                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
                     });
 
             Get["/Packages/{id:guid}"] = parameters =>
                 Response.AsJson(
                     new
                     {
-                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version)) }
+                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
                     });
 
             Post["/Packages/Execute"] = parameters =>
@@ -158,7 +158,7 @@ namespace PackageBuilder.Api.Modules
 
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
-                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, false);
+                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent);
 
                 // Filter responses for cleaner api payload
                 this.Info(() => "Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
