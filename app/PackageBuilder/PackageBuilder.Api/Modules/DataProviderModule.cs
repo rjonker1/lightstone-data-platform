@@ -90,7 +90,7 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProviders/{id}/{version}"] = _ =>
             {
-                var dataProvider = Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id, _.version));
+                var dataProvider = Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id));
                 return Response.AsJson(new { Response = new[] { dataProvider } });
             };
 

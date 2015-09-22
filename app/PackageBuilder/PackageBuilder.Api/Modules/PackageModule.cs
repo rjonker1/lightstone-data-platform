@@ -125,14 +125,14 @@ namespace PackageBuilder.Api.Modules
                 Response.AsJson(
                     new
                     {
-                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version)) }
+                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
                     });
 
             Get["/Packages/{id:guid}"] = parameters =>
                 Response.AsJson(
                     new
                     {
-                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version)) }
+                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
                     });
 
             Post["/Packages/Execute"] = parameters =>
