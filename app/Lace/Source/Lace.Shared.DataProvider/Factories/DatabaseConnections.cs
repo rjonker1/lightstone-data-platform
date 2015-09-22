@@ -21,7 +21,7 @@ namespace Lace.Toolbox.Database.Factories
 
         public static IDbConnection FinacedInterestsConnection
         {
-            get { return _financedInterestsConnection ?? new SqlConnection(FinancedInterestsConfiguration.Database); }
+            get { return _financedInterestsConnection ?? new SqlConnection(IntegrationBmwConfiguration.Database); }
         }
     }
 }

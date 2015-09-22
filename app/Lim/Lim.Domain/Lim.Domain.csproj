@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Base\AbstractAuditor.cs" />
     <Compile Include="Base\AbstractFailFactory.cs" />
+    <Compile Include="Base\AbstractNotificationFactory.cs" />
     <Compile Include="Base\AbstractWatcherFactory.cs" />
     <Compile Include="Base\AbstractFetchFactory.cs" />
     <Compile Include="Base\AbstractBackupFactory.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Base\AbstractPushFactory.cs" />
     <Compile Include="Commands\BackupFile.cs" />
     <Compile Include="Commands\FailFile.cs" />
+    <Compile Include="Commands\NotifiyFile.cs" />
     <Compile Include="Commands\ReadFile.cs" />
     <Compile Include="Dto\ClientDto.cs" />
     <Compile Include="Dto\ConfigurationDto.cs" />

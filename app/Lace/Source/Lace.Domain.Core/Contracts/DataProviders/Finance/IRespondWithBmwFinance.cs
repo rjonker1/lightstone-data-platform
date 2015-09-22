@@ -13,7 +13,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Finance
         string RegistrationNumber { get; }
         string Description { get; }
         int RegistrationYear { get; }
-        int ProductCategory { get; }
+        string ProductCategory { get; }
         string DealStatus { get; }
     }
 }

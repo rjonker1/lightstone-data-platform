@@ -33,9 +33,9 @@
         public static readonly string Database = ConfigurationReader.ReadConnectionString("lace/source/database/auto-car-stats");
     }
 
-    public static class FinancedInterestsConfiguration
+    public static class IntegrationBmwConfiguration
     {
-        public static readonly string Database = ConfigurationReader.ReadConnectionString("lace/source/database/financed-interests");
+        public static readonly string Database = ConfigurationReader.ReadConnectionString("lace/source/database/integrations/bmw");
     }
 
 

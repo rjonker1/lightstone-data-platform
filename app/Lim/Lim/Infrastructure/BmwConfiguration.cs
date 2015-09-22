@@ -58,5 +58,30 @@
         {
             get { return GetAppSetting("lim/schedule/bmw/fileExtensions", @"*.zip"); }
         }
+
+        public string EmailTo
+        {
+            get { return GetAppSetting("lim/schedule/bmw/email/to", "rudi@customapp.co.za"); }
+        }
+
+        public string EmailFrom
+        {
+            get { return GetAppSetting("lim/schedule/bmw/email/from", "rudi@customapp.co.za"); }
+        }
+
+        public string EmailSubject
+        {
+            get { return GetAppSetting("lim/schedule/bmw/email/subject", "LS Auto Integration Notification: BMW Data File"); }
+        }
+
+        public string EmailCc
+        {
+            get { return GetAppSetting("lim/schedule/bmw/email/cc", "rudi@customapp.co.za"); }
+        }
+
+        public string EmailNotificationTemplate
+        {
+            get { return GetAppSetting("lim/schedule/bmw/email/notification/template", "<html><head><title></title></head><body><h1>Good Day, </h1><p>{0}</p><p></html>"); }
+        }
     }
 }

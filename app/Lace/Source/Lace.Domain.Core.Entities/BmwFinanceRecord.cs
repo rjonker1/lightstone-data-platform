@@ -13,7 +13,7 @@ namespace Lace.Domain.Core.Entities
         }
 
         public BmwFinanceRecord(string financeHouse, decimal dealReference, DateTime startDate, DateTime expireDate, string chassis,
-            string engine,string registrationNumber, string description, int registrationYear, int productCategory, string dealStatus)
+            string engine,string registrationNumber, string description, int registrationYear, string productCategory, string dealStatus)
         {
             FinanceHouse = financeHouse;
             DealReference = dealReference;
@@ -47,7 +47,7 @@ namespace Lace.Domain.Core.Entities
         [DataMember]
         public int RegistrationYear { get; private set; }
         [DataMember]
-        public int ProductCategory { get; private set; }
+        public string ProductCategory { get; private set; }
         [DataMember]
         public string DealStatus { get; private set; }
     }

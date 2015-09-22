@@ -5,6 +5,7 @@ using Common.Logging;
 using Lim.Core;
 using Toolbox.Bmw.Entities.Factory;
 using Toolbox.Bmw.Factories;
+using Toolbox.Bmw.Notify;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -36,6 +37,11 @@ namespace Lim.Schedule.Service.Installers
                .BasedOn(typeof(IWatch<>))
                .WithServiceAllInterfaces()
                .LifestyleTransient());
+
+            container.Register(Classes.FromAssemblyContaining<FileNotificationFactory>()
+              .BasedOn(typeof(INotify<>))
+              .WithServiceAllInterfaces()
+              .LifestyleTransient());
 
             _log.Info("BMW Installers Installed");
         }
