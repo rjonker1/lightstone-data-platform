@@ -5,7 +5,7 @@ using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests.Entities.States.Read
+namespace PackageBuilder.Acceptance.Tests.PersistenceSpecifications.States.Read
 {
     public class when_persisting_a_state : TestDataBaseHelper
     {

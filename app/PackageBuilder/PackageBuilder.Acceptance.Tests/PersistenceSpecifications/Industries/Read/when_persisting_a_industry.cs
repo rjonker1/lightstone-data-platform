@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests.Entities.Industries.Read
+namespace PackageBuilder.Acceptance.Tests.PersistenceSpecifications.Industries.Read
 {
     public class when_persisting_a_industry : TestDataBaseHelper
     {
