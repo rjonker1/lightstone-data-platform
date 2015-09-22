@@ -103,6 +103,7 @@
     <Compile Include="NEventStore\MessageAdapter.cs" />
     <Compile Include="NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="NHibernate\MappingOverrides\CommandMappingOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\DataProviderMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\PackageMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RavenDB\Indexes\IndexAllIndustries.cs" />
