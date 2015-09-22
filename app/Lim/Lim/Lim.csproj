@@ -56,6 +56,7 @@
     <Compile Include="Core\IFetch.cs" />
     <Compile Include="Core\IInitialize.cs" />
     <Compile Include="Core\IIntegrate.cs" />
+    <Compile Include="Core\INotify.cs" />
     <Compile Include="Core\IPull.cs" />
     <Compile Include="Core\IPush.cs" />
     <Compile Include="Core\IRepository.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Core\IRead.cs" />
     <Compile Include="Core\IWatch.cs" />
     <Compile Include="Enums\Integrations.cs" />
+    <Compile Include="Enums\Status.cs" />
     <Compile Include="Enums\Times.cs" />
     <Compile Include="Infrastructure\AbstractConfigurationReader.cs" />
     <Compile Include="Infrastructure\BmwConfiguration.cs" />

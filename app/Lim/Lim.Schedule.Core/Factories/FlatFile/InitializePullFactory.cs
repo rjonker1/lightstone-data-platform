@@ -8,6 +8,8 @@ using Lim.Domain.Dto;
 using Lim.Enums;
 using Lim.Schedule.Core.Commands;
 using Toolbox.Bmw.Factories;
+using Toolbox.Bmw.Notify;
+using Toolbox.Emailing.Smtp;
 
 namespace Lim.Schedule.Core.Factories.FlatFile
 {
@@ -45,7 +47,7 @@ namespace Lim.Schedule.Core.Factories.FlatFile
         {
             {
                 PullClient.Bmw, () => new WatchForFinanceDataFileFactory(new SaveFinanceData(), new ReadFinanceDataFileFactory(),
-                    new BackupFinanceDataFileFactory(), new FailFinanceDataFileFactory())
+                    new BackupFinanceDataFileFactory(), new FailFinanceDataFileFactory(), new FileNotificationFactory(new SmtpMailDispatcher(), new HtmlMailMessageBuilder()))
             }
         };
     }

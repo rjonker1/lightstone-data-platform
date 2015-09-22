@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Core;
 using Lim.Schedule.Service.Resolvers;
+using Toolbox.Emailing.Domain;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -25,6 +26,9 @@ namespace Lim.Schedule.Service.Installers
             container.Register(Component.For<IPull>().ImplementedBy<PullResolver>());
             container.Register(Component.For<IPush>().ImplementedBy<PushResolver>());
             container.Register(Component.For<IAudit>().ImplementedBy<AuditorResolver>());
+            container.Register(Component.For<INotify>().ImplementedBy<NotifyFactoryResolver>());
+            container.Register(Component.For<IBuildMessage>().ImplementedBy<MessageBuilderResolver>());
+            container.Register(Component.For<IDispatchMail>().ImplementedBy<DispatchMailResolver>());
 
             _log.Info("Installed Factories");
         }
