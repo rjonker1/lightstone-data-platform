@@ -5,7 +5,7 @@ using PackageBuilder.Domain.Entities.DataFields.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
 {
-    public class VehicleValuationResponseMap : ICreateAutoMapperMaps
+    public class LightstoneAutoVehicleValuationResponseMap : ICreateAutoMapperMaps
     {
         public void CreateMaps()
         {
