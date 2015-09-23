@@ -42,10 +42,10 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                         {
                             var fileName = dto.Data.ContractStatements.Select(x => x.ContractName);
                             CreateFile(dto, path, fileName.FirstOrDefault() + " - Contract Statement.pdf");
-                        }
 
-                        //Send Email
-                        _emailPdfNotificationsWithAttachment.Send(dto);
+                            //Send Email
+                            _emailPdfNotificationsWithAttachment.Send(dto);
+                        }
                     }
 
                     if (message.Body.ReportType.Equals("pastel")) CreateFile(dto, path, "Pastel.csv");
