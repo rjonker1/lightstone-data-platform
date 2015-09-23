@@ -236,6 +236,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\" />
+    <Folder Include="Entities\DataProviders\Read\" />
+    <Folder Include="Entities\Industries\Read\" />
+    <Folder Include="Entities\Packages\Read\" />
+    <Folder Include="Entities\States\Read\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
