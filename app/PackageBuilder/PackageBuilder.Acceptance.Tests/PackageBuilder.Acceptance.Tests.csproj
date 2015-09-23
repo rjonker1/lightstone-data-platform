@@ -90,9 +90,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1694, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1694\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1706, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1706\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.1692\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -194,10 +194,12 @@
     <Compile Include="AutoMapper\DataProviders\when_mapping_an_override_to_a_single_data_provider.cs" />
     <Compile Include="AutoMapper\Packages\when_mapping_to_package.cs" />
     <Compile Include="AutoMapper\Packages\when_mapping_to_package_dto.cs" />
-    <Compile Include="Entities\DataProviders\Read\when_persisting_a_data_provider.cs" />
-    <Compile Include="Entities\Industries\Read\when_persisting_a_industry.cs" />
-    <Compile Include="Entities\Packages\Read\when_persisting_a_package.cs" />
-    <Compile Include="Entities\States\Read\when_persisting_a_state.cs" />
+    <Compile Include="Bases\BasePackageTest.cs" />
+    <Compile Include="Modules\Packages\when_creating_package.cs" />
+    <Compile Include="PersistenceSpecifications\DataProviders\Read\when_persisting_a_data_provider.cs" />
+    <Compile Include="PersistenceSpecifications\Industries\Read\when_persisting_a_industry.cs" />
+    <Compile Include="PersistenceSpecifications\Packages\Read\when_persisting_a_package.cs" />
+    <Compile Include="PersistenceSpecifications\States\Read\when_persisting_a_state.cs" />
     <Compile Include="Fakes\TestBootstrapper.cs" />
     <Compile Include="Handlers\CommandHandlers\CommandStore\when_storing_a_command.cs" />
     <Compile Include="Handlers\CommandHandlers\when_amending_data_provider_structure.cs" />
@@ -237,6 +239,10 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PackageBuilder.Api.Routes\PackageBuilder.Api.Routes.csproj">
+      <Project>{679326c1-9f76-415c-98e0-10faa6adb5f7}</Project>
+      <Name>PackageBuilder.Api.Routes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Api\PackageBuilder.Api.csproj">
       <Project>{f82044a3-e321-49f4-91bd-878561fe54b7}</Project>
       <Name>PackageBuilder.Api</Name>
