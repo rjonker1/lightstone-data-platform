@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Nancy.Extensions;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities;
@@ -38,7 +39,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
         protected override IEnumerable<DataProvider> ConvertCore(IEnumerable<IDataProviderOverride> source)
         {
             var sourceCompare = source.Select(o => o.Id);
-            var newDps = _readRepository.Where(x => !sourceCompare.Contains(x.DataProviderId));
+            var newDps = _readRepository.Where(x => !sourceCompare.Contains(x.DataProviderId)).DistinctBy(x => x.DataProviderId);
 
             var list = new List<DataProvider>();
             list.AddRange(DataProviders(source));
