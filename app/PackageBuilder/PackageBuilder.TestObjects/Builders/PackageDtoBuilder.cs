@@ -26,7 +26,7 @@ namespace PackageBuilder.TestObjects.Builders
         {
             return new PackageDto
             {
-                Id =_id,
+                Id = _id,
                 Name = _name,
                 Description = _description,
                 Notes = _notes,

@@ -18,6 +18,7 @@ using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Security;
+using PackageBuilder.Api.Routes;
 using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
@@ -31,7 +32,6 @@ using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
-using RestSharp;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
@@ -52,7 +52,7 @@ namespace PackageBuilder.Api.Modules
             //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
-            Get["/Packages/{showAll?false}"] = _ =>
+            Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
             {
                 return _.showAll
                     ? Response.AsJson(
@@ -62,7 +62,7 @@ namespace PackageBuilder.Api.Modules
                     : Response.AsJson(readRepo.Where(x => !x.IsDeleted));
             };
 
-            Get["/PackageLookup/{industryIds?}"] = parameters =>
+            Get[PackageBuilderApi.PackageRoutes.RequestLookup.ApiRoute] = parameters =>
             {
                 var filter = (string)Context.Request.Query["q_word[]"].Value;
                 var pageIndex = 0;
@@ -121,21 +121,14 @@ namespace PackageBuilder.Api.Modules
                         });
             };
 
-            Get["/Packages/{id:guid}/{version:int}"] = parameters =>
+            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute] = parameters =>
                 Response.AsJson(
                     new
                     {
                         Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
                     });
 
-            Get["/Packages/{id:guid}"] = parameters =>
-                Response.AsJson(
-                    new
-                    {
-                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
-                    });
-
-            Post["/Packages/Execute"] = parameters =>
+            Post[PackageBuilderApi.PackageRoutes.Execute.ApiRoute] = parameters =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
                 this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
@@ -173,10 +166,10 @@ namespace PackageBuilder.Api.Modules
                 return filteredResponse;
             };
 
-            Post["/Packages"] = parameters =>
+            Post[PackageBuilderApi.PackageRoutes.ProcessCreate.ApiRoute] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
-                dto.Id = Guid.NewGuid();
+                dto.Id = dto.Id == new Guid() ? Guid.NewGuid() : dto.Id; // Required for acceptance tests where we specify the Id
 
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
 
@@ -192,7 +185,7 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success" });
             };
 
-            Put["/Packages/{id}"] = parameters =>
+            Put[PackageBuilderApi.PackageRoutes.ProcessUpdate.ApiRoute] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
                 var dProviders =
@@ -240,7 +233,7 @@ namespace PackageBuilder.Api.Modules
                         });
             };
 
-            Delete["/Packages/Delete/{id}"] = parameters =>
+            Delete[PackageBuilderApi.PackageRoutes.ProcessDelete.ApiRoute] = parameters =>
             {
                 this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 

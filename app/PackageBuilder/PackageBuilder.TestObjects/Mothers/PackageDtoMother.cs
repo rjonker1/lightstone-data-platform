@@ -24,5 +24,19 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
+        public static PackageDto Internal(Guid id)
+        {
+            return new PackageDtoBuilder()
+                .With(id)
+                .With("Internal", "Description", "Notes")
+                .With(StateMother.Published, "Owner")
+                .With(1)
+                .With(0.1m)
+                .With(10m, 20m)
+                .With(DateTime.UtcNow)
+                .With(new IndustryDto {Id = Guid.NewGuid(), Name = "Finance"})
+                .With(DataProviderDtoMother.LightstoneAuto, DataProviderDtoMother.Rgt, DataProviderDtoMother.RgtVin)
+                .Build();
+        }
     }
 }
