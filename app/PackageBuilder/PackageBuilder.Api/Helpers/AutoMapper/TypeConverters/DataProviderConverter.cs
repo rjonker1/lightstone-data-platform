@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
@@ -8,13 +10,15 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class DataProviderConverter : TypeConverter<IDataProviderOverride, DataProvider>
+    public class DataProviderConverter : TypeConverter<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>
     {
-        private readonly INEventStoreRepository<DataProvider> _repository;
+        private readonly IRepository<Domain.Entities.DataProviders.Read.DataProvider> _readRepository;
+        private readonly INEventStoreRepository<DataProvider> _writeRepository;
 
-        public DataProviderConverter(INEventStoreRepository<DataProvider> repository)
+        public DataProviderConverter(IRepository<Domain.Entities.DataProviders.Read.DataProvider> readRepository, INEventStoreRepository<DataProvider> writeRepository)
         {
-            _repository = repository;
+            _readRepository = readRepository;
+            _writeRepository = writeRepository;
         }
 
         /// <summary>
@@ -24,20 +28,43 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
         /// If a package is created with the 1st initial version of the IVID data provider and 2 months from now the package is 
         /// edited, this method will map and make the latest structure or changes made to the IVID data provider available to 
         /// the package.
+        /// 
+        /// Note: For NewDps vs source comparision, older packages created before new imported DPs will always result in NewDps being
+        /// populated by 'n' number of dataprovider depending on 'n' imported. Not applicable to packages created after new DPs imported.
+        /// 
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        protected override DataProvider ConvertCore(IDataProviderOverride source)
+        protected override IEnumerable<DataProvider> ConvertCore(IEnumerable<IDataProviderOverride> source)
         {
-            var dataProvider = _repository.GetById(source.Id);
+            var sourceCompare = source.Select(o => o.Id);
+            var newDps = _readRepository.Where(x => !sourceCompare.Contains(x.DataProviderId));
 
-            dataProvider.RequestFields.ToNamespace().ToList().Cast<DataField>()
-                               .RecursiveForEach(x => Mapper.Map(source.RequestFieldOverrides.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault(), x));
+            var list = new List<DataProvider>();
+            list.AddRange(DataProviders(source));
+            list.AddRange(newDps.Select(x => Mapper.Map<IDataProvider, DataProvider>(_writeRepository.GetById(x.DataProviderId, false))));
 
-            dataProvider.DataFields.ToNamespace().ToList().Cast<DataField>()
-                               .RecursiveForEach(x => Mapper.Map(source.DataFieldOverrides.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace).FirstOrDefault(), x));
+            return list;
+        }
 
-            return dataProvider;
+        private IEnumerable<DataProvider> DataProviders(IEnumerable<IDataProviderOverride> source)
+        {
+            foreach (var dataProviderOverride in source)
+            {
+                var dataProvider = _writeRepository.GetById(dataProviderOverride.Id);
+
+                dataProvider.RequestFields.ToNamespace().ToList().Cast<DataField>()
+                    .RecursiveForEach(x => Mapper.Map(dataProviderOverride.RequestFieldOverrides.ToNamespace()
+                                    .Filter(f => x != null && f.Namespace == x.Namespace)
+                                    .FirstOrDefault(), x));
+
+                dataProvider.DataFields.ToNamespace().ToList().Cast<DataField>()
+                    .RecursiveForEach(x => Mapper.Map(dataProviderOverride.DataFieldOverrides.ToNamespace()
+                                    .Filter(f => x != null && f.Namespace == x.Namespace)
+                                    .FirstOrDefault(), x));
+
+                yield return dataProvider;
+            }
         }
     }
 }

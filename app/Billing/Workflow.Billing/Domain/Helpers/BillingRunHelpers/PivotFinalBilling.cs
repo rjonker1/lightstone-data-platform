@@ -236,8 +236,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         if (accounts.Any(x => x.AccountNumber == transaction.AccountNumber))
                         {
+                            var batchTotal = Math.Round(((_finalBillingRepository.Where(x => x.AccountNumber == account.AccountNumber).Sum(x => x.Package.PackageRecommendedPrice)) * 100), 2);
+
                             var debitOrderRecord = _reportBuilder.BuilDebitOrderRecord(account.AccountNumber, transaction.CustomerName, "1", account.BankAccountName,
-                                                                                        account.BillingDebitOrderAccountNumber, account.BillingDebitOrderBranchCode, "0", "0");
+                                                                                        account.BillingDebitOrderAccountNumber, account.BillingDebitOrderBranchCode, "0", batchTotal.ToString());
 
                             if ((debitOrderRecord.AccountName != null) && (debitOrderRecord.BankAccountName != null)
                                 && (debitOrderRecord.BranchCode != "0") && (debitOrderRecord.BankAccountNumber != null))
