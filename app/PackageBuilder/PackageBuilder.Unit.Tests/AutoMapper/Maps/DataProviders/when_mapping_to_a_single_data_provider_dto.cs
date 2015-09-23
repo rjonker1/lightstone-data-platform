@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.TestHelper.BaseTests;
@@ -22,7 +23,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
         public void should_map_all_fields()
         {
             _dto.Id.ShouldNotBeNull();
-            _dto.Name.ShouldEqual("Ivid");
+            _dto.Name.ShouldEqual(DataProviderName.IVIDVerify_E_WS.ToString());
             _dto.Description.ShouldEqual("Ivid");
             _dto.SourceConfigurationIsApiConfiguration.ShouldBeTrue();
             _dto.SourceConfigurationUrl.ShouldEqual("authenticate");

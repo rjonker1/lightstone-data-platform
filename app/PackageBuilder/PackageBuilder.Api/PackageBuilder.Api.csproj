@@ -89,9 +89,9 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Metadata.Entrypoint.1.0.0.1695\lib\net45\Lightstone.DataPlatform.Lace.Caching.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1695, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.1695\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1706, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1706\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1695, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.1695\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
@@ -334,6 +334,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneDirectorResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneCompanyResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\MmCodeResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\NestedDataFieldBuilder.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\PCubedEzScoreResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Messages\MessageMaps.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataToRequestFieldConverter.cs" />
@@ -364,7 +365,7 @@
     <Compile Include="Helpers\AutoMapper\TypeConverters\IndustryConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidTitleHolderResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtVinResponseMap.cs" />
@@ -447,6 +448,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PackageBuilder.Api.Routes\PackageBuilder.Api.Routes.csproj">
+      <Project>{679326c1-9f76-415c-98e0-10faa6adb5f7}</Project>
+      <Name>PackageBuilder.Api.Routes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>

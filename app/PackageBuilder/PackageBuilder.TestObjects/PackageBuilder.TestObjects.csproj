@@ -54,9 +54,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1695, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1695\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1706, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1706\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1695, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1695\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
@@ -97,7 +97,8 @@
     <Compile Include="Builders\DataProviderOverrideBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\IvidResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\IvidTitleHolderResponseBuilder.cs" />
-    <Compile Include="Builders\DataProviderResponses\LightstoneResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneAutoResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompanyResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\RgtResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\RgtVinResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AccidentDistributionBuilder.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Builders\DataProviderResponses\Valuations\AmortisedValueModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AreaFactorBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AuctionFactorModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\CompanyBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\ConfidenceModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\EstimatedValueModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\FrequencyModelBuilder.cs" />
@@ -138,8 +140,10 @@
     <Compile Include="Mothers\DataProviderOverrideMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidTitleHolderResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneBusinessCompanyResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\RgtResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\RgtVinResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\CompanyMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\VehicleSpecificInformationMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AccidentDistributionModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AmortisationFactorMother.cs" />
@@ -150,7 +154,7 @@
     <Compile Include="Mothers\DataProviderResponses\Valuations\EstimatedValueModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\FrequencyModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\ImageGaugeModelMother.cs" />
-    <Compile Include="Mothers\DataProviderResponses\LightstoneResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneAutoResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\PriceModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\RepairIndexModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\SaleModelMother.cs" />
