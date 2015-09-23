@@ -370,7 +370,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtVinResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\States\StateMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\VehicleValuationResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneAutoVehicleValuationResponseMap.cs" />
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Helpers\Extensions\ResponseExtensions.cs" />
