@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+using Lace.Domain.Core.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
@@ -25,14 +26,18 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
             _dataField.Type.ShouldEqual(typeof(IRespondWithAmortisedValueModel[]).ToString());
 
             var dataFields = _dataField.DataFields;
+            dataFields.Count().ShouldEqual(1);
 
-            dataFields.Count().ShouldEqual(2);
+            var amortiesedValueModel = dataFields.FirstOrDefault();
+            amortiesedValueModel.Name.ShouldEqual("AmortisedValueModel");
+            amortiesedValueModel.Type.ShouldEqual(typeof(AmortisedValueModel).ToString());
+            amortiesedValueModel.DataFields.Count().ShouldEqual(2);
 
-            dataFields.FirstOrDefault(x => x.Name == "Year").Name.ShouldEqual("Year");
-            dataFields.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(string).ToString());
+            amortiesedValueModel.DataFields.FirstOrDefault(x => x.Name == "Year").Name.ShouldEqual("Year");
+            amortiesedValueModel.DataFields.FirstOrDefault(x => x.Name == "Year").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(decimal).ToString());
+            amortiesedValueModel.DataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
+            amortiesedValueModel.DataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(decimal).ToString());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.TestObjects.Builders;
 
@@ -12,7 +13,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("Ivid", "Ivid")
+                    .With(DataProviderName.IVIDVerify_E_WS, "Ivid")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -63,7 +64,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("IvidTitleHolder", "IvidTitleHolder")
+                    .With(DataProviderName.IVIDTitle_E_WS, "IvidTitleHolder")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -96,7 +97,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("LightstoneAuto", "Lightstone Auto")
+                    .With(DataProviderName.LSAutoCarStats_I_DB, "Lightstone Auto")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -123,7 +124,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("Rgt", "Rgt")
+                    .With(DataProviderName.LSAutoSpecs_I_DB, "Rgt")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -163,7 +164,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("RgtVin", "RgtVin")
+                    .With(DataProviderName.LSAutoVINMaster_I_DB, "RgtVin")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -193,7 +194,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("PCubedFica", "PCubedFica")
+                    .With(DataProviderName.PCubedFica_E_WS, "PCubedFica")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -220,7 +221,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("SignioDecryptDriversLicense", "SignioDecryptDriversLicense")
+                    .With(DataProviderName.LSAutoDecryptDriverLic_I_WS, "SignioDecryptDriversLicense")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -239,7 +240,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("LightstoneProperty", "LightstoneProperty")
+                    .With(DataProviderName.LSPropertySearch_E_WS, "LightstoneProperty")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -258,7 +259,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("LightstoneBusinessCompany", "LightstoneBusinessCompany")
+                    .With(DataProviderName.LSBusinessCompany_E_WS, "LightstoneBusinessCompany")
                     .With("Owner")
                     .With(10m)
                     .With(true)
@@ -277,7 +278,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderDtoBuilder()
                     .With(Guid.NewGuid())
-                    .With("LightstoneBusinessDirector", "LightstoneBusinessDirector")
+                    .With(DataProviderName.LSBusinessDirector_E_WS, "LightstoneBusinessDirector")
                     .With("Owner")
                     .With(10m)
                     .With(true)

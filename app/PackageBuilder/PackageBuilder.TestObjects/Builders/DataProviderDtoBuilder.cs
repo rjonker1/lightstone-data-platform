@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Dtos.Write;
 
 namespace PackageBuilder.TestObjects.Builders
@@ -46,9 +47,9 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public DataProviderDtoBuilder With(string name, string description = "")
+        public DataProviderDtoBuilder With(DataProviderName name, string description = "")
         {
-            _name = name;
+            _name = name.ToString();
             _description = description;
             return this;
         }

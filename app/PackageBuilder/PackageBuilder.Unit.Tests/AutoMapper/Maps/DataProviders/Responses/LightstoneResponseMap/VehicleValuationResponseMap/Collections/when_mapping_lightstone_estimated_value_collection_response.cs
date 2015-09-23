@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+using Lace.Domain.Core.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
@@ -26,49 +27,54 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
 
             var dataFields = _dataField.DataFields;
 
-            dataFields.Count().ShouldEqual(14);
+            dataFields.Count().ShouldEqual(1);
 
-            dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedValue").Name.ShouldEqual("RetailEstimatedValue");
-            dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedValue").Type.ShouldEqual(typeof(string).ToString());
+            var estimatedValueModel = dataFields.FirstOrDefault();
+            estimatedValueModel.Name.ShouldEqual("EstimatedValueModel");
+            estimatedValueModel.Type.ShouldEqual(typeof(EstimatedValueModel).ToString());
+            estimatedValueModel.DataFields.Count().ShouldEqual(14);
 
-            dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedLow").Name.ShouldEqual("RetailEstimatedLow");
-            dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedLow").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailEstimatedValue").Name.ShouldEqual("RetailEstimatedValue");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailEstimatedValue").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedHigh").Name.ShouldEqual("RetailEstimatedHigh");
-            dataFields.FirstOrDefault(x => x.Name == "RetailEstimatedHigh").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailEstimatedLow").Name.ShouldEqual("RetailEstimatedLow");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailEstimatedLow").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "RetailConfidenceValue").Name.ShouldEqual("RetailConfidenceValue");
-            dataFields.FirstOrDefault(x => x.Name == "RetailConfidenceValue").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailEstimatedHigh").Name.ShouldEqual("RetailEstimatedHigh");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailEstimatedHigh").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "RetailConfidenceLevel").Name.ShouldEqual("RetailConfidenceLevel");
-            dataFields.FirstOrDefault(x => x.Name == "RetailConfidenceLevel").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailConfidenceValue").Name.ShouldEqual("RetailConfidenceValue");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailConfidenceValue").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "TradeEstimatedValue").Name.ShouldEqual("TradeEstimatedValue");
-            dataFields.FirstOrDefault(x => x.Name == "TradeEstimatedValue").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailConfidenceLevel").Name.ShouldEqual("RetailConfidenceLevel");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "RetailConfidenceLevel").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "TradeEstimatedLow").Name.ShouldEqual("TradeEstimatedLow");
-            dataFields.FirstOrDefault(x => x.Name == "TradeEstimatedLow").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeEstimatedValue").Name.ShouldEqual("TradeEstimatedValue");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeEstimatedValue").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "TradeEstimatedHigh").Name.ShouldEqual("TradeEstimatedHigh");
-            dataFields.FirstOrDefault(x => x.Name == "TradeEstimatedHigh").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeEstimatedLow").Name.ShouldEqual("TradeEstimatedLow");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeEstimatedLow").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "TradeConfidenceValue").Name.ShouldEqual("TradeConfidenceValue");
-            dataFields.FirstOrDefault(x => x.Name == "TradeConfidenceValue").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeEstimatedHigh").Name.ShouldEqual("TradeEstimatedHigh");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeEstimatedHigh").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "TradeConfidenceLevel").Name.ShouldEqual("TradeConfidenceLevel");
-            dataFields.FirstOrDefault(x => x.Name == "TradeConfidenceLevel").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeConfidenceValue").Name.ShouldEqual("TradeConfidenceValue");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeConfidenceValue").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "AuctionEstimate").Name.ShouldEqual("AuctionEstimate");
-            dataFields.FirstOrDefault(x => x.Name == "AuctionEstimate").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeConfidenceLevel").Name.ShouldEqual("TradeConfidenceLevel");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "TradeConfidenceLevel").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "CostLow").Name.ShouldEqual("CostLow");
-            dataFields.FirstOrDefault(x => x.Name == "CostLow").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "AuctionEstimate").Name.ShouldEqual("AuctionEstimate");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "AuctionEstimate").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "CostHigh").Name.ShouldEqual("CostHigh");
-            dataFields.FirstOrDefault(x => x.Name == "CostHigh").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "CostLow").Name.ShouldEqual("CostLow");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "CostLow").Type.ShouldEqual(typeof(string).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "CostValue").Name.ShouldEqual("CostValue");
-            dataFields.FirstOrDefault(x => x.Name == "CostValue").Type.ShouldEqual(typeof(string).ToString());
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "CostHigh").Name.ShouldEqual("CostHigh");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "CostHigh").Type.ShouldEqual(typeof(string).ToString());
+
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "CostValue").Name.ShouldEqual("CostValue");
+            estimatedValueModel.DataFields.FirstOrDefault(x => x.Name == "CostValue").Type.ShouldEqual(typeof(string).ToString());
         }
     }
 }

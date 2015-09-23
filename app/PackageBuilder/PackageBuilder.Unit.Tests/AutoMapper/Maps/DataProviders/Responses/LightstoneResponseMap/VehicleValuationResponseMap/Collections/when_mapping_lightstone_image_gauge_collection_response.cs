@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+using Lace.Domain.Core.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
@@ -25,23 +26,27 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders.Responses.Ligh
             _dataField.Type.ShouldEqual(typeof(IRespondWithImageGaugeModel[]).ToString());
 
             var dataFields = _dataField.DataFields;
+            dataFields.Count().ShouldEqual(1);
 
-            dataFields.Count().ShouldEqual(5);
+            var imageGaugeModel = dataFields.FirstOrDefault();
+            imageGaugeModel.Name.ShouldEqual("ImageGaugeModel");
+            imageGaugeModel.Type.ShouldEqual(typeof(ImageGaugeModel).ToString());
+            imageGaugeModel.DataFields.Count().ShouldEqual(5);
 
-            dataFields.FirstOrDefault(x => x.Name == "MinValue").Name.ShouldEqual("MinValue");
-            dataFields.FirstOrDefault(x => x.Name == "MinValue").Type.ShouldEqual(typeof(double?).ToString());
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "MinValue").Name.ShouldEqual("MinValue");
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "MinValue").Type.ShouldEqual(typeof(double?).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "MaxValue").Name.ShouldEqual("MaxValue");
-            dataFields.FirstOrDefault(x => x.Name == "MaxValue").Type.ShouldEqual(typeof(double?).ToString());
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "MaxValue").Name.ShouldEqual("MaxValue");
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "MaxValue").Type.ShouldEqual(typeof(double?).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
-            dataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double?).ToString());
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "Value").Name.ShouldEqual("Value");
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "Value").Type.ShouldEqual(typeof(double?).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "Quarter").Name.ShouldEqual("Quarter");
-            dataFields.FirstOrDefault(x => x.Name == "Quarter").Type.ShouldEqual(typeof(double?).ToString());
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "Quarter").Name.ShouldEqual("Quarter");
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "Quarter").Type.ShouldEqual(typeof(double?).ToString());
 
-            dataFields.FirstOrDefault(x => x.Name == "GaugeName").Name.ShouldEqual("GaugeName");
-            dataFields.FirstOrDefault(x => x.Name == "GaugeName").Type.ShouldEqual(typeof(string).ToString());
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "GaugeName").Name.ShouldEqual("GaugeName");
+            imageGaugeModel.DataFields.FirstOrDefault(x => x.Name == "GaugeName").Type.ShouldEqual(typeof(string).ToString());
         }
     }
 }
