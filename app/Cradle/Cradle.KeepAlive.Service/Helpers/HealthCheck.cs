@@ -32,7 +32,7 @@ namespace Cradle.KeepAlive.Service.Helpers
                                                                         "API Endpoint: " + endPointStatus.Key + " returned the follow status code: " + endPointStatus.Value);
             }
         }
-
+        
         private void SendEmailAlert(string subject, string body)
         {
             using (var client = new SmtpClient())
@@ -40,7 +40,7 @@ namespace Cradle.KeepAlive.Service.Helpers
                 var mailMessage = new MailMessage
                 {
                     From = new MailAddress(ConfigurationManager.AppSettings["report/email/from"].ToLower()),
-                    Subject = "BETA ALERT NOTIFICATION - " + subject,
+                    Subject = ConfigurationManager.AppSettings["report/email/environment/subject"] + " - " + subject,
                     IsBodyHtml = true,
                     Body = body,
                     BodyEncoding = Encoding.UTF8
