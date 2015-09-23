@@ -5,7 +5,7 @@ using DataProviders.Lightstone.MMCode.Core.Contracts;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 
-namespace DataProviders.Lightstone.MMCode.UnitOfWork
+namespace DataProviders.MMCode.UnitOfWork
 {
     public class MmCodeUnitOfWork : IGetMmCode
     {

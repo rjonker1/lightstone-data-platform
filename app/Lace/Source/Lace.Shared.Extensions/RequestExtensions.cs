@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
@@ -25,6 +26,26 @@ namespace Lace.Shared.Extensions
         public static string GetValue(this IAmRequestField field)
         {
             return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
+        }
+
+        public static bool IsCritical(this IAmDataProvider dataprovider)
+        {
+            return dataprovider.Critical != null && dataprovider.Critical.True;
+        }
+
+        public static string Message(this IAmDataProvider dataprovider)
+        {
+            return dataprovider.Critical == null ? "" : dataprovider.Critical.Message ?? "";
+        }
+
+        public static string Message(this ICauseCriticalFailure criticalFailure)
+        {
+            return criticalFailure == null ? "" : criticalFailure.Message ?? "";
+        }
+
+        public static bool IsCritical(this ICauseCriticalFailure criticalFailure)
+        {
+            return criticalFailure != null && criticalFailure.True;
         }
     }
 }

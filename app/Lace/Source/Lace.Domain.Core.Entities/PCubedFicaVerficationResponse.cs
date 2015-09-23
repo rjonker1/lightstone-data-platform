@@ -7,6 +7,27 @@ namespace Lace.Domain.Core.Entities
     [DataContract]
     public class PCubedFicaVerficationResponse : IProvideDataFromPCubedFicaVerfication
     {
+        public PCubedFicaVerficationResponse()
+        {
+
+        }
+
+        private PCubedFicaVerficationResponse(string message)
+        {
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
+        }
+
+        public static PCubedFicaVerficationResponse Empty()
+        {
+            return new PCubedFicaVerficationResponse();
+        }
+
+        public static PCubedFicaVerficationResponse Failure(string message)
+        {
+            return new PCubedFicaVerficationResponse(message);
+        }
+
         [DataMember]
         public Guid TransactionToken { get; private set; }
 
@@ -45,6 +66,12 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {

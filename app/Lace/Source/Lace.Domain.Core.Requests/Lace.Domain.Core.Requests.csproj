@@ -88,6 +88,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Contracts\ICauseCriticalFailure.cs" />
     <Compile Include="Contracts\IAmDataProvider.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
     <Compile Include="Contracts\IHaveContract.cs" />

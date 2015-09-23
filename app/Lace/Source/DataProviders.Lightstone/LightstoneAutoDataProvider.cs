@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Toolbox.Database.Repositories;
@@ -33,7 +34,7 @@ namespace Lace.Domain.DataProviders.Lightstone
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoCarStats_I_DB, _request);
 
-            if (!spec.IsSatisfied)
+            if (!spec.IsSatisfied || response.HasCriticalError())
             {
                 NotHandledResponse(response);
             }

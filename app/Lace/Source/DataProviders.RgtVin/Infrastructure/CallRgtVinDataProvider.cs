@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new { _dataProvider });
+                    .ForDatabaseType(), new {_dataProvider});
 
                 GetVin.AsAList(response, _dataProvider.GetRequest<IAmRgtVinRequest>(), new VehicleVinUnitOfWork(_repository), out _vins);
 
@@ -50,7 +50,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                     .ForDatabaseType(), new {_vins});
 
                 if (_vins == null || !_vins.Any())
-                    _logCommand.LogFault(new { _dataProvider },
+                    _logCommand.LogFault(new {_dataProvider},
                         new {ErrorMessage = "No VINs were received"});
 
                 _logCommand.LogResponse(_vins != null && _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
@@ -62,7 +62,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex,ex.Message);
+                _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling RGT Vin Data Provider"});
                 RgtVinResponseFailed(response);
             }
@@ -70,7 +70,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformRgtVinResponse(_vins);
+            var transformer = new TransformRgtVinResponse(_vins, _dataProvider.Critical);
 
             if (transformer.Continue)
             {
@@ -83,9 +83,9 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private static void RgtVinResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void RgtVinResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var rgtVinResponse = RgtVinResponse.Empty();
+            var rgtVinResponse = _dataProvider.IsCritical() ? RgtVinResponse.Failure(_dataProvider.Message()) : RgtVinResponse.Empty();
             rgtVinResponse.HasBeenHandled();
             response.Add(rgtVinResponse);
         }

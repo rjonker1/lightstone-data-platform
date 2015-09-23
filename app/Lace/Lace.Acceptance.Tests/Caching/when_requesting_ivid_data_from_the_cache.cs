@@ -12,6 +12,7 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
+using Lace.Test.Helper.Mothers.Packages;
 using Lace.Test.Helper.Mothers.Requests;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Messages.Core;
@@ -43,7 +44,7 @@ namespace Lace.Acceptance.Tests.Caching
             TestCacheRepository.ClearAll();
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             _retriever = IvidDataRetriever.Start(_logCommand, _log).ThenWithApi(_ividRequest, _dataProvider, out _response);
-            var transformer = new TransformIvidResponse(_response);
+            var transformer = new TransformIvidResponse(_response, new CriticalFailure(true, "this cannot fail"));
             transformer.Transform();
         }
 

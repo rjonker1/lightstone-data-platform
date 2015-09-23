@@ -3,7 +3,7 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromRgtVin : IPointToLaceProvider
+    public interface IProvideDataFromRgtVin : IPointToLaceProvider, IProvideCriticalFailure
     {
         IAmRgtVinRequest Request { get; }
         string Vin { get; }

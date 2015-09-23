@@ -219,6 +219,7 @@
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Fakes\Responses\FakeSignioDecryptedDriversLicenseResponse.cs" />
+    <Compile Include="Mothers\Packages\CriticalFailure.cs" />
     <Compile Include="Mothers\Packages\DataProvider.cs" />
     <Compile Include="Mothers\Packages\DriversLicensePackage.cs" />
     <Compile Include="Mothers\Packages\FicaPackage.cs" />

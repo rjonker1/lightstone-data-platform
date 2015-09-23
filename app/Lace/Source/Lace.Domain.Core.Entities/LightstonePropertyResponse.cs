@@ -14,12 +14,24 @@ namespace Lace.Domain.Core.Entities
     {
         public LightstonePropertyResponse()
         {
-            
+            PropertyInformation = Enumerable.Empty<IRespondWithProperty>();
+        }
+
+        private LightstonePropertyResponse(string message)
+        {
+            PropertyInformation = Enumerable.Empty<IRespondWithProperty>();
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
         }
 
         public static LightstonePropertyResponse Empty()
         {
-            return new LightstonePropertyResponse(Enumerable.Empty<IRespondWithProperty>());
+            return new LightstonePropertyResponse();
+        }
+
+        public static LightstonePropertyResponse Failure(string message)
+        {
+            return new LightstonePropertyResponse(message);
         }
 
         public LightstonePropertyResponse(IEnumerable<IRespondWithProperty> properties)
@@ -38,6 +50,12 @@ namespace Lace.Domain.Core.Entities
         {
             get { return GetType(); }
         }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
 
         [DataMember]
         public string TypeName

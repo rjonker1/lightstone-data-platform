@@ -6,6 +6,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.PCubed.Fica.Infrastructure.Management;
+using Lace.Shared.Extensions;
 
 namespace Lace.Domain.DataProviders.PCubed.Fica.Infrastructure
 {
@@ -61,13 +62,13 @@ namespace Lace.Domain.DataProviders.PCubed.Fica.Infrastructure
             {
                 _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(ex, new {ErrorMessage = "Error calling PCubed Fica Data Provider"});
-                SignioResponseFailed(response);
+                PCubedResponseFailed(response);
             }
         }
 
-        private static void SignioResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void PCubedResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var ficaVerficationResponse = new PCubedFicaVerficationResponse();
+            var ficaVerficationResponse = _dataProvider.IsCritical() ? PCubedFicaVerficationResponse.Failure(_dataProvider.Message()) : PCubedFicaVerficationResponse.Empty();
             ficaVerficationResponse.HasNotBeenHandled();
             response.Add(ficaVerficationResponse);
         }

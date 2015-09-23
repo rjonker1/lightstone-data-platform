@@ -70,9 +70,9 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             }
         }
 
-        private static void SignioResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void SignioResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var signioDriversLicenseDecryptionResponse = SignioDriversLicenseDecryptionResponse.Empty();
+            var signioDriversLicenseDecryptionResponse = _dataProvider.IsCritical() ? SignioDriversLicenseDecryptionResponse.Failure(_dataProvider.Message()) : SignioDriversLicenseDecryptionResponse.Empty();
             signioDriversLicenseDecryptionResponse.HasBeenHandled();
             response.Add(signioDriversLicenseDecryptionResponse);
         }

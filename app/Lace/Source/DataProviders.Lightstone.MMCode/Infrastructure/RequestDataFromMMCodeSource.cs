@@ -2,7 +2,7 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 
-namespace DataProviders.Lightstone.MMCode.Infrastructure
+namespace DataProviders.MMCode.Infrastructure
 {
     public sealed class RequestDataFromMMCodeSource : IRequestDataFromDataProviderSource
     {

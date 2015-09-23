@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Castle.Facilities.TypedFactory.Internal;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -7,8 +8,10 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure;
+using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Repositories;
 using Workflow.Lace.Messages.Core;
 
@@ -33,7 +36,7 @@ namespace Lace.Domain.DataProviders.RgtVin
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoVINMaster_I_DB, _request);
 
-            if (!spec.IsSatisfied)
+            if (!spec.IsSatisfied || response.HasCriticalError())
             {
                 NotHandledResponse(response);
             }
@@ -54,7 +57,6 @@ namespace Lace.Domain.DataProviders.RgtVin
             }
 
             CallNextSource(response, _command);
-
         }
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)

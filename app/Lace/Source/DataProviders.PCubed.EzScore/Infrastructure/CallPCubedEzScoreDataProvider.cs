@@ -36,28 +36,28 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
-                   .ForWebApiType(), new { _dataProvider });
+                    .ForWebApiType(), new {_dataProvider});
 
                 _response =
                     new ConsumerViewService(new RestClient()).Search(HandleRequest.GetQuery(_dataProvider.GetRequest<IAmPCubedEzScoreRequest>()));
 
                 _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                   new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
-                       .ForDatabaseType(), new { _response });
+                    new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
+                        .ForDatabaseType(), new {_response});
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling PCubed EzScore Data Provider {0}", ex, ex.Message);
-                _logCommand.LogFault(ex, new { ErrorMessage = "Error calling  PCubed EzScore Data Provider" });
+                _logCommand.LogFault(ex, new {ErrorMessage = "Error calling  PCubed EzScore Data Provider"});
                 PCubedEzScoreResponseFailed(response);
             }
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformPCubedEzScoreResponse(_response);
+            var transformer = new TransformPCubedEzScoreResponse(_response, _dataProvider.Critical);
 
             if (transformer.Continue)
             {
@@ -70,9 +70,9 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private static void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var ezScoreResponse = PCubedEzScoreResponse.Empty();
+            var ezScoreResponse = _dataProvider.IsCritical() ? PCubedEzScoreResponse.Failure(_dataProvider.Message()) : PCubedEzScoreResponse.Empty();
             ezScoreResponse.HasBeenHandled();
             response.Add(ezScoreResponse);
         }

@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromLightstoneAuto : IPointToLaceProvider
+    public interface IProvideDataFromLightstoneAuto : IPointToLaceProvider, IProvideCriticalFailure
     {
         IAmLightstoneAutoRequest Request { get; }
         int? CarId { get; }

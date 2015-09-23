@@ -6,6 +6,20 @@ using Lace.Test.Helper.Mothers.Packages;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
+
+    public class LicensePlateNumberForceIvidToFailPackage
+    {
+        public static IHavePackageForRequest LicenseNumberPackage(string licensePlate, string packageName)
+        {
+            return new LicensePlateNumberPackage(
+                new IAmDataProvider[]
+                {
+                    new CriticalDataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
+                        null, new CriticalFailure(true,"IVID IS CRTICAL AND SHOULD NEVER FAIL!!!!!!!")), 
+                }, Guid.NewGuid());
+        }
+    }
+
     public class LicensePlateNumberIvidSourcePackage
     {
         public static IHavePackageForRequest LicenseNumberPackage(string licensePlate, string packageName)

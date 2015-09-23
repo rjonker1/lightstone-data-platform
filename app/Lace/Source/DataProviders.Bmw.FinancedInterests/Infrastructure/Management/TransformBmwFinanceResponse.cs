@@ -2,22 +2,23 @@
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Management
 {
-    public class TransformBmwFinanceResponse : ITransformResponseFromDataProvider
+    public class TransformBmwFinanceResponse : ITransform
     {
         private readonly IEnumerable<BmwFinance> _response;
 
-        public TransformBmwFinanceResponse(IList<BmwFinance> response)
+        public TransformBmwFinanceResponse(IList<BmwFinance> response, ICauseCriticalFailure criticalFailure)
         {
             Continue = response != null && response.Any();
-            Result = Continue ? null : BmwFinanceResponse.Empty();
+            Result = Continue ? null : criticalFailure.IsCritical() ? BmwFinanceResponse.Failure(criticalFailure.Message) : BmwFinanceResponse.Empty();
             _response = Continue ? response : Enumerable.Empty<BmwFinance>();
         }
-
 
         public void Transform()
         {

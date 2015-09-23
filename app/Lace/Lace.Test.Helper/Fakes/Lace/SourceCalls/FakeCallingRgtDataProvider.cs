@@ -24,7 +24,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformRgtResponse(new List<CarSpecification>());
+            var transformer = new TransformRgtResponse(new List<CarSpecification>(), null);
 
             if (transformer.Continue)
             {

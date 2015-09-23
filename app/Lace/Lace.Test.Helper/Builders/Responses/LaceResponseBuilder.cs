@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
+using Lace.Test.Helper.Mothers.Packages;
 
 namespace Lace.Test.Helper.Builders.Responses
 {
@@ -13,7 +14,7 @@ namespace Lace.Test.Helper.Builders.Responses
             var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvid();
-            var transformer = new TransformIvidResponse(ividResponse);
+            var transformer = new TransformIvidResponse(ividResponse, new CriticalFailure(true, "this cannot fail"));
 
             if (transformer.Continue)
             {
@@ -36,15 +37,15 @@ namespace Lace.Test.Helper.Builders.Responses
             response.Add(ivid);
             return response;
         }
-    
 
-    public ICollection<IPointToLaceProvider> WithIvidResponseHandledAndVin12()
+
+        public ICollection<IPointToLaceProvider> WithIvidResponseHandledAndVin12()
         {
 
             var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvidWithRepairVin();
-            var transformer = new TransformIvidResponse(ividResponse);
+            var transformer = new TransformIvidResponse(ividResponse, new CriticalFailure(true, "this cannot fail"));
 
             if (transformer.Continue)
             {
@@ -62,7 +63,7 @@ namespace Lace.Test.Helper.Builders.Responses
             var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvidWithFinancedInterestVin();
-            var transformer = new TransformIvidResponse(ividResponse);
+            var transformer = new TransformIvidResponse(ividResponse, new CriticalFailure(true, "this cannot fail"));
 
             if (transformer.Continue)
             {

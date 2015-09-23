@@ -3,7 +3,7 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromPCubedFicaVerfication : IPointToLaceProvider
+    public interface IProvideDataFromPCubedFicaVerfication : IPointToLaceProvider, IProvideCriticalFailure
     {
         Guid TransactionToken { get; }
         long IdNumber { get; }

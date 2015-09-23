@@ -61,7 +61,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformConsumerSpecificationsResponse(_jsonRepairHistory);
+            var transformer = new TransformConsumerSpecificationsResponse(_jsonRepairHistory, _dataProvider.Critical);
 
             if (transformer.Continue)
             {
@@ -74,9 +74,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
             response.Add(transformer.Result);
         }
 
-        private static void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var specificationsResponse = LightstoneConsumerSpecificationsResponse.Empty();
+            var specificationsResponse = _dataProvider.IsCritical()
+                ? LightstoneConsumerSpecificationsResponse.Failure(_dataProvider.Message())
+                : LightstoneConsumerSpecificationsResponse.Empty();
             specificationsResponse.HasBeenHandled();
             response.Add(specificationsResponse);
         }

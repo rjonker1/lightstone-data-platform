@@ -6,7 +6,7 @@ using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Exten
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.Management
 {
-    public class TransformLightstoneCompanyResponse : ITransformResponseFromDataProvider
+    public class TransformLightstoneCompanyResponse : ITransform
     {
         public DataSet Response { get; private set; }
         public IProvideDataFromLightstoneBusinessCompany Result { get; private set; }
