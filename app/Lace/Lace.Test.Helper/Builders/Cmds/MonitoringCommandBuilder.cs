@@ -7,6 +7,7 @@ using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Responses;
+using Lace.Test.Helper.Mothers.Packages;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Test.Helper.Builders.Cmds
@@ -45,10 +46,10 @@ namespace Lace.Test.Helper.Builders.Cmds
                 .Error(new {NoRequestReceived = "No response received from Ivid Data Provider"}, null)
                 .EndCall(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp())
                 .Transform(
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()))
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true,"this cannot fail")).Result,
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true, "this cannot fail")))
                 .EndExecution(
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result);
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true, "this cannot fail")).Result);
 
             return this;
         }

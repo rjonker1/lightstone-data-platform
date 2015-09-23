@@ -106,6 +106,7 @@
     <Compile Include="Contracts\Caching\IAmCachable.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromBmwFinance.cs" />
     <Compile Include="Contracts\IProvideResponseFromDataProviders.cs" />
+    <Compile Include="Contracts\Requests\IProvideCriticalFailure.cs" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
     <Compile Include="Models\IvidCodePair.cs" />
     <None Include="Contracts\DataProviders\Specifics\IRespondWithCarModel.cs.old" />

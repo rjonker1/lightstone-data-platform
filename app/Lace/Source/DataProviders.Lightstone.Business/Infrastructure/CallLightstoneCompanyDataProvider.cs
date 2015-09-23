@@ -67,9 +67,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
             }
         }
 
-        private static void LightstoneBusinessResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void LightstoneBusinessResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneBusinessResponse = LightstoneBusinessCompanyResponse.Empty();
+            var lightstoneBusinessResponse = _dataProvider.IsCritical() ? LightstoneBusinessCompanyResponse.Failure(_dataProvider.Message()) : LightstoneBusinessCompanyResponse.Empty();
             lightstoneBusinessResponse.HasBeenHandled();
             response.Add(lightstoneBusinessResponse);
         }

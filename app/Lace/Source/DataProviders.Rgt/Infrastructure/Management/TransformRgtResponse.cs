@@ -2,23 +2,25 @@
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
 {
-    public sealed class TransformRgtResponse : ITransformResponseFromDataProvider
+    public sealed class TransformRgtResponse : ITransform
     {
         public bool Continue { get; private set; }
         public IProvideDataFromRgt Result { get; private set; }
 
         private readonly CarSpecification _carSpecification;
 
-        public TransformRgtResponse(IEnumerable<CarSpecification> carSpecifications)
+        public TransformRgtResponse(IEnumerable<CarSpecification> carSpecifications, ICauseCriticalFailure critical)
         {
             Continue = carSpecifications != null && carSpecifications.Any();
             _carSpecification = Continue ? carSpecifications.FirstOrDefault() : new CarSpecification();
-            Result = Continue ? null : new RgtResponse();
+            Result = Continue ? null : critical.IsCritical() ? RgtResponse.Failure(critical.Message) : RgtResponse.Empty();
         }
 
         public void Transform()

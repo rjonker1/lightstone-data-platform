@@ -1,6 +1,7 @@
 ﻿using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Test.Helper.Builders.Responses;
+using Lace.Test.Helper.Mothers.Packages;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources
@@ -17,7 +18,7 @@ namespace Lace.Unit.Tests.Sources
         
         public override void Observe()
         {
-            _transfomer = new TransformIvidResponse(_ividWebServiceResponse);
+            _transfomer = new TransformIvidResponse(_ividWebServiceResponse, new CriticalFailure(true, "this cannot fail"));
             _transfomer.Transform();
         }
 

@@ -12,9 +12,20 @@ namespace Lace.Domain.Core.Entities
         {
         }
 
+        private RgtVinResponse(string message)
+        {
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
+        }
+
         public static RgtVinResponse Empty()
         {
             return new RgtVinResponse();
+        }
+
+        public static RgtVinResponse Failure(string message)
+        {
+            return new RgtVinResponse(message);
         }
 
         public RgtVinResponse(string color, int month, int price, int quarter, int rgtCode, string vehicleMake,
@@ -39,43 +50,50 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public IAmRgtVinRequest Request { get; private set; }
+
         [DataMember]
         public string Vin { get; private set; }
+
         [DataMember]
         public string VehicleMake { get; private set; }
+
         [DataMember]
         public string VehicleType { get; private set; }
+
         [DataMember]
         public string VehicleModel { get; private set; }
+
         [DataMember]
         public int? Year { get; private set; }
+
         [DataMember]
         public int? Month { get; private set; }
+
         [DataMember]
         public int? Quarter { get; private set; }
+
         [DataMember]
         public int? RgtCode { get; private set; }
+
         [DataMember]
         public decimal? Price { get; private set; }
+
         [DataMember]
         public string Colour { get; private set; }
+
         [DataMember]
         public string CarFullname { get; private set; }
+
         [DataMember]
         public string TypeName
         {
-            get
-            {
-                return GetType().Name;
-            }
+            get { return GetType().Name; }
         }
+
         [DataMember]
         public Type Type
         {
-            get
-            {
-                return GetType();
-            }
+            get { return GetType(); }
         }
 
         [DataMember]
@@ -90,5 +108,11 @@ namespace Lace.Domain.Core.Entities
         {
             Handled = true;
         }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
     }
 }

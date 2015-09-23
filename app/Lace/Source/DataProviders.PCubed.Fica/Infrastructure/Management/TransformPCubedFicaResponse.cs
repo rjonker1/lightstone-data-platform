@@ -4,7 +4,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.PCubed.Fica.Infrastructure.Management
 {
-    public class TransformPCubedFicaResponse : ITransformResponseFromDataProvider
+    public class TransformPCubedFicaResponse : ITransform
     {
         public string Message { get; private set; }
         public IProvideDataFromPCubedFicaVerfication Result { get; private set; }

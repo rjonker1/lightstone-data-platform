@@ -12,9 +12,20 @@ namespace Lace.Domain.Core.Entities
         {
         }
 
+        private MMCodeResponse(string message)
+        {
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
+        }
+
         public static MMCodeResponse Empty()
         {
             return new MMCodeResponse();
+        }
+
+        public static MMCodeResponse Failure(string message)
+        {
+            return new MMCodeResponse(message);
         }
 
         public MMCodeResponse(int mmlId, int carId, string mmCode)
@@ -25,13 +36,13 @@ namespace Lace.Domain.Core.Entities
         }
 
         [DataMember]
-        public IAmMmCodeRequest Request { get; set; }
+        public IAmMmCodeRequest Request { get; private set; }
         [DataMember]
-        public int MMLId { get; set; }
+        public int MMLId { get; private set; }
         [DataMember]
-        public int CarId { get; set; }
+        public int CarId { get; private set; }
         [DataMember]
-        public string MMCode { get; set; }
+        public string MMCode { get; private set; }
 
         [DataMember]
         public string TypeName
@@ -52,6 +63,12 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {

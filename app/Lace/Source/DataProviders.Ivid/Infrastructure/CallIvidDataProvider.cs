@@ -53,16 +53,16 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             }
         }
 
-        private static void IvidResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void IvidResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var ividResponse = IvidResponse.Empty();
+            var ividResponse = _dataProvider.IsCritical() ? IvidResponse.Failure(_dataProvider.Message()) : IvidResponse.Empty();
             ividResponse.HasBeenHandled();
             response.Add(ividResponse);
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformIvidResponse(_response);
+            var transformer = new TransformIvidResponse(_response, _dataProvider.Critical);
 
             if (transformer.Continue)
             {

@@ -20,7 +20,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformRgtVinResponse(_vin);
+            var transformer = new TransformRgtVinResponse(_vin,null);
 
             if (transformer.Continue)
             {

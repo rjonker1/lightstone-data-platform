@@ -62,7 +62,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformBmwFinanceResponse(_bmwFinances);
+            var transformer = new TransformBmwFinanceResponse(_bmwFinances, _dataProvider.Critical);
 
             if (transformer.Continue)
             {
@@ -75,9 +75,9 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private static void BmwFinacedInterestsResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void BmwFinacedInterestsResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var financedInterests = BmwFinanceResponse.Empty();
+            var financedInterests = _dataProvider.IsCritical() ? BmwFinanceResponse.Failure(_dataProvider.Message()) : BmwFinanceResponse.Empty();
             financedInterests.HasBeenHandled();
             response.Add(financedInterests);
         }

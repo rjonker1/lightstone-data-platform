@@ -108,7 +108,7 @@
     <Compile Include="Contracts\ILogEvent.cs" />
     <Compile Include="Contracts\IRequestDataFromDataProviderSource.cs" />
     <Compile Include="Contracts\ILogCommandTypes.cs" />
-    <Compile Include="Contracts\ITransformResponseFromDataProvider.cs" />
+    <Compile Include="Contracts\ITransform.cs" />
     <Compile Include="Extensions\ResponseExtensions.cs" />
     <Compile Include="Factories\ResponseDataMining.cs" />
     <Compile Include="Services.cs" />

@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformLightstoneResponse(_metrics, _carInformation);
+            var transformer = new TransformLightstoneResponse(_metrics, _carInformation,_dataProvider.Critical);
 
             if (transformer.Continue)
             {
@@ -78,9 +78,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private static void LightstoneResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void LightstoneResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneResponse = LightstoneAutoResponse.Empty();
+            var lightstoneResponse = _dataProvider.IsCritical() ? LightstoneAutoResponse.Failure(_dataProvider.Message()) : LightstoneAutoResponse.Empty();
             lightstoneResponse.HasBeenHandled();
             response.Add(lightstoneResponse);
         }

@@ -3,11 +3,11 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromMmCode : IPointToLaceProvider
+    public interface IProvideDataFromMmCode : IPointToLaceProvider, IProvideCriticalFailure
     {
-        IAmMmCodeRequest Request { get; set; }
-        int MMLId { get; set; }
-        int CarId { get; set; }
-        string MMCode { get; set; }
+        IAmMmCodeRequest Request { get; }
+        int MMLId { get; }
+        int CarId { get; }
+        string MMCode { get; }
     }
 }

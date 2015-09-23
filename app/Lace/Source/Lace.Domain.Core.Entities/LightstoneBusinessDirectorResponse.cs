@@ -14,12 +14,24 @@ namespace Lace.Domain.Core.Entities
     {
         public LightstoneBusinessDirectorResponse()
         {
-            
+            Directors = Enumerable.Empty<IProvideDirector>();
+        }
+
+        private LightstoneBusinessDirectorResponse(string message)
+        {
+            Directors = Enumerable.Empty<IProvideDirector>();
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
         }
 
         public static LightstoneBusinessDirectorResponse Empty()
         {
-            return new LightstoneBusinessDirectorResponse(Enumerable.Empty<IProvideDirector>());
+            return new LightstoneBusinessDirectorResponse();
+        }
+
+        public static LightstoneBusinessDirectorResponse Failure(string message)
+        {
+            return new LightstoneBusinessDirectorResponse(message);
         }
 
         public LightstoneBusinessDirectorResponse(IEnumerable<IProvideDirector> directors)
@@ -55,11 +67,15 @@ namespace Lace.Domain.Core.Entities
             Handled = true;
         }
 
+          [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
+
 
         [DataMember]
         public IAmLightstoneBusinessDirectorRequest Request { get; private set; }
-      
-
       
     }
 }

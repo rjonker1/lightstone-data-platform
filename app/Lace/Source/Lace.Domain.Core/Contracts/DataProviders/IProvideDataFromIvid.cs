@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromIvid : IPointToLaceProvider
+    public interface IProvideDataFromIvid : IPointToLaceProvider, IProvideCriticalFailure
     {
         IAmIvidStandardRequest Request { get; set; }
         IProvideVehicleSpecificInformation SpecificInformation { get; }

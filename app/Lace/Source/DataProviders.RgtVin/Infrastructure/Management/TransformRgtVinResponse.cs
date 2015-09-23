@@ -2,23 +2,24 @@
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Management
 {
-    public sealed class TransformRgtVinResponse : ITransformResponseFromDataProvider
+    public sealed class TransformRgtVinResponse : ITransform
     {
         private readonly Vin _vin;
 
         public IProvideDataFromRgtVin Result { get; private set; }
         public bool Continue { get; private set; }
 
-        public TransformRgtVinResponse(IEnumerable<Vin> response)
+        public TransformRgtVinResponse(IEnumerable<Vin> response, ICauseCriticalFailure critical)
         {
             Continue = response != null && response.Any();
-            Result = Continue ? null : new RgtVinResponse();
-
+            Result = Continue ? null : critical.IsCritical() ? RgtVinResponse.Failure(critical.Message) : RgtVinResponse.Empty();
             _vin = Continue ? response.FirstOrDefault() : new Vin();
         }
 

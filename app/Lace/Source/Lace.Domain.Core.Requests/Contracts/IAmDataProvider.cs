@@ -10,5 +10,6 @@ namespace Lace.Domain.Core.Requests.Contracts
         ICollection<IAmDataProviderRequest> Request { get; }
         decimal CostPrice { get; }
         decimal RecommendedPrice { get; }
+        ICauseCriticalFailure Critical { get; }
     }
 }

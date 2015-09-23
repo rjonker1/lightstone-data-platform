@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
-using DataProviders.Lightstone.MMCode;
+using DataProviders.MMCode;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;

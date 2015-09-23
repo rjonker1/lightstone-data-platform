@@ -13,7 +13,14 @@ namespace Lace.Domain.Core.Entities
     {
         public PCubedEzScoreResponse()
         {
-            
+            EzScoreRecords = Enumerable.Empty<IRespondWithEzScore>();
+        }
+
+        private PCubedEzScoreResponse(string message)
+        {
+            EzScoreRecords = Enumerable.Empty<IRespondWithEzScore>();
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
         }
 
         public PCubedEzScoreResponse(IEnumerable<IRespondWithEzScore> ezScoreRecords)
@@ -23,7 +30,7 @@ namespace Lace.Domain.Core.Entities
 
         public static PCubedEzScoreResponse Empty()
         {
-            return new PCubedEzScoreResponse(new List<IRespondWithEzScore>());
+            return new PCubedEzScoreResponse();
         }
 
         public static PCubedEzScoreResponse WithRecords(IEnumerable<IRespondWithEzScore> ezScoreRecords)
@@ -31,32 +38,38 @@ namespace Lace.Domain.Core.Entities
             return new PCubedEzScoreResponse(ezScoreRecords.ToList());
         }
 
+        public static PCubedEzScoreResponse Failure(string message)
+        {
+            return new PCubedEzScoreResponse(message);
+        }
 
         [DataMember]
         public IAmPCubedEzScoreRequest Request { get; private set; }
+
         [DataMember]
         public IEnumerable<IRespondWithEzScore> EzScoreRecords { get; private set; }
 
         [DataMember]
         public string TypeName
         {
-            get
-            {
-                return GetType().Name;
-            }
+            get { return GetType().Name; }
         }
 
         [DataMember]
         public Type Type
         {
-            get
-            {
-                return GetType();
-            }
+            get { return GetType(); }
         }
 
         [DataMember]
         public bool Handled { get; private set; }
+
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {
@@ -67,7 +80,5 @@ namespace Lace.Domain.Core.Entities
         {
             Handled = true;
         }
-
-       
     }
 }
