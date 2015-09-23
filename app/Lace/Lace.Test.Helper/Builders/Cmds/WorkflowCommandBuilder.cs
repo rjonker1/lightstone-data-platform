@@ -15,6 +15,7 @@ using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Responses;
+using Lace.Test.Helper.Mothers.Packages;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 using Lace.Toolbox.Database.Models;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -77,7 +78,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                 .ReceiveResponseFromDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl", DataProviderAction.Response,
                     DataProviderState.Successful,
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true, "this cannot fail")).Result,
                     15, 30);
             return this;
         }
@@ -129,7 +130,7 @@ namespace Lace.Test.Helper.Builders.Cmds
             var queue = new WorkflowQueueSender(DataProviderCommandSource.IVIDVerify_E_WS);
             queue.InitQueue(_bus)
                 .Transformation(
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true, "this cannot fail")).Result,
                     null);
             return this;
         }
@@ -147,7 +148,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     new TransformLightstoneResponse(
                         FakeLighstoneRetrievalData.GetValuationFromMetrics(
                             new RequestCarInformationForCarHavingId107483()),
-                        FakeLighstoneRetrievalData.GetCarInformation("SB1KV58E40F039277"))
+                        FakeLighstoneRetrievalData.GetCarInformation("SB1KV58E40F039277"), null)
                         .Result, 20, 40);
             return this;
         }
@@ -174,7 +175,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     DataProviderState.Successful, new LicensePlateRequestBuilder().ForRgt(), 30, 60)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
-                    DataProviderState.Successful, new TransformRgtResponse(new List<CarSpecification>()), 30, 60);
+                    DataProviderState.Successful, new TransformRgtResponse(new List<CarSpecification>(), null), 30, 60);
             return this;
         }
 
@@ -202,7 +203,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
                     DataProviderState.Successful,
-                    new TransformRgtVinResponse(FakeRgtVinResponse.GetRgtVinResponseForLicensePlateNumber()), 25, 50);
+                    new TransformRgtVinResponse(FakeRgtVinResponse.GetRgtVinResponseForLicensePlateNumber(),new CriticalFailure(true, "this is a critical failure")), 25, 50);
             return this;
         }
 
@@ -247,7 +248,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     "https://secure1.ubiquitech.co.za:443/ivid/ws/", DataProviderAction.Response,
                     DataProviderState.Successful,
                     new TransformIvidTitleHolderResponse(
-                        FakeIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicenseNumber()), 35, 70);
+                        FakeIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicenseNumber(), null), 35, 70);
             return this;
         }
 
@@ -269,7 +270,7 @@ namespace Lace.Test.Helper.Builders.Cmds
             var queue = new WorkflowQueueSender(DataProviderCommandSource.EntryPoint);
             queue.InitQueue(_bus)
                 .EntryPointResponse(
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true, "this cannot fail")).Result,
                     DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources(), _Watch)
                 .CreateTransaction(_packageId, _packageVersion, _userId, _requestId, _contractId, _system,
                     0, DataProviderState.Successful, _accountNumber, _packageCostPrice, _packageRecommendedPrice);

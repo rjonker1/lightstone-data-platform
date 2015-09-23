@@ -76,16 +76,16 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             }
         }
 
-        private static void IvidTitleHolderResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void IvidTitleHolderResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var ividTitleHolderResponse = IvidTitleHolderResponse.Empty();
+            var ividTitleHolderResponse = _dataProvider.IsCritical() ? IvidTitleHolderResponse.Failure(_dataProvider.Message()) : IvidTitleHolderResponse.Empty();
             ividTitleHolderResponse.HasBeenHandled();
             response.Add(ividTitleHolderResponse);
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformIvidTitleHolderResponse(_response);
+            var transformer = new TransformIvidTitleHolderResponse(_response, _dataProvider.Critical);
 
             if (transformer.Continue)
             {

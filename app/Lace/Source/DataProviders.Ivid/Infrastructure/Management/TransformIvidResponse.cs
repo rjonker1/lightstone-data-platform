@@ -4,22 +4,19 @@ using System.Threading.Tasks;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Models;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
+using Lace.Shared.Extensions;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {
-    public sealed class TransformIvidResponse : ITransformResponseFromDataProvider
+    public sealed class TransformIvidResponse : ITransform
     {
-        public HpiStandardQueryResponse Message { get; private set; }
-        public IvidResponse Result { get; private set; }
-
-        public bool Continue { get; private set; }
-
-        public TransformIvidResponse(HpiStandardQueryResponse response)
+        public TransformIvidResponse(HpiStandardQueryResponse response, ICauseCriticalFailure critical)
         {
             Continue = response != null;
-            Result = Continue ? null : IvidResponse.Empty();
+            Result = Continue ? null : critical.IsCritical() ? IvidResponse.Failure(critical.Message) : IvidResponse.Empty();
             Message = response;
         }
 
@@ -90,5 +87,9 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
                 ? new IvidCodePair(string.Empty, string.Empty)
                 : new IvidCodePair(description.code, description.description);
         }
+
+        public HpiStandardQueryResponse Message { get; private set; }
+        public IvidResponse Result { get; private set; }
+        public bool Continue { get; private set; }
     }
 }

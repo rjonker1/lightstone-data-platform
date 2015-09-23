@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
-using DataProviders.Lightstone.MMCode.Infrastructure;
+using DataProviders.MMCode.Infrastructure;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Toolbox.Database.Repositories;
 using Workflow.Lace.Messages.Core;
 
-namespace DataProviders.Lightstone.MMCode
+namespace DataProviders.MMCode
 {
     public sealed class MmCodeDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
@@ -33,7 +34,7 @@ namespace DataProviders.Lightstone.MMCode
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.MMCode_E_DB, _request);
 
-            if (!spec.IsSatisfied)
+            if (!spec.IsSatisfied || response.HasCriticalError())
             {
                 NotHandledResponse(response);
             }

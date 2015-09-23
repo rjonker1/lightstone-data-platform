@@ -13,11 +13,23 @@ namespace Lace.Domain.Core.Entities
     {
         public LightstoneAutoResponse()
         {
+            VehicleValuation = new Valuation();
+        }
+
+        private LightstoneAutoResponse(string message)
+        {
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
         }
 
         public static LightstoneAutoResponse Empty()
         {
             return new LightstoneAutoResponse();
+        }
+
+        public static LightstoneAutoResponse Failure(string message)
+        {
+            return new LightstoneAutoResponse(message);
         }
 
         public LightstoneAutoResponse(int carId, int year, string vin, string imageUrl, string quarter, string carFullName,
@@ -35,37 +47,47 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public IAmLightstoneAutoRequest Request { get; private set; }
+
         [DataMember]
         public int? CarId { get; private set; }
+
         [DataMember]
         public int? Year { get; private set; }
+
         [DataMember]
         public string Vin { get; private set; }
+
         [DataMember]
         public string ImageUrl { get; private set; }
+
         [DataMember]
         public string Quarter { get; private set; }
+
         [DataMember]
         public string CarFullname { get; private set; }
+
         [DataMember]
         public string Model { get; private set; }
-        [DataMember, JsonConverter(typeof(JsonTypeResolverConverter))]
+
+        [DataMember, JsonConverter(typeof (JsonTypeResolverConverter))]
         public IRespondWithValuation VehicleValuation { get; private set; }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
+
         [DataMember]
         public string TypeName
         {
-            get
-            {
-                return GetType().Name;
-            }
+            get { return GetType().Name; }
         }
+
         [DataMember]
         public Type Type
         {
-            get
-            {
-                return GetType();
-            }
+            get { return GetType(); }
         }
 
         [DataMember]

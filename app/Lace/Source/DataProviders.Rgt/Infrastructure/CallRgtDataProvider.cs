@@ -84,7 +84,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformRgtResponse(_carSpecifications);
+            var transformer = new TransformRgtResponse(_carSpecifications, _dataProvider.Critical);
 
             if (transformer.Continue)
             {
@@ -97,9 +97,9 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private static void RgtResponseFailed(ICollection<IPointToLaceProvider> response)
+        private void RgtResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var rgtResponse = RgtResponse.Empty();
+            var rgtResponse = _dataProvider.IsCritical() ? RgtResponse.Failure(_dataProvider.Message()) : RgtResponse.Empty();
             rgtResponse.HasBeenHandled();
             response.Add(rgtResponse);
         }

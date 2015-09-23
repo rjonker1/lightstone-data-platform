@@ -19,7 +19,7 @@ namespace Lace.Unit.Tests.Transform
 
         public override void Observe()
         {
-            _transfomer = new TransformRgtVinResponse(_rgtVinResponse);
+            _transfomer = new TransformRgtVinResponse(_rgtVinResponse, null);
             _transfomer.Transform();
         }
 

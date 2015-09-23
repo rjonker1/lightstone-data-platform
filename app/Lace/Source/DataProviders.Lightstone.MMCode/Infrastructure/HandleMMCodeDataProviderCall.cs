@@ -1,7 +1,7 @@
 ﻿using System;
 using Lace.Domain.DataProviders.Core.Contracts;
 
-namespace DataProviders.Lightstone.MMCode.Infrastructure
+namespace DataProviders.MMCode.Infrastructure
 {
     public sealed class HandleMMCodeDataProviderCall : IHandleDataProviderSourceCall
     {

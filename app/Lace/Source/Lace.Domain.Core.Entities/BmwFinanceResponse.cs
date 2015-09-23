@@ -16,10 +16,29 @@ namespace Lace.Domain.Core.Entities
             Finances = Enumerable.Empty<IRespondWithBmwFinance>();
         }
 
+        private BmwFinanceResponse(string message)
+        {
+            Finances = Enumerable.Empty<IRespondWithBmwFinance>();
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
+        }
+     
         public static BmwFinanceResponse Empty()
         {
             return new BmwFinanceResponse();
         }
+
+        public static BmwFinanceResponse Failure(string message)
+        {
+            return new BmwFinanceResponse(message);
+        }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
+
 
         public BmwFinanceResponse(IEnumerable<IRespondWithBmwFinance> finances)
         {

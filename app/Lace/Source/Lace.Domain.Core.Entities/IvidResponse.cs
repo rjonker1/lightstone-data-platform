@@ -20,7 +20,13 @@ namespace Lace.Domain.Core.Entities
 
         public IvidResponse()
         {
-            
+           
+        }
+
+        private IvidResponse(string message)
+        {
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
         }
 
         public static IvidResponse Empty()
@@ -28,11 +34,22 @@ namespace Lace.Domain.Core.Entities
             return new IvidResponse();
         }
 
+        public static IvidResponse Failure(string message)
+        {
+            return new IvidResponse(message);
+        }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
+
         public static IvidResponse Build(string statusMessage, string reference, string license, string registration,
             string registrationDate, string vin, string engine,
             string displacement, string tare)
         {
-            return  new IvidResponse(statusMessage,reference,license,registration,registrationDate, vin,engine,displacement,tare);
+            return new IvidResponse(statusMessage, reference, license, registration, registrationDate, vin, engine, displacement, tare);
         }
 
         private IvidResponse(string statusMessage, string reference, string license, string registration,
@@ -48,6 +65,7 @@ namespace Lace.Domain.Core.Entities
             Engine = CheckPartial(engine);
             Displacement = CheckPartial(displacement);
             Tare = CheckPartial(tare);
+           // IsCritical = isCritcal;
         }
 
         public void AddToCache(ICacheRepository repository)

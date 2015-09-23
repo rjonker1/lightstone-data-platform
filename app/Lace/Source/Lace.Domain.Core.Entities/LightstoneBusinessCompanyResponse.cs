@@ -14,12 +14,12 @@ namespace Lace.Domain.Core.Entities
     {
         public LightstoneBusinessCompanyResponse()
         {
-
+            Companies = Enumerable.Empty<IProvideCompany>();
         }
 
         public static LightstoneBusinessCompanyResponse Empty()
         {
-            return new LightstoneBusinessCompanyResponse(Enumerable.Empty<IProvideCompany>());
+            return new LightstoneBusinessCompanyResponse();
         }
 
         public LightstoneBusinessCompanyResponse(IEnumerable<IProvideCompany> companies)
@@ -27,8 +27,26 @@ namespace Lace.Domain.Core.Entities
             Companies = companies;
         }
 
+        private LightstoneBusinessCompanyResponse(string message)
+        {
+
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
+        }
+
+        public static LightstoneBusinessCompanyResponse Failure(string message)
+        {
+            return new LightstoneBusinessCompanyResponse(message);
+        }
+
         [DataMember]
         public IEnumerable<IProvideCompany> Companies { get; private set; }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
 
         [DataMember]
         public Type Type

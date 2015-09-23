@@ -5,7 +5,7 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromBmwFinance : IPointToLaceProvider
+    public interface IProvideDataFromBmwFinance : IPointToLaceProvider,IProvideCriticalFailure
     {
         IAmBmwFinanceRequest Request { get; }
         IEnumerable<IRespondWithBmwFinance> Finances { get; }

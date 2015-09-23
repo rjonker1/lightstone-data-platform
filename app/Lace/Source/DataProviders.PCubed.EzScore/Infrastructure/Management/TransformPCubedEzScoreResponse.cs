@@ -3,19 +3,22 @@ using System.Net;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Consumer;
 using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Extensions;
 using Lace.Toolbox.PCubed.Domain;
 using RestSharp;
 
 namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure.Management
 {
-    public class TransformPCubedEzScoreResponse : ITransformResponseFromDataProvider
+    public class TransformPCubedEzScoreResponse : ITransform
     {
         private readonly ConsumerViewResponse _response;
-        public TransformPCubedEzScoreResponse(IRestResponse<ConsumerViewResponse> response)
+
+        public TransformPCubedEzScoreResponse(IRestResponse<ConsumerViewResponse> response, ICauseCriticalFailure critical)
         {
             Continue = response != null && response.Data != null && response.Data.ResponseStatusCode == HttpStatusCode.OK;
-            Result = Continue ? null : PCubedEzScoreResponse.Empty();
+            Result = Continue ? null : critical.IsCritical() ? PCubedEzScoreResponse.Failure(critical.Message) : PCubedEzScoreResponse.Empty();
             _response = Continue ? response.Data : new ConsumerViewResponse();
         }
 

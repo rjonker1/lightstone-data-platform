@@ -2,7 +2,7 @@
 using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Models;
 
-namespace DataProviders.Lightstone.MMCode.Infrastructure.Management
+namespace DataProviders.MMCode.Infrastructure.Management
 {
     public static class GetMmCode
     {

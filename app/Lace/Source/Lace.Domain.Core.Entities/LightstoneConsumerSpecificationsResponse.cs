@@ -15,9 +15,21 @@ namespace Lace.Domain.Core.Entities
             RepairData = new List<IRespondWithRepairData>();
         }
 
+        private LightstoneConsumerSpecificationsResponse(string message)
+        {
+            RepairData = new List<IRespondWithRepairData>();
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
+        }
+
         public static LightstoneConsumerSpecificationsResponse Empty()
         {
             return new LightstoneConsumerSpecificationsResponse();
+        }
+
+        public static LightstoneConsumerSpecificationsResponse Failure(string message)
+        {
+            return new LightstoneConsumerSpecificationsResponse(message);
         }
 
         public LightstoneConsumerSpecificationsResponse(IEnumerable<IRespondWithRepairData> repairData)
@@ -32,20 +44,21 @@ namespace Lace.Domain.Core.Entities
         public IAmLightstoneConsumerSpecificationsRequest Request { get; private set; }
 
         [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
+
+        [DataMember]
         public string TypeName
         {
-            get
-            {
-                return GetType().Name;
-            }
+            get { return GetType().Name; }
         }
+
         [DataMember]
         public Type Type
         {
-            get
-            {
-                return GetType();
-            }
+            get { return GetType(); }
         }
 
         [DataMember]

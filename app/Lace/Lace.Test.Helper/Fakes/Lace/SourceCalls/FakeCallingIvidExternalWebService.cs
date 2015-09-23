@@ -4,6 +4,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Test.Helper.Builders.Responses;
+using Lace.Test.Helper.Mothers.Packages;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
@@ -19,7 +20,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformIvidResponse(_ividResponse);
+            var transformer = new TransformIvidResponse(_ividResponse, new CriticalFailure(true,"this cannot fail"));
 
             if (transformer.Continue)
             {

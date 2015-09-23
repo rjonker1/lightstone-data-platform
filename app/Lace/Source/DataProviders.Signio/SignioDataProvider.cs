@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure;
 using Workflow.Lace.Messages.Core;
@@ -31,7 +32,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoDecryptDriverLic_I_WS, _request);
-            if (!spec.IsSatisfied)
+            if (!spec.IsSatisfied || response.HasCriticalError())
             {
                 NotHandledResponse(response);
             }

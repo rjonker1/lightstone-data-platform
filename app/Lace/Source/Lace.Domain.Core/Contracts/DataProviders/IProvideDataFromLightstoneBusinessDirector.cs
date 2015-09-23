@@ -5,7 +5,7 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromLightstoneBusinessDirector : IPointToLaceProvider
+    public interface IProvideDataFromLightstoneBusinessDirector : IPointToLaceProvider, IProvideCriticalFailure
     {
         IEnumerable<IProvideDirector> Directors { get; }
         IAmLightstoneBusinessDirectorRequest Request { get; }

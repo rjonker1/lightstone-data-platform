@@ -10,18 +10,30 @@ namespace Lace.Domain.Core.Entities
     {
         public SignioDriversLicenseDecryptionResponse()
         {
-            
+            DrivingLicense = new DrivingLicenseCard();
+            DecodedData = string.Empty;
+        }
+
+        private SignioDriversLicenseDecryptionResponse(string message)
+        {
+            HasCriticalFailure = true;
+            CriticalFailureMessage = message;
         }
 
         public static SignioDriversLicenseDecryptionResponse Empty()
         {
-            return new SignioDriversLicenseDecryptionResponse(null,null);
+            return new SignioDriversLicenseDecryptionResponse();
         }
 
         public SignioDriversLicenseDecryptionResponse(IRespondWithDriversLicenseCard driversLicense, string decodedData)
         {
             DrivingLicense = driversLicense;
             DecodedData = decodedData;
+        }
+
+        public static SignioDriversLicenseDecryptionResponse Failure(string message)
+        {
+            return new SignioDriversLicenseDecryptionResponse(message);
         }
 
         [DataMember]
@@ -47,6 +59,12 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {
