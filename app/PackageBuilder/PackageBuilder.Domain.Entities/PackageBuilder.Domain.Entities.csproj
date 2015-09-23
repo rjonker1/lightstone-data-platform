@@ -234,7 +234,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action.cs" />
     <Compile Include="DataProviders\Commands\AmendDataProviderStructure.cs" />
     <Compile Include="DataProviders\Write\DataProviderConnectionStringRepository.cs" />
     <Compile Include="DataProviders\Write\SourceConfiguration.cs" />
@@ -243,7 +242,6 @@
     <Compile Include="CommandStore\Command.cs" />
     <Compile Include="CommandStore\Commands\ReplayCommand.cs" />
     <Compile Include="CommandStore\Commands\StoreCommand.cs" />
-    <Compile Include="Criteria.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
     <Compile Include="DataProviders\Commands\ImportDataProvider.cs" />
@@ -253,11 +251,9 @@
     <Compile Include="DataProviders\Read\DataProvider.cs" />
     <Compile Include="DataProviders\Write\DataProvider.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
-    <Compile Include="IExpirable.cs" />
     <Compile Include="Industries\Commands\CreateIndustry.cs" />
     <Compile Include="Industries\Commands\RenameIndustry.cs" />
     <Compile Include="Industries\Read\Industry.cs" />
-    <Compile Include="IWorkflow.cs" />
     <Compile Include="DataProviders\Write\DataProviderOverride.cs" />
     <Compile Include="DataFields\Write\DataFieldOverride.cs" />
     <Compile Include="Packages\Commands\DeletePackage.cs" />

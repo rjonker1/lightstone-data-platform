@@ -6,14 +6,10 @@ using AutoMapper;
 using CommonDomain.Core;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Enums;
-using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Metadata.Entrypoint;
-using PackageBuilder.Domain.Entities.Contracts.Actions;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
@@ -55,8 +51,6 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         [DataMember]
         public decimal RecommendedSalePrice { get; internal set; }
         [DataMember]
-        public IAction Action { get; set; }
-        [DataMember]
         public string Notes { get; internal set; }
         [DataMember]
         public IEnumerable<IIndustry> Industries { get; internal set; }
@@ -83,12 +77,11 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         }
 
         //TODO: Remove - Constructor used for testing in LACE
-        public Package(Guid id, string name, IAction action, IEnumerable<IDataProvider> dataProviders)
+        public Package(Guid id, string name, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
             Id = id;
             Name = name;
-            Action = action;
             DataProviders = dataProviders;
         }
 

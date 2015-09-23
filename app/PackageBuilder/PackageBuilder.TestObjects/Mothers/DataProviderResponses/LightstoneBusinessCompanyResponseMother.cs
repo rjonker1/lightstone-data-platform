@@ -1,6 +1,6 @@
 ﻿using Lace.Domain.Core.Contracts.DataProviders;
-using PackageBuilder.TestObjects.Builders.DataProviderResponses;
-using PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations;
+using PackageBuilder.TestObjects.Builders.DataProviderResponses.LightstoneBusinessCompany;
+using PackageBuilder.TestObjects.Mothers.DataProviderResponses.LightstoneAuto;
 
 namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses
 {

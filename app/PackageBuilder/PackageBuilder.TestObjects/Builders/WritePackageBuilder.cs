@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PackageBuilder.Domain.Entities.Contracts.Actions;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Write;
@@ -14,7 +13,6 @@ namespace PackageBuilder.TestObjects.Builders
         private string _description;
         private decimal _costOfSale;
         private decimal _recommendedSalePrice;
-        private IAction _action;
         private string _notes;
         private IEnumerable<Industry> _industries;
         private State _state;
@@ -31,7 +29,6 @@ namespace PackageBuilder.TestObjects.Builders
                 Description = _description,
                 CostOfSale = _costOfSale,
                 RecommendedSalePrice = _recommendedSalePrice,
-                Action = _action,
                 Notes = _notes,
                 Industries = _industries,
                 State = _state,
@@ -56,12 +53,6 @@ namespace PackageBuilder.TestObjects.Builders
         {
             _costOfSale = costOfSale;
             _recommendedSalePrice = recommendedSalePrice;
-            return this;
-        }
-
-        public WritePackageBuilder With(IAction action)
-        {
-            _action = action;
             return this;
         }
 

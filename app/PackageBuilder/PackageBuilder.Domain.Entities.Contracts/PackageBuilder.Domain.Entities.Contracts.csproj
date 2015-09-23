@@ -65,13 +65,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\IAction.cs" />
     <Compile Include="DataFields\Write\IDataField.cs" />
     <Compile Include="DataFields\Write\IDataFieldOverride.cs" />
     <Compile Include="DataProviders\Write\IDataProvider.cs" />
     <Compile Include="DataProviders\Write\IDataProviderOverride.cs" />
     <Compile Include="DataProviders\Write\ISourceConfiguration.cs" />
-    <Compile Include="ICriteria.cs" />
     <Compile Include="Industries\Read\IIndustry.cs" />
     <Compile Include="Packages\Write\IPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
