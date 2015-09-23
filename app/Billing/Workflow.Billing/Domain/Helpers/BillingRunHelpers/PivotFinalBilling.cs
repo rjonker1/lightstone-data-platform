@@ -145,7 +145,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                         ItemDescription = y.ItemDescription,
                                         QuantityUnit = y.QuantityUnit,
                                         Price = y.Price,
-                                        Vat = y.Vat
+                                        Vat = account.BillingVatNumber != null ? account.BillingVatNumber.ToInt() : 0000
                                     }).ToList()
                                 }
                             });
@@ -163,7 +163,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         var contract = _contractRepository.FirstOrDefault(x => x.ContractId == transaction.ContractId);
                         var userTransactionsList = new List<ContractUserTransactions>();
 
-                        //TODO: Complete user transaction setup for statement
                         var userTransactions = _finalBillingRepository.Where(x => x.User.UserId == transaction.User.UserId && x.CustomerId == transaction.CustomerId);
                         var userPackageNames = userTransactions.Where(x => x.User.Username == transaction.User.Username).Select(x => x.Package).Distinct();
 
@@ -325,7 +324,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                         ItemDescription = y.ItemDescription,
                                         QuantityUnit = y.QuantityUnit,
                                         Price = y.Price,
-                                        Vat = y.Vat
+                                        Vat = account.BillingVatNumber != null ? account.BillingVatNumber.ToInt() : 0000
                                     }).ToList()
                                 }
                             });
