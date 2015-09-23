@@ -86,26 +86,27 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public long ContractVersion { get; private set; }
     }
-
-    //TODO: this needs some work. Some confusion about the requests to be sent to lace...
+  
     public class LaceDataProvider : IAmDataProvider
     {
+        public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice,
+            IHaveUser user, string packageName, IBuildRequestTypes requestTypes, ICauseCriticalFailure critical)
+        {
+            Name = name;
+            var requestType = requestTypes.RequestTypes.FirstOrDefault(w => w.Key == name);
+            if (requestType.Value != null)
+                Request = new[] { requestType.Value(requestFields.ToList(), user, packageName) };
+            CostPrice = costPrice;
+            RecommendedPrice = recommendedPrice;
+            Critical = critical;
+        }
+
         public DataProviderName Name { get; private set; }
         //public IEnumerable<IAmRequestField> RequestFields { get; private set; }
         public ICollection<IAmDataProviderRequest> Request { get; private set; }
         public decimal CostPrice { get; private set; }
         public decimal RecommendedPrice { get; private set; }
-
-        public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice,
-            IHaveUser user, string packageName, IBuildRequestTypes requestTypes)
-        {
-            Name = name;
-            var requestType = requestTypes.RequestTypes.FirstOrDefault(w => w.Key == name);
-            if (requestType.Value != null)
-                Request = new[] {requestType.Value(requestFields.ToList(), user, packageName)};
-            CostPrice = costPrice;
-            RecommendedPrice = recommendedPrice;
-        }
+        public ICauseCriticalFailure Critical { get; private set; }
     }
 
     public class RequestPackage : IHavePackageForRequest
@@ -127,8 +128,6 @@ namespace PackageBuilder.Domain.Entities.Requests
         public string Name { get; private set; }
         public double PackageCostPrice { get; private set; }
         public double PackageRecommendedPrice { get; private set; }
-
         public long Version { get; private set; }
     }
-    
 }

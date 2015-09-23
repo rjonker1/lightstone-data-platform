@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
-using PackageBuilder.Domain.Requests;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Requests.Fields;
