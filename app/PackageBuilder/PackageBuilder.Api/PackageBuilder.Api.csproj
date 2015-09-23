@@ -334,6 +334,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneDirectorResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneCompanyResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\MmCodeResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\NestedDataFieldBuilder.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\PCubedEzScoreResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Messages\MessageMaps.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataToRequestFieldConverter.cs" />
@@ -364,7 +365,7 @@
     <Compile Include="Helpers\AutoMapper\TypeConverters\IndustryConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidTitleHolderResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtVinResponseMap.cs" />

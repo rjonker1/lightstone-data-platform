@@ -6,6 +6,7 @@ using PackageBuilder.Acceptance.Tests.Bases;
 using PackageBuilder.Api.Helpers.Constants;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.Enums.Requests;
+using PackageBuilder.TestHelper.Helpers.Extensions;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
@@ -68,157 +69,157 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_request_field_car_id()
         {
-            AssertRequestField("CarId", RequestFieldType.CarId);
+            DataFieldExtensions.AssertRequestField("CarId", RequestFieldType.CarId, DataProvider.RequestFields);
         }
 
         [Observation]
         public void should_update_request_field_year()
         {
-            AssertRequestField("Year", RequestFieldType.Year);
+            DataFieldExtensions.AssertRequestField("Year", RequestFieldType.Year, DataProvider.RequestFields);
         }
 
         [Observation]
         public void should_update_request_field_make()
         {
-            AssertRequestField("Make", RequestFieldType.Make);
+            DataFieldExtensions.AssertRequestField("Make", RequestFieldType.Make, DataProvider.RequestFields);
         }
 
         [Observation]
         public void should_update_request_field_vin()
         {
-            AssertRequestField("VinNumber", RequestFieldType.VinNumber);
+            DataFieldExtensions.AssertRequestField("VinNumber", RequestFieldType.VinNumber, DataProvider.RequestFields);
         }
 
         [Observation]
         public void should_update_data_field_car_id()
         {
-            AssertDataField("CarId", "CarId Definition", "CarId Label", 10, true, 0, typeof(int?));
+            DataFieldExtensions.AssertDataField("CarId", "CarId Definition", "CarId Label", 10, true, 0, typeof(int?));
         }
 
         [Observation]
         public void should_update_data_field_year()
         {
-            AssertDataField("Year", "Year Definition", "Year Label", 10, true, 0, typeof(int?));
+            DataFieldExtensions.AssertDataField("Year", "Year Definition", "Year Label", 10, true, 0, typeof(int?));
         }
 
         [Observation]
         public void should_update_data_field_vin()
         {
-            AssertDataField("Vin", "Vin Definition", "Vin Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Vin", "Vin Definition", "Vin Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_image_url()
         {
-            AssertDataField("ImageUrl", "ImageUrl Definition", "ImageUrl Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("ImageUrl", "ImageUrl Definition", "ImageUrl Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_quarter()
         {
-            AssertDataField("Quarter", "Quarter Definition", "Quarter Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Quarter", "Quarter Definition", "Quarter Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_CarFullname()
         {
-            AssertDataField("CarFullname", "CarFullname Definition", "CarFullname Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("CarFullname", "CarFullname Definition", "CarFullname Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_model()
         {
-            AssertDataField("Model", "Model Definition", "Model Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Model", "Model Definition", "Model Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_vehicle_valuation()
         {
-            AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
+            DataFieldExtensions.AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
         }
 
         [Observation]
         public void should_update_data_field_estimated_value()
         {
-            var valuation = AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
-            var estimatedValue = AssertDataField("EstimatedValue", "EstimatedValue Definition", "EstimatedValue Label", 10, true, 0, typeof(string), 0, 10, valuation.DataFields);
+            var valuation = DataFieldExtensions.AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
+            var estimatedValue = DataFieldExtensions.AssertDataField("EstimatedValue", "EstimatedValue Definition", "EstimatedValue Label", 10, true, 0, typeof(string), 0, 10, valuation.DataFields);
 
-            AssertDataField("RetailEstimatedValue", "RetailEstimatedValue Definition", "RetailEstimatedValue Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("RetailEstimatedLow", "RetailEstimatedLow Definition", "RetailEstimatedLow Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("RetailEstimatedHigh", "RetailEstimatedHigh Definition", "RetailEstimatedHigh Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("RetailConfidenceValue", "RetailConfidenceValue Definition", "RetailConfidenceValue Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("RetailConfidenceLevel", "RetailConfidenceLevel Definition", "RetailConfidenceLevel Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("TradeEstimatedValue", "TradeEstimatedValue Definition", "TradeEstimatedValue Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("TradeEstimatedLow", "TradeEstimatedLow Definition", "TradeEstimatedLow Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("TradeEstimatedHigh", "TradeEstimatedHigh Definition", "TradeEstimatedHigh Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("TradeConfidenceValue", "TradeConfidenceValue Definition", "TradeConfidenceValue Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
-            AssertDataField("TradeConfidenceLevel", "TradeConfidenceLevel Definition", "TradeConfidenceLevel Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("RetailEstimatedValue", "RetailEstimatedValue Definition", "RetailEstimatedValue Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("RetailEstimatedLow", "RetailEstimatedLow Definition", "RetailEstimatedLow Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("RetailEstimatedHigh", "RetailEstimatedHigh Definition", "RetailEstimatedHigh Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("RetailConfidenceValue", "RetailConfidenceValue Definition", "RetailConfidenceValue Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("RetailConfidenceLevel", "RetailConfidenceLevel Definition", "RetailConfidenceLevel Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("TradeEstimatedValue", "TradeEstimatedValue Definition", "TradeEstimatedValue Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("TradeEstimatedLow", "TradeEstimatedLow Definition", "TradeEstimatedLow Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("TradeEstimatedHigh", "TradeEstimatedHigh Definition", "TradeEstimatedHigh Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("TradeConfidenceValue", "TradeConfidenceValue Definition", "TradeConfidenceValue Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
+            DataFieldExtensions.AssertDataField("TradeConfidenceLevel", "TradeConfidenceLevel Definition", "TradeConfidenceLevel Label", 10, true, 0, typeof(string), 0, 0, estimatedValue.DataFields);
         }
 
         [Observation]
         public void should_update_data_field_last_five_sales()
         {
-            var valuation = AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
-            var lastFiveSales = AssertDataField("LastFiveSales", "LastFiveSales Definition", "LastFiveSales Label", 10, true, 0, typeof(string), 0, 3, valuation.DataFields);
+            var valuation = DataFieldExtensions.AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
+            var lastFiveSales = DataFieldExtensions.AssertDataField("LastFiveSales", "LastFiveSales Definition", "LastFiveSales Label", 10, true, 0, typeof(string), 0, 3, valuation.DataFields);
 
-            AssertDataField("SalesDate", "SalesDate Definition", "SalesDate Label", 10, true, 0, typeof(string), 0, 0, lastFiveSales.DataFields);
-            AssertDataField("LicensingDistrict", "LicensingDistrict Definition", "LicensingDistrict Label", 10, true, 0, typeof(string), 0, 0, lastFiveSales.DataFields);
-            AssertDataField("SalesPrice", "SalesPrice Definition", "SalesPrice Label", 10, true, 0, typeof(string), 0, 0, lastFiveSales.DataFields);
+            DataFieldExtensions.AssertDataField("SalesDate", "SalesDate Definition", "SalesDate Label", 10, true, 0, typeof(string), 0, 0, lastFiveSales.DataFields);
+            DataFieldExtensions.AssertDataField("LicensingDistrict", "LicensingDistrict Definition", "LicensingDistrict Label", 10, true, 0, typeof(string), 0, 0, lastFiveSales.DataFields);
+            DataFieldExtensions.AssertDataField("SalesPrice", "SalesPrice Definition", "SalesPrice Label", 10, true, 0, typeof(string), 0, 0, lastFiveSales.DataFields);
         }
 
         [Observation]
         public void should_update_data_field_prices()
         {
-            var valuation = AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
-            var prices = AssertDataField("Prices", "Prices Definition", "Prices Label", 10, true, 0, typeof(string), 0, 2, valuation.DataFields);
+            var valuation = DataFieldExtensions.AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
+            var prices = DataFieldExtensions.AssertDataField("Prices", "Prices Definition", "Prices Label", 10, true, 0, typeof(string), 0, 2, valuation.DataFields);
 
-            AssertDataField("Name", "Name Definition", "Name Label", 10, true, 0, typeof(string), 0, 0, prices.DataFields);
-            AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(decimal), 0, 0, prices.DataFields);
+            DataFieldExtensions.AssertDataField("Name", "Name Definition", "Name Label", 10, true, 0, typeof(string), 0, 0, prices.DataFields);
+            DataFieldExtensions.AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(decimal), 0, 0, prices.DataFields);
         }
 
         [Observation]
         public void should_update_data_frequency()
         {
-            var valuation = AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
-            var frequency = AssertDataField("Frequency", "Frequency Definition", "Frequency Label", 10, true, 0, typeof(string), 0, 3, valuation.DataFields);
+            var valuation = DataFieldExtensions.AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
+            var frequency = DataFieldExtensions.AssertDataField("Frequency", "Frequency Definition", "Frequency Label", 10, true, 0, typeof(string), 0, 3, valuation.DataFields);
 
-            AssertDataField("CarType", "CarType Definition", "CarType Label", 10, true, 0, typeof(string), 0, 0, frequency.DataFields);
-            AssertDataField("Year", "Year Definition", "Year Label", 10, true, 0, typeof(int?), 0, 0, frequency.DataFields);
-            AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(double), 0, 0, frequency.DataFields);
+            DataFieldExtensions.AssertDataField("CarType", "CarType Definition", "CarType Label", 10, true, 0, typeof(string), 0, 0, frequency.DataFields);
+            DataFieldExtensions.AssertDataField("Year", "Year Definition", "Year Label", 10, true, 0, typeof(int?), 0, 0, frequency.DataFields);
+            DataFieldExtensions.AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(double), 0, 0, frequency.DataFields);
         }
 
         [Observation]
         public void should_update_data_confidence()
         {
-            var valuation = AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
-            var confidence = AssertDataField("Confidence", "Confidence Definition", "Confidence Label", 10, true, 0, typeof(string), 0, 3, valuation.DataFields);
+            var valuation = DataFieldExtensions.AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
+            var confidence = DataFieldExtensions.AssertDataField("Confidence", "Confidence Definition", "Confidence Label", 10, true, 0, typeof(string), 0, 3, valuation.DataFields);
 
-            AssertDataField("CarType", "CarType Definition", "CarType Label", 10, true, 0, typeof(string), 0, 0, confidence.DataFields);
-            AssertDataField("Year", "Year Definition", "Year Label", 10, true, 0, typeof(int?), 0, 0, confidence.DataFields);
-            AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(double), 0, 0, confidence.DataFields);
+            DataFieldExtensions.AssertDataField("CarType", "CarType Definition", "CarType Label", 10, true, 0, typeof(string), 0, 0, confidence.DataFields);
+            DataFieldExtensions.AssertDataField("Year", "Year Definition", "Year Label", 10, true, 0, typeof(int?), 0, 0, confidence.DataFields);
+            DataFieldExtensions.AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(double), 0, 0, confidence.DataFields);
         }
 
         [Observation]
         public void should_update_data_amortised_values()
         {
-            var valuation = AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
-            var amortisedValues = AssertDataField("AmortisedValues", "AmortisedValues Definition", "AmortisedValues Label", 10, true, 0, typeof(string), 0, 2, valuation.DataFields);
+            var valuation = DataFieldExtensions.AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
+            var amortisedValues = DataFieldExtensions.AssertDataField("AmortisedValues", "AmortisedValues Definition", "AmortisedValues Label", 10, true, 0, typeof(string), 0, 2, valuation.DataFields);
 
-            AssertDataField("Year", "Year Definition", "Year Label", 10, true, 0, typeof(int?), 0, 0, amortisedValues.DataFields);
-            AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(decimal), 0, 0, amortisedValues.DataFields);
+            DataFieldExtensions.AssertDataField("Year", "Year Definition", "Year Label", 10, true, 0, typeof(int?), 0, 0, amortisedValues.DataFields);
+            DataFieldExtensions.AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(decimal), 0, 0, amortisedValues.DataFields);
         }
 
         [Observation]
         public void should_update_data_image_guages()
         {
-            var valuation = AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
-            var imageGuages = AssertDataField("ImageGauges", "ImageGauges Definition", "ImageGauges Label", 10, true, 0, typeof(string), 0, 5, valuation.DataFields);
+            var valuation = DataFieldExtensions.AssertDataField("VehicleValuation", "VehicleValuation Definition", "VehicleValuation Label", 10, true, 0, typeof(string), 0, 7);
+            var imageGuages = DataFieldExtensions.AssertDataField("ImageGauges", "ImageGauges Definition", "ImageGauges Label", 10, true, 0, typeof(string), 0, 5, valuation.DataFields);
 
-            AssertDataField("MinValue", "MinValue Definition", "MinValue Label", 10, true, 0, typeof(double?), 0, 0, imageGuages.DataFields);
-            AssertDataField("MaxValue", "MaxValue Definition", "MaxValue Label", 10, true, 0, typeof(double?), 0, 0, imageGuages.DataFields);
-            AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(double?), 0, 0, imageGuages.DataFields);
-            AssertDataField("Quarter", "Quarter Definition", "Quarter Label", 10, true, 0, typeof(double?), 0, 0, imageGuages.DataFields);
-            AssertDataField("GaugeName", "GaugeName Definition", "GaugeName Label", 10, true, 0, typeof(string), 0, 0, imageGuages.DataFields);
+            DataFieldExtensions.AssertDataField("MinValue", "MinValue Definition", "MinValue Label", 10, true, 0, typeof(double?), 0, 0, imageGuages.DataFields);
+            DataFieldExtensions.AssertDataField("MaxValue", "MaxValue Definition", "MaxValue Label", 10, true, 0, typeof(double?), 0, 0, imageGuages.DataFields);
+            DataFieldExtensions.AssertDataField("Value", "Value Definition", "Value Label", 10, true, 0, typeof(double?), 0, 0, imageGuages.DataFields);
+            DataFieldExtensions.AssertDataField("Quarter", "Quarter Definition", "Quarter Label", 10, true, 0, typeof(double?), 0, 0, imageGuages.DataFields);
+            DataFieldExtensions.AssertDataField("GaugeName", "GaugeName Definition", "GaugeName Label", 10, true, 0, typeof(string), 0, 0, imageGuages.DataFields);
         }
     }
 }

@@ -6,6 +6,7 @@ using PackageBuilder.Acceptance.Tests.Bases;
 using PackageBuilder.Api.Helpers.Constants;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.Enums.Requests;
+using PackageBuilder.TestHelper.Helpers.Extensions;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
@@ -68,133 +69,133 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
         [Observation]
         public void should_update_request_field_vin_number()
         {
-            AssertRequestField("CarId", RequestFieldType.CarId);
+            DataFieldExtensions.AssertRequestField("CarId", RequestFieldType.CarId, DataProvider.RequestFields);
         }
 
         [Observation]
         public void should_update_data_field_manufacturer()
         {
-            AssertDataField("Manufacturer", "Manufacturer Definition", "Manufacturer Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Manufacturer", "Manufacturer Definition", "Manufacturer Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_model_year()
         {
-            AssertDataField("ModelYear", "ModelYear Definition", "ModelYear Label", 10, true, 0, typeof(int));
+            DataFieldExtensions.AssertDataField("ModelYear", "ModelYear Definition", "ModelYear Label", 10, true, 0, typeof(int));
         }
 
         [Observation]
         public void should_update_data_field_model_type()
         {
-            AssertDataField("ModelType", "ModelType Definition", "ModelType Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("ModelType", "ModelType Definition", "ModelType Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_top_speed()
         {
-            AssertDataField("TopSpeed", "TopSpeed Definition", "TopSpeed Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("TopSpeed", "TopSpeed Definition", "TopSpeed Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_kilowatts()
         {
-            AssertDataField("Kilowatts", "Kilowatts Definition", "Kilowatts Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Kilowatts", "Kilowatts Definition", "Kilowatts Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_fuel_economy()
         {
-            AssertDataField("FuelEconomy", "FuelEconomy Definition", "FuelEconomy Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("FuelEconomy", "FuelEconomy Definition", "FuelEconomy Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_acceleration()
         {
-            AssertDataField("Acceleration", "Acceleration Definition", "Acceleration Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Acceleration", "Acceleration Definition", "Acceleration Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_torque()
         {
-            AssertDataField("Torque", "Torque Definition", "Torque Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Torque", "Torque Definition", "Torque Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_emissions()
         {
-            AssertDataField("Emissions", "Emissions Definition", "Emissions Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Emissions", "Emissions Definition", "Emissions Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_engine_size()
         {
-            AssertDataField("EngineSize", "EngineSize Definition", "EngineSize Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("EngineSize", "EngineSize Definition", "EngineSize Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_body_shape()
         {
-            AssertDataField("BodyShape", "BodyShape Definition", "BodyShape Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("BodyShape", "BodyShape Definition", "BodyShape Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_fuel_type()
         {
-            AssertDataField("FuelType", "FuelType Definition", "FuelType Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("FuelType", "FuelType Definition", "FuelType Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_transmission_type()
         {
-            AssertDataField("TransmissionType", "TransmissionType Definition", "TransmissionType Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("TransmissionType", "TransmissionType Definition", "TransmissionType Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_car_full_name()
         {
-            AssertDataField("CarFullname", "CarFullname Definition", "CarFullname Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("CarFullname", "CarFullname Definition", "CarFullname Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_colour()
         {
-            AssertDataField("Colour", "Colour Definition", "Colour Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Colour", "Colour Definition", "Colour Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_rain_sensor_windscreen_wipers()
         {
-            AssertDataField("RainSensorWindscreenWipers", "RainSensorWindscreenWipers Definition", "RainSensorWindscreenWipers Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("RainSensorWindscreenWipers", "RainSensorWindscreenWipers Definition", "RainSensorWindscreenWipers Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_head_up_display()
         {
-            AssertDataField("HeadUpDisplay", "HeadUpDisplay Definition", "HeadUpDisplay Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("HeadUpDisplay", "HeadUpDisplay Definition", "HeadUpDisplay Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_vehicle_type()
         {
-            AssertDataField("VehicleType", "VehicleType Definition", "VehicleType Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("VehicleType", "VehicleType Definition", "VehicleType Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_model()
         {
-            AssertDataField("Model", "Model Definition", "Model Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Model", "Model Definition", "Model Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_field_make()
         {
-            AssertDataField("Make", "Make Definition", "Make Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("Make", "Make Definition", "Make Label", 10, true, 0, typeof(string));
         }
 
         [Observation]
         public void should_update_data_car_type()
         {
-            AssertDataField("CarType", "CarType Definition", "CarType Label", 10, true, 0, typeof(string));
+            DataFieldExtensions.AssertDataField("CarType", "CarType Definition", "CarType Label", 10, true, 0, typeof(string));
         }
     }
 }

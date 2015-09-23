@@ -97,7 +97,8 @@
     <Compile Include="Builders\DataProviderOverrideBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\IvidResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\IvidTitleHolderResponseBuilder.cs" />
-    <Compile Include="Builders\DataProviderResponses\LightstoneResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneAutoResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompanyResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\RgtResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\RgtVinResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AccidentDistributionBuilder.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Builders\DataProviderResponses\Valuations\AmortisedValueModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AreaFactorBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AuctionFactorModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\CompanyBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\ConfidenceModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\EstimatedValueModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\FrequencyModelBuilder.cs" />
@@ -138,8 +140,10 @@
     <Compile Include="Mothers\DataProviderOverrideMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidTitleHolderResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneBusinessCompanyResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\RgtResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\RgtVinResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\CompanyMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\VehicleSpecificInformationMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AccidentDistributionModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AmortisationFactorMother.cs" />
@@ -150,7 +154,7 @@
     <Compile Include="Mothers\DataProviderResponses\Valuations\EstimatedValueModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\FrequencyModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\ImageGaugeModelMother.cs" />
-    <Compile Include="Mothers\DataProviderResponses\LightstoneResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneAutoResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\PriceModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\RepairIndexModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\SaleModelMother.cs" />
