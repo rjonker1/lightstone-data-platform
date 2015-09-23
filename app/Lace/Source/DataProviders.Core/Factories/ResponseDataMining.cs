@@ -12,7 +12,7 @@ namespace Lace.Domain.DataProviders.Core.Factories
         public override int MineCarId(ICollection<IPointToLaceProvider> response)
         {
             var carid = 0;
-            foreach (var provider in CarIdDataProviders.OrderBy(o => (int)o.Key))
+            foreach (var provider in CarIdDataProviders.OrderBy(o => (int) o.Key))
             {
                 carid = provider.Value(response);
                 if (carid > 0)
@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Core.Factories
         {
             var vinnumber = string.Empty;
 
-            foreach (var provider in VinNumberDataProviders.OrderBy(o => (int)o.Key))
+            foreach (var provider in VinNumberDataProviders.OrderBy(o => (int) o.Key))
             {
                 vinnumber = provider.Value(response);
                 if (!string.IsNullOrEmpty(vinnumber))
@@ -74,9 +74,8 @@ namespace Lace.Domain.DataProviders.Core.Factories
             {
                 Order.Second,
                 (response) =>
-                    response.Exists<IProvideDataFromRgtVin>() && response.OfType<IProvideDataFromRgtVin>().First().Handled &&
-                    response.OfType<IProvideDataFromRgtVin>().First().RgtCode.HasValue
-                        ? GetNumber(response.OfType<IProvideDataFromRgtVin>().First().RgtCode)
+                    response.Exists<IProvideDataFromRgtVin>() && response.OfType<IProvideDataFromRgtVin>().First().Handled
+                        ? GetNumber(response.OfType<IProvideDataFromRgtVin>().First().CarId)
                         : 0
             }
         };

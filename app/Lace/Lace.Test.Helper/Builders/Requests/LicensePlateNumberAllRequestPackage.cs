@@ -37,6 +37,18 @@ namespace Lace.Test.Helper.Builders.Requests
                 new DataProvider(DataProviderName.LSAutoSpecs_I_DB, 9, 18, RgtRequestType.Empty()) 
             }, Guid.NewGuid());
         }
+
+        public static IHavePackageForRequest LicensePlateIvidRgtVinAndMmCodePackage(string licensePlate, string packageName)
+        {
+            return new LicensePlateNumberPackage(new IAmDataProvider[]
+            {
+                new DataProvider(DataProviderName.IVIDVerify_E_WS, 5, 10,
+                    new IvidStandardRequest(licensePlate, "Murray", packageName,
+                        "murrayw@lightstone.co.za", "Murray", string.Empty)),
+                new DataProvider(DataProviderName.LSAutoVINMaster_I_DB, 8, 16, RgtVinRequest.Empty()),
+                new DataProvider(DataProviderName.MMCode_E_DB, 9, 18, MmCodeRequestType.Empty()) 
+            }, Guid.NewGuid());
+        }
     }
 
     public class VinNumberRequestPackage

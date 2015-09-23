@@ -13,7 +13,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders
         int? Year { get; }
         int? Month { get; }
         int? Quarter { get; }
-        int? RgtCode { get; }
+        int CarId { get; }
         decimal? Price { get; }
         string Colour { get; }
         string CarFullname { get; }

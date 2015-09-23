@@ -5,6 +5,43 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
+    public class LicensePlateRgtVinMmCodeProvidersRequest : IPointToLaceRequest
+    {
+        private readonly IHaveRequestContext _aggregation;
+        private readonly DateTime _requestDate;
+
+        public LicensePlateRgtVinMmCodeProvidersRequest()
+        {
+            _aggregation = new RequestContextInformation();
+            _requestDate = DateTime.Now;
+        }
+
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation(); }
+        }
+
+        public IHaveRequestContext Request
+        {
+            get { return _aggregation; }
+        }
+
+        public DateTime RequestDate
+        {
+            get { return _requestDate; }
+        }
+
+        public IHavePackageForRequest Package
+        {
+            get { return LicensePlateNumberAllRequestPackage.LicensePlateIvidRgtVinAndMmCodePackage("XMC167GP", "IVID-RGTVIN-MMCODE"); }
+        }
+
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
+    }
+
     public class VinNumberLSAutoRgtAndRgtVinProvidersRequest : IPointToLaceRequest
     {
         private readonly IHaveRequestContext _aggregation;

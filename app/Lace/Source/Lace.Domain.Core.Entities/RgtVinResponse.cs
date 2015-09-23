@@ -28,14 +28,14 @@ namespace Lace.Domain.Core.Entities
             return new RgtVinResponse(message);
         }
 
-        public RgtVinResponse(string color, int month, int price, int quarter, int rgtCode, string vehicleMake,
+        public RgtVinResponse(string color, int month, int price, int quarter, int carId, string vehicleMake,
             string vechicleModel, string vehicleType, string vin, int year)
         {
             Colour = color;
             Month = month;
             Price = price;
             Quarter = quarter;
-            RgtCode = rgtCode;
+            CarId = carId;
             VehicleMake = vehicleMake;
             VehicleModel = vechicleModel;
             VehicleType = vehicleType;
@@ -73,7 +73,7 @@ namespace Lace.Domain.Core.Entities
         public int? Quarter { get; private set; }
 
         [DataMember]
-        public int? RgtCode { get; private set; }
+        public int CarId { get; private set; }
 
         [DataMember]
         public decimal? Price { get; private set; }

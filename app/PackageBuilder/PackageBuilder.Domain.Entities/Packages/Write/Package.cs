@@ -6,6 +6,7 @@ using AutoMapper;
 using CommonDomain.Core;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -200,6 +201,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Map LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             foreach (var dataProvider in dataProviders.Where(x => x.Handled))
             {
+                if(dataProvider.HasCriticalFailure)
+                    throw new LightstoneAutoException(dataProvider.CriticalFailureMessage);
+
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
                 Mapper.Map(laceResponse, DataProviders.FirstOrDefault(x => x.Name == laceResponse.Name), typeof(IDataProvider), typeof(DataProvider));
 
@@ -220,7 +224,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Form LACE Request Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
             if (request == null)
-                throw new Exception(string.Format("Request cannot be built to Contract with Id {0}", contractId));
+                throw new LightstoneAutoException(string.Format("Request cannot be built to Contract with Id {0}", contractId));
 
             this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var responses = entryPoint.GetResponsesFromLace(new[] { request });

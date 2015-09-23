@@ -97,4 +97,21 @@ namespace Lace.Test.Helper.Builders.Requests
             return _request;
         }
     }
+
+    public class LicensePlateMmCodeRequestBuilder
+    {
+        private ICollection<IPointToLaceRequest> _request;
+
+        public ICollection<IPointToLaceRequest> ForIvidRgtVinMmCode()
+        {
+            _request = new[] { new LicensePlateRgtVinMmCodeProvidersRequest() };
+            return _request;
+        }
+
+        public ICollection<IPointToLaceRequest> ForRgtAndRgtVin()
+        {
+            _request = new[] { new VinNumbeRgtAndRgtVinProvidersRequest() };
+            return _request;
+        }
+    }
 }

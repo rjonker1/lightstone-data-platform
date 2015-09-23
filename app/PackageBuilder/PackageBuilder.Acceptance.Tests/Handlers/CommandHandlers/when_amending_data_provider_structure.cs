@@ -66,6 +66,9 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
         {
             VehicleData = new VehicleData();
         }
+
+        public string CriticalFailureMessage { get; private set; }
+        public bool HasCriticalFailure { get; private set; }
     }
 
     public class when_amending_data_provider_structure : TestDataBaseHelper
