@@ -180,13 +180,13 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
                 //var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true); // todo: Validate & compare to api request fields 
                 var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(fields);
                 laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice, user, Name,
-                    requestTypes));
+                    requestTypes, CriticalDataProviders.Find(dataProvider.Name)));
             }
 
             var request = new LaceRequest(
                 user,
                 new Contract(contractVersion, accountNumber, contractId),
-                new RequestPackage(laceProviders.ToArray(), Id, Name, (long)DisplayVersion, packageCostPrice, packageRecommendedPrice),
+                new RequestPackage(laceProviders.ToArray(), Id, Name, (long) DisplayVersion, packageCostPrice, packageRecommendedPrice),
                 new RequestContext(requestId, fromDevice, fromIpAddress, osVersion, system),
                 DateTime.UtcNow);
 
