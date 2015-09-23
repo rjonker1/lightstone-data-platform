@@ -87,5 +87,11 @@ namespace Lace.Domain.Core.Entities
         {
             Handled = true;
         }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
     }
 }

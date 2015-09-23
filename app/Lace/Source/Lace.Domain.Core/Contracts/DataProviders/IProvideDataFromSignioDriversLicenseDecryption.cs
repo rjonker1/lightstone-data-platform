@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromSignioDriversLicenseDecryption : IPointToLaceProvider, IProvideCriticalFailure
+    public interface IProvideDataFromSignioDriversLicenseDecryption : IPointToLaceProvider
     {
         IAmSignioDriversLicenseDecryptionRequest Request { get; }
         IRespondWithDriversLicenseCard DrivingLicense { get; }

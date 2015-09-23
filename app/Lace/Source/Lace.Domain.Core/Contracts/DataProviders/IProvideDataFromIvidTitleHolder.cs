@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromIvidTitleHolder : IPointToLaceProvider, IProvideCriticalFailure
+    public interface IProvideDataFromIvidTitleHolder : IPointToLaceProvider
     {
         IAmIvidTitleholderRequest Request { get; }
         string BankName { get; }

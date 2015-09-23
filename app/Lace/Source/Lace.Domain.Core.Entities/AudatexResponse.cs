@@ -187,5 +187,11 @@ namespace Lace.Domain.Core.Entities
                 .ToList();
             return r3;
         }
+
+        [DataMember]
+        public bool HasCriticalFailure { get; private set; }
+
+        [DataMember]
+        public string CriticalFailureMessage { get; private set; }
     }
 }

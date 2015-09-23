@@ -126,5 +126,9 @@ namespace Lace.Domain.Core.Entities
                 return GetType();
             }
         }
+
+        public bool HasCriticalFailure { get; private set; }
+
+        public string CriticalFailureMessage { get; private set; }
     }
 }
