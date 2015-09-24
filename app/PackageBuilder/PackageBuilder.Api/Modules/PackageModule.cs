@@ -121,12 +121,12 @@ namespace PackageBuilder.Api.Modules
                         });
             };
 
-            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute] = parameters =>
-                Response.AsJson(
-                    new
-                    {
-                        Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
-                    });
+            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute] = parameters => Response.AsJson(
+                new
+                {
+                    Response = new[] {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id))}
+                });
+                
 
             Post[PackageBuilderApi.PackageRoutes.Execute.ApiRoute] = parameters =>
             {

@@ -59,6 +59,16 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                                     .Filter(f => x != null && f.Namespace == x.Namespace)
                                     .FirstOrDefault(), x));
 
+                //var d = dataProvider.DataFields.ToNamespace().ToList().Cast<DataField>();
+                //var c = dataProviderOverride.DataFieldOverrides.ToNamespace();
+
+                //foreach (var dataField in d)
+                //{
+                //    var test = Mapper.Map(c
+                //        .Filter(f => f.Namespace == dataField.Namespace)
+                //        .FirstOrDefault(), dataField);
+                //}
+
                 dataProvider.DataFields.ToNamespace().ToList().Cast<DataField>()
                     .RecursiveForEach(x => Mapper.Map(dataProviderOverride.DataFieldOverrides.ToNamespace()
                                     .Filter(f => x != null && f.Namespace == x.Namespace)

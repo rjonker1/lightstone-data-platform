@@ -105,37 +105,37 @@
                     var listItem = items[i];
 
                     switch (listItem.fieldLevelCostPriceOverride) {
-                        case true:
+                        case true: 
                             //Tier 1
                             for (var x = 0; x < (listItem.dataFields).length; x++) {
                                 if (listItem.dataFields[x] == null)
                                     continue;
 
-                                if (listItem.dataFields[x].isSelected === true) {
+                                //if (listItem.dataFields[x].isSelected === true) {
 
-                                    var parent = listItem.dataFields[x];
-                                    var children = listItem.dataFields[x].dataFields;
+                                //    var parent = listItem.dataFields[x];
+                                //    //var children = listItem.dataFields[x].dataFields;
 
-                                    if (children.length > 0) {
+                                //    //if (children.length > 0) {
 
-                                        for (var m = 0; m < children.length; m++) {
+                                //    //    for (var m = 0; m < children.length; m++) {
 
-                                            children[m].isSelected = false;
+                                //    //        children[m].isSelected = false;
 
-                                            //subChildren override
-                                            if (children[m].dataFields.length > 0) {
+                                //    //        //subChildren override
+                                //    //        //if (children[m].dataFields.length > 0) {
 
-                                                for (var n = 0; n < children[m].dataFields.length; n++) {
+                                //    //        //    for (var n = 0; n < children[m].dataFields.length; n++) {
 
-                                                    children[m].dataFields[n].isSelected = false;
-                                                }
-                                            }
+                                //    //        //        children[m].dataFields[n].isSelected = false;
+                                //    //        //    }
+                                //    //        //}
 
-                                        }
-                                    }
+                                //    //    }
+                                //    //}
 
-                                    valueTotal += parent.costOfSale;
-                                }
+                                //    //valueTotal += parent.costOfSale;
+                                //}
                                 //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
                                     if (listItem.dataFields[x].dataFields[j] == null)
@@ -144,15 +144,15 @@
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
                                         var child = listItem.dataFields[x].dataFields[j];
-                                        var subChildren = listItem.dataFields[x].dataFields[j].dataFields;
+                                        //var subChildren = listItem.dataFields[x].dataFields[j].dataFields;
 
-                                        if (subChildren.length > 0) {
+                                        //if (subChildren.length > 0) {
 
-                                            for (var l = 0; l < subChildren.length; l++) {
+                                        //    for (var l = 0; l < subChildren.length; l++) {
 
-                                                subChildren[l].isSelected = false;
-                                            }
-                                        }
+                                        //        subChildren[l].isSelected = false;
+                                        //    }
+                                        //}
 
                                         valueTotal += child.costOfSale;
                                     }

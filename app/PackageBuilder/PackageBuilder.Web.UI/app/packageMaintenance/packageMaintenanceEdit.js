@@ -102,48 +102,49 @@
                             for (var x = 0; x < (listItem.dataFields).length; x++) {
                                 if (listItem.dataFields[x] == null)
                                     continue;
-                                
-                                if (listItem.dataFields[x].isSelected === true) {
 
-                                    var parent = listItem.dataFields[x];
-                                    var children = listItem.dataFields[x].dataFields;
+                                //if (listItem.dataFields[x].isSelected === true) {
 
-                                    if (children.length > 0) {
+                                //    var parent = listItem.dataFields[x];
+                                //    //var children = listItem.dataFields[x].dataFields;
 
-                                        for (var m = 0; m < children.length; m++) {
+                                //    //if (children.length > 0) {
 
-                                            children[m].isSelected = false;
+                                //    //    for (var m = 0; m < children.length; m++) {
 
-                                            //subChildren override
-                                            if (children[m].dataFields.length > 0) {
+                                //    //        children[m].isSelected = false;
 
-                                                for (var n = 0; n < children[m].dataFields.length; n++) {
+                                //    //        //subChildren override
+                                //    //        //if (children[m].dataFields.length > 0) {
 
-                                                    children[m].dataFields[n].isSelected = false;
-                                                }
-                                            }
+                                //    //        //    for (var n = 0; n < children[m].dataFields.length; n++) {
 
-                                        }
-                                    }
+                                //    //        //        children[m].dataFields[n].isSelected = false;
+                                //    //        //    }
+                                //    //        //}
 
-                                    valueTotal += parent.costOfSale;
-                                }
+                                //    //    }
+                                //    //}
+
+                                //    //valueTotal += parent.costOfSale;
+                                //}
                                 //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
                                     if (listItem.dataFields[x].dataFields[j] == null)
                                         continue;
+
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
                                         var child = listItem.dataFields[x].dataFields[j];
-                                        var subChildren = listItem.dataFields[x].dataFields[j].dataFields;
+                                        //var subChildren = listItem.dataFields[x].dataFields[j].dataFields;
 
-                                        if (subChildren.length > 0) {
+                                        //if (subChildren.length > 0) {
 
-                                            for (var l = 0; l < subChildren.length; l++) {
+                                        //    for (var l = 0; l < subChildren.length; l++) {
 
-                                                subChildren[l].isSelected = false;
-                                            }
-                                        }
+                                        //        subChildren[l].isSelected = false;
+                                        //    }
+                                        //}
 
                                         valueTotal += child.costOfSale;
                                     }
@@ -151,6 +152,7 @@
                                     for (var k = 0; k < (listItem.dataFields[x].dataFields[j].dataFields).length; k++) {
                                         if (listItem.dataFields[x].dataFields[j].dataFields[k] == null)
                                             continue;
+
                                         if (listItem.dataFields[x].dataFields[j].dataFields[k].isSelected === true) {
 
                                             valueTotal += listItem.dataFields[x].dataFields[j].dataFields[k].costOfSale;

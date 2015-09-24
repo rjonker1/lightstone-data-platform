@@ -14,15 +14,18 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
         public void CreateMaps()
         {
             Mapper.CreateMap<DataField, DataField>()
+                //.ForMember(d => d.CostOfSale, opt => opt.MapFrom(x => x.CostOfSale))
                 .ForMember(d => d.DataFields, opt => opt.Ignore()); // Needs to ignore for amending DP structure functionality
             Mapper.CreateMap<IDataFieldOverride, DataField>()
+                //.ForMember(d => d.CostOfSale, opt => opt.UseDestinationValue())
                 .ForMember(d => d.Industries, opt => opt.UseDestinationValue());
 
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()
                 .ConstructUsing(Mapper.Map<DataProviderFieldItemDto, DataField>);
             Mapper.CreateMap<DataProviderFieldItemDto, DataField>()
                     .ForMember(d => d.Type, opt => opt.ResolveUsing(x => Mapper.Map<string, Type>(x.Type)))
-                    .ForMember(d => d.Industries, opt => opt.MapFrom(x => Mapper.Map<DataProviderFieldItemDto, IEnumerable<IIndustry>>(x))) 
+                    //.ForMember(d => d.CostOfSale, opt => opt.UseDestinationValue())
+                    .ForMember(d => d.Industries, opt => opt.MapFrom(x => Mapper.Map<DataProviderFieldItemDto, IEnumerable<IIndustry>>(x)))
                     .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields == null ? Enumerable.Empty<DataField>() : Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(x.DataFields.ToList())));
 
             Mapper.CreateMap<string, Type>()
