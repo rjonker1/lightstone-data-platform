@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EasyNetQ\when_publishing_new_report_message.cs" />
+    <Compile Include="EasyNetQ\when_publishing_new_statement_report.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
