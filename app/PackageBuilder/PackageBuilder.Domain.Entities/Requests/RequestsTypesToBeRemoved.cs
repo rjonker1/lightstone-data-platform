@@ -161,6 +161,8 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IvidRequest(ICollection<IAmRequestField> requestFields, string pacakgeName, IHaveUser user)
         {
             LicenceNumber = requestFields.GetRequestField<IAmLicenceNumberRequestField>();
+            RegisterNumber = requestFields.GetRequestField<IAmRegisterNumberRequestField>();
+            EngineNumber = requestFields.GetRequestField<IAmEngineNumberRequestField>();
             VinNumber = requestFields.GetRequestField<IAmVinNumberRequestField>();
             Label = new LabelRequestField(pacakgeName);
             RequesterEmail = new RequesterEmailRequestField(user.UserName);
