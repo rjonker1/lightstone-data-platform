@@ -55,7 +55,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         lightstoneAutoResponse.HasBeenHandled();
                         return lightstoneAutoResponse;
                     case DataProviderName.LSAutoSpecs_I_DB:
-                        var rgtResponse = new RgtResponse("TOYOTA", 2008, "Hatch back", "190", "91", "6.2", "10.4", "157", "166", "1598", "Hatch (5-dr)", "Petrol", "Man", "Toyota AURIS", "STANDARD WHITE", "", "", "", "D166", "T05", "Auris");
+                        var rgtResponse = new RgtResponse("TOYOTA", 2008, "Hatch back", "190", "91", "6.2", "10.4", "157", "166", "1598", "Hatch (5-dr)", "Petrol", "Man", "Toyota AURIS", "STANDARD WHITE", "", "", "", "D166", "T05", "Auris", ""
+                                                            , "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                         rgtResponse.HasBeenHandled();
                         return rgtResponse;
                     case DataProviderName.LSAutoVINMaster_I_DB:
