@@ -81,6 +81,10 @@ function gridPackagesFormatter(value, row, index) {
     ].join('');
 };
 
+function accountOwnerMetaFormatter(meta, row, index) {
+    return meta.accountOwner;
+};
+
 window.packageGridActionEvents = {
     'click .view': function (e, value, row, index) {
 

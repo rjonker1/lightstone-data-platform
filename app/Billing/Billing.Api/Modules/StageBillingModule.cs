@@ -33,7 +33,7 @@ namespace Billing.Api.Modules
         private static int _defaultJsonMaxLength;
 
         public StageBillingModule(IRepository<StageBilling> stageBillingDBRepository, IRepository<AuditLog> auditLogs, IRepository<UserMeta> userMetaRepository,
-                                    IRepository<ContractMeta> contracMetaRepository,
+                                    IRepository<ContractMeta> contracMetaRepository, IRepository<AccountMeta> accountMetaRepository,
                                     ICommitBillingTransaction<UserTransactionDto> userBillingTransaction,
                                     ICommitBillingTransaction<CustomerClientTransactionDto> customerClientBillingTransaction,
                                     ICommitBillingTransaction<PackageTransactionDto> packBillingTransaction,
@@ -104,7 +104,8 @@ namespace Billing.Api.Modules
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactions.Count(),
                             BilledTransactions = billedCustomerTransactionsTotal.Count(),
-                            Products = customerPackages
+                            Products = customerPackages,
+                            AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
                     }
 
@@ -117,7 +118,8 @@ namespace Billing.Api.Modules
                             CustomerName = transaction.ClientName,
                             Transactions = clientTransactions.Count(),
                             BilledTransactions = billedClientTransactionsTotal.Count(),
-                            Products = clientPackagesTotal
+                            Products = clientPackagesTotal,
+                            AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
                     }
 

@@ -167,6 +167,10 @@ window.userTransactionEditActionEvents = {
     }
 };
 
+function accountOwnerMetaFormatter(meta, row, index) {
+    return meta.accountOwner;
+};
+
 function gridPackagesFormatter(value, row, index) {
 
     return [

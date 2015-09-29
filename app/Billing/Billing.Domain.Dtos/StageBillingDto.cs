@@ -15,6 +15,7 @@ namespace Billing.Domain.Dtos
         public int Transactions { get; set; }
         public int BilledTransactions { get; set; }
         public string UserType { get; set; }
+        public AccountMeta AccountMeta { get; set; }
         public int Total { get; set; } 
     }
 }

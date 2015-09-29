@@ -48,8 +48,9 @@
                 title: 'User Type',
                 sortable: true
             }, {
-                field: 'owner',
-                title: 'Owner',
+                field: 'accountMeta',
+                title: 'Account Owner',
+                formatter: accountOwnerMetaFormatter,
                 sortable: true
             }, {
                 field: 'products',

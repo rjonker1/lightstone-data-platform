@@ -31,7 +31,7 @@ namespace Billing.Api.Modules
         private IList<PreBilling> _preBillingRepository;
 
         public PreBillingModule(IRepository<PreBilling> preBillingDBRepository, 
-                                IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider,
+                                IRepository<AccountMeta> accountMetaRepository, IRepository<UserMeta> userMetaRepository, ICacheProvider<PreBilling> preBillingCacheProvider,
                                 IReportApiClient reportApiClient)
         {
             this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
@@ -89,7 +89,8 @@ namespace Billing.Api.Modules
                             Id = transaction.CustomerId,
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactions.Count(),
-                            Products = customerPackages
+                            Products = customerPackages,
+                            AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
                     }
 
@@ -101,7 +102,8 @@ namespace Billing.Api.Modules
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
                             Transactions = clientTransactions.Count(),
-                            Products = clientPackagesTotal
+                            Products = clientPackagesTotal,
+                            AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
                     }
 
@@ -264,6 +266,7 @@ namespace Billing.Api.Modules
                 this.Info(() => "PreBilling Cache loaded");
             }
         }
+
     }
 
 }

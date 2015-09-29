@@ -71,6 +71,10 @@ function userTransactionsFormatter(value, row, index) {
     ].join('');
 };
 
+function accountOwnerMetaFormatter(meta, row, index) {
+    return meta.accountOwner;
+};
+
 function gridPackagesFormatter(value, row, index) {
 
     return [

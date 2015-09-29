@@ -24,7 +24,8 @@ namespace Billing.Api.Modules
         private readonly IRepository<FinalBilling> _finalBillingDBRepository;
         private IList<FinalBilling> finalBillingRepository;
 
-        public FinalBillingModule(IRepository<FinalBilling> finalBillingDBRepository, IRepository<UserMeta> userMetaRepository, ICacheProvider<FinalBilling> finalBillingCacheProvider)
+        public FinalBillingModule(IRepository<FinalBilling> finalBillingDBRepository, IRepository<UserMeta> userMetaRepository, IRepository<AccountMeta> accountMetaRepository,
+                                    ICacheProvider<FinalBilling> finalBillingCacheProvider)
         {
             this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
@@ -80,7 +81,8 @@ namespace Billing.Api.Modules
                             Id = transaction.CustomerId,
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactions.Count(),
-                            Products = customerPackages
+                            Products = customerPackages,
+                            AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
                     }
 
@@ -92,7 +94,8 @@ namespace Billing.Api.Modules
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
                             Transactions = clientTransactions.Count(),
-                            Products = clientPackagesTotal
+                            Products = clientPackagesTotal,
+                            AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
                     }
 
