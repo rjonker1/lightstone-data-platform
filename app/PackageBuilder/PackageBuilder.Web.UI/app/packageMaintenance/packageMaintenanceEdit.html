@@ -1,4 +1,4 @@
-﻿<script type="text/ng-template" id="data_field_renderer.html"> 
+﻿<script type="text/ng-template" id="data_field_renderer.html">
     <i ng-if="dataField.isSelected">{{dataField.name}} |</i>
     <span ng-repeat="dataField in dataField.dataFields" ng-include="'data_field_renderer.html'"></span>
 </script>
@@ -48,11 +48,11 @@
 
 <script type="text/ng-template" id="field_render.html">
 
-    <div style="cursor:default; background-color: #4C7E80 !important;" class="group-title angular-ui-tree-handle" data-nodrag>
+    <div style="cursor:default;" ng-attr-style="{{toggleDataFieldColor(dataField)}}" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
 
             <div class="col-md-4">
-                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag onclick="toggleTreeNode(this); return false;">
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggleDataField(rollupSummary);" onclick="toggleTreeNode(this); return false;">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
                 </a>
 
@@ -66,10 +66,12 @@
             </div>
 
             <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-4">Cost:</label>
+                <label ng-if="dataField.dataFields.length <= 0" class="col-md-4">Cost:</label>
+                <label ng-if="dataField.dataFields.length > 0" class="col-md-4"></label>
 
-                <input ng-if="dataField.dataFields.length > 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0"
-                       value="{{totalChildren(dataField, dataField.dataFields)}}" />
+                <div ng-show="rollupSummary" ng-if="dataField.dataFields.length > 0">
+                    <label class="col-md-4 form-control" style="width: 12% !important;">Roll-up Total: R {{totalChildren(dataField, dataField.dataFields)}}</label>
+                </div>
 
                 <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.costOfSale" />
             </div>
@@ -78,7 +80,7 @@
 
     <ul style="cursor:default; list-style-type: none;" class="angular-ui-tree" ng-model="dataField.dataFields" data-nodrag type="category" ng-class="{hidden: !collapsed}">
         <li style="cursor:default" class="category-title " ng-repeat="dataField in dataField.dataFields | filter:filterIndustry" ng-include="'field_render.html'">
-
+            toggleDataFieldColor();
         </li>
     </ul>
 
@@ -194,8 +196,8 @@
                                         <span ng-repeat="dataField in dataProvider.dataFields" ng-include="'data_field_renderer.html'"></span>
                                     </div>
                                 </div>
-                            </div> 
-                            </div> <!--End Info-->
+                            </div>
+                        </div> <!--End Info-->
                         <br />
                         <!-- DataProvider -->
                         <div class="row">

@@ -24,6 +24,20 @@
         { name: 'user3' }
         ];
 
+        $scope.toggleDataFieldColor = function (dataField) {
+
+            if (dataField.dataFields.length > 0) return $scope.dataFieldColor = 'background-color: #4D4D4D !important';
+            if (dataField.dataFields.length <= 0) return $scope.dataFieldColor = 'background-color: #4C7E80 !important';
+        }
+
+        $scope.rollupSummary = false;
+
+        $scope.toggleDataField = function (value) {
+
+            if (value == true) return $scope.rollupSummary = false;
+            if (value == false) return $scope.rollupSummary = true;
+        }
+
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
         $scope.dataProvsPkg = {};
@@ -111,31 +125,33 @@
                                 if (listItem.dataFields[x] == null)
                                     continue;
 
-                                //if (listItem.dataFields[x].isSelected === true) {
+                                if (listItem.dataFields[x].isSelected === true) {
 
-                                //    var parent = listItem.dataFields[x];
-                                //    //var children = listItem.dataFields[x].dataFields;
+                                    var parent = listItem.dataFields[x];
 
-                                //    //if (children.length > 0) {
+                                    //    //var children = listItem.dataFields[x].dataFields;
 
-                                //    //    for (var m = 0; m < children.length; m++) {
+                                    //    //if (children.length > 0) {
 
-                                //    //        children[m].isSelected = false;
+                                    //    //    for (var m = 0; m < children.length; m++) {
 
-                                //    //        //subChildren override
-                                //    //        //if (children[m].dataFields.length > 0) {
+                                    //    //        children[m].isSelected = false;
 
-                                //    //        //    for (var n = 0; n < children[m].dataFields.length; n++) {
+                                    //    //        //subChildren override
+                                    //    //        //if (children[m].dataFields.length > 0) {
 
-                                //    //        //        children[m].dataFields[n].isSelected = false;
-                                //    //        //    }
-                                //    //        //}
+                                    //    //        //    for (var n = 0; n < children[m].dataFields.length; n++) {
 
-                                //    //    }
-                                //    //}
+                                    //    //        //        children[m].dataFields[n].isSelected = false;
+                                    //    //        //    }
+                                    //    //        //}
 
-                                //    //valueTotal += parent.costOfSale;
-                                //}
+                                    //    //    }
+                                    //    //}
+
+                                    //valueTotal += parent.costOfSale;
+                                    if (parent.dataFields.length <= 0) valueTotal += parent.costOfSale;
+                                }
                                 //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
                                     if (listItem.dataFields[x].dataFields[j] == null)

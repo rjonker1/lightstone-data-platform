@@ -45,15 +45,15 @@
 </script>
 
 <script type="text/ng-template" id="field_render.html">
-    <div style="cursor:default; background-color: #4C7E80 !important;" class="group-title angular-ui-tree-handle" data-nodrag>
+    <div style="cursor:default;" ng-attr-style="{{toggleDataFieldColor(dataField)}}" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
 
-            <div class="col-md-6">
-                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs toggle-tree-node" data-nodrag" onclick="toggleTreeNode(this); return false;">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
+            <div class="col-md-4">
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggleDataField(rollupSummary);" onclick="toggleTreeNode(this); return false;">
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
                 </a>
 
-                <div class="col-md-1" ng-if="dataField.dataFields.length <= 0"></div>
+                <div class="col-md-2" ng-if="dataField.dataFields.length <= 0"></div>
 
                 <div>
                     <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
@@ -62,15 +62,15 @@
                 </div>
             </div>
 
-            <div class="col-md-1"></div>
-
             <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-2">Cost:</label>
+                <label ng-if="dataField.dataFields.length <= 0" class="col-md-4">Cost:</label>
+                <label ng-if="dataField.dataFields.length > 0" class="col-md-4"></label>
 
-                <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
-                       value="{{totalChildren(dataField, dataField.dataFields)}}" readonly />
+                <div ng-show="rollupSummary" ng-if="dataField.dataFields.length > 0">
+                    <label class="col-md-4 form-control" style="width: 12% !important;">Roll-up Total: R {{totalChildren(dataField, dataField.dataFields)}}</label>
+                </div>
 
-                <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="dataField.costOfSale" readonly />
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.costOfSale" />
             </div>
         </div>
     </div>

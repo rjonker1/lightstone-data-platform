@@ -23,6 +23,20 @@
         { name: 'user2' },
         { name: 'user3' }
         ];
+        
+        $scope.toggleDataFieldColor = function (dataField) {
+
+            if (dataField.dataFields.length > 0) return $scope.dataFieldColor = 'background-color: #4D4D4D !important';
+            if (dataField.dataFields.length <= 0) return $scope.dataFieldColor = 'background-color: #4C7E80 !important';
+        }
+
+        $scope.rollupSummary = false;
+
+        $scope.toggleDataField = function (value) {
+
+            if (value == true) return $scope.rollupSummary = false;
+            if (value == false) return $scope.rollupSummary = true;
+        }
 
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
@@ -103,9 +117,10 @@
                                 if (listItem.dataFields[x] == null)
                                     continue;
 
-                                //if (listItem.dataFields[x].isSelected === true) {
+                                if (listItem.dataFields[x].isSelected === true) {
 
-                                //    var parent = listItem.dataFields[x];
+                                    var parent = listItem.dataFields[x];
+
                                 //    //var children = listItem.dataFields[x].dataFields;
 
                                 //    //if (children.length > 0) {
@@ -126,8 +141,9 @@
                                 //    //    }
                                 //    //}
 
-                                //    //valueTotal += parent.costOfSale;
-                                //}
+                                    //valueTotal += parent.costOfSale;
+                                    if (parent.dataFields.length <= 0) valueTotal += parent.costOfSale;
+                                }
                                 //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
                                     if (listItem.dataFields[x].dataFields[j] == null)
@@ -208,7 +224,7 @@
         $scope.totalChildren = function(parent, children) {
             var totalChildrenVal = 0;
             for (var i = 0; i < children.length; i++) {
-                totalChildrenVal += children[i].costOfSale;
+                if (children[i].isSelected) totalChildrenVal += children[i].costOfSale;
             }
 
             parent.costOfSale = totalChildrenVal;
