@@ -4,9 +4,6 @@ namespace Lace.Toolbox.Database.Models
 {
     public sealed class CarSpecification : IAmCachable
     {
-        //public const string SelectWithCarId =
-        //    "select c.Car_ID as CarId, c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, c.RainSensorWindscreenWipers, c.HeadUpDisplay from Car c join Manufacturer m on m.Manufacturer_ID = c.Manufacturer_ID join CarType ct on ct.CarType_ID = c.CarType_ID where c.Car_ID = @CarId";
-
         public const string SelectWithCarId =
             @"select
               distinct c.Car_ID as CarId, c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, 
@@ -52,41 +49,52 @@ namespace Lace.Toolbox.Database.Models
               c.RainSensorWindscreenWipers, c.HeadUpDisplay";
         
         public const string SelectAll =
-            @"select c.Car_ID as CarId, c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, c.RainSensorWindscreenWipers, c.HeadUpDisplay from Car c join Manufacturer m on m.Manufacturer_ID = c.Manufacturer_ID join CarType ct on ct.CarType_ID = c.CarType_ID";
+            @"select
+              distinct c.Car_ID as CarId, c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, 
+                  c.RainSensorWindscreenWipers, c.HeadUpDisplay,
+                  max(case when SpID.Spec_Desc = 'Air Conditioner' then SpL.Spec_Val end) [AirConditioner],
+                  max(case when SpID.Spec_Desc = 'Electric Mirrors' then SpL.Spec_Val end) [ElectricMirrors],
+                  max(case when SpID.Spec_Desc = 'Fold Away Mirrors' then SpL.Spec_Val end) [FoldAwayMirrors],
+                  max(case when SpID.Spec_Desc = 'Heated Side Mirrors' then SpL.Spec_Val end) [HeatedSideMirrors],
+                  max(case when SpID.Spec_Desc = 'Doors' then SpL.Spec_Val end) [Doors],
+                  max(case when SpID.Spec_Desc = 'Bore x Stroke (mm)' then SpL.Spec_Val end) [BoreXStroke],
+                  max(case when SpID.Spec_Desc = 'Compression Ratio' then SpL.Spec_Val end) [CompressionRatio],
+                  max(case when SpID.Spec_Desc = 'Cylinders' then SpL.Spec_Val end) [Cylinders],
+                  max(case when SpID.Spec_Desc = 'Valves Per Cylinder' then SpL.Spec_Val end) [ValvesPerCylinder],
+                  max(case when SpID.Spec_Desc = 'ABS Brakes' then SpL.Spec_Val end) [ABSBrakes],
+                  max(case when SpID.Spec_Desc = 'Brakes - Front Discs' then SpL.Spec_Val end) [BrakesFrontDiscs],
+                  max(case when SpID.Spec_Desc = 'Brakes - Rear Discs' then SpL.Spec_Val end) [BrakesRearDiscs],
+                  max(case when SpID.Spec_Desc = 'Fog Lamps - Front' then SpL.Spec_Val end) [FogLampsFront],
+                  max(case when SpID.Spec_Desc = 'Fog Lamps - Rear' then SpL.Spec_Val end) [FogLampsRear],
+                  max(case when SpID.Spec_Desc = 'Headlight Type' then SpL.Spec_Val end) [HeadlightType],
+                  max(case when SpID.Spec_Desc = 'Heated Rear Window' then SpL.Spec_Val end) [HeatedRearWindow],
+                  max(case when SpID.Spec_Desc = 'Rear Wiper' then SpL.Spec_Val end) [RearWiper],
+                  max(case when SpID.Spec_Desc = 'Power Steering' then SpL.Spec_Val end) [PowerSteering],
+                  max(case when SpID.Spec_Desc = 'Colour Coded Bumpers' then SpL.Spec_Val end) [ColourCodedBumpers],
+                  max(case when SpID.Spec_Desc = 'Colour Coded Door Handles' then SpL.Spec_Val end) [ColourCodedDoorHandles],
+                  max(case when SpID.Spec_Desc = 'Colour Coded Mirrors' then SpL.Spec_Val end) [ColourCodedMirrors],
+                  max(case when SpID.Spec_Desc = 'Maintenance Plan - km''s' then SpL.Spec_Val end) [MaintenancePlanKms],
+                  max(case when SpID.Spec_Desc = 'Maintenance Plan - Years' then SpL.Spec_Val end) [MaintenancePlanYears],
+                  max(case when SpID.Spec_Desc = 'Service Intervals - km''s' then SpL.Spec_Val end) [ServiceIntervalsKms],
+                  max(case when SpID.Spec_Desc = 'Service Plan - km''s' then SpL.Spec_Val end) [ServicePlanKms],
+                  max(case when SpID.Spec_Desc = 'Service Plan - Years' then SpL.Spec_Val end) [ServicePlanYears],
+                  max(case when SpID.Spec_Desc = 'Warranty - km''s' then SpL.Spec_Val end) [WarrantyKms],
+                  max(case when SpID.Spec_Desc = 'Warranty - Years' then SpL.Spec_Val end) [WarrantyYears],
+                  max(case when SpID.Spec_Desc = 'Rim Size - Front' then SpL.Spec_Val end) [RimSizeFront],
+                  max(case when SpID.Spec_Desc = 'Tyre Size - Front' then SpL.Spec_Val end) [TyreSizeFront],
+                  max(case when SpID.Spec_Desc = 'Tyre Size - Rear' then SpL.Spec_Val end) [TyreSizeRear],
+                  max(case when SpID.Spec_Desc = 'Wheel Type' then SpL.Spec_Val end) [WheelType]
+            from SpecificationID SpID
+	             inner join SpecificationLookup SpL on SpL.Spec_ID = SpID.Spec_ID
+	             inner join Car c on c.Car_ID = SpL.Car_ID
+	             join Manufacturer m on m.Manufacturer_ID = c.Manufacturer_ID join CarType ct on ct.CarType_ID = c.CarType_ID 
+            group by c.Car_ID, c.CarModel, c.ModelYear,m.ManufacturerName, ct.CarTypeName, c.EngineSize, c.BodyShape, c.FuelType, c.TransmissionType, c.CarFullName, 
+              c.RainSensorWindscreenWipers, c.HeadUpDisplay";
 
         public CarSpecification()
         {
             
         }
-
-        //public CarSpecification(string manufacturerName, int modelYear, string carTypeName, string topSpeed, string kilowatts,
-        //    string fuelEconomy, string accelration, string torque, string emissions, string engineSize, string bodyShape,
-        //    string fuelType, string transmissionType, string carFullName, string color,
-        //    string rainSensorWindscreenWipers, string headsUpDisplay, string vehicleType, string carModel, string make,
-        //    string carType)
-        //{
-        //    ManufacturerName = manufacturerName;
-        //    ModelYear = modelYear;
-        //    CarTypeName = carTypeName;
-        //    TopSpeed = topSpeed;
-        //    Kilowatts = kilowatts;
-        //    FuelEconomy = fuelEconomy;
-        //    Acceleration = accelration;
-        //    Torque = torque;
-        //    Emissions = emissions;
-        //    EngineSize = engineSize;
-        //    BodyShape = bodyShape;
-        //    FuelType = fuelType;
-        //    TransmissionType = transmissionType;
-        //    CarFullname = carFullName;
-        //    Colour = color;
-        //    RainSensorWindscreenWipers = rainSensorWindscreenWipers;
-        //    HeadUpDisplay = headsUpDisplay;
-        //    VehicleType = vehicleType;
-        //    CarModel = carModel;
-        //    Make = make;
-        //    CarType = carType;
-        //}
 
         public CarSpecification(string manufacturerName, int? modelYear, string carTypeName, string topSpeed, string kilowatts,
             string fuelEconomy, string acceleration, string torque, string emissions, string engineSize, string bodyShape,
