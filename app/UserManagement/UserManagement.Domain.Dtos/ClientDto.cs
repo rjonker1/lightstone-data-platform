@@ -15,7 +15,9 @@ namespace UserManagement.Domain.Dtos
         [Required, Display(Name = "Account owner is required")]
         public Guid AccountOwnerId { get; set; }
         public string AccountOwnerName { get; set; }
+        public string AccountOwnerIndividualName { get; set; }
         public string AccountOwnerIndividualSurname { get; set; }
+        public string AccountOwnerIndividualFullName { get; set; }
         public Guid accountownerlastname_primary_key { get; set; }
         public IEnumerable<Guid> Industries { get; set; }
         public Guid IndividualId { get; set; }

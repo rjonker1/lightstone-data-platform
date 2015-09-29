@@ -41,7 +41,7 @@
                     {
                         var isSelected = item.Value == Model.CommercialStateId.ToString();
                         <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                    }
+                    }L
                 </select>
             </div>
             <div class="col-lg-6">
@@ -55,6 +55,7 @@
             <div class="input-group col-lg-2">
                 @Html.TextBoxFor(x => x.AccountOwnerIndividualSurname, new { @class = "form-control", placeholder = "", id = "AccountOwnerName" })
                 @Html.HiddenFor(x => x.AccountOwnerId, new { id = "AccountOwnerId" })
+                @Html.HiddenFor(x => x.accountownerlastname_primary_key, new { id = "accountownerlastname_primary_key" })
             </div>
             <div class="col-lg-6">
                 @Html.ValidationMessageFor(x => x.AccountOwnerId)

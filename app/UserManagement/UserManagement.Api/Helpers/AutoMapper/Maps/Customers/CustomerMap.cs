@@ -20,7 +20,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
                 {
                     Mapper.Map(s, d, typeof(Entity), typeof(EntityDto));
                 })
-                .ForMember(dest => dest.AccountOwnerName, opt => opt.MapFrom(x => x.AccountOwner != null ? x.AccountOwner.FullName : ""))
+                .ForMember(dest => dest.AccountOwnerName, opt => opt.MapFrom(x => x.AccountOwner != null ? x.AccountOwner.Individual.FullName : ""))
                 .ForMember(dest => dest.Industries, opt => opt.MapFrom(x => x.Industries.Select(cind => cind.IndustryId)));
 
             Mapper.CreateMap<CustomerDto, Customer>()

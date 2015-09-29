@@ -636,8 +636,7 @@ function initializePlugins() {
     //    }
     //});
     
-    var accountOwnerUserId = $('#AccountOwnerId').val();
-    var accountOwnerUserName = $('#AccountOwnerName').val();
+    var accountownerlastname_primary_key = $('#AccountOwnerId').val();
 
     $('#AccountOwnerName').ajaxComboBox(
         "/userlist/",
@@ -647,20 +646,21 @@ function initializePlugins() {
             primary_key: 'id',
             field: 'individualSurname',
             sub_info: true,
-            sub_as: {
-                firstName: 'First Name',
-                idNumber: 'ID Number'
-            },
-            show_field: 'individualName, individualIdNumber',
+            show_field: 'id, individualName, individualIdNumber',
             //select_only: true,
-            //init_record: [accountOwnerUserId],
+            init_record: ['d368acdf-9edb-40d4-bdb4-774c32f883aa'],
+            bind_to: 'kakComp',
             per_page: 10,
         }
-    );
-    
-    $('#AccountOwnerId').val(accountOwnerUserId);
-    $('#AccountOwnerName').text(accountOwnerUserName);
-    $('#accountownerlastname_primary_key').val(accountOwnerUserId);
+    ).bind('kakComp', function () {
+        var wtf = $.parseJSON(($(this).attr('sub_info')).replace(/'/g, "\""));
+
+        $('#accountownerlastname_primary_key').val(wtf.id);
+        $('#AccountOwnerName').text(wtf.individualName);
+    });
+
+    $('#accountownerlastname_primary_key').val(accountownerlastname_primary_key);
+    //$('#accountownerlastname_primary_key').val(accountOwnerUserId);
 
     var packageLookupUri = '#{Lightstone.dp.pb.api.url}/PackageLookup/';
 
