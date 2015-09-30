@@ -177,6 +177,7 @@ namespace PackageBuilder.Domain.Entities
             }
         }
 
+        // Return only selected Datafields
         public static IEnumerable<IDataField> GetSelected(this IEnumerable<IDataField> dataFields)
         {
             if (dataFields == null)
