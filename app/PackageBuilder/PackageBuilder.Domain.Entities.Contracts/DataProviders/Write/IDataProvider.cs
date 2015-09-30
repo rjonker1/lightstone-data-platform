@@ -20,6 +20,6 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
         DateTime CreatedDate { get; }
         DateTime? EditedDate { get; }
         IEnumerable<IDataField> RequestFields { get; }
-        IEnumerable<IDataField> DataFields { get; }
+        IEnumerable<IDataField> DataFields { get; set; }
     }
 }

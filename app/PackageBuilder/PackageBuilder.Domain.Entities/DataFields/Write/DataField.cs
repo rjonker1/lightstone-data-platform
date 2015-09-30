@@ -40,7 +40,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         [DataMember]
         public string Type { get; internal set; }
         [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
-        public IEnumerable<IDataField> DataFields { get; internal set; }
+        public IEnumerable<IDataField> DataFields { get; set; }
 
         //Default constructor for deserialization
         public DataField()

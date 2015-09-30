@@ -176,5 +176,20 @@ namespace PackageBuilder.Domain.Entities
                 dataField.DataFields.RemoveFields(predicate);
             }
         }
+
+        public static IEnumerable<IDataField> GetSelected(this IEnumerable<IDataField> dataFields)
+        {
+            if (dataFields == null)
+                yield break;
+
+            foreach (var dataField in dataFields.Where(x => x != null).ToList())
+            {
+                if (dataField.IsSelected.HasValue && dataField.IsSelected.Value)
+                {
+                    dataField.DataFields = dataField.DataFields.GetSelected();
+                    yield return dataField;
+                }
+            }
+        }
     }
 }

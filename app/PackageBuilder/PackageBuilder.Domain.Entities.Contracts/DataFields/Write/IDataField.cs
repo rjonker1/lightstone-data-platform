@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataFields.Write
         bool? IsSelected { get; }
         int Order { get; }
         string Type { get; }
-        IEnumerable<IDataField> DataFields { get; }
+        IEnumerable<IDataField> DataFields { get; set; }
         void OverrideValuesFromPackage(double costPrice, bool? selected);
         void SetName(string name);
         void SetValue(string value);

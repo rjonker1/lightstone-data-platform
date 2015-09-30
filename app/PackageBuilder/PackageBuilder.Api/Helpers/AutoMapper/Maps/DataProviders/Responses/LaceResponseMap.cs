@@ -70,7 +70,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                                    if (destField != null)
                                        Mapper.Map(destField, laceResponseField, typeof (DataField), typeof (DataField), options => options.BeforeMap((src, des) => destField.SetValue(laceResponseField.Value)));
                                });
-                        s.DataFields.RemoveFields(x => !x.IsSelected.HasValue || (x.IsSelected.HasValue && !x.IsSelected.Value));
+
+                        s.DataFields = s.DataFields.GetSelected();
                     }
                 })
             .ForMember(d => d.DataFields, opt => opt.Ignore());
