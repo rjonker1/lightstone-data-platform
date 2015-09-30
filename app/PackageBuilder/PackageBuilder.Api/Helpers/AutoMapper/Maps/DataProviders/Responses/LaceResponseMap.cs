@@ -71,6 +71,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                                        Mapper.Map(destField, laceResponseField, typeof (DataField), typeof (DataField), options => options.BeforeMap((src, des) => destField.SetValue(laceResponseField.Value)));
                                });
 
+                        // IEnumerableExtensions - extension method for below 
                         s.DataFields = s.DataFields.GetSelected();
                     }
                 })
