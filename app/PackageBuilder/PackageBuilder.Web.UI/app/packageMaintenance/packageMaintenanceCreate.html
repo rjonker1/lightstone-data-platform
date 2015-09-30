@@ -67,7 +67,7 @@
                 <label ng-if="dataField.dataFields.length > 0" class="col-md-4"></label>
 
                 <div ng-show="rollupSummary" ng-if="dataField.dataFields.length > 0">
-                    <label class="col-md-4 form-control" style="width: 12% !important;">Roll-up Total: R {{totalChildren(dataField, dataField.dataFields)}}</label>
+                    <label class="col-md-4 form-control" style="width: 22% !important;">Roll-up Total: R {{totalChildren(dataField, dataField.dataFields)}}</label>
                 </div>
 
                 <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.costOfSale" />
