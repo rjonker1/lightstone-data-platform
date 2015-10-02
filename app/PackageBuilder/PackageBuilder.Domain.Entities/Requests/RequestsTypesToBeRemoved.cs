@@ -160,6 +160,7 @@ namespace PackageBuilder.Domain.Entities.Requests
     {
         public IvidRequest(ICollection<IAmRequestField> requestFields, string pacakgeName, IHaveUser user)
         {
+            ApplicantName = new ApplicantNameRequestField(user.UserName);
             LicenceNumber = requestFields.GetRequestField<IAmLicenceNumberRequestField>();
             RegisterNumber = requestFields.GetRequestField<IAmRegisterNumberRequestField>();
             EngineNumber = requestFields.GetRequestField<IAmEngineNumberRequestField>();
