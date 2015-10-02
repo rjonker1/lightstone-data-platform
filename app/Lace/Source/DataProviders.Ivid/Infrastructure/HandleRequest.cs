@@ -19,7 +19,11 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 Make = request.Make.GetValue(),
                 ReasonForApplication = string.Empty,
                 RegisterNo = request.RegisterNumber.GetValue(),
-                VinOrChassis = request.VinNumber.GetValue()
+                VinOrChassis = request.VinNumber.GetValue(),
+                requesterDetails = new RequesterDetailsElement
+                {
+                    requesterName = request.ApplicantName.GetValue(), requesterEmail = request.ApplicantName.GetValue(), requesterPhone = "087 236 7740"
+                }
             };
         }
     }

@@ -58,5 +58,11 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         {
             _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
         }
+
+        [Observation]
+        public void lave_ivid_response_request_should_have_valid_license_plate_response()
+        {
+            _response.OfType<IProvideDataFromIvid>().First().License.ShouldEqual("CL49CTGP");
+        }
     }
 }
