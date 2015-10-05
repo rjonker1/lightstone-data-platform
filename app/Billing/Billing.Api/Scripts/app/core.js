@@ -389,12 +389,28 @@
 
         $(function () {
 
-            $('#transactionRange span').html(moment({ day: 26 }).subtract(1, 'month').format('MMMM D, YYYY') + ' - ' + moment({ day: 25 }).format('MMMM D, YYYY'));
+            var endRangeFilter = moment({ day: 25 });
+            var startRangeFilter = moment({ day: 26 }).subtract(1, 'month');
+
+            var endRangeFilterLM = moment({ day: 25 }).subtract(1, 'month');
+            var startRangeFilterLM = moment({ day: 26 }).subtract(2, 'month');
+
+            var today = moment().date();
+
+            if (today >= 26 && today < 31) {
+                endRangeFilter = moment({ day: 25 }).add(1, 'month');
+                startRangeFilter = moment({ day: 26 });
+
+                console.log(endRangeFilter);
+                console.log(startRangeFilter);
+            }
+
+            $('#transactionRange span').html(startRangeFilter.format('MMMM D, YYYY') + ' - ' + endRangeFilter.format('MMMM D, YYYY'));
 
             $('#transactionRange').daterangepicker({
                 format: 'MM/DD/YYYY',
-                startDate: moment({ day: 26 }).subtract(1, 'month'),
-                endDate: moment({ day: 25 }),
+                startDate: startRangeFilter,
+                endDate: endRangeFilter,
                 minDate: '01/01/2012',
                 maxDate: '12/31/2020',
                 dateLimit: { days: 60 },
@@ -406,10 +422,9 @@
                 ranges: {
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    //'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Billing Month': [moment({ day: 26 }).subtract(1, 'month'), moment({ day: 25 })],
-                    'Last Billing Month': [moment({ day: 26 }).subtract(2, 'month'), moment({ day: 25 }).subtract(1, 'month')]
+                    'This Billing Month': [startRangeFilter, endRangeFilter],
+                    'Last Billing Month': [startRangeFilterLM, endRangeFilterLM]
                 },
                 opens: 'right',
                 buttonClasses: ['btn', 'btn-sm'],
@@ -428,8 +443,8 @@
                 }
             }, function (start, end, label) {
                 //console.log(start.toISOString(), end.toISOString(), label);
-                startDateFilter = start;
-                endDateFilter = end;
+                endRangeFilter = end;
+                startRangeFilter = start;
                 $('#transactionRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             });
 

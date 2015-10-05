@@ -46,11 +46,11 @@ namespace Billing.Api.Modules
 
             Get["/FinalBilling/"] = _ =>
             {
-                var finalBillingStartDateFilter = Request.Query["startDate"];
-                var finalBillingEndDateFilter = Request.Query["endDate"];
+                var stageBillingStartDateFilter = Request.Query["startDate"];
+                var stageBillingEndDateFilter = Request.Query["endDate"];
 
-                if (finalBillingStartDateFilter.HasValue) endDateFilter = finalBillingStartDateFilter;
-                if (finalBillingEndDateFilter.HasValue) startDateFilter = finalBillingEndDateFilter;
+                if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
+                if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
 
                 endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -58,6 +58,9 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in finalBillingRepository)
                 {
+                    var customerClientIndex = customerClientList.FindIndex(x => x.Id == transaction.CustomerId || x.Id == transaction.ClientId);
+                    if (customerClientIndex > 0) continue;
+
                     var customerClient = new FinalBillingDto();
                     var userList = new List<User>();
 
@@ -109,15 +112,13 @@ namespace Billing.Api.Modules
 
                     // Indices
                     var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
-                    var customerClientIndex = customerClientList.FindIndex(x => x.Id == customerClient.Id);
-
 
                     // Index restrictions for new records
                     if (userIndex < 0) userList.Add(user);
 
                     customerClient.Users = userList;
 
-                    if (customerClientIndex < 0) customerClientList.Add(customerClient);
+                    if (customerClientIndex < 0 && customerClient.Transactions > 0) customerClientList.Add(customerClient);
                 }
 
                 return Negotiate
@@ -128,11 +129,13 @@ namespace Billing.Api.Modules
 
             Get["/FinalBilling/CustomerClient/{searchId}/Users"] = param =>
             {
-                var finalBillingStartDateFilter = Request.Query["startDate"];
-                var finalBillingEndDateFilter = Request.Query["endDate"];
+                var stageBillingStartDateFilter = Request.Query["startDate"];
+                var stageBillingEndDateFilter = Request.Query["endDate"];
 
-                if (finalBillingStartDateFilter.HasValue) endDateFilter = finalBillingStartDateFilter;
-                if (finalBillingEndDateFilter.HasValue) startDateFilter = finalBillingEndDateFilter;
+                if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
+                if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
@@ -180,11 +183,13 @@ namespace Billing.Api.Modules
 
             Get["/FinalBilling/CustomerClient/{searchId}/Packages"] = param =>
             {
-                var finalBillingStartDateFilter = Request.Query["startDate"];
-                var finalBillingEndDateFilter = Request.Query["endDate"];
+                var stageBillingStartDateFilter = Request.Query["startDate"];
+                var stageBillingEndDateFilter = Request.Query["endDate"];
 
-                if (finalBillingStartDateFilter.HasValue) endDateFilter = finalBillingStartDateFilter;
-                if (finalBillingEndDateFilter.HasValue) startDateFilter = finalBillingEndDateFilter;
+                if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
+                if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();

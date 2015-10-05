@@ -56,8 +56,8 @@ namespace Billing.Api.Modules
                 var preBillStartDateFilter = Request.Query["startDate"];
                 var preBillEndDateFilter = Request.Query["endDate"];
 
-                if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
-                if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
+                if (preBillStartDateFilter.HasValue) startDateFilter = preBillStartDateFilter;
+                if (preBillEndDateFilter.HasValue) endDateFilter = preBillEndDateFilter;
 
                 endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -65,21 +65,28 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in _preBillingRepository)
                 {
+                    var customerClientIndex = customerClientList.FindIndex(x => x.Id == transaction.CustomerId || x.Id == transaction.ClientId);
+                    if (customerClientIndex > 0) continue;
+
                     var customerClient = new PreBillingDto();
                     var userList = new List<User>();
 
                     var customerTransactions = _preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
-                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter))
+                                                                            .DistinctBy(x => x.UserTransaction.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
 
 
                     var clientTransactions = _preBillingRepository.Where(x => x.ClientId == transaction.ClientId
-                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter))
+                                                                            .DistinctBy(x => x.UserTransaction.TransactionId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
+
+                    if (customerTransactions.Count() < 0 && clientTransactions.Count() < 0) continue;
 
                     // Customer
                     if (transaction.ClientId == new Guid())
@@ -119,15 +126,13 @@ namespace Billing.Api.Modules
 
                     // Indices
                     var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
-                    var customerClientIndex = customerClientList.FindIndex(x => x.Id == customerClient.Id);
-
 
                     // Index restrictions for new records
                     if (userIndex < 0) userList.Add(user);
 
                     customerClient.Users = userList;
 
-                    if (customerClientIndex < 0) customerClientList.Add(customerClient);
+                    if (customerClientIndex < 0 && customerClient.Transactions > 0) customerClientList.Add(customerClient);
                 }
 
                 return Negotiate
@@ -143,6 +148,8 @@ namespace Billing.Api.Modules
 
                 if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
                 if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
@@ -196,6 +203,8 @@ namespace Billing.Api.Modules
                 if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
                 if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
 
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
+
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
@@ -223,6 +232,8 @@ namespace Billing.Api.Modules
 
                 if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
                 if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 var preBilling = _preBillingRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
 

@@ -67,8 +67,8 @@ namespace Billing.Api.Modules
                 var stageBillingStartDateFilter = Request.Query["startDate"];
                 var stageBillingEndDateFilter = Request.Query["endDate"];
 
-                if (stageBillingStartDateFilter.HasValue) endDateFilter = stageBillingStartDateFilter;
-                if (stageBillingEndDateFilter.HasValue) startDateFilter = stageBillingEndDateFilter;
+                if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
+                if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
 
                 endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -76,11 +76,15 @@ namespace Billing.Api.Modules
 
                 foreach (var transaction in stageBillingRepository)
                 {
+                    var customerClientIndex = customerClientList.FindIndex(x => x.Id == transaction.CustomerId || x.Id == transaction.ClientId);
+                    if (customerClientIndex > 0) continue;
+
                     var customerClient = new StageBillingDto();
                     var userList = new List<User>();
 
                     var customerTransactions = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
-                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter)).DistinctBy(x => x.UserTransaction.TransactionId);
+                                                                            && (x.Created >= startDateFilter && x.Created <= endDateFilter))
+                                                                            .DistinctBy(x => x.UserTransaction.TransactionId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
@@ -88,12 +92,16 @@ namespace Billing.Api.Modules
                     var billedCustomerTransactionsTotal = customerTransactions.Where(x => x.UserTransaction.IsBillable);
 
 
-                    var clientTransactions = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.UserTransaction.TransactionId);
+                    var clientTransactions = stageBillingRepository.Where(x => x.ClientId == transaction.ClientId
+                                                        && (x.Created >= startDateFilter && x.Created <= endDateFilter))
+                                                        .DistinctBy(x => x.UserTransaction.TransactionId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
 
                     var billedClientTransactionsTotal = clientTransactions.Where(x => x.UserTransaction.IsBillable);
+
+                    if (customerTransactions.Count() < 0 && clientTransactions.Count() < 0) continue;
 
                     // Customer
                     if (transaction.ClientId == new Guid())
@@ -133,15 +141,13 @@ namespace Billing.Api.Modules
 
                     // Indices
                     var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
-                    var customerClientIndex = customerClientList.FindIndex(x => x.Id == customerClient.Id);
-
 
                     // Index restrictions for new records
                     if (userIndex < 0) userList.Add(user);
 
                     customerClient.Users = userList;
 
-                    if (customerClientIndex < 0) customerClientList.Add(customerClient);
+                    if (customerClientIndex < 0 && customerClient.Transactions > 0) customerClientList.Add(customerClient);
                 }
 
                 return Negotiate
@@ -155,8 +161,10 @@ namespace Billing.Api.Modules
                 var stageBillingStartDateFilter = Request.Query["startDate"];
                 var stageBillingEndDateFilter = Request.Query["endDate"];
 
-                if (stageBillingStartDateFilter.HasValue) endDateFilter = stageBillingStartDateFilter;
-                if (stageBillingEndDateFilter.HasValue) startDateFilter = stageBillingEndDateFilter;
+                if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
+                if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 var searchId = new Guid(param.searchId);
                 var customerUsersDetailList = new List<UserDto>();
@@ -179,6 +187,7 @@ namespace Billing.Api.Modules
                                             .Select(x =>
                                             new TransactionDto
                                             {
+                                                Created = x.Created,
                                                 TransactionId = x.UserTransaction.TransactionId,
                                                 RequestId = x.UserTransaction.RequestId,
                                                 IsBillable = x.UserTransaction.IsBillable
@@ -204,6 +213,14 @@ namespace Billing.Api.Modules
 
             Get["/StageBilling/CustomerClient/{searchId}/Packages"] = param =>
             {
+                var stageBillingStartDateFilter = Request.Query["startDate"];
+                var stageBillingEndDateFilter = Request.Query["endDate"];
+
+                if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
+                if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
+
                 var searchId = new Guid(param.searchId);
                 var customerPackagesDetailList = new List<PackageDto>();
 
@@ -230,8 +247,10 @@ namespace Billing.Api.Modules
                 var stageBillingStartDateFilter = Request.Query["startDate"];
                 var stageBillingEndDateFilter = Request.Query["endDate"];
 
-                if (stageBillingStartDateFilter.HasValue) endDateFilter = stageBillingStartDateFilter;
-                if (stageBillingEndDateFilter.HasValue) startDateFilter = stageBillingEndDateFilter;
+                if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
+                if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 var searchId = new Guid(param.searchId);
                 var packagesDetailList = new List<PackageDto>();
@@ -348,8 +367,10 @@ namespace Billing.Api.Modules
                 var stageBillingStartDateFilter = Request.Query["startDate"];
                 var stageBillingEndDateFilter = Request.Query["endDate"];
 
-                if (stageBillingStartDateFilter.HasValue) endDateFilter = stageBillingStartDateFilter;
-                if (stageBillingEndDateFilter.HasValue) startDateFilter = stageBillingEndDateFilter;
+                if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
+                if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 var dto = this.Bind<UserDto>();
 
@@ -362,6 +383,7 @@ namespace Billing.Api.Modules
                     {
                         userTransactions.Add(new UserTransaction
                         {
+                            Created = transaction.Created,
                             RequestId = transaction.RequestId,
                             PackageName = billTransaction.Package.PackageName,
                             IsBillable = billTransaction.UserTransaction.IsBillable

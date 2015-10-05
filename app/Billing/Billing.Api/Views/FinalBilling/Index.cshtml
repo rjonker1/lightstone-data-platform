@@ -18,11 +18,18 @@
     <script>
         
         // Init
-        var startDateFilter = moment({ day: 25 }).format('YYYY-MM-DD');
-        var endDateFilter = moment({ day: 26 }).subtract(1, 'month').format('YYYY-MM-DD');
+        var startDateFilter = moment({ day: 26 }).subtract(1, 'month').format('YYYY-MM-DD');
+        var endDateFilter = moment({ day: 25 }).format('YYYY-MM-DD');
+
+        var today = moment().date();
+
+        if (today >= 26 && today < 31) {
+            endDateFilter = moment({ day: 25 }).add(1, 'month');
+            startDateFilter = moment({ day: 26 });
+        }
 
         $('#table').bootstrapTable({
-            url: '/FinalBilling',
+            //url: '/FinalBilling',
             search: true,
             showRefresh: true,
             showColumns: true,
@@ -69,8 +76,8 @@
         //Hook to feed back to API
         $('#transactionRange').on('apply.daterangepicker', function(ev, picker) {
 
-            startDateFilter = picker.endDate.format('YYYY-MM-DD');
-            endDateFilter = picker.startDate.format('YYYY-MM-DD');
+            startDateFilter = picker.startDate.format('YYYY-MM-DD');
+            endDateFilter = picker.endDate.format('YYYY-MM-DD');
 
             $('#table').bootstrapTable('destroy');
 

@@ -85,7 +85,7 @@ window.userTransactionEditActionEvents = {
                         '"transactions": ' + transactionData(row) + '' +
                     '}';
 
-        console.log(data);
+        //console.log(data);
 
         $.ajax({
             url: apiEndpoint + '/StageBilling/User/Transactions?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
@@ -121,6 +121,10 @@ window.userTransactionEditActionEvents = {
                     title: 'Request ID',
                     visible: false
                 }, {
+                    field: 'created',
+                    title: 'Created',
+                    sortable: true
+                }, {
                     field: 'packageName',
                     title: 'Package Name',
                     sortable: true
@@ -138,7 +142,8 @@ window.userTransactionEditActionEvents = {
             var requestString = '[';
             for (var i = 0; i < transRow.transactions.length; i++) {
 
-                requestString += '{ "requestId": "' + transRow.transactions[i].requestId + '" }';
+                requestString += '{ "created": "' + transRow.transactions[i].created + '",' +
+                                    ' "requestId": "' + transRow.transactions[i].requestId + '" }';
                 if (transRow.transactions.length - 1 != i) requestString += ',';
             }
 
