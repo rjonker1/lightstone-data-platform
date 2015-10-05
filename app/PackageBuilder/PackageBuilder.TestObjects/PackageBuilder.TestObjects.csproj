@@ -92,6 +92,8 @@
     <Compile Include="Builders\DataProviderResponses\Ivid\IvidResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\IvidTitleHolderResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneAuto\LightstoneAutoResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\FinanceBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneBmwFinanceResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneBusinessCompanyResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneProperty\PropertyBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneProperty\LightstonePropertyResponseBuilder.cs" />
@@ -129,7 +131,9 @@
     <Compile Include="Mothers\DataProviderOverrideMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Ivid\IvidResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidTitleHolderResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\FinanceMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\PropertyMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneBmwFinanceResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneBusinessCompanyResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstonePropertyResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\RgtResponseMother.cs" />
