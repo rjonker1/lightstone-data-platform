@@ -203,6 +203,7 @@
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\when_mapping_lightsone_vehicle_valuation_response.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_bmw_finance_collection_response.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_company_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_lightstone_consumer_collection_response.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_property_collection_response.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_ivid_title_holder_response.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_rgt_response.cs" />

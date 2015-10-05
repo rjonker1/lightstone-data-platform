@@ -23,9 +23,9 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses.LightstoneBu
             return new BmwFinanceRecord(_financeHouse, _dealReference, _startDate, _expireDate, _chassis, _engine, _registrationNumber, _description, _registrationYear, _productCategory, _dealStatus);
         }
 
-        public FinanceBuilder With(int egistrationYear, decimal dealReference)
+        public FinanceBuilder With(int registrationYear, decimal dealReference)
         {
-            _registrationYear = egistrationYear;
+            _registrationYear = registrationYear;
             _dealReference = dealReference;
             return this;
         }
