@@ -97,6 +97,8 @@
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneBusinessCompanyResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneConsumerBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneConsumerResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\PCubedEzScoreBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\PCubedEzScoreResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneProperty\PropertyBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneProperty\LightstonePropertyResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\RgtResponseBuilder.cs" />
@@ -134,12 +136,14 @@
     <Compile Include="Mothers\DataProviderResponses\Ivid\IvidResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidTitleHolderResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\FinanceMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\PCubedEzScoreMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\PropertyMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\RepairDataMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneBmwFinanceResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneBusinessCompanyResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneConsumerResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstonePropertyResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\PCubedEzScoreResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\RgtResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\RgtVinResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\CompanyMother.cs" />
