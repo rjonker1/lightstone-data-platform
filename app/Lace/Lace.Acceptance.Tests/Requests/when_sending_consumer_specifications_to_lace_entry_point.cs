@@ -41,9 +41,12 @@ namespace Lace.Acceptance.Tests.Requests
             _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();
             _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().Handled.ShouldBeTrue();
             _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();
-            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.Count().ShouldEqual(2);
-            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("TOYOTA FORTUNER");
-            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().DriversName.ShouldEqual("BB Cars (Pty) Ltd");
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.Count().ShouldEqual(1);
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("Opel Astra 2013");
+            _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().DriversName.ShouldEqual("International Panelbeaters");
+            //_responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.Count().ShouldEqual(2);
+            //_responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("TOYOTA FORTUNER");
+            //_responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().DriversName.ShouldEqual("BB Cars (Pty) Ltd");
         }
     }
 }

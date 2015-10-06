@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lace.Toolbox.PCubed.Domain;
+﻿using Lace.Toolbox.PCubed.Domain;
 using RestSharp;
 
 namespace Lace.Toolbox.PCubed

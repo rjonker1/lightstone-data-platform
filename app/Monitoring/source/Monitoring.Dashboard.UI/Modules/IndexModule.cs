@@ -10,12 +10,7 @@ namespace Monitoring.Dashboard.UI.Modules
         {
             this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
-            Get["/"] = _ =>
-            {
-                // var model = new MonitoringStorageModel(Guid.NewGuid());
-
-                return View["Index"];
-            };
+            Get["/"] = _ => View["Index"];
 
             Get["/cia"] = parameters => Response.AsRedirect(System.Configuration.ConfigurationManager.AppSettings["url/cia"].ToString());
 

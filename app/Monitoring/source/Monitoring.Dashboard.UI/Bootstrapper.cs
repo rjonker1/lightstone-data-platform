@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using DataPlatform.Shared.Helpers.Extensions;
 using EasyNetQ;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
@@ -8,16 +9,32 @@ using Monitoring.Dashboard.UI.Infrastructure.Services;
 using Monitoring.Domain.Mappers;
 using Monitoring.Domain.Repository;
 using Nancy;
+using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
 using Shared.BuildingBlocks.AdoNet.Mapping;
 using Shared.BuildingBlocks.AdoNet.Repository;
+using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Workflow.BuildingBlocks;
 
 namespace Monitoring.Dashboard.UI
 {
     public class Bootstrapper : DefaultNancyBootstrapper
     {
+        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        {
+            base.ApplicationStartup(container, pipelines);
+            StaticConfiguration.DisableErrorTraces = false;
+        }
+
+        protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
+        {
+            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
+            {
+                this.Error(() => "Error on Monitoring request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                return ErrorResponse.FromException(exception);
+            });
+        }
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
 
@@ -53,10 +70,6 @@ namespace Monitoring.Dashboard.UI
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/fastclick"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/slimScroll"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
-
-            
         }
-
-
     }
 }

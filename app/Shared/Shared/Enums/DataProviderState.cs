@@ -7,6 +7,7 @@ namespace DataPlatform.Shared.Enums
     {
         [EnumMember] Successful = 1,
         [EnumMember] PartialFailure = 2,
-        [EnumMember] Failed = 3
+        [EnumMember] Failed = 3,
+        [EnumMember] CriticalFailure = 4
     }
 }

@@ -50,9 +50,9 @@ namespace Lace.Acceptance.Tests.Lace.LsConsumer
         public void lightstone_response_from_consumer_must_not_be_empty()
         {
             _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.ShouldNotBeNull();
-            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.Count().ShouldEqual(2);
-            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("TOYOTA FORTUNER");
-            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().DriversName.ShouldEqual("BB Cars (Pty) Ltd");
+            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.Count().ShouldEqual(1);
+            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().VehicleDescription.ShouldEqual("Opel Astra 2013");
+            _response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().RepairData.First().DriversName.ShouldEqual("International Panelbeaters");
         }
     }
 }

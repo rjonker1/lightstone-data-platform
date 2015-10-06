@@ -8,6 +8,7 @@ using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
@@ -48,7 +49,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
                 LogResponse(request);
 
-                CreateTransaction(request, DataProviderState.Successful);
+                CreateTransaction(request, ResponseState());
 
                 _logCommand.LogEnd(_bootstrap.DataProviderResponses ?? EmptyResponse);
 
@@ -92,6 +93,11 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber,
                 request.GetFromRequest<IPointToLaceRequest>().Package.PackageCostPrice,
                 request.GetFromRequest<IPointToLaceRequest>().Package.PackageRecommendedPrice);
+        }
+
+        private DataProviderState ResponseState()
+        {
+            return _bootstrap.DataProviderResponses.HasCriticalError() ? DataProviderState.Failed : DataProviderState.Successful;
         }
 
         private static ICollection<IPointToLaceProvider> EmptyResponse
