@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Billing.Domain.Dtos;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
@@ -78,50 +79,58 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 //Billing transaction recorded per product invoked
                 foreach (var product in products)
                 {
-                    var preBillingTransaction = new PreBilling
+                    try
                     {
-                        //General
-                        Id = Guid.NewGuid(),
-                        Created = transaction.Date,
-                        CreatedBy = user.Username,
-                        BillingId = 101,
-                        //Customer implementation
-                        CustomerId = customer.CustomerId,
-                        CustomerName = customer.CustomerName,
-                        //Client implementation
-                        ClientId = client.ClientId,
-                        ClientName = client.ClientName,
-                        //Shared
-                        AccountNumber = transaction.AccountNumber,
-                        ContractId = transaction.ContractId,
-                        BillingType = (client.ClientId == new Guid()) ? customer.BillingType : client.BillingType,
-                        User = new User
+                        var preBillingTransaction = new PreBilling
                         {
-                            UserId = transaction.UserId,
-                            Username = user.Username
-                        },
-                        UserTransaction = new UserTransaction
-                        {
-                            TransactionId = transaction.Id,
-                            RequestId = transaction.RequestId
-                        },
-                        Package = new Package
-                        {
-                            PackageId = package.PackageId,
-                            PackageName = package.PackageName,
-                            PackageCostPrice = transaction.PackageCostPrice,
-                            PackageRecommendedPrice = transaction.PackageRecommendedPrice,
-                        },
-                        DataProvider = new DataProvider
-                        {
-                            DataProviderId = product.Id,
-                            DataProviderName = product.DataProviderName,
-                            CostPrice = product.CostPrice,
-                            RecommendedPrice = product.RecommendedPrice
-                        }
-                    };
+                            //General
+                            Id = Guid.NewGuid(),
+                            Created = transaction.Date,
+                            CreatedBy = user.Username,
+                            BillingId = 101,
+                            //Customer implementation
+                            CustomerId = customer.CustomerId,
+                            CustomerName = customer.CustomerName,
+                            //Client implementation
+                            ClientId = client.ClientId,
+                            ClientName = client.ClientName,
+                            //Shared
+                            AccountNumber = transaction.AccountNumber,
+                            ContractId = transaction.ContractId,
+                            BillingType = (client.ClientId == new Guid()) ? customer.BillingType : client.BillingType,
+                            User = new User
+                            {
+                                UserId = transaction.UserId,
+                                Username = user.Username
+                            },
+                            UserTransaction = new UserTransaction
+                            {
+                                TransactionId = transaction.Id,
+                                RequestId = transaction.RequestId
+                            },
+                            Package = new Package
+                            {
+                                PackageId = package.PackageId,
+                                PackageName = package.PackageName,
+                                PackageCostPrice = transaction.PackageCostPrice,
+                                PackageRecommendedPrice = transaction.PackageRecommendedPrice,
+                            },
+                            DataProvider = new DataProvider
+                            {
+                                DataProviderId = product.Id,
+                                DataProviderName = product.DataProviderName,
+                                CostPrice = product.CostPrice,
+                                RecommendedPrice = product.RecommendedPrice
+                            }
+                        };
 
-                    _preBillingRepository.Save(preBillingTransaction, true);
+                        _preBillingRepository.Save(preBillingTransaction, true);
+                    }
+                    catch (Exception e)
+                    {
+                        this.Error(() => "Potential Mapping error of meta data for transaction. See below for details.");
+                        this.Error(() => e);
+                    }
                 }
 
                 return;
