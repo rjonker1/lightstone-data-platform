@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
 
-namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
+namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 {
     public class ReportBuilder : IReportBuilder
     {
@@ -39,7 +39,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             };
         }
 
-        public ReportDebitOrder BuilDebitOrderRecord(string pastelId, string accountName, string accountType, string bankAccountName, string bankAccountNumber, string branchCode, string contractAmount, string batchAmount)
+        public ReportDebitOrder BuildDebitOrderRecord(string pastelId, string accountName, string accountType, string bankAccountName, string bankAccountNumber, string branchCode, string contractAmount, string batchAmount)
         {
             return new ReportDebitOrder
             {

@@ -5,6 +5,7 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Newtonsoft.Json;
+using Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure;
 
 namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 {

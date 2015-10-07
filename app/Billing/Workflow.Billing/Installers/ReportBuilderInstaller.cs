@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Workflow.Billing.Domain.Helpers.BillingRunHelpers;
+using Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure;
 
 namespace Workflow.Billing.Installers
 {

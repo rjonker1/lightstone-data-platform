@@ -2,13 +2,13 @@
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
 
-namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
+namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 {
     public interface IReportBuilder
     {
         ReportInvoice BuildPastelInvoice(int invoiceNumber, string accountNumber, string productName, double productPrice);
         ContractStatement BuildStatement(string customerName, string clientName, string contractName, IEnumerable<ContractUserTransactions> userTransactions);
-        ReportDebitOrder BuilDebitOrderRecord(string pastelId, string accountName, string accountType, string bankAccountName, string bankAccountNumber, string branchCode, string contractAmount, string batchAmount);
+        ReportDebitOrder BuildDebitOrderRecord(string pastelId, string accountName, string accountType, string bankAccountName, string bankAccountNumber, string branchCode, string contractAmount, string batchAmount);
         ReportDto BuildReport(ReportTemplate template, ReportData data);
 
         ReportPastelNewCustomer BuildPastelNewCustomerRecord(string dcLink, string accountId, string name, string title, string init, string contactPerson, string physical1,

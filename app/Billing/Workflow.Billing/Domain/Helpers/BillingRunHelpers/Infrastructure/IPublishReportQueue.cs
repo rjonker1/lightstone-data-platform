@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
+namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 {
     public interface IPublishReportQueue<T> where T : class
     {
