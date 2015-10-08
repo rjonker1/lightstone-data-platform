@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
-using Nancy.Extensions;
 using ServiceStack.Common;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure;
@@ -21,8 +20,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
         private readonly IReportBuilder _reportBuilder;
 
-        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
-        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
+        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month -1 , 25).AddHours(23).AddMinutes(59).AddSeconds(59);
+        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 2), 26);
 
         public PivotFinalBillingTransactions(IRepository<FinalBilling> finalBillingRepository, IRepository<AccountMeta> accountMetaReporRepository,
                                                 IRepository<ContractMeta> contractRepository, IReportBuilder reportBuilder)
@@ -157,7 +156,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                         foreach (var userId in users)
                         {
-                            var userTransactions = _finalBillingRepository.Where(x => x.User.UserId == userId && (x.CustomerId == customerClientId || x.ClientId == customerClientId));
+                            var userTransactions = _finalBillingRepository.Where(x => x.User.UserId == userId && (x.CustomerId == customerClientId || x.ClientId == customerClientId)
+                                                                            && (x.Created >= _startBillMonth && x.Created <= _endBillMonth));
 
                             var userProductList = new List<ContractProductDetail>();
 
@@ -165,15 +165,14 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 .Select(x => new ContractProductDetail
                                 {
                                     PackageName = x.Package.PackageName,
-                                    TransactionCount = userTransactions.Count(t => (t.User.UserId == userId) && (t.Package.PackageId == x.Package.PackageId))
+                                    TransactionCount = userTransactions.Count(t => t.Package.PackageId == x.Package.PackageId)
                                 }).Distinct());
 
-                            userTransactionsList.AddRange(userTransactions
-                                .Select(x => new ContractUserTransactions
-                                {
-                                    User = x.User.Username,
-                                    Products = userProductList
-                                }).Distinct());
+                            userTransactionsList.Add(new ContractUserTransactions
+                            {
+                                User = userTransactions.Where(x => x.User.UserId == userId).Select(x => x.User.Username).First(),
+                                Products = userProductList
+                            });
                         }
 
                         var statement = _reportBuilder.BuildStatement(customerClientDetail.CustomerName, null, contract.ContractName, userTransactionsList);
@@ -209,7 +208,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         /// <returns>
         ///     List of Invoices
         /// </returns>
-        public List<ReportInvoice> PivotToPastelCsv()
+        public ReportDto PivotToPastelCsv()
         {
             var pastelCounter = 1;
 
@@ -217,7 +216,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             {
                 try
                 {
-                    var invoices = _finalBillingRepository.Where(x => x.CustomerId == customerClientId || x.ClientId == customerClientId)
+                    var invoices = _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)
+                                                            && (x.Created >= _startBillMonth && x.Created <= _endBillMonth))
                         .Select(x => new ReportInvoice
                         {
                             ACCOUNTID = x.AccountNumber,
@@ -228,7 +228,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     foreach (var reportInvoice in invoices)
                     {
                         var invoice = _reportBuilder.BuildPastelInvoice(pastelCounter, reportInvoice.ACCOUNTID,
-                            reportInvoice.CDESCRIPTION, Double.Parse(reportInvoice.FUNITPRICEEXCL, CultureInfo.InvariantCulture));
+                            reportInvoice.CDESCRIPTION, Double.Parse(reportInvoice.FUNITPRICEEXCL, CultureInfo.InvariantCulture), _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)
+                                                            && (x.Created >= _startBillMonth && x.Created <= _endBillMonth)).Distinct().Count());
 
                         var invoiceListIndex = PastelInvoiceList.FindIndex(x => x.CDESCRIPTION == invoice.CDESCRIPTION);
                         if (invoiceListIndex < 0)
@@ -244,7 +245,11 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 }
             }
 
-            return PastelInvoiceList;
+            return _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.PastelCsv },
+                new ReportData
+                {
+                    Invoices = PastelInvoiceList
+                });
         }
 
         /// <summary>
@@ -253,7 +258,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         /// <returns>
         ///     List of ReportDebitOrder
         /// </returns>
-        public List<ReportDebitOrder> PivotToDebitOrderCsv()
+        public ReportDto PivotToDebitOrderCsv()
         {
 
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
@@ -264,7 +269,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                     var account = _accountMetaReporRepository.FirstOrDefault(x => x.AccountNumber == customerClientDetail.AccountNumber);
 
-                    var transactions = _finalBillingRepository.Where(x => x.AccountNumber == account.AccountNumber).Select(x => x.UserTransaction.TransactionId).Distinct();
+                    var transactions = _finalBillingRepository.Where(x => x.AccountNumber == account.AccountNumber && (x.Created >= _startBillMonth && x.Created <= _endBillMonth))
+                        .Select(x => x.UserTransaction.TransactionId).Distinct();
 
                     var batchTotal = 0.0;
 
@@ -272,8 +278,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     {
                         // Value in cents for Pastel
                         batchTotal += Math.Round(((_finalBillingRepository.Where(x => x.Id ==
-                                                                                      _finalBillingRepository.Where(br => br.AccountNumber == account.AccountNumber && br.UserTransaction.TransactionId == transactionId).Select(br => br.Id).First())
-                            .Sum(x => x.Package.PackageRecommendedPrice)) * 100), 2);
+                                                    _finalBillingRepository.Where(br => (br.AccountNumber == account.AccountNumber && br.UserTransaction.TransactionId == transactionId)
+                                                    && (x.Created >= _startBillMonth && x.Created <= _endBillMonth))
+                                                    .Select(br => br.Id).First())
+                                                    .Sum(x => x.Package.PackageRecommendedPrice)) * 100), 2);
                     }
 
                     var debitOrderRecord = _reportBuilder.BuildDebitOrderRecord(account.AccountNumber, customerClientDetail.CustomerName, "1", account.BankAccountName,
@@ -292,7 +300,13 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 }
             }
 
-            return DebitOrderRecordList;
+            return _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.DebitOrderCsv },
+                new ReportData
+                {
+                    BillDateTime1 = DateTime.UtcNow.ToString("yyyyMMdd"),
+                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy/MM/dd"),
+                    DebitOrders = DebitOrderRecordList
+                });
         }
 
         /// <summary>
@@ -301,7 +315,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         /// <returns>
         ///     List of ReportDebitOrder
         /// </returns>
-        public List<ReportDebitOrder> PivotToDebitOrderNotDoneCsv()
+        public ReportDto PivotToDebitOrderNotDoneCsv()
         {
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
             {
@@ -319,8 +333,10 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     {
                         // Value in cents for Pastel
                         batchTotal += Math.Round(((_finalBillingRepository.Where(x => x.Id ==
-                                                                                      _finalBillingRepository.Where(br => br.AccountNumber == account.AccountNumber && br.UserTransaction.TransactionId == transactionId).Select(br => br.Id).First())
-                            .Sum(x => x.Package.PackageRecommendedPrice)) * 100), 2);
+                                                    _finalBillingRepository.Where(br => (br.AccountNumber == account.AccountNumber && br.UserTransaction.TransactionId == transactionId)
+                                                    && (x.Created >= _startBillMonth && x.Created <= _endBillMonth))
+                                                    .Select(br => br.Id).First())
+                                                    .Sum(x => x.Package.PackageRecommendedPrice)) * 100), 2);
                     }
 
                     var debitOrderRecord = _reportBuilder.BuildDebitOrderRecord(account.AccountNumber, customerClientDetail.CustomerName, "1", account.BankAccountName,
@@ -339,7 +355,13 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 }
             }
 
-            return DebitOrderNotDoneRecordList;
+            return _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.DebitOrderNotDoneCsv },
+                new ReportData
+                {
+                    BillDateTime1 = DateTime.UtcNow.ToString("yyyyMMdd"),
+                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy/MM/dd"),
+                    DebitOrders = DebitOrderNotDoneRecordList
+                });
         }
     }
 }

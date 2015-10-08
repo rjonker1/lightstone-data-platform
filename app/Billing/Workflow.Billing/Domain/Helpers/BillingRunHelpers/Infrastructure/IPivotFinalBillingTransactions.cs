@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Workflow.Billing.Domain.Entities;
 using Workflow.Reporting.Dtos;
-using Workflow.Reporting.Entities;
 
 namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 {
@@ -9,8 +7,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
     {
         List<ReportDto> PivotToInvoicePdf();
         List<ReportDto> PivotToStatementPdf();
-        List<ReportInvoice> PivotToPastelCsv();
-        List<ReportDebitOrder> PivotToDebitOrderCsv();
-        List<ReportDebitOrder> PivotToDebitOrderNotDoneCsv();
+        ReportDto PivotToPastelCsv();
+        ReportDto PivotToDebitOrderCsv();
+        ReportDto PivotToDebitOrderNotDoneCsv();
     }
 }

@@ -7,7 +7,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 {
     public class ReportBuilder : IReportBuilder
     {
-        public ReportInvoice BuildPastelInvoice(int invoiceNumber, string accountNumber, string productName, double productPrice)
+        public ReportInvoice BuildPastelInvoice(int invoiceNumber, string accountNumber, string productName, double productPrice, int productQuantity)
         {
             return new ReportInvoice
             {
@@ -19,7 +19,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
                 TAXINCLUSIVE = "0",
                 ORDERNUM = invoiceNumber.ToString(),
                 CDESCRIPTION = productName,
-                FQUANTITY = "1",
+                FQUANTITY = productQuantity.ToString(),
                 FUNITPRICEEXCL = productPrice.ToString(),
                 ITAXTYPEID = "1",
                 ISTOCKCODEID = "",

@@ -6,7 +6,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 {
     public interface IReportBuilder
     {
-        ReportInvoice BuildPastelInvoice(int invoiceNumber, string accountNumber, string productName, double productPrice);
+        ReportInvoice BuildPastelInvoice(int invoiceNumber, string accountNumber, string productName, double productPrice, int productQuantity);
         ContractStatement BuildStatement(string customerName, string clientName, string contractName, IEnumerable<ContractUserTransactions> userTransactions);
         ReportDebitOrder BuildDebitOrderRecord(string pastelId, string accountName, string accountType, string bankAccountName, string bankAccountNumber, string branchCode, string contractAmount, string batchAmount);
         ReportDto BuildReport(ReportTemplate template, ReportData data);

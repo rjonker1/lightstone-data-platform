@@ -4,11 +4,9 @@ using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
-using ServiceStack.Common;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure;
 using Workflow.Reporting.Dtos;
-using Workflow.Reporting.Entities;
 
 namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 {
@@ -16,28 +14,19 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
         private readonly IRepository<FinalBilling> _finalBillingRepository;
-        private readonly IRepository<AccountMeta> _accountMetaReporRepository;
-        private readonly IRepository<ContractMeta> _contractRepository;
-        private readonly IRepository<UserMeta> _userMetaRepository;
         private readonly IRepository<ArchiveBillingTransaction> _archiveBillingRepository;
 
         private readonly IPublishReportQueue<BillingReport> _report;
-        private readonly IReportBuilder _reportBuilder;
 
         private readonly IPivotFinalBillingTransactions _finalBillingTransactions;
 
-        public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, IRepository<ArchiveBillingTransaction> archiveBillingRepository,
-                                    IRepository<AccountMeta> accountMetaReporRepository,
-                                    IPublishReportQueue<BillingReport> report, IReportBuilder reportBuilder, IRepository<ContractMeta> contractRepository, IRepository<UserMeta> userMetaRepository, 
+        public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, 
+                                    IRepository<ArchiveBillingTransaction> archiveBillingRepository, IPublishReportQueue<BillingReport> report, 
                                     IPivotFinalBillingTransactions finalBillingTransactions)
         {
             _stageBillingRepository = stageBillingRepository;
             _finalBillingRepository = finalBillingRepository;
             _archiveBillingRepository = archiveBillingRepository;
-            _accountMetaReporRepository = accountMetaReporRepository;
-            _reportBuilder = reportBuilder;
-            _contractRepository = contractRepository;
-            _userMetaRepository = userMetaRepository;
             _finalBillingTransactions = finalBillingTransactions;
             _report = report;
 
@@ -56,63 +45,31 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             try
             {
                 // Archive and clean Final Billing for new month
-                foreach (var archiveRecord in _finalBillingRepository)
-                {
-                    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId))
-                        _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
+                //foreach (var archiveRecord in _finalBillingRepository)
+                //{
+                //    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId))
+                //        _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
 
-                    _finalBillingRepository.Delete(archiveRecord);
-                }
+                //    _finalBillingRepository.Delete(archiveRecord);
+                //}
 
-                foreach (var record in _stageBillingRepository)
-                {
-                    if (record.Created <= startBillMonth) continue;
+                //foreach (var finalEntity in from record in _stageBillingRepository where !(record.Created <= startBillMonth) select Mapper.Map(record, new FinalBilling()))
+                //    _finalBillingRepository.SaveOrUpdate(finalEntity);
 
-                    var finalEntity = Mapper.Map(record, new FinalBilling());
-
-                    _finalBillingRepository.SaveOrUpdate(finalEntity);
-                }
-
-                InvoicePdfList = _finalBillingTransactions.PivotToInvoicePdf();
+                //InvoicePdfList = _finalBillingTransactions.PivotToInvoicePdf();
 
                 StatementPdfList = _finalBillingTransactions.PivotToStatementPdf();
 
-                PastelInvoiceList = _finalBillingTransactions.PivotToPastelCsv();
+                PastelReportList.Add(_finalBillingTransactions.PivotToPastelCsv());
 
-                DebitOrderRecordList = _finalBillingTransactions.PivotToDebitOrderCsv();
+                //DebitOrderReportList.Add(_finalBillingTransactions.PivotToDebitOrderCsv());
 
-                DebitOrderNotDoneRecordList = _finalBillingTransactions.PivotToDebitOrderNotDoneCsv();
+                //DebitOrderNotDoneReportList.Add(_finalBillingTransactions.PivotToDebitOrderNotDoneCsv());
             }
             catch (Exception ex)
             {
                 this.Error(() => ex.Message);
             }
-
-            var pastelReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "EJ-dvWnX" },
-                new ReportData
-                {
-                    Invoices = PastelInvoiceList
-                });
-
-            var debitOrderReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "4ksFqmUp" },
-                new ReportData
-                {
-                    BillDateTime1 = DateTime.UtcNow.ToString("yyyyMMdd"),
-                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy/MM/dd"),
-                    DebitOrders = DebitOrderRecordList
-                });
-
-            var debitOrderNotDoneReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = "4ksFqmUp" },
-                new ReportData
-                {
-                    BillDateTime1 = DateTime.UtcNow.ToString("yyyyMMdd"),
-                    BillDateTime2 = DateTime.UtcNow.ToString("yyyy/MM/dd"),
-                    DebitOrders = DebitOrderNotDoneRecordList
-                });
-
-            PastelReportList.Add(pastelReport);
-            DebitOrderReportList.Add(debitOrderReport);
-            DebitOrderNotDoneReportList.Add(debitOrderNotDoneReport);
 
             // Publish to Reporting for processing
             // Note Pdf report types get emailed to relevant mailing contacts
