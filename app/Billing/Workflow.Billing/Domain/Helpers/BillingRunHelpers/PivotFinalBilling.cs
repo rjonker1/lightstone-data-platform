@@ -45,26 +45,34 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             try
             {
                 // Archive and clean Final Billing for new month
-                //foreach (var archiveRecord in _finalBillingRepository)
-                //{
-                //    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId))
-                //        _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
+                foreach (var archiveRecord in _finalBillingRepository)
+                {
+                    if (!_archiveBillingRepository.Any(x => x.StageBillingId == archiveRecord.StageBillingId))
+                        _archiveBillingRepository.SaveOrUpdate(Mapper.Map(archiveRecord, new ArchiveBillingTransaction()));
 
-                //    _finalBillingRepository.Delete(archiveRecord);
-                //}
+                    _finalBillingRepository.Delete(archiveRecord, true);
+                }
 
-                //foreach (var finalEntity in from record in _stageBillingRepository where !(record.Created <= startBillMonth) select Mapper.Map(record, new FinalBilling()))
-                //    _finalBillingRepository.SaveOrUpdate(finalEntity);
+                // Save final version of StageBilling for the month into FinalBilling
+                foreach (var record in _stageBillingRepository)
+                {
+                    if (record.Created <= startBillMonth) continue;
 
-                //InvoicePdfList = _finalBillingTransactions.PivotToInvoicePdf();
+                    var finalEntity = Mapper.Map(record, new FinalBilling());
+
+                    _finalBillingRepository.SaveOrUpdate(finalEntity);
+                }
+                    
+
+                InvoicePdfList = _finalBillingTransactions.PivotToInvoicePdf();
 
                 StatementPdfList = _finalBillingTransactions.PivotToStatementPdf();
 
                 PastelReportList.Add(_finalBillingTransactions.PivotToPastelCsv());
 
-                //DebitOrderReportList.Add(_finalBillingTransactions.PivotToDebitOrderCsv());
+                DebitOrderReportList.Add(_finalBillingTransactions.PivotToDebitOrderCsv());
 
-                //DebitOrderNotDoneReportList.Add(_finalBillingTransactions.PivotToDebitOrderNotDoneCsv());
+                DebitOrderNotDoneReportList.Add(_finalBillingTransactions.PivotToDebitOrderNotDoneCsv());
             }
             catch (Exception ex)
             {
