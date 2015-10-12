@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.States.Read;
@@ -19,11 +20,12 @@ namespace PackageBuilder.Domain.Entities.Packages.Read
         public virtual DateTime? EditedDate { get; protected internal set; }
         public virtual bool IsDeleted { get; protected internal set; }
         public virtual DateTime? DeletedDate { get; protected internal set; }
+        public virtual PackageEventType? PackageEventType { get; protected internal set; }
         public virtual IEnumerable<Industry> Industries { get; protected internal set; }
 
         protected Package() { }
 
-        public Package(Guid id, string name, string description, State state, int version, decimal displayVersion, string owner, DateTime createdDateDate, DateTime? editedDateDate, IEnumerable<Industry> industries)
+        public Package(Guid id, string name, string description, State state, int version, decimal displayVersion, string owner, DateTime createdDateDate, DateTime? editedDateDate, PackageEventType? packageEventType, IEnumerable<Industry> industries)
             : base(Guid.NewGuid())
         {
             PackageId = id;
@@ -35,6 +37,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Read
             Owner = owner;
             CreatedDate = createdDateDate;
             EditedDate = editedDateDate;
+            PackageEventType = packageEventType;
             Industries = industries;
         }
 

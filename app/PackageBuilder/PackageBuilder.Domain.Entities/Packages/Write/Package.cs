@@ -54,6 +54,8 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         [DataMember]
         public string Notes { get; internal set; }
         [DataMember]
+        public PackageEventType? PackageEventType { get; set; }
+        [DataMember]
         public IEnumerable<IIndustry> Industries { get; internal set; }
         [DataMember]
         public IState State { get; internal set; }
@@ -95,13 +97,13 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             DataProviders = dataProviders;
         }
 
-        public Package(Guid id, string name, string description, IEnumerable<Industry> industries, decimal costPrice, decimal salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
+        public Package(Guid id, string name, string description, PackageEventType? packageEventType, IEnumerable<Industry> industries, decimal costPrice, decimal salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
             : this(id)
         {
-            RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, industries, state, displayVersion, owner, createdDate, editedDate, dataProviders));
+            RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, packageEventType, industries, state, displayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, decimal costPrice, decimal salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, decimal costPrice, decimal salePrice, string notes, PackageEventType? packageEventType, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
         {
             if (state.Name == StateName.Published)
                 DisplayVersion = Math.Ceiling(DisplayVersion);
@@ -111,7 +113,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
                 Name = name;
             }
 
-            RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, notes, industries, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
+            RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, notes, packageEventType, industries, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
         private void Apply(PackageCreated @event)
@@ -122,6 +124,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             CostOfSale = @event.CostPrice;
             RecommendedSalePrice = @event.SalePrice;
             Notes = @event.Notes;
+            PackageEventType = @event.PackageEventType;
             Industries = @event.Industries;
             State = @event.State;
             DisplayVersion = @event.DisplayVersion;
@@ -144,6 +147,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             CostOfSale = @event.CostPrice;
             RecommendedSalePrice = @event.SalePrice;
             Notes = @event.Notes;
+            PackageEventType = @event.PackageEventType;
             Industries = @event.Industries;
             State = @event.State;
             DisplayVersion = @event.DisplayVersion;

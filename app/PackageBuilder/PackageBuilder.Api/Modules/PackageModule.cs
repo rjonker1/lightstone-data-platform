@@ -174,7 +174,7 @@ namespace PackageBuilder.Api.Modules
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
 
                 publisher.Publish(new CreatePackage(dto.Id, dto.Name, dto.Description, dto.CostOfSale,
-                    dto.RecommendedSalePrice, dto.Notes, Mapper.Map<PackageDto, IEnumerable<Industry>>(dto), dto.State, dto.Owner, DateTime.UtcNow, null,
+                    dto.RecommendedSalePrice, dto.Notes, dto.PackageEventType, Mapper.Map<PackageDto, IEnumerable<Industry>>(dto), dto.State, dto.Owner, DateTime.UtcNow, null,
                     dProviders));
 
                 ////RabbitMQ
@@ -192,7 +192,7 @@ namespace PackageBuilder.Api.Modules
                     Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
 
                 publisher.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale,
-                    dto.RecommendedSalePrice, dto.Notes, Mapper.Map<PackageDto, IEnumerable<Industry>>(dto), dto.State, dto.Version, dto.Owner,
+                    dto.RecommendedSalePrice, dto.Notes, dto.PackageEventType, Mapper.Map<PackageDto, IEnumerable<Industry>>(dto), dto.State, dto.Version, dto.Owner,
                     dto.CreatedDate, DateTime.UtcNow, dProviders));
 
                 ////RabbitMQ
@@ -218,6 +218,7 @@ namespace PackageBuilder.Api.Modules
                     packageToClone.CostOfSale,
                     packageToClone.RecommendedSalePrice,
                     packageToClone.Notes,
+                    packageToClone.PackageEventType,
                     packageToClone.Industries,
                     stateResolve.FirstOrDefault(),
                     packageToClone.Owner, DateTime.UtcNow, null,

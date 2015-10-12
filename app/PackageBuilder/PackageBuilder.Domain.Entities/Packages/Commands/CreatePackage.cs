@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Helpers.Json;
 using Newtonsoft.Json;
@@ -18,6 +19,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
         public readonly decimal CostPrice;
         public readonly decimal SalePrice;
         public readonly string Notes;
+        public readonly PackageEventType? PackageEventType;
         public readonly IEnumerable<Industry> Industries;
         public readonly State State;
         public readonly string Owner;
@@ -26,7 +28,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
         [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataProviderOverride>>))]
         public readonly IEnumerable<IDataProviderOverride> DataProviderValueOverrides;
 
-        public CreatePackage(Guid id, string name, string description, decimal costPrice, decimal salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
+        public CreatePackage(Guid id, string name, string description, decimal costPrice, decimal salePrice, string notes, PackageEventType? packageEventType, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
             : base(id)
         {
             Name = name;
@@ -34,6 +36,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
             CostPrice = costPrice;
             SalePrice = salePrice;
             Notes = notes;
+            PackageEventType = packageEventType;
             Industries = industries;
             State = state;
             Owner = owner;

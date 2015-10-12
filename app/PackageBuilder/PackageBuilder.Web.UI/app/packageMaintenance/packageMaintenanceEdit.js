@@ -235,7 +235,7 @@
         activate();
 
         function activate() {
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId).then(function () {
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries(), getPackageEventTypes()], controllerId).then(function () {
                 log('Activated Package Maintenance View');
             }, function(error) {
                 logError(error.data.errorMessage);
@@ -289,6 +289,14 @@
                 }
 
                 $scope.filterData(bootFilters);
+            }, function (error) {
+                logError(error.data.errorMessage);
+            });
+        }
+
+        function getPackageEventTypes() {
+            return datacontext.getPackageEventTypes().then(function (response) {
+                $scope.packageEventTypes = response;
             }, function (error) {
                 logError(error.data.errorMessage);
             });

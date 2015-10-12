@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using Moq;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.Packages;
@@ -21,7 +22,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.CommandHandlers.Packages
         private readonly Mock<INEventStoreRepository<Package>> _writeRepository = new Mock<INEventStoreRepository<Package>>();
         public when_creating_a_package()
         {
-            var command = new CreatePackage(Guid.NewGuid(), "Name", "Description", 10m, 20m, "Notes", new[] { IndustryMother.Automotive }, StateMother.Draft, "Owner", DateTime.UtcNow, null, new List<IDataProviderOverride> { DataProviderOverrideMother.Ivid }.AsEnumerable());
+            var command = new CreatePackage(Guid.NewGuid(), "Name", "Description", 10m, 20m, "Notes", PackageEventType.VehicleVerification,  new[] { IndustryMother.Automotive }, StateMother.Draft, "Owner", DateTime.UtcNow, null, new List<IDataProviderOverride> { DataProviderOverrideMother.Ivid }.AsEnumerable());
             _handler = new CreatePackageHandler(_writeRepository.Object, _readRepository.Object);
             _handler.Handle(command);
         }

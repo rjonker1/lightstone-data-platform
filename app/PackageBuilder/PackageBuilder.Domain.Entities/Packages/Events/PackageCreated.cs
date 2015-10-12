@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Events;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Industries.Read;
@@ -14,6 +15,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
         public readonly decimal CostPrice;
         public readonly decimal SalePrice;
         public string Notes;
+        public PackageEventType? PackageEventType { get; set; }
         public readonly IEnumerable<Industry> Industries;
         public readonly State State;
         public readonly decimal DisplayVersion;
@@ -22,11 +24,12 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
         public readonly DateTime? EditedDate;
         public readonly IEnumerable<IDataProviderOverride> DataProviderValueOverrides;
 
-        public PackageCreated(Guid id, string name, string description, decimal costPrice, decimal salePrice, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
+        public PackageCreated(Guid id, string name, string description, decimal costPrice, decimal salePrice,PackageEventType? packageEventType, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
         {
             Id = id;
             Name = name;
             Description = description;
+            PackageEventType = packageEventType;
             Industries = industries;
             CostPrice = costPrice;
             SalePrice = salePrice;

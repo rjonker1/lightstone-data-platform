@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Moq;
 using PackageBuilder.Domain.Entities.Packages.Events;
 using PackageBuilder.Domain.Entities.Packages.Read;
@@ -16,7 +17,7 @@ namespace PackageBuilder.Unit.Tests.Handlers.EventHandlers.Packages
 
         public override void Observe()
         {
-            var command = new PackageCreated(Guid.NewGuid(), "VVi", "VVi", 10m, 20m, new []{IndustryMother.Automotive}, StateMother.Published, 0.1m, "Owner", DateTime.UtcNow, null, new[] { DataProviderOverrideMother.Ivid });
+            var command = new PackageCreated(Guid.NewGuid(), "VVi", "VVi", 10m, 20m, PackageEventType.VehicleVerification, new[] { IndustryMother.Automotive }, StateMother.Published, 0.1m, "Owner", DateTime.UtcNow, null, new[] { DataProviderOverrideMother.Ivid });
             _handler = new PackageCreatedHandler(_repository.Object);
             _handler.Handle(command);
         }

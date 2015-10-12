@@ -33,6 +33,7 @@
 
             getStates: getStates,
             getIndustries: getIndustries,
+            getPackageEventTypes: getPackageEventTypes,
             getRequestFields: getRequestFields,
 
             getPeople: getPeople,
@@ -205,6 +206,20 @@
             var deferred = $q.defer();
 
             $http.get( config.apiUri + '/Industries').then(function (result) {
+                data = result.data;
+                deferred.resolve(data);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //GET
+        function getPackageEventTypes() {
+            var deferred = $q.defer();
+
+            $http.get(config.apiUri + '/PackageEventTypes').then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
             }, function (error) {
