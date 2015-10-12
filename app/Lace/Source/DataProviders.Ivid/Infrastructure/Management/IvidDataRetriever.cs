@@ -107,7 +107,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
         {
             return response == null
                 ? DataProviderState.Failed
-                : response.partialResponse ? DataProviderState.PartialFailure : DataProviderState.Successful;
+                : response.partialResponse ? DataProviderState.Partial : DataProviderState.Successful;
         }
 
         private static string GetCacheSearch(HpiStandardQueryRequest request)

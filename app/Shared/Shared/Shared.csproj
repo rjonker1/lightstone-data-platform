@@ -75,7 +75,8 @@
     <Compile Include="Enums\DataProviderAction.cs" />
     <Compile Include="Enums\DataProviderCommandSource.cs" />
     <Compile Include="Enums\DataProviderName.cs" />
-    <Compile Include="Enums\DataProviderState.cs" />
+    <Compile Include="Enums\DataProviderNoRecordState.cs" />
+    <Compile Include="Enums\DataProviderResponseState.cs" />
     <Compile Include="Enums\DeviceTypes.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />
     <Compile Include="Enums\PackageEventType.cs" />
