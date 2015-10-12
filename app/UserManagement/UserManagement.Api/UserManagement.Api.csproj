@@ -597,6 +597,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\DataTables\DataTablesMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Email\EmailMessageMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Messages\MessageMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\MetaDetail\MetaDetailMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\RequestInfo\RequestInfoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Users\UserAliasMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ValueEntities\ValueEntityMap.cs" />
@@ -652,6 +653,7 @@
     <Compile Include="Modules\ExternalModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\IntegrationModule.cs" />
+    <Compile Include="Modules\MetaDetailModule.cs" />
     <Compile Include="Modules\NamedEntityModule.cs" />
     <Compile Include="Modules\PingModule.cs" />
     <Compile Include="Modules\RequestInfoModule.cs" />

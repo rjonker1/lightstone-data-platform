@@ -13,7 +13,25 @@ namespace Api.Modules
         {
             Post["/login"] = parameters =>
             {
-                if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"])) return Response.AsJson(new { data = "Service unavailable - Maintenance in progress" }, HttpStatusCode.ServiceUnavailable);
+                if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"])) 
+                    return Response.AsJson(new { data = "Service unavailable - Maintenance in progress" }, HttpStatusCode.ServiceUnavailable);
+
+                var username = Context.Request.Headers["Username"].FirstOrDefault();
+                var password = Context.Request.Headers["Password"].FirstOrDefault();
+
+                var response = userManagementApi.Post("", "/login/api", null, null, new[]
+                {
+                    new KeyValuePair<string, string>("Username", username), 
+                    new KeyValuePair<string, string>("Password", password)
+                });
+
+                return response;
+            };
+
+            Post["/login/mobi"] = parameters =>
+            {
+                if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"]))
+                    return Response.AsJson(new { data = "Service unavailable - Maintenance in progress" }, HttpStatusCode.ServiceUnavailable);
 
                 var username = Context.Request.Headers["Username"].FirstOrDefault();
                 var password = Context.Request.Headers["Password"].FirstOrDefault();
