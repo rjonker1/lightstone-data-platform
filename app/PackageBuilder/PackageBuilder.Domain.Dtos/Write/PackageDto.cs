@@ -11,7 +11,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         public string Name { get; set; }
         public string Description { get; set; }
         public string Notes { get; set; }
-        public PackageEventType? PackageEventType { get; set; }
+        public PackageEventType PackageEventType { get; set; }
         public IEnumerable<IndustryDto> Industries { get; set; }
         public int Version { get; set; }
         public decimal DisplayVersion { get; set; }
