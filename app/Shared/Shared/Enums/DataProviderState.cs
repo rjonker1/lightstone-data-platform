@@ -6,8 +6,13 @@ namespace DataPlatform.Shared.Enums
     public enum DataProviderState
     {
         [EnumMember] Successful = 1,
-        [EnumMember] PartialFailure = 2,
+        [EnumMember] Partial = 2,
         [EnumMember] Failed = 3,
-        [EnumMember] CriticalFailure = 4
+        [EnumMember] CriticalFailure = 4,
+        [EnumMember] Abandoned = 5,
+        [EnumMember] NoRecordsNonBillable = 6,
+        [EnumMember] NoRecordsBillable = 7,
+        [EnumMember] VinShort = 8,
+        [EnumMember] TechnicalError = 9,
     }
 }
