@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
@@ -15,6 +16,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.Packages.Write
         decimal CostOfSale { get; }
         decimal RecommendedSalePrice { get; }
         string Notes { get; }
+        PackageEventType? PackageEventType { get; }
         IEnumerable<IIndustry> Industries { get; }
         IState State { get; }
         decimal DisplayVersion { get; }

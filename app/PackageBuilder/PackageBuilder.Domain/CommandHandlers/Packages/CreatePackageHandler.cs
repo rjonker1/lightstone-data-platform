@@ -33,7 +33,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
                 return;
             }
 
-            var entity = new Package(command.Id, command.Name, command.Description, command.Industries, command.CostPrice, command.SalePrice,
+            var entity = new Package(command.Id, command.Name, command.Description, command.PackageEventType, command.Industries, command.CostPrice, command.SalePrice,
                 command.State, 0.1M, command.Owner, command.CreatedDate, command.EditedDate, command.DataProviderValueOverrides);
 
             _writeRepo.Save(entity, Guid.NewGuid(), true);

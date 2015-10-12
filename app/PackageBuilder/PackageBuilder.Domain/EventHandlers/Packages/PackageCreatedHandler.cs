@@ -22,10 +22,10 @@ namespace PackageBuilder.Domain.EventHandlers.Packages
             {
                 var exception = new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
                 this.Warn(() => exception);
-                throw exception;                
+                throw exception;
             }
 
-            _repository.Save(new Package(command.Id, command.Name, command.Description, command.State, command.Version, command.DisplayVersion, command.Owner, command.CreatedDate, command.EditedDate, command.Industries));
+            _repository.Save(new Package(command.Id, command.Name, command.Description, command.State, command.Version, command.DisplayVersion, command.Owner, command.CreatedDate, command.EditedDate, command.PackageEventType, command.Industries));
         }
     }
 }

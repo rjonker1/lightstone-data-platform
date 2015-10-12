@@ -35,7 +35,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
 
             var entity = _writeRepo.GetById(command.Id);
             entity.CreatePackageRevision(command.Id, command.Name, command.Description, command.CostPrice,
-                command.SalePrice, command.Notes, command.Industries, command.State, command.Owner,
+                command.SalePrice, command.Notes, command.PackageEventType, command.Industries, command.State, command.Owner,
                 command.CreatedDate, command.EditedDate, command.DataProviderValueOverrides);
 
             _writeRepo.Save(entity, Guid.NewGuid(), true);
