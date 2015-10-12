@@ -78,6 +78,7 @@
     <Compile Include="Enums\DataProviderState.cs" />
     <Compile Include="Enums\DeviceTypes.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />
+    <Compile Include="Enums\PackageEventType.cs" />
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Enums\SystemType.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
