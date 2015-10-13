@@ -41,8 +41,24 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1757, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1757\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\packages\Nancy.1.1\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,8 +73,22 @@
     <Compile Include="Dto\RequestDto.cs" />
     <Compile Include="Dto\ResponseDto.cs" />
     <Compile Include="Messages\RequestReportMessage.cs" />
+    <Compile Include="Meta\Client.cs" />
+    <Compile Include="Meta\Consumer.cs" />
+    <Compile Include="Meta\Contract.cs" />
+    <Compile Include="Meta\Customer.cs" />
+    <Compile Include="Meta\Menu.cs" />
+    <Compile Include="Meta\MetaClient.cs" />
+    <Compile Include="Meta\MetaConsumer.cs" />
+    <Compile Include="Meta\MetaContractDto.cs" />
+    <Compile Include="Meta\MetaCustomer.cs" />
+    <Compile Include="Meta\MetaPackage.cs" />
+    <Compile Include="Meta\MetaPackageDto.cs" />
+    <Compile Include="Meta\Product.cs" />
+    <Compile Include="Meta\SubMenu.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

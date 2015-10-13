@@ -60,7 +60,9 @@ namespace Api
 
             AutoMapperConfiguration.Init();
 
-            container.Install(new AuthInstaller());
+            container.Install(
+                new AuthInstaller(),
+                new AutoMapperInstaller());
 
             container.Register(
                 Component.For<IAuthenticateUser>().ImplementedBy<UerManagementAuthenticator>().LifestyleTransient());

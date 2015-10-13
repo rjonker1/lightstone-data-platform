@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using AutoMapper;
 using Nancy;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
-    public class MetaDetailModule : NancyModule
+    public class MetaDetailModule : SecureModule
     {
-        public MetaDetailModule(IRepository<User> userRepository)
+        public MetaDetailModule(IUserRepository userRepository)
         {
-            Get["/Meta/User/{id:guid}"] = parameters =>
+            Get["/Meta/User/{username}"] = parameters =>
             {
-                var id = (Guid) parameters.id;
-                var dto = Mapper.Map<User, MetaDetailDto>(userRepository.Get(id));
+                var username = (String) parameters.username;
+                var dto = Mapper.Map<User, MetaDetailDto>(userRepository.GetByUserName(username));
 
                 return Response.AsJson(dto);
             };
@@ -24,7 +25,23 @@ namespace UserManagement.Api.Modules
 
     public class MetaDetailDto
     {
+        public Guid UserId { get; set; }
+        public string UserName { get; set; }
+        public IEnumerable<MetaCustomerDto> Customers { get; set; } 
+        public IEnumerable<MetaClientDto> Clients { get; set; } 
+    }
+
+    public class MetaCustomerDto
+    {
         public Guid Id { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<MetaContractDto> Contracts { get; set; }
+    }
+
+    public class MetaClientDto
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
         public IEnumerable<MetaContractDto> Contracts { get; set; }
     }
 
@@ -39,6 +56,5 @@ namespace UserManagement.Api.Modules
     {
         public Guid PackageId { get; set; }
         public string PackageName { get; set; }
-        public string PackageEventType { get; set; }
     }
 }
