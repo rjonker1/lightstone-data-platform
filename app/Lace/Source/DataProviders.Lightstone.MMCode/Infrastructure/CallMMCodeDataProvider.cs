@@ -48,7 +48,7 @@ namespace DataProviders.MMCode.Infrastructure
                 GetMmCode.ForCar(new MmCodeUnitOfWork(_repository), new MmCodeDataFactory().RetrieveCarId(response, _dataProvider.GetRequest<IAmMmCodeRequest>()),
                     out _mmCode);
 
-                _logCommand.LogResponse(_mmCode != null ? DataProviderResponseState.Successful : DataProviderResponseState.Failed,
+                _logCommand.LogResponse(_mmCode != null ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                         .ForDatabaseType(), new { _mmCode },_dataProvider.BillablleState.NoRecordState);
 

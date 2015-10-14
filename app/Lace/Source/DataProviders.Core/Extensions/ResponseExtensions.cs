@@ -24,6 +24,8 @@ namespace Lace.Domain.DataProviders.Core.Extensions
 
         public static DataProviderResponseState State(this ICollection<IPointToLaceProvider> response)
         {
+            if (response == null) return DataProviderResponseState.TechnicalError;
+
             return response.HasAllRecords()
                 ? DataProviderResponseState.Successful
                 : response.IsPartial()

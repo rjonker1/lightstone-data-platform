@@ -75,10 +75,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         private void LogResponse(ICollection<IPointToLaceRequest> request)
         {
-            _logCommand.LogEntryPointResponse(_bootstrap.DataProviderResponses ?? EmptyResponse,
-                _bootstrap.DataProviderResponses == null || _bootstrap.DataProviderResponses.Count == 0
-                    ? DataProviderResponseState.Failed
-                    : DataProviderResponseState.Successful, request, DataProviderNoRecordState.Billable);
+            _logCommand.LogEntryPointResponse(_bootstrap.DataProviderResponses ?? EmptyResponse, _bootstrap.DataProviderResponses.State(), request,
+                DataProviderNoRecordState.Billable);
         }
 
         private void CreateTransaction(ICollection<IPointToLaceRequest> request, DataProviderResponseState state)

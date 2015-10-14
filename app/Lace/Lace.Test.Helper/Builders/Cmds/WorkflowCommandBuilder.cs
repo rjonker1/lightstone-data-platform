@@ -92,7 +92,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     DataProviderResponseState.Successful, new LicensePlateRequestBuilder().ForIvid(), 15, 30)
                 .ReceiveResponseFromDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl", DataProviderAction.Response,
-                    DataProviderResponseState.Failed, null,
+                    DataProviderResponseState.TechnicalError, null,
                     15, 30);
             return this;
         }
@@ -162,7 +162,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     DataProviderResponseState.Successful, new LicensePlateRequestBuilder().ForLightstoneLicensePlate(), 20, 40)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
-                    DataProviderResponseState.Failed, null, 20, 40);
+                    DataProviderResponseState.TechnicalError, null, 20, 40);
             return this;
         }
 
@@ -188,7 +188,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     DataProviderResponseState.Successful, new LicensePlateRequestBuilder().ForRgt(), 30, 60)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
-                    DataProviderResponseState.Failed, null, 30, 60);
+                    DataProviderResponseState.TechnicalError, null, 30, 60);
             return this;
         }
 
@@ -216,7 +216,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     DataProviderResponseState.Successful, new LicensePlateRequestBuilder().ForRgtVin(), 25, 50)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
-                    DataProviderResponseState.Failed, null, 25, 50);
+                    DataProviderResponseState.TechnicalError, null, 25, 50);
             return this;
         }
 
@@ -261,7 +261,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     DataProviderResponseState.Successful, new LicensePlateRequestBuilder().ForIvidTitleHolder(), 35, 70)
                 .ReceiveResponseFromDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za:443/ivid/ws/", DataProviderAction.Response,
-                    DataProviderResponseState.Failed, null, 35, 70);
+                    DataProviderResponseState.TechnicalError, null, 35, 70);
             return this;
         }
 
@@ -283,7 +283,7 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .EntryPointResponse(
                     new List<IPointToLaceProvider>(),
-                    DataProviderResponseState.Failed, new LicensePlateRequestBuilder().ForAllSources(), _Watch);
+                    DataProviderResponseState.TechnicalError, new LicensePlateRequestBuilder().ForAllSources(), _Watch);
 
             return this;
         }

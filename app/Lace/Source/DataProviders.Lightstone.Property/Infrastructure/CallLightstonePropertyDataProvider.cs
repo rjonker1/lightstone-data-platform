@@ -64,7 +64,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 
                 api.CloseSource();
 
-                _logCommand.LogResponse(_result != null ? DataProviderResponseState.Successful : DataProviderResponseState.Failed,
+                _logCommand.LogResponse(_result != null ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString())
                         .ForWebApiType(), new {_result}, _dataProvider.BillablleState.NoRecordState);
 

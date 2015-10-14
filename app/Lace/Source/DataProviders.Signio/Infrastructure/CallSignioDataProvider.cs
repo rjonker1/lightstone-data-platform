@@ -52,7 +52,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 
                 _client.Run();
 
-                _logCommand.LogResponse(_client.IsSuccessful ? DataProviderResponseState.Successful : DataProviderResponseState.Failed,
+                _logCommand.LogResponse(_client.IsSuccessful ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), new { _client.Resonse }, _dataProvider.BillablleState.NoRecordState);
 
 
