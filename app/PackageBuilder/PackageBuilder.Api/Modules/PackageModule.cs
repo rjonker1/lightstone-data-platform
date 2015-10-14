@@ -155,7 +155,15 @@ namespace PackageBuilder.Api.Modules
 
                 // Filter responses for cleaner api payload
                 this.Info(() => "Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
-                var filteredResponse = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>(responses);
+                var filteredResponse = new List<IProvideResponseDataProvider>
+                {
+                    new ResponseMeta
+                    {
+                        RequestId = apiRequest.RequestId
+                    }
+                };
+
+                filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
                 this.Info(() => "Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
@@ -164,6 +172,11 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => "Package Execute Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 return filteredResponse;
+            };
+
+            Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
+            {
+                return null;
             };
 
             Post[PackageBuilderApi.PackageRoutes.ProcessCreate.ApiRoute] = parameters =>

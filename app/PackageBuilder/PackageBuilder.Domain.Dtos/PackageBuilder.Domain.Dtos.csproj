@@ -63,11 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IEnumerableExtensions.cs" />
+    <Compile Include="IProvideResponseDataProvider.cs" />
     <Compile Include="MetaDataDto.cs" />
     <Compile Include="Read\DataProviderDto.cs" />
     <Compile Include="Read\DataProviderRequestDto.cs" />
     <Compile Include="ResponseDataFieldDto.cs" />
     <Compile Include="ResponseDataProviderDto.cs" />
+    <Compile Include="ResponseMeta.cs" />
     <Compile Include="Write\DataProviderDto.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -15,7 +15,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             // Bug: Would map multiple destination items of the 1st item in the source collection
             // Eg: Source containing 2 data providers Ivid & LightstoneAuto, would map and return 2 destination items of Ivid instead of Ivid & LightstoneAuto
             // Cause: Passing in DataProvider instead of IDataProvider as source
-            Mapper.CreateMap<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>()
+            Mapper.CreateMap<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>()
                 .ConvertUsing(x => x.Select(Mapper.Map<IDataProvider, ResponseDataProviderDto>));
             // End of work around
 

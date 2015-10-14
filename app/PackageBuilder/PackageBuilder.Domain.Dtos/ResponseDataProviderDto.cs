@@ -3,7 +3,7 @@ using DataPlatform.Shared.Enums;
 
 namespace PackageBuilder.Domain.Dtos
 {
-    public class ResponseDataProviderDto
+    public class ResponseDataProviderDto : IProvideResponseDataProvider
     {
         public DataProviderName Name { get; set; }
         public IEnumerable<ResponseDataFieldDto> DataFields { get; set; } 

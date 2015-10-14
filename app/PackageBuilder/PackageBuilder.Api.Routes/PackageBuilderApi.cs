@@ -11,6 +11,7 @@
             public static Route ProcessUpdate = new Route();
             public static Route ProcessDelete = new Route();
             public static Route Execute = new Route();
+            public static Route CommitRequest = new Route();
 
             static PackageRoutes()
             {
@@ -41,6 +42,10 @@
                 Execute.RequestType = RequestType.Post;
                 Execute.ApiRoute = "/Packages/Execute";
                 Execute.RestSharpRoute = Execute.ApiRoute;
+
+                CommitRequest.RequestType = RequestType.Post;
+                CommitRequest.ApiRoute = "/Packages/CommitRequest";
+                CommitRequest.RestSharpRoute = CommitRequest.ApiRoute;
             }
         }
     }
