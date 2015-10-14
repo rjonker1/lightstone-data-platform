@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Configuration;
+using System.Data;
 using DataPlatform.Shared.Helpers.Extensions;
 using EasyNetQ;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
@@ -9,6 +11,8 @@ using Monitoring.Dashboard.UI.Infrastructure.Services;
 using Monitoring.Domain.Mappers;
 using Monitoring.Domain.Repository;
 using Nancy;
+using Nancy.Authentication.Token;
+using Nancy.Authentication.Token.Storage;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
@@ -21,9 +25,16 @@ namespace Monitoring.Dashboard.UI
 {
     public class Bootstrapper : DefaultNancyBootstrapper
     {
+        protected override IRootPathProvider RootPathProvider
+        {
+            get { return new TokenRootPathProvider(); }
+        }
+
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
+            TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
+
             StaticConfiguration.DisableErrorTraces = false;
         }
 
@@ -37,6 +48,8 @@ namespace Monitoring.Dashboard.UI
         }
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
+            var userAgent = ConfigurationManager.AppSettings["TokenAuthUserAgentValue"];
+            container.Register<ITokenizer>(new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = userAgent).WithKeyCache(new FileSystemTokenKeyStore((new TokenRootPathProvider())))));
 
             container.Register<ITransactionRepository>(new BillingTransactionRepository());
 
@@ -70,6 +83,15 @@ namespace Monitoring.Dashboard.UI
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/fastclick"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/slimScroll"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
+        }
+
+        public class TokenRootPathProvider : IRootPathProvider
+        {
+            public string GetRootPath()
+            {
+                var keyStore = ConfigurationManager.AppSettings["TokenAuthKeyStorePath"];
+                return new Uri(keyStore).LocalPath;
+            }
         }
     }
 }
