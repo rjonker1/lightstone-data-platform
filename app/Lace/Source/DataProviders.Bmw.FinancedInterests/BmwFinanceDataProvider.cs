@@ -34,7 +34,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.BMWFSTitle_E_DB, _request);
 
-            if (!spec.IsSatisfied || response.HasCriticalError())
+            if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance
             {
 
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.BMWFSTitle_E_DB);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.BMWFSTitle_E_DB, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.BMWFSTitle_E_DB, _dataProvider, _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

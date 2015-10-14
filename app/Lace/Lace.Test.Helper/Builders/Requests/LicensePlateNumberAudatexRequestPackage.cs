@@ -13,7 +13,7 @@ namespace Lace.Test.Helper.Builders.Requests
 
             return
                 new LicensePlateNumberPackage(
-                    new IAmDataProvider[] {new DataProvider(DataProviderName.Audatex, 16, 32.1M, new AudatexRequestTypes() )}, Guid.NewGuid());
+                    new IAmDataProvider[] { new DataProvider(DataProviderName.Audatex, 16, 32.1M, new AudatexRequestTypes(), new BillableState(DataProviderNoRecordState.Billable)) }, Guid.NewGuid());
         }
     }
 }

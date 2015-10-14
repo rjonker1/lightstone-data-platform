@@ -27,6 +27,8 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
+        [DataMember]
+        public DataProviderNoRecordState BillNoRecords { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -35,8 +37,7 @@ namespace Workflow.Lace.Messages.Commands
         public Category Category { get; private set; }
 
         public RaisingSecurityFlagCommand(Guid id, Guid requestId, string message, string payload,
-            DataProviderCommandSource dataProvider,
-            DateTime date, string metaData, Category category)
+            DataProviderCommandSource dataProvider, DateTime date, string metaData, Category category, DataProviderNoRecordState billNoRecords)
         {
             Id = id;
             RequestId = requestId;
@@ -46,6 +47,7 @@ namespace Workflow.Lace.Messages.Commands
             Date = date;
             MetaData = metaData;
             Category = category;
+            BillNoRecords = billNoRecords;
         }
     }
 
@@ -70,6 +72,8 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
+        [DataMember]
+        public DataProviderNoRecordState BillNoRecords { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -79,7 +83,7 @@ namespace Workflow.Lace.Messages.Commands
 
         public ConfiguringDataProviderCommand(Guid id, Guid requestId, string message, string payload,
             DataProviderCommandSource dataProvider,
-            DateTime date, string metaData, Category category)
+            DateTime date, string metaData, Category category,DataProviderNoRecordState billNoRecords)
         {
             Id = id;
             RequestId = requestId;
@@ -89,6 +93,7 @@ namespace Workflow.Lace.Messages.Commands
             Date = date;
             MetaData = metaData;
             Category = category;
+            BillNoRecords = billNoRecords;
         }
     }
 
@@ -113,6 +118,8 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
+        [DataMember]
+        public DataProviderNoRecordState BillNoRecords { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -122,7 +129,7 @@ namespace Workflow.Lace.Messages.Commands
 
         public TransformingDataProviderResponseCommand(Guid id, Guid requestId, string message, string payload,
             DataProviderCommandSource dataProvider,
-            DateTime date, string metaData, Category category)
+            DateTime date, string metaData, Category category, DataProviderNoRecordState billNoRecords)
         {
             Id = id;
             RequestId = requestId;
@@ -132,6 +139,7 @@ namespace Workflow.Lace.Messages.Commands
             Date = date;
             MetaData = metaData;
             Category = category;
+            BillNoRecords = billNoRecords;
         }
     }
 
@@ -156,6 +164,8 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
+        [DataMember]
+        public DataProviderNoRecordState BillNoRecords { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -165,7 +175,7 @@ namespace Workflow.Lace.Messages.Commands
 
         public ErrorInDataProviderCommand(Guid id, Guid requestId, string message, string payload,
             DataProviderCommandSource dataProvider,
-            DateTime date, string metaData, Category category)
+            DateTime date, string metaData, Category category, DataProviderNoRecordState billNoRecords)
         {
             Id = id;
             RequestId = requestId;
@@ -175,6 +185,7 @@ namespace Workflow.Lace.Messages.Commands
             Date = date;
             MetaData = metaData;
             Category = category;
+            BillNoRecords = billNoRecords;
         }
     }
 
@@ -199,6 +210,8 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
+        [DataMember]
+        public DataProviderNoRecordState BillNoRecords { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -208,7 +221,7 @@ namespace Workflow.Lace.Messages.Commands
 
         public StartingCallCommand(Guid id, Guid requestId, string message, string payload,
             DataProviderCommandSource dataProvider,
-            DateTime date, string metaData, Category category)
+            DateTime date, string metaData, Category category, DataProviderNoRecordState billNoRecords)
         {
             Id = id;
             RequestId = requestId;
@@ -218,6 +231,7 @@ namespace Workflow.Lace.Messages.Commands
             Date = date;
             MetaData = metaData;
             Category = category;
+            BillNoRecords = billNoRecords;
         }
     }
 
@@ -242,6 +256,8 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
+        [DataMember]
+        public DataProviderNoRecordState BillNoRecords { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -251,7 +267,7 @@ namespace Workflow.Lace.Messages.Commands
 
         public EndingCallCommand(Guid id, Guid requestId, string message, string payload,
             DataProviderCommandSource dataProvider,
-            DateTime date, string metaData, Category category)
+            DateTime date, string metaData, Category category, DataProviderNoRecordState billNoRecords)
         {
             Id = id;
             RequestId = requestId;
@@ -261,6 +277,7 @@ namespace Workflow.Lace.Messages.Commands
             Date = date;
             MetaData = metaData;
             Category = category;
+            BillNoRecords = billNoRecords;
         }
     }
 }

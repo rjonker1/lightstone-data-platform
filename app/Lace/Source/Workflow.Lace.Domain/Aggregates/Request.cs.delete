@@ -95,7 +95,7 @@ namespace Workflow.Lace.Domain.Aggregates
 
             RequestId = requestId;
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Request,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData,payload,message);
@@ -114,7 +114,7 @@ namespace Workflow.Lace.Domain.Aggregates
 
             RequestId = requestId;
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Response,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -132,7 +132,7 @@ namespace Workflow.Lace.Domain.Aggregates
         {
             RequestId = requestId;
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Response,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -149,7 +149,7 @@ namespace Workflow.Lace.Domain.Aggregates
         {
             RequestId = requestId;
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Request,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -166,7 +166,7 @@ namespace Workflow.Lace.Domain.Aggregates
         {
             RequestId = requestId;
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Request,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -183,7 +183,7 @@ namespace Workflow.Lace.Domain.Aggregates
         {
             RequestId = requestId;
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Request,
-                DataProviderState.Failed);
+                DataProviderResponseState.Failed);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -202,7 +202,7 @@ namespace Workflow.Lace.Domain.Aggregates
 
             RequestId = requestId;
             DataProvider = new DataProviderIdentifier(DataProviderCommandSource.EntryPoint, DataProviderAction.Request,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = payload;

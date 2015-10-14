@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -11,8 +13,28 @@ namespace Lace.Domain.Core.Entities
     {
         public AudatexResponse()
         {
-            
+            ResponseState = DataProviderResponseState.NoRecords;
         }
+
+        private AudatexResponse(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        public static AudatexResponse WithState(DataProviderResponseState state)
+        {
+            return new AudatexResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
         [DataMember]
         public string TypeName
@@ -187,11 +209,5 @@ namespace Lace.Domain.Core.Entities
                 .ToList();
             return r3;
         }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
     }
 }

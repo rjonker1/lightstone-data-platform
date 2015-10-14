@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -10,12 +12,7 @@ namespace Lace.Domain.Core.Entities
     {
         public RgtResponse()
         {
-        }
-
-        private RgtResponse(string message)
-        {
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
+            ResponseState = DataProviderResponseState.NoRecords;
         }
 
         public static RgtResponse Empty()
@@ -23,39 +20,25 @@ namespace Lace.Domain.Core.Entities
             return new RgtResponse();
         }
 
-        public static RgtResponse Failure(string message)
+        private RgtResponse(DataProviderResponseState state)
         {
-            return new RgtResponse(message);
+            ResponseState = state;
         }
 
-        //public RgtResponse(string manufacturer, int modelYear, string modelType, string topSpeed, string kilowatts, string fuelEconomy,
-        //    string acceleration, string torque, string emissions,
-        //    string engineSize, string bodyShape, string fuelType, string transmissionType, string carFullName,
-        //    string colour, string rainSensorWipers, string headsUpDisplay,
-        //    string vehicleType, string model, string make, string carType)
-        //{
-        //    Manufacturer = manufacturer;
-        //    ModelYear = modelYear;
-        //    ModelType = modelType;
-        //    TopSpeed = topSpeed;
-        //    Kilowatts = kilowatts;
-        //    FuelEconomy = fuelEconomy;
-        //    Acceleration = acceleration;
-        //    Torque = torque;
-        //    Emissions = emissions;
-        //    EngineSize = engineSize;
-        //    BodyShape = bodyShape;
-        //    FuelType = fuelType;
-        //    TransmissionType = transmissionType;
-        //    CarFullname = carFullName;
-        //    Colour = colour;
-        //    RainSensorWindscreenWipers = rainSensorWipers;
-        //    HeadUpDisplay = headsUpDisplay;
-        //    VehicleType = vehicleType;
-        //    Model = model;
-        //    Make = make;
-        //    CarType = carType;
-        //}
+        public static RgtResponse WithState(DataProviderResponseState state)
+        {
+            return new RgtResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
         public RgtResponse(string manufacturer, int modelYear, string modelType, string topSpeed, string kilowatts, string fuelEconomy, 
             string acceleration, string torque, string emissions, string engineSize, string bodyShape, string fuelType, 
@@ -296,12 +279,6 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {

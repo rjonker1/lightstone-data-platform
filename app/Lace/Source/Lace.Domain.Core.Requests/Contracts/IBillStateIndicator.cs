@@ -2,8 +2,8 @@
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IDataProviderStateIndicator
+    public interface IBillStateIndicator
     {
-        DataProviderState State { get; }
+        DataProviderNoRecordState NoRecordState { get; }
     }
 }

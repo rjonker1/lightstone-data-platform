@@ -30,7 +30,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
             var request =
                 Request.InitRequest(message.Body.RequestId)
                     .RaiseSecurityFlag(message.Body.Id, message.Body.DataProvider, message.Body.Date,
-                        CommandType.Security, message.Body.MetaData, message.Body.Payload, message.Body.Message);
+                        CommandType.Security, message.Body.MetaData, message.Body.Payload, message.Body.Message, message.Body.BillNoRecords);
 
             var @event =
                 new SecurityFlagRaised(Guid.NewGuid(), request.RequestId, (DataProviderCommandSource)request.DataProvider.Id,
@@ -51,7 +51,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
             var request =
                 Request.InitRequest(message.Body.RequestId)
                     .Configuration(message.Body.Id, message.Body.DataProvider, message.Body.Date,
-                        CommandType.Security, message.Body.MetaData, message.Body.Payload, message.Body.Message);
+                        CommandType.Configuration, message.Body.MetaData, message.Body.Payload, message.Body.Message, message.Body.BillNoRecords);
 
             var @event =
                 new DataProviderConfigured(Guid.NewGuid(), request.RequestId, (DataProviderCommandSource)request.DataProvider.Id,
@@ -72,7 +72,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
             var request =
                 Request.InitRequest(message.Body.RequestId)
                     .Transformation(message.Body.Id, message.Body.DataProvider, message.Body.Date,
-                        CommandType.Security, message.Body.MetaData, message.Body.Payload, message.Body.Message);
+                        CommandType.Transformation, message.Body.MetaData, message.Body.Payload, message.Body.Message, message.Body.BillNoRecords);
 
             var @event =
                 new DataProviderResponseTransformed(Guid.NewGuid(), request.RequestId, (DataProviderCommandSource)request.DataProvider.Id,
@@ -93,7 +93,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
             var request =
                 Request.InitRequest(message.Body.RequestId)
                     .Error(message.Body.Id, message.Body.DataProvider, message.Body.Date,
-                        CommandType.Security, message.Body.MetaData, message.Body.Payload, message.Body.Message);
+                        CommandType.Error, message.Body.MetaData, message.Body.Payload, message.Body.Message, message.Body.BillNoRecords);
 
             var @event =
                 new DataProviderError(Guid.NewGuid(), request.RequestId, (DataProviderCommandSource)request.DataProvider.Id,
@@ -114,7 +114,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
             var request =
                 Request.InitRequest(message.Body.RequestId)
                     .StartCall(message.Body.Id, message.Body.DataProvider, message.Body.Date,
-                        CommandType.Security, message.Body.MetaData, message.Body.Payload, message.Body.Message);
+                        CommandType.StartSourceCall, message.Body.MetaData, message.Body.Payload, message.Body.Message, message.Body.BillNoRecords);
 
             var @event =
                 new DataProviderCallStarted(Guid.NewGuid(), request.RequestId, (DataProviderCommandSource)request.DataProvider.Id,
@@ -135,7 +135,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
             var request =
                 Request.InitRequest(message.Body.RequestId)
                     .EndCall(message.Body.Id, message.Body.DataProvider, message.Body.Date,
-                        CommandType.Security, message.Body.MetaData, message.Body.Payload, message.Body.Message);
+                        CommandType.EndSourceCall, message.Body.MetaData, message.Body.Payload, message.Body.Message, message.Body.BillNoRecords);
 
             var @event =
                 new DataProviderCallEnded(Guid.NewGuid(), request.RequestId,

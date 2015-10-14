@@ -17,7 +17,7 @@ namespace Lace.Unit.Tests.Transform
 
         public override void Observe()
         {
-            _transformer = new TransformConsumerSpecificationsResponse(_response, null);
+            _transformer = new TransformConsumerSpecificationsResponse(_response);
             _transformer.Transform();
         }
 

@@ -11,7 +11,6 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
 using Lace.Shared.Extensions;
-using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -27,7 +26,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         private readonly ILogCommandTypes _logCommand;
 
         private readonly IReadOnlyRepository _repository;
-        private IList<Vin> _vins;
+        private List<Vin> _vins;
 
         public CallRgtVinDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
@@ -42,20 +41,20 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new {_dataProvider});
+                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 GetVin.AsAList(response, _dataProvider.GetRequest<IAmRgtVinRequest>(), new VehicleVinUnitOfWork(_repository), out _vins);
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new {_vins});
+                    .ForDatabaseType(), new { _vins }, _dataProvider.BillablleState.NoRecordState);
 
                 if (_vins == null || !_vins.Any())
                     _logCommand.LogFault(new {_dataProvider},
                         new {ErrorMessage = "No VINs were received"});
 
-                _logCommand.LogResponse(_vins != null && _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(_vins != null && _vins.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                        .ForDatabaseType(), new {_vins});
+                        .ForDatabaseType(), new { _vins }, _dataProvider.BillablleState.NoRecordState);
 
                 TransformResponse(response);
 
@@ -70,7 +69,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformRgtVinResponse(_vins, _dataProvider.Critical);
+            var transformer = new TransformRgtVinResponse(_vins);
 
             if (transformer.Continue)
             {
@@ -85,7 +84,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
         private void RgtVinResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var rgtVinResponse = _dataProvider.IsCritical() ? RgtVinResponse.Failure(_dataProvider.Message()) : RgtVinResponse.Empty();
+            var rgtVinResponse = RgtVinResponse.WithState(DataProviderResponseState.TechnicalError);
             rgtVinResponse.HasBeenHandled();
             response.Add(rgtVinResponse);
         }

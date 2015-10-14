@@ -31,7 +31,7 @@ namespace Lace.Test.Helper.Builders.DataProviders
     {
         public static TransformIvidResponse ForIvid(HpiStandardQueryResponse response)
         {
-            var transformer = new TransformIvidResponse(response, new CriticalFailure(true,"this cannot fail"));
+            var transformer = new TransformIvidResponse(response);
 
             if (transformer.Continue)
             {

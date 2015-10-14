@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -9,6 +10,7 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
+
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
     public sealed class CallIvidDataProvider : ICallTheDataProviderSource
@@ -53,16 +55,16 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             }
         }
 
-        private void IvidResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void IvidResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var ividResponse = _dataProvider.IsCritical() ? IvidResponse.Failure(_dataProvider.Message()) : IvidResponse.Empty();
+            var ividResponse = IvidResponse.WithState(DataProviderResponseState.TechnicalError);
             ividResponse.HasBeenHandled();
             response.Add(ividResponse);
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformIvidResponse(_response, _dataProvider.Critical);
+            var transformer = new TransformIvidResponse(_response);
 
             if (transformer.Continue)
             {

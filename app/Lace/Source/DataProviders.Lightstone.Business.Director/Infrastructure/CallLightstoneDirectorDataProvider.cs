@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts.DataProviders.Business;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -47,12 +46,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
                     throw new Exception("Cannot continue call Lightstone Business Director Api. Request is not valid");
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(),
-                    new {_dataProvider});
+                    new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 DirectorDataRetriever.Start(api, request).WithReturnDirectors().ThenConfirmDirector().FinallyGetDirectorReport(out _result);
 
-                _logCommand.LogResponse(_result == null || _result.Tables.Count == 0 ? DataProviderState.Failed : DataProviderState.Successful,
-                    new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result});
+                _logCommand.LogResponse(_result == null || _result.Tables.Count == 0 ? DataProviderResponseState.NoRecords : DataProviderResponseState.Successful,
+                    new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new { _result }, _dataProvider.BillablleState.NoRecordState);
 
                 TransformResponse(response);
             }
@@ -64,9 +63,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
             }
         }
 
-        private void LightstoneDirectorResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void LightstoneDirectorResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneDirectorResponse = _dataProvider.IsCritical() ? LightstoneBusinessDirectorResponse.Failure(_dataProvider.Message()) : LightstoneBusinessDirectorResponse.Empty();
+            var lightstoneDirectorResponse = LightstoneBusinessDirectorResponse.WithState(DataProviderResponseState.TechnicalError);
             lightstoneDirectorResponse.HasBeenHandled();
             response.Add(lightstoneDirectorResponse);
         }

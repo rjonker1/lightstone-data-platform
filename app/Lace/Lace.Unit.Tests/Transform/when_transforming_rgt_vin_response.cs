@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Toolbox.Database.Models;
@@ -8,18 +9,18 @@ namespace Lace.Unit.Tests.Transform
 {
     public class when_transforming_rgt_vin_response : Specification
     {
-        private readonly IEnumerable<Vin> _rgtVinResponse;
+        private readonly List<Vin> _rgtVinResponse;
         private TransformRgtVinResponse _transfomer;
 
         public when_transforming_rgt_vin_response()
         {
-            _rgtVinResponse = new SourceResponseBuilder().ForRgtVin();
+            _rgtVinResponse = new SourceResponseBuilder().ForRgtVin().ToList();
         }
 
 
         public override void Observe()
         {
-            _transfomer = new TransformRgtVinResponse(_rgtVinResponse, null);
+            _transfomer = new TransformRgtVinResponse(_rgtVinResponse);
             _transfomer.Transform();
         }
 

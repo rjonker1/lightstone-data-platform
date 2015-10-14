@@ -1,8 +1,7 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders;
+﻿using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Models;
 
 namespace DataProviders.MMCode.Infrastructure.Management
@@ -14,16 +13,17 @@ namespace DataProviders.MMCode.Infrastructure.Management
 
         private readonly MmCode _mmCode;
 
-        public TransformMmCodeResponse(MmCode mmCode, ICauseCriticalFailure critical)
+        public TransformMmCodeResponse(MmCode mmCode)
         {
             Continue = mmCode != null;
             _mmCode = mmCode;
-            Result = Continue ? null : critical.IsCritical() ? MMCodeResponse.Failure(critical.Message) : MMCodeResponse.Empty();
+            Result = Continue ? null : MMCodeResponse.Empty();
         }
 
         public void Transform()
         {
             Result = new MMCodeResponse(_mmCode.MML_ID, _mmCode.Car_ID, _mmCode.MM_Code);
+            Result.AddResponseState(DataProviderResponseState.Successful);
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -9,7 +11,7 @@ namespace Lace.Domain.Core.Entities
     {
         public JisResponse()
         {
-            
+            ResponseState = DataProviderResponseState.NoRecords;
         }
       
         public JisResponse(string caseNumber, string description, bool empty, string errorType, string id, bool isHot,
@@ -47,6 +49,15 @@ namespace Lace.Domain.Core.Entities
             return this;
         }
 
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
         public string CaseNumber { get; private set; }
 
@@ -126,9 +137,5 @@ namespace Lace.Domain.Core.Entities
                 return GetType();
             }
         }
-
-        public bool HasCriticalFailure { get; private set; }
-
-        public string CriticalFailureMessage { get; private set; }
     }
 }

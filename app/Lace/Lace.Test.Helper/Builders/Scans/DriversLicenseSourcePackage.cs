@@ -17,7 +17,7 @@ namespace Lace.Test.Helper.Builders.Scans
                     {
                         new DataProvider(DataProviderName.LSAutoDecryptDriverLic_I_WS, 10, 20,
                             SignioDriversLicenseRequest.Request(DriversLicenseScan.GetBase64String(), string.Empty,
-                                new Guid("5A3DA2CD-6036-440C-B591-58C70B6F2EF2"), "jonathan@dnacars.co.za"))
+                                new Guid("5A3DA2CD-6036-440C-B591-58C70B6F2EF2"), "jonathan@dnacars.co.za"), new BillableState(DataProviderNoRecordState.Billable))
                     },
                     Guid.NewGuid());
         }

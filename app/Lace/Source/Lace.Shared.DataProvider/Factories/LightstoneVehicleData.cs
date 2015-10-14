@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Factories;
 using Lace.Shared.Extensions;
@@ -29,7 +27,7 @@ namespace Lace.Toolbox.Database.Factories
                     break;
             }
 
-            return carInformation ?? new GetCarInformation();
+            return carInformation ?? GetCarInformation.Empty();
         }
 
         private static int GetCarId(IAmLightstoneAutoRequest request)

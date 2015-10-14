@@ -13,16 +13,18 @@ namespace Lace.Test.Helper.Builders.Buses
         private ISendCommandToBus _command;
         private IPublishCommandMessages _publisher;
         private readonly DataProviderCommandSource _dataProvider;
+        private readonly DataProviderNoRecordState _billNoRecords;
 
         private DataProviderStopWatch _stopWatch;
         private DataProviderStopWatch _dataProviderStopWatch;
 
         private readonly Guid _aggregateId;
 
-        public MonitoirngQueueSender(DataProviderCommandSource dataProvider, Guid aggregateId)
+        public MonitoirngQueueSender(DataProviderCommandSource dataProvider, Guid aggregateId, DataProviderNoRecordState billNoRecords)
         {
             _dataProvider = dataProvider;
             _aggregateId = aggregateId;
+            _billNoRecords = billNoRecords;
         }
 
         public MonitoirngQueueSender InitQueue(ISendCommandToBus command)
@@ -41,21 +43,21 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender StartingExecution(object message)
         {
-            _command.Workflow.Begin(message, _dataProviderStopWatch, _dataProvider);
+            _command.Workflow.Begin(message, _dataProviderStopWatch, _dataProvider, _billNoRecords);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Configuration(object message, object metadata)
         {
-            _command.Workflow.Send(CommandType.Configuration, message, metadata, _dataProvider);
+            _command.Workflow.Send(CommandType.Configuration, message, metadata, _dataProvider, _billNoRecords);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Security(object message, object metadata)
         {
-            _command.Workflow.Send(CommandType.Security, message, metadata, _dataProvider);
+            _command.Workflow.Send(CommandType.Security, message, metadata, _dataProvider, _billNoRecords);
             Thread.Sleep(1000);
             return this;
         }
@@ -64,7 +66,7 @@ namespace Lace.Test.Helper.Builders.Buses
         {
             _command.Workflow.DataProviderRequest(
                 new DataProviderIdentifier((int) _dataProvider, _dataProvider.ToString(), 55, 100,
-                    DataProviderAction.Request, DataProviderState.Successful),
+                    DataProviderAction.Request, DataProviderResponseState.Successful, _billNoRecords),
                 new ConnectionTypeIdentifier("TEST", "TEST"), new {message}, _stopWatch);
             Thread.Sleep(1000);
             return this;
@@ -72,7 +74,7 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender Error(object message, object metatdata)
         {
-            _command.Workflow.Send(CommandType.Fault, message, metatdata, _dataProvider);
+            _command.Workflow.Send(CommandType.Error, message, metatdata, _dataProvider, _billNoRecords);
             Thread.Sleep(1000);
             return this;
         }
@@ -81,7 +83,7 @@ namespace Lace.Test.Helper.Builders.Buses
         {
             _command.Workflow.DataProviderRequest(
                 new DataProviderIdentifier((int) _dataProvider, _dataProvider.ToString(), 55, 100,
-                    DataProviderAction.Response, DataProviderState.Successful),
+                    DataProviderAction.Response, DataProviderResponseState.Successful, _billNoRecords),
                 new ConnectionTypeIdentifier("TEST", "TEST"), new {message}, _stopWatch);
             Thread.Sleep(1000);
             return this;
@@ -89,14 +91,14 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender Transform(object message, object metaData)
         {
-            _command.Workflow.Send(CommandType.Transformation, message, metaData, _dataProvider);
+            _command.Workflow.Send(CommandType.Transformation, message, metaData, _dataProvider, _billNoRecords);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender EndExecution(object message)
         {
-            _command.Workflow.End(message, _dataProviderStopWatch, _dataProvider);
+            _command.Workflow.End(message, _dataProviderStopWatch, _dataProvider, _billNoRecords);
             Thread.Sleep(1000);
             return this;
         }

@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
+using DataPlatform.Shared.Enums;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Models;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Enums;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
-using Lace.Shared.Extensions;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {
     public sealed class TransformIvidResponse : ITransform
     {
-        public TransformIvidResponse(HpiStandardQueryResponse response, ICauseCriticalFailure critical)
+        public TransformIvidResponse(HpiStandardQueryResponse response)
         {
             Continue = response != null;
-            Result = Continue ? null : critical.IsCritical() ? IvidResponse.Failure(critical.Message) : IvidResponse.Empty();
+            Result = Continue ? null : IvidResponse.Empty();
             Message = response;
         }
 
@@ -51,34 +51,36 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             Result.BuildSpecificInformation();
 
             Result.SetCarFullName();
-            
+
+            Result.AddResponseState(DataProviderResponseState.Successful);
+
             AddToCache();
         }
 
         public void SetStatusMessages(HpiStandardQueryRequest request)
         {
-            Result.AddReportStatusMessage(
-                DataChecks.ReportStatusMessages.FirstOrDefault(
-                    w => w.Key == DataChecks.ResponseChecks((Result.HasIssues || Result.HasNoRecords), DataChecks.ValidationTest.FurtherInvestigation))
-                    .Value);
-            Result.AddReportStatusMessage(
-                DataChecks.ReportStatusMessages.FirstOrDefault(
-                    w => w.Key == DataChecks.ResponseChecks((!string.IsNullOrEmpty(request.LicenceNo) && !string.IsNullOrEmpty(Result.License) &&
-                                                             !Result.License.Equals(request.LicenceNo, StringComparison.CurrentCultureIgnoreCase)),
-                        DataChecks.ValidationTest.LicensePlateMismatch)).Value);
+            Result.AddReportStatusMessage((Result.HasIssues || Result.HasNoRecords)
+                ? StatusMessageType.FurtherInvestigation.Description()
+                : StatusMessageType.NoStatusFeedbackRequired.Description());
 
+            Result.AddReportStatusMessage((!string.IsNullOrEmpty(request.LicenceNo) && !string.IsNullOrEmpty(Result.License) &&
+                                           !Result.License.Equals(request.LicenceNo, StringComparison.CurrentCultureIgnoreCase))
+                ? StatusMessageType.LicensePlateMismatch.Description()
+                : StatusMessageType.NoStatusFeedbackRequired.Description());
         }
 
         private void AddToCache()
         {
-            if(Result.HasNoRecords)
+            if (Result.HasNoRecords)
                 return;
             //Result.AddToCache(CacheDataRepository.ForCacheOnly());
             try
             {
                 Task.Run(() => Result.AddToCache(CacheDataRepository.ForCacheOnly()));
             }
-            catch {}
+            catch
+            {
+            }
         }
 
         private static IvidCodePair BuildIvidCodePair(CodeDescription description)
@@ -87,6 +89,8 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
                 ? new IvidCodePair(string.Empty, string.Empty)
                 : new IvidCodePair(description.code, description.description);
         }
+
+       
 
         public HpiStandardQueryResponse Message { get; private set; }
         public IvidResponse Result { get; private set; }
