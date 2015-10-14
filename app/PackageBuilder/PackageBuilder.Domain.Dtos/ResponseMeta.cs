@@ -11,14 +11,11 @@ namespace PackageBuilder.Domain.Dtos
         {
             RequestId = requestId;
             ResponseState = responseState;
+            ResponseStateMessage = ResponseState.Description();
         }
 
         [DataMember] public readonly Guid RequestId;
         [DataMember] public readonly DataProviderResponseState ResponseState;
-        [DataMember]
-        public string ResponseStateMessage
-        {
-            get { return ResponseState.Description(); }
-        }
+        [DataMember] public readonly string ResponseStateMessage;
     }
 }
