@@ -28,7 +28,7 @@ namespace Lace.Unit.Tests.Workflow
             _command = new SendRequestToDataProviderCommand(Guid.NewGuid(), Guid.NewGuid(),
                 new DataProviderIdentifier((int)DataProviderCommandSource.IVIDVerify_E_WS,
                     DataProviderCommandSource.IVIDVerify_E_WS.ToString(), 55, 100,
-                    DataProviderAction.Request, DataProviderState.Successful), DateTime.UtcNow,
+                    DataProviderAction.Request, DataProviderResponseState.Successful, DataProviderNoRecordState.Billable), DateTime.UtcNow,
                 new ConnectionTypeIdentifier("test.co.za", "API"),
                 new PayloadIdentifier(new MetadataContainer().ObjectToJson(),
                     HandleRequest.GetHpiStandardQueryRequest(

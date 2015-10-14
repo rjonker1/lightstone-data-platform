@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -9,24 +11,33 @@ namespace Lace.Domain.Core.Entities
     {
         public PCubedFicaVerficationResponse()
         {
-
+            ResponseState = DataProviderResponseState.NoRecords;
         }
-
-        private PCubedFicaVerficationResponse(string message)
-        {
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
-        }
-
         public static PCubedFicaVerficationResponse Empty()
         {
             return new PCubedFicaVerficationResponse();
         }
 
-        public static PCubedFicaVerficationResponse Failure(string message)
+        private PCubedFicaVerficationResponse(DataProviderResponseState state)
         {
-            return new PCubedFicaVerficationResponse(message);
+            ResponseState = state;
         }
+
+        public static PCubedFicaVerficationResponse WithState(DataProviderResponseState state)
+        {
+            return new PCubedFicaVerficationResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
+
 
         [DataMember]
         public Guid TransactionToken { get; private set; }
@@ -66,12 +77,6 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {

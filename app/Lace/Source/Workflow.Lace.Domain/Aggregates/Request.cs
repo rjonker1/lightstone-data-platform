@@ -15,10 +15,10 @@ namespace Workflow.Lace.Domain.Aggregates
         }
 
         public Request StartCall(Guid id,  DataProviderCommandSource dataProvider,
-            DateTime date, CommandType commandType, string metaData, string payload, string message)
+            DateTime date, CommandType commandType, string metaData, string payload, string message, DataProviderNoRecordState billNoRecords)
         {
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Request,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful, billNoRecords);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -29,12 +29,12 @@ namespace Workflow.Lace.Domain.Aggregates
         }
 
         public Request EndCall(Guid id, DataProviderCommandSource dataProvider,
-            DateTime date, CommandType commandType, string metaData, string payload, string message)
+            DateTime date, CommandType commandType, string metaData, string payload, string message, DataProviderNoRecordState billNoRecords)
         {
 
           
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Response,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful, billNoRecords);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -46,10 +46,10 @@ namespace Workflow.Lace.Domain.Aggregates
         }
 
         public Request RaiseSecurityFlag(Guid id, DataProviderCommandSource dataProvider,
-            DateTime date, CommandType commandType, string metaData, string payload, string message)
+            DateTime date, CommandType commandType, string metaData, string payload, string message, DataProviderNoRecordState billNoRecords)
         {
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Response,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful, billNoRecords);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -60,11 +60,11 @@ namespace Workflow.Lace.Domain.Aggregates
         }
 
         public Request Configuration(Guid id, DataProviderCommandSource dataProvider,
-            DateTime date, CommandType commandType, string metaData, string payload, string message)
+            DateTime date, CommandType commandType, string metaData, string payload, string message, DataProviderNoRecordState billNoRecords)
         {
         
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Request,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful, billNoRecords);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -75,11 +75,11 @@ namespace Workflow.Lace.Domain.Aggregates
         }
 
         public Request Transformation(Guid id, DataProviderCommandSource dataProvider,
-            DateTime date, CommandType commandType, string metaData, string payload, string message)
+            DateTime date, CommandType commandType, string metaData, string payload, string message, DataProviderNoRecordState billNoRecords)
         {
           
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Request,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful, billNoRecords);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -91,11 +91,11 @@ namespace Workflow.Lace.Domain.Aggregates
         }
 
         public Request Error(Guid id, DataProviderCommandSource dataProvider,
-            DateTime date, CommandType commandType, string metaData, string payload, string message)
+            DateTime date, CommandType commandType, string metaData, string payload, string message, DataProviderNoRecordState billNoRecords)
         {
            
             DataProvider = new DataProviderIdentifier(dataProvider, DataProviderAction.Request,
-                DataProviderState.Failed);
+                DataProviderResponseState.TechnicalError, billNoRecords);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier(metaData, payload, message);
@@ -107,10 +107,10 @@ namespace Workflow.Lace.Domain.Aggregates
 
 
         public Request EntryPointRequest(DateTime date, SearchRequestIndentifier request,
-            PayloadIdentifier payload)
+            PayloadIdentifier payload, NoRecordBillableIdentifier billNoRecords)
         {
             DataProvider = new DataProviderIdentifier(DataProviderCommandSource.EntryPoint, DataProviderAction.Request,
-                DataProviderState.Successful);
+                DataProviderResponseState.Successful, (DataProviderNoRecordState)billNoRecords.Id);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = payload;
@@ -122,11 +122,11 @@ namespace Workflow.Lace.Domain.Aggregates
         }
 
         public Request EntryPointResponse(DateTime date, StateIdentifier state,
-            PayloadIdentifier payload, SearchRequestIndentifier request)
+            PayloadIdentifier payload, SearchRequestIndentifier request, NoRecordBillableIdentifier billNoRecords)
         {
           
             DataProvider = new DataProviderIdentifier(DataProviderCommandSource.EntryPoint, DataProviderAction.Response,
-                (DataProviderState)state.Id);
+                (DataProviderResponseState)state.Id, (DataProviderNoRecordState)billNoRecords.Id);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = payload;
@@ -143,7 +143,7 @@ namespace Workflow.Lace.Domain.Aggregates
             Date = date;
             Connection = connection;
             Payload = payload;
-            CommandType = CommandType.StartSourceCall;
+            CommandType = CommandType.BeginExecution;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             return this;
@@ -156,7 +156,7 @@ namespace Workflow.Lace.Domain.Aggregates
             Date = date;
             Connection = connection;
             Payload = payload;
-            CommandType = CommandType.EndSourceCall;
+            CommandType = CommandType.EndExecution;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             return this;
@@ -164,9 +164,9 @@ namespace Workflow.Lace.Domain.Aggregates
 
         public Request CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId,
             Guid contractId,
-            string system, long contractVersion, DataProviderState state, string accountNumber, double packageCostPrice, double packageRecommendedPrice)
+            string system, long contractVersion, DataProviderResponseState state, string accountNumber, double packageCostPrice, double packageRecommendedPrice, DataProviderNoRecordState billNoRecords)
         {
-            DataProvider = new DataProviderIdentifier(DataProviderCommandSource.EntryPoint, DataProviderAction.Response, state);
+            DataProvider = new DataProviderIdentifier(DataProviderCommandSource.EntryPoint, DataProviderAction.Response, state, billNoRecords);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
             Payload = new PayloadIdentifier();

@@ -2,7 +2,7 @@
 
 namespace Lace.Domain.Core.Contracts.Requests
 {
-    public interface IPointToLaceProvider : IResponseProviderHandled, IProvideType, IProvideCriticalFailure
+    public interface IPointToLaceProvider : IResponseProviderHandled, IProvideType, IProvideResponseState
     {
     }
 }

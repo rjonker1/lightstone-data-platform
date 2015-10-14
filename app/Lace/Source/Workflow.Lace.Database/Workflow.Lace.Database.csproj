@@ -82,6 +82,7 @@
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
@@ -105,6 +106,7 @@
     </Compile>
     <Compile Include="Migrations\201504251525_Create_Data_Provider_Event_Table.cs" />
     <Compile Include="Migrations\201502271652_Create_Data_Provider_Transaction_Table.cs" />
+    <Compile Include="Migrations\201510132010_Add_Billable_State_For_No_Records.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\packages\FluentMigrator.1.2.1.0\tools\FluentMigrator.Runner.dll">

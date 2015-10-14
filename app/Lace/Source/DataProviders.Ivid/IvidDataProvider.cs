@@ -21,7 +21,8 @@ namespace Lace.Domain.DataProviders.Ivid
         private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
-        public IvidDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
+        public IvidDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -32,14 +33,14 @@ namespace Lace.Domain.DataProviders.Ivid
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.IVIDVerify_E_WS, _request);
 
-            if (!spec.IsSatisfied || response.HasCriticalError())
+            if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDVerify_E_WS, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDVerify_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 
@@ -54,6 +55,7 @@ namespace Lace.Domain.DataProviders.Ivid
 
             CallNextSource(response, _command);
         }
+
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
             var ividResponse = IvidResponse.Empty();

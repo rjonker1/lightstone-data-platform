@@ -20,6 +20,17 @@ namespace Lace.Toolbox.Database.Domain
             
         }
 
+        private GetCarInformation(bool empty)
+        {
+            CarInformation = new CarInformation();
+            CarInformationRequest = new CarInformationRequest(0, "", "", "", "", "", 0, 0, false);
+        }
+
+        public static GetCarInformation Empty()
+        {
+            return new GetCarInformation(true);
+        }
+
         public GetCarInformation(string vinNumber, IReadOnlyRepository repository)
         {
             _repository = repository;

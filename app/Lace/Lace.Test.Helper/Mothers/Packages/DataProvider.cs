@@ -5,49 +5,50 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Test.Helper.Mothers.Packages
 {
-    public class CriticalDataProvider : IAmDataProvider
-    {
-        private readonly DataProviderName _name;
-        private readonly decimal _cost;
-        private readonly decimal _rsp;
-        private readonly IAmDataProviderRequest _request;
-        private readonly ICauseCriticalFailure _critical;
+    //public class CriticalDataProvider : IAmDataProvider
+    //{
+    //    private readonly DataProviderName _name;
+    //    private readonly decimal _cost;
+    //    private readonly decimal _rsp;
+    //    private readonly IAmDataProviderRequest _request;
+    //    private readonly IBillStateIndicator _indicator;
 
-        public CriticalDataProvider(DataProviderName name, decimal cost, decimal rsp, IAmDataProviderRequest request, ICauseCriticalFailure critical)
-        {
-            _name = name;
-            _cost = cost;
-            _rsp = rsp;
-            _request = request;
-            _critical = critical;
-        }
+    //    public CriticalDataProvider(DataProviderName name, decimal cost, decimal rsp, IAmDataProviderRequest request, IBillStateIndicator indicator)
+    //    {
+    //        _name = name;
+    //        _cost = cost;
+    //        _rsp = rsp;
+    //        _request = request;
+    //        _indicator = indicator;
+    //    }
 
-        public DataProviderName Name
-        {
-            get { return _name; }
-        }
+    //    public DataProviderName Name
+    //    {
+    //        get { return _name; }
+    //    }
 
-        public decimal CostPrice
-        {
-            get { return _cost; }
-        }
+    //    public decimal CostPrice
+    //    {
+    //        get { return _cost; }
+    //    }
 
-        public decimal RecommendedPrice
-        {
-            get { return _rsp; }
-        }
+    //    public decimal RecommendedPrice
+    //    {
+    //        get { return _rsp; }
+    //    }
 
 
-        public ICollection<IAmDataProviderRequest> Request
-        {
-            get { return new[] {_request}; }
-        }
+    //    public ICollection<IAmDataProviderRequest> Request
+    //    {
+    //        get { return new[] {_request}; }
+    //    }
 
-        public ICauseCriticalFailure Critical
-        {
-            get { return _critical; }
-        }
-    }
+
+    //    public IBillStateIndicator BillablleState
+    //    {
+    //        get { return _indicator; }
+    //    }
+    //}
 
     public class DataProvider : IAmDataProvider
     {
@@ -55,14 +56,16 @@ namespace Lace.Test.Helper.Mothers.Packages
         private readonly decimal _cost;
         private readonly decimal _rsp;
         private readonly IAmDataProviderRequest _request;
+        private readonly IBillStateIndicator _indicator;
 
 
-        public DataProvider(DataProviderName name, decimal cost, decimal rsp, IAmDataProviderRequest request)
+        public DataProvider(DataProviderName name, decimal cost, decimal rsp, IAmDataProviderRequest request, IBillStateIndicator indicator)
         {
             _name = name;
             _cost = cost;
             _rsp = rsp;
             _request = request;
+            _indicator = indicator;
         }
 
         public DataProviderName Name
@@ -85,9 +88,9 @@ namespace Lace.Test.Helper.Mothers.Packages
             get { return new[] {_request}; }
         }
 
-        public ICauseCriticalFailure Critical
+        public IBillStateIndicator BillablleState
         {
-            get { return null; }
+            get { return _indicator; }
         }
     }
 }

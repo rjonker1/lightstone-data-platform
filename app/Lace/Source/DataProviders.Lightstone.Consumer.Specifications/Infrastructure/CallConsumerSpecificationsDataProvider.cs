@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -38,16 +37,16 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
                 var api = new ConfigureSource();
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
-                    .ForWebApiType(), new {_dataProvider});
+                    .ForWebApiType(), new {_dataProvider}, _dataProvider.BillablleState.NoRecordState);
 
                 _jsonRepairHistory =
                     api.Client.getRepairHistory(
                         Guid.Parse(ValidateAccessKey(_dataProvider.GetRequest<IAmLightstoneConsumerSpecificationsRequest>().AccessKey.GetValue())),
                         _dataProvider.GetRequest<IAmLightstoneConsumerSpecificationsRequest>().VinNumber.GetValue());
 
-                _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(response != null && response.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
-                        .ForDatabaseType(), new {_jsonRepairHistory});
+                        .ForDatabaseType(), new { _jsonRepairHistory }, _dataProvider.BillablleState.NoRecordState);
 
                 TransformResponse(response);
             }
@@ -61,7 +60,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformConsumerSpecificationsResponse(_jsonRepairHistory, _dataProvider.Critical);
+            var transformer = new TransformConsumerSpecificationsResponse(_jsonRepairHistory);
 
             if (transformer.Continue)
             {
@@ -74,11 +73,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
             response.Add(transformer.Result);
         }
 
-        private void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var specificationsResponse = _dataProvider.IsCritical()
-                ? LightstoneConsumerSpecificationsResponse.Failure(_dataProvider.Message())
-                : LightstoneConsumerSpecificationsResponse.Empty();
+            var specificationsResponse = LightstoneConsumerSpecificationsResponse.WithState(DataProviderResponseState.TechnicalError);
             specificationsResponse.HasBeenHandled();
             response.Add(specificationsResponse);
         }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Consumer;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -12,14 +14,8 @@ namespace Lace.Domain.Core.Entities
     {
         public LightstoneConsumerSpecificationsResponse()
         {
+            ResponseState = DataProviderResponseState.NoRecords;
             RepairData = new List<IRespondWithRepairData>();
-        }
-
-        private LightstoneConsumerSpecificationsResponse(string message)
-        {
-            RepairData = new List<IRespondWithRepairData>();
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
         }
 
         public static LightstoneConsumerSpecificationsResponse Empty()
@@ -27,27 +23,36 @@ namespace Lace.Domain.Core.Entities
             return new LightstoneConsumerSpecificationsResponse();
         }
 
-        public static LightstoneConsumerSpecificationsResponse Failure(string message)
-        {
-            return new LightstoneConsumerSpecificationsResponse(message);
-        }
-
         public LightstoneConsumerSpecificationsResponse(IEnumerable<IRespondWithRepairData> repairData)
         {
             RepairData = repairData;
         }
+        private LightstoneConsumerSpecificationsResponse(DataProviderResponseState state)
+        {
+            ResponseState = state;
+            RepairData = new List<IRespondWithRepairData>();
+        }
+
+        public static LightstoneConsumerSpecificationsResponse WithState(DataProviderResponseState state)
+        {
+            return new LightstoneConsumerSpecificationsResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
         [DataMember]
         public IEnumerable<IRespondWithRepairData> RepairData { get; private set; }
 
         [DataMember]
         public IAmLightstoneConsumerSpecificationsRequest Request { get; private set; }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         [DataMember]
         public string TypeName

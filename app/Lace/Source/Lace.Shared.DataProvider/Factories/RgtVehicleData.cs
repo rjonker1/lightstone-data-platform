@@ -27,7 +27,7 @@ namespace Lace.Toolbox.Database.Factories
                     break;
             }
 
-            return carInformation ?? new GetCarInformation();
+            return carInformation ?? GetCarInformation.Empty();
         }
 
         private static int GetCarId(IAmRgtRequest request)

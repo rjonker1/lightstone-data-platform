@@ -33,7 +33,7 @@ namespace Lace.Unit.Tests.Transform
 
         public override void Observe()
         {
-            _transform = new TransformLightstoneResponse(_retrieveValuationFromMetrics, _retrieveCarInformation, null);
+            _transform = new TransformLightstoneResponse(_retrieveValuationFromMetrics, _retrieveCarInformation);
             _transform.Transform();
             _response = _transform.Result;
         }

@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -14,8 +16,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.M
 
         public TransformLightstoneCompanyResponse(DataSet response)
         {
+            Continue = response != null && response.Tables.Count > 0;
+            Result = Continue ? null : LightstoneBusinessCompanyResponse.Empty();
             Response = response;
-            Continue = Response != null && Response.Tables.Count > 0;
         }
 
         public void Transform()
@@ -42,6 +45,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure.M
                                 s.GetStringValue("SIC_Description")));
 
             Result = new LightstoneBusinessCompanyResponse(results);
+            Result.AddResponseState(Result.Companies.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords);
         }
     }
 }

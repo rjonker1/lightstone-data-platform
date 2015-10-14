@@ -34,14 +34,14 @@ namespace DataProviders.MMCode
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.MMCode_E_DB, _request);
 
-            if (!spec.IsSatisfied || response.HasCriticalError())
+            if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.MMCode_E_DB);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.MMCode_E_DB, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.MMCode_E_DB, _dataProvider, _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new { _dataProvider });
 

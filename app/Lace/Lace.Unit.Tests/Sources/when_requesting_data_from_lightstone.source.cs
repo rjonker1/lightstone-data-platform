@@ -33,14 +33,12 @@ namespace Lace.Unit.Tests.Sources
         {
             _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneAuto();
-            // _request = new LicensePlateRequestBuilder().ForLightstoneLicensePlate();
             _request = new LicensePlateRequestBuilder().ForLightstoneVinNumber();
-            // _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _response = new Collection<IPointToLaceProvider>();
 
             _dataProvider = _request.GetFromRequest<IPointToLaceRequest>()
                 .Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoCarStats_I_DB);
-            _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoCarStats_I_DB, _dataProvider);
+            _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoCarStats_I_DB, _dataProvider, DataProviderNoRecordState.NonBillable);
 
             _callTheSource = new CallLightstoneAutoDataProvider(_dataProvider, new FakeDataProviderRepository(), _logCommand);
         }

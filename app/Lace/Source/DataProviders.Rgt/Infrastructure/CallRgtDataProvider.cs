@@ -44,16 +44,16 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new {_dataProvider});
+                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 _carInformation = new RgtVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmRgtRequest>(),
                    _repository);
 
                 GetSpecifications.ForCar(new CarSpecificationsUnitOfWork(_repository), _carInformation.CarInformationRequest, out _carSpecifications);
 
-                _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                        .ForDatabaseType(), new {_carSpecifications});
+                        .ForDatabaseType(), new { _carSpecifications }, _dataProvider.BillablleState.NoRecordState);
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {
@@ -84,7 +84,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformRgtResponse(_carSpecifications, _dataProvider.Critical);
+            var transformer = new TransformRgtResponse(_carSpecifications.ToList());
 
             if (transformer.Continue)
             {
@@ -99,7 +99,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         private void RgtResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var rgtResponse = _dataProvider.IsCritical() ? RgtResponse.Failure(_dataProvider.Message()) : RgtResponse.Empty();
+            var rgtResponse = RgtResponse.WithState(DataProviderResponseState.TechnicalError);
             rgtResponse.HasBeenHandled();
             response.Add(rgtResponse);
         }

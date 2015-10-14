@@ -77,7 +77,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                 Request.InitRequest(message.Body.RequestId)
                     .CreateTransaction(message.Body.PackageId, message.Body.PackageVersion, message.Body.Date,
                         message.Body.UserId, message.Body.ContractId, message.Body.System, message.Body.ContractVersion,
-                        message.Body.State, message.Body.AccountNumber, message.Body.PackageCostPrice, message.Body.PackageRecommendedPrice);
+                        message.Body.State, message.Body.AccountNumber, message.Body.PackageCostPrice, message.Body.PackageRecommendedPrice,message.Body.NoRecordState);
 
             var @event =
                 new BillTransactionMessage(request.Package,
@@ -101,7 +101,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
         {
             var request =
                 Request.InitRequest(message.Body.RequestId)
-                    .EntryPointRequest(message.Body.Date, message.Body.Request, message.Body.Payload);
+                    .EntryPointRequest(message.Body.Date, message.Body.Request, message.Body.Payload,message.Body.BillNoRecords);
 
             var @event =
                 new EntryPointReceivedRequest(Guid.NewGuid(), request.Date, request.RequestId,
@@ -121,7 +121,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
         {
             var request =
                 Request.InitRequest(message.Body.RequestId)
-                    .EntryPointResponse(message.Body.Date,message.Body.State,message.Body.Payload,message.Body.Request);
+                    .EntryPointResponse(message.Body.Date,message.Body.State,message.Body.Payload,message.Body.Request,message.Body.BillNoRecords);
 
             var @event =
                 new EntryPointReturnedResponse(Guid.NewGuid(), request.RequestId, request.Date, request.Payload,

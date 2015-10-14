@@ -1,4 +1,5 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders;
+﻿using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Extensions;
@@ -42,6 +43,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Managem
                     new VehicleClass(card.VehicleClass4.Code, card.VehicleClass4.VehicleRestriction,
                         card.VehicleClass4.FirstIssueDate),
                     card.Photo, card.Cellphone, card.EmailAddress), Message);
+            Result.AddResponseState(DataProviderResponseState.Successful);
         }
 
     }

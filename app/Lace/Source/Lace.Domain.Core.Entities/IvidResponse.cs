@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Caching;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 using Lace.Domain.Core.Models;
 using Newtonsoft.Json;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -16,17 +18,10 @@ namespace Lace.Domain.Core.Entities
     {
         private const string NotAvailableError = "Error - Not Available";
         public const string CacheKey = "urn:Ivid:{0}";
-
-
+        
         public IvidResponse()
         {
-           
-        }
-
-        private IvidResponse(string message)
-        {
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
+            ResponseState = DataProviderResponseState.NoRecords;
         }
 
         public static IvidResponse Empty()
@@ -34,16 +29,29 @@ namespace Lace.Domain.Core.Entities
             return new IvidResponse();
         }
 
-        public static IvidResponse Failure(string message)
+        private IvidResponse(DataProviderResponseState state)
         {
-            return new IvidResponse(message);
+            ResponseState = state;
+        }
+
+        public static IvidResponse WithState(DataProviderResponseState state)
+        {
+            return new IvidResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
         }
 
         [DataMember]
-        public bool HasCriticalFailure { get; private set; }
+        public DataProviderResponseState ResponseState { get; private set; }
 
         [DataMember]
-        public string CriticalFailureMessage { get; private set; }
+        public string ResponseStateMessage
+        {
+            get { return ResponseState.Description(); }
+        }
 
         public static IvidResponse Build(string statusMessage, string reference, string license, string registration,
             string registrationDate, string vin, string engine,
@@ -65,7 +73,6 @@ namespace Lace.Domain.Core.Entities
             Engine = CheckPartial(engine);
             Displacement = CheckPartial(displacement);
             Tare = CheckPartial(tare);
-           // IsCritical = isCritcal;
         }
 
         public void AddToCache(ICacheRepository repository)
@@ -149,6 +156,7 @@ namespace Lace.Domain.Core.Entities
             SpecificInformation = new VehicleSpecificInformation("Odometer Not Available", ColourDescription,
                 Registration, Vin, License, Engine, CategoryDescription);
             SpecificInformation.HasBeenHandled();
+            SpecificInformation.AddResponseState(DataProviderResponseState.Successful);
         }
 
         public void SetCarFullName()

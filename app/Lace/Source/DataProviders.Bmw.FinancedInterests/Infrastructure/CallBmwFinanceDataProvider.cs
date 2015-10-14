@@ -40,15 +40,15 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(IntegrationBmwConfiguration.Database)
-                    .ForDatabaseType(), new {_dataProvider});
+                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 _bmwFinances =
                     new BmwFinanceDataBasedOnRequestFactory().Get(new BmwFinanceUnitOfWork(_repository),
                         _dataProvider.GetRequest<IAmBmwFinanceRequest>(), response).ToList();
 
-                _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(IntegrationBmwConfiguration.Database)
-                        .ForDatabaseType(), new {_bmwFinances});
+                        .ForDatabaseType(), new { _bmwFinances }, _dataProvider.BillablleState.NoRecordState);
 
                 TransformResponse(response);
             }
@@ -62,7 +62,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformBmwFinanceResponse(_bmwFinances, _dataProvider.Critical);
+            var transformer = new TransformBmwFinanceResponse(_bmwFinances);
 
             if (transformer.Continue)
             {
@@ -75,9 +75,9 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private void BmwFinacedInterestsResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void BmwFinacedInterestsResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var financedInterests = _dataProvider.IsCritical() ? BmwFinanceResponse.Failure(_dataProvider.Message()) : BmwFinanceResponse.Empty();
+            var financedInterests = BmwFinanceResponse.WithState(DataProviderResponseState.TechnicalError);
             financedInterests.HasBeenHandled();
             response.Add(financedInterests);
         }

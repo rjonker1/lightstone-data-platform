@@ -29,7 +29,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
         private readonly IReadOnlyRepository _repository;
 
-        public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository,ILogCommandTypes logCommand)
+        public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
@@ -42,16 +42,16 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new {_dataProvider});
+                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 _carInformation = new LightstoneVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(),
                     _repository);
 
                 GetMetricType.OfBaseRetrievalMetric(_carInformation.CarInformationRequest, _repository, out _metrics);
 
-                _logCommand.LogResponse(response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(response != null && response.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                        .ForDatabaseType(), new {_carInformation, _metrics});
+                        .ForDatabaseType(), new { _carInformation, _metrics }, _dataProvider.BillablleState.NoRecordState);
 
                 TransformResponse(response);
             }
@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformLightstoneResponse(_metrics, _carInformation,_dataProvider.Critical);
+            var transformer = new TransformLightstoneResponse(_metrics, _carInformation);
 
             if (transformer.Continue)
             {
@@ -78,9 +78,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private void LightstoneResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void LightstoneResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneResponse = _dataProvider.IsCritical() ? LightstoneAutoResponse.Failure(_dataProvider.Message()) : LightstoneAutoResponse.Empty();
+            var lightstoneResponse = LightstoneAutoResponse.WithState(DataProviderResponseState.TechnicalError);
             lightstoneResponse.HasBeenHandled();
             response.Add(lightstoneResponse);
         }

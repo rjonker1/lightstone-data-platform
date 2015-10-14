@@ -24,15 +24,18 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public PayloadIdentifier Payload { get; private set; }
+        [DataMember]
+        public NoRecordBillableIdentifier BillNoRecords { get; private set; }
 
         public ReceiveEntryPointRequest(Guid id, Guid requestId,
-            DateTime date, SearchRequestIndentifier request, PayloadIdentifier payload)
+            DateTime date, SearchRequestIndentifier request, PayloadIdentifier payload,NoRecordBillableIdentifier billNoRecords)
         {
             Id = id;
             Date = date;
             RequestId = requestId;
             Request = request;
             Payload = payload;
+            BillNoRecords = billNoRecords;
 
         }
     }
@@ -57,9 +60,11 @@ namespace Workflow.Lace.Messages.Commands
         public PayloadIdentifier Payload { get; private set; }
         [DataMember]
         public SearchRequestIndentifier Request { get; private set; }
+        [DataMember]
+        public NoRecordBillableIdentifier BillNoRecords { get; private set; }
 
         public ReturnEntryPointResponse(Guid id, Guid requestId,
-            DateTime date, StateIdentifier state, PayloadIdentifier payload,SearchRequestIndentifier request)
+            DateTime date, StateIdentifier state, PayloadIdentifier payload,SearchRequestIndentifier request,NoRecordBillableIdentifier billNoRecords)
         {
             Id = id;
             Date = date;
@@ -67,6 +72,7 @@ namespace Workflow.Lace.Messages.Commands
             Payload = payload;
             State = state;
             Request = request;
+            BillNoRecords = billNoRecords;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Management
             
         }
 
-        public static void AsAList(ICollection<IPointToLaceProvider> response, IAmRgtVinRequest request, IGetVehicleFromVin vinWorker,  out IList<Vin> vins)
+        public static void AsAList(ICollection<IPointToLaceProvider> response, IAmRgtVinRequest request, IGetVehicleFromVin vinWorker,  out List<Vin> vins)
         {
             var vinnumber = HandleRequest.GetVinNumber(response, request);
             if (string.IsNullOrEmpty(vinnumber))

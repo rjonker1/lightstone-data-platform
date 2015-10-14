@@ -48,12 +48,12 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                     new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"});
 
 
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), _client.Suffix);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), _client.Suffix, _dataProvider.BillablleState.NoRecordState);
 
                 _client.Run();
 
-                _logCommand.LogResponse(_client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed,
-                    new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), new {_client.Resonse});
+                _logCommand.LogResponse(_client.IsSuccessful ? DataProviderResponseState.Successful : DataProviderResponseState.Failed,
+                    new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), new { _client.Resonse }, _dataProvider.BillablleState.NoRecordState);
 
 
                 if (string.IsNullOrWhiteSpace(_client.Resonse))
@@ -72,7 +72,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 
         private void SignioResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var signioDriversLicenseDecryptionResponse = _dataProvider.IsCritical() ? SignioDriversLicenseDecryptionResponse.Failure(_dataProvider.Message()) : SignioDriversLicenseDecryptionResponse.Empty();
+            var signioDriversLicenseDecryptionResponse = SignioDriversLicenseDecryptionResponse.WithState(DataProviderResponseState.TechnicalError);
             signioDriversLicenseDecryptionResponse.HasBeenHandled();
             response.Add(signioDriversLicenseDecryptionResponse);
         }

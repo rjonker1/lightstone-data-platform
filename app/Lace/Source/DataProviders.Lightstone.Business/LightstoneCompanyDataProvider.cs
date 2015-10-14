@@ -7,7 +7,6 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure;
 using Workflow.Lace.Messages.Core;
@@ -33,14 +32,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LSBusinessCompany_E_WS, _request);
 
-            if (!spec.IsSatisfied || response.HasCriticalError())
+            if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSBusinessCompany_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSBusinessCompany_E_WS, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSBusinessCompany_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 
@@ -51,8 +50,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromLightstoneBusinessCompany>().Any() ||
-                    response.OfType<IProvideDataFromLightstoneBusinessCompany>().First() == null)
+                if (!response.OfType<IProvideDataFromLightstoneBusinessCompany>().Any() ||response.OfType<IProvideDataFromLightstoneBusinessCompany>().First() == null)
                     CallFallbackSource(response, _command);
             }
 

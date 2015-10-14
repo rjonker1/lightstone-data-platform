@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -10,22 +12,12 @@ namespace Lace.Domain.Core.Entities
     {
         public MMCodeResponse()
         {
-        }
-
-        private MMCodeResponse(string message)
-        {
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
+            ResponseState = DataProviderResponseState.NoRecords;
         }
 
         public static MMCodeResponse Empty()
         {
             return new MMCodeResponse();
-        }
-
-        public static MMCodeResponse Failure(string message)
-        {
-            return new MMCodeResponse(message);
         }
 
         public MMCodeResponse(int mmlId, int carId, string mmCode)
@@ -34,6 +26,26 @@ namespace Lace.Domain.Core.Entities
             CarId = carId;
             MMCode = mmCode;
         }
+
+        private MMCodeResponse(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        public static MMCodeResponse WithState(DataProviderResponseState state)
+        {
+            return new MMCodeResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
         [DataMember]
         public IAmMmCodeRequest Request { get; private set; }
@@ -63,12 +75,6 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {

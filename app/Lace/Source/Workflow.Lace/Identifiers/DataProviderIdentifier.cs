@@ -25,14 +25,17 @@ namespace Workflow.Lace.Identifiers
         public DataProviderAction Action { get; private set; }
 
         [DataMember]
-        public DataProviderState State { get; private set; }
+        public DataProviderResponseState State { get; private set; }
+
+        [DataMember]
+        public DataProviderNoRecordState BillNoRecords { get; private set; }
 
         public DataProviderIdentifier()
         {
         }
 
         public DataProviderIdentifier(int id, string name, decimal costPrice, decimal recommendedPrice,
-            DataProviderAction action, DataProviderState state)
+            DataProviderAction action, DataProviderResponseState state, DataProviderNoRecordState billNoRecords)
         {
             Id = id;
             Name = name;
@@ -40,15 +43,17 @@ namespace Workflow.Lace.Identifiers
             RecommendedPrice = recommendedPrice;
             Action = action;
             State = state;
+            BillNoRecords = billNoRecords;
         }
 
         public DataProviderIdentifier(DataProviderCommandSource dataProvider,
-            DataProviderAction action, DataProviderState state)
+            DataProviderAction action, DataProviderResponseState state, DataProviderNoRecordState billNoRecords)
         {
             Id = (int) dataProvider;
             Name = dataProvider.ToString();
             Action = action;
             State = state;
+            BillNoRecords = billNoRecords;
         }
 
         public DataProviderIdentifier SetPrice(IAmDataProvider dataProvider)

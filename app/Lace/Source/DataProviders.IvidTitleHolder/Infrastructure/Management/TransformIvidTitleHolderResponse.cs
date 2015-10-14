@@ -1,8 +1,7 @@
-﻿using Lace.Domain.Core.Entities;
-using Lace.Domain.Core.Requests.Contracts;
+﻿using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
-using Lace.Shared.Extensions;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management
 {
@@ -12,10 +11,10 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management
         public IvidTitleHolderResponse Result { get; private set; }
         public bool Continue { get; private set; }
 
-        public TransformIvidTitleHolderResponse(TitleholderQueryResponse response, ICauseCriticalFailure criticalFailure)
+        public TransformIvidTitleHolderResponse(TitleholderQueryResponse response)
         {
             Continue = response != null;
-            Result = criticalFailure.IsCritical() ? IvidTitleHolderResponse.Failure(criticalFailure.Message) : IvidTitleHolderResponse.Empty();
+            Result = IvidTitleHolderResponse.Empty();
             Message = response;
         }
 
@@ -25,6 +24,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management
                 Message.accountClosedDate, Message.yearOfLiabilityForLicensing);
 
             Result.SetRequestFinancialInterestInvite();
+            Result.AddResponseState(DataProviderResponseState.Successful);
         }
     }
 }

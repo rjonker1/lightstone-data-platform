@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts.DataProviders.Business;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -50,12 +46,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
                     throw new Exception("Cannot continue call Lightstone Business Api. Request is not valid");
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(),
-                    new {_dataProvider});
+                    new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 CompanyDataRetriever.Start(api, request).WithReturnCompanies().ThenConfirmCompany().FinallyGetCompanyReport(out _result);
 
-                _logCommand.LogResponse(_result == null || _result.Tables.Count == 0 ? DataProviderState.Failed : DataProviderState.Successful,
-                    new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result});
+                _logCommand.LogResponse(_result == null || _result.Tables.Count == 0 ? DataProviderResponseState.NoRecords : DataProviderResponseState.Successful,
+                    new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new { _result }, _dataProvider.BillablleState.NoRecordState);
 
                 TransformResponse(response);
             }
@@ -67,9 +63,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
             }
         }
 
-        private void LightstoneBusinessResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void LightstoneBusinessResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneBusinessResponse = _dataProvider.IsCritical() ? LightstoneBusinessCompanyResponse.Failure(_dataProvider.Message()) : LightstoneBusinessCompanyResponse.Empty();
+            var lightstoneBusinessResponse = LightstoneAutoResponse.WithState(DataProviderResponseState.TechnicalError);
             lightstoneBusinessResponse.HasBeenHandled();
             response.Add(lightstoneBusinessResponse);
         }

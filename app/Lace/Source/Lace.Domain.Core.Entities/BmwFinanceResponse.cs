@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Finance;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -13,14 +15,8 @@ namespace Lace.Domain.Core.Entities
     {
         public BmwFinanceResponse()
         {
+            ResponseState = DataProviderResponseState.NoRecords;
             Finances = Enumerable.Empty<IRespondWithBmwFinance>();
-        }
-
-        private BmwFinanceResponse(string message)
-        {
-            Finances = Enumerable.Empty<IRespondWithBmwFinance>();
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
         }
      
         public static BmwFinanceResponse Empty()
@@ -28,17 +24,26 @@ namespace Lace.Domain.Core.Entities
             return new BmwFinanceResponse();
         }
 
-        public static BmwFinanceResponse Failure(string message)
+        private BmwFinanceResponse(DataProviderResponseState state)
         {
-            return new BmwFinanceResponse(message);
+            ResponseState = state;
+            Finances = Enumerable.Empty<IRespondWithBmwFinance>();
+        }
+
+        public static BmwFinanceResponse WithState(DataProviderResponseState state)
+        {
+            return new BmwFinanceResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
         }
 
         [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
+        public DataProviderResponseState ResponseState { get; private set; }
         [DataMember]
-        public string CriticalFailureMessage { get; private set; }
-
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
         public BmwFinanceResponse(IEnumerable<IRespondWithBmwFinance> finances)
         {

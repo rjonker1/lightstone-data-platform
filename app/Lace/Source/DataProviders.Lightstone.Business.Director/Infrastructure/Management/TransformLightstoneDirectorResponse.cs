@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -16,6 +18,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.
         {
             Response = response;
             Continue = Response != null && Response.Tables.Count > 0;
+            Result = Continue ? null : LightstoneBusinessDirectorResponse.Empty();
         }
 
         public void Transform()
@@ -38,6 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.
                             );
 
             Result = new LightstoneBusinessDirectorResponse(results);
+            Result.AddResponseState(Result.Directors.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Lace.Test.Helper.Builders.Cmds
         {
             var request = new LicensePlateRequestBuilder().ForIvid();
 
-            var queue = new MonitoirngQueueSender(DataProviderCommandSource.IVIDVerify_E_WS, _aggregateId);
+            var queue = new MonitoirngQueueSender(DataProviderCommandSource.IVIDVerify_E_WS, _aggregateId, DataProviderNoRecordState.Billable);
             queue.InitQueue(MonitoringBusBuilder.ForIvidCommands(_aggregateId))
                 .InitStopWatch()
                 .StartingExecution(new LicensePlateRequestBuilder().ForIvid())
@@ -46,10 +46,10 @@ namespace Lace.Test.Helper.Builders.Cmds
                 .Error(new {NoRequestReceived = "No response received from Ivid Data Provider"}, null)
                 .EndCall(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp())
                 .Transform(
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true,"this cannot fail")).Result,
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true, "this cannot fail")))
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()))
                 .EndExecution(
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(), new CriticalFailure(true, "this cannot fail")).Result);
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result);
 
             return this;
         }

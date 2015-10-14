@@ -19,7 +19,7 @@ namespace Lace.Unit.Tests.Transform
 
         public override void Observe()
         {
-            _transfomer = new TransformIvidResponse(_ividWebServiceResponse, new CriticalFailure(true, "this cannot fail"));
+            _transfomer = new TransformIvidResponse(_ividWebServiceResponse);
             _transfomer.Transform();
         }
 

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -14,6 +16,7 @@ namespace Lace.Domain.Core.Entities
     {
         public LightstoneBusinessCompanyResponse()
         {
+            ResponseState = DataProviderResponseState.NoRecords;
             Companies = Enumerable.Empty<IProvideCompany>();
         }
 
@@ -27,26 +30,29 @@ namespace Lace.Domain.Core.Entities
             Companies = companies;
         }
 
-        private LightstoneBusinessCompanyResponse(string message)
+        private LightstoneBusinessCompanyResponse(DataProviderResponseState state)
         {
-
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
+            ResponseState = state;
+            Companies = Enumerable.Empty<IProvideCompany>();
         }
 
-        public static LightstoneBusinessCompanyResponse Failure(string message)
+        public static LightstoneBusinessCompanyResponse WithState(DataProviderResponseState state)
         {
-            return new LightstoneBusinessCompanyResponse(message);
+            return new LightstoneBusinessCompanyResponse(state);
         }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
         [DataMember]
         public IEnumerable<IProvideCompany> Companies { get; private set; }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         [DataMember]
         public Type Type

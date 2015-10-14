@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Property;
 using Lace.Domain.Core.Entities;
@@ -78,6 +80,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Managemen
 
             properties.AddRange(property);
             Result = new LightstonePropertyResponse(properties);
+            Result.AddResponseState(Result.PropertyInformation.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords);
         }
 
         private static string GetStringRowValue(DataRow row, string value)
