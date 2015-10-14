@@ -124,9 +124,9 @@ namespace PackageBuilder.Api.Modules
             Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute] = parameters => Response.AsJson(
                 new
                 {
-                    Response = new[] {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id))}
+                    Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
                 });
-                
+
 
             Post[PackageBuilderApi.PackageRoutes.Execute.ApiRoute] = parameters =>
             {
@@ -176,6 +176,12 @@ namespace PackageBuilder.Api.Modules
 
             Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
             {
+                var apiRequest = this.Bind<ApiRequestDto>();
+
+                if (apiRequest.RequestId == new Guid()) return Response.AsJson(new { data = "Please supply a valid RequestId" });
+
+                // TODO: Execution path for VIN12 requests
+
                 return null;
             };
 
