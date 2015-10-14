@@ -5,7 +5,7 @@ namespace DataPlatform.Shared.Enums
     [DataContract]
     public enum DataProviderResponseState
     {
-        [EnumMember(Value = "Succesful Response")] Successful = 1,
+        [EnumMember(Value = "Successful Response")] Successful = 1,
         [EnumMember(Value = "Partial Response")] Partial = 2,
        // [EnumMember(Value = "Failed Response")] Failed = 3,
         [EnumMember(Value = "Critical Failure Response")] CriticalFailure = 4,

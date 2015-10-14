@@ -71,10 +71,12 @@
     <Compile Include="ResponseDataFieldDto.cs" />
     <Compile Include="ResponseDataProviderDto.cs" />
     <Compile Include="ResponseMeta.cs" />
+    <Compile Include="ResponseStateExtensions.cs" />
     <Compile Include="Write\DataProviderDto.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Write\DataProviderFieldItemDto.cs" />
+    <Compile Include="Write\DataProviderResponseDto.cs" />
     <Compile Include="Write\IndustryDto.cs" />
     <Compile Include="Write\PackageDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -20,7 +20,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             // End of work around
 
             Mapper.CreateMap<IDataProvider, ResponseDataProviderDto>()
-                .ForMember(d => d.Name, opt => opt.MapFrom(x => x.Name.ToString()));
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => x.Name.ToString()))
+                .ForMember(d => d.ResponseState, opt => opt.MapFrom(m => m.ResponseState));
 
             Mapper.CreateMap<IDataField, ResponseDataFieldDto>();
         }

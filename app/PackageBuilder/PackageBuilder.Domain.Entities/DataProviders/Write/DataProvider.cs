@@ -122,5 +122,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         {
             return "{0} - {1} - {2}".FormatWith(GetType().FullName, Id, Name);
         }
+       
+        public DataProviderResponseState ResponseState { get; internal set; }
     }
 }

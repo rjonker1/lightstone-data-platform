@@ -11,7 +11,8 @@ namespace PackageBuilder.Domain.Dtos
         public string Definition { get; set; }
         public int Order { get; set; }
         public string Type { get; set; }
-
+        //public string ResponseStateMessage { get; set; }
+        //public DataProviderResponseState ResponseState { get; set; }
         public IEnumerable<ResponseDataFieldDto> DataFields { get; set; }
     }
 }

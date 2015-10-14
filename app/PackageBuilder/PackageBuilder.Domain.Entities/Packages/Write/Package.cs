@@ -213,7 +213,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Map LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
         }
 
-        public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
+        public List<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string firstName, Guid requestId, string accountNumber, Guid contractId,
             long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
             IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent)

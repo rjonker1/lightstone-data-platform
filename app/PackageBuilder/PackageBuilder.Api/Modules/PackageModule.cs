@@ -18,6 +18,7 @@ using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Security;
+using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Routes;
 using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
@@ -159,10 +160,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => "Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
                 var filteredResponse = new List<IProvideResponseDataProvider>
                 {
-                    new ResponseMeta
-                    {
-                        RequestId = apiRequest.RequestId
-                    }
+                    new ResponseMeta(apiRequest.RequestId, responses.ResponseState())
                 };
 
                 filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));

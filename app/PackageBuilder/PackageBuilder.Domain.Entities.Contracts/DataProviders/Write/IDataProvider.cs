@@ -21,5 +21,6 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
         DateTime? EditedDate { get; }
         IEnumerable<IDataField> RequestFields { get; }
         IEnumerable<IDataField> DataFields { get; set; }
+        DataProviderResponseState ResponseState { get; }
     }
 }
