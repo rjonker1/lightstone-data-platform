@@ -61,7 +61,7 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1752\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1752, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1752\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\PackageBuilder.Api\bin\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NEventStore">
@@ -93,9 +93,11 @@
     <Compile Include="Builders\DataProviderResponses\Ivid\IvidResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\IvidTitleHolderResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneAuto\LightstoneAutoResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\DirectorBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\FinanceBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneBmwFinanceResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneBusinessCompanyResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneBusinessDirectorResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneConsumerBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\LightstoneConsumerResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneBusinessCompany\PCubedEzScoreBuilder.cs" />
@@ -136,12 +138,14 @@
     <Compile Include="Mothers\DataProviderOverrideMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Ivid\IvidResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidTitleHolderResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\DirectorMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\FinanceMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\PCubedEzScoreMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\PropertyMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneAuto\RepairDataMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneBmwFinanceResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneBusinessCompanyResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneBusinessDirectorResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstoneConsumerResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\LightstonePropertyResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\PCubedEzScoreResponseMother.cs" />
