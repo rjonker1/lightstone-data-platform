@@ -21,6 +21,7 @@ namespace PackageBuilder.Domain.Entities.Requests
             Request = context;
             RequestDate = requestDate;
         }
+
         public IHaveUser User { get; private set; }
 
         public IHaveContract Contract { get; private set; }
@@ -80,40 +81,46 @@ namespace PackageBuilder.Domain.Entities.Requests
             AccountNumber = accountNumber;
             ContractId = contractId;
         }
+
         public string AccountNumber { get; private set; }
 
         public Guid ContractId { get; private set; }
 
         public long ContractVersion { get; private set; }
     }
-  
+
     public class LaceDataProvider : IAmDataProvider
     {
         public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice,
-            IHaveUser user, string packageName, IBuildRequestTypes requestTypes, ICauseCriticalFailure critical)
+            IHaveUser user, string packageName, IBuildRequestTypes requestTypes)
         {
             Name = name;
             var requestType = requestTypes.RequestTypes.FirstOrDefault(w => w.Key == name);
             if (requestType.Value != null)
-                Request = new[] { requestType.Value(requestFields.ToList(), user, packageName) };
+                Request = new[] {requestType.Value(requestFields.ToList(), user, packageName)};
             CostPrice = costPrice;
             RecommendedPrice = recommendedPrice;
-            Critical = critical;
         }
 
         public DataProviderName Name { get; private set; }
-        //public IEnumerable<IAmRequestField> RequestFields { get; private set; }
         public ICollection<IAmDataProviderRequest> Request { get; private set; }
         public decimal CostPrice { get; private set; }
         public decimal RecommendedPrice { get; private set; }
-        public ICauseCriticalFailure Critical { get; private set; }
+
+        public IBillStateIndicator BillablleState
+        {
+            get { return DataProviderBillableState.GetBillStateForDataProvider(Name); }
+        }
+
+
     }
 
     public class RequestPackage : IHavePackageForRequest
     {
-        public RequestPackage(IAmDataProvider[] dataProviders, Guid id, string name, long version, double packageCostPrice, double packageRecommendedPrice)
+        public RequestPackage(IAmDataProvider[] dataProviders, Guid id, string name, long version, double packageCostPrice,
+            double packageRecommendedPrice)
         {
-          
+
             DataProviders = dataProviders;
             Id = id;
             Name = name;
@@ -129,5 +136,37 @@ namespace PackageBuilder.Domain.Entities.Requests
         public double PackageCostPrice { get; private set; }
         public double PackageRecommendedPrice { get; private set; }
         public long Version { get; private set; }
+    }
+
+    public class DataProviderBillState : IBillStateIndicator
+    {
+        public DataProviderBillState(DataProviderNoRecordState noRecordState)
+        {
+            NoRecordState = noRecordState;
+        }
+
+        public DataProviderNoRecordState NoRecordState { get; private set; }
+
+    }
+
+    public class DataProviderBillableState
+    {
+        public static IBillStateIndicator GetBillStateForDataProvider(DataProviderName dataProvider)
+        {
+            var nonBillable = BillStates.Where(w => w.Key == dataProvider).ToList();
+            return !nonBillable.Any() ? new DataProviderBillState(DataProviderNoRecordState.Billable) : nonBillable.FirstOrDefault().Value();
+        }
+
+
+        private static readonly List<KeyValuePair<DataProviderName, Func<IBillStateIndicator>>> BillStates = new List
+            <KeyValuePair<DataProviderName, Func<IBillStateIndicator>>>()
+        {
+            new KeyValuePair<DataProviderName, Func<IBillStateIndicator>>(DataProviderName.LSAutoCarStats_I_DB,
+                () => new DataProviderBillState(DataProviderNoRecordState.NonBillable)),
+            new KeyValuePair<DataProviderName, Func<IBillStateIndicator>>(DataProviderName.LSAutoSpecs_I_DB,
+                () => new DataProviderBillState(DataProviderNoRecordState.NonBillable)),
+            new KeyValuePair<DataProviderName, Func<IBillStateIndicator>>(DataProviderName.LSAutoVINMaster_I_DB,
+                () => new DataProviderBillState(DataProviderNoRecordState.NonBillable))
+        };
     }
 }

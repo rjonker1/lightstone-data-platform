@@ -10,6 +10,7 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
+using Workflow.Lace.Identifiers;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
@@ -33,12 +34,19 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             try
             {
                 _request = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
+
                 var data = IvidDataRetriever.Start(_logCommand, _log)
                     .CheckInCache(_request)
                     .ThenWithApi(_request, _dataProvider, out _response);
 
                 if (data.NoNeedToCallApi)
                 {
+                    _logCommand.LogRequest(new ConnectionTypeIdentifier("localhost").ForCacheType(), _request,
+                        _dataProvider.BillablleState.NoRecordState);
+
+                    _logCommand.LogResponse(DataProviderResponseState.Successful, new ConnectionTypeIdentifier("localhost").ForCacheType(),
+                        data.CacheResponse, _dataProvider.BillablleState.NoRecordState);
+
                     _logCommand.LogTransformation(data.CacheResponse, new {CacheResponse = "Response retrieved from Ivid's Cache"});
                     data.CacheResponse.HasBeenHandled();
                     response.Add(data.CacheResponse);

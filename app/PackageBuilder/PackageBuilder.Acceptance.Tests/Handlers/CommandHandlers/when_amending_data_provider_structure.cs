@@ -66,9 +66,13 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
         {
             VehicleData = new VehicleData();
         }
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            
+        }
 
-        public string CriticalFailureMessage { get; private set; }
-        public bool HasCriticalFailure { get; private set; }
+        public DataProviderResponseState ResponseState { get; private set; }
+        public string ResponseStateMessage { get; private set; }
     }
 
     public class when_amending_data_provider_structure : TestDataBaseHelper
