@@ -18,7 +18,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse, null);
+            var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 
             if (transformer.Continue)
             {

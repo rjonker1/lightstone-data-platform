@@ -1,9 +1,8 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders;
+﻿using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
-using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Base;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
@@ -17,10 +16,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
 
 
         public TransformLightstoneResponse(IRetrieveValuationFromMetrics metricResponse,
-            IRetrieveCarInformation carInformation, ICauseCriticalFailure critical)
+            IRetrieveCarInformation carInformation)
         {
-            Continue = metricResponse != null && metricResponse.IsSatisfied;
-            Result = Continue ? null : critical.IsCritical() ? LightstoneAutoResponse.Failure(critical.Message) : LightstoneAutoResponse.Empty();
+            Continue = metricResponse != null && carInformation != null && carInformation.CarInformation != null && carInformation.IsSatisfied && metricResponse.IsSatisfied;
+            Result = Continue ? null : LightstoneAutoResponse.Empty();
 
             _metricResponse = metricResponse;
             _carInformation = carInformation;
@@ -33,6 +32,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
                 _carInformation.CarInformation.Quarter,
                 _carInformation.CarInformation.CarFullname, _carInformation.CarInformation.CarModel,
                 _metricResponse.Valuation);
+            Result.AddResponseState(DataProviderResponseState.Successful);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Lace.Test.Helper.Builders.Requests
                     new IAmDataProvider[]
                     {
                         new DataProvider(DataProviderName.LSAutoCarStats_I_DB, 90, 92,
-                            LightstoneAutoRequest.WithCarIdAndYear(carid, year))
+                            LightstoneAutoRequest.WithCarIdAndYear(carid, year), new BillableState(DataProviderNoRecordState.NonBillable))
                     }, Guid.NewGuid());
         }
     }
@@ -29,7 +29,7 @@ namespace Lace.Test.Helper.Builders.Requests
                     new IAmDataProvider[]
                     {
                         new DataProvider(DataProviderName.LSAutoCarStats_I_DB, 90, 92,
-                            LightstoneAutoRequest.WithVin(vinNumber))
+                            LightstoneAutoRequest.WithVin(vinNumber), new BillableState(DataProviderNoRecordState.NonBillable))
                     }, Guid.NewGuid());
         }
     }

@@ -42,14 +42,14 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 _logCommand.LogBegin(request);
 
                 _dataProviderChain = new CreateSourceChain();
-                _logCommand.LogEntryPointRequest(request);
+                _logCommand.LogEntryPointRequest(request,DataProviderNoRecordState.Billable);
 
                 _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _dataProviderChain);
                 _bootstrap.Execute();
 
                 LogResponse(request);
 
-                CreateTransaction(request, ResponseState());
+                CreateTransaction(request, _bootstrap.DataProviderResponses.State());
 
                 _logCommand.LogEnd(_bootstrap.DataProviderResponses ?? EmptyResponse);
 
@@ -61,7 +61,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 _logCommand.LogEnd(request);
                 _log.ErrorFormat("Error occurred receiving request {0}", ex, request.ObjectToJson());
                 LogResponse(request);
-                CreateTransaction(request, DataProviderState.Failed);
+                CreateTransaction(request, DataProviderResponseState.TechnicalError);
                 return EmptyResponse;
             }
         }
@@ -69,19 +69,17 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private void Init(Guid requestId)
         {
             _command = CommandSender.InitCommandSender(_bus, requestId, DataProviderCommandSource.EntryPoint);
-            _logCommand = LogCommandTypes.ForEntryPoint(_command);
+            _logCommand = LogCommandTypes.ForEntryPoint(_command, DataProviderNoRecordState.Billable);
             _workflow  = new SendWorkflowCommands(_bus,requestId);
         }
 
         private void LogResponse(ICollection<IPointToLaceRequest> request)
         {
-            _logCommand.LogEntryPointResponse(_bootstrap.DataProviderResponses ?? EmptyResponse,
-                _bootstrap.DataProviderResponses == null || _bootstrap.DataProviderResponses.Count == 0
-                    ? DataProviderState.Failed
-                    : DataProviderState.Successful, request);
+            _logCommand.LogEntryPointResponse(_bootstrap.DataProviderResponses ?? EmptyResponse, _bootstrap.DataProviderResponses.State(), request,
+                DataProviderNoRecordState.Billable);
         }
 
-        private void CreateTransaction(ICollection<IPointToLaceRequest> request,DataProviderState state)
+        private void CreateTransaction(ICollection<IPointToLaceRequest> request, DataProviderResponseState state)
         {
             _workflow.CreateTransaction(request.GetFromRequest<IPointToLaceRequest>().Package.Id,
                 request.GetFromRequest<IPointToLaceRequest>().Package.Version,
@@ -92,12 +90,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 request.GetFromRequest<IPointToLaceRequest>().Contract.ContractVersion, state,
                 request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber,
                 request.GetFromRequest<IPointToLaceRequest>().Package.PackageCostPrice,
-                request.GetFromRequest<IPointToLaceRequest>().Package.PackageRecommendedPrice);
-        }
-
-        private DataProviderState ResponseState()
-        {
-            return _bootstrap.DataProviderResponses.HasCriticalError() ? DataProviderState.Failed : DataProviderState.Successful;
+                request.GetFromRequest<IPointToLaceRequest>().Package.PackageRecommendedPrice, DataProviderNoRecordState.Billable);
         }
 
         private static ICollection<IPointToLaceProvider> EmptyResponse

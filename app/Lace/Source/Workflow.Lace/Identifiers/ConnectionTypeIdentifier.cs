@@ -47,6 +47,12 @@ namespace Workflow.Lace.Identifiers
             return this;
         }
 
+        public ConnectionTypeIdentifier ForCacheType()
+        {
+            Type = "Cache";
+            return this;
+        }
+
         public ConnectionTypeIdentifier()
         {
             

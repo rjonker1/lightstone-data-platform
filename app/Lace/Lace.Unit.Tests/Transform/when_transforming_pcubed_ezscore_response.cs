@@ -19,7 +19,7 @@ namespace Lace.Unit.Tests.Transform
 
         public override void Observe()
         {
-            _transformer = new TransformPCubedEzScoreResponse(_response, null);
+            _transformer = new TransformPCubedEzScoreResponse(_response);
             _transformer.Transform();
         }
 

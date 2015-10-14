@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Consumer;
 using Lace.Domain.Core.Entities;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Extensions;
 using Lace.Toolbox.PCubed.Domain;
 using RestSharp;
 
@@ -15,10 +15,10 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure.Management
     {
         private readonly ConsumerViewResponse _response;
 
-        public TransformPCubedEzScoreResponse(IRestResponse<ConsumerViewResponse> response, ICauseCriticalFailure critical)
+        public TransformPCubedEzScoreResponse(IRestResponse<ConsumerViewResponse> response)
         {
             Continue = response != null && response.Data != null && response.Data.ResponseStatusCode == HttpStatusCode.OK;
-            Result = Continue ? null : critical.IsCritical() ? PCubedEzScoreResponse.Failure(critical.Message) : PCubedEzScoreResponse.Empty();
+            Result = Continue ? null : PCubedEzScoreResponse.Empty();
             _response = Continue ? response.Data : new ConsumerViewResponse();
         }
 
@@ -32,7 +32,8 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure.Management
                 return;
             }
 
-            Result =  PCubedEzScoreResponse.WithRecords(GetConsumerViewRecords());
+            Result = PCubedEzScoreResponse.WithRecords(GetConsumerViewRecords());
+            Result.AddResponseState(Result.EzScoreRecords.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords);
         }
 
         private IEnumerable<IRespondWithEzScore> GetConsumerViewRecords()

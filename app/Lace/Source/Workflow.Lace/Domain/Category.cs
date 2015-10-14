@@ -10,11 +10,13 @@ namespace Workflow.Lace.Domain
         [EnumMember]
         Configuration,
         [EnumMember]
-        Fault,
+        Error,
         [EnumMember]
         Performance,
         [EnumMember]
-        Security
+        Security,
+        [EnumMember]
+        Fault,
     }
 
     [DataContract]
@@ -25,7 +27,7 @@ namespace Workflow.Lace.Domain
         [EnumMember]
         Configuration,
         [EnumMember]
-        Fault,
+        Error,
         [EnumMember]
         Transformation,
         [EnumMember]
@@ -38,7 +40,8 @@ namespace Workflow.Lace.Domain
         StartSourceCall,
         [EnumMember]
         EndSourceCall,
-
+        [EnumMember]
+        Fault
     }
 
 

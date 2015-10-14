@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -10,23 +12,34 @@ namespace Lace.Domain.Core.Entities
     {
         public RgtVinResponse()
         {
+            ResponseState = DataProviderResponseState.NoRecords;
         }
-
-        private RgtVinResponse(string message)
-        {
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
-        }
-
+        
         public static RgtVinResponse Empty()
         {
             return new RgtVinResponse();
         }
 
-        public static RgtVinResponse Failure(string message)
+        private RgtVinResponse(DataProviderResponseState state)
         {
-            return new RgtVinResponse(message);
+            ResponseState = state;
         }
+
+        public static RgtVinResponse WithState(DataProviderResponseState state)
+        {
+            return new RgtVinResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
+
 
         public RgtVinResponse(string color, int month, int price, int quarter, int carId, string vehicleMake,
             string vechicleModel, string vehicleType, string vin, int year)
@@ -108,11 +121,5 @@ namespace Lace.Domain.Core.Entities
         {
             Handled = true;
         }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
     }
 }

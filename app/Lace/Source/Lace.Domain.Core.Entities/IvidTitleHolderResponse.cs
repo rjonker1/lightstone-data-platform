@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -13,13 +15,7 @@ namespace Lace.Domain.Core.Entities
 
         public IvidTitleHolderResponse()
         {
-
-        }
-
-        private IvidTitleHolderResponse(string message)
-        {
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
+            ResponseState = DataProviderResponseState.NoRecords;
         }
 
         public void Build(string bankName, bool flaggedOnAnpr, string accountNumber, DateTime accountOpenDate, DateTime accountCloseDate,
@@ -33,15 +29,30 @@ namespace Lace.Domain.Core.Entities
             YearOfLiabilityForLicensing = CheckPartial(yearOfLiablilityForLicensing);
         }
 
-        public static IvidTitleHolderResponse Failure(string message)
-        {
-            return new IvidTitleHolderResponse(message);
-        }
-
         public static IvidTitleHolderResponse Empty()
         {
             return new IvidTitleHolderResponse();
         }
+
+        private IvidTitleHolderResponse(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        public static IvidTitleHolderResponse WithState(DataProviderResponseState state)
+        {
+            return new IvidTitleHolderResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
 
         public void IsPartial(bool check)
@@ -156,12 +167,6 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {

@@ -24,7 +24,8 @@ namespace Workflow.Lace.Mappers
                 return new[]
                 {
                     "Id", "StreamId", "Date", "RequestId", "DataProvider", "DataProviderName", "ConnectionType",
-                    "Connection", "Action", "State", "StateId", "CostPrice", "RecommendedPrice"
+                    "Connection", "Action", "State", "StateId", "CostPrice", "RecommendedPrice", "BillableForNoRecordState",
+                    "BillableForNoRecordStateId"
                 };
             }
         }
@@ -47,7 +48,9 @@ namespace Workflow.Lace.Mappers
                 State = request.Transaction.State.Name,
                 StateId = request.Transaction.State.Id,
                 CostPrice = request.Transaction.DataProvider.CostPrice,
-                RecommendedPrice = request.Transaction.DataProvider.RecommendedPrice
+                RecommendedPrice = request.Transaction.DataProvider.RecommendedPrice,
+                BillableForNoRecordState = request.Transaction.BillNoRecords.Name,
+                BillableForNoRecordStateId = request.Transaction.BillNoRecords.Id
             };
 
             connection.Execute(sql, values);
@@ -63,9 +66,11 @@ namespace Workflow.Lace.Mappers
                 : new DataProviderTransaction(new DataProviderTransactionIdentifier(match.Id, match.StreamId, match.Date,
                     new RequestIdentifier(match.RequestId, null),
                     new DataProviderIdentifier(match.DataProvider, match.DataProviderName, match.CostPrice,
-                        match.RecommendedPrice, (DataProviderAction) match.Action, (DataProviderState) match.State),
-                    new ConnectionTypeIdentifier(match.Connection,match.ConnectionType),
-                    new ActionIdentifier(0, match.Name), new StateIdentifier(match.StateId, match.State)));
+                        match.RecommendedPrice, (DataProviderAction) match.Action, (DataProviderResponseState) match.State,
+                        (DataProviderNoRecordState) match.BillableForNoRecordState),
+                    new ConnectionTypeIdentifier(match.Connection, match.ConnectionType),
+                    new ActionIdentifier(0, match.Name), new StateIdentifier(match.StateId, match.State),
+                    new NoRecordBillableIdentifier(match.BillableForNoRecordStateId, match.BillableForNoRecordState)));
         }
     }
 }

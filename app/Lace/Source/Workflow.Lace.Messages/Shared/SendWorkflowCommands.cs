@@ -58,109 +58,108 @@ namespace Workflow.Lace.Messages.Shared
                 .SendToBus(_publisher, _log);
         }
 
-        public void Begin(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider)
+        public void Begin(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
         {
             new StartingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.StartCallDescription(dataProvider),
                 payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
-                new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance).SendToBus(
+                new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance,billNoRecords).SendToBus(
                     _publisher, _log);
             stopWatch.Start();
         }
 
-        public void End(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider)
+        public void End(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider,DataProviderNoRecordState billNoRecords)
         {
             stopWatch.Stop();
             new EndingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.EndExecutionDescription(dataProvider),
                 payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
-                new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance).SendToBus(
+                new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance,billNoRecords).SendToBus(
                     _publisher, _log);
         }
 
         public void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
-            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber, double packageCostPrice, double packageRecommendedPrice)
+            Guid contractId, string system, long contractVersion, DataProviderResponseState state, string accountNumber, double packageCostPrice, double packageRecommendedPrice, DataProviderNoRecordState billNoRecords)
         {
             new CreateTransactionCommand(Guid.NewGuid(), packageId, packageVersion, DateTime.UtcNow, userId, requestId,
                 contractId,
-                system, contractVersion, state,accountNumber, packageCostPrice, packageRecommendedPrice)
+                system, contractVersion, state, accountNumber, packageCostPrice, packageRecommendedPrice, billNoRecords)
                 .SendToBus(_publisher, _log);
         }
 
-        public void EntryPointRequest(ICollection<IPointToLaceRequest> request, DataProviderStopWatch stopWatch)
+        public void EntryPointRequest(ICollection<IPointToLaceRequest> request, DataProviderStopWatch stopWatch, DataProviderNoRecordState billNoRecords)
         {
             new ReceiveEntryPointRequest(Guid.NewGuid(), _requestId, DateTime.UtcNow,
                 SearchRequestIndentifier.Determine(request),
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), request.ObjectToJson(),
-                    CommandDescriptions.ReceiveEntryPointRequestDescription()))
+                    CommandDescriptions.ReceiveEntryPointRequestDescription()),new NoRecordBillableIdentifier((int)billNoRecords,billNoRecords.ToString()))
                 .SendToBus(_publisher, _log);
             stopWatch.Start();
         }
 
-        public void EntryPointResponse(object payload, DataProviderStopWatch stopWatch, DataProviderState state, ICollection<IPointToLaceRequest> request)
+        public void EntryPointResponse(object payload, DataProviderStopWatch stopWatch, DataProviderResponseState state, ICollection<IPointToLaceRequest> request, DataProviderNoRecordState billNoRecords)
         {
             stopWatch.Stop();
             new ReturnEntryPointResponse(Guid.NewGuid(), _requestId, DateTime.UtcNow,
                 new StateIdentifier((int) state, state.ToString()),
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
                     payload.ObjectToJson(),
-                    CommandDescriptions.ReturnEntryPointResponseDescription()),SearchRequestIndentifier.Determine(request))
+                    CommandDescriptions.ReturnEntryPointResponseDescription()),SearchRequestIndentifier.Determine(request),new NoRecordBillableIdentifier((int)billNoRecords,billNoRecords.ToString()))
                 .SendToBus(_publisher, _log);
 
         }
 
         public void Send(CommandType commandType, object payload, object metadata,
-            DataProviderCommandSource dataProvider)
+            DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
         {
-            Task.Run(() =>
-            {
+            //Task.Run(() =>
+            //{
                 switch (commandType)
                 {
-                    case CommandType.Fault:
-                        Error(payload, new MetadataContainer(metadata), dataProvider);
+                    case CommandType.Error:
+                        Error(payload, new MetadataContainer(metadata), dataProvider, billNoRecords);
                         break;
                     case CommandType.Configuration:
-                        Configuring(payload, new MetadataContainer(metadata), dataProvider);
+                        Configuring(payload, new MetadataContainer(metadata), dataProvider, billNoRecords);
                         break;
                     case CommandType.Security:
-                        Security(payload, new MetadataContainer(metadata), dataProvider);
+                        Security(payload, new MetadataContainer(metadata), dataProvider, billNoRecords);
                         break;
                     case CommandType.Transformation:
-                        Transforming(payload, new MetadataContainer(metadata), dataProvider);
+                        Transforming(payload, new MetadataContainer(metadata), dataProvider, billNoRecords);
                         break;
                 }
-            });
+            //});
         }
 
-        private void Error(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider)
+        private void Error(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
         {
             new ErrorInDataProviderCommand(Guid.NewGuid(), _requestId,
                 CommandDescriptions.FaultDescription(dataProvider), payload.ObjectToJson(), dataProvider,
-                DateTime.UtcNow, metadata.ObjectToJson(), Category.Fault)
+                DateTime.UtcNow, metadata.ObjectToJson(), Category.Error,billNoRecords)
                 .SendToBus(_publisher, _log);
         }
 
-        private void Transforming(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider)
+        private void Transforming(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
         {
             new TransformingDataProviderResponseCommand(Guid.NewGuid(), _requestId,
                 CommandDescriptions.TransformationDescription(dataProvider), payload.ObjectToJson(), dataProvider,
-                DateTime.UtcNow, metadata.ObjectToJson(), Category.Configuration)
+                DateTime.UtcNow, metadata.ObjectToJson(), Category.Configuration,billNoRecords)
                 .SendToBus(_publisher, _log);
         }
 
-        private void Configuring(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider)
+        private void Configuring(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
         {
             new ConfiguringDataProviderCommand(Guid.NewGuid(), _requestId,
                 CommandDescriptions.ConfigurationDescription(dataProvider), payload.ObjectToJson(), dataProvider,
-                DateTime.UtcNow, metadata.ObjectToJson(), Category.Configuration)
+                DateTime.UtcNow, metadata.ObjectToJson(), Category.Configuration,billNoRecords)
                 .SendToBus(_publisher, _log);
         }
 
-        private void Security(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider)
+        private void Security(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
         {
             new RaisingSecurityFlagCommand(Guid.NewGuid(), _requestId,
                 CommandDescriptions.SecurityDescription(dataProvider), payload.ObjectToJson(), dataProvider,
-                DateTime.UtcNow, metadata.ObjectToJson(), Category.Security)
+                DateTime.UtcNow, metadata.ObjectToJson(), Category.Security,billNoRecords)
                 .SendToBus(_publisher, _log);
         }
-       
     }
 }

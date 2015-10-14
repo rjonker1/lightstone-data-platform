@@ -33,14 +33,14 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.IVIDTitle_E_WS, _request);
 
-            if (!spec.IsSatisfied || response.HasCriticalError())
+            if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDTitle_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDTitle_E_WS, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDTitle_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new { _dataProvider });
 

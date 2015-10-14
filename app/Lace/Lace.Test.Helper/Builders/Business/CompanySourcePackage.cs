@@ -43,7 +43,7 @@ namespace Lace.Test.Helper.Builders.Business
 
         public IAmDataProvider[] DataProviders
         {
-            get { return new IAmDataProvider[] { new DataProvider(DataProviderName.LSBusinessCompany_E_WS, 50, 27, LightstoneBusinessCompanyRequest.WithDefault(_companyName, _companyRegNumber, _companyVatNumber)) }; }
+            get { return new IAmDataProvider[] { new DataProvider(DataProviderName.LSBusinessCompany_E_WS, 50, 27, LightstoneBusinessCompanyRequest.WithDefault(_companyName, _companyRegNumber, _companyVatNumber), new BillableState(DataProviderNoRecordState.Billable)) }; }
         }
 
         public string Name

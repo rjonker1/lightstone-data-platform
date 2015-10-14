@@ -62,8 +62,8 @@
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1754, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1754\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -126,8 +126,11 @@
     <Compile Include="Chain\when_building_lace_source_chain_for_company_search.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Chain\when_building_lace_source_chain_for_license_plate_number_search.cs" />
-    <Compile Include="CriticalErrors\when_ivid_data_provider_is_marked_as_critical.cs" />
-    <Compile Include="CriticalErrors\when_response_has_a_critical_failure.cs" />
+    <Compile Include="ErrorHandling\when_both_responses_are_successfull_response_state.cs" />
+    <Compile Include="ErrorHandling\when_ivid_data_provider_is_causes_a_technical_failure.cs" />
+    <Compile Include="ErrorHandling\when_previous_response_has_no_records_and_this_response_has_no_records.cs" />
+    <Compile Include="ErrorHandling\when_previous_response_has_a_result_but_response_has_no_result.cs" />
+    <Compile Include="ErrorHandling\when_response_has_a_technical_failure.cs" />
     <Compile Include="Metadata\when_getting_meta_data_for_company_search.cs" />
     <Compile Include="Metadata\when_getting_meta_data_for_vehicle_search.cs" />
     <Compile Include="Requests\when_lace_entry_point_get_response.cs" />

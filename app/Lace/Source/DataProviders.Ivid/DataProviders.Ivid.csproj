@@ -63,8 +63,8 @@
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1754, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1754\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -113,7 +113,6 @@
     <Compile Include="Infrastructure\Configuration\ConfigureIvid.cs" />
     <Compile Include="Infrastructure\HandleIvidSourceCall.cs" />
     <Compile Include="Infrastructure\HandleRequest.cs" />
-    <Compile Include="Infrastructure\Management\DataChecks.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidResponse.cs" />
     <Compile Include="Infrastructure\Management\IvidDataRetriever.cs" />
     <Compile Include="Infrastructure\RequestDataFromIvidSource.cs" />

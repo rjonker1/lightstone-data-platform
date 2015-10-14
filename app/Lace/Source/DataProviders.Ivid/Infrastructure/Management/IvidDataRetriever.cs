@@ -83,7 +83,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 
                 _logCommand.LogConfiguration(request, null);
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                    .ForWebApiType(), request);
+                    .ForWebApiType(), request, dataProvider.BillablleState.NoRecordState);
 
                 response = webService
                     .Client
@@ -93,7 +93,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 
                 _logCommand.LogResponse(CheckState(response),
                     new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                        .ForWebApiType(), response ?? new HpiStandardQueryResponse());
+                        .ForWebApiType(), response ?? new HpiStandardQueryResponse(), dataProvider.BillablleState.NoRecordState);
 
                 if (response == null)
                     _logCommand.LogFault(dataProvider,
@@ -103,11 +103,11 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             return this;
         }
 
-        private static DataProviderState CheckState(HpiStandardQueryResponse response)
+        private static DataProviderResponseState CheckState(HpiStandardQueryResponse response)
         {
             return response == null
-                ? DataProviderState.Failed
-                : response.partialResponse ? DataProviderState.Partial : DataProviderState.Successful;
+                ? DataProviderResponseState.NoRecords
+                : response.partialResponse ? DataProviderResponseState.Partial : DataProviderResponseState.Successful;
         }
 
         private static string GetCacheSearch(HpiStandardQueryRequest request)

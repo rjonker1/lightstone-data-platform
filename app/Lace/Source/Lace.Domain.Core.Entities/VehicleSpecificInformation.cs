@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities.Extensions;
 
 namespace Lace.Domain.Core.Entities
 {
     [DataContract]
     public class VehicleSpecificInformation : IProvideVehicleSpecificInformation
     {
+        private VehicleSpecificInformation()
+        {
+            ResponseState = DataProviderResponseState.NoRecords;
+        }
+
         public VehicleSpecificInformation(string odometer, string color, string registrationNumber, string vinNumber,
             string licenseNumber,
             string engineNumber, string categoryDescription)
@@ -18,6 +25,16 @@ namespace Lace.Domain.Core.Entities
             LicenseNumber = licenseNumber;
             EngineNumber = engineNumber;
             CategoryDescription = categoryDescription;
+        }
+
+        public static VehicleSpecificInformation Empty()
+        {
+            return new VehicleSpecificInformation();
+        }
+        
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
         }
 
         [DataMember]
@@ -54,6 +71,11 @@ namespace Lace.Domain.Core.Entities
         [DataMember]
         public bool Handled { get; private set; }
 
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
+
         public void HasNotBeenHandled()
         {
             Handled = false;
@@ -63,11 +85,5 @@ namespace Lace.Domain.Core.Entities
         {
             Handled = true;
         }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
     }
 }

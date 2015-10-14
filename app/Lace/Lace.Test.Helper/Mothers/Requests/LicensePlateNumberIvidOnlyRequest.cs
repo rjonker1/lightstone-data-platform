@@ -5,14 +5,14 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class IvidFailRequest : IPointToLaceRequest
+    public class IvidTechnicalFailureRequest : IPointToLaceRequest
     {
         public IHavePackageForRequest Package
         {
             get
             {
                 return LicensePlateNumberForceIvidToFailPackage.LicenseNumberPackage("CN62KZGP", "VVi+");
-               // return null;
+                //return null;
             }
         }
 

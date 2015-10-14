@@ -62,8 +62,8 @@
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1754, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1754\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -89,13 +89,13 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Contracts\ICauseCriticalFailure.cs" />
+    <None Include="Contracts\ICauseCriticalFailure.cs.delete" />
     <Compile Include="Contracts\IAmDataProvider.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
     <Compile Include="Contracts\IHaveContract.cs" />
     <Compile Include="Contracts\IHavePackageForRequest.cs" />
     <Compile Include="Contracts\IHaveUser.cs" />
-    <Compile Include="Contracts\IDataProviderStateIndicator.cs" />
+    <Compile Include="Contracts\IBillStateIndicator.cs" />
     <Compile Include="Contracts\IPointToLaceRequest.cs" />
     <Compile Include="Enums.cs" />
   </ItemGroup>

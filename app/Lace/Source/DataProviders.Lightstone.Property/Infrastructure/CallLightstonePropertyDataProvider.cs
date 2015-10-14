@@ -50,7 +50,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                             "Minimum requirements for Lightstone Property request has not been met with User id {0} and  Id or CK {1} and Max Rows to Return {2} and Tracking Number {3}",
                             request.UserId, request.IdCkOfOwner, request.MaxRowsToReturn, request.TrackingNumber));
 
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request}, _dataProvider.BillablleState.NoRecordState);
 
                 if (api.Client.State == CommunicationState.Closed)
                     api.Client.Open();
@@ -64,9 +64,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 
                 api.CloseSource();
 
-                _logCommand.LogResponse(_result != null ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(_result != null ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString())
-                        .ForWebApiType(), new {_result});
+                        .ForWebApiType(), new {_result}, _dataProvider.BillablleState.NoRecordState);
 
 
                 TransformResponse(response);
@@ -79,11 +79,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             }
         }
 
-        private void LightstonePropertyResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void LightstonePropertyResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstonePropertyResponse = _dataProvider.IsCritical()
-                ? LightstonePropertyResponse.Failure(_dataProvider.Message())
-                : LightstonePropertyResponse.Empty();
+            var lightstonePropertyResponse = LightstonePropertyResponse.WithState(DataProviderResponseState.TechnicalError);
             lightstonePropertyResponse.HasBeenHandled();
             response.Add(lightstonePropertyResponse);
         }

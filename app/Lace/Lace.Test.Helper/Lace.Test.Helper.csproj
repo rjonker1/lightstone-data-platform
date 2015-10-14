@@ -65,8 +65,8 @@
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1754, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1754\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -219,7 +219,7 @@
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Fakes\Responses\FakeSignioDecryptedDriversLicenseResponse.cs" />
-    <Compile Include="Mothers\Packages\CriticalFailure.cs" />
+    <Compile Include="Mothers\Packages\BillableState.cs" />
     <Compile Include="Mothers\Packages\DataProvider.cs" />
     <Compile Include="Mothers\Packages\DriversLicensePackage.cs" />
     <Compile Include="Mothers\Packages\FicaPackage.cs" />

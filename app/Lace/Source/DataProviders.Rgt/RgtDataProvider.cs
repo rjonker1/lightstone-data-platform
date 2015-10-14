@@ -34,14 +34,14 @@ namespace Lace.Domain.DataProviders.Rgt
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoSpecs_I_DB, _request);
 
-            if (!spec.IsSatisfied || response.HasCriticalError())
+            if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoSpecs_I_DB);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoSpecs_I_DB, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoSpecs_I_DB, _dataProvider, _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider });
 

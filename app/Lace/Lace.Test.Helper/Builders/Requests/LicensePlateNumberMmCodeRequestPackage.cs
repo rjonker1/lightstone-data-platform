@@ -12,7 +12,7 @@ namespace Lace.Test.Helper.Builders.Requests
         {
             return
                 new LicensePlateNumberPackage(
-                    new IAmDataProvider[] { new DataProvider(DataProviderName.MMCode_E_DB, 17, 33, MmCodeRequestType.WithCarId(carId.ToString())) },
+                    new IAmDataProvider[] { new DataProvider(DataProviderName.MMCode_E_DB, 17, 33, MmCodeRequestType.WithCarId(carId.ToString()), new BillableState(DataProviderNoRecordState.Billable)) },
                     Guid.NewGuid());
         }
     }

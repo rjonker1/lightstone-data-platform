@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Consumer;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -13,14 +15,8 @@ namespace Lace.Domain.Core.Entities
     {
         public PCubedEzScoreResponse()
         {
+            ResponseState = DataProviderResponseState.NoRecords;
             EzScoreRecords = Enumerable.Empty<IRespondWithEzScore>();
-        }
-
-        private PCubedEzScoreResponse(string message)
-        {
-            EzScoreRecords = Enumerable.Empty<IRespondWithEzScore>();
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
         }
 
         public PCubedEzScoreResponse(IEnumerable<IRespondWithEzScore> ezScoreRecords)
@@ -38,10 +34,27 @@ namespace Lace.Domain.Core.Entities
             return new PCubedEzScoreResponse(ezScoreRecords.ToList());
         }
 
-        public static PCubedEzScoreResponse Failure(string message)
+        private PCubedEzScoreResponse(DataProviderResponseState state)
         {
-            return new PCubedEzScoreResponse(message);
+            ResponseState = state;
+            EzScoreRecords = Enumerable.Empty<IRespondWithEzScore>();
         }
+
+        public static PCubedEzScoreResponse WithState(DataProviderResponseState state)
+        {
+            return new PCubedEzScoreResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
+
 
         [DataMember]
         public IAmPCubedEzScoreRequest Request { get; private set; }
@@ -63,13 +76,6 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
-
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {

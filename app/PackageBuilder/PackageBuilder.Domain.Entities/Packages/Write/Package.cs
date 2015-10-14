@@ -184,8 +184,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             {
                 //var selectedfields = dataProvider.RequestFields.Filter(x => x.IsSelected == true); // todo: Validate & compare to api request fields 
                 var requestFields = Mapper.Map<IEnumerable<IDataField>, IEnumerable<IAmRequestField>>(fields);
-                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice, user, Name,
-                    requestTypes, CriticalDataProviders.Find(dataProvider.Name)));
+                laceProviders.Add(new LaceDataProvider(dataProvider.Name, requestFields, dataProvider.CostOfSale, RecommendedSalePrice, user, Name,requestTypes));
             }
 
             var request = new LaceRequest(
@@ -205,9 +204,6 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Map LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             foreach (var dataProvider in dataProviders.Where(x => x.Handled))
             {
-                if(dataProvider.HasCriticalFailure)
-                    throw new LightstoneAutoException(dataProvider.CriticalFailureMessage);
-
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
                 Mapper.Map(laceResponse, DataProviders.FirstOrDefault(x => x.Name == laceResponse.Name), typeof(IDataProvider), typeof(DataProvider));
 

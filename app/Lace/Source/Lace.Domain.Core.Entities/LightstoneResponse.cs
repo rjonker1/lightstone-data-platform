@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+using Lace.Domain.Core.Entities.Extensions;
 using Newtonsoft.Json;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
@@ -13,13 +15,8 @@ namespace Lace.Domain.Core.Entities
     {
         public LightstoneAutoResponse()
         {
+            ResponseState = DataProviderResponseState.NoRecords;
             VehicleValuation = new Valuation();
-        }
-
-        private LightstoneAutoResponse(string message)
-        {
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
         }
 
         public static LightstoneAutoResponse Empty()
@@ -27,10 +24,26 @@ namespace Lace.Domain.Core.Entities
             return new LightstoneAutoResponse();
         }
 
-        public static LightstoneAutoResponse Failure(string message)
+        private LightstoneAutoResponse(DataProviderResponseState state)
         {
-            return new LightstoneAutoResponse(message);
+            ResponseState = state;
+            VehicleValuation = new Valuation();
         }
+
+        public static LightstoneAutoResponse WithState(DataProviderResponseState state)
+        {
+            return new LightstoneAutoResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
 
         public LightstoneAutoResponse(int carId, int year, string vin, string imageUrl, string quarter, string carFullName,
             string model, IRespondWithValuation vehicleValuation)
@@ -71,12 +84,6 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember, JsonConverter(typeof (JsonTypeResolverConverter))]
         public IRespondWithValuation VehicleValuation { get; private set; }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         [DataMember]
         public string TypeName

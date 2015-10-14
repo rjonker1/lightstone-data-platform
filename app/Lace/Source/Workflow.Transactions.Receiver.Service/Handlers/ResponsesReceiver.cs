@@ -36,7 +36,8 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
                     message.Body.Date, new RequestIdentifier(message.Body.RequestId, null),
                     message.Body.DataProvider, message.Body.Connection,
                     new ActionIdentifier((int) message.Body.DataProvider.Action, message.Body.DataProvider.Action.ToString()),
-                    new StateIdentifier((int) message.Body.DataProvider.State, message.Body.DataProvider.State.ToString())));
+                    new StateIdentifier((int) message.Body.DataProvider.State, message.Body.DataProvider.State.ToString()),
+                    new NoRecordBillableIdentifier((int) message.Body.DataProvider.BillNoRecords, message.Body.DataProvider.BillNoRecords.ToString())));
             _transaction.Add(response);
         }
 

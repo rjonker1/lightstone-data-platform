@@ -7,7 +7,6 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure;
 using Workflow.Lace.Messages.Core;
@@ -32,14 +31,14 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoDecryptDriverLic_I_WS, _request);
-            if (!spec.IsSatisfied || response.HasCriticalError())
+            if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
             }
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoDecryptDriverLic_I_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoDecryptDriverLic_I_WS, _dataProvider);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoDecryptDriverLic_I_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 

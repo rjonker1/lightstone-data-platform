@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
@@ -10,17 +11,17 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     public class FakeCallingRgtVinExternalWebService : ICallTheDataProviderSource
     {
 
-        private IEnumerable<Vin> _vin;
+        private List<Vin> _vin;
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
-            _vin = new SourceResponseBuilder().ForRgtVin();
+            _vin = new SourceResponseBuilder().ForRgtVin().ToList();
             TransformResponse(response);
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformRgtVinResponse(_vin,null);
+            var transformer = new TransformRgtVinResponse(_vin);
 
             if (transformer.Continue)
             {

@@ -59,7 +59,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     HandleRequest.GetTitleholderQueryRequest(response,_dataProvider.GetRequest<IAmIvidTitleholderRequest>());
 
                 _logCommand.LogConfiguration(new {request}, null);
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request});
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new { request }, _dataProvider.BillablleState.NoRecordState);
 
                 _response = webService
                     .Client
@@ -67,25 +67,25 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 
                 webService.Close();
 
-                _logCommand.LogResponse(_response == null ? DataProviderState.Failed : DataProviderState.Successful,
+                _logCommand.LogResponse(_response == null ? DataProviderResponseState.NoRecords : DataProviderResponseState.Successful,
                     new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                        .ForWebApiType(), _response ?? new TitleholderQueryResponse());
+                        .ForWebApiType(), _response ?? new TitleholderQueryResponse(), _dataProvider.BillablleState.NoRecordState);
 
                 if (_response == null)
                     _logCommand.LogFault(new {_dataProvider}, new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"});
             }
         }
 
-        private void IvidTitleHolderResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void IvidTitleHolderResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var ividTitleHolderResponse = _dataProvider.IsCritical() ? IvidTitleHolderResponse.Failure(_dataProvider.Message()) : IvidTitleHolderResponse.Empty();
+            var ividTitleHolderResponse = IvidTitleHolderResponse.WithState(DataProviderResponseState.TechnicalError);
             ividTitleHolderResponse.HasBeenHandled();
             response.Add(ividTitleHolderResponse);
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformIvidTitleHolderResponse(_response, _dataProvider.Critical);
+            var transformer = new TransformIvidTitleHolderResponse(_response);
 
             if (transformer.Continue)
             {

@@ -14,7 +14,7 @@ namespace Lace.Test.Helper.Builders.Responses
             var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvid();
-            var transformer = new TransformIvidResponse(ividResponse, new CriticalFailure(true, "this cannot fail"));
+            var transformer = new TransformIvidResponse(ividResponse);
 
             if (transformer.Continue)
             {
@@ -45,7 +45,7 @@ namespace Lace.Test.Helper.Builders.Responses
             var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvidWithRepairVin();
-            var transformer = new TransformIvidResponse(ividResponse, new CriticalFailure(true, "this cannot fail"));
+            var transformer = new TransformIvidResponse(ividResponse);
 
             if (transformer.Continue)
             {
@@ -63,7 +63,7 @@ namespace Lace.Test.Helper.Builders.Responses
             var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvidWithFinancedInterestVin();
-            var transformer = new TransformIvidResponse(ividResponse, new CriticalFailure(true, "this cannot fail"));
+            var transformer = new TransformIvidResponse(ividResponse);
 
             if (transformer.Continue)
             {

@@ -16,6 +16,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
     {
         private readonly ISendCommandToBus _commands;
         private readonly DataProviderCommandSource _dataProviderName;
+        private readonly DataProviderNoRecordState _billNoRecords;
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
         private readonly DataProviderStopWatch _executeWatch;
@@ -23,7 +24,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
 
 
         private LogCommandTypes(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,
-            IAmDataProvider dataProvider)
+            IAmDataProvider dataProvider,DataProviderNoRecordState billNoRecords)
         {
             _commands = commands;
             _dataProviderName = dataProviderName;
@@ -31,26 +32,28 @@ namespace Lace.Domain.DataProviders.Core.Shared
             _dataProvider = dataProvider;
             _executeWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
             _requestWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
+            _billNoRecords = billNoRecords;
         }
 
-        private LogCommandTypes(ISendCommandToBus commands, DataProviderCommandSource dataProviderName)
+        private LogCommandTypes(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,DataProviderNoRecordState billNoRecords)
         {
             _commands = commands;
             _dataProviderName = dataProviderName;
             _log = LogManager.GetLogger(GetType());
             _executeWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
             _requestWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
+            _billNoRecords = billNoRecords;
         }
 
         public static LogCommandTypes ForDataProvider(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,
-            IAmDataProvider dataProvider)
+            IAmDataProvider dataProvider,DataProviderNoRecordState billNoRecords)
         {
-            return new LogCommandTypes(commands,dataProviderName,dataProvider);
+            return new LogCommandTypes(commands,dataProviderName,dataProvider,billNoRecords);
         }
 
-        public static LogCommandTypes ForEntryPoint(ISendCommandToBus commands)
+        public static LogCommandTypes ForEntryPoint(ISendCommandToBus commands, DataProviderNoRecordState billNoRecords)
         {
-            return new LogCommandTypes(commands, DataProviderCommandSource.EntryPoint);
+            return new LogCommandTypes(commands, DataProviderCommandSource.EntryPoint,billNoRecords);
         }
 
         public void LogSecurity(object payload, object metadata)
@@ -70,33 +73,32 @@ namespace Lace.Domain.DataProviders.Core.Shared
 
         public void LogFault(object payload, object metadata)
         {
-            SendAsyc(CommandType.Fault, payload, metadata);
+            SendAsyc(CommandType.Error, payload, metadata);
         }
 
-        public void LogRequest(ConnectionTypeIdentifier connection, object payload)
+        public void LogRequest(ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords)
         {
             SendRequestAsync(
-                new DataProviderIdentifier(_dataProviderName, DataProviderAction.Request, DataProviderState.Successful)
+                new DataProviderIdentifier(_dataProviderName, DataProviderAction.Request, DataProviderResponseState.Successful,billNoRecords)
                     .SetPrice(_dataProvider), connection, payload, _requestWatch);
 
         }
 
-        public void LogResponse(DataProviderState state, ConnectionTypeIdentifier connection, object payload)
+        public void LogResponse(DataProviderResponseState state, ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords)
         {
-            SendResponseAsync(new DataProviderIdentifier(_dataProviderName, DataProviderAction.Response, state)
+            SendResponseAsync(new DataProviderIdentifier(_dataProviderName, DataProviderAction.Response, state,billNoRecords)
                 .SetPrice(
                     _dataProvider), connection, payload, _requestWatch);
         }
 
-        public void LogEntryPointRequest(ICollection<IPointToLaceRequest> request)
+        public void LogEntryPointRequest(ICollection<IPointToLaceRequest> request,DataProviderNoRecordState billNoRecords)
         {
-            SendEntryPointRequestAsync(request);
+            SendEntryPointRequestAsync(request,billNoRecords);
         }
 
-        public void LogEntryPointResponse(object payload, DataProviderState state,
-            ICollection<IPointToLaceRequest> request)
+        public void LogEntryPointResponse(object payload, DataProviderResponseState state, ICollection<IPointToLaceRequest> request, DataProviderNoRecordState billNoRecords)
         {
-            SendEntryPointResponseAsync(payload, state, request);
+            SendEntryPointResponseAsync(payload, state, request,billNoRecords);
         }
 
         public void LogBegin(object payload)
@@ -117,7 +119,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.Begin(payload, _executeWatch, _dataProviderName);
+                        _commands.Workflow.Begin(payload, _executeWatch, _dataProviderName,_billNoRecords);
                     }
                     catch (Exception ex)
                     {
@@ -139,7 +141,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.End(payload, _executeWatch, _dataProviderName);
+                        _commands.Workflow.End(payload, _executeWatch, _dataProviderName,_billNoRecords);
                     }
                     catch (Exception ex)
                     {
@@ -162,11 +164,11 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.Send(commandType, payload, metadata, _dataProviderName);
+                        _commands.Workflow.Send(commandType, payload, metadata, _dataProviderName, _billNoRecords);
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a command to the bus because of {0}",ex, ex.Message);
+                        _log.ErrorFormat("An error occured sending a command to the bus because of {0}", ex, ex.Message);
                     }
                 });
             }
@@ -176,9 +178,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendRequestAsync(DataProviderIdentifier dataProvider,
-            ConnectionTypeIdentifier connection, object payload,
-            DataProviderStopWatch stopWatch)
+        private void SendRequestAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch)
         {
             try
             {
@@ -200,9 +200,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendResponseAsync(DataProviderIdentifier dataProvider,
-            ConnectionTypeIdentifier connection, object payload,
-            DataProviderStopWatch stopWatch)
+        private void SendResponseAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch)
         {
             try
             {
@@ -224,7 +222,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendEntryPointRequestAsync(ICollection<IPointToLaceRequest> request)
+        private void SendEntryPointRequestAsync(ICollection<IPointToLaceRequest> request,DataProviderNoRecordState billNoRecords)
         {
             try
             {
@@ -232,7 +230,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.EntryPointRequest(request, _requestWatch);
+                        _commands.Workflow.EntryPointRequest(request, _requestWatch,billNoRecords);
                     }
                     catch (Exception ex)
                     {
@@ -246,8 +244,8 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendEntryPointResponseAsync(object payload, DataProviderState state,
-            ICollection<IPointToLaceRequest> request)
+        private void SendEntryPointResponseAsync(object payload, DataProviderResponseState state,
+            ICollection<IPointToLaceRequest> request, DataProviderNoRecordState billNoRecords)
         {
             try
             {
@@ -255,7 +253,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.EntryPointResponse(payload, _requestWatch, state, request);
+                        _commands.Workflow.EntryPointResponse(payload, _requestWatch, state, request,billNoRecords);
                     }
                     catch (Exception ex)
                     {
@@ -268,5 +266,8 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
             }
         }
+
+
+       
     }
 }

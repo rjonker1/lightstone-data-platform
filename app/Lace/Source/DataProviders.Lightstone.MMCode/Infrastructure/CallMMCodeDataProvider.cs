@@ -43,14 +43,14 @@ namespace DataProviders.MMCode.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new { _dataProvider });
+                    .ForDatabaseType(), new { _dataProvider },_dataProvider.BillablleState.NoRecordState);
 
                 GetMmCode.ForCar(new MmCodeUnitOfWork(_repository), new MmCodeDataFactory().RetrieveCarId(response, _dataProvider.GetRequest<IAmMmCodeRequest>()),
                     out _mmCode);
 
-                _logCommand.LogResponse(_mmCode != null ? DataProviderState.Successful : DataProviderState.Failed,
+                _logCommand.LogResponse(_mmCode != null ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                        .ForDatabaseType(), new { _mmCode });
+                        .ForDatabaseType(), new { _mmCode },_dataProvider.BillablleState.NoRecordState);
 
                 TransformResponse(response);
             }
@@ -64,7 +64,7 @@ namespace DataProviders.MMCode.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformMmCodeResponse(_mmCode, _dataProvider.Critical);
+            var transformer = new TransformMmCodeResponse(_mmCode);
 
             if (transformer.Continue)
             {
@@ -77,9 +77,9 @@ namespace DataProviders.MMCode.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private void MmCodeResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void MmCodeResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var mmCodeResponse = _dataProvider.IsCritical() ? MMCodeResponse.Failure(_dataProvider.Message()) : MMCodeResponse.Empty();
+            var mmCodeResponse = MMCodeResponse.WithState(DataProviderResponseState.TechnicalError);
             mmCodeResponse.HasBeenHandled();
             response.Add(mmCodeResponse);
         }

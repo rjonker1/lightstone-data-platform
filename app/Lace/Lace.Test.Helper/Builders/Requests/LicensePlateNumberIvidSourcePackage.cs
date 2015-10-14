@@ -14,8 +14,8 @@ namespace Lace.Test.Helper.Builders.Requests
             return new LicensePlateNumberPackage(
                 new IAmDataProvider[]
                 {
-                    new CriticalDataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
-                        null, new CriticalFailure(true,"IVID IS CRTICAL AND SHOULD NEVER FAIL!!!!!!!")), 
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
+                        null, new BillableState(DataProviderNoRecordState.Billable)), 
                 }, Guid.NewGuid());
         }
     }
@@ -29,7 +29,7 @@ namespace Lace.Test.Helper.Builders.Requests
                 {
                     new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
                         new IvidStandardRequest(licensePlate, "Murray", packageName,
-                            "murrayw@lightstone.co.za", "Murray", string.Empty))
+                            "murrayw@lightstone.co.za", "Murray", string.Empty), new BillableState(DataProviderNoRecordState.Billable))
                 }, Guid.NewGuid());
         }
     }
@@ -43,7 +43,7 @@ namespace Lace.Test.Helper.Builders.Requests
                 {
                     new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
                         new IvidVinRequest(vinNumber, "Murray", packageName,
-                            "murrayw@lightstone.co.za", "Murray", string.Empty))
+                            "murrayw@lightstone.co.za", "Murray", string.Empty), new BillableState(DataProviderNoRecordState.Billable))
                 }, Guid.NewGuid());
         }
     }
@@ -57,7 +57,7 @@ namespace Lace.Test.Helper.Builders.Requests
                 {
                     new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
                         new IvidRegisterNoRequest(registerNumber, "Murray", packageName,
-                            "murrayw@lightstone.co.za", "Murray", string.Empty))
+                            "murrayw@lightstone.co.za", "Murray", string.Empty), new BillableState(DataProviderNoRecordState.Billable))
                 }, Guid.NewGuid());
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.DriversLicense;
+using Lace.Domain.Core.Entities.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
@@ -10,14 +12,9 @@ namespace Lace.Domain.Core.Entities
     {
         public SignioDriversLicenseDecryptionResponse()
         {
+            ResponseState = DataProviderResponseState.NoRecords;
             DrivingLicense = new DrivingLicenseCard();
             DecodedData = string.Empty;
-        }
-
-        private SignioDriversLicenseDecryptionResponse(string message)
-        {
-            HasCriticalFailure = true;
-            CriticalFailureMessage = message;
         }
 
         public static SignioDriversLicenseDecryptionResponse Empty()
@@ -31,10 +28,29 @@ namespace Lace.Domain.Core.Entities
             DecodedData = decodedData;
         }
 
-        public static SignioDriversLicenseDecryptionResponse Failure(string message)
+        private SignioDriversLicenseDecryptionResponse(DataProviderResponseState state)
         {
-            return new SignioDriversLicenseDecryptionResponse(message);
+            ResponseState = state;
+            DrivingLicense = new DrivingLicenseCard();
+            DecodedData = string.Empty;
         }
+
+        public static SignioDriversLicenseDecryptionResponse WithState(DataProviderResponseState state)
+        {
+            return new SignioDriversLicenseDecryptionResponse(state);
+        }
+
+        public void AddResponseState(DataProviderResponseState state)
+        {
+            ResponseState = state;
+        }
+
+        [DataMember]
+        public DataProviderResponseState ResponseState { get; private set; }
+
+        [DataMember]
+        public string ResponseStateMessage { get { return ResponseState.Description(); } }
+
 
         [DataMember]
         public IAmSignioDriversLicenseDecryptionRequest Request { get; private set; }
@@ -59,12 +75,6 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public bool Handled { get; private set; }
-
-        [DataMember]
-        public bool HasCriticalFailure { get; private set; }
-
-        [DataMember]
-        public string CriticalFailureMessage { get; private set; }
 
         public void HasNotBeenHandled()
         {

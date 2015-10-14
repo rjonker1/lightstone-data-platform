@@ -66,8 +66,8 @@
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1754, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1754\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -131,6 +131,7 @@
     <Compile Include="Caching\when_adding_sale_data_to_the_cache.cs" />
     <Compile Include="Caching\when_refreshing_objects_in_the_cache.cs" />
     <Compile Include="Caching\when_requesting_ivid_data_from_the_cache.cs" />
+    <Compile Include="ErrorHandling\when_executing_request_with_errors_for_lightstone.cs" />
     <Compile Include="Events\when_publlishing_lace_audatex_monitoring_commands_to_bus.cs" />
     <Compile Include="Events\when_publlishing_lace_ivid_monitoring_commands_to_bus.cs" />
     <Compile Include="Helper\TestCacheRepository.cs" />
