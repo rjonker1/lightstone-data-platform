@@ -267,6 +267,7 @@
     <Compile Include="Packages\Write\Package.cs" />
     <Compile Include="Packages\Commands\CreatePackage.cs" />
     <Compile Include="DataFields\Write\DataField.cs" />
+    <Compile Include="Requests\Commands\CreateRequestAudit.cs" />
     <Compile Include="Requests\Read\RequestAudit.cs" />
     <Compile Include="Requests\RequestsTypesToBeRemoved.cs" />
     <Compile Include="Requests\LaceRequest.cs" />

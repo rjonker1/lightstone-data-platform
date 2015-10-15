@@ -9,5 +9,16 @@ namespace PackageBuilder.Domain.Entities.Requests.Read
         public virtual Guid RequestId { get; set; }
         public virtual Vin12State State { get; set; }
         public virtual DateTime RequestExpiration { get; set; }
+
+        public RequestAudit()
+        {
+        }
+
+        public RequestAudit(Guid id, Guid requestId, Vin12State state, DateTime requestExpiration) : base(id)
+        {
+            RequestId = requestId;
+            State = state;
+            RequestExpiration = requestExpiration;
+        }
     }
 }

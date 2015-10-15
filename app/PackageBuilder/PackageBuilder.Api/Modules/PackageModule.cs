@@ -18,6 +18,7 @@ using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Security;
+using NEventStore.Persistence;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Routes;
 using PackageBuilder.Core.Helpers;
@@ -32,6 +33,7 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Commands;
+using PackageBuilder.Domain.Entities.Requests.Commands;
 using PackageBuilder.Domain.Entities.Requests.Read;
 using PackageBuilder.Domain.Entities.States.Read;
 using Shared.BuildingBlocks.Api.ApiClients;
@@ -176,11 +178,12 @@ namespace PackageBuilder.Api.Modules
 
             Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
             {
-                var apiRequest = this.Bind<ApiRequestDto>();
+                var commitRequest = this.Bind<CommitRequestDto>();
 
-                if (apiRequest.RequestId == new Guid()) return Response.AsJson(new { data = "Please supply a valid RequestId" });
+                if (commitRequest.RequestId == new Guid()) return Response.AsJson(new { data = "Please supply a valid RequestId" });
 
                 // TODO: Execution path for VIN12 requests
+                publisher.Publish(new CreateRequestAudit(Guid.NewGuid(), commitRequest.RequestId, commitRequest.State, DateTime.UtcNow.AddDays(1)));
 
                 return null;
             };

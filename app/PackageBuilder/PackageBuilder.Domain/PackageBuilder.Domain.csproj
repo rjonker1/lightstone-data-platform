@@ -130,6 +130,7 @@
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
     <Compile Include="CommandHandlers\Packages\DeletePackageHandler.cs" />
     <Compile Include="CommandHandlers\Packages\UpdatePackageHandler.cs" />
+    <Compile Include="CommandHandlers\Requests\CreateRequestAuditHandler.cs" />
     <Compile Include="CommandHandlers\States\CreateStateHandler.cs" />
     <Compile Include="CommandHandlers\States\ImportStateHandler.cs" />
     <Compile Include="CommandHandlers\States\RenameStateHandler.cs" />
