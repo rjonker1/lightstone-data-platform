@@ -21,7 +21,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
     public sealed class CallLightstoneAutoDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallLightstoneAutoDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
         private IRetrieveValuationFromMetrics _metrics;
@@ -31,7 +31,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
         public CallLightstoneAutoDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repository = repository;
             _logCommand = logCommand;
@@ -57,7 +56,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex, ex.Message);
+                Log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(ex, new {ErrorMessage = "Error calling Lightstone Data Provider"});
                 LightstoneResponseFailed(response);
             }

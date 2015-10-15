@@ -115,7 +115,7 @@
     <Compile Include="Infrastructure\CallRgtVinDataProvider.cs" />
     <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\Management\GetVin.cs" />
-    <Compile Include="UnitOfWork\VehicleVinUnitOfWork.cs" />
+    <Compile Include="Queries\VehicleVinQuery.cs" />
     <Compile Include="Infrastructure\HandleRgtVinDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtVinResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtVinSource.cs" />

@@ -132,18 +132,18 @@
     <None Include="Services\Specifics\TotalSalesByAgeMetric.cs.old20150716" />
     <None Include="Services\Specifics\TotalSalesByGenderMetric.cs.old20150716" />
     <Compile Include="LightstoneAutoDataProvider.cs" />
-    <Compile Include="UnitOfWork\BandUnitOfWork.cs" />
+    <Compile Include="Queries\BandQuery.cs" />
     <Compile Include="Core\Contracts\IGetBands.cs" />
     <Compile Include="Core\Contracts\IGetMakes.cs" />
     <Compile Include="Core\Contracts\IGetMetrics.cs" />
     <Compile Include="Core\Contracts\IGetMuncipalities.cs" />
     <Compile Include="Core\Contracts\IGetSales.cs" />
     <Compile Include="Core\Contracts\IGetStatistics.cs" />
-    <Compile Include="UnitOfWork\MakeUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\MetricUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\MuncipalityUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\SaleUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\StatisticsUnitOfWork.cs" />
+    <Compile Include="Queries\MakeQuery.cs" />
+    <Compile Include="Queries\MetricQuery.cs" />
+    <Compile Include="Queries\MuncipalityQuery.cs" />
+    <Compile Include="Queries\SaleQuery.cs" />
+    <Compile Include="Queries\StatisticsQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">

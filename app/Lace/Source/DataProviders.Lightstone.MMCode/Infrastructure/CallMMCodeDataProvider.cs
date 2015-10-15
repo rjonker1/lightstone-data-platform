@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using DataProviders.MMCode.Infrastructure.Management;
-using DataProviders.MMCode.UnitOfWork;
+using DataProviders.MMCode.Queries;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Extensions;
-using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -45,7 +44,7 @@ namespace DataProviders.MMCode.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new { _dataProvider },_dataProvider.BillablleState.NoRecordState);
 
-                GetMmCode.ForCar(new MmCodeUnitOfWork(_repository), new MmCodeDataFactory().RetrieveCarId(response, _dataProvider.GetRequest<IAmMmCodeRequest>()),
+                GetMmCode.ForCar(new MmCodeQuery(_repository), new CarIdQuery().RetrieveCarId(response, _dataProvider.GetRequest<IAmMmCodeRequest>()),
                     out _mmCode);
 
                 _logCommand.LogResponse(_mmCode != null ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,

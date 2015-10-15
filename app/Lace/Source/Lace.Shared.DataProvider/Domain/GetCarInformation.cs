@@ -52,7 +52,7 @@ namespace Lace.Toolbox.Database.Domain
 
         public IRetrieveCarInformation SetupDataSources()
         {
-            _getCarInformation = new CarInformationWorker(_repository);
+            _getCarInformation = new CarInformationQuery(_repository);
             return this;
         }
 

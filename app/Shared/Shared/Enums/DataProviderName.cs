@@ -18,27 +18,7 @@
         LSConsumerRepair_E_WS,
         PCubedEZScore_E_WS,
         BMWFSTitle_E_DB,
-        MMCode_E_DB
+        MMCode_E_DB,
+        LSAutoVIN12_I_DB
     }
-
-    // Legacy - 15/09/2015
-    //public enum DataProviderName
-    //{
-    //    Ivid,
-    //    IvidTitleHolder,
-    //    Rgt,
-    //    RgtVin,
-    //    LightstoneAuto,
-    //    Audatex,
-    //    Jis,
-    //    Anpr,
-    //    PCubedFica,
-    //    SignioDecryptDriversLicense,
-    //    LightstoneProperty,
-    //    LightstoneBusinessCompany,
-    //    LightstoneBusinessDirector,
-    //    LightstoneConsumerSpecifications,
-    //    PCubedEzScore,
-    //    BmwFinance
-    //}
 }

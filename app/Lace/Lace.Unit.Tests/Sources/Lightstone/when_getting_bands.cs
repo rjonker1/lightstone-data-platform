@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
+using Lace.Domain.DataProviders.Lightstone.Queries;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Lace.Toolbox.Database.Base;
@@ -18,7 +18,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         public when_getting_bands()
         {
             _repository = new FakeBandsRepository();
-            _getBands = new BandUnitOfWork(_repository);
+            _getBands = new BandQuery(_repository);
             _request = LaceRequestCarInformationRequestBuilder.ForCarId_107483();
         }
 

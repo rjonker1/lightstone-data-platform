@@ -102,9 +102,11 @@
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedEzScore.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromVin12.cs" />
     <Compile Include="Contracts\DataProviders\Property\IRespondWithProperty.cs" />
     <Compile Include="Contracts\Caching\IAmCachable.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromBmwFinance.cs" />
+    <Compile Include="Contracts\DataProviders\Vin12\IRespondWithVin12.cs" />
     <Compile Include="Contracts\IProvideResponseFromDataProviders.cs" />
     <None Include="Contracts\Requests\IProvideCriticalFailure.cs.delete" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />

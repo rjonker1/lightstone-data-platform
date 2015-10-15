@@ -116,7 +116,7 @@
     <Compile Include="Infrastructure\Management\TransformRgtResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtSource.cs" />
     <Compile Include="RgtDataProvider.cs" />
-    <Compile Include="UnitOfWork\CarSpecificationsUnitOfWork.cs" />
+    <Compile Include="Queries\CarSpecificationsQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">

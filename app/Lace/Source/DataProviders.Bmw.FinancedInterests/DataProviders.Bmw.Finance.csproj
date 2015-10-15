@@ -70,7 +70,7 @@
     <Compile Include="Infrastructure\HandleBmwFinanceSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformBmwFinanceResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromBmwFinance.cs" />
-    <Compile Include="UnitOfWork\BmwFinanceUnitOfWork.cs" />
+    <Compile Include="Queries\BmwFinanceUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataProviders.Core\DataProviders.Core.csproj">

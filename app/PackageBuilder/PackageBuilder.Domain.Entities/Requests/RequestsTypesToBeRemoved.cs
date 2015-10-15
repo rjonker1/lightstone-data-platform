@@ -60,7 +60,10 @@ namespace PackageBuilder.Domain.Entities.Requests
                 },
                 {
                     DataProviderName.MMCode_E_DB, (requests, user, packageName) => new MmCodeRequest(requests)
-                }
+                } //,
+                //{
+                //    DataProviderName.LSAutoVIN12_I_DB, (requests, user, packageName) => new Vin12Request(requests)
+                //}
             };
 
         public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes
@@ -132,6 +135,16 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmYearRequestField Year { get; private set; }
 
         public IAmMakeRequestField Make { get; private set; }
+
+        public IAmVinNumberRequestField VinNumber { get; private set; }
+    }
+
+    public class Vin12Request : IAmVin12Request
+    {
+        public Vin12Request(ICollection<IAmRequestField> requestFields)
+        {
+            VinNumber = requestFields.GetRequestField<IAmVinNumberRequestField>();
+        }
 
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }

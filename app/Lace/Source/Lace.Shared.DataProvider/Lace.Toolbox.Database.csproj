@@ -105,18 +105,20 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Base\AbstractVin12VehicleFactory.cs" />
+    <Compile Include="Base\IGetVin12VehicleData.cs" />
     <Compile Include="Domain\CarInformationRequest.cs" />
-    <Compile Include="Domain\CarInformationWorker.cs" />
+    <Compile Include="Domain\CarInformationQuery.cs" />
     <Compile Include="Domain\GetCarInformation.cs" />
-    <Compile Include="Base\IGetCarInfo.cs" />
+    <Compile Include="Base\IGetCarInformation.cs" />
     <Compile Include="Base\IHaveCarInformation.cs" />
     <Compile Include="Base\IRetrieveCarInformation.cs" />
     <Compile Include="Base\AbstractVehicleFactory.cs" />
     <Compile Include="Factories\DatabaseConnections.cs" />
     <Compile Include="Base\IGetVehicleData.cs" />
     <Compile Include="Factories\LightstoneVehicleData.cs" />
-    <Compile Include="Factories\MMCodeDataFactory.cs" />
     <Compile Include="Factories\RgtVehicleData.cs" />
+    <Compile Include="Factories\Vin12VehicleDataFactory.cs" />
     <Compile Include="Models\Band.cs" />
     <Compile Include="Models\BmwFinance.cs" />
     <Compile Include="Models\CarInformation.cs" />

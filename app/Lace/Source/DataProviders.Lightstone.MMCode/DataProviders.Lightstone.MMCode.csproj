@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Contracts\IGetCarId.cs" />
     <Compile Include="Core\Contracts\IGetMmCode.cs" />
     <Compile Include="Infrastructure\CallMMCodeDataProvider.cs" />
     <Compile Include="Infrastructure\HandleMMCodeDataProviderCall.cs" />
@@ -73,7 +74,8 @@
     <Compile Include="Infrastructure\RequestDataFromMMCodeSource.cs" />
     <Compile Include="MMCodeDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\MmCodeUnitOfWork.cs" />
+    <Compile Include="Queries\CarIdQuery.cs" />
+    <Compile Include="Queries\MmCodeQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

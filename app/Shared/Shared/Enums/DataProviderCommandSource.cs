@@ -23,6 +23,7 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] PCubedEZScore_E_WS,
         [EnumMember] LSConsumerRepair_E_WS,
         [EnumMember] BMWFSTitle_E_DB,
-        [EnumMember] MMCode_E_DB
+        [EnumMember] MMCode_E_DB,
+        [EnumMember] LSAutoVIN12_I_DB
     }
 }

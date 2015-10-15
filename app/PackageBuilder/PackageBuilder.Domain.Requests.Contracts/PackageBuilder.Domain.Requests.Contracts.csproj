@@ -103,6 +103,7 @@
     <Compile Include="Requests\IAmRgtVinRequest.cs" />
     <Compile Include="Requests\IAmSignioDriversLicenseDecryptionRequest.cs" />
     <Compile Include="Requests\IAmIvidStandardRequest.cs" />
+    <Compile Include="Requests\IAmVin12Request.cs" />
     <Compile Include="Requests\RequestsPB\IAmIvidStandardRequestPB.cs" />
     <Compile Include="Requests\RequestsPB\IAmIvidTitleholderRequestPB.cs" />
   </ItemGroup>

@@ -56,7 +56,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            var specificationsResponse = new LightstoneConsumerSpecificationsResponse();
+            var specificationsResponse = LightstoneConsumerSpecificationsResponse.Empty();
             specificationsResponse.HasNotBeenHandled();
             response.Add(specificationsResponse);
         }

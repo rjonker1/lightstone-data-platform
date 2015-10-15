@@ -1,7 +1,6 @@
-﻿using Lace.Toolbox.Database.Base;
-using Lace.Toolbox.Database.Models;
+﻿using Lace.Toolbox.Database.Models;
 
-namespace DataProviders.Lightstone.MMCode.Core.Contracts
+namespace DataProviders.MMCode.Core.Contracts
 {
     public interface IGetMmCode
     {

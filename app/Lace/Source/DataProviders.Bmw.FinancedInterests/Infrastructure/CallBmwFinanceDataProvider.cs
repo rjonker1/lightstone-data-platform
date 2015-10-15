@@ -8,7 +8,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Bmw.Finance.Factory;
 using Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Management;
-using Lace.Domain.DataProviders.Bmw.Finance.UnitOfWork;
+using Lace.Domain.DataProviders.Bmw.Finance.Queries;
 using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Extensions;
@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
                     .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 _bmwFinances =
-                    new BmwFinanceDataBasedOnRequestFactory().Get(new BmwFinanceUnitOfWork(_repository),
+                    new BmwFinanceDataBasedOnRequestFactory().Get(new BmwFinanceQuery(_repository),
                         _dataProvider.GetRequest<IAmBmwFinanceRequest>(), response).ToList();
 
                 _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,

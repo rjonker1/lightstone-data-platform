@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
+using Lace.Domain.DataProviders.Lightstone.Queries;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Lace.Toolbox.Database.Base;
@@ -16,7 +16,7 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
         public static IEnumerable<Statistic> GetStatistics()
         {
             var repository = new FakeStatisticsRepository();
-            var getStatistics = new StatisticsUnitOfWork(repository);
+            var getStatistics = new StatisticsQuery(repository);
             getStatistics.GetStatistics(RequestForCarId107483);
             return getStatistics.Statistics;
         }
@@ -24,7 +24,7 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
         public static IEnumerable<Band> GetBands()
         {
             var repository = new FakeBandsRepository();
-            var getBands = new BandUnitOfWork(repository);
+            var getBands = new BandQuery(repository);
             getBands.GetBands(RequestForCarId107483);
             return getBands.Bands;
         }
@@ -32,7 +32,7 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
         public static IEnumerable<Metric> GetMetrics()
         {
             var repository = new FakeMetricRepository();
-            var getMetrics = new MetricUnitOfWork(repository);
+            var getMetrics = new MetricQuery(repository);
             getMetrics.GetMetrics(RequestForCarId107483);
             return getMetrics.Metrics;
         }
@@ -41,7 +41,7 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
         public static IEnumerable<Municipality> GetMunicipalities()
         {
             var repository = new FakeMunicipalityRepository();
-            var getMuncipality = new MuncipalityUnitOfWork(repository);
+            var getMuncipality = new MuncipalityQuery(repository);
             getMuncipality.GetMunicipalities(RequestForCarId107483);
             return getMuncipality.Municipalities;
         }
@@ -49,7 +49,7 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
         public static IEnumerable<Sale> GetSales()
         {
             var repository = new FakeSaleRepository();
-            var getSales = new SaleUnitOfWork(repository);
+            var getSales = new SaleQuery(repository);
             getSales.GetSales(RequestForCarId107483);
             return getSales.Sales;
         }
@@ -57,7 +57,7 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
         public static IEnumerable<Make> GetMakes()
         {
             var repository = new FakeMakeRepository();
-            var getMakes = new MakeUnitOfWork(repository);
+            var getMakes = new MakeQuery(repository);
             getMakes.GetMakes(RequestForCarId107483);
             return getMakes.Makes;
         }

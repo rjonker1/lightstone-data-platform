@@ -1,5 +1,4 @@
-﻿using DataProviders.Lightstone.MMCode.Core.Contracts;
-using Lace.Toolbox.Database.Base;
+﻿using DataProviders.MMCode.Core.Contracts;
 using Lace.Toolbox.Database.Models;
 
 namespace DataProviders.MMCode.Infrastructure.Management
@@ -10,10 +9,10 @@ namespace DataProviders.MMCode.Infrastructure.Management
         {
         }
 
-        public static void ForCar(IGetMmCode worker, int carId, out MmCode mmCode)
+        public static void ForCar(IGetMmCode query, int carId, out MmCode mmCode)
         {
-            worker.GetCarMmCode(carId);
-            mmCode = worker.MmCode ?? new MmCode();
+            query.GetCarMmCode(carId);
+            mmCode = query.MmCode ?? new MmCode();
         }
     }
 }

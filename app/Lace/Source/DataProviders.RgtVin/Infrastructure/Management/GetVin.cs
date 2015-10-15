@@ -14,7 +14,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Management
             
         }
 
-        public static void AsAList(ICollection<IPointToLaceProvider> response, IAmRgtVinRequest request, IGetVehicleFromVin vinWorker,  out List<Vin> vins)
+        public static void AsAList(ICollection<IPointToLaceProvider> response, IAmRgtVinRequest request, IGetVehicleFromVin vinQuery,  out List<Vin> vins)
         {
             var vinnumber = HandleRequest.GetVinNumber(response, request);
             if (string.IsNullOrEmpty(vinnumber))
@@ -23,8 +23,8 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure.Management
                 return;
             }
 
-            vinWorker.GetVin(vinnumber);
-            vins = vinWorker.Vins != null ? vinWorker.Vins.ToList() : new List<Vin>();
+            vinQuery.GetVin(vinnumber);
+            vins = vinQuery.Vins != null ? vinQuery.Vins.ToList() : new List<Vin>();
         }
     }
 }

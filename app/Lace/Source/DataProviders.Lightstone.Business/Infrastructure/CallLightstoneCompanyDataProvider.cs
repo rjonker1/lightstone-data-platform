@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure
 
         private static void LightstoneBusinessResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            var lightstoneBusinessResponse = LightstoneAutoResponse.WithState(DataProviderResponseState.TechnicalError);
+            var lightstoneBusinessResponse = LightstoneBusinessCompanyResponse.WithState(DataProviderResponseState.TechnicalError);
             lightstoneBusinessResponse.HasBeenHandled();
             response.Add(lightstoneBusinessResponse);
         }

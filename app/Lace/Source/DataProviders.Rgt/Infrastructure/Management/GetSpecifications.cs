@@ -13,11 +13,11 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
 
         }
 
-        public static void ForCar(IGetCarSpecifications worker, IHaveCarInformation request, out IList<CarSpecification> carSpecifications)
+        public static void ForCar(IGetCarSpecifications query, IHaveCarInformation request, out IList<CarSpecification> carSpecifications)
         {
-            worker.GetCarSpecifications(request);
-            carSpecifications = worker.CarSpecifications != null
-                ? worker.CarSpecifications.ToList()
+            query.GetCarSpecifications(request);
+            carSpecifications = query.CarSpecifications != null
+                ? query.CarSpecifications.ToList()
                 : new List<CarSpecification>();
         }
     }

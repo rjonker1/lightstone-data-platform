@@ -9,7 +9,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
-using Lace.Domain.DataProviders.Rgt.UnitOfWork;
+using Lace.Domain.DataProviders.Rgt.Queries;
 using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Factories;
@@ -49,7 +49,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 _carInformation = new RgtVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmRgtRequest>(),
                    _repository);
 
-                GetSpecifications.ForCar(new CarSpecificationsUnitOfWork(_repository), _carInformation.CarInformationRequest, out _carSpecifications);
+                GetSpecifications.ForCar(new CarSpecificationsQuery(_repository), _carInformation.CarInformationRequest, out _carSpecifications);
 
                 _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)

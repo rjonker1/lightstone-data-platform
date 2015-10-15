@@ -9,11 +9,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
 {
     public class TransformLightstoneResponse : ITransform
     {
-        public bool Continue { get; private set; }
         public IProvideDataFromLightstoneAuto Result { get; private set; }
         private readonly IRetrieveValuationFromMetrics _metricResponse;
         private readonly IRetrieveCarInformation _carInformation;
-
 
         public TransformLightstoneResponse(IRetrieveValuationFromMetrics metricResponse,
             IRetrieveCarInformation carInformation)
@@ -34,5 +32,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
                 _metricResponse.Valuation);
             Result.AddResponseState(DataProviderResponseState.Successful);
         }
+
+        public bool Continue { get; private set; }
     }
 }

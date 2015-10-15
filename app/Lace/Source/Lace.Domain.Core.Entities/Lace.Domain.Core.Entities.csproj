@@ -92,6 +92,8 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AccidentClaim.cs" />
+    <Compile Include="Vin12Record.cs" />
+    <Compile Include="Vin12Response.cs" />
     <None Include="AccidentDistributionModel.cs.old20150716" />
     <None Include="AmortisationFactorModel.cs.old20150716" />
     <Compile Include="AmortisedValueModel.cs" />
