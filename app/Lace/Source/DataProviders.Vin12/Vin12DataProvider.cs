@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Vin12.Infrastructure;
 using Lace.Toolbox.Database.Repositories;
 using Workflow.Lace.Messages.Core;
@@ -30,8 +31,8 @@ namespace Lace.Domain.DataProviders.Vin12
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            //TODO: CHange DP NAME!!!!!
-            var spec = new CanHandlePackageSpecification(DataProviderName.MMCode_E_DB, _request);
+
+            var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoVIN12_I_DB, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -39,18 +40,18 @@ namespace Lace.Domain.DataProviders.Vin12
             }
             else
             {
+                _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoVIN12_I_DB);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoVIN12_I_DB, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
-                //_dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoVIN12_I_DB);
-                //_logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoVIN12_I_DB, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand.LogBegin(new {_dataProvider});
 
-                _logCommand.LogBegin(new { _dataProvider });
-
-                var consumer = new ConsumeSource(new HandleVin12SourceCall(), 
+                var consumer = new ConsumeSource(new HandleVin12SourceCall(),
                     new CallVin12DataProvider(_dataProvider, new DataProviderRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
-                _logCommand.LogEnd(new { response });
+                _logCommand.LogEnd(new {response});
 
                 if (!response.OfType<IProvideDataFromVin12>().Any() || response.OfType<IProvideDataFromVin12>().First() == null)
                     CallFallbackSource(response, _command);

@@ -6,6 +6,7 @@ using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Vin12;
 using Lace.Domain.Core.Entities.Extensions;
+using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -55,6 +56,9 @@ namespace Lace.Domain.Core.Entities
         }
 
         [DataMember]
+        public IAmVin12Request Request { get; private set; }
+
+        [DataMember]
         public IEnumerable<IRespondWithVin12> Vin12Information { get; private set; }
 
         [DataMember]
@@ -80,5 +84,7 @@ namespace Lace.Domain.Core.Entities
         {
             get { return ResponseState.Description(); }
         }
+
+        
     }
 }

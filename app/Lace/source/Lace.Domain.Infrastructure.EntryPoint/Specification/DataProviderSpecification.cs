@@ -17,6 +17,7 @@ using Lace.Domain.DataProviders.PCubed.EzScore;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
 using Lace.Domain.DataProviders.Signio.DriversLicense;
+using Lace.Domain.DataProviders.Vin12;
 using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Specification
@@ -38,9 +39,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                                         new LightstoneDirectorDataProvider(request,
                                                             new PCubedEzScoreDataProvider(request,
                                                                 new ConsumerSpecificationsDataProvider(request,
-                                                                    new BmwFinanceDataProvider(request, 
-                                                                        new MmCodeDataProvider(request, null, null, 
-                                                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.MMCode_E_DB)), null,
+                                                                    new BmwFinanceDataProvider(request,
+                                                                        new MmCodeDataProvider(request, null, null,
+                                                                            CommandSender.InitCommandSender(bus, requestId,
+                                                                                DataProviderCommandSource.MMCode_E_DB)), null,
                                                                         CommandSender.InitCommandSender(bus, requestId,
                                                                             DataProviderCommandSource.BMWFSTitle_E_DB)), null,
                                                                     CommandSender.InitCommandSender(bus, requestId,
@@ -57,7 +59,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                             null,
                                             CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoSpecs_I_DB)), null,
                                         CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoVINMaster_I_DB)), null,
-                                    CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDTitle_E_WS)), null,
+                                    CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDTitle_E_WS)),
+                                new Vin12DataProvider(request, null, null,
+                                    CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoVIN12_I_DB)),
                                 CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoCarStats_I_DB)), null,
                             CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDVerify_E_WS))
                             .CallSource(response);

@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Vin12.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
-                _carInformation = new Vin12VehicleDataFactory().Vin12CarInformation(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>().VinNumber,
+                _carInformation = new Vin12VehicleDataFactory().Vin12CarInformation(response, _dataProvider.GetRequest<IAmVin12Request>().VinNumber,
                     _repository);
 
                 _logCommand.LogResponse(response != null && response.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,

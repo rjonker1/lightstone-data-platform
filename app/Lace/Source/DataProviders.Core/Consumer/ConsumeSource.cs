@@ -9,7 +9,6 @@ namespace Lace.Domain.DataProviders.Core.Consumer
         private readonly ICallTheDataProviderSource _dataProviderCall;
         private readonly IHandleDataProviderSourceCall _handleDataProviderCall;
 
-
         public ConsumeSource(IHandleDataProviderSourceCall handleDataProviderCall,
             ICallTheDataProviderSource dataProviderCall)
         {

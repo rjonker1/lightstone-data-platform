@@ -62,11 +62,11 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1775, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1775\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -144,6 +144,7 @@
     <Compile Include="Builders\Sources\Lightstone\SaleDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\StatisticsDataBuilder.cs" />
     <Compile Include="Builders\Sources\RequestDataFromSourceBuilder.cs" />
+    <Compile Include="Builders\Vin12\Vin12Request.cs" />
     <Compile Include="Fakes\Lace\Builder\FakeSourceChain.cs" />
     <Compile Include="Fakes\Lace\Builder\FakeSourceSpecification.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidSourceExecution.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Fakes\RequestTypes\RgtRequestType.cs" />
     <Compile Include="Fakes\RequestTypes\RgtVinRequest.cs" />
     <Compile Include="Fakes\RequestTypes\SignioDriversLicenseReqeust.cs" />
+    <Compile Include="Fakes\RequestTypes\Vin12Request.cs" />
     <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeLightstoneBusinessCompanyResponse.cs" />
@@ -242,6 +244,7 @@
     <Compile Include="Mothers\Requests\EzScoreRequests\EzScoreRequest.cs" />
     <Compile Include="Mothers\Requests\FinanceRequests\BmwFinanceRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberMmCodeOnlyRequest.cs" />
+    <Compile Include="Mothers\Requests\Vin12Requests\Vin12Request.cs" />
     <Compile Include="Mothers\Requests\VinNumberLSAutoRgtAndRgtVinProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberAllDataProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberLightstoneOnlyRequest.cs" />
