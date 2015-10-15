@@ -75,8 +75,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1762, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1762\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1772, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1772\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
