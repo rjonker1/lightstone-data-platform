@@ -72,7 +72,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First().Handled.ShouldBeTrue();
             _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First().ResponseState.ShouldEqual(DataProviderResponseState.VinShort);
-            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First().Vin12Information.Count().ShouldEqual(80);
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First().Vin12Information.Count().ShouldEqual(24);
 
             _initialize.DataProviderResponses.HasAllRecords().ShouldBeFalse();
             _initialize.DataProviderResponses.State().ShouldEqual(DataProviderResponseState.VinShort);

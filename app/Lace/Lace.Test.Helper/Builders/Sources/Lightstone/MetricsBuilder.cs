@@ -3,6 +3,7 @@ using Lace.Domain.DataProviders.Lightstone.Queries;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Lace.Toolbox.Database.Base;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Models;
 
 
@@ -13,7 +14,7 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
         private static readonly IHaveCarInformation RequestForCarId107483 =
             LaceRequestCarInformationRequestBuilder.ForCarId_107483();
 
-        public static IEnumerable<Statistic> GetStatistics()
+        public static IEnumerable<StatisticDto> GetStatistics()
         {
             var repository = new FakeStatisticsRepository();
             var getStatistics = new StatisticsQuery(repository);

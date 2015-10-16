@@ -6,24 +6,24 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Factories;
 using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Base;
-using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 
 namespace Lace.Toolbox.Database.Factories
 {
     public class Vin12VehicleDataFactory :
-        AbstractVin12VehicleFactory<ICollection<IPointToLaceProvider>, IAmRequestField, IReadOnlyRepository, List<CarInformation>>
+        AbstractVin12VehicleFactory<ICollection<IPointToLaceProvider>, IAmRequestField, IReadOnlyRepository, List<Vin12CarinformationDto>>
     {
         private static readonly IMineResponseData<ICollection<IPointToLaceProvider>> Factory = new ResponseDataMiningFactory();
         private static readonly ILog Log = LogManager.GetLogger<Vin12VehicleDataFactory>();
 
-        public override List<CarInformation> Vin12CarInformation(ICollection<IPointToLaceProvider> response, IAmRequestField request,
+        public override List<Vin12CarinformationDto> Vin12CarInformation(ICollection<IPointToLaceProvider> response, IAmRequestField request,
             IReadOnlyRepository repository)
         {
             try
             {
-                return repository.Get<CarInformation>(CarInformation.SelectWithVin12, new {@Vin = FindVinNumber(request, response)}).ToList();
+                return repository.Get<Vin12CarinformationDto>(Vin12CarinformationDto.Select, new { @Vin = FindVinNumber(request, response) }).ToList();
             }
             catch (Exception ex)
             {

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Domain.DataProviders.Bmw.Finance.Queries
 {
     public interface IBmwFinanceQuery
     {
-        // IEnumerable<BmwFinance> Finances { get; }
-        IEnumerable<BmwFinance> GetWithAccountNumber(string accountNumber);
-        IEnumerable<BmwFinance> GetWithVinNumber(string vinNumber);
-        IEnumerable<BmwFinance> GetWithLicenceNumber(string licenseNumber);
+        // IEnumerable<BmwFinanceDto> Finances { get; }
+        IEnumerable<BmwFinanceDto> GetWithAccountNumber(string accountNumber);
+        IEnumerable<BmwFinanceDto> GetWithVinNumber(string vinNumber);
+        IEnumerable<BmwFinanceDto> GetWithLicenceNumber(string licenseNumber);
     }
 
     public class BmwFinanceQuery : IBmwFinanceQuery
@@ -25,14 +25,14 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Queries
             _repository = repository;
         }
 
-        public IEnumerable<BmwFinance> GetWithAccountNumber(string accountNumber)
+        public IEnumerable<BmwFinanceDto> GetWithAccountNumber(string accountNumber)
         {
             try
             {
                 var finances =
-                    _repository.GetAll<BmwFinance>(finance => finance.DealReference == decimal.Parse(accountNumber)).ToList();
+                    _repository.GetAll<BmwFinanceDto>(finance => finance.DealReference == decimal.Parse(accountNumber)).ToList();
                 return !finances.Any()
-                    ? _repository.Get<BmwFinance>(BmwFinance.SelectWithAccountNumber, new {@AccountNumber = accountNumber})
+                    ? _repository.Get<BmwFinanceDto>(BmwFinanceDto.SelectWithAccountNumber, new {@AccountNumber = accountNumber})
                     : finances;
             }
             catch (Exception ex)
@@ -42,14 +42,14 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Queries
             }
         }
 
-        public IEnumerable<BmwFinance> GetWithVinNumber(string vinNumber)
+        public IEnumerable<BmwFinanceDto> GetWithVinNumber(string vinNumber)
         {
             try
             {
                 var finances =
-                    _repository.GetAll<BmwFinance>(finance => finance.Chassis == vinNumber).ToList();
+                    _repository.GetAll<BmwFinanceDto>(finance => finance.Chassis == vinNumber).ToList();
 
-                return !finances.Any() ? _repository.Get<BmwFinance>(BmwFinance.SelectWithVinNumber, new {@VinNumber = vinNumber}) : finances;
+                return !finances.Any() ? _repository.Get<BmwFinanceDto>(BmwFinanceDto.SelectWithVinNumber, new {@VinNumber = vinNumber}) : finances;
             }
             catch (Exception ex)
             {
@@ -58,15 +58,15 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Queries
             }
         }
 
-        public IEnumerable<BmwFinance> GetWithLicenceNumber(string licenseNumber)
+        public IEnumerable<BmwFinanceDto> GetWithLicenceNumber(string licenseNumber)
         {
             try
             {
                 var finances =
-                    _repository.GetAll<BmwFinance>(finance => finance.RegistrationNumber == licenseNumber).ToList();
+                    _repository.GetAll<BmwFinanceDto>(finance => finance.RegistrationNumber == licenseNumber).ToList();
 
                 return !finances.Any()
-                    ? _repository.Get<BmwFinance>(BmwFinance.SelectWithLicenceNumber, new {@LicenceNumber = licenseNumber})
+                    ? _repository.Get<BmwFinanceDto>(BmwFinanceDto.SelectWithLicenceNumber, new {@LicenceNumber = licenseNumber})
                     : finances;
             }
             catch (Exception ex)

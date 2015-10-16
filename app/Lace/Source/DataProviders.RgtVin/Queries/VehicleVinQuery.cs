@@ -25,11 +25,11 @@ namespace Lace.Domain.DataProviders.RgtVin.Queries
             try
             {
                 Vins = _repository.Get<Vin>(Vin.SelectWithVin, new { @Vin = vin });
-                //Vins = _repository.GetAll<CarInformation>(car => { return car.Vin == vin; })
+                //Vins = _repository.GetAll<CarInformationDto>(car => { return car.Vin == vin; })
                 //    .Select(s => new Vin(s.Vin, s.CarId, s.MakeName, s.CarTypeName, s.CarModel, s.Year, s.Quarter, s.Month, s.Colour, s.Source));
 
                 //if (!Vins.Any())
-                //    Vins = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {@Vin = vin})
+                //    Vins = _repository.Get<CarInformationDto>(CarInformationDto.SelectWithVin, new {@Vin = vin})
                 //        .Select(s => new Vin(s.Vin, s.CarId, s.MakeName, s.CarTypeName, s.CarModel, s.Year, s.Quarter, s.Month, s.Colour, s.Source));
 
                 //if (!Vins.Any())

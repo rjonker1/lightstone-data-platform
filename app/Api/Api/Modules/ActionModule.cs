@@ -9,7 +9,6 @@ using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
-using Nancy.Json;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
@@ -18,16 +17,8 @@ namespace Api.Modules
 {
     public class ActionModule : SecureModule
     {
-        private static int _defaultJsonMaxLength;
-
         public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi, IDispatchMessagesToBus<RequestReportMessage> dispatcher)
         {
-            if (_defaultJsonMaxLength == 0)
-                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
-
-            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
-            JsonSettings.MaxJsonLength = Int32.MaxValue;
-
             Get["/"] = parameters =>
             {
                 var token = Context.AuthorizationHeaderToken();

@@ -25,19 +25,11 @@ namespace PackageBuilder.Api.Modules
 {
     public class DataProviderModule : SecureModule
     {
-        private static int _defaultJsonMaxLength;
-
         public DataProviderModule(IPublishStorableCommands publisher,
             IDataProviderRepository readRepo,
             INEventStoreRepository<DataProvider> writeRepo, IRepository<State> stateRepo)
         {
             this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
-
-            if (_defaultJsonMaxLength == 0)
-                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
-
-            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
-            JsonSettings.MaxJsonLength = Int32.MaxValue;
 
             Get["/DataProviders/{showAll?false}"] = _ =>
             {

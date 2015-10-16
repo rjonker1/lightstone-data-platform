@@ -1,11 +1,11 @@
-﻿using Lace.Toolbox.Database.Models;
+﻿using Lace.Toolbox.Database.Dtos;
 
 namespace Lace.Toolbox.Database.Base
 { 
     public interface IRetrieveCarInformation
     {
         bool IsSatisfied { get; }
-        CarInformation CarInformation { get; }
+        CarInformationDto CarInformationDto { get; }
         IHaveCarInformation CarInformationRequest { get; }
         IRetrieveCarInformation SetupDataSources();
         IRetrieveCarInformation BuildCarInformation();

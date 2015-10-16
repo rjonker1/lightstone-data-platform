@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lace.Toolbox.Database.Base;
-using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Toolbox.Database.Domain
@@ -11,7 +11,7 @@ namespace Lace.Toolbox.Database.Domain
     public class CarInformationQuery : IGetCarInformation
     {
         private readonly ILog _log;
-        public IEnumerable<CarInformation> Cars { get; private set; }
+        public IEnumerable<CarInformationDto> Cars { get; private set; }
         private readonly IReadOnlyRepository _repository;
 
         public CarInformationQuery(IReadOnlyRepository repository)
@@ -54,10 +54,10 @@ namespace Lace.Toolbox.Database.Domain
             if (CannotGetWithVin(request.Vin))
                 return;
 
-            Cars = _repository.GetAll<CarInformation>(car => car.Vin == request.Vin);
+            Cars = _repository.GetAll<CarInformationDto>(car => car.Vin == request.Vin);
 
             if (!Cars.Any())
-                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithVin, new {request.Vin});
+                Cars = _repository.Get<CarInformationDto>(CarInformationDto.SelectWithVin, new {request.Vin});
         }
 
 
@@ -73,14 +73,14 @@ namespace Lace.Toolbox.Database.Domain
 
             if (!HasValidCarIdInformation(request))
             {
-                Cars = new List<CarInformation>();
+                Cars = new List<CarInformationDto>();
                 return;
             }
 
-            Cars = _repository.GetAll<CarInformation>(car => car.CarId == request.CarId);
+            Cars = _repository.GetAll<CarInformationDto>(car => car.CarId == request.CarId);
 
             if (!Cars.Any())
-                Cars = _repository.Get<CarInformation>(CarInformation.SelectWithCarId, new {request.CarId});
+                Cars = _repository.Get<CarInformationDto>(CarInformationDto.SelectWithCarId, new {request.CarId});
         }
 
     }

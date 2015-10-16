@@ -12,7 +12,7 @@ using Lace.Domain.DataProviders.Bmw.Finance.Queries;
 using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Extensions;
-using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
@@ -24,7 +24,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
         private static readonly ILog Log = LogManager.GetLogger<CallBmwFinanceDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
-        private IList<BmwFinance> _bmwFinances;
+        private IList<BmwFinanceDto> _bmwFinances;
 
         private readonly IReadOnlyRepository _repository;
 

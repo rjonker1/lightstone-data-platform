@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Common.Logging;
 using Lace.Domain.Core.Contracts.Caching;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Models;
 
 namespace Lace.Caching.BuildingBlocks.Handlers
@@ -31,7 +32,7 @@ namespace Lace.Caching.BuildingBlocks.Handlers
             new Metric(),
             new Municipality(),
             new Sale(),
-            new CarInformation()
+            new CarInformationDto()
         };
     }
 }

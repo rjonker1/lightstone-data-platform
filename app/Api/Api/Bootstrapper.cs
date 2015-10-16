@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Api.Domain.Infrastructure.Automapping;
 using Api.Domain.Infrastructure.Bus;
 using Api.Domain.Infrastructure.Extensions;
@@ -26,6 +27,11 @@ namespace Api
 {
     public class Bootstrapper : WindsorNancyBootstrapper
     {
+        public Bootstrapper()
+        {
+            Nancy.Json.JsonSettings.MaxJsonLength = Int32.MaxValue;
+        }
+
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
@@ -52,6 +58,8 @@ namespace Api
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
             });
             pipelines.EnableMonitoring();
+
+            Nancy.Json.JsonSettings.MaxJsonLength = int.MaxValue;
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)

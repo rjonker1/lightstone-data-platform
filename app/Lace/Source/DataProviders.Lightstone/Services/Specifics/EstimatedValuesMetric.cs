@@ -5,19 +5,19 @@ using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.Core.Entities;
 using Lace.Toolbox.Database.Base;
-using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Dtos;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 {
     public class EstimatedValuesMetric : IRetrieveATypeOfMetric<EstimatedValueModel>
     {
         public List<EstimatedValueModel> MetricResult { get; private set; }
-        public IEnumerable<Statistic> Statistics { get; private set; }
+        public IEnumerable<StatisticDto> Statistics { get; private set; }
 
-        private IList<Statistic> _gauges;
+        private IList<StatisticDto> _gauges;
         private readonly IHaveCarInformation _request;
 
-        public EstimatedValuesMetric(IHaveCarInformation request, IEnumerable<Statistic> statistics)
+        public EstimatedValuesMetric(IHaveCarInformation request, IEnumerable<StatisticDto> statistics)
         {
             Statistics = statistics;
             _request = request;
@@ -97,9 +97,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
                 estimatedCost.MoneyValue.HasValue ? estimatedCost.MoneyValue.Value.ToString("C") : "");
         }
 
-        private IList<Statistic> GetGauges()
+        private IList<StatisticDto> GetGauges()
         {
-            if (!_request.HasValidCarIdAndYear()) return new List<Statistic>();
+            if (!_request.HasValidCarIdAndYear()) return new List<StatisticDto>();
 
             return Statistics
                 .Where(w => w.CarId == _request.CarId && w.YearId == _request.Year)

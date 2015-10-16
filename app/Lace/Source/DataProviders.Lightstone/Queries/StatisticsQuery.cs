@@ -4,7 +4,7 @@ using Common.Logging;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Toolbox.Database.Base;
-using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Domain.DataProviders.Lightstone.Queries
@@ -14,7 +14,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Queries
         private readonly ILog _log;
         private readonly IReadOnlyRepository _repository;
 
-        public IEnumerable<Statistic> Statistics { get; private set; }
+        public IEnumerable<StatisticDto> Statistics { get; private set; }
 
         public StatisticsQuery(IReadOnlyRepository repository)
         {
@@ -26,9 +26,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Queries
         {
             try
             {
-                Statistics = _repository.Get<Statistic>(Statistic.SelectForCarIdMakeYear, new {request.CarId, request.Year, request.MakeId});
+                Statistics = _repository.Get<StatisticDto>(StatisticDto.SelectForCarIdMakeYear, new {request.CarId, request.Year, request.MakeId});
 
-                //Statistics = _repository.GetAll<Statistic>(Statistic.SelectAll, Statistic.CacheAllKey)
+                //Statistics = _repository.GetAll<StatisticDto>(StatisticDto.SelectAll, StatisticDto.CacheAllKey)
                 //    .Where(s => (s.MetricId == (int) MetricTypes.AccidentDistribution) ||
                 //                (s.MetricId == (int) MetricTypes.AmortisedValues && s.CarId == request.CarId && s.YearId == request.Year) ||
                 //                (s.MetricId == (int) MetricTypes.AreaFactors) ||
@@ -41,8 +41,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Queries
 
                 //if (!Statistics.Any())
                 //{
-                //    Statistics = _repository.Get<Statistic>(Statistic.SelectForCarIdMakeYear,
-                //        new {request.CarId, request.Year, request.MakeId}, Statistic.CacheStatisticsKey);
+                //    Statistics = _repository.Get<StatisticDto>(StatisticDto.SelectForCarIdMakeYear,
+                //        new {request.CarId, request.Year, request.MakeId}, StatisticDto.CacheStatisticsKey);
                 //}
             }
             catch (Exception ex)

@@ -50,7 +50,7 @@ namespace Lace.Acceptance.Tests.Lace.Vin12
             _response.OfType<IProvideDataFromVin12>().First().Vin12Information.ShouldNotBeNull();
             _response.OfType<IProvideDataFromVin12>().First().ResponseState.ShouldEqual(DataProviderResponseState.VinShort);
             _response.OfType<IProvideDataFromVin12>().First().Vin12Information.First().BodyShape.ShouldNotBeEmpty();
-            _response.OfType<IProvideDataFromVin12>().First().Vin12Information.Count().ShouldEqual(80);
+            _response.OfType<IProvideDataFromVin12>().First().Vin12Information.Count().ShouldEqual(24);
         }
     }
 }

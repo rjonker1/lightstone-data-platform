@@ -1,9 +1,9 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.Caching;
 
-namespace Lace.Toolbox.Database.Models
+namespace Lace.Toolbox.Database.Dtos
 {
-    public class BmwFinance : IAmCachable
+    public class BmwFinanceDto : IAmCachable
     {
         public const string SelectAll = @"SELECT * FROM Finances";
 
@@ -11,12 +11,12 @@ namespace Lace.Toolbox.Database.Models
         public const string SelectWithVinNumber = @"SELECT * FROM Finances WHERE Chassis = @VinNumber";
         public const string SelectWithLicenceNumber = @"SELECT* FROM Finances WHERE RegistrationNumber = @LicenceNumber";
 
-        public BmwFinance()
+        public BmwFinanceDto()
         {
 
         }
 
-        public BmwFinance(string financeHouse, decimal dealReference, DateTime startDate, DateTime expireDate, string chassis,
+        public BmwFinanceDto(string financeHouse, decimal dealReference, DateTime startDate, DateTime expireDate, string chassis,
             string engine, string registrationNumber, string description, int registrationYear, string productCategory, string dealStatus)
         {
             FinanceHouse = financeHouse;
@@ -35,7 +35,7 @@ namespace Lace.Toolbox.Database.Models
 
         public void AddToCache(ICacheRepository repository)
         {
-            repository.AddItems<BmwFinance>(SelectAll);
+            repository.AddItems<BmwFinanceDto>(SelectAll);
         }
 
         public string FinanceHouse { get; set; }

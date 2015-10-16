@@ -10,8 +10,8 @@ using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Vin12.Infrastructure.Management;
 using Lace.Shared.Extensions;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Factories;
-using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
@@ -24,7 +24,7 @@ namespace Lace.Domain.DataProviders.Vin12.Infrastructure
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
         private readonly IReadOnlyRepository _repository;
-        private List<CarInformation> _carInformation;
+        private List<Vin12CarinformationDto> _carInformation;
 
         public CallVin12DataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {

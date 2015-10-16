@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Lace.Domain.Core.Entities;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
@@ -8,7 +9,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
     public class LastFiveSalesMetric : IRetrieveATypeOfMetric<SaleModel>
     {
         public List<SaleModel> MetricResult { get; private set; }
-        public IEnumerable<Statistic> Statistics { get; private set; }
+        public IEnumerable<StatisticDto> Statistics { get; private set; }
 
         private readonly IEnumerable<Sale> _sales;
         private readonly IEnumerable<Municipality> _municipalities;

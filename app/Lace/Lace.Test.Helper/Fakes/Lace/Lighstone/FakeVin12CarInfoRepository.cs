@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 
@@ -18,7 +19,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         {
             return (IEnumerable<TItem>)Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort().Select(
                     s =>
-                        new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
+                        new CarInformationDto(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
                             s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
                             s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
                             s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId));
@@ -30,7 +31,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
                     .Where(w => w.Key == _vin)
                     .Select(
                         s =>
-                            new CarInformation(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
+                            new CarInformationDto(s.Value.CarId, s.Value.Year, s.Value.CarTypeId, s.Value.ManufacturerId,
                                 s.Value.CarFullname, s.Value.CarModel, s.Value.BodyShape, s.Value.FuelType,
                                 s.Value.Market, s.Value.TransmissionType, s.Value.ModelYear, s.Value.IntroductionDate,
                                 s.Value.ImageUrl, s.Value.Quarter, s.Value.MakeId));

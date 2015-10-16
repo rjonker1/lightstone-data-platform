@@ -16,7 +16,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
         public TransformLightstoneResponse(IRetrieveValuationFromMetrics metricResponse,
             IRetrieveCarInformation carInformation)
         {
-            Continue = metricResponse != null && carInformation != null && carInformation.CarInformation != null && carInformation.IsSatisfied && metricResponse.IsSatisfied;
+            Continue = metricResponse != null && carInformation != null && carInformation.CarInformationDto != null && carInformation.IsSatisfied && metricResponse.IsSatisfied;
             Result = Continue ? null : LightstoneAutoResponse.Empty();
 
             _metricResponse = metricResponse;
@@ -25,10 +25,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
 
         public void Transform()
         {
-            Result = new LightstoneAutoResponse(_carInformation.CarInformation.CarId, _carInformation.CarInformation.Year,
-                _carInformation.CarInformationRequest.Vin, _carInformation.CarInformation.ImageUrl,
-                _carInformation.CarInformation.Quarter,
-                _carInformation.CarInformation.CarFullname, _carInformation.CarInformation.CarModel,
+            Result = new LightstoneAutoResponse(_carInformation.CarInformationDto.CarId, _carInformation.CarInformationDto.Year,
+                _carInformation.CarInformationRequest.Vin, _carInformation.CarInformationDto.ImageUrl,
+                _carInformation.CarInformationDto.Quarter,
+                _carInformation.CarInformationDto.CarFullname, _carInformation.CarInformationDto.CarModel,
                 _metricResponse.Valuation);
             Result.AddResponseState(DataProviderResponseState.Successful);
         }

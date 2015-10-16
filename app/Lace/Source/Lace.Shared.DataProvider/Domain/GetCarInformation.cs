@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Lace.Toolbox.Database.Base;
-using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Toolbox.Database.Domain
@@ -8,7 +8,7 @@ namespace Lace.Toolbox.Database.Domain
     public class GetCarInformation : IRetrieveCarInformation
     {
         public bool IsSatisfied { get; private set; }
-        public CarInformation CarInformation { get; private set; }
+        public CarInformationDto CarInformationDto { get; private set; }
         public IHaveCarInformation CarInformationRequest { get; private set; }
 
         private IGetCarInformation _getCarInformation;
@@ -22,7 +22,7 @@ namespace Lace.Toolbox.Database.Domain
 
         private GetCarInformation(bool empty)
         {
-            CarInformation = new CarInformation();
+            CarInformationDto = new CarInformationDto();
             CarInformationRequest = new CarInformationRequest(0, "", "", "", "", "", 0, 0, false);
         }
 
@@ -59,7 +59,7 @@ namespace Lace.Toolbox.Database.Domain
         public IRetrieveCarInformation BuildCarInformation()
         {
             IsSatisfied = _getCarInformation.Cars.Any() && _getCarInformation.Cars.FirstOrDefault() != null;
-            CarInformation = IsSatisfied ? _getCarInformation.Cars.FirstOrDefault().SetYear(_year) : new CarInformation();
+            CarInformationDto = IsSatisfied ? _getCarInformation.Cars.FirstOrDefault().SetYear(_year) : new CarInformationDto();
             return this;
         }
 
@@ -71,9 +71,9 @@ namespace Lace.Toolbox.Database.Domain
 
         public IRetrieveCarInformation BuildCarInformationRequest()
         {
-            if (CarInformation == null) return this;
+            if (CarInformationDto == null) return this;
 
-            CarInformationRequest.SetCarModelYearMake(CarInformation.CarId, CarInformation.CarModel, CarInformation.Year, CarInformation.MakeId);
+            CarInformationRequest.SetCarModelYearMake(CarInformationDto.CarId, CarInformationDto.CarModel, CarInformationDto.Year, CarInformationDto.MakeId);
             return this;
         }
     }

@@ -5,6 +5,7 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Bmw.Finance.Queries;
 using Lace.Domain.DataProviders.Core.Factories;
 using Lace.Shared.Extensions;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Models;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
@@ -15,10 +16,10 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Factory
     {
         private static readonly IMineResponseData<ICollection<IPointToLaceProvider>> Factory = new ResponseDataMiningFactory();
 
-        public override IEnumerable<BmwFinance> Get(IBmwFinanceQuery query, IAmBmwFinanceRequest request,
+        public override IEnumerable<BmwFinanceDto> Get(IBmwFinanceQuery query, IAmBmwFinanceRequest request,
             ICollection<IPointToLaceProvider> response)
         {
-            var records = Enumerable.Empty<BmwFinance>();
+            var records = Enumerable.Empty<BmwFinanceDto>();
             foreach (var fields in RequestFields.OrderBy(o => (int) o.Key))
             {
                 records = fields.Value(request, response, query);
@@ -26,13 +27,13 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Factory
                     break;
             }
 
-            return records ?? Enumerable.Empty<BmwFinance>();
+            return records ?? Enumerable.Empty<BmwFinanceDto>();
         }
 
         private static readonly
-            IDictionary<Order, Func<IAmBmwFinanceRequest, ICollection<IPointToLaceProvider>, IBmwFinanceQuery, IEnumerable<BmwFinance>>>
+            IDictionary<Order, Func<IAmBmwFinanceRequest, ICollection<IPointToLaceProvider>, IBmwFinanceQuery, IEnumerable<BmwFinanceDto>>>
             RequestFields = new Dictionary
-                <Order, Func<IAmBmwFinanceRequest, ICollection<IPointToLaceProvider>, IBmwFinanceQuery, IEnumerable<BmwFinance>>>()
+                <Order, Func<IAmBmwFinanceRequest, ICollection<IPointToLaceProvider>, IBmwFinanceQuery, IEnumerable<BmwFinanceDto>>>()
             {
                 {
                     Order.First,
@@ -58,9 +59,9 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Factory
 
     public abstract class AbstractBmwFinanceBasedOnRequestFactory<T1, T2, T3> : IGetBmwFinanceData<T1, T2, T3>
     {
-        public abstract IEnumerable<BmwFinance> Get(T1 query, T2 request, T3 responseFactory);
+        public abstract IEnumerable<BmwFinanceDto> Get(T1 query, T2 request, T3 responseFactory);
 
-        public IEnumerable<BmwFinance> Get(object query, object request, object responseFactory)
+        public IEnumerable<BmwFinanceDto> Get(object query, object request, object responseFactory)
         {
             return Get((T1)query, (T2)request, (T3)responseFactory);
         }
