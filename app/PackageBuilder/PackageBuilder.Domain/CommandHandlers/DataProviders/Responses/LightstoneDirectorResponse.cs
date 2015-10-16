@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders.Business;
 using Lace.Domain.Core.Entities;
 
@@ -6,7 +7,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
 {
     public class LightstoneDirectorResponse
     {
-        public LightstoneBusinessDirectorResponse LightstoneCompanyResponse()
+        public LightstoneBusinessDirectorResponse Default()
         {
             var result = new List<IProvideDirector>()
             {
@@ -17,8 +18,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                     .SetRegisteredAddress("","","","","")
                     .SetResidentialAddress("","","","","")
             };
-
-            return new LightstoneBusinessDirectorResponse(result);
+            
+            var response =  new LightstoneBusinessDirectorResponse(result);
+            response.AddResponseState(DataProviderResponseState.NoRecords);
+            return response;
         }
     }
 }

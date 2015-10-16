@@ -93,6 +93,7 @@
     <Compile Include="RgtRequest.cs" />
     <Compile Include="RgtVinRequest.cs" />
     <Compile Include="SignioDriversLicenseRequest.cs" />
+    <Compile Include="Vin12Request.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PackageBuilder.Domain.Requests.Contracts\PackageBuilder.Domain.Requests.Contracts.csproj">

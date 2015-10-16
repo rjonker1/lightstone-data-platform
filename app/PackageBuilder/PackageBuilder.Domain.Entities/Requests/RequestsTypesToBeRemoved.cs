@@ -60,10 +60,10 @@ namespace PackageBuilder.Domain.Entities.Requests
                 },
                 {
                     DataProviderName.MMCode_E_DB, (requests, user, packageName) => new MmCodeRequest(requests)
-                } //,
-                //{
-                //    DataProviderName.LSAutoVIN12_I_DB, (requests, user, packageName) => new Vin12Request(requests)
-                //}
+                } ,
+                {
+                    DataProviderName.LSAutoVIN12_I_DB, (requests, user, packageName) => new Vin12Request(requests)
+                }
             };
 
         public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes

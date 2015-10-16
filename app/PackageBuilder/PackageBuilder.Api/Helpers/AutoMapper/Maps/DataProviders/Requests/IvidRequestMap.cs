@@ -3,9 +3,11 @@ using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.Requests;
 using PackageBuilder.Domain.Requests;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Requests.Fields;
+using BmwFinanceRequest = PackageBuilder.Domain.Requests.BmwFinanceRequest;
 using CarIdRequestField = PackageBuilder.Domain.Requests.Fields.CarIdRequestField;
 using CompanyNameRequestField = PackageBuilder.Domain.Requests.Fields.CompanyNameRequestField;
 using CompanyRegistrationNumberRequestField = PackageBuilder.Domain.Requests.Fields.CompanyRegistrationNumberRequestField;
@@ -19,8 +21,10 @@ using LightstoneCompanyRequest = PackageBuilder.Domain.Requests.LightstoneCompan
 using LightstoneConsumerSpecificationsRequest = PackageBuilder.Domain.Requests.LightstoneConsumerSpecificationsRequest;
 using LightstoneDirectorRequest = PackageBuilder.Domain.Requests.LightstoneDirectorRequest;
 using MakeRequestField = PackageBuilder.Domain.Requests.Fields.MakeRequestField;
+using MmCodeRequest = PackageBuilder.Domain.Requests.MmCodeRequest;
 using PCubedEzScoreRequest = PackageBuilder.Domain.Requests.PCubedEzScoreRequest;
 using RegisterNumberRequestField = PackageBuilder.Domain.Requests.Fields.RegisterNumberRequestField;
+using RgtRequest = PackageBuilder.Domain.Requests.RgtRequest;
 using RgtVinRequest = PackageBuilder.Domain.Requests.RgtVinRequest;
 using SignioDriversLicenseRequest = PackageBuilder.Domain.Requests.SignioDriversLicenseRequest;
 using SurnameRequestField = PackageBuilder.Domain.Requests.Fields.SurnameRequestField;
@@ -150,6 +154,12 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             {
                 var request = s.Request ??
                               new BmwFinanceRequest(new VinNumberRequestField(""), new AccountNumberRequestField(""), new IdentityNumberRequestField(""), new LicenceNumberRequestField(""));
+                return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
+            });
+
+            Mapper.CreateMap<IProvideDataFromVin12, IEnumerable<IDataField>>().ConvertUsing(s =>
+            {
+                var request = s.Request ?? new PackageBuilder.Domain.Requests.Vin12Request(new VinNumberRequestField(""));
                 return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
             });
         }

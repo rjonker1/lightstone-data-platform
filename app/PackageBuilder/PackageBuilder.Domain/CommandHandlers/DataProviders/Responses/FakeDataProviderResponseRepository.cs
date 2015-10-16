@@ -46,7 +46,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         ividResponse.HasBeenHandled();
                         return ividResponse;
                     case DataProviderName.IVIDTitle_E_WS:
-                        var ividTitleHolderResponse = new IvidTitleHolderResponse();
+                        var ividTitleHolderResponse = new Lace.Domain.Core.Entities.IvidTitleHolderResponse();
                         ividTitleHolderResponse.Build("WesBank", false, "00009009838", DateTime.UtcNow.AddYears(-10), DateTime.UtcNow.AddYears(-5), "");
                         ividTitleHolderResponse.HasBeenHandled();
                         return ividTitleHolderResponse;
@@ -55,12 +55,12 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         lightstoneAutoResponse.HasBeenHandled();
                         return lightstoneAutoResponse;
                     case DataProviderName.LSAutoSpecs_I_DB:
-                        var rgtResponse = new RgtResponse("TOYOTA", 2008, "Hatch back", "190", "91", "6.2", "10.4", "157", "166", "1598", "Hatch (5-dr)", "Petrol", "Man", "Toyota AURIS", "STANDARD WHITE", "", "", "", "D166", "T05", "Auris", ""
+                        var rgtResponse = new Lace.Domain.Core.Entities.RgtResponse("TOYOTA", 2008, "Hatch back", "190", "91", "6.2", "10.4", "157", "166", "1598", "Hatch (5-dr)", "Petrol", "Man", "Toyota AURIS", "STANDARD WHITE", "", "", "", "D166", "T05", "Auris", ""
                                                             , "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                         rgtResponse.HasBeenHandled();
                         return rgtResponse;
                     case DataProviderName.LSAutoVINMaster_I_DB:
-                        var rgtVinResponse = new RgtVinResponse("Super White II", 8, 0, 3, 0, "TOYOTA", "Auris 1.6 RT 5-dr", "Auris", "SB1KV58E40F039277", 2008);
+                        var rgtVinResponse = new Lace.Domain.Core.Entities.RgtVinResponse("Super White II", 8, 0, 3, 0, "TOYOTA", "Auris 1.6 RT 5-dr", "Auris", "SB1KV58E40F039277", 2008);
                         rgtVinResponse.HasBeenHandled();
                         return rgtVinResponse;
                     case DataProviderName.Audatex:
@@ -75,19 +75,19 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         audatexResponse.HasBeenHandled();
                         return audatexResponse;
                     case DataProviderName.PCubedFica_E_WS:
-                        return new PCubedFicaVerficationResponse().DefaultFicaResponse();
+                        return new PCubedFicaVerficationResponse().Default();
                     case DataProviderName.PCubedEZScore_E_WS:
-                        return new PCubedEzScoreResponse().DefaultEzScoreResponse();
+                        return new PCubedEzScoreResponse().Default();
                     case DataProviderName.LSAutoDecryptDriverLic_I_WS:
-                        return new SignioDriversLicenseDecryptionResponse().DefaultSignioDriversLicenseDecryptionResponse();
+                        return new SignioDriversLicenseDecryptionResponse().Default();
                     case DataProviderName.LSPropertySearch_E_WS:
-                        return new LightstonePropertyResponse().DefaultLightstonePropertyResponse();
+                        return new LightstonePropertyResponse().Default();
                     case DataProviderName.LSBusinessCompany_E_WS:
-                        return new LightstoneBusinessResponse().LightstoneCompanyResponse();
+                        return new LightstoneBusinessResponse().Default();
                     case DataProviderName.LSBusinessDirector_E_WS:
-                        return new LightstoneDirectorResponse().LightstoneCompanyResponse();
+                        return new LightstoneDirectorResponse().Default();
                     case DataProviderName.BMWFSTitle_E_DB:
-                        return new BmwFinanceResponse().EmptyBmwFinanceResponse();
+                        return new BmwFinanceResponse().Default();
                     default:
                         return null;
                 }

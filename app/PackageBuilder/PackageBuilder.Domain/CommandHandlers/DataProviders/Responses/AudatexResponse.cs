@@ -9,7 +9,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
 {
     public class AudatexResponse
     {
-        public IPointToLaceProvider DefaultAudatexResponse()
+        public IPointToLaceProvider Default()
         {
             var audatex =
                 new Lace.Domain.Core.Entities.AudatexResponse(new List<IProvideAccidentClaim>()
