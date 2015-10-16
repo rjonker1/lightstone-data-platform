@@ -80,8 +80,9 @@ namespace Api.Modules
                     this.Info(() => "Api request: ContractId {0} Api token: {1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
+                    apiRequest.AddRequestId(new Guid(parameters.RequestId));
                     apiRequest.Validate();
-                    apiRequest.ContractVersion((long)1.0); //TODO: Set here or in PB?
+                    apiRequest.ContractVersion((long)1.0);
                     Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Commit Request Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
