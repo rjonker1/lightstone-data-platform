@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using DataPlatform.Shared.Enums;
 using EasyNetQ;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -18,21 +17,17 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Chain
 {
-    public class when_inititializing_lace_source_chain_for_vin_rgt_mm_code_search :Specification
+    public class when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin : Specification
     {
         private IBootstrap _initialize;
-
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly IAdvancedBus _command;
-        private Dictionary<Type, Func<IPointToLaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
-
         private readonly IBuildSourceChain _buildSourceChain;
 
-        public when_inititializing_lace_source_chain_for_vin_rgt_mm_code_search()
+        public when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin()
         {
-
             _command = BusFactory.WorkflowBus();
-            _request = new LicensePlateMmCodeRequestBuilder().ForIvidRgtVinMmCode();
+            _request = new VinRequestBuilder().ForLightstoneAndRgtVinVin12VinNumber();
             _buildSourceChain = new CreateSourceChain();
         }
 
@@ -43,47 +38,45 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         }
 
         [Observation]
-        public void lace_data_providers_for_must_be_handled_loaded_correclty()
+        public void lace_data_providers_for_vin12_should_be_executed_only_once()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(13);
+            _initialize.DataProviderResponses.Count.ShouldEqual(15);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(3);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
-            _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeFalse();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ResponseState.ShouldEqual(DataProviderResponseState.NoRecords);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvidTitleHolder>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvidTitleHolder>().First().Handled.ShouldBeFalse();
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>().First().Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>().First().ResponseState.ShouldEqual(DataProviderResponseState.NoRecords);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First().Handled.ShouldBeFalse();
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
-            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeFalse();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().ResponseState.ShouldEqual(DataProviderResponseState.NoRecords);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneProperty>().First().Handled.ShouldBeFalse();
 
-            _initialize.DataProviderResponses.OfType<IProvideDataFromMmCode>().First().ShouldNotBeNull();
-            _initialize.DataProviderResponses.OfType<IProvideDataFromMmCode>().First().Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().Count().ShouldEqual(2);
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().Count(w => w.Handled).ShouldEqual(1);
 
-            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().Any().ShouldBeFalse();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().Where(w => w.Handled).ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First(w => w.Handled).ResponseState.ShouldEqual(DataProviderResponseState.VinShort);
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First(w => w.Handled).Vin12Information.Count().ShouldEqual(80);
 
-            _initialize.DataProviderResponses.HasAllRecords().ShouldBeTrue();
-            _initialize.DataProviderResponses.State().ShouldEqual(DataProviderResponseState.Successful);
-        }
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First(w => !w.Handled).ResponseState.ShouldEqual(DataProviderResponseState.NoRecords);
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().First(w => !w.Handled).Vin12Information.Count().ShouldEqual(0);
 
-        [Observation]
-        public void lace_data_providers_must_have_same_car_id()
-        {
-            _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().CarFullname.ShouldNotBeNull();
-            _initialize.DataProviderResponses.OfType<IProvideDataFromMmCode>()
-                .First()
-                .CarId.ShouldEqual(_initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>().First().CarId);
-
+            _initialize.DataProviderResponses.HasAllRecords().ShouldBeFalse();
+            _initialize.DataProviderResponses.State().ShouldEqual(DataProviderResponseState.VinShort);
         }
     }
 }

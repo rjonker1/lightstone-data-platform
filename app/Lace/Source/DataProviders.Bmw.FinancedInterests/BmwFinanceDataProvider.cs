@@ -42,7 +42,8 @@ namespace Lace.Domain.DataProviders.Bmw.Finance
             {
 
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.BMWFSTitle_E_DB);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.BMWFSTitle_E_DB, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.BMWFSTitle_E_DB, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 
@@ -53,8 +54,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromBmwFinance>().Any() || response.OfType<IProvideDataFromBmwFinance>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromBmwFinance>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

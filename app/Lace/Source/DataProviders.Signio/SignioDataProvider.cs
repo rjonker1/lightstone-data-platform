@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure;
 using Workflow.Lace.Messages.Core;
@@ -38,7 +39,8 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoDecryptDriverLic_I_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoDecryptDriverLic_I_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoDecryptDriverLic_I_WS, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 
@@ -47,8 +49,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().Any() || response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromSignioDriversLicenseDecryption>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

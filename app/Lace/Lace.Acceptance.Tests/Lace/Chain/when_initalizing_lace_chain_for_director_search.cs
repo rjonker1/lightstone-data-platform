@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
@@ -41,9 +43,14 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _initialize.DataProviderResponses.Count.ShouldEqual(13);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(1);
 
+            _initialize.DataProviderResponses.HasAllRecords().ShouldBeTrue();
+            _initialize.DataProviderResponses.State().ShouldEqual(DataProviderResponseState.Successful);
+
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessDirector>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessDirector>().First().Handled.ShouldBeTrue();
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessDirector>().First().Directors.Count().ShouldEqual(1);
+
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().Any().ShouldBeFalse();
 
         }
     }

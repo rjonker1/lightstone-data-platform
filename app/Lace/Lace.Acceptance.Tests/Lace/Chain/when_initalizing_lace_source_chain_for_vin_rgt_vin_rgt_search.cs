@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
@@ -47,6 +49,9 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _initialize.DataProviderResponses.Count.ShouldEqual(13);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(2);
 
+            _initialize.DataProviderResponses.HasAllRecords().ShouldBeTrue();
+            _initialize.DataProviderResponses.State().ShouldEqual(DataProviderResponseState.Successful);
+
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeFalse();
 
@@ -64,17 +69,8 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneProperty>().First().ShouldNotBeNull();
             _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneProperty>().First().Handled.ShouldBeFalse();
+
+            _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().Any().ShouldBeFalse();
         }
-
-        //[Observation]
-        //public void lace_data_providers_must_have_same_car_id()
-        //{
-        //    _initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First().CarFullname.ShouldNotBeNull();
-        //    _initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First().CarFullname.ShouldNotBeEmpty();
-        //    _initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>()
-        //        .First()
-        //        .RgtCode.ShouldEqual(_initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First());
-
-        //}
     }
 }

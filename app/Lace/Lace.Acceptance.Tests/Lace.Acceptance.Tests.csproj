@@ -139,8 +139,12 @@
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_company_search.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_source_chain_for_vin_rgt_vin_rgt_search.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_for_pcubed_ez_score.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_with_vin12_vin.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ivid_and_ls_auto_with_vin12_vin.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_MisMatchlicensePlate_number_search.cs" />
+    <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_rgt_vin_vin12.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_vin_rgt_ls_rgt_vin_search.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_vin_rgt_mm_code_search.cs" />
@@ -179,6 +183,8 @@
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_signio_drivers_license_decryption.cs" />
+    <Compile Include="Lace\Vin12\when_consuming_rgt_vin_with_vin12_vin_number.cs" />
+    <Compile Include="Lace\Vin12\when_consuming_lighstone_auto_with_vin12_vin_number.cs" />
     <Compile Include="Lace\Vin12\when_consuming_vin12_data_provider.cs" />
     <Compile Include="Requests\when_sending_bmw_finance_request_to_lace_entry_point.cs" />
     <Compile Include="Requests\when_sending_director_request_to_lace_entry_point.cs" />

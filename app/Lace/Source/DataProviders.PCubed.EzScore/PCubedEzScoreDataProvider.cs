@@ -28,6 +28,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore
             _request = request;
             _command = command;
         }
+
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.PCubedEZScore_E_WS, _request);
@@ -38,18 +39,17 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedEZScore_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedEZScore_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedEZScore_E_WS, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
-                _logCommand.LogBegin(new { _request });
+                _logCommand.LogBegin(new {_request});
 
                 var consumer = new ConsumeSource(new HandlePCubedEzScoreSourceCall(), new CallPCubedEzScoreDataProvider(_dataProvider, _logCommand));
                 consumer.ConsumeDataProvider(response);
 
-                _logCommand.LogBegin(new { response });
+                _logCommand.LogBegin(new {response});
 
-                if (!response.OfType<IProvideDataFromPCubedEzScore>().Any() ||
-                    response.OfType<IProvideDataFromPCubedEzScore>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromPCubedEzScore>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

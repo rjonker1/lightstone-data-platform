@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Vin12.Infrastructure
                 _carInformation = new Vin12VehicleDataFactory().Vin12CarInformation(response, _dataProvider.GetRequest<IAmVin12Request>().VinNumber,
                     _repository);
 
-                _logCommand.LogResponse(response != null && response.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
+                _logCommand.LogResponse(_carInformation != null && _carInformation.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                         .ForDatabaseType(), new {  }, _dataProvider.BillablleState.NoRecordState);
 

@@ -8,6 +8,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Toolbox.Database.Repositories;
 using Workflow.Lace.Messages.Core;
@@ -16,7 +17,7 @@ namespace DataProviders.MMCode
 {
     public sealed class MmCodeDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly  ICollection<IPointToLaceRequest> _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
         private IAmDataProvider _dataProvider;
         private ILogCommandTypes _logCommand;
@@ -40,18 +41,19 @@ namespace DataProviders.MMCode
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.MMCode_E_DB);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.MMCode_E_DB, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.MMCode_E_DB, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
-                _logCommand.LogBegin(new { _dataProvider });
+                _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleMMCodeDataProviderCall(), new CallMmCodeDataProvider(_dataProvider, new DataProviderRepository(), _logCommand));
+                var consumer = new ConsumeSource(new HandleMMCodeDataProviderCall(),
+                    new CallMmCodeDataProvider(_dataProvider, new DataProviderRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
-                _logCommand.LogEnd(new { response });
+                _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromMmCode>().Any() || response.OfType<IProvideDataFromMmCode>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromMmCode>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);
@@ -62,7 +64,6 @@ namespace DataProviders.MMCode
             var mmCodeResponse = MMCodeResponse.Empty();
             mmCodeResponse.HasNotBeenHandled();
             response.Add(mmCodeResponse);
-
         }
     }
 }

@@ -41,18 +41,19 @@ namespace Lace.Domain.DataProviders.Rgt
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoSpecs_I_DB);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoSpecs_I_DB, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoSpecs_I_DB, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
-                _logCommand.LogBegin(new {_dataProvider });
+                _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleRgtDataProviderCall(), new CallRgtDataProvider(_dataProvider, new DataProviderRepository(), _logCommand));
+                var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
+                    new CallRgtDataProvider(_dataProvider, new DataProviderRepository(), _logCommand));
 
                 consumer.ConsumeDataProvider(response);
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromRgt>().Any() || response.OfType<IProvideDataFromRgt>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromRgt>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

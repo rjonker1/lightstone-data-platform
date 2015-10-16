@@ -11,20 +11,20 @@ namespace Lace.Domain.DataProviders.Vin12.Infrastructure.Management
     public class TransformVin12Response : ITransform
     {
         public IProvideDataFromVin12 Result { get; private set; }
-        private readonly List<CarInformation> CarInformation;
+        private readonly List<CarInformation> _carInformation;
 
         public TransformVin12Response(List<CarInformation> carInformation)
         {
             Continue = carInformation != null && carInformation.Any();
             Result = Continue ? null : Vin12Response.Empty();
-            CarInformation = carInformation;
+            _carInformation = carInformation;
         }
 
         public void Transform()
         {
-            var records = CarInformation.Select(s => new Vin12Record(s.CarId, s.Year, s.CarFullname, s.ImageUrl, s.BodyShape, s.MakeName));
+            var records = _carInformation.Select(s => new Vin12Record(s.CarId, s.Year, s.CarFullname, s.ImageUrl, s.BodyShape, s.MakeName));
             Result = new Vin12Response(records);
-            Result.AddResponseState(Result.Vin12Information.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords);
+            Result.AddResponseState(Result.Vin12Information.Any() ? DataProviderResponseState.VinShort : DataProviderResponseState.NoRecords);
         }
 
         public bool Continue { get; private set; }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Mothers.Requests;
+using Lace.Test.Helper.Mothers.Requests.Vin12Requests;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -74,11 +75,19 @@ namespace Lace.Test.Helper.Builders.Requests
             return _request;
         }
 
+        public ICollection<IPointToLaceRequest> ForLightstoneVin12LicensePlate()
+        {
+            _request = new[] { new LighstoneAutoLicensePlateVin12Request() };
+            return _request;
+        }
+
         public ICollection<IPointToLaceRequest> ForAllSourcesWithMisMatchLicensePlate()
         {
             _request = new[] { new LicensePlateNumberMisMatchAllDataProvidersRequest() };
             return _request;
         }
+
+
     }
 
     public class VinRequestBuilder
@@ -94,6 +103,24 @@ namespace Lace.Test.Helper.Builders.Requests
         public ICollection<IPointToLaceRequest> ForRgtAndRgtVin()
         {
             _request = new[] { new VinNumbeRgtAndRgtVinProvidersRequest() };
+            return _request;
+        }
+
+        public ICollection<IPointToLaceRequest> ForLightstoneVin12VinNumber()
+        {
+            _request = new[] { new LighstoneAutoVinNumberVin12Request() };
+            return _request;
+        }
+
+        public ICollection<IPointToLaceRequest> ForLightstoneAndRgtVinVin12VinNumber()
+        {
+            _request = new[] { new LighstoneAutoAndRgtVinVinNumberVin12Request() };
+            return _request;
+        }
+
+        public ICollection<IPointToLaceRequest> ForRgtVin12VinNumber()
+        {
+            _request = new[] { new RgtVin12Request() };
             return _request;
         }
     }

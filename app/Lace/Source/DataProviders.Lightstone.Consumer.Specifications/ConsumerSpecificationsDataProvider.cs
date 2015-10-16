@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastructure;
 using Workflow.Lace.Messages.Core;
@@ -27,6 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications
             _request = request;
             _command = command;
         }
+
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LSConsumerRepair_E_WS, _request);
@@ -37,18 +39,18 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSConsumerRepair_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSConsumerRepair_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSConsumerRepair_E_WS, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
-                _logCommand.LogBegin(new { _request });
+                _logCommand.LogBegin(new {_request});
 
-                var consumer = new ConsumeSource(new HandleConsumerSpecificationsSourceCall(), new CallConsumerSpecificationsDataProvider(_dataProvider, _logCommand));
+                var consumer = new ConsumeSource(new HandleConsumerSpecificationsSourceCall(),
+                    new CallConsumerSpecificationsDataProvider(_dataProvider, _logCommand));
                 consumer.ConsumeDataProvider(response);
 
-                _logCommand.LogBegin(new { response });
+                _logCommand.LogBegin(new {response});
 
-                if (!response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().Any() ||
-                    response.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromLightstoneConsumerSpecifications>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Vin12.Infrastructure;
 using Lace.Toolbox.Database.Repositories;
@@ -31,10 +32,9 @@ namespace Lace.Domain.DataProviders.Vin12
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-
             var spec = new CanHandlePackageSpecification(DataProviderName.LSAutoVIN12_I_DB, _request);
 
-            if (!spec.IsSatisfied)
+            if (!spec.IsSatisfied || response.Exists<IProvideDataFromVin12>()) //don't execute again if we already have a vin 12 response cause vin12 can be a fallback for multiple DP
             {
                 NotHandledResponse(response);
             }
@@ -53,10 +53,8 @@ namespace Lace.Domain.DataProviders.Vin12
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromVin12>().Any() || response.OfType<IProvideDataFromVin12>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromVin12>()) CallFallbackSource(response, _command);
             }
-
             CallNextSource(response, _command);
         }
 

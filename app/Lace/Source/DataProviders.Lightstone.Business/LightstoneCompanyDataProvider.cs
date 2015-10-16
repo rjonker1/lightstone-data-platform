@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Business.Company.Infrastructure;
 using Workflow.Lace.Messages.Core;
@@ -50,8 +51,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Company
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromLightstoneBusinessCompany>().Any() ||response.OfType<IProvideDataFromLightstoneBusinessCompany>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromLightstoneBusinessCompany>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

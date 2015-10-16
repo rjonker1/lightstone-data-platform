@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -48,7 +47,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
                 GetMetricType.OfBaseRetrievalMetric(_carInformation.CarInformationRequest, _repository, out _metrics);
 
-                _logCommand.LogResponse(response != null && response.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
+                _logCommand.LogResponse(_carInformation != null && _carInformation.CarInformation != null &&_carInformation.CarInformation.CarId > 0 ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                         .ForDatabaseType(), new { _carInformation, _metrics }, _dataProvider.BillablleState.NoRecordState);
 
@@ -72,7 +71,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             }
 
             _logCommand.LogTransformation(transformer.Result, null);
-
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -41,7 +42,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
                 _response =
                     new ConsumerViewService(new RestClient()).Search(HandleRequest.GetQuery(_dataProvider.GetRequest<IAmPCubedEzScoreRequest>()));
 
-                _logCommand.LogResponse(response != null && response.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
+                _logCommand.LogResponse(_response != null && _response.StatusCode == HttpStatusCode.OK ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
                         .ForDatabaseType(), new { _response }, _dataProvider.BillablleState.NoRecordState);
 
