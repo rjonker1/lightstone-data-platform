@@ -62,5 +62,10 @@ namespace DataPlatform.Shared.Dtos
             DeviceType = deviceType;
             SystemType = systemType;
         }
+
+        public void AddRequestId(Guid requestId)
+        {
+            RequestId = requestId;
+        }
     }
 }
