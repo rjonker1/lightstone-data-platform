@@ -8,6 +8,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
+using NHibernate.Linq;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers.ConsumerTypes
@@ -56,9 +57,9 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
                 var products = new List<DataProviderTransactionDto>();
                 var prods = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId &&
-                                            (x.StateId == DataProviderResponseState.Successful ||
-                                                x.StateId == DataProviderResponseState.Partial ||
-                                                x.StateId == DataProviderResponseState.NoRecords) &&
+                                            ((x.StateId == (Int32)DataProviderResponseState.Successful) ||
+                                                (x.StateId == (Int32)DataProviderResponseState.Partial) ||
+                                                (x.StateId == (Int32)DataProviderResponseState.NoRecords)) &&
                                             //(x.Action == customer.BillingType || x.Action == client.BillingType))
                                             x.Action == "Response")
                                             .Select(x => new DataProviderTransactionDto

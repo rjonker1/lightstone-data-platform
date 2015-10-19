@@ -15,7 +15,7 @@ namespace Workflow.Billing.Domain.Entities
         public virtual string Connection { get; protected internal set; }
         public virtual string Action { get; protected internal set; }
         public virtual string State { get; protected internal set; }
-        public virtual DataProviderResponseState StateId { get; protected internal set; }
+        public virtual int StateId { get; protected internal set; }
         public virtual float CostPrice { get; protected internal set; }
         public virtual float RecommendedPrice { get; protected internal set; }
 
