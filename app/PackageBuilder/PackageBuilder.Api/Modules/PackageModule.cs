@@ -168,10 +168,7 @@ namespace PackageBuilder.Api.Modules
 
             Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
             {
-                var apiRequest = this.Bind<CommitRequestDto>();
-
-                if (apiRequest.RequestId == Guid.Empty) return Response.AsJson(new { data = "Please supply a valid RequestId" });
-
+                var apiRequest = this.Bind<ApiCommitRequestDto>();
                 
                 this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
