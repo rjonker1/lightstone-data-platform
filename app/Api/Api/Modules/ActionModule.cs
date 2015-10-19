@@ -71,7 +71,7 @@ namespace Api.Modules
                 try
                 {
                     this.Info(() => "Api Commit Request started. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                    var apiRequest = this.Bind<ApiRequestDto>();
+                    var apiRequest = this.Bind<CommitRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
                     new ApiRequestValidator(userManagementApi)
@@ -79,8 +79,7 @@ namespace Api.Modules
 
                     this.Info(() => "Api request: ContractId {0} Api token: {1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
-
-                    apiRequest.AddRequestId(new Guid(parameters.RequestId));
+                   
                     apiRequest.Validate();
                     apiRequest.ContractVersion((long)1.0);
                     Context.Report(dispatcher, apiRequest.RequestId);

@@ -38,7 +38,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         }
 
         [Observation]
-        public void lace_data_providers_for_VVI_product_must_be_handled_loaded_correclty()
+        public void lace_data_providers_for_Vin12_must_be_handled_loaded_correclty()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
             _initialize.DataProviderResponses.Count.ShouldEqual(14);
