@@ -3,7 +3,7 @@ using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
-using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
+using Lace.Domain.DataProviders.Lightstone.Queries;
 using Lace.Toolbox.Database.Base;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
@@ -31,12 +31,12 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IRetrieveValuationFromMetrics SetupDataSources()
         {
-            _getStatistics = new StatisticsUnitOfWork(new FakeStatisticsRepository());
-            _getMetrics = new MetricUnitOfWork(new FakeMetricRepository());
-            _getBands = new BandUnitOfWork(new FakeBandsRepository());
-            _getMuncipalities = new MuncipalityUnitOfWork(new FakeMunicipalityRepository());
-            _getMakes = new MakeUnitOfWork(new FakeMakeRepository());
-            _getSales = new SaleUnitOfWork(new FakeSaleRepository());
+            _getStatistics = new StatisticsQuery(new FakeStatisticsRepository());
+            _getMetrics = new MetricQuery(new FakeMetricRepository());
+            _getBands = new BandQuery(new FakeBandsRepository());
+            _getMuncipalities = new MuncipalityQuery(new FakeMunicipalityRepository());
+            _getMakes = new MakeQuery(new FakeMakeRepository());
+            _getSales = new SaleQuery(new FakeSaleRepository());
 
             return this;
         }

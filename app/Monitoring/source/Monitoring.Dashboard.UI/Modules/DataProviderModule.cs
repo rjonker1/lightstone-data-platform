@@ -11,7 +11,7 @@ namespace Monitoring.Dashboard.UI.Modules
     {
         public DataProviderModule(ICallMonitoringService service)
         {
-            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            //this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             Get["/dataProviders/log"] = _ => View["DataProviders"];
 

@@ -26,6 +26,12 @@ namespace Lace.Test.Helper.Builders.Buses
             return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoCarStats_I_DB);
         }
 
+        public static ISendCommandToBus ForVin12Commands(Guid requestId)
+        {
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoVINMaster_I_DB);
+        }
+
         public static ISendCommandToBus ForIvidTitleHolderCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();

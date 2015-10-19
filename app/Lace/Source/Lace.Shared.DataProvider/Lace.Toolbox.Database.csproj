@@ -59,11 +59,12 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1775, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1775\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -105,28 +106,31 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Base\AbstractVin12VehicleFactory.cs" />
+    <Compile Include="Base\IGetVin12VehicleData.cs" />
     <Compile Include="Domain\CarInformationRequest.cs" />
-    <Compile Include="Domain\CarInformationWorker.cs" />
+    <Compile Include="Domain\CarInformationQuery.cs" />
     <Compile Include="Domain\GetCarInformation.cs" />
-    <Compile Include="Base\IGetCarInfo.cs" />
+    <Compile Include="Base\IGetCarInformation.cs" />
     <Compile Include="Base\IHaveCarInformation.cs" />
     <Compile Include="Base\IRetrieveCarInformation.cs" />
     <Compile Include="Base\AbstractVehicleFactory.cs" />
+    <Compile Include="Dtos\Vin12CarinformationDto.cs" />
     <Compile Include="Factories\DatabaseConnections.cs" />
     <Compile Include="Base\IGetVehicleData.cs" />
     <Compile Include="Factories\LightstoneVehicleData.cs" />
-    <Compile Include="Factories\MMCodeDataFactory.cs" />
     <Compile Include="Factories\RgtVehicleData.cs" />
+    <Compile Include="Factories\Vin12VehicleDataFactory.cs" />
     <Compile Include="Models\Band.cs" />
-    <Compile Include="Models\BmwFinance.cs" />
-    <Compile Include="Models\CarInformation.cs" />
+    <Compile Include="Dtos\BmwFinanceDto.cs" />
+    <Compile Include="Dtos\CarInformationDto.cs" />
     <Compile Include="Models\CarSpecification.cs" />
     <Compile Include="Models\Make.cs" />
     <Compile Include="Models\Metric.cs" />
     <Compile Include="Models\MmCode.cs" />
     <Compile Include="Models\Municipality.cs" />
     <Compile Include="Models\Sale.cs" />
-    <Compile Include="Models\Statistic.cs" />
+    <Compile Include="Dtos\StatisticDto.cs" />
     <Compile Include="Models\Vin.cs" />
     <Compile Include="Repositories\FinanceRepository.cs" />
     <Compile Include="Repositories\IReadOnlyRepository.cs" />

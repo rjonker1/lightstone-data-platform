@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure;
 using Lace.Toolbox.Database.Repositories;
@@ -40,17 +41,18 @@ namespace Lace.Domain.DataProviders.RgtVin
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSAutoVINMaster_I_DB);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoVINMaster_I_DB, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSAutoVINMaster_I_DB, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(), new CallRgtVinDataProvider(_dataProvider,new DataProviderRepository(), _logCommand));
+                var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
+                    new CallRgtVinDataProvider(_dataProvider, new DataProviderRepository(), _logCommand));
                 consumer.ConsumeDataProvider(response);
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromRgtVin>().Any() || response.OfType<IProvideDataFromRgtVin>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromRgtVin>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

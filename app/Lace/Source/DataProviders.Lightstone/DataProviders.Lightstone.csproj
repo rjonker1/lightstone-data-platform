@@ -59,12 +59,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1775, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1775\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -132,18 +132,18 @@
     <None Include="Services\Specifics\TotalSalesByAgeMetric.cs.old20150716" />
     <None Include="Services\Specifics\TotalSalesByGenderMetric.cs.old20150716" />
     <Compile Include="LightstoneAutoDataProvider.cs" />
-    <Compile Include="UnitOfWork\BandUnitOfWork.cs" />
+    <Compile Include="Queries\BandQuery.cs" />
     <Compile Include="Core\Contracts\IGetBands.cs" />
     <Compile Include="Core\Contracts\IGetMakes.cs" />
     <Compile Include="Core\Contracts\IGetMetrics.cs" />
     <Compile Include="Core\Contracts\IGetMuncipalities.cs" />
     <Compile Include="Core\Contracts\IGetSales.cs" />
     <Compile Include="Core\Contracts\IGetStatistics.cs" />
-    <Compile Include="UnitOfWork\MakeUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\MetricUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\MuncipalityUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\SaleUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\StatisticsUnitOfWork.cs" />
+    <Compile Include="Queries\MakeQuery.cs" />
+    <Compile Include="Queries\MetricQuery.cs" />
+    <Compile Include="Queries\MuncipalityQuery.cs" />
+    <Compile Include="Queries\SaleQuery.cs" />
+    <Compile Include="Queries\StatisticsQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">

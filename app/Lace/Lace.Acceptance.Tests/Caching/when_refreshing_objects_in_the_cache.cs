@@ -36,10 +36,10 @@ namespace Lace.Acceptance.Tests.Caching
             //var bands = _repository.Get<Band>(Band.CacheAllKey);
             //bands.Count().ShouldEqual(0);
 
-            //var carInfo = _repository.Get<CarInformation>(CarInformation.CacheAllWithCarIdKey);
+            //var carInfo = _repository.Get<CarInformationDto>(CarInformationDto.CacheAllWithCarIdKey);
             //carInfo.Count().ShouldEqual(0);
 
-            //var carAllInfo = _repository.Get<CarInformation>(CarInformation.CacheAllWithValidCarIdAndYearKey);
+            //var carAllInfo = _repository.Get<CarInformationDto>(CarInformationDto.CacheAllWithValidCarIdAndYearKey);
             //carAllInfo.Count().ShouldEqual(0);
 
             //var carSpecs = _repository.Get<CarSpecification>(CarSpecification.CacheAllKey);
@@ -57,7 +57,7 @@ namespace Lace.Acceptance.Tests.Caching
             //var sale = _repository.Get<Sale>(Sale.CacheAllKey);
             //sale.Count().ShouldEqual(0);
 
-            //var stats = _repository.Get<Statistic>(Statistic.CacheAllKey);
+            //var stats = _repository.Get<StatisticDto>(StatisticDto.CacheAllKey);
             //stats.Count().ShouldEqual(0);
 
             //var vin = _repository.Get<Vin>(Vin.CacheAllKey);
@@ -88,7 +88,7 @@ namespace Lace.Acceptance.Tests.Caching
             var sale = _readRepository.GetAll<Sale>(null);
             sale.Count().ShouldNotEqual(0);
 
-            //var carInfo = _readRepository.GetAll<CarInformation>(CarInformation.SelectAllWithValidCarIdAndYear);
+            //var carInfo = _readRepository.GetAll<CarInformationDto>(CarInformationDto.SelectAllWithValidCarIdAndYear);
             //var count = carInfo.Count();
             //carInfo.Count().ShouldNotEqual(0);
         }

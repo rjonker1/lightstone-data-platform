@@ -45,18 +45,12 @@ namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : SecureModule
     {
-        private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
             IRepository<RequestAudit> requestAuditRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
         {
-            if (_defaultJsonMaxLength == 0)
-                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
-
-            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
-            JsonSettings.MaxJsonLength = Int32.MaxValue;
-
+           
             Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
             {
                 return _.showAll

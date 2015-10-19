@@ -9,7 +9,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
-using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
+using Lace.Domain.DataProviders.RgtVin.Queries;
 using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
-                GetVin.AsAList(response, _dataProvider.GetRequest<IAmRgtVinRequest>(), new VehicleVinUnitOfWork(_repository), out _vins);
+                GetVin.AsAList(response, _dataProvider.GetRequest<IAmRgtVinRequest>(), new VehicleVinQuery(_repository), out _vins);
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
                     .ForDatabaseType(), new { _vins }, _dataProvider.BillablleState.NoRecordState);

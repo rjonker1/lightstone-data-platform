@@ -8,11 +8,11 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Bmw.Finance.Factory;
 using Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Management;
-using Lace.Domain.DataProviders.Bmw.Finance.UnitOfWork;
+using Lace.Domain.DataProviders.Bmw.Finance.Queries;
 using Lace.Domain.DataProviders.Core.Configuration;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Extensions;
-using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
@@ -24,7 +24,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
         private static readonly ILog Log = LogManager.GetLogger<CallBmwFinanceDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
-        private IList<BmwFinance> _bmwFinances;
+        private IList<BmwFinanceDto> _bmwFinances;
 
         private readonly IReadOnlyRepository _repository;
 
@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
                     .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 _bmwFinances =
-                    new BmwFinanceDataBasedOnRequestFactory().Get(new BmwFinanceUnitOfWork(_repository),
+                    new BmwFinanceDataBasedOnRequestFactory().Get(new BmwFinanceQuery(_repository),
                         _dataProvider.GetRequest<IAmBmwFinanceRequest>(), response).ToList();
 
                 _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,

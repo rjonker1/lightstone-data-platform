@@ -59,11 +59,11 @@
       <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1775, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1775\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -102,9 +102,11 @@
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedEzScore.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromVin12.cs" />
     <Compile Include="Contracts\DataProviders\Property\IRespondWithProperty.cs" />
     <Compile Include="Contracts\Caching\IAmCachable.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromBmwFinance.cs" />
+    <Compile Include="Contracts\DataProviders\Vin12\IRespondWithVin12.cs" />
     <Compile Include="Contracts\IProvideResponseFromDataProviders.cs" />
     <None Include="Contracts\Requests\IProvideCriticalFailure.cs.delete" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />

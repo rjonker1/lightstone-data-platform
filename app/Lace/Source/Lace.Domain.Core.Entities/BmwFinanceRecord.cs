@@ -50,5 +50,16 @@ namespace Lace.Domain.Core.Entities
         public string ProductCategory { get; private set; }
         [DataMember]
         public string DealStatus { get; private set; }
+        [DataMember]
+        public Type Type
+        {
+            get { return GetType(); }
+        }
+
+        [DataMember]
+        public string TypeName
+        {
+            get { return GetType().Name; }
+        }
     }
 }

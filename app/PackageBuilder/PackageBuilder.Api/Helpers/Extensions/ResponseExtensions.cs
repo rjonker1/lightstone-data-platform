@@ -20,12 +20,12 @@ namespace PackageBuilder.Api.Helpers.Extensions
             if (response == null) return DataProviderResponseState.TechnicalError;
 
             return response.HasAllRecords()
-                ? DataProviderResponseState.Successful
-                : response.IsPartial()
-                    ? DataProviderResponseState.Partial
-                    : response.IsVinShortOnly()
-                        ? DataProviderResponseState.VinShort
-                        : response.IsTechnicalErrorsOnly() ? DataProviderResponseState.TechnicalError : DataProviderResponseState.NoRecords;
+               ? DataProviderResponseState.Successful
+               : response.HasVinShort()
+                   ? DataProviderResponseState.VinShort
+                   : response.IsPartial()
+                       ? DataProviderResponseState.Partial
+                       : response.IsTechnicalErrorsOnly() ? DataProviderResponseState.TechnicalError : DataProviderResponseState.NoRecords;
         }
 
         private static bool HasAllRecords(this List<IDataProvider> response)
@@ -42,7 +42,7 @@ namespace PackageBuilder.Api.Helpers.Extensions
             return response.FirstOrDefault(s => s.ResponseState == DataProviderResponseState.TechnicalError) != null;
         }
 
-        private static bool IsVinShortOnly(this List<IDataProvider> response)
+        private static bool HasVinShort(this List<IDataProvider> response)
         {
             if (response == null || !response.Any()) return false;
             return response.FirstOrDefault(s => s.ResponseState == DataProviderResponseState.VinShort) != null;

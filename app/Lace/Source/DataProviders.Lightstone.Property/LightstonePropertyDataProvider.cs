@@ -21,7 +21,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
         private ILogCommandTypes _logCommand;
         private IAmDataProvider _dataProvider;
 
-        public LightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request,IExecuteTheDataProviderSource nextSource,IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
+        public LightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -38,8 +39,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSPropertySearch_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSPropertySearch_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
-
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSPropertySearch_E_WS, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 
@@ -49,9 +50,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromLightstoneProperty>().Any() ||
-                    response.OfType<IProvideDataFromLightstoneProperty>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromLightstoneProperty>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

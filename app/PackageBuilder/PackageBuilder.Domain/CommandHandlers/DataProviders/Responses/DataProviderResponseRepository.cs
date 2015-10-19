@@ -1,6 +1,6 @@
 ﻿using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Entities;
+
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
 {
@@ -23,35 +23,37 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                 switch (name)
                 {
                     case DataProviderName.IVIDVerify_E_WS:
-                        return new IvidResponse().DefaultIvidResponse();
+                        return new IvidResponse().Default();
                     case DataProviderName.IVIDTitle_E_WS:
-                        return new IvidTitleHolderResponse();
+                        return new IvidTitleHolderResponse().Default();
                     case DataProviderName.LSAutoCarStats_I_DB:
-                        return new LightstoneAutoResponse().DefaultLightstoneResponse();
+                        return new LightstoneAutoResponse().Default();
                     case DataProviderName.LSAutoSpecs_I_DB:
-                        return new RgtResponse();
+                        return new RgtResponse().Default();
                     case DataProviderName.LSAutoVINMaster_I_DB:
-                        return new RgtVinResponse();
+                        return new RgtVinResponse().Default();
                     case DataProviderName.Audatex:
-                        return new AudatexResponse().DefaultAudatexResponse();
+                        return new AudatexResponse().Default();
                     case DataProviderName.PCubedFica_E_WS:
-                        return new PCubedFicaVerficationResponse().DefaultFicaResponse();
+                        return new PCubedFicaVerficationResponse().Default();
                     case DataProviderName.PCubedEZScore_E_WS:
-                        return new PCubedEzScoreResponse().DefaultEzScoreResponse();
+                        return new PCubedEzScoreResponse().Default();
                     case DataProviderName.LSAutoDecryptDriverLic_I_WS:
-                        return new SignioDriversLicenseDecryptionResponse().DefaultSignioDriversLicenseDecryptionResponse();
+                        return new SignioDriversLicenseDecryptionResponse().Default();
                     case DataProviderName.LSPropertySearch_E_WS:
-                        return new LightstonePropertyResponse().DefaultLightstonePropertyResponse();
+                        return new LightstonePropertyResponse().Default();
                     case DataProviderName.LSBusinessCompany_E_WS:
-                        return new LightstoneBusinessResponse().LightstoneCompanyResponse();
+                        return new LightstoneBusinessResponse().Default();
                     case DataProviderName.LSBusinessDirector_E_WS:
-                        return new LightstoneDirectorResponse().LightstoneCompanyResponse();
+                        return new LightstoneDirectorResponse().Default();
                     case DataProviderName.LSConsumerRepair_E_WS:
-                        return new LightstoneConsumerResponse().EmptyLightstoneConsumerSpecifications();
+                        return new LightstoneConsumerResponse().Default();
                     case DataProviderName.BMWFSTitle_E_DB:
-                        return new BmwFinanceResponse().EmptyBmwFinanceResponse();
+                        return new BmwFinanceResponse().Default();
                     case DataProviderName.MMCode_E_DB:
-                        return new MMCodeResponse();
+                        return new MMCodeResponse().Default();
+                    case DataProviderName.LSAutoVIN12_I_DB:
+                        return new Vin12Response().Default();
                     default:
                         return null;
                 }

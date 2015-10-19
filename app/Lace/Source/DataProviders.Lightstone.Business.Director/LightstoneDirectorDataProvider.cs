@@ -40,7 +40,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.LSBusinessDirector_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSBusinessDirector_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.LSBusinessDirector_E_WS, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 
@@ -51,8 +52,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromLightstoneBusinessDirector>().Any() || response.OfType<IProvideDataFromLightstoneBusinessDirector>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromLightstoneBusinessDirector>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

@@ -4,7 +4,7 @@ using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
-using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
+using Lace.Domain.DataProviders.Lightstone.Queries;
 using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Repositories;
 
@@ -35,13 +35,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
 
         public IRetrieveValuationFromMetrics SetupDataSources()
         {
-            _getStatistics = new StatisticsUnitOfWork(_repository);
-            _getMetrics = new MetricUnitOfWork(_repository);
-            _getBands = new BandUnitOfWork(_repository);
-            _getMuncipalities = new MuncipalityUnitOfWork(_repository);
-            _getMakes = new MakeUnitOfWork(_repository);
+            _getStatistics = new StatisticsQuery(_repository);
+            _getMetrics = new MetricQuery(_repository);
+            _getBands = new BandQuery(_repository);
+            _getMuncipalities = new MuncipalityQuery(_repository);
+            _getMakes = new MakeQuery(_repository);
             //_getCarType = new CarTypeUnitOfWork(_getStatistics.Statistics);
-            _getSales = new SaleUnitOfWork(_repository);
+            _getSales = new SaleQuery(_repository);
 
             return this;
         }

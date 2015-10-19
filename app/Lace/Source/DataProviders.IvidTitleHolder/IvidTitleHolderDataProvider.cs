@@ -40,17 +40,18 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDTitle_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDTitle_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDTitle_E_WS, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
-                _logCommand.LogBegin(new { _dataProvider });
+                _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(), new CallIvidTitleHolderDataProvider(_dataProvider, _logCommand));
+                var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
+                    new CallIvidTitleHolderDataProvider(_dataProvider, _logCommand));
                 consumer.ConsumeDataProvider(response);
 
-                _logCommand.LogEnd(new { response });
+                _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromIvidTitleHolder>().Any() || response.OfType<IProvideDataFromIvidTitleHolder>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromIvidTitleHolder>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

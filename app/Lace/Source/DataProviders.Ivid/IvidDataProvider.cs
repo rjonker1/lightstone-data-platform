@@ -40,7 +40,8 @@ namespace Lace.Domain.DataProviders.Ivid
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDVerify_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.IVIDVerify_E_WS, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_dataProvider});
 
@@ -49,8 +50,7 @@ namespace Lace.Domain.DataProviders.Ivid
 
                 _logCommand.LogEnd(new {response});
 
-                if (!response.OfType<IProvideDataFromIvid>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromIvid>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

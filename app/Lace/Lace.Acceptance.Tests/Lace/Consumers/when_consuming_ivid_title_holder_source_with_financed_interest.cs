@@ -58,7 +58,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
             _consumer.FallBack.ShouldBeNull();
         }
 
-        [Observation]
+        [Observation(Skip = "ABSA Financed Interests not avail")]
         public void ivid_title_holder_consumer_with_financed_interest_should_be_available()
         {
             _response.OfType<IProvideDataFromIvidTitleHolder>().First().FinancialInterestAvailable.ShouldBeTrue();

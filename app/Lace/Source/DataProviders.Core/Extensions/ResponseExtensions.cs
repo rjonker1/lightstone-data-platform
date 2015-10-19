@@ -14,6 +14,14 @@ namespace Lace.Domain.DataProviders.Core.Extensions
             return response.OfType<T>().Any() && response.OfType<T>().First() != null;
         }
 
+        public static bool HasRecords<T>(this ICollection<IPointToLaceProvider> response)
+        {
+            if (response == null) return false;
+            return response.OfType<T>().Any() && response.OfType<T>().First() != null &&
+                   response.OfType<T>().OfType<IProvideResponseState>().First().ResponseState != DataProviderResponseState.NoRecords;
+        }
+
+
         public static bool HasAllRecords(this ICollection<IPointToLaceProvider> response)
         {
             if (response == null || !response.Any()) return false;
@@ -28,10 +36,10 @@ namespace Lace.Domain.DataProviders.Core.Extensions
 
             return response.HasAllRecords()
                 ? DataProviderResponseState.Successful
-                : response.IsPartial()
-                    ? DataProviderResponseState.Partial
-                    : response.IsVinShortOnly()
-                        ? DataProviderResponseState.VinShort
+                : response.HasVinShort()
+                    ? DataProviderResponseState.VinShort
+                    : response.IsPartial()
+                        ? DataProviderResponseState.Partial
                         : response.IsTechnicalErrorsOnly() ? DataProviderResponseState.TechnicalError : DataProviderResponseState.NoRecords;
         }
 
@@ -41,12 +49,12 @@ namespace Lace.Domain.DataProviders.Core.Extensions
             return response.FirstOrDefault(s => s.Handled && s.ResponseState == DataProviderResponseState.TechnicalError) != null;
         }
 
-        public static bool IsVinShortOnly(this ICollection<IPointToLaceProvider> response)
+        public static bool HasVinShort(this ICollection<IPointToLaceProvider> response)
         {
             if (response == null || !response.Any()) return false;
             return response.FirstOrDefault(s => s.Handled && s.ResponseState == DataProviderResponseState.VinShort) != null;
         }
-
+        
         public static bool IsPartial(this ICollection<IPointToLaceProvider> response)
         {
             if (response == null) return false;

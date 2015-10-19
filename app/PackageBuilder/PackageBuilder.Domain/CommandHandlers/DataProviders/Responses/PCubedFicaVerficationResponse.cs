@@ -1,15 +1,16 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
+﻿using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.Requests;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
 {
     public class PCubedFicaVerficationResponse
     {
-        public IPointToLaceProvider DefaultFicaResponse()
+        public IPointToLaceProvider Default()
         {
-            var ezScore =
+            var pCubed =
                 new Lace.Domain.Core.Entities.PCubedFicaVerficationResponse();
-
-            return ezScore;
+            pCubed.AddResponseState(DataProviderResponseState.NoRecords);
+            return pCubed;
         } 
     }
 }

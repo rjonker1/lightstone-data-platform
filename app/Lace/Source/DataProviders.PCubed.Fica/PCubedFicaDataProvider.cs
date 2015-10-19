@@ -39,7 +39,8 @@ namespace Lace.Domain.DataProviders.PCubed.Fica
             else
             {
                 _dataProvider = _request.First().Package.DataProviders.Single(w => w.Name == DataProviderName.PCubedFica_E_WS);
-                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedFica_E_WS, _dataProvider, _dataProvider.BillablleState.NoRecordState);
+                _logCommand = LogCommandTypes.ForDataProvider(_command, DataProviderCommandSource.PCubedFica_E_WS, _dataProvider,
+                    _dataProvider.BillablleState.NoRecordState);
 
                 _logCommand.LogBegin(new {_request});
 
@@ -48,9 +49,7 @@ namespace Lace.Domain.DataProviders.PCubed.Fica
 
                 _logCommand.LogBegin(new {response});
 
-                if (!response.OfType<IProvideDataFromPCubedFicaVerfication>().Any() ||
-                    response.OfType<IProvideDataFromPCubedFicaVerfication>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromPCubedFicaVerfication>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

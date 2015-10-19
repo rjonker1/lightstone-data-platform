@@ -1,8 +1,9 @@
 ﻿using System;
+using DataPlatform.Shared.Entities;
 
 namespace Lace.Domain.Core.Contracts.DataProviders.Finance
 {
-    public interface IRespondWithBmwFinance
+    public interface IRespondWithBmwFinance : IProvideType
     {
         string FinanceHouse { get; }
         decimal DealReference { get; }

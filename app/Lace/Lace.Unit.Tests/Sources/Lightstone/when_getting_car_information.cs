@@ -20,7 +20,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             _request = LaceRequestCarInformationRequestBuilder.ForCarId_107483_ButNoVin();
             _repository = new FakeCarInfoRepository();
             _vin12Repository = new FakeVin12CarInfoRepository(_request.Vin);
-            _getCarInformation = new CarInformationWorker(_repository);
+            _getCarInformation = new CarInformationQuery(_repository);
         }
 
         public override void Observe()

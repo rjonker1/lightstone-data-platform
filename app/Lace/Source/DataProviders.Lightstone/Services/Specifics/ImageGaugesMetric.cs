@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Lace.Domain.Core.Entities;
+using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
@@ -8,7 +9,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
     public class ImageGaugesMetric : IRetrieveATypeOfMetric<ImageGaugeModel>
     {
         public List<ImageGaugeModel> MetricResult { get; private set; }
-        public IEnumerable<Statistic> Statistics { get; private set; }
+        public IEnumerable<StatisticDto> Statistics { get; private set; }
 
         private readonly IEnumerable<Metric> _metricsData;
 
@@ -18,14 +19,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
             MetricTypes.FuelEconomy, MetricTypes.Co2
         };
 
-        private IList<Statistic> _gauges;
+        private IList<StatisticDto> _gauges;
 
         private const int SubjectBand = 48;
         private const int LowBand = 49;
         private const int HighBand = 50;
         private const int QuarterBand = 51;
 
-        public ImageGaugesMetric(IEnumerable<Statistic> statistics, IEnumerable<Metric> metricData)
+        public ImageGaugesMetric(IEnumerable<StatisticDto> statistics, IEnumerable<Metric> metricData)
         {
             Statistics = statistics;
             _metricsData = metricData;
@@ -57,32 +58,32 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
         }
 
-        private IList<Statistic> GetGauges(int metricId)
+        private IList<StatisticDto> GetGauges(int metricId)
         {
             return Statistics
                 .Where(w => w.MetricId == metricId)
                 .ToList();
         }
 
-        private Statistic GetLowStat()
+        private StatisticDto GetLowStat()
         {
             return _gauges
                 .FirstOrDefault(w => w.BandId == LowBand);
         }
 
-        private Statistic GetSubjectStat()
+        private StatisticDto GetSubjectStat()
         {
             return _gauges
                 .FirstOrDefault(w => w.BandId == SubjectBand);
         }
 
-        private Statistic GetMaxStat()
+        private StatisticDto GetMaxStat()
         {
             return _gauges
                 .FirstOrDefault(w => w.BandId == HighBand);
         }
 
-        private Statistic GetQuarterStat()
+        private StatisticDto GetQuarterStat()
         {
             return _gauges
                 .FirstOrDefault(w => w.BandId == QuarterBand);

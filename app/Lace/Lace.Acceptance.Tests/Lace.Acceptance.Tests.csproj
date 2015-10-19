@@ -63,11 +63,11 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1684\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1761, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1761\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1775, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1775\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -139,8 +139,12 @@
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_company_search.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_source_chain_for_vin_rgt_vin_rgt_search.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_for_pcubed_ez_score.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_with_vin12_vin.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ivid_and_ls_auto_with_vin12_vin.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_MisMatchlicensePlate_number_search.cs" />
+    <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_rgt_vin_vin12.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_vin_rgt_ls_rgt_vin_search.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_vin_rgt_mm_code_search.cs" />
@@ -179,6 +183,9 @@
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_signio_drivers_license_decryption.cs" />
+    <Compile Include="Lace\Vin12\when_consuming_rgt_vin_with_vin12_vin_number.cs" />
+    <Compile Include="Lace\Vin12\when_consuming_lighstone_auto_with_vin12_vin_number.cs" />
+    <Compile Include="Lace\Vin12\when_consuming_vin12_data_provider.cs" />
     <Compile Include="Requests\when_sending_bmw_finance_request_to_lace_entry_point.cs" />
     <Compile Include="Requests\when_sending_director_request_to_lace_entry_point.cs" />
     <Compile Include="Requests\when_sending_company_request_to_lace_entry_point.cs" />
@@ -210,6 +217,10 @@
     <ProjectReference Include="..\Source\DataProviders.Lightstone.MMCode\DataProviders.Lightstone.MMCode.csproj">
       <Project>{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}</Project>
       <Name>DataProviders.Lightstone.MMCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\DataProviders.Vin12\DataProviders.Vin12.csproj">
+      <Project>{0eeb07bd-3710-4852-9112-0ca454608d3e}</Project>
+      <Name>DataProviders.Vin12</Name>
     </ProjectReference>
     <ProjectReference Include="..\Source\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj">
       <Project>{cbb5ee23-8ec8-45f7-b173-a268bfe9d23b}</Project>

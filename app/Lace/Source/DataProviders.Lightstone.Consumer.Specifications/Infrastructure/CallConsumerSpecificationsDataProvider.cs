@@ -44,7 +44,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
                         Guid.Parse(ValidateAccessKey(_dataProvider.GetRequest<IAmLightstoneConsumerSpecificationsRequest>().AccessKey.GetValue())),
                         _dataProvider.GetRequest<IAmLightstoneConsumerSpecificationsRequest>().VinNumber.GetValue());
 
-                _logCommand.LogResponse(response != null && response.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
+                _logCommand.LogResponse(!string.IsNullOrEmpty(_jsonRepairHistory) ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
                         .ForDatabaseType(), new { _jsonRepairHistory }, _dataProvider.BillablleState.NoRecordState);
 
