@@ -4,8 +4,10 @@ using System.Configuration;
 using System.Linq;
 using Api.Domain.Core.Meta;
 using Nancy;
+using Nancy.ModelBinding;
 using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.ApiClients;
+using UserManagement.Api.Routes;
 
 namespace Api.Modules
 {
@@ -175,6 +177,18 @@ namespace Api.Modules
                     Customers = customers
                 });
             };
+
+            Post["/forgotPassword"] = _ =>
+            {
+                var dto = this.Bind<AuthDto>();
+                ViewBag.Message = userManagementApi.Put("", UserManagementApiRoute.User.RequestResetPassword, new[] { new KeyValuePair<string, string>("username", dto.UserName + "") }, null, null);
+                return Response.AsText("Password reset mail sent");
+            };
+        }
+
+        public class AuthDto
+        {
+            public string UserName { get; set; }
         }
     }
 }

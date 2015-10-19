@@ -10,7 +10,7 @@
             /// Parameters: reset password token
             /// Route: /Authorizations/ChangePassword/{token:guid}
             /// </summary>
-            public const string GetChangePassword = "/Authorizations/ChangePassword/{token:guid}";
+            public const string GetChangePassword = "/Authorizations/ChangePassword/{token}";
             /// <summary>
             /// Verb: PUT
             /// Purpose: Used to change password
