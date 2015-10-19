@@ -57,7 +57,7 @@ namespace Workflow.Billing.Messages.Mapping
 
             return new TransactionRequest(match.Id, new RequestIdentifier(match.RequestId, new SystemIdentifier(match.System)),
                 new UserIdentifier(match.UserId), new StateIdentifier(match.StateId, match.State),
-                match.Date, match.RequestExpiration);
+                match.Date);
         }
     }
 }
