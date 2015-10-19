@@ -32,7 +32,6 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Commands;
-using PackageBuilder.Domain.Entities.Requests.Read;
 using PackageBuilder.Domain.Entities.States.Read;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
@@ -45,7 +44,6 @@ namespace PackageBuilder.Api.Modules
     {
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            IRepository<RequestAudit> requestAuditRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
         {
            
@@ -170,13 +168,49 @@ namespace PackageBuilder.Api.Modules
 
             Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
             {
-                var apiRequest = this.Bind<ApiRequestDto>();
+                var apiRequest = this.Bind<CommitRequestDto>();
 
-                if (apiRequest.RequestId == new Guid()) return Response.AsJson(new { data = "Please supply a valid RequestId" });
+                if (apiRequest.RequestId == Guid.Empty) return Response.AsJson(new { data = "Please supply a valid RequestId" });
 
-                // TODO: Execution path for VIN12 requests
+                
+                this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
-                return null;
+                this.Info(() => "Package Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
+                var package = writeRepo.GetById(apiRequest.PackageId, true);
+                this.Info(() => "Package Read Completed, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
+
+                if (package == null)
+                {
+                    this.Error(() => "Package not found:".FormatWith(apiRequest.PackageId));
+                    throw new LightstoneAutoException("Package could not be found");
+                }
+
+                this.Info(() => "PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+                var token = Context.Request.Headers.Authorization.Split(' ')[1];
+                var accountNumber = userManagementApi.Get(token, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
+
+                this.Info(() => "PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+
+                var responses = ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
+                    Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
+                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent);
+
+                // Filter responses for cleaner api payload
+                this.Info(() => "Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+                var filteredResponse = new List<IProvideResponseDataProvider>
+                {
+                    new ResponseMeta(apiRequest.RequestId, responses.ResponseState())
+                };
+
+                filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
+                this.Info(() => "Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+
+                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
+                    filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
+
+                this.Info(() => "Package Execute Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+
+                return filteredResponse;
             };
 
             Post[PackageBuilderApi.PackageRoutes.ProcessCreate.ApiRoute] = parameters =>

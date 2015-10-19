@@ -227,7 +227,28 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
                 throw new LightstoneAutoException(string.Format("Request cannot be built to Contract with Id {0}", contractId));
 
             this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
-            var responses = entryPoint.GetResponsesFromLace(new[] { request });
+            var responses = entryPoint.GetResponses(new[] { request });
+            this.Info(() => "EntryPoint Get LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+
+            return MapLaceResponses(responses, requestId).ToList();
+        }
+
+        public List<IDataProvider> ExecuteWithCarId(IEntryPoint entryPoint, Guid userId, string userName,
+            string firstName, Guid requestId, string accountNumber, Guid contractId,
+            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
+            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent)
+        {
+            this.Info(() => "Form LACE Request Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
+                contractVersion, fromDevice, fromIpAddress, osVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice,
+                hasConsent);
+            this.Info(() => "Form LACE Request Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+
+            if (request == null)
+                throw new LightstoneAutoException(string.Format("Request cannot be built to Contract with Id {0}", contractId));
+
+            this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            var responses = entryPoint.GetResponsesForCarId(new[] {request});
             this.Info(() => "EntryPoint Get LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
             return MapLaceResponses(responses, requestId).ToList();
