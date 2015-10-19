@@ -18,7 +18,7 @@ using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
-    public class AuthModule : NancyModule
+    public class AuthModule : NancyModule 
     {
         public AuthModule(IUmAuthenticator authenticator, IUserRepository userRepository, ITokenizer tokenizer, IBus bus)
         {
