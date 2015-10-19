@@ -141,4 +141,20 @@ namespace Lace.Test.Helper.Builders.Requests
             return _request;
         }
     }
+
+    public class CarIdRequestBuilder
+    {
+        private ICollection<IPointToLaceRequest> _request;
+        public ICollection<IPointToLaceRequest> ForLightstoneCarId()
+        {
+            _request = new[] { new CarIdLightstoneOnlyRequest() };
+            return _request;
+        }
+
+        public ICollection<IPointToLaceRequest> ForAllCarIdSources()
+        {
+            _request = new[] { new CarIdAllRequest() };
+            return _request;
+        }
+    }
 }

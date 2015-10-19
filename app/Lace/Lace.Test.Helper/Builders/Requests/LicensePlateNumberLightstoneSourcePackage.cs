@@ -33,4 +33,22 @@ namespace Lace.Test.Helper.Builders.Requests
                     }, Guid.NewGuid());
         }
     }
+
+    public class CarIdPackage
+    {
+        public static IHavePackageForRequest CarIdDataPacakge(int carid, int year)
+        {
+            return
+                new LicensePlateNumberPackage(
+                    new IAmDataProvider[]
+                    {
+                        new DataProvider(DataProviderName.LSAutoCarStats_I_DB, 90, 92,
+                            LightstoneAutoRequest.WithCarIdAndYear(carid, year), new BillableState(DataProviderNoRecordState.NonBillable)),
+                        new DataProvider(DataProviderName.LSAutoSpecs_I_DB, 100, 200, RgtRequestType.Empty(),
+                            new BillableState(DataProviderNoRecordState.NonBillable)),
+                        new DataProvider(DataProviderName.MMCode_E_DB, 100, 200, MmCodeRequestType.Empty(),
+                            new BillableState(DataProviderNoRecordState.NonBillable))
+                    }, Guid.NewGuid());
+        }
+    }
 }

@@ -24,13 +24,24 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
-        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request)
+        public ICollection<IPointToLaceProvider> GetResponses(ICollection<IPointToLaceRequest> request)
         {
             _buildSourceChain = new FakeSourceChain();
             if (_checkForDuplicateRequests.IsRequestDuplicated(request.First())) return null;
 
             _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _buildSourceChain);
-            _bootstrap.Execute();
+            _bootstrap.Execute(ChainType.All);
+
+            return _bootstrap.DataProviderResponses;
+        }
+
+        public ICollection<IPointToLaceProvider> GetResponsesForCarId(ICollection<IPointToLaceRequest> request)
+        {
+            _buildSourceChain = new FakeSourceChain();
+            if (_checkForDuplicateRequests.IsRequestDuplicated(request.First())) return null;
+
+            _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _buildSourceChain);
+            _bootstrap.Execute(ChainType.CarId);
 
             return _bootstrap.DataProviderResponses;
         }

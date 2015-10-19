@@ -6,6 +6,7 @@ namespace Lace.Domain.Infrastructure.Core.Contracts
 {
     public interface IEntryPoint
     {
-        ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request);
+        ICollection<IPointToLaceProvider> GetResponsesForCarId(ICollection<IPointToLaceRequest> request);
+        ICollection<IPointToLaceProvider> GetResponses(ICollection<IPointToLaceRequest> request);
     }
 }

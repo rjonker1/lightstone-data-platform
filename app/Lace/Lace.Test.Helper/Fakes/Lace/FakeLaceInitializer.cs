@@ -24,13 +24,14 @@ namespace Lace.Test.Helper.Fakes.Lace
             _buildSourceChain = buildSourceChain;
         }
 
-        public void Execute()
-        {
-            _buildSourceChain.SourceChain(_request, _bus, DataProviderResponses, _request.First().Request.RequestId);
-        }
-
-
         public ICollection<Domain.Core.Contracts.Requests.IPointToLaceProvider> DataProviderResponses { get;
             private set; }
+
+
+        public void Execute(ChainType chain)
+        {
+            _buildSourceChain.Build(chain)(_request, _bus, DataProviderResponses,
+                _request.First().Request.RequestId);
+        }
     }
 }

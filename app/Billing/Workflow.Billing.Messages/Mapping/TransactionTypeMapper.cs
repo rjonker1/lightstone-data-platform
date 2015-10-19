@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DataPlatform.Shared.Identifiers;
 using Shared.BuildingBlocks.AdoNet.Mapping;
 using Shared.BuildingBlocks.AdoNet.Repository;
@@ -58,7 +60,7 @@ namespace Workflow.Billing.Messages.Mapping
         {
             var sql = GenerateSelectByIPrimaryKeyStatement();
 
-            var match = connection.Query(sql, new {Id = id}).FirstOrDefault();
+            var match = connection.Query(sql, new { Id = id }).FirstOrDefault();
 
             if (match == null)
                 return null;

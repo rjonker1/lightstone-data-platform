@@ -92,15 +92,17 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ITransactionRepository.cs" />
+    <Compile Include="Mapping\TransactionTypeMapper.cs" />
     <Compile Include="Publishable\BillCacheMessage.cs" />
     <Compile Include="Publishable\BillTransactionMessage.cs" />
     <Compile Include="InvoiceTransaction.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="TransactionRepository.cs" />
+    <Compile Include="TransactionRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Compile Include="Mapping\TransactionTypeMapper.cs" />
+    <Compile Include="Mapping\TransactionRequestTypeMapper.cs" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

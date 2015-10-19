@@ -20,11 +20,11 @@ namespace Lace.Domain.Metadata.Entrypoint
             _bus = BusFactory.WorkflowBus();
         }
 
-        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request)
+        public ICollection<IPointToLaceProvider> GetResponses(ICollection<IPointToLaceRequest> request)
         {
             _buildSourceChain = new CreateSourceChain();
             _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _buildSourceChain);
-            _bootstrap.Execute();
+            _bootstrap.Execute(ChainType.All);
             return _bootstrap.DataProviderResponses ?? EmptyResponse;
         }
 
@@ -34,6 +34,11 @@ namespace Lace.Domain.Metadata.Entrypoint
             {
                 return new List<IPointToLaceProvider>();
             }
+        }
+
+        public ICollection<IPointToLaceProvider> GetResponsesForCarId(ICollection<IPointToLaceRequest> request)
+        {
+            throw new System.NotImplementedException();
         }
     }
 
