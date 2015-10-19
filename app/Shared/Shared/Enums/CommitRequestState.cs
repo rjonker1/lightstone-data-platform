@@ -1,6 +1,6 @@
 ﻿namespace DataPlatform.Shared.Enums
 {
-    public enum Vin12State
+    public enum CommitRequestState
     {
         Successful = 0,
         VehicleNotProvided = 1,
