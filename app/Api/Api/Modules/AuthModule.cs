@@ -95,6 +95,8 @@ namespace Api.Modules
 
                         contracts.Add(new Contract
                         {
+                            ContractId = contract.Id,
+                            ContractName = contract.Name,
                             Menu = new Menu
                             {
                                 Products = products

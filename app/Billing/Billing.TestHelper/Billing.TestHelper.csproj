@@ -84,13 +84,12 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.1384\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1757, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1757\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1781, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1781\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1652\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1781\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.1.0.0.1562\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
