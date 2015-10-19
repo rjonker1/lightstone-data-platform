@@ -21,7 +21,7 @@ namespace Workflow.Billing.Messages.Mapping
             {
                 return new[]
                 {
-                    "Id", "RequestId", "UserId", "State", "RequestExpiration"
+                    "Id", "RequestId", "UserId", "StateId", "State", "ExpirationDate", "Created"
                 };
             }
         }
@@ -37,8 +37,10 @@ namespace Workflow.Billing.Messages.Mapping
                 Id = transaction.Id,
                 RequestId = transaction.Request.Id,
                 UserId = transaction.User.Id,
-                RequestExpiration = transaction.ExpirationDate,
-                State = transaction.ResponseState.Name
+                ExpirationDate = transaction.ExpirationDate,
+                State = transaction.State.Name,
+                StateId = transaction.State.Id,
+                Created = DateTime.UtcNow
             };
 
             connection.Execute(sql, values);

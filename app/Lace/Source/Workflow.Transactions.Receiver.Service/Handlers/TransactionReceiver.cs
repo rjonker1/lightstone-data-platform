@@ -27,6 +27,8 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
 
             _transaction.Add(transaction);
 
+            //new TransactionRequest(Guid.NewGuid(), message.Body.RequestIdentifier, message.Body.UserIdentifier, message.Body.State, DateTime.UtcNow).Audit();
+
             _publisher.SendToBus(new InvoiceTransactionCreated(transaction.Id));
         }
     }
