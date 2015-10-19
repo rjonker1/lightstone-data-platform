@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Billing.Domain.Dtos;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
@@ -22,8 +23,8 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
         private readonly IRepository<PreBilling> _preBillingRepository;
         private readonly IRepository<DataProviderTransaction> _dataProviderTransactions;
 
-        public InvoiceTransactionConsumer(IRepository<Transaction> transactions, IRepository<UserMeta> users, IRepository<PreBilling> preBillingRepository, 
-                                            IRepository<DataProviderTransaction> dataProviderTransactions, IRepository<Customer> customerAccounts, 
+        public InvoiceTransactionConsumer(IRepository<Transaction> transactions, IRepository<UserMeta> users, IRepository<PreBilling> preBillingRepository,
+                                            IRepository<DataProviderTransaction> dataProviderTransactions, IRepository<Customer> customerAccounts,
                                             IRepository<Client> clientAccounts, IRepository<PackageMeta> pacakges)
         {
             _transactions = transactions;
@@ -54,16 +55,19 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     client = account;
 
                 var products = new List<DataProviderTransactionDto>();
-                var prods = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.StateId == 1 && 
-                                                //(x.Action == customer.BillingType || x.Action == client.BillingType))
-                                                x.Action == "Request")
-                                                .Select(x => new DataProviderTransactionDto
-                                                {
-                                                    Id = x.StreamId,
-                                                    DataProviderName = x.DataProviderName,
-                                                    CostPrice = x.CostPrice,
-                                                    RecommendedPrice = x.RecommendedPrice
-                                                });
+                var prods = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId &&
+                                            (x.StateId == DataProviderResponseState.Successful ||
+                                                x.StateId == DataProviderResponseState.Partial ||
+                                                x.StateId == DataProviderResponseState.NoRecords) &&
+                                            //(x.Action == customer.BillingType || x.Action == client.BillingType))
+                                            x.Action == "Response")
+                                            .Select(x => new DataProviderTransactionDto
+                                            {
+                                                Id = x.StreamId,
+                                                DataProviderName = x.DataProviderName,
+                                                CostPrice = x.CostPrice,
+                                                RecommendedPrice = x.RecommendedPrice
+                                            });
 
                 foreach (var dataProviderTransaction in prods)
                 {
@@ -136,6 +140,6 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                 return;
             }
 
-        } 
+        }
     }
 }
