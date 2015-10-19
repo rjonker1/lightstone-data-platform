@@ -83,7 +83,7 @@
     <Compile Include="Enums\PackageEventType.cs" />
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Enums\SystemType.cs" />
-    <Compile Include="Enums\Vin12State.cs" />
+    <Compile Include="Enums\CommitRequestState.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
     <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
     <Compile Include="Helpers\Builders\PredicateBuilder.cs" />
