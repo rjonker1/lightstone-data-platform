@@ -37,7 +37,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public override void Observe()
         {
-            _initialize.Execute();
+            _initialize.Execute(ChainType.All);
         }
 
         [Observation]

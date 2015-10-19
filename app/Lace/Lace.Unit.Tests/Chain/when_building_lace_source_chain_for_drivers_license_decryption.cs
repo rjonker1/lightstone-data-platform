@@ -36,7 +36,7 @@ namespace Lace.Unit.Tests.Chain
         public override void Observe()
         {
             _initialize = new FakeLaceInitializer(new Collection<IPointToLaceProvider>(), _request, _bus, _buildSourceChain);
-            _initialize.Execute();
+            _initialize.Execute(ChainType.All);
         }
 
         [Observation]

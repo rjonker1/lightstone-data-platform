@@ -109,6 +109,40 @@ namespace Lace.Test.Helper.Mothers.Requests
         }
     }
 
+    public class CarIdAllRequest : IPointToLaceRequest
+    {
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation(); }
+        }
+
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithLicensePlate("XMC167GP"); }
+        //}
+
+        public IHaveRequestContext Request
+        {
+            get { return new RequestContextInformation(); }
+        }
+
+        public DateTime RequestDate
+        {
+            get { return DateTime.Now; }
+        }
+
+        public IHavePackageForRequest Package
+        {
+            get { return CarIdPackage.CarIdDataPacakge(111684, 2013); } //107483 //111684 //return LicensePlateNumberLightstoneAutoPackage.LicenseNumberPackage(107483,2008)
+        }
+
+
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
+    }
+
     public class NoRecordCarIdLightstoneOnlyRequest : IPointToLaceRequest
     {
         public IHaveUser User

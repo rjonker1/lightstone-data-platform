@@ -100,6 +100,7 @@
     <Compile Include="Identifiers\ContractIdentifier.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />
+    <Compile Include="Identifiers\ResponseStateIndentifier.cs" />
     <Compile Include="Identifiers\ServerIdentifier.cs" />
     <Compile Include="Identifiers\StateIdentifier.cs" />
     <Compile Include="Identifiers\SystemIdentifier.cs" />

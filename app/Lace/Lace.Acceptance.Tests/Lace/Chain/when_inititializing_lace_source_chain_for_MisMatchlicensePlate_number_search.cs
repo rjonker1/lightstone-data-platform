@@ -40,7 +40,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public override void Observe()
         {
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command, _buildSourceChain);
-            _initialize.Execute();
+            _initialize.Execute(ChainType.All);
         }
 
         [Observation]

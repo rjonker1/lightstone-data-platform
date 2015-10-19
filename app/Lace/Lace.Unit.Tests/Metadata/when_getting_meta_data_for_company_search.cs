@@ -32,7 +32,7 @@ namespace Lace.Unit.Tests.Metadata
         }
         public override void Observe()
         {
-           _response = _entryPoint.GetResponsesFromLace(_request);
+           _response = _entryPoint.GetResponses(_request);
         }
 
         [Observation]

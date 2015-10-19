@@ -26,10 +26,11 @@ namespace Lace.Domain.Metadata.EntryPoint
         }
 
 
-        public void Execute()
+        public void Execute(ChainType chain)
         {
-            _buildSourceChain.SourceChain(_request, _bus, DataProviderResponses,
+            _buildSourceChain.Build(chain)(_request, _bus, DataProviderResponses,
                 _request.First().Request.RequestId);
         }
+
     }
 }

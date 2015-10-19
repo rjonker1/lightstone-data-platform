@@ -29,7 +29,7 @@ namespace Lace.Acceptance.Tests.Requests
 
         public override void Observe()
         {
-            _responses = _entryPoint.GetResponsesFromLace(_request);
+            _responses = _entryPoint.GetResponses(_request);
         }
 
         [Observation]

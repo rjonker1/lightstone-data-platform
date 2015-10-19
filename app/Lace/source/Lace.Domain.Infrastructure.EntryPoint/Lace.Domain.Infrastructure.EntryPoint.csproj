@@ -114,6 +114,7 @@
     <Compile Include="EntryPointService.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Specification\DataProviderSpecification.cs" />
+    <Compile Include="Specification\CarIdSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
