@@ -183,6 +183,8 @@ namespace PackageBuilder.Api.Modules
                 if (commitRequest.RequestId == new Guid()) return Response.AsJson(new { data = "Please supply a valid RequestId" });
 
                 // TODO: Execution path for VIN12 requests
+                if (requestAuditRepo.Any(x => x.RequestId == commitRequest.RequestId && x.RequestExpiration > DateTime.UtcNow)) return "Test";
+
                 publisher.Publish(new CreateRequestAudit(Guid.NewGuid(), commitRequest.RequestId, commitRequest.State, DateTime.UtcNow.AddDays(1)));
 
                 return null;
