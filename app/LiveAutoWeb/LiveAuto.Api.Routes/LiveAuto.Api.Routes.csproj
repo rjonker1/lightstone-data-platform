@@ -31,6 +31,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
     <OutputPath>bin\TeamCity\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -49,6 +51,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
+    <OutputPath>bin\TeamCity\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
