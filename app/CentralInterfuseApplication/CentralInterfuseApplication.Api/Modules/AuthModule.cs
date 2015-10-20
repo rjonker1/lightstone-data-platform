@@ -42,7 +42,6 @@ namespace CentralInterfuseApplication.Api.Modules
                 ViewBag.Message = client.Put("", UserManagementApiRoute.User.RequestResetPassword, new[] { new KeyValuePair<string, string>("username", _.username + "") }, null, null);
                 return View["Login"];
             };
-
         }
     }
 

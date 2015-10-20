@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -9,12 +10,26 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
     public class FakeSourceChain : IBuildSourceChain
     {
-        public FakeSourceChain()
+        public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> Build(ChainType chain)
         {
-            SourceChain = FakeSourceSpecification.Chain();
+            return Chains.First(w => w.Key == chain).Value;
         }
 
-        public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; private set; }
-
+        private static readonly
+            IEnumerable<KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>>
+            Chains = new List
+                <KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>>
+            {
+                {
+                    new KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>(
+                        ChainType.All,
+                        FakeSourceSpecification.Chain())
+                },
+                //{
+                //    new KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>(
+                //        ChainType.CarId,
+                //        CarIdSpecification.Chain())
+                //}
+            };
     }
 }

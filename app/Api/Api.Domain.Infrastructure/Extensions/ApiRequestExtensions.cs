@@ -18,6 +18,16 @@ namespace Api.Domain.Infrastructure.Extensions
             });
         }
 
+        public static void Validate(this ApiCommitRequestDto request)
+        {
+            request.RequestFields.ToList().ForEach(f =>
+            {
+                var valid = ValidationManager.Validate(int.Parse(f.Type), f.Value);
+                if (!valid.IsValid)
+                    throw new LightstoneAutoException(valid.Error);
+            });
+        }
+
         public static void Metadata(this ApiRequestDto request, string fromIpAddress)
         {
             request.SetRequestMetadata(DeviceTypes.ApiClient, SystemType.Api, fromIpAddress);

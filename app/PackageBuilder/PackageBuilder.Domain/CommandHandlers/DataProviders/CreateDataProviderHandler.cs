@@ -37,6 +37,12 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             }
 
             var response = new DataProviderResponseRepository()[command.Name];
+            if (response == null)
+            {
+                this.Warn(() => "No data provider response linked to name {0}".FormatWith(command.Name.ToString()));
+                return;
+            }
+
             var requestFields = Mapper.Map(response, response.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
             var dataFields = Mapper.Map(response, response.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>;
 

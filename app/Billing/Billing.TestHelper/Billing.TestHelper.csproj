@@ -84,8 +84,8 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.1384\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1781, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1781\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1792, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1792\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">

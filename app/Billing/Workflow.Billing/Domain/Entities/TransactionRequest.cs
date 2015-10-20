@@ -8,11 +8,13 @@ namespace Workflow.Billing.Domain.Entities
     {
         public virtual Guid RequestId { get; protected internal set; }
         public virtual Guid UserId { get; protected internal set; }
-        public virtual Vin12State State { get; protected internal set; }
-        public virtual DateTime RequestExpiration { get; protected internal set; }
+        public virtual int StateId { get; protected internal set; }
+        public virtual CommitRequestState State { get; protected internal set; }
+        public virtual DateTime ExpirationDate { get; protected internal set; }
 
         public TransactionRequest()
         {
+            
         }
     }
 }

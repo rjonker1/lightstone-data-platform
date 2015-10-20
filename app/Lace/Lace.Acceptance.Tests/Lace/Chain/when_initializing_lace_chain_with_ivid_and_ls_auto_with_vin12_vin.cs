@@ -34,11 +34,11 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public override void Observe()
         {
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command, _buildSourceChain);
-            _initialize.Execute();
+            _initialize.Execute(ChainType.All);
         }
 
         [Observation]
-        public void lace_data_providers_for_VVI_product_must_be_handled_loaded_correclty()
+        public void lace_data_providers_for_Vin12_must_be_handled_loaded_correclty()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
             _initialize.DataProviderResponses.Count.ShouldEqual(14);

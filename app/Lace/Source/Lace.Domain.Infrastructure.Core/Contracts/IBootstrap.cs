@@ -6,6 +6,6 @@ namespace Lace.Domain.Infrastructure.Core.Contracts
     public interface IBootstrap
     {
         ICollection<IPointToLaceProvider> DataProviderResponses { get; }
-        void Execute();
+        void Execute(ChainType chain);
     }
 }

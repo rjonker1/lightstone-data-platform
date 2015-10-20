@@ -66,8 +66,8 @@
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1775, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1775\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1793, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1793\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -138,6 +138,8 @@
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_director_search.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_company_search.cs" />
     <Compile Include="Lace\Chain\when_initalizing_lace_source_chain_for_vin_rgt_vin_rgt_search.cs" />
+    <Compile Include="Lace\Chain\when_initializing_car_id_chain_for_carid_and_year_search_for_all_carId_dp.cs" />
+    <Compile Include="Lace\Chain\when_initializing_car_id_chain_for_carid_and_year_search_on_ls_auto.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_for_pcubed_ez_score.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_with_vin12_vin.cs" />
@@ -160,6 +162,9 @@
     <Compile Include="Lace\Consumers\when_consuming_audatex_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider.cs" />
+    <Compile Include="Lace\EntryPoint\when_sending_carid_and_year_only_to_entry_point.cs" />
+    <Compile Include="Lace\EntryPoint\when_sending_valid_vehicle_to_entry_point_service.cs" />
+    <Compile Include="Lace\EntryPoint\when_sending_vin12_license_plate_to_entry_point_service.cs" />
     <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_account_number.cs" />
     <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_license_number.cs" />
     <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_ivid_vin_numbe.cs" />

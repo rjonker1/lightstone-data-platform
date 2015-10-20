@@ -57,7 +57,7 @@
     <Compile Include="Dtos\Action.cs" />
     <Compile Include="Dtos\ApiMetaData.cs" />
     <Compile Include="Dtos\ApiRequestDto.cs" />
-    <Compile Include="Dtos\CommitRequestDto.cs" />
+    <Compile Include="Dtos\ApiCommitRequestDto.cs" />
     <Compile Include="Dtos\Criteria.cs" />
     <Compile Include="Dtos\DataFieldDto.cs" />
     <Compile Include="Dtos\DataSet.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Enums\PackageEventType.cs" />
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Enums\SystemType.cs" />
-    <Compile Include="Enums\Vin12State.cs" />
+    <Compile Include="Enums\CommitRequestState.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
     <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
     <Compile Include="Helpers\Builders\PredicateBuilder.cs" />
@@ -100,6 +100,7 @@
     <Compile Include="Identifiers\ContractIdentifier.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />
+    <Compile Include="Identifiers\ResponseStateIndentifier.cs" />
     <Compile Include="Identifiers\ServerIdentifier.cs" />
     <Compile Include="Identifiers\StateIdentifier.cs" />
     <Compile Include="Identifiers\SystemIdentifier.cs" />

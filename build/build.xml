@@ -164,6 +164,23 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.LiveAuto.Web</name>
+      <folder>app/LiveAutoWeb/LiveAuto.Web</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.Dataplatform.LiveAuto.Web</description>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="AdminLteTemplate\" to="content\AdminLteTemplate"/>
+        <include pattern="bin\" to="content\bin"/>
+        <include pattern="Content\" to="content\Content"/>
+        <include pattern="fonts\" to="content\fonts"/>
+        <include pattern="Scripts\" to="content\Scripts"/>
+        <include pattern="Views\" to="content\Views"/>
+        <include pattern="favicon.ico" to="content"/>
+        <include pattern="*.config" to="content"/>
+      </includes>
+    </nuget>
     <!-- IIS SITES -->
 
     <!--Windows Services-->

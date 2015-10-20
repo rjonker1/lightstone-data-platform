@@ -54,16 +54,16 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1777, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1777\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1794, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1794\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1777, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1777\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1794, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1794\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1780, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1780\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1794, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1794\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NEventStore">

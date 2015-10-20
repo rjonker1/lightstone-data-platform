@@ -34,14 +34,12 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _command = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
             _buildSourceChain = new CreateSourceChain();
-            //_buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
-            //_buildSourceChain.Build();
         }
 
         public override void Observe()
         {
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command, _buildSourceChain);
-            _initialize.Execute();
+            _initialize.Execute(ChainType.All);
         }
 
         [Observation]

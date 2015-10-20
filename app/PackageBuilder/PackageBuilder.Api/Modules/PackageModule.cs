@@ -18,7 +18,6 @@ using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Security;
-using NEventStore.Persistence;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Routes;
 using PackageBuilder.Core.Helpers;
@@ -33,8 +32,6 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Commands;
-using PackageBuilder.Domain.Entities.Requests.Commands;
-using PackageBuilder.Domain.Entities.Requests.Read;
 using PackageBuilder.Domain.Entities.States.Read;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
@@ -47,7 +44,6 @@ namespace PackageBuilder.Api.Modules
     {
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            IRepository<RequestAudit> requestAuditRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
         {
            
@@ -172,26 +168,30 @@ namespace PackageBuilder.Api.Modules
 
             Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
             {
-<<<<<<< Updated upstream
-                var commitRequest = this.Bind<CommitRequestDto>();
-=======
                 var apiRequest = this.Bind<ApiCommitRequestDto>();
+                
+                this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
-                //TODO: Check TransactionRequest in Billing to validate RequestId
+                this.Info(() => "Package Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
+                var package = writeRepo.GetById(apiRequest.PackageId, true);
+                this.Info(() => "Package Read Completed, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
-                this.Info(() => "Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
->>>>>>> Stashed changes
+                if (package == null)
+                {
+                    this.Error(() => "Package not found:".FormatWith(apiRequest.PackageId));
+                    throw new LightstoneAutoException("Package could not be found");
+                }
 
-                if (commitRequest.RequestId == new Guid()) return Response.AsJson(new { data = "Please supply a valid RequestId" });
+                this.Info(() => "PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+                var token = Context.Request.Headers.Authorization.Split(' ')[1];
+                var accountNumber = userManagementApi.Get(token, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
 
-                // TODO: Execution path for VIN12 requests
-                if (requestAuditRepo.Any(x => x.RequestId == commitRequest.RequestId && x.RequestExpiration > DateTime.UtcNow)) return "Test";
+                this.Info(() => "PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
-                publisher.Publish(new CreateRequestAudit(Guid.NewGuid(), commitRequest.RequestId, commitRequest.State, DateTime.UtcNow.AddDays(1)));
+                var responses = ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
+                    Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
+                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent);
 
-<<<<<<< Updated upstream
-                return null;
-=======
                 // Filter responses for cleaner api payload
                 this.Info(() => "Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
                 var filteredResponse = new List<IProvideResponseDataProvider>
@@ -205,10 +205,9 @@ namespace PackageBuilder.Api.Modules
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
-                this.Info(() => "Package ExecuteWithCarId Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => "Package Execute Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 return filteredResponse;
->>>>>>> Stashed changes
             };
 
             Post[PackageBuilderApi.PackageRoutes.ProcessCreate.ApiRoute] = parameters =>

@@ -67,8 +67,8 @@
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1775, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1775\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1793, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1793\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -114,6 +114,7 @@
     <Compile Include="EntryPointService.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Specification\DataProviderSpecification.cs" />
+    <Compile Include="Specification\CarIdSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

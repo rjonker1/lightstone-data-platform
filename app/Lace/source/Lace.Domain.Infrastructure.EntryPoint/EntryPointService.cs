@@ -20,7 +20,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 {
     public sealed class EntryPointService : IEntryPoint
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<EntryPointService>();
         private readonly IAdvancedBus _bus;
         private ISendCommandToBus _command;
         private ISendWorkflowCommand _workflow;
@@ -29,11 +29,20 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private ILogCommandTypes _logCommand;
         public EntryPointService(IAdvancedBus bus)
         {
-            _log = LogManager.GetLogger(GetType());
             _bus = bus;
         }
 
-        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request)
+        public ICollection<IPointToLaceProvider> GetResponsesForCarId(ICollection<IPointToLaceRequest> request)
+        {
+            return Execute(request, ChainType.CarId);
+        }
+
+        public ICollection<IPointToLaceProvider> GetResponses(ICollection<IPointToLaceRequest> request)
+        {
+            return Execute(request, ChainType.All);
+        }
+
+        private ICollection<IPointToLaceProvider> Execute(ICollection<IPointToLaceRequest> request, ChainType chain)
         {
             try
             {
@@ -42,10 +51,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 _logCommand.LogBegin(request);
 
                 _dataProviderChain = new CreateSourceChain();
-                _logCommand.LogEntryPointRequest(request,DataProviderNoRecordState.Billable);
+                _logCommand.LogEntryPointRequest(request, DataProviderNoRecordState.Billable);
 
                 _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _dataProviderChain);
-                _bootstrap.Execute();
+                _bootstrap.Execute(chain);
 
                 LogResponse(request);
 
@@ -59,7 +68,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             {
                 _logCommand.LogFault(ex.Message, request);
                 _logCommand.LogEnd(request);
-                _log.ErrorFormat("Error occurred receiving request {0}", ex, request.ObjectToJson());
+                Log.ErrorFormat("Error occurred receiving request {0}", ex, request.ObjectToJson());
                 LogResponse(request);
                 CreateTransaction(request, DataProviderResponseState.TechnicalError);
                 return EmptyResponse;

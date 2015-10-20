@@ -16,9 +16,11 @@ namespace PackageBuilder.Acceptance.Tests.Modules.Packages
     {
         public when_creating_package()
         {
-            Handler.Handle(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LSAutoCarStats_I_DB, 0, "Owner", DateTime.UtcNow));
-            Handler.Handle(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LSAutoVINMaster_I_DB, 0, "Owner", DateTime.UtcNow));
-            Handler.Handle(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LSAutoSpecs_I_DB, 0, "Owner", DateTime.UtcNow));
+            foreach (DataProviderName dataProviderName in Enum.GetValues(typeof (DataProviderName)))
+                Handler.Handle(new CreateDataProvider(Guid.NewGuid(), dataProviderName, 0, "Owner", DateTime.UtcNow));
+            //Handler.Handle(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LSAutoCarStats_I_DB, 0, "Owner", DateTime.UtcNow));
+            //Handler.Handle(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LSAutoVINMaster_I_DB, 0, "Owner", DateTime.UtcNow));
+            //Handler.Handle(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LSAutoSpecs_I_DB, 0, "Owner", DateTime.UtcNow));
 
             Transaction(Session =>
             {

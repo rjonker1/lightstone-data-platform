@@ -66,8 +66,8 @@
       <HintPath>..\..\packages\EasyNetQ.0.50.1.392\lib\net40\EasyNetQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1781\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1792, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1792\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet">
@@ -91,15 +91,17 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ITransactionRepository.cs" />
+    <Compile Include="Mapping\TransactionTypeMapper.cs" />
     <Compile Include="Publishable\BillCacheMessage.cs" />
     <Compile Include="Publishable\BillTransactionMessage.cs" />
     <Compile Include="InvoiceTransaction.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="TransactionRepository.cs" />
+    <Compile Include="TransactionRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Compile Include="Mapping\TransactionTypeMapper.cs" />
+    <Compile Include="Mapping\TransactionRequestTypeMapper.cs" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

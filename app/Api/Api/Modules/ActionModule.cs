@@ -6,6 +6,7 @@ using Api.Domain.Infrastructure.Extensions;
 using Api.Domain.Infrastructure.Messages;
 using Api.Helpers.Validators;
 using DataPlatform.Shared.Dtos;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
@@ -17,7 +18,8 @@ namespace Api.Modules
 {
     public class ActionModule : SecureModule
     {
-        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi, IDispatchMessagesToBus<RequestReportMessage> dispatcher)
+        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi,
+            IDispatchMessagesToBus<RequestReportMessage> dispatcher)
         {
             Get["/"] = parameters =>
             {
@@ -28,8 +30,9 @@ namespace Api.Modules
 
             Post["/action"] = parameters =>
             {
-                if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"])) return Response.AsJson(new { data = "Service unavailable - Maintenance in progress" }, HttpStatusCode.ServiceUnavailable);
-                
+                if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"]))
+                    return Response.AsJson(new {data = "Service unavailable - Maintenance in progress"}, HttpStatusCode.ServiceUnavailable);
+
                 try
                 {
                     this.Info(() => "Api action started. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
@@ -43,7 +46,7 @@ namespace Api.Modules
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
                     apiRequest.Validate();
-                    apiRequest.ContractVersion((long)1.0); //TODO: Set here or in PB?
+                    apiRequest.ContractVersion((long) 1.0); //TODO: Set here or in PB?
                     Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Execute Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
@@ -57,21 +60,22 @@ namespace Api.Modules
                 }
                 catch (LightstoneAutoException ex)
                 {
-                    return Response.AsJson(new { error = ex.Message });
+                    return Response.AsJson(new {error = ex.Message});
                 }
                 catch (TargetInvocationException)
                 {
-                    return Response.AsJson(new { error = "Ensure all properties are populated" });
+                    return Response.AsJson(new {error = "Ensure all properties are populated"});
                 }
             };
 
-            Post["/action/requestId/{requestId}"] = parameters =>
+            Post["/action/requestId/{requestId}/state/{stateId}"] = parameters =>
             {
-                if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"])) return Response.AsJson(new { data = "Service unavailable - Maintenance in progress" }, HttpStatusCode.ServiceUnavailable);
+                if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"]))
+                    return Response.AsJson(new {data = "Service unavailable - Maintenance in progress"}, HttpStatusCode.ServiceUnavailable);
                 try
                 {
                     this.Info(() => "Api Commit Request started. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                    var apiRequest = this.Bind<ApiRequestDto>();
+                    var apiRequest = this.Bind<ApiCommitRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
                     new ApiRequestValidator(userManagementApi)
@@ -80,9 +84,9 @@ namespace Api.Modules
                     this.Info(() => "Api request: ContractId {0} Api token: {1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
-                    apiRequest.AddRequestId(new Guid(parameters.RequestId));
+                    apiRequest.AddStateForRequest(Guid.Parse(parameters.requestId.ToString()), ((ApiCommitRequestState) int.Parse(parameters.stateId)));
                     apiRequest.Validate();
-                    apiRequest.ContractVersion((long)1.0);
+                    apiRequest.SetContractVersion((long) 1.0);
                     Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Commit Request Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
@@ -96,11 +100,11 @@ namespace Api.Modules
                 }
                 catch (LightstoneAutoException ex)
                 {
-                    return Response.AsJson(new { error = ex.Message });
+                    return Response.AsJson(new {error = ex.Message});
                 }
                 catch (TargetInvocationException)
                 {
-                    return Response.AsJson(new { error = "Ensure all properties are populated" });
+                    return Response.AsJson(new {error = "Ensure all properties are populated"});
                 }
             };
         }

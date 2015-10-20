@@ -18,7 +18,7 @@ using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
-    public class AuthModule : NancyModule
+    public class AuthModule : NancyModule 
     {
         public AuthModule(IUmAuthenticator authenticator, IUserRepository userRepository, ITokenizer tokenizer, IBus bus)
         {
@@ -108,9 +108,11 @@ namespace UserManagement.Api.Modules
             Put[UserManagementApiRoute.User.ResetPassword] = _ =>
             {
                 var model = this.Bind<ResetPasswordDto>();
-                var token = (Guid)_.token;
-                var user = userRepository.GetByResetToken(token);
 
+                var token = (Guid)_.token;
+                if (token == new Guid()) throw new ArgumentException();
+
+                var user = userRepository.GetByResetToken(token);
                 user.HashPassword(model.Password);
                 user.ClearResetPasswordToken();
 
