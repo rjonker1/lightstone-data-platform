@@ -97,10 +97,11 @@ namespace UserManagement.Api.Modules
                 var entity = userRepository.GetByUserName(username);
                 if (entity == null) throw new LightstoneAutoException("Could not find username {0}".FormatWith(username));
                 var token = entity.AssignResetPasswordToken();
-                var url = ConfigurationManager.AppSettings["LiveAutoBaseUrl"] + LiveAutoApiRoute.Authorization.GetChangePassword + "/" + token;
-
+                var url = ConfigurationManager.AppSettings["LiveAutoBaseUrl"] + LiveAutoApiRoute.Authorization.GetChangePassword.Replace("{token}", token + "");
+                var body = "<a href='{0}'>Please click here to navigate to the change password web page</a>".FormatWith(url);
+                
                 bus.Publish(new CreateUpdateEntity(entity, "Update"));
-                bus.Publish(new EmailMessage(new[] { entity.UserName }, "Password reset", url));
+                bus.Publish(new EmailMessage(new[] { entity.UserName }, "LIVE Auto password reset", body));
 
                 return Response.AsText("Password reset mail sent");
             };

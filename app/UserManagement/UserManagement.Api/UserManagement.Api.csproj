@@ -108,8 +108,9 @@
     <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1651\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="LiveAuto.Api.Routes">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.LiveAuto.Api.Routes.1.0.0.1625\lib\net45\LiveAuto.Api.Routes.dll</HintPath>
+    <Reference Include="LiveAuto.Api.Routes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.LiveAuto.Api.Routes.1.0.0.1806\lib\net45\LiveAuto.Api.Routes.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
