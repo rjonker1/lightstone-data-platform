@@ -146,8 +146,8 @@ namespace Billing.Api.Modules
                 var preBillStartDateFilter = Request.Query["startDate"];
                 var preBillEndDateFilter = Request.Query["endDate"];
 
-                if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
-                if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
+                if (preBillStartDateFilter.HasValue) startDateFilter = preBillStartDateFilter;
+                if (preBillEndDateFilter.HasValue) endDateFilter = preBillEndDateFilter;
 
                 endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -200,8 +200,8 @@ namespace Billing.Api.Modules
                 var preBillStartDateFilter = Request.Query["startDate"];
                 var preBillEndDateFilter = Request.Query["endDate"];
 
-                if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
-                if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
+                if (preBillStartDateFilter.HasValue) startDateFilter = preBillStartDateFilter;
+                if (preBillEndDateFilter.HasValue) endDateFilter = preBillEndDateFilter;
 
                 endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -230,8 +230,8 @@ namespace Billing.Api.Modules
                 var preBillStartDateFilter = Request.Query["startDate"];
                 var preBillEndDateFilter = Request.Query["endDate"];
 
-                if (preBillStartDateFilter.HasValue) endDateFilter = preBillStartDateFilter;
-                if (preBillEndDateFilter.HasValue) startDateFilter = preBillEndDateFilter;
+                if (preBillStartDateFilter.HasValue) startDateFilter = preBillStartDateFilter;
+                if (preBillEndDateFilter.HasValue) endDateFilter = preBillEndDateFilter;
 
                 endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
