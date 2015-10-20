@@ -172,7 +172,15 @@ namespace PackageBuilder.Api.Modules
 
             Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
             {
+<<<<<<< Updated upstream
                 var commitRequest = this.Bind<CommitRequestDto>();
+=======
+                var apiRequest = this.Bind<ApiCommitRequestDto>();
+
+                //TODO: Check TransactionRequest in Billing to validate RequestId
+
+                this.Info(() => "Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+>>>>>>> Stashed changes
 
                 if (commitRequest.RequestId == new Guid()) return Response.AsJson(new { data = "Please supply a valid RequestId" });
 
@@ -181,7 +189,26 @@ namespace PackageBuilder.Api.Modules
 
                 publisher.Publish(new CreateRequestAudit(Guid.NewGuid(), commitRequest.RequestId, commitRequest.State, DateTime.UtcNow.AddDays(1)));
 
+<<<<<<< Updated upstream
                 return null;
+=======
+                // Filter responses for cleaner api payload
+                this.Info(() => "Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+                var filteredResponse = new List<IProvideResponseDataProvider>
+                {
+                    new ResponseMeta(apiRequest.RequestId, responses.ResponseState())
+                };
+
+                filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
+                this.Info(() => "Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+
+                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
+                    filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
+
+                this.Info(() => "Package ExecuteWithCarId Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+
+                return filteredResponse;
+>>>>>>> Stashed changes
             };
 
             Post[PackageBuilderApi.PackageRoutes.ProcessCreate.ApiRoute] = parameters =>

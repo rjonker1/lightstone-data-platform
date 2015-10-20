@@ -685,6 +685,7 @@
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\ReportModule.cs" />
     <Compile Include="Modules\StageBillingModule.cs" />
+    <Compile Include="Modules\TransactionRequestModule.cs" />
     <Compile Include="ViewModels\DataTablesViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
   </ItemGroup>
