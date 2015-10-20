@@ -7,7 +7,7 @@ using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace LiveAuto.Web.Modules
 {
-    public class AuthorizationModule : NancyModule 
+    public class AuthorizationModule : NancyModule
     {
         public AuthorizationModule(IUserManagementApiClient userManagementApi)
         {
