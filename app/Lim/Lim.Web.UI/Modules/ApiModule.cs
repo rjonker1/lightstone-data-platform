@@ -15,7 +15,7 @@ namespace Lim.Web.UI.Modules
         public ApiModule(IHandleGettingConfiguration setup, IHandleSavingConfiguration save, IHandleGettingIntegrationClient client,
             IUserManagementApiClient api, IHandleGettingDataPlatformClient dataPlatform, IHandleGettingMetadata metadata)
         {
-            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+           // this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             Get["/integrations/for/api/push"] = _ =>
             {

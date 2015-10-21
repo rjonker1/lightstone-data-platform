@@ -13,7 +13,7 @@ namespace Lim.Web.UI.Modules
     {
         public ClientModule(IHandleGettingIntegrationClient client, IHandleSavingClient save)
         {
-            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            //this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             Get["/client/new"] = _ => View["client/client", ClientDto.Create()];
 

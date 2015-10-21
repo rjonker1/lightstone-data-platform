@@ -8,7 +8,7 @@ namespace Lim.Web.UI.Modules
     {
         public IndexModule()
         {
-            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            //this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             Get["/"] = _ => View["Index"];
 
