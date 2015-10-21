@@ -20,16 +20,16 @@ namespace Lim.Web.UI
 {
     public class Bootstrapper : DefaultNancyBootstrapper
     {
-        protected override IRootPathProvider RootPathProvider
-        {
-            get { return new TokenRootPathProvider(); }
-        }
+        //protected override IRootPathProvider RootPathProvider
+        //{
+        //    get { return new TokenRootPathProvider(); }
+        //}
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
-            TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
-            StaticConfiguration.DisableErrorTraces = false;
+            //TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
+            //StaticConfiguration.DisableErrorTraces = false;
         }
 
         protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
@@ -43,8 +43,8 @@ namespace Lim.Web.UI
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
-            var userAgent = ConfigurationManager.AppSettings["TokenAuthUserAgentValue"];
-            container.Register<ITokenizer>(new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = userAgent).WithKeyCache(new FileSystemTokenKeyStore((new TokenRootPathProvider())))));
+            //var userAgent = ConfigurationManager.AppSettings["TokenAuthUserAgentValue"];
+            //container.Register<ITokenizer>(new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = userAgent).WithKeyCache(new FileSystemTokenKeyStore((new TokenRootPathProvider())))));
 
             container.Register<IRepository, LimRepository>();
             container.Register<IUserManagementApiClient, UserManagementApiClient>();
@@ -80,13 +80,13 @@ namespace Lim.Web.UI
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/chosen"));
         }
 
-        public class TokenRootPathProvider : IRootPathProvider
-        {
-            public string GetRootPath()
-            {
-                var keyStore = ConfigurationManager.AppSettings["TokenAuthKeyStorePath"];
-                return new Uri(keyStore).LocalPath;
-            }
-        }
+        //public class TokenRootPathProvider : IRootPathProvider
+        //{
+        //    public string GetRootPath()
+        //    {
+        //        var keyStore = ConfigurationManager.AppSettings["TokenAuthKeyStorePath"];
+        //        return new Uri(keyStore).LocalPath;
+        //    }
+        //}
     }
 }

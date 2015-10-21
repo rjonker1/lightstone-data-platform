@@ -57,17 +57,17 @@
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1643, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1643\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1812, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1812\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1643, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1643\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1812, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1812\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.1643, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1643\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.1812, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1812\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -77,8 +77,8 @@
     <Reference Include="Nancy">
       <HintPath>..\..\packages\Nancy.1.2.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Authentication.Stateless, Version=0.22.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
+    <Reference Include="Nancy.Authentication.Stateless, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.23.0\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Nancy.Authentication.Token, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -111,12 +111,12 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -130,7 +130,6 @@
     <Content Include="assets\plugins\chosen\chosen.jquery.min.js" />
     <Content Include="assets\plugins\chosen\chosen.min.css" />
     <Content Include="packages.config" />
-    <Content Include="Views\Index.cshtml" />
     <Content Include="Views\_Footer.cshtml" />
     <Content Include="Views\_Header.cshtml" />
     <Content Include="Views\_Layout.cshtml" />
@@ -162,6 +161,7 @@
     <None Include="AppSettings.Release.config">
       <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <SubType>Designer</SubType>
     </None>
     <None Include="AppSettings.TeamCity.config">
       <DependentUpon>AppSettings.config</DependentUpon>
@@ -192,6 +192,7 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
+    <Content Include="Views\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
