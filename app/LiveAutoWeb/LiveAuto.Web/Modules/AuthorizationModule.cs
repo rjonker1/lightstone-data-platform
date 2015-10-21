@@ -20,10 +20,13 @@ namespace LiveAuto.Web.Modules
             Post[LiveAutoApiRoute.Authorization.PutChangePassword] = _ =>
             {
                 var dto = this.Bind<ChangePasswordDto>();
+                if ((dto.Password + "").Length < 5)
+                {
+                    dto.Message = "Password length must be at least 5 characters long";
+                    return View["index", dto];                    
+                }
 
-                //var test = userManagementApi.Put("", UserManagementApiRoute.User.ResetPassword, new []{new KeyValuePair<string, string>("token", model.Token + "")}, model, null);
                 dto.Message = userManagementApi.Put("", "Users/ResetPassword/{token}", new[] { new KeyValuePair<string, string>("token", dto.Token + "") }, dto, null);
-
                 if (!dto.Message.Contains("Password changed"))
                     dto.Message = "Error updating password";
 
