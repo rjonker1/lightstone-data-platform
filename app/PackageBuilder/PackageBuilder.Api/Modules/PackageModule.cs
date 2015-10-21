@@ -172,7 +172,11 @@ namespace PackageBuilder.Api.Modules
                 var apiRequest = this.Bind<ApiCommitRequestDto>();
 
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var isValidRequest = billingApiClient.Get(token, "/Transactions/Request/{requestId}", new[] { new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString()) }, null);
+                var isValidRequest = billingApiClient.Get(token, "/Transactions/Request/{requestId}/{state}", new[]
+                {
+                    new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString()),
+                    new KeyValuePair<string, string>("state", apiRequest.State.ToString())
+                }, null);
                 if (!isValidRequest.Contains("true")) return Response.AsJson(new { data = "Request is not valid" });
 
                 this.Info(() => "Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
