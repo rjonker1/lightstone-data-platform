@@ -44,10 +44,10 @@ namespace PackageBuilder.Api.Modules
     {
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, 
-            IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus,
+            IUserManagementApiClient userManagementApi, IBillingApiClient billingApiClient, IPublishIntegrationMessages integration)
         {
-           
+
             Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
             {
                 return _.showAll
@@ -170,8 +170,12 @@ namespace PackageBuilder.Api.Modules
             Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
             {
                 var apiRequest = this.Bind<ApiCommitRequestDto>();
-                
-                this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+
+                var token = Context.Request.Headers.Authorization.Split(' ')[1];
+                var isValidRequest = billingApiClient.Get(token, "/Transactions/Request/{requestId}", new[] { new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString()) }, null);
+                if (!isValidRequest.Contains("true")) return Response.AsJson(new { data = "Request is not valid" });
+
+                this.Info(() => "Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 this.Info(() => "Package Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
                 var package = writeRepo.GetById(apiRequest.PackageId, true);
@@ -184,7 +188,7 @@ namespace PackageBuilder.Api.Modules
                 }
 
                 this.Info(() => "PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
-                var token = Context.Request.Headers.Authorization.Split(' ')[1];
+
                 var accountNumber = userManagementApi.Get(token, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
 
                 this.Info(() => "PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
@@ -206,7 +210,7 @@ namespace PackageBuilder.Api.Modules
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
-                this.Info(() => "Package Execute Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => "Package ExecuteWithCarId Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 return filteredResponse;
             };

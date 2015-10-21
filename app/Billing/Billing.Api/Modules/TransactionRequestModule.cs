@@ -13,7 +13,7 @@ namespace Billing.Api.Modules
             Get["/Transactions/Request/{requestId}"] = param =>
             {
                 var requestId = new Guid(param.requestId);
-                return transactionRequestRepo.Any(x => x.RequestId == requestId);
+                return transactionRequestRepo.Any(x => x.RequestId == requestId && x.ExpirationDate > DateTime.UtcNow);
             };
         }
     }
