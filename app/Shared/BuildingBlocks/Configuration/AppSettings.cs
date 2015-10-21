@@ -14,6 +14,7 @@ namespace Shared.Configuration
             Api = new ApiSettings(reader);
             PackageBuilderApi = new PackageBuilderApiSettings(reader);
             UserManagementApi = new UserManagementApiSettings(reader);
+            BillingApi = new BillingApiSettings(reader);
             ReportApi = new ReportApiSettings(reader);
         }
 

@@ -10,6 +10,7 @@ namespace PackageBuilder.Api.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IUserManagementApiClient>().ImplementedBy<UserManagementApiClient>().LifestyleTransient());
+            container.Register(Component.For<IBillingApiClient>().ImplementedBy<BillingApiClient>().LifestyleTransient());
         }
     }
 }
