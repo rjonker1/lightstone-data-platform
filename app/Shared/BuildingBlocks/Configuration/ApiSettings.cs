@@ -78,4 +78,22 @@
             get { return _reader.GetString("reportApi/config/baseUrl", () => "UNKNOWN_BASE_URL"); }
         }
     }
+
+    public class BillingApiSettings
+    {
+        private readonly AppSettingsReader _reader;
+
+        internal BillingApiSettings(AppSettingsReader reader)
+        {
+            _reader = reader;
+        }
+
+        /// <summary>
+        /// Finds an appSetting called billingApi/config/baseUrl
+        /// </summary>
+        public string BaseUrl
+        {
+            get { return _reader.GetString("billingApi/config/baseUrl", () => "UNKNOWN_BASE_URL"); }
+        }
+    }
 }
