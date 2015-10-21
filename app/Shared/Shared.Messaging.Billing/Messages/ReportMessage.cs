@@ -1,6 +1,5 @@
 ﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
 using EasyNetQ;
-using RestSharp;
 
 namespace DataPlatform.Shared.Messaging.Billing.Messages
 {
