@@ -8,14 +8,14 @@ namespace PackageBuilder.Domain.Entities.Requests.Read
     {
         public virtual Guid RequestId { get; set; }
         public virtual Guid UserId { get; set; }
-        public virtual CommitRequestState State { get; set; }
+        public virtual ApiCommitRequestState State { get; set; }
         public virtual DateTime RequestExpiration { get; set; }
 
         public RequestAudit()
         {
         }
 
-        public RequestAudit(Guid id, Guid requestId, CommitRequestState state, DateTime requestExpiration)
+        public RequestAudit(Guid id, Guid requestId, ApiCommitRequestState state, DateTime requestExpiration)
             : base(id)
         {
             RequestId = requestId;

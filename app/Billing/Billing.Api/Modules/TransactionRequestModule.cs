@@ -10,7 +10,7 @@ namespace Billing.Api.Modules
     {
         public TransactionRequestModule(IRepository<TransactionRequest> transactionRequestRepo)
         {
-            Get["/Transactions/Requests/{requestId}"] = param =>
+            Get["/Transactions/Request/{requestId}"] = param =>
             {
                 var requestId = new Guid(param.requestId);
                 return transactionRequestRepo.Any(x => x.RequestId == requestId);

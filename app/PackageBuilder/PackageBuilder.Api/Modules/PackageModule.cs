@@ -44,7 +44,8 @@ namespace PackageBuilder.Api.Modules
     {
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus, 
+            IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration)
         {
            
             Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
