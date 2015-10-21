@@ -23,6 +23,7 @@ namespace Shared.Configuration
         public ApiSettings Api { get; private set; }
         public UserManagementApiSettings UserManagementApi { get; private set; }
         public PackageBuilderApiSettings PackageBuilderApi { get; private set; }
+        public BillingApiSettings BillingApi { get; private set; }
         public ReportApiSettings ReportApi { get; private set; }
     }
 }

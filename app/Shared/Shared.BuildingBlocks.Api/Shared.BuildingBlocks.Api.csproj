@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="ApiClients\ApiClient.cs" />
     <Compile Include="ApiClients\ApiClientBase.cs" />
+    <Compile Include="ApiClients\BillingApiClient.cs" />
     <Compile Include="ApiClients\ReportApiClient.cs" />
     <Compile Include="ExceptionHandling\ErrorHtmlPageResponse.cs" />
     <Compile Include="ExceptionHandling\ErrorResponse.cs" />
