@@ -93,16 +93,20 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.1818\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1818\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1818\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1819\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.1818\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.1819\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MemBus, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

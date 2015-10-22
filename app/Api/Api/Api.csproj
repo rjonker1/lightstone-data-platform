@@ -77,13 +77,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1818\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1818\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1818\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1819\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.UserManagement.Api.Routes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
