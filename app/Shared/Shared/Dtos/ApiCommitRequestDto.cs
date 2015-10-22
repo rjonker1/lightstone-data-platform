@@ -10,16 +10,16 @@ namespace DataPlatform.Shared.Dtos
     {
         public ApiCommitRequestDto()
         {
-            State = ApiCommitRequestState.Cancelled;
+            UserState = ApiCommitRequestUserState.Cancelled;
             FromIpAddress = "127.0.0.1";
             DeviceType = DeviceTypes.ApiClient;
             SystemType = SystemType.Api;
         }
 
-        public void AddStateForRequest(Guid requestId, ApiCommitRequestState state)
+        public void AddStateForRequest(Guid requestId, ApiCommitRequestUserState userState)
         {
             RequestId = requestId;
-            State = state;
+            UserState = userState;
         }
 
         public bool IsValid()
@@ -76,6 +76,6 @@ namespace DataPlatform.Shared.Dtos
         public bool HasConsent { get; private set; }
 
         [DataMember]
-        public ApiCommitRequestState State { get; private set; }
+        public ApiCommitRequestUserState UserState { get; private set; }
     }
 }
