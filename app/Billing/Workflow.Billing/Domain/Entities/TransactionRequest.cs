@@ -10,7 +10,7 @@ namespace Workflow.Billing.Domain.Entities
         public virtual Guid UserId { get; protected internal set; }
         public virtual int StateId { get; protected internal set; }
         public virtual DataProviderResponseState State { get; protected internal set; }
-        public virtual ApiCommitRequestState UserState { get; protected internal set; }
+        public virtual ApiCommitRequestUserState UserState { get; set; }
         public virtual DateTime ExpirationDate { get; protected internal set; }
 
         public TransactionRequest()

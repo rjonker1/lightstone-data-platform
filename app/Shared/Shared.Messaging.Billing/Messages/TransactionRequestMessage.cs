@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using EasyNetQ;
 
 namespace DataPlatform.Shared.Messaging.Billing.Messages
@@ -7,6 +8,7 @@ namespace DataPlatform.Shared.Messaging.Billing.Messages
     public class TransactionRequestMessage : IPublishableMessage
     {
         public virtual Guid RequestId { get; set; }
+        public virtual ApiCommitRequestUserState UserState { get; set; }
 
         public TransactionRequestMessage()
         {

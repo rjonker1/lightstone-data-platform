@@ -1,4 +1,6 @@
-﻿using DataPlatform.Shared.Messaging.Billing.Messages;
+﻿using System.Linq;
+using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Workflow.Billing.Domain.Entities;
@@ -16,7 +18,10 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
         public void Consume(IMessage<TransactionRequestMessage> message)
         {
-            throw new System.NotImplementedException();
+            var entity = _transactionRequestRepository.FirstOrDefault(x => x.RequestId == message.Body.RequestId);
+            entity.UserState = ApiCommitRequestUserState.Successful;
+
+            _transactionRequestRepository.SaveOrUpdate(entity);
         }
     }
 }
