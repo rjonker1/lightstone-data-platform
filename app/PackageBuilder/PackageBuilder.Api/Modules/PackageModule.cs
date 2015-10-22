@@ -175,7 +175,7 @@ namespace PackageBuilder.Api.Modules
                 var isValidRequest = billingApiClient.Get(token, "/Transactions/Request/{requestId}/{state}", new[]
                 {
                     new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString()),
-                    new KeyValuePair<string, string>("state", apiRequest.State.ToString())
+                    new KeyValuePair<string, string>("state", apiRequest.UserState.ToString())
                 }, null);
                 if (!isValidRequest.Contains("true")) return Response.AsJson(new { data = "Request is not valid" });
 
