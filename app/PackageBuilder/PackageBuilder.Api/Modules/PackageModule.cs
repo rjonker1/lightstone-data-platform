@@ -172,13 +172,13 @@ namespace PackageBuilder.Api.Modules
                 var apiRequest = this.Bind<ApiCommitRequestDto>();
 
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var isValidRequest = billingApiClient.Get(token, "/Transactions/Request/{requestId}/{state}", new[]
+                var request = billingApiClient.Get(token, "/Transactions/Request/{requestId}", new[]
                 {
-                    new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString()),
-                    new KeyValuePair<string, string>("state", apiRequest.UserState.ToString())
-                }, null);
+                    new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString())
+                }
+                ,null);
 
-                if (!isValidRequest.Contains("true")) return Response.AsJson(new { data = "Request is not valid" });
+                if (request.Contains("error")) return request;
 
                 // RabbitMQ
                 new TransactionBus(eBus).SendDynamic(Mapper.Map(apiRequest, new TransactionRequestMessage()));
