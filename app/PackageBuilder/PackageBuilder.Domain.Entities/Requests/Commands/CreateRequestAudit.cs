@@ -7,14 +7,14 @@ namespace PackageBuilder.Domain.Entities.Requests.Commands
     public class CreateRequestAudit : DomainCommand
     {
         public Guid RequestId { get; set; }
-        public ApiCommitRequestState State { get; set; }
+        public ApiCommitRequestUserState UserState { get; set; }
         public DateTime RequestExpiration { get; set; }
 
-        public CreateRequestAudit(Guid id, Guid requestId, ApiCommitRequestState state, DateTime requestExpiration)
+        public CreateRequestAudit(Guid id, Guid requestId, ApiCommitRequestUserState userstate, DateTime requestExpiration)
             : base(id)
         {
             RequestId = requestId;
-            State = state;
+            UserState = userstate;
             RequestExpiration = requestExpiration;
         }
     }

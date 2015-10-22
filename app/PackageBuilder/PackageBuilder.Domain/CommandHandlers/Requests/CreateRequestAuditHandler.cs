@@ -16,7 +16,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Requests
 
         public override void Handle(CreateRequestAudit command)
         {
-            _requestAuditRepository.Save(new RequestAudit(command.Id, command.RequestId,command.State,command.RequestExpiration));
+            _requestAuditRepository.Save(new RequestAudit(command.Id, command.RequestId,command.UserState,command.RequestExpiration));
         }
     }
 }
