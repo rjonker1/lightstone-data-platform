@@ -68,7 +68,7 @@ namespace Api.Modules
                 }
             };
 
-            Post["/action/requestId/{requestId}/state/{stateId}"] = parameters =>
+            Post["/action/requestId/{requestId}/userstate/{stateId}"] = parameters =>
             {
                 if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"]))
                     return Response.AsJson(new {data = "Service unavailable - Maintenance in progress"}, HttpStatusCode.ServiceUnavailable);
