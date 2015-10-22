@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using PackageBuilder.Domain.Dtos.Write;
 
@@ -14,6 +15,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.Messages
                 .ForMember(dest => dest.PackageName, opt => opt.MapFrom(x => x.Name))
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => DateTime.UtcNow))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => "dev.packagebuilder.web.lightstone.co.za"));
+
+            Mapper.CreateMap<ApiCommitRequestDto, TransactionRequestMessage>();
         }
     }
 }

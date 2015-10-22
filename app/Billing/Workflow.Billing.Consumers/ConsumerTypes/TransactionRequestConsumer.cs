@@ -19,9 +19,13 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
         public void Consume(IMessage<TransactionRequestMessage> message)
         {
             var entity = _transactionRequestRepository.FirstOrDefault(x => x.RequestId == message.Body.RequestId);
-            entity.UserState = ApiCommitRequestUserState.Successful;
 
-            _transactionRequestRepository.SaveOrUpdate(entity);
+            if (entity != null)
+            {
+                entity.UserState = message.Body.UserState;
+
+                _transactionRequestRepository.SaveOrUpdate(entity);
+            }
         }
     }
 }

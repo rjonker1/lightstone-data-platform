@@ -177,7 +177,11 @@ namespace PackageBuilder.Api.Modules
                     new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString()),
                     new KeyValuePair<string, string>("state", apiRequest.UserState.ToString())
                 }, null);
+
                 if (!isValidRequest.Contains("true")) return Response.AsJson(new { data = "Request is not valid" });
+
+                // RabbitMQ
+                new TransactionBus(eBus).SendDynamic(Mapper.Map(apiRequest, new TransactionRequestMessage()));
 
                 this.Info(() => "Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
