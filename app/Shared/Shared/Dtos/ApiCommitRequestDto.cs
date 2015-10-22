@@ -10,7 +10,7 @@ namespace DataPlatform.Shared.Dtos
     {
         public ApiCommitRequestDto()
         {
-            UserState = ApiCommitRequestUserState.Cancelled;
+            UserState = UserState != ApiCommitRequestUserState.Cancelled ? UserState : ApiCommitRequestUserState.Cancelled;
             FromIpAddress = "127.0.0.1";
             DeviceType = DeviceTypes.ApiClient;
             SystemType = SystemType.Api;

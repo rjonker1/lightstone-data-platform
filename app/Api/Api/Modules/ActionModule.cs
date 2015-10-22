@@ -84,7 +84,7 @@ namespace Api.Modules
                     this.Info(() => "Api request: ContractId {0} Api token: {1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
-                    apiRequest.AddStateForRequest(Guid.Parse(parameters.requestId.ToString()), ((ApiCommitRequestState) int.Parse(parameters.stateId)));
+                    apiRequest.AddStateForRequest(Guid.Parse(parameters.requestId.ToString()), ((ApiCommitRequestUserState) int.Parse(parameters.stateId)));
                     apiRequest.Validate();
                     apiRequest.SetContractVersion((long) 1.0);
                     Context.Report(dispatcher, apiRequest.RequestId);
