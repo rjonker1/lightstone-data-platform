@@ -15,7 +15,12 @@ namespace Workflow.Billing.Domain.Schedules
 
         public void Clean()
         {
-            var test = _transactionRequests;
+            if (!_transactionRequests.Any()) return;
+
+            foreach (var transactionRequest in _transactionRequests.Where(x => x.ExpirationDate <= DateTime.UtcNow))
+            {
+                _transactionRequests.Delete(transactionRequest);
+            }
         }
     }
 }
