@@ -200,6 +200,8 @@
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Domain\NotificationSender\EmailNotification.cs" />
     <Compile Include="Domain\NotificationSender\ISendNotifications.cs" />
+    <Compile Include="Domain\Schedules\CacheSchedule.cs" />
+    <Compile Include="Domain\Schedules\MessageSchedule.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\AccountMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\ArchiveBillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />

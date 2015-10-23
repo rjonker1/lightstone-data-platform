@@ -1,16 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Globalization;
 using DataPlatform.Shared.Helpers.Extensions;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
-using EasyNetQ;
 using Hangfire;
 using Hangfire.Storage;
 using Nancy;
 using Workflow.Billing.Domain.Entities;
+using Workflow.Billing.Domain.Schedules;
 using Workflow.Billing.Messages.Publishable;
-using Workflow.BuildingBlocks;
 
 namespace Billing.Scheduler.Modules
 {
@@ -164,33 +161,6 @@ namespace Billing.Scheduler.Modules
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
             });
-        }
-    }
-
-    //Class required to provide DI for TransactionBus functionality
-    public class MessageSchedule
-    {
-        IAdvancedBus _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
-
-        public void Send(BillingMessage message)
-        {
-            this.Info(() => "Attempting to send BillingMessage: {0} to queue.".FormatWith(message.RunType));
-            var bus = new TransactionBus(_bus);
-            bus.SendDynamic(new BillingMessage() { RunType = message.RunType, Schedule = message.Schedule });
-            this.Info(() => "Successfully sent BillingMessage: {0} to queue.".FormatWith(message.RunType));
-        }
-    }
-
-    public class CacheSchedule
-    {
-        IAdvancedBus _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
-
-        public void Send(BillCacheMessage message)
-        {
-            this.Info(() => "Attempting to send BillCacheMessage: {0} to queue.".FormatWith(message.BillingType));
-            var bus = new TransactionBus(_bus);
-            bus.SendDynamic(new BillCacheMessage { BillingType = message.BillingType, Command = message.Command });
-            this.Info(() => "Successfully sent BillCacheMessage: {0} to queue.".FormatWith(message.BillingType));
         }
     }
 }
