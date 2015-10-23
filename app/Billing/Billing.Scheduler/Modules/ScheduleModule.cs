@@ -154,7 +154,7 @@ namespace Billing.Scheduler.Modules
                 return Response.AsJson(new { data = "Schedule Added/Updated" });
             };
 
-            //CORS for Module
+            // CORS for Module
             After.AddItemToEndOfPipeline(nancyContext =>
             {
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
