@@ -201,8 +201,10 @@
     <Compile Include="Domain\NotificationSender\EmailNotification.cs" />
     <Compile Include="Domain\NotificationSender\ISendNotifications.cs" />
     <Compile Include="Domain\Schedules\CacheSchedule.cs" />
+    <Compile Include="Domain\Schedules\ISchedule.cs" />
+    <Compile Include="Domain\Schedules\ICleanup.cs" />
     <Compile Include="Domain\Schedules\MessageSchedule.cs" />
-    <Compile Include="Domain\Schedules\TransactionRequestCleanupSchedule.cs" />
+    <Compile Include="Domain\Schedules\TransactionRequestCleanup.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\AccountMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\ArchiveBillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="Installers\PublishReportQueueInstaller.cs" />
     <Compile Include="Installers\ReportBuilderInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
+    <Compile Include="Installers\ScheduleInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Repository\CacheProvider.cs" />
     <Compile Include="Repository\ICacheProvider.cs" />

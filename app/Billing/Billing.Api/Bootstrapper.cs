@@ -12,6 +12,7 @@ using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow.Billing.Domain.Schedules;
 using Workflow.Billing.Installers;
 
 namespace Billing.Api
@@ -27,6 +28,9 @@ namespace Billing.Api
 
             this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
+
+            // Init cleanup schedule
+            container.Resolve<ICleanup>().Clean();
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -42,7 +46,8 @@ namespace Billing.Api
                 new AutoMapperInstaller(),
                 new UpdateBillingTransactionInstaller(),
                 new AuthenticationInstaller(),
-                new ApiClientInstaller());
+                new ApiClientInstaller(),
+                new ScheduleInstaller());
 
             //Drop create
             //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
