@@ -150,7 +150,6 @@
     <Compile Include="Modules\Index.cs" />
     <Compile Include="Modules\ScheduleModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Schedules\ApiSchedule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

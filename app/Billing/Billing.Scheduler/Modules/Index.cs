@@ -1,6 +1,4 @@
-﻿using Billing.Scheduler.Schedules;
-using Nancy;
-using Shared.BuildingBlocks.Api.ApiClients;
+﻿using Nancy;
 
 namespace Billing.Scheduler.Modules
 {
@@ -8,10 +6,7 @@ namespace Billing.Scheduler.Modules
     {
         public Index()
         {
-            Get["/"] = _ =>
-            {
-                return Response.AsRedirect("/hangfire");
-            };
+            Get["/"] = _ => Response.AsRedirect("/hangfire");
         }
     }
 }
