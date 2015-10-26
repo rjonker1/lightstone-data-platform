@@ -90,6 +90,8 @@ namespace Api.Modules
                                     continue;
                                 }
 
+                                if (products[productIndex].SubMenus.Select(x => x.PackageId).Any(x => x == package.PackageId)) continue;
+
                                 subList.AddRange(products[productIndex].SubMenus.DistinctBy(x => x.PackageId));
                                 products[productIndex].SubMenus = subList;
                             }
@@ -177,7 +179,8 @@ namespace Api.Modules
                     UserId = consumerMeta.UserId, 
                     UserName = consumerMeta.UserName, 
                     Token = token,
-                    Customers = customers
+                    Customers = customers,
+                    Clients = clients
                 });
             };
 
