@@ -355,37 +355,15 @@
     "use strict";
     Billing.Common = function () {
 
-        $('#table').bootstrapTable({
-            url: "/MI",
-            search: true,
-            showRefresh: true,
-            showColumns: true,
-            pagination: true,
-            pageNumber: 1,
-            pageSize: 10,
-            pageList: [10, 25, 50, 100, 'All'],
-            columns: [{
-                field: 'id',
-                title: 'Item ID',
-                visible: false
-            }, {
-                field: 'totalCoS',
-                title: 'Cost Of Sale (Total)',
-                sortable: true,
-                //formatter: gridCOSFormatter
-            }, {
-                field: 'totalRevenue',
-                title: 'Revenue (Total)',
-                sortable: true
-            }, {
-                field: 'nonBillable',
-                title: 'Non-Billable (Total)',
-                sortable: true
-            }]
-        });
-
         Billing.overrideDataTablesStyling();
 
+        if ($('.search input').val() == '') {
+            $('.no-records-found td').html('Please select a date range to filter records by');
+        };
+
+        $('#table').bootstrapTable().on('search.bs.table', function (e, text) {
+            if (text == '') $('.no-records-found td').html('Please select a date range to filter records by');
+        });
 
         $(function () {
 
@@ -401,8 +379,8 @@
                 endRangeFilter = moment({ day: 25 }).add(1, 'month');
                 startRangeFilter = moment({ day: 26 });
 
-                console.log(endRangeFilter);
-                console.log(startRangeFilter);
+                endRangeFilterLM = moment({ day: 25 });
+                startRangeFilterLM = moment({ day: 26 }).subtract(1, 'month');
             }
 
             $('#transactionRange span').html(startRangeFilter.format('MMMM D, YYYY') + ' - ' + endRangeFilter.format('MMMM D, YYYY'));
@@ -442,7 +420,6 @@
                     firstDay: 1
                 }
             }, function (start, end, label) {
-                //console.log(start.toISOString(), end.toISOString(), label);
                 endRangeFilter = end;
                 startRangeFilter = start;
                 $('#transactionRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
