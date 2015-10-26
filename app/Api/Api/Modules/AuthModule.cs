@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using Api.Domain.Core.Meta;
 using Nancy;
+using Nancy.Extensions;
 using Nancy.ModelBinding;
 using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.ApiClients;
@@ -87,9 +88,9 @@ namespace Api.Modules
                                     });
 
                                     continue;
-                                } 
+                                }
 
-                                subList.AddRange(products[productIndex].SubMenus);
+                                subList.AddRange(products[productIndex].SubMenus.DistinctBy(x => x.PackageId));
                                 products[productIndex].SubMenus = subList;
                             }
                         }
