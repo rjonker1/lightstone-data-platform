@@ -1,4 +1,4 @@
-﻿namespace Workflow.Billing.Domain.Schedules
+﻿namespace Workflow.Billing.Helpers.Schedules
 {
     public interface ISchedule
     {

@@ -2,6 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Workflow.Billing.Domain.Schedules;
+using Workflow.Billing.Helpers.Schedules;
 
 namespace Workflow.Billing.Installers
 {

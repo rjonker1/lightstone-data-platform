@@ -17,6 +17,7 @@ namespace Workflow.Billing.Consumers
             if (message is IMessage<PackageMessage>) container.Resolve<PackageConsumer>().Consume(message as IMessage<PackageMessage>);
             if (message is IMessage<ContractMessage>) container.Resolve<ContractConsumer>().Consume(message as IMessage<ContractMessage>);
             if (message is IMessage<TransactionRequestMessage>) container.Resolve<TransactionRequestConsumer>().Consume(message as IMessage<TransactionRequestMessage>);
+            if (message is IMessage<TransactionRequestCleanupMessage>) container.Resolve<TransactionRequestCleanupConsumer>().Consume(message as IMessage<TransactionRequestCleanupMessage>);
         }
     }
 

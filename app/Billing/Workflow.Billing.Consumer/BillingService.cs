@@ -26,7 +26,8 @@ namespace Workflow.Billing.Consumer
                 new ConsumerInstaller(),
                 new BusInstaller(),
                 new PublishReportQueueInstaller(),
-                new PivotInstaller());
+                new PivotInstaller(),
+                new ScheduleInstaller());
 
             advancedBus = container.Resolve<IAdvancedBus>();
             var q = advancedBus.QueueDeclare("DataPlatform.Transactions.Billing");
@@ -38,7 +39,8 @@ namespace Workflow.Billing.Consumer
                 .Add<ClientMessage>((message, info) => new TransactionConsumer<ClientMessage>(message, container))
                 .Add<PackageMessage>((message, info) => new TransactionConsumer<PackageMessage>(message, container))
                 .Add<ContractMessage>((message, info) => new TransactionConsumer<ContractMessage>(message, container))
-                .Add<TransactionRequestMessage>((message, info) => new TransactionConsumer<TransactionRequestMessage>(message, container)));
+                .Add<TransactionRequestMessage>((message, info) => new TransactionConsumer<TransactionRequestMessage>(message, container))
+                .Add<TransactionRequestCleanupMessage>((message, info) => new TransactionConsumer<TransactionRequestCleanupMessage>(message, container)));
 
             _log.DebugFormat("Billing service started");
         }

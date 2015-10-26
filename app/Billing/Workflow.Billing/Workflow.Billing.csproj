@@ -88,20 +88,16 @@
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1824\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1824\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1819\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1824\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1824\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1652\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
@@ -201,10 +197,11 @@
     <Compile Include="Domain\NotificationSender\EmailNotification.cs" />
     <Compile Include="Domain\NotificationSender\ISendNotifications.cs" />
     <Compile Include="Domain\Schedules\CacheSchedule.cs" />
-    <Compile Include="Domain\Schedules\ISchedule.cs" />
-    <Compile Include="Domain\Schedules\ICleanup.cs" />
+    <Compile Include="Domain\Schedules\CleanupSchedule.cs" />
+    <Compile Include="Helpers\Schedules\ISchedule.cs" />
+    <Compile Include="Helpers\Schedules\ICleanup.cs" />
     <Compile Include="Domain\Schedules\MessageSchedule.cs" />
-    <Compile Include="Domain\Schedules\TransactionRequestCleanup.cs" />
+    <Compile Include="Helpers\Schedules\TransactionRequestCleanup.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\AccountMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\ArchiveBillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />

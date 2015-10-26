@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;

@@ -47,8 +47,6 @@ namespace Workflow.Billing.Repository
 
         public virtual void Save(T entity)
         {
-            //ValidateEntity(entity);
-
             var currSession = pipelineExtensions.BeforeTransaction(_session);
 
             currSession.Save(entity);
@@ -78,7 +76,6 @@ namespace Workflow.Billing.Repository
 
             var currSession = pipelineExtensions.BeforeTransaction(_session);
 
-            //currSession.SaveOrUpdate(entity);
             currSession.Merge(entity);
 
             pipelineExtensions.AfterTransaction(currSession);
@@ -108,14 +105,22 @@ namespace Workflow.Billing.Repository
         public void Delete(T entity)
         {
             ValidateEntity(entity);
-            _session.Delete(entity);
+            var currSession = pipelineExtensions.BeforeTransaction(_session);
+
+            currSession.Delete(entity);
+
+            pipelineExtensions.AfterTransaction(currSession);
         }
 
         public void Delete(T entity, bool useCache = false)
         {
             ValidateEntity(entity);
-            _session.Delete(entity);
+            var currSession = pipelineExtensions.BeforeTransaction(_session);
+
+            currSession.Delete(entity);
             if (useCache) _cacheProvider.CacheDelete(new Guid(entity.GetId().ToString()));
+
+            pipelineExtensions.AfterTransaction(currSession);
         }
 
         private void ValidateEntity(T entity)

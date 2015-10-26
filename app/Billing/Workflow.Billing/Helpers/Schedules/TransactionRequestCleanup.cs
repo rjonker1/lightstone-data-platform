@@ -3,7 +3,7 @@ using System.Linq;
 using DataPlatform.Shared.Repositories;
 using Workflow.Billing.Domain.Entities;
 
-namespace Workflow.Billing.Domain.Schedules
+namespace Workflow.Billing.Helpers.Schedules
 {
     public class TransactionRequestCleanup : ICleanup
     {
@@ -17,7 +17,7 @@ namespace Workflow.Billing.Domain.Schedules
         {
             if (!_transactionRequests.Any()) return;
 
-            foreach (var transactionRequest in _transactionRequests.Where(x => x.ExpirationDate <= DateTime.UtcNow))
+            foreach (var transactionRequest in _transactionRequests)
             {
                 _transactionRequests.Delete(transactionRequest);
             }
