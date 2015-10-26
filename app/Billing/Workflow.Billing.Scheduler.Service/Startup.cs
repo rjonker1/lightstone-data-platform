@@ -16,7 +16,6 @@ namespace Workflow.Billing.Scheduler.Service
 
             app.UseHangfireDashboard("/hangfire");
             app.UseNancy();
-            //app.UseStageMarker(PipelineStage.MapHandler);
         }
     }
 }

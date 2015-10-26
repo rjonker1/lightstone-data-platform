@@ -2,14 +2,18 @@
 using System.Configuration;
 using System.Text;
 using Common.Logging;
+using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using Hangfire;
 using Hangfire.Storage;
 using Microsoft.Owin.Hosting;
 using Nancy;
 using Workflow.Billing.Domain.Entities;
+using Workflow.Billing.Domain.Schedules;
 using Workflow.Billing.Helpers.Schedules;
 using Workflow.Billing.Messages.Publishable;
+using CacheSchedule = Workflow.Billing.Helpers.Schedules.CacheSchedule;
+using MessageSchedule = Workflow.Billing.Helpers.Schedules.MessageSchedule;
 
 namespace Workflow.Billing.Scheduler.Service
 {
@@ -73,6 +77,8 @@ namespace Workflow.Billing.Scheduler.Service
             }
 
             RecurringJob.AddOrUpdate<EmailSchedule>("Monthly StageBilling Notification", x => x.SendStageBillingNotification(), "0 8 26 * *", TimeZoneInfo.Local);
+
+            RecurringJob.AddOrUpdate<CleanupSchedule>("Transaction Request Cleanup", x => x.Send(new TransactionRequestCleanupMessage()), "0 23 * * *", TimeZoneInfo.Local);
 
             Console.WriteLine("\r");
             Console.WriteLine("Running on {0}", url);
