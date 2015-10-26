@@ -54,15 +54,13 @@ namespace Api.Modules
 
                 var customers = new List<Customer>();
                 var clients = new List<Client>();
-                var products = new List<Product>();
 
                 foreach (var metaCustomer in consumerMeta.Customers)
                 {
                     var contracts = new List<Contract>();
-
                     foreach (var contract in metaCustomer.Contracts)
                     {
-
+                        var products = new List<Product>();
                         foreach (var metaPackage in metaPackages)
                         {
                             foreach (var package in contract.Packages.Where(package => package.PackageId == metaPackage.PackageId))
@@ -119,10 +117,9 @@ namespace Api.Modules
                 foreach (var metaClient in consumerMeta.Clients)
                 {
                     var contracts = new List<Contract>();
-
                     foreach (var contract in metaClient.Contracts)
                     {
-
+                        var products = new List<Product>();
                         foreach (var metaPackage in metaPackages)
                         {
                             foreach (var package in contract.Packages.Where(package => package.PackageId == metaPackage.PackageId))
