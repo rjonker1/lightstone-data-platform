@@ -54,11 +54,12 @@ namespace Api.Modules
 
                 var customers = new List<Customer>();
                 var clients = new List<Client>();
-                var contracts = new List<Contract>();
                 var products = new List<Product>();
 
                 foreach (var metaCustomer in consumerMeta.Customers)
                 {
+                    var contracts = new List<Contract>();
+
                     foreach (var contract in metaCustomer.Contracts)
                     {
 
@@ -106,6 +107,7 @@ namespace Api.Modules
                         });
                     }
 
+                    if (contracts.Count >= 1)
                     customers.Add(new Customer
                     {
                         Id = metaCustomer.Id,
@@ -116,6 +118,8 @@ namespace Api.Modules
 
                 foreach (var metaClient in consumerMeta.Clients)
                 {
+                    var contracts = new List<Contract>();
+
                     foreach (var contract in metaClient.Contracts)
                     {
 
@@ -161,6 +165,7 @@ namespace Api.Modules
                         });
                     }
 
+                    if (contracts.Count >= 1)
                     clients.Add(new Client
                     {
                         Id = metaClient.Id,
