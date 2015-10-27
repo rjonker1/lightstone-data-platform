@@ -29,6 +29,12 @@
         var startDateFilter = moment({ day: 26 }).subtract(1, 'month').format('YYYY-MM-DD');
         var endDateFilter = moment({ day: 25 }).format('YYYY-MM-DD');
 
+        function exportPreBilling() {
+            $.fileDownload('/PreBillingDump?startDate=' + moment(startDateFilter).format('YYYY-MM-DD') + '&endDate=' + moment(endDateFilter).format('YYYY-MM-DD'));
+            //.done(function () { alert('File download a success!'); })
+            //.fail(function () { alert('File download failed!'); });
+        }
+
         var today = moment().date();
 
         if (today >= 26 && today < 31) {
@@ -37,7 +43,6 @@
         }
 
         $('#table').bootstrapTable({
-            //url: '/PreBilling?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
             search: true,
             showRefresh: true,
             showColumns: true,
@@ -127,12 +132,6 @@
                 }]
             });
         });
-
-        function exportPreBilling() {
-            $.fileDownload('/PreBillingDump?startDate=' + startDateFilter + '&endDate=' + endDateFilter);
-                //.done(function () { alert('File download a success!'); })
-                //.fail(function () { alert('File download failed!'); });
-        }
 
     </script>
 </div>
