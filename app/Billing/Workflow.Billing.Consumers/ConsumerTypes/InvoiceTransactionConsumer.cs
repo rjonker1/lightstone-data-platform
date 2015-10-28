@@ -57,9 +57,9 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 
                 var products = new List<DataProviderTransactionDto>();
                 var prods = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId &&
-                                            ((x.StateId == (Int32)DataProviderResponseState.Successful) ||
-                                                (x.StateId == (Int32)DataProviderResponseState.Partial) ||
-                                                (x.StateId == (Int32)DataProviderResponseState.NoRecords)) &&
+                                            ((x.StateId == (Int32) DataProviderResponseState.Successful) ||
+                                                (x.StateId == (Int32) DataProviderResponseState.Partial) ||
+                                                (x.StateId == (Int32) DataProviderResponseState.NoRecords)) &&
                                             //(x.Action == customer.BillingType || x.Action == client.BillingType))
                                             x.Action == "Response")
                                             .Select(x => new DataProviderTransactionDto
@@ -67,7 +67,8 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                                 Id = x.StreamId,
                                                 DataProviderName = x.DataProviderName,
                                                 CostPrice = x.CostPrice,
-                                                RecommendedPrice = x.RecommendedPrice
+                                                RecommendedPrice = x.RecommendedPrice,
+                                                ResponseState = (DataProviderResponseState) Enum.Parse(typeof(DataProviderResponseState), x.State)
                                             });
 
                 foreach (var dataProviderTransaction in prods)
@@ -125,7 +126,9 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                 DataProviderId = product.Id,
                                 DataProviderName = product.DataProviderName,
                                 CostPrice = product.CostPrice,
-                                RecommendedPrice = product.RecommendedPrice
+                                RecommendedPrice = product.RecommendedPrice,
+                                ResponseState = product.ResponseState,
+                                TransactState = (DataProviderResponseState) Enum.Parse(typeof(DataProviderResponseState), transaction.State)
                             }
                         };
 
