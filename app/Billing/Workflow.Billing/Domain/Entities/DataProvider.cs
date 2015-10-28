@@ -10,7 +10,7 @@ namespace Workflow.Billing.Domain.Entities
         public virtual double CostPrice { get; set; }
         public virtual double RecommendedPrice { get; set; }
         public virtual DataProviderResponseState ResponseState { get; set; }
-        public virtual DataProviderResponseState TransactState { get; set; }
+        public virtual DataProviderResponseState TransactionState { get; set; }
 
         public DataProvider() { }
     }

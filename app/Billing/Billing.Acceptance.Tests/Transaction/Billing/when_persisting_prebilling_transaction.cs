@@ -1,5 +1,6 @@
 ﻿using System;
 using Billing.TestHelper.BaseTests;
+using DataPlatform.Shared.Enums;
 using FluentNHibernate.Testing;
 using Workflow.Billing.Domain.Entities;
 using Xunit.Extensions;
@@ -22,6 +23,8 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
                 .CheckProperty(c => c.UserTransaction.TransactionId, Guid.NewGuid())
                 .CheckProperty(c => c.DataProvider.DataProviderId, Guid.NewGuid())
                 .CheckProperty(c => c.DataProvider.DataProviderName, "Package Test")
+                .CheckProperty(c => c.DataProvider.ResponseState, DataProviderResponseState.Successful)
+                .CheckProperty(c => c.DataProvider.TransactionState, DataProviderResponseState.Successful)
                 .VerifyTheMappings();
         }
         
@@ -39,6 +42,8 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
                 .CheckProperty(c => c.UserTransaction.TransactionId, Guid.NewGuid())
                 .CheckProperty(c => c.DataProvider.DataProviderId, Guid.NewGuid())
                 .CheckProperty(c => c.DataProvider.DataProviderName, "Package Test")
+                .CheckProperty(c => c.DataProvider.ResponseState, DataProviderResponseState.Successful)
+                .CheckProperty(c => c.DataProvider.TransactionState, DataProviderResponseState.Partial)
                 .VerifyTheMappings();
         }
     }

@@ -128,7 +128,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                 CostPrice = product.CostPrice,
                                 RecommendedPrice = product.RecommendedPrice,
                                 ResponseState = product.ResponseState,
-                                TransactState = (DataProviderResponseState) Enum.Parse(typeof(DataProviderResponseState), transaction.State)
+                                TransactionState = (DataProviderResponseState) Enum.Parse(typeof(DataProviderResponseState), transaction.State)
                             }
                         };
 

@@ -27,6 +27,8 @@ namespace Workflow.Billing.Helpers.AutoMapper.MappingOverrides
                 m.Map(x => x.DataProviderName);
                 m.Map(x => x.CostPrice);
                 m.Map(x => x.RecommendedPrice);
+                m.Map(x => x.ResponseState);
+                m.Map(x => x.TransactionState);
             });
 
             mapping.Component(x => x.UserTransaction, m =>
