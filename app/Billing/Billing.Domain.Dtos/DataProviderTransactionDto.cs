@@ -10,5 +10,6 @@ namespace Billing.Domain.Dtos
         public float CostPrice { get; set; }
         public float RecommendedPrice { get; set; }
         public DataProviderResponseState ResponseState { get; set; }
+        public DataProviderResponseState TransactionState { get; set; }
     }
 }

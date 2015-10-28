@@ -68,7 +68,8 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                                 DataProviderName = x.DataProviderName,
                                                 CostPrice = x.CostPrice,
                                                 RecommendedPrice = x.RecommendedPrice,
-                                                ResponseState = (DataProviderResponseState) Enum.Parse(typeof(DataProviderResponseState), x.State)
+                                                ResponseState = (DataProviderResponseState) Enum.Parse(typeof(DataProviderResponseState), x.State),
+                                                TransactionState = (DataProviderResponseState) Enum.Parse(typeof(DataProviderResponseState), transaction.State)
                                             });
 
                 foreach (var dataProviderTransaction in prods)
@@ -128,7 +129,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                                 CostPrice = product.CostPrice,
                                 RecommendedPrice = product.RecommendedPrice,
                                 ResponseState = product.ResponseState,
-                                TransactionState = (DataProviderResponseState) Enum.Parse(typeof(DataProviderResponseState), transaction.State)
+                                TransactionState = product.TransactionState
                             }
                         };
 

@@ -28,7 +28,7 @@ namespace Billing.Api.Tests.Consumers.EasyNetQ
             var bus = new TransactionBus(_bus);
 
             // Customer
-            transaction = new InvoiceTransactionCreated(new Guid("4B905242-4352-4A36-B1CD-CF6832606703"));
+            transaction = new InvoiceTransactionCreated(new Guid("2FD581A3-47EC-42A6-8EE7-ECC03FADD14E"));
 
             bus.SendDynamic(transaction);
 
