@@ -184,8 +184,8 @@ namespace PackageBuilder.Api.Modules
                 new TransactionBus(eBus).SendDynamic(Mapper.Map(apiRequest, new TransactionRequestMessage()));
 
                 this.Info(() => "Updated TransactionRequest UserState: {0}".FormatWith(apiRequest.UserState));
-                if (apiRequest.UserState == ApiCommitRequestUserState.Cancelled) Response.AsJson(new { Success = "Request successfully cancelled by user" });
-                if (apiRequest.UserState == ApiCommitRequestUserState.VehicleNotProvided) Response.AsJson(new { Success = "Request successfully marked as VehicleNotProvided by user" });
+                if (apiRequest.UserState == ApiCommitRequestUserState.Cancelled) return Response.AsJson(new { Success = "Request successfully cancelled by user" });
+                if (apiRequest.UserState == ApiCommitRequestUserState.VehicleNotProvided) return Response.AsJson(new { Success = "Request successfully marked as VehicleNotProvided by user" });
 
                 this.Info(() => "Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
