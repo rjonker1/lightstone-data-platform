@@ -183,6 +183,10 @@ namespace PackageBuilder.Api.Modules
                 // RabbitMQ
                 new TransactionBus(eBus).SendDynamic(Mapper.Map(apiRequest, new TransactionRequestMessage()));
 
+                this.Info(() => "Updated TransactionRequest UserState: {0}".FormatWith(apiRequest.UserState));
+                if (apiRequest.UserState == ApiCommitRequestUserState.Cancelled) Response.AsJson(new { Success = "Request successfully cancelled by user" });
+                if (apiRequest.UserState == ApiCommitRequestUserState.VehicleNotProvided) Response.AsJson(new { Success = "Request successfully marked as VehicleNotProvided by user" });
+
                 this.Info(() => "Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
                 this.Info(() => "Package Read Initialized, TimeStamp: {0}".FormatWith(DateTime.UtcNow));
