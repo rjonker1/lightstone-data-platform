@@ -44,7 +44,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                             CreateFile(dto, path, fileName.FirstOrDefault() + " - Contract Statement.pdf");
 
                             //Send Email
-                            //_emailPdfNotificationsWithAttachment.Send(dto);
+                            _emailPdfNotificationsWithAttachment.Send(dto);
                         }
                     }
 
