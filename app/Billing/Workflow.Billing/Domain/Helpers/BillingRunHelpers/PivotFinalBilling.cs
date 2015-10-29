@@ -62,7 +62,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                     _finalBillingRepository.SaveOrUpdate(finalEntity);
                 }
-                    
 
                 InvoicePdfList = _finalBillingTransactions.PivotToInvoicePdf();
 
