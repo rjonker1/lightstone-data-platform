@@ -156,7 +156,8 @@ window.invoiceActionEvents = {
             var packages = '';
 
             for (var i = 0; i < response.data.length; i++) {
-                packages += '{"ItemCode": "' + response.data[i].packageName + '", "ItemDescription": "' + response.data[i].packageName + '", "QuantityUnit": ' + response.data[i].packageTransactions + ', "Price":' + response.data[i].packageRecommendedPrice + ', "Vat": 0.00},';
+                packages += '{"ItemCode": "' + response.data[i].packageName + '", "ItemDescription": "' + response.data[i].packageDescription + '", "QuantityUnit": ' + response.data[i].packageTransactions + ', "Price":' + response.data[i].packageRecommendedPrice + ', "Vat": 0.00 }';
+                if (response.data.length - 1 != i && response.data.length - 1 >= 0) packages += ',';
             }
 
             var data = '{' +
@@ -169,6 +170,7 @@ window.invoiceActionEvents = {
                             packages +
                             ']  ' +
                     '} ' +
+                 '}' +
                 '}';
 
             $.post(reportingApi + "/ReportOutput", data)

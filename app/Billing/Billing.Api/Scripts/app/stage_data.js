@@ -144,7 +144,7 @@ window.userTransactionEditActionEvents = {
 
                 requestString += '{ "created": "' + transRow.transactions[i].created + '",' +
                                     ' "requestId": "' + transRow.transactions[i].requestId + '" }';
-                if (transRow.transactions.length - 1 != i) requestString += ',';
+                if (transRow.transactions.length - 1 != i && transRow.transactions.length - 1 >= 0) requestString += ',';
             }
 
             requestString += ']';
@@ -325,7 +325,8 @@ window.invoiceActionEvents = {
             var packages = '';
 
             for (var i = 0; i < response.data.length; i++) {
-                packages += '{"ItemCode": "' + response.data[i].packageName + '", "ItemDescription": "' + response.data[i].packageDescription + '", "QuantityUnit": ' + response.data[i].packageTransactions + ', "Price":' + response.data[i].packageRecommendedPrice + ', "Vat": 0.00},';
+                packages += '{"ItemCode": "' + response.data[i].packageName + '", "ItemDescription": "' + response.data[i].packageDescription + '", "QuantityUnit": ' + response.data[i].packageTransactions + ', "Price":' + response.data[i].packageRecommendedPrice + ', "Vat": 0.00 }';
+                if (response.data.length - 1 != i && response.data.length - 1 >= 0) packages += ',';
             }
             
             var data = '{' +
@@ -338,6 +339,7 @@ window.invoiceActionEvents = {
                             packages +
                             ']  ' +
                     '} ' +
+                 '}' +
                 '}';
 
             //$.get("http://localhost:8856/templates/N190datG", function (response) {
