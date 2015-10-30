@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using jsreport.Client;
 using Nancy;
 using Nancy.Json;
@@ -51,6 +52,20 @@ namespace Reporting.Api.Modules
                 var response = new StreamResponse(() => file, MimeTypes.GetMimeType(fileName));
 
                 return response.AsAttachment(fileName);
+            };
+
+            Post["/ReportOutput"] = parameters =>
+            {
+
+                var body = Request.Body<dynamic>();
+
+                var dataString = JsonConvert.SerializeObject(body);
+
+                var cli = new WebClient();
+                cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string report = cli.UploadString("http://localhost:8856/api/report", dataString);
+
+                return report;
             };
 
             //CORS for Module
