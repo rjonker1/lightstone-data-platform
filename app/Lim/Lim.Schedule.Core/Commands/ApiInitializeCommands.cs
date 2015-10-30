@@ -19,11 +19,11 @@ namespace Lim.Schedule.Core.Commands
     [DataContract]
     public class ApiInitializePushCommand
     {
-        public ApiInitializePushCommand(IEnumerable<IntegrationPackageDto> packages, AuthenticationType authenticationType, AuditIntegrationCommand audit, ApiConfigurationIdentifier configuration, long configurationId)
+        public ApiInitializePushCommand(IEnumerable<IntegrationPackageDto> packages, AuthenticationType authenticationType,
+            AuditIntegrationCommand audit, ApiConfigurationIdentifier configuration, long configurationId)
         {
             Packages = packages;
             PackageTransactions = new List<PackageTransactionDto>();
-        //    DateRange = dateRange;
             AuthenticationType = authenticationType;
             Audit = audit;
             Configuration = configuration;
@@ -33,7 +33,6 @@ namespace Lim.Schedule.Core.Commands
         [DataMember] public readonly long ConfigurationId;
         [DataMember] public readonly IEnumerable<IntegrationPackageDto> Packages;
         [DataMember] public readonly List<PackageTransactionDto> PackageTransactions;
-      //  [DataMember] public readonly DateTime DateRange;
         [DataMember] public readonly AuthenticationType AuthenticationType;
         [DataMember] public readonly AuditIntegrationCommand Audit;
         [DataMember] public readonly ApiConfigurationIdentifier Configuration;

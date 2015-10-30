@@ -50,7 +50,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
     [DataContract]
     public class DataProviderError
     {
-        private const string GetErrors = @"select count([state]) ErrorCount, RequestId from [Billing].[dbo].[DataProviderTransaction] where ([State] <> 'Successful') and RequestId in @RequestIds group by RequestId";
+        private const string GetErrors = @"select count([state]) ErrorCount, RequestId from [Billing].[dbo].[DataProviderTransaction] where ([StateId] <> 1) and RequestId in @RequestIds group by RequestId";
 
         public static string SelectStatement()
         {

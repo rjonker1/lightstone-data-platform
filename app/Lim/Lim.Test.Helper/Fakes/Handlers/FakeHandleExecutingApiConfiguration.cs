@@ -19,7 +19,6 @@ namespace Lim.Test.Helper.Fakes.Handlers
             command.Configurations.ToList().ForEach(f =>
             {
                 f.Pusher.Push(f.Command);
-                f.Audit.Successful();
             });
 
             IsHandled = true;

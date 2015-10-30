@@ -14,7 +14,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     {
         private readonly IMonitoringRepository _monitoring;
         private readonly ITransactionRepository _billing;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<DataProviderHandler>();
         public IEnumerable<DataProviderView> MonitoringResponse { get; private set; }
 
         public DataProviderHandler(IMonitoringRepository monitoring,
@@ -22,7 +22,6 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
         {
             _monitoring = monitoring;
             _billing = billing;
-            _log = LogManager.GetLogger(GetType());
         }
 
         public void Handle(GetMonitoringCommand command)
@@ -59,7 +58,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured in the Monitoirng Handler because of {0}", ex.Message);
+                Log.ErrorFormat("An error occured in the Monitoirng Handler because of {0}", ex.Message);
             }
         }
 
