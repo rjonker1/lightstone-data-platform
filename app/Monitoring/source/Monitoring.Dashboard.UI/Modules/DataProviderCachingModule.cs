@@ -14,7 +14,7 @@ namespace Monitoring.Dashboard.UI.Modules
 
         public DataProviderCachingModule(IHandleDataProviderCaching handler)
         {
-            //this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
             Get["/dataProviders/caching"] = _ => View["DataProvidersCaching"];
 
