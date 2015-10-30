@@ -1,6 +1,5 @@
 ﻿using System;
 using Lim.Domain.Base;
-using Lim.Domain.Dto;
 using Lim.Schedule.Core.Commands;
 
 namespace Lim.Schedule.Core.Factories.FlatFile

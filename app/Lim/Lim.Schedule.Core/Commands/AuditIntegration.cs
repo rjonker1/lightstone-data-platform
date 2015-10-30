@@ -16,6 +16,11 @@ namespace Lim.Schedule.Core.Commands
             Suffix = suffix;
         }
 
+        public void IsSuccessful(bool check)
+        {
+            WasSuccessful = check;
+        }
+
         public void Successful()
         {
             WasSuccessful = true;

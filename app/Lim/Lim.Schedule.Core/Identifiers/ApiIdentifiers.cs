@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Common.Logging;
 using Lim.Core;
 using Lim.Enums;
 using Lim.Schedule.Core.Commands;
@@ -10,7 +9,6 @@ namespace Lim.Schedule.Core.Identifiers
     [DataContract]
     public class ApiPushIntegration
     {
-        private readonly ILog _log = LogManager.GetLogger<ApiPushIntegration>();
         public readonly IPush<ApiInitializePushCommand> Pusher;
         public ApiPushIntegration(Guid key, long configurationId, ApiConfigurationIdentifier configuration, IntegrationClientIdentifier integrationClient, IntegrationContractIdentifier integrationContract,
             IntegrationPackageIdentifier packages, ClientIdentifier client, IPush<ApiInitializePushCommand> pusher)
@@ -53,12 +51,13 @@ namespace Lim.Schedule.Core.Identifiers
         }
 
         [DataMember]
-        public AuditIntegrationCommand Audit
+        private AuditIntegrationCommand Audit
+
         {
             get
             {
-                return new AuditIntegrationCommand(Client.ClientId, ConfigurationId, DateTime.UtcNow, (short) IntegrationAction.Push,
-                    (short) IntegrationType.Api,
+                return new AuditIntegrationCommand(Client.ClientId, ConfigurationId, DateTime.UtcNow, (short)IntegrationAction.Push,
+                    (short)IntegrationType.Api,
                     Configuration.BaseAddress, Configuration.Suffix);
             }
         }

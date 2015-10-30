@@ -54,10 +54,10 @@ namespace Lim.Acceptance.Tests.Integrations.Push
 
             _fetch =
                 new HandleFetchingApiPushConfiguration(
-                    new FetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository))),
-                    new CustomFetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository))),
-                    new ClientFetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository))));
-            _execute = new HandleExecutingApiConfiguration(_audit, _tracking);
+                    new FetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository), _tracking,_audit)),
+                    new CustomFetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository), _tracking, _audit)),
+                    new ClientFetchPushFactory(_entityRepository, new PushFactory(new InitializePushFactory(_entityRepository), _tracking, _audit)));
+            _execute = new HandleExecutingApiConfiguration();
 
             _setup = new ApiIntegrationTestSetup(_session, _entityRepository);
         }

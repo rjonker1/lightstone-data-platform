@@ -181,114 +181,49 @@
     <script src="~/assets/plugins/chosen/chosen.jquery.min.js" type="text/javascript"></script>
     <script src="~/assets/js/app.min.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        $(function() {
-            //$('#frequencytime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' });
+<script type="text/javascript">
+    $(function() {
+        $('#frequencytime').timepicker();
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Value does not exist in the list' },
+            '.chosen-select-width': { width: "95%" }
+        };
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
 
-            @*var packages =  @Html.Raw(new JavaScriptSerializer().Serialize(Model.SelectableDataPlatformClients.Select(s => s.Contracts)));
-            var contracts = @Html.Raw(new JavaScriptSerializer().Serialize(Model.SelectableDataPlatformClients));*@
+        if ($('#HasAuthentication').is(':checked')) {
+            $('.section-authentication').fadeIn('slow');
+        } else {
+            $('.section-authentication').fadeOut('slow');
+        }
 
+        if ($('#frequencyType').find(':selected').data('name') == 'Custom') {
+            $('#custom-time-picker').fadeIn('slow');
+        } else {
+            $('#custom-time-picker').fadeOut('slow');
+        }
 
-            $('#frequencytime').timepicker();
-            var config = {
-                '.chosen-select': {},
-                '.chosen-select-deselect': { allow_single_deselect: true },
-                '.chosen-select-no-single': { disable_search_threshold: 10 },
-                '.chosen-select-no-results': { no_results_text: 'Value does not exist in the list' },
-                '.chosen-select-width': { width: "95%" }
-            };
-            for (var selector in config) {
-                $(selector).chosen(config[selector]);
-            }
-
-            if ($('#HasAuthentication').is(':checked')) {
+        $('#HasAuthentication').change(function() {
+            if (this.checked) {
                 $('.section-authentication').fadeIn('slow');
             } else {
                 $('.section-authentication').fadeOut('slow');
             }
+        });
 
-            if ($('#frequencyType').find(':selected').data('name') == 'Custom') {
+        $('#frequencyType').change(function() {
+            var name = $(this).find(':selected').data('name');
+            if (name == 'Custom') {
                 $('#custom-time-picker').fadeIn('slow');
             } else {
                 $('#custom-time-picker').fadeOut('slow');
             }
 
-            $('#HasAuthentication').change(function() {
-                if (this.checked) {
-                    $('.section-authentication').fadeIn('slow');
-                } else {
-                    $('.section-authentication').fadeOut('slow');
-                }
-            });
-
-            $('#frequencyType').change(function() {
-                var name = $(this).find(':selected').data('name');
-                if (name == 'Custom') {
-                    $('#custom-time-picker').fadeIn('slow');
-                } else {
-                    $('#custom-time-picker').fadeOut('slow');
-                }
-
-            });
-
-            //$('#integrationClients').change(function() {
-            //    var id = $(this).val();
-            //    var clientContracts = $.grep(contracts, function(e) {
-            //        alert("client id " + id);
-            //        return e.clientCustomerId = id;
-            //    });
-                
-            //    $("#integrationContracts").remove();
-
-            //    var sel = $("<select id='integrationContracts' name='IntegrationContracts' required data-placeholder='Select Contract ...' class='chosen-select form-control' multiple></select>").appendTo("#select-integration-contracts");
-                
-            //    $.each(clientContracts, function(client, clientContract) {
-
-            //        //var selectDiv = $.getElementById("select-integration-contracts");
-                    
-            //        $.each(clientContract.contracts, function(clientid, contract) {
-            //            alert(contract.contractId);
-            //            alert(contract.name);
-            //            sel.append($("<option></option>")
-            //                .attr("value", contract.contractId)
-            //                .text(contract.name));
-            //        });
-            //        //alert(contract.contractId);
-            //        //alert(contract.name);
-            //        //$('#integrationContracts').append($("<option></option>")
-            //        //    .attr("value", contract.contractId)
-            //        //    .text(contract.name));
-            //    });
-
-            //});
-
-            //$('#integrationClients').change(function () {
-            //    var id = $(this).val();
-            //    $("#integrationContracts > option").each(function () {
-            //        var clientId = $(this).data('clientid');
-            //        if (clientId == id && clientId != undefined) {
-            //            alert('enabling');
-            //            $(this).prop('disabled', false);
-            //        }
-            //        if(clientId != id && clientId != undefined){
-            //            alert('disabling');
-            //            $(this).hide();
-            //            $(this).prop('disabled', true);
-            //        }
-            //    });
-            //});
-
-            //$('#integrationContracts').change(function() {
-            //    var id = $(this).val();
-            //    $('#integrationPackages > option').each(function() {
-            //        var contractId = $(this).data('contractid');
-            //        if (contractId == id) {
-            //            $(this).prop('disabled', false);
-            //        } else {
-            //            $(this).prop('disabled', true);
-            //        }
-            //    });
-            //});
-        })
-    </script>
+        });
+    })
+</script>
 </body>

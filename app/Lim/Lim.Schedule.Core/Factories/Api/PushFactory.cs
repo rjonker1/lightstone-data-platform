@@ -5,9 +5,11 @@ using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
 using Lim.Push.RestApi;
+using Lim.Schedule.Core.Audits;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Factories.FlatFile;
 using Lim.Schedule.Core.Identifiers;
+using Lim.Schedule.Core.Tracking;
 using Newtonsoft.Json;
 
 namespace Lim.Schedule.Core.Factories.Api
@@ -16,10 +18,14 @@ namespace Lim.Schedule.Core.Factories.Api
     {
         private static readonly ILog Log = LogManager.GetLogger<PullFactory>();
         private readonly IInitialize<ApiInitializePushCommand> _initialize;
+        private readonly ITrackIntegration _tracking;
+        private readonly IAuditIntegration _auditLog;
 
-        public PushFactory(IInitialize<ApiInitializePushCommand> initialize)
+        public PushFactory(IInitialize<ApiInitializePushCommand> initialize, ITrackIntegration tracking, IAuditIntegration auditLog)
         {
             _initialize = initialize;
+            _tracking = tracking;
+            _auditLog = auditLog;
         }
 
         public override void Push(ApiInitializePushCommand command)
@@ -46,6 +52,12 @@ namespace Lim.Schedule.Core.Factories.Api
                     command.Audit.SetPayload(JsonConvert.SerializeObject(packageTransaction), false, DateTime.MinValue);
                 }
             }
+
+            _tracking.Track(new TrackIntegrationCommand(command.Audit.Payloads.Max(m => m.TransactionDate), command.ConfigurationId,
+                         command.Audit.Payloads.Count(w => w.WasSuccessful)));
+
+            command.Audit.IsSuccessful(command.Audit.Payloads.Count(w => !w.WasSuccessful) == 0);
+            _auditLog.Audit(command.Audit);
 
         }
 
