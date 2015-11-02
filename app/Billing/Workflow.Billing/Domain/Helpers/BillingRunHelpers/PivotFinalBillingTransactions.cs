@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
+using Nancy.Extensions;
 using ServiceStack.Common;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure;
@@ -20,8 +21,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
         private readonly IReportBuilder _reportBuilder;
 
-        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month , 25).AddHours(23).AddMinutes(59).AddSeconds(59);
-        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
+        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month - 1, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
+        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 2), 26);
 
         public PivotFinalBillingTransactions(IRepository<FinalBilling> finalBillingRepository, IRepository<AccountMeta> accountMetaReporRepository,
                                                 IRepository<ContractMeta> contractRepository, IReportBuilder reportBuilder)
@@ -142,8 +143,11 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         {
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
             {
-                var customerClientDetail = _finalBillingRepository.FirstOrDefault(x => x.CustomerId == customerClientId || x.ClientId == customerClientId);
-                var contracts = _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)).Select(x => x.ContractId).Distinct();
+                var repo = _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)
+                                                                    && (x.Created >= _startBillMonth && x.Created <= _endBillMonth));
+
+                var customerClientDetail = repo.First();
+                var contracts = repo.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)).Select(x => x.ContractId).Distinct();
 
                 try
                 {
@@ -152,12 +156,14 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         var contract = _contractRepository.FirstOrDefault(x => x.ContractId == contractId);
                         var userTransactionsList = new List<ContractUserTransactions>();
 
-                        var users = _finalBillingRepository.Where(x => x.CustomerId == customerClientId || x.ClientId == customerClientId).Select(x => x.User.UserId).Distinct();
+                        //var repo = _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)
+                        //                                            && (x.Created >= _startBillMonth && x.Created <= _endBillMonth));
+
+                        var users = repo.Select(x => x.User.UserId).Distinct();
 
                         foreach (var userId in users)
                         {
-                            var userTransactions = _finalBillingRepository.Where(x => x.User.UserId == userId && (x.CustomerId == customerClientId || x.ClientId == customerClientId)
-                                                                            && (x.Created >= _startBillMonth && x.Created <= _endBillMonth));
+                            var userTransactions = repo.Where(x => x.User.UserId == userId).DistinctBy(x => x.UserTransaction.RequestId);
 
                             var userProductList = new List<ContractProductDetail>();
 
@@ -166,7 +172,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 {
                                     PackageName = x.Package.PackageName,
                                     TransactionCount = userTransactions.Count(t => t.Package.PackageId == x.Package.PackageId)
-                                }).Distinct());
+                                }).DistinctBy(x => x.PackageName));
 
                             userTransactionsList.Add(new ContractUserTransactions
                             {

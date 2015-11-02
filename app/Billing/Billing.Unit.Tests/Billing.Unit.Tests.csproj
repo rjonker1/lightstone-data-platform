@@ -123,19 +123,21 @@
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy">
-      <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
+    <Reference Include="Nancy, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nancy.1.2.0\lib\net40\Nancy.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Nancy.Authentication.Stateless">
-      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
+    <Reference Include="Nancy.Authentication.Stateless, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.23.0\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Nancy.Testing, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
+    <Reference Include="Nancy.Testing">
+      <HintPath>..\..\packages\Nancy.Testing.1.2.0\lib\net40\Nancy.Testing.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
