@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Management
                 _response.Select(
                     s =>
                         new BmwFinanceRecord(s.FinanceHouse, s.DealReference, s.StartDate, s.ExpireDate, s.Chassis, s.Engine, s.RegistrationNumber,
-                            s.Description, s.RegistrationYear, s.ProductCategory, s.DealStatus));
+                            s.Description, s.RegistrationYear, s.ProductCategory, s.DealStatus,s.ClientNumber));
 
             Result = new BmwFinanceResponse(financeRecords);
             Result.AddResponseState(State());

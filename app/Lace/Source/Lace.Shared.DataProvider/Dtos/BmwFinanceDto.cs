@@ -10,6 +10,7 @@ namespace Lace.Toolbox.Database.Dtos
         public const string SelectWithAccountNumber = @"SELECT * FROM Finances WHERE DealReference = @AccountNumber";
         public const string SelectWithVinNumber = @"SELECT * FROM Finances WHERE Chassis = @VinNumber";
         public const string SelectWithLicenceNumber = @"SELECT* FROM Finances WHERE RegistrationNumber = @LicenceNumber";
+        public const string SelectWithVinAndEngineId = @"SELECT * FROM Finances WHERE VinEngineId = @VinEngineId";
 
         public BmwFinanceDto()
         {
@@ -17,7 +18,7 @@ namespace Lace.Toolbox.Database.Dtos
         }
 
         public BmwFinanceDto(string financeHouse, decimal dealReference, DateTime startDate, DateTime expireDate, string chassis,
-            string engine, string registrationNumber, string description, int registrationYear, string productCategory, string dealStatus)
+            string engine, string registrationNumber, string description, int registrationYear, string productCategory, string dealStatus, string clientNumber)
         {
             FinanceHouse = financeHouse;
             DealReference = dealReference;
@@ -30,6 +31,7 @@ namespace Lace.Toolbox.Database.Dtos
             RegistrationYear = registrationYear;
             ProductCategory = productCategory;
             DealStatus = dealStatus;
+            ClientNumber = clientNumber;
         }
 
 
@@ -49,5 +51,7 @@ namespace Lace.Toolbox.Database.Dtos
         public int RegistrationYear { get; set; }
         public string ProductCategory { get; set; }
         public string DealStatus { get; set; }
+        public string ClientNumber { get; set; }
+        public string VinEngineId { get; set; }
     }
 }

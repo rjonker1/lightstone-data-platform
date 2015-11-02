@@ -99,6 +99,8 @@
     <Compile Include="Dto\WeekdayDto.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
+    <Compile Include="Extensions\RepeatAction.cs" />
+    <Compile Include="Extensions\RepeatValue.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
