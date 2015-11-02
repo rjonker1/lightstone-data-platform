@@ -21,8 +21,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
         private readonly IReportBuilder _reportBuilder;
 
-        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month - 1, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
-        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 2), 26);
+        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
+        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
 
         public PivotFinalBillingTransactions(IRepository<FinalBilling> finalBillingRepository, IRepository<AccountMeta> accountMetaReporRepository,
                                                 IRepository<ContractMeta> contractRepository, IReportBuilder reportBuilder)
@@ -156,9 +156,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         var contract = _contractRepository.FirstOrDefault(x => x.ContractId == contractId);
                         var userTransactionsList = new List<ContractUserTransactions>();
 
-                        //var repo = _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)
-                        //                                            && (x.Created >= _startBillMonth && x.Created <= _endBillMonth));
-
                         var users = repo.Select(x => x.User.UserId).Distinct();
 
                         foreach (var userId in users)
@@ -175,7 +172,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 }).DistinctBy(x => x.PackageName));
 
                             userTransactionsList.Add(new ContractUserTransactions
-                            {
+                             {
                                 User = userTransactions.Where(x => x.User.UserId == userId).Select(x => x.User.Username).First(),
                                 Products = userProductList
                             });
