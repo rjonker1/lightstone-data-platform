@@ -48,40 +48,6 @@ namespace Toolbox.Bmw.Factories
             _watcher.Deleted += Deleted;
             _watcher.Renamed += Renamed;
         }
-
-        public void Changed(object source, FileSystemEventArgs args)
-        {
-
-            Log.InfoFormat("File has been changed in Path {0}", args.FullPath);
-            //try
-            //{
-            //    SendFileNotifications.Notify("A file has been changed");
-            //    var dto = new FileInformationDto(_command.FilePath, args.Name, _command.Password, "", true,true);
-            //    var data = _fileReader.Read(
-            //        new ReadFile(dto)).ToList();
-
-            //    if (!data.Any())
-            //    {
-            //        FailFile(dto, args.Name);
-            //        Log.ErrorFormat("File has been created in Path {0} but cannot be read", args.FullPath);
-            //        return;
-            //    }
-
-            //    if (!_persist.Persist(data))
-            //    {
-            //        Log.ErrorFormat("File has been created in Path {0} and has been read but cannot be saved to the database.", args.FullPath);
-            //        FailFile(dto, args.Name);
-            //        return;
-            //    }
-
-            //    BackupFile(dto, args.Name);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.ErrorFormat("An error occurred reading file in path {0} because of {1}", ex, args.FullPath, ex.Message);
-            //}
-        }
-
         public void Created(object source, FileSystemEventArgs args)
         {
             try
@@ -132,35 +98,11 @@ namespace Toolbox.Bmw.Factories
         public void Renamed(object source, FileSystemEventArgs args)
         {
             Log.InfoFormat("File has been renamed in Path {0}", args.FullPath);
-            //try
-            //{
-            //    var dto = new FileInformationDto(_command.FilePath, args.Name, _command.Password, "", true, true);
-            //    var data = _fileReader.Read(
-            //        new ReadFile(dto)).ToList();
-
-            //    if (!data.Any())
-            //    {
-            //        Log.InfoFormat("File has been created in Path {0} but cannot be read", args.FullPath);
-            //        FailFile(dto, args.Name);
-            //        return;
-            //    }
-
-            //    if (!_persist.Persist(data))
-            //    {
-            //        Log.ErrorFormat("File has been created in Path {0} and has been read but cannot be saved to the database.", args.FullPath);
-            //        FailFile(dto, args.Name);
-            //        return;
-            //    }
-
-
-            //    BackupFile(dto, args.Name);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.ErrorFormat("An error occurred reading file in path {0} because of {1}", ex, args.FullPath, ex.Message);
-            //}
         }
-
+        public void Changed(object source, FileSystemEventArgs args)
+        {
+            Log.InfoFormat("File has been changed in Path {0}", args.FullPath);
+        }
         private void BackupFile(FileInformationDto dto, string fileName)
         {
             _backup.Backup(new BackupFile(dto,

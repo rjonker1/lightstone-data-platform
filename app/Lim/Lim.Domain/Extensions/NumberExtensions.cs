@@ -21,5 +21,17 @@ namespace Lim.Domain.Extensions
                 return -1;
             }
         }
+
+        public static TimeSpan Seconds(this int value)
+        {
+            var fromSeconds = TimeSpan.FromSeconds(value);
+
+            return fromSeconds;
+        }
+
+        public static RepeatValue Times(this int value)
+        {
+            return new RepeatValue(value);
+        }
     }
 }

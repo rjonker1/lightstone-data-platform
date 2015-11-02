@@ -9,9 +9,9 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Queries
 {
     public interface IBmwFinanceQuery
     {
-        // IEnumerable<BmwFinanceDto> Finances { get; }
         IEnumerable<BmwFinanceDto> GetWithAccountNumber(string accountNumber);
         IEnumerable<BmwFinanceDto> GetWithVinNumber(string vinNumber);
+        IEnumerable<BmwFinanceDto> GetWithVinEngineId(string vinEngineId);
         IEnumerable<BmwFinanceDto> GetWithLicenceNumber(string licenseNumber);
     }
 
@@ -68,6 +68,23 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Queries
                 return !finances.Any()
                     ? _repository.Get<BmwFinanceDto>(BmwFinanceDto.SelectWithLicenceNumber, new {@LicenceNumber = licenseNumber})
                     : finances;
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Error getting BWM Finance data because of {0}", ex, ex.Message);
+                throw;
+            }
+        }
+
+
+        public IEnumerable<BmwFinanceDto> GetWithVinEngineId(string vinEngineId)
+        {
+            try
+            {
+                var finances =
+                    _repository.GetAll<BmwFinanceDto>(finance => finance.VinEngineId == vinEngineId).ToList();
+
+                return !finances.Any() ? _repository.Get<BmwFinanceDto>(BmwFinanceDto.SelectWithVinAndEngineId, new { @VinEngineId = vinEngineId }) : finances;
             }
             catch (Exception ex)
             {
