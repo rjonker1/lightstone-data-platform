@@ -19,7 +19,7 @@ namespace Api.Modules
     public class ActionModule : SecureModule
     {
         public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi,
-            IDispatchMessagesToBus<RequestReportMessage> dispatcher)
+            IDispatchMessagesToBus<RequestMetadataMessage> dispatcher)
         {
             Get["/"] = parameters =>
             {

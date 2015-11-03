@@ -51,4 +51,5 @@ namespace Api.Domain.Core.Dto
         [DataMember] public readonly string Scheme;
         [DataMember] public readonly string SiteBase;
     }
+
 }

@@ -10,14 +10,14 @@ namespace Api.Unit.Tests.Publisher
     public class when_dispatching_request_message_to_bus : Specification
     {
 
-        private readonly IDispatchMessagesToBus<RequestReportMessage> _dispatcher;
-        private readonly RequestReportMessage _request;
+        private readonly IDispatchMessagesToBus<RequestMetadataMessage> _dispatcher;
+        private readonly RequestMetadataMessage _request;
 
         public when_dispatching_request_message_to_bus()
         {
 
             _dispatcher = new RequestMessageDispatcher(BusFactory.CreateAdvancedBus("host=localhost"));
-            _request = new RequestReportMessage(new RequestDto(), Guid.NewGuid());
+            _request = new RequestMetadataMessage(new RequestHeaderMetadataDto(),new RequestUrlMetadataDto(),  Guid.NewGuid(), string.Empty);
         }
 
         public override void Observe()

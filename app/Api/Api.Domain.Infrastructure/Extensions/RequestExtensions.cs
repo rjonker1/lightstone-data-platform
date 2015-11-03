@@ -11,7 +11,7 @@ namespace Api.Domain.Infrastructure.Extensions
 {
     public static class RequestExtensions
     {
-        public static void Report(this Nancy.NancyContext context, IDispatchMessagesToBus<RequestReportMessage> dispatcher, Guid requestId)
+        public static void Report(this Nancy.NancyContext context, IDispatchMessagesToBus<RequestMetadataMessage> dispatcher, Guid requestId)
         {
             try
             {
@@ -19,22 +19,17 @@ namespace Api.Domain.Infrastructure.Extensions
                 {
                     try
                     {
-                        var request = new RequestDto
-                        {
-                            Headers = context.Request.Headers,
-                            Url = context.Request.Url,
-                            Form = context.Request.Form,
-                            Method = context.Request.Method,
-                            Path = context.Request.Path,
-                            Query = context.Request.Query,
-                            UserHostAddress = context.Request.UserHostAddress
-                        };
-                        dispatcher.Dispatch(new RequestReportMessage(request, requestId));
+                        var header = new RequestHeaderMetadataDto(context.Request.Headers.Authorization, context.Request.Headers.Host,
+                            context.Request.Headers.UserAgent, context.Request.Headers.ContentType);
+                        var url = new RequestUrlMetadataDto(context.Request.Url.Path, context.Request.Url.HostName, context.Request.Url.IsSecure,
+                            context.Request.Url.Path, context.Request.Url.Port, context.Request.Url.Query, context.Request.Url.Scheme,
+                            context.Request.Url.SiteBase);
+                        dispatcher.Dispatch(new RequestMetadataMessage(header, url, requestId, context.CurrentUser.UserName));
                     }
-                    finally 
+                    finally
                     {
                     }
-                   
+
                 });
             }
             finally
