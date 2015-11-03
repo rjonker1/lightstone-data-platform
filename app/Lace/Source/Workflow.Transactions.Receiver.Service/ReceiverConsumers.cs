@@ -37,8 +37,8 @@ namespace Workflow.Transactions.Receiver.Service
             if (message is IMessage<BillTransactionMessage>)
                 container.Resolve<TransactionReceiver>().Consume((IMessage<BillTransactionMessage>)message);
 
-            if(message is IMessage<RequestReportMessage>)
-                container.Resolve<ApiRequestReceiver>().Consume((IMessage<RequestReportMessage>)message);
+            if (message is IMessage<RequestMetadataMessage>)
+                container.Resolve<ApiRequestReceiver>().Consume((IMessage<RequestMetadataMessage>)message);
         }
     }
 }

@@ -88,7 +88,7 @@ namespace Workflow.DataProvider.Bus.Consumer
             _bus.Bind(apiReceiverExchange, apiReceiverQueue, string.Empty);
 
             _bus.Consume(apiReceiverQueue,
-                q => q.Add<RequestReportMessage>((message, info) => new ReceiverConsumers<RequestReportMessage>(message, container)));
+                q => q.Add<RequestMetadataMessage>((message, info) => new ReceiverConsumers<RequestMetadataMessage>(message, container)));
 
             _log.DebugFormat("Data Provider Command Processor Service Started");
         }

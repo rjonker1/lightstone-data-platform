@@ -73,7 +73,6 @@
     <Compile Include="Dto\RequestMetadataDto.cs" />
     <Compile Include="Dto\ResponseDto.cs" />
     <Compile Include="Messages\RequestMetadataMessage.cs" />
-    <Compile Include="Messages\RequestReportMessage.cs" />
     <Compile Include="Meta\Client.cs" />
     <Compile Include="Meta\Consumer.cs" />
     <Compile Include="Meta\Contract.cs" />

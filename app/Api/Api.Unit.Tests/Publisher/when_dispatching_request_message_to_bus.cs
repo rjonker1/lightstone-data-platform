@@ -17,7 +17,7 @@ namespace Api.Unit.Tests.Publisher
         {
 
             _dispatcher = new RequestMessageDispatcher(BusFactory.CreateAdvancedBus("host=localhost"));
-            _request = new RequestMetadataMessage(new RequestHeaderMetadataDto(),new RequestUrlMetadataDto(),  Guid.NewGuid(), string.Empty);
+            _request = new RequestMetadataMessage(new RequestHeaderMetadataDto(),new RequestUrlMetadataDto(),  Guid.NewGuid(), string.Empty,string.Empty,string.Empty,string.Empty);
         }
 
         public override void Observe()
@@ -25,7 +25,7 @@ namespace Api.Unit.Tests.Publisher
             _dispatcher.Dispatch(_request);
         }
 
-        [Observation] //(Skip = "Need to check that message exists on the queue")
+        [Observation(Skip = "Need to check that message exists on the queue")] //
         public void then_message_should_exist_on_queue()
         {
             true.ShouldBeTrue();

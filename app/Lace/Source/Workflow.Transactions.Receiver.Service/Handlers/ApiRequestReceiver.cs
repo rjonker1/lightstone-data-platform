@@ -18,19 +18,19 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
             _monitoring = monitoring;
         }
 
-        public void Consume(IMessage<RequestReportMessage> message)
+        public void Consume(IMessage<RequestMetadataMessage> message)
         {
-            var url = message.Body.Request.Url;
-            var headers = message.Body.Request.Headers;
+            var url = message.Body.Url;
+            var headers = message.Body.Header;
 
-            var request = new MonitoringApiRequest(new ApiRequestIdentifier(
-                new UrlIdentifier(url.BasePath, url.HostName, url.IsSecure, url.Path, url.Port, url.Query, url.Scheme, url.SiteBase),
-                new HeaderIdentifier(headers.Authorization, headers.Host, headers.UserAgent, headers.ContentType),
-                message.Body.Request.Method, message.Body.Request.UserHostAddress, message.Body.RequestId,
-                message.Body.Date == DateTime.MinValue ? SystemTime.Now() : message.Body.Date,
-                message.Body.Request.ObjectToJson()));
+            //var request = new MonitoringApiRequest(new ApiRequestIdentifier(
+            //    new UrlIdentifier(url.BasePath, url.HostName, url.IsSecure, url.Path, url.Port, url.Query, url.Scheme, url.SiteBase),
+            //    new HeaderIdentifier(headers.Authorization, headers.Host, headers.UserAgent, headers.ContentType),
+            //    message.Body.Url.Method, message.Body.Request.UserHostAddress, message.Body.RequestId,
+            //    message.Body.Date == DateTime.MinValue ? SystemTime.Now() : message.Body.Date,
+            //    message.Body.Request.ObjectToJson()));
 
-            _monitoring.Add(request);
+            //_monitoring.Add(request);
         }
     }
 }
