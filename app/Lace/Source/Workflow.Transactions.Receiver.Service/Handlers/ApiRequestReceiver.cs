@@ -28,7 +28,7 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
                 new HeaderIdentifier(headers.Authorization, headers.Host, headers.UserAgent, headers.ContentType),
                 message.Body.Method, message.Body.UserHostAddress, message.Body.RequestId,
                 message.Body.Date == DateTime.MinValue ? SystemTime.Now() : message.Body.Date,
-                message.Body.ObjectToJson()));
+                message.Body.ObjectToJson(), message.Body.User));
 
             _monitoring.Add(request);
         }
