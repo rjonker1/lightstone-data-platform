@@ -1,9 +1,8 @@
-﻿using System;
-using FluentMigrator;
+﻿using FluentMigrator;
 
 namespace Monitoring.Database.Migrations
 {
-    [Migration(201511031046)]
+    [Migration(201511031922)]
     public class Create_Api_Request_Monitoring_Table : Migration
     {
         public override void Down()
@@ -19,7 +18,8 @@ namespace Monitoring.Database.Migrations
                 .WithColumn("RequestId").AsGuid().Indexed().NotNullable()
                 .WithColumn("RequestDate").AsDateTime()
                 .WithColumn("UserHostAddress").AsString(500).Nullable()
-                .WithColumn("Authorization").AsString(Int32.MaxValue).Nullable()
+                .WithColumn("Authorization").AsString(int.MaxValue).Nullable()
+                .WithColumn("UserName").AsString(1000).Nullable()
                 .WithColumn("Method").AsString(50).Nullable()
                 .WithColumn("BasePath").AsString(500).Nullable()
                 .WithColumn("HostName").AsString(100).Nullable()
@@ -32,7 +32,7 @@ namespace Monitoring.Database.Migrations
                 .WithColumn("UserAgent").AsString(1000).Nullable()
                 .WithColumn("ContentType").AsString(1000).Nullable()
                 .WithColumn("CommitDate").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
-                .WithColumn("JsonRequest").AsString(Int32.MaxValue).Nullable();
+                .WithColumn("JsonRequest").AsString(int.MaxValue).Nullable();
         }
     }
 }
