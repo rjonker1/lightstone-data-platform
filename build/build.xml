@@ -455,7 +455,7 @@
       </dependencies>
     </nuget>
 
-     <nuget deploy="false">
+   <!--  <nuget deploy="false">
       <name>Lightstone.DataPlatform.Workflow.Lace.Domain</name>
       <folder>app/Lace/source/Workflow.Lace.Domain</folder>
       <author>CustomApp</author>
@@ -480,7 +480,7 @@
         <dependency id="Lightstone.DataPlatform.Workflow.Billing.Messages" />
         <dependency id="Newtonsoft.Json" />
       </dependencies>
-    </nuget>
+    </nuget> -->
 
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Lace.Domain.Metadata.Entrypoint</name>
