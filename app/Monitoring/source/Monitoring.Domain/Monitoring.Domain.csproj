@@ -57,11 +57,14 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Identifiers\ApiRequestIdentifier.cs" />
     <Compile Include="Identifiers\MonitoringDataProviderIdentifier.cs" />
     <Compile Include="Identifiers\MonitoringActionIdentifier.cs" />
     <Compile Include="Identifiers\SearchIdentifier.cs" />
     <Compile Include="Mappers\MappingForMonitoringTypes.cs" />
+    <Compile Include="Mappers\MonitoringApiRequestMapper.cs" />
     <Compile Include="Mappers\MonitoringDataProviderMapper.cs" />
+    <Compile Include="MonitoringApiRequest.cs" />
     <Compile Include="MonitoringDataProviderTransaction.cs" />
     <Compile Include="Repository\ConnectionFactoryManager.cs" />
     <Compile Include="Repository\IMonitoringRepository.cs" />

@@ -1,0 +1,2 @@
+"Migrate.exe"  /conn "Data Source=.;Initial Catalog=Billing;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;" /provider sqlserver2012 /assembly "Lightstone.DataPlatform.Workflow.Database.dll" /verbose=true --tag Billing --task migrate
+"Migrate.exe"  /conn "Data Source=.;Initial Catalog=Monitoring;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;" /provider sqlserver2012 /assembly "Lightstone.DataPlatform.Workflow.Database.dll" /verbose=true --tag Monitoring --task migrate

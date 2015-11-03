@@ -11,14 +11,14 @@ namespace Lim.Domain.Messaging.Messages
             PackageId = packageId;
             UserId = userId;
             ContractId = contractId;
-            AccountNumber = accountNumber.HasDigit() ? (string.Join("", accountNumber.Where(Char.IsNumber)).TrimStart('0')).Check() : -1;
+            AccountNumber = accountNumber.HasDigit() ? (string.Join("", accountNumber.Where(char.IsNumber)).TrimStart('0')).Check() : -1;
             ResponseDate = DateTime.UtcNow;
             RequestId = requestId;
         }
 
         private static bool HasDigit(string value)
         {
-            return value.Any(Char.IsDigit);
+            return value.Any(char.IsDigit);
         }
 
         public Guid PackageId { get; private set; }

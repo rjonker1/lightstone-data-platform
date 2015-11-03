@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Workflow.Lace.Database.Migrations
+namespace Workflow.Database.Migrations
 {
     [Tags("Billing")]
     [Migration(201502271652)]

@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="Domain\Category.cs" />
     <Compile Include="Domain\DataProviders.cs" />
+    <Compile Include="Domain\Aggregates\Request.cs" />
     <Compile Include="Identifiers\ActionIdentifier.cs" />
     <Compile Include="Identifiers\EventIndentifier.cs" />
     <Compile Include="Identifiers\EventPayloadIndetifier.cs" />
