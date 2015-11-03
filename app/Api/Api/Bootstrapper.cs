@@ -29,7 +29,7 @@ namespace Api
     {
         public Bootstrapper()
         {
-            Nancy.Json.JsonSettings.MaxJsonLength = Int32.MaxValue;
+            Nancy.Json.JsonSettings.MaxJsonLength = int.MaxValue;
         }
 
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)

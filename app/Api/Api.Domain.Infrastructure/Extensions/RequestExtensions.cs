@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Api.Domain.Core.Contracts;
+using Api.Domain.Core.Dto;
 using Api.Domain.Core.Messages;
 using Api.Domain.Infrastructure.Bus;
 using AutoMapper;
@@ -18,7 +19,16 @@ namespace Api.Domain.Infrastructure.Extensions
                 {
                     try
                     {
-                        var request = Mapper.Map<Request, IRequest>(context.Request);
+                        var request = new RequestDto
+                        {
+                            Headers = context.Request.Headers,
+                            Url = context.Request.Url,
+                            Form = context.Request.Form,
+                            Method = context.Request.Method,
+                            Path = context.Request.Path,
+                            Query = context.Request.Query,
+                            UserHostAddress = context.Request.UserHostAddress
+                        };
                         dispatcher.Dispatch(new RequestReportMessage(request, requestId));
                     }
                     finally 

@@ -44,7 +44,7 @@ namespace Toolbox.Bmw.Factories
                 using (var session = BmwFactoryManager.BmwInstance.OpenStatelessSession())
                 using (var transaction = session.BeginTransaction())
                 {
-                    session.CreateSQLQuery("delete from Finances").ExecuteUpdate();
+                    session.CreateSQLQuery("delete from Finances").SetTimeout(240).ExecuteUpdate();
                     session.SetBatchSize(1000);
                     foreach (var entity in financeEntities)
                     {
