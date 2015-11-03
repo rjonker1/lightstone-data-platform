@@ -1,9 +1,7 @@
 ﻿using System;
-using Api.Domain.Core.Contracts;
 using Api.Domain.Core.Dto;
+using Api.Domain.Core.Messages;
 using Api.Domain.Infrastructure.Bus;
-using Api.Domain.Infrastructure.Messages;
-using Nancy;
 using Xunit.Extensions;
 using BusFactory = Workflow.BuildingBlocks.BusFactory;
 

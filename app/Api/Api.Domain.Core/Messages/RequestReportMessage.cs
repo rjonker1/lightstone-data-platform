@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Api.Domain.Core.Dto;
+using Api.Domain.Core.Contracts;
+using DataPlatform.Shared.Helpers;
 
 namespace Api.Domain.Core.Messages
 {
     [DataContract]
     public class RequestReportMessage
     {
-        public RequestReportMessage(RequestDto request, Guid requestId)
+        public RequestReportMessage(IRequest request, Guid requestId)
         {
             Request = request;
             RequestId = requestId;
+            Date = SystemTime.Now();
         }
 
-        [DataMember] public readonly RequestDto Request;
+        [DataMember]
+        public readonly IRequest Request;
         [DataMember] public readonly Guid RequestId;
+        [DataMember] public readonly DateTime Date;
     }
 }

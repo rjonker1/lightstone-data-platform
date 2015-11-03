@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using Api.Domain.Infrastructure.Messages;
+using Api.Domain.Core.Messages;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.Topology;

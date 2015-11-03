@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Api.Domain.Core.Contracts;
+using Api.Domain.Core.Messages;
 using Api.Domain.Infrastructure.Bus;
-using Api.Domain.Infrastructure.Messages;
 using AutoMapper;
 using Nancy;
 

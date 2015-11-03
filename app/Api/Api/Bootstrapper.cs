@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
+using Api.Domain.Core.Messages;
 using Api.Domain.Infrastructure.Automapping;
 using Api.Domain.Infrastructure.Bus;
 using Api.Domain.Infrastructure.Extensions;
-using Api.Domain.Infrastructure.Messages;
 using Api.Domain.Infrastructure.Metadata;
 using Api.Helpers.Installers;
 using Api.Infrastructure.Metadata;

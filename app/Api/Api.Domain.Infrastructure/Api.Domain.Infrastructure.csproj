@@ -116,7 +116,7 @@
     <Compile Include="Extensions\ApiRequestExtensions.cs" />
     <Compile Include="Extensions\AuthorizationHeaderExtensions.cs" />
     <Compile Include="Extensions\RequestExtensions.cs" />
-    <Compile Include="Messages\RequestReportMessage.cs" />
+    <None Include="Messages\RequestReportMessage.cs.delete" />
     <Compile Include="Metadata\ApiMetaDataGenerator.cs" />
     <Compile Include="Metadata\DefaultRouteMetadata.cs" />
     <Compile Include="Metadata\IApiMetaDataGenerator.cs" />
