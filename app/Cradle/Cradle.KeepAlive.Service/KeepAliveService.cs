@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Net;
-using Cradle.KeepAlive.Service.Helpers;
+using Cradle.KeepAlive.Service.Domain;
 using DataPlatform.Shared.Helpers.Extensions;
 using Hangfire;
 using Microsoft.Owin.Hosting;
@@ -23,7 +20,9 @@ namespace Cradle.KeepAlive.Service
 
             _server = new BackgroundJobServer();
 
-            RecurringJob.AddOrUpdate<HealthCheck>("DataPlatform HealthCheck", x => x.PingDataPlatform(), ConfigurationManager.AppSettings["keepAliveCron"], TimeZoneInfo.Local);
+            RecurringJob.AddOrUpdate<HealthCheck>("DataPlatform HealthCheck", x => x.PingDataPlatform(), ConfigurationManager.AppSettings["pollingCron"], TimeZoneInfo.Local);
+            RecurringJob.AddOrUpdate<LoginCheck>("DataPlatform Mobile LoginCheck", x => x.MobileLogin(), ConfigurationManager.AppSettings["pollingCron"], TimeZoneInfo.Local);
+            RecurringJob.AddOrUpdate<LoginCheck>("DataPlatform API LoginCheck", x => x.ApiLogin(), ConfigurationManager.AppSettings["pollingCron"], TimeZoneInfo.Local);
 
             Console.WriteLine("\r");
             Console.WriteLine("Running on {0}", url);

@@ -152,9 +152,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Dtos\ClientDto.cs" />
+    <Compile Include="Domain\Dtos\ConsumerDto.cs" />
+    <Compile Include="Domain\Dtos\ContractDto.cs" />
+    <Compile Include="Domain\Dtos\CustomerDto.cs" />
+    <Compile Include="Domain\Dtos\MenuDto.cs" />
+    <Compile Include="Domain\Dtos\ProductDto.cs" />
+    <Compile Include="Domain\Dtos\SubMenuDto.cs" />
+    <Compile Include="Domain\LoginCheck.cs" />
+    <Compile Include="Domain\PackageCheck.cs" />
     <Compile Include="Helpers\CheckEndpoint.cs" />
-    <Compile Include="Helpers\HealthCheck.cs" />
+    <Compile Include="Domain\HealthCheck.cs" />
     <Compile Include="Helpers\Login.cs" />
+    <Compile Include="Helpers\Notifications\EmailAlert.cs" />
     <Compile Include="Helpers\Notifications\IEmailBuilder.cs" />
     <Compile Include="NotificationSender\EmailBuilder.cs" />
     <Compile Include="NotificationSender\EmailNotification.cs" />

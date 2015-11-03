@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Configuration;
-using System.Net.Mail;
-using System.Text;
+using Cradle.KeepAlive.Service.Helpers;
+using Cradle.KeepAlive.Service.Helpers.Notifications;
 using DataPlatform.Shared.Helpers.Extensions;
 using RestSharp;
 
-namespace Cradle.KeepAlive.Service.Helpers
+namespace Cradle.KeepAlive.Service.Domain
 {
-    public class HealthCheck
+    public class HealthCheck : EmailAlert
     {
         private readonly CheckEndpoint _checkEndpoint = new CheckEndpoint();
 
@@ -19,7 +18,7 @@ namespace Cradle.KeepAlive.Service.Helpers
             foreach (string key in ConfigurationManager.AppSettings)
             {
                 if (key.StartsWith("endpoint/url"))
-                {
+                { 
                     var status = _checkEndpoint.Invoke("", ConfigurationManager.AppSettings[key], "ping", Method.GET);
                     this.Info(() => "Checked " + ConfigurationManager.AppSettings[key] + " - Status: " + status);
                     statusCheckList.Add(ConfigurationManager.AppSettings[key], (int)status);
@@ -28,26 +27,8 @@ namespace Cradle.KeepAlive.Service.Helpers
 
             foreach (DictionaryEntry endPointStatus in statusCheckList)
             {
-                if ((int)endPointStatus.Value != 200) SendEmailAlert("API ALERT - " + endPointStatus.Key, 
+                if ((int)endPointStatus.Value != 200) SendEmail("API ALERT - " + endPointStatus.Key, 
                                                                         "API Endpoint: " + endPointStatus.Key + " returned the follow status code: " + endPointStatus.Value);
-            }
-        }
-        
-        private void SendEmailAlert(string subject, string body)
-        {
-            using (var client = new SmtpClient())
-            {
-                var mailMessage = new MailMessage
-                {
-                    From = new MailAddress(ConfigurationManager.AppSettings["report/email/from"].ToLower()),
-                    Subject = ConfigurationManager.AppSettings["report/email/environment/subject"] + " - " + subject,
-                    IsBodyHtml = true,
-                    Body = body,
-                    BodyEncoding = Encoding.UTF8
-                };
-                mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to"].ToLower());
-
-                client.Send(mailMessage);
             }
         }
     }
