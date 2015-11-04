@@ -50,7 +50,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                 {
                     BaseAddress = _root
                 };
-
+              
                 var model = new ApiRequestMonitoringDto[] { };
                 var task = client.GetAsync("apiRequests/freshenMetadata").ContinueWith(t =>
                 {
