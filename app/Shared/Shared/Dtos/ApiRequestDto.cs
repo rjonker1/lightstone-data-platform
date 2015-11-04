@@ -62,5 +62,23 @@ namespace DataPlatform.Shared.Dtos
             DeviceType = deviceType;
             SystemType = systemType;
         }
+
+        public ApiRequestDto(Guid customerClientId, Guid userId, Guid contractId, Guid packageId, Guid requestId, Guid sourceId, string searchTerm, string username, string fromIpAddress, long contractVersion, DeviceTypes deviceType, SystemType systemType, IEnumerable<RequestFieldDto> requestFields, bool hasConsent)
+        {
+            CustomerClientId = customerClientId;
+            UserId = userId;
+            ContractId = contractId;
+            PackageId = packageId;
+            RequestId = requestId;
+            SourceId = sourceId;
+            SearchTerm = searchTerm;
+            Username = username;
+            FromIpAddress = fromIpAddress;
+            ContractVersion = contractVersion;
+            DeviceType = deviceType;
+            SystemType = systemType;
+            RequestFields = requestFields;
+            HasConsent = hasConsent;
+        }
     }
 }

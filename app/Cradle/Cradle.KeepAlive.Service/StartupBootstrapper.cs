@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using Castle.Windsor;
 using Hangfire;
 using Microsoft.Owin;
 using Owin;
@@ -15,7 +16,7 @@ namespace Cradle.KeepAlive.Service
             .UseSqlServerStorage(ConfigurationManager.ConnectionStrings["keepAliveScheduler"].ConnectionString);
 
             app.UseHangfireDashboard("/hangfire");
-            app.UseNancy();
+            app.UseNancy(options => options.Bootstrapper = new NancyBootstrapper(new WindsorContainer()));
         }
     }
 }
