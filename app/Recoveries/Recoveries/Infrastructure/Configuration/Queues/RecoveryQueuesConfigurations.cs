@@ -1,10 +1,8 @@
-﻿using System;
-using Recoveries.Core;
-using Workflow.BuildingBlocks;
+﻿using Recoveries.Core;
 
-namespace Recoveries.Router.Configuration
+namespace Recoveries.Infrastructure.Configuration.Queues
 {
-    public class RecoveryReceiverQueueConfiguration : IDefineQueue
+    public class RecoveryReceiverQueueConfiguration : IDefineRabbitQueue
     {
         public RecoveryReceiverQueueConfiguration()
         {
@@ -16,9 +14,14 @@ namespace Recoveries.Router.Configuration
             return new RecoveryReceiverQueueConfiguration();
         }
 
-        public string ConnectionStringKey
+        public string Host
         {
-            get { return "recoveries/receiver/queue"; }
+            get { return RouterBusConfiguration.Host; }
+        }
+
+        public string ExchangeName
+        {
+            get { return RouterBusConfiguration.ExchangeName; }
         }
 
         public string ErrorExchangeName
@@ -31,9 +34,10 @@ namespace Recoveries.Router.Configuration
             get { return AppSettingsReader.GetString("dataplatform/queues/recoveries/receiver/error", () => "Dataplatform.DataProvider.Recoveries.Reciever.Errors"); }
         }
 
-        public string ExchangeType
+
+        public string QueueName
         {
-            get { return RabbitMQ.Client.ExchangeType.Fanout; }
+            get { return RouterBusConfiguration.QueueName; }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using Recoveries.Core;
 
-namespace Recoveries.ErrorQueues.Integrations
+namespace Recoveries.Infrastructure.Configuration.Integrations
 {
     [DataContract]
     public class IntegrationSenderConfiguration: IErrorQueueConfiguration

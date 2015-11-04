@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using Recoveries.Core;
 
-namespace Recoveries.ErrorQueues.DataProviders
+namespace Recoveries.Infrastructure.Configuration.DataProviders
 {
     [DataContract]
     public class WorkflowSenderRecoveryConfiguration : IErrorQueueConfiguration

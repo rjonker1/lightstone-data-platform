@@ -1,4 +1,6 @@
-﻿using Castle.Windsor;
+﻿using System;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Topshelf;
 
@@ -8,7 +10,9 @@ namespace Recoveries.Router
     {
         private static void Main(string[] args)
         {
-            var container = new WindsorContainer().Install(FromAssembly.This());
+           // var container = new WindsorContainer().Install(FromAssembly.This());
+            var container = new WindsorContainer()
+               .Install(FromAssembly.InDirectory(new AssemblyFilter(AppDomain.CurrentDomain.BaseDirectory)));
             HostFactory.Run(runner =>
             {
                 runner.Service<IRecoveryService>(service =>
