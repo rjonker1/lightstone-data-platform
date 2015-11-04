@@ -18,16 +18,16 @@ namespace Cradle.KeepAlive.Service.Domain
         {
             var token = new Login().GetToken();
 
-            if (token != null)
-            {
-                var apiRequest = new ApiRequestDto();
-                apiRequest.CustomerClientId = ConfigurationManager.AppSettings[""];
+            //if (token != null)
+            //{
+            //    var apiRequest = new ApiRequestDto();
+            //    apiRequest.CustomerClientId = ConfigurationManager.AppSettings[""];
 
-                _apiClient.Post(token, "/action",null, new ApiCommitRequestDto
-                {
+            //    _apiClient.Post(token, "/action",null, new ApiCommitRequestDto
+            //    {
                    
-                },  null);
-            }
+            //    },  null);
+            //}
         }
     }
 }
