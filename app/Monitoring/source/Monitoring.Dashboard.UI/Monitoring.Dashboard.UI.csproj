@@ -314,6 +314,7 @@
     <Compile Include="Core\Contracts\Handlers\IHandleMonitoringCommands.cs" />
     <Compile Include="Core\Contracts\Services\ICallMonitoringService.cs" />
     <Compile Include="Core\Contracts\Services\IPublishCacheMessages.cs" />
+    <Compile Include="Infrastructure\Builders\BuildMonitoringService.cs" />
     <Compile Include="Infrastructure\Dto\ApiRequestMonitoringDto.cs" />
     <Compile Include="Core\Extensions\JsonExtensions.cs" />
     <Compile Include="Core\Models\ApiRequestMonitoring.cs" />
@@ -338,7 +339,7 @@
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\PingModule.cs" />
-    <Compile Include="Modules\RefreshModule.cs" />
+    <Compile Include="Modules\FreshenLogsModule.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

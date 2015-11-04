@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using Common.Logging;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Monitoring.Dashboard.UI.Infrastructure.Dto;
-using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Hubs;
-using Newtonsoft.Json;
+using Monitoring.Dashboard.UI.Infrastructure.Commands;
+using Monitoring.Dashboard.UI.Infrastructure.Handlers;
+using Monitoring.Dashboard.UI.Infrastructure.Repository;
+using Monitoring.Domain.Mappers;
+using Monitoring.Domain.Repository;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Monitoring.Dashboard.UI.Broadcasters
 {
@@ -59,38 +61,39 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             _clients.All.dataProviderMonitoringInfo(result);
         }
 
-        private object GetDataProviderMonitoringFromApi()
+        private static object GetDataProviderMonitoringFromApi()
         {
             try
             {
-                var client = new HttpClient()
-                {
-                    BaseAddress = _root,
-                  //  DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("") {  "Token bXVycmF5d0BsaWdodHN0b25lLmNvLnphDQpBY2NvdW50TWFuYWdlcnxTdXBlclVzZXJ8U3VwcG9ydHxBZG1pbnxQcm9kdWN0TWFuYWdlcg0KNjM1ODIyMTQxMTM1NDQ1NDM5DQpMaWdodHN0b25l%3AJh566ZsA2gbjfkciC5xkwgn3t8wykH72Nf6mfD03MF8%3D" }
-                };
+                var handler = new DataProviderHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())),
+                    new BillingTransactionRepository());
+                handler.Handle(new GetMonitoringCommand(new MonitoringRequestDto()));
+                return handler.MonitoringResponse;
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", "Token bXVycmF5d0BsaWdodHN0b25lLmNvLnphDQpBY2NvdW50TWFuYWdlcnxTdXBlclVzZXJ8U3VwcG9ydHxBZG1pbnxQcm9kdWN0TWFuYWdlcg0KNjM1ODIyMTQxMTM1NDQ1NDM5DQpMaWdodHN0b25l%3AJh566ZsA2gbjfkciC5xkwgn3t8wykH72Nf6mfD03MF8%3D");
+                //var client = new HttpClient()
+                //{
+                //    BaseAddress = _root,
+                //};
+                //var model = new DataProviderDto[] { };
 
-                var model = new DataProviderDto[] { };
+                //var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
+                //{
+                //    try
+                //    {
+                //        var response = t.Result;
+                //        var json = response.Content.ReadAsStringAsync();
+                //        json.Wait();
+                //        model = JsonConvert.DeserializeObject<DataProviderDto[]>(json.Result);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        Log.ErrorFormat("Error occurred in Monitoring refreshing the data provider log because of {0}", ex.Message);
+                //    }
+                //});
 
-                var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
-                {
-                    try
-                    {
-                        var response = t.Result;
-                        var json = response.Content.ReadAsStringAsync();
-                        json.Wait();
-                        model = JsonConvert.DeserializeObject<DataProviderDto[]>(json.Result);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.ErrorFormat("Error occurred in Monitoring refreshing the data provider log because of {0}", ex.Message);
-                    }
-                });
+                //task.Wait();
 
-                task.Wait();
-
-                return model;
+                //return model;
             }
             catch (Exception ex)
             {
@@ -115,36 +118,40 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             _clients.All.dataProviderStatisticsInfo(result);
         }
 
-        private object GetDataProviderStatisticsFromApi()
+        private static object GetDataProviderStatisticsFromApi()
         {
             try
             {
-                var client = new HttpClient()
-                {
-                    BaseAddress = _root
-                };
+                var handler = new DataProviderStatisticsHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())));
+                handler.Handle();
+                return handler.StatisticsResponse;
 
-                var model = new DataProviderStatisticsDto[] { };
+                //var client = new HttpClient()
+                //{
+                //    BaseAddress = _root
+                //};
 
-                var task = client.GetAsync("dataProviders/freshenStatistics").ContinueWith(t =>
-                {
-                    try
-                    {
-                        var response = t.Result;
-                        var json = response.Content.ReadAsStringAsync();
-                        json.Wait();
-                        model = JsonConvert.DeserializeObject<DataProviderStatisticsDto[]>(json.Result);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.ErrorFormat("Error occurred in Monitoring refreshing the data provider stats because of {0}", ex.Message);
-                    }
+                //var model = new DataProviderStatisticsDto[] { };
+
+                //var task = client.GetAsync("dataProviders/freshenStatistics").ContinueWith(t =>
+                //{
+                //    try
+                //    {
+                //        var response = t.Result;
+                //        var json = response.Content.ReadAsStringAsync();
+                //        json.Wait();
+                //        model = JsonConvert.DeserializeObject<DataProviderStatisticsDto[]>(json.Result);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        Log.ErrorFormat("Error occurred in Monitoring refreshing the data provider stats because of {0}", ex.Message);
+                //    }
                   
-                });
+                //});
 
-                task.Wait();
+                //task.Wait();
 
-                return model;
+                //return model;
             }
             catch (Exception ex)
             {

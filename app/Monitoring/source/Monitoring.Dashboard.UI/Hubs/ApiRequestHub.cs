@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
 using Monitoring.Dashboard.UI.Broadcasters;
+using Monitoring.Dashboard.UI.Core.Contracts.Services;
 
 namespace Monitoring.Dashboard.UI.Hubs
 {
@@ -8,9 +10,10 @@ namespace Monitoring.Dashboard.UI.Hubs
     {
         private readonly ApiRequestBroadcaster _broadcaster;
 
-        public ApiRequestHub() : this(ApiRequestBroadcaster.Instance)
+        public ApiRequestHub()
+            : this(ApiRequestBroadcaster.Instance)
         {
-            
+
         }
 
         public ApiRequestHub(ApiRequestBroadcaster broadCaster)

@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Net.Http;
 using System.Threading;
 using Common.Logging;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using Monitoring.Dashboard.UI.Infrastructure.Dto;
 using Monitoring.Dashboard.UI.Hubs;
-using Newtonsoft.Json;
+using Monitoring.Dashboard.UI.Infrastructure.Handlers;
+using Monitoring.Domain.Mappers;
+using Monitoring.Domain.Repository;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Monitoring.Dashboard.UI.Broadcasters
 {
@@ -46,30 +47,34 @@ namespace Monitoring.Dashboard.UI.Broadcasters
         {
             try
             {
-                var client = new HttpClient()
-                {
-                    BaseAddress = _root
-                };
+                var handler = new ApiRequestHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())));
+                handler.Handle();
+                return handler.ApiRequests;
+
+                //var client = new HttpClient()
+                //{
+                //    BaseAddress = _root
+                //};
               
-                var model = new ApiRequestMonitoringDto[] { };
-                var task = client.GetAsync("apiRequests/freshenMetadata").ContinueWith(t =>
-                {
-                    try
-                    {
-                        var response = t.Result;
-                        var json = response.Content.ReadAsStringAsync();
-                        json.Wait();
-                        model = JsonConvert.DeserializeObject<ApiRequestMonitoringDto[]>(json.Result);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.ErrorFormat("Error occurred in Monitoring refreshing the api request metadata log because of {0}", ex.Message);
-                    }
-                });
+                //var model = new ApiRequestMonitoringDto[] { };
+                //var task = client.GetAsync("apiRequests/freshenMetadata").ContinueWith(t =>
+                //{
+                //    try
+                //    {
+                //        var response = t.Result;
+                //        var json = response.Content.ReadAsStringAsync();
+                //        json.Wait();
+                //        model = JsonConvert.DeserializeObject<ApiRequestMonitoringDto[]>(json.Result);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        Log.ErrorFormat("Error occurred in Monitoring refreshing the api request metadata log because of {0}", ex.Message);
+                //    }
+                //});
 
-                task.Wait();
+                //task.Wait();
 
-                return model;
+                //return model;
             }
             catch (Exception ex)
             {
@@ -77,7 +82,6 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             }
             return null;
         }
-
 
         public static ApiRequestBroadcaster Instance
         {
