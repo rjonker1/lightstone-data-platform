@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using Common.Logging;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using Monitoring.Dashboard.UI.Infrastructure.Dto;
 using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Hubs;
 using Newtonsoft.Json;
@@ -22,28 +24,13 @@ namespace Monitoring.Dashboard.UI.Broadcasters
         private Timer _monitoringTimer;
         private Timer _statisticsTimer;
         private bool _isFirstCall = true;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<DataProviderBroadcaster>();
 
         public DataProviderBroadcaster(IHubConnectionContext<dynamic> clients)
         {
-            _log = LogManager.GetLogger<DataProviderBroadcaster>();
             _clients = clients;
             SetMonitoringTimer();
             SetStatisticsTimer();
-        }
-
-        public static DataProviderBroadcaster Instance
-        {
-            get { return  _instance.Value; }
-        }
-
-        public Uri Root
-        {
-            set
-            {
-                if (_root == null)
-                    _root = value;
-            }
         }
 
         private void SetMonitoringTimer()
@@ -78,10 +65,13 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             {
                 var client = new HttpClient()
                 {
-                    BaseAddress = _root
+                    BaseAddress = _root,
+                  //  DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("") {  "Token bXVycmF5d0BsaWdodHN0b25lLmNvLnphDQpBY2NvdW50TWFuYWdlcnxTdXBlclVzZXJ8U3VwcG9ydHxBZG1pbnxQcm9kdWN0TWFuYWdlcg0KNjM1ODIyMTQxMTM1NDQ1NDM5DQpMaWdodHN0b25l%3AJh566ZsA2gbjfkciC5xkwgn3t8wykH72Nf6mfD03MF8%3D" }
                 };
 
-                var model = new DataProviderView[] { };
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", "Token bXVycmF5d0BsaWdodHN0b25lLmNvLnphDQpBY2NvdW50TWFuYWdlcnxTdXBlclVzZXJ8U3VwcG9ydHxBZG1pbnxQcm9kdWN0TWFuYWdlcg0KNjM1ODIyMTQxMTM1NDQ1NDM5DQpMaWdodHN0b25l%3AJh566ZsA2gbjfkciC5xkwgn3t8wykH72Nf6mfD03MF8%3D");
+
+                var model = new DataProviderDto[] { };
 
                 var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
                 {
@@ -90,11 +80,11 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                         var response = t.Result;
                         var json = response.Content.ReadAsStringAsync();
                         json.Wait();
-                        model = JsonConvert.DeserializeObject<DataProviderView[]>(json.Result);
+                        model = JsonConvert.DeserializeObject<DataProviderDto[]>(json.Result);
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("Error occurred in Monitoring refreshing the data provider log because of {0}", ex.Message);
+                        Log.ErrorFormat("Error occurred in Monitoring refreshing the data provider log because of {0}", ex.Message);
                     }
                 });
 
@@ -104,7 +94,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error occurred in Monitoring For Data Provider Broadcaster because of {0}", ex.Message);
+                Log.ErrorFormat("Error occurred in Monitoring For Data Provider Broadcaster because of {0}", ex.Message);
             }
             return null;
         }
@@ -134,7 +124,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                     BaseAddress = _root
                 };
 
-                var model = new DataProviderStatisticsView[] { };
+                var model = new DataProviderStatisticsDto[] { };
 
                 var task = client.GetAsync("dataProviders/freshenStatistics").ContinueWith(t =>
                 {
@@ -143,11 +133,11 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                         var response = t.Result;
                         var json = response.Content.ReadAsStringAsync();
                         json.Wait();
-                        model = JsonConvert.DeserializeObject<DataProviderStatisticsView[]>(json.Result);
+                        model = JsonConvert.DeserializeObject<DataProviderStatisticsDto[]>(json.Result);
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("Error occurred in Monitoring refreshing the data provider stats because of {0}", ex.Message);
+                        Log.ErrorFormat("Error occurred in Monitoring refreshing the data provider stats because of {0}", ex.Message);
                     }
                   
                 });
@@ -158,9 +148,23 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error occurred in Monitoring For Data Provider Statistics Broadcaster because of {0}", ex.Message);
+                Log.ErrorFormat("Error occurred in Monitoring For Data Provider Statistics Broadcaster because of {0}", ex.Message);
             }
             return null;
+        }
+
+        public static DataProviderBroadcaster Instance
+        {
+            get { return _instance.Value; }
+        }
+
+        public Uri Root
+        {
+            set
+            {
+                if (_root == null)
+                    _root = value;
+            }
         }
     }
 }

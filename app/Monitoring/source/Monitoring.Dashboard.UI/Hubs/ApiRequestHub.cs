@@ -4,16 +4,16 @@ using Monitoring.Dashboard.UI.Broadcasters;
 
 namespace Monitoring.Dashboard.UI.Hubs
 {
-    public class DataProviderHub : Hub
+    public class ApiRequestHub : Hub
     {
-        private readonly DataProviderBroadcaster _broadcaster;
-        public DataProviderHub()
-            : this(DataProviderBroadcaster.Instance)
-        {
+        private readonly ApiRequestBroadcaster _broadcaster;
 
+        public ApiRequestHub() : this(ApiRequestBroadcaster.Instance)
+        {
+            
         }
 
-        public DataProviderHub(DataProviderBroadcaster broadCaster)
+        public ApiRequestHub(ApiRequestBroadcaster broadCaster)
         {
             _broadcaster = broadCaster;
         }
