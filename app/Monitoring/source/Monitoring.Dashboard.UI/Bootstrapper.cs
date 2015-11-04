@@ -88,7 +88,8 @@ namespace Monitoring.Dashboard.UI
 
             container.Register<IHandleMonitoringCommands, DataProviderHandler>();
             container.Register<IHandleDataProviderStatistics, DataProviderStatisticsHandler>();
-            container.Register<ICallMonitoringService, DataProviderMonitoringService>();
+            container.Register<IHandleApiRequests, ApiRequestHandler>();
+            container.Register<ICallMonitoringService, MonitoringService>();
 
             container.Register<IHandleDataProviderCaching, DataProviderCachingHandler>();
             container.Register<IPublishCacheMessages, DataProviderCommandPublisher>();

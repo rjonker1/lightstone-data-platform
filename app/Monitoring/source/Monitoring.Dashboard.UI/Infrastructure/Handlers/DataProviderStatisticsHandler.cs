@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
+using Monitoring.Dashboard.UI.Infrastructure.Dto;
 using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Domain.Repository;
 
@@ -11,12 +12,11 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     public class DataProviderStatisticsHandler : IHandleDataProviderStatistics
     {
         private readonly IMonitoringRepository _monitoring;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<DataProviderStatisticsHandler>();
 
         public DataProviderStatisticsHandler(IMonitoringRepository monitoring)
         {
             _monitoring = monitoring;
-            _log = LogManager.GetLogger(GetType());
         }
 
         public void Handle()
@@ -32,19 +32,19 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                 StatisticsResponse =
                     statistics.Select(
                         s =>
-                            new DataProviderStatisticsView(s.AvgerageRequestTime, s.TotalRequests, s.TotalResponses,
+                            new DataProviderStatisticsDto(s.AvgerageRequestTime, s.TotalRequests, s.TotalResponses,
                                 s.TotalErrors)
-                                .DetermineSuccessRate());
+                                .DetermineSuccessRate()).ToList();
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occurred in the Monitoirng Data Provider Statistics Handler because of {0}",
+                Log.ErrorFormat("An error occurred in the Monitoirng Data Provider Statistics Handler because of {0}", ex,
                     ex.Message);
-                StatisticsResponse = new[] {new DataProviderStatisticsView("00:00:00", 0, 0, 0)};
+                StatisticsResponse = new[] { new DataProviderStatisticsDto("00:00:00", 0, 0, 0) }.ToList();
             }
         }
 
-        public IEnumerable<DataProviderStatisticsView> StatisticsResponse { get; private set; }
+        public List<DataProviderStatisticsDto> StatisticsResponse { get; private set; }
 
 
     }

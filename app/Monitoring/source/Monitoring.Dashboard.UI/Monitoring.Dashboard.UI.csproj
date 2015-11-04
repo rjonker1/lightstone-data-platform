@@ -177,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\ang\angular-ui-bootstrap.js" />
+    <Content Include="assets\ang\app\apiRequestMetadataApp.js" />
     <Content Include="assets\ang\app\dataProviderCachingApp.js" />
     <Content Include="assets\ang\app\dataProviderMonitoringApp.js" />
     <Content Include="AppSettings.config">
@@ -288,6 +289,8 @@
     <Content Include="Views\_Sidebar.cshtml" />
     <Content Include="Views\_Footer.cshtml" />
     <Content Include="Views\DataProvidersCaching.cshtml" />
+    <Content Include="Views\Metadata\_ApiRequestMetadata.cshtml" />
+    <Content Include="Views\ApiRequests.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -303,31 +306,39 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Broadcasters\ApiRequestBroadcaster.cs" />
     <Compile Include="Broadcasters\DataProviderBroadcaster.cs" />
+    <Compile Include="Core\Contracts\Handlers\IHandleApiRequests.cs" />
     <Compile Include="Core\Contracts\Handlers\IHandleDataProviderCaching.cs" />
     <Compile Include="Core\Contracts\Handlers\IHandleDataProviderStatistics.cs" />
     <Compile Include="Core\Contracts\Handlers\IHandleMonitoringCommands.cs" />
     <Compile Include="Core\Contracts\Services\ICallMonitoringService.cs" />
     <Compile Include="Core\Contracts\Services\IPublishCacheMessages.cs" />
+    <Compile Include="Infrastructure\Dto\ApiRequestMonitoringDto.cs" />
     <Compile Include="Core\Extensions\JsonExtensions.cs" />
+    <Compile Include="Core\Models\ApiRequestMonitoring.cs" />
     <Compile Include="Core\Models\CommandLog.cs" />
     <Compile Include="Core\Models\DataProviderStatistics.cs" />
-    <Compile Include="Core\Models\DataProviderStatisticsView.cs" />
-    <Compile Include="Core\Models\DataProviderView.cs" />
+    <Compile Include="Infrastructure\Dto\DataProviderStatisticsDto.cs" />
+    <Compile Include="Infrastructure\Dto\DataProviderDto.cs" />
     <Compile Include="Core\Models\DataProvider.cs" />
+    <Compile Include="Hubs\ApiRequestHub.cs" />
     <Compile Include="Hubs\DataProviderHub.cs" />
     <Compile Include="Infrastructure\Commands\MonitoringCommands.cs" />
     <Compile Include="Infrastructure\Dto\MonitoringRequestDto.cs" />
+    <Compile Include="Infrastructure\Handlers\ApiRequestHandler.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderCachingHandler.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderStatisticsHandler.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderHandler.cs" />
     <Compile Include="Infrastructure\Repository\ITransactionRepository.cs" />
     <Compile Include="Infrastructure\Services\DataProviderCommandPublisher.cs" />
-    <Compile Include="Infrastructure\Services\DataProviderMonitoringService.cs" />
+    <Compile Include="Infrastructure\Services\MonitoringService.cs" />
+    <Compile Include="Modules\ApiRequestModule.cs" />
     <Compile Include="Modules\DataProviderCachingModule.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\PingModule.cs" />
+    <Compile Include="Modules\RefreshModule.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
