@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Recoveries.Core;
 
-namespace Recoveries.Domain
+namespace Recoveries.Shared
 {
     public static class Extensions
     {

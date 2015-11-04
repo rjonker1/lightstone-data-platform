@@ -2,14 +2,10 @@
 using System.Text;
 using RabbitMQ.Client.Framing;
 using Recoveries.Core;
+using Recoveries.Domain.Base;
 
 namespace Recoveries
 {
-    public interface IQueueInsertion
-    {
-        void PublishMessagesToQueue(IEnumerable<RecoveryMessage> messages, IQueueOptions options);
-    }
-
     public class QueueInsertion : IQueueInsertion
     {
         public void PublishMessagesToQueue(IEnumerable<RecoveryMessage> messages, IQueueOptions options)

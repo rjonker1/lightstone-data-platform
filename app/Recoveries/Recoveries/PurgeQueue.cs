@@ -2,17 +2,13 @@
 using Common.Logging;
 using RabbitMQ.Client.Exceptions;
 using Recoveries.Core;
+using Recoveries.Domain.Base;
 
 namespace Recoveries
 {
-    public interface IPurgeQueue
-    {
-        IEnumerable<uint> PurgeQueue(IQueueOptions options);
-    }
-
     public class PurgeErrorQueue : IPurgeQueue
     {
-        private readonly ILog _log = LogManager.GetLogger<PurgeErrorQueue>();
+        private static readonly ILog Log = LogManager.GetLogger<PurgeErrorQueue>();
         public IEnumerable<uint> PurgeQueue(IQueueOptions options)
         {
             
@@ -30,7 +26,7 @@ namespace Recoveries
                 }
                 catch (OperationInterruptedException exception)
                 {
-                    _log.ErrorFormat("Error Occurred Getting a message from queue because {0}", exception, exception.Message);
+                    Log.ErrorFormat("Error Occurred Getting a message from queue because {0}", exception, exception.Message);
                     yield break;
                 }
                 

@@ -3,19 +3,14 @@ using System.IO;
 using Common.Logging;
 using EasyNetQ;
 using Recoveries.Core;
-using Recoveries.Domain;
+using Recoveries.Domain.Base;
+using Recoveries.Shared;
 
 namespace Recoveries
 {
-    public interface IMessageReader
-    {
-        IEnumerable<RecoveryMessage> ReadMessages(IQueueOptions options);
-        IEnumerable<RecoveryMessage> ReadMessages(IQueueOptions options, string messageName);
-    }
-
     public class MessageReader : IMessageReader
     {
-        private readonly ILog _log = LogManager.GetLogger<MessageReader>();
+        private static readonly ILog Log = LogManager.GetLogger<MessageReader>();
         public IEnumerable<RecoveryMessage> ReadMessages(IQueueOptions options)
         {
             return ReadMessages(options, null);
@@ -25,10 +20,10 @@ namespace Recoveries
         {
             if (!Directory.Exists(options.MessageFilePath))
             {
-                _log.ErrorFormat("Directory '{0}' does not exist", options.MessageFilePath);
-                _log.InfoFormat("Creating Directory at '{0}'", options.MessageFilePath);
+                Log.ErrorFormat("Directory '{0}' does not exist", options.MessageFilePath);
+                Log.InfoFormat("Creating Directory at '{0}'", options.MessageFilePath);
                 options.MessageFilePath.CreateDirectory();
-                _log.InfoFormat("Directory created at '{0}'", options.MessageFilePath);
+                Log.InfoFormat("Directory created at '{0}'", options.MessageFilePath);
             }
 
             var bodyPattern = (messageName ?? "*") + ".*.message.txt";

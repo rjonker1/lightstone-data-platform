@@ -5,18 +5,14 @@ using EasyNetQ;
 using EasyNetQ.SystemMessages;
 using RabbitMQ.Client.Exceptions;
 using Recoveries.Core;
+using Recoveries.Domain.Base;
 
 namespace Recoveries
 {
-    public interface IErrorRetry
-    {
-        void RetryErrors(IEnumerable<RecoveryMessage> rawErrorMessages, IQueueOptions options);
-    }
-
     public class ErrorRetry : IErrorRetry
     {
         private readonly ISerializer _serializer;
-        private readonly ILog _log = LogManager.GetLogger<ErrorRetry>();
+        private static readonly ILog Log = LogManager.GetLogger<ErrorRetry>();
 
         public ErrorRetry(ISerializer serializer)
         {
@@ -54,7 +50,7 @@ namespace Recoveries
                 }
                 catch (OperationInterruptedException)
                 {
-                    _log.ErrorFormat("The exchange, '{0}', described in the error message does not exist on '{1}', '{2}'",
+                    Log.ErrorFormat("The exchange, '{0}', described in the error message does not exist on '{1}', '{2}'",
                         error.Exchange, options.HostName, options.VirtualHost);
                 }
             }

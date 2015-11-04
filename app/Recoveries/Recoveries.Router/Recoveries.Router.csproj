@@ -77,10 +77,6 @@
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1485\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1485, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1485\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -106,14 +102,11 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Configuration\RecoveryQueuesConfigurations.cs" />
-    <Compile Include="Consumers\AbstractConsumer.cs" />
-    <Compile Include="Consumers\ConsumerFactory.cs" />
-    <Compile Include="Consumers\RetryErrorsConsumers.cs" />
-    <Compile Include="ErrorMessageRecoveryHandler.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
+    <Compile Include="Installers\ContainerExtentions.cs" />
     <Compile Include="Installers\ContainerInstaller.cs" />
+    <Compile Include="Installers\RecoveryHandlerInstaller.cs" />
     <Compile Include="Installers\RecoveryRouterInstaller.cs" />
     <Compile Include="Installers\RecoveryServiceInstaller.cs" />
     <Compile Include="Program.cs" />
@@ -207,10 +200,6 @@
     <ProjectReference Include="..\Recoveries.Core\Recoveries.Core.csproj">
       <Project>{ab586fc6-b803-4024-b864-5e567bd0b960}</Project>
       <Name>Recoveries.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Recoveries.ErrorQueues\Recoveries.ErrorQueues.csproj">
-      <Project>{b4a11de7-5496-4b57-9a9f-297cafe499f6}</Project>
-      <Name>Recoveries.ErrorQueues</Name>
     </ProjectReference>
     <ProjectReference Include="..\Recoveries\Recoveries.csproj">
       <Project>{3f11c22c-2cbb-466b-bfee-7f530b267038}</Project>

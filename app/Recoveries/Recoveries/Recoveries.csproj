@@ -41,6 +41,14 @@
     <OutputPath>bin\TeamCity\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
@@ -65,12 +73,35 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Domain\Extensions.cs" />
+    <Compile Include="Domain\Base\AbstractConsumer.cs" />
+    <Compile Include="Domain\Base\IDeleteFiles.cs" />
+    <Compile Include="Domain\Base\IErrorRetry.cs" />
+    <Compile Include="Domain\Base\IHandleErrorMessageRecovery.cs" />
+    <Compile Include="Domain\Base\IMessageReader.cs" />
+    <Compile Include="Domain\Base\IMessageWriter.cs" />
+    <Compile Include="Domain\Base\IPurgeQueue.cs" />
+    <Compile Include="Domain\Base\IQueueInsertion.cs" />
+    <Compile Include="Domain\Base\IQueueRetrieval.cs" />
+    <Compile Include="Domain\Consumers\RetryErrorsConsumers.cs" />
+    <Compile Include="Domain\Handlers\ErrorMessageRecoveryHandler.cs" />
+    <Compile Include="Domain\Messages\RecoveriesRouter.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigurationReader.cs" />
+    <Compile Include="Infrastructure\Configuration\DataProviders\BillingRecoveryConfiguration.cs" />
+    <Compile Include="Infrastructure\Configuration\DataProviders\WorkflowReceiverRecoveryConfiguration.cs" />
+    <Compile Include="Infrastructure\Configuration\DataProviders\WorkflowSenderRecoveryConfiguration.cs" />
+    <Compile Include="Infrastructure\Configuration\Integrations\IntegrationReceiverConfiguration.cs" />
+    <Compile Include="Infrastructure\Configuration\Integrations\IntegrationSenderConfiguration.cs" />
+    <Compile Include="Infrastructure\Configuration\Queues\RecoveryQueuesConfigurations.cs" />
+    <Compile Include="Infrastructure\Configuration\Queues\RouterBusConfiguration.cs" />
+    <Compile Include="Publisher\BusBuilder.cs" />
+    <Compile Include="RecoveriesMarker.cs" />
+    <Compile Include="Shared\Extensions.cs" />
     <Compile Include="EasyNetQException.cs" />
     <Compile Include="ErrorRetry.cs" />
     <Compile Include="FileDelete.cs" />
@@ -91,6 +122,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

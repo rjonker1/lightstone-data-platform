@@ -3,17 +3,13 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Common.Logging;
 using Recoveries.Core;
+using Recoveries.Domain.Base;
 
 namespace Recoveries
 {
-    public interface IMessageWriter
-    {
-        void Write(IEnumerable<RecoveryMessage> messages, IQueueOptions options);
-    }
-
     public class FileMessageWriter : IMessageWriter
     {
-        private readonly ILog _log = LogManager.GetLogger<FileMessageWriter>();
+        private static readonly ILog Log = LogManager.GetLogger<FileMessageWriter>();
 
         private static readonly Regex InvalidCharRegex = new Regex(@"[\\\/:\*\?\""\<\>|]");
 
@@ -29,7 +25,7 @@ namespace Recoveries
                 var infoPath = Path.Combine(options.MessageFilePath, uniqueFileName + ".info.txt");
 
                 if (File.Exists(bodyPath))
-                    _log.InfoFormat("Overwriting existing messsage file: {0}", bodyPath);
+                    Log.InfoFormat("Overwriting existing messsage file: {0}", bodyPath);
 
                 try
                 {
