@@ -13,7 +13,7 @@ namespace Monitoring.Domain.Mappers
             {
                 return new[]
                 {
-                    "RequestId", "RequestDate", "UserHostAddress", "Authorization", "Method", "BasePath", "HostName", "IsSecure", "Port", "Query",
+                    "RequestId", "RequestDate", "UserHostAddress", "Authorization", "UserName", "Method", "BasePath", "HostName", "IsSecure", "Port", "Query",
                     "SiteBase", "Scheme", "Host", "UserAgent", "ContentType", "JsonRequest"
                 };
             }
@@ -34,6 +34,7 @@ namespace Monitoring.Domain.Mappers
                 RequestDate = request.Request.RequestDate,
                 UserHostAddress = request.Request.UserHostAddress,
                 Authorization = request.Request.Header.Authorization,
+                UserName = request.Request.UserName,
                 Method = request.Request.Method,
                 BasePath = request.Request.Url.BasePath,
                 HostName = request.Request.Url.HostName,

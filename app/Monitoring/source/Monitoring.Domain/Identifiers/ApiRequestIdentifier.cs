@@ -5,7 +5,7 @@ namespace Monitoring.Domain.Identifiers
     public class ApiRequestIdentifier
     {
         public ApiRequestIdentifier(UrlIdentifier url, HeaderIdentifier header, string method, string userHostAddress, Guid requestId,
-            DateTime requestDate, string jsonRequest)
+            DateTime requestDate, string jsonRequest, string userName)
         {
             Url = url;
             Header = header;
@@ -14,12 +14,14 @@ namespace Monitoring.Domain.Identifiers
             RequestId = requestId;
             RequestDate = requestDate;
             JsonRequest = jsonRequest;
+            UserName = userName;
         }
 
         public UrlIdentifier Url { get; private set; }
         public HeaderIdentifier Header { get; private set; }
         public string Method { get; private set; }
         public string UserHostAddress { get; private set; }
+        public string UserName { get; private set; }
         public Guid RequestId { get; private set; }
         public DateTime RequestDate { get; private set; }
         public string JsonRequest { get; private set; }

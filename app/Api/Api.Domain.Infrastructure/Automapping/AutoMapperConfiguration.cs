@@ -23,6 +23,7 @@ namespace Api.Domain.Infrastructure.Automapping
             //cfg.CreateMap<Request, IRequest>();
             //cfg.CreateMap<Response, IResponse>()
             //    .ForMember(d => d.Response, opt => opt.MapFrom<string>(s => JsonConvert.SerializeObject(s.Contents.Target)));
+           
         }
     }
 }

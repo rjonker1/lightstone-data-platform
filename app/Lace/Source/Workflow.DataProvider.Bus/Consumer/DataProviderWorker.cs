@@ -1,4 +1,5 @@
-﻿using Castle.Windsor;
+﻿using Api.Domain.Core.Messages;
+using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.Topology;
@@ -35,7 +36,7 @@ namespace Workflow.DataProvider.Bus.Consumer
             var receiverExchange = _bus.ExchangeDeclare("DataPlatform.DataProvider.Receiver", ExchangeType.Fanout);
             _bus.Bind(receiverExchange, receiverQueue, string.Empty);
 
-            _bus.Consume(senderQueue, x => x
+            _bus.Consume(senderQueue, q => q
                 .Add<SendRequestToDataProviderCommand>(
                     (message, info) => new SenderConsumers<SendRequestToDataProviderCommand>(message, container))
                 .Add<GetResponseFromDataProviderCommmand>(
@@ -58,7 +59,7 @@ namespace Workflow.DataProvider.Bus.Consumer
                     (message, info) => new SenderConsumers<StartingCallCommand>(message, container))
                 .Add<EndingCallCommand>((message, info) => new SenderConsumers<EndingCallCommand>(message, container)));
 
-            _bus.Consume(receiverQueue, x => x
+            _bus.Consume(receiverQueue, q => q
                 .Add<RequestToDataProvider>(
                     (message, info) => new ReceiverConsumers<RequestToDataProvider>(message, container))
                 .Add<EntryPointReceivedRequest>(
@@ -81,6 +82,13 @@ namespace Workflow.DataProvider.Bus.Consumer
                     (message, info) => new ReceiverConsumers<DataProviderResponseTransformed>(message, container))
                 .Add<DataProviderConfigured>(
                     (message, info) => new ReceiverConsumers<DataProviderConfigured>(message, container)));
+
+            var apiReceiverQueue = _bus.QueueDeclare("DataPlatform.Api");
+            var apiReceiverExchange = _bus.ExchangeDeclare("DataPlatform.Api", ExchangeType.Fanout);
+            _bus.Bind(apiReceiverExchange, apiReceiverQueue, string.Empty);
+
+            _bus.Consume(apiReceiverQueue,
+                q => q.Add<RequestMetadataMessage>((message, info) => new ReceiverConsumers<RequestMetadataMessage>(message, container)));
 
             _log.DebugFormat("Data Provider Command Processor Service Started");
         }

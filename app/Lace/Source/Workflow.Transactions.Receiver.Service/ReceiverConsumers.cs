@@ -1,4 +1,5 @@
-﻿using Castle.Windsor;
+﻿using Api.Domain.Core.Messages;
+using Castle.Windsor;
 using EasyNetQ;
 using Workflow.Billing.Messages.Publishable;
 using Workflow.Lace.Messages.Events;
@@ -34,7 +35,10 @@ namespace Workflow.Transactions.Receiver.Service
                 container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderResponseTransformed>)message);
 
             if (message is IMessage<BillTransactionMessage>)
-                container.Resolve<Handlers.TransactionReceiver>().Consume((IMessage<BillTransactionMessage>)message);
+                container.Resolve<TransactionReceiver>().Consume((IMessage<BillTransactionMessage>)message);
+
+            if (message is IMessage<RequestMetadataMessage>)
+                container.Resolve<ApiRequestReceiver>().Consume((IMessage<RequestMetadataMessage>)message);
         }
     }
 }
