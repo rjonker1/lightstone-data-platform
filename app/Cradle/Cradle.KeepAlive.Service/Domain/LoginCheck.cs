@@ -13,11 +13,14 @@ namespace Cradle.KeepAlive.Service.Domain
     {
         public void ApiLogin()
         {
+            this.Info(() => "Initiating api login check");
             try
             {
                 var token = new Login().GetToken();
 
                 if (token == null) throw new LightstoneAutoException("API Token error");
+
+                this.Info(() => "Api login check complete");
             }
             catch (Exception e)
             {
@@ -28,6 +31,7 @@ namespace Cradle.KeepAlive.Service.Domain
 
         public void MobileLogin()
         {
+            this.Info(() => "Initiating mobile login check");
             try
             {
                 var body = JsonConvert.DeserializeObject<ConsumerDto>(new Login().GetMobileMenu());
@@ -70,6 +74,7 @@ namespace Cradle.KeepAlive.Service.Domain
                         }
                     }
                 }
+                this.Info(() => "Mobile login check complete");
             }
             catch (Exception e)
             {

@@ -102,8 +102,8 @@
       <HintPath>..\..\packages\Hangfire.Windsor.0.1.5343.14974\lib\net45\HangFire.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1860, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1860\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1864, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1864\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1860, Culture=neutral, processorArchitecture=MSIL">
@@ -191,7 +191,6 @@
     <Compile Include="Helpers\Login.cs" />
     <Compile Include="Helpers\Notifications\EmailAlert.cs" />
     <Compile Include="Helpers\Notifications\IEmailBuilder.cs" />
-    <Compile Include="NancyBootstrapper.cs" />
     <Compile Include="NotificationSender\EmailBuilder.cs" />
     <Compile Include="NotificationSender\EmailNotification.cs" />
     <Compile Include="Helpers\Notifications\ISendNotifications.cs" />
