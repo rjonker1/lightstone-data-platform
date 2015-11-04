@@ -3,9 +3,9 @@ using Monitoring.Dashboard.UI.Infrastructure.Dto;
 
 namespace Monitoring.Dashboard.UI.Core.Contracts.Handlers
 {
-    public interface IHandleDataProviderStatistics
+    public interface IHandleApiRequests
     {
-        List<DataProviderStatisticsDto> StatisticsResponse { get; }
+        List<ApiRequestMonitoringDto> ApiRequests { get; }
         void Handle();
     }
 }

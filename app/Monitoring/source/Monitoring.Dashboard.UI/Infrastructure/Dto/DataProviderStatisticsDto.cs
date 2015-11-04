@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 
-namespace Monitoring.Dashboard.UI.Core.Models
+namespace Monitoring.Dashboard.UI.Infrastructure.Dto
 {
     [DataContract]
-    public class DataProviderStatisticsView
+    public class DataProviderStatisticsDto
     {
-        public DataProviderStatisticsView()
+        public DataProviderStatisticsDto()
         {
             
         }
 
-        public DataProviderStatisticsView(string averageResponseTime, double totalRequests, double totalResponses,
+        public DataProviderStatisticsDto(string averageResponseTime, double totalRequests, double totalResponses,
             double totalErrors)
         {
             //AverageResponseTime = averageResponseTime.Seconds;
@@ -22,7 +21,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
             TotalResponses = totalResponses;
         }
        
-        public DataProviderStatisticsView DetermineSuccessRate()
+        public DataProviderStatisticsDto DetermineSuccessRate()
         {
             SuccessRate = TotalRequests > 0 ? Math.Round(((TotalRequests - TotalErrors)/TotalRequests)*100, 2) : 0;
             return this;

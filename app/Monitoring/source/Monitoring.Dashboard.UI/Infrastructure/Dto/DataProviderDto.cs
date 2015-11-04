@@ -7,13 +7,13 @@ using Common.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Monitoring.Dashboard.UI.Core.Models
+namespace Monitoring.Dashboard.UI.Infrastructure.Dto
 {
 
     [DataContract]
-    public class DataProviderView
+    public class DataProviderDto
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<DataProviderDto>();
 
         [DataMember]
         public Guid Id { get; private set; }
@@ -48,12 +48,12 @@ namespace Monitoring.Dashboard.UI.Core.Models
         [DataMember]
         public string JsonPayload { get; private set; }
 
-        public DataProviderView()
+        public DataProviderDto()
         {
-            _log = LogManager.GetLogger(GetType());
+            
         }
 
-        public DataProviderView(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date,
+        public DataProviderDto(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date,
             bool hasErrors,
             string elapsedTime, long packageVersion, string packageName, int dataProviderCount)
         {
@@ -67,14 +67,14 @@ namespace Monitoring.Dashboard.UI.Core.Models
             DataProviderCount = dataProviderCount;
         }
 
-        public DataProviderView SetState(int errorCount)
+        public DataProviderDto SetState(int errorCount)
         {
             State = errorCount > 0 ? "Failure" : "Successful";
             HasErrors = errorCount > 0;
             return this;
         }
 
-        public DataProviderView DeserializePayload()
+        public DataProviderDto DeserializePayload()
         {
             JsonPayload = DeserializePayloads();
             return this;
@@ -96,7 +96,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occurred deserializing the data provider payload {0}", ex.Message);
+                Log.ErrorFormat("An error occurred deserializing the data provider payload {0}", ex.Message);
             }
 
             return string.Empty;

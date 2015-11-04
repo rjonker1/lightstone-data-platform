@@ -4,12 +4,12 @@ using Nancy.Security;
 
 namespace Monitoring.Dashboard.UI.Modules
 {
-    public class DataProviderModule : NancyModule
+    public class ApiRequestModule : NancyModule
     {
-        public DataProviderModule()
+        public ApiRequestModule()
         {
             this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
-            Get["/dataProviders/log"] = _ => View["DataProviders"];
+            Get["/apiRequests/metadata"] = _ => View["ApiRequests"];
         }
     }
 }

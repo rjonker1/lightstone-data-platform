@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using Monitoring.Dashboard.UI.Core.Models;
+using Monitoring.Dashboard.UI.Infrastructure.Dto;
 
 namespace Monitoring.Dashboard.UI.Core.Contracts.Services
 {
     public interface ICallMonitoringService
     {
-        IEnumerable<DataProviderView> GetMonitoringForDataProviders();
-        IEnumerable<DataProviderStatisticsView> GetDataProviderStatistics();
+        List<DataProviderDto> GetMonitoringForDataProviders();
+        List<DataProviderStatisticsDto> GetDataProviderStatistics();
+        List<ApiRequestMonitoringDto> GetApiRequests();
     }
 }
