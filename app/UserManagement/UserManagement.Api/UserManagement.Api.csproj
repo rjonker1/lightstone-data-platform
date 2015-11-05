@@ -351,6 +351,8 @@
     <Content Include="Scripts\bootstrap-table\extensions\filter\bootstrap-table-filter.min.js" />
     <Content Include="Scripts\bootstrap-table\extensions\flatJSON\bootstrap-table-flatJSON.min.js" />
     <Content Include="Scripts\bootstrap-table\extensions\sorting\bootstrap-table_natural-sorting.min.js" />
+    <Content Include="Scripts\bundleDropdown\jquery.dropdown.js" />
+    <Content Include="Scripts\bundleDropdown\modernizr.custom.63321.js" />
     <Content Include="Scripts\cascadeDropdown\jquery.cascadingdropdown.js" />
     <Content Include="Scripts\DataTables-1.10.4\jquery.dataTables.min.js.map">
       <DependentUpon>jquery.dataTables.min.js</DependentUpon>
