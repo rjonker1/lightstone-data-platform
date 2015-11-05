@@ -29,6 +29,8 @@
     }
 </style>
 
+<link rel="stylesheet" type="text/css" href="~/Content/bundleDropdown/style1.css" />
+
 
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
@@ -290,8 +292,23 @@
         <div class="col-sm-6 col-md-8" style="width: 65%; margin-top: 10px;">
 
             <div class="row">
+                
+                <section class="main clearfix">
+                    <div class="fleft">
+                        <p>In this example we use a gutter of 5 and stack the items with a slight offset</p>
+                    </div>
+                    <div class="fleft">
+                        <select id="cd-dropdown" name="cd-dropdown" class="cd-select">
+                            <option value="-1" selected>Choose your favorite animal</option>
+                            <option value="1" class="icon-monkey">Monkey</option>
+                            <option value="2" class="icon-bear">Bear</option>
+                            <option value="3" class="icon-squirrel">Squirrel</option>
+                            <option value="4" class="icon-elephant">Elephant</option>
+                        </select>
+                    </div>
+                </section>
 
-                @foreach (var bundle in Model.ContractBundleList)
+                @*@foreach (var bundle in Model.ContractBundleList)
                 {
 
 
@@ -394,7 +411,7 @@
                             </div>
                         </div>
                     }
-                }
+                }*@
 
             </div>
         </div>

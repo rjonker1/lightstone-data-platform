@@ -202,6 +202,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bundleDropdown\common.css" />
+    <Content Include="Content\bundleDropdown\demo.css" />
+    <Content Include="Content\bundleDropdown\icons.css" />
+    <Content Include="Content\bundleDropdown\style1.css" />
+    <Content Include="Content\bundleDropdown\style2.css" />
+    <Content Include="Content\bundleDropdown\style3.css" />
+    <Content Include="Content\bundleDropdown\style4.css" />
+    <Content Include="Content\bundleDropdown\style5.css" />
+    <Content Include="Content\bundleDropdown\style6.css" />
     <Content Include="Content\chosen-sprite%402x.png" />
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
