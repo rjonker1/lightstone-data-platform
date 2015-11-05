@@ -27,6 +27,8 @@ namespace Cradle.KeepAlive.Service
 
             var container = new WindsorContainer();
             container.Register(Component.For<IApiClient>().ImplementedBy<ApiClient>());
+            container.Register(Component.For<HealthCheck>());
+            container.Register(Component.For<LoginCheck>());
             container.Register(Component.For<PackageCheck>());
 
             JobActivator.Current = new WindsorJobActivator(container.Kernel);
