@@ -37,3 +37,13 @@
 .validation .validation-summary-errors {
     margin-bottom: 0;
 }
+
+/* jquery.ajax-combobox */
+.ac_results {
+    min-height: 230px !important;
+} 
+        
+.ac_results li {
+    width: 198px;
+}
+/* jquery.ajax-combobox */
