@@ -1,6 +1,5 @@
 @import url('demo.css');
 @import url('common.css');
-@import url('icons.css');
 
 .cd-dropdown > span,
 .cd-dropdown ul li:nth-last-child(-n+3) span {
@@ -19,7 +18,7 @@
 }
 
 .cd-active.cd-dropdown > span {
-	color: #fc756f;
+	color: #3C8DBC;
 }
 
 .cd-active.cd-dropdown > span,
@@ -36,6 +35,6 @@
 }
 
 .cd-active.cd-dropdown ul li span:hover {
-	background: #fc756f;
+	background: #3C8DBC;
 	color: #fff;
 }

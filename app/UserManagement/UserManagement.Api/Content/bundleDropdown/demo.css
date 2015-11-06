@@ -78,8 +78,8 @@ a {
 }
 
 .fleft {
-	float: left;
-	width: 49%;
+	/*float: left;
+	width: 49%;*/
 	min-width: 300px;
 }
 

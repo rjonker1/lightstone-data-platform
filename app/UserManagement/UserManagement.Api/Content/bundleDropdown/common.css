@@ -1,7 +1,7 @@
 .cd-dropdown,
 .cd-select {
 	position: relative;
-	width: 300px;
+	/*width: 450px;*/
 	margin: 20px auto;
 	display: block;
 }
@@ -24,7 +24,7 @@
 	content: '\25BC';
 	position: absolute;
 	right: 0px;
-	top: 15%;
+	top: 6%;
 	width: 50px;
 	text-align: center;
 	font-size: 12px;
