@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders.Metric;
@@ -53,7 +54,23 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                     if (dataField != null) dataField.SetName(property.Name);
                 }
                 )) as DataField).ToList();
-            list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType.ToString(), _industryRepository.ToList(), field.GetValue(source) + "")).ToList());
+
+            foreach (var field in properties.Except(complexProperties))
+            {
+                if (field == null) continue;
+                var value = "";
+                try
+                {
+                    value = field.GetValue(source) + "";
+                }
+                catch (Exception)
+                {
+                    var field1 = field;
+                    this.Error(() => "Error getting property value to populate data field value {0}".FormatWith(field1.Name));
+                }
+                 
+                list.Add(new DataField(field.Name, field.PropertyType.ToString(), _industryRepository.ToList(), value));
+            }
 
             this.Info(() => "Successfully mapped {0} to IEnumerable<IDataField>".FormatWith(source));
 

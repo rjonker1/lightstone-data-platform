@@ -1,5 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using PackageBuilder.Api.Installers;
+using Shared.BuildingBlocks.Api.Installers;
 
 namespace PackageBuilder.Api.Helpers
 {

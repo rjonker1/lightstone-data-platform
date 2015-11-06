@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Billing.Api.Installers;
+using Billing.Api.Helpers;
 using Castle.Windsor;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -12,21 +12,16 @@ using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
-using Workflow.Billing.Domain.Schedules;
-using Workflow.Billing.Helpers.Schedules;
-using Workflow.Billing.Installers;
 
 namespace Billing.Api
 {
     public class Bootstrapper : WindsorNancyBootstrapper
     {
-
         // The bootstrapper enables you to reconfigure the composition of the framework,
         // by overriding the various methods and properties.
         // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
-
             this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
         }
@@ -36,15 +31,7 @@ namespace Billing.Api
             // Perform registations that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
-            container.Install(
-                new NHibernateInstaller(),
-                new CacheProviderInstaller(),
-                new RepositoryInstaller(),
-                new BusInstaller(),
-                new AutoMapperInstaller(),
-                new UpdateBillingTransactionInstaller(),
-                new AuthenticationInstaller(),
-                new ApiClientInstaller());
+            container.Install(WindsorInstallerCollection.Installers);
 
             //Drop create
             //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);

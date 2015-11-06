@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
-using DataPlatform.Shared.Helpers.Extensions;
+using CentralInterfuseApplication.Api.Helpers;
 using Nancy;
-using Nancy.Authentication.Forms;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
@@ -31,7 +29,7 @@ namespace CentralInterfuseApplication.Api
             // Perform registation that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
-            container.Install(FromAssembly.InThisApplication());
+            container.Install(WindsorInstallerCollection.Installers);
 
             //  container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)

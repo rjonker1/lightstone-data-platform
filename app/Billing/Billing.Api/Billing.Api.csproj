@@ -676,6 +676,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\WindsorInstallerCollection.cs" />
     <Compile Include="Installers\AuthenticationInstaller.cs" />
     <Compile Include="Installers\UpdateBillingTransactionInstaller.cs" />
     <Compile Include="Modules\AdminBillingModule.cs" />

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
 using EasyNetQ;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
@@ -12,34 +12,34 @@ using Monitoring.Domain.Mappers;
 using Monitoring.Domain.Repository;
 using Nancy;
 using Nancy.Authentication.Token;
-using Nancy.Authentication.Token.Storage;
 using Nancy.Bootstrapper;
+using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
-using Nancy.TinyIoc;
 using Shared.BuildingBlocks.AdoNet.Mapping;
 using Shared.BuildingBlocks.AdoNet.Repository;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
+using Shared.BuildingBlocks.Api.Installers;
 using Workflow.BuildingBlocks;
 
 namespace Monitoring.Dashboard.UI
 {
-    public class Bootstrapper : DefaultNancyBootstrapper
+    public class Bootstrapper : WindsorNancyBootstrapper
     {
         protected override IRootPathProvider RootPathProvider
         {
             get { return new AspNetRootPathProvider(); }
         }
 
-        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
             StaticConfiguration.DisableErrorTraces = false;
             base.ApplicationStartup(container, pipelines);
         }
 
-        protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
+        protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
@@ -74,26 +74,25 @@ namespace Monitoring.Dashboard.UI
 
             base.RequestStartup(container, pipelines, context);
         }
-        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+        protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
-            var userAgent = ConfigurationManager.AppSettings["TokenAuthUserAgentValue"];
-            container.Register<ITokenizer>(new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = userAgent).WithKeyCache(new FileSystemTokenKeyStore((new TokenRootPathProvider())))));
+            container.Register(Component.For<ITransactionRepository>().Instance(new BillingTransactionRepository()));
 
-            container.Register<ITransactionRepository>(new BillingTransactionRepository());
+            container.Register(Component.For<IRepositoryMapper, RepositoryMapper>());
+            container.Register(Component.For<IHaveTypeMappings, MappingForMonitoringTypes>());
+            container.Register(Component.For<IMonitoringRepository, MonitoringRepository>());
+            container.Register(Component.For<ITransactionRepository, BillingTransactionRepository>());
 
-            container.Register<IRepositoryMapper, RepositoryMapper>();
-            container.Register<IHaveTypeMappings, MappingForMonitoringTypes>();
-            container.Register<IMonitoringRepository, MonitoringRepository>();
-            container.Register<ITransactionRepository, BillingTransactionRepository>();
+            container.Register(Component.For<IHandleMonitoringCommands, DataProviderHandler>());
+            container.Register(Component.For<IHandleDataProviderStatistics, DataProviderStatisticsHandler>());
+            container.Register(Component.For<IHandleApiRequests, ApiRequestHandler>());
+            container.Register(Component.For<ICallMonitoringService, MonitoringService>());
 
-            container.Register<IHandleMonitoringCommands, DataProviderHandler>();
-            container.Register<IHandleDataProviderStatistics, DataProviderStatisticsHandler>();
-            container.Register<IHandleApiRequests, ApiRequestHandler>();
-            container.Register<ICallMonitoringService, MonitoringService>();
+            container.Register(Component.For<IHandleDataProviderCaching, DataProviderCachingHandler>());
+            container.Register(Component.For<IPublishCacheMessages, DataProviderCommandPublisher>());
+            container.Register(Component.For<IAdvancedBus>().UsingFactoryMethod(kernel => BusFactory.CreateAdvancedBus(QueueConfigurationReader.CacheSender)));
 
-            container.Register<IHandleDataProviderCaching, DataProviderCachingHandler>();
-            container.Register<IPublishCacheMessages, DataProviderCommandPublisher>();
-            container.Register<IAdvancedBus>(BusFactory.CreateAdvancedBus(QueueConfigurationReader.CacheSender));
+            container.Install(new AuthInstaller());
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
@@ -112,15 +111,6 @@ namespace Monitoring.Dashboard.UI
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/fastclick"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/slimScroll"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
-        }
-
-        public class TokenRootPathProvider : IRootPathProvider
-        {
-            public string GetRootPath()
-            {
-                var keyStore = ConfigurationManager.AppSettings["TokenAuthKeyStorePath"];
-                return new Uri(keyStore).LocalPath;
-            }
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using Api.Domain.Core.Messages;
 using Api.Domain.Infrastructure.Automapping;
 using Api.Domain.Infrastructure.Bus;
 using Api.Domain.Infrastructure.Extensions;
 using Api.Domain.Infrastructure.Metadata;
-using Api.Helpers.Installers;
+using Api.Helpers;
 using Api.Infrastructure.Metadata;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -68,9 +67,7 @@ namespace Api
 
             AutoMapperConfiguration.Init();
 
-            container.Install(
-                new AuthInstaller(),
-                new AutoMapperInstaller());
+            container.Install(WindsorInstallerCollection.Installers);
 
             container.Register(
                 Component.For<IAuthenticateUser>().ImplementedBy<UerManagementAuthenticator>().LifestyleTransient());
@@ -88,7 +85,6 @@ namespace Api
                 Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
             container.Register(Component.For<IAdvancedBus>().Instance(BusFactory.CreateAdvancedBus(ConfigurationManager.ConnectionStrings["api/bus/host"].ConnectionString)).LifestyleSingleton());
             container.Register(Component.For<IDispatchMessagesToBus<RequestMetadataMessage>>().ImplementedBy<RequestMessageDispatcher>().LifestyleSingleton());
-
         }
 
         protected override IRootPathProvider RootPathProvider

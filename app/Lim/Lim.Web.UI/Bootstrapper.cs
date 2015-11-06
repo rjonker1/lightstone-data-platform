@@ -1,6 +1,6 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
 ﻿using Lim.Core;
 using Lim.Domain.Dto;
@@ -10,32 +10,32 @@ using Lim.Web.UI.Handlers;
 using Lim.Web.UI.Models.Api;
 using Nancy;
 using Nancy.Authentication.Token;
-using Nancy.Authentication.Token.Storage;
 using Nancy.Bootstrapper;
+using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
-using Nancy.TinyIoc;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
+using Shared.BuildingBlocks.Api.Installers;
 
 namespace Lim.Web.UI
 {
-    public class Bootstrapper : DefaultNancyBootstrapper
+    public class Bootstrapper : WindsorNancyBootstrapper
     {
         protected override IRootPathProvider RootPathProvider
         {
             get { return new AspNetRootPathProvider(); }
         }
 
-        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
             StaticConfiguration.DisableErrorTraces = false;
             base.ApplicationStartup(container, pipelines);
         }
 
-        protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
+        protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
@@ -70,22 +70,21 @@ namespace Lim.Web.UI
             base.RequestStartup(container, pipelines, context);
         }
 
-        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+        protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
-            var userAgent = ConfigurationManager.AppSettings["TokenAuthUserAgentValue"];
-            container.Register<ITokenizer>(new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = userAgent).WithKeyCache(new FileSystemTokenKeyStore((new TokenRootPathProvider())))));
+            container.Register(Component.For<IRepository, LimRepository>());
+            container.Register(Component.For<IUserManagementApiClient, UserManagementApiClient>());
+            container.Register(Component.For<ISaveApiConfiguration, SaveApiConfiguration>());
+            container.Register(Component.For<IHandleGettingDataPlatformClient, GetDataPlatformClientHandler>());
+            container.Register(Component.For<IHandleGettingIntegrationClient, GetIntegrationClientHandler>());
+            container.Register(Component.For<IHandleGettingConfiguration, GetConfigurationHandler>());
+            container.Register(Component.For<IHandleSavingConfiguration, SavingConfigurationHandler>());
+            container.Register(Component.For<IHandleSavingClient, SavingClientHandler>());
+            container.Register(Component.For<IHandleGettingMetadata, GetMetadataHandler>());
+            container.Register(Component.For<IPersist<PushConfiguration>, ApiPushCommit>());
+            container.Register(Component.For<IPersist<ClientDto>, ClientCommit>());
 
-            container.Register<IRepository, LimRepository>();
-            container.Register<IUserManagementApiClient, UserManagementApiClient>();
-            container.Register<ISaveApiConfiguration, SaveApiConfiguration>();
-            container.Register<IHandleGettingDataPlatformClient, GetDataPlatformClientHandler>();
-            container.Register<IHandleGettingIntegrationClient, GetIntegrationClientHandler>();
-            container.Register<IHandleGettingConfiguration, GetConfigurationHandler>();
-            container.Register<IHandleSavingConfiguration, SavingConfigurationHandler>();
-            container.Register<IHandleSavingClient, SavingClientHandler>();
-            container.Register<IHandleGettingMetadata, GetMetadataHandler>();
-            container.Register<IPersist<PushConfiguration>, ApiPushCommit>();
-            container.Register<IPersist<ClientDto>, ClientCommit>();
+            container.Install(new AuthInstaller());
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
@@ -107,15 +106,6 @@ namespace Lim.Web.UI
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/daterangepicker"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/input-mask"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/chosen"));
-        }
-
-        public class TokenRootPathProvider : IRootPathProvider
-        {
-            public string GetRootPath()
-            {
-                var keyStore = ConfigurationManager.AppSettings["TokenAuthKeyStorePath"];
-                return new Uri(keyStore).LocalPath;
-            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Castle.MicroKernel.Registration;
+using Shared.BuildingBlocks.Api.Installers;
 using UserManagement.Api.Installers;
 
 namespace UserManagement.Api.Helpers
