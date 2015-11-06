@@ -6,6 +6,7 @@ using AutoMapper;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers;
 using Nancy;
+using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Nancy.Security;
@@ -24,8 +25,16 @@ namespace UserManagement.Api.Modules
 {
     public class ClientModule : SecureModule
     {
+        private static int _defaultJsonMaxLength;
+
         public ClientModule(IBus bus, IClientRepository clientRepository, IRepository<User> userRepository)
         {
+            if (_defaultJsonMaxLength == 0)
+                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
+
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
+            JsonSettings.MaxJsonLength = Int32.MaxValue;
+
             Get["/Clients"] = _ =>
             {
                 var search = Context.Request.Query["search"];

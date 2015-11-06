@@ -9,6 +9,7 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Nancy;
+using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Nancy.Security;
@@ -25,8 +26,16 @@ namespace UserManagement.Api.Modules
 {
     public class UserModule : SecureModule
     {
+        private static int _defaultJsonMaxLength;
+
         public UserModule(IBus bus, IAdvancedBus eBus, IUserRepository userRepository)
         {
+            if (_defaultJsonMaxLength == 0)
+                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
+
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
+            JsonSettings.MaxJsonLength = Int32.MaxValue;
+
             Get["/Users/All"] = _ => Response.AsJson(Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(userRepository));
 
             Get["/Users"] = _ =>

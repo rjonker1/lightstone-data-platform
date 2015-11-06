@@ -5,6 +5,7 @@ using AutoMapper;
 using DataPlatform.Shared.Enums;
 using MemBus;
 using Nancy;
+using Nancy.Json;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Nancy.Security;
@@ -20,8 +21,16 @@ namespace UserManagement.Api.Modules
 {
     public class ContractModule : SecureModule
     {
+        private static int _defaultJsonMaxLength;
+
         public ContractModule(IBus bus, IContractRepository contracts, IContractBundleRepository contractBundles)
         {
+            if (_defaultJsonMaxLength == 0)
+                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
+
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
+            JsonSettings.MaxJsonLength = Int32.MaxValue;
+
             Get["/Contracts"] = _ =>
             {
                 var model = this.Bind<DataTablesViewModel>();
