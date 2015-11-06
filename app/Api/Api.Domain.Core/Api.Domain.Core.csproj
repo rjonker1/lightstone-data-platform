@@ -70,8 +70,9 @@
     <Compile Include="Contracts\IRequest.cs" />
     <Compile Include="Contracts\IResponse.cs" />
     <Compile Include="Dto\RequestDto.cs" />
+    <Compile Include="Dto\RequestMetadataDto.cs" />
     <Compile Include="Dto\ResponseDto.cs" />
-    <Compile Include="Messages\RequestReportMessage.cs" />
+    <Compile Include="Messages\RequestMetadataMessage.cs" />
     <Compile Include="Meta\Client.cs" />
     <Compile Include="Meta\Consumer.cs" />
     <Compile Include="Meta\Contract.cs" />

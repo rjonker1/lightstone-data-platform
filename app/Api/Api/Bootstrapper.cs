@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
+using Api.Domain.Core.Messages;
 using Api.Domain.Infrastructure.Automapping;
 using Api.Domain.Infrastructure.Bus;
 using Api.Domain.Infrastructure.Extensions;
-using Api.Domain.Infrastructure.Messages;
 using Api.Domain.Infrastructure.Metadata;
 using Api.Helpers.Installers;
 using Api.Infrastructure.Metadata;
@@ -29,7 +29,7 @@ namespace Api
     {
         public Bootstrapper()
         {
-            Nancy.Json.JsonSettings.MaxJsonLength = Int32.MaxValue;
+            Nancy.Json.JsonSettings.MaxJsonLength = int.MaxValue;
         }
 
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
@@ -87,7 +87,7 @@ namespace Api
             container.Register(
                 Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
             container.Register(Component.For<IAdvancedBus>().Instance(BusFactory.CreateAdvancedBus(ConfigurationManager.ConnectionStrings["api/bus/host"].ConnectionString)).LifestyleSingleton());
-            container.Register(Component.For<IDispatchMessagesToBus<RequestReportMessage>>().ImplementedBy<RequestMessageDispatcher>().LifestyleSingleton());
+            container.Register(Component.For<IDispatchMessagesToBus<RequestMetadataMessage>>().ImplementedBy<RequestMessageDispatcher>().LifestyleSingleton());
 
         }
 

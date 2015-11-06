@@ -59,6 +59,8 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Migrations\201504151135_Create_Data_Provider_Monitoring_Table.cs" />
+    <Compile Include="Migrations\201504251525_Create_Data_Provider_Event_Table.cs" />
+    <Compile Include="Migrations\201511031922_Create_Api_Request_Monitoring_Table.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

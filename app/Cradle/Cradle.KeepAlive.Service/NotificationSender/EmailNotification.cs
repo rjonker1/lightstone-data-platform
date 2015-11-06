@@ -27,7 +27,6 @@ namespace Cradle.KeepAlive.Service.NotificationSender
                     var mailMessage = _emailBuilder.BuildMessage();
 
                     mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to"].ToLower());
-                    mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to/secondary"].ToLower());
 
                     this.Info(() => "Sending Email notification to: " + mailMessage.To);
                     client.Send(mailMessage);

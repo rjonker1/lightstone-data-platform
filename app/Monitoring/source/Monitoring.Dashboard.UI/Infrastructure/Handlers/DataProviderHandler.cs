@@ -5,6 +5,7 @@ using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
+using Monitoring.Dashboard.UI.Infrastructure.Dto;
 using Monitoring.Dashboard.UI.Infrastructure.Repository;
 using Monitoring.Domain.Repository;
 
@@ -14,15 +15,12 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     {
         private readonly IMonitoringRepository _monitoring;
         private readonly ITransactionRepository _billing;
-        private readonly ILog _log;
-        public IEnumerable<DataProviderView> MonitoringResponse { get; private set; }
-
+        private static readonly ILog Log = LogManager.GetLogger<DataProviderHandler>();
         public DataProviderHandler(IMonitoringRepository monitoring,
             ITransactionRepository billing)
         {
             _monitoring = monitoring;
             _billing = billing;
-            _log = LogManager.GetLogger(GetType());
         }
 
         public void Handle(GetMonitoringCommand command)
@@ -50,7 +48,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                 MonitoringResponse =
                     requests.Select(
                         s =>
-                            new DataProviderView(s.RequestId, payloads
+                            new DataProviderDto(s.RequestId, payloads
                                 .Where(f => f.Id == s.RequestId)
                                 .Select(c => new SerializedPayload(c.Payload, c.CommitSequence)).ToList(), s.Date, false,
                                 s.ElapsedTime, s.PackageVersion, s.PackageName, s.DataProviderCount).DeserializePayload()
@@ -59,7 +57,8 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured in the Monitoirng Handler because of {0}", ex.Message);
+                Log.ErrorFormat("An error occured in the Monitoirng Handler because of {0}", ex, ex.Message);
+                MonitoringResponse = Enumerable.Empty<DataProviderDto>().ToList();
             }
         }
 
@@ -67,6 +66,8 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
         {
             return error == null ? 0 : error.ErrorCount;
         }
+
+        public List<DataProviderDto> MonitoringResponse { get; private set; }
 
     }
 }

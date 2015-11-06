@@ -10,12 +10,12 @@ namespace Workflow.BuildingBlocks.Consumers
 {
     public class ConsumerRegistration
     {
-        private readonly Dictionary<Type, List<Func<object>>> creationRegistry = 
+        private readonly Dictionary<Type, List<Func<object>>> _creationRegistry = 
             new Dictionary<Type, List<Func<object>>>();
 
-        private readonly Dictionary<string, Assembly> assemblyRegistry = new Dictionary<string, Assembly>();
+        private readonly Dictionary<string, Assembly> _assemblyRegistry = new Dictionary<string, Assembly>();
 
-        private readonly ILog log = LogManager.GetCurrentClassLogger();
+        private readonly ILog Log = LogManager.GetLogger<ConsumerRegistration>();
 
         public ConsumerRegistration AddConsumer<TConsumer, TMessage>(Func<TConsumer> creation)
             where TMessage : class
@@ -51,9 +51,9 @@ namespace Workflow.BuildingBlocks.Consumers
         {
             var fullName = consumerType.Assembly.FullName;
 
-            if (!assemblyRegistry.ContainsKey(fullName))
+            if (!_assemblyRegistry.ContainsKey(fullName))
             {
-                assemblyRegistry.Add(fullName, consumerType.Assembly);
+                _assemblyRegistry.Add(fullName, consumerType.Assembly);
             }
         }
 
@@ -61,45 +61,45 @@ namespace Workflow.BuildingBlocks.Consumers
         {
             var fullName = consumerAssembly.FullName;
 
-            if (!assemblyRegistry.ContainsKey(fullName))
+            if (!_assemblyRegistry.ContainsKey(fullName))
             {
-                assemblyRegistry.Add(fullName, consumerAssembly);
+                _assemblyRegistry.Add(fullName, consumerAssembly);
             }
         }
 
         private void AddConsumerCreation<TConsumer, TMessage>(Func<TConsumer> creation, Type messageType) where TMessage : class
             where TConsumer : IConsume<TMessage>
         {
-            if (!creationRegistry.ContainsKey(messageType))
-                creationRegistry.Add(messageType, new List<Func<object>>());
+            if (!_creationRegistry.ContainsKey(messageType))
+                _creationRegistry.Add(messageType, new List<Func<object>>());
 
             Func<object> wrappedCreation = () => creation();
 
-            creationRegistry[messageType].Add(wrappedCreation);
+            _creationRegistry[messageType].Add(wrappedCreation);
         }
 
         private void AddConsumerCreation<TMessage>(Func<IConsume<TMessage>> creation, Type messageType) where TMessage : class
         {
-            if (!creationRegistry.ContainsKey(messageType))
-                creationRegistry.Add(messageType, new List<Func<object>>());
+            if (!_creationRegistry.ContainsKey(messageType))
+                _creationRegistry.Add(messageType, new List<Func<object>>());
 
             Func<object> wrappedCreation = () => creation();
 
-            creationRegistry[messageType].Add(wrappedCreation);
+            _creationRegistry[messageType].Add(wrappedCreation);
         }
 
         public IEnumerable<IConsume<TMessageType>> GetConsumers<TMessageType>() where TMessageType : class
         {
             var messageType = typeof (TMessageType);
-            var found = creationRegistry.ContainsKey(messageType);
+            var found = _creationRegistry.ContainsKey(messageType);
 
             if (!found)
             {
-                log.DebugFormat("Did not find any consumers for message of type {0}", messageType);
+                Log.DebugFormat("Did not find any consumers for message of type {0}", messageType);
                 yield break;
             }
 
-            var creationList = creationRegistry[messageType];
+            var creationList = _creationRegistry[messageType];
             foreach (var consumerCreation in creationList)
             {
                 object blankConsumer = consumerCreation();
@@ -107,7 +107,7 @@ namespace Workflow.BuildingBlocks.Consumers
 
                 if (consumer != null)
                 {
-                    log.InfoFormat("Found {0} as consumer for message {1}", consumer.GetType(), messageType);
+                    Log.InfoFormat("Found {0} as consumer for message {1}", consumer.GetType(), messageType);
                     yield return consumer;
                 }
                 else
@@ -117,7 +117,7 @@ namespace Workflow.BuildingBlocks.Consumers
                             "Failed to create consumer for message {0}. The supposed consumer is {1}. Moving to next consumer is available",
                             messageType.FullName, blankConsumer.GetType());
 
-                    log.ErrorFormat(failureMessage);
+                    Log.ErrorFormat(failureMessage);
 
                     throw new Exception(failureMessage);
                 }
@@ -156,7 +156,7 @@ namespace Workflow.BuildingBlocks.Consumers
 
         public Assembly[] GetAssemblies()
         {
-            return assemblyRegistry.Select(r => r.Value).ToArray();
+            return _assemblyRegistry.Select(r => r.Value).ToArray();
         }
     }
 }

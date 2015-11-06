@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using Castle.Windsor;
 using Hangfire;
 using Microsoft.Owin;
 using Owin;

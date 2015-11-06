@@ -12,7 +12,8 @@ namespace Monitoring.Domain.Mappers
         {
             Mappings = new Dictionary<Type, TypeMapper>()
             {
-                {typeof (MonitoringDataProviderTransaction), new MonitoringDataProviderMapper()}
+                {typeof (MonitoringDataProviderTransaction), new MonitoringDataProviderMapper()},
+                {typeof (MonitoringApiRequest), new MonitoringApiRequestMapper()}
             };
         }
     }

@@ -4,14 +4,10 @@ using Common.Logging;
 using EasyNetQ;
 using RabbitMQ.Client.Exceptions;
 using Recoveries.Core;
+using Recoveries.Domain.Base;
 
 namespace Recoveries
 {
-    public interface IQueueRetrieval
-    {
-        IEnumerable<RecoveryMessage> GetMessagesFromQueue(IQueueOptions options);
-    }
-
     public class QueueRetrieval : IQueueRetrieval
     {
         private readonly ILog _log = LogManager.GetLogger<QueueRetrieval>();

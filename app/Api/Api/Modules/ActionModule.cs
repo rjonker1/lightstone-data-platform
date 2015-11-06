@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.Reflection;
+using Api.Domain.Core.Messages;
 using Api.Domain.Infrastructure.Bus;
 using Api.Domain.Infrastructure.Extensions;
-using Api.Domain.Infrastructure.Messages;
 using Api.Helpers.Validators;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Enums;
@@ -19,7 +19,7 @@ namespace Api.Modules
     public class ActionModule : SecureModule
     {
         public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi,
-            IDispatchMessagesToBus<RequestReportMessage> dispatcher)
+            IDispatchMessagesToBus<RequestMetadataMessage> dispatcher)
         {
             Get["/"] = parameters =>
             {

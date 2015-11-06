@@ -59,9 +59,13 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.1200, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.1200\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Api.Domain.Core, Version=1.0.0.1856, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Api.Domain.Core.1.0.0.1856\lib\net45\Lightstone.DataPlatform.Api.Domain.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.1857, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.1857\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
@@ -88,6 +92,10 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1296\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Nancy, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Nancy.1.1\lib\net40\Nancy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -103,13 +111,16 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Handlers\ContextReceiver.cs" />
+    <Compile Include="Handlers\ApiRequestReceiver.cs" />
     <Compile Include="Handlers\RequestsReceiver.cs" />
     <Compile Include="Handlers\ResponsesReceiver.cs" />
     <Compile Include="Handlers\TransactionReceiver.cs" />
     <Compile Include="ReceiverConsumers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">

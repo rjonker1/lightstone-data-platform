@@ -12,7 +12,7 @@ namespace Toolbox.Bmw.Dtos
         }
 
         public BmwFinanceDataDto(string chassis, string engine, string registrationNumber, string description, int registrationYear,
-            string dealStatus, string financeHouse, string dealReference, DateTime startDate, DateTime expireDate, string productCategory)
+            string dealStatus, string financeHouse, string dealReference, DateTime startDate, DateTime expireDate, string clientNumber)
         {
             Chassis = chassis;
             Engine = engine;
@@ -25,7 +25,7 @@ namespace Toolbox.Bmw.Dtos
             DealReference = dealReference;
             StartDate =  startDate;
             ExpireDate = expireDate;
-            ProductCategory = productCategory;
+            ClientNumber = clientNumber;
         }
 
       
@@ -59,8 +59,10 @@ namespace Toolbox.Bmw.Dtos
 
         [DataMember]
         public string DealStatus { get; private set; }
-
         [DataMember]
-        public string ProductCategory { get; set; }
+        public string ClientNumber { get; private set; }
+
+        //[DataMember]
+        //public string ProductCategory { get; set; }
     }
 }

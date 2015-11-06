@@ -56,10 +56,6 @@
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1488\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1488, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1488\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.5.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\RabbitMQ.Client.3.5.3\lib\net40\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
@@ -85,16 +81,13 @@
     <Compile Include="when_sending_a_message_to_the_recover_all_messages_consumer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Recoveries.Core\Recoveries.Core.csproj">
       <Project>{ab586fc6-b803-4024-b864-5e567bd0b960}</Project>
       <Name>Recoveries.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Recoveries.ErrorQueues\Recoveries.ErrorQueues.csproj">
-      <Project>{b4a11de7-5496-4b57-9a9f-297cafe499f6}</Project>
-      <Name>Recoveries.ErrorQueues</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Recoveries.Router\Recoveries.Router.csproj">
       <Project>{67eb7ea2-5930-40be-887a-129ed3e9d253}</Project>

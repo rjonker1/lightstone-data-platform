@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recoveries", "Recoveries\Recoveries\Recoveries.csproj", "{3F11C22C-2CBB-466B-BFEE-7F530B267038}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recoveries.ErrorQueues", "Recoveries\Recoveries.ErrorQueues\Recoveries.ErrorQueues.csproj", "{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B1E0A60A-E138-45CA-8A40-D2E91AD0B4F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recoveries.Router", "Recoveries\Recoveries.Router\Recoveries.Router.csproj", "{67EB7EA2-5930-40BE-887A-129ED3E9D253}"
@@ -42,16 +40,6 @@ Global
 		{3F11C22C-2CBB-466B-BFEE-7F530B267038}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
 		{3F11C22C-2CBB-466B-BFEE-7F530B267038}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{3F11C22C-2CBB-466B-BFEE-7F530B267038}.Test|Any CPU.Build.0 = Test|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.Prod|Any CPU.Build.0 = Prod|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.Test|Any CPU.ActiveCfg = Test|Any CPU
-		{B4A11DE7-5496-4B57-9A9F-297CAFE499F6}.Test|Any CPU.Build.0 = Test|Any CPU
 		{67EB7EA2-5930-40BE-887A-129ED3E9D253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{67EB7EA2-5930-40BE-887A-129ED3E9D253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67EB7EA2-5930-40BE-887A-129ED3E9D253}.Prod|Any CPU.ActiveCfg = Prod|Any CPU

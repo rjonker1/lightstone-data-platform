@@ -7,8 +7,6 @@ namespace Monitoring.Dashboard.UI.Hubs
     public class DataProviderHub : Hub
     {
         private readonly DataProviderBroadcaster _broadcaster;
-        //private readonly DataProviderStatisticsBroadcaster _statisticsBroadcaster;
-
         public DataProviderHub()
             : this(DataProviderBroadcaster.Instance)
         {

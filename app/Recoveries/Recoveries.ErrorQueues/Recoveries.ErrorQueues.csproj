@@ -63,11 +63,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ConfigurationReader.cs" />
-    <Compile Include="DataProviders\BillingRecoveryConfiguration.cs" />
-    <Compile Include="DataProviders\WorkflowSenderRecoveryConfiguration.cs" />
-    <Compile Include="DataProviders\WorkflowReceiverRecoveryConfiguration.cs" />
-    <Compile Include="Integrations\IntegrationReceiverConfiguration.cs" />
-    <Compile Include="Integrations\IntegrationSenderConfiguration.cs" />
     <Compile Include="Messages\RetryErrorMessages.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,8 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
                 Component.For<ContextReceiver>().ImplementedBy<ContextReceiver>(),
                 Component.For<RequestsReceiver>().ImplementedBy<RequestsReceiver>(),
                 Component.For<ResponsesReceiver>().ImplementedBy<ResponsesReceiver>(),
-                Component.For<TransactionReceiver>().ImplementedBy<TransactionReceiver>());
+                Component.For<TransactionReceiver>().ImplementedBy<TransactionReceiver>(),
+                Component.For<ApiRequestReceiver>().ImplementedBy<ApiRequestReceiver>());
         }
     }
 }

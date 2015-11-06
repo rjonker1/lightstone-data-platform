@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Configuration;
-using Api.Domain.Infrastructure.Messages;
+using Api.Domain.Core.Messages;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.Topology;
 
 namespace Api.Domain.Infrastructure.Bus
 {
-    public class RequestMessageDispatcher : AbstractMessageDispatcher<RequestReportMessage>
+    public class RequestMessageDispatcher : AbstractMessageDispatcher<RequestMetadataMessage>
     {
         private readonly IAdvancedBus _bus;
         private readonly IExchange _exchange;
@@ -23,11 +23,11 @@ namespace Api.Domain.Infrastructure.Bus
             _bus.Bind(_exchange, _bus.QueueDeclare(_queueName), "");
         }
 
-        public override void Dispatch(RequestReportMessage message)
+        public override void Dispatch(RequestMetadataMessage message)
         {
             try
             {
-                _bus.Publish(_exchange, "", true, false, new Message<RequestReportMessage>(message));
+                _bus.Publish(_exchange, "", true, false, new Message<RequestMetadataMessage>(message));
             }
             catch (Exception ex)
             {

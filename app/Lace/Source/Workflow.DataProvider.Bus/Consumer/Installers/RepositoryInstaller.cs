@@ -33,7 +33,7 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
                 Component.For<IMonitoringRepository>()
                     .UsingFactoryMethod(
                         () =>
-                            new MonitoringRepository(new SqlConnection(WorkflowConfiguration.MonitoringDatabase), new RepositoryMapper(new MappingForMonitoringTypes()))));
+                            new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes()))));
 
             container.Register(Component.For<IRepositoryMapper>().ImplementedBy<RepositoryMapper>());
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>());

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Monitoring.Dashboard.UI.Core.Models;
+using Monitoring.Dashboard.UI.Infrastructure.Dto;
 
 namespace Monitoring.Dashboard.UI.Core.Contracts.Handlers
 {
     public interface IHandleDataProviderStatistics
     {
-        IEnumerable<DataProviderStatisticsView> StatisticsResponse { get; }
+        List<DataProviderStatisticsDto> StatisticsResponse { get; }
         void Handle();
     }
 }

@@ -16,5 +16,6 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Finance
         int RegistrationYear { get; }
         string ProductCategory { get; }
         string DealStatus { get; }
+        string ClientNumber { get; }
     }
 }
