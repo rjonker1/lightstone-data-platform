@@ -255,6 +255,19 @@
 
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-sm-4 col-md-4">Contract Bundle</label>
+                        <div class="input-group col-md-4">
+                            <select id="ContractBundle" data-placeholder="Select a contract option" class="chosen-select" onchange="bundleSelect(this.value)">
+                                <option value=""></option>
+                                @foreach (var bundle in Model.ContractBundleList)
+                                {
+                                    <option value="@bundle.Id|@bundle.Name|@bundle.TransactionLimit|@bundle.Price">@bundle.Name - @bundle.TransactionLimit tx @@ R @bundle.Price</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
 
                         <label class="control-label col-sm-4 col-md-4">Packages</label>
                         <div class="input-group col-md-4 packag-autocomplete">
@@ -288,134 +301,6 @@
             </form>
         </div>
 
-        <div class="col-sm-2"></div>
-
-        <div class="col-sm-6 col-md-8">
-
-
-            <div class="row">
-                
-                <div class="col-md-6">
-                    <div class="fleft">
-                        <select id="cd-dropdown" name="cd-dropdown" class="cd-select">
-                            <option value="-1" selected>Select a contract option: </option>
-                            @foreach (var bundle in Model.ContractBundleList)
-                            {
-                                <option value="1" class="icon-monkey">@bundle.Name : @bundle.TransactionLimit transactions @@ R @bundle.Price</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
-            
-
-            @*@foreach (var bundle in Model.ContractBundleList)
-                {
-
-
-                    if (bundle.Name == "Bundle 1")
-                    {
-                        <div class="col-sm-6 col-md-3">
-                            <div id="bundle1" class="well">
-                                <h2 class="text-warning">@bundle.Name</h2>
-                                <div id="bundleId" style="display: none">@bundle.Id</div>
-                                <p><span class="label label-warning">OVERVIEW</span></p>
-                                <ul>
-                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
-                                    <li>Pro rata thereafter</li>
-                                </ul>
-                                <p></p>
-                                <hr>
-                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
-                                <hr>
-                                <p><a class="btn btn-success btn-md" onclick=" bundleSelect(this) "><i class="icon-ok"></i> Select plan</a></p>
-                            </div>
-                        </div>
-                    }
-
-                    if (bundle.Name == "Bundle 2")
-                    {
-                        <div class="col-sm-6 col-md-3">
-                            <div id="bundle2" class="well">
-                                <h2 class="text-info">@bundle.Name</h2>
-                                <div id="bundleId" style="display: none">@bundle.Id</div>
-                                <p><span class="label label-info">OVERVIEW</span></p>
-                                <ul>
-                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
-                                    <li>Pro rata thereafter</li>
-                                </ul>
-                                <p></p>
-                                <hr>
-                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
-                                <hr>
-                                <p><a class="btn btn-success btn-md" onclick=" bundleSelect(this) "><i class="icon-ok"></i> Select plan</a></p>
-                            </div>
-                        </div>
-                    }
-
-                    if (bundle.Name == "Bundle 3")
-                    {
-                        <div class="col-sm-6 col-md-3">
-                            <div id="bundle3" class="well">
-                                <h2 class="text-success">@bundle.Name</h2>
-                                <div id="bundleId" style="display: none">@bundle.Id</div>
-                                <p><span class="label label-success">OVERVIEW</span></p>
-                                <ul>
-                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
-                                    <li>Pro rata thereafter</li>
-                                </ul>
-                                <p></p>
-                                <hr>
-                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
-                                <hr>
-                                <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
-                            </div>
-                        </div>
-                    }
-
-                    if (bundle.Name == "Bundle 4")
-                    {
-                        <div class="col-sm-6 col-md-3">
-                            <div id="bundle4" class="well">
-                                <h2 class="text-danger">@bundle.Name</h2>
-                                <div id="bundleId" style="display: none">@bundle.Id</div>
-                                <p><span class="label label-danger">OVERVIEW</span></p>
-                                <ul>
-                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
-                                    <li>Pro rata thereafter</li>
-                                </ul>
-                                <p></p>
-                                <hr>
-                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
-                                <hr>
-                                <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
-                            </div>
-                        </div>
-                    }
-
-                    if (bundle.Name == "Bundle 5")
-                    {
-                        <div class="col-sm-6 col-md-3">
-                            <div id="bundle5" class="well">
-                                <h2 class="text-purple">@bundle.Name</h2>
-                                <div id="bundleId" style="display: none">@bundle.Id</div>
-                                <p><span class="label label-info">OVERVIEW</span></p>
-                                <ul>
-                                    <li><label id="transactionLimit">@bundle.TransactionLimit</label> transactions</li>
-                                    <li>Pro rata thereafter</li>
-                                </ul>
-                                <p></p>
-                                <hr>
-                                <h3>R<label id="bundlePrice">@bundle.Price</label> / first @bundle.TransactionLimit transactions</h3>
-                                <hr>
-                                <p><a class="btn btn-success btn-md" onclick="bundleSelect(this)"><i class="icon-ok"></i> Select plan</a></p>
-                            </div>
-                        </div>
-                    }
-                }*@
-
-        </div>
-
     </div>
 
 </div>
@@ -423,14 +308,6 @@
 <script type="text/javascript" src="~/Scripts/bundleDropdown/jquery.dropdown.js"></script>
 
 <script type="text/javascript">
-
-    $(function () {
-
-        $('#cd-dropdown').dropdown({
-            gutter: 5
-        });
-
-    });
 
     $(document).ready(function () {
 
@@ -452,32 +329,26 @@
 
     function bundleSelect(bundleElement) {
 
-        var bundleWell = $(bundleElement).parent().parent();
+        var bundleValues = bundleElement.split('|');
 
-        $('.well').css('border-color', '#e3e3e3');
-        $('#' + bundleWell[0].id).css('border-color', 'green');
+        if (bundleValues.length > 0) {
+            
+            $('.hasPackagePriceOverride').val(true);
+            $('.contractBundleId').val(bundleValues[0]);
+            $('.contractBundleTransactionLimit').val(bundleValues[2]);
+            $('.contractBundlePrice').val(bundleValues[3]);
 
-        $('.hasPackagePriceOverride').val(true);
-        $('.contractBundleId').val($('#' + bundleWell[0].id + ' #bundleId').text());
-        $('.contractBundleTransactionLimit').val($('#' + bundleWell[0].id + ' #transactionLimit').text());
-        $('.contractBundlePrice').val($('#' + bundleWell[0].id + ' #bundlePrice').text());
-
-        $('#bundleWarning').html('<p>Please note: This contract has been assigned a bundle pricing scheme.</p>' +
-            '<p><a class="btn btn-warning btn-md" onclick="removeBundle()"><i class="icon-ok"></i> Remove Bundled Pricing</a></p>');
+            $('#bundleWarning').html('<p>Please note: This contract has been assigned a bundle pricing scheme.</p>' +
+                '<p><a class="btn btn-warning btn-md" onclick="removeBundle()"><i class="icon-ok"></i> Remove Bundled Pricing</a></p>');
+        }
     };
 
     function removeBundle() {
         $('.hasPackagePriceOverride').val(false);
-
-        var bundleId = $('.contractBundleId').val();
-
-        $("div[id='bundleId']").each(function () {
-
-            if ($(this)[0].innerHTML == bundleId) {
-                $(this).parent().css('border-color', '#e3e3e3');
-            }
-        });
-
+        $('.contractBundleId').val('');
+        $('.contractBundleTransactionLimit').val('');
+        $('.contractBundlePrice').val('');
+        $('#ContractBundle').val('').trigger('chosen:updated');
         $('#bundleWarning').html('');
     };
 </script>
