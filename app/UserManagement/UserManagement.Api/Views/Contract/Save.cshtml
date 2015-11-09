@@ -261,7 +261,7 @@
                                 <option value=""></option>
                                 @foreach (var bundle in Model.ContractBundleList)
                                 {
-                                    <option value="@bundle.Id|@bundle.Name|@bundle.TransactionLimit|@bundle.Price">@bundle.Name - @bundle.TransactionLimit tx @@ R @bundle.Price</option>
+                                    <option value="@bundle.Id|@bundle.TransactionLimit|@bundle.Price">@bundle.Name - @bundle.TransactionLimit tx @@ R @bundle.Price</option>
                                 }
                             </select>
                         </div>
@@ -315,12 +315,20 @@
 
             var bundleId = $('.contractBundleId').val();
 
-            $("div[id='bundleId']").each(function () {
+            var bundles = [];
 
-                if ($(this)[0].innerHTML == bundleId) {
-                    $(this).parent().css('border-color', 'green');
+            @foreach (var bundle in Model.ContractBundleList)
+            {
+                <text>
+                    bundles.push(["@bundle.Id", "@bundle.TransactionLimit", "@bundle.Price"]);
+            </text>
+            }
+
+            for (var i = 0; i < bundles.length; i++) {
+                if (bundles[i][0] == bundleId) {
+                    $('#ContractBundle').val(bundles[i][0] + '|' + bundles[i][1] + '|' + bundles[i][2]).trigger('chosen:updated');
                 }
-            });
+            }
 
             $('#bundleWarning').html('<p>Please note: This contract has been assigned a bundle pricing scheme.</p>' +
                 '<p><a class="btn btn-warning btn-md" onclick="removeBundle()"><i class="icon-ok"></i> Remove Bundled Pricing</a></p>');
@@ -332,11 +340,11 @@
         var bundleValues = bundleElement.split('|');
 
         if (bundleValues.length > 0) {
-            
+
             $('.hasPackagePriceOverride').val(true);
             $('.contractBundleId').val(bundleValues[0]);
-            $('.contractBundleTransactionLimit').val(bundleValues[2]);
-            $('.contractBundlePrice').val(bundleValues[3]);
+            $('.contractBundleTransactionLimit').val(bundleValues[1]);
+            $('.contractBundlePrice').val(bundleValues[2]);
 
             $('#bundleWarning').html('<p>Please note: This contract has been assigned a bundle pricing scheme.</p>' +
                 '<p><a class="btn btn-warning btn-md" onclick="removeBundle()"><i class="icon-ok"></i> Remove Bundled Pricing</a></p>');
