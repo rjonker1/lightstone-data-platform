@@ -124,7 +124,7 @@ namespace PackageBuilder.Api.Modules
                 });
 
 
-            Post[PackageBuilderApi.PackageRoutes.Execute.ApiRoute] = parameters =>
+            Post[PackageBuilderApi.PackageRoutes.Execute.ApiRoute, true] = async(parameters, ct) =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
                 this.Info(() => "Package Execute Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
@@ -141,7 +141,7 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => "PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var accountNumber = userManagementApi.Get(token, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
+                var accountNumber = await userManagementApi.GetAsync(token, ct, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
 
                 this.Info(() => "PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
@@ -167,12 +167,12 @@ namespace PackageBuilder.Api.Modules
                 return filteredResponse;
             };
 
-            Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute] = _ =>
+            Post[PackageBuilderApi.PackageRoutes.CommitRequest.ApiRoute, true] = async(_, ct) =>
             {
                 var apiRequest = this.Bind<ApiCommitRequestDto>();
 
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var request = billingApiClient.Get(token, "/Transactions/Request/{requestId}", new[]
+                var request = await billingApiClient.GetAsync(token, ct, "/Transactions/Request/{requestId}", new[]
                 {
                     new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString())
                 }
@@ -201,7 +201,7 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => "PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 
-                var accountNumber = userManagementApi.Get(token, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
+                var accountNumber = await userManagementApi.GetAsync(token, ct, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
 
                 this.Info(() => "PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}".FormatWith(apiRequest.RequestId, DateTime.UtcNow));
 

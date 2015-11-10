@@ -28,7 +28,7 @@ namespace Api.Modules
                 return Response.AsJson(metaData);
             };
 
-            Post["/action"] = parameters =>
+            Post["/action", true] = async(parameters, ct) =>
             {
                 if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"]))
                     return Response.AsJson(new {data = "Service unavailable - Maintenance in progress"}, HttpStatusCode.ServiceUnavailable);
@@ -40,7 +40,7 @@ namespace Api.Modules
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
                     new ApiRequestValidator(userManagementApi)
-                        .AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
+                        .AuthenticateRequest(token, ct, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
 
                     this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
@@ -50,7 +50,7 @@ namespace Api.Modules
                     Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Execute Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                    var responses = packageBuilderApi.Post(token, "/Packages/Execute", null, apiRequest);
+                    var responses = await packageBuilderApi.PostAsync(token, ct, "/Packages/Execute", null, apiRequest);
                     this.Info(() => "Api to PackageBuilder Execute Completed. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
                     this.Info(() => "Api responses: {0}".FormatWith(responses));
@@ -68,7 +68,7 @@ namespace Api.Modules
                 }
             };
 
-            Post["/action/requestId/{requestId}/userstate/{stateId}"] = parameters =>
+            Post["/action/requestId/{requestId}/userstate/{stateId}", true] = async(parameters, ct) =>
             {
                 if (Convert.ToBoolean(ConfigurationManager.AppSettings["maintenanceMode"]))
                     return Response.AsJson(new {data = "Service unavailable - Maintenance in progress"}, HttpStatusCode.ServiceUnavailable);
@@ -79,7 +79,7 @@ namespace Api.Modules
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
                     new ApiRequestValidator(userManagementApi)
-                        .AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
+                        .AuthenticateRequest(token, ct, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
 
                     this.Info(() => "Api request: ContractId {0} Api token: {1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
@@ -90,7 +90,7 @@ namespace Api.Modules
                     Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Commit Request Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
-                    var responses = packageBuilderApi.Post(token, "/Packages/CommitRequest", null, apiRequest);
+                    var responses = await packageBuilderApi.PostAsync(token, ct, "/Packages/CommitRequest", null, apiRequest);
                     this.Info(() => "Api to PackageBuilder Commit Request Completed. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
                     this.Info(() => "Api responses: {0}".FormatWith(responses));
