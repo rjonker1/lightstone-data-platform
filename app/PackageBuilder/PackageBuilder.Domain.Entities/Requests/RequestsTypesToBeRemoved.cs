@@ -293,6 +293,7 @@ namespace PackageBuilder.Domain.Entities.Requests
             VinNumber = requestFields.GetRequestField<IAmVinNumberRequestField>();
             IdNumber = requestFields.GetRequestField<IAmIdentityNumberRequestField>();
             LicenceNumber = requestFields.GetRequestField<IAmLicenceNumberRequestField>();
+            EngineNumber = requestFields.GetRequestField<IAmEngineNumberRequestField>();
         }
 
         public IAmAccountNumberRequestField AccountNumber { get; private set; }
@@ -302,6 +303,8 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmIdentityNumberRequestField IdNumber { get; private set; }
 
         public IAmLicenceNumberRequestField LicenceNumber { get; private set; }
+        public IAmEngineNumberRequestField EngineNumber { get; private set; }
+
     }
 
     public static class RequestFieldExtensions
