@@ -17,7 +17,7 @@ namespace Lace.Toolbox.Database.Dtos
 
         }
 
-        public BmwFinanceDto(string financeHouse, decimal dealReference, DateTime startDate, DateTime expireDate, string chassis,
+        public BmwFinanceDto(string financeHouse, string dealReference, DateTime startDate, DateTime expireDate, string chassis,
             string engine, string registrationNumber, string description, int registrationYear, string productCategory, string dealStatus, string clientNumber)
         {
             FinanceHouse = financeHouse;
@@ -41,7 +41,7 @@ namespace Lace.Toolbox.Database.Dtos
         }
 
         public string FinanceHouse { get; set; }
-        public decimal DealReference { get; set; }
+        public string DealReference { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpireDate { get; set; }
         public string Chassis { get; set; }
@@ -53,5 +53,10 @@ namespace Lace.Toolbox.Database.Dtos
         public string DealStatus { get; set; }
         public string ClientNumber { get; set; }
         public string VinEngineId { get; set; }
+        public string AccountNumber
+        {
+            get { return string.Format("{0}-{1}", DealReference ?? "", ClientNumber ?? ""); }
+        }
+
     }
 }
