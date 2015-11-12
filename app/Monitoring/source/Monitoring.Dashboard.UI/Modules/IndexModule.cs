@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Enums;
+﻿using System.Configuration;
+using DataPlatform.Shared.Enums;
 using Nancy;
 using Nancy.Security;
 namespace Monitoring.Dashboard.UI.Modules
@@ -11,7 +12,7 @@ namespace Monitoring.Dashboard.UI.Modules
 
             Get["/"] = _ => View["Index"];
 
-            Get["/cia"] = parameters => Response.AsRedirect(System.Configuration.ConfigurationManager.AppSettings["url/cia"].ToString());
+            Get["/cia"] = parameters => Response.AsRedirect(ConfigurationManager.AppSettings["url/cia"].ToString());
 
         }
     }
