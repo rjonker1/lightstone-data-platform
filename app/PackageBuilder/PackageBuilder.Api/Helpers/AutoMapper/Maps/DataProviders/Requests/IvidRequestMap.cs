@@ -153,7 +153,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IProvideDataFromBmwFinance, IEnumerable<IDataField>>().ConvertUsing(s =>
             {
                 var request = s.Request ??
-                              new BmwFinanceRequest(new VinNumberRequestField(""), new AccountNumberRequestField(""), new IdentityNumberRequestField(""), new LicenceNumberRequestField(""));
+                              new BmwFinanceRequest(new VinNumberRequestField(""), new AccountNumberRequestField(""), new IdentityNumberRequestField(""), new LicenceNumberRequestField(""), new EngineNumberRequestField(""));
                 return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
             });
 
