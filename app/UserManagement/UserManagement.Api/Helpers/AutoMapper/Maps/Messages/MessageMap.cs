@@ -10,7 +10,9 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<User, UserMessage>();
+            Mapper.CreateMap<User, UserMessage>()
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(x => x.Individual.Name))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(x => x.Individual.Surname));
 
             Mapper.CreateMap<Customer, CustomerMessage>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => Guid.NewGuid()))

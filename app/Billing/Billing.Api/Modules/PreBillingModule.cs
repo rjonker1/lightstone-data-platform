@@ -55,6 +55,8 @@ namespace Billing.Api.Modules
                 var preBillStartDateFilter = Request.Query["startDate"];
                 var preBillEndDateFilter = Request.Query["endDate"];
 
+                if (!preBillStartDateFilter.HasValue && !preBillEndDateFilter.HasValue) return Negotiate.WithView("Index");
+
                 if (preBillStartDateFilter.HasValue) startDateFilter = preBillStartDateFilter;
                 if (preBillEndDateFilter.HasValue) endDateFilter = preBillEndDateFilter;
 
@@ -68,7 +70,7 @@ namespace Billing.Api.Modules
                     if (customerClientIndex > 0) continue;
 
                     var customerClient = new PreBillingDto();
-                    var userList = new List<User>();
+                    
 
                     var customerTransactions = _preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
                                                                             && (x.Created >= startDateFilter && x.Created <= endDateFilter))
@@ -77,6 +79,8 @@ namespace Billing.Api.Modules
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
 
+                    var customerUsers = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId).DistinctBy(x => x.User.UserId).Count();
+
 
                     var clientTransactions = _preBillingRepository.Where(x => x.ClientId == transaction.ClientId
                                                                             && (x.Created >= startDateFilter && x.Created <= endDateFilter))
@@ -84,6 +88,8 @@ namespace Billing.Api.Modules
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
+
+                    var clientUsers = customerTransactions.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.User.UserId).Count();
 
                     if (customerTransactions.Count() < 0 && clientTransactions.Count() < 0) continue;
 
@@ -96,8 +102,10 @@ namespace Billing.Api.Modules
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactions.Count(),
                             Products = customerPackages,
-                            AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
+                            AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber),
                         };
+
+                        customerClient.Users = customerUsers;
                     }
 
                     // Client
@@ -111,27 +119,13 @@ namespace Billing.Api.Modules
                             Products = clientPackagesTotal,
                             AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
+
+                        customerClient.Users = clientUsers;
                     }
 
                    if ((transaction.ClientId == new Guid()) && (transaction.CustomerId == new Guid())) continue;
 
-                    // User
-                    var user = new User
-                    {
-                        UserId = transaction.User.UserId,
-                        Username = transaction.User.Username,
-                        HasTransactions = true
-                    };
-
-                    // Indices
-                    var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
-
-                    // Index restrictions for new records
-                    if (userIndex < 0) userList.Add(user);
-
-                    customerClient.Users = userList;
-
-                    if (customerClientIndex < 0 && customerClient.Transactions > 0) customerClientList.Add(customerClient);
+                   if (customerClientIndex < 0 && customerClient.Transactions > 0) customerClientList.Add(customerClient);
                 }
 
                 return Negotiate
@@ -216,9 +210,19 @@ namespace Billing.Api.Modules
 
                     var package = Mapper.Map<Package, PackageDto>(transaction.Package);
                     package.PackageTransactions = packageTransactions.Count();
+                    package.Created = transaction.Created;
 
                     var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
+
                     if (packageIndex < 0) customerPackagesDetailList.Add(package);
+
+                    if (packageIndex >= 0)
+                    {
+                        if (customerPackagesDetailList[packageIndex].Created < package.Created)
+                        {
+                            customerPackagesDetailList[packageIndex] = package;
+                        }
+                    }
                 }
 
                 return Response.AsJson(new { data = customerPackagesDetailList });

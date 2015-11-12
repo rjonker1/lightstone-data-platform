@@ -67,6 +67,8 @@ namespace Billing.Api.Modules
                 var stageBillingStartDateFilter = Request.Query["startDate"];
                 var stageBillingEndDateFilter = Request.Query["endDate"];
 
+                if (!stageBillingStartDateFilter.HasValue && !stageBillingEndDateFilter.HasValue) return Negotiate.WithView("Index");
+
                 if (stageBillingStartDateFilter.HasValue) startDateFilter = stageBillingStartDateFilter;
                 if (stageBillingEndDateFilter.HasValue) endDateFilter = stageBillingEndDateFilter;
 
@@ -80,7 +82,6 @@ namespace Billing.Api.Modules
                     if (customerClientIndex > 0) continue;
 
                     var customerClient = new StageBillingDto();
-                    var userList = new List<User>();
 
                     var customerTransactions = stageBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
                                                                             && (x.Created >= startDateFilter && x.Created <= endDateFilter))
@@ -88,6 +89,8 @@ namespace Billing.Api.Modules
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
+
+                    var customerUsers = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId).DistinctBy(x => x.User.UserId).Count();
 
                     var billedCustomerTransactionsTotal = customerTransactions.Where(x => x.UserTransaction.IsBillable);
 
@@ -98,6 +101,8 @@ namespace Billing.Api.Modules
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
+
+                    var clientUsers = customerTransactions.Where(x => x.ClientId == transaction.ClientId).DistinctBy(x => x.User.UserId).Count();
 
                     var billedClientTransactionsTotal = clientTransactions.Where(x => x.UserTransaction.IsBillable);
 
@@ -115,6 +120,8 @@ namespace Billing.Api.Modules
                             Products = customerPackages,
                             AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
+
+                        customerClient.Users = customerUsers;
                     }
 
                     // Client
@@ -129,23 +136,9 @@ namespace Billing.Api.Modules
                             Products = clientPackagesTotal,
                             AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
+
+                        customerClient.Users = clientUsers;
                     }
-
-                    // User
-                    var user = new User
-                    {
-                        UserId = transaction.User.UserId,
-                        Username = transaction.User.Username,
-                        HasTransactions = true
-                    };
-
-                    // Indices
-                    var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
-
-                    // Index restrictions for new records
-                    if (userIndex < 0) userList.Add(user);
-
-                    customerClient.Users = userList;
 
                     if (customerClientIndex < 0 && customerClient.Transactions > 0) customerClientList.Add(customerClient);
                 }
@@ -236,6 +229,14 @@ namespace Billing.Api.Modules
 
                     var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
                     if (packageIndex < 0) customerPackagesDetailList.Add(package);
+
+                    if (packageIndex >= 0)
+                    {
+                        if (customerPackagesDetailList[packageIndex].Created < package.Created)
+                        {
+                            customerPackagesDetailList[packageIndex] = package;
+                        }
+                    }
                 }
 
                 return Response.AsJson(new { data = customerPackagesDetailList });
