@@ -16,7 +16,11 @@ namespace Cradle.KeepAlive.Service
             .UseSqlServerStorage(ConfigurationManager.ConnectionStrings["keepAliveScheduler"].ConnectionString);
 
             app.UseHangfireDashboard("/hangfire");
-            app.UseNancy();
+            app.UseNancy(x =>
+            {
+                x.Bootstrapper = new NancyBootstrapper();
+                x.PerformPassThrough = context => true;
+            });
         }
     }
 }
