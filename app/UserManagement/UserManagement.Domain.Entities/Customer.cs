@@ -11,7 +11,6 @@ namespace UserManagement.Domain.Entities
     public class Customer : NamedEntity
     {
         public virtual User AccountOwner { get; protected internal set; }
-        public virtual string Notes { get; protected internal set; }
         private CustomerAccountNumber _customerAccountNumber = new CustomerAccountNumber();
         public virtual CustomerAccountNumber CustomerAccountNumber
         {
@@ -64,6 +63,7 @@ namespace UserManagement.Domain.Entities
         public virtual DateTime? TrialExpiration { get; protected internal set; }
         public virtual Individual Individual { get; protected internal set; }
         public virtual ISet<CustomerAddress> Addresses { get; protected internal set; }
+        public virtual ISet<CustomerNote> Notes { get; protected internal set; }
         [DoNotMap]
         public virtual Address PhysicalAddress
         {

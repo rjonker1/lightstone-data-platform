@@ -90,6 +90,8 @@
     <Compile Include="PersistenceSpecifications\ValueTypes\when_persisting_country.cs" />
     <Compile Include="PersistenceSpecifications\ValueTypes\when_persisting_province.cs" />
     <Compile Include="PersistenceSpecifications\ValueTypes\when_persisting_role.cs" />
+    <Compile Include="PersistenceSpecifications\when_persisting_customer_note.cs" />
+    <Compile Include="PersistenceSpecifications\when_persisting_note.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_address.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_audit_log.cs" />
     <Compile Include="PersistenceSpecifications\when_persisting_billing.cs" />
