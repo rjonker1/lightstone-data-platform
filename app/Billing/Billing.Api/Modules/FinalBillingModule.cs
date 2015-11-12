@@ -197,6 +197,7 @@ namespace Billing.Api.Modules
 
                     var package = Mapper.Map<Package, PackageDto>(transaction.Package);
                     package.PackageTransactions = packageTransactions.Count();
+                    package.Created = transaction.Created;
 
                     var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
                     if (packageIndex < 0) customerPackagesDetailList.Add(package);
