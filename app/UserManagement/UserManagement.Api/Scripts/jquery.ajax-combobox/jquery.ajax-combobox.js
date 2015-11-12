@@ -797,13 +797,24 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 	 * @desc イベントハンドラ: コンボボックスの入力欄
 	 */
 	_ehComboInput: function() {
-		var self = this;
-		$(self.elem.combo_input).keydown(function(ev) {
-			self._processKey(self, ev);
+	    var self = this;
+	    var myTimer = 0;
+		$(self.elem.combo_input).keydown(function (ev) {
+		    if (myTimer) {
+		        clearTimeout(myTimer);
+		    }
+		    myTimer = setTimeout(function () {
+		        self._processKey(self, ev);
+		    }, 2000);
 		});
 		$(self.elem.combo_input)
-			.focus(function() {
-				self._setTimerCheckValue(self);
+			.focus(function () {
+			    if (myTimer) {
+			        clearTimeout(myTimer);
+			    }
+			    myTimer = setTimeout(function () {
+			        self._setTimerCheckValue(self);
+			    }, 2000);
 			})
 			.click(function() {
 				self._setCssFocusedInput(self);
@@ -1085,10 +1096,13 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 	 * @desc 入力値変化の監視をタイマーで予約する
 	 * @param {Object} self - このクラスのインスタンスオブジェクトへの参照
 	 */
-	_setTimerCheckValue: function(self) {
-		self.prop.timer_valchange = setTimeout(function() {
+	_setTimerCheckValue: function (self) {
+	    if (self.prop.timer_valchange) {
+	        clearTimeout(self.prop.timer_valchange);
+	    }
+	    self.prop.timer_valchange = setTimeout(function () {
 			self._checkValue(self);
-		}, 500);
+		}, 2000);
 	},
 
 	/**
