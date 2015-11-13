@@ -41,7 +41,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1882\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1815, Culture=neutral, processorArchitecture=MSIL">
@@ -63,8 +63,10 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BmwFinanceDataProvider.cs" />
-    <Compile Include="Factory\BmwFinanceDataBasedOnRequest.cs" />
-    <Compile Include="Factory\IGetBmwFinanceData.cs" />
+    <Compile Include="Infrastructure\Base\AbstractGetFinanceRequestFactory.cs" />
+    <Compile Include="Infrastructure\Dto\VinEngineIdDto.cs" />
+    <Compile Include="Infrastructure\Factories\GetFinanceDataRequestFactory.cs" />
+    <Compile Include="Infrastructure\Base\IGetFinanceData.cs" />
     <Compile Include="Infrastructure\CallBmwFinanceDataProvider.cs" />
     <Compile Include="Infrastructure\HandleBmwFinanceSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformBmwFinanceResponse.cs" />
@@ -109,6 +111,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

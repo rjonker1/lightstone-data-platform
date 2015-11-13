@@ -36,9 +36,17 @@ namespace Lace.Domain.DataProviders.Core.Factories
             return vinnumber;
         }
 
+        public override string MineEngineNumber(ICollection<IPointToLaceProvider> response)
+        {
+            var engineNumber = response.Exists<IProvideDataFromIvid>() && response.OfType<IProvideDataFromIvid>().First().Handled
+                ? response.OfType<IProvideDataFromIvid>().First().Engine
+                : string.Empty;
+            return engineNumber;
+        }
+
         private static int GetNumber(int? value)
         {
-            return value.HasValue ? value.Value : 0;
+            return value ?? 0;
         }
 
         private static readonly IDictionary<Order, Func<ICollection<IPointToLaceProvider>, string>> VinNumberDataProviders = new Dictionary
@@ -84,6 +92,7 @@ namespace Lace.Domain.DataProviders.Core.Factories
     public abstract class AbstractResponseFactory<T> : IMineResponseData<T>
     {
         public abstract string MineVinNumber(T response);
+        public abstract string MineEngineNumber(T response);
         public abstract int MineCarId(T response);
 
         public string MineVinNumber(object response)
@@ -95,17 +104,24 @@ namespace Lace.Domain.DataProviders.Core.Factories
         {
             return MineCarId((T) response);
         }
+
+        public string MineEngineNumber(object response)
+        {
+            return MineEngineNumber((T)response);
+        }
     }
 
     public interface IMineResponseData
     {
         string MineVinNumber(object response);
+        string MineEngineNumber(object response);
         int MineCarId(object response);
     }
 
     public interface IMineResponseData<in T> : IMineResponseData
     {
         string MineVinNumber(T response);
+        string MineEngineNumber(T response);
         int MineCarId(T response);
     }
 

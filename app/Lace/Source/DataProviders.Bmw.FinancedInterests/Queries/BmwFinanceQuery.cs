@@ -30,7 +30,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Queries
             try
             {
                 var finances =
-                    _repository.GetAll<BmwFinanceDto>(finance => finance.DealReference == decimal.Parse(accountNumber)).ToList();
+                    _repository.GetAll<BmwFinanceDto>(finance => finance.DealReference ==accountNumber).ToList();
                 return !finances.Any()
                     ? _repository.Get<BmwFinanceDto>(BmwFinanceDto.SelectWithAccountNumber, new {@AccountNumber = accountNumber})
                     : finances;

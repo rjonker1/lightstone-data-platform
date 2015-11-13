@@ -1,8 +1,10 @@
 ﻿using System.Linq;
+using System.Web;
 using Common.Logging;
 using Lim.Test.Api.Core;
 using Lim.Test.Api.Data;
 using Lim.Test.Api.Models.Users;
+using Nancy;
 using Nancy.Authentication.Basic;
 using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
@@ -25,9 +27,9 @@ namespace Lim.Test.Api
     //    }
     //}
 
-    public class BasicAuthenticationBoostrapper : DefaultNancyAspNetBootstrapper
+    public class StatelessAndBasicAuthenticationBoostrapper : DefaultNancyAspNetBootstrapper
     {
-        private readonly ILog _log = LogManager.GetLogger<BasicAuthenticationBoostrapper>();
+        private readonly ILog _log = LogManager.GetLogger<StatelessAndBasicAuthenticationBoostrapper>();
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
@@ -78,8 +80,6 @@ namespace Lim.Test.Api
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/css/skins"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/jquery"));
         }
-
-      
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
