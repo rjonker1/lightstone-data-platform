@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Base;
+using Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Bmw.Finance.Queries;
 using Lace.Domain.DataProviders.Core.Factories;
 using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Dtos;
-using Lace.Toolbox.Database.Models;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
-namespace Lace.Domain.DataProviders.Bmw.Finance.Factory
+namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Factories
 {
-    public sealed class BmwFinanceDataBasedOnRequestFactory :
-        AbstractBmwFinanceBasedOnRequestFactory<IBmwFinanceQuery, IAmBmwFinanceRequest, ICollection<IPointToLaceProvider>>
+    public sealed class GetFinanceDataRequestFactory :
+        AbstractGetFinanceRequestFactory<IBmwFinanceQuery, IAmBmwFinanceRequest, ICollection<IPointToLaceProvider>, IEnumerable<BmwFinanceDto>>
     {
         private static readonly IMineResponseData<ICollection<IPointToLaceProvider>> Factory = new ResponseDataMiningFactory();
 
@@ -38,15 +39,33 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Factory
                 {
                     Order.First,
                     (request, response, query) =>
+                    {
+                        var vinNumber = !string.IsNullOrEmpty(request.VinNumber.GetValue())
+                            ? request.VinNumber.GetValue()
+                            : Factory.MineVinNumber(response);
+
+                        var engineNumber = !string.IsNullOrEmpty(request.EngineNumber.GetValue())
+                            ? request.EngineNumber.GetValue()
+                            : Factory.MineEngineNumber(response);
+
+                        var vinEngineNumber = new VinEngineIdDto(vinNumber, engineNumber).VinAndEngineNumber;
+                        return !string.IsNullOrEmpty(vinEngineNumber) ? query.GetWithVinEngineId(vinEngineNumber) : null;
+                    }
+
+                },
+
+                {
+                    Order.Second,
+                    (request, response, query) =>
                         string.IsNullOrEmpty(request.LicenceNumber.GetValue()) ? null : query.GetWithLicenceNumber(request.LicenceNumber.GetValue())
                 },
                 {
-                    Order.Second,
+                    Order.Third,
                     (request, response, query) =>
                         string.IsNullOrEmpty(request.AccountNumber.GetValue()) ? null : query.GetWithAccountNumber(request.AccountNumber.GetValue())
                 },
                 {
-                    Order.Third, (request, response, query) =>
+                    Order.Fourth, (request, response, query) =>
                     {
                         var vinNumber = !string.IsNullOrEmpty(request.VinNumber.GetValue())
                             ? request.VinNumber.GetValue()
@@ -56,15 +75,4 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Factory
                 }
             };
     }
-
-    public abstract class AbstractBmwFinanceBasedOnRequestFactory<T1, T2, T3> : IGetBmwFinanceData<T1, T2, T3>
-    {
-        public abstract IEnumerable<BmwFinanceDto> Get(T1 query, T2 request, T3 responseFactory);
-
-        public IEnumerable<BmwFinanceDto> Get(object query, object request, object responseFactory)
-        {
-            return Get((T1)query, (T2)request, (T3)responseFactory);
-        }
-    }
-
 }

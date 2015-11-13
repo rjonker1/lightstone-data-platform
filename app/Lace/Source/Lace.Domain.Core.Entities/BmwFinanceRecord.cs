@@ -12,9 +12,9 @@ namespace Lace.Domain.Core.Entities
 
         }
 
-        public BmwFinanceRecord(string financeHouse, decimal dealReference, DateTime startDate, DateTime expireDate, string chassis,
+        public BmwFinanceRecord(string financeHouse, string dealReference, DateTime startDate, DateTime expireDate, string chassis,
             string engine, string registrationNumber, string description, int registrationYear, string productCategory, string dealStatus,
-            string clientNumber)
+            string clientNumber, string accountNumberReference)
         {
             FinanceHouse = financeHouse;
             DealReference = dealReference;
@@ -28,13 +28,14 @@ namespace Lace.Domain.Core.Entities
             ProductCategory = productCategory;
             DealStatus = dealStatus;
             ClientNumber = clientNumber;
+            AccountNumberReference = accountNumberReference;
         }
 
         [DataMember]
         public string FinanceHouse { get; private set; }
 
         [DataMember]
-        public decimal DealReference { get; private set; }
+        public string DealReference { get; private set; }
 
         [DataMember]
         public DateTime StartDate { get; private set; }
@@ -65,6 +66,8 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public string ClientNumber { get; private set; }
+        [DataMember]
+        public string AccountNumberReference { get; private set; }
 
         [DataMember]
         public Type Type

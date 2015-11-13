@@ -121,6 +121,20 @@ namespace Lace.Test.Helper.Mothers.RequestFields
 
         public string Field { get; private set; }
     }
+    public class EngineNumberField : IAmEngineNumberRequestField
+    {
+        private EngineNumberField(string field)
+        {
+            Field = field;
+        }
+
+        public static IAmEngineNumberRequestField Get(string field)
+        {
+            return new EngineNumberField(field);
+        }
+
+        public string Field { get; private set; }
+    }
 
     public class EmailField : IAmRequesterEmailRequestField
     {
