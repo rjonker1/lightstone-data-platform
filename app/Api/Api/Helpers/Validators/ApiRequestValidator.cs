@@ -35,7 +35,7 @@ namespace Api.Helpers.Validators
             
             if (user == null) throw new LightstoneAutoException("User: " + userId + " not found. Please make sure the UserId entered is correct. Alternatively please re-authenticate token.");
             if (user.IsLocked) throw new LightstoneAutoException("User: " + userId + " is locked");
-            
+
             //Validate Customer|Client
             var client = new ValidationDto();
 
@@ -86,6 +86,8 @@ namespace Api.Helpers.Validators
                 if (customer != null && contract.Customers.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Customer relationship invalid for contract: " + contractId);
                 if (customer == null && contract.Clients.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Client relationship invalid for contract: " + contractId);
             }
+
+          
 
             #endregion
         }

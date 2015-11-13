@@ -11,8 +11,6 @@ namespace DataPlatform.Shared.Dtos
         public ApiRequestDto()
         {
             RequestId = Guid.NewGuid();
-            FromIpAddress = "127.0.0.1";
-            DeviceType = DeviceTypes.ApiClient;
             SystemType = SystemType.Api;
         }
 
@@ -20,6 +18,8 @@ namespace DataPlatform.Shared.Dtos
         public Guid CustomerClientId { get; private set; }
         [DataMember]
         public Guid UserId { get; private set; }
+        [DataMember]
+        public string ContactNumber { get; private set; }
         [DataMember]
         public Guid ContractId { get; private set; }
         [DataMember]
@@ -33,11 +33,7 @@ namespace DataPlatform.Shared.Dtos
         [DataMember]
         public string Username { get; set; }
         [DataMember]
-        public string FromIpAddress { get; private set; }
-        [DataMember]
         public long ContractVersion { get; private set; }
-        [DataMember]
-        public DeviceTypes DeviceType { get; private set; }
         [DataMember]
         public SystemType SystemType { get; private set; }
         [DataMember]
@@ -56,10 +52,13 @@ namespace DataPlatform.Shared.Dtos
             ContractVersion = version;
         }
 
-        public void SetRequestMetadata(DeviceTypes deviceType, SystemType systemType, string fromIpAddress)
+        public void SetContactNumber(string contactNumber)
         {
-            FromIpAddress = fromIpAddress;
-            DeviceType = deviceType;
+            ContactNumber = contactNumber;
+        }
+
+        public void SetRequestMetadata(SystemType systemType)
+        {
             SystemType = systemType;
         }
 

@@ -107,7 +107,6 @@
     <Compile Include="Contracts\DataProviders\IProvideDataFromBmwFinance.cs" />
     <Compile Include="Contracts\DataProviders\Vin12\IRespondWithVin12.cs" />
     <Compile Include="Contracts\IProvideResponseFromDataProviders.cs" />
-    <None Include="Contracts\Requests\IProvideCriticalFailure.cs.delete" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
     <Compile Include="Contracts\Requests\IProvideResponseState.cs" />
     <Compile Include="Models\IvidCodePair.cs" />

@@ -22,7 +22,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 VinOrChassis = request.VinNumber.GetValue(),
                 requesterDetails = new RequesterDetailsElement
                 {
-                    requesterName = request.ApplicantName.GetValue(), requesterEmail = request.ApplicantName.GetValue(), requesterPhone = "087 236 7740"
+                    requesterName = request.ApplicantName.GetValue(), requesterEmail = request.ApplicantName.GetValue(), requesterPhone = request.RequesterPhone.GetValue()
                 }
             };
         }
