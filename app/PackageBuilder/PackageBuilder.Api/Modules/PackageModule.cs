@@ -113,8 +113,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
-                    Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
-                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent);
+                    Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber);
 
                 // Filter responses for cleaner api payload
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
@@ -174,7 +173,7 @@ namespace PackageBuilder.Api.Modules
 
                 var responses = ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
-                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent);
+                    apiRequest.DeviceType, apiRequest.FromIpAddress, "", apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent,"");
 
                 // Filter responses for cleaner api payload
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));

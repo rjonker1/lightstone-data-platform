@@ -53,23 +53,13 @@ namespace PackageBuilder.Domain.Entities.Requests
 
     public class RequestContext : IHaveRequestContext
     {
-        public RequestContext(Guid requestId, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
+        public RequestContext(Guid requestId, SystemType system)
         {
             RequestId = requestId;
-            FromDeviceType = fromDevice;
-            FromIpAddress = fromIpAddress;
-            OsVersion = osVersion;
             System = system;
         }
 
-        public DeviceTypes FromDeviceType { get; private set; }
-
-        public string FromIpAddress { get; private set; }
-
-        public string OsVersion { get; private set; }
-
         public Guid RequestId { get; private set; }
-
         public SystemType System { get; private set; }
     }
 
@@ -92,12 +82,12 @@ namespace PackageBuilder.Domain.Entities.Requests
     public class LaceDataProvider : IAmDataProvider
     {
         public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice,
-            IHaveUser user, string packageName, IBuildRequestTypes requestTypes)
+            IHaveUser user, string packageName, IBuildRequestTypes requestTypes, string contactNumber)
         {
             Name = name;
             var requestType = requestTypes.RequestTypes.FirstOrDefault(w => w.Key == name);
             if (requestType.Value != null)
-                Request = new[] {requestType.Value(requestFields.ToList(), user, packageName)};
+                Request = new[] {requestType.Value(new RequestBuilderContext(requestFields.ToList(), user, packageName, contactNumber))};
             CostPrice = costPrice;
             RecommendedPrice = recommendedPrice;
         }

@@ -17,7 +17,7 @@ namespace Api.Helpers.Validators
             _userManagementApiClient = userManagementApiClient;
         }
 
-        public void AuthenticateRequest(string authToken, Guid userId, Guid customerClientId, Guid contractId, Guid packageId)
+        public string AuthenticateRequest(string authToken, Guid userId, Guid customerClientId, Guid contractId, Guid packageId)
         {
             #region ValuePopulation Validation
 
@@ -87,7 +87,8 @@ namespace Api.Helpers.Validators
                 if (customer == null && contract.Clients.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Client relationship invalid for contract: " + contractId);
             }
 
-          
+            return user.IndividualContactNumber;
+
 
             #endregion
         }

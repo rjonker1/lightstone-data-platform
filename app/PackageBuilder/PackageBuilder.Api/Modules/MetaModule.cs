@@ -15,7 +15,6 @@ using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
-using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
@@ -49,8 +48,7 @@ namespace PackageBuilder.Api.Modules
                 const string accountNumber = "META";
 
                 var responses = ((Package)package).Execute(new MetadataEntryPointService(), userId, Context.CurrentUser.UserName,
-                    Context.CurrentUser.UserName, requestId, accountNumber, contractId, contractVersion,
-                    fromDevice, fromIpAddress, osVersion, systemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, true);
+                    Context.CurrentUser.UserName, requestId, accountNumber, contractId, contractVersion,systemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, true,"0118926242");
 
                 // Filter responses for cleaner api payload
                 var filteredResponse = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>(responses);

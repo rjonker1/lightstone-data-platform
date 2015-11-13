@@ -39,7 +39,7 @@ namespace Api.Modules
                     var apiRequest = this.Bind<ApiRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
-                    new ApiRequestValidator(userManagementApi)
+                   var contactNumber = new ApiRequestValidator(userManagementApi)
                         .AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
 
                     this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
@@ -47,6 +47,7 @@ namespace Api.Modules
 
                     apiRequest.Validate();
                     apiRequest.ContractVersion((long) 1.0); //TODO: Set here or in PB?
+                    apiRequest.SetContactNumber(contactNumber);
                     Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Execute Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));

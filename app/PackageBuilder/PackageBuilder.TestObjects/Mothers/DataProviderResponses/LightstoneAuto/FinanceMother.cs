@@ -11,7 +11,7 @@ namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.LightstoneAut
             get
             {
                 return new FinanceBuilder()
-                    .With(2008, 12354785.025m)
+                    .With(2008, "12354785.025")
                     .With(new DateTime(2015, 01, 01), new DateTime(2015, 10, 15))
                     .With(
                     "Chassis",
@@ -20,7 +20,9 @@ namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.LightstoneAut
                     "Engine",
                     "FinanceHouse",
                     "ProductCategory",
-                    "RegistrationNumber"
+                    "RegistrationNumber",
+                    "ClientNumber",
+                    "AccountReferece"
                     )
                     .Build();
             }

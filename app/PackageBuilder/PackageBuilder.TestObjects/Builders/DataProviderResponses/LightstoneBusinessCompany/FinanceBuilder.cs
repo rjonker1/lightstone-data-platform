@@ -7,7 +7,7 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses.LightstoneBu
     public class FinanceBuilder
     {
         private int _registrationYear;
-        private decimal _dealReference;
+        private string _dealReference;
         private DateTime _startDate;
         private DateTime _expireDate;
         private string _chassis;
@@ -17,13 +17,15 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses.LightstoneBu
         private string _financeHouse;
         private string _productCategory;
         private string _registrationNumber;
+        private string _accoutnNumberReference;
+        private string _clientNumber;
 
         public IRespondWithBmwFinance Build()
         {
-            return new BmwFinanceRecord(_financeHouse, _dealReference, _startDate, _expireDate, _chassis, _engine, _registrationNumber, _description, _registrationYear, _productCategory, _dealStatus);
+            return new BmwFinanceRecord(_financeHouse, _dealReference, _startDate, _expireDate, _chassis, _engine, _registrationNumber, _description, _registrationYear, _productCategory, _dealStatus, _clientNumber,_accoutnNumberReference);
         }
 
-        public FinanceBuilder With(int registrationYear, decimal dealReference)
+        public FinanceBuilder With(int registrationYear, string dealReference)
         {
             _registrationYear = registrationYear;
             _dealReference = dealReference;
@@ -43,7 +45,9 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses.LightstoneBu
          string engine,
          string financeHouse,
          string productCategory,
-         string registrationNumber)
+         string registrationNumber,
+            string clientNumber,
+            string accountReference)
         {
             _chassis = chassis;
             _dealStatus = dealStatus;
@@ -52,6 +56,8 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses.LightstoneBu
             _financeHouse = financeHouse;
             _productCategory = productCategory;
             _registrationNumber = registrationNumber;
+            _accoutnNumberReference = accountReference;
+            _clientNumber = clientNumber;
 
             return this;
         }

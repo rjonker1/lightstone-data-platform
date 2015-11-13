@@ -11,62 +11,78 @@ namespace PackageBuilder.Domain.Entities.Requests
 {
     public interface IBuildRequestTypes
     {
-        IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>>
+        IEnumerable<KeyValuePair<DataProviderName, Func<RequestBuilderContext, IAmDataProviderRequest>>>
             RequestTypes { get; }
+    }
+
+    public class RequestBuilderContext
+    {
+        public RequestBuilderContext(ICollection<IAmRequestField> requests, IHaveUser user, string packageName, string contactNumber)
+        {
+            Requests = requests;
+            User = user;
+            PackageName = packageName;
+            ContactNumber = contactNumber;
+        }
+
+        public readonly ICollection<IAmRequestField>  Requests;
+        public readonly IHaveUser User;
+        public readonly string ContactNumber;
+        public readonly string PackageName;
     }
 
     public class RequestTypeBuilder : IBuildRequestTypes
     {
-        private readonly IDictionary<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>
-            _requestTypes = new Dictionary<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>()
+        private readonly IDictionary<DataProviderName, Func<RequestBuilderContext, IAmDataProviderRequest>>
+            _requestTypes = new Dictionary<DataProviderName, Func<RequestBuilderContext, IAmDataProviderRequest>>()
             {
                 {
-                    DataProviderName.IVIDVerify_E_WS, (requests, user, packageName) => new IvidRequest(requests, packageName, user)
+                    DataProviderName.IVIDVerify_E_WS, (context) => new IvidRequest(context.Requests, context.PackageName, context.User,context.ContactNumber)
                 },
                 {
-                    DataProviderName.LSAutoCarStats_I_DB, (requests, user, packageName) => new LightstoneAutoRequest(requests)
+                    DataProviderName.LSAutoCarStats_I_DB, (context) => new LightstoneAutoRequest(context.Requests)
                 },
                 {
-                    DataProviderName.IVIDTitle_E_WS, (requests, user, packageName) => new IvidTitleHolderRequest(requests, user)
+                    DataProviderName.IVIDTitle_E_WS, (context) => new IvidTitleHolderRequest(context.Requests, context.User,context.ContactNumber)
                 },
                 {
-                    DataProviderName.LSAutoSpecs_I_DB, (requests, user, packageName) => new RgtRequest(requests)
+                    DataProviderName.LSAutoSpecs_I_DB, (context) => new RgtRequest(context.Requests)
                 }
                 ,
                 {
-                    DataProviderName.LSAutoVINMaster_I_DB, (requests, user, packageName) => new RgtVinRequest(requests)
+                    DataProviderName.LSAutoVINMaster_I_DB, (context) => new RgtVinRequest(context.Requests)
                 },
                 {
-                    DataProviderName.LSPropertySearch_E_WS, (requests, user, packageName) => new LightstonePropertyRequest(requests)
+                    DataProviderName.LSPropertySearch_E_WS, (context) => new LightstonePropertyRequest(context.Requests)
                 },
                 {
-                    DataProviderName.LSBusinessCompany_E_WS, (requests, user, packageName) => new LightstoneCompanyRequest(requests)
+                    DataProviderName.LSBusinessCompany_E_WS, (context) => new LightstoneCompanyRequest(context.Requests)
                 },
                 {
-                    DataProviderName.LSBusinessDirector_E_WS, (requests, user, packageName) => new LightstoneDirectorRequest(requests)
+                    DataProviderName.LSBusinessDirector_E_WS, (context) => new LightstoneDirectorRequest(context.Requests)
                 },
                 {
-                    DataProviderName.PCubedEZScore_E_WS, (requests, user, packageName) => new PCubedEzScoreRequest(requests)
+                    DataProviderName.PCubedEZScore_E_WS, (context) => new PCubedEzScoreRequest(context.Requests)
                 },
                 {
                     DataProviderName.LSConsumerRepair_E_WS,
-                    (requests, user, packageName) => new LightstoneConsumerSpecificationsRequest(requests)
+                    (context) => new LightstoneConsumerSpecificationsRequest(context.Requests)
                 },
                 {
-                    DataProviderName.LSAutoDecryptDriverLic_I_WS, (requests, user, packageName) => new SignioDriversLicenseRequest(requests)
+                    DataProviderName.LSAutoDecryptDriverLic_I_WS, (context) => new SignioDriversLicenseRequest(context.Requests)
                 },
                 {
-                    DataProviderName.BMWFSTitle_E_DB, (requests, user, packageName) => new BmwFinanceRequest(requests)
+                    DataProviderName.BMWFSTitle_E_DB, (context) => new BmwFinanceRequest(context.Requests)
                 },
                 {
-                    DataProviderName.MMCode_E_DB, (requests, user, packageName) => new MmCodeRequest(requests)
+                    DataProviderName.MMCode_E_DB, (context) => new MmCodeRequest(context.Requests)
                 } ,
                 {
-                    DataProviderName.LSAutoVIN12_I_DB, (requests, user, packageName) => new Vin12Request(requests)
+                    DataProviderName.LSAutoVIN12_I_DB, (context) => new Vin12Request(context.Requests)
                 }
             };
 
-        public IEnumerable<KeyValuePair<DataProviderName, Func<ICollection<IAmRequestField>, IHaveUser, string, IAmDataProviderRequest>>> RequestTypes
+        public IEnumerable<KeyValuePair<DataProviderName, Func<RequestBuilderContext, IAmDataProviderRequest>>> RequestTypes
         {
             get { return _requestTypes; }
         }
@@ -104,10 +120,11 @@ namespace PackageBuilder.Domain.Entities.Requests
 
     public class IvidTitleHolderRequest : IAmIvidTitleholderRequest
     {
-        public IvidTitleHolderRequest(ICollection<IAmRequestField> requestFields, IHaveUser user)
+        public IvidTitleHolderRequest(ICollection<IAmRequestField> requestFields, IHaveUser user, string contactNumber)
         {
             RequesterName = new RequesterNameRequestField(user.UserFirstName);
             RequesterEmail = new RequesterEmailRequestField(user.UserName);
+            RequesterPhone = new RequesterPhoneRequestField(contactNumber);
             VinNumber = requestFields.GetRequestField<IAmVinNumberRequestField>();
         }
 
@@ -171,13 +188,14 @@ namespace PackageBuilder.Domain.Entities.Requests
 
     public class IvidRequest : IAmIvidStandardRequest
     {
-        public IvidRequest(ICollection<IAmRequestField> requestFields, string pacakgeName, IHaveUser user)
+        public IvidRequest(ICollection<IAmRequestField> requestFields, string pacakgeName, IHaveUser user, string contactNumber)
         {
             ApplicantName = new ApplicantNameRequestField(user.UserName);
             LicenceNumber = requestFields.GetRequestField<IAmLicenceNumberRequestField>();
             RegisterNumber = requestFields.GetRequestField<IAmRegisterNumberRequestField>();
             EngineNumber = requestFields.GetRequestField<IAmEngineNumberRequestField>();
             VinNumber = requestFields.GetRequestField<IAmVinNumberRequestField>();
+            RequesterPhone = new RequesterPhoneRequestField(contactNumber);
             Label = new LabelRequestField(pacakgeName);
             RequesterEmail = new RequesterEmailRequestField(user.UserName);
             RequesterName = new RequesterNameRequestField(user.UserFirstName);
