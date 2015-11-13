@@ -23,7 +23,11 @@ function initializeAuditLogRoutes(sammy) {
 function initializeCusomerRoutes(sammy) {
 
     sammy.get('#/Customers', function (context) {
-        context.load('/Customers', { dataType: 'html', cache: false }).swap();
+        context.load('/Customers', { dataType: 'html', cache: false })
+            .swap()
+            .then(function() {
+                initializePlugins();
+            });
     });
     sammy.get('/Customers/Add', function(context) {
         context.load('/Customers/Add', { dataType: 'html', cache: false })
@@ -448,6 +452,14 @@ function initializeLookupRoutes(sammy) {
     });
 }
 
+//function initializeNoteRoutes(sammy) {
+
+//    sammy.get('/Notes/:type/:id', function (context) {
+//        context.load('/Contracts', { dataType: 'html', cache: false }).swap();
+//    });
+
+//}
+
 function initializePlugins() {
     $.ajaxSetup({
         //crossDomain: true,
@@ -784,5 +796,21 @@ function initializePlugins() {
         close: function(event, ui) {
             $(this).val('');
         }
+    });
+
+    $('.notes-view').on("click", function (e) {
+        var $self = $(this);
+        var url = $self.attr('href');
+        $.get(url, {}, function(response) {
+            var $body = $("body");
+            var $response = $(response);
+            $body.append($response);
+            var $modal = $(".note-modal");
+            $modal.modal('show');
+            $modal.on('hidden.bs.modal', function(e) {
+                $modal.remove();
+            });
+        }, 'html');
+        return false;
     });
 }

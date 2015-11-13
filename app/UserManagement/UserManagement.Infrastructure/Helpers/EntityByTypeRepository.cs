@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Linq;
 using Castle.Windsor;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers;
-using FluentNHibernate.Utils;
-using NHibernate.Criterion;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Infrastructure.Helpers
 {
-    public interface IRetrieveEntitiesByType
+    public interface IEntityByTypeRepository
     {
         IQueryable<Entity> GetEntities(Type type);
         IQueryable<NamedEntity> GetNamedEntities(Type type);
@@ -22,13 +19,14 @@ namespace UserManagement.Infrastructure.Helpers
         IQueryable<ValueEntity> GetValueEntities(Type type, string value);
         PagedList<ValueEntity> GetValueEntities(Type type, string value, int pageIndex, int pageSize);
         IQueryable<NamedEntity> GetIndustryEntities(Type type, string name, Guid[] industries);
+        IQueryable<Note> GetEntityNotes(Type type);
     }
 
-    public class EntitiesByTypeHelper : IRetrieveEntitiesByType
+    public class EntityByTypeRepository : IEntityByTypeRepository
     {
         private readonly IWindsorContainer _container;
 
-        public EntitiesByTypeHelper(IWindsorContainer container)
+        public EntityByTypeRepository(IWindsorContainer container)
         {
             _container = container;
         }
@@ -87,6 +85,13 @@ namespace UserManagement.Infrastructure.Helpers
             var predicate = PredicateBuilder.False<ValueEntity>();
             predicate = predicate.Or(x => (x.Value + "").Trim().ToLower().StartsWith((value + "").Trim().ToLower()));
             return new PagedList<ValueEntity>(GetValueEntities(type), pageIndex, pageSize, predicate);
+        }
+
+        public IQueryable<Note> GetEntityNotes(Type type)
+        {
+            var executorType = typeof(IEntityNoteRepository<>).MakeGenericType(type);
+            var entities = (IQueryable)_container.Resolve(executorType);
+            return (from EntityNote item in entities select item.Note);
         }
     }
 }

@@ -63,7 +63,17 @@ namespace UserManagement.Domain.Entities
         public virtual DateTime? TrialExpiration { get; protected internal set; }
         public virtual Individual Individual { get; protected internal set; }
         public virtual ISet<CustomerAddress> Addresses { get; protected internal set; }
-        public virtual ISet<CustomerNote> Notes { get; protected internal set; }
+        public virtual ISet<CustomerNote> CustomerNotes { get; protected internal set; }
+
+        [DoNotMap]
+        public virtual IEnumerable<Note> Notes
+        {
+            get
+            {
+                return CustomerNotes.Select(x => x.Note);
+            }
+        }
+
         [DoNotMap]
         public virtual Address PhysicalAddress
         {

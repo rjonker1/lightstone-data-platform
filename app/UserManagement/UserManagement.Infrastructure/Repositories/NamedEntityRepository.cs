@@ -3,7 +3,7 @@ using System.Linq;
 using NHibernate;
 using UserManagement.Domain.Core.Entities;
 
-namespace UserManagement.Domain.Core.Repositories
+namespace UserManagement.Infrastructure.Repositories
 {
     public class NamedEntityRepository<T> : Repository<T>, INamedEntityRepository<T> where T : INamedEntity, IEntity
     {

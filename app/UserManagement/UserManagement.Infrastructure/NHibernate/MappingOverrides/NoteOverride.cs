@@ -9,7 +9,6 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
         public void Override(AutoMapping<Note> mapping)
         {
             mapping.References(x => x.User).Cascade.SaveUpdate();
-            //mapping.Map(x => x.NoteText).Length(256);
         }
     }
 }

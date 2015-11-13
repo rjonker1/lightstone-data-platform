@@ -8,7 +8,7 @@ using NHibernate;
 using NHibernate.Linq;
 using UserManagement.Domain.Core.Entities;
 
-namespace UserManagement.Domain.Core.Repositories
+namespace UserManagement.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T>
     {

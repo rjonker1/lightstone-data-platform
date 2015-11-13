@@ -1,7 +1,7 @@
 ﻿using System;
 using UserManagement.Domain.Core.Entities;
 
-namespace UserManagement.Domain.Core.Repositories
+namespace UserManagement.Infrastructure.Repositories
 {
     public interface IValueEntityRepository<T> : IRepository<T> where T : IValueEntity, IEntity
     {

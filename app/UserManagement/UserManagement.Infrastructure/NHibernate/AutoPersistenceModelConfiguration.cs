@@ -18,8 +18,6 @@ namespace UserManagement.Infrastructure.NHibernate
         public AutoPersistenceModel GetAutoPersistenceModel()
         {
             return AutoMap.AssemblyOf<User>(this)
-                //.Where(type => type.IsSubclassOf(typeof (Entity)))
-                .IncludeBase<NamedEntity>() //todo: need to store duplicated Name column in NamedEntity
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
                 .UseOverridesFromAssemblyOf<UserMappingOverride>()
                 .OverrideAll(x => x.IgnoreProperties(member => member.MemberInfo.GetCustomAttributes(typeof(DoNotMapAttribute), false).Length > 0));

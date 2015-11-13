@@ -22,7 +22,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
             //    .KeyColumn("CustomerId");
             mapping.HasMany(x => x.Industries).Cascade.SaveUpdate();
             mapping.HasMany(x => x.Addresses).Cascade.SaveUpdate(); 
-            mapping.HasMany(x => x.Notes).Cascade.SaveUpdate(); 
+           // mapping.HasMany(x => x.CustomerNotes).Cascade.SaveUpdate(); 
             mapping.References(x => x.Individual).Cascade.SaveUpdate(); 
         }
     }

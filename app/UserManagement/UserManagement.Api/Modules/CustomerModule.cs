@@ -12,7 +12,6 @@ using Nancy.Security;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;

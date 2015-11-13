@@ -8,7 +8,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<CustomerNote> mapping)
         {
-            mapping.References(x => x.Customer).Cascade.SaveUpdate();
+            mapping.References(x => x.Entity).Cascade.SaveUpdate();
             mapping.References(x => x.Note).Cascade.SaveUpdate();
         }
     }

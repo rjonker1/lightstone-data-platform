@@ -11,16 +11,16 @@ using Nancy.Security;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Infrastructure.Helpers;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
     public class ValueEntityModule : SecureModule
     {
-        public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
+        public ValueEntityModule(IBus bus, IEntityByTypeRepository entityRetriever, IValueEntityRepository<ValueEntity> entities)
         {
             this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString() });
 

@@ -18,9 +18,8 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
         public void should_persist()
         {
             new PersistenceSpecification<CustomerNote>(Session, new CustomEqualityComparer())
-                .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckReference(c => c.Customer, new Customer("Name"))
-                .CheckReference(c => c.Note, new Note("NoteText", new User()))
+                .CheckReference(c => c.Entity, new Customer("Name"))
+                .CheckReference(c => c.Note, new Note("NoteText", new User{Id=Guid.NewGuid()}))
                 .VerifyTheMappings();
         }
     }

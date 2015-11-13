@@ -1,8 +1,8 @@
 ﻿using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities.BusinessRules;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Domain.CommandHandlers.Entities
 {

@@ -135,12 +135,13 @@
     <Compile Include="CustomerUser.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="ClientUserAlias.cs" />
+    <Compile Include="EntityNote.cs" />
+    <Compile Include="IEntityNote.cs" />
     <Compile Include="IIndustry.cs" />
     <Compile Include="Individual.cs" />
     <Compile Include="IndividualAddress.cs" />
     <Compile Include="IndividualContactNumber.cs" />
     <Compile Include="IndividualEmail.cs" />
-    <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />
     <Compile Include="Note.cs" />
@@ -152,11 +153,6 @@
     <Compile Include="Country.cs" />
     <Compile Include="ContractType.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="IClient.cs" />
-    <Compile Include="IClientUser.cs" />
-    <Compile Include="IRole.cs" />
-    <Compile Include="IUser.cs" />
-    <Compile Include="IUserRole.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="ContactDetail.cs" />
     <Compile Include="Province.cs" />

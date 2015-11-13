@@ -11,11 +11,11 @@ using Nancy.ModelBinding;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Entities.Commands.UserAliases;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {

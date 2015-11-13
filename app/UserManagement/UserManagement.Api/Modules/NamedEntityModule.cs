@@ -14,7 +14,7 @@ namespace UserManagement.Api.Modules
 {
     public class NamedEntityModule : SecureModule
     {
-        public NamedEntityModule(IRetrieveEntitiesByType entityRetriever)
+        public NamedEntityModule(IEntityByTypeRepository entityRetriever)
         {
             Get["/NamedEntities/{type}/{filter}"] = parameters =>
             {

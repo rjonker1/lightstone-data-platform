@@ -66,7 +66,7 @@ namespace UserManagement.Api.Helpers.Extensions
             });
         }
 
-        public static void AddLookupDataToViewBag<T>(this IPipelines pipelines, IRetrieveEntitiesByType entityRetriever) where T : IValueEntity, IEntity
+        public static void AddLookupDataToViewBag<T>(this IPipelines pipelines, IEntityByTypeRepository entityRetriever) where T : IValueEntity, IEntity
         {
             var type = typeof(T);
             var valueEntities = entityRetriever.GetValueEntities(type);

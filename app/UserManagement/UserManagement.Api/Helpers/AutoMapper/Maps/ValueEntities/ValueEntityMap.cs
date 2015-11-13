@@ -6,6 +6,14 @@ using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
 {
+    public class NoteEntityMap : ICreateAutoMapperMaps
+    {
+        public void CreateMaps()
+        {
+            Mapper.CreateMap<Note, NoteItemDto>();
+        }
+    }
+
     public class ValueEntityMap : ICreateAutoMapperMaps
     {
         public void CreateMaps()

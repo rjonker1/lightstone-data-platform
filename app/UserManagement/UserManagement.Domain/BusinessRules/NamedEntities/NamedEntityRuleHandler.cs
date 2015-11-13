@@ -12,11 +12,11 @@ namespace UserManagement.Domain.BusinessRules.NamedEntities
     public class NamedEntityRuleHandler : AbstractMessageHandler<NamedEntityDto>
     {
         //Entity retriever
-        private readonly IRetrieveEntitiesByType _entityRetriever;
+        private readonly IEntityByTypeRepository _entityRetriever;
 
         //private readonly INamedEntityRepository<NamedEntity> _repository;
 
-        public NamedEntityRuleHandler(IRetrieveEntitiesByType entityRetriever)
+        public NamedEntityRuleHandler(IEntityByTypeRepository entityRetriever)
         {
             _entityRetriever = entityRetriever;
         }

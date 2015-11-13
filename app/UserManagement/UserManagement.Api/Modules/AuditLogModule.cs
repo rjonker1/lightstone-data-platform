@@ -2,8 +2,8 @@
 using Nancy;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {

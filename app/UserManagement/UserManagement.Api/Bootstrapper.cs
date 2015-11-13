@@ -88,7 +88,7 @@ namespace UserManagement.Api
             });
             pipelines.AddTransactionScope(container);
 
-            AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());
+            AddLookupData(pipelines, container.Resolve<IEntityByTypeRepository>());
            
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
@@ -103,7 +103,7 @@ namespace UserManagement.Api
             base.RequestStartup(container, pipelines, context);
         }
 
-        private static void AddLookupData(IPipelines pipelines, IRetrieveEntitiesByType entityRetriever)
+        private static void AddLookupData(IPipelines pipelines, IEntityByTypeRepository entityRetriever)
         {
             pipelines.AddLookupDataToViewBag<CommercialState>(entityRetriever);
             pipelines.AddLookupDataToViewBag<ContractType>(entityRetriever);
