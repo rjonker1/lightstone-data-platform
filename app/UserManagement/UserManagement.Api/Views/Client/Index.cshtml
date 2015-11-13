@@ -1,0 +1,77 @@
+﻿@using UserManagement.Api.ViewModels
+
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Clients", "All clients"))
+
+<div class="box">
+
+    <div class="box-header"></div>
+    <table id="table"></table>
+
+</div>
+
+<script>
+    
+    $('#table').bootstrapTable({
+        url: '/Clients',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+            field: 'id',
+            title: 'Item ID',
+            visible: false
+        }, {
+            field: 'name',
+            title: 'Name',
+            sortable: true
+        }, {
+            field: 'accountOwnerName',
+            title: 'Account Owner Name'
+            //formatter: gridUsersFormatter,
+            //events: userGridActionEvents
+        }, {
+            field: 'created',
+            title: 'Created Date',
+            //formatter: gridProductsFormatter,
+            //events: productGridActionEvents
+        }, {
+            field: 'platformStateValue',
+            title: 'Platform State',
+            //formatter: gridTransactionsFormatter
+        }, {
+            field: 'commercialStateValue',
+            title: 'Commercial State',
+            sortable: true
+        }, {
+            field: '',
+            title: '',
+            formatter: gridActionFormatter
+
+        }]
+    });
+
+    function gridActionFormatter(value, row, index) {
+
+        var lockUnlock = '<a class="btn btn-warning entity-lock" href="#/Clients/Lock/' + row.id + '">Lock</a>';
+
+        if (row.isLocked == true) lockUnlock = '<a class="btn btn-success entity-lock" href="#/Clients/UnLock/' + row.id + '">UnLock</a>';
+
+        return [
+            '<div class="row" style="width: 240px;">' +
+            '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Clients/' + row.id + '">Edit</a></div>' +
+            '<div class="col-md-1" />' +
+            '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Clients/Delete/' + row.id + '">Delete</a></div>' +
+            '<div class="col-md-2" />' +
+            '<div id="indexLock" class="col-md-1">' + lockUnlock + '</div>' +
+            '</div>'
+        ].join('');
+    };
+
+    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Clients/Add", text: "Add" }).appendTo($("div.box-header"));
+
+    UserManagement.overrideDataTablesStyling();
+</script>

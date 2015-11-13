@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PackageBuilder.Unit.Tests</RootNamespace>
-    <AssemblyName>PackageBuilder.Unit.Tests</AssemblyName>
+    <AssemblyName>Lightstone.Dataplatform.PackageBuilder.Unit.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,58 +41,118 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Common.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="CsQuery">
-      <HintPath>..\..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CommonServiceLocator.WindsorAdapter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.1.0\lib\NET35\CommonServiceLocator.WindsorAdapter.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FluentMigrator">
+      <HintPath>..\..\packages\FluentMigrator.1.2.1.0\lib\40\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner">
+      <HintPath>..\..\packages\FluentMigrator.Runner.1.2.1.0\lib\40\FluentMigrator.Runner.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1817\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1817\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1871, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1871\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1871, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1871\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.1871, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1871\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.1819\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MemBus, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
-      <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
+      <HintPath>..\..\packages\Nancy.1.2.0\lib\net40\Nancy.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Nancy.Authentication.Stateless">
-      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
+      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.23.0\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Nancy.Bootstrappers.Windsor">
-      <HintPath>..\..\packages\Nancy.Bootstrappers.Windsor.0.23.0\lib\net40\Nancy.Bootstrappers.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Nancy.Bootstrappers.Windsor.1.2.0\lib\net40\Nancy.Bootstrappers.Windsor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Nancy.Testing">
-      <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
+      <HintPath>..\..\packages\Nancy.Testing.1.2.0\lib\net40\Nancy.Testing.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -103,18 +164,104 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="PackageResolution\when_user4_envokes_partial_action.cs" />
-    <Compile Include="PackageResolution\when_user5_belonging_to_group3_invokes_full_action.cs" />
-    <Compile Include="PackageResolution\when_user5_belonging_to_group3_and_role1_invokes_partial_action.cs" />
-    <Compile Include="PackageResolution\when_user_belonging_to_group1_invokes_license_scan_action.cs" />
-    <Compile Include="PackageResolution\when_user_belonging_to_group2_invokes_ezscore_action.cs" />
-    <Compile Include="PackageResolution\when_user_belonging_to_group2_invokes_partial_verification_action.cs" />
-    <Compile Include="PackageResolution\when_user_belonging_to_group3_invokes_full_action.cs" />
-    <Compile Include="PackageResolution\when_user_belonging_to_wesbank_customer_invokes_verify_action.cs" />
+    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_data_field_collection.cs" />
+    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_data_field_dto_collection.cs" />
+    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_single_data_field.cs" />
+    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_single_data_field_override.cs" />
+    <Compile Include="AutoMapper\Maps\DataFields\when_mapping_to_a_single_data_field_override_collection.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_ivid_request.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_ivid_titleholder_request.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_lightstone_auto_request.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_mmcode_request.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_rgt_request.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Requests\when_mapping_rgt_vin_request.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\IvidResponseMap\when_mapping_ivid_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\IvidResponseMap\when_mapping_ivid_specific_information_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_accident_dist_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_amortised_value_coll_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_auction_factor_coll_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_amortisation_factor_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_area_factor_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_confidence_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_estimated_value_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_frequency_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_image_gauge_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_price_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_repair_index_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_sale_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_total_sales_by_age_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_total_sales_by_gender_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_image_gauge_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_accident_distribution_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_amortisation_factor_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_amortised_value_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_area_factor_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_auction_factor_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_confidence_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_estimated_value_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_frequency_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_price_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_repair_index_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_sale_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_total_sales_by_age_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_total_sales_by_gender_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\when_mapping_lightsone_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneAutoResponseMap\when_mapping_lightsone_vehicle_valuation_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_bmw_finance_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_company_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_director_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_lightstone_consumer_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_pcubed_ezscore_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_property_collection_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_ivid_title_holder_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_rgt_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\Responses\when_mapping_rgt_vin_response.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_data_provider_collection.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_data_provider_dto_collection.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider_dto.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider_override.cs" />
+    <Compile Include="AutoMapper\Maps\when_mapping_a_complex_object_to_a_data_field.cs" />
+    <Compile Include="AutoMapper\when_creating_maps.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_ivid_data_provider_source_configuration.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_ivid_title_holder_data_provider_source_configuration.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_lightstone_source_configuration.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_rgt_source_configuration.cs" />
+    <Compile Include="Entities\DataProviders\when_reading_rgt_vin_source_configuration.cs" />
     <Compile Include="Fakes\TestBootstrapper.cs" />
+    <Compile Include="Handlers\CommandHandlers\DataProviders\when_creating_a_data_provider.cs" />
+    <Compile Include="Handlers\CommandHandlers\DataProviders\when_updating_a_data_provider.cs" />
+    <Compile Include="Handlers\CommandHandlers\Industries\when_creating_an_industry.cs" />
+    <Compile Include="Handlers\CommandHandlers\Industries\when_renaming_an_industry.cs" />
+    <Compile Include="Handlers\CommandHandlers\Industries\when_renaming_an_industry_that_does_not_exist.cs" />
+    <Compile Include="Handlers\CommandHandlers\Packages\when_creating_a_package.cs" />
+    <Compile Include="Handlers\CommandHandlers\Packages\when_updating_a_package.cs" />
+    <Compile Include="Handlers\CommandHandlers\States\when_creating_a_state.cs" />
+    <Compile Include="Handlers\CommandHandlers\States\when_renaming_an_state.cs" />
+    <Compile Include="Handlers\CommandHandlers\States\when_renaming_a_state_that_does_not_exist.cs" />
+    <Compile Include="Handlers\EventHandlers\DataProviders\when_creating_a_data_provider.cs" />
+    <Compile Include="Handlers\EventHandlers\DataProviders\when_updating_a_data_provider.cs" />
+    <Compile Include="Handlers\EventHandlers\Packages\when_creating_a_package.cs" />
+    <Compile Include="Handlers\EventHandlers\Packages\when_updating_a_package.cs" />
+    <Compile Include="Installers\when_installing_auto_mapper.cs" />
+    <Compile Include="Installers\when_installing_a_bus.cs" />
+    <Compile Include="Installers\when_installing_command_handlers.cs" />
+    <Compile Include="Installers\when_installing_nhibernate.cs" />
+    <Compile Include="Installers\when_installing_nventstore_dependency.cs" />
+    <Compile Include="Installers\when_installing_repositories.cs" />
+    <Compile Include="Installers\when_installing_service_locator.cs" />
+    <Compile Include="TestObjects\Builders\when_calling_write_package_builder.cs" />
+    <Compile Include="TestObjects\Mothers\when_calling_write_package_mother.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\PackageBuilder.Api\appSettings.config">
+      <Link>appSettings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
+    <None Include="connectionStrings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -122,17 +269,64 @@
       <Project>{f82044a3-e321-49f4-91bd-878561fe54b7}</Project>
       <Name>PackageBuilder.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
+      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
+      <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Core.Contracts\PackageBuilder.Domain.Core.Contracts.csproj">
+      <Project>{361D1B44-9C69-4FBC-8FFA-184909E28D19}</Project>
+      <Name>PackageBuilder.Domain.Core.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Dtos\PackageBuilder.Domain.Dtos.csproj">
+      <Project>{3ed18243-3a71-4e3f-adfb-fc6777af5225}</Project>
+      <Name>PackageBuilder.Domain.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
+      <Project>{15EA3113-E3A9-4BAA-8746-A92973E7D3C0}</Project>
+      <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
+      <Project>{90905013-B92B-44B2-8099-EB31042EE399}</Project>
+      <Name>PackageBuilder.Domain.Entities.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
-      <Project>{AF32C137-D01E-4243-8DE5-6920113CFC6A}</Project>
+      <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
       <Name>PackageBuilder.Domain.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Requests.Contracts\PackageBuilder.Domain.Requests.Contracts.csproj">
+      <Project>{203ed1e3-44ca-4ce5-95bf-94bab8516019}</Project>
+      <Name>PackageBuilder.Domain.Requests.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Requests\PackageBuilder.Domain.Requests.csproj">
+      <Project>{4e41ead6-c182-4921-99b0-0f74e2e76321}</Project>
+      <Name>PackageBuilder.Domain.Requests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
-      <Project>{C075E78C-8051-4CFC-A0F5-5C61BB108234}</Project>
+      <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Infrastructure\PackageBuilder.Infrastructure.csproj">
+      <Project>{622131d3-b807-49a9-a41e-5309d3e14a37}</Project>
+      <Name>PackageBuilder.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
+      <Name>PackageBuilder.TestHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
+      <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
+      <Name>PackageBuilder.TestObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PackageResolution\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

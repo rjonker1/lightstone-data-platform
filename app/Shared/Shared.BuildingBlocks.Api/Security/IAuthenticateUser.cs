@@ -10,15 +10,5 @@ namespace Shared.BuildingBlocks.Api.Security
     public interface IRedisAuthenticator : IAuthenticateUser
     {
         
-    }
-
-    public interface IUmAuthenticator : IAuthenticateUser
-    {
-
-    }
-
-    public interface IUmApiAuthenticator : IAuthenticateUser
-    {
-
-    }
+    } 
 }

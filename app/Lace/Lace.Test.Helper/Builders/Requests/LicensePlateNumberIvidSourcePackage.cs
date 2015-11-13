@@ -1,44 +1,64 @@
 ﻿using System;
-using DataPlatform.Shared.Entities;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Test.Helper.Fakes.RequestTypes;
 using Lace.Test.Helper.Mothers.Packages;
-using PackageBuilder.Domain.Entities;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
+
+    public class LicensePlateNumberForceIvidToFailPackage
+    {
+        public static IHavePackageForRequest LicenseNumberPackage(string licensePlate, string packageName)
+        {
+            return new LicensePlateNumberPackage(
+                new IAmDataProvider[]
+                {
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
+                        null, new BillableState(DataProviderNoRecordState.Billable)), 
+                }, Guid.NewGuid());
+        }
+    }
+
     public class LicensePlateNumberIvidSourcePackage
     {
-        public static IPackage LicenseNumberPackage()
+        public static IHavePackageForRequest LicenseNumberPackage(string licensePlate, string packageName)
         {
-            return new Package("License plate lookup package")
-            {
-                DataSets =
-                    new[]
-                    {
-                        new DataSet("License plate lookup DataSet")
-                        {
-                            DataFields = new[]
-                            {
+            return new LicensePlateNumberPackage(
+                new IAmDataProvider[]
+                {
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
+                        new IvidStandardRequest(licensePlate, "Murray", packageName,
+                            "murrayw@lightstone.co.za", "Murray", string.Empty), new BillableState(DataProviderNoRecordState.Billable))
+                }, Guid.NewGuid());
+        }
+    }
 
-                                new DataField("Registration") { DataProvider = new DataProvider(new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A"), "Ivid") },
-                                new DataField("Vin") { DataProvider = new DataProvider(new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A"), "Ivid") },
-                                new DataField("Engine") { DataProvider = new DataProvider(new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A"), "Ivid") },
-                                new DataField("MakeDescription") { DataProvider = new DataProvider(new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A"), "Ivid") }
+    public class VinNumberIvidSourcePackage
+    {
+        public static IHavePackageForRequest VinNumberPackage(string vinNumber, string packageName)
+        {
+            return new LicensePlateNumberPackage(
+                new IAmDataProvider[]
+                {
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
+                        new IvidVinRequest(vinNumber, "Murray", packageName,
+                            "murrayw@lightstone.co.za", "Murray", string.Empty), new BillableState(DataProviderNoRecordState.Billable))
+                }, Guid.NewGuid());
+        }
+    }
 
-                                //new DataFieldBuilder().With("Registration")
-                                //    .With(DataSourceMother.IvidDataSource)
-                                //    .Build(),
-                                //new DataFieldBuilder().With("Vin").With(DataSourceMother.IvidDataSource).Build(),
-                                //new DataFieldBuilder().With("Engine").With(DataSourceMother.IvidDataSource).Build(),
-                                //new DataFieldBuilder().With("MakeDescription")
-                                //    .With(DataSourceMother.IvidDataSource)
-                                //    .Build(),
-
-
-                            }
-                        }
-                    },
-                Action = ActionMother.LicensePlateSearchAction
-            };
+    public class RegisterNumberIvidSourcePackage
+    {
+        public static IHavePackageForRequest RegisterNumberPackage(string registerNumber, string packageName)
+        {
+            return new LicensePlateNumberPackage(
+                new IAmDataProvider[]
+                {
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
+                        new IvidRegisterNoRequest(registerNumber, "Murray", packageName,
+                            "murrayw@lightstone.co.za", "Murray", string.Empty), new BillableState(DataProviderNoRecordState.Billable))
+                }, Guid.NewGuid());
         }
     }
 }

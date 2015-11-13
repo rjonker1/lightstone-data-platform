@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
-using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
+using Lace.Domain.DataProviders.Lightstone.Queries;
+using Lace.Toolbox.Database.Base;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
@@ -18,12 +18,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         private IGetBands _getBands;
         private IGetMuncipalities _getMuncipalities;
         private IGetMakes _getMakes;
-        private IGetCarType _getCarType;
         private IGetSales _getSales;
 
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
 
-        public FakeBaseRetrievalMetric(IProvideCarInformationForRequest request, IRespondWithValuation valuation)
+        public FakeBaseRetrievalMetric(IHaveCarInformation request, IRespondWithValuation valuation)
         {
             _request = request;
             Valuation = valuation;
@@ -32,13 +31,12 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IRetrieveValuationFromMetrics SetupDataSources()
         {
-            _getStatistics = new StatisticsUnitOfWork(new FakeStatisticsRepository());
-            _getMetrics = new MetricUnitOfWork(new FakeMetricRepository());
-            _getBands = new BandUnitOfWork(new FakeBandsRepository());
-            _getMuncipalities = new MuncipalityUnitOfWork(new FakeMunicipalityRepository());
-            _getMakes = new MakeUnitOfWork(new FakeMakeRepository());
-            _getCarType = new CarTypeUnitOfWork(new FakeCarTypeRepository());
-            _getSales = new SaleUnitOfWork(new FakeSaleRepository());
+            _getStatistics = new StatisticsQuery(new FakeStatisticsRepository());
+            _getMetrics = new MetricQuery(new FakeMetricRepository());
+            _getBands = new BandQuery(new FakeBandsRepository());
+            _getMuncipalities = new MuncipalityQuery(new FakeMunicipalityRepository());
+            _getMakes = new MakeQuery(new FakeMakeRepository());
+            _getSales = new SaleQuery(new FakeSaleRepository());
 
             return this;
         }
@@ -49,13 +47,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
 
             Valuation.AddImageGauages(GetImageGaugeMetrics());
-            Valuation.AddAccidentDistribution(GetAccidentDistributionMetrics());
+            //Valuation.AddAccidentDistribution(GetAccidentDistributionMetrics());
             Valuation.AddAmortisedValues(GetAmortisedValues());
-            Valuation.AddAreaFactors(GetAreaFactors());
-            Valuation.AddAuctionFactors(GetAuctionFactors());
-            Valuation.AddRepairIndex((GetRepairIndex()));
-            Valuation.AddTotalSalesByAge(GetTotalSalesByAge());
-            Valuation.AddTotalSalesByGender(GetTotalSalesByGender());
+            //Valuation.AddAreaFactors(GetAreaFactors());
+            //Valuation.AddAuctionFactors(GetAuctionFactors());
+            //Valuation.AddRepairIndex((GetRepairIndex()));
+            //Valuation.AddTotalSalesByAge(GetTotalSalesByAge());
+            //Valuation.AddTotalSalesByGender(GetTotalSalesByGender());
             Valuation.AddEstimatedValue(GetEstimatedValues());
             Valuation.AddLastFiveSales(GetLastFiveSales());
 
@@ -71,7 +69,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             _getBands.GetBands(_request);
             _getMuncipalities.GetMunicipalities(_request);
             _getMakes.GetMakes(_request);
-            _getCarType.GetCarTypes(_request);
             _getSales.GetSales(_request);
 
             return this;
@@ -87,47 +84,47 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             return new EstimatedValuesMetric(_request, _getStatistics.Statistics).Get().MetricResult;
         }
 
-        private IEnumerable<IRespondWithTotalSalesByGenderModel> GetTotalSalesByGender()
-        {
-            return
-                new TotalSalesByGenderMetric(_request, _getStatistics.Statistics, _getBands.Bands, _getCarType.CarTypes)
-                    .Get()
-                    .MetricResult;
-        }
+        //private IEnumerable<IRespondWithTotalSalesByGenderModel> GetTotalSalesByGender()
+        //{
+        //    return
+        //        new TotalSalesByGenderMetric(_request, _getStatistics.Statistics, _getBands.Bands)
+        //            .Get()
+        //            .MetricResult;
+        //}
 
-        private IEnumerable<IRespondWithTotalSalesByAgeModel> GetTotalSalesByAge()
-        {
-            return
-                new TotalSalesByAgeMetric(_request, _getStatistics.Statistics, _getBands.Bands, _getCarType.CarTypes)
-                    .Get()
-                    .MetricResult;
-        }
+        //private IEnumerable<IRespondWithTotalSalesByAgeModel> GetTotalSalesByAge()
+        //{
+        //    return
+        //        new TotalSalesByAgeMetric(_request, _getStatistics.Statistics, _getBands.Bands)
+        //            .Get()
+        //            .MetricResult;
+        //}
 
-        private IEnumerable<IRespondWithRepairIndexModel> GetRepairIndex()
-        {
-            return new RepairIndexMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
-        }
+        //private IEnumerable<IRespondWithRepairIndexModel> GetRepairIndex()
+        //{
+        //    return new RepairIndexMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
+        //}
 
-        private IEnumerable<IRespondWithAuctionFactorModel> GetAuctionFactors()
-        {
-            return new AuctionFactorsMetric(_request, _getStatistics.Statistics, _getMakes.Makes).Get().MetricResult;
-        }
+        //private IEnumerable<IRespondWithAuctionFactorModel> GetAuctionFactors()
+        //{
+        //    return new AuctionFactorsMetric(_request, _getStatistics.Statistics, _getMakes.Makes).Get().MetricResult;
+        //}
 
-        private IEnumerable<IRespondWithAreaFactorModel> GetAreaFactors()
-        {
-            return new AreaFactorsMetric(_getStatistics.Statistics, _getMuncipalities.Municipalities).Get().MetricResult;
-        }
+        //private IEnumerable<IRespondWithAreaFactorModel> GetAreaFactors()
+        //{
+        //    return new AreaFactorsMetric(_getStatistics.Statistics, _getMuncipalities.Municipalities).Get().MetricResult;
+        //}
 
         private IEnumerable<IRespondWithAmortisedValueModel> GetAmortisedValues()
         {
             return new AmortisedValueMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
         }
 
-        private IEnumerable<IRespondWithAccidentDistributionModel> GetAccidentDistributionMetrics()
-        {
-            return
-                new AccidentDistributionMetric(_getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
-        }
+        //private IEnumerable<IRespondWithAccidentDistributionModel> GetAccidentDistributionMetrics()
+        //{
+        //    return
+        //        new AccidentDistributionMetric(_getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
+        //}
 
         private IEnumerable<IRespondWithImageGaugeModel> GetImageGaugeMetrics()
         {

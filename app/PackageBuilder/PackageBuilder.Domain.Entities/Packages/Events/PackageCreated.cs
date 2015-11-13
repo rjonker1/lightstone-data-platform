@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Entities;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Events;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Industries.Read;
+using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Domain.Entities.Packages.Events
 {
@@ -9,26 +12,33 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
     {
         public readonly string Name;
         public readonly string Description;
-        public readonly double CostPrice;
-        public readonly double SalePrice;
-        public readonly string State;
+        public readonly decimal CostPrice;
+        public readonly decimal SalePrice;
+        public string Notes;
+        public PackageEventType? PackageEventType { get; set; }
+        public readonly IEnumerable<Industry> Industries;
+        public readonly State State;
+        public readonly decimal DisplayVersion;
         public readonly string Owner;        
         public readonly DateTime CreatedDate;
-        public readonly DateTime EditedDate;
-        public readonly IEnumerable<IDataProvider> DataProviders;
+        public readonly DateTime? EditedDate;
+        public readonly IEnumerable<IDataProviderOverride> DataProviderValueOverrides;
 
-        public PackageCreated(Guid id,string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public PackageCreated(Guid id, string name, string description, decimal costPrice, decimal salePrice,PackageEventType? packageEventType, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
         {
             Id = id;
             Name = name;
             Description = description;
+            PackageEventType = packageEventType;
+            Industries = industries;
             CostPrice = costPrice;
             SalePrice = salePrice;
             State = state;
+            DisplayVersion = displayVersion;
             Owner = owner;
             CreatedDate = createdDate;
             EditedDate = editedDate;
-            DataProviders = dataProviders;
+            DataProviderValueOverrides = dataProviderValueOverrides;
         }
     }
 }

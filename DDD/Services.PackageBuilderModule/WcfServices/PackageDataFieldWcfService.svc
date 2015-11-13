@@ -1,2 +1,0 @@
-
-<%@ ServiceHost Language="C#" Debug="false" Service="LightstoneApp.Services.PackageBuilderModule.WcfServices.PackageDataFieldWcfService" CodeBehind="~/WcfServices/PackageDataFieldWcfService.svc.cg.cs" %>

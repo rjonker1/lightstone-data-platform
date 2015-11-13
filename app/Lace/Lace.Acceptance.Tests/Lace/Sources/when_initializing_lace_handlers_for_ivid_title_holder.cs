@@ -1,60 +1,49 @@
-﻿using System.Collections.Generic;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Domain.Infrastructure.EntryPoint;
-using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.IvidTitleHolder;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Fakes.Bus;
+using Lace.Test.Helper.Builders.Responses;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources
 {
     public class when_initializing_lace_handlers_for_ivid_title_holder : Specification
     {
-
-        private readonly ILaceRequest _request;
-        private readonly ILaceEvent _laceEvent;
-        private readonly IBootstrap _initialize;
-        private IList<LaceExternalSourceResponse> _laceResponses;
-        private readonly IBuildSourceChain _buildSourceChain;
+        private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly ICollection<IPointToLaceProvider> _response;
+        private readonly ISendCommandToBus _command;
+        private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_ivid_title_holder()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            
-
+            _command = MonitoringBusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolder();
-            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
-
-
-            _buildSourceChain = new CreateSourceChain(_request.Package);
-            _buildSourceChain.Build();
-
-
-            _initialize = new Initialize(new LaceResponse(),_request, _laceEvent, _buildSourceChain);
+            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _dataProvider = new IvidTitleHolderDataProvider(_request, null, null,_command);
         }
 
         public override void Observe()
         {
-            _initialize.Execute();
-            _laceResponses = _initialize.LaceResponses;
+            _dataProvider.CallSource(_response);
         }
 
         [Observation]
-        public void lace_functional_test_ivid_title_holder_response_should_be_handled_test()
+        public void lace_ivid_title_holder_response_should_be_handled_test()
         {
-            _laceResponses[0].Response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
-        public void lace_functional_test_ivid_title_holder_response_shuould_not_be_null_test()
+        public void lace_ivid_title_holder_response_shuould_not_be_null_test()
         {
-            _laceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().ShouldNotBeNull();
         }
-
     }
 }

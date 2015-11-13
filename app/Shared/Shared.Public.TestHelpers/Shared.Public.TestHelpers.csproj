@@ -43,6 +43,9 @@
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy">
+      <HintPath>..\..\packages\Nancy.1.1\lib\net40\Nancy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -64,12 +67,12 @@
     <Compile Include="Packages\IDefinePackageIdentifer.cs" />
     <Compile Include="Packages\PackageIdentifierBuilder.cs" />
     <Compile Include="Packages\PackageIdentifierMother.cs" />
-    <Compile Include="Repositories\CannedRepository.cs" />
-    <Compile Include="Repositories\NamedCannedRepository.cs" />
     <Compile Include="Requests\DefaultRequestIdentifier.cs" />
     <Compile Include="Requests\IDefineRequestIdentifier.cs" />
     <Compile Include="Requests\RequestIdentifierBuilder.cs" />
     <Compile Include="Requests\RequestIdentifierMother.cs" />
+    <Compile Include="Security\TestAuthenticator.cs" />
+    <Compile Include="Security\TestNullAuthenticator.cs" />
     <Compile Include="Systems\DefaultTestSystem.cs" />
     <Compile Include="Systems\IDefineSystemIdentifier.cs" />
     <Compile Include="Systems\SystemIdentifierBuilder.cs" />
@@ -80,9 +83,9 @@
     <Compile Include="Users\UserIdentifierMother.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared.Public\Shared.Public.csproj">
-      <Project>{A9E8B20A-E8F8-4549-83FC-921E26C64282}</Project>
-      <Name>Shared.Public</Name>
+    <ProjectReference Include="..\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj">
+      <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
+      <Name>Shared.BuildingBlocks.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
@@ -95,7 +98,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

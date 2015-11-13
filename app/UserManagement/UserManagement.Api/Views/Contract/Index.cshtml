@@ -1,0 +1,67 @@
+﻿@using UserManagement.Api.ViewModels
+@*@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>*@
+
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Contracts", ""))
+
+<div class="box">
+
+    <div class="box-header"></div>
+    <table id="table"></table>
+
+</div>
+<script>
+
+    $('#table').bootstrapTable({
+        url: '/Contracts',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+            field: 'id',
+            title: 'Item ID',
+            visible: false
+        }, {
+            field: 'name',
+            title: 'Name',
+            sortable: true
+        }, {
+            field: 'description',
+            title: 'Description'
+        }, {
+            field: 'hasPackage',
+            title: 'Has Package'
+        }, {
+            field: 'created',
+            title: 'Created Date',
+            sortable: true
+        }, {
+            field: 'modified',
+            title: 'Modified Date',
+            sortable: true
+        }, {
+            field: '',
+            title: '',
+            formatter: gridActionFormatter
+
+        }]
+    });
+
+    function gridActionFormatter(value, row, index) {
+
+        return [
+            '<div class="row" style="width: 160px;">' +
+                '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Contracts/' + row.id + '">Edit</a></div>' +
+                '<div class="col-md-1" />' +
+                '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Contracts/Delete/' + row.id + '">Delete</a></div>' +
+            '</div>'
+        ].join('');
+    };
+
+    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Contracts/Add", text: "Add" }).appendTo($("div.box-header"));
+
+    UserManagement.overrideDataTablesStyling();
+</script>

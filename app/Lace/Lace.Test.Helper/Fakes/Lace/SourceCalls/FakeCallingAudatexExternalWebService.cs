@@ -1,42 +1,44 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+﻿using System;
+using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Dto;
-using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
-using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Responses;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
     public class FakeCallingAudatexExternalWebService : ICallTheDataProviderSource
     {
-        private GetDataResult _audatexResponse;
-        private readonly ILaceRequest _request;
+      //  private GetDataResult _audatexResponse;
+        private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly ISendCommandToBus _command;
 
-        public FakeCallingAudatexExternalWebService(ILaceRequest request)
+        public FakeCallingAudatexExternalWebService(ICollection<IPointToLaceRequest> request,  ISendCommandToBus command)
         {
             _request = request;
+            _command = command;
         }
 
-        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response)
         {
-            _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
+         //   _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
             TransformResponse(response);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response)
         {
-            var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
+            throw new Exception("Audatex transformation has not been updated to reference package builder requests...");
+            //var transformer = new TransformAudatexResponse(_audatexResponse, response, _request.GetFromRequest<IPointToLaceRequest>());
 
-            if (transformer.Continue)
-            {
-                transformer.Transform();
-            }
+            //if (transformer.Continue)
+            //{
+            //    transformer.Transform();
+            //}
 
-            response.AudatexResponse = transformer.Result;
-            response.AudatexResponseHandled = new AudatexResponseHandled();
-            response.AudatexResponseHandled.HasBeenHandled();
+            //transformer.Result.HasBeenHandled();
+            //response.Add(transformer.Result);
         }
     }
 }

@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    @*<meta http-equiv="X-UA-Compatible" content="IE=edge">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>User Management</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    @*<link href="~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/chosen.min.css" rel="stylesheet" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    <link href="~/Scripts/jquery.ajax-combobox/jquery.ajax-combobox.css" rel="stylesheet" />
+
+    @*<link href="~/Scripts/dropzone/basic.css" rel="stylesheet" />
+    <link href="~/Scripts/dropzone/dropzone.css" rel="stylesheet" />*@
+
+    <!-- Template -->
+    <link href="~/Template/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Template/css/skins/_all-skins.min.css" rel="stylesheet" />
+    <!-- Template -->
+
+    <link href="~/Content/site.css" rel="stylesheet" />
+
+    <style>
+        /*#indexEdit {
+            width: 60px;
+        }*/
+
+        .search-field {
+            width: 100%;
+        }
+
+        .ac_container {
+            width: 100%;
+        }
+
+        .required-field {
+            color: red;
+        }
+    </style>
+
+    @RenderSection("Header", false)
+</head>
+<body class="skin-blue">
+    <div class="wrapper">
+        @Html.Partial("Shared/Header")
+        @Html.Partial("Shared/Sidebar")
+        <div class="content-wrapper">
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script>
+        // Conflict between jQueryUi datepicker and bootstrap datepicker, thus the rename of the plugin
+        $.fn.bootstrapdatepicker = $.fn.datepicker;
+    </script>
+    <script src="~/Scripts/GreenSock/TweenMax.min.js"></script>
+    <script src="~/Scripts/GreenSock/UIpreloader.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    @*<script src="~/Scripts/DataTables-1.10.4/jquery.dataTables.min.js"></script>
+        <script src="~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js"></script>*@
+    <script src="~/Scripts/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/sammy-0.7.5.js"></script>
+    <script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
+    <script src="~/Scripts/cascadeDropdown/jquery.cascadingdropdown.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="~/Scripts/jquery.ajax-combobox/jquery.ajax-combobox.js"></script>
+    <script src="~/Scripts/app/routes/routes.js"></script>
+    <script src="~/Scripts/app/core.js"></script>
+    <script src="~/Scripts/app/app.js"></script>
+
+    <script src="~/Scripts/dropzone/dropzone.js"></script>
+    
+    <!-- The Templates plugin is included to render the upload/download listings -->
+    <script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+    <script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    <script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+    <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- blueimp Gallery script -->
+    <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+
+    <!-- Template -->
+    <script src="~/Scripts/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/fastclick/fastclick.min.js"></script>
+    <script src="~/Template/js/app.min.js"></script>
+    <!-- Template -->
+
+    <div id="scripts">@RenderSection("Scripts", false)</div>
+    <script>
+        //document.domain = "lightstone.com";
+
+        //var token = $.cookie('token');
+        //$.cookie('name', 'value', { domain: 'lightstone.com' });
+
+        //var store = new Sammy.Store({ type: 'cookie', domain: 'lightstone.com' });
+        //var token = store.get('token');
+
+        //$.ajaxSetup({
+        //    headers: { 'Authorization': 'Token ' + token }
+        //});
+        //$(document).ajaxSetup({
+        //    beforeSend: function (xhr) {
+        //        xhr.setRequestHeader('Authorization', 'Token ' + token);
+        //    }
+        //});
+        // Configure Toastr
+        toastr.options.timeOut = 4000;
+        toastr.options.positionClass = 'toast-bottom-right';
+        
+        $.ajaxSetup({ cache: false });
+
+        $(document).ajaxStart(function () {
+            var t = $.cookie('token');
+            
+            if (t == undefined || t == "") {
+                window.location.href = "http://dev.cia.lightstone.co.za";
+                return;
+            }
+            //$.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
+            $.blockUI();
+            preloader.active(true);
+        });
+        $(document).ajaxStop(function () {
+            $.unblockUI();
+            preloader.active(false);
+        });
+        $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+            if (jqxhr.responseJSON)
+                toastr["error"]("Error", jqxhr.responseJSON.errorMessage);
+            else
+                toastr["error"]("Error", jqxhr.responseText);
+            $.unblockUI();
+        });
+        $(document).ajaxSuccess(function (event, jqxhr, settings, thrownError) {
+            if (jqxhr.responseJSON)
+                toastr["success"]("Success", jqxhr.responseJSON);
+            $.unblockUI();
+        });
+    </script>
+</body>
+</html>
+
+

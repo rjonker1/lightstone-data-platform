@@ -1,0 +1,134 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Pre Billing", ""))
+
+<div class="box">
+    
+    <div style="margin-top: 0.5%;">
+        <div id="transactionRange" class="pull-left col-lg-2" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; float: left;">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            <span></span> <b class="caret"></b>
+        </div>
+
+        <div class="col-lg-2">
+            <input type="button" class="btn btn-info" value="Export PreBilling" onclick="exportPreBilling()">
+        </div>
+
+    </div>
+
+        <table id="table"></table>
+
+    <h2 id="detail-table-header"></h2>
+    <table id="detail"></table>
+
+    <script src="~/Scripts/app/pre_data.js"></script>
+    <script src="~/Scripts/app/fileDownload.js"></script>
+
+    <script>
+
+        // Init
+        var startDateFilter = moment({ day: 26 }).subtract(1, 'month').format('YYYY-MM-DD');
+        var endDateFilter = moment({ day: 25 }).format('YYYY-MM-DD');
+
+        function exportPreBilling() {
+            $.fileDownload('/PreBillingDump?startDate=' + moment(startDateFilter).format('YYYY-MM-DD') + '&endDate=' + moment(endDateFilter).format('YYYY-MM-DD'));
+            //.done(function () { alert('File download a success!'); })
+            //.fail(function () { alert('File download failed!'); });
+        }
+
+        var today = moment().date();
+
+        if (today >= 26 && today < 31) {
+            endDateFilter = moment({ day: 25 }).add(1, 'month');
+            startDateFilter = moment({ day: 26 });
+        }
+
+        $('#table').bootstrapTable({
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'customerName',
+                title: 'Customer / Client Name',
+                sortable: true
+            }, {
+                field: 'users',
+                title: '# Users',
+                formatter: gridUsersFormatter,
+                events: userGridActionEvents
+            }, {
+                field: 'accountOwner',
+                title: 'Account Owner',
+                //formatter: accountOwnerMetaFormatter,
+                sortable: true
+            }, {
+                field: 'products',
+                title: '# Packages',
+                formatter: gridPackagesFormatter,
+                events: packageGridActionEvents
+            }, {
+                field: 'transactions',
+                title: '# Transactions',
+                formatter: gridTransactionsFormatter
+            }]
+        });
+
+        Billing.Common();
+
+        //Hook to feed back to API
+        $('#transactionRange').on('apply.daterangepicker', function (ev, picker) {
+
+            startDateFilter = picker.startDate.format('YYYY-MM-DD');
+            endDateFilter = picker.endDate.format('YYYY-MM-DD');
+
+            $('#table').bootstrapTable('destroy');
+
+            $('#table').bootstrapTable({
+                url: '/PreBilling?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
+                search: true,
+                showRefresh: true,
+                showColumns: true,
+                pagination: true,
+                pageNumber: 1,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100, 'All'],
+                columns: [{
+                    field: 'id',
+                    title: 'Item ID',
+                    visible: false
+                }, {
+                    field: 'customerName',
+                    title: 'Customer / Client Name',
+                    sortable: true
+                }, {
+                    field: 'users',
+                    title: '# Users',
+                    formatter: gridUsersFormatter,
+                    events: userGridActionEvents
+                }, {
+                    field: 'accountOwner',
+                    title: 'Account Owner',
+                    formatter: accountOwnerMetaFormatter,
+                    sortable: true
+                }, {
+                    field: 'products',
+                    title: '# Packages',
+                    formatter: gridPackagesFormatter,
+                    events: packageGridActionEvents
+                }, {
+                    field: 'transactions',
+                    title: '# Transactions',
+                    formatter: gridTransactionsFormatter
+                }]
+            });
+        });
+
+    </script>
+</div>

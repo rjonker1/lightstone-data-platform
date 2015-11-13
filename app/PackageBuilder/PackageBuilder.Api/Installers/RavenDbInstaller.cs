@@ -1,8 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Raven.Client;
-using Raven.Client.Document;
 
 namespace PackageBuilder.Api.Installers
 {

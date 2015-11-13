@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Configuration;
+﻿using Shared.Configuration;
 using Topshelf;
 
 namespace Workflow.Billing.Consumer
@@ -9,9 +9,10 @@ namespace Workflow.Billing.Consumer
         {
             var appSettings = new AppSettings();
 
-
             HostFactory.Run(x =>
             {
+                x.RunAsPrompt();
+
                 x.Service<IBillingService>(s =>
                 {
                     s.ConstructUsing(name => new BillingService());
@@ -19,7 +20,8 @@ namespace Workflow.Billing.Consumer
                     s.WhenStopped(tc => tc.Stop());
                 });
 
-                x.RunAsLocalSystem();
+                //x.RunAsLocalSystem();
+                x.RunAsPrompt();
 
                 x.SetDescription(appSettings.Service.Description);
                 x.SetDisplayName(appSettings.Service.DisplayName);

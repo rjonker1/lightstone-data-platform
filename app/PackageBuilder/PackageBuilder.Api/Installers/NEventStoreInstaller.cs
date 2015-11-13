@@ -1,36 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
-using MemBus;
 using NEventStore;
 using NEventStore.Dispatcher;
 using NEventStore.Persistence.Sql.SqlDialects;
-using PackageBuilder.Core.Events;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Infrastructure.NEventStore;
 
 namespace PackageBuilder.Api.Installers
 {
-    public class MessageAdapter : IocAdapter
-    {
-        private readonly IWindsorContainer _container;
-
-        public MessageAdapter(IWindsorContainer container)
-        {
-            _container = container;
-        }
-
-        public IEnumerable<object> GetAllInstances(Type desiredType)
-        {
-            yield return _container.Resolve(desiredType);
-        }
-    }
-
     public class NEventStoreInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
@@ -38,13 +19,14 @@ namespace PackageBuilder.Api.Installers
             container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>().LifestyleTransient());
 
             var eventStore = Wireup.Init()
+                .LogToConsoleWindow()
                 //.UsingRavenPersistence("packageBuilder/database")
                 .UsingSqlPersistence("packageBuilder")
                 .WithDialect(new MsSqlDialect())
                 //.EnlistInAmbientTransaction() // two-phase commit
                 .InitializeStorageEngine()
                 .UsingJsonSerialization()
-                .Compress()
+                //.Compress()
                 //.EncryptWith(new byte[]
                 //{ //todo: specify encryption string
                 //    0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf
@@ -59,68 +41,6 @@ namespace PackageBuilder.Api.Installers
             container.Register(Component.For<IConstructAggregates>().ImplementedBy<AggregateFactory>().LifestyleTransient());
             container.Register(Component.For<IDetectConflicts>().ImplementedBy<ConflictDetector>().LifestyleTransient());
             container.Register(Component.For(typeof(INEventStoreRepository<>)).ImplementedBy(typeof(NEventStoreRepository<>)).LifestyleTransient());
-        }
-    }
-
-    public class InMemoryDispatcher : IDispatchCommits
-    {
-        private readonly IBus _bus;
-
-        public InMemoryDispatcher(IBus bus)
-        {
-            _bus = bus;
-        }
-
-        public void Dispose()
-        {
-            _bus.Dispose();
-        }
-
-        public void Dispatch(ICommit commit)
-        {
-            foreach (var @event in commit.Events.Where(x => x.Body is IDomainEvent))
-                _bus.Publish(@event.Body);
-        }
-    }
-
-    public class AuthorizationPipelineHook : IPipelineHook
-    {
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public ICommit Select(ICommit committed)
-        {
-            // return null if the user isn't authorized to see this commit
-            return committed;
-        }
-
-        public bool PreCommit(CommitAttempt attempt)
-        {
-            // Can easily do logging or other such activities here
-            return true; // true == allow commit to continue, false = stop.
-        }
-
-        public void PostCommit(ICommit committed)
-        {
-            // anything to do after the commit has been persisted.
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            // no op
-        }
-
-        public void OnPurge(string bucketId)
-        {
-
-        }
-
-        public void OnDeleteStream(string bucketId, string streamId)
-        {
-
         }
     }
 }

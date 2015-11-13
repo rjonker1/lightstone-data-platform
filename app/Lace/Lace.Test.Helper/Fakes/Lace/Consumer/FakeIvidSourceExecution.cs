@@ -1,29 +1,33 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Dto;
-using Lace.Domain.DataProviders.Core;
+using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
     public class FakeIvidSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
+        private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly ISendCommandToBus _command;
 
-        private readonly ILaceRequest _request;
-
-        public FakeIvidSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource)
+        public FakeIvidSourceExecution(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
+            _command = command;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
-            var spec = new CanHandlePackageSpecification(Services.Ivid, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.IVIDVerify_E_WS, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -33,22 +37,21 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             {
                 var consumer = new ConsumeSource(new FakeHandleIvidServiceCall(),
                     new FakeCallingIvidExternalWebService());
-                consumer.ConsumeExternalSource(response, laceEvent);
+                consumer.ConsumeDataProvider(response);
 
-                if (response.IvidResponse == null)
-                    CallFallbackSource(response, laceEvent);
+                if (!response.OfType<IProvideDataFromIvid>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
+                    CallFallbackSource(response, _command);
             }
 
-            CallNextSource(response, laceEvent);
+            CallNextSource(response, _command);
 
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.IvidResponse = null;
-            response.IvidResponseHandled = new IvidResponseHandled();
-            response.IvidResponseHandled.HasNotBeenHandled();
+            var ividResponse = IvidResponse.Empty();
+            ividResponse.HasNotBeenHandled();
+            response.Add(ividResponse);
         }
-
     }
 }

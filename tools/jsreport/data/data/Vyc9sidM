@@ -1,0 +1,10 @@
+{
+    "name": "Invoice Data",
+    "dataJson": "{\n  \"Customer\": { \n      \"Name\": \"Customer 1\",\n      \"TaxRegistration\": 4190195679,\n      \"Packages\" : [ \n        {\"ItemCode\": \"1000/200/002\", \"ItemDescription\": \"AutoTest\", \"QuantityUnit\": 2, \"Price\": 16314.67, \"Vat\": 0}\n      ]  \n  }\n}",
+    "shortid": "Vyc9sidM",
+    "creationDate": "2015-04-28T16:59:37.000Z",
+    "modificationDate": {
+        "$$date": 1431935056835
+    },
+    "_id": "8oSBssu0TyxXLzQ0"
+}

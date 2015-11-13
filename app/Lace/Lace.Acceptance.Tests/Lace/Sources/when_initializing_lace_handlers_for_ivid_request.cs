@@ -1,66 +1,68 @@
-﻿using System.Collections.Generic;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using EasyNetQ;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
+using Lace.Shared.Extensions;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Fakes.Bus;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources
 {
     public class when_initializing_lace_handlers_for_ivid_request : Specification
     {
-        private readonly ILaceRequest _request;
-        private readonly ILaceEvent _laceEvent;
+        private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly IAdvancedBus _command;
         private readonly IBootstrap _initialize;
-        private IList<LaceExternalSourceResponse> _laceResponses;
+        private ICollection<IPointToLaceProvider> _response;
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_initializing_lace_handlers_for_ivid_request()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            
+            _command = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForIvid();
-
-            _laceEvent = new PublishLaceEventMessages(publisher,_request.RequestAggregation.AggregateId);
-
-
-            _buildSourceChain = new CreateSourceChain(_request.Package);
-            _buildSourceChain.Build();
-
-
-            _initialize = new Initialize(new LaceResponse(), _request, _laceEvent, _buildSourceChain);
+            _buildSourceChain = new CreateSourceChain();
+            //_buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
+            //_buildSourceChain.Build();
+            _initialize = new Initialize(new Collection<IPointToLaceProvider>(),  _request, _command, _buildSourceChain);
         }
 
 
         public override void Observe()
         {
-            _initialize.Execute();
-            _laceResponses = _initialize.LaceResponses;
+            _initialize.Execute(ChainType.All);
+            _response = _initialize.DataProviderResponses;
         }
 
         [Observation]
-        public void lace_response_to_be_returned_should_be_one()
+        public void lace_response_to_be_returned_should_be_13()
         {
-            _laceResponses.Count.ShouldEqual(1);
+            _response.Count.ShouldEqual(13);
         }
-
 
         [Observation]
         public void lace_ivid_response_should_be_handled()
         {
-            _laceResponses[0].Response.IvidResponseHandled.Handled.ShouldEqual(true);
+            _response.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void lace_ivid_response_shuould_not_be_null()
         {
-            _laceResponses[0].Response.IvidResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void lave_ivid_response_request_should_have_valid_license_plate_response()
+        {
+            _response.OfType<IProvideDataFromIvid>().First().License.ShouldEqual("CL49CTGP");
         }
     }
 }

@@ -1,5 +1,10 @@
-﻿namespace DataPlatform.Shared.Identifiers
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace DataPlatform.Shared.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class SystemIdentifier
     {
         public SystemIdentifier()
@@ -16,12 +21,24 @@
             Server = server;
         }
 
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public ServerIdentifier Server { get; set; }
 
         public static SystemIdentifier CreateApi()
         {
             return new SystemIdentifier("API", ServerIdentifier.Create());
+        }
+
+        public static SystemIdentifier CreateLim()
+        {
+            return new SystemIdentifier("LIMM", ServerIdentifier.Create());
+        }
+
+        public static SystemIdentifier CreateWeb()
+        {
+            return new SystemIdentifier("WEB", ServerIdentifier.Create());
         }
 
         protected bool Equals(SystemIdentifier other)

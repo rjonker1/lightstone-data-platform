@@ -1,72 +1,39 @@
 ﻿using System;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
+using System.Collections.Generic;
+using System.Linq;
+using Lace.Test.Helper.Builders.Sources.Lightstone;
+using Lace.Toolbox.Database.Dtos;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-
-    public class FakeCarRepositioryFactory : ISetupCarRepository
+    public class FakeDataProviderRepository : IReadOnlyRepository
     {
-        public IReadOnlyCarRepository<CarInfo> CarInfoRepository()
+        public IEnumerable<TItem> GetAll<TItem>(Func<TItem, bool> predicate) where TItem : class
         {
-            return new FakeCarInfoRepository();
+            if (typeof (TItem) == (typeof (CarInformationDto)))
+                return new FakeCarInfoRepository().GetAll(predicate);
+
+            var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
+            return (IEnumerable<TItem>)data;
         }
 
-        public IReadOnlyCarRepository<CarInfo> Vin12CarInfoRepository()
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return new FakeVin12CarInfoRepository();
-        }
-    }
-
-    public class FakeRepositoryFactory : ISetupRepository
-    {
-        public IReadOnlyRepository<Band> BandRepository()
-        {
-           return new FakeBandsRepository();
+            var data = _data.FirstOrDefault(w => w.Key == typeof(TItem)).Value;
+            return (IEnumerable<TItem>)data;
         }
 
-        public IReadOnlyRepository<Car> CarRepository()
+        private readonly Dictionary<Type, IEnumerable<object>> _data = new Dictionary<Type, IEnumerable<object>>()
         {
-            return new FakeCarRepository();
-        }
-
-        public IReadOnlyRepository<CarType> CarTypeRepository()
-        {
-            return  new FakeCarTypeRepository();
-        }
-
-        public IReadOnlyRepository<CarVendor> CarVendorRepository()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IReadOnlyRepository<Make> MakeRepository()
-        {
-            return new FakeMakeRepository();
-        }
-
-        public IReadOnlyRepository<Metric> MetricRepository()
-        {
-            return new FakeMetricRepository();
-        }
-
-        public IReadOnlyRepository<Municipality> MuncipalityRepository()
-        {
-            return new FakeMunicipalityRepository();
-        }
-
-        public IReadOnlyRepository<Sale> SaleRepository()
-        {
-            return new FakeSaleRepository();
-        }
-
-        public IReadOnlyRepository<Statistic> StatisticRepository()
-        {
-            return new FakeStatisticsRepository();
-        }
+            {typeof(Band), BandsDataBuilder.ForAllBands()},
+            {typeof(Make), MakeDataBuilder.ForAllMakes()},
+            {typeof(Metric), MetricDataBuilder.ForAllMetrics()},
+            {typeof(Municipality), MuncipalityDataBuilder.ForAllMunicipalities()},
+            {typeof(Sale), SaleDataBuilder.ForCarSalesOnCarId_107483()},
+            {typeof(StatisticDto), StatisticsDataBuilder.ForCarId_107483()},
+            {typeof(CarInformationDto),Mothers.Sources.Lightstone.CarInfoData.CarInformation() }
+        };
     }
 }

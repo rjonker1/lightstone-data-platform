@@ -1,26 +1,46 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveAutoWeb", "Web\LiveAutoWeb\LiveAutoWeb.csproj", "{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveAuto.Web", "LiveAutoWeb\LiveAuto.Web\LiveAuto.Web.csproj", "{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveAuto.Api.Routes", "LiveAutoWeb\LiveAuto.Api.Routes\LiveAuto.Api.Routes.csproj", "{7E39582E-B42A-4FE9-9747-A87C700FE6E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D59271F5-1221-40AD-B174-832B4D3103FC}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Prod|Any CPU = Prod|Any CPU
 		Release|Any CPU = Release|Any CPU
 		TeamCity|Any CPU = TeamCity|Any CPU
 		Test|Any CPU = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
-		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
-		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Test|Any CPU.ActiveCfg = Test|Any CPU
-		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Test|Any CPU.Build.0 = Test|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Test|Any CPU.Build.0 = Test|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{7E39582E-B42A-4FE9-9747-A87C700FE6E4}.Test|Any CPU.Build.0 = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

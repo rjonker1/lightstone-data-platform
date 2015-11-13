@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Infrastructure.Core.Contracts
 {
     public interface IBootstrap
     {
-        IList<LaceExternalSourceResponse> LaceResponses { get; }
-        void Execute();
+        ICollection<IPointToLaceProvider> DataProviderResponses { get; }
+        void Execute(ChainType chain);
     }
 }

@@ -1,34 +1,23 @@
-﻿using DataPlatform.Shared.Entities;
+﻿using System;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Test.Helper.Fakes.RequestTypes;
 using Lace.Test.Helper.Mothers.Packages;
-using PackageBuilder.Domain.Entities;
-
 
 namespace Lace.Test.Helper.Builders.Requests
 {
     public class LicensePlateNumberIvidTitleHolderRequestPackage
     {
-        public static IPackage LicenseNumberPackage()
+        public static IHavePackageForRequest LicenseNumberPackage(string vinNumber)
         {
-            return new Package("License plate lookup package")
-            {
-                DataSets =
-                    new[]
+            return
+                new LicensePlateNumberPackage(
+                    new IAmDataProvider[]
                     {
-                        new DataSet("License plate lookup DataSet")
-                        {
-                            DataFields = new[]
-                            {
-
-                                new DataFieldBuilder().With("Vin").With(DataSourceMother.IvidTitleHolderDataSource).Build(),
-                                new DataFieldBuilder().With("BankName").With(DataSourceMother.IvidTitleHolderDataSource).Build(),
-                                new DataFieldBuilder().With("AccountNumber").With(DataSourceMother.IvidTitleHolderDataSource).Build(),
-                                new DataFieldBuilder().With("AccountOpenDate").With(DataSourceMother.IvidTitleHolderDataSource).Build(),
-                                new DataFieldBuilder().With("AccountClosedDate").With(DataSourceMother.IvidTitleHolderDataSource).Build()
-                            }
-                        }
+                        new DataProvider(DataProviderName.IVIDTitle_E_WS, 18, 36,
+                            IvidTitleHolderRequest.WithVin(vinNumber, "murrayw@lightstone.co.za", "Murray Woolfson"), new BillableState(DataProviderNoRecordState.Billable))
                     },
-                Action = ActionMother.LicensePlateSearchAction
-            };
+                    Guid.NewGuid());
         }
     }
 }

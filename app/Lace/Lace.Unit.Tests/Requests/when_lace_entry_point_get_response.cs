@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Test.Helper.Fakes.Lace.EntryPoint;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
@@ -12,32 +11,30 @@ namespace Lace.Unit.Tests.Requests
     public class when_lace_entry_point_get_response : Specification
     {
         private readonly IEntryPoint _entryPoint;
-        private readonly IProvideResponseFromLaceDataProviders _response;
-        private readonly ILaceRequest _request;
-        private IList<LaceExternalSourceResponse> _laceResponse;
+        private ICollection<IPointToLaceProvider> _response;
+        private readonly ICollection<IPointToLaceRequest> _request;
 
         public when_lace_entry_point_get_response()
         {
             _entryPoint = new FakeEntryPoint();
-            _request = new LicensePlateNumberSliverAllServicesRequest();
+            _request = new[] {new LicensePlateNumberAllDataProvidersRequest()};
         }
 
         public override void Observe()
         {
-            _laceResponse = _entryPoint.GetResponsesFromLace(_request);
+            _response = _entryPoint.GetResponses(_request);
         }
 
         [Observation]
         public void lace_entry_point_get_response_must_not_be_null()
         {
-            _laceResponse.ShouldNotBeNull();
+            _response.ShouldNotBeNull();
         }
 
         [Observation]
         public void lace_entry_point_get_response_must_be_availble()
         {
-            _laceResponse.Count.ShouldEqual(1);
+            _response.Count.ShouldEqual(8);
         }
-        
     }
 }

@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace DataPlatform.Shared.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class VersionIdentifier
     {
+        [DataMember]
         public long Number { get; set; }
+        [DataMember]
         public DateTime Date { get; set; }
 
         public VersionIdentifier()

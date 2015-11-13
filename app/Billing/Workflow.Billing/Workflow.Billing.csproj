@@ -31,23 +31,131 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
+    <OutputPath>bin\TeamCity\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EasyNetQ, Version=0.28.5.245, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.5.115\lib\net40\EasyNetQ.dll</HintPath>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1883\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1883\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1883\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1883\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1652\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1832\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Nancy, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nancy.1.2.0\lib\net40\Nancy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nancy.Authentication.Stateless">
+      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.23.0\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.XML" />
   </ItemGroup>
@@ -55,30 +163,116 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Consumers\BillTransactionConsumer.cs" />
-    <Compile Include="Consumers\SqlServerConnectionController.cs" />
-    <Compile Include="Domain\InvoiceTransaction.cs" />
-    <Compile Include="Domain\Transaction.cs" />
-    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Domain\Dtos\PackageDto.cs" />
+    <Compile Include="Domain\Dtos\PreBillingDto.cs" />
+    <Compile Include="Domain\Dtos\TransactionDto.cs" />
+    <Compile Include="Domain\Dtos\UserDto.cs" />
+    <Compile Include="Domain\Entities\AccountMeta.cs" />
+    <Compile Include="Domain\Entities\ArchiveBillingTransaction.cs" />
+    <Compile Include="Domain\Entities\AuditLog.cs" />
+    <Compile Include="Domain\Entities\BillingTransaction.cs" />
+    <Compile Include="Domain\Entities\Client.cs" />
+    <Compile Include="Domain\Entities\ContractMeta.cs" />
+    <Compile Include="Domain\Entities\Customer.cs" />
+    <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
+    <Compile Include="Domain\Entities\FinalBilling.cs" />
+    <Compile Include="Domain\Entities\PackageMeta.cs" />
+    <Compile Include="Domain\Entities\TransactionRequest.cs" />
+    <Compile Include="Domain\Entities\UserTransaction.cs" />
+    <Compile Include="Domain\Entities\Package.cs" />
+    <Compile Include="Domain\Entities\PreBilling.cs" />
+    <Compile Include="Domain\Entities\DataProvider.cs" />
+    <Compile Include="Domain\Entities\StageBilling.cs" />
+    <Compile Include="Domain\Entities\Transaction.cs" />
+    <Compile Include="Domain\Entities\User.cs" />
+    <Compile Include="Domain\Entities\UserMeta.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\Infrastructure\IPivotFinalBillingTransactions.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\Infrastructure\IReportBuilder.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\Infrastructure\ReportTemplateIdentifier.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\PivotFinalBillingTransactions.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\Infrastructure\ReportBuilder.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\IPivotBilling.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\Infrastructure\IPublishReportQueue.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\BillingReport.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\PivotFinalBilling.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\PivotStageBilling.cs" />
+    <Compile Include="Domain\Helpers\BillingRunHelpers\Infrastructure\ReportList.cs" />
+    <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
+    <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
+    <Compile Include="Domain\NotificationSender\EmailNotification.cs" />
+    <Compile Include="Domain\NotificationSender\ISendNotifications.cs" />
+    <Compile Include="Domain\Schedules\CacheSchedule.cs" />
+    <Compile Include="Domain\Schedules\CleanupSchedule.cs" />
+    <Compile Include="Helpers\Schedules\ISchedule.cs" />
+    <Compile Include="Helpers\Schedules\ICleanup.cs" />
+    <Compile Include="Domain\Schedules\MessageSchedule.cs" />
+    <Compile Include="Helpers\Schedules\TransactionRequestCleanup.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\AccountMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\ArchiveBillingMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionOverrideMapping.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\PreBillingMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\TransactionMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\UserCheck1MappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\UserMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ClientMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ContractMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\CustomerMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\FinalBIllingMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\FinalBillingUserDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\PackageMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\PackageMetaMaps.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\PreBIllingUserDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\StageBillingMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\StageBillingUserDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\UserMetaMaps.cs" />
+    <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
+    <Compile Include="Helpers\Schedules\CacheSchedule.cs" />
+    <Compile Include="Helpers\Schedules\EmailSchedule.cs" />
+    <Compile Include="Helpers\Schedules\MessageSchedule.cs" />
+    <Compile Include="Helpers\Schedules\SimpleMailMessage.cs" />
+    <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />
+    <Compile Include="Infrastructure\NHibernate\Conventions\DomainSignatureConvention.cs" />
+    <Compile Include="Infrastructure\NHibernate\Conventions\PrimaryKeyConvention.cs" />
+    <Compile Include="Installers\ApiClientInstaller.cs" />
+    <Compile Include="Installers\AutoMapperInstaller.cs" />
+    <Compile Include="Installers\BusInstaller.cs" />
+    <Compile Include="Installers\CacheProviderInstaller.cs" />
+    <Compile Include="Installers\NHibernateInstaller.cs" />
+    <Compile Include="Installers\NotificationInstaller.cs" />
+    <Compile Include="Installers\PivotInstaller.cs" />
+    <Compile Include="Installers\PublishReportQueueInstaller.cs" />
+    <Compile Include="Installers\ReportBuilderInstaller.cs" />
+    <Compile Include="Installers\RepositoryInstaller.cs" />
+    <Compile Include="Installers\ScheduleInstaller.cs" />
+    <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Repository\CacheProvider.cs" />
+    <Compile Include="Repository\ICacheProvider.cs" />
+    <Compile Include="Repository\ICacheRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
-    <Compile Include="Repository\Dapper.cs" />
-    <Compile Include="Repository\RepositoryMapper.cs" />
-    <Compile Include="Repository\TransactionTypeMapper.cs" />
-    <Compile Include="Repository\TypeMapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\NHibernate\MappingOverrides\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
-      <Project>{ea4e1ff1-8581-4680-aa28-126294163093}</Project>
+      <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>
       <Name>Workflow.Billing.Messages</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

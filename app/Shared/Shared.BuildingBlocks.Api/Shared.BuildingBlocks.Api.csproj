@@ -32,21 +32,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nancy, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
+      <HintPath>..\..\packages\Nancy.1.1\lib\net40\Nancy.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Authentication.Stateless">
       <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Nancy.Authentication.Token">
+      <HintPath>..\..\packages\Nancy.Authentication.Token.1.1\lib\net40\Nancy.Authentication.Token.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,19 +69,37 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ApiClient.cs" />
-    <Compile Include="SecureModule.cs" />
-    <Compile Include="Security\ApiUser.cs" />
+    <Compile Include="ApiClients\ApiClient.cs" />
+    <Compile Include="ApiClients\ApiClientBase.cs" />
+    <Compile Include="ApiClients\BillingApiClient.cs" />
+    <Compile Include="ApiClients\ReportApiClient.cs" />
+    <Compile Include="ExceptionHandling\ErrorHtmlPageResponse.cs" />
+    <Compile Include="ExceptionHandling\ErrorResponse.cs" />
+    <Compile Include="ExceptionHandling\ErrorStatusCodeHandler.cs" />
+    <Compile Include="ApiClients\PackageBuilderApiClient.cs" />
+    <Compile Include="Installers\AuthInstaller.cs" />
+    <Compile Include="Security\RootPathProvider.cs" />
+    <Compile Include="Security\Tokenizer.cs" />
+    <Compile Include="Security\SecureModule.cs" />
+    <Compile Include="ApiClients\UserIdentity.cs" />
     <Compile Include="CannedResponses.cs" />
     <Compile Include="Security\ContextExtensions.cs" />
     <Compile Include="Security\IAuthenticateUser.cs" />
     <Compile Include="RestSharpDataContractJsonDeserializer.cs" />
     <Compile Include="Security\PiplineExtensions.cs" />
-    <Compile Include="Security\TestAuthenticator.cs" />
-    <Compile Include="Security\TestNullAuthenticator.cs" />
-    <Compile Include="Security\UmApiAuthenticator.cs" />
+    <Compile Include="Security\UerManagementAuthenticator.cs" />
+    <Compile Include="ApiClients\UserAuthenticatorClient.cs" />
+    <Compile Include="ApiClients\UserManagementApiClient.cs" />
+    <Compile Include="Validation\IValidateRequestField.cs" />
+    <Compile Include="Validation\Types\EngineNumberValidation.cs" />
+    <Compile Include="Validation\Types\IdNumberValidation.cs" />
+    <Compile Include="Validation\Types\LicensePlateValidation.cs" />
+    <Compile Include="Validation\Types\RegistrationNumberValidation.cs" />
+    <Compile Include="Validation\Types\VinNumberValidation.cs" />
+    <Compile Include="Validation\ValidationManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +112,10 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExceptionHandling\Error.html" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

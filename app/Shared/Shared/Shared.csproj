@@ -11,6 +11,8 @@
     <AssemblyName>Lightstone.DataPlatform.Shared</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,8 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
@@ -40,49 +56,76 @@
     </Compile>
     <Compile Include="Dtos\Action.cs" />
     <Compile Include="Dtos\ApiMetaData.cs" />
+    <Compile Include="Dtos\ApiRequestDto.cs" />
+    <Compile Include="Dtos\ApiCommitRequestDto.cs" />
     <Compile Include="Dtos\Criteria.cs" />
     <Compile Include="Dtos\DataFieldDto.cs" />
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
-    <Compile Include="Entities\IAction.cs" />
-    <Compile Include="Entities\IContract.cs" />
-    <Compile Include="Entities\ICriteria.cs" />
-    <Compile Include="Entities\ICustomer.cs" />
-    <Compile Include="Entities\ICustomerContract.cs" />
-    <Compile Include="Entities\ICustomerUser.cs" />
-    <Compile Include="Entities\IDataField.cs" />
-    <Compile Include="Entities\IDataSet.cs" />
-    <Compile Include="Entities\IDataProvider.cs" />
+    <Compile Include="Dtos\RequestFieldDto.cs" />
+    <Compile Include="Dtos\RequestInfo\BaseRequestInfoDto.cs" />
+    <Compile Include="Dtos\RequestInfo\RequestInfoContractDto.cs" />
+    <Compile Include="Dtos\RequestInfo\RequestInfoCustomerDto.cs" />
+    <Compile Include="Dtos\RequestInfo\RequestInfoDto.cs" />
+    <Compile Include="Dtos\RequestInfo\RequestInfoPackageDto.cs" />
+    <Compile Include="Dtos\RequestInfo\RequestInfoRequestFieldDto.cs" />
     <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\IExpirable.cs" />
-    <Compile Include="Entities\IGroup.cs" />
-    <Compile Include="Entities\IGroupPermission.cs" />
     <Compile Include="Entities\INamedEntity.cs" />
-    <Compile Include="Entities\IPackage.cs" />
-    <Compile Include="Entities\IRole.cs" />
-    <Compile Include="Entities\IRolePermission.cs" />
-    <Compile Include="Entities\IUser.cs" />
-    <Compile Include="Entities\IUserGroup.cs" />
-    <Compile Include="Entities\IUserRole.cs" />
-    <Compile Include="Entities\IWorkflow.cs" />
-    <Compile Include="Entities\NamedEntity.cs" />
+    <Compile Include="Entities\IProvideType.cs" />
+    <Compile Include="Enums\DataProviderAction.cs" />
+    <Compile Include="Enums\DataProviderCommandSource.cs" />
+    <Compile Include="Enums\DataProviderName.cs" />
+    <Compile Include="Enums\DataProviderNoRecordState.cs" />
+    <Compile Include="Enums\DataProviderResponseState.cs" />
+    <Compile Include="Enums\DeviceTypes.cs" />
+    <Compile Include="Enums\MonitoringSource.cs" />
+    <Compile Include="Enums\PackageEventType.cs" />
+    <Compile Include="Enums\RoleType.cs" />
+    <Compile Include="Enums\SystemType.cs" />
+    <Compile Include="Enums\CommitRequestState.cs" />
+    <Compile Include="ExceptionHandling\Guard.cs" />
+    <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
+    <Compile Include="Helpers\Builders\PredicateBuilder.cs" />
     <Compile Include="Helpers\DynamicTypeCreator.cs" />
+    <Compile Include="Helpers\Builders\LinqList.cs" />
+    <Compile Include="Helpers\Extensions\LoggingExtensions.cs" />
     <Compile Include="Helpers\Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\Json\JsonConcreteTypeConverter.cs" />
+    <Compile Include="Helpers\Json\JsonTypeResolverConverter.cs" />
+    <Compile Include="Helpers\PagedList.cs" />
     <Compile Include="Helpers\SystemTime.cs" />
+    <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Identifiers\AccountIdentifier.cs" />
+    <Compile Include="Identifiers\ContractIdentifier.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />
+    <Compile Include="Identifiers\ResponseStateIndentifier.cs" />
     <Compile Include="Identifiers\ServerIdentifier.cs" />
+    <Compile Include="Identifiers\StateIdentifier.cs" />
     <Compile Include="Identifiers\SystemIdentifier.cs" />
     <Compile Include="Identifiers\UserIdentifier.cs" />
     <Compile Include="Identifiers\VersionIdentifier.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Messaging\IPublishableMessage.cs" />
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />
+    <Compile Include="Repositories\INamedEntityRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="RabbitMQ\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,0 +1,36 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+	font-family : "Courier New", Courier, monospace;
+	font-size : 12pt;
+	margin : 0px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 40px;
+    font-weight: normal;
+    text-transform: lowercase; 
+    margin: 20px 0 10px 4px;
+}
+    h1 span {
+        font-size: 15px;
+        display: block;
+        padding-left: 1px;
+        text-transform: lowercase;
+    }
+header {
+    padding-left: 5px;
+}
+
+header ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    text-transform: lowercase;
+    font-weight: bold;
+    color: #000000;
+}

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+using System.Collections.ObjectModel;
+using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
-using Lace.Test.Helper.Fakes.Bus;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Fakes.Lace.Builder;
-using Workflow;
 
 namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 {
@@ -15,32 +15,35 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private IBuildSourceChain _buildSourceChain;
-        private ILaceEvent _laceEvent;
+        private readonly IAdvancedBus _bus;
         private IBootstrap _bootstrap;
-
-        private readonly IPublishMessages _publisher;
 
         public FakeEntryPoint()
         {
-
-            var bus = new FakeBus();
-            _publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _bus = BusFactory.WorkflowBus();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
-        public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
+        public ICollection<IPointToLaceProvider> GetResponses(ICollection<IPointToLaceRequest> request)
         {
-            _laceEvent = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
+            _buildSourceChain = new FakeSourceChain();
+            if (_checkForDuplicateRequests.IsRequestDuplicated(request.First())) return null;
 
-            _buildSourceChain = new FakeSourceChain(request.Package.Action);
-            _buildSourceChain.Build();
+            _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _buildSourceChain);
+            _bootstrap.Execute(ChainType.All);
 
-            if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return null;
+            return _bootstrap.DataProviderResponses;
+        }
 
-            _bootstrap = new Initialize(new LaceResponse(), request, _laceEvent, _buildSourceChain);
-            _bootstrap.Execute();
+        public ICollection<IPointToLaceProvider> GetResponsesForCarId(ICollection<IPointToLaceRequest> request)
+        {
+            _buildSourceChain = new FakeSourceChain();
+            if (_checkForDuplicateRequests.IsRequestDuplicated(request.First())) return null;
 
-            return _bootstrap.LaceResponses;
+            _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _buildSourceChain);
+            _bootstrap.Execute(ChainType.CarId);
+
+            return _bootstrap.DataProviderResponses;
         }
     }
 }

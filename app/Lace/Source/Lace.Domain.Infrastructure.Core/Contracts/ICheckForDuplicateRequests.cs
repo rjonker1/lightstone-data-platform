@@ -1,9 +1,9 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
+﻿using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Domain.Infrastructure.Core.Contracts
 {
     public interface ICheckForDuplicateRequests
     {
-        bool IsRequestDuplicated(ILaceRequest request);
+        bool IsRequestDuplicated(IPointToLaceRequest request);
     }
 }

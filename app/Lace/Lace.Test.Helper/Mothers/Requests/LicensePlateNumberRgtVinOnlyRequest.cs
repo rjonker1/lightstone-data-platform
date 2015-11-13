@@ -1,79 +1,40 @@
 ﻿using System;
-using DataPlatform.Shared.Entities;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberRgtVinOnlyRequest : ILaceRequest
+    public class LicensePlateNumberRgtVinOnlyRequest : IPointToLaceRequest
     {
-
-        public IProvideUserInformationForRequest User
+        public IHaveUser User
         {
-            get
-            {
-                return new RequestUserInformation();
-            }
+            get { return new RequestUserInformation(); }
         }
 
-        public IProvideContextForRequest Context
-        {
-            get
-            {
-                return new ContextInformation();
-            }
-        }
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
+        //}
 
-        public IProvideVehicleInformationForRequest Vehicle
+        public IHaveRequestContext Request
         {
-            get
-            {
-                return new RequestVehicleInformation();
-            }
-        }
-
-        public IProvideRequestAggregation RequestAggregation
-        {
-            get
-            {
-                return new AggregationInformation();
-            }
-        }
-
-        public IProvideCoOrdinateInformationForRequest CoOrdinates
-        {
-            get { return new CoOrdinateInformation(); }
-        }
-
-        public IProvideJisInformation Jis
-        {
-            get { return new RequestJisInformation(); }
+            get { return new RequestContextInformation(); }
         }
 
         public DateTime RequestDate
         {
-            get
-            {
-                return DateTime.Now;
-            }
+            get { return DateTime.Now; }
         }
 
-        public string SearchTerm
+        public IHavePackageForRequest Package
         {
-            get
-            {
-                return "XMC167GP";
-            }
+            get { return LicensePlateNumberRgtVinRequestPackage.VinNumberPackage("W0LPC6EC8DG072314"); } // 3C4PDCKG7DT526617  //return LicensePlateNumberRgtVinRequestPackage.LicenseNumberPackage("W0LPC6EC8DG072314");
         }
 
-        public IPackage Package
+        public IHaveContract Contract
         {
-            get
-            {
-                return LicensePlateNumberRgtVinRequestPackage.LicenseNumberPackage();
-            }
-           
+            get { return new RequestContractInformation();}
         }
     }
 }

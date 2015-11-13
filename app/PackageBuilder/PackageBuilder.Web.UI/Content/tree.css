@@ -7,7 +7,7 @@
     /*background: #f8faff;*/
     border: 1px solid #dae2ea;
     color: #7c9eb2;
-    padding: 10px 10px;
+    padding: 10px 14px;
 }
 
 .angular-ui-tree-handle:hover {
@@ -29,4 +29,12 @@
     /*background-color: #687074 !important;*/
     background-color: #1171a3 !important;
     color: #FFF !important;
+}
+
+.toggled-child-selected {
+    background-color: #666 !important;
+}
+
+.toggled-child-rest {
+    background-color: #666 !important;
 }

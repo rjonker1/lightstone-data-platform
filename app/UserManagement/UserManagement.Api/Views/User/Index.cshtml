@@ -1,0 +1,144 @@
+﻿@using UserManagement.Api.ViewModels
+
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Users", ""))
+
+<div class="box">
+
+    <div class="box-header"></div>
+    <table id="table"></table>
+
+</div>
+<script>
+
+    $('#table').bootstrapTable({
+        url: '/Users',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'userName',
+                title: 'Username',
+                sortable: true
+            }, {
+                field: 'individualName',
+                title: 'First Name'
+            }, {
+                field: 'individualSurname',
+                title: 'Last Name',
+                sortable: true
+            }, {
+                field: 'userType',
+                title: 'User Type',
+                sortable: true
+                //formatter: userFormatter
+            }, {
+                field: 'roleValues',
+                title: 'Roles',
+                sortable: true
+                //formatter: roleFormatter
+            }, {
+                field: 'customers',
+                title: 'Customers',
+                formatter: customerClientFormatter
+            }
+            //, {
+            //    field: 'clients',
+            //    title: 'Clients',
+            //    formatter: customerClientFormatter
+            //}
+            , {
+                field: '',
+                title: '',
+                formatter: gridActionFormatter
+
+            }]
+    });
+
+    //function userFormatter(value, row, index) {
+
+    //    var state = "";
+
+    //    $.ajax({
+    //        async: false,
+    //        type: 'GET',
+    //        url: '/ValueEntities/Lookup/' + row.userTypeId,
+    //        success: function (response) {
+    //            //callback
+
+    //            state = response.data.value;
+    //        }
+    //    });
+
+    //    return state;
+    //}
+
+    //function roleFormatter(value, row, index) {
+
+    //    var role = "";
+
+    //    console.log(value);
+
+    //    //$.ajax({
+    //    //    async: false,
+    //    //    type: 'GET',
+    //    //    url: '/ValueEntities/Lookup/' + row.roleIds[0],
+    //    //    success: function (response) {
+    //    //        //callback
+
+    //    //        state = response.data.value;
+    //    //    }
+    //    //});
+
+    //    return value;
+    //}
+
+    function customerClientFormatter(value, row, index) {
+        console.log(value);
+        var stringBuilder = "";
+        if (value) {
+
+            var count = value.length;
+
+            for (customerObj in value) {
+
+                stringBuilder += value[customerObj].name;
+                count--;
+
+                if (count > 0) stringBuilder += ", ";
+            }
+        } else {
+            stringBuilder += "~";
+        }
+
+        return stringBuilder;
+    }
+
+    function gridActionFormatter(value, row, index) {
+
+        var lockUnlock = '<a class="btn btn-warning entity-lock" href="#/Users/Lock/' + row.id + '">Lock</a>';
+
+        if (row.isLocked == true) lockUnlock = '<a class="btn btn-success entity-lock" href="#/Users/UnLock/' + row.id + '">UnLock</a>';
+
+        return [
+            '<div class="row" style="width: 240px;">' +
+                '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '">Edit</a></div>' +
+                '<div class="col-md-1" />' +
+                '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '">Delete</a></div>' +
+                '<div class="col-md-2" />' +
+                '<div id="indexLock" class="col-md-1">' + lockUnlock + '</div>' +
+            '</div>'
+        ].join('');
+    };
+
+    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Users/Add", text: "Add" }).appendTo($("div.box-header"));
+
+    UserManagement.overrideDataTablesStyling();
+</script>

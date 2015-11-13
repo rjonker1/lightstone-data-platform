@@ -18,43 +18,29 @@
         var logSuccess = getLogFn(controllerId, 'success');
 
         $scope.data = [];
-        $scope.notify = function(row) {
-            //$location.path('/data-source-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
-        };
-        
-        $scope.selectedDatasource = [];
+      
         $scope.colDefs = [
-                { headerCellTemplate: 'app/industries/headerTemplate.html', field: 'name', displayName: 'Name', filter: { term: '' } }
+                { name: 'name', enableCellEdit: true }
         ];
         $scope.gridOptions = {
             data: 'data',
-            selectedItems: $scope.selectedDatasource,
             multiSelect: false,
-            enableFiltering: true,
-            showFilter: true,
-            showGroupPanel: true,
-            enableCellEditOnFocus: true,
-            enableCellSelection: true,
             columnDefs: $scope.colDefs
         };
 
-        $scope.$on('ngGridEventEndCellEdit', function(evt) {
-            var entity = evt.targetScope.row.entity;
-            updateIndustry(entity.id, entity.name);
-        });
-        
-        $scope.showIndustryAddInput = function () {
-            var $industry = $('#industry_add');
-            $industry.attr('ng-show', true);
-            $industry.removeClass('ng-hide');
-            $industry.addClass('ng-show');
+        $scope.gridOptions.onRegisterApi = function (gridApi) {
+            //set gridApi on scope
+            $scope.gridApi = gridApi;
+            gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+                updateIndustry(rowEntity.id, newValue);
+                console.log('edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue);
+                $scope.$apply();
+            });
         };
 
-        function hideIndustryAddInput() {
+        function clearNewIndustry() {
             var $industry = $('#industry_add');
-            $industry.attr('ng-show', false);
-            $industry.removeClass('ng-show');
-            $industry.addClass('ng-hide');
+            $industry.val('');
         }
 
         activate();
@@ -70,25 +56,27 @@
                         $scope.data = successCallback;
                         logSuccess("Industries retrieved");
                 }, function(errorCallback) {
-                        logError(errorCallback.response);
+                        logError(errorCallback.data.errorMessage);
                 });
         }
-
-        $scope.addIndustry = function(row, $event) {
+            
+            $scope.addIndustry = function() {
             var $industry = $('#industry_add');
             var name = $industry.val();
             if (name.length === 0) {
-                hideIndustryAddInput();
+                clearNewIndustry();
                 return;
             }
-                
+
             return industryRepository.addIndustry(name).then(
-                   function(successCallback) {
-                        hideIndustryAddInput();
-                        getIndustries();
-                        logSuccess(successCallback.response);
+                function(successCallback) {
+                    clearNewIndustry();
+                    getIndustries();
+                    logSuccess(successCallback.response);
                 }, function(errorCallback) {
-                        logError(errorCallback);
+                    logError(errorCallback.data.errorMessage);
+                    console.log(errorCallback.data.errorMessage);
+
                 });
         };
 
@@ -98,7 +86,7 @@
                         getIndustries();
                         logSuccess(successCallback.response);
                 }, function(errorCallback) {
-                        logError(errorCallback.response);
+                    logError(errorCallback.data.errorMessage);
                 });
         }
     }

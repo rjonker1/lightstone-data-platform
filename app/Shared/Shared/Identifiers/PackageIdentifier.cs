@@ -1,21 +1,32 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace DataPlatform.Shared.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class PackageIdentifier
     {
         public PackageIdentifier()
         {
         }
 
-        public PackageIdentifier(Guid id, VersionIdentifier version)
+        public PackageIdentifier(Guid id, VersionIdentifier version, double packageCostPrice, double packageRecommendedPrice)
         {
             Id = id;
             Version = version;
+            PackageCostPrice = packageCostPrice;
+            PackageRecommendedPrice = packageRecommendedPrice;
         }
 
+        [DataMember]
         public Guid Id { get; set; }
+        [DataMember]
         public VersionIdentifier Version { get; set; }
+        [DataMember]
+        public double PackageCostPrice { get; set; }
+        [DataMember]
+        public double PackageRecommendedPrice { get; set; }
 
         protected bool Equals(PackageIdentifier other)
         {

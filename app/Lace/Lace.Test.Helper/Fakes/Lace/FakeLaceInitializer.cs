@@ -1,42 +1,37 @@
 ﻿using System.Collections.Generic;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 
 namespace Lace.Test.Helper.Fakes.Lace
 {
-    public class FakeLaceInitializer: IBootstrap
+    public class FakeLaceInitializer : IBootstrap
     {
-        public IList<LaceExternalSourceResponse> LaceResponses { get; private set; }
-
-        private readonly ILaceRequest _request;
-
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceRequest> _request;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
-        private readonly ILaceEvent _laceEvent;
+        private readonly IAdvancedBus _bus;
 
-        public FakeLaceInitializer(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ILaceEvent laceEvent,
+        public FakeLaceInitializer(ICollection<IPointToLaceProvider> response, ICollection<IPointToLaceRequest> request, IAdvancedBus bus,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;
-            _laceEvent = laceEvent;
-            _response = response;
+            _bus = bus;
+            DataProviderResponses = response;
             _buildSourceChain = buildSourceChain;
         }
 
-        public void Execute()
+        public ICollection<Domain.Core.Contracts.Requests.IPointToLaceProvider> DataProviderResponses { get;
+            private set; }
+
+
+        public void Execute(ChainType chain)
         {
-            _buildSourceChain.SourceChain(_request, _laceEvent, _response);
-
-            LaceResponses = new List<LaceExternalSourceResponse>()
-            {
-                new LaceExternalSourceResponse() {Response = _response}
-            };
-
+            _buildSourceChain.Build(chain)(_request, _bus, DataProviderResponses,
+                _request.First().Request.RequestId);
         }
     }
 }

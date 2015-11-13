@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Toolbox.Database.Models;
 
 namespace Lace.Test.Helper.Builders.Sources.Lightstone
 {

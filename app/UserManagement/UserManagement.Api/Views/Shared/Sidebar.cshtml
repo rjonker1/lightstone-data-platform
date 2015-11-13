@@ -1,0 +1,50 @@
+﻿@using UserManagement.Domain.Entities
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#/AuditLogs"><i class="fa fa-fw fa-dashboard"></i> Audit Logs</a>
+            </li>
+            <li>
+                <a href="#/Customers"><i class="fa fa-truck"></i> Customers</a>
+            </li>
+            <li>
+                <a href="#/Clients"><i class="fa fa-sitemap"></i> Clients</a>
+            </li>
+            <li>
+                <a href="#/Users"><i class="fa fa-users"></i> Users</a>
+            </li>
+            <li>
+                <a href="#/Contracts"><i class="fa fa-file-text-o"></i> Contracts</a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-folder"></i> <span>Lookups</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#/ValueEntities/@typeof(CommercialState).AssemblyQualifiedName"><i class="fa fa-fw fa-table"></i> Commercial States</a>
+                    </li>
+                    <li>
+                        <a href="#/ValueEntities/@typeof(ContractType).AssemblyQualifiedName"><i class="fa fa-fw fa-edit"></i> Contract Types</a>
+                    </li>
+                    <li>
+                        <a href="#/ValueEntities/@typeof(Country).AssemblyQualifiedName"><i class="fa fa-fw fa-wrench"></i> Countries</a>
+                    </li>
+                    <li>
+                        <a href="#/ValueEntities/@typeof(Province).AssemblyQualifiedName"><i class="fa fa-fw fa-arrows-v"></i> Provinces</a>
+                    </li>
+                    <li>
+                        <a href="#/ValueEntities/@typeof(Role).AssemblyQualifiedName"><i class="fa fa-fw fa-dashboard"></i> Roles</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/cia"><i class="glyphicon glyphicon-arrow-left"></i> Back to CIA</a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

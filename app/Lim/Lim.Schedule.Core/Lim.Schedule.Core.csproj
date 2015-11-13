@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C2001D8A-5CC6-459C-B8FD-3DC87399F1EE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lim.Schedule.Core</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lim.Schedule.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
+    <OutputPath>bin\TeamCity\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net1211, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Audits\IAuditIntegration.cs" />
+    <Compile Include="Commands\ApiInitializeCommands.cs" />
+    <Compile Include="Commands\AuditIntegration.cs" />
+    <Compile Include="Commands\ApiCommands.cs" />
+    <Compile Include="Commands\FetchConfiguration.cs" />
+    <Compile Include="Commands\FlatFileCommands.cs" />
+    <Compile Include="Commands\FlatFileInitialize.cs" />
+    <Compile Include="Commands\TrackIntegration.cs" />
+    <Compile Include="Factories\Api\ClientFetchPullFactory.cs" />
+    <Compile Include="Factories\Api\ClientFetchPushFactory.cs" />
+    <Compile Include="Factories\Api\CustomFetchPullFactory.cs" />
+    <Compile Include="Factories\Api\CustomFetchPushFactory.cs" />
+    <Compile Include="Factories\Api\FetchPullFactory.cs" />
+    <Compile Include="Factories\Api\FetchPushFactory.cs" />
+    <Compile Include="Factories\Api\InitializePushFactory.cs" />
+    <Compile Include="Factories\Api\PushFactory.cs" />
+    <Compile Include="Factories\FlatFile\FetchFactory.cs" />
+    <Compile Include="Factories\FlatFile\PullFactory.cs" />
+    <Compile Include="Factories\FlatFile\PushFactory.cs" />
+    <Compile Include="Factories\FlatFile\InitializePullFactory.cs" />
+    <Compile Include="Handlers\HandleExecutingApiConfiguration.cs" />
+    <Compile Include="Handlers\HandleExecutingFlatFileConfiguration.cs" />
+    <Compile Include="Handlers\HandleFetchingApiPullConfiguration.cs" />
+    <Compile Include="Handlers\HandleFetchingApiPushConfiguration.cs" />
+    <Compile Include="Handlers\HandleFetchingFlatFilePullConfiguration.cs" />
+    <Compile Include="Identifiers\ApiAuthenticationIdentifier.cs" />
+    <Compile Include="Identifiers\ApiAuthenticationTypeIdentifier.cs" />
+    <Compile Include="Identifiers\ApiConfigurationIdentifier.cs" />
+    <Compile Include="Identifiers\ApiIdentifiers.cs" />
+    <Compile Include="Identifiers\ApiPullIntegration.cs" />
+    <Compile Include="Identifiers\ClientIdentifier.cs" />
+    <Compile Include="Identifiers\DirectoryWatcherIndentifier.cs" />
+    <Compile Include="Identifiers\FlatFileIndentifier.cs" />
+    <Compile Include="Identifiers\FlatFilePullIntegration.cs" />
+    <Compile Include="Identifiers\ActionIdentifier.cs" />
+    <Compile Include="Identifiers\IntegrationClientIdentifier.cs" />
+    <Compile Include="Identifiers\FrequencyIdentifier.cs" />
+    <Compile Include="Identifiers\IntegrationPackageIdentifier.cs" />
+    <Compile Include="Identifiers\PullClientIdentifier.cs" />
+    <Compile Include="Identifiers\IntegrationTypeIdentifier.cs" />
+    <None Include="app.config" />
+    <Compile Include="IHandleConfigurationExecution.cs" />
+    <Compile Include="IHandleFetchingConfiguration.cs" />
+    <Compile Include="Tracking\ITrackIntegration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Configurations\BMW.Entities\Toolbox.Bmw.Entities.csproj">
+      <Project>{ac7a58b5-bc2a-40dc-8b8f-ffc6d3d51775}</Project>
+      <Name>Toolbox.Bmw.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Configurations\BMW\Toolbox.Bmw.csproj">
+      <Project>{9ce35e56-55a7-4c15-82ad-1ed6ec631945}</Project>
+      <Name>Toolbox.Bmw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
+      <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
+      <Name>Lim.Domain.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
+      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
+      <Name>Lim.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
+      <Project>{0d4e5018-6f0d-42a3-8962-0bb05ffc136c}</Project>
+      <Name>Lim.Pull</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Push\Lim.Push.csproj">
+      <Project>{d7b63a79-2bc8-4bb2-9510-322c8b5d9efa}</Project>
+      <Name>Lim.Push</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Toolbox.Emailing\Toolbox.Emailing.csproj">
+      <Project>{73f1dc06-bfa6-446b-b77f-296bf526dd16}</Project>
+      <Name>Toolbox.Emailing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

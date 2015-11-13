@@ -1,0 +1,32 @@
+﻿@using System
+@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ValueEntityDto>
+@{
+    var isCreate = Model.Id == new Guid();
+    var pageHeadingViewModel = new HeaderViewModel("Lookups detail", isCreate ? "Create" : "Update");
+    var method = isCreate ? "POST" : "PUT";
+    var url = isCreate ? "/ValueEntities" : "/ValueEntities/" + Model.Id;
+}
+@Html.Partial("Shared/PageHeader", pageHeadingViewModel)
+
+<div class="box dark">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Lookup Info", "", "fa fa-edit", Model))
+    <form action="@url" method="@method" class="form-horizontal">
+        <div class="box-body">
+            <div class="form-group">
+                @Html.HiddenFor(x => x.AssemblyQualifiedName)
+                @Html.LabelFor(x => x.Value, new { @class = "control-label col-lg-4" })
+                <div class="col-lg-3">
+                    @Html.TextBoxFor(x => x.Value, new { @class = "form-control", placeholder = "" })
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.Value)
+                </div>
+            </div>
+        </div>
+        @Html.Partial("Shared/BoxFooter")
+    </form>
+</div>
+

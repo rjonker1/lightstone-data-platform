@@ -1,37 +1,19 @@
-﻿using DataPlatform.Shared.Entities;
+﻿using System;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Test.Helper.Fakes.RequestTypes;
 using Lace.Test.Helper.Mothers.Packages;
-using PackageBuilder.Domain.Entities;
-
 
 namespace Lace.Test.Helper.Builders.Requests
 {
     public class LicensePlateNumberAudatexRequestPackage
     {
-        public static IPackage LicenseNumberPackage()
+        public static IHavePackageForRequest LicenseNumberPackage()
         {
-            return new Package("License plate lookup package")
-            {
-                DataSets =
-                    new[]
-                    {
-                        new DataSet("License plate lookup DataSet")
-                        {
-                            DataFields = new[]
-                            {
-                                new DataFieldBuilder().With("Registration").With(DataSourceMother.AudatexSource).Build(),
-                                new DataFieldBuilder().With("Vin").With(DataSourceMother.AudatexSource).Build(),
-                                new DataFieldBuilder().With("Engine").With(DataSourceMother.AudatexSource).Build(),
-                                new DataFieldBuilder().With("AccidentClaim").With(DataSourceMother.AudatexSource).Build()
 
-                                //new DataField("Registration") {DataSource = new RegistrationFieldSource(), Type = typeof(string).ToString()},
-                                //new DataField("Vin") {DataSource = new VinFieldSource(), Type = typeof(string).ToString()},
-                                //new DataField("Engine") {DataSource = new EngineFieldSource(), Type = typeof(string).ToString()},
-                                //new DataField("AccidentClaim") {DataSource = new AccidentClaimSource(), Type = typeof(string).ToString()}
-                            }
-                        }
-                    },
-                Action = ActionMother.LicensePlateSearchAction
-            };
+            return
+                new LicensePlateNumberPackage(
+                    new IAmDataProvider[] { new DataProvider(DataProviderName.Audatex, 16, 32.1M, new AudatexRequestTypes(), new BillableState(DataProviderNoRecordState.Billable)) }, Guid.NewGuid());
         }
     }
 }

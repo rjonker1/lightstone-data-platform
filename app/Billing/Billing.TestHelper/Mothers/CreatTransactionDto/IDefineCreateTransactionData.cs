@@ -7,5 +7,7 @@ namespace Billing.TestHelper.Mothers.CreatTransactionDto
     {
         TransactionContext Context { get; }
         PackageIdentifier Package { get; }
+        ContractIdentifier Contract { get; }
+        AccountIdentifier Account { get; }
     }
 }

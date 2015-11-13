@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
@@ -76,7 +76,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
 
             torqueGauge.MaxValue.ShouldEqual(320.0);
             torqueGauge.MinValue.ShouldEqual(108.0);
-            torqueGauge.Quarter.ShouldEqual(4.0);
+            torqueGauge.Quarter.ShouldEqual(3.0);
             torqueGauge.Value.ShouldEqual(157.0);
         }
 
@@ -86,7 +86,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             var c02Gauge = _metric.MetricResult.FirstOrDefault(w => w.GaugeName == "CO2");
             c02Gauge.ShouldNotBeNull();
 
-            c02Gauge.MaxValue.ShouldEqual(117.0);
+            c02Gauge.MaxValue.ShouldEqual(114.0);
             c02Gauge.MinValue.ShouldEqual(194.0);
             c02Gauge.Quarter.ShouldEqual(2.0);
             c02Gauge.Value.ShouldEqual(166.0);

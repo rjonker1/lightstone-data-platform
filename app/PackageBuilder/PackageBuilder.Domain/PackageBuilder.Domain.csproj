@@ -40,19 +40,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentNHibernate">
-      <HintPath>..\..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="MemBus">
       <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
@@ -62,40 +69,92 @@
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Abstractions">
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Abstractions.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1817\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1817\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.1817\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MemBus, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore">
+      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PackageBuilder.Domain.Entities.Enums">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.1628\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CommandHandlers\DataImports\ImportStartupDataHandler.cs" />
+    <Compile Include="CommandHandlers\DataProviders\AmendDataProviderStructureHandler.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\IvidTitleHolderResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\MMCodeResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\RgtResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\RgtVinResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Vin12Response.cs" />
+    <Compile Include="CommandHandlers\Industries\ImportIndustryHandler.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\AudatexResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\BmwFinanceResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\DataProviderResponseRepository.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\FakeDataProviderResponseRepository.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\IvidResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneAutoResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneBusinessResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneConsumerSpecificationsResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneDirectorResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LightstonePropertyResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\PCubedEzScoreResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\PCubedFicaVerficationResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\SignioDriversLicenseDecryptionResponse.cs" />
+    <Compile Include="CommandHandlers\PublishStorableCommands.cs" />
+    <Compile Include="CommandHandlers\CommandStore\ReplayCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CommandStore\StoreCommandHandler.cs" />
+    <Compile Include="CommandHandlers\DataProviders\ImportDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\CreateDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\UpdateDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\Industries\RenameIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Industries\CreateIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
+    <Compile Include="CommandHandlers\Packages\DeletePackageHandler.cs" />
+    <Compile Include="CommandHandlers\Packages\UpdatePackageHandler.cs" />
+    <Compile Include="CommandHandlers\Requests\CreateRequestAuditHandler.cs" />
+    <Compile Include="CommandHandlers\States\CreateStateHandler.cs" />
+    <Compile Include="CommandHandlers\States\ImportStateHandler.cs" />
+    <Compile Include="CommandHandlers\States\RenameStateHandler.cs" />
     <Compile Include="EventHandlers\DataProviders\DataProviderCreatedHandler.cs" />
     <Compile Include="EventHandlers\DataProviders\DataProviderUpdatedHandler.cs" />
     <Compile Include="EventHandlers\Packages\PackageCreatedHandler.cs" />
     <Compile Include="EventHandlers\Packages\PackageUpdatedHandler.cs" />
-    <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
-    <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
-    <Compile Include="PackageLookup.cs" />
+    <Compile Include="Helpers\DataFieldEqualityComparer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
@@ -108,13 +167,26 @@
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Core.Contracts\PackageBuilder.Domain.Core.Contracts.csproj">
+      <Project>{361D1B44-9C69-4FBC-8FFA-184909E28D19}</Project>
+      <Name>PackageBuilder.Domain.Core.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
+      <Project>{15EA3113-E3A9-4BAA-8746-A92973E7D3C0}</Project>
+      <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
       <Name>PackageBuilder.Domain.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Infrastructure\PackageBuilder.Infrastructure.csproj">
+      <Project>{622131d3-b807-49a9-a41e-5309d3e14a37}</Project>
+      <Name>PackageBuilder.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

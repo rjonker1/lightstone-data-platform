@@ -1,10 +1,10 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
+﻿using Lace.Toolbox.Database.Base;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestCarInformationForCarHavingId107483ButNoVin : IProvideCarInformationForRequest
+    public class RequestCarInformationForCarHavingId107483ButNoVin : IHaveCarInformation
     {
-        public int? CarId
+        public int CarId
         {
             get
             {
@@ -52,7 +52,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             }
         }
 
-        public int? Year
+        public int Year
         {
             get
             {
@@ -76,11 +76,22 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             }
 
         }
-
-
-        public void SetCarModelYear(int? carId, string model, int? year)
+        public void SetCarModelYearMake(int? carId, string model, int? year, int makeId)
         {
-            throw new System.NotImplementedException();
+            //CarId = carId.HasValue ? carId.Value : 0;
+            //Model = model;
+            //Year = year.HasValue ? year.Value : 0;
+            //MakeId = makeId;
+        }
+
+        public bool HasValidCarIdAndYear()
+        {
+            return CarId > 0 && Year > 0;
+        }
+
+        public bool HasValidCarId()
+        {
+            return CarId > 0;
         }
     }
 }

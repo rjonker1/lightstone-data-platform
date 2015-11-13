@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Fluency;
+﻿using Shared.Fluency;
 
-namespace BuildingBlocks.Extentions
+namespace Shared.Extentions
 {
     public static class IntegerExtentions
     {

@@ -19,8 +19,8 @@ require 'fileutils'
 		:executable => '../tools/nuget/nuget.exe',
 	},
 	:octupus => {
-  		:server => 'http://dev.octopus/api',
-  		:apiKey => 'API-ONI3VWBDTIWUFPOJOJIOMOC7AZA'
+  		:server => 'http://dev.lsa.octopus/api',
++  		:apiKey => 'API-RC2X3OCLSRMQKYRCWENMLLT7FU'
  	}
 }
 
@@ -205,7 +205,7 @@ end
 
 # PACKAGE #
 namespace :package do
-	task :default => [:specs, :pack, :zip] do
+	task :default => [:specs, :pack] do
 	end
 
 	task :specs => ['convention:spec_generation'] do
@@ -259,33 +259,6 @@ namespace :package do
 			cmd.execute
 		end
 	end
-
-	task :zip do
-		puts "#{(@settings.Configs).length} apps to zip found"
-
-		@settings.Configs.each do |c|
-			folder = "../#{c.folder}"
-			spec_file = "#{c.name}.#{get_version()}.nuspec"
-			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
-			base_path = File.join(folder, 'bin/release')
-
-			if !File.exists?(base_path)
-				base_path = folder
-			end
-			puts "Zipping '#{folder}' as '#{c.name}.zip' to '#{@config[:artifact_folder]}'"
-
-			zip = ZipDirectory.new
-
-			if File.directory?(@config[:artifact_folder])
-				zip.directories_to_zip = folder
-				zip.output_file = "#{c.name}.zip"
-				zip.output_path = @config[:artifact_folder]
-				zip.execute
-			end
-
-			zip = nil
-		end
-	end
 end
 
 # DEPLOY #
@@ -296,26 +269,26 @@ namespace :deploy do
 				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
 				cmd = Exec.new
 				cmd.command = '../tools/octopus/Octo.exe'
-				cmd.parameters = 'create-release --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.deployment_project + ' --apiKey=' + @config[:octupus][:apiKey]
+				cmd.parameters = 'create-release --ignoreexisting --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.deployment_project + ' --apiKey=' + @config[:octupus][:apiKey]
 				cmd.execute
 			end
 		end
 	end
 
-	task :to_test => ['convention:spec_generation', 'deploy:deploy_to_test'] do
-	end
+	#task :to_test => ['convention:spec_generation', 'deploy:deploy_to_test'] do
+	#end
 
-	task :deploy_to_test do
-		@settings.Configs.each do |c|
-			if c.deploy
-				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
-				cmd = Exec.new
-				cmd.command = '../tools/octopus/Octo.exe'
-				cmd.parameters = 'create-release --force --waitfordeployment --deployto=Test --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
-				cmd.execute
-			end
-		end
-	end
+	# task :deploy_to_test do
+	# 	@settings.Configs.each do |c|
+	# 		if c.deploy
+	# 			puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
+	# 			cmd = Exec.new
+	# 			cmd.command = '../tools/octopus/Octo.exe'
+	# 			cmd.parameters = 'create-release --force --waitfordeployment --deployto=Test --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
+	# 			cmd.execute
+	# 		end
+	# 	end
+	# end
 end
 
 # CONVENTIONS #
@@ -403,7 +376,7 @@ namespace :convention do
 	end
 
 	task :solutions do
-		Dir.glob('../**/*.sln').each do |solution_file|
+		Dir.glob('../app/*.sln').each do |solution_file|
 			if solution_file.index("libs") == nil
 				@solutions << solution_file
 			else

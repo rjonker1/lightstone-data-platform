@@ -8,18 +8,18 @@ namespace Workflow.BuildingBlocks.Dispatcher
 {
     public class NoMagicAutoDispatcher : IAutoSubscriberMessageDispatcher
     {
-        private readonly ConsumerRegistration consumers;
-        private readonly ILog log = LogManager.GetCurrentClassLogger();
+        private readonly ConsumerRegistration _consumers;
+        private readonly ILog _log = LogManager.GetLogger<NoMagicAutoDispatcher>();
 
         public NoMagicAutoDispatcher(ConsumerRegistration consumers)
         {
-            this.consumers = consumers;
+            _consumers = consumers;
         }
 
         public void Dispatch<TMessage, TConsumer>(TMessage message) where TMessage : class
             where TConsumer : IConsume<TMessage>
         {
-            var dispatcher = new SyncDispatcher(consumers);
+            var dispatcher = new SyncDispatcher(_consumers);
             dispatcher.Dispatch(message);
 
         }

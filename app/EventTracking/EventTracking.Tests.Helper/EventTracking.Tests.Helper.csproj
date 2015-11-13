@@ -62,9 +62,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.1.0.0.55\lib\net45\Lightstone.DataPlatform.Monitoring.Events.Lace.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.308, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.308\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -83,7 +83,7 @@
     <Compile Include="Builder\Lace\EventMessagesBuilder.cs" />
     <Compile Include="Builder\Lace\MonitoringEventsBuilder.cs" />
     <Compile Include="Fakes\Lace\FakeExternalSourceEvents.cs" />
-    <Compile Include="Fakes\Measurement\FakeSourceExecutionRepository.cs" />
+    <None Include="Fakes\Measurement\FakeSourceExecutionRepository.cs.old" />
     <Compile Include="Mother\Messages\Lace\LaceExternalSourceExecutionEventMessage.cs" />
     <Compile Include="Fakes\Persistence\FakePersistEvent.cs" />
     <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
@@ -91,12 +91,6 @@
     <Compile Include="Mother\Monitoring\ExternalSourceEventConsumers.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
-      <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>
-      <Name>EventTracking.Measurement</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

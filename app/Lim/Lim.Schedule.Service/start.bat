@@ -1,0 +1,1 @@
+Lightstone.DataPlatform.Lim.Schedule.Service.exe start

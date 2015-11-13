@@ -1,0 +1,202 @@
+﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using System
+@using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Enums
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
+
+<div class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Billing Info", "", "fa fa-money", Model))
+    <div class="box-body">
+        @Html.HiddenFor(x => x.BillingId)
+        <div class="form-group">
+
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Legal Entity Name</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingLegalEntityName, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingLegalEntityName)
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Accounts Contact Name</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingAccountContactName, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingAccountContactName)
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Payment Type</label>
+            <div class="input-group col-lg-2">
+                <select id="paymentTypeSelect" name="BillingPaymentType" data-placeholder="Select payment type" class="chosen-select">
+                    <option value=""></option>
+                    @foreach (var item in Enum.GetValues(typeof(PaymentType)))
+                    {
+                        var isSelected = item.ToString() == Model.BillingPaymentType.ToString();
+                        <option selected="@isSelected" value="@item">@item</option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingPaymentType)
+            </div>
+
+        </div>
+        <div class="form-group debit-order">
+
+            <label class="control-label col-lg-4">Debit Order Date</label>
+            <div class="input-group col-lg-2">
+                <div class="input-group date">
+                    <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.BillingDebitOrderDate, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingDebitOrderDate)
+            </div>
+
+        </div>
+        <div class="form-group debit-order">
+
+            <label class="control-label col-lg-4">Debit Order Account Owner</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingDebitOrderAccountOwner, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingDebitOrderAccountOwner)
+            </div>
+
+        </div>
+        <div class="form-group debit-order">
+
+            <label class="control-label col-lg-4">Debit Order Account Number</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon" id="basic-addon1"><b>123</b></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingDebitOrderAccountNumber, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingDebitOrderAccountNumber)
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="control-label col-lg-4">Accounts Contact Number</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-phone" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingAccountContactNumber, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingAccountContactNumber)
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="control-label col-lg-4">Accounts Contact Email</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingAccountContactEmail, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingAccountContactEmail)
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-lg-4">Company Registration</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-file" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingCompanyRegistration, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingCompanyRegistration)
+            </div>
+
+        </div>
+        
+        <div class="form-group">
+
+            <label class="control-label col-lg-4">Pastel Id</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingPastelId, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingPastelId)
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="control-label col-lg-4">Vat Number</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-flag" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.BillingVatNumber, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingVatNumber)
+            </div>
+
+        </div>  
+    </div>
+    @Html.Partial("Shared/BoxFooter")
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        if ($('#paymentTypeSelect option:selected').text() == 'Debit Order') {
+
+            $('.debit-order').show();
+            return;
+        }
+
+        $('.debit-order').hide();
+    });
+
+    $('#paymentTypeSelect').on('change', function () {
+
+        if ($('#paymentTypeSelect option:selected').text() == 'Debit Order') {
+
+            $('.debit-order').show();
+            return;
+        }
+
+        $('.debit-order').hide();
+    });
+
+</script>

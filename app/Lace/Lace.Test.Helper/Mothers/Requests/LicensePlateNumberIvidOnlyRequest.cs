@@ -1,87 +1,186 @@
 ﻿using System;
-using DataPlatform.Shared.Entities;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberIvidOnlyRequest : ILaceRequest
+    public class IvidTechnicalFailureRequest : IPointToLaceRequest
     {
-
-        public IPackage Package
+        public IHavePackageForRequest Package
         {
             get
             {
-                return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage();
+                return LicensePlateNumberForceIvidToFailPackage.LicenseNumberPackage("CN62KZGP", "VVi+");
+                //return null;
             }
         }
 
-        public IProvideUserInformationForRequest User
+        public IHaveUser User
         {
-            get
-            {
-                return new RequestUserInformation();
-            }
+            get { return new RequestUserInformation(); }
         }
 
-        public IProvideContextForRequest Context
-        {
-            get
-            {
-                return new ContextInformation();
-            }
-        }
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
+        //}
 
-        public IProvideRequestAggregation RequestAggregation
+        public IHaveRequestContext Request
         {
-            get
-            {
-                return new AggregationInformation();
-            }
-        }
-
-        public IProvideVehicleInformationForRequest Vehicle
-        {
-            get
-            {
-                return new RequestVehicleInformation();
-            }
-        }
-
-        public IProvideCoOrdinateInformationForRequest CoOrdinates
-        {
-            get { return new CoOrdinateInformation(); }
-        }
-
-        public IProvideJisInformation Jis
-        {
-            get { return new RequestJisInformation(); }
+            get { return new RequestContextInformation(); }
         }
 
         public DateTime RequestDate
         {
-            get
-            {
-                return DateTime.Now;
-            }
+            get { return DateTime.Now; }
         }
 
-        public string SearchTerm
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
+    }
+
+    public class LicensePlateNumberIvidOnlyRequest : IPointToLaceRequest
+    {
+        public IHavePackageForRequest Package
         {
             get
             {
-                return "XMC167GP";
+                return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage("CL49CTGP", "VVi+");
+                //return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage("CN62KZGP", "VVi+");
             }
         }
 
-        //public ILaceRequestCarInformation CarInformation
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation(); }
+        }
+
+        //public IHaveVehicle Vehicle
         //{
-        //    get
-        //    {
-        //        return new RequestCarInformationForCarHavingId107483();
-        //    }
+        //    get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
         //}
-      
+
+        public IHaveRequestContext Request
+        {
+            get { return new RequestContextInformation(); }
+        }
+
+        public DateTime RequestDate
+        {
+            get { return DateTime.Now; }
+        }
+
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
+    }
+
+    public class VinNumberIvidOnlyRequest : IPointToLaceRequest
+    {
+        public IHavePackageForRequest Package
+        {
+            get
+            {
+                return VinNumberIvidSourcePackage.VinNumberPackage("3C4PDCKG7DT526617", "VVi+");
+            }
+        }
+
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation(); }
+        }
+
+        public IHaveRequestContext Request
+        {
+            get { return new RequestContextInformation(); }
+        }
+
+        public DateTime RequestDate
+        {
+            get { return DateTime.Now; }
+        }
+
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
+    }
+
+    public class RegisterNumberIvidOnlyRequest : IPointToLaceRequest
+    {
+        public IHavePackageForRequest Package
+        {
+            get
+            {
+                return RegisterNumberIvidSourcePackage.RegisterNumberPackage("RWS183W", "VVi+");
+            }
+        }
+
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation(); }
+        }
+
+        public IHaveRequestContext Request
+        {
+            get { return new RequestContextInformation(); }
+        }
+
+        public DateTime RequestDate
+        {
+            get { return DateTime.Now; }
+        }
+
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
+    }
+
+    public class LicensePlateNumberIvidMisMatchRequest : IPointToLaceRequest
+    {
+
+        //samples
+//        Request     Response
+//        2SNAZI4GP   BP48JXGP    
+//        yxn332gp    DZD309FS    
+//        HJF622MP    HHS608EC    
+//        Bz24tggp    ND509499    
+        public IHavePackageForRequest Package
+        {
+            get
+            {
+                return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage("VRK544GP", "VVi+");
+            }
+        }
+
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation(); }
+        }
+
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
+        //}
+
+        public IHaveRequestContext Request
+        {
+            get { return new RequestContextInformation(); }
+        }
+
+        public DateTime RequestDate
+        {
+            get { return DateTime.Now; }
+        }
+
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
     }
 }

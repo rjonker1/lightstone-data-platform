@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    @*<meta http-equiv="X-UA-Compatible" content="IE=edge">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Central Interfuse Application</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+    <!-- Template -->
+    <link href="~/Template/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Template/css/skins/_all-skins.min.css" rel="stylesheet" />
+    <!-- Template -->
+    @RenderSection("Header", false)
+</head>
+<body class="skin-black layout-top-nav">
+    <div class="wrapper">
+        @Html.Partial("Shared/Header")
+        @*@Html.Partial("Shared/Sidebar")*@
+        <div class="content-wrapper">
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/GreenSock/TweenMax.min.js"></script>
+    <script src="~/Scripts/GreenSock/UIpreloader.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/sammy-0.7.5.js"></script>
+    <script src="~/Scripts/app/routes/routes.js"></script>
+    <script src="~/Scripts/app/app.js"></script>
+
+    <!-- Template -->
+    <script src="~/Scripts/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/fastclick/fastclick.min.js"></script>
+    <script src="~/Template/js/app.min.js"></script>
+    <!-- Template -->
+    
+    <div id="scripts">@RenderSection("Scripts", false)</div>
+    <script>
+        $(document).ajaxStart(function () {
+            $.blockUI({ message: '' });
+            preloader.active(true);
+        });
+        $(document).ajaxStop(function () {
+            preloader.active(false);
+            $.unblockUI();
+        });
+    </script>
+</body>
+</html>
+
+

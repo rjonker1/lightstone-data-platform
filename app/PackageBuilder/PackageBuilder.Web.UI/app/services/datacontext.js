@@ -2,67 +2,81 @@
     'use strict';
 
     var serviceId = 'datacontext';
-    angular.module('app').factory(serviceId, ['$http', 'common', 'GetDataProvider', 'GetDataProviders',
-                            'GetDataProviderSources', 'GetPackages', 'PostDataProvider', datacontext]);
+    //angular.module('app').factory(serviceId, ['$http', 'common', 'GetDataProvider', 'GetDataProviders',
+    //                        'GetDataProviderSources', 'GetPackages', 'PostDataProvider', datacontext]);
 
-    function datacontext($http, common, GetDataProvider, GetDataProviders, GetDataProviderSources,
-                    GetPackages, PostDataProvider) {
+    angular.module('app').factory(serviceId, ['$http', 'common', 'config', datacontext]);
+
+    function datacontext($http, common, config) {
+        //function datacontext($http, common, GetDataProvider, GetDataProviders, GetDataProviderSources,
+        //            GetPackages, PostDataProvider) {
 
         //Used to convert promises.
         var $q = common.$q;
         var data = {};
 
         var service = {
-
+            
             getDataProvider: getDataProvider,
             getAllDataProviders: getAllDataProviders,
             getDataProviderSources: getDataProviderSources,
             getAllPackages: getAllPackages,
             editDataProvider: editDataProvider,
+            amendDataProvider: amendDataProvider,
+            
+            getPackage: getPackage,
             createPackage: createPackage,
+            editPackage: editPackage,
+            clonePackage: clonePackage,
+            deletePackage: deletePackage,
+            
+
+            getStates: getStates,
+            getIndustries: getIndustries,
+            getPackageEventTypes: getPackageEventTypes,
+            getRequestFields: getRequestFields,
 
             getPeople: getPeople,
             getMessageCount: getMessageCount
-          
         };
-
-        
 
         return service;
 
         //GET *
-        function getDataProvider(_id, _version) {
-
+        function getPackage(_id, _version) {
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/'+_id+'/'+_version+'').then(function (result) {
-
-                data = result.data;
-                deferred.resolve(data);
-
+            $http.get( config.apiUri + '/Packages/' + _id + '/' + _version + '').then(function (result) {
+                deferred.resolve(result);
             }, function (error) {
-
                 deferred.reject(error);
-
             });
 
             return $q.when(deferred.promise);
         }
 
         //GET *
-        function getAllDataProviders() {
-
+        function getDataProvider(_id, _version) {
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider').then(function (result) {
+            $http.get( config.apiUri + '/DataProviders/' + _id + '/' + _version + '').then(function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
+            });
 
+            return $q.when(deferred.promise);
+        }
+
+        //GET *
+        function getAllDataProviders(showAll) {
+            var deferred = $q.defer();
+
+            $http.get(config.apiUri + '/DataProviders/' + showAll).then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
-
             }, function (error) {
-
                 deferred.reject(error);
-
             });
 
             return $q.when(deferred.promise);
@@ -70,69 +84,65 @@
 
         //GET
         function getDataProviderSources() {
-
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/All').then(function (result) {
-
+            $http.get( config.apiUri + '/DataProviders/Latest').then(function (result) {
                 data = result.data;
                 deferred.resolve(result);
-
             }, function (error) {
-
                 deferred.reject(error);
-
             });
 
             return $q.when(deferred.promise);
         }
 
         //GET
-        function getAllPackages() {
-
+        function getAllPackages(showAll) {
             var deferred = $q.defer();
             
-            $http.get('http://dev.lightstone.packagebuilder.api/Packages').then(function (result) {
-
+            $http.get(config.apiUri + '/Packages/' + showAll).then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
-
             }, function (error) {
-
                 deferred.reject(error);
-
             });
 
-            //GetPackages.query().$promise.then(function (result) {
-
-            //    data = result;
-            //    console.log(data);
-            //    //deferred.resolve(data);
-
-            //}, function (error) {
-
-            //    deferred.reject(error);
-
-            //});
-
-            //console.log('asdasd');
-            //console.log(deferred.promise);
             return $q.when(deferred.promise);
-
         }
 
         //POST
         function editDataProvider(_id, providerData) {
-
             var deferred = $q.defer();
 
-            $http.post('http://localhost:12257/DataProvider/Edit/' + _id + '', providerData).then(function(result) {
-
+            $http.put( config.apiUri + '/DataProviders/' + _id + '', providerData).then(function (result) {
                 deferred.resolve(result);
-
             }, function(error) {
+                deferred.reject(error);
+            });
 
-                deferred.resolve(error);
+            return $q.when(deferred.promise);
+        }
+        
+        function amendDataProvider(_id) {
+            var deferred = $q.defer();
+
+            $http.put(config.apiUri + '/DataProviders/' + _id + '/amend').then(function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //POST
+        function editPackage(_id, packageData) {
+            var deferred = $q.defer();
+
+            $http.put( config.apiUri + '/Packages/' + _id + '', packageData).then(function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
             });
 
             return $q.when(deferred.promise);
@@ -140,20 +150,96 @@
 
         //POST
         function createPackage(packageData) {
-
             var deferred = $q.defer();
 
-            $http.post('http://localhost:12257/Package/Add', packageData).then(function (result) {
-
+            $http.post( config.apiUri + '/Packages', packageData).then(function (result) {
                 deferred.resolve(result);
-
             }, function (error) {
-
-                deferred.resolve(error);
+                deferred.reject(error);
             });
 
             return $q.when(deferred.promise);
+        }
 
+        //POST
+        function clonePackage(_packageToCloneId, _cloneName) {
+            var deferred = $q.defer();
+
+            $http.put( config.apiUri + '/Packages/Clone/' + _packageToCloneId + '/' + _cloneName).then(function (result) {
+                deferred.resolve(result);
+            }, function(error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+        
+        //POST
+        function deletePackage(_id) {
+            var deferred = $q.defer();
+
+            $http.delete( config.apiUri + '/Packages/Delete/' + _id + '').then(function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //GET
+        function getStates() {
+            var deferred = $q.defer();
+
+            $http.get( config.apiUri + '/States').then(function (result) {
+                data = result.data;
+                deferred.resolve(data);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //GET
+        function getIndustries() {
+            var deferred = $q.defer();
+
+            $http.get( config.apiUri + '/Industries').then(function (result) {
+                data = result.data;
+                deferred.resolve(data);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //GET
+        function getPackageEventTypes() {
+            var deferred = $q.defer();
+
+            $http.get(config.apiUri + '/PackageEventTypes').then(function (result) {
+                data = result.data;
+                deferred.resolve(data);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+        
+        function getRequestFields() {
+            var deferred = $q.defer();
+
+            $http.get(config.apiUri + '/Requests').then(function (result) {
+                data = result.data;
+                deferred.resolve(data);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
         }
 
         function getMessageCount() { return $q.when(72); }
@@ -171,6 +257,5 @@
 
             return $q.when(people);
         };
-
     }
 })();

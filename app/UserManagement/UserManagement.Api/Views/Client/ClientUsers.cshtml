@@ -1,0 +1,156 @@
+﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using UserManagement.Api.ViewModels
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
+
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="~/Content/jquery.fileupload/jquery.fileupload.css">
+<link rel="stylesheet" href="~/Content/jquery.fileupload/jquery.fileupload-ui.css">
+
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="~/Scripts/jquery.fileupload/vendor/jquery.ui.widget.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="~/Scripts/jquery.fileupload/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="~/Scripts/jquery.fileupload/jquery.fileupload.js"></script>
+
+<div class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Client Users", "", "fa fa-edit", Model))
+    <div id="toolbar" class="btn-group">
+        <span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Select files...</span>
+            <input type="file" multiple="" name="files[]" id="fileupload">
+        </span>&nbsp;
+        <div class="progress pull-right" id="progress" style="width: 500px; height: 34px;">
+            <div class="progress-bar progress-bar-success"></div>
+        </div>
+    </div>
+    <table id="client_user_alias" data-toggle="table"
+           data-url="/UserAliases/@Model.Id"
+           data-search=" true"
+           data-show-refresh="true"
+           data-show-columns="true"
+           data-pagination="true"
+           data-page-number="1"
+           data-page-size="10"
+           data-page-list="[5, 10, 50, 100]"
+           data-formatter="gridActionFormatter"
+           data-toolbar="#toolbar">
+        <thead>
+            <tr>
+                <th data-field="id" data-visible="false">Id</th>
+                <th data-field="userName">Username</th>
+                <th data-field="firstName">First Name</th>
+                <th data-field="lastName">Last Name</th>
+                <th data-formatter="gridActionFormatter"></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<script>
+    $('#client_user_alias').bootstrapTable();
+    $('#client_user_alias').on('load-success.bs.table', function(e, name, args) {
+        initializeSelects();
+    }).on('page-change.bs.table', function(e, size, number) {
+        initializeSelects();
+    });
+
+    function initializeSelects() {
+        $('.clientUserSelect').ajaxComboBox(
+            "/ClientUsers/@Model.Id",
+            {
+                lang: 'en',
+                bind_to: 'select',
+                primary_key: 'id',
+                field: 'lastName',
+                sub_info: true,
+                sub_as: {
+                    firstName: 'First Name',
+                    idNumber: 'ID Number'
+                },
+                show_field: 'firstName, idNumber',
+                //select_only: true,
+                //init_record: [accountOwnerUserId],
+                per_page: 10,
+            }
+        ).bind('select', function () {
+            var $container = $(this).closest('td');
+            var $select = $container.find('select');
+            
+            var id = $container.find('#userId_primary_key').val();
+            $.get("UserCustomers/" + id, function (data) {
+                $select.empty();
+                $.each(data, function (index, customer) {
+                    var $option = $("<option>", { value: customer.id, text: customer.name });
+                    $option.attr("selected", data.length == 1);
+                    $option.appendTo($select);
+                });
+                $select.addClass("chosen-select");
+                $select.chosen({ width: "30%" });
+                $select.trigger("chosen:updated");
+            });
+        });
+        $("td .ac_container").css("margin-bottom", "-10px");
+        $('.clientUserSelect').each(function() {
+            var $select = $(this);
+            var $container = $select.closest("div");
+            var userId = $select.data("userId");
+            var userLastName = $select.data("userLastName");
+            $container.find('#userId_primary_key').val(userId);
+            $(this).val(userLastName);
+        });
+        $("#defaultCustomerSelect").each(function () {
+            var $select = $(this);
+            var customerId = $select.data("defaultCustomerId");
+            var customerName = $select.data("defaultCustomerName");
+            var $option = $("<option>", { value: customerId, text: customerName });
+            $option.attr("selected", true);
+            $option.appendTo($select);
+            $select.addClass("chosen-select");
+            $select.chosen({ width: "30%" });
+            $select.trigger("chosen:updated");
+        });
+        $(".user-alias-link").click(function () {
+            var $container = $(this).closest('td');
+            var aliasId = $(this).data("aliasId");
+            var userId = $container.find('#userId_primary_key').val();
+            var customerId = $container.find('#defaultCustomerSelect').val();
+
+            $.post("/UserAliases/LinkAlias", { aliasId: aliasId, customerId: customerId, userId: userId }, function () {
+                //alert("success");
+            })
+            .fail(function() {
+                //alert("error");
+            });
+        });
+    }
+
+    $(function () {
+        $('#fileupload').fileupload({
+            url: '/UserAliases/ImportUsers/FilesUpload/@Model.Id',
+            dataType: 'json',
+            start: function (e, data) {
+                $('#progress .progress-bar').css(
+                    'width', '0'
+                );
+            },
+            done: function (e, data) {
+                $('#client_user_alias').bootstrapTable('refresh');
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            }
+        }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    });
+    
+    function gridActionFormatter(value, row, index) {
+        return ['<input class="clientUserSelect" name="userId" data-user-id="' + row.userId + '" data-user-last-name="' + row.userLastName + '" type="text" />' +
+            '<select id="defaultCustomerSelect" name="Customer" data-default-customer-id="' + row.defaultCustomerId + '" data-default-customer-name="' + row.defaultCustomerName + '" data-placeholder="Select default customer"></select>' +
+            '<a class="btn btn-primary user-alias-link" data-alias-id="' + row.id + '">Save</a> '];
+    };
+</script>

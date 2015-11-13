@@ -1,44 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Services;
+﻿using System.Collections.Generic;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeSaleRepository : IReadOnlyRepository<Sale>
+    public class FakeSaleRepository : IReadOnlyRepository
     {
-        public IEnumerable<Sale> FindAllWithRequest(IProvideCarInformationForRequest request)
+        public IEnumerable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
         {
-            throw new NotImplementedException();
+            return (IEnumerable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483();
         }
 
-        public IEnumerable<Sale> GetAll()
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Sale> FindByMake(int makeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Sale> FindByMakeAndMetricTypes(int makeId,
-            MetricTypes[] metricTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Sale> FindByCarIdAndYear(int? carId, int year)
-        {
-            return SaleDataBuilder.ForCarSalesOnCarId_107483();
-        }
-
-        public IEnumerable<Sale> FindByVin(string vinNumber)
-        {
-            throw new NotImplementedException();
+            return (IEnumerable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483();
         }
     }
 }

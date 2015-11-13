@@ -1,15 +1,17 @@
-﻿using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Dto;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
-using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Test.Helper.Mothers.Packages;
 
 namespace Lace.Test.Helper.Builders.Responses
 {
     public class LaceResponseBuilder
     {
-        public IProvideResponseFromLaceDataProviders WithIvidResponseHandled()
+        public ICollection<IPointToLaceProvider> WithIvidResponseHandled()
         {
-            var response = new LaceResponse();
+            var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvid();
             var transformer = new TransformIvidResponse(ividResponse);
@@ -19,18 +21,28 @@ namespace Lace.Test.Helper.Builders.Responses
                 transformer.Transform();
             }
 
-            response.IvidResponse = transformer.Result;
-            response.IvidResponseHandled = new IvidResponseHandled();
-            response.IvidResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
 
             return response;
 
         }
 
-        public IProvideResponseFromLaceDataProviders WithIvidResponseHandledAndVin12()
+        public ICollection<IPointToLaceProvider> WithBmwFinanceIvidVinNumber()
+        {
+            var response = new Collection<IPointToLaceProvider>();
+            var ivid = IvidResponse.Build("", "", "", "", "", "WAUZZZ8T2CA058431", "", "", "");
+
+            ivid.HasBeenHandled();
+            response.Add(ivid);
+            return response;
+        }
+
+
+        public ICollection<IPointToLaceProvider> WithIvidResponseHandledAndVin12()
         {
 
-            var response = new LaceResponse();
+            var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvidWithRepairVin();
             var transformer = new TransformIvidResponse(ividResponse);
@@ -40,16 +52,15 @@ namespace Lace.Test.Helper.Builders.Responses
                 transformer.Transform();
             }
 
-            response.IvidResponse = transformer.Result;
-            response.IvidResponseHandled = new IvidResponseHandled();
-            response.IvidResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
 
             return response;
         }
 
-        public IProvideResponseFromLaceDataProviders WithIvidResponseAndFinancedInterestVin()
+        public ICollection<IPointToLaceProvider> WithIvidResponseAndFinancedInterestVin()
         {
-            var response = new LaceResponse();
+            var response = new Collection<IPointToLaceProvider>();
 
             var ividResponse = new SourceResponseBuilder().ForIvidWithFinancedInterestVin();
             var transformer = new TransformIvidResponse(ividResponse);
@@ -59,9 +70,8 @@ namespace Lace.Test.Helper.Builders.Responses
                 transformer.Transform();
             }
 
-            response.IvidResponse = transformer.Result;
-            response.IvidResponseHandled = new IvidResponseHandled();
-            response.IvidResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
 
             return response;
         }

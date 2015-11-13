@@ -1,15 +1,14 @@
-﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
+﻿using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using Lace.Toolbox.Database.Base;
+using Lace.Toolbox.Database.Domain;
 
 namespace Lace.Test.Helper.Fakes.Responses
 {
     public class FakeLighstoneRetrievalData
     {
-        public static IRetrieveValuationFromMetrics GetValuationFromMetrics(IProvideCarInformationForRequest request)
+        public static IRetrieveValuationFromMetrics GetValuationFromMetrics(IHaveCarInformation request)
         {
             return new FakeBaseRetrievalMetric(request, new Valuation())
                 .SetupDataSources()
@@ -17,9 +16,9 @@ namespace Lace.Test.Helper.Fakes.Responses
                 .BuildValuation();
         }
 
-        public static IRetrieveCarInformation GetCarInformation(ILaceRequest request)
+        public static IRetrieveCarInformation GetCarInformation(string vinNumber)
         {
-            return new RetrieveCarInformationDetail(request, new FakeCarRepositioryFactory())
+            return new GetCarInformation(vinNumber, new FakeCarInfoRepository())
                 .SetupDataSources()
                 .GenerateData()
                 .BuildCarInformation()

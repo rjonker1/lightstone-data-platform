@@ -7,16 +7,19 @@ namespace Shared.Public.TestHelpers.Packages
     {
         private Guid id;
         private VersionIdentifier version;
+        private double packageCostPrice;
+        private double packageRecommendedPrice;
 
         public PackageIdentifier Build()
         {
-            return new PackageIdentifier(id, version);
+            return new PackageIdentifier(id, version, packageCostPrice, packageRecommendedPrice);
         }
 
         public PackageIdentifierBuilder With(IDefinePackageIdentifer data)
         {
             return WithId(data.Id)
-                .WithVersion(data.Version);
+                .WithVersion(data.Version)
+                .WithPackagePricing(data.PackageCostPrice, data.PackageRecommendedPrice);
         }
 
         public PackageIdentifierBuilder WithId(Guid id)
@@ -28,6 +31,13 @@ namespace Shared.Public.TestHelpers.Packages
         public PackageIdentifierBuilder WithVersion(VersionIdentifier version)
         {
             this.version = version;
+            return this;
+        }
+
+        public PackageIdentifierBuilder WithPackagePricing(double packageCostPrice, double packageRecommendedPrice)
+        {
+            this.packageCostPrice = packageCostPrice;
+            this.packageRecommendedPrice = packageRecommendedPrice;
             return this;
         }
     }

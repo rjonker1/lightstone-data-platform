@@ -1,33 +1,34 @@
 using System;
+using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Helpers.Json;
+using Newtonsoft.Json;
 using PackageBuilder.Core.Commands;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Commands
 {
     public class CreateDataProvider : DomainCommand
     {
-        public readonly string Name;
+        [JsonConverter(typeof(JsonTypeResolverConverter))]
+        public readonly DataProviderName Name;
         public readonly string Description;
-        public readonly double CostOfSale;
-        public readonly string SourceURL;
-        public readonly Type ResponseType;
-        public readonly string State;
+        public readonly decimal CostOfSale;
         public readonly string Owner;
         public readonly DateTime CreatedDate;
-        public readonly DateTime EditedDate;
-        public readonly Type DataProviderType;
 
-        public CreateDataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string state, string owner, DateTime createdDate)
+        public CreateDataProvider(Guid id, DataProviderName name, decimal costOfSale, string owner, DateTime createdDate)
+            : base(id)
         {
-			Id = id;
 			Name = name;
-            Description = description;
+            Description = name.ToString();
             CostOfSale = costOfSale;
-            SourceURL = sourceUrl;
-            ResponseType = responseType;
-            State = state;
             Owner = owner;
             CreatedDate = createdDate;
-            EditedDate = createdDate;
+        }
+
+        public override string ToString()
+        {
+            return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
         }
     }
 }

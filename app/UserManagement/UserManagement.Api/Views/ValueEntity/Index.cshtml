@@ -1,0 +1,58 @@
+﻿@using UserManagement.Api.ViewModels
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>
+
+@{
+    var viewModel = new HeaderViewModel(Model.Name, "");
+    var tableId = string.Format("{0}_table", viewModel.Title.Replace(" ", ""));
+}
+@Html.Partial("Shared/PageHeader", viewModel)
+
+
+<div class="box">
+
+    <div class="box-header"></div>
+    <table id="@tableId"></table>
+
+</div>
+<script>
+
+    $('#@tableId').bootstrapTable({
+        url: '/ValueEntities/' + '@Model.AssemblyQualifiedName',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+            field: 'id',
+            title: 'Id',
+            visible: false
+        }, {
+            field: 'value',
+            title: 'Name',
+            sortable: true
+        }, {
+            field: '',
+            title: '',
+            formatter: gridActionFormatter
+
+        }]
+    });
+
+    function gridActionFormatter(value, row, index) {
+
+        return [
+            '<div class="row" style="width: 160px;">' +
+                '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/ValueEntities/' + row.id + '">Edit</a></div>' +
+                '<div class="col-md-1" />' +
+                '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/ValueEntities/Delete/' + row.id + '">Delete</a></div>' +
+            '</div>'
+        ].join('');
+    };
+
+    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/ValueEntities/Add/@Model.AssemblyQualifiedName", text: "Add" }).appendTo($("div.box-header"));
+
+    UserManagement.overrideDataTablesStyling();
+</script>

@@ -1,5 +1,5 @@
 ﻿.gridStyle {
-    height: 300px;
+    height: 450px;
 }
 
 .ngHeaderScroller {
@@ -10,11 +10,15 @@
 
 .grid-btn {
 
-    width: 55px !important;
+    width: 60px !important;
     height: 30px !important;
 }
 
 .user .btn {
 
     font-size: 14px !important;
+}
+
+.btn {
+    margin-right: 0 !important;
 }

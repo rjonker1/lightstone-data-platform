@@ -1,82 +1,112 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Common.Logging;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+using DataPlatform.Shared.Enums;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
-using Monitoring.Sources.Lace;
-using Workflow;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
-    public class EntryPointService : IEntryPoint
+    public sealed class EntryPointService : IEntryPoint
     {
-        private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private ILaceEvent _laceEvent;
-        private readonly IPublishMessages _publisher;
-        private IBuildSourceChain _sourceChain;
+        private static readonly ILog Log = LogManager.GetLogger<EntryPointService>();
+        private readonly IAdvancedBus _bus;
+        private ISendCommandToBus _command;
+        private ISendWorkflowCommand _workflow;
+        private IBuildSourceChain _dataProviderChain;
         private IBootstrap _bootstrap;
-
-        public EntryPointService(IPublishMessages publisher)
+        private ILogCommandTypes _logCommand;
+        public EntryPointService(IAdvancedBus bus)
         {
-            _publisher = publisher;
-            _checkForDuplicateRequests = new CheckTheReceivedRequest();
+            _bus = bus;
         }
 
-        public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
+        public ICollection<IPointToLaceProvider> GetResponsesForCarId(ICollection<IPointToLaceRequest> request)
+        {
+            return Execute(request, ChainType.CarId);
+        }
+
+        public ICollection<IPointToLaceProvider> GetResponses(ICollection<IPointToLaceRequest> request)
+        {
+            return Execute(request, ChainType.All);
+        }
+
+        private ICollection<IPointToLaceProvider> Execute(ICollection<IPointToLaceRequest> request, ChainType chain)
         {
             try
             {
-                _laceEvent = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
+                Init(request.First().Request.RequestId);
 
-                _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
+                _logCommand.LogBegin(request);
 
+                _dataProviderChain = new CreateSourceChain();
+                _logCommand.LogEntryPointRequest(request, DataProviderNoRecordState.Billable);
 
-                _sourceChain = new CreateSourceChain(request.Package);
-                _sourceChain.Build();
+                _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _dataProviderChain);
+                _bootstrap.Execute(chain);
 
-                if (_sourceChain.SourceChain == null)
-                {
-                    Log.ErrorFormat("Source chain could not be built for action {0}", request.Package.Action.Name);
-                    return EmptyResponse;
-                }
+                LogResponse(request);
 
-                if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return EmptyResponse;
+                CreateTransaction(request, _bootstrap.DataProviderResponses.State());
 
-                _bootstrap = new Initialize(new LaceResponse(), request, _laceEvent, _sourceChain);
-                _bootstrap.Execute();
+                _logCommand.LogEnd(_bootstrap.DataProviderResponses ?? EmptyResponse);
 
-                return _bootstrap.LaceResponses ?? EmptyResponse;
-
+                return _bootstrap.DataProviderResponses ?? EmptyResponse;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _laceEvent.PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(LaceEventSource.EntryPoint);
-                Log.ErrorFormat("Error occurred receiving request {0}",
-                    request.ObjectToJson());
+                _logCommand.LogFault(ex.Message, request);
+                _logCommand.LogEnd(request);
+                Log.ErrorFormat("Error occurred receiving request {0}", ex, request.ObjectToJson());
+                LogResponse(request);
+                CreateTransaction(request, DataProviderResponseState.TechnicalError);
                 return EmptyResponse;
             }
         }
 
-        private static IList<LaceExternalSourceResponse> EmptyResponse
+        private void Init(Guid requestId)
+        {
+            _command = CommandSender.InitCommandSender(_bus, requestId, DataProviderCommandSource.EntryPoint);
+            _logCommand = LogCommandTypes.ForEntryPoint(_command, DataProviderNoRecordState.Billable);
+            _workflow  = new SendWorkflowCommands(_bus,requestId);
+        }
+
+        private void LogResponse(ICollection<IPointToLaceRequest> request)
+        {
+            _logCommand.LogEntryPointResponse(_bootstrap.DataProviderResponses ?? EmptyResponse, _bootstrap.DataProviderResponses.State(), request,
+                DataProviderNoRecordState.Billable);
+        }
+
+        private void CreateTransaction(ICollection<IPointToLaceRequest> request, DataProviderResponseState state)
+        {
+            _workflow.CreateTransaction(request.GetFromRequest<IPointToLaceRequest>().Package.Id,
+                request.GetFromRequest<IPointToLaceRequest>().Package.Version,
+                request.GetFromRequest<IPointToLaceRequest>().User.UserId,
+                request.GetFromRequest<IPointToLaceRequest>().Request.RequestId,
+                request.GetFromRequest<IPointToLaceRequest>().Contract.ContractId,
+                request.GetFromRequest<IPointToLaceRequest>().Request.System.ToString(),
+                request.GetFromRequest<IPointToLaceRequest>().Contract.ContractVersion, state,
+                request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber,
+                request.GetFromRequest<IPointToLaceRequest>().Package.PackageCostPrice,
+                request.GetFromRequest<IPointToLaceRequest>().Package.PackageRecommendedPrice, DataProviderNoRecordState.Billable);
+        }
+
+        private static ICollection<IPointToLaceProvider> EmptyResponse
         {
             get
             {
-                return new List<LaceExternalSourceResponse>()
-                {
-                    new LaceExternalSourceResponse()
-                    {
-                        Response = new LaceResponse()
-                        {
-
-                        }
-                    }
-                };
+                return new List<IPointToLaceProvider>();
             }
         }
     }

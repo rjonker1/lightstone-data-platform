@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,52 +32,66 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
+    <OutputPath>bin\TeamCity\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor">
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Log4Net">
-      <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net1211">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
     </Reference>
     <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.135\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1815, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1815\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1815\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1296, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1296\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+      <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RabbitMQ.Client">
-      <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -96,6 +111,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
@@ -108,27 +126,84 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Events\when_publishing_handled_lace_events_to_bus.cs" />
-    <Compile Include="Events\when_publlishing_lace_events_to_bus.cs" />
+    <Compile Include="Caching\when_adding_bands_to_the_cache.cs" />
+    <Compile Include="Caching\when_adding_sale_data_to_the_cache.cs" />
+    <Compile Include="Caching\when_refreshing_objects_in_the_cache.cs" />
+    <Compile Include="Caching\when_requesting_ivid_data_from_the_cache.cs" />
+    <Compile Include="ErrorHandling\when_executing_request_with_errors_for_lightstone.cs" />
+    <Compile Include="Events\when_publlishing_lace_audatex_monitoring_commands_to_bus.cs" />
+    <Compile Include="Events\when_publlishing_lace_ivid_monitoring_commands_to_bus.cs" />
+    <Compile Include="Helper\TestCacheRepository.cs" />
+    <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_director_search.cs" />
+    <Compile Include="Lace\Chain\when_initalizing_lace_chain_for_company_search.cs" />
+    <Compile Include="Lace\Chain\when_initalizing_lace_source_chain_for_vin_rgt_vin_rgt_search.cs" />
+    <Compile Include="Lace\Chain\when_initializing_car_id_chain_for_carid_and_year_search_for_all_carId_dp.cs" />
+    <Compile Include="Lace\Chain\when_initializing_car_id_chain_for_carid_and_year_search_on_ls_auto.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_for_pcubed_ez_score.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_with_vin12_vin.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ivid_and_ls_auto_with_vin12_vin.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_source_chain_for_drivers_license_decryption.cs" />
+    <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_MisMatchlicensePlate_number_search.cs" />
+    <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_rgt_vin_vin12.cs" />
+    <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_vin_rgt_ls_rgt_vin_search.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
+    <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_vin_rgt_mm_code_search.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider_with_license_number_mismatch.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_source_with_financed_interest.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_lightstone_source.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_rgt_vin_source.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_audatex_source.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_source.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_ivid_source.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_lightstone_business_director_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_lightstone_business_company_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_lightstone_data_provider_with_car_id.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_lightstone_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_mmcode_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_rgt_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_rgt_vin_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_audatex_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider.cs" />
+    <Compile Include="Lace\EntryPoint\when_sending_carid_and_year_only_to_entry_point.cs" />
+    <Compile Include="Lace\EntryPoint\when_sending_valid_vehicle_to_entry_point_service.cs" />
+    <Compile Include="Lace\EntryPoint\when_sending_vin12_license_plate_to_entry_point_service.cs" />
+    <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_account_number.cs" />
+    <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_license_number.cs" />
+    <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_ivid_vin_numbe.cs" />
+    <Compile Include="Lace\Finance\when_consuming_bmw_finance_with_vin_number.cs" />
+    <Compile Include="Lace\LsConsumer\when_consuming_ls_consumer_specifications_web_service.cs" />
     <Compile Include="Lace\Sources\Lightstone\when_getting_statistics_data_to_build_vendor_valuation.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_data_providers_in_vvi_products.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder_with_absa_financed_interest.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_audatex_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_lightstone.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_Lightstone_business_director_request.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_Lightstone_business_company_request.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_Lightstone_property_request.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lace\PCubed\when_performing_ez_score_search.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_mmcode_with_carid.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_with_carid.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
-    <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_signio_drivers_license_decryption.cs" />
+    <Compile Include="Lace\Vin12\when_consuming_rgt_vin_with_vin12_vin_number.cs" />
+    <Compile Include="Lace\Vin12\when_consuming_lighstone_auto_with_vin12_vin_number.cs" />
+    <Compile Include="Lace\Vin12\when_consuming_vin12_data_provider.cs" />
+    <Compile Include="Requests\when_sending_bmw_finance_request_to_lace_entry_point.cs" />
+    <Compile Include="Requests\when_sending_director_request_to_lace_entry_point.cs" />
+    <Compile Include="Requests\when_sending_company_request_to_lace_entry_point.cs" />
+    <Compile Include="Requests\when_sending_pcubed_ezscore_request_to_lace_entry_point.cs" />
+    <Compile Include="Requests\when_sending_property_request_to_lace_entry_point.cs" />
+    <Compile Include="Requests\when_sending_consumer_specifications_to_lace_entry_point.cs" />
     <Compile Include="Requests\when_sending_request_to_lace_entry_point.cs" />
+    <Compile Include="Workflow\when_sending_failed_ivid_request_to_workflow_bus.cs" />
+    <Compile Include="Workflow\when_sending_request_for_data_provider_to_workflow_bus.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <Fakes Include="Fakes\Workflow.BuildingBlocks.fakes" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -139,45 +214,85 @@
       <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
       <Name>Lace.Test.Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
-      <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>
-      <Name>Lace.CrossCutting.DataProvider.Car</Name>
+    <ProjectReference Include="..\Source\DataProviders.Bmw.FinancedInterests\DataProviders.Bmw.Finance.csproj">
+      <Project>{0c723d05-d0ff-47ae-b551-a670f771f9f3}</Project>
+      <Name>DataProviders.Bmw.Finance</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj">
-      <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
-      <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
+    <ProjectReference Include="..\Source\DataProviders.Lightstone.MMCode\DataProviders.Lightstone.MMCode.csproj">
+      <Project>{263A9429-F6FF-4E9B-BA96-1944DA8FDF24}</Project>
+      <Name>DataProviders.Lightstone.MMCode</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
-      <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
-      <Name>Lace.DistributedServices.Events</Name>
+    <ProjectReference Include="..\Source\DataProviders.Vin12\DataProviders.Vin12.csproj">
+      <Project>{0eeb07bd-3710-4852-9112-0ca454608d3e}</Project>
+      <Name>DataProviders.Vin12</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj">
+      <Project>{cbb5ee23-8ec8-45f7-b173-a268bfe9d23b}</Project>
+      <Name>Lace.Caching.BuildingBlocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Caching\Lace.Caching.csproj">
+      <Project>{a38117cd-afcd-4f1a-999c-0c390f6be5ae}</Project>
+      <Name>Lace.Caching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
+      <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
+      <Name>Lace.Domain.Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Audatex\Lace.Domain.DataProviders.Audatex.csproj">
-      <Project>{c591b1f8-1490-4cad-8842-ddd642d004b5}</Project>
-      <Name>Lace.Domain.DataProviders.Audatex</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
+    <ProjectReference Include="..\source\DataProviders.Core\DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
-      <Name>Lace.Domain.DataProviders.Core</Name>
+      <Name>DataProviders.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.IvidTitleHolder\Lace.Domain.DataProviders.IvidTitleHolder.csproj">
+    <ProjectReference Include="..\source\DataProviders.IvidTitleHolder\DataProviders.IvidTitleHolder.csproj">
       <Project>{cf5345ca-1b8a-41b5-b85c-a9031d3ea174}</Project>
-      <Name>Lace.Domain.DataProviders.IvidTitleHolder</Name>
+      <Name>DataProviders.IvidTitleHolder</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Ivid\Lace.Domain.DataProviders.Ivid.csproj">
+    <ProjectReference Include="..\source\DataProviders.Ivid\DataProviders.Ivid.csproj">
       <Project>{3180c3d9-5f65-4ab3-9111-1144f96a352c}</Project>
-      <Name>Lace.Domain.DataProviders.Ivid</Name>
+      <Name>DataProviders.Ivid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
+    <ProjectReference Include="..\Source\DataProviders.Lightstone.Business.Director\DataProviders.Lightstone.Business.Director.csproj">
+      <Project>{f8a50911-4066-4eca-ba26-42aef9c3a521}</Project>
+      <Name>DataProviders.Lightstone.Business.Director</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\DataProviders.Lightstone.Business\DataProviders.Lightstone.Business.Company.csproj">
+      <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>
+      <Name>DataProviders.Lightstone.Business.Company</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\DataProviders.Lightstone.Consumer.Specifications\DataProviders.Lightstone.Consumer.Specifications.csproj">
+      <Project>{f281c6fb-b038-43a6-8ece-158da7ee02d4}</Project>
+      <Name>DataProviders.Lightstone.Consumer.Specifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.Lightstone.Property\DataProviders.Lightstone.Property.csproj">
+      <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>
+      <Name>DataProviders.Lightstone.Property</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.Lightstone\DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
-      <Name>Lace.Domain.DataProviders.Lightstone</Name>
+      <Name>DataProviders.Lightstone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
+    <ProjectReference Include="..\Source\DataProviders.PCubed.EzScore\DataProviders.PCubed.EzScore.csproj">
+      <Project>{3f37004f-e209-47d3-93be-4b796c6e4e66}</Project>
+      <Name>DataProviders.PCubed.EzScore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.RgtVin\DataProviders.RgtVin.csproj">
       <Project>{ae3f8127-622b-4e02-a21f-6ee7bea123e2}</Project>
-      <Name>Lace.Domain.DataProviders.RgtVin</Name>
+      <Name>DataProviders.RgtVin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.Rgt\DataProviders.Rgt.csproj">
+      <Project>{52a528c9-b875-4487-a5f0-3820cb98acff}</Project>
+      <Name>DataProviders.Rgt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.Signio\DataProviders.Signio.DriversLicense.csproj">
+      <Project>{8bf3d0cf-01e3-4397-bdaf-1b20d9bd7934}</Project>
+      <Name>DataProviders.Signio.DriversLicense</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
       <Project>{ae8a5548-01cc-481f-935f-66bf89b08081}</Project>
@@ -187,10 +302,32 @@
       <Project>{7f252fe1-1ab1-42fb-aebd-eac952e71664}</Project>
       <Name>Lace.Domain.Infrastructure.EntryPoint</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Shared.DataProvider\Lace.Toolbox.Database.csproj">
+      <Project>{b2049e92-cf9a-40d5-9ade-d9bfc8ecd00c}</Project>
+      <Name>Lace.Toolbox.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Toolbox.PCubed\Lace.Toolbox.PCubed.csproj">
+      <Project>{182c2b39-29e7-4290-afb4-7b703bc1ceb9}</Project>
+      <Name>Lace.Toolbox.PCubed</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
+      <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
+      <Name>Workflow.Lace.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Workflow.Lace\Workflow.Lace.csproj">
+      <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
+      <Name>Workflow.Lace</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\License\License.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

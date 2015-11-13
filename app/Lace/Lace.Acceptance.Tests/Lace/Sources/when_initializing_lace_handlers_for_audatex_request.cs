@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Domain.Infrastructure.EntryPoint;
-using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
-using Lace.Test.Helper.Fakes.Bus;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources
@@ -16,53 +16,42 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_audatex_request : Specification
     {
 
-        private readonly ILaceRequest _request;
-        private readonly ILaceEvent _laceEvent;
-        private readonly IBootstrap  _initialize;
-        private IList<LaceExternalSourceResponse> _laceResponses;
-        private readonly IBuildSourceChain _buildSourceChain;
+        private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly ICollection<IPointToLaceProvider> _response;
+        private readonly ISendCommandToBus _command;
+        private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_audatex_request()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            
-
+            _command = MonitoringBusBuilder.ForAudatexCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForAudatex();
-
-            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
-
-            _buildSourceChain = new CreateSourceChain(_request.Package);
-            _buildSourceChain.Build();
-
-
-            _initialize = new Initialize(new LaceResponseBuilder().WithIvidResponseHandled(), _request, _laceEvent, _buildSourceChain);
+            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+          //  _dataProvider = new AudatexDataProvider(_request, null, null,_command);
         }
 
 
         public override void Observe()
         {
-            _initialize.Execute();
-            _laceResponses = _initialize.LaceResponses;
+          //  _dataProvider.CallSource(_response);
         }
 
-        [Observation]
+       // [Observation]
         public void lace_functional_test_response_for_audatex_to_be_returned_should_be_one_test()
         {
-            _laceResponses.Count.ShouldEqual(1);
+            _response.ShouldNotBeNull();
         }
 
 
-        [Observation]
+      //  [Observation]
         public void lace_functional_test_audatex_response_should_be_handled_test()
         {
-            _laceResponses[0].Response.AudatexResponseHandled.Handled.ShouldEqual(true);
+            _response.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
         }
 
-        [Observation]
+       // [Observation]
         public void lace_functional_test_audatex_response_shuould_not_be_null_test()
         {
-            _laceResponses[0].Response.AudatexResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
         }
     }
 }

@@ -1,0 +1,13 @@
+﻿using Workflow.Billing.Messages.Publishable;
+
+namespace Billing.TestHelper.Mothers.BillTransactionMessages
+{
+    public class BillTransactionMessageMother
+    {
+        public static BillTransactionMessage BillTransactionMessage()
+        {
+            return null;
+            // return new BillTransactionMessageBuilder().With(new BillingTransaction()).Build();
+        }
+    }
+}

@@ -1,0 +1,77 @@
+﻿@using LiveAuto.Api.Routes
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LiveAuto.Web.Dtos.ChangePasswordDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LIVE Auto | Change password</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/AdminLteTemplate/css/AdminLTE.min.css" rel="stylesheet" />
+</head>
+<body class="register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="#"><b>LIVE</b>Auto</a>
+        </div>
+        <div class="register-box-body">
+            <p class="login-box-msg">Change password</p>
+            <form action="@LiveAutoApiRoute.Authorization.PutChangePassword" method="POST">
+                <input name="Token" value="@Model.Token" type="hidden" />
+                <div class="form-group has-feedback">
+                    <input id="pass1" type="password" name="Password" class="form-control" placeholder="Password" />
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input id="pass2" type="password" class="form-control" placeholder="Retype password" />
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                </div>
+                @if (Model.Message.Equals("Password changed"))
+                {
+                    <div class="alert alert-success" role="alert">@Model.Message</div>
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(Model.Message))
+                    {
+                        <div class="alert alert-danger" role="alert">@Model.Message</div>
+                    }
+                }
+                
+                <div id="passMatchError" class="alert alert-danger" style="display: none;" role="alert"></div>
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button id="changePassword" type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
+                    </div><!-- /.col -->
+                </div>
+            </form>
+            @*<p class="login-box-msg">@Model.Message</p>*@
+
+        </div><!-- /.form-box -->
+    </div><!-- /.register-box -->
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    
+    <script>
+        
+        $(function () {
+            $('form').submit(function (e) {
+
+                $('#passMatchError').css('display', 'none');
+
+                if ($('#pass2').val() != $('#pass1').val()) {
+                    e.preventDefault();
+
+                    $('#passMatchError').text('Passwords do not match!');
+                    $('#passMatchError').css('display', 'block');
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+﻿<script type="text/ng-template" id="dField_renderer.html">
+
+    <tr>
+        <td><b style="color: green;">{{dField.name}}</b></td>
+        <td><!--{{dField.type}}--></td>
+        <td>
+            <input class="form-control" ng-model="dField.label" type="text" readonly/>
+        </td>
+        <td>
+            <input class="form-control" ng-model="dField.definition" type="text" readonly/>
+        </td>
+        <td>
+            <input class="form-control" ng-model="dField.order" type="text" readonly />
+        </td>
+        <td>
+            <div multi-select
+                 input-model="dField.industries"
+                 button-label="name"
+                 item-label="name"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 is-disabled="true">
+            </div>
+        </td>
+        <td ng-show="switch == true">
+            <input ng-show="(dField.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" readonly/>
+        </td>
+    </tr>
+
+    <tr ng-repeat-start="subDF in dField.dataFields">
+        <td><b>{{subDF.name}}</b></td>
+        <td></td>
+        <td>
+            <input class="form-control" ng-model="subDF.label" type="text" readonly/>
+        </td>
+        <td>
+            <input class="form-control" ng-model="subDF.definition" type="text" readonly />
+        </td>
+        <td>
+            <input class="form-control" ng-model="subDF.order" type="text" readonly />
+        </td>
+        <td>
+            <div multi-select
+                 input-model="subDF.industries"
+                 button-label="name"
+                 item-label="name"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 is-disabled="true">
+            </div>
+        </td>
+        <td ng-show="switch == true">
+            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subDF.price" readonly/>
+        </td>
+    </tr>
+    <tr ng-repeat-end ng-repeat-start="subChildDF in subDF.dataFields">
+        <td>{{subChildDF.name}}</td>
+        <td>System.Type</td>
+        <td>
+            <input class="form-control" ng-model="subChildDF.label" type="text" readonly/>
+        </td>
+        <td>
+            <input class="form-control" ng-model="subChildDF.definition" readonly />
+        </td>
+        <td>
+            <input class="form-control" ng-model="subChildDF.order" readonly />
+        </td>
+        <td>
+            <div multi-select
+                 input-model="subChildDF.industries"
+                 button-label="name"
+                 item-label="name"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 is-disabled="true">
+
+            </div>
+        </td>
+        <td ng-show="switch == true">
+            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subChildDF.price" readonly/>
+        </td>
+    </tr>
+    <tr ng-repeat-end></tr>
+
+</script>
+
+<section class="mainbar" data-ng-controller="dataProviderView">
+    <!--<div ng-model="dataProvider">
+            <div ng-repeat="data in dataProvider.response">
+                <li>{{data}}</li>
+            </div>
+
+        </div>-->
+    <section class="matter" data-ng-model="dataProvider.response">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div id="title" data-cc-widget-header title="{{title}}" allow-collapse="true"></div>
+                    <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
+                        <div class="row" id="info">
+                            <div id="1" class="col-md-3">
+                                <div>
+                                    <label>Name:</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProv.name" readonly />
+                                    </div>
+                                    <label>Version:</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProv.version" readonly />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <label>Description</label>
+                                    </div>
+                                    <div>
+                                        <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProv.description" readonly></textarea>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div>
+                                    <button type="button" class="btn btn-info" ng-click="cancel()">Return to Data Providers</button>
+                                </div>
+                            </div>
+                            <div id="2" class="col-md-3">
+                                <div ng-if="switch == false">
+                                    <label>COS Per Request:</label>
+                                    <div>
+                                        <input type="number" class="form-control" ng-model="dataProv.costOfSale" readonly />
+                                    </div>
+                                </div>
+                                <div ng-if="switch == true">
+                                    <label>COS Per Field (Total Rands):</label>
+                                    <div>
+                                        <input type="number" class="form-control" value="{{total()}}" readonly />
+                                    </div>
+                                </div>
+                                <br />
+                                <div>
+                                    <label>Created Date:</label>
+                                    <div>{{dataProv.createdDate}}</div>
+                                </div>
+                                <br />
+                                <div>
+                                    <label>Edited Date: </label>
+                                    <div current-date-time="format"></div>
+                                </div>
+                                <br />
+                                <div>
+                                    <label>Owner:</label>
+                                    <div>
+                                        <select class="form-control" ng-model="dataProv.owner" ng-selected="dataProv.owner" readonly>
+                                            <option ng-repeat="user in users">{{user.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="3" class="col-md-4">
+                                <div>
+                                    <label>Override Data Provider Cost: {{switchAlternate}}</label>
+                                    <div>
+                                        <div class="toggle-bg toggle-alternate {{switch}}">
+                                            <label class="{{switch}}">{{switchAlternate}}</label>
+                                            <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle( true )">
+                                            <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle( false )">
+                                            <span class=" switch {{switch}} "></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--End Info-->
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="widget wblue">
+                                    <div id="field_table_title" data-cc-widget-header title="Response Fields" allow-collapse="true"></div>
+                                    <div class="widget-content text-left text-info">
+                                        <table class="table" style="padding-top: 20px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Field</th>
+                                                    <th>Type</th>
+                                                    <th>Label</th>
+                                                    <th>Definition</th>
+                                                    <th>Order</th>
+                                                    <th>Industry</th>
+                                                    <th ng-show="switch == true">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'">
+                                                <!-- <tr ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'"></tr>-->
+                                            </tbody>
+
+                                            <!--<tbody ng-repeat="dField in dataProv.dataFields">
+
+                                                <tr>
+                                                    <td>{{dField.name}}</td>
+                                                    <td>{{dField.type}}</td>
+                                                    <td><input class="form-control" ng-model="dField.label" type="text" readonly></td>
+                                                    <td><input class="form-control" ng-model="dField.definition" type="text" readonly></td>
+
+                                                    <td>
+                                                        <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
+                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" readonly />
+                                                    </td>
+
+                                                    <td ng-show="switch == true">
+                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" readonly />
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>-->
+                                        </table>
+                                    </div>
+                                    <!--<div class="widget-foot">
+                                        <div class="clearfix"></div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="matter" data-ng-model="dataProvider.response">
+        <div class="container">
+            <div class="row">
+                <div class="widget worange">
+                    <div id="connection_details" data-cc-widget-header title="Configuration" allow-collapse="true"></div>
+                    <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
+                        <div class="row">
+                            <div id="1" class="col-md-3">
+                                <div>
+                                    <label>Username:</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProv.sourceConfigurationUsername" readonly />
+                                    </div>
+                                </div>
+                                <label>Configuration URL:</label>
+                                <div>
+                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceConfigurationUrl" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+

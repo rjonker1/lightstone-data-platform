@@ -1,0 +1,29 @@
+﻿@using System
+@using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
+@{
+    var isCreate = Model.Id == new Guid();
+    var pageHeadingViewModel = new HeaderViewModel("Customer detail", isCreate ? "Create a new customer" : "Update existing customer");
+    var method = isCreate ? "POST" : "PUT";
+    var url = isCreate ? "/Customers" : "/Customers/" + Model.Id;
+}
+@Html.Partial("Shared/PageHeader", pageHeadingViewModel)
+
+@if (isCreate)
+{
+    <p>* Denotes required fields, please ensure that all required fields are filled in.</p>
+}
+
+<form action="@url" @*data-method="@method"*@ method="@method" class="form-horizontal">
+    @Html.ValidationSummary("Validation Results")
+    @Html.HiddenFor(x => x.IsActive)
+    
+    @Html.HiddenFor(x => x.AssemblyQualifiedName)
+    
+    @Html.Partial("Customer", Model)
+    @Html.Partial("Billing", Model)
+    @Html.Partial("ContactDetail", Model)
+    @Html.Partial("PhysicalAddress", Model)
+    @Html.Partial("PostalAddress", Model)
+</form>

@@ -1,7 +1,8 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using PackageBuilder.Domain.MessageHandling;
+using PackageBuilder.Core.MessageHandling;
+using PackageBuilder.Domain.CommandHandlers.DataProviders;
 
 namespace PackageBuilder.Api.Installers
 {
@@ -10,7 +11,7 @@ namespace PackageBuilder.Api.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IHandleMessages>().ImplementedBy<MessagesHandlerResolver>());
-            container.Register(Classes.FromAssemblyContaining<IHandleMessages>().BasedOn(typeof(IHandleMessages<>)).WithServiceAllInterfaces().LifestyleTransient());
+            container.Register(Classes.FromAssemblyContaining<CreateDataProviderHandler>().BasedOn(typeof(IHandleMessages<>)).WithServiceAllInterfaces().LifestyleTransient());
         }
     }
 }

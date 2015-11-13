@@ -1,7 +1,7 @@
-﻿using PackageBuilder.Core.Repositories;
+﻿using PackageBuilder.Core.MessageHandling;
+using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
-using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
-using PackageBuilder.Domain.MessageHandling;
+using PackageBuilder.Domain.Entities.DataProviders.Read;
 
 namespace PackageBuilder.Domain.EventHandlers.DataProviders
 {
@@ -16,7 +16,7 @@ namespace PackageBuilder.Domain.EventHandlers.DataProviders
 
         public override void Handle(DataProviderUpdated command)
         {
-            _repository.Save(new DataProvider(command.Id, command.Name, command.Description, command.CostPrice, command.Version, command.Owner, command.CreatedDate, command.EditedDate));
+            _repository.Save(new DataProvider(command.Id, command.Name, command.Description, command.CostPrice, command.Version + 1, command.Owner, command.CreatedDate, command.EditedDate));
         }
     }
 }

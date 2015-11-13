@@ -1,35 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Entities;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
     public class FakeSourceChain : IBuildSourceChain
     {
-        private readonly IAction _action;
-
-        public FakeSourceChain(IAction action)
+        public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> Build(ChainType chain)
         {
-            _action = action;
+            return Chains.First(w => w.Key == chain).Value;
         }
 
-        public void Build()
-        {
-            if (string.IsNullOrEmpty(_action.Name))
+        private static readonly
+            IEnumerable<KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>>
+            Chains = new List
+                <KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>>
             {
-                throw new Exception("Action for request is empty");
-            }
-
-
-            SourceChain =
-                new FakeSourceSpecification().Specifications.SingleOrDefault(
-                    w => w.Key.Equals(_action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
-        }
-
-        public Action<ILaceRequest, ILaceEvent, IProvideResponseFromLaceDataProviders> SourceChain { get; private set; }
+                {
+                    new KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>(
+                        ChainType.All,
+                        FakeSourceSpecification.Chain())
+                },
+                //{
+                //    new KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>(
+                //        ChainType.CarId,
+                //        CarIdSpecification.Chain())
+                //}
+            };
     }
 }

@@ -1,8 +1,8 @@
 using System;
 using DataPlatform.Shared.Helpers;
-using Shared.Public.TestHelpers.Packages;
-using Shared.Public.TestHelpers.Requests;
-using Shared.Public.TestHelpers.Users;
+//using Shared.Public.TestHelpers.Packages;
+//using Shared.Public.TestHelpers.Requests;
+//using Shared.Public.TestHelpers.Users;
 
 namespace Billing.TestHelper.Mothers.BillTransactionMessages
 {
@@ -18,19 +18,29 @@ namespace Billing.TestHelper.Mothers.BillTransactionMessages
             get { return SystemTime.Now(); }
         }
 
-        public UserIdentifierBuilder UserIdentifier
+        //public UserIdentifierBuilder UserIdentifier
+        //{
+        //    get { return new UserIdentifierBuilder().With(new DefaultUserIdentifier()); }
+        //}
+
+        //public PackageIdentifierBuilder PackageIdentifier
+        //{
+        //    get { return new PackageIdentifierBuilder().With(new DefaultPackageIdentifier()); }
+        //}
+
+        //public RequestIdentifierBuilder RequestIdentifier
+        //{
+        //    get { return new RequestIdentifierBuilder().With(new DefaultRequestIdentifier()); }
+        //}
+
+        public DataPlatform.Shared.Identifiers.ContractIdentifier Contract
         {
-            get { return new UserIdentifierBuilder().With(new DefaultUserIdentifier()); }
+            get { return null; }
         }
 
-        public PackageIdentifierBuilder PackageIdentifier
+        public DataPlatform.Shared.Identifiers.AccountIdentifier Account
         {
-            get { return new PackageIdentifierBuilder().With(new DefaultPackageIdentifier()); }
-        }
-
-        public RequestIdentifierBuilder RequestIdentifier
-        {
-            get { return new RequestIdentifierBuilder().With(new DefaultRequestIdentifier()); }
+            get { return null; }
         }
     }
 }

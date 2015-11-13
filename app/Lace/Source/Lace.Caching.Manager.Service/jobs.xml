@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+    <job>
+      <name>RefreshCache</name>
+      <group>RefreshCacheGroup</group>
+      <description>Refresh the Data Provider Cache</description>
+      <job-type>Lace.Caching.Manager.Service.Jobs.RefreshCache, Lightstone.DataPlatform.Lace.Caching.Manager.Service</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>RefreshCacheTrigger</name>
+        <job-name>RefreshCache</job-name>
+        <job-group>RefreshCacheGroup</job-group>
+         <!--To run at 23:00 every day -->
+        <cron-expression>0 0 23 * * ?</cron-expression>
+        <!--  Fire at 08:15am every day
+        <cron-expression>0 30 9 * * ?</cron-expression>-->
+      </cron>
+    </trigger>
+  </schedule>
+
+</job-scheduling-data>

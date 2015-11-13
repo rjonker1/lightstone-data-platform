@@ -8,6 +8,8 @@ namespace PackageBuilder.Api.ModelBinders
 {
     /// <summary>
     /// https://gist.github.com/thecodejunkie/5521941
+    /// 
+    /// Usage: this.Bind<DynamicDictionary>();
     /// </summary>
     public class DynamicModelBinder : IModelBinder
     {

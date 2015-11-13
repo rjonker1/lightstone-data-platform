@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
+using System.Text.RegularExpressions;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
@@ -43,7 +44,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             var actual = DateTime.Parse(tlokwe.SalesDate);
 
             actual.ShouldEqual(expected);
-            tlokwe.SalesPrice.ShouldEqual("R 98 900,00");
+            Regex.Replace(tlokwe.SalesPrice, @"\s+", "").ShouldEqual("R98900,00");
         }
 
         [Observation]
@@ -55,7 +56,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             var actual = DateTime.Parse(capeTown.SalesDate);
 
             actual.ShouldEqual(expected);
-            capeTown.SalesPrice.ShouldEqual("R 100 320,00");
+            Regex.Replace(capeTown.SalesPrice, @"\s+", "").ShouldEqual("R100320,00");
         }
 
         [Observation]
@@ -67,7 +68,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             var actual = DateTime.Parse(makhado.SalesDate);
             actual.ShouldEqual(expected);
 
-            makhado.SalesPrice.ShouldEqual("R 86 800,00");
+            Regex.Replace(makhado.SalesPrice, @"\s+", "").ShouldEqual("R86800,00");
         }
 
         [Observation]
@@ -79,7 +80,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             var actual = DateTime.Parse(ethekwini.SalesDate);
 
             actual.ShouldEqual(expected);
-            ethekwini.SalesPrice.ShouldEqual("R 96 990,00");
+            Regex.Replace(ethekwini.SalesPrice, @"\s+", "").ShouldEqual("R96990,00");
         }
 
         [Observation]
@@ -91,7 +92,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             var actual = DateTime.Parse(hibiscus.SalesDate);
 
             actual.ShouldEqual(expected);
-            hibiscus.SalesPrice.ShouldEqual("R 93 900,00");
+            Regex.Replace(hibiscus.SalesPrice, @"\s+", "").ShouldEqual("R93900,00");
         }
     }
 }

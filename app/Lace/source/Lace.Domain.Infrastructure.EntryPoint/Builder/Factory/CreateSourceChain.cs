@@ -1,40 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Common.Logging;
-using DataPlatform.Shared.Entities;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Specification;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
 {
-    public class CreateSourceChain : IBuildSourceChain
+    public sealed class CreateSourceChain : IBuildSourceChain
     {
-        private readonly IPackage _package;
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-
-        public CreateSourceChain(IPackage package)
+        public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> Build(ChainType chain)
         {
-            _package = package;
+            return Chains.First(w => w.Key == chain).Value;
         }
 
-        public void Build()
-        {
-            if (string.IsNullOrEmpty(_package.Action.Name))
+        private static readonly
+            IEnumerable<KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>>
+            Chains = new List
+                <KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>>
             {
-                Log.Error("Action for request is empty. Source chain cannot be built");
-                throw new Exception("Action for request is empty");
-            }
+                {
+                    new KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>(
+                        ChainType.All,
+                        DataProviderSpecification.Chain())
+                },
+                {
+                    new KeyValuePair<ChainType, Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>(
+                        ChainType.CarId,
+                        CarIdSpecification.Chain())
+                }
+            };
 
-            Log.ErrorFormat("Building source chain for acton {0}", _package.Action.Name);
-
-            SourceChain =
-                new DataProviderSpecification().Specifications.SingleOrDefault(
-                    w => w.Key.Equals(_package.Action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
-        }
-
-        public Action<ILaceRequest, ILaceEvent, IProvideResponseFromLaceDataProviders> SourceChain { get; private set; }
     }
 }

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+using System.Collections.ObjectModel;
+using System.Linq;
+using EasyNetQ;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Shared.Extensions;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace;
 using Lace.Test.Helper.Fakes.Lace.Builder;
 using Xunit.Extensions;
@@ -19,52 +22,54 @@ namespace Lace.Unit.Tests.Chain
 
         private IBootstrap _initialize;
 
-        private readonly ILaceRequest _request;
-        private readonly ILaceEvent _laceEvent;
-        private Dictionary<Type, Func<ILaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
+        private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly IAdvancedBus _bus;
+        private Dictionary<Type, Func<IPointToLaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_building_lace_source_chain_for_license_plate_number_search()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
-
+            _bus = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
-
-            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
-            _buildSourceChain = new FakeSourceChain(_request.Package.Action);
-            _buildSourceChain.Build();
+            _buildSourceChain = new FakeSourceChain();
         }
 
         public override void Observe()
         {
-            _initialize = new FakeLaceInitializer(new LaceResponse(), _request, _laceEvent, _buildSourceChain);
-            _initialize.Execute();
+            _initialize = new FakeLaceInitializer(new Collection<IPointToLaceProvider>(), _request, _bus, _buildSourceChain);
+            _initialize.Execute(ChainType.All);
         }
 
 
         [Observation]
-        public void lace_source_in_chain_to_be_loaded_correclty()
+        public void lace_source_in_chain_to_be_loaded_correctly()
         {
 
-            _initialize.LaceResponses.Count.ShouldEqual(1);
-            _initialize.LaceResponses[0].Response.ShouldNotBeNull();
+            _initialize.ShouldNotBeNull();
+            _initialize.DataProviderResponses.Count.ShouldEqual(8);
+            _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(5);
 
-            _initialize.LaceResponses[0].Response.IvidResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.LightstoneResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.LightstoneResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvidTitleHolder>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvidTitleHolder>().First().Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>().First().Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.RgtVinResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.RgtVinResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First().Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.AudatexResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.AudatexResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
+
+            _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeFalse();
+
+            //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
+            //_initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
 
         }
 

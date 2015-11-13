@@ -1,51 +1,49 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
-using Lace.Domain.Core.Contracts;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Responses;
-using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Mothers.Requests;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Consumers
 {
     public class when_consuming_ivid_title_holder_source_with_financed_interest : Specification
     {
-        private readonly ILaceRequest _request;
-        private readonly ILaceEvent _laceEvent;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly ISendCommandToBus _command;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private IvidTitleHolderDataProvider _consumer;
-
-
+        
         public when_consuming_ivid_title_holder_source_with_financed_interest()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
-
-            _request = new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest();
+            _command = MonitoringBusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
+            _request = new[] {new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest()};
             _response = new LaceResponseBuilder().WithIvidResponseAndFinancedInterestVin();
-
-            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
         }
 
         public override void Observe()
         {
-            _consumer = new IvidTitleHolderDataProvider(_request, null, null);
-            _consumer.CallSource(_response, _laceEvent);
+            _consumer = new IvidTitleHolderDataProvider(_request, null, null,_command);
+            _consumer.CallSource(_response);
         }
 
 
         [Observation]
         public void ivid_title_holder_consumer_with_financed_interest_must_be_handled()
         {
-            _response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void ivid_title_holder_response_from_consumer_with_financed_interest_must_not_be_null()
         {
-            _response.IvidTitleHolderResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().ShouldNotBeNull();
         }
 
         [Observation]
@@ -60,10 +58,10 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
             _consumer.FallBack.ShouldBeNull();
         }
 
-        [Observation]
+        [Observation(Skip = "ABSA Financed Interests not avail")]
         public void ivid_title_holder_consumer_with_financed_interest_should_be_available()
         {
-            _response.IvidTitleHolderResponse.FinancialInterestAvailable.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().FinancialInterestAvailable.ShouldBeTrue();
         }
     }
 }

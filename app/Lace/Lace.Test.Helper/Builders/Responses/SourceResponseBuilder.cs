@@ -1,14 +1,13 @@
-﻿
-using System.Collections.Generic;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
-using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Test.Helper.Fakes.Responses;
+using Lace.Toolbox.Database.Base;
+using Lace.Toolbox.Database.Models;
+using Lace.Toolbox.PCubed.Domain;
+using RestSharp;
 
 namespace Lace.Test.Helper.Builders.Responses
 {
@@ -31,15 +30,15 @@ namespace Lace.Test.Helper.Builders.Responses
 
         public HpiStandardQueryResponse ForIvidWithFinancedInterestVin()
         {
-            return FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoYxk559Gp();
+            return FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoNrb891W();
         }
 
-        public GetDataResult ForAudatexWithHuyandaiHistory()
-        {
-            return FakeAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();
-        }
+        //public GetDataResult ForAudatexWithHuyandaiHistory()
+        //{
+        //    return FakeAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();
+        //}
 
-        public IProvideResponseFromLaceDataProviders ForAudatexWithLaceResponse()
+        public ICollection<IPointToLaceProvider> ForAudatexWithLaceResponse()
         {
             return FakeAudatexWebResponseData.GetLaceResponseToUserInAudatexRequest();
         }
@@ -49,15 +48,45 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicenseNumber();
         }
 
-        public IRetrieveValuationFromMetrics ForLightstoneMetricValuationResponse(IProvideCarInformationForRequest request)
+        public IRetrieveValuationFromMetrics ForLightstoneMetricValuationResponse(IHaveCarInformation request)
         {
 
             return FakeLighstoneRetrievalData.GetValuationFromMetrics(request);
         }
 
-        public IRetrieveCarInformation ForLightstoneCarInformationResponse(ILaceRequest request)
+        public IRetrieveCarInformation ForLightstoneCarInformationResponse(string vinNumber)
         {
-            return FakeLighstoneRetrievalData.GetCarInformation(request);
+            return FakeLighstoneRetrievalData.GetCarInformation(vinNumber);
+        }
+
+        public string ForSignioDriversLicenseDecryptedResponse()
+        {
+            return FakeSignioDecryptedDriversLicenseResponse.GetDecryptedDriversLicenseXmlResponse();
+        }
+
+        public System.Data.DataSet ForLightstoneReturnPropertiesResponse()
+        {
+            return FakeLightstonePropertyResponse.GetResponseFromReturnProperties();
+        }
+
+        public System.Data.DataSet ForLightstoneBusinessCompanyResponse()
+        {
+            return FakeLightstoneBusinessCompanyResponse.ReturnCompanyReport();
+        }
+
+        public System.Data.DataSet ForLightstoneDirectorResponse()
+        {
+            return FakeLightstoneDirectorResponse.ReturnDirectorReport();
+        }
+
+        public IRestResponse<ConsumerViewResponse> ForPcubedEzScore()
+        {
+            return FakePcubedEzScoreResponse.SuccessfulConsumerViewResponse();
+        }
+
+        public string ForLightstoneConsumerSpecificationsResponse()
+        {
+            return FakeLightstoneConsumerSpecificationsResponse.GetLightoneConsumerRepairHistoryResponse();
         }
     }
 }

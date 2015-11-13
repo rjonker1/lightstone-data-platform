@@ -34,88 +34,104 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
+    <OutputPath>bin\TeamCity\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="CsQuery">
-      <HintPath>..\..\packages\CsQuery.1.3.3\lib\net40\CsQuery.dll</HintPath>
-    </Reference>
-    <Reference Include="EasyNetQ, Version=0.32.2.271, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ.Management.Client">
-      <HintPath>..\..\packages\EasyNetQ.Management.Client.0.35.6.302\lib\net40\EasyNetQ.Management.Client.dll</HintPath>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="FluentMigrator">
-      <HintPath>..\..\packages\FluentMigrator.1.2.1.0\lib\40\FluentMigrator.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1775\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="FluentMigrator.Runner">
-      <HintPath>..\..\packages\FluentMigrator.Runner.1.2.1.0\lib\40\FluentMigrator.Runner.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1815, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1815\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.135\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1815\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1296, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1296\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Public, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.135\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy">
-      <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy.Testing">
-      <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RabbitMQ.Client, Version=3.3.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Builders\Buses\MonitoringBusBuilder.cs" />
+    <Compile Include="Builders\Buses\MonitoirngCommandSenderBuilder.cs" />
+    <Compile Include="Builders\Buses\MonitoirngQueueSender.cs" />
+    <Compile Include="Builders\Buses\WorkflowBusBuilder.cs" />
+    <Compile Include="Builders\Buses\WorkflowQueueSender.cs" />
+    <Compile Include="Builders\Business\CompanySourcePackage.cs" />
+    <Compile Include="Builders\Business\DirectorSourcePackage.cs" />
+    <Compile Include="Builders\Cmds\MonitoringCommandBuilder.cs" />
+    <Compile Include="Builders\Cmds\WorkflowCommandBuilder.cs" />
+    <Compile Include="Builders\Consumers\LighstoneConsumerSpecificationsRequest.cs" />
+    <Compile Include="Builders\DataProviders\DataProviderResponseBuilder.cs" />
+    <Compile Include="Builders\EzScore\PCubedSourcePackage.cs" />
+    <Compile Include="Builders\Finance\BmwFinanceInterestsRequest.cs" />
+    <Compile Include="Builders\Property\LspRequestBuilder.cs" />
+    <Compile Include="Builders\Property\LspSourcePackage.cs" />
+    <Compile Include="Builders\Requests\CompanyRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\ConsumerRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\DirectorRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\EzScoreRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\FinanceRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberMmCodeRequestPackage.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberRgtRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\PropertyRequestBuilder.cs" />
     <Compile Include="Builders\Responses\LaceResponseBuilder.cs" />
+    <Compile Include="Builders\Scans\DriversLicenseRequestBuilder.cs" />
+    <Compile Include="Builders\Scans\DriversLicenseScan.cs" />
+    <Compile Include="Builders\Scans\DriversLicenseSourcePackage.cs" />
     <Compile Include="Builders\Sources\Lightstone\BandsDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\CarDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\CarTypeDataBuilder.cs" />
@@ -127,28 +143,34 @@
     <Compile Include="Builders\Sources\Lightstone\SaleDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\StatisticsDataBuilder.cs" />
     <Compile Include="Builders\Sources\RequestDataFromSourceBuilder.cs" />
-    <Compile Include="Fakes\Bus\FakeBus.cs" />
+    <Compile Include="Builders\Vin12\Vin12Request.cs" />
     <Compile Include="Fakes\Lace\Builder\FakeSourceChain.cs" />
     <Compile Include="Fakes\Lace\Builder\FakeSourceSpecification.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidTitleHolderSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeLightstoneBusinessDirectorExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeLightstoneBusinessCompanyExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeLightstoneSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeRgtSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeRgtVinSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeAudatexSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeSignioDataProvider.cs" />
     <Compile Include="Fakes\Lace\EntryPoint\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Lace\FakeLaceInitializer.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleAudatexServiceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleLightstonePropertyServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidTitleHolderServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleLighstoneSourceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleLightstoneBusinessDirectorServiceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleLightstoneBusinessCompanyServiceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleRgtServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleRgtVinServiceCall.cs" />
     <Compile Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberResponse.cs" />
     <None Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberSourceChain.cs.old" />
     <Compile Include="Fakes\Lace\Lighstone\FakeBandsRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeBaseRetrievalMetric.cs" />
-    <Compile Include="Fakes\Lace\Lighstone\FakeCarInfoRepository.cs" />
-    <Compile Include="Fakes\Lace\Lighstone\FakeCarRepository.cs" />
-    <Compile Include="Fakes\Lace\Lighstone\FakeCarTypeRepository.cs" />
+    <Compile Include="Fakes\Lace\Lighstone\FakeAutoCarStatsRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMakeRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMetricRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMunicipalityRepository.cs" />
@@ -159,36 +181,86 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingAudatexExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingLightstoneBusinessDirectorExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingLightstoneBusinessCompanyExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingLightstonePropertyExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingPCubedDataProvider.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtDataProvider.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingSignioDataProvider.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakePCubedDataProvider.cs" />
+    <Compile Include="Fakes\RequestTypes\AudatexRequestTypes.cs" />
+    <Compile Include="Fakes\RequestTypes\BmwFinanceRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\IvidRegisterNoRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\IvidVinRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\IvidStandardRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\IvidTitleHolderRequestType.cs" />
+    <Compile Include="Fakes\RequestTypes\LighstonePropertyRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\LightstoneAutoRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\LightstoneBusinessDirectorRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\LightstoneBusinessRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\LightstoneConsumerSpecificationsRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\MmCodeRequestType.cs" />
+    <Compile Include="Fakes\RequestTypes\PCubedEzScoreRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\RgtRequestType.cs" />
+    <Compile Include="Fakes\RequestTypes\RgtVinRequest.cs" />
+    <Compile Include="Fakes\RequestTypes\SignioDriversLicenseReqeust.cs" />
+    <Compile Include="Fakes\RequestTypes\Vin12Request.cs" />
     <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
+    <Compile Include="Fakes\Responses\FakeLightstoneBusinessCompanyResponse.cs" />
+    <Compile Include="Fakes\Responses\FakeLightstoneBusinessDirectorResponse.cs" />
+    <Compile Include="Fakes\Responses\FakeLightstoneConsumerSpecificationsResponse.cs" />
+    <Compile Include="Fakes\Responses\FakeLightstonePropertyResponse.cs" />
+    <Compile Include="Fakes\Responses\FakePcubedEzScoreResponse.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
     <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeIvidTitleHolderQueryResponse.cs" />
-    <Compile Include="Mothers\Packages\ActionMother.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
+    <Compile Include="Fakes\Responses\FakeSignioDecryptedDriversLicenseResponse.cs" />
+    <Compile Include="Mothers\Packages\BillableState.cs" />
+    <Compile Include="Mothers\Packages\DataProvider.cs" />
+    <Compile Include="Mothers\Packages\DriversLicensePackage.cs" />
+    <Compile Include="Mothers\Packages\FicaPackage.cs" />
+    <Compile Include="Mothers\Packages\LicensePlateNumberPackage.cs" />
+    <Compile Include="Mothers\Packages\PropertyPackage.cs" />
+    <Compile Include="Mothers\RequestFields\RequestFields.cs" />
+    <Compile Include="Mothers\Requests\BusinessRequests\DirectorRequest.cs" />
+    <Compile Include="Mothers\Requests\BusinessRequests\CompaniesRequest.cs" />
+    <Compile Include="Mothers\Requests\ConsumerRequests\SpecificationsRequest.cs" />
+    <Compile Include="Mothers\Requests\DriversLicenseRequests\DriversLicenseDecryptionRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483ButNoVin.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId113018.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId110490.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequesPropertyInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestContractInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestDriversLicenseInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestFicaInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestJisInformation.cs" />
+    <Compile Include="Mothers\Requests\EzScoreRequests\EzScoreRequest.cs" />
+    <Compile Include="Mothers\Requests\FinanceRequests\BmwFinanceRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberMmCodeOnlyRequest.cs" />
+    <Compile Include="Mothers\Requests\Vin12Requests\Vin12Request.cs" />
+    <Compile Include="Mothers\Requests\VinNumberLSAutoRgtAndRgtVinProvidersRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberAllDataProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberLightstoneOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest.cs" />
-    <Compile Include="Mothers\Requests\Dto\ContextInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />
-    <Compile Include="Mothers\Requests\Dto\RequestAggregationInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestContextInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestUserInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestVehicleInformation.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberAudatexOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberIvidOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberIvidTitleHolderOnlyRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberRgtOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberRgtVinOnlyRequest.cs" />
-    <Compile Include="Mothers\Requests\LicensePlateNumberSliverAllServicesRequest.cs" />
     <Compile Include="Builders\Responses\SourceResponseBuilder.cs" />
+    <Compile Include="Mothers\Requests\PropertyRequests\PropertiesRequest.cs" />
     <Compile Include="Mothers\Sources\Lightstone\BandData.cs" />
     <Compile Include="Mothers\Sources\Lightstone\CarData.cs" />
     <Compile Include="Mothers\Sources\Lightstone\CarInfoData.cs" />
@@ -202,70 +274,72 @@
     <Compile Include="Mothers\Sources\RequestDataFromIvidService.cs" />
     <Compile Include="Mothers\Sources\RequestDataFromIvidTitleHolderService.cs" />
     <Compile Include="Mothers\Sources\RequestDataFromRgtVinHolderSource.cs" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Fakes\Jis\" />
     <Folder Include="Fakes\Lace\Responses\" />
-    <Folder Include="Mothers\Consumers\" />
-    <Folder Include="Mothers\Responses\" />
-    <Folder Include="Mothers\Sources\Lightstone\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
-      <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>
-      <Name>Lace.CrossCutting.DataProvider.Car</Name>
+    <ProjectReference Include="..\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
+      <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
+      <Name>Lace.Domain.Core.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj">
-      <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
-      <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
-      <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
-      <Name>Lace.DistributedServices.Events</Name>
+    <ProjectReference Include="..\source\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Anpr\Lace.Domain.DataProviders.Anpr.csproj">
-      <Project>{b3c39de4-4b23-4604-8732-06ed64a790b4}</Project>
-      <Name>Lace.Domain.DataProviders.Anpr</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Audatex\Lace.Domain.DataProviders.Audatex.csproj">
-      <Project>{c591b1f8-1490-4cad-8842-ddd642d004b5}</Project>
-      <Name>Lace.Domain.DataProviders.Audatex</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
+    <ProjectReference Include="..\source\DataProviders.Core\DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
-      <Name>Lace.Domain.DataProviders.Core</Name>
+      <Name>DataProviders.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.IvidTitleHolder\Lace.Domain.DataProviders.IvidTitleHolder.csproj">
+    <ProjectReference Include="..\source\DataProviders.IvidTitleHolder\DataProviders.IvidTitleHolder.csproj">
       <Project>{cf5345ca-1b8a-41b5-b85c-a9031d3ea174}</Project>
-      <Name>Lace.Domain.DataProviders.IvidTitleHolder</Name>
+      <Name>DataProviders.IvidTitleHolder</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Ivid\Lace.Domain.DataProviders.Ivid.csproj">
+    <ProjectReference Include="..\source\DataProviders.Ivid\DataProviders.Ivid.csproj">
       <Project>{3180c3d9-5f65-4ab3-9111-1144f96a352c}</Project>
-      <Name>Lace.Domain.DataProviders.Ivid</Name>
+      <Name>DataProviders.Ivid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj">
-      <Project>{d2f75a1a-20e2-4b05-8f04-ef932d6f6b38}</Project>
-      <Name>Lace.Domain.DataProviders.Jis</Name>
+    <ProjectReference Include="..\Source\DataProviders.Lightstone.Business.Director\DataProviders.Lightstone.Business.Director.csproj">
+      <Project>{f8a50911-4066-4eca-ba26-42aef9c3a521}</Project>
+      <Name>DataProviders.Lightstone.Business.Director</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
+    <ProjectReference Include="..\Source\DataProviders.Lightstone.Business\DataProviders.Lightstone.Business.Company.csproj">
+      <Project>{b1093454-d552-434b-a474-f1caa7a3fc42}</Project>
+      <Name>DataProviders.Lightstone.Business.Company</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.Lightstone.Property\DataProviders.Lightstone.Property.csproj">
+      <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>
+      <Name>DataProviders.Lightstone.Property</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.Lightstone\DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
-      <Name>Lace.Domain.DataProviders.Lightstone</Name>
+      <Name>DataProviders.Lightstone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
+    <ProjectReference Include="..\Source\DataProviders.PCubed.Fica\DataProviders.PCubed.FIca.csproj">
+      <Project>{8f3eb9bb-7f5b-43af-8033-4ac91443a0e8}</Project>
+      <Name>DataProviders.PCubed.FIca</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.RgtVin\DataProviders.RgtVin.csproj">
       <Project>{ae3f8127-622b-4e02-a21f-6ee7bea123e2}</Project>
-      <Name>Lace.Domain.DataProviders.RgtVin</Name>
+      <Name>DataProviders.RgtVin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Rgt\Lace.Domain.DataProviders.Rgt.csproj">
+    <ProjectReference Include="..\source\DataProviders.Rgt\DataProviders.Rgt.csproj">
       <Project>{52a528c9-b875-4487-a5f0-3820cb98acff}</Project>
-      <Name>Lace.Domain.DataProviders.Rgt</Name>
+      <Name>DataProviders.Rgt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProviders.Signio\DataProviders.Signio.DriversLicense.csproj">
+      <Project>{8bf3d0cf-01e3-4397-bdaf-1b20d9bd7934}</Project>
+      <Name>DataProviders.Signio.DriversLicense</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
       <Project>{ae8a5548-01cc-481f-935f-66bf89b08081}</Project>
@@ -275,9 +349,25 @@
       <Project>{7f252fe1-1ab1-42fb-aebd-eac952e71664}</Project>
       <Name>Lace.Domain.Infrastructure.EntryPoint</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Shared.DataProvider\Lace.Toolbox.Database.csproj">
+      <Project>{b2049e92-cf9a-40d5-9ade-d9bfc8ecd00c}</Project>
+      <Name>Lace.Toolbox.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\Lace.Toolbox.PCubed\Lace.Toolbox.PCubed.csproj">
+      <Project>{182c2b39-29e7-4290-afb4-7b703bc1ceb9}</Project>
+      <Name>Lace.Toolbox.PCubed</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
+      <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
+      <Name>Workflow.Lace.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Workflow.Lace\Workflow.Lace.csproj">
+      <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
+      <Name>Workflow.Lace</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
+using DataPlatform.Shared.Helpers.Extensions;
 using NHibernate;
 using NHibernate.Linq;
 using PackageBuilder.Core.Entities;
+using ServiceStack.Redis;
+using ServiceStack.Redis.Generic;
 
 namespace PackageBuilder.Core.Repositories
 {
@@ -30,38 +34,32 @@ namespace PackageBuilder.Core.Repositories
 
         public T Persist(T entity)
         {
+            ValidateEntity(entity);
             _session.Persist(entity);
             return entity;
         }
 
         public void Save(T entity)
         {
-            if ((entity is Entity) && (entity as Entity).Id == new Guid())
-                return;
-
+            ValidateEntity(entity);
             _session.Save(entity);
         }
 
         public void Update(T entity)
         {
-            if ((entity is Entity) && (entity as Entity).Id == new Guid())
-                return;
-
+            ValidateEntity(entity);
             _session.Update(entity);
         }
 
         public void SaveOrUpdate(T entity)
         {
-            if ((entity is Entity) && (entity as Entity).Id == new Guid())
-                return;
-
+            ValidateEntity(entity);
             _session.SaveOrUpdate(entity);
         }
 
         public void Refresh(T entity)
         {
-            if ((entity is Entity) && (entity as Entity).Id == new Guid())
-                return;
+            ValidateEntity(entity);
 
             var id = _session.GetIdentifier(entity);
             _session.Evict(entity);
@@ -70,7 +68,17 @@ namespace PackageBuilder.Core.Repositories
 
         public void Delete(T entity)
         {
+            ValidateEntity(entity);
             _session.Delete(entity);
+        }
+
+        private void ValidateEntity(T entity)
+        {
+            if ((entity is Entity) && (entity as Entity).Id == new Guid())
+            {
+                this.Info(() => "Not a valid NHibernate entity {0} - {1}".FormatWith((entity as Entity).Id, entity));
+                throw new InvalidOperationException();
+            }
         }
 
         #region IQueryable members

@@ -1,5 +1,7 @@
-﻿using System.Linq;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
+﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Test.Helper.Builders.Requests;
@@ -34,27 +36,45 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         }
 
         [Observation]
-        public void lightstone_estimated_value_metric_confidence_level_should_be_valid()
+        public void lightstone_retail_confidence_level_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().ConfidenceLevel.ShouldEqual("Medium");
+            _metric.MetricResult.FirstOrDefault().RetailConfidenceLevel.ShouldEqual("Medium");
         }
 
         [Observation]
-        public void lightstone_estimated_value_metric_estimated_high_should_be_valid()
+        public void lightstone_retail_estimated_high_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().EstimatedHigh.ShouldEqual("R 98 700,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedHigh, @"\s+", "").ShouldEqual("R96900,00");
         }
 
         [Observation]
-        public void lightstone_estimated_value_metric_estimated_low_should_be_valid()
+        public void lightstone_retail_estimated_low_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().EstimatedLow.ShouldEqual("R 80 600,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedLow, @"\s+", "").ShouldEqual("R79300,00");
         }
 
         [Observation]
-        public void lightstone_estimated_value_metric_estimated_value_should_be_valid()
+        public void lightstone_retail_estimated_value_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().EstimatedValue.ShouldEqual("R 89 200,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedValue, @"\s+", "").ShouldEqual("R88100,00");
+        }
+
+        [Observation]
+        public void lightstone_trade_estimated_value_should_be_valid()
+        {
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedValue, @"\s+", "").ShouldEqual("R78600,00");
+        }
+
+        [Observation]
+        public void lightstone_trade_estimated_value_low_should_be_valid()
+        {
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedLow, @"\s+", "").ShouldEqual("R70800,00");
+        }
+
+        [Observation]
+        public void lightstone_trade_estimated_value_high_should_be_valid()
+        {
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedHigh, @"\s+", "").ShouldEqual("R86500,00");
         }
     }
 }

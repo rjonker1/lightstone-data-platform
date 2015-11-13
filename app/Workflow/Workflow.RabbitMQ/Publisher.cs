@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BuildingBlocks.Recovery;
 using Common.Logging;
 using DataPlatform.Shared.Messaging;
 using EasyNetQ;
+using Shared.Recovery;
 using Workflow.RabbitMQ.Publishers;
 
 namespace Workflow.RabbitMQ

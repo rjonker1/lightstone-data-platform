@@ -1,9 +1,8 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using PackageBuilder.Api;
-using PackageBuilder.Domain.Entities;
-using PackageBuilder.TestHelper.Mothers;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Public.TestHelpers.Security;
 
 namespace PackageBuilder.Unit.Tests.Fakes
 {

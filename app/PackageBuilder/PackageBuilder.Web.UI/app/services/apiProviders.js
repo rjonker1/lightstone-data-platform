@@ -33,7 +33,7 @@ ApiProviderServices.factory('GetPackages', ['$resource',
 ApiProviderServices.factory('PostDataProvider', ['$resource',
 	function($resource) {
 
-		return $resource('http://localhost:12257/DataProvider/Edit/:id', {}, {
+	    return $resource('http://dev.lightstone.packagebuilder.api/DataProvider/Edit/:id', {}, {
 			
 		});
 	}]);
@@ -41,7 +41,7 @@ ApiProviderServices.factory('PostDataProvider', ['$resource',
 ApiProviderServices.factory('PostPackage', ['$resource',
 	function($resource) {
 
-		return $resource('http://localhost:12257/Package/Add', {}, {
+	    return $resource('http://dev.lightstone.packagebuilder.api/Package/Add', {}, {
 			
 		});
 	}]);

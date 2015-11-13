@@ -1,0 +1,1 @@
+"Migrate.exe"  /conn "Data Source=.;Initial Catalog=Lim;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;" /provider sqlserver2012 /assembly "Lightstone.DataPlatform.Lim.Database.dll" /verbose=true --tag Lim --task migrate

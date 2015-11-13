@@ -1,42 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Services;
+﻿using System.Collections.Generic;
+using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeMakeRepository : IReadOnlyRepository<Make>
+    //
+    public class FakeMakeRepository : IReadOnlyRepository
     {
-        public IEnumerable<Make> FindAllWithRequest(IProvideCarInformationForRequest request)
+        public IEnumerable<TItem> GetAll<TItem>(System.Func<TItem, bool> predicate) where TItem : class
         {
-            throw new NotImplementedException();
+            return (IEnumerable<TItem>)Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
         }
 
-        public IEnumerable<Make> GetAll()
+        public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
-            return Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
-        }
-
-        public IEnumerable<Make> FindByMake(int makeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Make> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Make> FindByCarIdAndYear(int? carId, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Make> FindByVin(string vinNumber)
-        {
-            throw new NotImplementedException();
+            return (IEnumerable<TItem>)Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
         }
     }
 }

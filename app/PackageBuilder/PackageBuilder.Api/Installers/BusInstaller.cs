@@ -1,9 +1,15 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using EasyNetQ;
+using Lim.Domain.Messaging.Publishing;
 using MemBus;
 using MemBus.Configurators;
-using PackageBuilder.Domain.MessageHandling;
+using PackageBuilder.Core.MessageHandling;
+using PackageBuilder.Domain.CommandHandlers;
+using PackageBuilder.Infrastructure.NEventStore;
+using Workflow.BuildingBlocks;
+using IBus = MemBus.IBus;
 
 namespace PackageBuilder.Api.Installers
 {
@@ -15,6 +21,15 @@ namespace PackageBuilder.Api.Installers
                                                                       .Apply<IoCSupport>(s => s.SetAdapter(new MessageAdapter(container))
                                                                       .SetHandlerInterface(typeof(IHandleMessages<>)))
                                                                       .Construct()));
+            container.Register(Component.For<IPublishStorableCommands>().ImplementedBy<PublishStorableCommands>());
+
+            container.Register(
+                Component.For<IAdvancedBus>()
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/billing/queue"))//.CreateBus("workflow/billing/queue", container))
+                    .LifestyleSingleton()
+                );
+
+            container.Register(Component.For<IPublishIntegrationMessages>().ImplementedBy<IntegrationMessagePublisher>());
         }
     }
 }

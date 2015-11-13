@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using DataPlatform.Shared.Entities;
 using Nancy;
 using Shared.BuildingBlocks.Api;
 using PackageBuilder.Domain.Entities;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class IndexModule : NancyModule//SecureModule
+    public class IndexModule : SecureModule
     {
         private readonly ILog _log = LogManager.GetCurrentClassLogger();
 
@@ -65,7 +65,7 @@ namespace PackageBuilder.Api.Modules
     //    {
     //        Name = name;
     //        Type = type;
-    //        Price = 100;
+    //        CostOfSale = 100;
     //    }
 
     //    public string Name { get; set; }
@@ -73,7 +73,7 @@ namespace PackageBuilder.Api.Modules
     //    public string Label { get; set; }
     //    public string Definition { get; set; }
     //    public string Industries { get; set; }
-    //    public double Price { get; set; }
+    //    public double CostOfSale { get; set; }
     //    public bool IsSelected { get; set; }
 
     //}

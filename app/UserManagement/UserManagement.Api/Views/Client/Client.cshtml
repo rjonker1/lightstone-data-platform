@@ -1,0 +1,170 @@
+﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using System
+@using System.Linq
+@using DataPlatform.Shared.Enums
+@using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Dtos
+@using UserManagement.Domain.Entities
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
+<style>
+    #AccountOwnerName {
+        width: 88%;
+    }
+</style>
+<div class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Client Info", "", "fa fa-edit", Model))
+    <div class="box-body">
+        <div class="form-group">
+            @*@Html.LabelFor(x => x.Name, new { @class = "control-label col-lg-4" })*@
+            <label class="control-label col-lg-4"><span class="required-field">*</span> Name</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Client Name" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4"><span class="required-field">*</span> Commercial State</label>
+        <div class="input-group col-lg-2">
+            <select id="commercialStateSelect" name="CommercialStateId" data-placeholder="Select commercial state" class="chosen-select">
+                <option value=""></option>
+                @foreach (SelectListItem item in ViewBag.CommercialStates.Value)
+                {
+                    var isSelected = item.Value == Model.CommercialStateId.ToString();
+                    <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.CommercialStateId)
+        </div>
+
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Account Owner</label>
+        <div class="input-group col-lg-2">
+            @Html.TextBoxFor(x => x.AccountOwnerIndividualSurname, new { @class = "form-control", placeholder = "", id = "AccountOwnerName" })
+            @Html.HiddenFor(x => x.AccountOwnerId, new { id = "AccountOwnerId" })
+            @Html.HiddenFor(x => x.accountownerlastname_primary_key, new { id = "accountownerlastname_primary_key" })
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.AccountOwnerId)
+        </div>
+
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Client Account Number</label>
+        <div class="input-group col-lg-2">
+            <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+            <div aria-describedby="basic-addon1">
+                @Html.TextBoxFor(x => x.ClientAccountNumber, new { @class = "form-control", placeholder = "This is system generated", @readonly = true })
+            </div>
+        </div>
+        <div class="col-lg-6">
+        </div>
+
+    </div>
+    <div class="form-group trial-expiration">
+
+        <label class="control-label col-lg-4">Trial Expiration Date</label>
+        <div class="input-group col-lg-2">
+            <div class="input-group date">
+                <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.TrialExpiration, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.TrialExpiration)
+        </div>
+
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Industry Type</label>
+        <div class="input-group col-lg-2">
+            <select id="industryTypeSelect" name="Industries" data-selected="@(Model.Industries != null ? string.Join(",", Model.Industries) : "")" data-placeholder="Select industry type" multiple class="chosen-select"></select>
+        </div>
+        <div class="col-lg-6">
+            @*@Html.ValidationMessageFor(x => x.UserTypeId)*@
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Customers</label>
+        <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Customer).AssemblyQualifiedName">
+            <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
+                @foreach (NamedEntityDto item in Model.Customers)
+                {
+                    var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
+                    <option selected="@isSelected" value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.CustomerIds)
+        </div>
+
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Contracts</label>
+        <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Contract).AssemblyQualifiedName">
+            <select id="ContractIds" name="ContractIds" data-placeholder="Type to search & add contracts" multiple class="chosen-select">
+                @foreach (var item in Model.Contracts)
+                {
+                    var isSelected = Model.Contracts != null && Model.Contracts.Select(x => x.Id).Contains(item.Id);
+                    <option id="@item.Id" selected="@isSelected" value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-6">
+            @Html.ValidationMessageFor(x => x.ContractIds)
+        </div>
+
+    </div>
+    <div class="form-group">
+
+        <label class="control-label col-lg-4">Users</label>
+        <div id="roles" class="input-group col-lg-2">
+            <textarea readonly="readonly">@string.Join(", ", Model.Users)</textarea>
+        </div>
+        <div class="col-lg-6">
+        </div>
+
+    </div>
+    @Html.Partial("Shared/BoxFooter")
+</div>
+
+<script>
+    $(function () {
+        if ($('#commercialStateSelect option:selected').text() == 'TRIAL') {
+
+            $('.trial-expiration').show();
+            return;
+        }
+
+        $('.trial-expiration').hide();
+    });
+
+    $('#commercialStateSelect').on('change', function () {
+
+        if ($('#commercialStateSelect option:selected').text() == 'TRIAL') {
+
+            $('.trial-expiration').show();
+            return;
+        }
+
+        $('.trial-expiration').hide();
+    });
+</script>

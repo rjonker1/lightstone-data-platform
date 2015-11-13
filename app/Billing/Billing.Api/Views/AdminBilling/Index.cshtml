@@ -1,0 +1,330 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Admin Billing", ""))
+
+<!-- ROW 1 -->
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-stack-overflow"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Billing Run</span>
+                <br />
+                <span class="info-box-text">
+                    <button id="automated_run" type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Automated</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-purple"><i class="fa fa-refresh"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Force Billing Run Process</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Run</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-gray-active"><i class="fa fa-envelope-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Statement Template Layout</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">View</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-blue-gradient"><i class="fa fa-star-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Invoice Template Layout</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">View</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ROW 2 -->
+<div class="row">
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-olive-active"><i class="fa fa-flag-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Pastel</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Action</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Merchant</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Action</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-teal-gradient"><i class="fa fa-inbox"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Provider Notifications</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">View</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-gears"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Billing Run Notification Settings</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">View</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-gears"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">PreBilling Cache Settings</span>
+                <br />
+                <span class="info-box-text">
+                    <button id="preBillingFlush" type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button id="preBillingReload" type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-gears"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">StageBilling Cache Settings</span>
+                <br />
+                <span class="info-box-text">
+                    <button id="stageBillingFlush" type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button id="stageBillingReload" type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-gears"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">FinalBilling Cache Settings</span>
+                <br />
+                <span class="info-box-text">
+                    <button id="finalBillingFlush" type="button" class="btn btn-primary btn-md">Flush Cache</button>
+                    <button id="finalBillingReload" type="button" class="btn btn-primary btn-md">Reload Cache</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-gray-active"><i class="fa fa-stack-exchange"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Replay Billing Transactions</span>
+                <br />
+                <span class="info-box-text">
+                    <button id="replayBilling" type="button" class="btn btn-primary btn-md">Replay</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $('#preBillingFlush').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Flush/preBilling", function (response) { });
+    });
+
+    $('#preBillingReload').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Reload/preBilling", function (response) { });
+    });
+
+    $('#stageBillingFlush').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Flush/stageBilling", function (response) { });
+    });
+
+    $('#stageBillingReload').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Reload/stageBilling", function (response) { });
+    });
+
+    $('#finalBillingFlush').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Flush/finalBilling", function (response) { });
+    });
+
+    $('#finalBillingReload').click(function () {
+        $.post(apiEndpoint + "/Admin/Cache/Reload/finalBilling", function (response) { });
+    });
+
+    $('#replayBilling').click(function () {
+        $.post(apiEndpoint + "/Admin/Replay/BillingTransactions", function (response) { });
+    });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Schedule Billing Run's</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="container">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Daily Run:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input id="dailyRunFlag" data-on-color="success" data-off-color="warning" type="checkbox">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class='input-group date' id='dailyBillingRun'>
+                                        <input id='dailyBillingRun-input' type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time">
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Monthly Run:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input id="monthlyRunFlag" data-on-color="success" data-off-color="warning" type="checkbox">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class='input-group date' id='monthlyBillingRun'>
+                                        <input id='monthlyBillingRun-input' type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar">
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+
+                        $(function () {
+
+                            later.date.localTime();
+                            var monthlySchedule = moment().format('DD-MM-YYYY HH:mm');
+
+                            $('#dailyRunFlag').bootstrapSwitch('state', true, true);
+                            $('#monthlyRunFlag').bootstrapSwitch('state', true, true);
+
+                            $('#automated_run').click(function () {
+
+                                //Daily
+                                $.get(schedulerApi + "/Schedules/BillingRun/Schedule/Daily", function (response) {
+
+                                    var schedule = later.parse.cron('' + response.data, false);
+                                    var result = later.schedule(schedule).next(1);
+
+                                    $('#dailyBillingRun').datetimepicker({
+                                        format: 'HH:mm',
+                                        defaultDate: moment(result)
+                                    });
+
+                                    if (response.data == '* * * * *') {
+                                        $('#dailyRunFlag').bootstrapSwitch('state', false, true);
+                                        return;
+                                    }
+
+                                    $('#dailyRunFlag').bootstrapSwitch('state', true, true);
+                                });
+
+                                //Monthly
+                                $.get(schedulerApi + "/Schedules/BillingRun/Schedule/Monthly", function (response) {
+
+                                    var schedule = later.parse.cron('' + response.data, false);
+                                    var result = later.schedule(schedule).next();
+
+                                    monthlySchedule = moment(result).format('DD-MM-YYYY HH:mm');
+
+                                    $('#monthlyBillingRun').datetimepicker({
+                                        format: 'DD [of each Month at] HH:mm',
+                                        defaultDate: moment(result)
+
+                                    }).on('dp.change', function (e) {
+                                        monthlySchedule = moment(e.date).format('DD-MM-YYYY HH:mm');
+                                    });
+
+                                    if (response.data == '* * * * *') {
+                                        $('#monthlyRunFlag').bootstrapSwitch('state', false, true);
+                                        return;
+                                    }
+
+                                    $('#monthlyRunFlag').bootstrapSwitch('state', true, true);
+                                });
+                            });
+
+                            //Update Schedules
+                            $('#btn_submit').click(function () {
+
+                                var dailyTime = $('#dailyBillingRun-input').val().split(":");
+                                var dailySchedule = moment().hour(dailyTime[0]).minutes(dailyTime[1]).format('DD-MM-YYYY HH:mm');
+
+                                $.post(schedulerApi + "/Schedules/BillingRun/Schedule/Daily?daily_time=" + dailySchedule +
+                                    "&disable_schedule=" + $('#dailyRunFlag').bootstrapSwitch('state'), function (response) {
+
+                                    });
+
+                                $.post(schedulerApi + "/Schedules/BillingRun/Schedule/Monthly?monthly_dateTime=" + monthlySchedule +
+                                    "&disable_schedule=" + $('#monthlyRunFlag').bootstrapSwitch('state'), function (response) {
+
+                                    });
+                            });
+                        });
+                    </script>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btn_submit" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("M.I.", ""))
+
+<style>
+    .info-box {
+        margin-bottom: 5px !important;
+    }
+</style>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Filter Options:</h3>
+
+                    <div style="margin-top: 10px;">
+                        <button id="filterMIData" type="button" class="btn btn-primary" style="float: right;">Filter</button>
+                        <div style="display: none">
+                            <div id="startDateFilter"></div>
+                            <div id="endDateFilter"></div>
+                        </div>
+
+                        <div id="reportrange" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; float: left;">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <span></span> <b class="caret"></b>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-briefcase" id="basic-addon1"></span>
+                                <input id="client_customer" type="text" class="form-control" placeholder="Client / Customer" aria-describedby="basic-addon1">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
+                                <input id="username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-tag" id="basic-addon1"></span>
+                                <input id="product_type" type="text" class="form-control" placeholder="Product type" aria-describedby="basic-addon1">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-bell" id="basic-addon1"></span>
+                                <input id="account_manager" type="text" class="form-control" placeholder="Account Manager" aria-describedby="basic-addon1">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-pushpin" id="basic-addon1"></span>
+                                <input id="industry" type="text" class="form-control" placeholder="Industry" aria-describedby="basic-addon1">
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- /.box-body -->
+            </div><!-- /. box -->
+
+            <div class="box box-solid">
+                <!-- Donut chart -->
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <i class="fa fa-bar-chart-o"></i>
+                        <h3 class="box-title">Comparative Overview</h3>
+                    </div>
+                    <div class="box-body">
+                        <div id="donut-chart" style="height: 300px;"></div>
+                    </div><!-- /.box-body-->
+                </div><!-- /.box -->
+            </div><!-- /.box -->
+
+        </div><!-- /.col -->
+        <div class="col-md-9">
+
+            <div id="mi_dashboard_filtered" class="hidden col-md-4">
+                <div class="info-box bg-purple">
+                    <span class="info-box-icon"><i class="fa fa-stack-exchange"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Cost of Sale</span>
+                        <span class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span id="filtered_cos" class="progress-description"></span>
+                        <span class="progress-description">Cost of Sale Final Billing: *Billing run required</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+                <div class="info-box bg-purple">
+                    <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Revenue</span>
+                        <span class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span id="filtered_revenue" class="progress-description"></span>
+                        <span class="progress-description">Revenue Final Billing: *Billing run required</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+                <div class="info-box bg-purple">
+                    <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Non-Billable</span>
+                        <span class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-description">
+                            
+                        </span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div>
+            <!---->
+
+            <div id="mi_dashboard" class="col-md-4">
+                <!-- Info Boxes Style 2 -->
+                <div class="info-box bg-yellow">
+                    <span class="info-box-icon"><i class="fa fa-stack-exchange"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Client | Customers</span>
+                        <span id="customers_transacted" class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 50%"></div>
+                        </div>
+                        <span class="progress-description">
+                            50% Increase in 30 Days
+                        </span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+                <div class="info-box bg-blue">
+                    <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Users</span>
+                        <span id="users_transacted" class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 20%"></div>
+                        </div>
+                        <span class="progress-description">
+                            20% Increase in 30 Days
+                        </span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+                <div class="info-box bg-red">
+                    <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Products</span>
+                        <span id="products_transacted" class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                        <span class="progress-description">
+                            70% Increase in 30 Days
+                        </span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+        
+        
+            <div class="col-md-6">
+                <div class="box-header with-border">
+                    <p id="detail-table-header" class="box-title">Overview</p>
+                </div>
+            </div>
+
+            <!---->
+            @*<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <p id="detail-table-header" class="box-title">Overview</p>
+                    </div><!-- /.box-header -->
+
+                    <table id="table"></table>
+
+
+
+                </div><!-- /. box -->*@
+        </div><!-- /.col -->
+
+        </div><!-- /.row -->
+</section><!-- /.content -->
+
+<script>
+
+    Billing.MIDashboard();
+
+</script>

@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Entities;
+using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Events
 {
     public class DataProviderUpdated : DataProviderCreated
     {
-        public DataProviderUpdated(Guid id, string name, string description, double costPrice, string sourceUrl, Type responseType, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields) : base(id, name, description, costPrice, sourceUrl, responseType, state, owner, createdDate, editedDate, dataFields)
+        public bool RequiresConsent;
+        public bool FieldLevelCostPriceOverride;
+        public DateTime? EditedDate;
+        public DataProviderUpdated(Guid id, DataProviderName name, string description, decimal costPrice, Type responseType, bool fieldLevelCostPriceOverride, bool requiresConsent, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> requestFields, IEnumerable<IDataField> dataFields)
+            : base(id, name, description, costPrice, responseType, owner, createdDate, requestFields, dataFields, version)
         {
+            RequiresConsent = requiresConsent;
+            Version = version;
+            FieldLevelCostPriceOverride = fieldLevelCostPriceOverride;
+            EditedDate = editedDate;
         }
     }
 }
