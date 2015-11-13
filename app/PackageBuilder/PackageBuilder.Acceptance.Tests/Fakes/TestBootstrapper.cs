@@ -1,24 +1,18 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Nancy.Authentication.Token;
 using PackageBuilder.Api;
-using Shared.BuildingBlocks.Api.Security;
+using PackageBuilder.TestHelper.Fakes;
 
 namespace PackageBuilder.Acceptance.Tests.Fakes
 {
     public class TestBootstrapper : Bootstrapper
     {
-        private readonly string _username = string.Empty;
-        public TestBootstrapper(string username)
-        {
-            _username = username;
-        }
-
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
             base.ConfigureApplicationContainer(container);
-            
-            container.Register(Component.For<IAuthenticateUser>().Instance(new TestAuthenticator(_username)));
-            //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion()));
+
+            container.Register(Component.For<ITokenizer>().Instance(new FakeTokenizer()).IsDefault());
         }
     }
 }

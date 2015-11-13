@@ -1,115 +1,121 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Entities;
-using Lace.Domain.Core.Dto;
-using MemBus;
+using DataPlatform.Shared.Enums;
 using Nancy;
+using Nancy.Json;
 using Nancy.ModelBinding;
+using Nancy.Security;
+using PackageBuilder.Api.Helpers.Constants;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.CommandHandlers;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Domain.Entities.States.Read;
+using PackageBuilder.Infrastructure.Repositories;
+using Shared.BuildingBlocks.Api.Security;
+using DataProviderDto = PackageBuilder.Domain.Dtos.Read.DataProviderDto;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class DataProviderModule : NancyModule
+    public class DataProviderModule : SecureModule
     {
-        public DataProviderModule(IBus bus,
-            IRepository<Domain.Entities.DataProviders.ReadModels.DataProvider> readRepo,
-            INEventStoreRepository<Domain.Entities.DataProviders.WriteModels.DataProvider> writeRepo)
+        public DataProviderModule(IPublishStorableCommands publisher,
+            IDataProviderRepository readRepo,
+            INEventStoreRepository<DataProvider> writeRepo, IRepository<State> stateRepo)
         {
-            Get["/DataProvider"] = parameters => { return Response.AsJson(readRepo); };
+            this.RequiresAnyClaim(new[] { RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString() });
 
-            Get["/DataProvider/Get/All"] = parameters =>
+            Get["/DataProviders/{showAll?false}"] = _ =>
             {
-                var dataSources = new ArrayList();
+                return _.showAll
+                    ? Response.AsJson(
+                        Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>
+                            (from d1 in readRepo
+                             where d1.Version == (from d2 in readRepo where d2.DataProviderId == d1.DataProviderId select d2.Version).Max()
+                             select d1).ToList())
+                    : Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>(readRepo));
+            };
 
-                foreach (var provider in readRepo)
+            Get["/DataProviders/Latest"] = _ =>
+            {
+                var repoSource =
+                    readRepo.GetUniqueIds()
+                        .Select(x => Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(x)))
+                        .ToList();
+
+                var dataSources = new List<Domain.Dtos.Write.DataProviderDto>();
+                //var requestFields = new List<DataProviderFieldItemDto>();
+
+                foreach (var entity in repoSource)
                 {
-                    DataProviderDto dSource = new DataProviderDto();
-
-                    dSource.Id = provider.DataProviderId;
-                    dSource.Name = provider.Name;
-                    dSource.CostOfSale = provider.CostPrice;
-                    dSource.Description = provider.Description;
-                    dSource.Owner = provider.Owner;
-                    dSource.Created = provider.CreatedDate;
-                    dSource.Edited = provider.EditedDate;
-                    dSource.Version = provider.Version;
-
-                    try
+                    var requestFields = entity.RequestFields.Where(requestField => requestField != null);
+                    dataSources.Add(new Domain.Dtos.Write.DataProviderDto
                     {
-                     
-                        dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version).DataFields
-                           .Select(field => new DataProviderFieldItemDto {Name = field.Name, Type = field.Type + ""});
-                    }
-                    catch (Exception ex)
-                    {
-                        dSource.DataFields = null;
-                    }
-
-                    dataSources.Add(dSource);
+                        Id = entity.Id,
+                        Name = entity.Name,
+                        Description = entity.Description,
+                        CostOfSale = entity.CostOfSale,
+                        SourceConfigurationIsApiConfiguration = entity.SourceConfigurationIsApiConfiguration,
+                        SourceConfigurationUrl = entity.SourceConfigurationUrl,
+                        SourceConfigurationUsername = entity.SourceConfigurationUsername,
+                        SourceConfigurationConnectionString = entity.SourceConfigurationConnectionString,
+                        FieldLevelCostPriceOverride = entity.FieldLevelCostPriceOverride, 
+                        Owner = entity.Owner,
+                        CreatedDate = entity.CreatedDate,
+                        EditedDate = entity.EditedDate, 
+                        RequestFields = requestFields,
+                        DataFields = entity.DataFields
+                    });
                 }
 
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProvider/Add"] = parameters =>
-            {
-                var providerId = Guid.NewGuid();
-                bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), "draft", "Al", DateTime.Now));
+            Get["/DataProviders/{id:guid}"] = _ => 
+                Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id)) } });
 
-                return Response.AsJson(new { msg = "Success, "+providerId+" created" });
+            Get["/DataProviders/{id}/{version}"] = _ =>
+            {
+                var dataProvider = Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id));
+                return Response.AsJson(new { Response = new[] { dataProvider } });
             };
 
-            Get["/DataProvider/Edit/{id}/{version}"] = parameters =>
+            Put[RouteConstants.DataProviderEditRoute] = _ =>
             {
-                bus.Publish(new RenameDataProvider(new Guid(parameters.id), "Test1"));
+                var dto = this.Bind<Domain.Dtos.Write.DataProviderDto>();
+                var rFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(dto.RequestFields);
+                var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(dto.DataFields);
+                //var command = new UpdateDataProvider(parameters.id,
+                //    (DataProviderName) Enum.Parse(typeof (DataProviderName), dto.Name, true), dto.Description,
+                //    dto.CostOfSale, typeof (Domain.Dtos.Write.DataProviderDto), dto.FieldLevelCostPriceOverride,
+                //    stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dFields);
 
-                return Response.AsJson(new {msg = "Success"});
+                var command = new UpdateDataProvider(_.id,
+                    (DataProviderName)Enum.Parse(typeof(DataProviderName), dto.Name, true), dto.Description,
+                    dto.CostOfSale, typeof(Domain.Dtos.Write.DataProviderDto), dto.FieldLevelCostPriceOverride, dto.RequiresConsent,
+                    stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, rFields, dFields);
+                publisher.Publish(command);
+
+                return Response.AsJson(new {msg = "Success, " + _.id + " created"});
             };
 
-            Get["/DataProvider/Get/{id}/{version}"] = parameters =>
+            Put["/Dataproviders/{id}/amend"] = _ =>
             {
-                var dataSources = new ArrayList();
-
-                DataProvider dataProvider = new DataProvider();
-
-                try
-                {
-                    dataProvider = writeRepo.GetById(parameters.id, parameters.version);
-                }
-                catch (Exception)
-                {
-                    dataProvider = null;
-                }
-
-                dataSources.Add(dataProvider);
-
-                return Response.AsJson(new {Response = dataSources});
+                var id = (Guid) _.id;
+                publisher.Publish(new AmendDataProviderStructure(id));
+                return Response.AsJson(new { msg = "Amended" });
             };
 
-            Post["/Dataprovider/Edit/{id}"] = parameters =>
+            Post["DataProvider/Clone/{id}/{cloneName}"] = ParametersBackTrackExtensions =>
             {
-                //var dto = this.Bind<dto>();
-                var dto = this.Bind<DataProviderDto>();
-                //DataFieldMap
-                var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
-                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.CostOfSale,
-                    "http://test.com", typeof (DataProviderDto), "Draft", dto.Owner, dto.Created, dFields));
-
-                return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
-                
+                return Response.AsJson(new {msg = "Works"});
             };
         }
-    }
-
-    public class dto
-    {
-        public string Name { get; set; }
     }
 }
