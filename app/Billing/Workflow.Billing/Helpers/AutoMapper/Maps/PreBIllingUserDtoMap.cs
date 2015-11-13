@@ -8,7 +8,11 @@ namespace Workflow.Billing.Helpers.AutoMapper.Maps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<PreBilling, UserDto>();
+            Mapper.CreateMap<PreBilling, UserDto>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(x => x.User.UserId))
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(x => x.User.FirstName))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(x => x.User.LastName))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(x => x.User.Username));
             Mapper.CreateMap<UserMeta, UserDto>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(s => s.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(s => s.LastName));

@@ -15,7 +15,11 @@ namespace Workflow.Billing.Scheduler.Service
             .UseSqlServerStorage(ConfigurationManager.ConnectionStrings["billingScheduler"].ConnectionString);
 
             app.UseHangfireDashboard("/hangfire");
-            app.UseNancy();
+            app.UseNancy(x =>
+            {
+                x.Bootstrapper = new NancyBootstrapper();
+                x.PerformPassThrough = context => true;
+            });
         }
     }
 }
