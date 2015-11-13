@@ -84,7 +84,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         private void LogResponse(ICollection<IPointToLaceRequest> request)
         {
-            _logCommand.LogEntryPointResponse(_bootstrap.DataProviderResponses ?? EmptyResponse, _bootstrap.DataProviderResponses.State(), request,
+            _logCommand.LogEntryPointResponse((_bootstrap.DataProviderResponses ?? EmptyResponse).Where(w => w.Handled), _bootstrap.DataProviderResponses.State(), request,
                 DataProviderNoRecordState.Billable);
         }
 

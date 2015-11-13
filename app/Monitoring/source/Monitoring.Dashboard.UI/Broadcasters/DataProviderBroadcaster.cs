@@ -22,15 +22,19 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         private readonly IHubConnectionContext<dynamic> _clients;
         private Uri _root = null;
-        private TimeSpan _interval = TimeSpan.FromMilliseconds(60000);
+        private readonly TimeSpan _interval = TimeSpan.FromMilliseconds(60000);
+        private readonly TimeSpan _statsInterval = TimeSpan.FromMilliseconds(25000);
         private Timer _monitoringTimer;
         private Timer _statisticsTimer;
-        private bool _isFirstCall = true;
         private static readonly ILog Log = LogManager.GetLogger<DataProviderBroadcaster>();
 
         public DataProviderBroadcaster(IHubConnectionContext<dynamic> clients)
         {
             _clients = clients;
+
+            BroadCastDataProvideStatistics(new {});
+            BroadCastDataProviderMonitoring(new {});
+
             SetMonitoringTimer();
             SetStatisticsTimer();
         }
@@ -42,7 +46,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         private void SetStatisticsTimer()
         {
-            _statisticsTimer = new Timer(BroadCastDataProvideStatistics, null, _interval, _interval);
+            _statisticsTimer = new Timer(BroadCastDataProvideStatistics, null, _statsInterval, _interval);
         }
 
         private void BroadCastDataProviderMonitoring(object state)
@@ -50,13 +54,6 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             var result = GetDataProviderMonitoringFromApi();
             if (result == null)
                 return;
-
-            if (_isFirstCall)
-            {
-                _isFirstCall = false;
-                _interval = TimeSpan.FromMilliseconds(60000);
-                SetMonitoringTimer();
-            }
 
             _clients.All.dataProviderMonitoringInfo(result);
         }
@@ -69,31 +66,6 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                     new BillingTransactionRepository());
                 handler.Handle(new GetMonitoringCommand(new MonitoringRequestDto()));
                 return handler.MonitoringResponse;
-
-                //var client = new HttpClient()
-                //{
-                //    BaseAddress = _root,
-                //};
-                //var model = new DataProviderDto[] { };
-
-                //var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
-                //{
-                //    try
-                //    {
-                //        var response = t.Result;
-                //        var json = response.Content.ReadAsStringAsync();
-                //        json.Wait();
-                //        model = JsonConvert.DeserializeObject<DataProviderDto[]>(json.Result);
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        Log.ErrorFormat("Error occurred in Monitoring refreshing the data provider log because of {0}", ex.Message);
-                //    }
-                //});
-
-                //task.Wait();
-
-                //return model;
             }
             catch (Exception ex)
             {
@@ -108,13 +80,6 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             if (result == null)
                 return;
 
-            if (_isFirstCall)
-            {
-                _isFirstCall = false;
-                _interval = TimeSpan.FromMilliseconds(60000);
-                SetStatisticsTimer();
-            }
-
             _clients.All.dataProviderStatisticsInfo(result);
         }
 
@@ -125,33 +90,6 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                 var handler = new DataProviderStatisticsHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())));
                 handler.Handle();
                 return handler.StatisticsResponse;
-
-                //var client = new HttpClient()
-                //{
-                //    BaseAddress = _root
-                //};
-
-                //var model = new DataProviderStatisticsDto[] { };
-
-                //var task = client.GetAsync("dataProviders/freshenStatistics").ContinueWith(t =>
-                //{
-                //    try
-                //    {
-                //        var response = t.Result;
-                //        var json = response.Content.ReadAsStringAsync();
-                //        json.Wait();
-                //        model = JsonConvert.DeserializeObject<DataProviderStatisticsDto[]>(json.Result);
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        Log.ErrorFormat("Error occurred in Monitoring refreshing the data provider stats because of {0}", ex.Message);
-                //    }
-                  
-                //});
-
-                //task.Wait();
-
-                //return model;
             }
             catch (Exception ex)
             {

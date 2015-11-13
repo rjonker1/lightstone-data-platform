@@ -8,7 +8,8 @@ namespace Monitoring.Dashboard.UI.Core.Models
     public class DataProviderEventLog
     {
         private const string GetEventsForRequests =
-            @"select Id, Payload, CommitNumber, CommitSequence,[CommitStamp] from DataProviderEventLog where Id in (select top 100 RequestId from DataProviderMonitoring where [action] = 'response' order by [date] desc) order by CommitNumber, CommitSequence";
+            @"select Id, Payload, CommitNumber, CommitSequence,[CommitStamp] from DataProviderEventLog where Id in (select top 100 RequestId from DataProviderMonitoring where [action] = 'response' order by [date] desc) and (commandTypeId in (1,2,4,6,7)) order by CommitStamp, CommitNumber, CommitSequence";
+            //@"select Id, Payload, CommitNumber, CommitSequence,[CommitStamp] from DataProviderEventLog where Id in (select top 100 RequestId from DataProviderMonitoring where [action] = 'response' order by [date] desc) order by CommitNumber, CommitSequence";
 
         [DataMember]
         public Guid Id { get; set; }
