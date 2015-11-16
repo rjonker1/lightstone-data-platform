@@ -31,23 +31,28 @@ namespace Api.Helpers.Validators
             #region isLocked Validation
 
             // Validate User
-            var user = _userManagementApiClient.Get<ValidationDto>(authToken, "/Users/Details/{id}", new[] { new KeyValuePair<string, string>("id", userId + "") }, null);
-            
-            if (user == null) throw new LightstoneAutoException("User: " + userId + " not found. Please make sure the UserId entered is correct. Alternatively please re-authenticate token.");
+            var user = _userManagementApiClient.Get<ValidationDto>(authToken, "/Users/Details/{id}",
+                new[] {new KeyValuePair<string, string>("id", userId + "")}, null);
+
+            if (user == null)
+                throw new LightstoneAutoException("User: " + userId +
+                                                  " not found. Please make sure the UserId entered is correct. Alternatively please re-authenticate token.");
             if (user.IsLocked) throw new LightstoneAutoException("User: " + userId + " is locked");
 
             //Validate Customer|Client
             var client = new ValidationDto();
 
-            var customer = _userManagementApiClient.Get<ValidationDto>(authToken, "Customers/Details/{id}", new[] { new KeyValuePair<string, string>("id", customerClientId + "") }, null);
+            var customer = _userManagementApiClient.Get<ValidationDto>(authToken, "Customers/Details/{id}",
+                new[] {new KeyValuePair<string, string>("id", customerClientId + "")}, null);
             if (customer != null && customer.IsLocked) throw new LightstoneAutoException("Customer: " + customerClientId + " is locked");
 
             if (customer == null)
             {
-                client = _userManagementApiClient.Get<ValidationDto>(authToken, "/Clients/Details/{id}", new[] { new KeyValuePair<string, string>("id", customerClientId + "") }, null);
+                client = _userManagementApiClient.Get<ValidationDto>(authToken, "/Clients/Details/{id}",
+                    new[] {new KeyValuePair<string, string>("id", customerClientId + "")}, null);
 
                 if (client == null) throw new LightstoneAutoException("CustomerClientId: " + customerClientId + " not found");
-                
+
                 if (client.IsLocked) throw new LightstoneAutoException("Client: " + customerClientId + " is locked");
             }
 
@@ -69,29 +74,38 @@ namespace Api.Helpers.Validators
 
             #region User Customer | Client relationship validation
 
-            if (customer != null && user.Customers.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Customer relationship invalid for user: " + userId);
-            if (customer == null && user.Clients.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Client relationship invalid for user: " + userId);
+            if (customer != null && user.Customers.All(x => x.Id != customerClientId))
+                throw new LightstoneAutoException("Customer relationship invalid for user: " + userId);
+            if (customer == null && user.Clients.All(x => x.Id != customerClientId))
+                throw new LightstoneAutoException("Client relationship invalid for user: " + userId);
 
             #endregion
 
             #region Contract relationship validation
 
             // Validate Contract
-            var contract = _userManagementApiClient.Get<ValidationDto>(authToken, "/Contracts/Details/{id}", new[] { new KeyValuePair<string, string>("id", contractId + "") }, null);
+            var contract = _userManagementApiClient.Get<ValidationDto>(authToken, "/Contracts/Details/{id}",
+                new[] {new KeyValuePair<string, string>("id", contractId + "")}, null);
 
             // Package, Customer, Client relationship check
             if (contract != null)
             {
-                if (contract.Packages.All(x => x.Key != packageId)) throw new LightstoneAutoException("Package relationship invalid for contract: " + contractId);
-                if (customer != null && contract.Customers.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Customer relationship invalid for contract: " + contractId);
-                if (customer == null && contract.Clients.All(x => x.Id != customerClientId)) throw new LightstoneAutoException("Client relationship invalid for contract: " + contractId);
+                if (contract.Packages.All(x => x.Key != packageId))
+                    throw new LightstoneAutoException("Package relationship invalid for contract: " + contractId);
+                if (customer != null && contract.Customers.All(x => x.Id != customerClientId))
+                    throw new LightstoneAutoException("Customer relationship invalid for contract: " + contractId);
+                if (customer == null && contract.Clients.All(x => x.Id != customerClientId))
+                    throw new LightstoneAutoException("Client relationship invalid for contract: " + contractId);
             }
 
-            return user.IndividualContactNumber;
+
+            return !string.IsNullOrEmpty(user.IndividualContactNumber) ? user.IndividualContactNumber : customer.IndividualContactNumber;
 
 
             #endregion
         }
+
+
 
         private void TrialValidation(ValidationDto dto)
         {
