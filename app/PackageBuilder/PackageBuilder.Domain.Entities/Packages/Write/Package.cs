@@ -163,8 +163,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         }
 
         private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string firstName, Guid requestId, string accountNumber,
-            Guid contractId, long contractVersion, SystemType system,
-            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent, string contactNumber)
+            Guid contractId, long contractVersion, SystemType system,IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent, string contactNumber)
         {
             if (DataProviders == null)
                 return null;
@@ -233,9 +232,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         }
 
         public List<IDataProvider> ExecuteWithCarId(IEntryPoint entryPoint, Guid userId, string userName,
-            string firstName, Guid requestId, string accountNumber, Guid contractId,
-            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system,
-            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent, string contactNumber)
+            string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent, string contactNumber)
         {
             this.Info(() => "Form LACE Request Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
