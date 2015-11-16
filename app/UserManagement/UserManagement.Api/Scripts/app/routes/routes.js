@@ -9,6 +9,7 @@ function initializeRoutes(sammy) {
     initializeClientRoutes(sammy);
     initializeUserRoutes(sammy);
     initializeContractRoutes(sammy);
+    initializeNoteRoutes(sammy);
     initializeLookupRoutes(sammy);
 }
 
@@ -452,13 +453,20 @@ function initializeLookupRoutes(sammy) {
     });
 }
 
-//function initializeNoteRoutes(sammy) {
+function initializeNoteRoutes(sammy) {
 
-//    sammy.get('/Notes/:type/:id', function (context) {
-//        context.load('/Contracts', { dataType: 'html', cache: false }).swap();
-//    });
+    sammy.post('/Notes/:type/:id', function (context) {
+        $(context.target).ajaxSubmit({
+            success: function (response) {
+                //if (response.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
+            }
+        });
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false;
+    });
 
-//}
+}
 
 function initializePlugins() {
     $.ajaxSetup({
@@ -798,7 +806,10 @@ function initializePlugins() {
         }
     });
 
-    $('.notes-view').on("click", function (e) {
+    
+
+    //$('.notes-view').on("click", function () {
+    $('.notes-view').click(function () {
         var $self = $(this);
         var url = $self.attr('href');
         $.get(url, {}, function(response) {
@@ -807,7 +818,7 @@ function initializePlugins() {
             $body.append($response);
             var $modal = $(".note-modal");
             $modal.modal('show');
-            $modal.on('hidden.bs.modal', function(e) {
+            $modal.on('hidden.bs.modal', function() {
                 $modal.remove();
             });
         }, 'html');

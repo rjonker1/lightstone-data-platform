@@ -2,7 +2,6 @@
 using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Dtos;
 using UserManagement.Infrastructure.Helpers;

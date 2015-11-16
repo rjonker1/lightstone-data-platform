@@ -1,5 +1,4 @@
-﻿using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Enums;
+﻿using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {

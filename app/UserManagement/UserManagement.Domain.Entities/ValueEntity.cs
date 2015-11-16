@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.NHibernate.Attributes;
 
-namespace UserManagement.Domain.Core.Entities
+namespace UserManagement.Domain.Entities
 {
     public abstract class ValueEntity : Entity, IValueEntity
     {

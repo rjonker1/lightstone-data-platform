@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Entities;
 
 namespace UserManagement.TestHelper.Helpers
 {

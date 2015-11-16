@@ -15,7 +15,7 @@ namespace UserManagement.Acceptance.Tests.Repositories.NoteEntities
         {
             RefreshDb(false);
             _repository = new EntityNoteRepository<CustomerNote>(Session);
-            SaveAndFlush(new CustomerNote(new Customer("Cust"), new Note("Text", new User())));
+            SaveAndFlush(new CustomerNote(new Customer("Cust"), new Note("Text")));
         }
 
         [Observation]

@@ -1,5 +1,5 @@
 ﻿using System;
-using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Repositories
 {

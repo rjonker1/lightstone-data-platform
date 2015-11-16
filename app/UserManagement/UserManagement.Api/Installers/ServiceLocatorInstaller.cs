@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using CommonServiceLocator.WindsorAdapter;
+using CommonServiceLocator.WindsorAdapter.Unofficial;
 using DataPlatform.Shared.Helpers.Extensions;
 using Microsoft.Practices.ServiceLocation;
 

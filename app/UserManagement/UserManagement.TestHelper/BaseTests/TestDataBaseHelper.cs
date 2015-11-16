@@ -3,7 +3,7 @@ using System.IO;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Entities;
 using UserManagement.TestHelper.Extensions;
 using UserManagement.TestHelper.Helpers;
 

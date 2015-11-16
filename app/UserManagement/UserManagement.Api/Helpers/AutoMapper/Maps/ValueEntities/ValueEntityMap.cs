@@ -1,19 +1,10 @@
 ﻿using System;
 using AutoMapper;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
 {
-    public class NoteEntityMap : ICreateAutoMapperMaps
-    {
-        public void CreateMaps()
-        {
-            Mapper.CreateMap<Note, NoteItemDto>();
-        }
-    }
-
     public class ValueEntityMap : ICreateAutoMapperMaps
     {
         public void CreateMaps()

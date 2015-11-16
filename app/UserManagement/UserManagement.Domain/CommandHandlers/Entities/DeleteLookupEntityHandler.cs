@@ -1,5 +1,5 @@
-﻿using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.MessageHandling;
+﻿using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules;
 using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Infrastructure.Repositories;

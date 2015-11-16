@@ -35,7 +35,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
                 .CheckList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.UtcNow, "Name", "Detail", "By", DateTime.UtcNow, "RegisteredName", "Reg#", new ContractType("Type"), EscalationType.AnnualPercentageAllProducts, ContractDuration.Custom) })
                 .CheckList(c => c.Industries, new HashSet<CustomerIndustry> { new CustomerIndustry(customer, Guid.NewGuid()) })
                 .CheckList(c => c.Addresses, new HashSet<CustomerAddress> { new CustomerAddress(customer, physicalAddress, AddressType.Physical), new CustomerAddress(customer, postalAddress, AddressType.Postal) })
-                .CheckList(c => c.CustomerNotes, new HashSet<CustomerNote> { new CustomerNote(customer, new Note("Note Text", new User{Id = Guid.NewGuid(), UserName = "UserName2"}){Id=Guid.NewGuid()}) })
+                .CheckList(c => c.CustomerNotes, new HashSet<CustomerNote> { new CustomerNote(customer, new Note("Note Text"){Id=Guid.NewGuid()}) })
                 .VerifyTheMappings(customer);
         }
     }

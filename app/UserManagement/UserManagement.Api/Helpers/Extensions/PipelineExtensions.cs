@@ -11,12 +11,11 @@ using Nancy;
 using Nancy.Bootstrapper;
 using NHibernate;
 using UserManagement.Api.Helpers.NancyRazorHelpers;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Infrastructure.Helpers;
 using UserManagement.Infrastructure.Repositories;
-using IEntity = UserManagement.Domain.Core.Entities.IEntity;
+using IEntity = UserManagement.Domain.Entities.IEntity;
 
 namespace UserManagement.Api.Helpers.Extensions
 {

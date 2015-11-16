@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using DataPlatform.Shared.Helpers.Extensions;
 using NHibernate;
 using NHibernate.Linq;
-using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Repositories
 {

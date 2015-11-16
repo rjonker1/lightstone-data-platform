@@ -41,6 +41,7 @@
     <OutputPath>bin\Prod\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ValueEntity.cs" />
     <Reference Include="Castle.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
@@ -92,6 +93,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -135,13 +137,19 @@
     <Compile Include="CustomerUser.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="ClientUserAlias.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="EntityNote.cs" />
+    <Compile Include="IEntity.cs" />
     <Compile Include="IEntityNote.cs" />
     <Compile Include="IIndustry.cs" />
+    <Compile Include="INamedEntity.cs" />
     <Compile Include="Individual.cs" />
     <Compile Include="IndividualAddress.cs" />
     <Compile Include="IndividualContactNumber.cs" />
     <Compile Include="IndividualEmail.cs" />
+    <Compile Include="IntEntity.cs" />
+    <Compile Include="IValueEntity.cs" />
+    <Compile Include="NamedEntity.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />
     <Compile Include="Note.cs" />

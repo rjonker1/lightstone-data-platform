@@ -19,7 +19,7 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
         {
             new PersistenceSpecification<CustomerNote>(Session, new CustomEqualityComparer())
                 .CheckReference(c => c.Entity, new Customer("Name"))
-                .CheckReference(c => c.Note, new Note("NoteText", new User{Id=Guid.NewGuid()}))
+                .CheckReference(c => c.Note, new Note("NoteText"))
                 .VerifyTheMappings();
         }
     }
