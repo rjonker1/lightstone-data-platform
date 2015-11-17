@@ -17,7 +17,6 @@ namespace Billing.Api.Helpers
             new UpdateBillingTransactionInstaller(),
             new AuthInstaller(),
             new ApiClientInstaller(),
-
         };
     }
 }
