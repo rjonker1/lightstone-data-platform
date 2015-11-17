@@ -5,6 +5,7 @@ using Api.Domain.Infrastructure.Bus;
 using Api.Domain.Infrastructure.Extensions;
 using Api.Domain.Infrastructure.Metadata;
 using Api.Helpers;
+using Api.Helpers.Validators;
 using Api.Infrastructure.Metadata;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -69,20 +70,15 @@ namespace Api
 
             container.Install(WindsorInstallerCollection.Installers);
 
-            container.Register(
-                Component.For<IAuthenticateUser>().ImplementedBy<UerManagementAuthenticator>().LifestyleTransient());
-            container.Register(
-                Component.For<IRouteDescriptionProvider>()
+            container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UerManagementAuthenticator>().LifestyleTransient());
+            container.Register(Component.For<IRouteDescriptionProvider>()
                     .ImplementedBy<ApiRouteDescriptionProvider>()
                     .LifestyleTransient());
-            container.Register(
-                Component.For<IApiMetaDataGenerator>().ImplementedBy<ApiMetaDataGenerator>().LifestyleTransient());
-            container.Register(
-                Component.For<IPackageBuilderApiClient>().ImplementedBy<PackageBuilderApiClient>().LifestyleTransient());
-            container.Register(
-                Component.For<IUserManagementApiClient>().ImplementedBy<UserManagementApiClient>().LifestyleTransient());
-            container.Register(
-                Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
+            container.Register(Component.For<IApiMetaDataGenerator>().ImplementedBy<ApiMetaDataGenerator>().LifestyleTransient());
+            container.Register(Component.For<IPackageBuilderApiClient>().ImplementedBy<PackageBuilderApiClient>().LifestyleTransient());
+            container.Register(Component.For<IUserManagementApiClient>().ImplementedBy<UserManagementApiClient>().LifestyleTransient());
+            container.Register(Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
+            container.Register(Component.For<IAuthenticateApi>().ImplementedBy<ApiRequestValidator>().LifestyleTransient());
             container.Register(Component.For<IAdvancedBus>().Instance(BusFactory.CreateAdvancedBus(ConfigurationManager.ConnectionStrings["api/bus/host"].ConnectionString)).LifestyleSingleton());
             container.Register(Component.For<IDispatchMessagesToBus<RequestMetadataMessage>>().ImplementedBy<RequestMessageDispatcher>().LifestyleSingleton());
         }

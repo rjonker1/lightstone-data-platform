@@ -63,6 +63,34 @@ namespace Lace.Test.Helper.Mothers.Requests.FinanceRequests
         }
     }
 
+    public class BmwFinanceRequestWithVinAndEngineNumber : IPointToLaceRequest
+    {
+        public DateTime RequestDate
+        {
+            get { return DateTime.Now; }
+        }
+
+        public IHavePackageForRequest Package
+        {
+            get { return BmwFinanceInterestsRequest.BmwFinanceRequestWithVinAndEngineNumber("JN1TAAT32Z00000681", "MR20644299B"); }
+        }
+
+        public IHaveRequestContext Request
+        {
+            get { return new RequestContextInformation(); }
+        }
+
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
+
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation(); }
+        }
+    }
+
     public class BmwFinanceRequestWithLicenseNumber : IPointToLaceRequest
     {
         public DateTime RequestDate

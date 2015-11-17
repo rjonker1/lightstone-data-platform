@@ -23,21 +23,5 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         {
             get { return SystemType.Api; }
         }
-
-        public string FromIpAddress
-        {
-            get { return "196.165.10.2"; }
-        }
-
-        public DeviceTypes FromDeviceType
-        {
-            get { return DeviceTypes.ApiClient; }
-        }
-
-
-        public string OsVersion
-        {
-            get { return "not available"; }
-        }
     }
 }

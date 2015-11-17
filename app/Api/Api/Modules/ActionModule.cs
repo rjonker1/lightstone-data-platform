@@ -18,8 +18,7 @@ namespace Api.Modules
 {
     public class ActionModule : SecureModule
     {
-        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi,
-            IDispatchMessagesToBus<RequestMetadataMessage> dispatcher)
+        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IAuthenticateApi authenticator,IDispatchMessagesToBus<RequestMetadataMessage> dispatcher)
         {
             Get["/"] = parameters =>
             {
@@ -39,14 +38,11 @@ namespace Api.Modules
                     var apiRequest = this.Bind<ApiRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
-                    new ApiRequestValidator(userManagementApi)
-                        .AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
+                    authenticator.AuthenticateNewRequest(token, apiRequest);
 
                     this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
-                    apiRequest.Validate();
-                    apiRequest.ContractVersion((long) 1.0); //TODO: Set here or in PB?
                     Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Execute Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
@@ -78,15 +74,12 @@ namespace Api.Modules
                     var apiRequest = this.Bind<ApiCommitRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
-                    new ApiRequestValidator(userManagementApi)
-                        .AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
+                    authenticator.AuthenticateExistingRequest(token, apiRequest);
 
                     this.Info(() => "Api request: ContractId {0} Api token: {1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
                     apiRequest.AddStateForRequest(Guid.Parse(parameters.requestId.ToString()), ((ApiCommitRequestUserState) int.Parse(parameters.stateId)));
-                    apiRequest.Validate();
-                    apiRequest.SetContractVersion((long) 1.0);
                     Context.Report(dispatcher, apiRequest.RequestId);
 
                     this.Info(() => "Api to PackageBuilder Commit Request Initialized. TimeStamp: {0}".FormatWith(DateTime.UtcNow));

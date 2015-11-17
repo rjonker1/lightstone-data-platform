@@ -11,8 +11,6 @@ namespace DataPlatform.Shared.Dtos
         public ApiCommitRequestDto()
         {
             UserState = UserState != ApiCommitRequestUserState.Cancelled ? UserState : ApiCommitRequestUserState.Cancelled;
-            FromIpAddress = "127.0.0.1";
-            DeviceType = DeviceTypes.ApiClient;
             SystemType = SystemType.Api;
         }
 
@@ -32,11 +30,14 @@ namespace DataPlatform.Shared.Dtos
             ContractVersion = version;
         }
 
-        public void SetRequestMetadata(DeviceTypes deviceType, SystemType systemType, string fromIpAddress)
+        public void SetRequestMetadata(SystemType systemType)
         {
-            FromIpAddress = fromIpAddress;
-            DeviceType = deviceType;
             SystemType = systemType;
+        }
+
+        public void SetContactNumber(string contactNumber)
+        {
+            ContactNumber = contactNumber;
         }
 
         [DataMember]
@@ -56,15 +57,11 @@ namespace DataPlatform.Shared.Dtos
 
         [DataMember]
         public string Username { get; set; }
-
         [DataMember]
-        public string FromIpAddress { get; private set; }
-
+        public string ContactNumber { get; set; }
+       
         [DataMember]
         public long ContractVersion { get; private set; }
-
-        [DataMember]
-        public DeviceTypes DeviceType { get; private set; }
 
         [DataMember]
         public SystemType SystemType { get; private set; }

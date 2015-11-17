@@ -10,6 +10,7 @@ namespace Api.Domain.Infrastructure.Dto
         public DateTime? TrialExpiration { get; set; }
         public bool? IsActive { get; set; }
         public bool IsLocked { get; set; }
+        public string IndividualContactNumber { get; set; }
 
         public IEnumerable<NamedEntityDto> Clients { get; set; }
         public IEnumerable<NamedEntityDto> Customers { get; set; }

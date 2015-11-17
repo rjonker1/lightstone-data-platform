@@ -28,9 +28,9 @@ namespace Api.Domain.Infrastructure.Extensions
             });
         }
 
-        public static void Metadata(this ApiRequestDto request, string fromIpAddress)
+        public static void Metadata(this ApiRequestDto request)
         {
-            request.SetRequestMetadata(DeviceTypes.ApiClient, SystemType.Api, fromIpAddress);
+            request.SetRequestMetadata(SystemType.Api);
         }
 
         public static void ContractVersion(this ApiRequestDto request, long version)
