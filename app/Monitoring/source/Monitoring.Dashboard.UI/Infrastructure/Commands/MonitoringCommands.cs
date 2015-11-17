@@ -11,4 +11,14 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Commands
             Request = request;
         }
     }
+
+    public class GetMonitoringForArumentCommand
+    {
+        public readonly MonitoringWithArgumentDto Argument;
+
+        public GetMonitoringForArumentCommand(MonitoringWithArgumentDto argument)
+        {
+            Argument = argument;
+        }
+    }
 }

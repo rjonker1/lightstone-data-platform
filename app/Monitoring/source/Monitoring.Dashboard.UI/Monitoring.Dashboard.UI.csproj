@@ -212,6 +212,7 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="assets\css\style.css.delete" />
+    <Content Include="assets\ang\app\dataProviderQueryMonitoringApp.js" />
     <Content Include="assets\css\AdminLTE.css" />
     <Content Include="assets\css\AdminLTE.min.css" />
     <Content Include="assets\css\skins\skin-black.css" />
@@ -240,6 +241,7 @@
     <Content Include="assets\img\icons.png" />
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\app.min.js" />
+    <Content Include="assets\js\config.js" />
     <Content Include="assets\js\demo.js" />
     <Content Include="assets\js\json-formatter.js" />
     <Content Include="assets\js\pages\dashboard.js" />
@@ -297,6 +299,8 @@
     <Content Include="Views\DataProvidersCaching.cshtml" />
     <Content Include="Views\Metadata\_ApiRequestMetadata.cshtml" />
     <Content Include="Views\ApiRequests.cshtml" />
+    <Content Include="Views\DataProviders\_QueryLog.cshtml" />
+    <Content Include="Views\DataProvidersQuery.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -332,7 +336,9 @@
     <Compile Include="Hubs\ApiRequestHub.cs" />
     <Compile Include="Hubs\DataProviderHub.cs" />
     <Compile Include="Infrastructure\Commands\MonitoringCommands.cs" />
+    <Compile Include="Infrastructure\Dto\DataProviderWithPagesDto.cs" />
     <Compile Include="Infrastructure\Dto\MonitoringRequestDto.cs" />
+    <Compile Include="Infrastructure\Dto\MonitoringWithArgumentDto.cs" />
     <Compile Include="Infrastructure\Handlers\ApiRequestHandler.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderCachingHandler.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderStatisticsHandler.cs" />
