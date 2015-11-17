@@ -74,6 +74,15 @@ namespace UserManagement.Domain.Entities
         }
 
         [DoNotMap]
+        public virtual bool HasNotes
+        {
+            get
+            {
+                return Notes.Any();
+            }
+        }
+
+        [DoNotMap]
         public virtual Address PhysicalAddress
         {
             get

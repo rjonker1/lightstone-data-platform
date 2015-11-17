@@ -5,10 +5,12 @@ namespace UserManagement.Domain.Dtos
 {
     public class NoteDto : EntityDto
     {
+        public Guid EntityNoteId { get; set; }
         public Guid NoteId { get; set; }
         public Guid EntityId { get; set; }
         public string AssemblyQualifiedName { get; set; }
         public string NoteText { get; set; }
+        public string RedirectPath { get; set; }
         public IEnumerable<NoteItemDto> Notes { get; set; }
 
         // Json.net
@@ -23,6 +25,8 @@ namespace UserManagement.Domain.Dtos
     }
     public class NoteItemDto : EntityDto
     {
-        public string NoteText { get; set; }
+        public Guid Id { get; set; }
+        public Guid NoteId { get; set; }
+        public string NoteNoteText { get; set; }
     }
 }

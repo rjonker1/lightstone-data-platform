@@ -18,7 +18,7 @@ namespace UserManagement.Infrastructure.Helpers
         IQueryable<ValueEntity> GetValueEntities(Type type, string value);
         PagedList<ValueEntity> GetValueEntities(Type type, string value, int pageIndex, int pageSize);
         IQueryable<NamedEntity> GetIndustryEntities(Type type, string name, Guid[] industries);
-        IQueryable<Note> GetEntityNotes(Type type);
+        IQueryable<EntityNote> GetEntityNotes(Type type);
     }
 
     public class EntityByTypeRepository : IEntityByTypeRepository
@@ -86,11 +86,11 @@ namespace UserManagement.Infrastructure.Helpers
             return new PagedList<ValueEntity>(GetValueEntities(type), pageIndex, pageSize, predicate);
         }
 
-        public IQueryable<Note> GetEntityNotes(Type type)
+        public IQueryable<EntityNote> GetEntityNotes(Type type)
         {
             var executorType = typeof(IEntityNoteRepository<>).MakeGenericType(type);
             var entities = (IQueryable)_container.Resolve(executorType);
-            return (from EntityNote item in entities select item.Note);
+            return (from EntityNote item in entities select item);
         }
     }
 }

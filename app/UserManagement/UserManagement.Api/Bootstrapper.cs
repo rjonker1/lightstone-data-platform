@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -10,9 +11,11 @@ using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
 using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
+using Nancy.Security;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using UserManagement.Api.Helpers;
 using UserManagement.Api.Helpers.Extensions;
+using UserManagement.Api.Helpers.Security;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.DataImports;
 using UserManagement.Infrastructure.Helpers;
@@ -96,7 +99,12 @@ namespace UserManagement.Api
 
             pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
             {
-                if (ctx.CurrentUser != null) ctx.ViewBag.UserName = ctx.CurrentUser.UserName;
+                if (ctx.CurrentUser != null)
+                {
+                    ctx.ViewBag.UserName = ctx.CurrentUser.UserName;
+                    if (!container.Kernel.HasComponent(typeof(IUserIdentity)))
+                        container.Register(Component.For<IUserIdentity>().UsingFactoryMethod(x => ctx.CurrentUser).LifestylePerWebRequest());
+                }
                 return null;
             });
 

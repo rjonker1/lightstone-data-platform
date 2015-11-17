@@ -99,15 +99,16 @@
 
     function gridActionFormatter(value, row, index) {
 
-        var lockUnlock = '<a class="btn btn-warning entity-lock" href="#/Customers/Lock/' + row.id + '">Lock</a>';
-
-        if (row.isLocked == true) lockUnlock = '<a class="btn btn-success entity-lock" href="#/Customers/UnLock/' + row.id + '">UnLock</a>';
+        var lockUnlock = '<a class="btn btn-warning entity-lock" href="#/Customers/Lock/' + row.id + '" title="Lock"><i class="fa fa-lock"></i></a>';
+        var icon = '<i class="fa fa-comment-o"></i>';
+        if (row.isLocked == true) lockUnlock = '<a class="btn btn-success entity-lock" href="#/Customers/UnLock/' + row.id + '" title="Unlock"><i class="fa fa-lock"></i></a>';
+        if (row.hasNotes == true) icon = '<i class="fa fa-comment"></i>';
 
         return [
-                '<a class="btn btn-primary entity-edit" href="#/Customers/' + row.id + '">Edit</a>' +
-                '<a class="btn btn-danger entity-remove" href="#/Customers/Delete/' + row.id + '">Delete</a>' +
+                '<a class="btn btn-primary entity-edit" href="#/Customers/' + row.id + '" title="Edit"><i class="fa fa-pencil-square-o"></i></a>' +
+                '<a class="btn btn-danger entity-remove" href="#/Customers/Delete/' + row.id + '" title="Delete"><i class="fa fa-times"></i></a>' +
                 '' + lockUnlock + '' +
-                '<a class="btn btn-default notes-view" href="/Notes/@typeof(CustomerNote).AssemblyQualifiedName/' + row.id + '">Notes</a>'
+                '<a class="btn btn-default notes-view" href="/Notes/@typeof(CustomerNote).AssemblyQualifiedName/' + row.id + '/Customers" onclick="return false;" title="Notes">' + icon + '</a>'
         ].join('');
     };
 

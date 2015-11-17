@@ -1,10 +1,13 @@
 ﻿using System;
+using UserManagement.Domain.Core.NHibernate.Attributes;
 
 namespace UserManagement.Domain.Entities
 {
     public class CustomerNote : EntityNote
     {
+        [Unique]
         public virtual Customer Entity { get; protected internal set; }
+        [Unique]
         public virtual Note Note { get; protected internal set; }
 
         protected CustomerNote() { }

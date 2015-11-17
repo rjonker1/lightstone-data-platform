@@ -18,12 +18,12 @@ namespace UserManagement.Api.Modules
     {
         public NoteModule(IEntityByTypeRepository entityRetriever, IBus bus)
         {
-            Get["/Notes/{type}/{id}"] = _ =>
+            Get["/Notes/{type}/{id}/{path}"] = _ =>
             {
                 var typeName = _.type.ToString();
                 var type = Type.GetType(typeName);
-                var notes = Mapper.Map<IEnumerable<Note>, IEnumerable<NoteItemDto>>(entityRetriever.GetEntityNotes(type)) as IEnumerable<NoteItemDto>;
-                var noteDto = new NoteDto(_.id, type, notes != null ? notes.Where(x => x != null) : Enumerable.Empty<NoteItemDto>());
+                var notes = Mapper.Map<IEnumerable<EntityNote>, IEnumerable<NoteItemDto>>(entityRetriever.GetEntityNotes(type)) as IEnumerable<NoteItemDto>;
+                var noteDto = new NoteDto(_.id, type, notes != null ? notes.Where(x => x != null) : Enumerable.Empty<NoteItemDto>()){ RedirectPath = _.path };
 
                 return Negotiate
                     .WithView("Index")
@@ -43,7 +43,7 @@ namespace UserManagement.Api.Modules
                     bus.Publish(new CreateUpdateEntity(entity, "Read"));
                 }
 
-                return Response.AsJson(dto.AssemblyQualifiedName);
+                return Response.AsRedirect(Context.Request.Headers.Referrer + "#/" + dto.RedirectPath);
             };
         }
     }
