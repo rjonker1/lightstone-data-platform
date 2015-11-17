@@ -27,7 +27,7 @@ function initializeCusomerRoutes(sammy) {
         context.load('/Customers', { dataType: 'html', cache: false })
             .swap()
             .then(function() {
-                bindNoteViewEvent();
+                initializePlugins();
             });
     });
     sammy.get('/Customers/Add', function(context) {
@@ -814,12 +814,10 @@ function initializePlugins() {
     });
     
     $('#table').on('load-success.bs.table', function (e, row, $element) {
-
+        
     });
-}
-
-function bindNoteViewEvent() {
-    $('.notes-view').click(function () {
+    
+    $('.notes-view').on("click", function () {
         var $self = $(this);
         var url = $self.attr('href');
         $.get(url, {}, function (response) {
