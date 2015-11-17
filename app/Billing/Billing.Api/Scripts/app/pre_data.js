@@ -146,3 +146,30 @@ function gridTransactionsFormatter(value, row, index) {
         'Total Transactions: ( ' + value + ' ) '
     ].join('');
 };
+
+function footerTextFormatter(data) {
+    return '';
+}
+
+function footerUsersFormatter(data) {
+    return '';
+}
+
+function footerAccountOwnerFormatter(data) {
+    return '';
+}
+
+function footerPackagesFormatter(data) {
+    return '';
+}
+
+function footerTransactionsFormatter(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].transactions;
+    }
+
+    return '<b>Total Transactions: </b>' + total;
+}

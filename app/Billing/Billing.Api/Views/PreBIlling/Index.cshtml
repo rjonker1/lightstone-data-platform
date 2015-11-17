@@ -96,6 +96,7 @@
                 showRefresh: true,
                 showColumns: true,
                 pagination: true,
+                showFooter: true,
                 pageNumber: 1,
                 pageSize: 10,
                 pageList: [10, 25, 50, 100, 'All'],
@@ -106,22 +107,26 @@
                 }, {
                     field: 'customerName',
                     title: 'Customer / Client Name',
-                    sortable: true
+                    sortable: true,
+                    footerFormatter: footerTransactionsFormatter
                 }, {
                     field: 'users',
                     title: '# Users',
                     formatter: gridUsersFormatter,
-                    events: userGridActionEvents
+                    events: userGridActionEvents,
+                    footerFormatter: footerUsersFormatter
                 }, {
                     field: 'accountOwner',
                     title: 'Account Owner',
                     formatter: accountOwnerMetaFormatter,
-                    sortable: true
+                    sortable: true,
+                    footerFormatter: footerAccountOwnerFormatter
                 }, {
                     field: 'products',
                     title: '# Packages',
                     formatter: gridPackagesFormatter,
-                    events: packageGridActionEvents
+                    events: packageGridActionEvents,
+                    footerFormatter: footerPackagesFormatter
                 }, {
                     field: 'transactions',
                     title: '# Transactions',
