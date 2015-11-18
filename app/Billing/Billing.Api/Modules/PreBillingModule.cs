@@ -238,7 +238,7 @@ namespace Billing.Api.Modules
 
                 endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
 
-                var preBilling = _preBillingDBRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
+                var preBilling = _preBillingRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
 
                 var report = new ReportDto
                 {
