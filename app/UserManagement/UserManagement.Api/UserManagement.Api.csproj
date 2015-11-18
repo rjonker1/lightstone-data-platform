@@ -770,6 +770,7 @@
     <Content Include="Views\Client\Billing.cshtml" />
     <Content Include="Views\Client\ClientUsers.cshtml" />
     <Content Include="Views\Note\Index.cshtml" />
+    <Content Include="Views\Note\NoteBody.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

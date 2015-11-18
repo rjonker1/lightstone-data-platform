@@ -1,4 +1,5 @@
 ﻿@using System
+@using System.Linq
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
 @using UserManagement.Domain.Dtos
@@ -23,35 +24,40 @@
                     <div class="clearfix"></div>
                 </form>
             </div>
-            <div class="modal-body">
-                @if (Model.Notes != null)
-                {
-                    <ul class="notes-list">
-                        @foreach (var note in Model.Notes)
+            @Html.Partial("Note/NoteBody", Model)
+            <div class="modal-footer">
+                <nav>
+                    <ul class="pagination">
+                        @*<li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>*@
+                        @foreach (var i in Enumerable.Range(1, Model.PageTotal))
                         {
-                            <li>
-                                <a data-id="@note.Id" data-note-id="@note.NoteId" data-text="@note.NoteNoteText"><b>@note.NoteNoteText</b></a>
-                            </li>
+                            <li><a class="note-page" href="/Notes/@Model.AssemblyQualifiedName/@Model.EntityId/@Model.RedirectPath/@i">@i</a></li>
                         }
+                        @*<li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>*@
                     </ul>
-                }
+                </nav>
             </div>
-            @*<div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>*@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script>
-    $('.notes-list a').click(function () {
+    $('.note-page').click(function () {
         var $self = $(this);
-        var id = $self.data('id');
-        var noteId = $self.data('noteId');
-        var text = $self.data('text');
-
-        $('#NoteId').val(noteId);
-        $('#EntityNoteId').val(id);
-        $('#NoteText').text(text);
-    })
+        var url = $self.attr('href');
+        console.log(url);
+        $.get(url, {}, function (response) {
+            var $modalBody = $(".modal-body");
+            $modalBody.html(response);
+        }, 'html');
+        
+        return false;
+    });
 </script>

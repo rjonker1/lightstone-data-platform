@@ -50,7 +50,7 @@ function initializeCusomerRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
-    sammy.get('/Customers/:id', function (context) {
+    sammy.get('#/Customers/:id', function (context) {
         context.load('/Customers/' + context.params.id, { dataType: 'html', cache: false })
             .swap()
             .then(function() {
@@ -455,7 +455,7 @@ function initializeLookupRoutes(sammy) {
 
 function initializeNoteRoutes(sammy) {
 
-    //sammy.get('/Notes/:type/:id', function (context) {
+    //sammy.get('/Notes/:type/:id/:returnPath', function (context) {
     //    context.load('/Notes/' + context.params.type + '/' + context.params.id, { dataType: 'html', cache: false })
     //        //.swap()
     //        .then(function (data) {

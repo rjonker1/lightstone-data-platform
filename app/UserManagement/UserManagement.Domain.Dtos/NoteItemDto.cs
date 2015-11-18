@@ -12,6 +12,13 @@ namespace UserManagement.Domain.Dtos
         public string NoteText { get; set; }
         public string RedirectPath { get; set; }
         public IEnumerable<NoteItemDto> Notes { get; set; }
+        public bool HasNextPage { get; set; }
+        public bool HasPreviousPage { get; set; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
+        public int PageTotal { get; set; }
+        public int RecordsFiltered { get; set; }
+        public int RecordsTotal { get; set; }
 
         // Json.net
         public NoteDto() { }
