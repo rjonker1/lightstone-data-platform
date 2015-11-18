@@ -43,7 +43,8 @@
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open", Model))
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
             <form action="@url" method="@method" class="form-horizontal">
                 @Html.HiddenFor(x => x.IsActive)
 
