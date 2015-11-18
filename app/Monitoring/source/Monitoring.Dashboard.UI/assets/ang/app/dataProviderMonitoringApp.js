@@ -105,8 +105,6 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             };
 
             $scope.ReInitializeService = function() {
-                //$scope.dataProviderMonitoring = [];
-                //dataProviderSignalRService.init();
                 dataProviderSignalRService.restart();
             };
         });

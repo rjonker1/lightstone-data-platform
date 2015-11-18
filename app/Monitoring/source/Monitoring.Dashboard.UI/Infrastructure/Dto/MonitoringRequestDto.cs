@@ -2,7 +2,6 @@
 {
     public class MonitoringRequestDto
     {
-     
         public MonitoringRequestDto()
         {
             
