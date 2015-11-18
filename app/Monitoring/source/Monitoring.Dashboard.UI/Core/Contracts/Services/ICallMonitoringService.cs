@@ -7,6 +7,5 @@ namespace Monitoring.Dashboard.UI.Core.Contracts.Services
     {
         List<DataProviderDto> GetMonitoringForDataProviders();
         List<DataProviderStatisticsDto> GetDataProviderStatistics();
-        List<ApiRequestMonitoringDto> GetApiRequests();
     }
 }

@@ -5,7 +5,7 @@ namespace Monitoring.Dashboard.UI.Core.Contracts.Handlers
 {
     public interface IHandleApiRequests
     {
-        List<ApiRequestMonitoringDto> ApiRequests { get; }
+        List<ApiRequestDto> ApiRequests { get; }
         void Handle();
     }
 }

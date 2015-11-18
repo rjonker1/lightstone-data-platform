@@ -1,8 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Dto
 {
+    [DataContract]
+    public class ApiRequestDto
+    {
+        public ApiRequestDto()
+        {
+            
+        }
+
+        public ApiRequestDto(List<ApiRequestUserAgentDto> userAgents, List<ApiRequestMonitoringDto> apiRequests)
+        {
+            UserAgents = userAgents;
+            ApiRequests = apiRequests;
+        }
+
+
+        [DataMember]
+        public List<ApiRequestUserAgentDto> UserAgents { get; private set; }
+        [DataMember]
+        public List<ApiRequestMonitoringDto> ApiRequests { get; private set; }
+    }
+
+
+    [DataContract]
+    public class ApiRequestUserAgentDto
+    {
+        public ApiRequestUserAgentDto()
+        {
+            
+        }
+        public ApiRequestUserAgentDto(string label, int value)
+        {
+            Label = label;
+            Value = value;
+        }
+
+        public string Label { get; private set; }
+        public int Value { get; private set; }
+    }
+
+
     [DataContract]
     public class ApiRequestMonitoringDto
     {
