@@ -38,5 +38,14 @@ namespace Monitoring.Domain.Repository
                 return connection.Query<TItem>(sql);
             }
         }
+
+
+        public IEnumerable<TItem> Items<TItem>(string sql, object param) where TItem : class
+        {
+            using (var connection = ConnectionFactoryManager.MonitoringConnection)
+            {
+                return connection.Query<TItem>(sql, param);
+            }
+        }
     }
 }
