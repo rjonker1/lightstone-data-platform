@@ -1,18 +1,99 @@
-﻿@model dynamic
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Pre Billing CoS", ""))
 
-@{
-    Layout = null;
-}
+<div class="box">
 
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title>title</title>
-    </head>
-    <body>
-        <div>
-              
+    <div style="margin-top: 0.5%;">
+        <div id="transactionRange" class="pull-left col-lg-2" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; float: left;">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            <span></span> <b class="caret"></b>
         </div>
-    </body>
-</html>
+    </div>
+
+    <table id="table"></table>
+
+    <h2 id="detail-table-header"></h2>
+
+    <script src="~/Scripts/app/pre_data.js"></script>
+
+    <script>
+
+        // Init
+        var startDateFilter = moment({ day: 26 }).subtract(1, 'month').format('YYYY-MM-DD');
+        var endDateFilter = moment({ day: 25 }).format('YYYY-MM-DD');
+
+        var today = moment().date();
+
+        if (today >= 26 && today < 31) {
+            endDateFilter = moment({ day: 25 }).add(1, 'month');
+            startDateFilter = moment({ day: 26 });
+        }
+
+        $('#table').bootstrapTable({
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                title: 'ID',
+                visible: false
+            }, {
+                title: 'DataProvider Name'
+            }, {
+                title: 'Total Transactions'
+            }, {
+                title: 'Billable Transactions'
+            }, {
+                title: 'Maximum Cost of Sale'
+            }, {
+                title: 'Total'
+            }]
+        });
+
+        Billing.Common();
+
+        //Hook to feed back to API
+        $('#transactionRange').on('apply.daterangepicker', function (ev, picker) {
+
+            startDateFilter = picker.startDate.format('YYYY-MM-DD');
+            endDateFilter = picker.endDate.format('YYYY-MM-DD');
+
+            $('#table').bootstrapTable('destroy');
+
+            $('#table').bootstrapTable({
+                url: '/PreBillingCoS?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
+                search: true,
+                showRefresh: true,
+                showColumns: true,
+                pagination: true,
+                pageNumber: 1,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100, 'All'],
+                columns: [{
+                    field: 'id',
+                    title: 'ID',
+                    visible: false
+                }, {
+                    field: 'dataProviderName',
+                    title: 'DataProvider Name'
+                }, {
+                    field: 'totalTransactions',
+                    title: 'Total Transactions'
+                }, {
+                    field: 'billableTransactions',
+                    title: 'Billable Transactions'
+                }, {
+                    field: 'maxCostOfSale',
+                    title: 'Maximum Cost of Sale'
+                }, {
+                    field: 'totalAmount',
+                    title: 'Total'
+                }]
+            });
+        });
+
+    </script>
+</div>

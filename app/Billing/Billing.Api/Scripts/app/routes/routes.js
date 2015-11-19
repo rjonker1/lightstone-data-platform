@@ -6,8 +6,10 @@
     });
 
     initializePreBilling(sammy);
+    initializePreBillingCoS(sammy);
     initializeStageBilling(sammy);
     initializeFinalBilling(sammy);
+    initializeFinalBillingCoS(sammy);
     intitializeMI(sammy);
     initializeAdminBilling(sammy);
     initializeAdminAuditLogBilling(sammy);
@@ -17,6 +19,13 @@ function initializePreBilling(sammy) {
 
     sammy.get('#/PreBilling', function(context) {
         context.load('/PreBilling', { dataType: 'html', cache: false }).swap();
+    });
+}
+
+function initializePreBillingCoS(sammy) {
+
+    sammy.get('#/PreBillingCoS', function (context) {
+        context.load('/PreBillingCoS', { dataType: 'html', cache: false }).swap();
     });
 }
 
@@ -31,6 +40,13 @@ function initializeFinalBilling(sammy) {
 
     sammy.get('#/FinalBilling', function (context) {
         context.load('/FinalBilling', { dataType: 'html', cache: false }).swap();
+    });
+}
+
+function initializeFinalBillingCoS(sammy) {
+
+    sammy.get('#/FinalBillingCoS', function (context) {
+        context.load('/FinalBillingCoS', { dataType: 'html', cache: false }).swap();
     });
 }
 
