@@ -14,7 +14,7 @@ namespace Recoveries.Test.Helper.Mothers.DataProviders
             var entryPoint = new MetadataEntryPointService();
             var request = new LicensePlateRequestBuilder().ForAllSources();
 
-            return entryPoint.GetResponsesFromLace(request);
+            return entryPoint.GetResponses(request);
         }
     }
 }
