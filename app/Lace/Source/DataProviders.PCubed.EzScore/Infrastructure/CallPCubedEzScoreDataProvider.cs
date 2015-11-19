@@ -44,7 +44,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
 
                 _logCommand.LogResponse(_response != null && _response.StatusCode == HttpStatusCode.OK ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
-                        .ForDatabaseType(), new { _response }, _dataProvider.BillablleState.NoRecordState);
+                        .ForWebApiType(), new { _response }, _dataProvider.BillablleState.NoRecordState);
 
                 TransformResponse(response);
             }
