@@ -3,9 +3,9 @@ using System.Linq;
 using AutoMapper;
 using Nancy;
 using Nancy.ModelBinding;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {

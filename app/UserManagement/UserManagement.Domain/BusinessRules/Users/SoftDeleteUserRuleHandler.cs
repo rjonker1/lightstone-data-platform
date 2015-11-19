@@ -1,7 +1,7 @@
 ﻿using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules.Users;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Domain.BusinessRules.Users
 {

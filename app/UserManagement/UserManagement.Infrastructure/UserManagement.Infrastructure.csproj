@@ -71,6 +71,10 @@
     <Reference Include="MemBus">
       <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -89,7 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\EntitiesByTypeHelper.cs" />
+    <Compile Include="Helpers\EntityByTypeRepository.cs" />
     <Compile Include="Helpers\PredicateBuilder.cs" />
     <Compile Include="MessageAdapter.cs" />
     <Compile Include="NHibernate\Conventions\AuditLogConvention.cs" />
@@ -116,12 +120,14 @@
     <Compile Include="NHibernate\MappingOverrides\CustomerAddressOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerIndustryOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerMappingOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\CustomerNoteOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\CustomerUserOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\IndividualAddressOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\IndividualContactNumberOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\IndividualEmailOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\IndividualOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\NamedEntityOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\NoteOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserAliasMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,8 +136,16 @@
     <Compile Include="Repositories\ContractBundleRepository.cs" />
     <Compile Include="Repositories\ContractRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\EntityNoteRepository.cs" />
+    <Compile Include="Repositories\IEntityNoteRepository.cs" />
+    <Compile Include="Repositories\INamedEntityRepository.cs" />
     <Compile Include="Repositories\IndividualRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IValueEntityRepository.cs" />
+    <Compile Include="Repositories\NamedEntityRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\ValueEntityRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -151,7 +165,9 @@
       <Name>UserManagement.Domain.Enums</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Microsoft.Web.Infrastructure.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

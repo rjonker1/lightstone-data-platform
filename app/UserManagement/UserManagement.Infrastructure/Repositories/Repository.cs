@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 using DataPlatform.Shared.Helpers.Extensions;
 using NHibernate;
 using NHibernate.Linq;
-using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Entities;
 
-namespace UserManagement.Domain.Core.Repositories
+namespace UserManagement.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T>
     {

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.UserAliases;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Domain.CommandHandlers.UserAliases
 {

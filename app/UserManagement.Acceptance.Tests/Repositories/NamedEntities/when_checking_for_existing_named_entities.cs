@@ -1,6 +1,6 @@
 ﻿using System;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 using UserManagement.TestHelper.BaseTests;
 using Xunit.Extensions;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using NHibernate;
-using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Entities;
 
-namespace UserManagement.Domain.Core.Repositories
+namespace UserManagement.Infrastructure.Repositories
 {
     public class ValueEntityRepository<T> : Repository<T>, IValueEntityRepository<T> where T : IValueEntity, IEntity
     {

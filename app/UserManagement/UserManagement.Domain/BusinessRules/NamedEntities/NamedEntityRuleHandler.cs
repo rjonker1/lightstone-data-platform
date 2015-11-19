@@ -2,7 +2,6 @@
 using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Dtos;
 using UserManagement.Infrastructure.Helpers;
@@ -12,11 +11,11 @@ namespace UserManagement.Domain.BusinessRules.NamedEntities
     public class NamedEntityRuleHandler : AbstractMessageHandler<NamedEntityDto>
     {
         //Entity retriever
-        private readonly IRetrieveEntitiesByType _entityRetriever;
+        private readonly IEntityByTypeRepository _entityRetriever;
 
         //private readonly INamedEntityRepository<NamedEntity> _repository;
 
-        public NamedEntityRuleHandler(IRetrieveEntitiesByType entityRetriever)
+        public NamedEntityRuleHandler(IEntityByTypeRepository entityRetriever)
         {
             _entityRetriever = entityRetriever;
         }

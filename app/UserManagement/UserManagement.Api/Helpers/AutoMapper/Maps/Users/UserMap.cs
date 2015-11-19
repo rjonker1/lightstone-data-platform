@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Microsoft.Practices.ServiceLocation;
-using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
 {

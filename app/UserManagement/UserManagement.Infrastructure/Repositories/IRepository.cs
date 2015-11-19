@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace UserManagement.Domain.Core.Repositories
+namespace UserManagement.Infrastructure.Repositories
 {
     public interface IRepository<T> : IQueryable<T>
     {

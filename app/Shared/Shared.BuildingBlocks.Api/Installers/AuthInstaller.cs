@@ -12,7 +12,7 @@ namespace Shared.BuildingBlocks.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<ITokenizer>().UsingFactoryMethod(() => new Tokenizer(cfg => cfg.AdditionalItems().WithKeyCache(new FileSystemTokenKeyStore(new RootPathProvider())))).LifestylePerWebRequest());
+            container.Register(Component.For<ITokenizer>().UsingFactoryMethod(() => new Tokenizer(cfg => cfg.WithKeyCache(new FileSystemTokenKeyStore(new RootPathProvider())))).LifestylePerWebRequest());
         }
     }
 }

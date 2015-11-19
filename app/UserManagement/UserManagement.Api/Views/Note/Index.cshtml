@@ -1,0 +1,63 @@
+﻿@using System
+@using System.Linq
+@using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Dtos
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.NoteDto>
+<div class="modal fade note-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <form action="/notes" method="POST">
+                    <input type="hidden" name="EntityId" value="@Model.EntityId" />
+                    <input type="hidden" id="EntityNoteId" name="EntityNoteId" value="@Model.EntityNoteId" /> />
+                    <input type="hidden" id="NoteId" name="NoteId" value="@Model.NoteId" />
+                    <input type="hidden" name="AssemblyQualifiedName" value="@Model.AssemblyQualifiedName" />
+                    <input type="hidden" name="RedirectPath" value="@Model.RedirectPath" />
+                    <div class="col-md-8">
+                        <textarea rows="4" cols="50" class="form-control" id="NoteText" name="NoteText" placeholder="Add new note">@Model.NoteText</textarea>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+            @Html.Partial("Note/NoteBody", Model)
+            <div class="modal-footer">
+                <nav>
+                    <ul class="pagination">
+                        @*<li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>*@
+                        @foreach (var i in Enumerable.Range(1, Model.PageTotal))
+                        {
+                            <li><a class="note-page" href="/Notes/@Model.AssemblyQualifiedName/@Model.EntityId/@Model.RedirectPath/@i">@i</a></li>
+                        }
+                        @*<li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>*@
+                    </ul>
+                </nav>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    $('.note-page').click(function () {
+        var $self = $(this);
+        var url = $self.attr('href');
+        console.log(url);
+        $.get(url, {}, function (response) {
+            var $modalBody = $(".modal-body");
+            $modalBody.html(response);
+        }, 'html');
+        
+        return false;
+    });
+</script>

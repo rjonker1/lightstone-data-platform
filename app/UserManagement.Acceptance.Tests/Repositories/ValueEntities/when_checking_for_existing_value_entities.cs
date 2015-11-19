@@ -1,6 +1,6 @@
 ﻿using System;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 using UserManagement.TestHelper.BaseTests;
 using Xunit.Extensions;
 
@@ -9,7 +9,7 @@ namespace UserManagement.Acceptance.Tests.Repositories.ValueEntities
     public class when_checking_for_existing_value_entities : TestDataBaseHelper
     {
         private IValueEntityRepository<Role> _repository;
-        private Guid _id = Guid.NewGuid();
+        private readonly Guid _id = Guid.NewGuid();
         public override void Observe()
         {
             RefreshDb();

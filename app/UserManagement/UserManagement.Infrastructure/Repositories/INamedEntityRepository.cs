@@ -1,7 +1,7 @@
 ﻿using System;
-using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Entities;
 
-namespace UserManagement.Domain.Core.Repositories
+namespace UserManagement.Infrastructure.Repositories
 {
     //TODO: Refactor repositories into Shared
     public interface INamedEntityRepository<T> : IRepository<T> where T : INamedEntity, IEntity

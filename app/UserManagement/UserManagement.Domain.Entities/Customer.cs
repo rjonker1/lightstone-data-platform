@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
 using UserManagement.Domain.Enums;
 
@@ -11,7 +10,6 @@ namespace UserManagement.Domain.Entities
     public class Customer : NamedEntity
     {
         public virtual User AccountOwner { get; protected internal set; }
-        public virtual string Notes { get; protected internal set; }
         private CustomerAccountNumber _customerAccountNumber = new CustomerAccountNumber();
         public virtual CustomerAccountNumber CustomerAccountNumber
         {
@@ -64,6 +62,26 @@ namespace UserManagement.Domain.Entities
         public virtual DateTime? TrialExpiration { get; protected internal set; }
         public virtual Individual Individual { get; protected internal set; }
         public virtual ISet<CustomerAddress> Addresses { get; protected internal set; }
+        public virtual ISet<CustomerNote> CustomerNotes { get; protected internal set; }
+
+        [DoNotMap]
+        public virtual IEnumerable<Note> Notes
+        {
+            get
+            {
+                return CustomerNotes.Select(x => x.Note);
+            }
+        }
+
+        [DoNotMap]
+        public virtual bool HasNotes
+        {
+            get
+            {
+                return Notes.Any();
+            }
+        }
+
         [DoNotMap]
         public virtual Address PhysicalAddress
         {

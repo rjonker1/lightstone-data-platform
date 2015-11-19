@@ -2,9 +2,9 @@
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.Roles;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Domain.BusinessRules.Lookups.Roles
 {

@@ -1,0 +1,32 @@
+﻿@using System
+@using System.Linq
+@using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Dtos
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.NoteDto>
+
+<div class="modal-body">
+    @if (Model.Notes != null)
+    {
+        <ul class="notes-list">
+            @foreach (var note in Model.Notes)
+            {
+                <li>
+                    <a data-id="@note.Id" data-note-id="@note.NoteId" data-text="@note.NoteNoteText"><b>@note.NoteNoteText</b></a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+<script>
+    $('.notes-list a').click(function () {
+        var $self = $(this);
+        var id = $self.data('id');
+        var noteId = $self.data('noteId');
+        var text = $self.data('text');
+
+        $('#NoteId').val(noteId);
+        $('#EntityNoteId').val(id);
+        $('#NoteText').text(text);
+    });
+</script>

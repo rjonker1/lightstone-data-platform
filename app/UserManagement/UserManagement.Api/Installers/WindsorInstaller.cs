@@ -8,7 +8,7 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IWindsorContainer>().Instance(container));
+            container.Register(Component.For<IWindsorContainer>().Instance(container).LifestylePerWebRequest());
         }
     }
 }
