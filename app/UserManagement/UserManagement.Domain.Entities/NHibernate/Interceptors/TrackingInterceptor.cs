@@ -5,8 +5,6 @@ using System.Linq;
 using NHibernate;
 using NHibernate.Transaction;
 using NHibernate.Type;
-using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Repositories;
 using ISession = NHibernate.ISession;
 
 namespace UserManagement.Domain.Entities.NHibernate.Interceptors

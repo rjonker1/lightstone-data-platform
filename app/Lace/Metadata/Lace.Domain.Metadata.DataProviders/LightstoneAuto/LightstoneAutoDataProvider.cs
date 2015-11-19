@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
@@ -47,8 +48,7 @@ namespace Lace.Domain.Metadata.DataProviders.LightstoneAuto
 
                 consumer.ConsumeDataProvider(response);
 
-                if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() || response.OfType<IProvideDataFromLightstoneAuto>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromLightstoneAuto>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

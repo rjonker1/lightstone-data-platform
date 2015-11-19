@@ -9,6 +9,7 @@ function initializeRoutes(sammy) {
     initializeClientRoutes(sammy);
     initializeUserRoutes(sammy);
     initializeContractRoutes(sammy);
+    initializeNoteRoutes(sammy);
     initializeLookupRoutes(sammy);
 }
 
@@ -23,7 +24,11 @@ function initializeAuditLogRoutes(sammy) {
 function initializeCusomerRoutes(sammy) {
 
     sammy.get('#/Customers', function (context) {
-        context.load('/Customers', { dataType: 'html', cache: false }).swap();
+        context.load('/Customers', { dataType: 'html', cache: false })
+            .swap()
+            .then(function() {
+                bindNoteViewEvent();
+            });
     });
     sammy.get('/Customers/Add', function(context) {
         context.load('/Customers/Add', { dataType: 'html', cache: false })
@@ -45,7 +50,7 @@ function initializeCusomerRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
-    sammy.get('/Customers/:id', function (context) {
+    sammy.get('#/Customers/:id', function (context) {
         context.load('/Customers/' + context.params.id, { dataType: 'html', cache: false })
             .swap()
             .then(function() {
@@ -448,6 +453,28 @@ function initializeLookupRoutes(sammy) {
     });
 }
 
+function initializeNoteRoutes(sammy) {
+
+    //sammy.get('/Notes/:type/:id/:returnPath', function (context) {
+    //    context.load('/Notes/' + context.params.type + '/' + context.params.id, { dataType: 'html', cache: false })
+    //        //.swap()
+    //        .then(function (data) {
+    //        });
+    //});
+    
+    sammy.post('/Notes/:type/:id', function (context) {
+        $(context.target).ajaxSubmit({
+            success: function (response) {
+                //if (response.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
+            }
+        });
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false;
+    });
+
+}
+
 function initializePlugins() {
     $.ajaxSetup({
         //crossDomain: true,
@@ -784,5 +811,27 @@ function initializePlugins() {
         close: function(event, ui) {
             $(this).val('');
         }
+    });
+    
+    $('#table').on('post-body.bs.table', function (e, row, $element) {
+
+    });
+}
+
+function bindNoteViewEvent() {
+    $('.notes-view').click(function() {
+        var $self = $(this);
+        var url = $self.attr('href');
+        $.get(url, {}, function(response) {
+            var $body = $("body");
+            var $response = $(response);
+            $body.append($response);
+            var $modal = $(".note-modal");
+            $modal.modal('show');
+            $modal.on('hidden.bs.modal', function() {
+                $modal.remove();
+            });
+        }, 'html');
+        return false;
     });
 }

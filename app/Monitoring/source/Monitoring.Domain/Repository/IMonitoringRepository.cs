@@ -6,5 +6,6 @@ namespace Monitoring.Domain.Repository
     public interface IMonitoringRepository : IRepository
     {
         IEnumerable<TItem> Items<TItem>(string sql) where TItem : class;
+        IEnumerable<TItem> Items<TItem>(string sql, object param) where TItem : class;
     }
 }

@@ -72,6 +72,8 @@ namespace Lim.Web.UI
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
+            base.ConfigureApplicationContainer(container);
+
             container.Register(Component.For<IRepository, LimRepository>());
             container.Register(Component.For<IUserManagementApiClient, UserManagementApiClient>());
             container.Register(Component.For<ISaveApiConfiguration, SaveApiConfiguration>());

@@ -1,6 +1,5 @@
 ﻿using System;
 using AutoMapper;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 

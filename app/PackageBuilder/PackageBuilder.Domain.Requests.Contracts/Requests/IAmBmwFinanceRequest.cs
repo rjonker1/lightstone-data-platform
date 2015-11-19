@@ -8,5 +8,6 @@ namespace PackageBuilder.Domain.Requests.Contracts.Requests
         IAmVinNumberRequestField VinNumber { get; }
         IAmIdentityNumberRequestField IdNumber { get; }
         IAmLicenceNumberRequestField LicenceNumber { get; }
+        IAmEngineNumberRequestField EngineNumber { get; }
     }
 }

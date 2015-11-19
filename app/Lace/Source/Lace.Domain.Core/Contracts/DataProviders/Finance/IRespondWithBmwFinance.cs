@@ -6,7 +6,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Finance
     public interface IRespondWithBmwFinance : IProvideType
     {
         string FinanceHouse { get; }
-        decimal DealReference { get; }
+        string DealReference { get; }
         DateTime StartDate { get; }
         DateTime ExpireDate { get; }
         string Chassis { get; }
@@ -17,5 +17,6 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Finance
         string ProductCategory { get; }
         string DealStatus { get; }
         string ClientNumber { get; }
+        string AccountNumberReference { get; }
     }
 }

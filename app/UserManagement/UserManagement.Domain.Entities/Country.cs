@@ -1,6 +1,4 @@
-﻿using UserManagement.Domain.Core.Entities;
-
-namespace UserManagement.Domain.Entities
+﻿namespace UserManagement.Domain.Entities
 {
     public class Country : ValueEntity
     {

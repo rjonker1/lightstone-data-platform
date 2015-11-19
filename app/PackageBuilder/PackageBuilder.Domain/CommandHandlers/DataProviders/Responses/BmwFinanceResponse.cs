@@ -12,7 +12,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
         {
             var result = new Lace.Domain.Core.Entities.BmwFinanceResponse(new List<IRespondWithBmwFinance>()
             {
-                new BmwFinanceRecord("",0.0M,DateTime.MinValue, DateTime.MinValue, "","","","",0,"","")
+                new BmwFinanceRecord("","",DateTime.MinValue, DateTime.MinValue, "","","","",0,"","","","")
             });
             result.AddResponseState(DataProviderResponseState.NoRecords);
             return result;

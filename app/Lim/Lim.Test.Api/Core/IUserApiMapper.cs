@@ -15,7 +15,7 @@ namespace Lim.Test.Api.Core
     {
         private const string Token = "2b1eeb42-0cf7-4234-b798-3bbaa293e273";
         private const string Username = "LightStoneAuto";
-        private const string Password = "49q42FwDSajrF9";
+        private const string Password = "1234567890";
 
         public IUserIdentity GetUserFromToken(string token)
         {

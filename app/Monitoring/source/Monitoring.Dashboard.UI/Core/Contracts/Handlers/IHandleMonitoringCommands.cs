@@ -8,5 +8,6 @@ namespace Monitoring.Dashboard.UI.Core.Contracts.Handlers
     {
         List<DataProviderDto> MonitoringResponse { get; }
         void Handle(GetMonitoringCommand command);
+        void Handle(GetMonitoringForArumentCommand command);
     }
 }

@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Configuration;
-using System.Text;
 using Common.Logging;
-using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using Hangfire;
 using Hangfire.Storage;
 using Microsoft.Owin.Hosting;
 using Nancy;
 using Workflow.Billing.Domain.Entities;
-using Workflow.Billing.Domain.Schedules;
 using Workflow.Billing.Helpers.Schedules;
 using Workflow.Billing.Messages.Publishable;
 using CacheSchedule = Workflow.Billing.Helpers.Schedules.CacheSchedule;

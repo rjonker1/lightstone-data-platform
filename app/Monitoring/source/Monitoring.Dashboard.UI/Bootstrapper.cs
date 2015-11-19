@@ -34,13 +34,16 @@ namespace Monitoring.Dashboard.UI
 
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
+            base.ApplicationStartup(container, pipelines);
+
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
             StaticConfiguration.DisableErrorTraces = false;
-            base.ApplicationStartup(container, pipelines);
         }
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
+            base.RequestStartup(container, pipelines, context);
+
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
                 this.Info(() => "Monitoring API invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
@@ -71,12 +74,10 @@ namespace Monitoring.Dashboard.UI
                 this.Error(() => "Error on Monitoring request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
                 return ErrorResponse.FromException(exception);
             });
-
-            base.RequestStartup(container, pipelines, context);
         }
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
-            container.Register(Component.For<ITransactionRepository>().Instance(new BillingTransactionRepository()));
+            base.ConfigureApplicationContainer(container);
 
             container.Register(Component.For<IRepositoryMapper, RepositoryMapper>());
             container.Register(Component.For<IHaveTypeMappings, MappingForMonitoringTypes>());

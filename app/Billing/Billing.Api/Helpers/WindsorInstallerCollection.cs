@@ -1,5 +1,6 @@
 ﻿using Billing.Api.Installers;
 using Castle.MicroKernel.Registration;
+using Shared.BuildingBlocks.Api.Installers;
 using Workflow.Billing.Installers;
 
 namespace Billing.Api.Helpers
@@ -14,8 +15,8 @@ namespace Billing.Api.Helpers
             new BusInstaller(),
             new AutoMapperInstaller(),
             new UpdateBillingTransactionInstaller(),
-            new AuthenticationInstaller(),
-            new ApiClientInstaller()
+            new AuthInstaller(),
+            new ApiClientInstaller(),
         };
     }
 }

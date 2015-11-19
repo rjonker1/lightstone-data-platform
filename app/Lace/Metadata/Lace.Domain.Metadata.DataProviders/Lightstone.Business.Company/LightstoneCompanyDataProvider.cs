@@ -7,6 +7,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 using Workflow.Lace.Messages.Core;
@@ -40,8 +41,7 @@ namespace Lace.Domain.Metadata.DataProviders.Lightstone.Business.Company
                     new FakeCallingLightstoneBusinessCompanyExternalWebService());
                 consumer.ConsumeDataProvider(response);
 
-                if (!response.OfType<IProvideDataFromLightstoneBusinessCompany>().Any() || response.OfType<IProvideDataFromLightstoneBusinessCompany>().First() == null)
-                    CallFallbackSource(response, _command);
+                if (!response.HasRecords<IProvideDataFromLightstoneBusinessCompany>()) CallFallbackSource(response, _command);
             }
 
             CallNextSource(response, _command);

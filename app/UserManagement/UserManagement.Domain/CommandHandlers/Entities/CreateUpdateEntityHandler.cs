@@ -1,12 +1,12 @@
 ﻿using System;
 using AutoMapper;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Helpers;
 using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Domain.CommandHandlers.Entities
 {

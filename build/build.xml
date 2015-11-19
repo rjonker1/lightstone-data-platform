@@ -114,7 +114,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="false">
+    <!-- <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Scheduler</name>
       <folder>app/Billing/Billing.Scheduler</folder>
       <author>CustomApp</author>
@@ -124,7 +124,7 @@
        <include pattern="bin\" to="content\bin"/>
         <include pattern="*.config" to="content"/>
       </includes>
-    </nuget>
+    </nuget> -->
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Reporting.Api</name>
       <folder>app/Reporting/Reporting.Api</folder>

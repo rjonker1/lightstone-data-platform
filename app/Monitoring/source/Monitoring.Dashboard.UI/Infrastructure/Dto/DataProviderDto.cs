@@ -48,6 +48,9 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Dto
         [DataMember]
         public string JsonPayload { get; private set; }
 
+        [DataMember]
+        public short RowCount { get; private set; }
+
         public DataProviderDto()
         {
             
@@ -55,7 +58,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Dto
 
         public DataProviderDto(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date,
             bool hasErrors,
-            string elapsedTime, long packageVersion, string packageName, int dataProviderCount)
+            string elapsedTime, long packageVersion, string packageName, int dataProviderCount, short rowCount = 0)
         {
             Id = id;
             SerializedPayloads = serializedPayloads;
@@ -65,6 +68,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Dto
             PackageName = packageName;
             PackageVersion = packageVersion;
             DataProviderCount = dataProviderCount;
+            RowCount = rowCount;
         }
 
         public DataProviderDto SetState(int errorCount)

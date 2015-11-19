@@ -1,0 +1,20 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using UserManagement.Domain.Core.NHibernate.Attributes;
+
+namespace UserManagement.Domain.Entities
+{
+    public abstract class ValueEntity : Entity, IValueEntity
+    {
+        [Required, Unique]
+        public virtual string Value { get; protected internal set; }
+
+        public ValueEntity() { }
+
+        protected ValueEntity(string value, Guid id = new Guid())
+            : base(id)
+        {
+            Value = value;
+        }
+    }
+}

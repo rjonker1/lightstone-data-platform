@@ -2,15 +2,15 @@
 
 function gridUsersFormatter(value, row, index) {
 
-    var count = 0;
+    //var count = 0;
 
-    for (var i = 0; i < row.users.length; i++) {
+    //for (var i = 0; i < row.users.length; i++) {
 
-        if (row.users[i].hasTransactions) count++;
-    }
+    //    if (row.users[i].hasTransactions) count++;
+    //}
 
     return [
-        'Total Users: ( ' + count + ' ) ' +
+        'Total Users: ( ' + row.users + ' ) ' +
         '<button type="button" class="view btn btn-primary btn-md">' +
             'View' +
             '</button>'
@@ -81,8 +81,8 @@ function gridPackagesFormatter(value, row, index) {
     ].join('');
 };
 
-function accountOwnerMetaFormatter(meta, row, index) {
-    return meta.accountOwner;
+function accountOwnerMetaFormatter(value, row, index) {
+    return row.accountMeta != null ? row.accountMeta.accountOwner : 'None found';
 };
 
 window.packageGridActionEvents = {

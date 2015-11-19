@@ -1,0 +1,57 @@
+﻿<div ng-app="dataProviderQueryMonitoringApp">
+    <div class="row">
+        <div ng-controller="DataProviderQueryController">
+            <div class="col-md-5">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Query Log</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <form role="form">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="query-log-data-argument" placeholder="enter value to query logs by">
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button type="submit" id="query-log-data" class="btn btn-primary" ng-click="Query('query-log-data-argument');">Query</button>
+                            </div>
+                        </form>
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>Request</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr ng-repeat="response in QueryResults.Response" ng-class="{'hasErrorsClass':response.hasErrors, 'hasNoErrorsClass' : !response.hasErrors}">
+                                <td ng-click="Toggle($index,'log-formatted-json');" style="cursor: pointer;"><span style="font-size: 12px">{{response.id}}&nbsp;{{response.packageName}}&nbsp;v{{response.packageVersion}}</span>&nbsp;{{response.elapsedTime}}</td>
+                                <td>
+                                    <span ng-class="{'label label-danger':response.HasErrors, 'label label-success' : !response.HasErrors}">{{response.state}}</span>
+                                    <div style="display: none;" id="toggle-{{$index}}">
+                                        <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.jsonPayload}}</textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="#">&laquo;</a></li>
+                            <li ng-repeat="page in QueryResults.Pages">
+                                <a href="#" ng-click="QueryWithPage('query-log-data-argument', page)">{{page}}</a>
+                            </li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div><!-- /.box -->
+            </div>
+            <div class="col-md-7">
+                <div id="log-formatted-json" style="display: none;">
+                    <div>
+                        <input type="button" id="button-collapse-expand" ng-click="CollapseOrExpand('button-collapse-expand');" value="collapse"/>
+                    </div>
+                    <div class="canvas" id="canvas-display"><pre class="CodeContainer"></pre></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

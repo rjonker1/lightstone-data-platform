@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Converters
 {

@@ -6,7 +6,7 @@ using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.Bmw.Finance.Factory;
+using Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Factories;
 using Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Management;
 using Lace.Domain.DataProviders.Bmw.Finance.Queries;
 using Lace.Domain.DataProviders.Core.Configuration;
@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
                     .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
 
                 _bmwFinances =
-                    new BmwFinanceDataBasedOnRequestFactory().Get(new BmwFinanceQuery(_repository),
+                    new GetFinanceDataRequestFactory().Get(new BmwFinanceQuery(_repository),
                         _dataProvider.GetRequest<IAmBmwFinanceRequest>(), response).ToList();
 
                 _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,

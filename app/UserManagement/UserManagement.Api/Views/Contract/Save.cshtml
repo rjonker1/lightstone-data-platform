@@ -29,9 +29,6 @@
     }
 </style>
 
-<link rel="stylesheet" type="text/css" href="~/Content/bundleDropdown/style1.css" />
-<script src="~/Scripts/bundleDropdown/modernizr.custom.63321.js"></script>
-
 
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
@@ -46,7 +43,8 @@
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open", Model))
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
             <form action="@url" method="@method" class="form-horizontal">
                 @Html.HiddenFor(x => x.IsActive)
 
@@ -261,7 +259,7 @@
                                 <option value=""></option>
                                 @foreach (var bundle in Model.ContractBundleList)
                                 {
-                                    <option value="@bundle.Id|@bundle.TransactionLimit|@bundle.Price">@bundle.Name - @bundle.TransactionLimit tx @@ R @bundle.Price</option>
+                                    <option value="@bundle.Id|@bundle.TransactionLimit|@bundle.Price|@bundle.Name">@bundle.Name - @bundle.TransactionLimit tx @@ R @bundle.Price</option>
                                 }
                             </select>
                         </div>
@@ -300,12 +298,14 @@
                 @Html.Partial("Shared/BoxFooter")
             </form>
         </div>
+        
+        <div id="infographic" class="col-md-6">
+            
+        </div>
 
     </div>
 
 </div>
-
-<script type="text/javascript" src="~/Scripts/bundleDropdown/jquery.dropdown.js"></script>
 
 <script type="text/javascript">
 
@@ -320,13 +320,28 @@
             @foreach (var bundle in Model.ContractBundleList)
             {
                 <text>
-                    bundles.push(["@bundle.Id", "@bundle.TransactionLimit", "@bundle.Price"]);
+                    bundles.push(["@bundle.Id", "@bundle.TransactionLimit", "@bundle.Price", "@bundle.Name"]);
             </text>
             }
 
             for (var i = 0; i < bundles.length; i++) {
                 if (bundles[i][0] == bundleId) {
-                    $('#ContractBundle').val(bundles[i][0] + '|' + bundles[i][1] + '|' + bundles[i][2]).trigger('chosen:updated');
+                    $('#ContractBundle').val(bundles[i][0] + '|' + bundles[i][1] + '|' + bundles[i][2] + '|' + bundles[i][3]).trigger('chosen:updated');
+
+                    $('#infographic').html('<div class="col-sm-6 col-md-6" style="margin-top: 0.7%;">' +
+                       '<div id="bundle1" class="well">' +
+                            '<h2 class="text-warning">' + bundles[i][3] + '</h2>' +
+                            '<p><span class="label label-warning">OVERVIEW</span></p>' +
+                            '<ul>' +
+                                '<li><label id="transactionLimit">' + bundles[i][1] + '</label> transactions</li>' +
+                                '<li>Pro rata thereafter</li>' +
+                            '</ul>' +
+                            '<p></p>' +
+                            '<hr>' +
+                            '<h3>R <label id="bundlePrice">' + bundles[i][2] + '</label> / first ' + bundles[i][1] + ' transactions</h3>' +
+                            '<hr>' +
+                        '</div>' +
+                    '</div>');
                 }
             }
 
@@ -346,6 +361,21 @@
             $('.contractBundleTransactionLimit').val(bundleValues[1]);
             $('.contractBundlePrice').val(bundleValues[2]);
 
+            $('#infographic').html('<div class="col-sm-6 col-md-6" style="margin-top: 0.7%;">' +
+               '<div id="bundle1" class="well">'+
+                    '<h2 class="text-warning">' + bundleValues[3] + '</h2>' +
+                    '<p><span class="label label-warning">OVERVIEW</span></p>'+
+                    '<ul>'+
+                        '<li><label id="transactionLimit">' + bundleValues[1] + '</label> transactions</li>' +
+                        '<li>Pro rata thereafter</li>'+
+                    '</ul>'+
+                    '<p></p>'+
+                    '<hr>'+
+                    '<h3>R <label id="bundlePrice">' + bundleValues[2] + '</label> / first ' + bundleValues[1] + ' transactions</h3>' +
+                    '<hr>'+
+                '</div>' +
+            '</div>');
+
             $('#bundleWarning').html('<p>Please note: This contract has been assigned a bundle pricing scheme.</p>' +
                 '<p><a class="btn btn-warning btn-md" onclick="removeBundle()"><i class="icon-ok"></i> Remove Bundled Pricing</a></p>');
         }
@@ -357,6 +387,7 @@
         $('.contractBundleTransactionLimit').val('');
         $('.contractBundlePrice').val('');
         $('#ContractBundle').val('').trigger('chosen:updated');
+        $('#infographic').html('');
         $('#bundleWarning').html('');
     };
 </script>
