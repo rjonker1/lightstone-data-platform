@@ -1,5 +1,4 @@
-﻿using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.NHibernate.Attributes;
+﻿using UserManagement.Domain.Core.NHibernate.Attributes;
 
 namespace UserManagement.Domain.Entities
 {

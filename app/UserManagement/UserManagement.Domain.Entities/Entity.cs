@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace UserManagement.Domain.Core.Entities
+namespace UserManagement.Domain.Entities
 {
     [DataContract]
     public abstract class Entity : IEntity

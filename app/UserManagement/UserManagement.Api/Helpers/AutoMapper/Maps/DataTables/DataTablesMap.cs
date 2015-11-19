@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DataPlatform.Shared.Helpers;
 using UserManagement.Api.ViewModels;
-using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.DataTables
 {

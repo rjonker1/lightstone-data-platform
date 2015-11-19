@@ -1,4 +1,4 @@
-﻿namespace UserManagement.Domain.Core.Entities
+﻿namespace UserManagement.Domain.Entities
 {
     public interface INamedEntity
     {

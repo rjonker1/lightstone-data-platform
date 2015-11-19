@@ -89,6 +89,7 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<NamedEntityDto> Contracts { get; set; }
         public IEnumerable<Guid> UserIds { get; set; }
         public IEnumerable<UserDto> Users { get; set; }
+        public bool HasNotes { get; set; }
 
         public CustomerDto()
         {

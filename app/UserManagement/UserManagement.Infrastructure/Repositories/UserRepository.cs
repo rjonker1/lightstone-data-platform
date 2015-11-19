@@ -2,7 +2,6 @@
 using System.Linq;
 using DataPlatform.Shared.Helpers;
 using NHibernate;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Infrastructure.Helpers;
 

@@ -11,7 +11,7 @@ namespace UserManagement.Api.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             this.Info(() => "Attempting to install HelperInstaller");
-            container.Register(Component.For<IRetrieveEntitiesByType>().ImplementedBy<EntitiesByTypeHelper>().LifestyleTransient());
+            container.Register(Component.For<IEntityByTypeRepository>().ImplementedBy<EntityByTypeRepository>().LifestyleTransient());
             this.Info(() => "Successfully installed HelperInstaller");
         }
     }

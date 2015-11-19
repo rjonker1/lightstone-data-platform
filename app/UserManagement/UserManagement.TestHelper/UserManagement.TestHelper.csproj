@@ -94,6 +94,10 @@
       <Project>{4ca5036f-e26d-4345-ab68-d670e948f50f}</Project>
       <Name>UserManagement.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserManagement.Domain.Entities\UserManagement.Domain.Entities.csproj">
+      <Project>{3CFF1FF6-1AAE-435A-9C81-BB0793979596}</Project>
+      <Name>UserManagement.Domain.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -78,6 +78,7 @@
     <Compile Include="IntegrationClientDto.cs" />
     <Compile Include="IntegrationContractDto.cs" />
     <Compile Include="NamedEntityDto.cs" />
+    <Compile Include="NoteItemDto.cs" />
     <Compile Include="PackageDto.cs" />
     <Compile Include="PagedCollectionDto.cs" />
     <Compile Include="PlatformStatusDto.cs" />
