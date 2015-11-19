@@ -11,8 +11,6 @@ using Nancy.Responses.Negotiation;
 using Nancy.Security;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
-using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
@@ -95,7 +93,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Get["/Customers/{id}"] = parameters =>
+            Get["/Customers/{id:guid}"] = parameters =>
             {
                 var guid = (Guid)parameters.id;
                 var dto = Mapper.Map<Customer, CustomerDto>(customers.Get(guid));

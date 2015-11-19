@@ -6,15 +6,15 @@ using Nancy;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
+using UserManagement.Domain.Entities;
 using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api.Modules
 {
     public class NamedEntityModule : SecureModule
     {
-        public NamedEntityModule(IRetrieveEntitiesByType entityRetriever)
+        public NamedEntityModule(IEntityByTypeRepository entityRetriever)
         {
             Get["/NamedEntities/{type}/{filter}"] = parameters =>
             {

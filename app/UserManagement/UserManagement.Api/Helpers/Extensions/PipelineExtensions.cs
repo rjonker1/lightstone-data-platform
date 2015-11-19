@@ -11,12 +11,11 @@ using Nancy;
 using Nancy.Bootstrapper;
 using NHibernate;
 using UserManagement.Api.Helpers.NancyRazorHelpers;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Infrastructure.Helpers;
 using UserManagement.Infrastructure.Repositories;
-using IEntity = UserManagement.Domain.Core.Entities.IEntity;
+using IEntity = UserManagement.Domain.Entities.IEntity;
 
 namespace UserManagement.Api.Helpers.Extensions
 {
@@ -66,7 +65,7 @@ namespace UserManagement.Api.Helpers.Extensions
             });
         }
 
-        public static void AddLookupDataToViewBag<T>(this IPipelines pipelines, IRetrieveEntitiesByType entityRetriever) where T : IValueEntity, IEntity
+        public static void AddLookupDataToViewBag<T>(this IPipelines pipelines, IEntityByTypeRepository entityRetriever) where T : IValueEntity, IEntity
         {
             var type = typeof(T);
             var valueEntities = entityRetriever.GetValueEntities(type);

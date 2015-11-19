@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
 using UserManagement.Domain.Core.Security;
 using UserManagement.Domain.Enums;
@@ -10,9 +9,6 @@ namespace UserManagement.Domain.Entities
 {
     public class User : Entity
     {
-        //public virtual string FirstName { get; protected internal set; }
-        //public virtual string LastName { get; protected internal set; }
-        //public virtual string IdNumber { get; protected internal set; }
         public virtual string ContactNumber { get; protected internal set; }
         [Unique]
         public virtual string UserName { get; protected internal set; }

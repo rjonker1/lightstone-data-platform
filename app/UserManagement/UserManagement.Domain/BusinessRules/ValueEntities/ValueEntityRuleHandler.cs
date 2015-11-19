@@ -1,9 +1,9 @@
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
-using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
+using UserManagement.Domain.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Domain.BusinessRules.ValueEntities
 {

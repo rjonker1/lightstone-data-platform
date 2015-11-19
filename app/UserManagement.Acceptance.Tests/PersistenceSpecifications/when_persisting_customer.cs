@@ -31,10 +31,11 @@ namespace UserManagement.Acceptance.Tests.PersistenceSpecifications
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))
                 .CheckProperty(c => c.CreateSource, CreateSourceType.Web)
-                .CheckList(c => c.CustomerUsers, new HashSet<CustomerUser> { new CustomerUser(customer, new User(), true) })
+                .CheckList(c => c.CustomerUsers, new HashSet<CustomerUser> { new CustomerUser(customer, new User { Id = Guid.NewGuid(), UserName = "UserName1" }, true) })
                 .CheckList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.UtcNow, "Name", "Detail", "By", DateTime.UtcNow, "RegisteredName", "Reg#", new ContractType("Type"), EscalationType.AnnualPercentageAllProducts, ContractDuration.Custom) })
                 .CheckList(c => c.Industries, new HashSet<CustomerIndustry> { new CustomerIndustry(customer, Guid.NewGuid()) })
                 .CheckList(c => c.Addresses, new HashSet<CustomerAddress> { new CustomerAddress(customer, physicalAddress, AddressType.Physical), new CustomerAddress(customer, postalAddress, AddressType.Postal) })
+                .CheckList(c => c.CustomerNotes, new HashSet<CustomerNote> { new CustomerNote(customer, new Note("Note Text"){Id=Guid.NewGuid()}) })
                 .VerifyTheMappings(customer);
         }
     }
