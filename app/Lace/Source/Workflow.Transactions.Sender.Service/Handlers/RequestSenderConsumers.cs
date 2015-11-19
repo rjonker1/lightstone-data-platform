@@ -43,7 +43,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource) request.DataProvider.Id,
-                        request.CommandType, @event.GetType()))));
+                        request.CommandType, @event.GetType()), request.Date)));
 
             _publisher.SendToBus(@event);
             //new DataProviderEventBus(BusFactory.CreateAdvancedBus("workflow/dataprovider/queue")).Send(@event,
@@ -66,7 +66,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource) request.DataProvider.Id,
-                        request.CommandType, @event.GetType()))));
+                        request.CommandType, @event.GetType()), request.Date)));
 
             _publisher.SendToBus(@event);
         }
@@ -92,7 +92,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                 new DataProviderEvent(new EventIndentifier(request.RequestId,
                     new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId), DataProviderCommandSource.EntryPoint,
-                        request.CommandType, @event.GetType()))));
+                        request.CommandType, @event.GetType()), request.Date)));
 
             _publisher.SendToBus(@event);
         }
@@ -112,7 +112,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource) request.DataProvider.Id,
-                        request.CommandType, @event.GetType()))));
+                        request.CommandType, @event.GetType()), request.Date)));
 
             _publisher.SendToBus(@event);
         }
@@ -132,7 +132,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
                         GetNextSequence(request.RequestId),
                         (DataProviderCommandSource)request.DataProvider.Id,
-                        request.CommandType, @event.GetType()))));
+                        request.CommandType, @event.GetType()), request.Date)));
 
             _publisher.SendToBus(@event);
         }

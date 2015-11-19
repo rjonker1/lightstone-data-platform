@@ -14,7 +14,7 @@ namespace Workflow.Lace.Mappers
             {
                 return new[]
                 {
-                    "Id", "CommitSequence", "Payload", "DataProvider", "DataProviderId", "CommandType", "CommandTypeId",
+                    "Id", "CommitSequence", "Payload", "DataProvider", "CommitStamp", "DataProviderId", "CommandType", "CommandTypeId",
                     "Type"
                 };
             }
@@ -39,6 +39,7 @@ namespace Workflow.Lace.Mappers
                 DataProviderId = command.Command.Payload.DataProviderId,
                 CommandType = command.Command.Payload.CommandType,
                 CommandTypeId = command.Command.Payload.CommandTypeId,
+                CommitStamp = command.Command.CommitStamp,
                 Type = command.Command.Payload.TypeStringValue
             };
             connection.Execute(sql, values);
