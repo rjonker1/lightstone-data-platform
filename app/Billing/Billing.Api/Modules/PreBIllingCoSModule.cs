@@ -35,7 +35,7 @@ namespace Billing.Api.Modules
                     dto.BillableTransactions = db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
                                                     .DistinctBy(x => x.UserTransaction.RequestId).Count();
 
-                    dto.TotalAmount = db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
+                    dto.TotalCostOfSale = db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
                                                     .DistinctBy(x => x.UserTransaction.RequestId).Sum(x => x.DataProvider.CostPrice);
 
                     dto.MaxCostOfSale = db.Count(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName) > 0 ?
@@ -58,6 +58,6 @@ namespace Billing.Api.Modules
         public int TotalTransactions { get; set; }
         public int BillableTransactions { get; set; }
         public double MaxCostOfSale { get; set; }
-        public double TotalAmount { get; set; }
+        public double TotalCostOfSale { get; set; }
     }
 }

@@ -38,26 +38,18 @@
             pageSize: 10,
             pageList: [10, 25, 50, 100, 'All'],
             columns: [{
-                field: 'id',
                 title: 'ID',
                 visible: false
             }, {
-                field: 'dataProviderName',
-                title: 'DataProvider Name',
-                sortable: true
+                title: 'DataProvider Name'
             }, {
-                field: 'accountOwner',
-                title: 'Account Owner',
-                sortable: true
+                title: 'Total Transactions'
             }, {
-                field: 'products',
-                title: '# Packages',
-                formatter: gridPackagesFormatter,
-                events: packageGridActionEvents
+                title: 'Billable Transactions'
             }, {
-                field: 'transactions',
-                title: '# Transactions',
-                formatter: gridTransactionsFormatter
+                title: 'Maximum Cost of Sale'
+            }, {
+                title: 'Total Cost of Sale'
             }]
         });
 
@@ -72,7 +64,7 @@
             $('#table').bootstrapTable('destroy');
 
             $('#table').bootstrapTable({
-                url: '/PreBilling?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
+                url: '/FinalBillingCoS?startDate=' + startDateFilter + '&endDate=' + endDateFilter,
                 search: true,
                 showRefresh: true,
                 showColumns: true,
@@ -82,31 +74,23 @@
                 pageList: [10, 25, 50, 100, 'All'],
                 columns: [{
                     field: 'id',
-                    title: 'Item ID',
+                    title: 'ID',
                     visible: false
                 }, {
-                    field: 'customerName',
-                    title: 'Customer / Client Name',
-                    sortable: true
+                    field: 'dataProviderName',
+                    title: 'DataProvider Name'
                 }, {
-                    field: 'users',
-                    title: '# Users',
-                    formatter: gridUsersFormatter,
-                    events: userGridActionEvents
+                    field: 'totalTransactions',
+                    title: 'Total Transactions'
                 }, {
-                    field: 'accountOwner',
-                    title: 'Account Owner',
-                    formatter: accountOwnerMetaFormatter,
-                    sortable: true
+                    field: 'billableTransactions',
+                    title: 'Billable Transactions'
                 }, {
-                    field: 'products',
-                    title: '# Packages',
-                    formatter: gridPackagesFormatter,
-                    events: packageGridActionEvents
+                    field: 'maxCostOfSale',
+                    title: 'Maximum Cost of Sale'
                 }, {
-                    field: 'transactions',
-                    title: '# Transactions',
-                    formatter: gridTransactionsFormatter
+                    field: 'totalCostOfSale',
+                    title: 'Total Cost of Sale'
                 }]
             });
         });
