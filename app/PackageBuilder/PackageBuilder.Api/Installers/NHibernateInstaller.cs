@@ -45,14 +45,10 @@ namespace PackageBuilder.Api.Installers
             container.Register(Component.For<ISessionFactory>()
                 .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
                 .LifestyleSingleton());
-            if (HttpContext.Current != null)
-                container.Register(Component.For<ISession>()
-                    .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
-                    .LifestylePerWebRequest());
-            else // Sets lifestyle for testing to avoid -> Castle.MicroKernel.ComponentResolutionException, Looks like you forgot to register the http module Castle.MicroKernel.Lifestyle.PerWebRequestLifestyleModule
-                container.Register(Component.For<ISession>()
-                    .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
-                    .LifestyleTransient());
+
+            container.Register(Component.For<ISession>()
+                .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
+                .LifeStyle.HybridPerWebRequestPerThread());
         }
 
         protected virtual void TreatConfiguration(Configuration configuration)

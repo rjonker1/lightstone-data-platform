@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Api.Domain.Infrastructure.Dto;
 using Api.Domain.Infrastructure.Extensions;
 using DataPlatform.Shared.Dtos;
@@ -11,8 +13,8 @@ namespace Api.Helpers.Validators
 {
     public interface IAuthenticateApi
     {
-        void AuthenticateNewRequest(string authToken, ApiRequestDto apiRequest);
-        void AuthenticateExistingRequest(string authToken, ApiCommitRequestDto apiRequest);
+        void AuthenticateNewRequest(string authToken, CancellationToken ct, ApiRequestDto apiRequest);
+        void AuthenticateExistingRequest(string authToken, CancellationToken ct, ApiCommitRequestDto apiRequest);
     }
 
     public class ApiRequestValidator : IAuthenticateApi
@@ -25,24 +27,24 @@ namespace Api.Helpers.Validators
             _userManagementApiClient = userManagementApiClient;
         }
 
-        public void AuthenticateNewRequest(string authToken, ApiRequestDto apiRequest)
+        public async void AuthenticateNewRequest(string authToken, CancellationToken ct, ApiRequestDto apiRequest)
         {
-            var result = ValidateUserCustomerContract(authToken, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId,apiRequest.PackageId);
+            var result = await ValidateUserCustomerContract(authToken, ct, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId,apiRequest.PackageId);
             apiRequest.Validate();
             apiRequest.ContractVersion(result.ContractVersion);
             apiRequest.SetContactNumber(result.ContactNumber);
         }
 
-        public void AuthenticateExistingRequest(string authToken, ApiCommitRequestDto apiRequest)
+        public async void AuthenticateExistingRequest(string authToken, CancellationToken ct, ApiCommitRequestDto apiRequest)
         {
-            var result = ValidateUserCustomerContract(authToken, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
+            var result = await ValidateUserCustomerContract(authToken, ct, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
             apiRequest.Validate();
             apiRequest.SetContractVersion(result.ContractVersion);
             apiRequest.SetContactNumber(result.ContactNumber);
         }
 
 
-        private AuthenticationResult ValidateUserCustomerContract(string authToken, Guid userId, Guid customerClientId, Guid contractId, Guid packageId)
+        private async Task<AuthenticationResult> ValidateUserCustomerContract(string authToken, CancellationToken ct, Guid userId, Guid customerClientId, Guid contractId, Guid packageId)
         {
             #region ValuePopulation Validation
 
@@ -56,24 +58,23 @@ namespace Api.Helpers.Validators
             #region isLocked Validation
 
             // Validate User
-            var user = _userManagementApiClient.Get<ValidationDto>(authToken, "/Users/Details/{id}",
-                new[] {new KeyValuePair<string, string>("id", userId + "")}, null);
+            var user = await _userManagementApiClient.GetAsync<ValidationDto>(authToken, ct, "/Users/Details/{id}",
+                new[] {new KeyValuePair<string, string>("id", userId + "")}, null).ConfigureAwait(false);
 
             if (user == null)
-                throw new LightstoneAutoException("User: " + userId +
-                                                  " not found. Please make sure the UserId entered is correct. Alternatively please re-authenticate token.");
+                throw new LightstoneAutoException("User: " + userId + " not found. Please make sure the UserId entered is correct. Alternatively please re-authenticate token.");
             if (user.IsLocked) throw new LightstoneAutoException("User: " + userId + " is locked");
 
             //Validate Customer|Client
             var client = new ValidationDto();
 
-            var customer = _userManagementApiClient.Get<ValidationDto>(authToken, "Customers/Details/{id}",
+            var customer = await _userManagementApiClient.GetAsync<ValidationDto>(authToken, ct, "Customers/Details/{id}",
                 new[] {new KeyValuePair<string, string>("id", customerClientId + "")}, null);
             if (customer != null && customer.IsLocked) throw new LightstoneAutoException("Customer: " + customerClientId + " is locked");
 
             if (customer == null)
             {
-                client = _userManagementApiClient.Get<ValidationDto>(authToken, "/Clients/Details/{id}",
+                client = await _userManagementApiClient.GetAsync<ValidationDto>(authToken, ct, "/Clients/Details/{id}",
                     new[] {new KeyValuePair<string, string>("id", customerClientId + "")}, null);
 
                 if (client == null) throw new LightstoneAutoException("CustomerClientId: " + customerClientId + " not found");
@@ -109,7 +110,7 @@ namespace Api.Helpers.Validators
             #region Contract relationship validation
 
             // Validate Contract
-            var contract = _userManagementApiClient.Get<ValidationDto>(authToken, "/Contracts/Details/{id}",
+            var contract = await _userManagementApiClient.GetAsync<ValidationDto>(authToken, ct, "/Contracts/Details/{id}",
                 new[] {new KeyValuePair<string, string>("id", contractId + "")}, null);
 
             // Package, Customer, Client relationship check
@@ -124,6 +125,7 @@ namespace Api.Helpers.Validators
             }
 
             var contactNumber =  !string.IsNullOrEmpty(user.IndividualContactNumber) ? user.IndividualContactNumber : (customer == null || string.IsNullOrEmpty(customer.IndividualContactNumber) ? client.IndividualContactNumber : customer.IndividualContactNumber);
+            
             return new AuthenticationResult(contactNumber,(long)1.0);
             
             #endregion
