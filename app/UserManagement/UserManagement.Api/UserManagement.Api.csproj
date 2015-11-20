@@ -632,6 +632,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\Extensions\EnumExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
+    <Compile Include="Helpers\Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\NancyRazorHelpers\EditorExtensions.cs" />
     <Compile Include="Helpers\NancyRazorHelpers\Extensions\ExpressionExtensions.cs" />
     <Compile Include="Helpers\NancyRazorHelpers\Extensions\HtmlTagExtensions.cs" />

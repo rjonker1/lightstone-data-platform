@@ -69,7 +69,7 @@ namespace UserManagement.Domain.Entities
         {
             get
             {
-                return CustomerNotes.Select(x => x.Note);
+                return CustomerNotes.Where(x => !x.Deleted).Select(x => x.Note);
             }
         }
 

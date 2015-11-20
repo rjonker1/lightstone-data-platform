@@ -462,8 +462,15 @@ function initializeNoteRoutes(sammy) {
     //        });
     //});
     
-    sammy.post('/Notes/:type/:id', function (context) {
+    sammy.post('/Notes', function (context) {
         $(context.target).ajaxSubmit({
+            //beforeSubmit: function (arr, $form, options) {
+            //    if ($('#NoteText').val().trim().length > 0) {
+            //        toastr["error"]("Error", "Please enter note text to save");
+            //        return false;
+            //    }
+            //    return true;
+            //},
             success: function (response) {
                 //if (response.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
             }
