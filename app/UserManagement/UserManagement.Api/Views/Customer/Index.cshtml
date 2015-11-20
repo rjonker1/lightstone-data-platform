@@ -115,4 +115,8 @@
     $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Customers/Add", text: "Add" }).appendTo($("div.box-header"));
 
     UserManagement.overrideDataTablesStyling();
+
+    $('#table').on('post-body.bs.table', function (e, row, $element) {
+        bindNoteViewEvent();
+    });
 </script>
