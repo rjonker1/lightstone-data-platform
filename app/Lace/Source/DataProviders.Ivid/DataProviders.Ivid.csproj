@@ -118,7 +118,6 @@
     <Compile Include="Infrastructure\HandleIvidSourceCall.cs" />
     <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidResponse.cs" />
-    <None Include="Infrastructure\Management\IvidDataRetriever.cs.delete" />
     <Compile Include="Infrastructure\RequestDataFromIvidSource.cs" />
     <Compile Include="IvidDataProvider.cs" />
     <Compile Include="Service References\IvidServiceReference\Reference.cs">

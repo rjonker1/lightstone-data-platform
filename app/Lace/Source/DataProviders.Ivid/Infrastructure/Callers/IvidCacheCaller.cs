@@ -39,10 +39,8 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Callers
             try
             {
                 var parameter = GetCacheSearch(_request);
-                if (string.IsNullOrEmpty(parameter))
-                    CallNext(response);
 
-                _cacheResponse = DataProviderRepository.GetKeyFromCache<IvidResponse>(string.Format(IvidResponse.CacheKey, parameter));
+                _cacheResponse = string.IsNullOrEmpty(parameter) ? null : DataProviderRepository.GetKeyFromCache<IvidResponse>(string.Format(IvidResponse.CacheKey, parameter));
 
                 if (_cacheResponse != null)
                 {

@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Acceptance.Tests.Helper;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
-using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
+using Lace.Domain.DataProviders.Ivid.Infrastructure.Callers;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Mothers.Requests;
@@ -23,10 +25,10 @@ namespace Lace.Acceptance.Tests.Caching
         private ICollection<IPointToLaceRequest> _request;
         private IAmDataProvider _dataProvider;
         private readonly ISendCommandToBus _command;
-        private HpiStandardQueryResponse _response;
-        private IvidDataRetriever _retriever;
+        private ICallTheDataProviderSource _caller;
         private readonly ILog _log = LogManager.GetLogger<when_requesting_ivid_data_from_the_cache>();
-        private ILogCommandTypes _logCommand;
+        private readonly ILogCommandTypes _logCommand;
+        private ICollection<IPointToLaceProvider> _response;
 
         private HpiStandardQueryRequest _ividRequest;
 
@@ -40,53 +42,60 @@ namespace Lace.Acceptance.Tests.Caching
         public override void Observe()
         {
             TestCacheRepository.ClearAll();
-            _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
-            _retriever = IvidDataRetriever.Start(_logCommand, _log).RetrieveFromApi(_ividRequest, _dataProvider, out _response);
-            var transformer = new TransformIvidResponse(_response);
-            transformer.Transform();
+            _response = new List<IPointToLaceProvider>();
+            var callers = new IvidCallerFactory(_dataProvider,_logCommand);
+            callers.Create().CallTheDataProvider(_response);
         }
 
-        [Observation(Skip = "Need cache to be running")]
+        [Observation(Skip = "Need cache to be running")] //
         public void then_request_for_license_number_should_exist_in_cache()
         {
+            Task.Delay(10000);
+
+            _response = new List<IPointToLaceProvider>();
             _request = new[] { new LicensePlateNumberIvidOnlyRequest() };
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
-            var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .RetrieveFromCache(_ividRequest);
+            _caller = new IvidCacheCaller(new IvidNullCaller(), _ividRequest, _dataProvider, _logCommand);
+            _caller.CallTheDataProvider(_response);
+            
 
-            Task.Delay(5000);
-
-            retriever.NoNeedToCallApi.ShouldBeTrue();
-            retriever.CacheResponse.ShouldNotBeNull();
-            retriever.CacheResponse.Vin.ShouldEqual("3C4PDCKG7DT526617");
+            _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvid>().First().Vin.ShouldEqual("W0LPC6EC8DG072314");
         }
 
         [Observation(Skip = "Need cache to be running")]
         public void then_request_for_vin_number_should_exist_in_cache()
         {
+            Task.Delay(10000);
+
+            _response = new List<IPointToLaceProvider>();
             _request = new[] { new VinNumberIvidOnlyRequest() };
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
-            var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .RetrieveFromCache(_ividRequest);
-            Task.Delay(5000);
+            _caller = new IvidCacheCaller(new IvidNullCaller(), _ividRequest, _dataProvider, _logCommand);
+            _caller.CallTheDataProvider(_response);
+            
 
-            retriever.NoNeedToCallApi.ShouldBeTrue();
-            retriever.CacheResponse.ShouldNotBeNull();
-            retriever.CacheResponse.License.ShouldEqual("CN62KZGP");
+            _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvid>().First().License.ShouldEqual("CN62KZGP");
         }
 
         [Observation(Skip = "Need cache to be running")]
         public void then_request_for_register_no_should_exist_in_cache()
         {
+            Task.Delay(10000);
+
+            _response = new List<IPointToLaceProvider>();
             _request = new[] { new RegisterNumberIvidOnlyRequest() };
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
-            var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .RetrieveFromCache(_ividRequest);
-            Task.Delay(5000);
+            _caller = new IvidCacheCaller(new IvidNullCaller(), _ividRequest, _dataProvider, _logCommand);
+            _caller.CallTheDataProvider(_response);
+            
 
-            retriever.NoNeedToCallApi.ShouldBeTrue();
-            retriever.CacheResponse.ShouldNotBeNull();
-            retriever.CacheResponse.License.ShouldEqual("CN62KZGP");
+            _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvid>().First().License.ShouldEqual("CN62KZGP");
         }
     }
 }

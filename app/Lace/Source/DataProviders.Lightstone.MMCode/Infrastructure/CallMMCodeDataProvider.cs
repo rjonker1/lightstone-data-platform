@@ -22,13 +22,8 @@ namespace DataProviders.MMCode.Infrastructure
         private readonly ILog _log;
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
-
         private readonly IReadOnlyRepository _repository;
-
-        //private IRetrieveCarInformation _carInformation;
         private MmCode _mmCode;
-
-
         public CallMmCodeDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
             _log = LogManager.GetLogger(GetType());
