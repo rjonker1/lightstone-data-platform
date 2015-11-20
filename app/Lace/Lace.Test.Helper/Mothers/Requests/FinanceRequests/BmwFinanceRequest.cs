@@ -44,7 +44,7 @@ namespace Lace.Test.Helper.Mothers.Requests.FinanceRequests
 
         public IHavePackageForRequest Package
         {
-            get { return BmwFinanceInterestsRequest.BmwFinanceRequestWithVinNumber("AAVZZZ17Z9U010429"); }
+            get { return BmwFinanceInterestsRequest.BmwFinanceRequestWithVinNumber("WBAVM12080VM57801"); }
         }
 
         public IHaveRequestContext Request
@@ -128,7 +128,7 @@ namespace Lace.Test.Helper.Mothers.Requests.FinanceRequests
 
         public IHavePackageForRequest Package
         {
-            get { return BmwFinanceInterestsRequest.BmwFinanceRequestWithAccountNumber("150100100861578"); }
+            get { return BmwFinanceInterestsRequest.BmwFinanceRequestWithAccountNumber("01064133"); }
         }
 
         public IHaveRequestContext Request

@@ -49,7 +49,8 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Factories
                             : Factory.MineEngineNumber(response);
 
                         var vinEngineNumber = new VinEngineIdDto(vinNumber, engineNumber).VinAndEngineNumber;
-                        return !string.IsNullOrEmpty(vinEngineNumber) ? query.GetWithVinEngineId(vinEngineNumber) : null;
+                        return !string.IsNullOrEmpty(vinEngineNumber)
+                            ? query.GetWithVinEngineId(vinEngineNumber) : null;
                     }
 
                 },
@@ -63,15 +64,6 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure.Factories
                     Order.Third,
                     (request, response, query) =>
                         string.IsNullOrEmpty(request.AccountNumber.GetValue()) ? null : query.GetWithAccountNumber(request.AccountNumber.GetValue())
-                },
-                {
-                    Order.Fourth, (request, response, query) =>
-                    {
-                        var vinNumber = !string.IsNullOrEmpty(request.VinNumber.GetValue())
-                            ? request.VinNumber.GetValue()
-                            : Factory.MineVinNumber(response);
-                        return string.IsNullOrEmpty(vinNumber) ? null : query.GetWithVinNumber(vinNumber);
-                    }
                 }
             };
     }

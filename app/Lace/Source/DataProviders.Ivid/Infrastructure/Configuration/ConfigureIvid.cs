@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration
                     IvidConfiguration.Password);
         }
 
-        public void CloseWebService()
+        public void Close()
         {
             if (Client == null) return;
 

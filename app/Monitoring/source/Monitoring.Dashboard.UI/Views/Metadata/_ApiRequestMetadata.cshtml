@@ -22,17 +22,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="request in apiRequests">
-                                <td>{{request.RequestId}}</td>
-                                <td>{{request.RequestDate}}</td>
-                                <td>{{request.UserName}}</td>
-                                <td>{{request.UserHostAddress}}</td>
-                                <td>{{request.Method}}</td>
-                                <td>{{request.UserAgent}}</td>
-                                <td>{{request.Port}}</td>
-                                <td>{{request.BasePath}}</td>
-                                <td style="font-size: 10px; overflow: scroll; max-width: 15px; font-weight: bold">{{request.Authorization}}</td>
-                            </tr>
+                                <tr ng-repeat="request in apiRequests.apiRequests">
+                                    <td>{{request.RequestId}}</td>
+                                    <td>{{request.RequestDate}}</td>
+                                    <td>{{request.UserName}}</td>
+                                    <td>{{request.UserHostAddress}}</td>
+                                    <td>{{request.Method}}</td>
+                                    <td>{{request.UserAgent}}</td>
+                                    <td>{{request.Port}}</td>
+                                    <td>{{request.BasePath}}</td>
+                                    <td style="font-size: 10px; overflow: scroll; max-width: 15px; font-weight: bold">{{request.Authorization}}</td>
+                                </tr>
                             </tbody>
                             <tfoot>
                                 <tr>

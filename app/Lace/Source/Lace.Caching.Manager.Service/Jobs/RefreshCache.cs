@@ -8,20 +8,19 @@ namespace Lace.Caching.Manager.Service.Jobs
     {
         private readonly IHandleClearingData _clear;
         private readonly IHandleRefreshingData _refresh;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<RefreshCache>();
         public RefreshCache(IHandleClearingData clear, IHandleRefreshingData refresh)
         {
             _clear = clear;
             _refresh = refresh;
-            _log = LogManager.GetLogger(GetType());
         }
 
         public void Execute(IJobExecutionContext context)
         {
-            _log.InfoFormat("Attempting to execute the refresh cache job");
+            Log.InfoFormat("Attempting to execute the refresh cache job");
             _clear.Handle();
             _refresh.Handle();
-            _log.InfoFormat("Executed the refresh cache job");
+            Log.InfoFormat("Executed the refresh cache job");
         }
     }
 }
