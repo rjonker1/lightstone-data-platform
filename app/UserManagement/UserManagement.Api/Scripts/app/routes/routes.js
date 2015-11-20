@@ -27,7 +27,7 @@ function initializeCusomerRoutes(sammy) {
         context.load('/Customers', { dataType: 'html', cache: false })
             .swap()
             .then(function() {
-                bindNoteViewEvent();
+                
             });
     });
     sammy.get('/Customers/Add', function(context) {
@@ -462,8 +462,15 @@ function initializeNoteRoutes(sammy) {
     //        });
     //});
     
-    sammy.post('/Notes/:type/:id', function (context) {
+    sammy.post('/Notes', function (context) {
         $(context.target).ajaxSubmit({
+            //beforeSubmit: function (arr, $form, options) {
+            //    if ($('#NoteText').val().trim().length > 0) {
+            //        toastr["error"]("Error", "Please enter note text to save");
+            //        return false;
+            //    }
+            //    return true;
+            //},
             success: function (response) {
                 //if (response.indexOf('Validation') < 0) { context.redirect('#/ValueEntities/' + response); }
             }
@@ -818,20 +825,3 @@ function initializePlugins() {
     });
 }
 
-function bindNoteViewEvent() {
-    $('.notes-view').click(function() {
-        var $self = $(this);
-        var url = $self.attr('href');
-        $.get(url, {}, function(response) {
-            var $body = $("body");
-            var $response = $(response);
-            $body.append($response);
-            var $modal = $(".note-modal");
-            $modal.modal('show');
-            $modal.on('hidden.bs.modal', function() {
-                $modal.remove();
-            });
-        }, 'html');
-        return false;
-    });
-}
