@@ -41,7 +41,7 @@ namespace Lace.Acceptance.Tests.Caching
         {
             TestCacheRepository.ClearAll();
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
-            _retriever = IvidDataRetriever.Start(_logCommand, _log).ThenWithApi(_ividRequest, _dataProvider, out _response);
+            _retriever = IvidDataRetriever.Start(_logCommand, _log).RetrieveFromApi(_ividRequest, _dataProvider, out _response);
             var transformer = new TransformIvidResponse(_response);
             transformer.Transform();
         }
@@ -52,7 +52,7 @@ namespace Lace.Acceptance.Tests.Caching
             _request = new[] { new LicensePlateNumberIvidOnlyRequest() };
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .CheckInCache(_ividRequest);
+                .RetrieveFromCache(_ividRequest);
 
             Task.Delay(5000);
 
@@ -67,7 +67,7 @@ namespace Lace.Acceptance.Tests.Caching
             _request = new[] { new VinNumberIvidOnlyRequest() };
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .CheckInCache(_ividRequest);
+                .RetrieveFromCache(_ividRequest);
             Task.Delay(5000);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();
@@ -81,7 +81,7 @@ namespace Lace.Acceptance.Tests.Caching
             _request = new[] { new RegisterNumberIvidOnlyRequest() };
             _ividRequest = HandleRequest.GetHpiStandardQueryRequest(_dataProvider.GetRequest<IAmIvidStandardRequest>());
             var retriever = IvidDataRetriever.Start(_logCommand, _log)
-                .CheckInCache(_ividRequest);
+                .RetrieveFromCache(_ividRequest);
             Task.Delay(5000);
 
             retriever.NoNeedToCallApi.ShouldBeTrue();

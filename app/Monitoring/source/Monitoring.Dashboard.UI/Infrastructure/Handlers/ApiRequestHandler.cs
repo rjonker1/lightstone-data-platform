@@ -4,6 +4,7 @@ using System.Linq;
 using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Models;
+using Monitoring.Dashboard.UI.Domain.UserAgent;
 using Monitoring.Dashboard.UI.Infrastructure.Dto;
 using Monitoring.Dashboard.UI.Infrastructure.Factory;
 using Monitoring.Domain.Repository;
@@ -13,13 +14,13 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     public class ApiRequestHandler : IHandleApiRequests
     {
         private readonly IMonitoringRepository _monitoring;
-        private readonly IDetermineUserAgentFactory _userAgentFactory;
+        private readonly IDetermineUserAgent _determinator;
         private static readonly ILog Log = LogManager.GetLogger<ApiRequestHandler>();
 
         public ApiRequestHandler(IMonitoringRepository monitoring, IDetermineUserAgentFactory userAgentFactory)
         {
             _monitoring = monitoring;
-            _userAgentFactory = userAgentFactory;
+            _determinator = userAgentFactory.Create();
         }
 
         public void Handle()
@@ -39,30 +40,21 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                                 s.BasePath, s.HostName, s.IsSecure, s.Port, s.Query, s.SiteBase, s.Scheme, s.Host, s.UserAgent, s.ContentType,
                                 s.CommitDate)).ToList();
 
-                var determinator = _userAgentFactory.Create();
+             
+                var userAgents = new List<ApiRequestUserAgentDto>();
+                _determinator.DetermineUserAgent(monitoringRequests.Select(s => s.UserAgent).ToList(), userAgents);
 
-                var rawUserAgents = monitoringRequests.Select(s => s.UserAgent);
-                foreach (var userAgent in rawUserAgents)
-                {
-                    
-                }
-
-                var userAgents = determinator.DetermineUserAgent(monitoringRequests.Select(s => s.UserAgent).ToList());
-                userAgents.
-
+                ApiRequests = new ApiRequestDto(userAgents, monitoringRequests);
 
             }
             catch (Exception ex)
             {
                 Log.ErrorFormat("An error occurred in the Monitoirng Data Provider Statistics Handler because of {0}", ex,
                     ex.Message);
-                ApiRequests = new List<ApiRequestDto>()
-                {
-                    new ApiRequestDto(new List<ApiRequestUserAgentDto>(), new List<ApiRequestMonitoringDto>())
-                };
+                ApiRequests = new ApiRequestDto(new List<ApiRequestUserAgentDto>(), new List<ApiRequestMonitoringDto>());
             }
         }
 
-        public List<ApiRequestDto> ApiRequests { get; private set; }
+        public ApiRequestDto ApiRequests { get; private set; }
     }
 }

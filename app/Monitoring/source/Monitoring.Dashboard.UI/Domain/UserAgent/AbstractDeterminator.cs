@@ -7,32 +7,31 @@ namespace Monitoring.Dashboard.UI.Domain.UserAgent
 {
     public interface IDetermineUserAgent
     {
-        List<ApiRequestUserAgentDto> UserAgents { get; }
-        void DetermineUserAgent(List<string> fullUserAgentList);
+        void DetermineUserAgent(List<string> fullUserAgentList, List<ApiRequestUserAgentDto> userAgents);
     }
     public abstract class AbstractDeterminator : IDetermineUserAgent
     {
         private readonly IDetermineUserAgent _next;
         private readonly Core.Enums.UserAgent _userAgent;
 
-        protected AbstractDeterminator(Core.Enums.UserAgent userAgent, List<ApiRequestUserAgentDto> userAgents)
+        protected AbstractDeterminator(Core.Enums.UserAgent userAgent)
         {
-            UserAgents = userAgents;
             _userAgent = userAgent;
         }
 
-        protected AbstractDeterminator(IDetermineUserAgent next, Core.Enums.UserAgent userAgent, List<ApiRequestUserAgentDto> userAgents)
-            : this(userAgent, userAgents)
+        protected AbstractDeterminator(IDetermineUserAgent next, Core.Enums.UserAgent userAgent)
+            : this(userAgent)
         {
             _next = next;
         }
 
-        public void DetermineUserAgent(List<string> fullUserAgentList)
+        public void DetermineUserAgent(List<string> fullUserAgentList, List<ApiRequestUserAgentDto> userAgents)
         {
-            var check = fullUserAgentList.Where(w => fullUserAgentList.Count(_userAgent.Checks())).ToList();
-            UserAgents.Add(new ApiRequestUserAgentDto(_userAgent.ToString(), check.Count));
-        }
+            var check = fullUserAgentList.Where(w => w.Exists(_userAgent.Checks())).ToList();
+            userAgents.Add(new ApiRequestUserAgentDto(_userAgent.ToString(), check.Count,_userAgent));
 
-        public List<ApiRequestUserAgentDto> UserAgents { get; private set; }
+            if (_next != null)
+                _next.DetermineUserAgent(fullUserAgentList,userAgents);
+        }
     }
 }

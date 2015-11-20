@@ -107,12 +107,18 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Infrastructure\Callers\AbstractIvidCaller.cs" />
+    <Compile Include="Infrastructure\Callers\IvidApiAsyncCaller.cs" />
+    <Compile Include="Infrastructure\Callers\IvidApiCaller.cs" />
+    <Compile Include="Infrastructure\Callers\IvidCacheCaller.cs" />
+    <Compile Include="Infrastructure\Callers\IvidCallerFactory.cs" />
+    <Compile Include="Infrastructure\Callers\IvidNullCaller.cs" />
     <Compile Include="Infrastructure\CallIvidDataProvider.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureIvid.cs" />
     <Compile Include="Infrastructure\HandleIvidSourceCall.cs" />
     <Compile Include="Infrastructure\HandleRequest.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidResponse.cs" />
-    <Compile Include="Infrastructure\Management\IvidDataRetriever.cs" />
+    <None Include="Infrastructure\Management\IvidDataRetriever.cs.delete" />
     <Compile Include="Infrastructure\RequestDataFromIvidSource.cs" />
     <Compile Include="IvidDataProvider.cs" />
     <Compile Include="Service References\IvidServiceReference\Reference.cs">

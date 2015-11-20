@@ -10,6 +10,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
+using Lace.Domain.DataProviders.Ivid.Infrastructure.Callers;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Ivid
@@ -45,7 +46,8 @@ namespace Lace.Domain.DataProviders.Ivid
 
                 _logCommand.LogBegin(new {_dataProvider});
 
-                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_dataProvider, _logCommand));
+                //var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_dataProvider, _logCommand));
+                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new IvidCallerFactory(_dataProvider,_logCommand).Create());
                 consumer.ConsumeDataProvider(response);
 
                 _logCommand.LogEnd(new {response});

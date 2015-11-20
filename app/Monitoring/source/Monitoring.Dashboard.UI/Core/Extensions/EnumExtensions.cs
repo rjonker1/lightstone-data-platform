@@ -16,12 +16,12 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
             return attribute == null ? agent.ToString() : attribute.Value;
         }
 
-        public static bool Count(this List<string> agents, string parameters)
+        public static bool Exists(this string agent, string parameters)
         {
             var exists = false;
             foreach (var param in parameters.Split(','))
             {
-                exists = agents.Contains(param, StringComparer.CurrentCultureIgnoreCase);
+                exists = agent.IndexOf(param, StringComparison.CurrentCultureIgnoreCase) > 0; // .IndexOfAny(param, StringComparer.CurrentCultureIgnoreCase);
                 if(exists)
                     break;
             }

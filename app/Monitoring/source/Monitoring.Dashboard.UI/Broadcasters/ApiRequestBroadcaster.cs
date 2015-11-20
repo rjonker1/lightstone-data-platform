@@ -4,6 +4,7 @@ using Common.Logging;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Monitoring.Dashboard.UI.Hubs;
+using Monitoring.Dashboard.UI.Infrastructure.Factory;
 using Monitoring.Dashboard.UI.Infrastructure.Handlers;
 using Monitoring.Domain.Mappers;
 using Monitoring.Domain.Repository;
@@ -40,7 +41,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
         {
             try
             {
-                var handler = new ApiRequestHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())));
+                var handler = new ApiRequestHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())), new UserAgentDeterminatoryFactory());
                 handler.Handle();
                 return handler.ApiRequests;
             }

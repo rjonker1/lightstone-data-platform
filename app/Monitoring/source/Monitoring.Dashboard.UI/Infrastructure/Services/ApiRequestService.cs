@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Common.Logging;
+﻿using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
 using Monitoring.Dashboard.UI.Infrastructure.Dto;
@@ -16,7 +15,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
             _apiRequestsHandler = apiRequestsHandler;
         }
 
-        public List<ApiRequestDto> GetApiRequests()
+        public ApiRequestDto GetApiRequests()
         {
             Log.InfoFormat("Getting Api Requests for Monitoring");
             _apiRequestsHandler.Handle();

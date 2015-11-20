@@ -37,11 +37,16 @@ var apiRequestMetadataApp = angular.module("apiRequestMetadataApp", ["ngRoute"])
         return { init: init, restart: restart };
 
     }).controller("ApiRequestMetatdataController", function($scope, apiRequestSignalRService, $rootScope) {
-        $scope.apiRequests = [];
+        $scope.apiRequests = {};
+        $scope.apiRequests.apiRequests = [];
+        $scope.apiRequests.userAgents = [];
         apiRequestSignalRService.init();
         $scope.$parent.$on("apiRequestMetadataInfo", function(e, result) {
             $scope.$apply(function() {
-                $scope.apiRequests = result;
+                //$scope.apiRequests = result;
+                console.log(result);
+                $scope.apiRequests.apiRequests = result.ApiRequests;
+                $scope.apiRequests.userAgents = result.UserAgents;
             });
         });
     });

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Monitoring.Dashboard.UI.Core.Enums;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Dto
 {
@@ -16,6 +17,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Dto
         {
             UserAgents = userAgents;
             ApiRequests = apiRequests;
+            TotalDisplayedRequests = apiRequests.Count;
         }
 
 
@@ -23,6 +25,8 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Dto
         public List<ApiRequestUserAgentDto> UserAgents { get; private set; }
         [DataMember]
         public List<ApiRequestMonitoringDto> ApiRequests { get; private set; }
+        [DataMember]
+        public int TotalDisplayedRequests { get; private set; }
     }
 
 
@@ -33,14 +37,19 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Dto
         {
             
         }
-        public ApiRequestUserAgentDto(string label, int value)
+        public ApiRequestUserAgentDto(string label, int value, UserAgent userAgent)
         {
             Label = label;
             Value = value;
+            UserAgent = userAgent;
         }
 
+        [DataMember]
         public string Label { get; private set; }
+        [DataMember]
         public int Value { get; private set; }
+        [DataMember]
+        public UserAgent UserAgent { get; private set; }
     }
 
 
