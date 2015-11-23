@@ -37,8 +37,8 @@ namespace Lace.Acceptance.Tests.Lace.Finance
         public void bmw_finance_response_from_consumer_must_not_be_empty()
         {
             _response.OfType<IProvideDataFromBmwFinance>().First().Finances.ShouldNotBeNull();
-            _response.OfType<IProvideDataFromBmwFinance>().First().Finances.First().Description.ShouldEqual("VOLVO XC60 T5 EXCEL POWERSHIFT");
-            _response.OfType<IProvideDataFromBmwFinance>().First().Finances.First().RegistrationYear.ShouldEqual(2011);
+            _response.OfType<IProvideDataFromBmwFinance>().First().Finances.First().Description.ShouldEqual("BMW 335i M SPORT LINE A/T (F30)");
+            _response.OfType<IProvideDataFromBmwFinance>().First().Finances.First().RegistrationYear.ShouldEqual(2015);
         }
     }
 }

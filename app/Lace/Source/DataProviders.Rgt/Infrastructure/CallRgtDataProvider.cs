@@ -97,7 +97,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private void RgtResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void RgtResponseFailed(ICollection<IPointToLaceProvider> response)
         {
             var rgtResponse = RgtResponse.WithState(DataProviderResponseState.TechnicalError);
             rgtResponse.HasBeenHandled();

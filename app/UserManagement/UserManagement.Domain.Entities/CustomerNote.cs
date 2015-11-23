@@ -9,6 +9,7 @@ namespace UserManagement.Domain.Entities
         public virtual Customer Entity { get; protected internal set; }
         [Unique]
         public virtual Note Note { get; protected internal set; }
+        public override bool Deleted { get; protected internal set; }
 
         protected CustomerNote() { }
 

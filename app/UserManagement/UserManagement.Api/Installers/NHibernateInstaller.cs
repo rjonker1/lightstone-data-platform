@@ -23,12 +23,12 @@ namespace UserManagement.Api.Installers
                     .BuildConfiguration()).LifestyleTransient());
 
             container.Register(Component.For<ISessionFactory>()
-                     .UsingFactoryMethod(kernal => 
-                         kernal.Resolve<Configuration>().BuildSessionFactory())
+                     .UsingFactoryMethod(kernal => kernal.Resolve<Configuration>().BuildSessionFactory())
                      .LifestyleSingleton());
+
             container.Register(Component.For<ISession>()
                      .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
-                     .LifestylePerWebRequest());
+                     .LifeStyle.HybridPerWebRequestPerThread());
 
             this.Info(() => "Successfully installed NHibernateInstaller");
         }

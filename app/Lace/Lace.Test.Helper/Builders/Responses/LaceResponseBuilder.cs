@@ -31,7 +31,7 @@ namespace Lace.Test.Helper.Builders.Responses
         public ICollection<IPointToLaceProvider> WithBmwFinanceIvidVinNumber()
         {
             var response = new Collection<IPointToLaceProvider>();
-            var ivid = IvidResponse.Build("", "", "", "", "", "WAUZZZ8T2CA058431", "", "", "");
+            var ivid = IvidResponse.Build("", "", "", "", "", "WAUZZZ8T2CA058431", "CGL149131", "", "");
 
             ivid.HasBeenHandled();
             response.Add(ivid);

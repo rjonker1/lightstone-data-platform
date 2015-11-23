@@ -4,23 +4,23 @@ import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 import scala.concurrent.duration._
 
-class MvpStressTesting extends Simulation {
+class MvpStressTestingProd extends Simulation {
 	val vin_data = csv("MVP.csv").circular
 
 	val httpConf = http 
-				    .baseURL("http://dev.api.lightstone.co.za") 
+				    .baseURL("http://prod.api.lightstone.co.za") 
 
 	 val scn = scenario("BasicSimulation") 
 	 			.feed(vin_data)
 			    .exec(
 						http("String body")
-	  					.post("/action")
-	  					.header("Authorization", "Token ${token}")
+	  					.post("/action")	  					
+	  					.header("Authorization", "Token bGl2ZTJzeXN0ZW1AbGlnaHRzdG9uZWF1dG8uY28uemENClN1cGVyVXNlcg0KNjM1ODM1OTIzOTQzMTc1NTQ4:XdNWOhekpvO73ZEdUb72ZrGvnJJPq42nHCfKkBOBUd8=")
 	  					.body(StringBody("""{
-											  "UserId": "69a69aec-0f9a-4a51-b0b5-e55a203f4603",
-											  "ContractId": "b77666d6-bac3-4b9d-9063-b2e92984feaf",
-											  "PackageId": "73faca7d-c4d8-4ff8-ac0f-769795218795",
-											  "CustomerClientId": "b49114d3-6145-4ad3-9645-65f2fa4ab961",
+											  "UserId": "c699299e-525b-4efc-8e11-819909429d10",
+											  "ContractId": "9739ce2e-281a-4bc2-aef2-9be0ba474e87",
+											  "PackageId": "893fd02f-3121-4375-b626-8752558381a0",
+											  "CustomerClientId": "cebaace3-4d4b-474c-b7b7-5366f7b4c8c5",
 											  "RequestFields": [
 											    {
 											      "Name": "License Number",
@@ -33,12 +33,13 @@ class MvpStressTesting extends Simulation {
 											      "Type": "0"
 											    }
 											  ]
-											}""")).asJSON
+											}""")).asJSON	  					
 	  					.check(status.is(200))
-	  					.check(regex("""dataFields""").find.exists)
-			    ) 
+	  					.check(regex("""dataFields""").find.exists)	  					
+			    )
+			    .pause(0)
 
     setUp( 
-    	scn.inject(rampUsers(10) over (10 seconds)
+    	scn.inject(rampUsers(40) over (60 seconds)
   			).protocols(httpConf)) 
 }

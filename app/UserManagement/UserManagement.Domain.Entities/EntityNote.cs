@@ -9,6 +9,8 @@ namespace UserManagement.Domain.Entities
         public virtual Entity Entity { get; protected internal set; }
         [DoNotMap]
         public virtual Note Note { get; protected internal set; }
+        [DoNotMap]
+        public virtual bool Deleted { get; protected internal set; }
 
         protected EntityNote() { }
 
@@ -16,6 +18,11 @@ namespace UserManagement.Domain.Entities
         {
             Entity = entity;
             Note = note;
+        }
+
+        public virtual void Delete()
+        {
+            Deleted = true;
         }
     }
 }

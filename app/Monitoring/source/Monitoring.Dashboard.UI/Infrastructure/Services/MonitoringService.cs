@@ -12,14 +12,12 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
         private static readonly ILog Log = LogManager.GetLogger<MonitoringService>();
         private readonly IHandleMonitoringCommands _handler;
         private readonly IHandleDataProviderStatistics _statisticsHandler;
-        private readonly IHandleApiRequests _apiRequestsHandler;
+        
 
-        public MonitoringService(IHandleMonitoringCommands handler,
-            IHandleDataProviderStatistics statisticsHandler, IHandleApiRequests apiRequestsHandler)
+        public MonitoringService(IHandleMonitoringCommands handler,IHandleDataProviderStatistics statisticsHandler)
         {
             _handler = handler;
             _statisticsHandler = statisticsHandler;
-            _apiRequestsHandler = apiRequestsHandler;
         }
 
         public List<DataProviderDto> GetMonitoringForDataProviders()
@@ -36,11 +34,6 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
             _statisticsHandler.Handle();
             return _statisticsHandler.StatisticsResponse;
         }
-        public List<ApiRequestMonitoringDto> GetApiRequests()
-        {
-            Log.InfoFormat("Getting Api Requests for Monitoring");
-            _apiRequestsHandler.Handle();
-            return _apiRequestsHandler.ApiRequests;
-        }
+        
     }
 }
