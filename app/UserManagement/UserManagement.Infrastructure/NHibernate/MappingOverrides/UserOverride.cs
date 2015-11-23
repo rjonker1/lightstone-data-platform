@@ -5,7 +5,7 @@ using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
 {
-    public class UserMappingOverride : IAutoMappingOverride<User>
+    public class UserOverride : IAutoMappingOverride<User>
     {
         public void Override(AutoMapping<User> mapping)
         {

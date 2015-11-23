@@ -4,7 +4,7 @@ using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
 {
-    public class CustomerMappingOverride : IAutoMappingOverride<Customer>
+    public class CustomerOverride : IAutoMappingOverride<Customer>
     {
         public void Override(AutoMapping<Customer> mapping)
         {

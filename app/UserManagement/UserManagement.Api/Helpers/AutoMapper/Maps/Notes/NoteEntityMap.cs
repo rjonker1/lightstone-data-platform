@@ -13,8 +13,12 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Notes
         public void CreateMaps()
         {
             Mapper.CreateMap<EntityNote, NoteItemDto>()
-                .Include<CustomerNote, NoteItemDto>();
+                .Include<CustomerNote, NoteItemDto>()
+                .Include<UserNote, NoteItemDto>();
             Mapper.CreateMap<CustomerNote, NoteItemDto>()
+                .ForMember(dest => dest.Created, opt => opt.MapFrom(x => x.Note.Created))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => x.Note.CreatedBy));
+            Mapper.CreateMap<UserNote, NoteItemDto>()
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => x.Note.Created))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => x.Note.CreatedBy));
 
@@ -28,12 +32,16 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Notes
 
             Mapper.CreateMap<NoteDto, EntityNote>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .Include<NoteDto, CustomerNote>();
+                .Include<NoteDto, CustomerNote>()
+                .Include<NoteDto, UserNote>();
             Mapper.CreateMap<NoteDto, CustomerNote>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.EntityNoteId == new Guid() ? Guid.NewGuid() : x.EntityNoteId))
                 .ForMember(dest => dest.Entity, opt => opt.MapFrom(x => Mapper.Map<Guid, Customer>(x.EntityId)))
                 .ForMember(dest => dest.Note, opt => opt.MapFrom(x => Mapper.Map(x, Mapper.Map<Guid, Note>(x.NoteId) ?? new Note(x.NoteText, Guid.NewGuid()), typeof(NoteDto), typeof(Note))));
-
+            Mapper.CreateMap<NoteDto, UserNote>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.EntityNoteId == new Guid() ? Guid.NewGuid() : x.EntityNoteId))
+                .ForMember(dest => dest.Entity, opt => opt.MapFrom(x => Mapper.Map<Guid, User>(x.EntityId)))
+                .ForMember(dest => dest.Note, opt => opt.MapFrom(x => Mapper.Map(x, Mapper.Map<Guid, Note>(x.NoteId) ?? new Note(x.NoteText, Guid.NewGuid()), typeof(NoteDto), typeof(Note))));
         }
     }
 }

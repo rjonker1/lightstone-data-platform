@@ -1,4 +1,5 @@
 ﻿@using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Entities
 
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Users", ""))
 
@@ -123,22 +124,24 @@
 
     function gridActionFormatter(value, row, index) {
 
-        var lockUnlock = '<a class="btn btn-warning entity-lock" href="#/Users/Lock/' + row.id + '">Lock</a>';
-
-        if (row.isLocked == true) lockUnlock = '<a class="btn btn-success entity-lock" href="#/Users/UnLock/' + row.id + '">UnLock</a>';
-
+        var lockUnlock = '<a class="btn btn-warning entity-lock" href="#/Users/Lock/' + row.id + '" title="Lock"><i class="fa fa-lock"></i></a>';
+        var icon = '<i class="fa fa-comment-o"></i>';
+        if (row.isLocked == true) lockUnlock = '<a class="btn btn-success entity-lock" href="#/Users/UnLock/' + row.id + '" title="Unlock"><i class="fa fa-lock"></i></a>';
+        if (row.hasNotes == true) icon = '<i class="fa fa-comment"></i>';
+        
         return [
-            '<div class="row" style="width: 240px;">' +
-                '<div id="indexEdit" class="col-md-1"><a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '">Edit</a></div>' +
-                '<div class="col-md-1" />' +
-                '<div id="indexDelete" class="col-md-2"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '">Delete</a></div>' +
-                '<div class="col-md-2" />' +
-                '<div id="indexLock" class="col-md-1">' + lockUnlock + '</div>' +
-            '</div>'
+                '<a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '" title="Edit"><i class="fa fa-pencil-square-o"></i></a>' +
+                '<a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '" title="Delete"><i class="fa fa-times"></i></a>' +
+                '' + lockUnlock + '' +
+                '<a class="btn btn-default notes-view" href="/Notes/@typeof(UserNote).AssemblyQualifiedName/' + row.id + '/Users" onclick="return false;" title="Notes">' + icon + '</a>'
         ].join('');
     };
 
     $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Users/Add", text: "Add" }).appendTo($("div.box-header"));
 
     UserManagement.overrideDataTablesStyling();
+    
+    $('#table').on('post-body.bs.table', function (e, row, $element) {
+        bindNoteViewEvent();
+    });
 </script>

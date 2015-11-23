@@ -3,20 +3,20 @@ using UserManagement.Domain.Core.NHibernate.Attributes;
 
 namespace UserManagement.Domain.Entities
 {
-    public class CustomerNote : EntityNote
+    public class UserNote : EntityNote
     {
         [Unique]
-        public virtual Customer Entity { get; protected internal set; }
+        public virtual User Entity { get; protected internal set; }
         [Unique]
         public virtual Note Note { get; protected internal set; }
         public override bool Deleted { get; protected internal set; }
 
-        protected CustomerNote() { }
+        protected UserNote() { }
 
-        public CustomerNote(Customer customer, Note note, Guid id = new Guid())
-            : base(customer, note, id)
+        public UserNote(User user, Note note, Guid id = new Guid())
+            : base(user, note, id)
         {
-            Entity = customer;
+            Entity = user;
             Note = note;
         }
     }

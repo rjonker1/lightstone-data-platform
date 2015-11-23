@@ -51,5 +51,6 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<NamedEntityDto> Customers { get; set; }
         public IEnumerable<Guid> ClientIds { get; set; }
         public IEnumerable<string> Clients { get; set; }
+        public bool HasNotes { get; set; }
     }
 }

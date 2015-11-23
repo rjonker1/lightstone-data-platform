@@ -79,6 +79,26 @@ namespace UserManagement.Domain.Entities
             }
         }
 
+        public virtual ISet<UserNote> UserNotes { get; protected internal set; }
+
+        [DoNotMap]
+        public virtual IEnumerable<Note> Notes
+        {
+            get
+            {
+                return UserNotes.Where(x => !x.Deleted).Select(x => x.Note);
+            }
+        }
+
+        [DoNotMap]
+        public virtual bool HasNotes
+        {
+            get
+            {
+                return Notes.Any();
+            }
+        }
+
         public User() { }
 
         public User(string firstName, string lastName, string idNumber, string contactNumber, string userName,

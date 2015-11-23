@@ -18,7 +18,7 @@ namespace UserManagement.Infrastructure.NHibernate
         {
             return AutoMap.AssemblyOf<User>(this)
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
-                .UseOverridesFromAssemblyOf<UserMappingOverride>()
+                .UseOverridesFromAssemblyOf<UserOverride>()
                 .OverrideAll(x => x.IgnoreProperties(member => member.MemberInfo.GetCustomAttributes(typeof(DoNotMapAttribute), false).Length > 0));
         }
     }
