@@ -16,19 +16,20 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
     public class PivotFinalBillingTransactions : ReportList, IPivotFinalBillingTransactions
     {
         private readonly IRepository<FinalBilling> _finalBillingRepository;
-        private readonly IRepository<AccountMeta> _accountMetaReporRepository;
+        private readonly IRepository<AccountMeta> _accountMetaRepository;
         private readonly IRepository<ContractMeta> _contractRepository;
+        private readonly IRepository<PackageMeta> _packageRepository;
 
         private readonly IReportBuilder _reportBuilder;
 
         readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
         readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
 
-        public PivotFinalBillingTransactions(IRepository<FinalBilling> finalBillingRepository, IRepository<AccountMeta> accountMetaReporRepository,
+        public PivotFinalBillingTransactions(IRepository<FinalBilling> finalBillingRepository, IRepository<AccountMeta> accountMetaRepository,
                                                 IRepository<ContractMeta> contractRepository, IReportBuilder reportBuilder)
         {
             _finalBillingRepository = finalBillingRepository;
-            _accountMetaReporRepository = accountMetaReporRepository;
+            _accountMetaRepository = accountMetaRepository;
             _contractRepository = contractRepository;
             _reportBuilder = reportBuilder;
 
@@ -51,7 +52,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             {
                 var customerClientDetail = _finalBillingRepository.FirstOrDefault(x => x.CustomerId == customerClientId || x.ClientId == customerClientId);
 
-                var account = _accountMetaReporRepository.FirstOrDefault(x => x.AccountNumber == customerClientDetail.AccountNumber);
+                var account = _accountMetaRepository.FirstOrDefault(x => x.AccountNumber == customerClientDetail.AccountNumber);
 
                 var billedTransactionsTotal =
                     _finalBillingRepository.Where(
@@ -141,59 +142,117 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         /// </returns>
         public List<ReportDto> PivotToStatementPdf()
         {
+            //foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
+            //{
+            //    var repo = _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)
+            //                                                        && (x.Created >= _startBillMonth && x.Created <= _endBillMonth));
+
+            //    var customerClientDetail = repo.First();
+            //    var contracts = repo.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)).Select(x => x.ContractId).Distinct();
+
+            //    try
+            //    {
+            //        foreach (var contractId in contracts)
+            //        {
+            //            var contract = _contractRepository.FirstOrDefault(x => x.ContractId == contractId);
+            //            var userTransactionsList = new List<ContractUserTransactions>();
+
+            //            var users = repo.Select(x => x.User.UserId).Distinct();
+
+            //            foreach (var userId in users)
+            //            {
+            //                var userTransactions = repo.Where(x => x.User.UserId == userId).DistinctBy(x => x.UserTransaction.RequestId);
+
+            //                var userProductList = new List<ContractProductDetail>();
+
+            //                userProductList.AddRange(userTransactions
+            //                    .Select(x => new ContractProductDetail
+            //                    {
+            //                        PackageName = x.Package.PackageName,
+            //                        TransactionCount = userTransactions.Count(t => t.Package.PackageId == x.Package.PackageId)
+            //                    }).DistinctBy(x => x.PackageName));
+
+            //                userTransactionsList.Add(new ContractUserTransactions
+            //                 {
+            //                    User = userTransactions.Where(x => x.User.UserId == userId).Select(x => x.User.Username).First(),
+            //                    Products = userProductList
+            //                });
+            //            }
+
+            //            var statement = _reportBuilder.BuildStatement(customerClientDetail.CustomerName, null, contract.ContractName, userTransactionsList);
+
+            //            var statementList = new List<ContractStatement>();
+            //            var statementIndex = statementList.FindIndex(x => x.Customer == customerClientDetail.CustomerName);
+
+            //            if (statementIndex < 0) statementList.Add(statement);
+
+            //            var statementReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.StatementPdf },
+            //                new ReportData
+            //                {
+            //                    ContractStatements = statementList
+            //                });
+
+            //            var statementReportIndex = StatementPdfList.FindIndex(x => x.Data.ContractStatements.Any(s => s.Customer == customerClientDetail.CustomerName));
+
+            //            if (statementReportIndex < 0) StatementPdfList.Add(statementReport);
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        this.Error(() => "An Error Occured while creating StatementPdf record. See below for details." + e);
+            //    }
+            //}
+
+
+
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
             {
                 var repo = _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)
                                                                     && (x.Created >= _startBillMonth && x.Created <= _endBillMonth));
 
-                var customerClientDetail = repo.First();
-                var contracts = repo.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)).Select(x => x.ContractId).Distinct();
-
                 try
                 {
-                    foreach (var contractId in contracts)
+                    var statementReport = new CustomerClientStatement();
+
+                    foreach (var transaction in repo)
                     {
-                        var contract = _contractRepository.FirstOrDefault(x => x.ContractId == contractId);
-                        var userTransactionsList = new List<ContractUserTransactions>();
+                        var account = _accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
+                        var contract = _contractRepository.FirstOrDefault(x => x.ContractId == transaction.ContractId);
+                        var package = _packageRepository.FirstOrDefault(x => x.PackageId == transaction.Package.PackageId);
 
-                        var users = repo.Select(x => x.User.UserId).Distinct();
-
-                        foreach (var userId in users)
+                        // Customer transaction
+                        if (transaction.ClientId == new Guid())
                         {
-                            var userTransactions = repo.Where(x => x.User.UserId == userId).DistinctBy(x => x.UserTransaction.RequestId);
+                            statementReport.StatementPeriod = _startBillMonth + " - " + _endBillMonth;
+                            statementReport.CustomerClientName = transaction.CustomerName;
+                            statementReport.ConsultantName = account.AccountOwner;
+                            statementReport.AccountContact = account.BillingAccountContactName;
+                            statementReport.AccountNumber = account.BillingAccountContactNumber;
+                            statementReport.ContractName = contract.ContractName;
 
-                            var userProductList = new List<ContractProductDetail>();
-
-                            userProductList.AddRange(userTransactions
-                                .Select(x => new ContractProductDetail
+                            if (contract.HasPackagePriceOverride)
+                            {
+                                statementReport.PricingSummaries.Add(new PricingSummary
                                 {
-                                    PackageName = x.Package.PackageName,
-                                    TransactionCount = userTransactions.Count(t => t.Package.PackageId == x.Package.PackageId)
-                                }).DistinctBy(x => x.PackageName));
-
-                            userTransactionsList.Add(new ContractUserTransactions
-                             {
-                                User = userTransactions.Where(x => x.User.UserId == userId).Select(x => x.User.Username).First(),
-                                Products = userProductList
-                            });
+                                    ContractName = contract.ContractName,
+                                    PackageName = package.PackageName,
+                                    Description = contract.ContractBundleTransactionLimit + " @ " + contract.ContractBundlePrice + ". " + contract.ContractBundleName
+                                });
+                            }
+                            else
+                            {
+                                statementReport.PricingSummaries.Add(new PricingSummary
+                                {
+                                    ContractName = contract.ContractName,
+                                    PackageName = package.PackageName,
+                                    Description = "Per request @ " + contract.ContractBundlePrice
+                                });
+                            }
                         }
 
-                        var statement = _reportBuilder.BuildStatement(customerClientDetail.CustomerName, null, contract.ContractName, userTransactionsList);
+                        //var statementReportIndex = StatementPdfList.FindIndex(x => x.Data.ContractStatements.Any(s => s.Customer == customerClientDetail.CustomerName));
 
-                        var statementList = new List<ContractStatement>();
-                        var statementIndex = statementList.FindIndex(x => x.Customer == customerClientDetail.CustomerName);
-
-                        if (statementIndex < 0) statementList.Add(statement);
-
-                        var statementReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.StatementPdf },
-                            new ReportData
-                            {
-                                ContractStatements = statementList
-                            });
-
-                        var statementReportIndex = StatementPdfList.FindIndex(x => x.Data.ContractStatements.Any(s => s.Customer == customerClientDetail.CustomerName));
-
-                        if (statementReportIndex < 0) StatementPdfList.Add(statementReport);
+                        //if (statementReportIndex < 0) StatementPdfList.Add(statementReport);
                     }
                 }
                 catch (Exception e)
@@ -270,7 +329,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 {
                     var customerClientDetail = _finalBillingRepository.FirstOrDefault(x => x.CustomerId == customerClientId || x.ClientId == customerClientId);
 
-                    var account = _accountMetaReporRepository.FirstOrDefault(x => x.AccountNumber == customerClientDetail.AccountNumber);
+                    var account = _accountMetaRepository.FirstOrDefault(x => x.AccountNumber == customerClientDetail.AccountNumber);
 
                     var transactions = _finalBillingRepository.Where(x => x.AccountNumber == account.AccountNumber && (x.Created >= _startBillMonth && x.Created <= _endBillMonth))
                         .Select(x => x.UserTransaction.TransactionId).Distinct();
@@ -326,7 +385,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 {
                     var customerClientDetail = _finalBillingRepository.FirstOrDefault(x => x.CustomerId == customerClientId || x.ClientId == customerClientId);
 
-                    var account = _accountMetaReporRepository.FirstOrDefault(x => x.AccountNumber == customerClientDetail.AccountNumber);
+                    var account = _accountMetaRepository.FirstOrDefault(x => x.AccountNumber == customerClientDetail.AccountNumber);
 
                     var transactions = _finalBillingRepository.Where(x => x.AccountNumber == account.AccountNumber).Select(x => x.UserTransaction.TransactionId).Distinct();
 
