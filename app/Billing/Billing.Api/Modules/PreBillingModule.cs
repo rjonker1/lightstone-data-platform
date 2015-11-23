@@ -102,7 +102,7 @@ namespace Billing.Api.Modules
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactions.Count(),
                             BillableTransactions = customerTransactions.Count(x => x.BillingType == "BILLABLE"),
-                            TotalCostOfSale = customerTransactions.Where(x => x.BillingType == "BILLABLE").Sum(x => x.DataProvider.CostPrice),
+                            TotalCostOfSale = customerTransactions.Sum(x => x.Package.PackageCostPrice),
                             Products = customerPackages,
                             AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber),
                         };
@@ -118,6 +118,8 @@ namespace Billing.Api.Modules
                             Id = transaction.ClientId,
                             CustomerName = transaction.ClientName,
                             Transactions = clientTransactions.Count(),
+                            BillableTransactions = clientTransactions.Count(x => x.BillingType == "BILLABLE"),
+                            TotalCostOfSale = clientTransactions.Sum(x => x.Package.PackageCostPrice),
                             Products = clientPackagesTotal,
                             AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber)
                         };
