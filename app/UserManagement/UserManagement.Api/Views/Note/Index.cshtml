@@ -9,7 +9,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <form action="/notes" method="POST">
+                <form id="note_save" action="/notes" method="POST">
                     <input type="hidden" name="EntityId" value="@Model.EntityId" />
                     <input type="hidden" id="EntityNoteId" name="EntityNoteId" value="@Model.EntityNoteId" /> />
                     <input type="hidden" id="NoteId" name="NoteId" value="@Model.NoteId" />
@@ -49,6 +49,16 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script>
+    $("#note_save").submit(function (e) {
+        e.preventDefault();
+        var form = this;
+        if ($('#NoteText').val()) {
+            form.submit();
+        } else {
+            toastr["error"]("Error", "Please enter note text to save!");
+        }
+    });
+    
     $('.note-page').click(function () {
         var $self = $(this);
         var url = $self.attr('href');

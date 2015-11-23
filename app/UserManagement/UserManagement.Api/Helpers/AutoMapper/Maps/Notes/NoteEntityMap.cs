@@ -2,9 +2,9 @@
 using AutoMapper;
 using Microsoft.Practices.ServiceLocation;
 using Nancy.Security;
+using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
-using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.Notes
 {
@@ -14,13 +14,16 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Notes
         {
             Mapper.CreateMap<EntityNote, NoteItemDto>()
                 .Include<CustomerNote, NoteItemDto>();
-            Mapper.CreateMap<CustomerNote, NoteItemDto>();
+            Mapper.CreateMap<CustomerNote, NoteItemDto>()
+                .ForMember(dest => dest.Created, opt => opt.MapFrom(x => x.Note.Created))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => x.Note.CreatedBy));
 
             Mapper.CreateMap<NoteDto, Note>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.NoteId == new Guid() ? Guid.NewGuid() : x.NoteId))
+                .ForMember(dest => dest.NoteText, opt => opt.MapFrom(x => x.NoteText.FirstNCharacters(255)))
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => string.IsNullOrEmpty(x.Created) ? DateTime.UtcNow : DateTime.Parse(x.Created)))
                 .ForMember(dest => dest.Modified, opt => opt.MapFrom(x => DateTime.UtcNow))
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IUserRepository>().GetByUserName(x.CreatedBy)))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IUserIdentity>().UserName))
                 .ForMember(dest => dest.ModifiedBy, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IUserIdentity>().UserName));
 
             Mapper.CreateMap<NoteDto, EntityNote>()

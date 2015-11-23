@@ -73,12 +73,14 @@ namespace UserManagement.Api.Modules
 
         private static NoteDto NoteDto(IEntityByTypeRepository entityRetriever, dynamic _)
         {
+            var id = (Guid) _.id;
             var typeName = _.type.ToString();
             var type = Type.GetType(typeName);
             var pageIndex = 0;
             int.TryParse(_.pageIndex, out pageIndex);
             Expression<Func<EntityNote, bool>> expression = note => !note.Deleted;
-            var notes = new PagedList<EntityNote>(entityRetriever.GetEntityNotes(type), pageIndex != 0 ? pageIndex - 1 : pageIndex, 10, expression);
+            var query = (entityRetriever.GetEntityNotes(type) as IQueryable<EntityNote>).Where(x => x.Entity.Id.Equals(id)).OrderByDescending(x => x.Note.Created);
+            var notes = new PagedList<EntityNote>(query, pageIndex != 0 ? pageIndex - 1 : pageIndex, 10, expression);
             var noteItems = Mapper.Map<IEnumerable<EntityNote>, IEnumerable<NoteItemDto>>(notes);
             var noteDto = new NoteDto(_.id, type,
                 noteItems != null ? noteItems.Where(x => x != null) : Enumerable.Empty<NoteItemDto>())

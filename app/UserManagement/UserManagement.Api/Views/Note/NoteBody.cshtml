@@ -12,28 +12,32 @@
         <ul class="notes-list">
             @foreach (var note in Model.Notes)
             {
+                var noteText = note.NoteNoteText.Length > 50 ? note.NoteNoteText.FirstNCharacters(50) + " ..." : note.NoteNoteText;
                 <li>
-                    <div class="col-md-5">
-                        <a class="note-view" data-id="@note.Id" data-note-id="@note.NoteId" data-text="@note.NoteNoteText"><b>@note.NoteNoteText.FirstNCharacters(50)</b></a>
+                    <div class="col-md-10">
+                        <a class="note-view" data-id="@note.Id" data-note-id="@note.NoteId" data-text="@note.NoteNoteText" title="@note.NoteNoteText"><b>@noteText</b></a>
                     </div>
-                    <a class="btn btn-default note-delete" href="/notes/@note.Id" title="Delete"><i class="fa fa-times"></i></a>
-                    <b>@note.CreatedBy</b> 
+                    <a class="btn btn-default note-audit" href="/notes/@note.Id" title="Created on @note.Created by @note.CreatedBy"><i class="fa fa-user"></i></a>
+                    <a class="btn btn-danger note-delete" href="/notes/@note.Id" title="Delete"><i class="fa fa-times"></i></a>
                 </li>
             }
         </ul>
     }
 </div>
 <script>
-    $('.note-view').click(function () {
-        var $self = $(this);
-        var id = $self.data('id');
-        var noteId = $self.data('noteId');
-        var text = $self.data('text');
+    // Disbaling edit for now
+    //$('.note-view').click(function () {
+    //    var $self = $(this);
+    //    var id = $self.data('id');
+    //    var noteId = $self.data('noteId');
+    //    var text = $self.data('text');
 
-        $('#NoteId').val(noteId);
-        $('#EntityNoteId').val(id);
-        $('#NoteText').text(text);
-    });
+    //    $('#NoteId').val(noteId);
+    //    $('#EntityNoteId').val(id);
+    //    $('#NoteText').text(text);
+    //});
+
+    $('a').tooltip();
 
     $('.note-delete').click(function () {
         var $self = $(this);
