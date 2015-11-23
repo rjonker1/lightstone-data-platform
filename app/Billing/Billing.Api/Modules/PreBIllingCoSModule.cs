@@ -31,29 +31,22 @@ namespace Billing.Api.Modules
 
                 var db = preBillingTransactionsRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
 
-                listStub.AddRange(db.DistinctBy(x => x.Package.PackageCostPrice).Select(x =>
+                listStub.AddRange(db.DistinctBy(x => x.DataProvider.CostPrice).Select(x =>
                     new PreBillingCoSDto
                     {
                         DataProviderName = x.DataProvider.DataProviderName,
+
                         TotalTransactions = db.Count(d => d.DataProvider.DataProviderName == x.DataProvider.DataProviderName &&
-                                                d.Package.PackageCostPrice == x.Package.PackageCostPrice),
-                        MaxCostOfSale = x.Package.PackageCostPrice
+                                                d.DataProvider.CostPrice == x.DataProvider.CostPrice),
+
+                        BillableTransactions = db.Count(d => d.DataProvider.DataProviderName == x.DataProvider.DataProviderName &&
+                                                d.DataProvider.CostPrice == x.DataProvider.CostPrice && x.BillingType == "BILLABLE"),
+
+                        TotalCostOfSale = db.Where(d => d.DataProvider.DataProviderName == x.DataProvider.DataProviderName &&
+                                                d.DataProvider.CostPrice == x.DataProvider.CostPrice).Sum(d => d.DataProvider.CostPrice),
+
+                        CostOfSale = x.DataProvider.CostPrice
                     }));
-
-                foreach (var dto in listStub)
-                {
-                    //dto.TotalTransactions = db.GroupBy(x => x.DataProvider.DataProviderName).Count(x => x.Key == dto.DataProviderName);
-
-                    dto.BillableTransactions = db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
-                                                    .DistinctBy(x => x.UserTransaction.RequestId).Count();
-
-                    dto.TotalCostOfSale = db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
-                                                    .DistinctBy(x => x.UserTransaction.RequestId).Sum(x => x.DataProvider.CostPrice);
-
-                    //dto.MaxCostOfSale = db.Count(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName) > 0 ?
-                    //                        Math.Round(db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
-                    //                        .DistinctBy(x => x.UserTransaction.RequestId).Max(x => Convert.ToDouble(x.DataProvider.CostPrice)), 2) : 0;
-                }
 
                 return Negotiate.WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = listStub }); ;
@@ -69,7 +62,7 @@ namespace Billing.Api.Modules
         public string AccountOwner { get; set; }
         public int TotalTransactions { get; set; }
         public int BillableTransactions { get; set; }
-        public double MaxCostOfSale { get; set; }
+        public double CostOfSale { get; set; }
         public double TotalCostOfSale { get; set; }
     }
 }

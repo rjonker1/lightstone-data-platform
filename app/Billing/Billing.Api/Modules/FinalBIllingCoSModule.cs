@@ -15,34 +15,39 @@ namespace Billing.Api.Modules
     {
         public FinalBillingCoSModule(IRepository<FinalBilling> finalBillingTransactionsRepository)
         {
+            var endDateFilter = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25);
+            var startDateFilter = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
+
             Get["/FinalBillingCoS"] = _ =>
             {
-                var preBillCoSStartDateFilter = Request.Query["startDate"];
-                var preBillCoSEndDateFilter = Request.Query["endDate"];
+                var finalBillCoSStartDateFilter = Request.Query["startDate"];
+                var finalBillCoSEndDateFilter = Request.Query["endDate"];
+
+                if (finalBillCoSStartDateFilter.HasValue) startDateFilter = finalBillCoSStartDateFilter;
+                if (finalBillCoSEndDateFilter.HasValue) endDateFilter = finalBillCoSEndDateFilter;
+
+                endDateFilter = endDateFilter.AddHours(23).AddMinutes(59).AddSeconds(59);
+
                 var listStub = new List<FinalBillingCoSDto>();
 
-                var db = finalBillingTransactionsRepository;
+                var db = finalBillingTransactionsRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter); ;
 
-                listStub.AddRange(db.Select(x =>
+                listStub.AddRange(db.DistinctBy(x => x.DataProvider.CostPrice).Select(x =>
                     new FinalBillingCoSDto
                     {
                         DataProviderName = x.DataProvider.DataProviderName,
-                    }).DistinctBy(x => x.DataProviderName));
 
-                foreach (var dto in listStub)
-                {
-                    dto.TotalTransactions = db.GroupBy(x => x.DataProvider.DataProviderName).Count(x => x.Key == dto.DataProviderName);
+                        TotalTransactions = db.Count(d => d.DataProvider.DataProviderName == x.DataProvider.DataProviderName &&
+                                                d.DataProvider.CostPrice == x.DataProvider.CostPrice),
 
-                    dto.BillableTransactions = db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
-                                                    .DistinctBy(x => x.UserTransaction.RequestId).Count();
+                        BillableTransactions = db.Count(d => d.DataProvider.DataProviderName == x.DataProvider.DataProviderName &&
+                                                d.DataProvider.CostPrice == x.DataProvider.CostPrice && x.BillingType == "BILLABLE"),
 
-                    dto.TotalCostOfSale = db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
-                                                    .DistinctBy(x => x.UserTransaction.RequestId).Sum(x => x.DataProvider.CostPrice);
+                        TotalCostOfSale = db.Where(d => d.DataProvider.DataProviderName == x.DataProvider.DataProviderName &&
+                                                d.DataProvider.CostPrice == x.DataProvider.CostPrice).Sum(d => d.DataProvider.CostPrice),
 
-                    dto.MaxCostOfSale = db.Count(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName) > 0 ?
-                                            Math.Round(db.Where(x => x.BillingType == "BILLABLE" && x.DataProvider.DataProviderName == dto.DataProviderName)
-                                            .DistinctBy(x => x.UserTransaction.RequestId).Max(x => Convert.ToDouble(x.DataProvider.CostPrice)), 2) : 0;
-                }
+                        CostOfSale = x.DataProvider.CostPrice
+                    }));
 
                 return Negotiate.WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = listStub }); ;
@@ -58,7 +63,7 @@ namespace Billing.Api.Modules
         public string AccountOwner { get; set; }
         public int TotalTransactions { get; set; }
         public int BillableTransactions { get; set; }
-        public double MaxCostOfSale { get; set; }
+        public double CostOfSale { get; set; }
         public double TotalCostOfSale { get; set; }
     }
 }
