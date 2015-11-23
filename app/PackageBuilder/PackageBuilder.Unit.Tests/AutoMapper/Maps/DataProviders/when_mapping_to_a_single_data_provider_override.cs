@@ -22,7 +22,7 @@ namespace PackageBuilder.Unit.Tests.AutoMapper.Maps.DataProviders
         public void should_map_all_fields()
         {
             _dto.Id.ShouldNotBeNull();;
-            _dto.CostOfSale.ShouldEqual(10m);
+            _dto.CostOfSale.ShouldEqual(10.0);
             _dto.RequestFieldOverrides.Count().ShouldEqual(6);
             _dto.DataFieldOverrides.Count().ShouldEqual(32);
             _dto.DataFieldOverrides.FirstOrDefault(x => x.Name == "CarFullname").Name.ShouldNotBeNull();

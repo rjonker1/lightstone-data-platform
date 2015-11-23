@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PackageBuilder.Domain.Dtos.Write;
 
@@ -19,6 +20,16 @@ namespace PackageBuilder.Domain.Dtos
             }
 
             return fields;
+        }
+
+        public static void RecursiveForEach(this IEnumerable<DataProviderFieldItemDto> dataFields, Action<DataProviderFieldItemDto> action)
+        {
+            if (dataFields == null) return;
+            foreach (var dataField in dataFields.Where(dataField => dataField != null))
+            {
+                action(dataField);
+                dataField.DataFields.RecursiveForEach(action);
+            }
         }
     }
 }

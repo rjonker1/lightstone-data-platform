@@ -208,7 +208,7 @@
                 }
             }
 
-            $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
+            if ($scope.dataProvsPkg.Package.length > 0) $scope.dataProvsPkg.Package[0].costOfSale = valueTotal;
 
             if (valueTotal > rspEdit[0].value) {
                 $scope.warning = true;

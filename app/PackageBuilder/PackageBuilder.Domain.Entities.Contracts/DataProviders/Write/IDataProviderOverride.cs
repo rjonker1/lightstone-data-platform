@@ -7,7 +7,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
     public interface IDataProviderOverride
     {
         Guid Id { get; }
-        decimal CostOfSale { get; }
+        double CostOfSale { get; }
         IEnumerable<IDataFieldOverride> RequestFieldOverrides { get; }
         IEnumerable<IDataFieldOverride> DataFieldOverrides { get; }
     }

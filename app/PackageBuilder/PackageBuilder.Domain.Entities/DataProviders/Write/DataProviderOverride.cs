@@ -18,7 +18,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         [DataMember]
         public Guid Id { get; internal set; }
         [DataMember]
-        public decimal CostOfSale { get; internal set; }
+        public double CostOfSale { get; set; }
         [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataFieldOverride>>))]
         public IEnumerable<IDataFieldOverride> RequestFieldOverrides { get; internal set; } 
         [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataFieldOverride>>))]
