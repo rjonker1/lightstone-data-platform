@@ -95,8 +95,9 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1890\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Reporting">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1914\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Reporting.1.0.0.1915\lib\net45\Lightstone.DataPlatform.Workflow.Reporting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -250,7 +250,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             }
                         }
 
-                        //var statementReportIndex = StatementPdfList.FindIndex(x => x.Data.ContractStatements.Any(s => s.Customer == customerClientDetail.CustomerName));
+                        //var statementReportIndex = StatementPdfList.FindIndex(x => x.Data.CustomerClientStatement.;
 
                         //if (statementReportIndex < 0) StatementPdfList.Add(statementReport);
                     }

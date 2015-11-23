@@ -10,7 +10,8 @@ namespace Workflow.Reporting.Entities
         public string AccountContact { get; set; }
         public string AccountNumber { get; set; }
         public string ContractName { get; set; }
-        public List<PricingSummary> PricingSummaries { get; set; } 
+        public IEnumerable<PricingSummary> PricingSummaries { get; set; }
+        public IEnumerable<ContractUserTransactions> UserTransactions { get; set; } 
     }
 
     public class PricingSummary
