@@ -37,7 +37,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             _clients.All.apiRequestMetadataInfo(result);
         }
 
-        private object GetRequestMetadataFromApi()
+        private static object GetRequestMetadataFromApi()
         {
             try
             {

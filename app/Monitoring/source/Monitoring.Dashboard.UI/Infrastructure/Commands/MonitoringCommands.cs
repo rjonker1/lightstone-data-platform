@@ -1,4 +1,4 @@
-﻿using Monitoring.Dashboard.UI.Infrastructure.Dto;
+﻿using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Commands
 {

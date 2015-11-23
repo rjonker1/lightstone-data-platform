@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
-using Monitoring.Dashboard.UI.Core.Models;
+using Monitoring.Dashboard.UI.Core.Models.DataProvider;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
-using Monitoring.Dashboard.UI.Infrastructure.Dto;
+using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
 using Monitoring.Dashboard.UI.Infrastructure.Repository;
 using Monitoring.Domain.Repository;
 
@@ -28,7 +28,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             try
             {
                 var requests =
-                    _monitoring.Items<DataProvider>(DataProvider.SelectStatement()).ToArray();
+                    _monitoring.Items<DataProviderMonitoring>(DataProviderMonitoring.SelectStatement()).ToArray();
 
 
                 if (!requests.Any())
@@ -87,7 +87,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                        g.PackageName,
                        g.DataProviderCount
 
-                    }).Select(s => new DataProvider()
+                    }).Select(s => new DataProviderMonitoring()
                     {
                         RequestId = s.Key.RequestId,
                         Date = s.Key.Date,

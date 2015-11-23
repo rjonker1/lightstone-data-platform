@@ -3,7 +3,7 @@ using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
-using Monitoring.Dashboard.UI.Infrastructure.Dto;
+using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Services
 {
@@ -11,13 +11,13 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
     {
         private static readonly ILog Log = LogManager.GetLogger<MonitoringService>();
         private readonly IHandleMonitoringCommands _handler;
-        private readonly IHandleDataProviderStatistics _statisticsHandler;
+        private readonly IHandleDataProviderIndicators _indicatorsHandler;
         
 
-        public MonitoringService(IHandleMonitoringCommands handler,IHandleDataProviderStatistics statisticsHandler)
+        public MonitoringService(IHandleMonitoringCommands handler,IHandleDataProviderIndicators indicatorsHandler)
         {
             _handler = handler;
-            _statisticsHandler = statisticsHandler;
+            _indicatorsHandler = indicatorsHandler;
         }
 
         public List<DataProviderDto> GetMonitoringForDataProviders()
@@ -28,11 +28,11 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
             return _handler.MonitoringResponse;
         }
 
-        public List<DataProviderStatisticsDto> GetDataProviderStatistics()
+        public DataProviderIndicatorsDto GetDataProviderIndicators()
         {
-            Log.InfoFormat("Getting Data Provider Monitoring Statistics View");
-            _statisticsHandler.Handle();
-            return _statisticsHandler.StatisticsResponse;
+            Log.InfoFormat("Getting Data Provider Monitoring Indicators View");
+            _indicatorsHandler.Handle();
+            return _indicatorsHandler.Indicators;
         }
         
     }

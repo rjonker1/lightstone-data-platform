@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Monitoring.Dashboard.UI.Infrastructure.Dto;
+using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
 
 namespace Monitoring.Dashboard.UI.Core.Contracts.Handlers

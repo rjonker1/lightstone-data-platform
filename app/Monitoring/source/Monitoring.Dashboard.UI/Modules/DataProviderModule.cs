@@ -4,7 +4,7 @@ using DataPlatform.Shared.Enums;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Extensions;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
-using Monitoring.Dashboard.UI.Infrastructure.Dto;
+using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
 using Nancy;
 using Nancy.Security;
 

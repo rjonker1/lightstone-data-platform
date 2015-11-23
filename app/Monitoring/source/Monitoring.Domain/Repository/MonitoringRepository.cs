@@ -47,5 +47,11 @@ namespace Monitoring.Domain.Repository
                 return connection.Query<TItem>(sql, param);
             }
         }
+
+        public SqlMapper.GridReader MultipleItems(string sql)
+        {
+            var connection = ConnectionFactoryManager.MonitoringConnection;
+            return connection.QueryMultiple(sql);
+        }
     }
 }

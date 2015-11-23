@@ -1,0 +1,63 @@
+﻿<div ng-app="dataProviderIndicatorApp">
+    <div class="row">
+        <div ng-controller="dataProviderIndicatorController">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-purple">
+                    <div class="inner">
+                        <h3>{{statistics.AverageResponseTime}}</h3>
+                        <p>
+                            Average Response Time<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>
+                            {{statistics.SuccessRate}}<sup style="font-size: 20px">%</sup>
+                        </h3>
+                        <p>
+                            Success Rate<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-check"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h3>{{statistics.TotalRequests}}</h3>
+                        <p>
+                            Total Requests<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>{{statistics.TotalErrors}}</h3>
+                        <p>
+                            Total Errors<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-ambulance"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -51,9 +51,13 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet, Version=1.0.0.1914, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1914\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.866\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -68,6 +72,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="DataProviders\Indicators\when_handling_indicators.cs" />
     <None Include="Queues\when_sending_data_provider_command_messages_to_the_write_queues_on_the_bus.cs.redo" />
     <None Include="Queues\when_sending_rgt_vin_command_messages_to_the_write_queues_on_the_bus.cs.redo" />
     <None Include="Queues\when_sending_rgt_command_messages_to_the_write_queues_on_the_bus.cs.redo" />
@@ -78,6 +83,14 @@
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>
       <Name>Monitoring.Test.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Dashboard.UI\Monitoring.Dashboard.UI.csproj">
+      <Project>{8aa179c2-2bb7-4f0f-8df1-ceadec086d17}</Project>
+      <Name>Monitoring.Dashboard.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Domain\Monitoring.Domain.csproj">
+      <Project>{9256f4f5-27fa-4475-af68-f07afa582081}</Project>
+      <Name>Monitoring.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

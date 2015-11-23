@@ -13,7 +13,7 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                 $rootScope.$emit("dataProviderStatisticsInfo", result);
             };
 
-            $.connection.hub.start({ transport: 'longPolling' }).done(function () {
+            $.connection.hub.start({ transport: "longPolling" }).done(function () {
                 hub.server.initRootUri();
             });
 
@@ -32,8 +32,6 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                     console.info("Dataprovider Monitoring App is online");
                 }
             };
-
-
         };
 
         var restart = function() {
@@ -79,10 +77,7 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             }
         };
 
-        $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {
-            $scope.$apply(function() {
-                $scope.dataProviderMonitoring = result;
-            });
+        $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {$scope.$apply(function() {$scope.dataProviderMonitoring = result;});
 
             $scope.Toggle = function(elementIndex, formattedJsonId) {
                 Toggle(toggleId + elementIndex, rawJsonId + elementIndex, canvasId);

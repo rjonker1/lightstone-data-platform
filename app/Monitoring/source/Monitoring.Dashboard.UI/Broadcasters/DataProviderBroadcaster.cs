@@ -3,7 +3,7 @@ using System.Threading;
 using Common.Logging;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using Monitoring.Dashboard.UI.Infrastructure.Dto;
+using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
 using Monitoring.Dashboard.UI.Hubs;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
 using Monitoring.Dashboard.UI.Infrastructure.Handlers;
@@ -87,9 +87,9 @@ namespace Monitoring.Dashboard.UI.Broadcasters
         {
             try
             {
-                var handler = new DataProviderStatisticsHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())));
+                var handler = new DataProviderIndicatorsHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())));
                 handler.Handle();
-                return handler.StatisticsResponse;
+                return handler.Indicators;
             }
             catch (Exception ex)
             {

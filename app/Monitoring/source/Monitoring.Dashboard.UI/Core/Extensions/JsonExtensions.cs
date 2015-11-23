@@ -42,7 +42,7 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
             }
             catch
             {
-                return null;
+                return default(T);
             }
         }
 
@@ -54,7 +54,7 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
             }
             catch
             {
-                return null;
+                return default(dynamic);
             }
         }
 

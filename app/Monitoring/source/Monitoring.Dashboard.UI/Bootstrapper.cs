@@ -85,7 +85,7 @@ namespace Monitoring.Dashboard.UI
             container.Register(Component.For<ITransactionRepository, BillingTransactionRepository>());
 
             container.Register(Component.For<IHandleMonitoringCommands, DataProviderHandler>());
-            container.Register(Component.For<IHandleDataProviderStatistics, DataProviderStatisticsHandler>());
+            container.Register(Component.For<IHandleDataProviderIndicators, DataProviderIndicatorsHandler>());
             container.Register(Component.For<IHandleApiRequests, ApiRequestHandler>());
             container.Register(Component.For<ICallMonitoringService, MonitoringService>());
 
