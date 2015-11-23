@@ -15,6 +15,8 @@ namespace Billing.Domain.Dtos
         public int Products { get; set; }
         public IEnumerable<PackageDto> ProductsDetail { get; set; }
         public int Transactions { get; set; }
+        public int BillableTransactions { get; set; }
+        public double TotalCostOfSale { get; set; }
         public string UserType { get; set; }
         public AccountMeta AccountMeta { get; set; }
         public int Total { get; set; } 

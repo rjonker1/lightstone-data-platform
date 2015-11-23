@@ -171,5 +171,60 @@ function footerTransactionsFormatter(data) {
         total += data[i].transactions;
     }
 
-    return '<b>Total Transactions: </b>' + total;
+    return '<b>Total : </b>' + total;
+}
+
+function footerTransactionsFormatterPCOS(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].totalTransactions;
+    }
+
+    return '<b>Total : </b>' + total;
+}
+
+function footerBillableTransactionsFormatter(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].billableTransactions;
+    }
+
+    return '<b>Total : </b>' + total;
+}
+
+function footerBillableTransactionsFormatterPCOS(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].billableTransactions;
+    }
+
+    return '<b>Total : </b>' + total;
+}
+
+function footerTotalCoSFormatter(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].totalCostOfSale;
+    }
+
+    return '<b>Total : </b> R ' + total;
+}
+
+function footerTotalCoSFormatterPCOS(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].totalCostOfSale;
+    }
+
+    return '<b>Total : </b> R ' + total;
 }

@@ -195,3 +195,36 @@ function gridTransactionsFormatter(value, row, index) {
         'Total Transactions: ( ' + value + ' ) '
     ].join('');
 };
+
+function footerTransactionsFormatterFCOS(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].totalTransactions;
+    }
+
+    return '<b>Total : </b>' + total;
+}
+
+function footerBillableTransactionsFormatterFCOS(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].billableTransactions;
+    }
+
+    return '<b>Total : </b>' + total;
+}
+
+function footerTotalCoSFormatterFCOS(data) {
+
+    var total = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        total += data[i].totalCostOfSale;
+    }
+
+    return '<b>Total : </b> R ' + total;
+}

@@ -77,6 +77,12 @@
                 field: 'transactions',
                 title: '# Transactions',
                 formatter: gridTransactionsFormatter
+            }, {
+                field: '',
+                title: '# Billable Transactions',
+            }, {
+                field: '',
+                title: 'Cost of Sale',
             }]
         });
 
@@ -107,8 +113,7 @@
                 }, {
                     field: 'customerName',
                     title: 'Customer / Client Name',
-                    sortable: true,
-                    footerFormatter: footerTransactionsFormatter
+                    sortable: true
                 }, {
                     field: 'users',
                     title: '# Users',
@@ -130,7 +135,16 @@
                 }, {
                     field: 'transactions',
                     title: '# Transactions',
-                    formatter: gridTransactionsFormatter
+                    formatter: gridTransactionsFormatter,
+                    footerFormatter: footerTransactionsFormatter
+                }, {
+                    field: 'billableTransactions',
+                    title: '# Billable Transactions',
+                    footerFormatter: footerBillableTransactionsFormatter
+                }, {
+                    field: 'totalCostOfSale',
+                    title: 'Cost of Sale',
+                    footerFormatter: footerTotalCoSFormatter
                 }]
             });
         });
