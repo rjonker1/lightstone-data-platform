@@ -14,7 +14,7 @@
 
     <h2 id="detail-table-header"></h2>
 
-    <script src="~/Scripts/app/pre_data.js"></script>
+    <script src="~/Scripts/app/final_data.js"></script>
 
     <script>
 
@@ -68,6 +68,7 @@
                 search: true,
                 showRefresh: true,
                 showColumns: true,
+                showFooter: true,
                 pagination: true,
                 pageNumber: 1,
                 pageSize: 10,
@@ -81,16 +82,19 @@
                     title: 'DataProvider Name'
                 }, {
                     field: 'totalTransactions',
-                    title: 'Total Transactions'
+                    title: 'Total Transactions',
+                    footerFormatter: footerTransactionsFormatterFCOS
                 }, {
                     field: 'billableTransactions',
-                    title: 'Billable Transactions'
+                    title: 'Billable Transactions',
+                    footerFormatter: footerBillableTransactionsFormatterFCOS
                 }, {
                     field: 'costOfSale',
                     title: 'Cost of Sale'
                 }, {
                     field: 'totalCostOfSale',
-                    title: 'Total Cost of Sale'
+                    title: 'Total Cost of Sale',
+                    footerFormatter: footerTotalCoSFormatterFCOS
                 }]
             });
         });

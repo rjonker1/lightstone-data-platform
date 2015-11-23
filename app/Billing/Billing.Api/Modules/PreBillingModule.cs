@@ -101,6 +101,8 @@ namespace Billing.Api.Modules
                             Id = transaction.CustomerId,
                             CustomerName = transaction.CustomerName,
                             Transactions = customerTransactions.Count(),
+                            BillableTransactions = customerTransactions.Count(x => x.BillingType == "BILLABLE"),
+                            TotalCostOfSale = customerTransactions.Where(x => x.BillingType == "BILLABLE").Sum(x => x.DataProvider.CostPrice),
                             Products = customerPackages,
                             AccountMeta = accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber),
                         };
