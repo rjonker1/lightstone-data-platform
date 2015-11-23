@@ -102,8 +102,8 @@ namespace UserManagement.Api
                 if (ctx.CurrentUser != null)
                 {
                     ctx.ViewBag.UserName = ctx.CurrentUser.UserName;
-                    if (!container.Kernel.HasComponent(typeof(IUserIdentity)))
-                        container.Register(Component.For<IUserIdentity>().UsingFactoryMethod(x => ctx.CurrentUser).LifestylePerWebRequest());
+                    if (!container.Kernel.HasComponent("CurrentUserIdentity"))
+                        container.Register(Component.For<IUserIdentity>().UsingFactoryMethod(x => ctx.CurrentUser).Named("CurrentUserIdentity").LifestylePerWebRequest());
                 }
                 return null;
             });
