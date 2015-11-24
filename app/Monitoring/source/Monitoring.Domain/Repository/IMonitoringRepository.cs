@@ -7,6 +7,7 @@ namespace Monitoring.Domain.Repository
     {
         IEnumerable<TItem> Items<TItem>(string sql) where TItem : class;
         IEnumerable<TItem> Items<TItem>(string sql, object param) where TItem : class;
-        SqlMapper.GridReader MultipleItems(string sql);
+        IEnumerable<dynamic> MultipleItems<T1, T2, T3, T4>(string sql);
+        //SqlMapper.GridReader MultipleItems(string sql);
     }
 }

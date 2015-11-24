@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Dtos;
 using Monitoring.Dashboard.UI.Core.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace Monitoring.Dashboard.UI.Core.Models.DataProvider
 {
     [DataContract]
-    public class Payload
+    public class PayloadObject
     {
         [DataMember]
         public string MetaData { get; set; }
+
+        [DataMember]
+        public string Payload { get; set; }
       
         [DataMember]
         public MetaData MetadataObject
@@ -19,30 +23,24 @@ namespace Monitoring.Dashboard.UI.Core.Models.DataProvider
                 return string.IsNullOrEmpty(MetaData) ? new MetaData() : MetaData.JsonToObject<MetaData>() ?? new MetaData();
             }
         }
-    }
-
-    [DataContract]
-    public class RequestDetailsPayload
-    {
-        [DataMember]
-        public string Payload { get; set; }
 
         [DataMember]
-        public Package Pacakge
+        public List<DataProviders> DataProviders
         {
             get
             {
-                var obj = string.IsNullOrEmpty(Payload) ? new Package() : Payload.JsonToObject<Package>() ?? new Package();
-                return obj;
+                var obj = string.IsNullOrEmpty(Payload) ? new Package() : Payload.TrimEnd(']').TrimStart('[').JsonToObject<dynamic>() ?? new Package();
+                var dataProviders = ((JArray)obj.Package.DataProviders).Select(s => new DataProviders
+                {
+                    Name = (int)s["Name"],
+                    DataProviderJson = ((JArray)s["Request"]).First().AsJsonString()
+                });
+
+                return dataProviders.ToList();
             }
         }
-        
     }
+  
 
-    [DataContract]
-    public class Package
-    {
-        [DataMember]
-        public List<DataProviders> DataProviders { get; set; }
-    }
+   
 }

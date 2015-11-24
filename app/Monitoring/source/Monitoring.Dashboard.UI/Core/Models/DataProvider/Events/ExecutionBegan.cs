@@ -29,9 +29,8 @@ namespace Monitoring.Dashboard.UI.Core.Models.DataProvider.Events
 
         [DataMember]
         public DateTime Date { get; set; }
-
         [DataMember]
-        public RequestDetailsPayload Payload { get; set; }
+        public PayloadObject Payload { get; set; }
         [DataMember]
         public ConnectionPayload Connection { get; set; }
     }

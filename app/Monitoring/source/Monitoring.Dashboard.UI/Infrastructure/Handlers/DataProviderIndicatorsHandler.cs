@@ -7,11 +7,14 @@ using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
 using Monitoring.Dashboard.UI.Core.Models.DataProvider;
 using Monitoring.Dashboard.UI.Core.Models.DataProvider.Events;
-using Monitoring.Dashboard.UI.Domain.Payloads;
+using Monitoring.Dashboard.UI.Domain.DataProviders;
+using Monitoring.Dashboard.UI.Infrastructure.Dto.Payloads;
+using Monitoring.Dashboard.UI.Infrastructure.Dto.RequestFields;
 using Monitoring.Domain.Repository;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
 {
+
     public class DataProviderIndicatorsHandler : IHandleDataProviderIndicators
     {
         private readonly IMonitoringRepository _monitoring;
@@ -26,42 +29,43 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
         {
             try
             {
-                var indicators = _monitoring.MultipleItems(DataProviderIndicators.SelectStatement());
+                var indicators =
+                    _monitoring.MultipleItems<IndicatorRequestLevelDto, IndicatorRequestPerDataProviderDto, DataProviderPayloadDto, RequestPayloadDto>
+                        (DataProviderIndicators.SelectStatement()).ToList();
 
-                if (indicators == null)
-                    return;
+                var requestField = new RequestField();
+                ((List<RequestPayloadDto>)indicators[3]).ForEach(f =>
+                {
+                    requestField.DetermineRequestField(ExecutionBegan.Deserialize(f.Json));
+                });
 
-                var requestLevel = indicators.Read<IndicatorRequestLevelDto>().ToList();
-                var requestPerDataProvider = indicators.Read<IndicatorRequestPerDataProviderDto>().ToList();
-                var dataProviderPayloads = indicators.Read<DataProviderPayload>().ToList();
-                var requestPayloads = indicators.Read<RequestPayload>().ToList();
+                var requestFieldCounts =
+                    requestField.RequestFieldCounts.GroupBy(g => g.Name, g => g.Count, (name, count) => new
+                    {
+                        Name = name,
+                        Total = count.Sum()
 
-                var requestTypeIndicator = requestPayloads.Select(s => new RequestTypeDto(ExecutionBegan.Deserialize(s.Json))).ToList();
+                    }).Select(s => new IndicatorRequestFieldTypeCountDto(s.Name, s.Total));
 
-                var dataProviderRequestTimeIndicator = dataProviderPayloads.Select(
+
+                var dataProviderRequestTimeIndicator = ((List<DataProviderPayloadDto>)indicators[2]).Select(
                     s => new ElapsedTimeDataProviderDto(ExecutionEnded.Deserialize(s.Json)))
                     .GroupBy(g => g.DataProviderName, g => g.ElapsedTimeSpan, (key, times) => new
                     {
                         DataProvider = key,
                         Times = times.ToList()
                     })
-                    .Select(sg => new IndicatorRequestTimeDataProviderDto(sg.Times.Average(i => i.TotalSeconds),sg.DataProvider))
+                    .Select(sg => new IndicatorRequestTimeDataProviderDto(sg.Times.Average(i => i.TotalSeconds), sg.DataProvider))
                     .ToList();
 
 
-                Indicators = new DataProviderIndicatorsDto(requestLevel.FirstOrDefault(), requestPerDataProvider.ToList(), dataProviderRequestTimeIndicator);
+                Indicators = new DataProviderIndicatorsDto(indicators[0].FirstOrDefault(), indicators[1].ToList(), dataProviderRequestTimeIndicator, requestFieldCounts.ToList());
 
-                //Indicators =
-                //    statistics.Select(
-                //        s =>
-                //            new DataProviderIndicatorsDto(s.AvgerageResponseTime, s.TotalRequests, s.TotalResponses,
-                //                s.TotalErrors)
-                //                .DetermineSuccessRate()).ToList();
             }
             catch (Exception ex)
             {
                 Log.ErrorFormat("An error occurred in the Monitoring Data Provider Statistics Handler because of {0}", ex,ex.Message);
-                Indicators = new DataProviderIndicatorsDto(new IndicatorRequestLevelDto("00:00:00", 0, 0, 0), new List<IndicatorRequestPerDataProviderDto>(), new EditableList<IndicatorRequestTimeDataProviderDto>());
+                Indicators = new DataProviderIndicatorsDto(new IndicatorRequestLevelDto("00:00:00", 0, 0, 0), new List<IndicatorRequestPerDataProviderDto>(), new EditableList<IndicatorRequestTimeDataProviderDto>(), new List<IndicatorRequestFieldTypeCountDto>());
             }
         }
 

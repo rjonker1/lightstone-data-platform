@@ -1,11 +1,12 @@
 ﻿using System.Runtime.Serialization;
+using Monitoring.Domain;
 
-namespace Monitoring.Dashboard.UI.Domain.Payloads 
+namespace Monitoring.Dashboard.UI.Infrastructure.Dto.Payloads
 {
     [DataContract]
-    public class DataProviderPayload: AbstractPayload
+    public class DataProviderPayloadDto: AbstractDto
     {
-        public DataProviderPayload()
+        public DataProviderPayloadDto()
         {
 
         }
@@ -21,7 +22,7 @@ namespace Monitoring.Dashboard.UI.Domain.Payloads
         {
             get
             {
-                DeserializePayload(Payload);
+                Deserialize(Payload);
                 return JsonPayload;
             }
         }

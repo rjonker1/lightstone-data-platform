@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Monitoring.Domain.Repository
@@ -48,10 +50,29 @@ namespace Monitoring.Domain.Repository
             }
         }
 
-        public SqlMapper.GridReader MultipleItems(string sql)
+        public IEnumerable<dynamic> MultipleItems<T1, T2, T3, T4>(string sql)
         {
-            var connection = ConnectionFactoryManager.MonitoringConnection;
-            return connection.QueryMultiple(sql);
+            using (var connection = ConnectionFactoryManager.MonitoringConnection)
+            {
+                var results = connection.QueryMultiple(sql);
+                var returnResult = new List<dynamic>();
+                returnResult.Add(results.Read<T1>().ToList());
+                returnResult.Add(results.Read<T2>().ToList());
+                returnResult.Add(results.Read<T3>().ToList());
+                returnResult.Add(results.Read<T4>().ToList());
+                return returnResult;
+
+            }
+
+
+            // var connection = ConnectionFactoryManager.MonitoringConnection;
+          //  return connection.QueryMultiple(sql);
         }
+
+        //public SqlMapper.GridReader MultipleItems(string sql)
+        //{
+        //    var connection = ConnectionFactoryManager.MonitoringConnection;
+        //    return connection.QueryMultiple(sql);
+        //}
     }
 }

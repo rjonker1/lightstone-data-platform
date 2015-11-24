@@ -1,10 +1,11 @@
 ﻿using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
+using Monitoring.Domain;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider
 {
     [DataContract]
-    public class IndicatorRequestPerDataProviderDto
+    public class IndicatorRequestPerDataProviderDto : AbstractDto
     {
         public IndicatorRequestPerDataProviderDto()
         {

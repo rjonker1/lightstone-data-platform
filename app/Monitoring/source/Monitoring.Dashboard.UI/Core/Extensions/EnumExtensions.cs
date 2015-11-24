@@ -21,12 +21,21 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
             var exists = false;
             foreach (var param in parameters.Split(','))
             {
-                exists = agent.IndexOf(param, StringComparison.CurrentCultureIgnoreCase) > 0; // .IndexOfAny(param, StringComparer.CurrentCultureIgnoreCase);
-                if(exists)
+                exists = agent.IndexOf(param, StringComparison.CurrentCultureIgnoreCase) > 0;
+                    // .IndexOfAny(param, StringComparer.CurrentCultureIgnoreCase);
+                if (exists)
                     break;
             }
 
             return exists;
+        }
+
+        public static string Description(this RequestFieldType requestField)
+        {
+            var attribute =
+                requestField.GetType().GetField(requestField.ToString()).GetCustomAttributes(typeof (EnumMemberAttribute), false).SingleOrDefault() as
+                    EnumMemberAttribute;
+            return attribute == null ? requestField.ToString() : attribute.Value;
         }
     }
 }

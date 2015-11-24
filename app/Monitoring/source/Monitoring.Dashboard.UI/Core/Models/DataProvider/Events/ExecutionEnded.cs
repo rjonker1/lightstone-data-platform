@@ -30,7 +30,7 @@ namespace Monitoring.Dashboard.UI.Core.Models.DataProvider.Events
         public DateTime Date { get; set; }
 
         [DataMember]
-        public Payload Payload { get; set; }
+        public PayloadObject Payload { get; set; }
         [DataMember]
         public ConnectionPayload Connection { get; set; }
     }

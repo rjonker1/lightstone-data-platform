@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Monitoring.Domain;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider
 {
     [DataContract]
-    public class IndicatorRequestLevelDto
+    public class IndicatorRequestLevelDto : AbstractDto
     {
         public IndicatorRequestLevelDto()
         {
