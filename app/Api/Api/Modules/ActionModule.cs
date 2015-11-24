@@ -38,7 +38,7 @@ namespace Api.Modules
                     var apiRequest = this.Bind<ApiRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
-                    authenticator.AuthenticateNewRequest(token, cancellationToken, apiRequest);
+                    apiRequest = await authenticator.AuthenticateNewRequest(token, cancellationToken, apiRequest);
 
                     this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
@@ -74,7 +74,7 @@ namespace Api.Modules
                     var apiRequest = this.Bind<ApiCommitRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
-                    authenticator.AuthenticateExistingRequest(token, cancellationToken, apiRequest);
+                    apiRequest = await authenticator.AuthenticateExistingRequest(token, cancellationToken, apiRequest);
 
                     this.Info(() => "Api request: ContractId {0} Api token: {1}".FormatWith(apiRequest.ContractId, token));
                     this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));

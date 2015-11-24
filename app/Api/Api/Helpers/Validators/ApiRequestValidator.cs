@@ -13,8 +13,8 @@ namespace Api.Helpers.Validators
 {
     public interface IAuthenticateApi
     {
-        void AuthenticateNewRequest(string authToken, CancellationToken ct, ApiRequestDto apiRequest);
-        void AuthenticateExistingRequest(string authToken, CancellationToken ct, ApiCommitRequestDto apiRequest);
+        Task<ApiRequestDto> AuthenticateNewRequest(string authToken, CancellationToken cancellationToken, ApiRequestDto apiRequest);
+        Task<ApiCommitRequestDto> AuthenticateExistingRequest(string authToken, CancellationToken cancellationToken, ApiCommitRequestDto apiRequest);
     }
 
     public class ApiRequestValidator : IAuthenticateApi
@@ -27,20 +27,22 @@ namespace Api.Helpers.Validators
             _userManagementApiClient = userManagementApiClient;
         }
 
-        public async void AuthenticateNewRequest(string authToken, CancellationToken cancellationToken, ApiRequestDto apiRequest)
+        public async Task<ApiRequestDto> AuthenticateNewRequest(string authToken, CancellationToken cancellationToken, ApiRequestDto apiRequest)
         {
             var result = await ValidateUserCustomerContract(authToken, cancellationToken, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId,apiRequest.PackageId);
             apiRequest.Validate();
             apiRequest.ContractVersion(result.ContractVersion);
             apiRequest.SetContactNumber(result.ContactNumber);
+            return apiRequest;
         }
 
-        public async void AuthenticateExistingRequest(string authToken, CancellationToken cancellationToken, ApiCommitRequestDto apiRequest)
+        public async Task<ApiCommitRequestDto> AuthenticateExistingRequest(string authToken, CancellationToken cancellationToken, ApiCommitRequestDto apiRequest)
         {
             var result = await ValidateUserCustomerContract(authToken, cancellationToken, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
             apiRequest.Validate();
             apiRequest.SetContractVersion(result.ContractVersion);
             apiRequest.SetContactNumber(result.ContactNumber);
+            return apiRequest;
         }
 
 
