@@ -331,8 +331,8 @@
     <Compile Include="Core\Extensions\EnumExtensions.cs" />
     <Compile Include="Core\Models\DataProvider\Connection.cs" />
     <Compile Include="Core\Models\DataProvider\DataProvider.cs" />
-    <Compile Include="Core\Models\DataProvider\ExecutionBegan.cs" />
-    <Compile Include="Core\Models\DataProvider\ExecutionEnded.cs" />
+    <Compile Include="Core\Models\DataProvider\Events\ExecutionBegan.cs" />
+    <Compile Include="Core\Models\DataProvider\Events\ExecutionEnded.cs" />
     <Compile Include="Core\Models\DataProvider\Metadata.cs" />
     <Compile Include="Core\Models\DataProvider\Payload.cs" />
     <Compile Include="Core\Models\DataProvider\RequestDataProviders.cs" />

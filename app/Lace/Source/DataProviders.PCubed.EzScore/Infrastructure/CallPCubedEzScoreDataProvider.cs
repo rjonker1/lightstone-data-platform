@@ -20,14 +20,13 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
 {
     public sealed class CallPCubedEzScoreDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallPCubedEzScoreDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
         private IRestResponse<ConsumerViewResponse> _response;
 
         public CallPCubedEzScoreDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _logCommand = logCommand;
         }
@@ -50,7 +49,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling PCubed EzScore Data Provider {0}", ex, ex.Message);
+                Log.ErrorFormat("Error calling PCubed EzScore Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(ex, new {ErrorMessage = "Error calling  PCubed EzScore Data Provider"});
                 PCubedEzScoreResponseFailed(response);
             }

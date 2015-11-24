@@ -6,6 +6,7 @@ using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
 using Monitoring.Dashboard.UI.Core.Models.DataProvider;
+using Monitoring.Dashboard.UI.Core.Models.DataProvider.Events;
 using Monitoring.Dashboard.UI.Domain.Payloads;
 using Monitoring.Domain.Repository;
 
@@ -25,8 +26,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
         {
             try
             {
-                var indicators =
-                    _monitoring.MultipleItems(DataProviderIndicators.SelectStatement());
+                var indicators = _monitoring.MultipleItems(DataProviderIndicators.SelectStatement());
 
                 if (indicators == null)
                     return;
@@ -49,9 +49,6 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                     .ToList();
 
 
-                
-
-
                 Indicators = new DataProviderIndicatorsDto(requestLevel.FirstOrDefault(), requestPerDataProvider.ToList(), dataProviderRequestTimeIndicator);
 
                 //Indicators =
@@ -63,13 +60,11 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("An error occurred in the Monitoirng Data Provider Statistics Handler because of {0}", ex,ex.Message);
+                Log.ErrorFormat("An error occurred in the Monitoring Data Provider Statistics Handler because of {0}", ex,ex.Message);
                 Indicators = new DataProviderIndicatorsDto(new IndicatorRequestLevelDto("00:00:00", 0, 0, 0), new List<IndicatorRequestPerDataProviderDto>(), new EditableList<IndicatorRequestTimeDataProviderDto>());
             }
         }
 
         public DataProviderIndicatorsDto Indicators { get; private set; }
-
-
     }
 }

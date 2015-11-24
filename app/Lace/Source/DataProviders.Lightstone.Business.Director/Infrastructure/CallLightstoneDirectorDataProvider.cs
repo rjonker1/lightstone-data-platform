@@ -18,14 +18,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
 {
     public sealed class CallLightstoneBusinessDirectorDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallLightstoneBusinessDirectorDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
         private DataSet _result;
 
         public CallLightstoneBusinessDirectorDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _logCommand = logCommand;
         }
@@ -57,7 +56,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lightstone Business Director Data Provider {0}", ex, ex.Message);
+                Log.ErrorFormat("Error calling Lightstone Business Director Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(ex, new {ErrorMessage = "Error calling Lightstone Business Director Data Provider"});
                 LightstoneDirectorResponseFailed(response);
             }

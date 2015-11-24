@@ -22,7 +22,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 {
     public class CallRgtDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallRgtDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
 
@@ -33,7 +33,6 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         public CallRgtDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repository = repository;
             _logCommand = logCommand;
@@ -75,7 +74,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling RGT Data Provider because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Error calling RGT Data Provider because of {0}", ex, ex.Message);
                 _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling RGT Data Provider"});
                 RgtResponseFailed(response);
             }

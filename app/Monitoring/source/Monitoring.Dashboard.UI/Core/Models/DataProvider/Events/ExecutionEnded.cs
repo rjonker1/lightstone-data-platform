@@ -2,20 +2,19 @@
 using System.Runtime.Serialization;
 using Monitoring.Dashboard.UI.Core.Extensions;
 
-namespace Monitoring.Dashboard.UI.Core.Models.DataProvider
+namespace Monitoring.Dashboard.UI.Core.Models.DataProvider.Events
 {
     [DataContract]
-    public class ExecutionBegan
+    public class ExecutionEnded
     {
-        public ExecutionBegan()
+        public ExecutionEnded()
         {
             
         }
 
-        public static ExecutionBegan Deserialize(string jsonPayload)
+        public static ExecutionEnded Deserialize(string jsonPayload)
         {
-            var obj  =  string.IsNullOrEmpty(jsonPayload) ? new ExecutionBegan() : jsonPayload.JsonToObject<ExecutionBegan>() ?? new ExecutionBegan();
-            return obj;
+            return string.IsNullOrEmpty(jsonPayload) ? new ExecutionEnded() : jsonPayload.JsonToObject<ExecutionEnded>() ?? new ExecutionEnded();
         }
 
         [DataMember]
@@ -31,7 +30,7 @@ namespace Monitoring.Dashboard.UI.Core.Models.DataProvider
         public DateTime Date { get; set; }
 
         [DataMember]
-        public RequestDetailsPayload Payload { get; set; }
+        public Payload Payload { get; set; }
         [DataMember]
         public ConnectionPayload Connection { get; set; }
     }

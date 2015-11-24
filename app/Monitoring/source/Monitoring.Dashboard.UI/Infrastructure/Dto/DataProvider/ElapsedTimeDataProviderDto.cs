@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
-using Monitoring.Dashboard.UI.Core.Models.DataProvider;
+using Monitoring.Dashboard.UI.Core.Models.DataProvider.Events;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider
 {

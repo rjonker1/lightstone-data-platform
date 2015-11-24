@@ -20,7 +20,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 {
     public sealed class CallRgtVinDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallRgtVinDataProvider>();
 
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
@@ -30,7 +30,6 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
         public CallRgtVinDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repository = repository;
             _logCommand = logCommand;
@@ -61,7 +60,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex, ex.Message);
+                Log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling RGT Vin Data Provider"});
                 RgtVinResponseFailed(response);
             }
@@ -82,7 +81,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private void RgtVinResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void RgtVinResponseFailed(ICollection<IPointToLaceProvider> response)
         {
             var rgtVinResponse = RgtVinResponse.WithState(DataProviderResponseState.TechnicalError);
             rgtVinResponse.HasBeenHandled();
