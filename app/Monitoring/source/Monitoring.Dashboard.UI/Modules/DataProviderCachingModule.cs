@@ -1,8 +1,8 @@
 ﻿using System;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
+using DataProvider.Infrastructure.Base.Handlers;
 using Lace.Caching.Messages;
-using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Nancy;
 using Nancy.Security;
 

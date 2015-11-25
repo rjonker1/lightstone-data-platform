@@ -84,6 +84,18 @@
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>
       <Name>Monitoring.Test.Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\API.Infrastructure\API.Infrastructure.csproj">
+      <Project>{bf987ee8-cfce-499c-9a9d-ce5d751242eb}</Project>
+      <Name>API.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProvider.Domain\DataProvider.Domain.csproj">
+      <Project>{7188f3c2-a02c-467d-8a23-c59f1ee5aecb}</Project>
+      <Name>DataProvider.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\DataProvider.Infrastracture\DataProvider.Infrastructure.csproj">
+      <Project>{9b2e8600-9884-47cc-9b5b-313e8852b860}</Project>
+      <Name>DataProvider.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Monitoring.Dashboard.UI\Monitoring.Dashboard.UI.csproj">
       <Project>{8aa179c2-2bb7-4f0f-8df1-ceadec086d17}</Project>
       <Name>Monitoring.Dashboard.UI</Name>

@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B2E8600-9884-47CC-9B5B-313E8852B860}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataProvider.Infrastructure</RootNamespace>
+    <AssemblyName>DataProvider.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyNetQ, Version=0.32.2.271, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Caching, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Caching.1.0.0.1918\lib\net45\Lightstone.DataPlatform.Lace.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1918, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1918\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1918, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1918\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet, Version=1.0.0.1918, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1918\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1918, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1918\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.3.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Base\Handlers\IHandleDataProviderCaching.cs" />
+    <Compile Include="Base\Handlers\IHandleDataProviderErrors.cs" />
+    <Compile Include="Base\Handlers\IHandleDataProviderIndicators.cs" />
+    <Compile Include="Base\Handlers\IHandleMonitoringCommands.cs" />
+    <Compile Include="Base\Services\ICallMonitoringService.cs" />
+    <Compile Include="Base\Services\IPublishCacheMessages.cs" />
+    <Compile Include="Builders\BuildMonitoringService.cs" />
+    <Compile Include="Commands\MonitoringCommands.cs" />
+    <Compile Include="Dto\DataProvider\AbstractIndicator.cs" />
+    <Compile Include="Dto\DataProvider\DataProviderDto.cs" />
+    <Compile Include="Dto\DataProvider\DataProviderIndicatorsDto.cs" />
+    <Compile Include="Dto\DataProvider\DataProviderWithPagesDto.cs" />
+    <Compile Include="Dto\DataProvider\ElapsedTimeDataProviderDto.cs" />
+    <Compile Include="Dto\DataProvider\IndicatorRequestLevelDto.cs" />
+    <Compile Include="Dto\DataProvider\IndicatorRequestPerDataProviderDto.cs" />
+    <Compile Include="Dto\DataProvider\IndicatorRequestTimeDataProviderDto.cs" />
+    <Compile Include="Dto\DataProvider\MonitoringRequestDto.cs" />
+    <Compile Include="Dto\DataProvider\MonitoringWithArgumentDto.cs" />
+    <Compile Include="Dto\DataProvider\ResultsDto.cs" />
+    <Compile Include="Dto\Payloads\DataProviderPayloadDto.cs" />
+    <Compile Include="Dto\Payloads\RequestPayloadDto.cs" />
+    <Compile Include="Dto\RequestFields\IndicatorRequestFieldTypeCountDto.cs" />
+    <Compile Include="Factory\RequestFieldFinderFactory.cs" />
+    <Compile Include="Handlers\DataProviderCachingHandler.cs" />
+    <Compile Include="Handlers\DataProviderErrorHandler.cs" />
+    <Compile Include="Handlers\DataProviderHandler.cs" />
+    <Compile Include="Handlers\DataProviderIndicatorsHandler.cs" />
+    <Compile Include="Repository\ITransactionRepository.cs" />
+    <Compile Include="RequestField.cs" />
+    <Compile Include="Services\DataProviderCommandPublisher.cs" />
+    <Compile Include="Services\MonitoringService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataProvider.Domain\DataProvider.Domain.csproj">
+      <Project>{7188f3c2-a02c-467d-8a23-c59f1ee5aecb}</Project>
+      <Name>DataProvider.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Domain\Monitoring.Domain.csproj">
+      <Project>{9256f4f5-27fa-4475-af68-f07afa582081}</Project>
+      <Name>Monitoring.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

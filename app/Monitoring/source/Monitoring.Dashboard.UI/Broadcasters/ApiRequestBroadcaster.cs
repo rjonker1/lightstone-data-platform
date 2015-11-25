@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
+using Api.Infrastructure.Factory;
+using Api.Infrastructure.Handlers;
 using Common.Logging;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Monitoring.Dashboard.UI.Hubs;
-using Monitoring.Dashboard.UI.Infrastructure.Factory;
-using Monitoring.Dashboard.UI.Infrastructure.Handlers;
 using Monitoring.Domain.Mappers;
 using Monitoring.Domain.Repository;
 using Shared.BuildingBlocks.AdoNet.Repository;
@@ -21,6 +21,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
         private Timer _apiRequestTimer;
         private readonly TimeSpan _interval = TimeSpan.FromMilliseconds(20000);
         private Uri _root = null;
+
         public ApiRequestBroadcaster(IHubConnectionContext<dynamic> clients)
         {
             _clients = clients;

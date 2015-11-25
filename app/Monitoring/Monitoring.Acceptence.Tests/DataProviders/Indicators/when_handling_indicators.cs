@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
-using Monitoring.Dashboard.UI.Infrastructure.Dto.DataProvider;
-using Monitoring.Dashboard.UI.Infrastructure.Handlers;
+using DataProvider.Infrastructure.Base.Handlers;
+using DataProvider.Infrastructure.Dto.DataProvider;
+using DataProvider.Infrastructure.Handlers;
 using Monitoring.Domain.Mappers;
 using Monitoring.Domain.Repository;
 using Shared.BuildingBlocks.AdoNet.Repository;

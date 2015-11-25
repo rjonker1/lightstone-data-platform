@@ -3,7 +3,7 @@ var dataProviderIndicatorApp = angular.module("dataProviderIndicatorApp", ["ngRo
     .service("dataProviderIndicatorAppService", function ($rootScope) {
         var init = function() {
             var hub = $.connection.dataProviderIndicatorHub;
-            hub.client.dataProviderIndicators = function(result) {
+            hub.client.dataProviderIndicators = function (result) {
                 $rootScope.$emit("dataProviderIndicators", result);
             };
             $.connection.hub.start({ transport: "longPolling" }).done(function () {
@@ -34,17 +34,34 @@ var dataProviderIndicatorApp = angular.module("dataProviderIndicatorApp", ["ngRo
         return { init: init, restart: restart };
 
     })
-    .controller("dataProviderIndicatorController", function ($scope, dataProviderIndicatorAppService, $rootScope) {
+    .controller("dataProviderIndicatorController", function ($scope, dataProviderIndicatorAppService, $rootScope, $location, $window) {
         $scope.dataProviderIndicators = {};
+        $scope.dataProviderIndicators.requestLevel = {};
+        $scope.dataProviderIndicators.requestPerDataProvider = [];
+        $scope.dataProviderIndicators.requestTimePerDataProvider = [];
+        $scope.dataProviderIndicators.requestFieldCounts = [];
         dataProviderIndicatorAppService.init();
 
         $scope.$parent.$on("dataProviderIndicators", function(e, result) {
             $scope.$apply(function() {
                 $scope.dataProviderIndicators = result;
+                $scope.dataProviderIndicators.requestLevel = result.RequestLevel;
+                $scope.dataProviderIndicators.requestPerDataProvider = result.RequestPerDataProvider;
+                $scope.dataProviderIndicators.requestTimePerDataProvider = result.RequestTimePerDataProvider;
+                $scope.dataProviderIndicators.requestFieldCounts = result.RequestFieldCounts;
             });
 
             $scope.ReInitializeService = function() {
                 dataProviderIndicatorAppService.restart();
             };
+
+            $scope.viewAllRequests = function () {
+                $window.location.href = "/dataProviders/log";
+            }
+
+            $scope.viewErrors = function () {
+                $window.location.href = "/dataProviders/log/errors";
+            }
         });
+
     });
