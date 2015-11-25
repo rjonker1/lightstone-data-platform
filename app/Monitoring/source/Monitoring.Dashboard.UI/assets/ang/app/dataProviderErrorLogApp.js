@@ -72,7 +72,7 @@ var dataProviderErrorLogApp = angular.module("dataProviderErrorLogApp", ["ngRout
             }
         };
 
-        $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {
+        $scope.$parent.$on("dataProviderErrors", function (e, result) {
             $scope.$apply(function () { $scope.dataProviderErrors = result; });
 
             $scope.Toggle = function(elementIndex, formattedJsonId) {

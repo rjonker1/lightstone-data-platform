@@ -24,7 +24,7 @@ namespace DataProvider.Infrastructure.Dto.DataProvider
             get
             {
                 var name = (DataProviderCommandSource) DataProviderId;
-                return name.ToString();
+                return name.Description();
             }
         }
     }

@@ -14,8 +14,10 @@ namespace DataProvider.Domain.Enums
         Year = 3,
         [EnumMember(Value = "ID Number")]
         IdentityNumber = 4,
-        [EnumMember(Value = "Drivers LIC Scan")]
+        [EnumMember(Value = "DLi Scan")]
         ScanData = 5,
+        [EnumMember(Value = "Reg Number")]
+        RegisterNumber = 7,
         [EnumMember(Value = "Undefined")]
         Undefined = 99
     }

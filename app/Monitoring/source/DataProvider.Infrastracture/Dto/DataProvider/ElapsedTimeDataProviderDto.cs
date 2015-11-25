@@ -5,11 +5,12 @@ using DataProvider.Domain.Models.Events;
 
 namespace DataProvider.Infrastructure.Dto.DataProvider
 {
-    [DataContract]public class ElapsedTimeDataProviderDto
+    [DataContract]
+    public class ElapsedTimeDataProviderDto
     {
         public ElapsedTimeDataProviderDto()
         {
-            
+
         }
 
         public ElapsedTimeDataProviderDto(ExecutionEnded @event)
@@ -24,10 +25,7 @@ namespace DataProvider.Infrastructure.Dto.DataProvider
         [DataMember]
         public int DataproviderId
         {
-            get
-            {
-                return (int)(DataProviderCommandSource)Enum.Parse(typeof(DataProviderCommandSource), DataProviderName);
-            }
+            get { return (int) (DataProviderCommandSource) Enum.Parse(typeof (DataProviderCommandSource), DataProviderName); }
         }
 
         [DataMember]

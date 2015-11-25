@@ -4,7 +4,7 @@ using DataProvider.Infrastructure.Dto.DataProvider;
 
 namespace DataProvider.Infrastructure.Base.Handlers
 {
-    interface IHandleDataProviderErrors
+    public interface IHandleDataProviderErrors
     {
         List<DataProviderDto> ErrorResponse { get; }
         void Handle(GetMonitoringCommand command);

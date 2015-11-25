@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using DataProvider.Domain.Models;
 using DataProvider.Domain.Models.Events;
 using DataProvider.Infrastructure.Base.Handlers;
@@ -46,12 +47,12 @@ namespace DataProvider.Infrastructure.Handlers
 
                 var dataProviderRequestTimeIndicator = ((List<DataProviderPayloadDto>)indicators[2]).Select(
                     s => new ElapsedTimeDataProviderDto(ExecutionEnded.Deserialize(s.Json)))
-                    .GroupBy(g => g.DataProviderName, g => g.ElapsedTimeSpan, (key, times) => new
+                    .GroupBy(g => g.DataproviderId, g => g.ElapsedTimeSpan, (key, times) => new
                     {
                         DataProvider = key,
                         Times = times.ToList()
                     })
-                    .Select(sg => new IndicatorRequestTimeDataProviderDto(sg.Times.Average(i => i.TotalSeconds), sg.DataProvider))
+                    .Select(sg => new IndicatorRequestTimeDataProviderDto(sg.Times.Average(i => i.TotalSeconds), ((DataProviderCommandSource)sg.DataProvider).Description()))
                     .ToList();
 
                 Indicators = new DataProviderIndicatorsDto(((List<IndicatorRequestLevelDto>)indicators[0]).FirstOrDefault(), ((List<IndicatorRequestPerDataProviderDto>)indicators[1]), dataProviderRequestTimeIndicator, requestFieldCounts.ToList());
@@ -59,7 +60,7 @@ namespace DataProvider.Infrastructure.Handlers
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("An error occurred in the Monitoring Data Provider Statistics Handler because of {0}", ex,ex.Message);
+                Log.ErrorFormat("An error occurred in the Monitoring Data Provider Indicator Handler because of {0}", ex,ex.Message);
                 Indicators = new DataProviderIndicatorsDto(new IndicatorRequestLevelDto("00:00:00", 0, 0, 0), new List<IndicatorRequestPerDataProviderDto>(), new List<IndicatorRequestTimeDataProviderDto>(), new List<IndicatorRequestFieldTypeCountDto>());
             }
         }

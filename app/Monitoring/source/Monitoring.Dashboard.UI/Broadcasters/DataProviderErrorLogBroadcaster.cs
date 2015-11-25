@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Common.Logging;
+using DataProvider.Infrastructure.Base.Handlers;
 using DataProvider.Infrastructure.Commands;
 using DataProvider.Infrastructure.Dto.DataProvider;
 using DataProvider.Infrastructure.Handlers;
@@ -17,7 +18,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
     {
         private static readonly Lazy<DataProviderErrorLogBroadcaster> _instance =
             new Lazy<DataProviderErrorLogBroadcaster>(
-                () => new DataProviderErrorLogBroadcaster(GlobalHost.ConnectionManager.GetHubContext<DataProviderErrorLogHub>().Clients));
+                () => new DataProviderErrorLogBroadcaster(GlobalHost.ConnectionManager.GetHubContext<DataProviderErrorLogHub>().Clients,new DataProviderErrorHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())))));
 
         private static readonly ILog Log = LogManager.GetLogger<DataProviderErrorLogBroadcaster>();
 
@@ -26,11 +27,12 @@ namespace Monitoring.Dashboard.UI.Broadcasters
         private readonly IHubConnectionContext<dynamic> _clients;
         private Timer _indicatorTimer;
         private readonly TimeSpan _interval = TimeSpan.FromMilliseconds(30000);
+        private readonly IHandleDataProviderErrors _handler;
 
-        public DataProviderErrorLogBroadcaster(IHubConnectionContext<dynamic> clients)
+        public DataProviderErrorLogBroadcaster(IHubConnectionContext<dynamic> clients, IHandleDataProviderErrors handler)
         {
             _clients = clients;
-
+            _handler = handler;
             BroadCastDataProviderErrors(new {});
             SetErrorLogTimer();
         }
@@ -49,13 +51,13 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             _indicatorTimer = new Timer(BroadCastDataProviderErrors, null, _interval, _interval);
         }
 
-        private static object GetDataProviderErrors()
+        private object GetDataProviderErrors()
         {
             try
             {
-                var handler = new DataProviderErrorHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())));
-                handler.Handle(new GetMonitoringCommand(new MonitoringRequestDto()));
-                return handler.ErrorResponse;
+                //var handler = new DataProviderErrorHandler(new MonitoringRepository(new RepositoryMapper(new MappingForMonitoringTypes())));
+                _handler.Handle(new GetMonitoringCommand(new MonitoringRequestDto()));
+                return _handler.ErrorResponse;
             }
             catch (Exception ex)
             {
