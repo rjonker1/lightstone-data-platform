@@ -9,7 +9,7 @@ using PackageBuilder.TestHelper.Helpers.Extensions;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
+namespace PackageBuilder.Acceptance.Tests.Api.Modules.DataProviders
 {
     public class when_updating_the_pcubed_fica_data_provider : BaseDataProviderTest
     {
@@ -25,13 +25,11 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
                     with.JsonBody(DataProviderDtoMother.PCubedFica);
                 });
             });
-
-            DataProvider = WriteRepo.GetById(Id);
         }
 
-        public override void Observe()
+        public override async void Observe()
         {
-
+            DataProvider = await WriteRepo.GetById(Id);
         }
 
         [Observation]

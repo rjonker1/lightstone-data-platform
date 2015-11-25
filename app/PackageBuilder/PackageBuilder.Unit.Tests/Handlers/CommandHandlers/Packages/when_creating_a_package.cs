@@ -8,6 +8,7 @@ using PackageBuilder.Domain.CommandHandlers.Packages;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;

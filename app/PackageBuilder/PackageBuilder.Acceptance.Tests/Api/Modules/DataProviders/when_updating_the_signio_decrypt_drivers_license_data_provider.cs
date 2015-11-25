@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Castle.MicroKernel.SubSystems.Conversion;
 using DataPlatform.Shared.Enums;
 using Nancy.Testing;
 using PackageBuilder.Acceptance.Tests.Bases;
@@ -9,7 +10,7 @@ using PackageBuilder.TestHelper.Helpers.Extensions;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
+namespace PackageBuilder.Acceptance.Tests.Api.Modules.DataProviders
 {
     public class when_updating_the_signio_decrypt_drivers_license_data_provider : BaseDataProviderTest
     {
@@ -25,13 +26,11 @@ namespace PackageBuilder.Acceptance.Tests.Modules.DataProviders
                     with.JsonBody(DataProviderDtoMother.SignioDecryptDriversLicense);
                 });
             });
-
-            DataProvider = WriteRepo.GetById(Id);
         }
 
-        public override void Observe()
+        public override async void Observe()
         {
-
+            DataProvider = await WriteRepo.GetById(Id);
         }
 
         [Observation]

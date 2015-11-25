@@ -31,6 +31,7 @@ using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
+using PackageBuilder.Infrastructure.NEventStore;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
@@ -84,10 +85,10 @@ namespace PackageBuilder.Api.Modules
                         });
             };
 
-            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute] = parameters => Response.AsJson(
+            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute, true] = async(parameters, ct) => Response.AsJson(
                 new
                 {
-                    Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
+                    Response = new[] { Mapper.Map<IPackage, PackageDto>(await writeRepo.GetById(parameters.id)) }
                 });
 
 
@@ -97,7 +98,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => StringExtensions.FormatWith("Package Execute Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 this.Info(() => StringExtensions.FormatWith("Package Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
-                var package = writeRepo.GetById(apiRequest.PackageId, true);
+                var package = await writeRepo.GetById(apiRequest.PackageId, true);
                 this.Info(() => StringExtensions.FormatWith("Package Read Completed, TimeStamp: {0}", DateTime.UtcNow));
 
                 if (package == null)
@@ -155,7 +156,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => StringExtensions.FormatWith("Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 this.Info(() => StringExtensions.FormatWith("Package Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
-                var package = writeRepo.GetById(apiRequest.PackageId, true);
+                var package = await writeRepo.GetById(apiRequest.PackageId, true);
                 this.Info(() => StringExtensions.FormatWith("Package Read Completed, TimeStamp: {0}", DateTime.UtcNow));
 
                 if (package == null)
@@ -228,9 +229,9 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
 
-            Put["/Packages/Clone/{id}/{cloneName}"] = parameters =>
+            Put["/Packages/Clone/{id}/{cloneName}", true] = async(parameters, ct) =>
             {
-                var packageToClone = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+                var packageToClone = Mapper.Map<IPackage, PackageDto>(await writeRepo.GetById(parameters.id));
                 var dataProvidersToClone =
                     Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(
                         packageToClone.DataProviders);

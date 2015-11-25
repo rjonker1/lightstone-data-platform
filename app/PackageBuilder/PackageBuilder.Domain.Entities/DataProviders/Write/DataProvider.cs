@@ -4,9 +4,12 @@ using System.Runtime.Serialization;
 using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Helpers.Json;
+using Newtonsoft.Json;
 using PackageBuilder.Core.Attributes;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Write
@@ -26,6 +29,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         public string Description { get; internal set; }
         [DataMember, MapToCurrentValue]
         public decimal CostOfSale { get; internal set; }
+        //[DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<SourceConfiguration>))]
+        [DataMember]
         public ISourceConfiguration SourceConfiguration
         {
             get
@@ -43,9 +48,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         public DateTime CreatedDate { get; internal set; }
         [DataMember]
         public DateTime? EditedDate { get; internal set; }
-        [DataMember]
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
         public IEnumerable<IDataField> RequestFields { get; set; }
-        [DataMember]
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
         public IEnumerable<IDataField> DataFields { get; set; }
         [DataMember]
         public int Version
@@ -55,6 +60,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         }
         [DataMember]
         public bool RequiresConsent { get; internal set; }
+        public DataProviderResponseState ResponseState { get; internal set; }
 
         private DataProvider(Guid id)
         {
@@ -122,7 +128,5 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         {
             return "{0} - {1} - {2}".FormatWith(GetType().FullName, Id, Name);
         }
-       
-        public DataProviderResponseState ResponseState { get; internal set; }
     }
 }

@@ -5,12 +5,11 @@ using Nancy.Testing;
 using PackageBuilder.Acceptance.Tests.Bases;
 using PackageBuilder.Api.Routes;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.Enums.Requests;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests.Modules.Packages
+namespace PackageBuilder.Acceptance.Tests.Api.Modules.Packages
 {
     public class when_creating_package : BasePackageTest
     {
@@ -30,13 +29,11 @@ namespace PackageBuilder.Acceptance.Tests.Modules.Packages
                     with.JsonBody(PackageDtoMother.Internal(Id));
                 });
             });
-
-            Package = WriteRepo.GetById(Id);
         }
 
-        public override void Observe()
+        public override async void Observe()
         {
-
+            Package = await WriteRepo.GetById(Id);
         }
 
         [Observation]

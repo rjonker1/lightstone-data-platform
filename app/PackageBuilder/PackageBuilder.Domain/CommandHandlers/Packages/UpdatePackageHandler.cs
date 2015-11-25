@@ -2,9 +2,9 @@
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Domain.CommandHandlers.Packages
@@ -20,7 +20,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
             _readRepo = readRepo;
         }
 
-        public override void Handle(UpdatePackage command)
+        public override async void Handle(UpdatePackage command)
         {
             if (command.Name == null)
                 throw new LightstoneAutoException("Package name was not specified.");
@@ -33,7 +33,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
                 throw exception;                
             }
 
-            var entity = _writeRepo.GetById(command.Id);
+            var entity = await _writeRepo.GetById(command.Id);
             entity.CreatePackageRevision(command.Id, command.Name, command.Description, command.CostPrice,
                 command.SalePrice, command.Notes, command.PackageEventType, command.Industries, command.State, command.Owner,
                 command.CreatedDate, command.EditedDate, command.DataProviderValueOverrides);

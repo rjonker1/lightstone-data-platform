@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
 using Nancy;
@@ -17,6 +18,7 @@ using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.States.Read;
+using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.Infrastructure.Repositories;
 using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Read.DataProviderDto;
@@ -42,17 +44,21 @@ namespace PackageBuilder.Api.Modules
                     : Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>(readRepo));
             };
 
-            Get["/DataProviders/Latest"] = _ =>
+            Get["/DataProviders/Latest", true] = async(_, ct) =>
             {
-                var repoSource =
-                    readRepo.GetUniqueIds()
-                        .Select(x => Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(x)))
-                        .ToList();
+                var list = new List<Domain.Dtos.Write.DataProviderDto>();
+                var repoSource = readRepo.GetUniqueIds();
+                foreach (var id in repoSource)
+                {
+                    var dataProvider = await writeRepo.GetById(id);
+
+                    list.Add(Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(dataProvider));
+                }
 
                 var dataSources = new List<Domain.Dtos.Write.DataProviderDto>();
                 //var requestFields = new List<DataProviderFieldItemDto>();
 
-                foreach (var entity in repoSource)
+                foreach (var entity in list)
                 {
                     var requestFields = entity.RequestFields.Where(requestField => requestField != null);
                     dataSources.Add(new Domain.Dtos.Write.DataProviderDto

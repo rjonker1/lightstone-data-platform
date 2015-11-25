@@ -1,80 +1,63 @@
 using System;
-using System.Configuration;
+using System.Threading.Tasks;
 using DataPlatform.Shared.Helpers.Extensions;
-using ServiceStack.Redis;
-using ServiceStack.Redis.Generic;
+using Newtonsoft.Json;
+using PackageBuilder.Domain.Entities.Packages.Write;
+using StackExchange.Redis;
 
-namespace PackageBuilder.Core.NEventStore
+namespace PackageBuilder.Infrastructure.NEventStore
 {
     public class CacheProvider<T> : ICacheProvider<T> where T : class
     {
-        private static RedisClient _redisClient;
-        private readonly IRedisTypedClient<T> cacheClient;
-
-        private static bool useCache = true;
-
-        public CacheProvider()
+        private readonly IDatabase _redisDb;
+        public CacheProvider(IDatabase redisDb)
         {
-            try
-            {
-                string host = ConfigurationManager.ConnectionStrings["workflow/redis/cache"].ConnectionString;
-                _redisClient = new RedisClient(host);
-                cacheClient = _redisClient.As<T>();
-            }
-            catch (Exception ex)
-            {
-                this.Error(() => string.Format("Failed to initialize CacheProvider. {0}", ex.Message));
-                useCache = false;
-            }
+            _redisDb = redisDb;
         }
 
-        public T CacheGet(Guid entityId)
+        public async Task<T> CacheGet(Guid entityId)
         {
-            if (!useCache) return null;
             try
             {
                 this.Info(() => string.Format("Attempting to retrieve {0}, from cache", entityId));
-                var cachedEntity = cacheClient.GetById(entityId);
+                var redisValue = await _redisDb.StringGetAsync(entityId + "");
+                var cachedEntity = JsonConvert.DeserializeObject<Package>(redisValue.ToString());
                 this.Info(() => string.Format("Successfully retrieved {0}, from cache", entityId));
-                return cachedEntity;
+                return cachedEntity as T;
             }
             catch (Exception e)
             {
                 this.Error(() => string.Format("Failed to retrieve from cache. {0}", e.Message));
-                useCache = false;
                 return null;
             }
         }
 
-        public void CacheSave(T entity)
+        public async void CacheSave(Guid entityId, T entity)
         {
-            if (!useCache) return;
             try
             {
                 this.Info(() => string.Format("Attempting to save {0}, to cache", entity));
-                cacheClient.Store(entity);
+                var value = JsonConvert.SerializeObject(entity);
+                await _redisDb.StringSetAsync(entityId + "", value);
                 this.Info(() => string.Format("Successfully saved {0}, to cache", entity));
             }
             catch (Exception e)
             {
                 this.Error(() => string.Format("Failed to save to cache. {0}", e.Message));
-                useCache = false;
             }
         }
 
-        public void CacheDelete(Guid entityId)
+        public async void CacheDelete(Guid entityId)
         {
-            if (!useCache) return;
             try
             {
                 this.Info(() => string.Format("Attempting to delete {0}, from cache", entityId));
-                cacheClient.DeleteById(entityId);
+                await _redisDb.KeyDeleteAsync(entityId + "");
                 this.Info(() => string.Format("Successfully deleted {0}, from cache", entityId));
             }
             catch (Exception e)
             {
                 this.Error(() => string.Format("Failed to delete from cache. {0}", e.Message));
-                useCache = false;
             }
         }
     }

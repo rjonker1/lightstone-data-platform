@@ -29,7 +29,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         public string Value { get; internal set; }
         [DataMember]
         public string Definition { get; internal set; }
-        [DataMember]
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Industry>>))]
         public IEnumerable<IIndustry> Industries { get; internal set; }
         [DataMember, MapToCurrentValue]
         public double CostOfSale { get; internal set; }

@@ -5,6 +5,7 @@ using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;

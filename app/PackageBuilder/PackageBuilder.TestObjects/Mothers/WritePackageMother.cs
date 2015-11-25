@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using PackageBuilder.Domain.Entities.Packages.Write;
 using PackageBuilder.TestObjects.Builders;
 
@@ -6,7 +7,7 @@ namespace PackageBuilder.TestObjects.Mothers
 {
     public class WritePackageMother
     {
-        public static Package LicensePlateSearchPackage
+        public static Task<Package> LicensePlateSearchPackage
         {
             get
             {
@@ -22,7 +23,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Package FullVerificationPackage
+        public static Task<Package> FullVerificationPackage
         {
             get
             {
@@ -37,7 +38,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Package PartialVerificationPackage
+        public static Task<Package> PartialVerificationPackage
         {
             get
             {
@@ -52,7 +53,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Package LicenseScanPackage
+        public static Task<Package> LicenseScanPackage
         {
             get
             {
@@ -67,7 +68,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Package EzScorePackage
+        public static Task<Package> EzScorePackage
         {
             get
             {
@@ -82,7 +83,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Package FicaVerificationPackage
+        public static Task<Package> FicaVerificationPackage
         {
             get
             {
@@ -97,7 +98,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Package PropertyPackage
+        public static Task<Package> PropertyPackage
         {
             get
             {

@@ -8,7 +8,7 @@ using PackageBuilder.TestHelper.BaseTests;
 using Xunit;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests.Modules.States
+namespace PackageBuilder.Acceptance.Tests.Api.Modules.States
 {
     public class when_invoking_state_add_route : TestDataBaseHelper
     {

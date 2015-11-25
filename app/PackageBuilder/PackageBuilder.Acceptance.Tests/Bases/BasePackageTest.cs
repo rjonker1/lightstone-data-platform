@@ -4,6 +4,7 @@ using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Packages.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 
 namespace PackageBuilder.Acceptance.Tests.Bases
 {

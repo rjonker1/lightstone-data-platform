@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Nancy.Extensions;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class DataProviderConverter : TypeConverter<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>
+    public class DataProviderConverter : TypeConverter<IEnumerable<IDataProviderOverride>, Task<IEnumerable<DataProvider>>>
     {
         private readonly IRepository<Domain.Entities.DataProviders.Read.DataProvider> _readRepository;
         private readonly INEventStoreRepository<DataProvider> _writeRepository;
@@ -36,23 +37,32 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        protected override IEnumerable<DataProvider> ConvertCore(IEnumerable<IDataProviderOverride> source)
+        protected override async Task<IEnumerable<DataProvider>> ConvertCore(IEnumerable<IDataProviderOverride> source)
         {
             var sourceCompare = source.Select(o => o.Id);
             var newDps = _readRepository.Where(x => !sourceCompare.Contains(x.DataProviderId)).DistinctBy(x => x.DataProviderId);
 
             var list = new List<DataProvider>();
-            list.AddRange(DataProviders(source));
-            list.AddRange(newDps.Select(x => Mapper.Map<IDataProvider, DataProvider>(_writeRepository.GetById(x.DataProviderId, false))));
+            var dataProviders = await DataProviders(source);
+            list.AddRange(dataProviders);
+            foreach (var newDp in newDps)
+                list.Add(await DataProvider(newDp));
 
             return list;
         }
 
-        private IEnumerable<DataProvider> DataProviders(IEnumerable<IDataProviderOverride> source)
+        private async Task<DataProvider> DataProvider(Domain.Entities.DataProviders.Read.DataProvider x)
         {
+            var byId = await _writeRepository.GetById(x.DataProviderId);
+            return Mapper.Map<IDataProvider, DataProvider>(byId);
+        }
+
+        private async Task<IEnumerable<DataProvider>> DataProviders(IEnumerable<IDataProviderOverride> source)
+        {
+            var list = new List<DataProvider>();
             foreach (var dataProviderOverride in source)
             {
-                var dataProvider = _writeRepository.GetById(dataProviderOverride.Id);
+                var dataProvider = await _writeRepository.GetById(dataProviderOverride.Id);
 
                 dataProvider.RequestFields.ToNamespace().ToList().Cast<DataField>()
                     .RecursiveForEach(x => Mapper.Map(dataProviderOverride.RequestFieldOverrides.ToNamespace()
@@ -74,8 +84,9 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                                     .Filter(f => x != null && f.Namespace == x.Namespace)
                                     .FirstOrDefault(), x));
 
-                yield return dataProvider;
+                list.Add(dataProvider);
             }
+            return list;
         }
     }
 }

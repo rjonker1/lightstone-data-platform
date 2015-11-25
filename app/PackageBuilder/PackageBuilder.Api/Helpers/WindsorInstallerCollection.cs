@@ -8,6 +8,7 @@ namespace PackageBuilder.Api.Helpers
     {
         public static IWindsorInstaller[] Installers =
         {
+            new RedisInstaller(), 
             new NHibernateInstaller(),
             new RepositoryInstaller(),
             new CommandInstaller(),
@@ -18,7 +19,8 @@ namespace PackageBuilder.Api.Helpers
             new AutoMapperInstaller(),
             new LaceInstaller(),
             new AuthInstaller(),
-            new ApiInstaller()
+            new ApiInstaller(),
+            new NancyInstaller(), 
         };
     }
 }

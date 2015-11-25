@@ -1,15 +1,15 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using PackageBuilder.Infrastructure.NEventStore;
+using PackageBuilder.Api.Helpers;
 
 namespace PackageBuilder.Api.Installers
 {
-    public class CacheProviderInstaller : IWindsorInstaller
+    public class NancyInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For(typeof(ICacheProvider<>)).ImplementedBy(typeof(CacheProvider<>)));
+            //container.Register(Component.For<INancyContextWrapper>().ImplementedBy<NancyContextWrapper>().LifeStyle.HybridPerWebRequestPerThread());
         }
     }
 }

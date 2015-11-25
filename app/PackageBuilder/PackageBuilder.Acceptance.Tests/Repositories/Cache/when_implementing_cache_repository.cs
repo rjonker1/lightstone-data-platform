@@ -2,6 +2,7 @@
 using System.Configuration;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Packages.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.TestHelper.BaseTests;
 using ServiceStack.Redis;
 using ServiceStack.Redis.Generic;
