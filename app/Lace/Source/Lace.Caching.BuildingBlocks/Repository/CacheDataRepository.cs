@@ -10,12 +10,11 @@ namespace Lace.Caching.BuildingBlocks.Repository
 {
     public class CacheDataRepository : ICacheRepository
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CacheDataRepository>();
         private const string CacheIp = "127.0.0.1:6379";
 
         public CacheDataRepository()
         {
-            _log = LogManager.GetLogger(GetType());
         }
         
         public static CacheDataRepository ForCacheOnly()
@@ -37,18 +36,18 @@ namespace Lace.Caching.BuildingBlocks.Repository
                         {
                             var dbResponse = connection.Query<TItem>(sql).ToList();
 
-                            _log.InfoFormat("Trying to add {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
+                            Log.InfoFormat("Trying to add {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
 
                             dbResponse.ForEach(f => type.Store(f));
 
-                            _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
+                            Log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Cannot Add Items to Cache because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Cannot Add Items to Cache because of {0}", ex, ex.Message);
             }
         }
 
@@ -66,18 +65,18 @@ namespace Lace.Caching.BuildingBlocks.Repository
                         {
                             var dbResponse = connection.Query<TItem>(sql).ToList();
 
-                            _log.InfoFormat("Trying to add {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
+                            Log.InfoFormat("Trying to add {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
 
                             type.StoreAll(dbResponse);
 
-                            _log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof (TItem).FullName, dbResponse.Count);
+                            Log.InfoFormat("Added {0} to the cache. Number of rows {1}", typeof(TItem).FullName, dbResponse.Count);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Cannot Add Items to Cache because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Cannot Add Items to Cache because of {0}", ex, ex.Message);
             }
         }
 
@@ -93,7 +92,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Cannot Clear All the Items from the Cache becuse of {0}", ex, ex.Message);
+                Log.ErrorFormat("Cannot Clear All the Items from the Cache becuse of {0}", ex, ex.Message);
             }
         }
 
@@ -111,7 +110,7 @@ namespace Lace.Caching.BuildingBlocks.Repository
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Cannot Clear All the Items from the Cache becuse of {0}", ex, ex.Message);
+                Log.ErrorFormat("Cannot Clear All the Items from the Cache becuse of {0}", ex, ex.Message);
             }
         }
     }
