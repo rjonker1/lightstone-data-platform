@@ -115,17 +115,18 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        _commands.Workflow.Begin(payload, _executeWatch, _dataProviderName,_billNoRecords);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
-                    }
-                });
+                _commands.Workflow.Begin(payload, _executeWatch, _dataProviderName, _billNoRecords);
+                //Task.Run(() =>
+                //{
+                //    try
+                //    {
+                //        _commands.Workflow.Begin(payload, _executeWatch, _dataProviderName,_billNoRecords);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                //    }
+                //});
             }
             catch (Exception ex)
             {
@@ -137,17 +138,19 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        _commands.Workflow.End(payload, _executeWatch, _dataProviderName,_billNoRecords);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
-                    }
-                });
+                _commands.Workflow.End(payload, _executeWatch, _dataProviderName, _billNoRecords);
+                //TODO: TESTING ANSYNC
+                //Task.Run(() =>
+                //{
+                //    try
+                //    {
+                //        _commands.Workflow.End(payload, _executeWatch, _dataProviderName,_billNoRecords);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                //    }
+                //});
             }
             catch (Exception ex)
             {
@@ -160,17 +163,19 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        _commands.Workflow.Send(commandType, payload, metadata, _dataProviderName, _billNoRecords);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log.ErrorFormat("An error occured sending a command to the bus because of {0}", ex, ex.Message);
-                    }
-                });
+                _commands.Workflow.Send(commandType, payload, metadata, _dataProviderName, _billNoRecords);
+                //TODO: TESTING ANSYNC
+                //Task.Run(() =>
+                //{
+                //    try
+                //    {
+                //        _commands.Workflow.Send(commandType, payload, metadata, _dataProviderName, _billNoRecords);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        _log.ErrorFormat("An error occured sending a command to the bus because of {0}", ex, ex.Message);
+                //    }
+                //});
             }
             catch (Exception ex)
             {
@@ -182,17 +187,19 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        _commands.Workflow.DataProviderRequest(dataProvider, connection, payload, stopWatch);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
-                    }
-                });
+                _commands.Workflow.DataProviderRequest(dataProvider, connection, payload, stopWatch);
+                //TODO: TESTING ANSYNC
+                //Task.Run(() =>
+                //{
+                //    try
+                //    {
+                //        _commands.Workflow.DataProviderRequest(dataProvider, connection, payload, stopWatch);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                //    }
+                //});
             }
             catch (Exception ex)
             {
@@ -204,17 +211,19 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        _commands.Workflow.DataProviderResponse(dataProvider, connection, payload, stopWatch);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log.ErrorFormat("An error occured sending a response to the bus because of {0}",ex, ex.Message);
-                    }
-                });
+                _commands.Workflow.DataProviderResponse(dataProvider, connection, payload, stopWatch);
+                //TODO: TESTING ANSYNC
+                //Task.Run(() =>
+                //{
+                //    try
+                //    {
+                //        _commands.Workflow.DataProviderResponse(dataProvider, connection, payload, stopWatch);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        _log.ErrorFormat("An error occured sending a response to the bus because of {0}",ex, ex.Message);
+                //    }
+                //});
             }
             catch (Exception ex)
             {
@@ -226,17 +235,19 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        _commands.Workflow.EntryPointRequest(request, _requestWatch,billNoRecords);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
-                    }
-                });
+                _commands.Workflow.EntryPointRequest(request, _requestWatch, billNoRecords);
+                //TODO: TESTING ANSYNC
+                //Task.Run(() =>
+                //{
+                //    try
+                //    {
+                //        _commands.Workflow.EntryPointRequest(request, _requestWatch,billNoRecords);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
+                //    }
+                //});
             }
             catch (Exception ex)
             {
@@ -249,17 +260,19 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        _commands.Workflow.EntryPointResponse(payload, _requestWatch, state, request,billNoRecords);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
-                    }
-                });
+                _commands.Workflow.EntryPointResponse(payload, _requestWatch, state, request, billNoRecords);
+                //TODO: TESTING ANSYNC
+                //Task.Run(() =>
+                //{
+                //    try
+                //    {
+                //        _commands.Workflow.EntryPointResponse(payload, _requestWatch, state, request,billNoRecords);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
+                //    }
+                //});
             }
             catch (Exception ex)
             {

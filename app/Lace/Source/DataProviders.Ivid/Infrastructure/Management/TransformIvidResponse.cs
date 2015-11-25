@@ -73,14 +73,14 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
         {
             if (Result.HasNoRecords)
                 return;
-            //Result.AddToCache(CacheDataRepository.ForCacheOnly());
-            try
-            {
-                Task.Run(() => Result.AddToCache(CacheDataRepository.ForCacheOnly()));
-            }
-            catch
-            {
-            }
+            Result.AddToCache(CacheDataRepository.ForCacheOnly());
+            //try
+            //{
+            //    Task.Run(() => Result.AddToCache(CacheDataRepository.ForCacheOnly()));
+            //}
+            //catch
+            //{
+            //}
         }
 
         private static IvidCodePair BuildIvidCodePair(CodeDescription description)
