@@ -3,7 +3,6 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
-using PackageBuilder.Api.Helpers;
 using StackExchange.Redis;
 
 namespace PackageBuilder.Api.Installers
@@ -16,6 +15,7 @@ namespace PackageBuilder.Api.Installers
             {
                 EndPoints = { ConfigurationManager.ConnectionStrings["workflow/redis/cache"].ConnectionString },
                 ConnectRetry = 3,
+                AbortOnConnectFail = false
             })));
             var connectionMultiplexer = container.Resolve<ConnectionMultiplexer>();
             connectionMultiplexer.ConnectionFailed += (sender, args) => this.Error(() => "Redis: ConnectionFailed", args.Exception);
