@@ -31,7 +31,7 @@ namespace Billing.Api.Modules
 
                 var db = preBillingTransactionsRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter);
 
-                listStub.AddRange(db.DistinctBy(x => x.DataProvider.CostPrice).Select(x =>
+                listStub.AddRange(db.DistinctBy(x => new { x.DataProvider.DataProviderName, x.DataProvider.CostPrice }).Select(x =>
                     new PreBillingCoSDto
                     {
                         DataProviderName = x.DataProvider.DataProviderName,

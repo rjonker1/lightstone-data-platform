@@ -54,6 +54,7 @@ namespace Api.Helpers.Validators
             if (userId == new Guid()) throw new LightstoneAutoException("UserId required");
             if (customerClientId == new Guid()) throw new LightstoneAutoException("customerClientId required");
             if (packageId == new Guid()) throw new LightstoneAutoException("packageId required");
+            if (contractId == new Guid()) throw new LightstoneAutoException("contractId required");
 
             #endregion
 

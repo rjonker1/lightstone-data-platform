@@ -16,7 +16,6 @@ namespace Workflow.Billing.Helpers.Schedules
 
             var mailMessage = message.ToMailMessage();
             mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to"].ToLower());
-            mailMessage.To.Add(ConfigurationManager.AppSettings["report/email/to/secondary"].ToLower());
 
             new EmailNotification().Send(mailMessage);
         }

@@ -28,7 +28,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
         {
             var date = DateTime.UtcNow.ToString("MMMM yyyy");
             var dto = JsonConvert.DeserializeObject<ReportDto>(message.Body.ReportBody);
-            var path = @"D:\LSA Reports\Invoices " + date;
+            var path = @"D:\LSA Reports\Billing {0}".FormatWith(date);
 
             await Task.Run(() =>
             {
@@ -38,13 +38,12 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                     {
                         if (dto.Data.Customer != null) CreateFile(dto, path, dto.Data.Customer.Name + " - Invoice.pdf");
 
-                        if (dto.Data.ContractStatements != null)
+                        if (dto.Data.CustomerClientStatement != null)
                         {
-                            var fileName = dto.Data.ContractStatements.Select(x => x.ContractName);
-                            CreateFile(dto, path, fileName.FirstOrDefault() + " - Contract Statement.pdf");
+                            CreateFile(dto, path, @"{0}_Statement_{1}.pdf".FormatWith(dto.Data.CustomerClientStatement.CustomerClientName, DateTime.UtcNow.ToString("MMMM yyyy")));
 
                             //Send Email
-                            _emailPdfNotificationsWithAttachment.Send(dto);
+                            //_emailPdfNotificationsWithAttachment.Send(dto);
                         }
                     }
 

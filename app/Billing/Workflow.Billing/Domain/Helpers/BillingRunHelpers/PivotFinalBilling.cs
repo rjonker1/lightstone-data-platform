@@ -34,7 +34,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             DebitOrderReportList = new List<ReportDto>();
             DebitOrderNotDoneReportList = new List<ReportDto>();
         }
-
+ 
         public void Pivot()
         {
             var endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
