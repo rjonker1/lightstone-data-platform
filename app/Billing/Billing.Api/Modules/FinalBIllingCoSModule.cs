@@ -32,7 +32,7 @@ namespace Billing.Api.Modules
 
                 var db = finalBillingTransactionsRepository.Where(x => x.Created >= startDateFilter && x.Created <= endDateFilter); ;
 
-                listStub.AddRange(db.DistinctBy(x => x.DataProvider.CostPrice).Select(x =>
+                listStub.AddRange(db.DistinctBy(x => new { x.DataProvider.DataProviderName, x.DataProvider.CostPrice }).Select(x =>
                     new FinalBillingCoSDto
                     {
                         DataProviderName = x.DataProvider.DataProviderName,
