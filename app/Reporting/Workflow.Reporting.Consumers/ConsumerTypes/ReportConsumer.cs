@@ -43,7 +43,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                             CreateFile(dto, path, @"{0}_Statement_{1}.pdf".FormatWith(dto.Data.CustomerClientStatement.CustomerClientName, DateTime.UtcNow.ToString("MMMM yyyy")));
 
                             //Send Email
-                            //_emailPdfNotificationsWithAttachment.Send(dto);
+                            _emailPdfNotificationsWithAttachment.Send(dto);
                         }
                     }
 
