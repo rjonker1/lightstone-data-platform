@@ -97,15 +97,10 @@ namespace PackageBuilder.Api.Modules
                 var apiRequest = this.Bind<ApiRequestDto>();
                 this.Info(() => StringExtensions.FormatWith("Package Execute started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
-<<<<<<< HEAD
-                this.Info(() => StringExtensions.FormatWith("Package Read Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
-                var package = writeRepo.GetById(apiRequest.PackageId, true);
-                this.Info(() => StringExtensions.FormatWith("Package Read Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
-=======
                 this.Info(() => StringExtensions.FormatWith("Package Read started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
                 var package = await writeRepo.GetById(apiRequest.PackageId, true);
                 this.Info(() => StringExtensions.FormatWith("Package Read finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
->>>>>>> a198439f1c6ce4061c7978befb693e9c9a7f9220
+
 
                 if (package == null)
                 {
