@@ -73,6 +73,8 @@ namespace Workflow.Billing.Scheduler.Service
                 }
             }
 
+            RecurringJob.AddOrUpdate<MessageSchedule>("StageBilling Run", x => x.Send(stageBillRun), "0 8 26 * *", TimeZoneInfo.Local);
+
             RecurringJob.AddOrUpdate<EmailSchedule>("Monthly StageBilling Notification", x => x.SendStageBillingNotification(), "0 8 26 * *", TimeZoneInfo.Local);
 
             //RecurringJob.AddOrUpdate<CleanupSchedule>("Transaction Request Cleanup", x => x.Send(new TransactionRequestCleanupMessage()), "0 23 * * *", TimeZoneInfo.Local);
