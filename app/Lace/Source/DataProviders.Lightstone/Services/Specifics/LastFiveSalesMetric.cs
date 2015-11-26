@@ -12,12 +12,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         public IEnumerable<StatisticDto> Statistics { get; private set; }
 
         private readonly IEnumerable<Sale> _sales;
-        private readonly IEnumerable<Municipality> _municipalities;
+       // private readonly IEnumerable<Municipality> _municipalities;
 
-        public LastFiveSalesMetric(IEnumerable<Sale> sales, IEnumerable<Municipality> municipalities)
+        public LastFiveSalesMetric(IEnumerable<Sale> sales) //, IEnumerable<Municipality> municipalities
         {
             _sales = sales;
-            _municipalities = municipalities;
+           // _municipalities = municipalities;
             MetricResult = new List<SaleModel>();
         }
 
@@ -28,7 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
                 .Take(5)
                 .Select(
                     s =>
-                        new SaleModel(s.SaleDateTime.ToShortDateString(), GetMuncipalityName(s.Municipality_ID),
+                        new SaleModel(s.SaleDateTime.ToShortDateString(), s.MunicipalityName,
                             s.SalePrice.ToString("C"))).ToList();
 
             MetricResult.AddRange(result);
@@ -36,12 +36,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
             return this;
         }
 
-        private string GetMuncipalityName(int? municipalityId)
-        {
-            if (!_municipalities.Any()) return string.Empty;
+        //private string GetMuncipalityName(int? municipalityId)
+        //{
+        //    if (!_municipalities.Any()) return string.Empty;
 
-            var municipality = _municipalities.FirstOrDefault(w => w.Municipality_ID == municipalityId);
-            return municipality != null ? municipality.MunicipalityName : string.Empty;
-        }
+        //    var municipality = _municipalities.FirstOrDefault(w => w.Municipality_ID == municipalityId);
+        //    return municipality != null ? municipality.MunicipalityName : string.Empty;
+        //}
     }
 }

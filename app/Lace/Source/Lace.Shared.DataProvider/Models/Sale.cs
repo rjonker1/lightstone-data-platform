@@ -5,10 +5,10 @@ namespace Lace.Toolbox.Database.Models
     public class Sale : IAmCachable
     {
         public const string SelectTopFiveSalesForCarIdAndYear =
-            @"select top 5 s.Sale_ID, s.Car_ID, ISNULL(s.Year_ID,0) AS Year_ID, s.SaleDateTime, s.IsNew, cast(s.SalePrice as decimal(18,2)) as SalePrice, s.Municipality_ID from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID where s.Car_ID = @CarId and s.Year_ID = @Year order by SaleDateTime desc";
+            @"select top 5 s.Sale_ID, s.Car_ID, ISNULL(s.Year_ID,0) AS Year_ID, s.SaleDateTime, s.IsNew, cast(s.SalePrice as decimal(18,2)) as SalePrice, s.Municipality_ID, m.MunicipalityName from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID where s.Car_ID = @CarId and s.Year_ID = @Year order by SaleDateTime desc";
 
         public const string SelectAllSales =
-            @"select s.Sale_ID, s.Car_ID, ISNULL(s.Year_ID,0) AS Year_ID, s.SaleDateTime, s.IsNew, cast(s.SalePrice as decimal(18,2)) as SalePrice, s.Municipality_ID from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID";
+            @"select s.Sale_ID, s.Car_ID, ISNULL(s.Year_ID,0) AS Year_ID, s.SaleDateTime, s.IsNew, cast(s.SalePrice as decimal(18,2)) as SalePrice, s.Municipality_ID, m.MunicipalityName from Sale s join Car c on c.Car_ID = s.Car_ID join Municipality m on m.Municipality_ID = s.Municipality_ID";
 
         public Sale()
         {
@@ -16,7 +16,7 @@ namespace Lace.Toolbox.Database.Models
         }
 
         public Sale(int saleId, int carId, int? yearId, DateTime saleDateTime, bool isNew, decimal salePrice,
-            int muncipalityId)
+            int muncipalityId, string muncipalityName)
         {
             Sale_ID = saleId;
             Car_ID = carId;
@@ -25,6 +25,7 @@ namespace Lace.Toolbox.Database.Models
             IsNew = isNew;
             SalePrice = salePrice;
             Municipality_ID = muncipalityId;
+            MunicipalityName = muncipalityName;
         }
 
         public void AddToCache(ICacheRepository repository)
@@ -40,7 +41,6 @@ namespace Lace.Toolbox.Database.Models
         public bool IsNew { get; set; }
         public decimal SalePrice { get; set; }
         public int Municipality_ID { get; set; }
-
-
+        public string MunicipalityName { get; set; }
     }
 }

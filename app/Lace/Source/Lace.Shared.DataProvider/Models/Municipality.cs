@@ -23,7 +23,5 @@ namespace Lace.Toolbox.Database.Models
 
         public int Municipality_ID { get; set; }
         public string MunicipalityName { get; set; }
-
-       
     }
 }

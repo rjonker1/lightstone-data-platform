@@ -3,7 +3,6 @@ using System.Linq;
 using Lace.Domain.Core.Entities;
 using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Dtos;
-using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 {
@@ -14,15 +13,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
         private static readonly MetricTypes[] Metrics = {MetricTypes.AmortisedValues};
         private readonly IHaveCarInformation _request;
-        private IList<StatisticDto> _gauges;
-        private readonly IEnumerable<Band> _bands;
+        private IList<StatisticDto> _statistics;
+      //  private readonly IEnumerable<Band> _bands;
 
-        public AmortisedValueMetric(IHaveCarInformation request, IEnumerable<StatisticDto> statistics,
-            IEnumerable<Band> bands)
+        public AmortisedValueMetric(IHaveCarInformation request, IEnumerable<StatisticDto> statistics) //IEnumerable<Band> bands
         {
             Statistics = statistics;
             _request = request;
-            _bands = bands;
+          //  _bands = bands;
             MetricResult = new List<AmortisedValueModel>();
         }
 
@@ -30,7 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         {
             foreach (var metric in Metrics)
             {
-                GetGauges((int) metric);
+                GetStatistic((int) metric);
                 AddToMetrics();
             }
 
@@ -39,10 +37,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
         private void AddToMetrics()
         {
-            foreach (var gauge in _gauges)
+            foreach (var statistic in _statistics)
             {
-                MetricResult.Add(new AmortisedValueModel(GetBandName(gauge.BandId),
-                    gauge.MoneyValue.HasValue ? gauge.MoneyValue.Value : 0.00M));
+                MetricResult.Add(new AmortisedValueModel(statistic.BandName ?? string.Empty,
+                    statistic.MoneyValue.HasValue ? statistic.MoneyValue.Value : 0.00M));
             }
         }
 
@@ -59,21 +57,21 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
             return statisic.MakeId ?? 0;
         }
 
-        private void GetGauges(int metricId)
+        private void GetStatistic(int metricId)
         {
             var makeId = GetMakeIdFromStatistics();
 
-            _gauges = makeId == 0
+            _statistics = makeId == 0
                 ? new List<StatisticDto>()
                 : Statistics.Where(w => w.MakeId == makeId && w.MetricId == metricId).ToList();
         }
 
-        private string GetBandName(int bandId)
-        {
-            if (!_bands.Any()) return string.Empty;
+        //private string GetBandName(int bandId)
+        //{
+        //    if (!_bands.Any()) return string.Empty;
 
-            var band = _bands.FirstOrDefault(w => w.Band_ID == bandId);
-            return band != null ? band.BandName : string.Empty;
-        }
+        //    var band = _bands.FirstOrDefault(w => w.Band_ID == bandId);
+        //    return band != null ? band.BandName : string.Empty;
+        //}
     }
 }

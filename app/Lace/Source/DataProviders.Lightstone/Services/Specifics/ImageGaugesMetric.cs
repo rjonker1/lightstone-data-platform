@@ -2,7 +2,6 @@
 using System.Linq;
 using Lace.Domain.Core.Entities;
 using Lace.Toolbox.Database.Dtos;
-using Lace.Toolbox.Database.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 {
@@ -10,8 +9,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
     {
         public List<ImageGaugeModel> MetricResult { get; private set; }
         public IEnumerable<StatisticDto> Statistics { get; private set; }
-
-        private readonly IEnumerable<Metric> _metricsData;
 
         private static readonly MetricTypes[] Metrics =
         {
@@ -26,10 +23,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         private const int HighBand = 50;
         private const int QuarterBand = 51;
 
-        public ImageGaugesMetric(IEnumerable<StatisticDto> statistics, IEnumerable<Metric> metricData)
+        public ImageGaugesMetric(IEnumerable<StatisticDto> statistics) //, IEnumerable<Metric> metricData
         {
             Statistics = statistics;
-            _metricsData = metricData;
             MetricResult = new List<ImageGaugeModel>();
         }
 
@@ -50,7 +46,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
                       quarterStat.FloatValue.HasValue)) continue;
 
                 MetricResult.Add(new ImageGaugeModel(lowStat.FloatValue, maxStat.FloatValue, subjectStat.FloatValue,
-                    quarterStat.FloatValue, GetGaugeName()));
+                    quarterStat.FloatValue, GetMetricName()));
 
             }
 
@@ -89,11 +85,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
                 .FirstOrDefault(w => w.BandId == QuarterBand);
         }
 
-        private string GetGaugeName()
+        private string GetMetricName()
         {
-            return _gauges.FirstOrDefault() != null
-                ? _metricsData.FirstOrDefault(w => w.Metric_ID == _gauges.FirstOrDefault().MetricId).MetricName
-                : string.Empty;
+            var name = _gauges.FirstOrDefault(w => !string.IsNullOrEmpty(w.MetricName));
+            return name == null ? "" : name.MetricName;
         }
     }
 }

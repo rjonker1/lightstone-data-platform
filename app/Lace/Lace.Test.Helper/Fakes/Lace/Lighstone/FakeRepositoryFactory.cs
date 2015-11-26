@@ -27,13 +27,24 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         private readonly Dictionary<Type, IEnumerable<object>> _data = new Dictionary<Type, IEnumerable<object>>()
         {
-            {typeof(Band), BandsDataBuilder.ForAllBands()},
-            {typeof(Make), MakeDataBuilder.ForAllMakes()},
-            {typeof(Metric), MetricDataBuilder.ForAllMetrics()},
-            {typeof(Municipality), MuncipalityDataBuilder.ForAllMunicipalities()},
+           // {typeof(Band), BandsDataBuilder.ForAllBands()},
+           // {typeof(Make), MakeDataBuilder.ForAllMakes()},
+          //  {typeof(Metric), MetricDataBuilder.ForAllMetrics()},
+           // {typeof(Municipality), MuncipalityDataBuilder.ForAllMunicipalities()},
             {typeof(Sale), SaleDataBuilder.ForCarSalesOnCarId_107483()},
             {typeof(StatisticDto), StatisticsDataBuilder.ForCarId_107483()},
             {typeof(CarInformationDto),Mothers.Sources.Lightstone.CarInfoData.CarInformation() }
         };
+
+
+        public IEnumerable<dynamic> MultipleItems<T1, T2>(string sql, object param)
+        {
+            var returnResult = new List<dynamic>()
+            {
+                (List<T1>) SaleDataBuilder.ForCarSalesOnCarId_107483(),
+                (List<T2>)  StatisticsDataBuilder.ForCarId_107483()
+            };
+            return returnResult;
+        }
     }
 }

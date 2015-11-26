@@ -44,37 +44,37 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         [Observation]
         public void lightstone_retail_estimated_high_should_be_valid()
         {
-            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedHigh, @"\s+", "").ShouldEqual("R96900,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedHigh, @"\s+", "").ShouldEqual("R99700,00");
         }
 
         [Observation]
         public void lightstone_retail_estimated_low_should_be_valid()
         {
-            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedLow, @"\s+", "").ShouldEqual("R79300,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedLow, @"\s+", "").ShouldEqual("R81500,00");
         }
 
         [Observation]
         public void lightstone_retail_estimated_value_should_be_valid()
         {
-            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedValue, @"\s+", "").ShouldEqual("R88100,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().RetailEstimatedValue, @"\s+", "").ShouldEqual("R90600,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_should_be_valid()
         {
-            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedValue, @"\s+", "").ShouldEqual("R78600,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedValue, @"\s+", "").ShouldEqual("R83300,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_low_should_be_valid()
         {
-            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedLow, @"\s+", "").ShouldEqual("R70800,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedLow, @"\s+", "").ShouldEqual("R75000,00");
         }
 
         [Observation]
         public void lightstone_trade_estimated_value_high_should_be_valid()
         {
-            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedHigh, @"\s+", "").ShouldEqual("R86500,00");
+            Regex.Replace(_metric.MetricResult.FirstOrDefault().TradeEstimatedHigh, @"\s+", "").ShouldEqual("R89140,00");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Lace.Test.Helper.Builders.Sources.Lightstone;
 using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
@@ -13,6 +14,16 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         public IEnumerable<TItem> Get<TItem>(string sql, object param) where TItem : class
         {
             return (IEnumerable<TItem>)Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
+        }
+
+        public IEnumerable<dynamic> MultipleItems<T1, T2>(string sql, object param)
+        {
+            var returnResult = new List<dynamic>()
+            {
+                (List<T1>) SaleDataBuilder.ForCarSalesOnCarId_107483(),
+                (List<T2>)  StatisticsDataBuilder.ForCarId_107483()
+            };
+            return returnResult;
         }
     }
 }
