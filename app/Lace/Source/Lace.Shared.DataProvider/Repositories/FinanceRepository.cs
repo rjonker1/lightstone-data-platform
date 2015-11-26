@@ -71,5 +71,10 @@ namespace Lace.Toolbox.Database.Repositories
 
             return null;
         }
+
+        public IEnumerable<dynamic> MultipleItems<T1, T2>(string sql, object param)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

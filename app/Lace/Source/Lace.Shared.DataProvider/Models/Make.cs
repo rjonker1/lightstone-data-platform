@@ -8,7 +8,7 @@ namespace Lace.Toolbox.Database.Models
 
         public Make()
         {
-             
+
         }
 
         public Make(int makeId, string makeName)
@@ -25,6 +25,6 @@ namespace Lace.Toolbox.Database.Models
         public int Make_ID { get; set; }
         public string MakeName { get; set; }
 
-      
+
     }
 }

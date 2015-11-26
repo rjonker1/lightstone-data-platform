@@ -132,6 +132,7 @@
     <Compile Include="Repositories\FinanceRepository.cs" />
     <Compile Include="Repositories\IReadOnlyRepository.cs" />
     <Compile Include="Repositories\DataProviderRepository.cs" />
+    <Compile Include="Views\ValuationView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

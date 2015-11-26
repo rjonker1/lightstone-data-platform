@@ -109,16 +109,17 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Core\Contracts\IGetValuationView.cs" />
     <Compile Include="Infrastructure\CallLightstoneAutoDataProvider.cs" />
     <Compile Include="Infrastructure\HandleLightstoneAutoSourceCall.cs" />
     <Compile Include="Infrastructure\Management\GetMetrics.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneAuto.cs" />
+    <Compile Include="Queries\ValuationViewQuery.cs" />
     <Compile Include="Services\BaseRetrievalMetric.cs" />
     <Compile Include="Services\IRetrieveATypeOfMetric.cs" />
     <Compile Include="Services\IRetrieveValuationFromMetrics.cs" />
     <Compile Include="Services\MetricTypes.cs" />
-    <None Include="Services\Specifics\AccidentDistributionMetric.cs.old20150716" />
     <Compile Include="Services\Specifics\AmortisedValueMetric.cs" />
     <None Include="Services\Specifics\AreaFactorsMetric.cs.old20150716" />
     <None Include="Services\Specifics\AuctionFactorsMetric.cs.old20150716" />
@@ -129,16 +130,8 @@
     <None Include="Services\Specifics\TotalSalesByAgeMetric.cs.old20150716" />
     <None Include="Services\Specifics\TotalSalesByGenderMetric.cs.old20150716" />
     <Compile Include="LightstoneAutoDataProvider.cs" />
-    <Compile Include="Queries\BandQuery.cs" />
-    <Compile Include="Core\Contracts\IGetBands.cs" />
-    <Compile Include="Core\Contracts\IGetMakes.cs" />
-    <Compile Include="Core\Contracts\IGetMetrics.cs" />
-    <Compile Include="Core\Contracts\IGetMuncipalities.cs" />
     <Compile Include="Core\Contracts\IGetSales.cs" />
     <Compile Include="Core\Contracts\IGetStatistics.cs" />
-    <Compile Include="Queries\MakeQuery.cs" />
-    <Compile Include="Queries\MetricQuery.cs" />
-    <Compile Include="Queries\MuncipalityQuery.cs" />
     <Compile Include="Queries\SaleQuery.cs" />
     <Compile Include="Queries\StatisticsQuery.cs" />
   </ItemGroup>

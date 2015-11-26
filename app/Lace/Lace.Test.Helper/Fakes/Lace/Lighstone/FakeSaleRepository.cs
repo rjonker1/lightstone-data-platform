@@ -15,5 +15,15 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         {
             return (IEnumerable<TItem>)SaleDataBuilder.ForCarSalesOnCarId_107483();
         }
+
+        public IEnumerable<dynamic> MultipleItems<T1, T2>(string sql, object param)
+        {
+            var returnResult = new List<dynamic>()
+            {
+                (List<T1>) SaleDataBuilder.ForCarSalesOnCarId_107483(),
+               (List<T2>)  StatisticsDataBuilder.ForCarId_107483()
+            };
+            return returnResult;
+        }
     }
 }

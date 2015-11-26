@@ -15,7 +15,7 @@ namespace Lace.Toolbox.Database.Repositories
 
         public DataProviderRepository()
         {
-           
+
         }
 
         public IEnumerable<TItem> GetAll<TItem>(Func<TItem, bool> predicate) where TItem : class
@@ -40,7 +40,7 @@ namespace Lace.Toolbox.Database.Repositories
         {
             try
             {
-                using(var connection = DatabaseConnectionFactory.AutocarStatsConnection)
+                using (var connection = DatabaseConnectionFactory.AutocarStatsConnection)
                     return connection.Query<TItem>(sql, param);
             }
             catch (Exception ex)
@@ -62,6 +62,29 @@ namespace Lace.Toolbox.Database.Repositories
 
                     if (response != null && response.Any())
                         return response.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Could not get items from Cache because of {0}", ex.Message, ex);
+            }
+
+            return null;
+        }
+
+        public IEnumerable<dynamic> MultipleItems<T1, T2>(string sql, object param)
+        {
+            try
+            {
+                using (var connection = DatabaseConnectionFactory.AutocarStatsConnection)
+                {
+                    var results = connection.QueryMultiple(sql, param);
+                    var returnResult = new List<dynamic>()
+                    {
+                        results.Read<T1>().ToList(),
+                        results.Read<T2>().ToList()
+                    };
+                    return returnResult;
                 }
             }
             catch (Exception ex)
