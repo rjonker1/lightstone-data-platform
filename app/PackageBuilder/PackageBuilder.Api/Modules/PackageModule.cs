@@ -95,11 +95,11 @@ namespace PackageBuilder.Api.Modules
             Post[PackageBuilderApi.PackageRoutes.Execute.ApiRoute, true] = async(parameters, ct) =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
-                this.Info(() => StringExtensions.FormatWith("Package Execute Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Execute started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
-                this.Info(() => StringExtensions.FormatWith("Package Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Read started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
                 var package = await writeRepo.GetById(apiRequest.PackageId, true);
-                this.Info(() => StringExtensions.FormatWith("Package Read Completed, TimeStamp: {0}", DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Read finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 if (package == null)
                 {
@@ -111,25 +111,25 @@ namespace PackageBuilder.Api.Modules
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 var accountNumber = await userManagementApi.GetAsync(token, ct, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
 
-                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber);
 
                 // Filter responses for cleaner api payload
-                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
                 var filteredResponse = new List<IProvideResponseDataProvider>
                 {
                     new ResponseMeta(apiRequest.RequestId, responses.ResponseState())
                 };
 
                 filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
-                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
-                this.Info(() => StringExtensions.FormatWith("Package Execute Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Execute finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 return filteredResponse;
             };
