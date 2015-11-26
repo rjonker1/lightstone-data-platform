@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Enums;
@@ -114,9 +115,10 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
-                var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
-                    Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber);
-
+                var responses = await new TaskFactory().StartNew(() => 
+                    ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
+                    Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber));
+                   
                 // Filter responses for cleaner api payload
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
                 var filteredResponse = new List<IProvideResponseDataProvider>
@@ -172,8 +174,9 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
-                var responses = ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
-                    apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent,apiRequest.ContactNumber);
+                var responses = await Task.Factory.StartNew(() => 
+                    ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
+                    apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent,apiRequest.ContactNumber));
 
                 // Filter responses for cleaner api payload
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
