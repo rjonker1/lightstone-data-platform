@@ -26,9 +26,5 @@ namespace Lace.Toolbox.Database.Models
         public string BandName { get; set; }
         public int Metric_ID { get; set; }
         public int OrderBy { get; set; }
-        
-       
-
-        
     }
 }

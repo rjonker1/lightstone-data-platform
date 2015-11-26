@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Lace.Test.Helper.Builders.Sources.Lightstone;
 using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
@@ -42,22 +43,33 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             if(typeof(TItem) == (typeof(StatisticDto)))
                 return (IEnumerable<TItem>)Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
 
-            if (typeof(TItem) == (typeof(Metric)))
-                return (IEnumerable<TItem>)Builders.Sources.Lightstone.MetricDataBuilder.ForAllMetrics();
+            //if (typeof(TItem) == (typeof(Metric)))
+            //    return (IEnumerable<TItem>)Builders.Sources.Lightstone.MetricDataBuilder.ForAllMetrics();
 
             if (typeof(TItem) == (typeof(Sale)))
                 return (IEnumerable<TItem>)Builders.Sources.Lightstone.SaleDataBuilder.ForCarSalesOnCarId_107483();
 
-            if (typeof(TItem) == (typeof(Make)))
-                return (IEnumerable<TItem>)Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
+            //if (typeof(TItem) == (typeof(Make)))
+            //    return (IEnumerable<TItem>)Builders.Sources.Lightstone.MakeDataBuilder.ForAllMakes();
 
-            if (typeof(TItem) == (typeof(Municipality)))
-                return (IEnumerable<TItem>)Builders.Sources.Lightstone.MuncipalityDataBuilder.ForAllMunicipalities();
+            //if (typeof(TItem) == (typeof(Municipality)))
+            //    return (IEnumerable<TItem>)Builders.Sources.Lightstone.MuncipalityDataBuilder.ForAllMunicipalities();
 
-            if (typeof(TItem) == (typeof(Band)))
-                return (IEnumerable<TItem>)Builders.Sources.Lightstone.BandsDataBuilder.ForAllBands();
+            //if (typeof(TItem) == (typeof(Band)))
+            //    return (IEnumerable<TItem>)Builders.Sources.Lightstone.BandsDataBuilder.ForAllBands();
 
             return Enumerable.Empty<TItem>();
+        }
+
+
+        public IEnumerable<dynamic> MultipleItems<T1, T2>(string sql, object param)
+        {
+            var returnResult = new List<dynamic>()
+            {
+                (List<T1>) SaleDataBuilder.ForCarSalesOnCarId_107483(),
+                (List<T2>)  StatisticsDataBuilder.ForCarId_107483()
+            };
+            return returnResult;
         }
     }
 }

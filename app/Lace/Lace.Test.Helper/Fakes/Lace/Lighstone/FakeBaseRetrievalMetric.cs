@@ -14,10 +14,10 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         public IRespondWithValuation Valuation { get; private set; }
 
         private IGetStatistics _getStatistics;
-        private IGetMetrics _getMetrics;
-        private IGetBands _getBands;
-        private IGetMuncipalities _getMuncipalities;
-        private IGetMakes _getMakes;
+        //private IGetMetrics _getMetrics;
+       // private IGetBands _getBands;
+       // private IGetMuncipalities _getMuncipalities;
+       // private IGetMakes _getMakes;
         private IGetSales _getSales;
 
         private readonly IHaveCarInformation _request;
@@ -32,10 +32,10 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         public IRetrieveValuationFromMetrics SetupDataSources()
         {
             _getStatistics = new StatisticsQuery(new FakeStatisticsRepository());
-            _getMetrics = new MetricQuery(new FakeMetricRepository());
-            _getBands = new BandQuery(new FakeBandsRepository());
-            _getMuncipalities = new MuncipalityQuery(new FakeMunicipalityRepository());
-            _getMakes = new MakeQuery(new FakeMakeRepository());
+          //  _getMetrics = new MetricQuery(new FakeMetricRepository());
+          //  _getBands = new BandQuery(new FakeBandsRepository());
+          //  _getMuncipalities = new MuncipalityQuery(new FakeMunicipalityRepository());
+           // _getMakes = new MakeQuery(new FakeMakeRepository());
             _getSales = new SaleQuery(new FakeSaleRepository());
 
             return this;
@@ -43,7 +43,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IRetrieveValuationFromMetrics BuildValuation()
         {
-            if (_request.CarId == null || _request.Year == null) return this;
+            if (_request.CarId == 0 || _request.Year == 0) return this;
 
 
             Valuation.AddImageGauages(GetImageGaugeMetrics());
@@ -65,10 +65,10 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         public IRetrieveValuationFromMetrics GenerateData()
         {
             _getStatistics.GetStatistics(_request);
-            _getMetrics.GetMetrics(_request);
-            _getBands.GetBands(_request);
-            _getMuncipalities.GetMunicipalities(_request);
-            _getMakes.GetMakes(_request);
+           // _getMetrics.GetMetrics(_request);
+           // _getBands.GetBands(_request);
+           // _getMuncipalities.GetMunicipalities(_request);
+           // _getMakes.GetMakes(_request);
             _getSales.GetSales(_request);
 
             return this;
@@ -76,7 +76,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         private IEnumerable<IRespondWithSaleModel> GetLastFiveSales()
         {
-            return new LastFiveSalesMetric(_getSales.Sales, _getMuncipalities.Municipalities).Get().MetricResult;
+            return new LastFiveSalesMetric(_getSales.Sales).Get().MetricResult; //_getMuncipalities.Municipalities
         }
 
         private IEnumerable<IRespondWithEstimatedValueModel> GetEstimatedValues()
@@ -116,8 +116,8 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         //}
 
         private IEnumerable<IRespondWithAmortisedValueModel> GetAmortisedValues()
-        {
-            return new AmortisedValueMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
+        { 
+            return new AmortisedValueMetric(_request, _getStatistics.Statistics).Get().MetricResult; //
         }
 
         //private IEnumerable<IRespondWithAccidentDistributionModel> GetAccidentDistributionMetrics()
@@ -128,7 +128,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         private IEnumerable<IRespondWithImageGaugeModel> GetImageGaugeMetrics()
         {
-            return new ImageGaugesMetric(_getStatistics.Statistics, _getMetrics.Metrics).Get().MetricResult;
+            return new ImageGaugesMetric(_getStatistics.Statistics).Get().MetricResult; //, _getMetrics.Metrics
         }
     }
 }

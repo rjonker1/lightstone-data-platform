@@ -7,7 +7,7 @@ namespace Lace.Toolbox.Database.Models
         public const string SelectAll = @"SELECT * FROM Metric";
         public Metric()
         {
-            
+
         }
 
         public Metric(int metricId, string metricName, int dataTypeId, int aggregationId, int hasBand, int hasMake, int hasCarType, int hasCar, int hasYear, int hasMuncipality)
@@ -41,6 +41,6 @@ namespace Lace.Toolbox.Database.Models
         public int HasYear { get; set; }
         public int HasMunicipality { get; set; }
 
-      
+
     }
 }

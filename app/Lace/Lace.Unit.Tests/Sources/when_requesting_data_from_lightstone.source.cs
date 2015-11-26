@@ -104,7 +104,7 @@ namespace Lace.Unit.Tests.Sources
             _response.OfType<IProvideDataFromLightstoneAuto>()
                 .First()
                 .VehicleValuation.AmortisedValues.Count()
-                .ShouldEqual(4);
+                .ShouldEqual(3);
         }
 
 
@@ -126,14 +126,14 @@ namespace Lace.Unit.Tests.Sources
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_high_must_be_correct()
         {
             Regex.Replace(_response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
-                .RetailEstimatedHigh, @"\s+", "").ShouldEqual("R96900,00");
+                .RetailEstimatedHigh, @"\s+", "").ShouldEqual("R99700,00");
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_low_must_be_correct()
         {
             Regex.Replace(_response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
-                .RetailEstimatedLow, @"\s+", "").ShouldEqual("R79300,00");
+                .RetailEstimatedLow, @"\s+", "").ShouldEqual("R81500,00");
         }
 
         [Observation]
@@ -147,14 +147,14 @@ namespace Lace.Unit.Tests.Sources
         public void lace_lighstone_response_vehicleValuation_trade_estimated_value_estimated_high_must_be_correct()
         {
             _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
-                .TradeEstimatedHigh.Trim().ShouldEqual(86500.ToString("C"));
+                .TradeEstimatedHigh.Trim().ShouldEqual(89140.ToString("C"));
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_trade_estimated_value_estimated_low_must_be_correct()
         {
             _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
-                .TradeEstimatedLow.ShouldEqual(70800.ToString("C"));
+                .TradeEstimatedLow.ShouldEqual(75000.ToString("C"));
         }
 
 
@@ -162,13 +162,13 @@ namespace Lace.Unit.Tests.Sources
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_value_must_be_correct()
         {
             _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
-                .TradeEstimatedValue.Trim().ShouldEqual(78600.ToString("C"));
+                .TradeEstimatedValue.Trim().ShouldEqual(83300.ToString("C"));
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_image_gauges_count_must_be_correct()
         {
-            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.ImageGauges.Count().ShouldEqual(6);
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.ImageGauges.Count().ShouldEqual(5);
         }
 
         [Observation]

@@ -22,30 +22,30 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
             return getStatistics.Statistics;
         }
 
-        public static IEnumerable<Band> GetBands()
-        {
-            var repository = new FakeBandsRepository();
-            var getBands = new BandQuery(repository);
-            getBands.GetBands(RequestForCarId107483);
-            return getBands.Bands;
-        }
+        //public static IEnumerable<Band> GetBands()
+        //{
+        //    var repository = new FakeBandsRepository();
+        //    var getBands = new BandQuery(repository);
+        //    getBands.GetBands(RequestForCarId107483);
+        //    return getBands.Bands;
+        //}
 
-        public static IEnumerable<Metric> GetMetrics()
-        {
-            var repository = new FakeMetricRepository();
-            var getMetrics = new MetricQuery(repository);
-            getMetrics.GetMetrics(RequestForCarId107483);
-            return getMetrics.Metrics;
-        }
+        //public static IEnumerable<Metric> GetMetrics()
+        //{
+        //    var repository = new FakeMetricRepository();
+        //    var getMetrics = new MetricQuery(repository);
+        //    getMetrics.GetMetrics(RequestForCarId107483);
+        //    return getMetrics.Metrics;
+        //}
 
 
-        public static IEnumerable<Municipality> GetMunicipalities()
-        {
-            var repository = new FakeMunicipalityRepository();
-            var getMuncipality = new MuncipalityQuery(repository);
-            getMuncipality.GetMunicipalities(RequestForCarId107483);
-            return getMuncipality.Municipalities;
-        }
+        //public static IEnumerable<Municipality> GetMunicipalities()
+        //{
+        //    var repository = new FakeMunicipalityRepository();
+        //    var getMuncipality = new MuncipalityQuery(repository);
+        //    getMuncipality.GetMunicipalities(RequestForCarId107483);
+        //    return getMuncipality.Municipalities;
+        //}
 
         public static IEnumerable<Sale> GetSales()
         {
@@ -55,13 +55,13 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
             return getSales.Sales;
         }
 
-        public static IEnumerable<Make> GetMakes()
-        {
-            var repository = new FakeMakeRepository();
-            var getMakes = new MakeQuery(repository);
-            getMakes.GetMakes(RequestForCarId107483);
-            return getMakes.Makes;
-        }
+        //public static IEnumerable<Make> GetMakes()
+        //{
+        //    var repository = new FakeMakeRepository();
+        //    var getMakes = new MakeQuery(repository);
+        //    getMakes.GetMakes(RequestForCarId107483);
+        //    return getMakes.Makes;
+        //}
       
     }
 }

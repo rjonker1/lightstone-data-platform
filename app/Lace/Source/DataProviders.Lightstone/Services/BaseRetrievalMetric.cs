@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
@@ -12,12 +10,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
 {
     public class BaseRetrievalMetric : IRetrieveValuationFromMetrics
     {
-        private IGetStatistics _getStatistics;
-        private IGetMetrics _getMetrics;
-        private IGetBands _getBands;
-        private IGetMuncipalities _getMuncipalities;
-        private IGetMakes _getMakes;
-        private IGetSales _getSales;
+        //private IGetStatistics _getStatistics;
+        //private IGetSales _getSales;
+        private IGetValuationView _getValuation;
 
         private readonly IHaveCarInformation _request;
         private readonly IReadOnlyRepository _repository;
@@ -35,31 +30,23 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
 
         public IRetrieveValuationFromMetrics SetupDataSources()
         {
-            _getStatistics = new StatisticsQuery(_repository);
-            _getMetrics = new MetricQuery(_repository);
-            _getBands = new BandQuery(_repository);
-            _getMuncipalities = new MuncipalityQuery(_repository);
-            _getMakes = new MakeQuery(_repository);
-            //_getCarType = new CarTypeUnitOfWork(_getStatistics.Statistics);
-            _getSales = new SaleQuery(_repository);
+            _getValuation = new ValuationViewQuery(_repository);
+            //_getStatistics = new StatisticsQuery(_repository);
+            //_getSales = new SaleQuery(_repository);
 
             return this;
         }
 
         public IRetrieveValuationFromMetrics GenerateData()
         {
-            _getStatistics.GetStatistics(_request);
+            _getValuation.GetValuation(_request);
+            //_getStatistics.GetStatistics(_request);
 
-            if (!_getStatistics.Statistics.Any())
-                throw new Exception(
-                    string.Format("Statistics data Lightstone Auto for Car id {0} could not be generated",
-                        _request.CarId));
-
-            _getMetrics.GetMetrics(_request);
-            _getBands.GetBands(_request);
-            _getMuncipalities.GetMunicipalities(_request);
-            _getMakes.GetMakes(_request); //TODO: This might not be relevant any more. Need to see if it can be removed!
-            _getSales.GetSales(_request);
+            //if (!_getStatistics.Statistics.Any())
+            //    throw new Exception(
+            //        string.Format("Statistics data Lightstone Auto for Car id {0} could not be generated",
+            //            _request.CarId));
+            //_getSales.GetSales(_request);
 
             return this;
         }
@@ -78,21 +65,20 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
 
         private IEnumerable<IRespondWithSaleModel> GetLastFiveSales()
         {
-            return new LastFiveSalesMetric(_getSales.Sales, _getMuncipalities.Municipalities).Get().MetricResult;
+            return new LastFiveSalesMetric(_getValuation.Sales).Get().MetricResult;
         }
 
         private IEnumerable<IRespondWithEstimatedValueModel> GetEstimatedValues()
         {
-            return new EstimatedValuesMetric(_request, _getStatistics.Statistics).Get().MetricResult;
+            return new EstimatedValuesMetric(_request, _getValuation.Statistics).Get().MetricResult;
         }
         private IEnumerable<IRespondWithAmortisedValueModel> GetAmortisedValues()
         {
-            return new AmortisedValueMetric(_request, _getStatistics.Statistics, _getBands.Bands).Get().MetricResult;
+            return new AmortisedValueMetric(_request, _getValuation.Statistics).Get().MetricResult;
         }
-
         private IEnumerable<IRespondWithImageGaugeModel> GetImageGaugeMetrics()
         {
-            return new ImageGaugesMetric(_getStatistics.Statistics, _getMetrics.Metrics).Get().MetricResult;
+            return new ImageGaugesMetric(_getValuation.Statistics).Get().MetricResult;
         }
     }
 }

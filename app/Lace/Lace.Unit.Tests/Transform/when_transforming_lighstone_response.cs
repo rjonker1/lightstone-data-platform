@@ -65,7 +65,7 @@ namespace Lace.Unit.Tests.Transform
         [Observation]
         public void lighstone_transformer_vechicle_valuation_must_have_amortised_values()
         {
-            _transform.Result.VehicleValuation.AmortisedValues.Count().ShouldEqual(4);
+            _transform.Result.VehicleValuation.AmortisedValues.Count().ShouldEqual(3);
         }
 
         //[Observation]
@@ -83,7 +83,7 @@ namespace Lace.Unit.Tests.Transform
         [Observation]
         public void lighstone_transformer_vechicle_valuation_must_have_image_gauges()
         {
-            _transform.Result.VehicleValuation.ImageGauges.Count().ShouldEqual(6);
+            _transform.Result.VehicleValuation.ImageGauges.Count().ShouldEqual(5);
         }
 
         [Observation]

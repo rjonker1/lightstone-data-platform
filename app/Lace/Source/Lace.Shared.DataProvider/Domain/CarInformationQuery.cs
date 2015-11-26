@@ -10,13 +10,12 @@ namespace Lace.Toolbox.Database.Domain
 {
     public class CarInformationQuery : IGetCarInformation
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CarInformationQuery>();
         public IEnumerable<CarInformationDto> Cars { get; private set; }
         private readonly IReadOnlyRepository _repository;
 
         public CarInformationQuery(IReadOnlyRepository repository)
         {
-            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -29,7 +28,7 @@ namespace Lace.Toolbox.Database.Domain
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Car Information because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Error getting Car Information because of {0}", ex, ex.Message);
                 throw;
             }
         }
@@ -38,12 +37,7 @@ namespace Lace.Toolbox.Database.Domain
         {
             return string.IsNullOrEmpty(vin);
         }
-
-        private bool ItMightBeAVin12()
-        {
-            return (Cars == null || !Cars.Any());
-        }
-
+        
         private bool NoNeedToContinue()
         {
             return Cars != null && Cars.Any() && Cars.FirstOrDefault(f => f.CarId > 0 && f.Year > 0) != null;

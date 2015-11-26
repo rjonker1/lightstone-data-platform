@@ -14,8 +14,8 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         public when_getting_image_gauge_metric()
         {
             var stats = MetricsBuilder.GetStatistics();
-            var metrics = MetricsBuilder.GetMetrics();
-            _metric = new ImageGaugesMetric(stats, metrics);
+           // var metrics = MetricsBuilder.GetMetrics();
+            _metric = new ImageGaugesMetric(stats); //, metrics
         }
 
         public override void Observe()
@@ -86,7 +86,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             var c02Gauge = _metric.MetricResult.FirstOrDefault(w => w.GaugeName == "CO2");
             c02Gauge.ShouldNotBeNull();
 
-            c02Gauge.MaxValue.ShouldEqual(114.0);
+            c02Gauge.MaxValue.ShouldEqual(112);
             c02Gauge.MinValue.ShouldEqual(194.0);
             c02Gauge.Quarter.ShouldEqual(2.0);
             c02Gauge.Value.ShouldEqual(166.0);

@@ -11,14 +11,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Queries
 {
     public class SaleQuery : IGetSales
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<SaleQuery>();
         public IEnumerable<Sale> Sales { get; private set; }
 
         private readonly IReadOnlyRepository _repository;
 
         public SaleQuery(IReadOnlyRepository repository)
         {
-            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -38,7 +37,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Queries
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Sales data because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Error getting Sales data because of {0}", ex, ex.Message);
                 throw;
             }
         }
