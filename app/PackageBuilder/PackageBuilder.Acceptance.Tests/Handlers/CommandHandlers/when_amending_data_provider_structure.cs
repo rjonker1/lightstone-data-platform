@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -14,6 +15,7 @@ using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
@@ -108,13 +110,14 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
         }
 
-        public override void Observe()
+        public override async void Observe()
         {
             RefreshDb();
 
             _handler.Handle(new CreateDataProvider(_id, DataProviderName.IVIDVerify_E_WS, 0, "", DateTime.UtcNow));
 
-            _originalFields = _writeRepo.GetById(_id).DataFields.ToList();
+            var dataProvider = await _writeRepo.GetById(_id);
+            _originalFields = dataProvider.DataFields.ToList();
             var field = _originalFields.Filter(x => x.Name == "MakeDescription").FirstOrDefault() as DataField;
             field.Label = "Test Label";
 
@@ -122,7 +125,7 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
 
             _amendHandler.Handle(new AmendDataProviderStructure(_id));
 
-            _newFields = _writeRepo.GetById(_id).DataFields.ToList();
+            _newFields = dataProvider.DataFields.ToList();
         }
 
         [Observation]

@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Infrastructure.NEventStore;
 
 namespace PackageBuilder.Api.Installers
 {

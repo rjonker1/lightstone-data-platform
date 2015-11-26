@@ -90,8 +90,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1887, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1887\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1923, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1923\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1888, Culture=neutral, processorArchitecture=MSIL">
@@ -199,7 +199,7 @@
     <Compile Include="AutoMapper\Packages\when_mapping_to_package.cs" />
     <Compile Include="AutoMapper\Packages\when_mapping_to_package_dto.cs" />
     <Compile Include="Bases\BasePackageTest.cs" />
-    <Compile Include="Modules\Packages\when_creating_package.cs" />
+    <Compile Include="Api\Modules\Packages\when_creating_package.cs" />
     <Compile Include="PersistenceSpecifications\DataProviders\Read\when_persisting_a_data_provider.cs" />
     <Compile Include="PersistenceSpecifications\Industries\Read\when_persisting_a_industry.cs" />
     <Compile Include="PersistenceSpecifications\Packages\Read\when_persisting_a_package.cs" />
@@ -209,19 +209,19 @@
     <Compile Include="Handlers\CommandHandlers\when_amending_data_provider_structure.cs" />
     <Compile Include="Bases\BaseModuleTest.cs" />
     <Compile Include="Bases\BaseDataProviderTest.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_ivid_titleholder_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_lightstone_business_company_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_lightstone_business_director_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_lightStone_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_ivid_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_lightstone_property_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_pcubed_fica_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_rgt_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_rgt_vin_data_provider.cs" />
-    <Compile Include="Modules\DataProviders\when_updating_the_signio_decrypt_drivers_license_data_provider.cs" />
-    <Compile Include="Modules\States\when_invoking_state_add_route.cs" />
-    <Compile Include="Modules\States\when_invoking_state_edit_route.cs" />
-    <Compile Include="Modules\States\when_invoking_state_route.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_ivid_titleholder_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_lightstone_business_company_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_lightstone_business_director_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_lightStone_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_ivid_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_lightstone_property_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_pcubed_fica_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_rgt_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_rgt_vin_data_provider.cs" />
+    <Compile Include="Api\Modules\DataProviders\when_updating_the_signio_decrypt_drivers_license_data_provider.cs" />
+    <Compile Include="Api\Modules\States\when_invoking_state_add_route.cs" />
+    <Compile Include="Api\Modules\States\when_invoking_state_edit_route.cs" />
+    <Compile Include="Api\Modules\States\when_invoking_state_route.cs" />
     <Compile Include="Repositories\Base\when_implementing_base_repository.cs" />
     <Compile Include="Repositories\Cache\when_implementing_cache_repository.cs" />
     <Compile Include="Repositories\DataProviders\when_querying_data_providers.cs" />
@@ -239,7 +239,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Api\" />
     <Folder Include="Entities\DataProviders\Read\" />
     <Folder Include="Entities\Industries\Read\" />
     <Folder Include="Entities\Packages\Read\" />

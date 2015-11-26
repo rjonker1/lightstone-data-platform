@@ -19,14 +19,13 @@ namespace DataProviders.MMCode.Infrastructure
 {
     public class CallMmCodeDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallMmCodeDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
         private readonly IReadOnlyRepository _repository;
         private MmCode _mmCode;
         public CallMmCodeDataProvider(IAmDataProvider dataProvider, IReadOnlyRepository repository, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _repository = repository;
             _logCommand = logCommand;
@@ -50,7 +49,7 @@ namespace DataProviders.MMCode.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling MMCode Data Provider because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Error calling MMCode Data Provider because of {0}", ex, ex.Message);
                 _logCommand.LogFault(new { ex }, new { ErrorMessage = "Error calling MMCode Data Provider" });
                 MmCodeResponseFailed(response);
             }

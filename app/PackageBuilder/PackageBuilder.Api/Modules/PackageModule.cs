@@ -31,6 +31,7 @@ using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
+using PackageBuilder.Infrastructure.NEventStore;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
@@ -84,21 +85,27 @@ namespace PackageBuilder.Api.Modules
                         });
             };
 
-            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute] = parameters => Response.AsJson(
+            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute, true] = async(parameters, ct) => Response.AsJson(
                 new
                 {
-                    Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
+                    Response = new[] { Mapper.Map<IPackage, PackageDto>(await writeRepo.GetById(parameters.id)) }
                 });
 
 
             Post[PackageBuilderApi.PackageRoutes.Execute.ApiRoute, true] = async(parameters, ct) =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
-                this.Info(() => StringExtensions.FormatWith("Package Execute Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Execute started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
+<<<<<<< HEAD
                 this.Info(() => StringExtensions.FormatWith("Package Read Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
                 var package = writeRepo.GetById(apiRequest.PackageId, true);
                 this.Info(() => StringExtensions.FormatWith("Package Read Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+=======
+                this.Info(() => StringExtensions.FormatWith("Package Read started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                var package = await writeRepo.GetById(apiRequest.PackageId, true);
+                this.Info(() => StringExtensions.FormatWith("Package Read finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+>>>>>>> a198439f1c6ce4061c7978befb693e9c9a7f9220
 
                 if (package == null)
                 {
@@ -110,25 +117,25 @@ namespace PackageBuilder.Api.Modules
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 var accountNumber = await userManagementApi.GetAsync(token, ct, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
 
-                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 var responses = ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber);
 
                 // Filter responses for cleaner api payload
-                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
                 var filteredResponse = new List<IProvideResponseDataProvider>
                 {
                     new ResponseMeta(apiRequest.RequestId, responses.ResponseState())
                 };
 
                 filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
-                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
-                this.Info(() => StringExtensions.FormatWith("Package Execute Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Execute finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 return filteredResponse;
             };
@@ -155,7 +162,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => StringExtensions.FormatWith("Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 this.Info(() => StringExtensions.FormatWith("Package Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
-                var package = writeRepo.GetById(apiRequest.PackageId, true);
+                var package = await writeRepo.GetById(apiRequest.PackageId, true);
                 this.Info(() => StringExtensions.FormatWith("Package Read Completed, TimeStamp: {0}", DateTime.UtcNow));
 
                 if (package == null)
@@ -228,9 +235,9 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
 
-            Put["/Packages/Clone/{id}/{cloneName}"] = parameters =>
+            Put["/Packages/Clone/{id}/{cloneName}", true] = async(parameters, ct) =>
             {
-                var packageToClone = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+                var packageToClone = Mapper.Map<IPackage, PackageDto>(await writeRepo.GetById(parameters.id));
                 var dataProvidersToClone =
                     Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(
                         packageToClone.DataProviders);

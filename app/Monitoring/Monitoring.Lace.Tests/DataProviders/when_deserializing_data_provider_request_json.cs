@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Monitoring.Dashboard.UI.Core.Extensions;
+using DataProvider.Domain.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit.Extensions;

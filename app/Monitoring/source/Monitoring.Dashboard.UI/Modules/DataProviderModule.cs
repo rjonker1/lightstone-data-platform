@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Text;
 using DataPlatform.Shared.Enums;
-using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
-using Monitoring.Dashboard.UI.Core.Extensions;
-using Monitoring.Dashboard.UI.Infrastructure.Commands;
-using Monitoring.Dashboard.UI.Infrastructure.Dto;
+using DataProvider.Domain.Extensions;
+using DataProvider.Infrastructure.Base.Handlers;
+using DataProvider.Infrastructure.Commands;
+using DataProvider.Infrastructure.Dto.DataProvider;
 using Nancy;
 using Nancy.Security;
 
@@ -16,7 +16,12 @@ namespace Monitoring.Dashboard.UI.Modules
         public DataProviderModule(IHandleMonitoringCommands handler)
         {
             this.RequiresAnyClaim(new[] {RoleType.Admin.ToString(), RoleType.ProductManager.ToString(), RoleType.Support.ToString()});
-            Get["/dataProviders/log"] = _ => View["DataProviders"];
+
+            Get["/dataProviders/log"] = _ => View["DataProvidersLog"];
+
+            Get["/dataProviders/log/errors"] = _ => View["DataProvidersErrorLog"];
+
+            Get["/dataProviders/indicators"] = _ => View["DataProvidersIndicators"];
 
             Get["/dataProviders/Query"] = _ => View["DataProvidersQuery"];
 

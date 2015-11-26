@@ -3,17 +3,13 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
     .service("dataProviderSignalRService", function($rootScope) {
 
         var init = function() {
-            var hub = $.connection.dataProviderHub;
+            var hub = $.connection.dataProviderLogHub;
 
             hub.client.dataProviderMonitoringInfo = function(result) {
                 $rootScope.$emit("dataProviderMonitoringInfo", result);
             };
 
-            hub.client.dataProviderStatisticsInfo = function(result) {
-                $rootScope.$emit("dataProviderStatisticsInfo", result);
-            };
-
-            $.connection.hub.start({ transport: 'longPolling' }).done(function () {
+            $.connection.hub.start({ transport: "longPolling" }).done(function() {
                 hub.server.initRootUri();
             });
 
@@ -27,26 +23,24 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
 
             hub.stateChanged = function(change) {
                 if (change.newState === $.signalR.connectionState.reconnecting) {
-                    console.info("Reconnecting to Data Provider SignalR Service");
+                    console.info("Reconnecting to Data Provider Log Service");
                 } else if (change.newState === $.signalR.connectionState.connected) {
                     console.info("Dataprovider Monitoring App is online");
                 }
             };
-
-
         };
 
         var restart = function() {
             console.log("Restarting connection for service");
-            var hub = $.connection.dataProviderHub;
+            var hub = $.connection.dataProviderLogHub;
             $.connection.hub.stop();
             $.connection.hub.start();
         };
 
         return { init: init, restart: restart };
     })
-    .controller("DataProviderController", function($scope, dataProviderSignalRService, $rootScope) {
-
+    .controller("dataProviderController", function($scope, dataProviderSignalRService, $rootScope) {
+      
         $scope.dataProviderMonitoring = [];
         dataProviderSignalRService.init();
 
@@ -79,9 +73,11 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             }
         };
 
-        $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {
-            $scope.$apply(function() {
+        $scope.$parent.$on("dataProviderMonitoringInfo", function (e, result) {
+
+            $scope.$apply(function () {
                 $scope.dataProviderMonitoring = result;
+                
             });
 
             $scope.Toggle = function(elementIndex, formattedJsonId) {
@@ -104,20 +100,7 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                 }
             };
 
-            $scope.ReInitializeService = function() {
-                dataProviderSignalRService.restart();
-            };
-        });
-    }).controller("DataProviderStatisticsController", function ($scope, dataProviderSignalRService, $rootScope) {
-        $scope.statistics = {};
-        dataProviderSignalRService.init();
-
-        $scope.$parent.$on("dataProviderStatisticsInfo", function(e, result) {
-            $scope.$apply(function() {
-                $scope.statistics = result[0];
-            });
-
-            $scope.ReInitializeService = function() {
+            $scope.reInitializeService = function () {
                 dataProviderSignalRService.restart();
             };
         });

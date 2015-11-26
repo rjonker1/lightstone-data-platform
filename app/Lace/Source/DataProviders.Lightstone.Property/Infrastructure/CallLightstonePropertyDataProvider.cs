@@ -19,7 +19,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 {
     public sealed class CallLightstonePropertyDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallLightstonePropertyDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
 
@@ -27,7 +27,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 
         public CallLightstonePropertyDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _logCommand = logCommand;
         }
@@ -73,7 +72,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lightstone Property Data Provider {0}", ex, ex.Message);
+                Log.ErrorFormat("Error calling Lightstone Property Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(new {ex}, new {ErrorMessage = "Error calling Lightstone Property Data Provider"});
                 LightstonePropertyResponseFailed(response);
             }

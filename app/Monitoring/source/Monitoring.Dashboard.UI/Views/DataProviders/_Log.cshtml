@@ -1,58 +1,6 @@
 ﻿<div ng-app="dataProviderMonitoringApp">
     <div class="row">
-        <div ng-controller="DataProviderStatisticsController">
-
-            @*<div ng-repeat="response in dataProviderStatistics">*@
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-purple">
-                        <div class="inner">
-                            <h3>{{statistics.AverageResponseTime}}</h3>
-                            <p>Average Response Time<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup></p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-clock-o"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <h3>{{statistics.SuccessRate}}<sup style="font-size: 20px">%</sup></h3>
-                            <p>Success Rate<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup></p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-check"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-blue">
-                        <div class="inner">
-                            <h3>{{statistics.TotalRequests}}</h3>
-                            <p>Total Requests<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup></p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3>{{statistics.TotalErrors}}</h3>
-                            <p>Total Errors<sup style="font-size: 10px"> for {{statistics.CurrentMonth}}</sup></p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-ambulance"></i>
-                        </div>
-                    </div>
-                </div>
-            @*</div>*@
-        </div>
-        <div ng-controller="DataProviderController">
+        <div ng-controller="dataProviderController">
             <div class="col-md-5">
                 <div class="box">
                     <div class="box-header">
@@ -60,14 +8,14 @@
 
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
-                        <input type="button" id="re-initialize-log-data" value="re-connect" ng-click="ReInitializeService();" />
+                        <input type="button" id="re-initialize-log-data" value="re-connect" ng-click="reInitializeService();" />
                         <table class="table table-condensed">
                             <tr>
                                 <th>Request</th>
                                 <th>Status</th>
                             </tr>
                             <tr ng-repeat="response in dataProviderMonitoring" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
-                                <td ng-click="Toggle($index,'log-formatted-json');" style="cursor: pointer;" ><span style="font-size: 12px">{{response.Id}}&nbsp;{{response.PackageName}}&nbsp;v{{response.PackageVersion}}</span>&nbsp;{{response.ElapsedTime}}</td>
+                                <td ng-click="Toggle($index,'log-formatted-json');" style="cursor: pointer;"><span style="font-size: 12px">{{response.Id}}&nbsp;{{response.PackageName}}&nbsp;v{{response.PackageVersion}}</span>&nbsp;{{response.ElapsedTime}}</td>
                                 <td>
                                     <span ng-class="{'label label-danger':response.HasErrors, 'label label-success' : !response.HasErrors}">{{response.State}}</span>
                                     <div style="display: none;" id="toggle-{{$index}}">

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Caching.BuildingBlocks.Repository;
 using Lace.Domain.Core.Entities;
@@ -13,6 +15,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {
     public sealed class TransformIvidResponse : ITransform
     {
+        private static readonly ILog Log = LogManager.GetLogger<TransformIvidResponse>();
         public TransformIvidResponse(HpiStandardQueryResponse response)
         {
             Continue = response != null;
@@ -76,7 +79,17 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
             //Result.AddToCache(CacheDataRepository.ForCacheOnly());
             try
             {
-                Task.Run(() => Result.AddToCache(CacheDataRepository.ForCacheOnly()));
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        Result.AddToCache(CacheDataRepository.ForCacheOnly());
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.ErrorFormat("Could not load ivid reaponse into cache because of {0}", ex, ex.Message);
+                    }
+                });
             }
             catch
             {

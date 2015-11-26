@@ -5,6 +5,7 @@ using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;

@@ -15,6 +15,7 @@ using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 using Shared.BuildingBlocks.Api.Security;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
@@ -24,11 +25,11 @@ namespace PackageBuilder.Api.Modules
     {
         public MetaModule(INEventStoreRepository<Package> writeRepo, IPublishIntegrationMessages integration)
         {
-            Post["/Packages/Execute/Meta"] = parameters =>
+            Post["/Packages/Execute/Meta", true] = async(parameters, ct) =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
 
-                var package = writeRepo.GetById(apiRequest.PackageId);
+                var package = await writeRepo.GetById(apiRequest.PackageId);
 
                 if (package == null)
                 {

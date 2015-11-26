@@ -7,9 +7,9 @@ namespace PackageBuilder.Unit.Tests.TestObjects.Builders
     public class when_calling_write_package_builder : Specification
     {
         private Package _package;
-        public override void Observe()
+        public override async void Observe()
         {
-            _package = new WritePackageBuilder().With("Ivid").Build();
+            _package = await new WritePackageBuilder().With("Ivid").Build();
         }
 
         [Observation]

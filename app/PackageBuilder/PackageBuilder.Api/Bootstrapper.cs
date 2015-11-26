@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Castle.Core;
+using Castle.Core.Internal;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Registration.Lifestyle;
 using Castle.Windsor;
 using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
@@ -13,6 +18,7 @@ using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Domain.Entities.DataImports;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using StackExchange.Redis;
 
 namespace PackageBuilder.Api
 {
@@ -30,7 +36,9 @@ namespace PackageBuilder.Api
         {
             base.ApplicationStartup(container, pipelines);
             container.Resolve<IBus>().Publish(new ImportStartupData());
-            
+
+            //var connectionMultiplexer = container.Resolve<ConnectionMultiplexer>();
+            //connectionMultiplexer.RegisterProfiler(new RedisProfiler(container.Resolve<INancyContextWrapper>()));
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -41,9 +49,17 @@ namespace PackageBuilder.Api
             //container.Install(FromAssembly.InThisApplication());
             container.Install(WindsorInstallerCollection.Installers);
 
+            //container.Kernel.ComponentModelCreated += Kernel_ComponentModelCreated;
+
           //  container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
         }
+
+        //void Kernel_ComponentModelCreated(ComponentModel model)
+        //{
+        //    if (model.LifestyleType == LifestyleType.PerWebRequest)
+        //        model.CustomLifestyle = new LifestyleGroup<INancyContextWrapper>(new ComponentRegistration<INancyContextWrapper>()).HybridPerWebRequestPerThread().GetType();
+        //}
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
@@ -70,9 +86,24 @@ namespace PackageBuilder.Api
                     nancyContext.CurrentUser = user;
                     //container.Resolve<CurrentContext>().Context = nancyContext;
                 }
+
+                //var ctxObj = new RedisProfiler(container.Resolve<INancyContextWrapper>()).CreateContextForCurrentRequest();
+                //if (ctxObj != null)
+                //    container.Resolve<ConnectionMultiplexer>().BeginProfiling(ctxObj);
+
                 return null;
             });
-            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
+            {
+                this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+
+                //var ctxObj = new RedisProfiler(container.Resolve<INancyContextWrapper>()).GetContext();
+                //if (ctxObj != null)
+                //{
+                //    var timings = container.Resolve<ConnectionMultiplexer>().FinishProfiling(ctxObj);
+                //    timings.ForEach(x => this.Info(() => "Redis profile -> " + x));
+                //}
+            });
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
                 this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));

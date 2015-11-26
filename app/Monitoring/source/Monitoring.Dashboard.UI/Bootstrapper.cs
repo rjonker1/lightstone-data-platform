@@ -1,13 +1,15 @@
 ﻿using System.Linq;
+using Api.Infrastructure.Base.Handlers;
+using Api.Infrastructure.Handlers;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataProvider.Infrastructure.Base.Handlers;
+using DataProvider.Infrastructure.Base.Services;
+using DataProvider.Infrastructure.Handlers;
+using DataProvider.Infrastructure.Repository;
+using DataProvider.Infrastructure.Services;
 using EasyNetQ;
-using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
-using Monitoring.Dashboard.UI.Core.Contracts.Services;
-using Monitoring.Dashboard.UI.Infrastructure.Handlers;
-using Monitoring.Dashboard.UI.Infrastructure.Repository;
-using Monitoring.Dashboard.UI.Infrastructure.Services;
 using Monitoring.Domain.Mappers;
 using Monitoring.Domain.Repository;
 using Nancy;
@@ -85,7 +87,7 @@ namespace Monitoring.Dashboard.UI
             container.Register(Component.For<ITransactionRepository, BillingTransactionRepository>());
 
             container.Register(Component.For<IHandleMonitoringCommands, DataProviderHandler>());
-            container.Register(Component.For<IHandleDataProviderStatistics, DataProviderStatisticsHandler>());
+            container.Register(Component.For<IHandleDataProviderIndicators, DataProviderIndicatorsHandler>());
             container.Register(Component.For<IHandleApiRequests, ApiRequestHandler>());
             container.Register(Component.For<ICallMonitoringService, MonitoringService>());
 

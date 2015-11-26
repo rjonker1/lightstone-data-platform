@@ -2,9 +2,9 @@
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
@@ -20,7 +20,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             _readRepo = readRepo;
         }
 
-        public override void Handle(UpdateDataProvider command)
+        public override async void Handle(UpdateDataProvider command)
         {
             var existing = _readRepo.Exists(command.Id, command.Name);
             if (existing)
@@ -30,7 +30,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 throw exception;
             }
 
-            var entity = _writeRepo.GetById(command.Id);
+            var entity = await _writeRepo.GetById(command.Id);
             entity.CreateDataProviderRevision(command.Id, command.Name, command.Description, command.CostOfSale,
                command.ResponseType, command.FieldLevelCostPriceOverride, command.RequiresConsent, entity.Version,
                command.Owner, command.CreatedDate, command.EditedDate, command.RequestFields, command.DataFields);

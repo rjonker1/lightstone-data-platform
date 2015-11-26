@@ -57,6 +57,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AbstractDto.cs" />
     <Compile Include="Identifiers\ApiRequestIdentifier.cs" />
     <Compile Include="Identifiers\MonitoringDataProviderIdentifier.cs" />
     <Compile Include="Identifiers\MonitoringActionIdentifier.cs" />

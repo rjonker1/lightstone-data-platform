@@ -1,0 +1,39 @@
+﻿<div ng-app="dataProviderErrorLogApp">
+    <div class="row">
+        <div ng-controller="dataProviderErrorLogController">
+            <div class="col-md-5">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Error Log</h3>
+
+                    </div><!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>Request</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr ng-repeat="response in dataProviderErrors" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
+                                <td ng-click="Toggle($index,'log-formatted-json');" style="cursor: pointer;"><span style="font-size: 12px">{{response.Id}}&nbsp;{{response.PackageName}}&nbsp;v{{response.PackageVersion}}</span>&nbsp;{{response.ElapsedTime}}</td>
+                                <td>
+                                    <span ng-class="{'label label-danger':response.HasErrors, 'label label-success' : !response.HasErrors}">{{response.State}}</span>
+                                    <div style="display: none;" id="toggle-{{$index}}">
+                                        <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.JsonPayload}}</textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+            <div class="col-md-7">
+                <div id="log-formatted-json" style="display: none;">
+                    <div>
+                        <input type="button" id="button-collapse-expand" ng-click="CollapseOrExpand('button-collapse-expand');" value="collapse" />
+                    </div>
+                    <div class="canvas" id="canvas-display"><pre class="CodeContainer"></pre></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

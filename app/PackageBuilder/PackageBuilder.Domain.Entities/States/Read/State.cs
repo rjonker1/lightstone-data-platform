@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Core.NHibernate.Attributes;
@@ -9,8 +10,9 @@ namespace PackageBuilder.Domain.Entities.States.Read
 {
     public class State : Entity, IState
     {
-        [DomainSignature]
+        [DomainSignature, DataMember]
         public virtual StateName Name { get; set; }
+        [DataMember]
         public virtual string Alias { get; set; }
 
         protected State() { }

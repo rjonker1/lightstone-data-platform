@@ -17,7 +17,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
         private readonly ISendCommandToBus _commands;
         private readonly DataProviderCommandSource _dataProviderName;
         private readonly DataProviderNoRecordState _billNoRecords;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<LogCommandTypes>();
         private readonly IAmDataProvider _dataProvider;
         private readonly DataProviderStopWatch _executeWatch;
         private readonly DataProviderStopWatch _requestWatch;
@@ -28,7 +28,6 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             _commands = commands;
             _dataProviderName = dataProviderName;
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _executeWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
             _requestWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
@@ -39,7 +38,6 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             _commands = commands;
             _dataProviderName = dataProviderName;
-            _log = LogManager.GetLogger(GetType());
             _executeWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
             _requestWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProviderName);
             _billNoRecords = billNoRecords;
@@ -108,7 +106,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
 
         public void LogEnd(object payload)
         {
-            SendEndAsyc(payload);
+              SendEndAsyc(payload);
         }
 
         private void SendBeginAsyc(object payload)
@@ -119,17 +117,17 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.Begin(payload, _executeWatch, _dataProviderName,_billNoRecords);
+                        _commands.Workflow.Begin(payload, _executeWatch, _dataProviderName, _billNoRecords);
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                        Log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                Log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -137,21 +135,22 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
+
                 Task.Run(() =>
                 {
                     try
                     {
-                        _commands.Workflow.End(payload, _executeWatch, _dataProviderName,_billNoRecords);
+                        _commands.Workflow.End(payload, _executeWatch, _dataProviderName, _billNoRecords);
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                        Log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                Log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -160,6 +159,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
+
                 Task.Run(() =>
                 {
                     try
@@ -168,13 +168,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a command to the bus because of {0}", ex, ex.Message);
+                        Log.ErrorFormat("An error occured sending a command to the bus because of {0}", ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a command to the bus because of {0}",ex, ex.Message);
+                Log.ErrorFormat("An error occured sending a command to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -182,6 +182,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
+
                 Task.Run(() =>
                 {
                     try
@@ -190,13 +191,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                        Log.ErrorFormat("An error occured sending a request to the bus because of {0}", ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
+                Log.ErrorFormat("An error occured sending a request to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -204,6 +205,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
+                
                 Task.Run(() =>
                 {
                     try
@@ -212,13 +214,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending a response to the bus because of {0}",ex, ex.Message);
+                        Log.ErrorFormat("An error occured sending a response to the bus because of {0}", ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending a response to the bus because of {0}",ex, ex.Message);
+                Log.ErrorFormat("An error occured sending a response to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -226,6 +228,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
+               
                 Task.Run(() =>
                 {
                     try
@@ -234,13 +237,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
+                        Log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
+                Log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
             }
         }
 
@@ -249,25 +252,23 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             try
             {
+
                 Task.Run(() =>
                 {
                     try
                     {
-                        _commands.Workflow.EntryPointResponse(payload, _requestWatch, state, request,billNoRecords);
+                        _commands.Workflow.EntryPointResponse(payload, _requestWatch, state, request, billNoRecords);
                     }
                     catch (Exception ex)
                     {
-                        _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
+                        Log.ErrorFormat("An error occured sending entry point request to the bus because of {0}", ex, ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
+                Log.ErrorFormat("An error occured sending entry point request to the bus because of {0}",ex, ex.Message);
             }
         }
-
-
-       
     }
 }

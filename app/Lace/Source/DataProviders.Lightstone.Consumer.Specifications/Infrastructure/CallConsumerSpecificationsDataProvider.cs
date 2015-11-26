@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -18,14 +17,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
 {
     public sealed class CallConsumerSpecificationsDataProvider : ICallTheDataProviderSource
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CallConsumerSpecificationsDataProvider>();
         private readonly IAmDataProvider _dataProvider;
         private readonly ILogCommandTypes _logCommand;
         private string _jsonRepairHistory;
 
         public CallConsumerSpecificationsDataProvider(IAmDataProvider dataProvider, ILogCommandTypes logCommand)
         {
-            _log = LogManager.GetLogger(GetType());
             _dataProvider = dataProvider;
             _logCommand = logCommand;
         }
@@ -52,7 +50,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lightstone Consumer Specifications Data Provider {0}", ex, ex.Message);
+                Log.ErrorFormat("Error calling Lightstone Consumer Specifications Data Provider {0}", ex, ex.Message);
                 _logCommand.LogFault(ex, new {ErrorMessage = "Error calling Lightstone Consumer Specifications Data Provider"});
                 PCubedEzScoreResponseFailed(response);
             }

@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using AutoMapper;
 using CommonDomain.Core;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
+using Newtonsoft.Json;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
@@ -43,6 +46,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             get { return base.Version; }
             internal set { base.Version = value; }
         }
+
         [DataMember]
         public string Name { get; internal set; }
         [DataMember]
@@ -55,9 +59,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         public string Notes { get; internal set; }
         [DataMember]
         public PackageEventType? PackageEventType { get; set; }
-        [DataMember]
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Industry>>))]
         public IEnumerable<IIndustry> Industries { get; internal set; }
-        [DataMember]
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<State>))]
         public IState State { get; internal set; }
         [DataMember]
         public decimal DisplayVersion { get; internal set; }
@@ -67,7 +71,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         public DateTime CreatedDate { get; internal set; }
         [DataMember]
         public DateTime? EditedDate { get; internal set; }
-        [DataMember]
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataProvider>>))]
         public IEnumerable<IDataProvider> DataProviders { get; internal set; }
 
         //Used for serialization
@@ -116,7 +120,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, notes, packageEventType, industries, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
-        private void Apply(PackageCreated @event)
+        private async void Apply(PackageCreated @event)
         {
             Id = @event.Id;
             Name = @event.Name;
@@ -134,12 +138,12 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
             this.Info(() => "Attempting to map data provider overrides from PackageCreated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
-            DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>(@event.DataProviderValueOverrides);
+            DataProviders = await Mapper.Map<IEnumerable<IDataProviderOverride>, Task<IEnumerable<DataProvider>>>(@event.DataProviderValueOverrides);
 
             this.Info(() => "Successfully mapped data provider overrides from PackageCreated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
         }
 
-        private void Apply(PackageUpdated @event)
+        private async void Apply(PackageUpdated @event)
         {
             Id = @event.Id;
             Name = @event.Name;
@@ -157,7 +161,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
             this.Info(() => "Attempting to map data provider overrides from PackageUpdated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
-            DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>(@event.DataProviderValueOverrides);
+            DataProviders = await Mapper.Map<IEnumerable<IDataProviderOverride>, Task<IEnumerable<DataProvider>>>(@event.DataProviderValueOverrides);
 
             this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
         }
@@ -200,7 +204,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         {
             if (dataProviders == null) yield break;
 
-            this.Info(() => "Map LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "Map LACE Response started for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             foreach (var dataProvider in dataProviders.Where(x => x.Handled))
             {
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
@@ -209,24 +213,24 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
                 if (laceResponse.DataFields.Any())
                     yield return laceResponse;
             }
-            this.Info(() => "Map LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "Map LACE Response finished for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
         }
 
         public List<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string firstName, Guid requestId, string accountNumber, Guid contractId,long contractVersion, SystemType system,
             IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent, string contactNumber)
         {
-            this.Info(() => "Form LACE Request Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "Form LACE Request started for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
                 contractVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice, hasConsent, contactNumber);
-            this.Info(() => "Form LACE Request Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "Form LACE Request finished for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
             if (request == null)
                 throw new LightstoneAutoException(string.Format("Request cannot be built to Contract with Id {0}", contractId));
 
-            this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "EntryPoint Get LACE Response started for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var responses = entryPoint.GetResponses(new[] { request });
-            this.Info(() => "EntryPoint Get LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "EntryPoint Get LACE Response finished for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
             return MapLaceResponses(responses, requestId).ToList();
         }
@@ -234,18 +238,18 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         public List<IDataProvider> ExecuteWithCarId(IEntryPoint entryPoint, Guid userId, string userName,
             string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, SystemType system, IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent, string contactNumber)
         {
-            this.Info(() => "Form LACE Request Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "Form LACE Request started for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
                 contractVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice,
                 hasConsent, contactNumber);
-            this.Info(() => "Form LACE Request Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "Form LACE Request finished for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
             if (request == null)
                 throw new LightstoneAutoException(string.Format("Request cannot be built to Contract with Id {0}", contractId));
 
-            this.Info(() => "EntryPoint Get LACE Response Initialized for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "EntryPoint Get LACE Response started for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
             var responses = entryPoint.GetResponsesForCarId(new[] {request});
-            this.Info(() => "EntryPoint Get LACE Response Completed for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            this.Info(() => "EntryPoint Get LACE Response finished for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
 
             return MapLaceResponses(responses, requestId).ToList();
         }

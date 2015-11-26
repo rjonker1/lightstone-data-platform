@@ -110,8 +110,7 @@ namespace Workflow.Lace.Messages.Shared
         public void Send(CommandType commandType, object payload, object metadata,
             DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
         {
-            //Task.Run(() =>
-            //{
+            
                 switch (commandType)
                 {
                     case CommandType.Error:
@@ -127,7 +126,6 @@ namespace Workflow.Lace.Messages.Shared
                         Transforming(payload, new MetadataContainer(metadata), dataProvider, billNoRecords);
                         break;
                 }
-            //});
         }
 
         private void Error(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)

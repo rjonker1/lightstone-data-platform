@@ -1,0 +1,110 @@
+﻿<div ng-app="dataProviderIndicatorApp">
+    <div class="row">
+        <div ng-controller="dataProviderIndicatorController">
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-purple">
+                        <div class="inner">
+                            <h3>{{dataProviderIndicators.requestLevel.AverageResponseTime}}</h3>
+                            <p>
+                                Average Response Time<sup style="font-size: 10px"> for {{dataProviderIndicators.requestLevel.CurrentMonth}}</sup>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>
+                                {{dataProviderIndicators.requestLevel.SuccessRate}}<sup style="font-size: 20px">%</sup>
+                            </h3>
+                            <p>
+                                Success Rate<sup style="font-size: 10px"> for {{dataProviderIndicators.requestLevel.CurrentMonth}}</sup>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-thumbs-up"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6" ng-click="viewAllRequests();">
+                    <!-- small box -->
+                    <div class="small-box bg-blue">
+                        <div class="inner">
+                            <h3>{{dataProviderIndicators.requestLevel.TotalRequests}}</h3>
+                            <p>
+                                Total Requests<sup style="font-size: 10px"> for {{dataProviderIndicators.requestLevel.CurrentMonth}}</sup>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-line-chart"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6" ng-click="viewErrors();">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>{{dataProviderIndicators.requestLevel.TotalErrors}}</h3>
+                            <p>
+                                Total Errors<sup style="font-size: 10px"> for {{dataProviderIndicators.requestLevel.CurrentMonth}}</sup>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-thumbs-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div ng-repeat="dataProvider in dataProviderIndicators.requestPerDataProvider" class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-orange">
+                        <div class="inner">
+                            <h3>{{dataProvider.Count}}</h3>
+                            <p>
+                                {{dataProvider.DataProviderName}} Requests<sup style="font-size: 10px"> for {{dataProviderIndicators.requestLevel.CurrentMonth}}</sup>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-database"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div ng-repeat="dataProvider in dataProviderIndicators.requestTimePerDataProvider" class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-light-blue">
+                        <div class="inner">
+                            <h3>{{dataProvider.Seconds}}</h3>
+                            <p>
+                                {{dataProvider.DataProvider}} Average Sec<sup style="font-size: 10px"> for {{dataProviderIndicators.requestLevel.CurrentMonth}}</sup>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-hourglass-half"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div ng-repeat="dataProvider in dataProviderIndicators.requestFieldCounts" class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-maroon">
+                        <div class="inner">
+                            <h3>{{dataProvider.Count}}</h3>
+                            <p>
+                                {{dataProvider.RequestField}} Requests<sup style="font-size: 10px"> for {{dataProviderIndicators.requestLevel.CurrentMonth}}</sup>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-filter"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

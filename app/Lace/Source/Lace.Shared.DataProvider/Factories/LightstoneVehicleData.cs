@@ -46,8 +46,7 @@ namespace Lace.Toolbox.Database.Factories
 
         private static readonly
             IDictionary<Order, Func<IAmLightstoneAutoRequest, ICollection<IPointToLaceProvider>, IReadOnlyRepository, IRetrieveCarInformation>>
-            Requests = new Dictionary
-                <Order, Func<IAmLightstoneAutoRequest, ICollection<IPointToLaceProvider>, IReadOnlyRepository, IRetrieveCarInformation>>()
+            Requests = new Dictionary<Order, Func<IAmLightstoneAutoRequest, ICollection<IPointToLaceProvider>, IReadOnlyRepository, IRetrieveCarInformation>>()
             {
                 {
                     Order.First, (request, response, repository) =>
