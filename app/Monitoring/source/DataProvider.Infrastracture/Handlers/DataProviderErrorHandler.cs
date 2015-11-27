@@ -31,7 +31,7 @@ namespace DataProvider.Infrastructure.Handlers
                 if (!requests.Any())
                     return;
 
-                var payloads = (List<DataProviderEventLog>) requests[1]; //_monitoring.Items<DataProviderEventLog>(DataProviderEventLog.SelectErrorsStatement()).ToArray();
+                var payloads = (List<DataProviderEventLog>) requests[1]; 
                 var responses = (List<DataProviderMonitoring>) requests[0];
 
                 if (!payloads.Any())

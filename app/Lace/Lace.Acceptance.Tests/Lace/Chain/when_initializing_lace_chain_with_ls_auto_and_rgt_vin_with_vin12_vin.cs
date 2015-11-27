@@ -28,7 +28,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         {
             _command = BusFactory.WorkflowBus();
             _request = new VinRequestBuilder().ForLightstoneAndRgtVinVin12VinNumber();
-            _buildSourceChain = new CreateSourceChain();
+            _buildSourceChain = new SpecificationFactory();
         }
 
         public override void Observe()

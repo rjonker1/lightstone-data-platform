@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Core\Contracts\IGetValuationView.cs" />
     <Compile Include="Infrastructure\CallLightstoneAutoDataProvider.cs" />
+    <Compile Include="Infrastructure\Factory\LightstoneVehicleData.cs" />
     <Compile Include="Infrastructure\HandleLightstoneAutoSourceCall.cs" />
     <Compile Include="Infrastructure\Management\GetMetrics.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />

@@ -29,7 +29,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _request = new LicensePlateRequestBuilder().ForAllSources();
             //_buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToLaceRequest>().Package);
             //_buildSourceChain.Build();
-            _buildSourceChain = new CreateSourceChain();
+            _buildSourceChain = new SpecificationFactory();
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command,
                 _buildSourceChain);
         }

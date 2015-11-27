@@ -107,12 +107,14 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Builder\Factory\CreateSourceChain.cs" />
+    <Compile Include="Builder\Factory\SpecificationFactory.cs" />
     <Compile Include="CheckTheReceivedRequest.cs" />
     <Compile Include="EntryPointService.cs" />
     <Compile Include="Initialize.cs" />
-    <Compile Include="Specification\DataProviderSpecification.cs" />
-    <Compile Include="Specification\CarIdSpecification.cs" />
+    <Compile Include="Specification\AbstractSpecification.cs" />
+    <Compile Include="Specification\AllDataProviderSpecification.cs" />
+    <Compile Include="Specification\CarIdDataProviderSpecification.cs" />
+    <Compile Include="Specification\NullSpecificationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

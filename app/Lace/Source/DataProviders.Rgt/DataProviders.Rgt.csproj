@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Core\Contracts\IGetCarSpecifications.cs" />
     <Compile Include="Infrastructure\CallRgtDataProvider.cs" />
+    <Compile Include="Infrastructure\Factory\RgtVehicleData.cs" />
     <Compile Include="Infrastructure\HandleRgtDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\GetSpecifications.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtResponse.cs" />
