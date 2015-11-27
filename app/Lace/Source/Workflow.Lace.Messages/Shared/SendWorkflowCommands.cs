@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
@@ -19,13 +18,12 @@ namespace Workflow.Lace.Messages.Shared
     public sealed class SendWorkflowCommands : ISendWorkflowCommand
     {
         private readonly IPublishCommandMessages _publisher;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<WorkflowCommandPublisher>();
         private readonly Guid _requestId;
 
         public SendWorkflowCommands(IAdvancedBus bus, Guid requestId)
         {
             _requestId = requestId;
-            _log = LogManager.GetLogger(GetType());
             _publisher = new WorkflowCommandPublisher(bus);
         }
 
@@ -38,7 +36,7 @@ namespace Workflow.Lace.Messages.Shared
                 DateTime.UtcNow, connection,
                 new PayloadIdentifier(new MetadataContainer().ObjectToJson(), payload.ObjectToJson(),
                     CommandDescriptions.StartExecutionDescription((DataProviderCommandSource) dataProvider.Id)))
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
             stopWatch.Start();
         }
 
@@ -55,7 +53,7 @@ namespace Workflow.Lace.Messages.Shared
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
                     payload.ObjectToJson(),
                     CommandDescriptions.EndExecutionDescription((DataProviderCommandSource) dataProvider.Id)))
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
         }
 
         public void Begin(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
@@ -63,7 +61,7 @@ namespace Workflow.Lace.Messages.Shared
             new StartingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.StartCallDescription(dataProvider),
                 payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
                 new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance,billNoRecords).SendToBus(
-                    _publisher, _log);
+                    _publisher, Log);
             stopWatch.Start();
         }
 
@@ -73,7 +71,7 @@ namespace Workflow.Lace.Messages.Shared
             new EndingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.EndExecutionDescription(dataProvider),
                 payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
                 new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance,billNoRecords).SendToBus(
-                    _publisher, _log);
+                    _publisher, Log);
         }
 
         public void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
@@ -82,7 +80,7 @@ namespace Workflow.Lace.Messages.Shared
             new CreateTransactionCommand(Guid.NewGuid(), packageId, packageVersion, DateTime.UtcNow, userId, requestId,
                 contractId,
                 system, contractVersion, state, accountNumber, packageCostPrice, packageRecommendedPrice, billNoRecords)
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
         }
 
         public void EntryPointRequest(ICollection<IPointToLaceRequest> request, DataProviderStopWatch stopWatch, DataProviderNoRecordState billNoRecords)
@@ -91,7 +89,7 @@ namespace Workflow.Lace.Messages.Shared
                 SearchRequestIndentifier.Determine(request),
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), request.ObjectToJson(),
                     CommandDescriptions.ReceiveEntryPointRequestDescription()),new NoRecordBillableIdentifier((int)billNoRecords,billNoRecords.ToString()))
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
             stopWatch.Start();
         }
 
@@ -103,7 +101,7 @@ namespace Workflow.Lace.Messages.Shared
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
                     payload.ObjectToJson(),
                     CommandDescriptions.ReturnEntryPointResponseDescription()),SearchRequestIndentifier.Determine(request),new NoRecordBillableIdentifier((int)billNoRecords,billNoRecords.ToString()))
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
 
         }
 
@@ -133,7 +131,7 @@ namespace Workflow.Lace.Messages.Shared
             new ErrorInDataProviderCommand(Guid.NewGuid(), _requestId,
                 CommandDescriptions.FaultDescription(dataProvider), payload.ObjectToJson(), dataProvider,
                 DateTime.UtcNow, metadata.ObjectToJson(), Category.Error,billNoRecords)
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
         }
 
         private void Transforming(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
@@ -141,7 +139,7 @@ namespace Workflow.Lace.Messages.Shared
             new TransformingDataProviderResponseCommand(Guid.NewGuid(), _requestId,
                 CommandDescriptions.TransformationDescription(dataProvider), payload.ObjectToJson(), dataProvider,
                 DateTime.UtcNow, metadata.ObjectToJson(), Category.Configuration,billNoRecords)
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
         }
 
         private void Configuring(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
@@ -149,7 +147,7 @@ namespace Workflow.Lace.Messages.Shared
             new ConfiguringDataProviderCommand(Guid.NewGuid(), _requestId,
                 CommandDescriptions.ConfigurationDescription(dataProvider), payload.ObjectToJson(), dataProvider,
                 DateTime.UtcNow, metadata.ObjectToJson(), Category.Configuration,billNoRecords)
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
         }
 
         private void Security(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider, DataProviderNoRecordState billNoRecords)
@@ -157,7 +155,7 @@ namespace Workflow.Lace.Messages.Shared
             new RaisingSecurityFlagCommand(Guid.NewGuid(), _requestId,
                 CommandDescriptions.SecurityDescription(dataProvider), payload.ObjectToJson(), dataProvider,
                 DateTime.UtcNow, metadata.ObjectToJson(), Category.Security,billNoRecords)
-                .SendToBus(_publisher, _log);
+                .SendToBus(_publisher, Log);
         }
     }
 }
