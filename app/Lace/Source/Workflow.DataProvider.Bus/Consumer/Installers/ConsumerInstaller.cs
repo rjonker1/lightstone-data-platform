@@ -9,12 +9,11 @@ namespace Workflow.DataProvider.Bus.Consumer.Installers
 {
     public class ConsumerInstaller : IWindsorInstaller
     {
-        private ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<ConsumerInstaller>();
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            _log = LogManager.GetLogger(GetType());
-            _log.InfoFormat("Installing Consumers");
+            Log.InfoFormat("Installing Consumers");
 
             container.Register(
                 Component.For<ContextSenderConsumers>().ImplementedBy<ContextSenderConsumers>(),

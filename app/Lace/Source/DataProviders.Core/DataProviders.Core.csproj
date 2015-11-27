@@ -109,10 +109,19 @@
     <Compile Include="Contracts\IRequestDataFromDataProviderSource.cs" />
     <Compile Include="Contracts\ILogCommandTypes.cs" />
     <Compile Include="Contracts\ITransform.cs" />
+    <Compile Include="Enums\Order.cs" />
     <Compile Include="Enums\StatusMessageType.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\ResponseExtensions.cs" />
-    <Compile Include="Factories\ResponseDataMining.cs" />
+    <Compile Include="Factories\ResponseDataMiningFactory.cs" />
+    <Compile Include="Infrastructure\ResponseMining\AbstractResponseMiner.cs" />
+    <Compile Include="Infrastructure\ResponseMining\CarId\LightstoneAutoCarIdMiner.cs" />
+    <Compile Include="Infrastructure\ResponseMining\CarId\RgtVinCarIdMiner.cs" />
+    <Compile Include="Infrastructure\ResponseMining\EngineNumber\EngineNumberMiner.cs" />
+    <Compile Include="Infrastructure\ResponseMining\VinNumber\IvidVinMiner.cs" />
+    <Compile Include="Infrastructure\ResponseMining\VinNumber\LightstoneAutoVinMiner.cs" />
+    <Compile Include="Infrastructure\ResponseMining\NullResponseMiner.cs" />
+    <Compile Include="Infrastructure\ResponseMining\VinNumber\RgtVinVinMiner.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="Shared\AuthenticationHeaders.cs" />
     <Compile Include="Shared\CheckThePackageDataSource.cs" />
@@ -140,9 +149,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

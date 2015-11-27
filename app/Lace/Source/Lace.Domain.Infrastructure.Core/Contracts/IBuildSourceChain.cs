@@ -8,13 +8,13 @@ namespace Lace.Domain.Infrastructure.Core.Contracts
 {
     public interface IBuildSourceChain
     {
-       //Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; }
-        Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> Build(ChainType chain);
+        Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> Build(ChainType chainType);
     }
 
     public enum ChainType
     {
         All = 1,
-        CarId = 2
+        CarId = 2, 
+        Undefined = 99
     }
 }

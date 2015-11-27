@@ -11,7 +11,7 @@ namespace Workflow.Lace.Messages.Shared
         private readonly IAdvancedBus _bus;
         private readonly IExchange _exchange;
         private readonly IQueue _queue;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<BillingPublisher>();
 
         private const string Exchange = "DataPlatform.Transactions.Billing";
         private const string QueueName = "DataPlatform.Transactions.Billing";
@@ -24,7 +24,6 @@ namespace Workflow.Lace.Messages.Shared
                 ExchangeType.Fanout);
             _queue = _bus.QueueDeclare(QueueName);
             _bus.Bind(_exchange, _queue, "");
-            _log = LogManager.GetLogger(GetType());
         }
 
         public void SendToBus<T>(T message) where T : class
@@ -35,7 +34,7 @@ namespace Workflow.Lace.Messages.Shared
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error sending message to Billing Transation Bus: {0}",ex, ex.Message);
+                Log.ErrorFormat("Error sending message to Billing Transation Bus: {0}", ex, ex.Message);
             }
         }
     }

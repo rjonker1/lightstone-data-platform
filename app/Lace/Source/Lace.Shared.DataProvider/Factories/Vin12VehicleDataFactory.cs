@@ -12,14 +12,12 @@ using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 
 namespace Lace.Toolbox.Database.Factories
 {
-    public class Vin12VehicleDataFactory :
-        AbstractVin12VehicleFactory<ICollection<IPointToLaceProvider>, IAmRequestField, IReadOnlyRepository, List<Vin12CarinformationDto>>
+    public class Vin12VehicleDataFactory : AbstractVin12VehicleFactory<ICollection<IPointToLaceProvider>, IAmRequestField, IReadOnlyRepository, List<Vin12CarinformationDto>>
     {
-        private static readonly IMineResponseData<ICollection<IPointToLaceProvider>> Factory = new ResponseDataMiningFactory();
+        private static readonly IMineDataProviderResponseFactory Factory = new ResponseDataMiningFactory();
         private static readonly ILog Log = LogManager.GetLogger<Vin12VehicleDataFactory>();
 
-        public override List<Vin12CarinformationDto> Vin12CarInformation(ICollection<IPointToLaceProvider> response, IAmRequestField request,
-            IReadOnlyRepository repository)
+        public override List<Vin12CarinformationDto> Vin12CarInformation(ICollection<IPointToLaceProvider> response, IAmRequestField request,IReadOnlyRepository repository)
         {
             try
             {
@@ -34,9 +32,7 @@ namespace Lace.Toolbox.Database.Factories
 
         private static string FindVinNumber(IAmRequestField field, ICollection<IPointToLaceProvider> response)
         {
-            return !string.IsNullOrEmpty(field.GetValue())
-                ? field.GetValue()
-                : Factory.MineVinNumber(response);
+            return !string.IsNullOrEmpty(field.GetValue()) ? field.GetValue() : Factory.BuildVinMiners(response).MineVin();
         }
     }
 }

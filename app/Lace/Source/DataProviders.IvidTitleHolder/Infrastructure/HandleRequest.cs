@@ -20,7 +20,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     requesterPhone = request.RequesterPhone.GetValue()
                 },
 
-                vin = !string.IsNullOrEmpty(request.VinNumber.GetValue()) ? request.VinNumber.GetValue() : new ResponseDataMiningFactory().MineVinNumber(response)
+                vin = !string.IsNullOrEmpty(request.VinNumber.GetValue()) ? request.VinNumber.GetValue() : new ResponseDataMiningFactory().BuildVinMiners(response).MineVin()
             };
         }
     }

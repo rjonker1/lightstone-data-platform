@@ -12,7 +12,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         {
             return !string.IsNullOrEmpty(request.VinNumber.GetValue())
                 ? request.VinNumber.GetValue()
-                : new ResponseDataMiningFactory().MineVinNumber(response);
+                : new ResponseDataMiningFactory().BuildVinMiners(response).MineVin();
         }
     }
 }

@@ -115,8 +115,7 @@
     <Compile Include="Dtos\Vin12CarinformationDto.cs" />
     <Compile Include="Factories\DatabaseConnections.cs" />
     <Compile Include="Base\IGetVehicleData.cs" />
-    <Compile Include="Factories\LightstoneVehicleData.cs" />
-    <Compile Include="Factories\RgtVehicleData.cs" />
+    <Compile Include="Factories\CarInformation\RequestTypeFactory.cs" />
     <Compile Include="Factories\Vin12VehicleDataFactory.cs" />
     <Compile Include="Models\Band.cs" />
     <Compile Include="Dtos\BmwFinanceDto.cs" />
@@ -132,6 +131,11 @@
     <Compile Include="Repositories\FinanceRepository.cs" />
     <Compile Include="Repositories\IReadOnlyRepository.cs" />
     <Compile Include="Repositories\DataProviderRepository.cs" />
+    <Compile Include="Requests\CarInformation\AbstractRequestDeterminator.cs" />
+    <Compile Include="Requests\CarInformation\CarIdRequestType.cs" />
+    <Compile Include="Requests\CarInformation\IDetermineRequestType.cs" />
+    <Compile Include="Requests\CarInformation\VinRequestType.cs" />
+    <Compile Include="Requests\CarInformation\NullRequestTypeDeterminator.cs" />
     <Compile Include="Views\ValuationView.cs" />
   </ItemGroup>
   <ItemGroup>

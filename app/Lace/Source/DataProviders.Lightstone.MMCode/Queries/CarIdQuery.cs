@@ -9,10 +9,10 @@ namespace DataProviders.MMCode.Queries
 {
     public class CarIdQuery : IGetCarId
     {
-        private static readonly IMineResponseData<ICollection<IPointToLaceProvider>> Factory = new ResponseDataMiningFactory();
+        private static readonly IMineDataProviderResponseFactory Factory = new ResponseDataMiningFactory();
         public int RetrieveCarId(ICollection<IPointToLaceProvider> response, IAmMmCodeRequest request)
         {
-            var carId = GetCarId(request) > 0 ? GetCarId(request) : Factory.MineCarId(response);
+            var carId = GetCarId(request) > 0 ? GetCarId(request) : Factory.BuildCarIdMiners(response).MineCarId();
             return carId;
         }
 

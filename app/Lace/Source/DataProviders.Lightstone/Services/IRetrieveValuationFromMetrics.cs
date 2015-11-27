@@ -6,7 +6,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
     {
         bool IsSatisfied { get; }
         IRespondWithValuation Valuation { get; }
-        IRetrieveValuationFromMetrics SetupDataSources();
         IRetrieveValuationFromMetrics BuildValuation();
         IRetrieveValuationFromMetrics GenerateData();
     }

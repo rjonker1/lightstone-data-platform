@@ -11,12 +11,11 @@ namespace Lace.Domain.DataProviders.RgtVin.Queries
     {
         public IEnumerable<Vin> Vins { get; private set; }
 
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<VehicleVinQuery>();
         private readonly IReadOnlyRepository _repository;
 
         public VehicleVinQuery(IReadOnlyRepository repository)
         {
-            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -37,7 +36,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Queries
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Vin information because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Error getting Vin information because of {0}", ex, ex.Message);
                 throw;
             }
         }
