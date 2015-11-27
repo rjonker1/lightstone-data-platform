@@ -12,8 +12,6 @@ namespace Workflow.Billing.Repository
     public class CacheProvider<T> : ICacheProvider<T> where T : class
     {
         public static RedisClient _redisClient;
-        //public readonly IRedisTypedClient<T> cacheClient;
-
         public IRedisTypedClient<T> CacheClient { get; set; }
 
         private static bool useCache = true;
