@@ -1,11 +1,12 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Enums;
 using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using Shared.Logging;
 using UserManagement.Infrastructure.NHibernate;
 
 namespace UserManagement.Api.Installers
@@ -14,7 +15,7 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install NHibernateInstaller");
+            this.Info(() => "Attempting to install NHibernateInstaller", SystemName.UserManagement);
 
             container.Register(Component.For<Configuration>().UsingFactoryMethod(() =>
                 Fluently.Configure(new Configuration().Configure())
@@ -30,7 +31,7 @@ namespace UserManagement.Api.Installers
                      .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
                      .LifeStyle.HybridPerWebRequestPerThread());
 
-            this.Info(() => "Successfully installed NHibernateInstaller");
+            this.Info(() => "Successfully installed NHibernateInstaller", SystemName.UserManagement);
         }
 
         protected virtual void ExportSchemaConfig(Configuration config)

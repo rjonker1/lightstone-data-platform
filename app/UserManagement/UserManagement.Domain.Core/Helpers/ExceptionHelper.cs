@@ -1,5 +1,6 @@
 ﻿using System;
-using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Enums;
+using Shared.Logging;
 
 namespace UserManagement.Domain.Core.Helpers
 {
@@ -13,7 +14,7 @@ namespace UserManagement.Domain.Core.Helpers
             }
             catch (Exception exception)
             {
-                typeof(ExceptionHelper).Error(() => exception);
+                typeof(ExceptionHelper).Error(() => exception, SystemName.UserManagement);
             }
         }
 
@@ -25,7 +26,7 @@ namespace UserManagement.Domain.Core.Helpers
             }
             catch (Exception exception)
             {
-                typeof(ExceptionHelper).Error(() => exception);
+                typeof(ExceptionHelper).Error(() => exception, SystemName.UserManagement);
                 return null;
             }
         }
@@ -38,7 +39,7 @@ namespace UserManagement.Domain.Core.Helpers
             }
             catch (Exception exception)
             {
-                typeof(ExceptionHelper).Error(() => exception);
+                typeof(ExceptionHelper).Error(() => exception, SystemName.UserManagement);
                 return null;
             }
         } 

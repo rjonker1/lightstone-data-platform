@@ -2,6 +2,7 @@
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
@@ -13,9 +14,9 @@ using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Nancy.Security;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
+using Shared.Logging;
 using UserManagement.Api.Helpers;
 using UserManagement.Api.Helpers.Extensions;
-using UserManagement.Api.Helpers.Security;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.DataImports;
 using UserManagement.Infrastructure.Helpers;
@@ -30,9 +31,9 @@ namespace UserManagement.Api
         // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
-            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize(); 
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
-            this.Info(() => "Application startup initiated");
+            this.Info(() => "Application startup initiated", SystemName.UserManagement);
             base.ApplicationStartup(container, pipelines);
 
             container.Resolve<IBus>().Publish(new ImportStartupData());
@@ -53,7 +54,7 @@ namespace UserManagement.Api
         {
             pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
-                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.UserManagement);
                 var token = "";
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
@@ -64,17 +65,15 @@ namespace UserManagement.Api
 
                 var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
                 if (user != null)
-                {
                     nancyContext.CurrentUser = user;
-                }
-                    
+
                 return null;
             });
 
-            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.UserManagement));
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.UserManagement);
                 var errorResponse = ErrorResponse.FromException(exception);
                 if (exception is LightstoneAutoException)
                     errorResponse.StatusCode = HttpStatusCode.ImATeapot;

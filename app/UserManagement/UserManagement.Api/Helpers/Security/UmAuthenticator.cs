@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy.Security;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Logging;
 using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Helpers.Security
@@ -35,7 +37,7 @@ namespace UserManagement.Api.Helpers.Security
             var user = _repository.GetByUserName(username);
             if (user == null)
             {
-                this.Error(() => "User not found: {0}".FormatWith(username));
+                this.Error(() => "User not found: {0}".FormatWith(username), SystemName.UserManagement);
                 return null;                
             }
 

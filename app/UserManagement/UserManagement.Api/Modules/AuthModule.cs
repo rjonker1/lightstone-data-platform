@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using LiveAuto.Api.Routes;
@@ -8,6 +9,7 @@ using MemBus;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.ModelBinding;
+using Shared.Logging;
 using UserManagement.Api.Helpers.Security;
 using UserManagement.Api.Routes;
 using UserManagement.Domain.Dtos;
@@ -54,7 +56,7 @@ namespace UserManagement.Api.Modules
                         if (userType != UserType.Internal)
                         {
                             userIdentity = null;
-                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType));
+                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType), SystemName.UserManagement);
                         }
                     }
                 }
@@ -70,7 +72,7 @@ namespace UserManagement.Api.Modules
                 var password = Context.Request.Headers["Password"].FirstOrDefault();
                 var userIdentity = authenticator.GetUserIdentity(username, password);
 
-                this.Info(() => "UserIdentity: {0}, log in attempt".FormatWith(userIdentity));
+                this.Info(() => "UserIdentity: {0}, log in attempt".FormatWith(userIdentity), SystemName.UserManagement);
 
                 if (userIdentity != null)
                 {
@@ -81,7 +83,7 @@ namespace UserManagement.Api.Modules
                         if (userType != UserType.Internal && userType != UserType.External)
                         {
                             userIdentity = null;
-                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType));
+                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType), SystemName.UserManagement);
                         }
                     }
                 }

@@ -1,14 +1,13 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DataPlatform.Shared.Helpers.Extensions;
 using EasyNetQ;
 using MemBus;
 using MemBus.Configurators;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Infrastructure;
 using Workflow.BuildingBlocks;
-using IBus = MemBus.IBus;
+using Workflow.Publisher;
 
 namespace UserManagement.Api.Installers
 {
@@ -16,9 +15,9 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install BusInstaller");
+            container.Register(Component.For<EasyNetQ.IBus>().UsingFactoryMethod(BusBuilder.CreateBus).LifestyleSingleton());
 
-            container.Register(Component.For<IBus>().Instance(BusSetup.StartWith<Conservative>()
+            container.Register(Component.For<MemBus.IBus>().Instance(BusSetup.StartWith<Conservative>()
                                                                      .Apply<IoCSupport>(s => s.SetAdapter(new MessageAdapter(container))
                                                                      .SetHandlerInterface(typeof(IHandleMessages<>)))
                                                                      .Construct()));
@@ -28,8 +27,6 @@ namespace UserManagement.Api.Installers
                     .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/billing/queue"))
                     .LifestyleSingleton()
                 );
-
-            this.Info(() => "Successfully installed BusInstaller");
         }
     }
 }

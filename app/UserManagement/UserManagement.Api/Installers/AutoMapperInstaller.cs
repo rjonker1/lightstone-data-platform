@@ -4,7 +4,9 @@ using AutoMapper;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
+using Shared.Logging;
 using UserManagement.Api.Helpers.AutoMapper.Converters;
 using UserManagement.Api.Helpers.AutoMapper.Maps;
 using UserManagement.Domain.Entities;
@@ -15,7 +17,7 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install AutoMapperInstaller");
+            this.Info(() => "Attempting to install AutoMapperInstaller", SystemName.UserManagement);
 
             container.Register(Classes.FromAssemblyContaining<ICreateAutoMapperMaps>().BasedOn(typeof(ITypeConverter<,>)).WithServiceAllInterfaces().LifestyleTransient());
             container.Register(Classes.FromAssemblyContaining<ICreateAutoMapperMaps>().BasedOn<ICreateAutoMapperMaps>().WithServiceAllInterfaces().LifestyleTransient());
@@ -24,7 +26,7 @@ namespace UserManagement.Api.Installers
             foreach (var map in container.ResolveAll<ICreateAutoMapperMaps>())
                 map.CreateMaps();
 
-            this.Info(() => "Successfully installed AutoMapperInstaller");
+            this.Info(() => "Successfully installed AutoMapperInstaller", SystemName.UserManagement);
         }
 
         private static void RegisterIdToEntityConverters(IWindsorContainer container)

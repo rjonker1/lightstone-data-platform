@@ -1,5 +1,5 @@
 ﻿using Castle.Windsor;
-using UserManagement.Domain.Core.Helpers;
+using DataPlatform.Shared.Helpers.Extensions;
 
 namespace UserManagement.Domain.Core.MessageHandling
 {

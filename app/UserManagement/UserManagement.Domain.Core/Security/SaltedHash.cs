@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Enums;
+using Shared.Logging;
 
 namespace UserManagement.Domain.Core.Security
 {
@@ -132,18 +133,18 @@ namespace UserManagement.Domain.Core.Security
             //  No easy array comparison in C# -- we do the legwork
             if (NewHash.Length != Hash.Length)
             {
-                this.Error(() => "Hash compare failed.");
+                this.Error(() => "Hash compare failed.", SystemName.UserManagement);
                 return false;
             }
 
             for (int Lp = 0; Lp < Hash.Length; Lp++ )
                 if (!Hash[Lp].Equals(NewHash[Lp]))
                 {
-                    this.Error(() => "Hash verfication failed.");
+                    this.Error(() => "Hash verfication failed.", SystemName.UserManagement);
                     return false;
                 }
 
-            this.Info(() => "Hash verified.");
+            this.Info(() => "Hash verified.", SystemName.UserManagement);
             return true;
         }
 
