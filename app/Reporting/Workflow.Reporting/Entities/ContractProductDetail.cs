@@ -4,5 +4,6 @@
     {
         public string PackageName { get; set; }
         public int TransactionCount { get; set; }
+        public int BillableTransactionCount { get; set; }
     }
 }
