@@ -160,6 +160,7 @@
     <Compile Include="Lace\Consumers\when_consuming_audatex_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider.cs" />
+    <Compile Include="Lace\EntrypointAsync\when_sending_valid_vehicle_to_async_entry_point_service.cs" />
     <Compile Include="Lace\EntryPoint\when_sending_carid_and_year_only_to_entry_point.cs" />
     <Compile Include="Lace\EntryPoint\when_sending_valid_vehicle_to_entry_point_service.cs" />
     <Compile Include="Lace\EntryPoint\when_sending_vin12_license_plate_to_entry_point_service.cs" />

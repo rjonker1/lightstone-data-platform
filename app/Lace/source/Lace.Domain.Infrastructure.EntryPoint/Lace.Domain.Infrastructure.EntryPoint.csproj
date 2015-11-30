@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Builder\Factory\SpecificationFactory.cs" />
     <Compile Include="CheckTheReceivedRequest.cs" />
+    <Compile Include="EntryPointAsyncService.cs" />
     <Compile Include="EntryPointService.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Specification\AbstractSpecification.cs" />

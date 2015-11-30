@@ -22,7 +22,6 @@ namespace Lace.Domain.DataProviders.Core.Shared
         private readonly DataProviderStopWatch _executeWatch;
         private readonly DataProviderStopWatch _requestWatch;
 
-
         private LogCommandTypes(ISendCommandToBus commands, DataProviderCommandSource dataProviderName,
             IAmDataProvider dataProvider,DataProviderNoRecordState billNoRecords)
         {
@@ -109,11 +108,11 @@ namespace Lace.Domain.DataProviders.Core.Shared
               SendEndAsyc(payload);
         }
 
-        private void SendBeginAsyc(object payload)
+        private async void SendBeginAsyc(object payload)
         {
             try
             {
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     try
                     {
@@ -131,12 +130,12 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendEndAsyc(object payload)
+        private async void SendEndAsyc(object payload)
         {
             try
             {
 
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     try
                     {
@@ -155,12 +154,12 @@ namespace Lace.Domain.DataProviders.Core.Shared
         }
 
 
-        private void SendAsyc(CommandType commandType, object payload, object metadata)
+        private async void SendAsyc(CommandType commandType, object payload, object metadata)
         {
             try
             {
 
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     try
                     {
@@ -178,12 +177,12 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendRequestAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch)
+        private async void SendRequestAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch)
         {
             try
             {
 
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     try
                     {
@@ -201,12 +200,12 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendResponseAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch)
+        private async void SendResponseAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch)
         {
             try
             {
                 
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     try
                     {
@@ -224,12 +223,12 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendEntryPointRequestAsync(ICollection<IPointToLaceRequest> request,DataProviderNoRecordState billNoRecords)
+        private async void SendEntryPointRequestAsync(ICollection<IPointToLaceRequest> request,DataProviderNoRecordState billNoRecords)
         {
             try
             {
-               
-                Task.Run(() =>
+
+                await Task.Run(() =>
                 {
                     try
                     {
@@ -247,13 +246,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendEntryPointResponseAsync(object payload, DataProviderResponseState state,
+        private async void SendEntryPointResponseAsync(object payload, DataProviderResponseState state,
             ICollection<IPointToLaceRequest> request, DataProviderNoRecordState billNoRecords)
         {
             try
             {
 
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     try
                     {

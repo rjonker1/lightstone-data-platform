@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using EasyNetQ;
@@ -74,6 +75,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             }
         }
 
+       
+
         private void Init(Guid requestId)
         {
             _command = CommandSender.InitCommandSender(_bus, requestId, DataProviderCommandSource.EntryPoint);
@@ -108,5 +111,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 return new List<IPointToLaceProvider>();
             }
         }
+
+
+       
     }
 }
