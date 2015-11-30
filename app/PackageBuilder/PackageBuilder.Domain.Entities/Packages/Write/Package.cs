@@ -273,6 +273,27 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             return MapLaceResponses(responses, requestId).ToList();
         }
 
+        public async Task<List<IDataProvider>> ExecuteWithCarIdAsync(IEntryPointAsync entryPoint, Guid userId, string userName,
+            string firstName, Guid requestId, string accountNumber, Guid contractId, long contractVersion, SystemType system,
+            IEnumerable<RequestFieldDto> requestFieldsDtos, double packageCostPrice, double packageRecommendedPrice, bool hasConsent,
+            string contactNumber)
+        {
+            this.Info(() => "Form LACE Request started for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            var request = FormLaceRequest(userId, userName, firstName, requestId, accountNumber, contractId,
+                contractVersion, system, requestFieldsDtos, packageCostPrice, packageRecommendedPrice,
+                hasConsent, contactNumber);
+            this.Info(() => "Form LACE Request finished for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+
+            if (request == null)
+                throw new LightstoneAutoException(string.Format("Request cannot be built to Contract with Id {0}", contractId));
+
+            this.Info(() => "EntryPoint Get LACE Response started for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+            var responses = await entryPoint.GetResponsesForCarIdAsync(new[] {request});
+            this.Info(() => "EntryPoint Get LACE Response finished for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow));
+
+            return MapLaceResponses(responses, requestId).ToList();
+        }
+
         public override string ToString()
         {
             return "{0} - {1} - {2}".FormatWith(GetType().FullName, Id, Name);

@@ -46,7 +46,7 @@ namespace PackageBuilder.Api.Modules
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus,
-            IUserManagementApiClient userManagementApi, IBillingApiClient billingApiClient, IPublishIntegrationMessages integration) //IEntryPointAsync entryPointAsync
+            IUserManagementApiClient userManagementApi, IBillingApiClient billingApiClient, IPublishIntegrationMessages integration) //, IEntryPointAsync entryPointAsync
         {
 
             Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
@@ -146,12 +146,12 @@ namespace PackageBuilder.Api.Modules
                 var apiRequest = this.Bind<ApiCommitRequestDto>();
 
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var request = await billingApiClient.GetAsync(token, ct, "/Transactions/Request/{requestId}", new[]
-                {
-                    new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString())
-                },null);
+                //var request = await billingApiClient.GetAsync(token, ct, "/Transactions/Request/{requestId}", new[]
+                //{
+                //    new KeyValuePair<string, string>("requestId", apiRequest.RequestId.ToString())
+                //},null);
 
-                if (request.Contains("error")) return request;
+                //if (request.Contains("error")) return request;
 
                 // RabbitMQ
                 new TransactionBus(eBus).SendDynamic(Mapper.Map(apiRequest, new TransactionRequestMessage()));
@@ -178,9 +178,9 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
-                var responses = await Task.Factory.StartNew(() => 
-                    ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
-                    apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent,apiRequest.ContactNumber));
+                var responses = await Task.Factory.StartNew(() =>
+                    ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName, Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
+                    apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber));
 
                 // Filter responses for cleaner api payload
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));

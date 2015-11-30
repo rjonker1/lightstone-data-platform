@@ -11,7 +11,7 @@ namespace PackageBuilder.Api.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IEntryPoint>().ImplementedBy<EntryPointService>().LifestyleTransient());
-          //  container.Register(Component.For<IEntryPointAsync>().ImplementedBy<EntryPointAsyncService>().LifestyleTransient());
+            //container.Register(Component.For<IEntryPointAsync>().ImplementedBy<EntryPointAsyncService>().LifestyleTransient());
         }
     }
 }
