@@ -211,7 +211,9 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                     .Select(x => new ContractProductDetail
                                     {
                                         PackageName = x.Package.PackageName,
-                                        TransactionCount = userTransactions.Count(t => t.Package.PackageId == x.Package.PackageId)
+                                        TransactionCount = userTransactions.Count(t => t.Package.PackageId == x.Package.PackageId),
+                                        BillableTransactionCount = userTransactions.Count(t => t.Package.PackageId == x.Package.PackageId &&
+                                                                        t.BillingType == "BILLABLE")
                                     }).DistinctBy(x => x.PackageName));
 
                                 userTransactionsList.Add(new ContractUserTransactions
