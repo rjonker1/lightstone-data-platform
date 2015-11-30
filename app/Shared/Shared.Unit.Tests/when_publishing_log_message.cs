@@ -13,7 +13,7 @@ namespace Shared.Unit.Tests
 
         }
 
-        [Observation]
+        //[Observation]
         public void should()
         {
             _workflowBus.Publish(new LogMessage("Test", LogLevel.Debug, SystemName.Shared));

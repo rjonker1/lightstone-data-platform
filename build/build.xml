@@ -1000,8 +1000,10 @@
       <author>CustomApp</author>
       <description>Workflow.Bus</description>
       <includes>
-        <include pattern="Lightstone.Dataplatform.*.dll" to="lib\net45" />
-        <include pattern="Lightstone.Dataplatform.*.pdb" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Workflow.Bus.dll" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Workflow.Bus.pdb" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Workflow.Publisher.dll" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Workflow.Publisher.pdb" to="lib\net45" />
       </includes>
       <dependencies>
          <dependency id="Castle.Core" version="3.3.3" />
@@ -1024,8 +1026,8 @@
       <author>CustomApp</author>
       <description>Workflow.Publisher</description>
       <includes>
-        <include pattern="Lightstone.Dataplatform.*.dll" to="lib\net45" />
-        <include pattern="Lightstone.Dataplatform.*.pdb" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Workflow.Publisher.dll" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Workflow.Publisher.pdb" to="lib\net45" />
       </includes>
       <dependencies>
          <dependency id="Common.Logging" version="3.2.0" />
@@ -1036,6 +1038,47 @@
          <dependency id="log4net" version="1.2.11" />
          <dependency id="Newtonsoft.Json" version="6.0.8" />
          <dependency id="RabbitMQ.Client" version="3.5.3" />
+      </dependencies>
+    </nuget>
+
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Shared.Logging</name>
+      <folder>app/Shared/Shared.Logging</folder>
+      <author>CustomApp</author>
+      <description>Shared.Logging</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Shared.Logging.dll" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Shared.Logging.pdb" to="lib\net45" />
+      </includes>
+      <dependencies>
+         <dependency id="Castle.Core" version="3.3.3" />
+         <dependency id="Castle.Windsor" version="3.3.0" />
+         <dependency id="Common.Logging" version="3.2.0" />
+         <dependency id="Common.Logging.Core" version="3.2.0" />
+         <dependency id="Common.Logging.Log4Net1211" version="3.2.0" />
+         <dependency id="CommonServiceLocator" version="1.3" />
+         <dependency id="CommonServiceLocator.WindsorAdapter.Unofficial" version="3.3.0.0" />
+         <dependency id="EasyNetQ" version="0.50.1.392" />
+         <dependency id="Lightstone.DataPlatform.Shared" version="1.0.0.1944" />
+         <dependency id="Lightstone.DataPlatform.Workflow.Publisher" version="1.0.0.1944" />
+         <dependency id="log4net" version="1.2.11" />
+         <dependency id="Newtonsoft.Json" version="6.0.8" />
+         <dependency id="RabbitMQ.Client" version="3.5.3" />
+      </dependencies>
+    </nuget>
+
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Shared.Messages</name>
+      <folder>app/Shared/Shared.Messages</folder>
+      <author>CustomApp</author>
+      <description>Shared.Messages</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Shared.Messages.dll" to="lib\net45" />
+        <include pattern="Lightstone.DataPlatform.Shared.Messages.pdb" to="lib\net45" />
+      </includes>
+      <dependencies>
       </dependencies>
     </nuget>
 	</nugets>

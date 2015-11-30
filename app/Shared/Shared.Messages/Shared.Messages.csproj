@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Shared.Messages</RootNamespace>
-    <AssemblyName>Shared.Messages</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Shared.Messages</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

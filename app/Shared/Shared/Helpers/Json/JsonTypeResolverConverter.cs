@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Logging;
 using DataPlatform.Shared.Helpers.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -7,6 +8,7 @@ namespace DataPlatform.Shared.Helpers.Json
 {
     public class JsonTypeResolverConverter : JsonConverter
     {
+        private readonly ILog _log = LogManager.GetLogger<JsonTypeResolverConverter>();
         public override bool CanConvert(Type objectType)
         {
             //assume we can convert to anything for now
@@ -35,7 +37,7 @@ namespace DataPlatform.Shared.Helpers.Json
             }
             catch (JsonException exception)
             {
-                this.Error(() => string.Format("Could not deserialize command by type: {0} attempting to deserialize by type name {1}", type + "", typeName), exception);
+                _log.Error(string.Format("Could not deserialize command by type: {0} attempting to deserialize by type name {1}", type + "", typeName), exception);
                 return DeserializeObjectByTypeName(json, type + "", typeName);
             }
         }
@@ -48,7 +50,7 @@ namespace DataPlatform.Shared.Helpers.Json
             }
             catch (JsonException exception)
             {
-                this.Error(() => "Could not deserialize command by type: {0} or type name {1}".FormatWith(type, typeName), exception);
+                _log.Error("Could not deserialize command by type: {0} or type name {1}".FormatWith(type, typeName), exception);
                 return null;
             }
         }
