@@ -46,7 +46,7 @@ namespace PackageBuilder.Api.Modules
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus,
-            IUserManagementApiClient userManagementApi, IBillingApiClient billingApiClient, IPublishIntegrationMessages integration)
+            IUserManagementApiClient userManagementApi, IBillingApiClient billingApiClient, IPublishIntegrationMessages integration) //IEntryPointAsync entryPointAsync
         {
 
             Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
@@ -115,10 +115,14 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
-                var responses = await new TaskFactory().StartNew(() => 
+                var responses = await new TaskFactory().StartNew(() =>
                     ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
                     Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber));
-                   
+
+                //var responses = await ((Package)package).ExecuteAsync(entryPointAsync, apiRequest.UserId, Context.CurrentUser.UserName,
+                //   Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber);
+
+
                 // Filter responses for cleaner api payload
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
                 var filteredResponse = new List<IProvideResponseDataProvider>
