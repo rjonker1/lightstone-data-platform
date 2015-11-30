@@ -45,5 +45,16 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 
             return _bootstrap.DataProviderResponses;
         }
+
+
+        public System.Threading.Tasks.Task<ICollection<IPointToLaceProvider>> GetResponsesForCarIdAsync(ICollection<IPointToLaceRequest> request)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public System.Threading.Tasks.Task<ICollection<IPointToLaceProvider>> GetResponsesAsync(ICollection<IPointToLaceRequest> request)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

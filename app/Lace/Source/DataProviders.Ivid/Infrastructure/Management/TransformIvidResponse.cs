@@ -72,14 +72,14 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
                 : StatusMessageType.NoStatusFeedbackRequired.Description());
         }
 
-        private void AddToCache()
+        private async void AddToCache()
         {
             if (Result.HasNoRecords)
                 return;
             //Result.AddToCache(CacheDataRepository.ForCacheOnly());
             try
             {
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     try
                     {

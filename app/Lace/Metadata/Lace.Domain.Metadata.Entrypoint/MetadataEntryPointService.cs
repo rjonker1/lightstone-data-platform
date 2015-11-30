@@ -40,6 +40,17 @@ namespace Lace.Domain.Metadata.Entrypoint
         {
             throw new System.NotImplementedException();
         }
+
+
+        public System.Threading.Tasks.Task<ICollection<IPointToLaceProvider>> GetResponsesForCarIdAsync(ICollection<IPointToLaceRequest> request)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public System.Threading.Tasks.Task<ICollection<IPointToLaceProvider>> GetResponsesAsync(ICollection<IPointToLaceRequest> request)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     public class BusFactory
