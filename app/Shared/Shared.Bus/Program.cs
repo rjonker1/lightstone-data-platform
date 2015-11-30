@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            //Workflow.Bus.Program.Main(args);
+            Workflow.Bus.Program.Main(args);
         }
     }
 }

@@ -32,8 +32,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net1211">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.50.1.392\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Publisher">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1943\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.5.3\lib\net40\RabbitMQ.Client.dll</HintPath>
@@ -66,7 +87,7 @@
       <Name>Shared.Messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{49DF15E2-0A73-46D1-BF98-BE472678A28D}</Project>
+      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
