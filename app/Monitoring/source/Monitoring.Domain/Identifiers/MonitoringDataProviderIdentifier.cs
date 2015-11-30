@@ -13,7 +13,7 @@ namespace Monitoring.Domain.Identifiers
         }
 
         public MonitoringDataProviderIdentifier(Guid id, DateTime date, SearchIdentifier dataProviderSearch,
-            MonitoringActionIdentifier action)
+            ActionIdentifier action)
         {
             Id = id;
             DataProviderSearch = dataProviderSearch;
@@ -25,7 +25,7 @@ namespace Monitoring.Domain.Identifiers
         public Guid Id { get; private set; }
 
         [DataMember]
-        public MonitoringActionIdentifier Action { get; private set; }
+        public ActionIdentifier Action { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
