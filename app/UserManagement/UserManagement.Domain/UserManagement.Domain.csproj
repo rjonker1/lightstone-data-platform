@@ -76,9 +76,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1945, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1947, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1945\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1947\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1890, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1890\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
@@ -90,7 +90,7 @@
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1945\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1947\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Publisher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
