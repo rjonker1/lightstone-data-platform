@@ -2,7 +2,7 @@
 {
     public interface ISendNotificationsWithAttachment<in T> where T: class 
     {
-        void Send(T Object);
+        void Send(T Object, string attachmentFileName);
     }
 
     public interface ISendNotifications

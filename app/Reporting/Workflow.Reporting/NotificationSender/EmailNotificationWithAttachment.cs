@@ -13,15 +13,16 @@ namespace Workflow.Reporting.NotificationSender
     public class EmailNotificationWithAttachment<T> : ISendNotificationsWithAttachment<ReportDto>
     {
 
-        ReportingService _reportingService = new ReportingService(ConfigurationManager.ConnectionStrings["workflow/reporting/jsreport"].ConnectionString);
-        private IEmailBuilder _emailBuilder;
+        private readonly ReportingService _reportingService;
+        private readonly IEmailBuilder _emailBuilder;
 
         public EmailNotificationWithAttachment(IEmailBuilder emailBuilder)
         {
             _emailBuilder = emailBuilder;
+            _reportingService = new ReportingService(ConfigurationManager.ConnectionStrings["workflow/reporting/jsreport"].ConnectionString);
         }
 
-        public void Send(ReportDto dto)
+        public void Send(ReportDto dto, string attachmentFileName)
         {
             try
             {
@@ -29,19 +30,11 @@ namespace Workflow.Reporting.NotificationSender
                 {
                     var report = _reportingService.RenderAsync(dto.Template.ShortId, dto.Data).Result;
 
-                    if (dto.Data.Customer != null)
+                    if (dto.Data.CustomerClientStatement != null)
                     {
-                        _emailBuilder.MailSubject = dto.Data.Customer.Name + " Invoice";
-                        _emailBuilder.MailBody = "Please see attached for Billing Invoice Report";
-                        _emailBuilder.AddAttachment(new Attachment(report.Content, "" + dto.Data.Customer.Name + " - Invoice.pdf"));
-                    }
-
-                    if (dto.Data.ContractStatements != null)
-                    {
-                        var fileName = dto.Data.ContractStatements.Select(x => x.ContractName).FirstOrDefault();
-                        _emailBuilder.MailSubject = fileName + " Statement";
-                        _emailBuilder.MailBody = "Please see attached for Billing Invoice Report";
-                        _emailBuilder.AddAttachment(new Attachment(report.Content, fileName + " - Statement.pdf"));
+                        _emailBuilder.MailSubject = dto.Data.CustomerClientStatement.CustomerClientName + " Statement";
+                        _emailBuilder.MailBody = "Please see attached for Billing Statement Report for: {0}".FormatWith(dto.Data.CustomerClientStatement.CustomerClientName);
+                        _emailBuilder.AddAttachment(new Attachment(report.Content, attachmentFileName));
                     }
 
                     var mailMessage = _emailBuilder.BuildMessage();

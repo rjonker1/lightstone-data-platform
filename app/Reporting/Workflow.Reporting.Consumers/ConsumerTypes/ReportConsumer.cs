@@ -40,10 +40,12 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
 
                         if (dto.Data.CustomerClientStatement != null)
                         {
-                            CreateFile(dto, path, @"{0}_Statement_{1}.pdf".FormatWith(dto.Data.CustomerClientStatement.CustomerClientName, DateTime.UtcNow.ToString("MMMM yyyy")));
+                            var fileName = @"{0}_Statement_{1}.pdf".FormatWith(dto.Data.CustomerClientStatement.CustomerClientName, DateTime.UtcNow.ToString("MMMM yyyy"));
+
+                            CreateFile(dto, path, fileName);
 
                             //Send Email
-                            _emailPdfNotificationsWithAttachment.Send(dto);
+                            _emailPdfNotificationsWithAttachment.Send(dto, fileName);
                         }
                     }
 
