@@ -183,7 +183,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                         Description = _contractRepository.Where(t => t.ContractId == x.ContractId).Select(t => t.ContractBundleTransactionLimit).First() +
                                                         " @ " + contract.ContractBundlePrice + ". " +
                                                         _contractRepository.Where(t => t.ContractId == x.ContractId).Select(t => t.ContractBundleName).First()
-                                    }).DistinctBy(x => x.ContractName));
+                                    }).DistinctBy(x => x.PackageName));
                             }
                             else
                             {
@@ -193,7 +193,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                         ContractName = _contractRepository.Where(t => t.ContractId == x.ContractId).Select(t => t.ContractName).First(),
                                         PackageName = _packageMetaRepository.Where(t => t.PackageId == x.Package.PackageId).Select(t => t.PackageName).First(),
                                         Description = "Per request @ " + x.Package.PackageRecommendedPrice
-                                    }).DistinctBy(x => x.ContractName));
+                                    }).DistinctBy(x => x.PackageName));
                             }
 
                             statement.PricingSummaries = pricingSummaryList;
@@ -227,7 +227,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         if (transaction.CustomerId == new Guid())
                         {
                             statement.StatementPeriod = _startBillMonth.ToString("yyyy/MM/dd") + " - " + _endBillMonth.ToString("yyyy/MM/dd");
-                            statement.CustomerClientName = transaction.CustomerName;
+                            statement.CustomerClientName = transaction.ClientName;
                             statement.ConsultantName = account.AccountOwner;
                             statement.AccountContact = account.BillingAccountContactName;
                             statement.AccountNumber = account.BillingAccountContactNumber;
@@ -243,7 +243,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                         Description = _contractRepository.Where(t => t.ContractId == x.ContractId).Select(t => t.ContractBundleTransactionLimit).First() +
                                                         " @ " + contract.ContractBundlePrice + ". " +
                                                         _contractRepository.Where(t => t.ContractId == x.ContractId).Select(t => t.ContractBundleName).First()
-                                    }).DistinctBy(x => x.ContractName));
+                                    }).DistinctBy(x => x.PackageName));
                             }
                             else
                             {
@@ -253,7 +253,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                         ContractName = _contractRepository.Where(t => t.ContractId == x.ContractId).Select(t => t.ContractName).First(),
                                         PackageName = _packageMetaRepository.Where(t => t.PackageId == x.Package.PackageId).Select(t => t.PackageName).First(),
                                         Description = "Per request @ " + x.Package.PackageRecommendedPrice
-                                    }).DistinctBy(x => x.ContractName));
+                                    }).DistinctBy(x => x.PackageName));
                             }
 
                             statement.PricingSummaries = pricingSummaryList;
@@ -271,7 +271,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                     {
                                         PackageName = x.Package.PackageName,
                                         TransactionCount = userTransactions.Count(t => t.Package.PackageId == x.Package.PackageId)
-                                    }).DistinctBy(x => x.PackageName));
+                                    }).DistinctBy(x => new { x.PackageName }));
 
                                 userTransactionsList.Add(new ContractUserTransactions
                                 {
@@ -280,16 +280,19 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                                 });
                             }
 
-                            statement.UserTransactions = userTransactionsList;
+                            statement.UserTransactions = userTransactionsList.OrderByDescending(x => x.User);
                         }
 
+                        // Build Statement
                         var statementReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.StatementPdf },
                         new ReportData
                         {
                             CustomerClientStatement = statement
                         });
 
-                        var statementReportIndex = StatementPdfList.FindIndex(x => x.Data.CustomerClientStatement.CustomerClientName == statement.CustomerClientName);
+                        var statementReportIndex = StatementPdfList.FindIndex(x =>
+                                                    x.Data.CustomerClientStatement.CustomerClientName == statement.CustomerClientName &&
+                                                    x.Data.CustomerClientStatement.ContractName == statement.ContractName);
 
                         if (statementReportIndex < 0)
                         {
