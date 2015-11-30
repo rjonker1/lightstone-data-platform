@@ -8,12 +8,12 @@ namespace Toolbox.LightstoneAuto.Database.Domain.Models
 {
     public class AutoCarSpecifcations
     {
-        int? CarId { get; set; }
-        int? Year { get; set; }
-        string Vin { get; set; }
-        string ImageUrl { get; set; }
-        string Quarter { get; set; }
-        string CarFullname { get; set; }
-        string Model { get; set; }
+        public int CarId { get; set; }
+        public int Year { get; set; }
+        public string Vin { get; set; }
+        public string ImageUrl { get; set; }
+        public string Quarter { get; set; }
+        public string CarFullname { get; set; }
+        public string Model { get; set; }
     }
 }

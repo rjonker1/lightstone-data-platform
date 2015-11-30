@@ -33,7 +33,7 @@ namespace Monitoring.Domain.Mappers
             return
                 new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(match.Id, match.Date,
                     new SearchIdentifier(match.PackageName, match.PackageVersion, match.ElapsedTime, match.RequestId,
-                        match.DataProviderCount), new MonitoringActionIdentifier(match.Action)));
+                        match.DataProviderCount), new ActionIdentifier(match.Action)));
         }
 
         public override void Insert(IDbConnection connection, object instance)
