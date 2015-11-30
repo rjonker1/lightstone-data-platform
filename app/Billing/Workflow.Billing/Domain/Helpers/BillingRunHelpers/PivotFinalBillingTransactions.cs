@@ -173,6 +173,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                             statement.AccountNumber = account.BillingAccountContactNumber;
                             statement.ContractName = contract.ContractName;
 
+                            // Bundle check
                             if (contract.HasPackagePriceOverride)
                             {
                                 pricingSummaryList.AddRange(customerClientTransactions
