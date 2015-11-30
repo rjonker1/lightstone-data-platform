@@ -33,19 +33,19 @@ namespace Lace.Acceptance.Tests.Lace.Finance
             _consumer.CallSource(_response);
         }
 
-        [Observation]
+        [Observation(Skip = "Not querable with only vin number yet")]
         public void bmw_finance_consumer_must_be_handled()
         {
             _response.OfType<IProvideDataFromBmwFinance>().First().Handled.ShouldBeTrue();
         }
 
-        [Observation]
+        [Observation(Skip = "Not querable with only vin number yet")]
         public void bmw_finance_response_from_consumer_must_not_be_null()
         {
             _response.OfType<IProvideDataFromBmwFinance>().First().ShouldNotBeNull();
         }
 
-        [Observation]
+        [Observation(Skip = "Not querable with only vin number yet")]
         public void bmw_finance_response_from_consumer_must_not_be_empty()
         {
             _response.OfType<IProvideDataFromBmwFinance>().First().Finances.ShouldNotBeNull();

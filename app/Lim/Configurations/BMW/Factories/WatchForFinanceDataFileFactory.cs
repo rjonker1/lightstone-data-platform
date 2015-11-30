@@ -56,8 +56,7 @@ namespace Toolbox.Bmw.Factories
                     string.Format("Received file {0} in Path {1}. File will be processed.", args.Name, args.FullPath), Status.Received));
 
                 var dto = new FileInformationDto(_command.FilePath, args.Name, _command.Password, "", true, true);
-                var data = _fileReader.Read(
-                    new ReadFile(dto)).ToList();
+                var data = _fileReader.Read(new ReadFile(dto)).ToList();
 
                 if (!data.Any())
                 {
@@ -97,7 +96,43 @@ namespace Toolbox.Bmw.Factories
 
         public void Renamed(object source, FileSystemEventArgs args)
         {
-            Log.InfoFormat("File has been renamed in Path {0}", args.FullPath);
+            try
+            {
+                _notify.Notify(new NotifyFile(args.Name, args.FullPath,
+                    string.Format("Received file {0} in Path {1}. File will be processed.", args.Name, args.FullPath), Status.Received));
+
+                var dto = new FileInformationDto(_command.FilePath, args.Name, _command.Password, "", true, true);
+                var data = _fileReader.Read(new ReadFile(dto)).ToList();
+
+                if (!data.Any())
+                {
+                    FailFile(dto, args.Name);
+                    Log.InfoFormat("File has been created in Path {0} but cannot be read", args.FullPath);
+                    _notify.Notify(new NotifyFile(args.Name, args.FullPath,
+                        string.Format("File {0} in Path {1} could not be read.", args.Name, args.FullPath), Status.Failed));
+                    return;
+                }
+
+
+                if (!_persist.Persist(data))
+                {
+                    _notify.Notify(new NotifyFile(args.Name, args.FullPath,
+                        string.Format("File {0} in Path {1} could not be processed.", args.Name, args.FullPath), Status.Failed));
+                    Log.ErrorFormat("File has been created in Path {0} and has been read but cannot be saved to the database.", args.FullPath);
+                    FailFile(dto, args.Name);
+                    return;
+                }
+
+                BackupFile(dto, args.Name);
+                _notify.Notify(new NotifyFile(args.Name, args.FullPath,
+                    string.Format("File {0} in Path {1} has been processed.", args.Name, args.FullPath), Status.Successful));
+            }
+            catch (Exception ex)
+            {
+                _notify.Notify(new NotifyFile(args.Name, args.FullPath,
+                    string.Format("An error occurred processing File {0} in Path {1}.", args.Name, args.FullPath), Status.Failed));
+                Log.ErrorFormat("An error occurred reading file in path {0} because of {1}", ex, args.FullPath, ex.Message);
+            }
         }
         public void Changed(object source, FileSystemEventArgs args)
         {

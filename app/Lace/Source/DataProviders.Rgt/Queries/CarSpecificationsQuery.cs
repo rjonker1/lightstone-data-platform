@@ -13,12 +13,11 @@ namespace Lace.Domain.DataProviders.Rgt.Queries
     {
         public IEnumerable<CarSpecification> CarSpecifications { get; private set; }
 
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<CarSpecification>();
         private readonly IReadOnlyRepository _repository;
 
         public CarSpecificationsQuery(IReadOnlyRepository repository)
         {
-            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -34,7 +33,7 @@ namespace Lace.Domain.DataProviders.Rgt.Queries
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error getting Car Specification data because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Error getting Car Specification data because of {0}", ex, ex.Message);
             }
         }
     }

@@ -12,7 +12,6 @@ using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
-using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Xunit.Extensions;
@@ -34,7 +33,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
             _command = BusFactory.WorkflowBus();
             _request = new VinRequestBuilder().ForLsAutoRgtAndRgtVin();
-            _buildSourceChain = new CreateSourceChain();
+            _buildSourceChain = new SpecificationFactory();
         }
 
         public override void Observe()

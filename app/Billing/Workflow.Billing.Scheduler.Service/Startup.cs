@@ -1,6 +1,8 @@
 ﻿using System.Configuration;
 using Hangfire;
 using Microsoft.Owin;
+using Nancy;
+using Nancy.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(Workflow.Billing.Scheduler.Service.Startup))]
@@ -18,7 +20,9 @@ namespace Workflow.Billing.Scheduler.Service
             app.UseNancy(x =>
             {
                 x.Bootstrapper = new NancyBootstrapper();
-                x.PerformPassThrough = context => true;
+                x.PassThroughWhenStatusCodesAre(
+                    HttpStatusCode.NotFound,
+                    HttpStatusCode.InternalServerError);
             });
         }
     }

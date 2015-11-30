@@ -24,12 +24,13 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private readonly IAdvancedBus _bus;
         private ISendCommandToBus _command;
         private ISendWorkflowCommand _workflow;
-        private IBuildSourceChain _dataProviderChain;
+        private readonly IBuildSourceChain _dataProviderChain;
         private IBootstrap _bootstrap;
         private ILogCommandTypes _logCommand;
         public EntryPointService(IAdvancedBus bus)
         {
             _bus = bus;
+            _dataProviderChain = new SpecificationFactory();
         }
 
         public ICollection<IPointToLaceProvider> GetResponsesForCarId(ICollection<IPointToLaceRequest> request)
@@ -49,8 +50,6 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 Init(request.First().Request.RequestId);
 
                 _logCommand.LogBegin(request);
-
-                _dataProviderChain = new CreateSourceChain();
                 _logCommand.LogEntryPointRequest(request, DataProviderNoRecordState.Billable);
 
                 _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _dataProviderChain);

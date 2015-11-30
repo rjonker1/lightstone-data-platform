@@ -18,14 +18,28 @@ using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
 using Lace.Domain.DataProviders.Signio.DriversLicense;
 using Lace.Domain.DataProviders.Vin12;
+using Lace.Domain.Infrastructure.Core.Contracts;
 using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 {
-    public static class DataProviderSpecification
+
+    public class AllDataProviderSpecification : AbstractSpecificationExecutor, IExecuteSpecification
     {
-        public static readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
-            Chain =
+        private readonly ChainType _chainType;
+        public AllDataProviderSpecification(IExecuteSpecification next, ChainType chainType)
+            : base(next)
+        {
+            _chainType = chainType;
+        }
+
+        public Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid> Execute()
+        {
+            return _chainType != ChainType.All ? ExecuteNext() : _chain();
+        }
+
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IAdvancedBus, ICollection<IPointToLaceProvider>, Guid>>
+            _chain =
                 () =>
                     (request, bus, response, requestId) =>
                         new IvidDataProvider(request,
@@ -66,6 +80,5 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                 CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoCarStats_I_DB)), null,
                             CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDVerify_E_WS))
                             .CallSource(response);
-
     }
 }

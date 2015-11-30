@@ -273,6 +273,14 @@
                                     }
 
                                     $('#dailyRunFlag').bootstrapSwitch('state', true, true);
+                                }).error(function () {
+
+                                    $('#dailyBillingRun').datetimepicker({
+                                        format: 'HH:mm',
+                                        defaultDate: moment()
+                                    });
+
+                                    $('#dailyRunFlag').bootstrapSwitch('state', false, true);
                                 });
 
                                 //Monthly
@@ -297,6 +305,17 @@
                                     }
 
                                     $('#monthlyRunFlag').bootstrapSwitch('state', true, true);
+                                }).error(function () {
+
+                                    $('#monthlyBillingRun').datetimepicker({
+                                        format: 'DD [of each Month at] HH:mm',
+                                        defaultDate: moment()
+
+                                    }).on('dp.change', function (e) {
+                                        monthlySchedule = moment(e.date).format('DD-MM-YYYY HH:mm');
+                                    });
+
+                                    $('#monthlyRunFlag').bootstrapSwitch('state', false, true);
                                 });
                             });
 

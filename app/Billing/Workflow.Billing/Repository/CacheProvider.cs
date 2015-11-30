@@ -12,8 +12,6 @@ namespace Workflow.Billing.Repository
     public class CacheProvider<T> : ICacheProvider<T> where T : class
     {
         public static RedisClient _redisClient;
-        //public readonly IRedisTypedClient<T> cacheClient;
-
         public IRedisTypedClient<T> CacheClient { get; set; }
 
         private static bool useCache = true;
@@ -93,18 +91,22 @@ namespace Workflow.Billing.Repository
             try
             {
                 using (var client = CacheClient)
-                using (var pipeline = client.CreateTransaction())
                 {
-                    pipeline.QueueCommand(c => c.DeleteAll());
-
-                    foreach (var record in typedEntityRepository)
-                    {
-                        if (record != null)
-                            pipeline.QueueCommand(c => c.Store(record));
-                    }
-
-                    pipeline.Commit();
+                    client.DeleteAll();
+                    client.StoreAll(typedEntityRepository);
                 }
+                //using (var pipeline = client.CreateTransaction())
+                //{
+                //    pipeline.QueueCommand(c => c.DeleteAll());
+
+                //    foreach (var record in typedEntityRepository)
+                //    {
+                //        if (record != null)
+                //            pipeline.QueueCommand(c => c.Store(record));
+                //    }
+
+                //    pipeline.Commit();
+                //}
             }
             catch (Exception ex)
             {

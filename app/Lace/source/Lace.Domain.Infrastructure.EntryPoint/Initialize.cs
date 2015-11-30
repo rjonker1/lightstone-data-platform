@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using EasyNetQ;
@@ -28,11 +27,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             _buildSourceChain = buildSourceChain;
         }
 
-
         public void Execute(ChainType chain)
         {
-            _buildSourceChain.Build(chain)(_request, _bus, DataProviderResponses,
-                _request.First().Request.RequestId);
+            _buildSourceChain.Build(chain)(_request, _bus, DataProviderResponses,_request.First().Request.RequestId);
         }
     }
 }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using DataPlatform.Shared.Enums;
 using EasyNetQ;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -12,10 +10,8 @@ using Lace.Domain.DataProviders.Core.Extensions;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
-using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using ServiceStack.Text;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Chain
@@ -30,10 +26,9 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
-
             _command = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
-            _buildSourceChain = new CreateSourceChain();
+            _buildSourceChain = new SpecificationFactory();
         }
 
         public override void Observe()
