@@ -290,6 +290,17 @@
        <include pattern="*" to="content\bin"/>
       </includes>
     </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Shared.Bus</name>
+      <folder>app/Shared/Shared.Bus</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Shared.Bus</description>
+      <deploymentProject>LightstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="*" to="content/bin"/>
+        <include pattern="*.config" to="content/bin"/>
+      </includes>
+    </nuget>
 
     <!-- API  Start -->
     <nuget deploy="false">
