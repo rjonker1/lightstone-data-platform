@@ -4,7 +4,7 @@
     {
         public string Name
         {
-            get { return ReadAppSettings("workflow/environment", "DEV"); }
+            get { return ReadAppSettings("workflow/environment", ""); }
         }
 
         public string AppendEnvironment(string settingValue)
