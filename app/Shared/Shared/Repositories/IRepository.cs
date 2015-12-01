@@ -15,6 +15,7 @@ namespace DataPlatform.Shared.Repositories
         void SaveOrUpdate(T entity);
         void SaveOrUpdate(T entity, bool useCache = false);
         void BatchInsert(IEnumerable<T> repository, int batchSize);
+        void BatchDelete(IEnumerable<T> repository, int batchSize);
         void Refresh(T entity);
         void Delete(T entity);
         void Delete(T entity, bool useCache = false);
