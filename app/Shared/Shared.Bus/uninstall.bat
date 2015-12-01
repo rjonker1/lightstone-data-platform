@@ -1,0 +1,1 @@
+Lightstone.DataPlatform.Shared.Bus uninstall

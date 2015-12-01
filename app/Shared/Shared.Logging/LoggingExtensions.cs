@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -134,7 +135,7 @@ namespace Shared.Logging
 
         public static void Debug(string name, Func<object> message, SystemName systemName)
         {
-            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Debug, systemName));
+            Task.Run(() => Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Debug, systemName)));
         }
 
         #endregion
@@ -167,7 +168,7 @@ namespace Shared.Logging
 
         public static void Info(string name, Func<object> message, SystemName systemName)
         {
-            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Info, systemName));
+            Task.Run(() => Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Info, systemName)));
         }
         #endregion
 
@@ -198,7 +199,7 @@ namespace Shared.Logging
         }
         public static void Warn(string name, Func<object> message, SystemName systemName)
         {
-            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Warn, systemName));
+            Task.Run(() => Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Warn, systemName)));
         }
 
         #endregion
@@ -263,7 +264,7 @@ namespace Shared.Logging
 
         public static void Error(string name, Func<object> message, Exception exception, SystemName systemName)
         {
-            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Error, systemName, exception));
+            Task.Run(() => Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Error, systemName, exception)));
         }
 
         #endregion
@@ -298,7 +299,7 @@ namespace Shared.Logging
 
         public static void Fatal(string name, Func<object> message, SystemName systemName)
         {
-            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Fatal, systemName));
+            Task.Run(() => Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Fatal, systemName)));
         }
 
         #endregion
