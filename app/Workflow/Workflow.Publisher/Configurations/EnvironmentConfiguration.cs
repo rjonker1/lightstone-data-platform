@@ -9,7 +9,7 @@
 
         public string AppendEnvironment(string settingValue)
         {
-            return string.Format("{0}-{1}", Name.ToLowerInvariant(), settingValue);
+            return string.Format("{0}{1}", Name.ToLowerInvariant(), settingValue);
         }
     }
 }
