@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Mail;
 using DataPlatform.Shared.Helpers.Extensions;
+using Shared.Logging;
 
 namespace Workflow.Billing.Domain.NotificationSender
 {

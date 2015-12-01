@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
+using Shared.Logging;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
@@ -18,36 +20,39 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             _stageBillingRepository = stageBillingRepository;
         }
 
-        public void Pivot()
+        public async Task Pivot()
         {
-            try
+            await Task.Factory.StartNew(() =>
             {
-                this.Info(() => "StageBilling Pivot Started");
-
-                foreach (var preBilling in _preBillingRepository)
+                try
                 {
-                    var stageEntity = Mapper.Map(preBilling, new StageBilling());
+                    this.Info(() => "StageBilling Pivot Started");
 
-                    // Check if transaction has already been recorded
-                    if (!_stageBillingRepository.Any(x => x.PreBillingId == stageEntity.PreBillingId))
+                    foreach (var preBilling in _preBillingRepository)
                     {
-                        // Null check for rogue transactions (caused by inconsistent AccountNumber mapping)
-                        if (stageEntity.BillingType == null) continue;
+                        var stageEntity = Mapper.Map(preBilling, new StageBilling());
 
-                        // Internal transactions - non-billable
-                        if (stageEntity.BillingType.Contains("INTERNAL"))
-                            stageEntity.UserTransaction.IsBillable = false;
+                        // Check if transaction has already been recorded
+                        if (!_stageBillingRepository.Any(x => x.PreBillingId == stageEntity.PreBillingId))
+                        {
+                            // Null check for rogue transactions (caused by inconsistent AccountNumber mapping)
+                            if (stageEntity.BillingType == null) continue;
 
-                        _stageBillingRepository.SaveOrUpdate(stageEntity, true);
+                            // Internal transactions - non-billable
+                            if (stageEntity.BillingType.Contains("INTERNAL"))
+                                stageEntity.UserTransaction.IsBillable = false;
+
+                            _stageBillingRepository.SaveOrUpdate(stageEntity, true);
+                        }
                     }
-                }
 
-                this.Info(() => "StageBilling Pivot Completed");
-            }
-            catch (Exception e)
-            {
-                this.Error(() => e.Message);
-            }
+                    this.Info(() => "StageBilling Pivot Completed");
+                }
+                catch (Exception e)
+                {
+                    this.Error(() => e.Message);
+                }
+            });
         }
     }
 }

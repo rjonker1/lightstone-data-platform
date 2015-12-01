@@ -22,6 +22,12 @@ namespace Workflow.Billing.Helpers.Extensions
             return session;
         }
 
+        public IStatelessSession BeforeTransaction(IStatelessSession statelessSession)
+        {
+            statelessSession.BeginTransaction();
+            return statelessSession;
+        }
+
         public void AfterTransaction(ISession session)
         {
             if (session == null)
@@ -30,6 +36,16 @@ namespace Workflow.Billing.Helpers.Extensions
                 return;
 
             session.Transaction.Commit();
+        }
+
+        public void AfterTransaction(IStatelessSession statelessSession)
+        {
+            if (statelessSession == null)
+                return;
+            if (!statelessSession.Transaction.IsActive)
+                return;
+
+            statelessSession.Transaction.Commit();
         }
     }
 }

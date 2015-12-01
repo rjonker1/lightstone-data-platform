@@ -5,6 +5,7 @@ using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using Hangfire;
 using Hangfire.Storage;
 using Nancy;
+using Shared.Logging;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Helpers.Schedules;
 using Workflow.Billing.Messages.Publishable;

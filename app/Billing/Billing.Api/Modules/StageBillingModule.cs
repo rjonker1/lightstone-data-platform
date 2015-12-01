@@ -19,6 +19,7 @@ using Nancy.Security;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Logging;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Repository;

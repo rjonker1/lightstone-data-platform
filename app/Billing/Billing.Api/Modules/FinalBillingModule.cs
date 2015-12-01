@@ -13,6 +13,7 @@ using Nancy.Extensions;
 using Nancy.Responses.Negotiation;
 using Nancy.Security;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Logging;
 using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Repository;

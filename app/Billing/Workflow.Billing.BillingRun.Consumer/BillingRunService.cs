@@ -4,6 +4,7 @@ using Common.Logging;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
+using Shared.Logging;
 using Workflow.Billing.Consumers;
 using Workflow.Billing.Consumers.Installers;
 using Workflow.Billing.Installers;
@@ -20,13 +21,15 @@ namespace Workflow.Billing.BillingRun.Consumer
             _log.DebugFormat("Started billing run service");
 
             var container = new WindsorContainer().Install(
+                new BusInstaller(),
+                new ServiceLocatorInstaller(),
+                new WorkflowInstaller(),
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
                 new CacheProviderInstaller(),
                 new RepositoryInstaller(),
                 new AutoMapperInstaller(),
                 new ConsumerInstaller(),
-                new BusInstaller(),
                 new PublishReportQueueInstaller(),
                 new PivotInstaller(),
                 new ReportBuilderInstaller(),

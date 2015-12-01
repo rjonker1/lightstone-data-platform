@@ -2,6 +2,7 @@
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
+using Shared.Logging;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Messages.Publishable;
 using Workflow.Billing.Repository;

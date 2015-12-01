@@ -18,12 +18,14 @@ namespace Workflow.Billing.Cache.Consumer
             _log.DebugFormat("Started billing cache service");
 
             var container = new WindsorContainer().Install(
+                new BusInstaller(),
+                new ServiceLocatorInstaller(),
+                new WorkflowInstaller(),
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
                 new CacheProviderInstaller(),
                 new RepositoryInstaller(),
-                new ConsumerInstaller(),
-                new BusInstaller());
+                new ConsumerInstaller());
 
             advancedBus = container.Resolve<IAdvancedBus>();
             var cache = advancedBus.QueueDeclare("DataPlatform.Cache.Billing");

@@ -1,6 +1,7 @@
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using EasyNetQ;
+using Shared.Logging;
 using Workflow.Billing.Messages.Publishable;
 using Workflow.BuildingBlocks;
 

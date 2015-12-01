@@ -9,6 +9,7 @@ using DataPlatform.Shared.Repositories;
 using NHibernate;
 using NHibernate.Linq;
 using ServiceStack.Common.Utils;
+using Shared.Logging;
 using Workflow.Billing.Helpers.Extensions;
 
 namespace Workflow.Billing.Repository
@@ -17,14 +18,16 @@ namespace Workflow.Billing.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ISession _session;
+        private readonly IStatelessSession _statelessSession;
         private readonly ICacheProvider<T> _cacheProvider; 
 
         private PipelineExtensions pipelineExtensions;
 
-        public Repository(ISession session, ICacheProvider<T> cacheProvider)
+        public Repository(ISession session, ICacheProvider<T> cacheProvider, IStatelessSession statelessSession)
         {
             _session = session;
             _cacheProvider = cacheProvider;
+            _statelessSession = statelessSession;
             pipelineExtensions = new PipelineExtensions();
         }
 
@@ -91,6 +94,22 @@ namespace Workflow.Billing.Repository
             if (useCache) _cacheProvider.CacheSave(entity);
 
             pipelineExtensions.AfterTransaction(currSession);
+        }
+
+        public void BatchInsert(IEnumerable<T> repository, int batchSize)
+        {
+            _statelessSession.SetBatchSize(batchSize);
+
+            foreach (var entity in (IEnumerable)repository)
+                _statelessSession.Insert(entity);
+        }
+
+        public void BatchDelete(IEnumerable<T> repository, int batchSize)
+        {
+            _statelessSession.SetBatchSize(batchSize);
+
+            foreach (var entity in (IEnumerable)repository)
+                _statelessSession.Delete(entity);
         }
 
         public void Refresh(T entity)

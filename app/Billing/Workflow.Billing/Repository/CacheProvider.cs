@@ -6,6 +6,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using ServiceStack.Redis;
 using ServiceStack.Redis.Generic;
+using Shared.Logging;
 
 namespace Workflow.Billing.Repository
 {

@@ -18,23 +18,25 @@ namespace Workflow.Billing.Consumer
             _log.DebugFormat("Started billing service");
 
             var container = new WindsorContainer().Install(
+                new BusInstaller(),
+                new ServiceLocatorInstaller(),
+                new WorkflowInstaller(),
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
                 new CacheProviderInstaller(),
                 new RepositoryInstaller(),
                 new AutoMapperInstaller(),
                 new ConsumerInstaller(),
-                new BusInstaller(),
                 new PublishReportQueueInstaller(),
                 new PivotInstaller(),
                 new ScheduleInstaller());
 
             advancedBus = container.Resolve<IAdvancedBus>();
             var q = advancedBus.QueueDeclare("DataPlatform.Transactions.Billing");
-            
+
             advancedBus.Consume(q, x => x
-                .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer<InvoiceTransactionCreated> (message, container))
-                .Add<UserMessage>((message, info) => new TransactionConsumer<UserMessage> (message, container))
+                .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer<InvoiceTransactionCreated>(message, container))
+                .Add<UserMessage>((message, info) => new TransactionConsumer<UserMessage>(message, container))
                 .Add<CustomerMessage>((message, info) => new TransactionConsumer<CustomerMessage>(message, container))
                 .Add<ClientMessage>((message, info) => new TransactionConsumer<ClientMessage>(message, container))
                 .Add<PackageMessage>((message, info) => new TransactionConsumer<PackageMessage>(message, container))

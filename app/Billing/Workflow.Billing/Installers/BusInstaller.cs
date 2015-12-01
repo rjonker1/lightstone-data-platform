@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
 using Workflow.BuildingBlocks;
+using Workflow.Publisher;
 
 namespace Workflow.Billing.Installers
 {
@@ -20,6 +21,8 @@ namespace Workflow.Billing.Installers
             //        .UsingFactoryMethod(() => new BusFactory().CreateBus("workflow/billing/queue", container))
             //        .LifestyleSingleton()
             //    );
+
+            container.Register(Component.For<EasyNetQ.IBus>().UsingFactoryMethod(BusBuilder.CreateBus).LifestyleSingleton());
 
             container.Register(
                 Component.For<IAdvancedBus>()

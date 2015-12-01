@@ -9,6 +9,7 @@ using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using NHibernate.Linq;
+using Shared.Logging;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers.ConsumerTypes

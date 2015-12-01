@@ -6,6 +6,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
 using Nancy.Extensions;
 using ServiceStack.Common;
+using Shared.Logging;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure;
 using Workflow.Reporting.Dtos;
@@ -22,8 +23,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
         private readonly IReportBuilder _reportBuilder;
 
-        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
-        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
+        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month -1, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
+        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 2), 26);
 
         public PivotFinalBillingTransactions(IRepository<FinalBilling> finalBillingRepository, IRepository<AccountMeta> accountMetaRepository,
                                                 IRepository<ContractMeta> contractRepository, IReportBuilder reportBuilder, IRepository<PackageMeta> packageMetaRepository)
@@ -49,6 +50,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         /// </returns>
         public List<ReportDto> PivotToInvoicePdf()
         {
+            this.Info(() => "PivotToInvoicePdf process started");
+
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
             {
                 var customerClientDetail = _finalBillingRepository.FirstOrDefault(x => x.CustomerId == customerClientId || x.ClientId == customerClientId);
@@ -132,6 +135,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 }
             }
 
+            this.Info(() => "PivotToInvoicePdf process completed");
             return InvoicePdfList;
         }
 
@@ -143,6 +147,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         /// </returns>
         public List<ReportDto> PivotToStatementPdf()
         {
+            this.Info(() => "PivotToStatementPdf process started");
+
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
             {
                 var customerClientTransactions = _finalBillingRepository.Where(x => (x.CustomerId == customerClientId || x.ClientId == customerClientId)
@@ -154,11 +160,20 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                     foreach (var transaction in customerClientTransactions)
                     {
+                        
+
                         var account = _accountMetaRepository.FirstOrDefault(x => x.AccountNumber == transaction.AccountNumber);
                         var contract = _contractRepository.FirstOrDefault(x => x.ContractId == transaction.ContractId);
 
                         // Workaround for temporary missing contract id's due to initial failed async deployment
                         if (contract.ContractId.Equals(new Guid())) continue;
+
+                        var index = StatementPdfList.FindIndex(x =>
+                                                    (x.Data.CustomerClientStatement.CustomerClientName == transaction.CustomerName || 
+                                                        x.Data.CustomerClientStatement.CustomerClientName == transaction.ClientName) &&
+                                                    x.Data.CustomerClientStatement.ContractName == contract.ContractName);
+
+                        if (index > 0) continue;
 
                         var pricingSummaryList = new List<PricingSummary>();
                         var userTransactionsList = new List<ContractUserTransactions>();
@@ -300,6 +315,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                         if (statementReportIndex < 0)
                         {
                             StatementPdfList.Add(statementReport);
+                            this.Info(() => "Statement added for: {0}".FormatWith(statementReport.Data.CustomerClientStatement.CustomerClientName));
+
                             break;
                         }
                     }
@@ -310,6 +327,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 }
             }
 
+            this.Info(() => "PivotToStatementPdf process completed");
             return StatementPdfList;
         }
 
@@ -322,6 +340,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         public ReportDto PivotToPastelCsv()
         {
             var pastelCounter = 1;
+
+            this.Info(() => "PivotToPastelCsv process started");
 
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
             {
@@ -356,6 +376,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 }
             }
 
+            this.Info(() => "PivotToPastelCsv process completed");
+
             return _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.PastelCsv },
                 new ReportData
                 {
@@ -371,6 +393,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         /// </returns>
         public ReportDto PivotToDebitOrderCsv()
         {
+            this.Info(() => "PivotToDebitOrderCsv process started");
 
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
             {
@@ -411,6 +434,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 }
             }
 
+            this.Info(() => "PivotToDebitOrderCsv process completed");
+
             return _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.DebitOrderCsv },
                 new ReportData
                 {
@@ -428,6 +453,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         /// </returns>
         public ReportDto PivotToDebitOrderNotDoneCsv()
         {
+            this.Info(() => "PivotToDebitOrderNotDoneCsv process started");
+
             foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
             {
                 try
@@ -465,6 +492,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                     this.Error(() => "An Error Occured while creating DebitOrderNotDone record. See below for details." + e);
                 }
             }
+
+            this.Info(() => "PivotToDebitOrderNotDoneCsv process completed");
 
             return _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.DebitOrderNotDoneCsv },
                 new ReportData

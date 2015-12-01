@@ -1,11 +1,11 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DataPlatform.Shared.Helpers.Extensions;
 using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using Shared.Logging;
 using Workflow.Billing.Infrastructure.NHibernate;
 
 namespace Workflow.Billing.Installers
@@ -33,6 +33,8 @@ namespace Workflow.Billing.Installers
             container.Register(Component.For<ISession>()
                 .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
                 .LifestyleTransient());
+            container.Register(Component.For<IStatelessSession>()
+                .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenStatelessSession()));
 
             //Initialize ISession to build up first run schema
             //var init = container.Resolve<ISession>();

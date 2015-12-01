@@ -12,6 +12,7 @@ using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Logging;
 
 namespace Billing.Api
 {
