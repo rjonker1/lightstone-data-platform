@@ -42,12 +42,45 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Domain\Base\ColumnValue.cs" />
+    <Compile Include="Domain\Aggregate.cs" />
+    <Compile Include="Domain\Base\Command.cs" />
+    <Compile Include="Domain\Base\ICommandSender.cs" />
+    <Compile Include="Domain\Base\IEventPublisher.cs" />
+    <Compile Include="Domain\Base\IHandles.cs" />
+    <Compile Include="Domain\Base\IAggregateRepository.cs" />
+    <Compile Include="Domain\Entities\DataSetItem.cs" />
+    <Compile Include="Infrastructure\Bus\FakeBus.cs" />
+    <Compile Include="Infrastructure\Commands\CreateDataSet.cs" />
+    <Compile Include="Infrastructure\Dto\DataSetDetailsDto.cs" />
+    <Compile Include="Infrastructure\Dto\DataSetDto.cs" />
+    <Compile Include="Infrastructure\Dto\IReadModelFacade.cs" />
+    <Compile Include="Infrastructure\Handlers\DataSetCommandHandler.cs" />
+    <Compile Include="Infrastructure\Read\DataSetReadModel.cs" />
+    <Compile Include="Infrastructure\Read\Handlers\DataSetReadHandlers.cs" />
+    <Compile Include="Infrastructure\Read\ReadRepository.cs" />
+    <Compile Include="Infrastructure\Repository\EventStore.cs" />
+    <None Include="Domain\Base\ColumnValue.cs.delete" />
+    <Compile Include="Domain\Base\Event.cs" />
+    <Compile Include="Domain\Base\IEventStore.cs" />
+    <Compile Include="Domain\Base\Message.cs" />
+    <Compile Include="Domain\DomainEvent.cs" />
+    <Compile Include="Domain\Enums\AggregateType.cs" />
+    <Compile Include="Domain\Enums\EventType.cs" />
+    <Compile Include="Domain\Events\DataSetDeActivated.cs" />
+    <Compile Include="Domain\Events\DataSetCreated.cs" />
+    <Compile Include="Domain\Extensions\ReflectionExtensions.cs" />
+    <Compile Include="Domain\Helpers\ReflectionHelper.cs" />
     <Compile Include="Domain\Models\AutoCarSpecifcations.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
-    <Folder Include="NewFolder1\" />
+    <Folder Include="Infrastructure\Processor\" />
+    <Folder Include="Infrastructure\Write\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

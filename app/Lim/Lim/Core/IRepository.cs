@@ -13,6 +13,7 @@ namespace Lim.Core
         void SaveOrUpdate<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;
         void Merge<T>(T entity) where T : class;
+        void Delete<T>(T entity) where T : class;
     }
 
     public interface IReadOnlyRepository

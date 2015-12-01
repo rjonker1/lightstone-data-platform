@@ -66,6 +66,10 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Database\Toolbox.LSAuto.Database.csproj">
+      <Project>{503335fd-622f-469a-83bf-c341562f7e45}</Project>
+      <Name>Toolbox.LSAuto.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
       <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
       <Name>Lim.Domain.Entities</Name>
@@ -92,10 +96,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\FakeBusBuilder.cs" />
+    <Compile Include="Builder\FakeDataBaseBuilder.cs" />
+    <Compile Include="Fakes\FakeBus.cs" />
     <Compile Include="Fakes\FakeResponse.cs" />
     <Compile Include="Fakes\FakeTransactions.cs" />
     <Compile Include="Fakes\Handlers\FakeFetchingApiPushConfigurationHandler.cs" />
     <Compile Include="Fakes\Handlers\FakeHandleExecutingApiConfiguration.cs" />
+    <Compile Include="Fakes\Repository\FakeDataSetDetailDtoRepository.cs" />
     <Compile Include="Fakes\Repository\FakeLimRepository.cs" />
     <Compile Include="Mothers\LimConfigurations.cs" />
     <Compile Include="Mothers\LimClients.cs" />

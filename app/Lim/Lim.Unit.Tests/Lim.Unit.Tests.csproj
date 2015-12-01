@@ -82,6 +82,9 @@
     <Compile Include="Jobs\Api\when_pushing_hourly_api_job.cs" />
     <Compile Include="Jobs\Api\when_pushing_daily_api_job.cs" />
     <Compile Include="Jobs\Api\when_pushing_cusom_api_job.cs" />
+    <Compile Include="LSAuto\Helpers\FakeDatabase.cs" />
+    <Compile Include="LSAuto\Helpers\FakeDataSetReadModel.cs" />
+    <Compile Include="LSAuto\when_reading_data_sets_from_read_model.cs" />
     <Compile Include="when_pushing_integration_to_api.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +97,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Database\Toolbox.LSAuto.Database.csproj">
+      <Project>{503335fd-622f-469a-83bf-c341562f7e45}</Project>
+      <Name>Toolbox.LSAuto.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>
@@ -119,6 +126,7 @@
       <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>

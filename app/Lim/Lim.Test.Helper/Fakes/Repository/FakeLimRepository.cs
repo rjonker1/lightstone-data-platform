@@ -54,5 +54,10 @@ namespace Lim.Test.Helper.Fakes.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void Delete<T>(T entity) where T : class
+        {
+            throw new NotImplementedException();
+        }
     }
 }
