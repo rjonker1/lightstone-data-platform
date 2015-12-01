@@ -27,23 +27,21 @@ namespace Workflow.Lace.Messages.Shared
             _publisher = new WorkflowCommandPublisher(bus);
         }
 
-        public void DataProviderRequest(DataProviderIdentifier dataProvider,
-            ConnectionTypeIdentifier connection, object payload,
-            DataProviderStopWatch stopWatch)
+        public void DataProviderRequest(DataProviderIdentifier dataProvider,ConnectionTypeIdentifier connection, object payload,
+            DataProviderStopWatch stopWatch, string referenceNumber)
         {
             new SendRequestToDataProviderCommand(Guid.NewGuid(), _requestId,
                 dataProvider,
                 DateTime.UtcNow, connection,
                 new PayloadIdentifier(new MetadataContainer().ObjectToJson(), payload.ObjectToJson(),
-                    CommandDescriptions.StartExecutionDescription((DataProviderCommandSource) dataProvider.Id)))
+                    CommandDescriptions.StartExecutionDescription((DataProviderCommandSource) dataProvider.Id)),referenceNumber)
                 .SendToBus(_publisher, Log);
             stopWatch.Start();
         }
 
 
-        public void DataProviderResponse(DataProviderIdentifier dataProvider,
-            ConnectionTypeIdentifier connection, object payload,
-            DataProviderStopWatch stopWatch)
+        public void DataProviderResponse(DataProviderIdentifier dataProvider,ConnectionTypeIdentifier connection, object payload,
+            DataProviderStopWatch stopWatch, string referenceNumber)
         {
             stopWatch.Stop();
 
@@ -52,7 +50,7 @@ namespace Workflow.Lace.Messages.Shared
                 DateTime.UtcNow, connection,
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
                     payload.ObjectToJson(),
-                    CommandDescriptions.EndExecutionDescription((DataProviderCommandSource) dataProvider.Id)))
+                    CommandDescriptions.EndExecutionDescription((DataProviderCommandSource) dataProvider.Id)), referenceNumber)
                 .SendToBus(_publisher, Log);
         }
 
@@ -88,7 +86,7 @@ namespace Workflow.Lace.Messages.Shared
             new ReceiveEntryPointRequest(Guid.NewGuid(), _requestId, DateTime.UtcNow,
                 SearchRequestIndentifier.Determine(request),
                 new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), request.ObjectToJson(),
-                    CommandDescriptions.ReceiveEntryPointRequestDescription()),new NoRecordBillableIdentifier((int)billNoRecords,billNoRecords.ToString()))
+                    CommandDescriptions.ReceiveEntryPointRequestDescription()),new NoRecordBillableIdentifier((int)billNoRecords,billNoRecords.ToString()),RequestFieldTypeIdentifier.GetRequestTypes(request))
                 .SendToBus(_publisher, Log);
             stopWatch.Start();
         }

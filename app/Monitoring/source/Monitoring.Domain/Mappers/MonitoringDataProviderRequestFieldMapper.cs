@@ -12,7 +12,7 @@ namespace Monitoring.Domain.Mappers
             {
                 return new[]
                 {
-                    "DataProviderId", "DataProviderName", "RequestFieldType", "RequestFieldTypeValue", "RequestId", "PackageName"
+                   "DataProviderId", "DataProviderName", "RequestFields", "RequestId", "PackageName"
                 };
             }
         }
@@ -30,8 +30,7 @@ namespace Monitoring.Domain.Mappers
             {
                 DataProviderId = request.DataProvider.Id,
                 DataProviderName = request.DataProvider.Name,
-                RequestFieldType = request.RequestField.Name,
-                RequestFieldTypeValue = request.RequestField.Value,
+                RequestFields = request.RequestField.Payload,
                 RequestId = request.DataProvider.RequestId,
                 PackageName = request.DataProvider.PackageName
             };

@@ -10,8 +10,8 @@ namespace Workflow.Lace.Messages.Core
 {
     public interface ISendWorkflowCommand
     {
-        void DataProviderRequest(DataProviderIdentifier dataProvider,ConnectionTypeIdentifier connection, object payload,DataProviderStopWatch stopWatch);
-        void DataProviderResponse(DataProviderIdentifier dataProvider,ConnectionTypeIdentifier connection, object payload,DataProviderStopWatch stopWatch);
+        void DataProviderRequest(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch, string referenceNumber);
+        void DataProviderResponse(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch, string referenceNumber);
         void EntryPointRequest(ICollection<IPointToLaceRequest> request, DataProviderStopWatch stopWatch, DataProviderNoRecordState billNoRecords);
         void EntryPointResponse(object payload, DataProviderStopWatch stopWatch, DataProviderResponseState state, ICollection<IPointToLaceRequest> request, DataProviderNoRecordState billNoRecords);
         void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,

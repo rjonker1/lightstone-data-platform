@@ -3,6 +3,7 @@ using Castle.Windsor;
 using EasyNetQ;
 using Workflow.Billing.Messages.Publishable;
 using Workflow.Lace.Messages.Events;
+using Workflow.Lace.Messages.Indicators;
 using Workflow.Transactions.Receiver.Service.Handlers;
 
 namespace Workflow.Transactions.Receiver.Service
@@ -39,6 +40,11 @@ namespace Workflow.Transactions.Receiver.Service
 
             if (message is IMessage<RequestMetadataMessage>)
                 container.Resolve<ApiRequestReceiver>().Consume((IMessage<RequestMetadataMessage>)message);
+
+            if(message is IMessage<ExecutionDetailForDataProvider>)
+                container.Resolve<IndicatorReceiver>().Consume((IMessage<ExecutionDetailForDataProvider>)message);
+            if (message is IMessage<RequestFieldsForDataProvider>)
+                container.Resolve<IndicatorReceiver>().Consume((IMessage<RequestFieldsForDataProvider>)message);
         }
     }
 }

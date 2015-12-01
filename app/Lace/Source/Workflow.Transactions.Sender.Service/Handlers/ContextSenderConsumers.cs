@@ -9,6 +9,8 @@ using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;
+using Workflow.Lace.Messages.Indicators;
+using Workflow.Lace.Messages.Infrastructure;
 using Workflow.Lace.Persistence;
 using Workflow.Transactions.Sender.Service.Views;
 
@@ -142,6 +144,8 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                     (DataProviderCommandSource) request.DataProvider.Id,
                     request.Date, request.CommandType, request.Payload);
 
+            _publisher.SendToBus(@event);
+
             _repository.Add(
                 new DataProviderEvent(new EventIndentifier(request.RequestId,
                     new EventPayloadIndentifier(Encoding.UTF8.GetBytes(@event.ObjectToJson()),
@@ -149,7 +153,12 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                         (DataProviderCommandSource) request.DataProvider.Id,
                         request.CommandType, @event.GetType()), request.Date)));
 
-            _publisher.SendToBus(@event);
+            var indicator = new ExecutionDetailForDataProvider(request.RequestId,
+                new CommandTypeIdentifier((short) CommandType.EndSourceCall, CommandType.EndSourceCall.ToString()),
+                new DataProviderIdentifier((DataProviderCommandSource) request.DataProvider.Id),
+                message.Body.MetaData.JsonToObject<PerformanceMetadata>().Results.ElapsedTime.ToString());
+
+            _publisher.SendToBus(indicator);
         }
 
         private int GetNextSequence(Guid requestId)

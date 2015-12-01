@@ -34,7 +34,7 @@ namespace Lace.Unit.Tests.Workflow
                     HandleRequest.GetHpiStandardQueryRequest(
                         new LicensePlateNumberIvidOnlyRequest().Package.DataProviders.Single(w => w.Name == DataProviderName.IVIDVerify_E_WS)
                             .GetRequest<IAmIvidStandardRequest>()).ObjectToJson(),
-                    "testing message to bus"));
+                    "testing message to bus"),"");
             _bus = BusFactory.CreateAdvancedBus(ConfigurationReader.WorkflowSender);
         }
 

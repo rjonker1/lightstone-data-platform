@@ -75,8 +75,6 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             }
         }
 
-       
-
         private void Init(Guid requestId)
         {
             _command = CommandSender.InitCommandSender(_bus, requestId, DataProviderCommandSource.EntryPoint);

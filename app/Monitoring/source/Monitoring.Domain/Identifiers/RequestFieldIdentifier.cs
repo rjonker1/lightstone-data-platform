@@ -5,16 +5,12 @@ namespace Monitoring.Domain.Identifiers
     [DataContract]
     public sealed class RequestFieldIdentifier
     {
-        public RequestFieldIdentifier(string name, string value)
+        public RequestFieldIdentifier(string payload)
         {
-            Name = name;
-            Value = value;
+            Payload = payload;
         }
 
         [DataMember]
-        public string Name { get; private set; }
-
-        [DataMember]
-        public string Value { get; private set; }
+        public string Payload { get; private set; }
     }
 }

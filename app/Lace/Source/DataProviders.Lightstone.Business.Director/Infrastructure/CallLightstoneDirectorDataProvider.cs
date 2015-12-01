@@ -45,12 +45,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure
                     throw new Exception("Cannot continue call Lightstone Business Director Api. Request is not valid");
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(),
-                    new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
+                    new { _dataProvider }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 DirectorDataRetriever.Start(api, request).WithReturnDirectors().ThenConfirmDirector().FinallyGetDirectorReport(out _result);
 
                 _logCommand.LogResponse(_result == null || _result.Tables.Count == 0 ? DataProviderResponseState.NoRecords : DataProviderResponseState.Successful,
-                    new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new { _result }, _dataProvider.BillablleState.NoRecordState);
+                    new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new { _result }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 TransformResponse(response);
             }

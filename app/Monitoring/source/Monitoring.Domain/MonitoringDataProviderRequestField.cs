@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Monitoring.Domain.Identifiers;
 
 namespace Monitoring.Domain
@@ -11,7 +12,6 @@ namespace Monitoring.Domain
             DataProvider = dataProvider;
             RequestField = requestField;
         }
-
 
         [DataMember]
         public DataProviderIdentifier DataProvider { get; private set; }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
 using EasyNetQ;
@@ -35,9 +31,9 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
                 new DataProviderTransaction(new DataProviderTransactionIdentifier(Guid.NewGuid(), message.Body.Id,
                     message.Body.Date, new RequestIdentifier(message.Body.RequestId, null),
                     message.Body.DataProvider, message.Body.Connection,
-                    new ActionIdentifier((int) message.Body.DataProvider.Action, message.Body.DataProvider.Action.ToString()),
+                    new Lace.Identifiers.ActionIdentifier((int) message.Body.DataProvider.Action, message.Body.DataProvider.Action.ToString()),
                     new StateIdentifier((int) message.Body.DataProvider.State, message.Body.DataProvider.State.ToString()),
-                    new NoRecordBillableIdentifier((int) message.Body.DataProvider.BillNoRecords, message.Body.DataProvider.BillNoRecords.ToString())));
+                    new NoRecordBillableIdentifier((int) message.Body.DataProvider.BillNoRecords, message.Body.DataProvider.BillNoRecords.ToString()),message.Body.ReferenceNumber));
             _transaction.Add(response);
         }
 
@@ -48,8 +44,10 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
                     new SearchIdentifier(message.Body.RequestContext.PackageName, message.Body.RequestContext.PackageVersion,
                         message.Body.Payload.MetaData.JsonToObject<PerformanceMetadata>().Results.ElapsedTime.ToString(),
                         message.Body.RequestId, message.Body.RequestContext.NumberOfDataProviders),
-                    new MonitoringActionIdentifier(DataProviderAction.Response.ToString())));
+                    new Monitoring.Domain.Identifiers.ActionIdentifier(DataProviderAction.Response.ToString())));
             _monitoring.Add(response);
+
+            
         }
     }
 }
