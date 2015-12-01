@@ -1015,7 +1015,7 @@
          <dependency id="Lightstone.DataPlatform.Shared" version="1.0.0.1941" />
          <dependency id="log4net" version="1.2.11" />
          <dependency id="Newtonsoft.Json" version="6.0.8" />
-         <dependency id="RabbitMQ.Client" version="3.5.3" />
+         <dependency id="RabbitMQ.Client" version="3.4.3" />
          <dependency id="Topshelf" version="3.1.4" />
       </dependencies>
     </nuget>
@@ -1063,7 +1063,7 @@
          <dependency id="Lightstone.DataPlatform.Workflow.Publisher" version="1.0.0.1944" />
          <dependency id="log4net" version="1.2.11" />
          <dependency id="Newtonsoft.Json" version="6.0.8" />
-         <dependency id="RabbitMQ.Client" version="3.5.3" />
+         <dependency id="RabbitMQ.Client" version="3.4.3" />
       </dependencies>
     </nuget>
 
