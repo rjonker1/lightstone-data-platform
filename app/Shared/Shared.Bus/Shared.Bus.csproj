@@ -57,11 +57,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Bus">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1943\lib\net45\Lightstone.DataPlatform.Workflow.Bus.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Bus, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1968\lib\net45\Lightstone.DataPlatform.Workflow.Bus.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Publisher">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1943\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Publisher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1968\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>

@@ -4,12 +4,12 @@
     {
         public string Name
         {
-            get { return ReadAppSettings("workflow/environment", "DEV"); }
+            get { return ReadAppSettings("workflow/environment", ""); }
         }
 
         public string AppendEnvironment(string settingValue)
         {
-            return string.Format("{0}-{1}", Name.ToLowerInvariant(), settingValue);
+            return string.Format("{0}{1}", Name.ToLowerInvariant(), settingValue);
         }
     }
 }
