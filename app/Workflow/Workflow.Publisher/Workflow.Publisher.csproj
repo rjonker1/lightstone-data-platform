@@ -42,7 +42,7 @@
       <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
     </Reference>
     <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ.0.50.1.392\lib\net40\EasyNetQ.dll</HintPath>
+      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1936\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -55,7 +55,7 @@
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
-      <HintPath>..\..\packages\RabbitMQ.Client.3.5.3\lib\net40\RabbitMQ.Client.dll</HintPath>
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -79,7 +79,9 @@
     <Compile Include="WorkflowBus.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
