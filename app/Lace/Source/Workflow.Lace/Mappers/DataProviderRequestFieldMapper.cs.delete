@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using Shared.BuildingBlocks.AdoNet.Mapping;
+using Workflow.Lace.Domain;
+
+namespace Workflow.Lace.Mappers
+{
+    public class DataProviderRequestFieldMapper : TypeMapper
+    {
+        protected override IEnumerable<string> FieldNames
+        {
+            get
+            {
+                return new[]
+                {
+                    "DataProviderId", "DataProviderName", "RequestFields", "RequestId", "PackageName"
+                };
+            }
+        }
+
+        public override object Get(System.Data.IDbConnection connection, Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Insert(System.Data.IDbConnection connection, object instance)
+        {
+            var request = instance as DataProviderRequestField;
+            var sql = GenerateInsertStatement();
+            var values = new
+            {
+                DataProviderId = request.DataProvider.Id,
+                DataProviderName = request.DataProvider.Name,
+                RequestFields = request.RequestField.Payload,
+                RequestId = request.RequestId,
+                PackageName = request.PackageName
+            };
+        }
+
+        protected override string TableName
+        {
+            get { return "DataProviderRequestField"; }
+        }
+    }
+}
