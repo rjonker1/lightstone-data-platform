@@ -79,9 +79,9 @@
       <HintPath>..\..\packages\EasyNetQ.0.50.1.392\lib\net40\EasyNetQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1956, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1966, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.1956\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.1966\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1888, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1888\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
@@ -93,10 +93,11 @@
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1960\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1966\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Messages">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.1956\lib\net45\Lightstone.DataPlatform.Shared.Messages.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.1966\lib\net45\Lightstone.DataPlatform.Shared.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.UserManagement.Api.Routes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -105,8 +106,9 @@
     <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1625\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Publisher">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1956\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Publisher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1966\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
