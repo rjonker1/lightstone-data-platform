@@ -26,8 +26,10 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
 
         public void Consume(IMessage<RequestFieldsForDataProvider> message)
         {
-            //var indicator = new MonitoringDataProviderRequestField(new DataProviderIdentifier(message.Body.RequestId, message.Body.PackageName, message.Body.DataProvider.Name, (short)message.Body.DataProvider.Id),new RequestFieldIdentifier(message.Body.RequestField.));
-            //_monitoring.Add(indicator);
+            var indicator = new MonitoringDataProviderRequestField(
+                new DataProviderIdentifier(message.Body.RequestId, message.Body.PackageName, message.Body.DataProvider.Name, (short)message.Body.DataProvider.Id),
+                new RequestFieldIdentifier(message.Body.RequestField.Payload));
+            _monitoring.Add(indicator);
         }
     }
 }

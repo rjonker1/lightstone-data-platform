@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Shared.BuildingBlocks.AdoNet.Mapping;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Monitoring.Domain.Mappers
 {
@@ -34,6 +35,8 @@ namespace Monitoring.Domain.Mappers
                 RequestId = request.DataProvider.RequestId,
                 PackageName = request.DataProvider.PackageName
             };
+
+            connection.Execute(sql, values);
         }
 
         protected override string TableName

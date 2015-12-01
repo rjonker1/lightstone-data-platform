@@ -20,7 +20,7 @@ namespace Monitoring.Database.Migrations
             Create.Table("DataProviderRequestField")
                 .WithColumn("DataProviderId").AsInt16().NotNullable().Indexed("IDX_DataProviderResponseTime_DataProviderId")
                 .WithColumn("DataProviderName").AsString(50).NotNullable()
-                .WithColumn("RequestFields").AsString(5000).Nullable()
+                .WithColumn("RequestFields").AsBinary(int.MaxValue).Nullable()
                 .WithColumn("RequestId").AsGuid().Indexed("IDX_DataProviderRequestField_RequestId").NotNullable()
                 .WithColumn("PackageName").AsString(100).Indexed("IDX_DataProviderRequestField_PackageName").NotNullable()
                 .WithColumn("CommitStamp").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime);
