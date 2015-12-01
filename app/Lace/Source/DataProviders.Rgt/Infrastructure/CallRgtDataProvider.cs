@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
+                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 _carInformation = new RgtVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmRgtRequest>(),
                    _repository);
@@ -52,7 +52,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
                 _logCommand.LogResponse(_carSpecifications.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                        .ForDatabaseType(), new { _carSpecifications }, _dataProvider.BillablleState.NoRecordState);
+                        .ForDatabaseType(), new { _carSpecifications }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {

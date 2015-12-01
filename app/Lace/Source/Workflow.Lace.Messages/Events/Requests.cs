@@ -14,14 +14,15 @@ namespace Workflow.Lace.Messages.Events
         {
             
         }
-        public RequestToDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection)
+        public RequestToDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, string referenceNumber)
         {
             Id = id;
             RequestId = requestId;
             DataProvider = dataProvider;
             Date = date;
             Connection = connection;
-           // Payload = payload;
+            ReferenceNumber = referenceNumber;
+            // Payload = payload;
         }
 
         [DataMember]
@@ -38,6 +39,8 @@ namespace Workflow.Lace.Messages.Events
 
         [DataMember]
         public ConnectionTypeIdentifier Connection { get; private set; }
+        [DataMember]
+        public string ReferenceNumber { get; private set; }
 
         //[DataMember]
         //public PayloadIdentifier Payload { get; private set; }

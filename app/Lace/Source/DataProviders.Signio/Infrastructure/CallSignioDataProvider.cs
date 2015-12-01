@@ -47,12 +47,12 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                     new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"});
 
 
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), _client.Suffix, _dataProvider.BillablleState.NoRecordState);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), _client.Suffix, _dataProvider.BillablleState.NoRecordState,string.Empty);
 
                 _client.Run();
 
                 _logCommand.LogResponse(_client.IsSuccessful ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
-                    new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), new { _client.Resonse }, _dataProvider.BillablleState.NoRecordState);
+                    new ConnectionTypeIdentifier(_client.Suffix).ForWebApiType(), new { _client.Resonse }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
 
                 if (string.IsNullOrWhiteSpace(_client.Resonse))

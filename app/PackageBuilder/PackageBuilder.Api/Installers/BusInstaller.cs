@@ -9,7 +9,7 @@ using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Infrastructure.NEventStore;
 using Workflow.BuildingBlocks;
-using IBus = MemBus.IBus;
+using Workflow.Publisher;
 
 namespace PackageBuilder.Api.Installers
 {
@@ -17,7 +17,9 @@ namespace PackageBuilder.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IBus>().Instance(BusSetup.StartWith<Conservative>()
+            container.Register(Component.For<EasyNetQ.IBus>().UsingFactoryMethod(BusBuilder.CreateBus).LifestyleSingleton());
+
+            container.Register(Component.For<MemBus.IBus>().Instance(BusSetup.StartWith<Conservative>()
                                                                       .Apply<IoCSupport>(s => s.SetAdapter(new MessageAdapter(container))
                                                                       .SetHandlerInterface(typeof(IHandleMessages<>)))
                                                                       .Construct()));

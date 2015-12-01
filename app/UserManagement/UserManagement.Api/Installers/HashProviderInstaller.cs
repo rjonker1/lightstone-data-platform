@@ -1,7 +1,8 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Enums;
+using Shared.Logging;
 using UserManagement.Domain.Core.Security;
 
 namespace UserManagement.Api.Installers
@@ -10,9 +11,9 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install HashProviderInstaller");
+            this.Info(() => "Attempting to install HashProviderInstaller", SystemName.UserManagement);
             container.Register(Component.For<IHashProvider>().ImplementedBy<SaltedHash>());
-            this.Info(() => "Successfully installed HashProviderInstaller");
+            this.Info(() => "Successfully installed HashProviderInstaller", SystemName.UserManagement);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using Shared.Logging;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules.Contracts;
@@ -28,21 +30,21 @@ namespace UserManagement.Domain.BusinessRules.Contracts
             if (hasClients.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Client constraint".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.UserManagement);
                 throw exception;
             }
 
             if (hasCustomers.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Customer constraint".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.UserManagement);
                 throw exception;
             }
 
             if (hasPackages.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Package constraint".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.UserManagement);
                 throw exception;
             }
 

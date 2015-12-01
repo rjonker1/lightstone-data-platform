@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using Shared.Logging;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules.Customers;
@@ -27,7 +29,7 @@ namespace UserManagement.Domain.BusinessRules.Customers
             if (hasCustomerUser.Any(user => user.Any()))
             {
                 var exception = new LightstoneAutoException("Customer cannot be deleted due to Customer - User relationship".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.UserManagement);
                 throw exception;
             }
 

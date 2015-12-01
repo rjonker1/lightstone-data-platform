@@ -59,16 +59,17 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.1857, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.1857\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.1950, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.1950\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1882\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1815\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1942, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1942\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.1815\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
@@ -106,6 +107,7 @@
     <Compile Include="Domain\DataProviders.cs" />
     <Compile Include="Domain\Aggregates\Request.cs" />
     <Compile Include="Identifiers\ActionIdentifier.cs" />
+    <Compile Include="Identifiers\CommandTypeIdentifier.cs" />
     <Compile Include="Identifiers\EventIndentifier.cs" />
     <Compile Include="Identifiers\EventPayloadIndetifier.cs" />
     <Compile Include="Identifiers\DataProviderIdentifier.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Identifiers\ConnectionTypeIdentifier.cs" />
     <Compile Include="Identifiers\NoRecordBillableIdentifier.cs" />
     <Compile Include="Identifiers\PayloadIdentifier.cs" />
+    <Compile Include="Identifiers\RequestFieldTypeIdentifier.cs" />
     <Compile Include="Identifiers\SearchRequestIndentifier.cs" />
     <Compile Include="Mappers\DataProviderCommandMapper.cs" />
     <Compile Include="Mappers\DataProviderTransactionTypeMapper.cs" />

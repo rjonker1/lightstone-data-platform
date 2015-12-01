@@ -37,7 +37,7 @@ namespace Lace.Test.Helper.Builders.Buses
         {
             _workflow.DataProviderRequest(
                 new DataProviderIdentifier((int)_dataProvider, _dataProvider.ToString(), cost, rsp, action, state, _billNoRecords),
-                new ConnectionTypeIdentifier(connection, connectionTpe), payload, _stopWatch);
+                new ConnectionTypeIdentifier(connection, connectionTpe), payload, _stopWatch,string.Empty);
             return this;
         }
 
@@ -47,7 +47,7 @@ namespace Lace.Test.Helper.Builders.Buses
         {
             _workflow.DataProviderResponse(
                 new DataProviderIdentifier((int)_dataProvider, _dataProvider.ToString(), cost, rsp, action, state, _billNoRecords),
-                new ConnectionTypeIdentifier(connection, connectionTpe), payload, _stopWatch);
+                new ConnectionTypeIdentifier(connection, connectionTpe), payload, _stopWatch,string.Empty);
             return this;
         }
 

@@ -3,7 +3,7 @@
 
     var config =
     {
-        apiUrl : "http://dev.monitoring.web.lightstone.co.za"
+        apiUrl : "http://prod.monitoring.web.lightstone.co.za"
     };
 
     app.config("config", config);

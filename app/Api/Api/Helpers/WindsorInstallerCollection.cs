@@ -8,6 +8,9 @@ namespace Api.Helpers
     {
         public static IWindsorInstaller[] Installers =
         {
+            new BusInstaller(),
+            new ServiceLocatorInstaller(),
+            new WorkflowInstaller(),
             new AuthInstaller(),
             new AutoMapperInstaller()
         };

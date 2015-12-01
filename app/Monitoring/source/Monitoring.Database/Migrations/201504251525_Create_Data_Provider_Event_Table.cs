@@ -14,7 +14,7 @@ namespace Monitoring.Database.Migrations
                 .WithColumn("CommitNumber").AsInt64().Identity().PrimaryKey("PK_DataProviderEventLog")
                 .WithColumn("CommitSequence").AsInt32().NotNullable()
                 .WithColumn("Dispatched").AsBoolean().NotNullable().WithDefaultValue(false)
-                .WithColumn("Payload").AsBinary(Int32.MaxValue)
+                .WithColumn("Payload").AsBinary(int.MaxValue)
                 .WithColumn("CommitStamp").AsDateTime().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("DataProvider").AsString(50)
                 .WithColumn("DataProviderId").AsInt32()

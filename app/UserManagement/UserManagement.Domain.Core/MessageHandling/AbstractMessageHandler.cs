@@ -14,5 +14,4 @@
             Handle((T)command);
         }
     }
-    
 }

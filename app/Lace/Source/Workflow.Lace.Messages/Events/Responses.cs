@@ -10,7 +10,7 @@ namespace Workflow.Lace.Messages.Events
     [DataContract]
     public class ResponseFromDataProvider : IPublishableMessage
     {
-        public ResponseFromDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload)
+        public ResponseFromDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload,string referenceNumber)
         {
             Id = id;
             RequestId = requestId;
@@ -18,6 +18,7 @@ namespace Workflow.Lace.Messages.Events
             Date = date;
             Connection = connection;
             Payload = payload;
+            ReferenceNumber = referenceNumber;
         }
 
         [DataMember]
@@ -37,6 +38,7 @@ namespace Workflow.Lace.Messages.Events
 
         [DataMember]
         public PayloadIdentifier Payload { get; private set; }
-
+        [DataMember]
+        public string ReferenceNumber { get; private set; }
     }
 }

@@ -90,7 +90,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Callers
 
             _logCommand.LogConfiguration(_request, null);
             _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), _request,
-                _dataProvider.BillablleState.NoRecordState);
+                _dataProvider.BillablleState.NoRecordState,string.Empty);
 
             _response = await api.Client.HpiStandardQueryAsync(_request);
 
@@ -98,7 +98,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Callers
 
             _logCommand.LogResponse(CheckState(_response),
                 new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString())
-                    .ForWebApiType(), _response ?? new HpiStandardQueryResponse1(), _dataProvider.BillablleState.NoRecordState);
+                .ForWebApiType(), _response ?? new HpiStandardQueryResponse1(), _dataProvider.BillablleState.NoRecordState, _response != null && _response.HpiStandardQueryResponse != null ?_response.HpiStandardQueryResponse.IvidReference : string.Empty);
 
             if (_response == null || _response.HpiStandardQueryResponse == null)
                 _logCommand.LogFault(_dataProvider,

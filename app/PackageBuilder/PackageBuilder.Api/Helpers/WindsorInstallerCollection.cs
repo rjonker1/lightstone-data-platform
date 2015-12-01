@@ -8,14 +8,15 @@ namespace PackageBuilder.Api.Helpers
     {
         public static IWindsorInstaller[] Installers =
         {
+            new CommandInstaller(),
+            new BusInstaller(),
+            new ServiceLocatorInstaller(),
+            new WorkflowInstaller(), 
             new RedisInstaller(), 
             new NHibernateInstaller(),
             new RepositoryInstaller(),
-            new CommandInstaller(),
-            new BusInstaller(),
             new CacheProviderInstaller(),
             new NEventStoreInstaller(),
-            new ServiceLocatorInstaller(),
             new AutoMapperInstaller(),
             new LaceInstaller(),
             new AuthInstaller(),

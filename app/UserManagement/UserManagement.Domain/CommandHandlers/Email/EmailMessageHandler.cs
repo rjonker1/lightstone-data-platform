@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net.Mail;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using Shared.Logging;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities.Commands.Email;
 
@@ -20,12 +22,12 @@ namespace UserManagement.Domain.CommandHandlers.Email
                 }
                 catch (SmtpException exception)
                 {
-                    this.Error(() => "Error sending password reset mail to {0}".FormatWith(string.Join(",", command.ToAddresses), exception));
+                    this.Error(() => "Error sending password reset mail to {0}".FormatWith(string.Join(",", command.ToAddresses), exception), SystemName.UserManagement);
                     throw new LightstoneAutoException("Error sending password reset mail");
                 }
                 catch (Exception exception)
                 {
-                    this.Error(() => "Error sending password reset mail to {0}".FormatWith(string.Join(",", command.ToAddresses), exception));
+                    this.Error(() => "Error sending password reset mail to {0}".FormatWith(string.Join(",", command.ToAddresses), exception), SystemName.UserManagement);
                     throw new LightstoneAutoException("Error sending password reset mail");
                 }
             }

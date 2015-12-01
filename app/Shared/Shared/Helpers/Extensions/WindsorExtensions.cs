@@ -1,5 +1,6 @@
 using System;
 using Castle.Windsor;
+using Common.Logging;
 
 namespace DataPlatform.Shared.Helpers.Extensions
 {
@@ -7,13 +8,14 @@ namespace DataPlatform.Shared.Helpers.Extensions
     {
         public static object TryResolve(this IWindsorContainer container, Type service)
         {
+            var log = LogManager.GetLogger(typeof(WindsorExtensions));
             try
             {
                 return container.Resolve(service);
             }
             catch (Exception exception)
             {
-                typeof(WindsorExtensions).Error(() => exception);
+                log.Error(exception);
                 return null;
             }
         }

@@ -1,8 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Enums;
 using Newtonsoft.Json;
 using PackageBuilder.Domain.Entities.Packages.Write;
+using Shared.Logging;
 using StackExchange.Redis;
 
 namespace PackageBuilder.Infrastructure.NEventStore
@@ -19,15 +20,15 @@ namespace PackageBuilder.Infrastructure.NEventStore
         {
             try
             {
-                this.Info(() => string.Format("Attempting to retrieve {0}, from cache", entityId));
+                this.Info(() => string.Format("Attempting to retrieve {0}, from cache", entityId), SystemName.PackageBuilder);
                 var redisValue = await _redisDb.StringGetAsync(entityId + "");
                 var cachedEntity = JsonConvert.DeserializeObject<Package>(redisValue.ToString());
-                this.Info(() => string.Format("Successfully retrieved {0}, from cache", entityId));
+                this.Info(() => string.Format("Successfully retrieved {0}, from cache", entityId), SystemName.PackageBuilder);
                 return cachedEntity as T;
             }
             catch (Exception e)
             {
-                this.Error(() => string.Format("Failed to retrieve from cache. {0}", e.Message));
+                this.Error(() => string.Format("Failed to retrieve from cache. {0}", e.Message), SystemName.PackageBuilder);
                 return null;
             }
         }
@@ -36,14 +37,14 @@ namespace PackageBuilder.Infrastructure.NEventStore
         {
             try
             {
-                this.Info(() => string.Format("Attempting to save {0}, to cache", entity));
+                this.Info(() => string.Format("Attempting to save {0}, to cache", entity), SystemName.PackageBuilder);
                 var value = JsonConvert.SerializeObject(entity);
                 await _redisDb.StringSetAsync(entityId + "", value);
-                this.Info(() => string.Format("Successfully saved {0}, to cache", entity));
+                this.Info(() => string.Format("Successfully saved {0}, to cache", entity), SystemName.PackageBuilder);
             }
             catch (Exception e)
             {
-                this.Error(() => string.Format("Failed to save to cache. {0}", e.Message));
+                this.Error(() => string.Format("Failed to save to cache. {0}", e.Message), SystemName.PackageBuilder);
             }
         }
 
@@ -51,13 +52,13 @@ namespace PackageBuilder.Infrastructure.NEventStore
         {
             try
             {
-                this.Info(() => string.Format("Attempting to delete {0}, from cache", entityId));
+                this.Info(() => string.Format("Attempting to delete {0}, from cache", entityId), SystemName.PackageBuilder);
                 await _redisDb.KeyDeleteAsync(entityId + "");
-                this.Info(() => string.Format("Successfully deleted {0}, from cache", entityId));
+                this.Info(() => string.Format("Successfully deleted {0}, from cache", entityId), SystemName.PackageBuilder);
             }
             catch (Exception e)
             {
-                this.Error(() => string.Format("Failed to delete from cache. {0}", e.Message));
+                this.Error(() => string.Format("Failed to delete from cache. {0}", e.Message), SystemName.PackageBuilder);
             }
         }
     }

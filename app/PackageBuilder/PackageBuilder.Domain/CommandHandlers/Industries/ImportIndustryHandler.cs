@@ -1,7 +1,7 @@
 using System;
-using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.Industries.Commands;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.Industries
 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
@@ -6,6 +7,7 @@ using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.Infrastructure.Repositories;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {
@@ -26,7 +28,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             if (existing)
             {
                 var exception = new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.PackageBuilder);
                 throw exception;
             }
 

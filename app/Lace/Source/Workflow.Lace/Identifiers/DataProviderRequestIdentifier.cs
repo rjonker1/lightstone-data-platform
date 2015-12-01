@@ -15,7 +15,7 @@ namespace Workflow.Lace.Identifiers
 
         public DataProviderTransactionIdentifier(Guid id, Guid streamId, DateTime date, RequestIdentifier parentRequest,
             DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connectionType, ActionIdentifier action,
-            StateIdentifier state, NoRecordBillableIdentifier billNoRecords)
+            StateIdentifier state, NoRecordBillableIdentifier billNoRecords, string referenceNumber)
         {
             Id = id;
             StreamId = streamId;
@@ -26,6 +26,7 @@ namespace Workflow.Lace.Identifiers
             Action = action;
             State = state;
             BillNoRecords = billNoRecords;
+            ReferenceNumber = referenceNumber;
         }
 
         [DataMember]
@@ -46,6 +47,8 @@ namespace Workflow.Lace.Identifiers
         public StateIdentifier State { get; private set; }
         [DataMember]
         public NoRecordBillableIdentifier BillNoRecords { get; private set; }
+        [DataMember]
+        public string ReferenceNumber { get; private set; }
 
     }
 }

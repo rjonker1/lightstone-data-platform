@@ -17,6 +17,7 @@ using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Infrastructure.NEventStore;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Logging;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
@@ -33,7 +34,7 @@ namespace PackageBuilder.Api.Modules
 
                 if (package == null)
                 {
-                    this.Error(() => "Package meta data not found for id {0}".FormatWith(apiRequest.PackageId));
+                    this.Error(() => "Package meta data not found for id {0}".FormatWith(apiRequest.PackageId), SystemName.PackageBuilder);
                     throw new LightstoneAutoException("Package could not be found");
                 }
 

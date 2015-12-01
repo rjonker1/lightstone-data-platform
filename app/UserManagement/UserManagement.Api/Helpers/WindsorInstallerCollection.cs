@@ -8,11 +8,12 @@ namespace UserManagement.Api.Helpers
     {
         public static IWindsorInstaller[] Installers =
         {
-            new NHibernateInstaller(),
-            new RepositoryInstaller(),
             new CommandInstaller(),
             new BusInstaller(),
             new ServiceLocatorInstaller(),
+            new WorkflowInstaller(), 
+            new NHibernateInstaller(),
+            new RepositoryInstaller(),
             new AutoMapperInstaller(),
             new HelperInstaller(),
             new ApiClientInstaller(),

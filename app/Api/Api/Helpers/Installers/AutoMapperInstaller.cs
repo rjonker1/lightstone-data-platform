@@ -3,7 +3,8 @@ using AutoMapper;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Enums;
+using Shared.Logging;
 
 namespace Api.Helpers.Installers
 {
@@ -11,7 +12,7 @@ namespace Api.Helpers.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install AutoMapperInstaller");
+            this.Info(() => "Attempting to install AutoMapperInstaller", SystemName.Api);
 
             container.Register(Classes.FromAssemblyContaining<ICreateAutoMapperMaps>().BasedOn(typeof(ITypeConverter<,>)).WithServiceAllInterfaces().LifestyleTransient());
             container.Register(Classes.FromAssemblyContaining<ICreateAutoMapperMaps>().BasedOn<ICreateAutoMapperMaps>().WithServiceAllInterfaces().LifestyleTransient());
@@ -19,7 +20,7 @@ namespace Api.Helpers.Installers
             foreach (var map in container.ResolveAll<ICreateAutoMapperMaps>())
                 map.CreateMaps();
 
-            this.Info(() => "Successfully installed AutoMapperInstaller");
+            this.Info(() => "Successfully installed AutoMapperInstaller", SystemName.Api);
         }
     }
 }

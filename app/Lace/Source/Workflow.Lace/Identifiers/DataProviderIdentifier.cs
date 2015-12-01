@@ -56,6 +56,12 @@ namespace Workflow.Lace.Identifiers
             BillNoRecords = billNoRecords;
         }
 
+        public DataProviderIdentifier(DataProviderCommandSource dataProvider)
+        {
+            Id = (int)dataProvider;
+            Name = dataProvider.ToString();
+        }
+
         public DataProviderIdentifier SetPrice(IAmDataProvider dataProvider)
         {
             CostPrice = dataProvider == null ? 0 : dataProvider.CostPrice;

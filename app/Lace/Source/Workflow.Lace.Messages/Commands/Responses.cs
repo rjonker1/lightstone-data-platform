@@ -25,9 +25,11 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public PayloadIdentifier Payload { get; private set; }
+        [DataMember]
+        public string ReferenceNumber { get; private set; }
 
         public GetResponseFromDataProviderCommmand(Guid id, Guid requestId, DataProviderIdentifier dataProvider,
-            DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload)
+            DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload, string referenceNumber)
         {
             Id = id;
             Date = date;
@@ -35,6 +37,7 @@ namespace Workflow.Lace.Messages.Commands
             Connection = connection;
             DataProvider = dataProvider;
             Payload = payload;
+            ReferenceNumber = referenceNumber;
         }
     }
 }

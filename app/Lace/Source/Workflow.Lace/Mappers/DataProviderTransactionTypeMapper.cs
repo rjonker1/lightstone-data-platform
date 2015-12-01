@@ -25,7 +25,7 @@ namespace Workflow.Lace.Mappers
                 {
                     "Id", "StreamId", "Date", "RequestId", "DataProvider", "DataProviderName", "ConnectionType",
                     "Connection", "Action", "State", "StateId", "CostPrice", "RecommendedPrice", "BillableForNoRecordState",
-                    "BillableForNoRecordStateId"
+                    "BillableForNoRecordStateId", "ReferenceNumber"
                 };
             }
         }
@@ -50,7 +50,8 @@ namespace Workflow.Lace.Mappers
                 CostPrice = request.Transaction.DataProvider.CostPrice,
                 RecommendedPrice = request.Transaction.DataProvider.RecommendedPrice,
                 BillableForNoRecordState = request.Transaction.BillNoRecords.Name,
-                BillableForNoRecordStateId = request.Transaction.BillNoRecords.Id
+                BillableForNoRecordStateId = request.Transaction.BillNoRecords.Id,
+                ReferenceNumber = request.Transaction.ReferenceNumber
             };
 
             connection.Execute(sql, values);
@@ -70,7 +71,7 @@ namespace Workflow.Lace.Mappers
                         (DataProviderNoRecordState) match.BillableForNoRecordState),
                     new ConnectionTypeIdentifier(match.Connection, match.ConnectionType),
                     new ActionIdentifier(0, match.Name), new StateIdentifier(match.StateId, match.State),
-                    new NoRecordBillableIdentifier(match.BillableForNoRecordStateId, match.BillableForNoRecordState)));
+                    new NoRecordBillableIdentifier(match.BillableForNoRecordStateId, match.BillableForNoRecordState), match.ReferenceNumber));
         }
     }
 }

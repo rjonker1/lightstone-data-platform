@@ -36,14 +36,14 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
-                    .ForWebApiType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
+                    .ForWebApiType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 _response =
                     new ConsumerViewService(new RestClient()).Search(HandleRequest.GetQuery(_dataProvider.GetRequest<IAmPCubedEzScoreRequest>()));
 
                 _logCommand.LogResponse(_response != null && _response.StatusCode == HttpStatusCode.OK ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(ConfigurationProvider.ConsumerViewApiUrl)
-                        .ForWebApiType(), new { _response }, _dataProvider.BillablleState.NoRecordState);
+                    .ForWebApiType(), new { _response }, _dataProvider.BillablleState.NoRecordState, _response != null && _response.Data != null && _response.Data.ExternalId != Guid.Empty ? _response.Data.ExternalId.ToString() : string.Empty);
 
                 TransformResponse(response);
             }
@@ -70,7 +70,7 @@ namespace Lace.Domain.DataProviders.PCubed.EzScore.Infrastructure
             response.Add(transformer.Result);
         }
 
-        private void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
+        private static void PCubedEzScoreResponseFailed(ICollection<IPointToLaceProvider> response)
         {
             var ezScoreResponse = PCubedEzScoreResponse.WithState(DataProviderResponseState.TechnicalError);
             ezScoreResponse.HasBeenHandled();

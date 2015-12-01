@@ -2,12 +2,12 @@
 
 namespace Monitoring.Domain.Identifiers
 {
-    public class MonitoringActionIdentifier
+    public class ActionIdentifier
     {
         [DataMember]
         public string Name { get; private set; }
 
-        public MonitoringActionIdentifier(string name)
+        public ActionIdentifier(string name)
         {
             Name = name;
         }

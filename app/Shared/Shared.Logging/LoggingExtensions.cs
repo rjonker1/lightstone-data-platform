@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Helpers.Extensions;
+using Microsoft.Practices.ServiceLocation;
+using Shared.Messages;
+using Workflow.Publisher;
 
-namespace DataPlatform.Shared.Helpers.Extensions
+namespace Shared.Logging
 {
     public static class LoggingExtensions
     {
+        private static readonly IWorkflowBus Bus = ServiceLocator.Current.GetInstance<IWorkflowBus>();
+
         #region .: Enabled Checks :.
 
         public static bool IsDebugEnabled(this object o)
@@ -105,15 +112,29 @@ namespace DataPlatform.Shared.Helpers.Extensions
             o.GetType().Debug(message);
         }
 
+        public static void Debug(this object o, Func<object> message, SystemName systemName)
+        {
+            o.GetType().Debug(message, systemName);
+        }
+
         public static void Debug(this Type t, Func<object> message)
         {
             Debug(t.FullName, message);
+        }
+        public static void Debug(this Type t, Func<object> message, SystemName systemName)
+        {
+            Debug(t.FullName, message, systemName);
         }
 
         public static void Debug(string name, Func<object> message)
         {
             if (IsDebugEnabled(name))
                 LogManager.GetLogger(name).Debug(message());
+        }
+
+        public static void Debug(string name, Func<object> message, SystemName systemName)
+        {
+            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Debug, systemName));
         }
 
         #endregion
@@ -124,16 +145,29 @@ namespace DataPlatform.Shared.Helpers.Extensions
         {
             Info(o.GetType(), message);
         }
+        public static void Info(this object o, Func<object> message, SystemName systemName)
+        {
+            Info(o.GetType(), message, systemName);
+        }
 
         public static void Info(this Type t, Func<object> message)
         {
             Info(t.FullName, message);
+        }
+        public static void Info(this Type t, Func<object> message, SystemName systemName)
+        {
+            Info(t.FullName, message, systemName);
         }
 
         public static void Info(string name, Func<object> message)
         {
             if (IsInfoEnabled(name))
                 LogManager.GetLogger(name).Info(message());
+        }
+
+        public static void Info(string name, Func<object> message, SystemName systemName)
+        {
+            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Info, systemName));
         }
         #endregion
 
@@ -143,10 +177,18 @@ namespace DataPlatform.Shared.Helpers.Extensions
         {
             Warn(o.GetType(), message);
         }
+        public static void Warn(this object o, Func<object> message, SystemName systemName)
+        {
+            Warn(o.GetType(), message, systemName);
+        }
 
         public static void Warn(this Type t, Func<object> message)
         {
             Warn(t.FullName, message);
+        }
+        public static void Warn(this Type t, Func<object> message, SystemName systemName)
+        {
+            Warn(t.FullName, message, systemName);
         }
 
         public static void Warn(string name, Func<object> message)
@@ -154,6 +196,11 @@ namespace DataPlatform.Shared.Helpers.Extensions
             if (IsWarnEnabled(name))
                 LogManager.GetLogger(name).Warn(message());
         }
+        public static void Warn(string name, Func<object> message, SystemName systemName)
+        {
+            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Warn, systemName));
+        }
+
         #endregion
 
         #region .: Error :.
@@ -163,9 +210,19 @@ namespace DataPlatform.Shared.Helpers.Extensions
             Error(o.GetType(), message, exception);
         }
 
+        public static void Error(this object o, Func<object> message, Exception exception, SystemName systemName)
+        {
+            Error(o.GetType(), message, exception, systemName);
+        }
+
         public static void Error(this object o, Func<object> message)
         {
             Error(o.GetType(), message);
+        }
+
+        public static void Error(this object o, Func<object> message, SystemName systemName)
+        {
+            Error(o.GetType(), message, systemName);
         }
 
         public static void Error(this Type t, Func<object> message, Exception exception)
@@ -173,9 +230,19 @@ namespace DataPlatform.Shared.Helpers.Extensions
             Error(t.FullName, message, exception);
         }
 
+        public static void Error(this Type t, Func<object> message, Exception exception, SystemName systemName)
+        {
+            Error(t.FullName, message, exception, systemName);
+        }
+
         public static void Error(this Type t, Func<object> message)
         {
             Error(t.FullName, message);
+        }
+
+        public static void Error(this Type t, Func<object> message, SystemName systemName)
+        {
+            Error(t.FullName, message, systemName);
         }
 
         public static void Error(string name, Func<object> message)
@@ -183,10 +250,20 @@ namespace DataPlatform.Shared.Helpers.Extensions
             Error(name, message, null);
         }
 
+        public static void Error(string name, Func<object> message, SystemName systemName)
+        {
+            Error(name, message, null, systemName);
+        }
+
         public static void Error(string name, Func<object> message, Exception exception)
         {
             if (IsErrorEnabled(name))
                 LogManager.GetLogger(name).Error(message(), exception);
+        }
+
+        public static void Error(string name, Func<object> message, Exception exception, SystemName systemName)
+        {
+            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Error, systemName, exception));
         }
 
         #endregion
@@ -198,15 +275,30 @@ namespace DataPlatform.Shared.Helpers.Extensions
             Fatal(o.GetType(), message);
         }
 
+        public static void Fatal(this object o, Func<object> message, SystemName systemName)
+        {
+            Fatal(o.GetType(), message, systemName);
+        }
+
         public static void Fatal(this Type t, Func<object> message)
         {
             Fatal(t.FullName, message);
+        }
+
+        public static void Fatal(this Type t, Func<object> message, SystemName systemName)
+        {
+            Fatal(t.FullName, message, systemName);
         }
 
         public static void Fatal(string name, Func<object> message)
         {
             if (IsFatalEnabled(name))
                 LogManager.GetLogger(name).Fatal(message());
+        }
+
+        public static void Fatal(string name, Func<object> message, SystemName systemName)
+        {
+            Bus.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Fatal, systemName));
         }
 
         #endregion

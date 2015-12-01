@@ -7,6 +7,7 @@ using Workflow.Billing.Messages.Publishable;
 using Workflow.DataProvider.Bus.Consumer.Installers;
 using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Events;
+using Workflow.Lace.Messages.Indicators;
 using Workflow.Transactions.Receiver.Service;
 using Workflow.Transactions.Sender.Service;
 
@@ -81,7 +82,11 @@ namespace Workflow.DataProvider.Bus.Consumer
                 .Add<DataProviderResponseTransformed>(
                     (message, info) => new ReceiverConsumers<DataProviderResponseTransformed>(message, container))
                 .Add<DataProviderConfigured>(
-                    (message, info) => new ReceiverConsumers<DataProviderConfigured>(message, container)));
+                    (message, info) => new ReceiverConsumers<DataProviderConfigured>(message, container))
+                .Add<ExecutionDetailForDataProvider>(
+                    (message, info) => new ReceiverConsumers<ExecutionDetailForDataProvider>(message, container))
+                .Add<RequestFieldsForDataProvider>(
+                    (message, info) => new ReceiverConsumers<RequestFieldsForDataProvider>(message, container)));
 
             var apiReceiverQueue = _bus.QueueDeclare("DataPlatform.Api");
             var apiReceiverExchange = _bus.ExchangeDeclare("DataPlatform.Api", ExchangeType.Fanout);
