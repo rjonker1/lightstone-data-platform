@@ -63,8 +63,8 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Api.Domain.Core.1.0.0.1856\lib\net45\Lightstone.DataPlatform.Api.Domain.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.1949, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.1949\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Domain, Version=1.0.0.1950, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.Domain.1.0.0.1950\lib\net45\Lightstone.DataPlatform.Monitoring.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

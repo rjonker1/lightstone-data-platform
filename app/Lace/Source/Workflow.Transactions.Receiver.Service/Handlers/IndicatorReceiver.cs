@@ -1,4 +1,5 @@
-﻿using EasyNetQ;
+﻿using System.Text;
+using EasyNetQ;
 using Monitoring.Domain;
 using Monitoring.Domain.Identifiers;
 using Monitoring.Domain.Repository;
@@ -28,7 +29,7 @@ namespace Workflow.Transactions.Receiver.Service.Handlers
         {
             var indicator = new MonitoringDataProviderRequestField(
                 new DataProviderIdentifier(message.Body.RequestId, message.Body.PackageName, message.Body.DataProvider.Name, (short)message.Body.DataProvider.Id),
-                new RequestFieldIdentifier(message.Body.RequestField.Payload));
+                new RequestFieldIdentifier(Encoding.UTF8.GetBytes(message.Body.RequestField.Payload ?? "{}")));
             _monitoring.Add(indicator);
         }
     }
