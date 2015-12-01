@@ -1,9 +1,11 @@
-﻿using DataPlatform.Shared.ExceptionHandling;
+﻿using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.Packages.Events;
 using PackageBuilder.Domain.Entities.Packages.Read;
 using PackageBuilder.Infrastructure.Repositories;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.EventHandlers.Packages
 {
@@ -21,7 +23,7 @@ namespace PackageBuilder.Domain.EventHandlers.Packages
             if (_repository.Exists(command.Id, command.Name))
             {
                 var exception = new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.PackageBuilder);
                 throw exception;
             }
 

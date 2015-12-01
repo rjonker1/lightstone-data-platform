@@ -6,7 +6,6 @@ using AutoMapper;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
-using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
@@ -20,7 +19,6 @@ using Nancy.Security;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Routes;
 using PackageBuilder.Core.Helpers;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Dtos;
@@ -35,6 +33,7 @@ using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.NEventStore;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Logging;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 using StringExtensions = DataPlatform.Shared.Helpers.Extensions.StringExtensions;
@@ -46,7 +45,7 @@ namespace PackageBuilder.Api.Modules
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus,
-            IUserManagementApiClient userManagementApi, IBillingApiClient billingApiClient, IPublishIntegrationMessages integration) //, IEntryPointAsync entryPointAsync
+            IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration) //, IEntryPointAsync entryPointAsync
         {
 
             Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
@@ -96,24 +95,24 @@ namespace PackageBuilder.Api.Modules
             Post[PackageBuilderApi.PackageRoutes.Execute.ApiRoute, true] = async(parameters, ct) =>
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
-                this.Info(() => StringExtensions.FormatWith("Package Execute started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Execute started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
-                this.Info(() => StringExtensions.FormatWith("Package Read started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Read started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
                 var package = await writeRepo.GetById(apiRequest.PackageId, true);
-                this.Info(() => StringExtensions.FormatWith("Package Read finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Read finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
 
                 if (package == null)
                 {
-                    this.Error(() => StringExtensions.FormatWith("Package not found:", apiRequest.PackageId));
+                    this.Error(() => StringExtensions.FormatWith("Package not found:", apiRequest.PackageId), SystemName.PackageBuilder);
                     throw new LightstoneAutoException("Package could not be found");
                 }
 
-                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
                 var accountNumber = await userManagementApi.GetAsync(token, ct, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
 
-                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
                 var responses = await new TaskFactory().StartNew(() =>
                     ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
@@ -124,19 +123,19 @@ namespace PackageBuilder.Api.Modules
 
 
                 // Filter responses for cleaner api payload
-                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
                 var filteredResponse = new List<IProvideResponseDataProvider>
                 {
                     new ResponseMeta(apiRequest.RequestId, responses.ResponseState())
                 };
 
                 filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
-                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
-                this.Info(() => StringExtensions.FormatWith("Package Execute finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Execute finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
                 return filteredResponse;
             };
@@ -156,46 +155,46 @@ namespace PackageBuilder.Api.Modules
                 // RabbitMQ
                 new TransactionBus(eBus).SendDynamic(Mapper.Map(apiRequest, new TransactionRequestMessage()));
 
-                this.Info(() => StringExtensions.FormatWith("Updated TransactionRequest UserState: {0}", apiRequest.UserState));
+                this.Info(() => StringExtensions.FormatWith("Updated TransactionRequest UserState: {0}", apiRequest.UserState), SystemName.PackageBuilder);
                 if (apiRequest.UserState == ApiCommitRequestUserState.Cancelled) return Response.AsJson(new { Success = "Request successfully cancelled by user" });
                 if (apiRequest.UserState == ApiCommitRequestUserState.VehicleNotProvided) return Response.AsJson(new { Success = "Request successfully marked as VehicleNotProvided by user" });
 
-                this.Info(() => StringExtensions.FormatWith("Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
-                this.Info(() => StringExtensions.FormatWith("Package Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Read Initialized, TimeStamp: {0}", DateTime.UtcNow), SystemName.PackageBuilder);
                 var package = await writeRepo.GetById(apiRequest.PackageId, true);
-                this.Info(() => StringExtensions.FormatWith("Package Read Completed, TimeStamp: {0}", DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Read Completed, TimeStamp: {0}", DateTime.UtcNow), SystemName.PackageBuilder);
 
                 if (package == null)
                 {
-                    this.Error(() => StringExtensions.FormatWith("Package not found:", apiRequest.PackageId));
+                    this.Error(() => StringExtensions.FormatWith("Package not found:", apiRequest.PackageId), SystemName.PackageBuilder);
                     throw new LightstoneAutoException("Package could not be found");
                 }
 
-                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
                 var accountNumber = await userManagementApi.GetAsync(token, ct, "/CustomerClient/{id}", new[] { new KeyValuePair<string, string>("id", apiRequest.CustomerClientId.ToString()) }, null);
 
-                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
                 var responses = await Task.Factory.StartNew(() =>
                     ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName, Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
                     apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber));
 
                 // Filter responses for cleaner api payload
-                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
                 var filteredResponse = new List<IProvideResponseDataProvider>
                 {
                     new ResponseMeta(apiRequest.RequestId, responses.ResponseState())
                 };
 
                 filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
-                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
                 integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
-                this.Info(() => StringExtensions.FormatWith("Package ExecuteWithCarId Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
+                this.Info(() => StringExtensions.FormatWith("Package ExecuteWithCarId Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
                 return filteredResponse;
             };

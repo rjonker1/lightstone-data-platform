@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Castle.Core;
-using Castle.Core.Internal;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.Registration.Lifestyle;
+﻿using System.Linq;
 using Castle.Windsor;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
@@ -18,7 +14,7 @@ using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Domain.Entities.DataImports;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
-using StackExchange.Redis;
+using Shared.Logging;
 
 namespace PackageBuilder.Api
 {
@@ -74,7 +70,7 @@ namespace PackageBuilder.Api
 
             pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
-                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.PackageBuilder);
                 var token = "";
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
@@ -95,7 +91,7 @@ namespace PackageBuilder.Api
             });
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-                this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.PackageBuilder);
 
                 //var ctxObj = new RedisProfiler(container.Resolve<INancyContextWrapper>()).GetContext();
                 //if (ctxObj != null)
@@ -106,7 +102,7 @@ namespace PackageBuilder.Api
             });
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.PackageBuilder);
                 var errorResponse = ErrorResponse.FromException(exception);
                 if (exception is LightstoneAutoException)
                     errorResponse.StatusCode = HttpStatusCode.ImATeapot;

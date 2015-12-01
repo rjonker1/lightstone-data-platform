@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders.Metric;
 using PackageBuilder.Core.Helpers.Extensions;
@@ -10,6 +11,7 @@ using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
+using Shared.Logging;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
@@ -31,14 +33,14 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             }
             catch (InvalidOperationException exception)
             {
-                this.Error(() => "Failed to map {0} to IEnumerable<IDataField>".FormatWith(source), exception);    
+                this.Error(() => "Failed to map {0} to IEnumerable<IDataField>".FormatWith(source), exception, SystemName.PackageBuilder);    
                 throw;
             }
         }
 
         private IEnumerable<DataField> DataFields(object source)
         {
-            this.Info(() => "Attempting to map {0} to IEnumerable<IDataField>".FormatWith(source));
+            this.Info(() => "Attempting to map {0} to IEnumerable<IDataField>".FormatWith(source), SystemName.PackageBuilder);
 
             var properties = source.GetType().GetPublicProperties().AsQueryable().Where(x => !_blackListedProperties.Contains(x.Name)).ToList(); 
             var complexProperties = properties.Where(property =>
@@ -66,13 +68,13 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                 catch (Exception)
                 {
                     var field1 = field;
-                    this.Error(() => "Error getting property value to populate data field value {0}".FormatWith(field1.Name));
+                    this.Error(() => "Error getting property value to populate data field value {0}".FormatWith(field1.Name), SystemName.PackageBuilder);
                 }
                  
                 list.Add(new DataField(field.Name, field.PropertyType.ToString(), _industryRepository.ToList(), value));
             }
 
-            this.Info(() => "Successfully mapped {0} to IEnumerable<IDataField>".FormatWith(source));
+            this.Info(() => "Successfully mapped {0} to IEnumerable<IDataField>".FormatWith(source), SystemName.PackageBuilder);
 
             return list.Where(x => x != null).ToList();
         }

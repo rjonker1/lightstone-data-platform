@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders.Responses;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
@@ -12,6 +12,7 @@ using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.Infrastructure.Repositories;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {
@@ -32,7 +33,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             if (existing)
             {
                 var exception = new LightstoneAutoException("A data provider with the name: {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.PackageBuilder);
                 //throw exception;
                 return;
             }
@@ -40,7 +41,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             var response = new DataProviderResponseRepository()[command.Name];
             if (response == null)
             {
-                this.Warn(() => "No data provider response linked to name {0}".FormatWith(command.Name.ToString()));
+                this.Warn(() => "No data provider response linked to name {0}".FormatWith(command.Name.ToString()), SystemName.PackageBuilder);
                 return;
             }
 

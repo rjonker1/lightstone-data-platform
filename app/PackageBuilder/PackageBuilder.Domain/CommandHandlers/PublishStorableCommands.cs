@@ -1,8 +1,10 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using PackageBuilder.Domain.Core.Contracts.Commands;
 using PackageBuilder.Domain.Entities.CommandStore.Commands;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers
 {
@@ -22,12 +24,12 @@ namespace PackageBuilder.Domain.CommandHandlers
 
         public void Publish(IDomainCommand command)
         {
-            this.Info(() => "Publishing command {0}".FormatWith(command));
+            this.Info(() => "Publishing command {0}".FormatWith(command), SystemName.PackageBuilder);
             _bus.Publish(command);
-            this.Info(() => "Published command {0}".FormatWith(command));
-            this.Info(() => "Storing command {0}".FormatWith(command));
+            this.Info(() => "Published command {0}".FormatWith(command), SystemName.PackageBuilder);
+            this.Info(() => "Storing command {0}".FormatWith(command), SystemName.PackageBuilder);
             _bus.Publish(new StoreCommand(Guid.NewGuid(), command));
-            this.Info(() => "Stored command {0}".FormatWith(command));
+            this.Info(() => "Stored command {0}".FormatWith(command), SystemName.PackageBuilder);
         }
     }
 }

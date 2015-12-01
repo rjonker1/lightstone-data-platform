@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using NHibernate;
 using NHibernate.Linq;
 using PackageBuilder.Core.Entities;
+using Shared.Logging;
 
 namespace PackageBuilder.Core.Repositories
 {
@@ -73,7 +75,7 @@ namespace PackageBuilder.Core.Repositories
         {
             if ((entity is Entity) && (entity as Entity).Id == new Guid())
             {
-                this.Info(() => "Not a valid NHibernate entity {0} - {1}".FormatWith((entity as Entity).Id, entity));
+                this.Info(() => "Not a valid NHibernate entity {0} - {1}".FormatWith((entity as Entity).Id, entity), SystemName.PackageBuilder);
                 throw new InvalidOperationException();
             }
         }

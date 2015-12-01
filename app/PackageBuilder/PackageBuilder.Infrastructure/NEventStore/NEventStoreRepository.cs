@@ -4,8 +4,9 @@ using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
-using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Enums;
 using NEventStore;
+using Shared.Logging;
 
 namespace PackageBuilder.Infrastructure.NEventStore
 {
@@ -27,9 +28,9 @@ namespace PackageBuilder.Infrastructure.NEventStore
 
         public async Task<T> GetById(Guid id, bool useCache = false)
         {
-            this.Info(() => string.Format("Attempting to get aggregate: {0}", id));
+            this.Info(() => string.Format("Attempting to get aggregate: {0}", id), SystemName.PackageBuilder);
 
-            this.Info(() => string.Format("Aggregate Cache Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
+            this.Info(() => string.Format("Aggregate Cache Read Initialized, TimeStamp: {0}", DateTime.UtcNow), SystemName.PackageBuilder);
 
             var aggregate = default(T);
 
@@ -37,14 +38,14 @@ namespace PackageBuilder.Infrastructure.NEventStore
 
             if (aggregate == null)
             {
-                this.Info(() => string.Format("Aggregate DB Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
+                this.Info(() => string.Format("Aggregate DB Read Initialized, TimeStamp: {0}", DateTime.UtcNow), SystemName.PackageBuilder);
                 aggregate = GetById<T>(typeof(T).Name, id);
 
                 // Load aggregate into cache, if it was found in the DB and not originally from Cache
                 if (aggregate != null && useCache) _cacheProvider.CacheSave(id, aggregate);
             }
 
-            this.Info(() => string.Format("Successfully got aggregate: {0}", id));
+            this.Info(() => string.Format("Successfully got aggregate: {0}", id), SystemName.PackageBuilder);
 
             return aggregate;
         }
@@ -62,12 +63,12 @@ namespace PackageBuilder.Infrastructure.NEventStore
 
         public void Save(IAggregate aggregate, Guid commitId, bool useCache = false)
         {
-            this.Info(() => string.Format("Attempting to save {0}", aggregate));
+            this.Info(() => string.Format("Attempting to save {0}", aggregate), SystemName.PackageBuilder);
 
             this.Save(typeof(T).Name, aggregate, commitId);
             if (useCache) _cacheProvider.CacheSave(commitId, aggregate as T);
 
-            this.Info(() => string.Format("Successfully to saved {0}", aggregate));
+            this.Info(() => string.Format("Successfully to saved {0}", aggregate), SystemName.PackageBuilder);
         }
     }
 }

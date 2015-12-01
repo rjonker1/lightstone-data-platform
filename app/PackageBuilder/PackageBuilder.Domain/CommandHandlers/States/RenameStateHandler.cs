@@ -1,9 +1,11 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.States.Commands;
 using PackageBuilder.Infrastructure.Repositories;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.States
 {
@@ -21,7 +23,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
             if (_repository.Exists(command.Id, command.Name))
             {
                 var exception = new LightstoneAutoException("A state with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.PackageBuilder);
                 throw exception;
             }
 
@@ -29,7 +31,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
             if (state == null)
             {
                 var exception = new ArgumentNullException(string.Format("Could not retrieve state with id {0}", command.Id));
-                this.Warn(() => exception);
+                this.Warn(() => exception, SystemName.PackageBuilder);
                 throw exception;
             }
 

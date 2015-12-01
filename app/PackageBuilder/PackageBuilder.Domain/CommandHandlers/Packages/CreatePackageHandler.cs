@@ -1,12 +1,13 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.Write;
 using PackageBuilder.Infrastructure.NEventStore;
 using PackageBuilder.Infrastructure.Repositories;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.Packages
 {
@@ -30,7 +31,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
             if (exists)
             {
                 throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => "A Package with the name {0} already exists".FormatWith(command.Name));
+                this.Warn(() => "A Package with the name {0} already exists".FormatWith(command.Name), SystemName.PackageBuilder);
                 return;
             }
 

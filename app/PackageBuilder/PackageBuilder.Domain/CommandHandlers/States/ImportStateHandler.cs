@@ -1,8 +1,8 @@
 ﻿using System;
-using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.States.Commands;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.States
 {

@@ -6,6 +6,7 @@ using PackageBuilder.Domain.Entities.DataImports;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.States.Commands;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataImports
 {

@@ -1,10 +1,12 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.Read;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.Industries
 {
@@ -21,14 +23,14 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
         {
             if (_repository.Exists(command.Id, command.Name))
             {
-                this.Warn(() => "An industry with the name {0} already exists".FormatWith(command.Name));
+                this.Warn(() => "An industry with the name {0} already exists".FormatWith(command.Name), SystemName.PackageBuilder);
                 throw new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
             }
 
             var industry = _repository.Get(command.Id);
             if (industry == null)
             {
-                this.Warn(() => "Could not load industry with id {0}".FormatWith(command.Id));
+                this.Warn(() => "Could not load industry with id {0}".FormatWith(command.Id), SystemName.PackageBuilder);
                 throw new ArgumentNullException("Could not load industry with id {0}".FormatWith(command.Id));
             }
 

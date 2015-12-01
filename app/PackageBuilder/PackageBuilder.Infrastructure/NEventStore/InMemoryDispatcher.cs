@@ -1,9 +1,10 @@
 ﻿using System.Linq;
-using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Enums;
 using MemBus;
 using NEventStore;
 using NEventStore.Dispatcher;
 using PackageBuilder.Domain.Core.Contracts.Events;
+using Shared.Logging;
 
 namespace PackageBuilder.Infrastructure.NEventStore
 {
@@ -27,11 +28,11 @@ namespace PackageBuilder.Infrastructure.NEventStore
             {
                 var tmp = @event;
 
-                this.Info(() => string.Format("Attempting to dispatch event: {0}", tmp));
+                this.Info(() => string.Format("Attempting to dispatch event: {0}", tmp), SystemName.PackageBuilder);
 
                 _bus.Publish(@event.Body);
 
-                this.Info(() => string.Format("Successfully dispatched event: {0}", tmp));                
+                this.Info(() => string.Format("Successfully dispatched event: {0}", tmp), SystemName.PackageBuilder);                
             }
         }
     }

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers;
 using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
@@ -8,6 +9,7 @@ using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.CommandStore;
 using PackageBuilder.Domain.Entities.CommandStore.Commands;
+using Shared.Logging;
 
 namespace PackageBuilder.Domain.CommandHandlers.CommandStore
 {
@@ -28,7 +30,7 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
             {
                 var domainCommand = GetDomainCommandByType(command);
                 if (domainCommand == null)
-                    this.Error(() => "Could not replay command {0}, continuing to replay next command".FormatWith(command.Type));
+                    this.Error(() => "Could not replay command {0}, continuing to replay next command".FormatWith(command.Type), SystemName.PackageBuilder);
                 else
                     _bus.Publish(domainCommand);
             }
@@ -42,7 +44,7 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
             }
             catch (JsonException exception)
             {
-                this.Error(() => "Could not deserialize command by type: {0} attempting to deserialize by type name {1}".FormatWith(command.Type, command.TypeName), exception);
+                this.Error(() => "Could not deserialize command by type: {0} attempting to deserialize by type name {1}".FormatWith(command.Type, command.TypeName), exception, SystemName.PackageBuilder);
                 return GetDomainCommandByTypeName(command);
             }
         }
@@ -55,7 +57,7 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
             }
             catch (JsonException exception)
             {
-                this.Error(() => "Could not deserialize command by type: {0} or type name {1}".FormatWith(command.Type, command.TypeName), exception);
+                this.Error(() => "Could not deserialize command by type: {0} or type name {1}".FormatWith(command.Type, command.TypeName), exception, SystemName.PackageBuilder);
                 return null;
             }
         }
