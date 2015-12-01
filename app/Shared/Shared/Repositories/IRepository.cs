@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DataPlatform.Shared.Repositories
@@ -12,6 +14,7 @@ namespace DataPlatform.Shared.Repositories
         void Save(T entity, bool useCache = false);
         void SaveOrUpdate(T entity);
         void SaveOrUpdate(T entity, bool useCache = false);
+        void BatchInsert(IEnumerable<T> repository, int batchSize);
         void Refresh(T entity);
         void Delete(T entity);
         void Delete(T entity, bool useCache = false);
