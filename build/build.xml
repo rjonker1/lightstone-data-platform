@@ -1048,7 +1048,7 @@
          <dependency id="Lightstone.DataPlatform.Shared" version="1.0.0.1936" />
          <dependency id="log4net" version="1.2.11" />
          <dependency id="Newtonsoft.Json" version="6.0.8" />
-         <dependency id="RabbitMQ.Client" version="3.5.3" />
+         <dependency id="RabbitMQ.Client" version="3.4.3" />
       </dependencies>
     </nuget>
 
