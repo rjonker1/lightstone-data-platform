@@ -36,14 +36,14 @@ namespace DataProviders.MMCode.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new { _dataProvider },_dataProvider.BillablleState.NoRecordState);
+                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 GetMmCode.ForCar(new MmCodeQuery(_repository), new CarIdQuery().RetrieveCarId(response, _dataProvider.GetRequest<IAmMmCodeRequest>()),
                     out _mmCode);
 
                 _logCommand.LogResponse(_mmCode != null && _mmCode.Car_ID > 0 ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                        .ForDatabaseType(), new { _mmCode },_dataProvider.BillablleState.NoRecordState);
+                        .ForDatabaseType(), new { _mmCode }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 TransformResponse(response);
             }

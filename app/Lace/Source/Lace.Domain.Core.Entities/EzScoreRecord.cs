@@ -12,6 +12,13 @@ namespace Lace.Domain.Core.Entities
             
         }
 
+        public EzScoreRecord WithReference(Guid ezScoreRecordId, Guid driverLicenceScanId)
+        {
+            EzScoreRecordId = ezScoreRecordId;
+            DriverLicenceScanId = driverLicenceScanId;
+            return this;
+        }
+
         public EzScoreRecord WithHeader(string phone1, string phone2, string phone3, string emailAddress1, string emailAddress2, string emailAddress3,
             string surname, string firstName, string idnumber)
         {

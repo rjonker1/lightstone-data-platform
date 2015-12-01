@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
@@ -11,6 +12,7 @@ using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;
+using Workflow.Lace.Messages.Indicators;
 using Workflow.Lace.Persistence;
 using Workflow.Transactions.Sender.Service.Views;
 
@@ -36,7 +38,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
             var @event =
                 new RequestToDataProvider(Guid.NewGuid(), request.RequestId, request.DataProvider,
-                    request.Date, request.Connection);
+                    request.Date, request.Connection, message.Body.ReferenceNumber);
 
             _repository.Add(
                 new DataProviderEvent(new EventIndentifier(request.RequestId,
@@ -46,8 +48,6 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                         request.CommandType, @event.GetType()), request.Date)));
 
             _publisher.SendToBus(@event);
-            //new DataProviderEventBus(BusFactory.CreateAdvancedBus("workflow/dataprovider/queue")).Send(@event,
-            //    "DataPlatform.DataProvider.Receiver", "DataPlatform.DataProvider.Receiver");
         }
 
         public void Consume(IMessage<GetResponseFromDataProviderCommmand> message)
@@ -59,7 +59,7 @@ namespace Workflow.Transactions.Sender.Service.Handlers
 
             var @event =
                 new ResponseFromDataProvider(Guid.NewGuid(), request.RequestId, request.DataProvider,
-                    request.Date, request.Connection, request.Payload);
+                    request.Date, request.Connection, request.Payload, message.Body.ReferenceNumber);
 
             _repository.Add(
                 new DataProviderEvent(new EventIndentifier(request.RequestId,
@@ -115,6 +115,13 @@ namespace Workflow.Transactions.Sender.Service.Handlers
                         request.CommandType, @event.GetType()), request.Date)));
 
             _publisher.SendToBus(@event);
+
+
+            if(message.Body.RequestFields == null || !message.Body.RequestFields.Any())
+                return;
+
+            message.Body.RequestFields.ForEach(f => _publisher.SendToBus(new RequestFieldsForDataProvider(request.RequestId,
+                    new DataProviderIdentifier((DataProviderCommandSource)request.DataProvider.Id), f, message.Body.Request.PackageName)));
         }
 
         public void Consume(IMessage<ReturnEntryPointResponse> message)

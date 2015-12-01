@@ -49,7 +49,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                             "Minimum requirements for Lightstone Property request has not been met with User id {0} and  Id or CK {1} and Max Rows to Return {2} and Tracking Number {3}",
                             request.UserId, request.IdCkOfOwner, request.MaxRowsToReturn, request.TrackingNumber));
 
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request}, _dataProvider.BillablleState.NoRecordState);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString()).ForWebApiType(), new { request }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 if (api.Client.State == CommunicationState.Closed)
                     api.Client.Open();
@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 
                 _logCommand.LogResponse(_result != null ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(api.Client.Endpoint.Address.ToString())
-                        .ForWebApiType(), new {_result}, _dataProvider.BillablleState.NoRecordState);
+                        .ForWebApiType(), new { _result }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
 
                 TransformResponse(response);

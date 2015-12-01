@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
+                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 _carInformation = new LightstoneVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(),
                     _repository);
@@ -49,7 +49,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
                 _logCommand.LogResponse(_carInformation != null && _carInformation.CarInformationDto != null &&_carInformation.CarInformationDto.CarId > 0 ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                        .ForDatabaseType(), new { _carInformation, _metrics }, _dataProvider.BillablleState.NoRecordState);
+                        .ForDatabaseType(), new { _carInformation, _metrics }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 TransformResponse(response);
             }

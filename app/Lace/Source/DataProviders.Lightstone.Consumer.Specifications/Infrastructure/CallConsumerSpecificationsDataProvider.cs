@@ -35,7 +35,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
                 var api = new ConfigureSource();
 
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
-                    .ForWebApiType(), new {_dataProvider}, _dataProvider.BillablleState.NoRecordState);
+                    .ForWebApiType(), new {_dataProvider}, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 _jsonRepairHistory =
                     api.Client.getRepairHistory(
@@ -44,7 +44,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.Infrastru
 
                 _logCommand.LogResponse(!string.IsNullOrEmpty(_jsonRepairHistory) ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(api.Client.Endpoint.Address.Uri.AbsoluteUri)
-                        .ForDatabaseType(), new { _jsonRepairHistory }, _dataProvider.BillablleState.NoRecordState);
+                        .ForDatabaseType(), new { _jsonRepairHistory }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 TransformResponse(response);
             }

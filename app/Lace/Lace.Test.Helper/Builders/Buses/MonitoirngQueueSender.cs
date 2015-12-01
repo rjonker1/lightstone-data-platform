@@ -67,7 +67,7 @@ namespace Lace.Test.Helper.Builders.Buses
             _command.Workflow.DataProviderRequest(
                 new DataProviderIdentifier((int) _dataProvider, _dataProvider.ToString(), 55, 100,
                     DataProviderAction.Request, DataProviderResponseState.Successful, _billNoRecords),
-                new ConnectionTypeIdentifier("TEST", "TEST"), new {message}, _stopWatch);
+                new ConnectionTypeIdentifier("TEST", "TEST"), new {message}, _stopWatch, "");
             Thread.Sleep(1000);
             return this;
         }
@@ -84,7 +84,7 @@ namespace Lace.Test.Helper.Builders.Buses
             _command.Workflow.DataProviderRequest(
                 new DataProviderIdentifier((int) _dataProvider, _dataProvider.ToString(), 55, 100,
                     DataProviderAction.Response, DataProviderResponseState.Successful, _billNoRecords),
-                new ConnectionTypeIdentifier("TEST", "TEST"), new {message}, _stopWatch);
+                new ConnectionTypeIdentifier("TEST", "TEST"), new {message}, _stopWatch,"");
             Thread.Sleep(1000);
             return this;
         }

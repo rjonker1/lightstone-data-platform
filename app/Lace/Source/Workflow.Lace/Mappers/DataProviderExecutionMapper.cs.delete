@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Monitoring.Domain;
 using Shared.BuildingBlocks.AdoNet.Mapping;
+using Shared.BuildingBlocks.AdoNet.Repository;
+using Workflow.Lace.Domain;
 
-namespace Monitoring.Domain.Mappers
+namespace Workflow.Lace.Mappers
 {
-    public class MonitoringDataProviderRequestFieldMapper : TypeMapper
+    public class DataProviderExecutionMapper : TypeMapper
     {
         protected override IEnumerable<string> FieldNames
         {
@@ -12,7 +18,7 @@ namespace Monitoring.Domain.Mappers
             {
                 return new[]
                 {
-                   "DataProviderId", "DataProviderName", "RequestFields", "RequestId", "PackageName"
+                    "DataProviderId", "DataProviderName", "CommandTypeId", "CommandTypeName", "ElapsedTime", "RequestId"
                 };
             }
         }
@@ -24,21 +30,24 @@ namespace Monitoring.Domain.Mappers
 
         public override void Insert(System.Data.IDbConnection connection, object instance)
         {
-            var request = instance as MonitoringDataProviderRequestField;
+            var request = instance as DataProviderExecution;
             var sql = GenerateInsertStatement();
             var values = new
             {
                 DataProviderId = request.DataProvider.Id,
                 DataProviderName = request.DataProvider.Name,
-                RequestFields = request.RequestField.Payload,
-                RequestId = request.DataProvider.RequestId,
-                PackageName = request.DataProvider.PackageName
+                CommandTypeId = request.Command.Id,
+                CommandTypeName = request.Command.Name,
+                ElapsedTime = request.ElapsedTime,
+                RequestId = request.RequestId
             };
+
+            connection.Execute(sql, values);
         }
 
         protected override string TableName
         {
-            get { return "DataProviderRequestField"; }
+            get { return "DataProviderResponseTime"; }
         }
     }
 }

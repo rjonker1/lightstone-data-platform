@@ -13,8 +13,8 @@ namespace Lace.Domain.DataProviders.Core.Contracts
         void LogConfiguration(object payload, object metadata);
         void LogTransformation(object payload, object metadata);
         void LogFault(object payload, object metadata);
-        void LogRequest(ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords);
-        void LogResponse(DataProviderResponseState state, ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords);
+        void LogRequest(ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords, string referenceNumber);
+        void LogResponse(DataProviderResponseState state, ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords, string referenceNumber);
         void LogEntryPointRequest(ICollection<IPointToLaceRequest> request,DataProviderNoRecordState billNoRecords);
         void LogEntryPointResponse(object payload, DataProviderResponseState state, ICollection<IPointToLaceRequest> request,DataProviderNoRecordState billNoRecords);
     }

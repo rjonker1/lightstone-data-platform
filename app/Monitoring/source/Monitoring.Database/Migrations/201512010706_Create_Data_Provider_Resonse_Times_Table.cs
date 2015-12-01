@@ -2,9 +2,8 @@
 
 namespace Monitoring.Database.Migrations
 {
-    [Tags("Monitoring")]
-    [Migration(201511301330)]
-    internal class Create_Data_Provider_Resonse_Times_Table : Migration
+    [Migration(201512010706)]
+    public class Create_Data_Provider_Resonse_Times_Table : Migration
     {
         public override void Down()
         {

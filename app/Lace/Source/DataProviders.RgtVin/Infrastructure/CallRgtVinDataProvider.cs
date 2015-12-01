@@ -40,12 +40,9 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
+                    .ForDatabaseType(), new {_dataProvider}, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 GetVin.AsAList(response, _dataProvider.GetRequest<IAmRgtVinRequest>(), new VehicleVinQuery(_repository), out _vins);
-
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                    .ForDatabaseType(), new { _vins }, _dataProvider.BillablleState.NoRecordState);
 
                 if (_vins == null || !_vins.Any())
                     _logCommand.LogFault(new {_dataProvider},
@@ -53,7 +50,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
                 _logCommand.LogResponse(_vins != null && _vins.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(AutoCarstatsConfiguration.Database)
-                        .ForDatabaseType(), new { _vins }, _dataProvider.BillablleState.NoRecordState);
+                        .ForDatabaseType(), new { _vins }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 TransformResponse(response);
 

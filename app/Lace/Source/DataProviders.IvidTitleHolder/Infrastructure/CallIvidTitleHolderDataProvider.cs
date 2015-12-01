@@ -58,7 +58,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     HandleRequest.GetTitleholderQueryRequest(response,_dataProvider.GetRequest<IAmIvidTitleholderRequest>());
 
                 _logCommand.LogConfiguration(new {request}, null);
-                _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new { request }, _dataProvider.BillablleState.NoRecordState);
+                _logCommand.LogRequest(new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new { request }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 _response = webService
                     .Client
@@ -68,7 +68,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 
                 _logCommand.LogResponse(_response == null ? DataProviderResponseState.NoRecords : DataProviderResponseState.Successful,
                     new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
-                        .ForWebApiType(), _response ?? new TitleholderQueryResponse(), _dataProvider.BillablleState.NoRecordState);
+                        .ForWebApiType(), _response ?? new TitleholderQueryResponse(), _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 if (_response == null)
                     _logCommand.LogFault(new {_dataProvider}, new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"});

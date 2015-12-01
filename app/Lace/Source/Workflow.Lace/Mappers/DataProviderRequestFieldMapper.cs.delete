@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Shared.BuildingBlocks.AdoNet.Mapping;
+using Workflow.Lace.Domain;
 
-namespace Monitoring.Domain.Mappers
+namespace Workflow.Lace.Mappers
 {
-    public class MonitoringDataProviderRequestFieldMapper : TypeMapper
+    public class DataProviderRequestFieldMapper : TypeMapper
     {
         protected override IEnumerable<string> FieldNames
         {
@@ -12,7 +13,7 @@ namespace Monitoring.Domain.Mappers
             {
                 return new[]
                 {
-                   "DataProviderId", "DataProviderName", "RequestFields", "RequestId", "PackageName"
+                    "DataProviderId", "DataProviderName", "RequestFields", "RequestId", "PackageName"
                 };
             }
         }
@@ -24,15 +25,15 @@ namespace Monitoring.Domain.Mappers
 
         public override void Insert(System.Data.IDbConnection connection, object instance)
         {
-            var request = instance as MonitoringDataProviderRequestField;
+            var request = instance as DataProviderRequestField;
             var sql = GenerateInsertStatement();
             var values = new
             {
                 DataProviderId = request.DataProvider.Id,
                 DataProviderName = request.DataProvider.Name,
                 RequestFields = request.RequestField.Payload,
-                RequestId = request.DataProvider.RequestId,
-                PackageName = request.DataProvider.PackageName
+                RequestId = request.RequestId,
+                PackageName = request.PackageName
             };
         }
 

@@ -45,10 +45,10 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Callers
                 if (_cacheResponse != null)
                 {
                     _logCommand.LogRequest(new ConnectionTypeIdentifier("localhost").ForCacheType(), _request,
-                        _dataProvider.BillablleState.NoRecordState);
+                        _dataProvider.BillablleState.NoRecordState, _cacheResponse.Reference);
 
                     _logCommand.LogResponse(DataProviderResponseState.Successful, new ConnectionTypeIdentifier("localhost").ForCacheType(),
-                        _cacheResponse, _dataProvider.BillablleState.NoRecordState);
+                        _cacheResponse, _dataProvider.BillablleState.NoRecordState, _cacheResponse.Reference);
 
                     _logCommand.LogTransformation(_cacheResponse, new {CacheResponse = "Response retrieved from Ivid's Cache"});
                     _cacheResponse.HasBeenHandled();

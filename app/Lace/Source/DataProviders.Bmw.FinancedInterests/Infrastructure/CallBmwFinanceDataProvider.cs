@@ -40,7 +40,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
             try
             {
                 _logCommand.LogRequest(new ConnectionTypeIdentifier(IntegrationBmwConfiguration.Database)
-                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState);
+                    .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState,string.Empty);
 
                 _bmwFinances =
                     new GetFinanceDataRequestFactory().Get(new BmwFinanceQuery(_repository),
@@ -48,7 +48,7 @@ namespace Lace.Domain.DataProviders.Bmw.Finance.Infrastructure
 
                 _logCommand.LogResponse(_bmwFinances != null && _bmwFinances.Any() ? DataProviderResponseState.Successful : DataProviderResponseState.NoRecords,
                     new ConnectionTypeIdentifier(IntegrationBmwConfiguration.Database)
-                        .ForDatabaseType(), new { _bmwFinances }, _dataProvider.BillablleState.NoRecordState);
+                        .ForDatabaseType(), new { _bmwFinances }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 TransformResponse(response);
             }

@@ -73,19 +73,19 @@ namespace Lace.Domain.DataProviders.Core.Shared
             SendAsyc(CommandType.Error, payload, metadata);
         }
 
-        public void LogRequest(ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords)
+        public void LogRequest(ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords, string referenceNumber)
         {
             SendRequestAsync(
                 new DataProviderIdentifier(_dataProviderName, DataProviderAction.Request, DataProviderResponseState.Successful,billNoRecords)
-                    .SetPrice(_dataProvider), connection, payload, _requestWatch);
+                    .SetPrice(_dataProvider), connection, payload, _requestWatch,referenceNumber);
 
         }
 
-        public void LogResponse(DataProviderResponseState state, ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords)
+        public void LogResponse(DataProviderResponseState state, ConnectionTypeIdentifier connection, object payload, DataProviderNoRecordState billNoRecords, string referenceNumber)
         {
             SendResponseAsync(new DataProviderIdentifier(_dataProviderName, DataProviderAction.Response, state,billNoRecords)
                 .SetPrice(
-                    _dataProvider), connection, payload, _requestWatch);
+                    _dataProvider), connection, payload, _requestWatch, referenceNumber);
         }
 
         public void LogEntryPointRequest(ICollection<IPointToLaceRequest> request,DataProviderNoRecordState billNoRecords)
@@ -177,7 +177,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendRequestAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch)
+        private void SendRequestAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch, string referenceNumber)
         {
             try
             {
@@ -186,7 +186,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.DataProviderRequest(dataProvider, connection, payload, stopWatch);
+                        _commands.Workflow.DataProviderRequest(dataProvider, connection, payload, stopWatch,referenceNumber);
                     }
                     catch (Exception ex)
                     {
@@ -200,7 +200,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        private void SendResponseAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch)
+        private void SendResponseAsync(DataProviderIdentifier dataProvider, ConnectionTypeIdentifier connection, object payload, DataProviderStopWatch stopWatch, string referenceNumber)
         {
             try
             {
@@ -209,7 +209,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 {
                     try
                     {
-                        _commands.Workflow.DataProviderResponse(dataProvider, connection, payload, stopWatch);
+                        _commands.Workflow.DataProviderResponse(dataProvider, connection, payload, stopWatch,referenceNumber);
                     }
                     catch (Exception ex)
                     {

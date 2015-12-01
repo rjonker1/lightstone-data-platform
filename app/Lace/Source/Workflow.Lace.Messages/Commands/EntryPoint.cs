@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Identifiers;
 using EasyNetQ;
@@ -27,8 +28,11 @@ namespace Workflow.Lace.Messages.Commands
         [DataMember]
         public NoRecordBillableIdentifier BillNoRecords { get; private set; }
 
+        [DataMember]
+        public List<RequestFieldTypeIdentifier> RequestFields { get; private set; }
+
         public ReceiveEntryPointRequest(Guid id, Guid requestId,
-            DateTime date, SearchRequestIndentifier request, PayloadIdentifier payload,NoRecordBillableIdentifier billNoRecords)
+            DateTime date, SearchRequestIndentifier request, PayloadIdentifier payload, NoRecordBillableIdentifier billNoRecords, List<RequestFieldTypeIdentifier> requestFields)
         {
             Id = id;
             Date = date;
@@ -36,6 +40,7 @@ namespace Workflow.Lace.Messages.Commands
             Request = request;
             Payload = payload;
             BillNoRecords = billNoRecords;
+            RequestFields = requestFields;
 
         }
     }

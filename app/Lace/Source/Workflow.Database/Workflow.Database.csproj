@@ -106,6 +106,7 @@
     </Compile>
     <None Include="Migrations\201504251525_Create_Data_Provider_Event_Table.cs.delete" />
     <Compile Include="Migrations\201502271652_Create_Data_Provider_Transaction_Table.cs" />
+    <Compile Include="Migrations\201511301615_Add_Reference_Number.cs" />
     <Compile Include="Migrations\201510132010_Add_Billable_State_For_No_Records.cs" />
   </ItemGroup>
   <ItemGroup>
