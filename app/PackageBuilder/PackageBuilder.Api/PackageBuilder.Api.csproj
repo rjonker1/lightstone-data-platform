@@ -201,8 +201,9 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Metadata.Entrypoint.1.0.0.1936\lib\net45\Lightstone.DataPlatform.Lace.Toolbox.PCubed.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lim.Domain.Messaging">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lim.Domain.Messaging.1.0.0.1628\lib\net45\Lightstone.DataPlatform.Lim.Domain.Messaging.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lim.Domain.Messaging, Version=1.0.0.1974, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lim.Domain.Messaging.1.0.0.1974\lib\net45\Lightstone.DataPlatform.Lim.Domain.Messaging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1970, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
