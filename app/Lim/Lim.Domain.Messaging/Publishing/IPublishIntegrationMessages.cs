@@ -15,7 +15,7 @@ namespace Lim.Domain.Messaging.Publishing
     {
         private readonly IAdvancedBus _bus;
         private readonly IExchange _exchange;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<IntegrationMessagePublisher>();
 
         private const string Exchange = "DataPlatform.Integration.Sender";
         private const string QueueName = "DataPlatform.Integration.Sender";
@@ -27,7 +27,6 @@ namespace Lim.Domain.Messaging.Publishing
                 ExchangeType.Fanout);
             var queue = _bus.QueueDeclare(QueueName);
             _bus.Bind(_exchange, queue, "");
-            _log = LogManager.GetLogger(GetType());
         }
 
         public void SendToBus<T>(T message) where T : class
@@ -38,7 +37,7 @@ namespace Lim.Domain.Messaging.Publishing
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error sending Integration Message because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Error sending Integration Message because of {0}", ex, ex.Message);
             }
         }
 
@@ -50,7 +49,7 @@ namespace Lim.Domain.Messaging.Publishing
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error sending Integration Message because of {0}", ex, ex.Message);
+                Log.ErrorFormat("Error sending Integration Message because of {0}", ex, ex.Message);
             }
         }
     }

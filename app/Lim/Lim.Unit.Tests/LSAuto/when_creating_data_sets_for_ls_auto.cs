@@ -25,7 +25,7 @@ namespace Lim.Unit.Tests.LSAuto
         [Observation]
         public void then_aggregate_must_be_created()
         {
-            
+            _bus.Send(new DataSetc);
         }
     }
 }

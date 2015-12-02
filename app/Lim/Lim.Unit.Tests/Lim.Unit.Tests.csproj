@@ -82,9 +82,8 @@
     <Compile Include="Jobs\Api\when_pushing_hourly_api_job.cs" />
     <Compile Include="Jobs\Api\when_pushing_daily_api_job.cs" />
     <Compile Include="Jobs\Api\when_pushing_cusom_api_job.cs" />
-    <Compile Include="LSAuto\Helpers\FakeDatabase.cs" />
     <Compile Include="LSAuto\Helpers\FakeDataSetReadModel.cs" />
-    <Compile Include="LSAuto\when_reading_data_sets_from_read_model.cs" />
+    <Compile Include="LSAuto\when_creating_data_sets_for_ls_auto.cs" />
     <Compile Include="when_pushing_integration_to_api.cs" />
   </ItemGroup>
   <ItemGroup>
