@@ -54,9 +54,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1979, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Publisher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1968\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
@@ -91,10 +95,6 @@
     <ProjectReference Include="..\Shared.Messages\Shared.Messages.csproj">
       <Project>{D33D6787-FAE4-4F33-8E74-652ABFB88FDA}</Project>
       <Name>Shared.Messages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
