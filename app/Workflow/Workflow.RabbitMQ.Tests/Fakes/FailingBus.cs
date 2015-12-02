@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using EasyNetQ;
 using EasyNetQ.Consumer;
 using EasyNetQ.FluentConfiguration;
+using EasyNetQ.Producer;
 
 namespace Workflow.RabbitMQ.Tests.Fakes
 {
@@ -36,22 +37,22 @@ namespace Workflow.RabbitMQ.Tests.Fakes
             throw new NotImplementedException();
         }
 
-        public IDisposable Subscribe<T>(string subscriptionId, Action<T> onMessage) where T : class
+        public ISubscriptionResult Subscribe<T>(string subscriptionId, Action<T> onMessage) where T : class
         {
             throw new NotImplementedException();
         }
 
-        public IDisposable Subscribe<T>(string subscriptionId, Action<T> onMessage, Action<ISubscriptionConfiguration> configure) where T : class
+        public ISubscriptionResult Subscribe<T>(string subscriptionId, Action<T> onMessage, Action<ISubscriptionConfiguration> configure) where T : class
         {
             throw new NotImplementedException();
         }
 
-        public IDisposable SubscribeAsync<T>(string subscriptionId, Func<T, Task> onMessage) where T : class
+        public ISubscriptionResult SubscribeAsync<T>(string subscriptionId, Func<T, Task> onMessage) where T : class
         {
             throw new NotImplementedException();
         }
 
-        public IDisposable SubscribeAsync<T>(string subscriptionId, Func<T, Task> onMessage, Action<ISubscriptionConfiguration> configure) where T : class
+        public ISubscriptionResult SubscribeAsync<T>(string subscriptionId, Func<T, Task> onMessage, Action<ISubscriptionConfiguration> configure) where T : class
         {
             throw new NotImplementedException();
         }
@@ -71,7 +72,17 @@ namespace Workflow.RabbitMQ.Tests.Fakes
             throw new NotImplementedException();
         }
 
+        public IDisposable Respond<TRequest, TResponse>(Func<TRequest, TResponse> responder, Action<IResponderConfiguration> configure) where TRequest : class where TResponse : class
+        {
+            throw new NotImplementedException();
+        }
+
         public IDisposable RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> responder) where TRequest : class where TResponse : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDisposable RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> responder, Action<IResponderConfiguration> configure) where TRequest : class where TResponse : class
         {
             throw new NotImplementedException();
         }
@@ -81,7 +92,17 @@ namespace Workflow.RabbitMQ.Tests.Fakes
             throw new NotImplementedException();
         }
 
+        public Task SendAsync<T>(string queue, T message) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
         public IDisposable Receive<T>(string queue, Action<T> onMessage) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDisposable Receive<T>(string queue, Action<T> onMessage, Action<IConsumerConfiguration> configure) where T : class
         {
             throw new NotImplementedException();
         }
@@ -91,7 +112,17 @@ namespace Workflow.RabbitMQ.Tests.Fakes
             throw new NotImplementedException();
         }
 
+        public IDisposable Receive<T>(string queue, Func<T, Task> onMessage, Action<IConsumerConfiguration> configure) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
         public IDisposable Receive(string queue, Action<IReceiveRegistration> addHandlers)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDisposable Receive(string queue, Action<IReceiveRegistration> addHandlers, Action<IConsumerConfiguration> configure)
         {
             throw new NotImplementedException();
         }

@@ -4,7 +4,6 @@ using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
-using EasyNetQ.Topology;
 using Shared.Configuration;
 using Workflow.BuildingBlocks.Consumers;
 using Workflow.BuildingBlocks.Dispatcher;
