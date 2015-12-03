@@ -63,11 +63,11 @@
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Bus, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Workflow.Bus.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1984\lib\net45\Lightstone.DataPlatform.Workflow.Bus.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Publisher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1984\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
@@ -99,6 +99,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="appSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="connectionStrings.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="install.bat">

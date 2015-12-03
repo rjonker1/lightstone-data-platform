@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using DataPlatform.Shared.Messaging;
 using EasyNetQ;
+using EasyNetQ.Topology;
 
 namespace Workflow.Publisher
 {

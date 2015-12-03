@@ -2,6 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using EasyNetQ;
+using Workflow.BuildingBlocks;
 using Workflow.Publisher;
 
 namespace Workflow.Bus.Installers
@@ -11,6 +12,7 @@ namespace Workflow.Bus.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IBus>().UsingFactoryMethod(BusBuilder.CreateBus).LifestyleSingleton());
+            container.Register(Component.For<IAdvancedBus>().UsingFactoryMethod(x => BusFactory.CreateAdvancedBus(new QueueDefinition ())).LifestyleSingleton());
         }
     }
 }

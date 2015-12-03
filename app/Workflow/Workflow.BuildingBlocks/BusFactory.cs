@@ -116,8 +116,8 @@ namespace Workflow.BuildingBlocks
 
             IConventions conventions = new Conventions(new TypeNameSerializer())
             {
-                //ExchangeNamingConvention = type => queue.ExchangeName,
-                //QueueNamingConvention = (type, information) => queue.QueueName,
+                ExchangeNamingConvention = type => queue.ExchangeName,
+                QueueNamingConvention = (type, information) => type.Name,
                 TopicNamingConvention = type => queue.ExchangeType, // type.Name,
                 ErrorExchangeNamingConvention = information => queue.ErrorExchangeName,
                 ErrorQueueNamingConvention = () => queue.ErrorQueueName

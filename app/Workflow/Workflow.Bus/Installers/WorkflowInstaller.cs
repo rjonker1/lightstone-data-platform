@@ -9,7 +9,8 @@ namespace Workflow.Bus.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IWorkflowBus>().ImplementedBy<WorkflowBus>().LifestyleSingleton());
+            //container.Register(Component.For<IWorkflowBus>().ImplementedBy<WorkflowBus>().LifestyleSingleton());
+            container.Register(Component.For<IWorkflowBus>().ImplementedBy<WorkflowAdvancedBus>().LifestyleSingleton());
             container.Register(Component.For<IWorkflowBusService>().ImplementedBy<WorkflowBusService>().LifestyleTransient());
         }
     }

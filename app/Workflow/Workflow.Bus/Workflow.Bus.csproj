@@ -93,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
+      <Project>{DFC7DFC8-1C33-4061-90AF-51405D8E8793}</Project>
+      <Name>Workflow.BuildingBlocks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Workflow.Publisher\Workflow.Publisher.csproj">
       <Project>{9ac06f18-fd95-49ba-82db-4abf18f3edb6}</Project>
       <Name>Workflow.Publisher</Name>
