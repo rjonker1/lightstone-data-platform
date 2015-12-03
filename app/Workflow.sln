@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Publisher", "Workf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Bus", "Workflow\Workflow.Bus\Workflow.Bus.csproj", "{B82484DB-A31F-4F94-BFEF-7AA945463478}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Publisher.Installers", "Workflow\Workflow.Publisher.Installers\Workflow.Publisher.Installers.csproj", "{AD24FADC-390E-4D95-854F-4A951DFDBDB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,16 @@ Global
 		{B82484DB-A31F-4F94-BFEF-7AA945463478}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{B82484DB-A31F-4F94-BFEF-7AA945463478}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{B82484DB-A31F-4F94-BFEF-7AA945463478}.Test|Any CPU.Build.0 = Release|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{AD24FADC-390E-4D95-854F-4A951DFDBDB6}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

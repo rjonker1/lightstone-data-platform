@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B82484DB-A31F-4F94-BFEF-7AA945463478}</ProjectGuid>
+    <ProjectGuid>{AD24FADC-390E-4D95-854F-4A951DFDBDB6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Workflow.Bus</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Workflow.Bus</AssemblyName>
+    <RootNamespace>Workflow.Publisher.Installers</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Workflow.Publisher.Installers</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -38,33 +38,11 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging">
-      <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ.0.50.1.392\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Log4Net1211">
-      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
-    </Reference>
-    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1979, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\packages\RabbitMQ.Client.3.5.3\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,21 +51,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Topshelf">
-      <HintPath>..\..\packages\Topshelf.3.1.4\lib\net40-full\Topshelf.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExceptionPrettyPrinter.cs" />
-    <Compile Include="Installers\BusInstaller.cs" />
-    <Compile Include="Installers\ConsumerInstaller.cs" />
-    <Compile Include="Installers\WindsorInstaller.cs" />
-    <Compile Include="Installers\WorkflowBusServiceInstaller.cs" />
-    <Compile Include="IWorkflowBusService.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="BusInstaller.cs" />
+    <Compile Include="WorkflowInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WindsorMessageDispatcher.cs" />
-    <Compile Include="WorkflowBusService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -97,12 +65,8 @@
       <Project>{DFC7DFC8-1C33-4061-90AF-51405D8E8793}</Project>
       <Name>Workflow.BuildingBlocks</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Workflow.Publisher.Installers\Workflow.Publisher.Installers.csproj">
-      <Project>{AD24FADC-390E-4D95-854F-4A951DFDBDB6}</Project>
-      <Name>Workflow.Publisher.Installers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Workflow.Publisher\Workflow.Publisher.csproj">
-      <Project>{9ac06f18-fd95-49ba-82db-4abf18f3edb6}</Project>
+      <Project>{9AC06F18-FD95-49BA-82DB-4ABF18F3EDB6}</Project>
       <Name>Workflow.Publisher</Name>
     </ProjectReference>
   </ItemGroup>
