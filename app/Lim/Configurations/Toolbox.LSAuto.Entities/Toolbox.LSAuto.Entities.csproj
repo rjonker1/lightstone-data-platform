@@ -59,9 +59,9 @@
     <Compile Include="DataField.cs" />
     <Compile Include="Factory\LSAutoFactoryManager.cs" />
     <Compile Include="Maps\DataSetMap.cs" />
-    <Compile Include="Tables.cs" />
+    <Compile Include="View.cs" />
     <Compile Include="DataSet.cs" />
-    <Compile Include="TableColumns.cs" />
+    <Compile Include="ViewColumns.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -5,14 +5,15 @@ namespace Lim
 {
     public class LimEvent : IMessage
     {
+        public long Id { get; set; }
         public int Version { get;  set; }
-        public string EventType { get; protected set; }
-        public int EventTypeId { get; protected set; }
-        public bool AggregateNew { get; protected set; }
-        public Guid CorrelationId { get; protected set; }
-        public string Type { get; protected set; }
-        public string TypeName { get; protected set; }
-        public byte[] Payload { get; protected set; }
-        public Guid User { get; protected set; }
+        public string EventType { get; set; }
+        public int EventTypeId { get; set; }
+        public bool AggregateNew { get; set; }
+        public Guid CorrelationId { get; set; }
+        public Type Type { get; set; }
+        public string TypeName { get; set; }
+       // public byte[] Payload { get; set; }
+        public Guid User { get; set; }
     }
 }

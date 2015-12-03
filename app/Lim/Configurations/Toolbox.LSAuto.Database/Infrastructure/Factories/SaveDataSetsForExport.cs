@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.Logging;
 using Lim.Domain.Base;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Dto;
+using Lim.Dtos;
 using Toolbox.LSAuto.Entities;
 using Toolbox.LSAuto.Entities.Factory;
 
@@ -39,7 +39,7 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Factories
                     Name = s.Name,
                     Id = s.Id,
                     Activated = s.Activated,
-                    DataSetId = dto.Id,
+                    DataSet = dataSetEntity,
                     DisplayName = s.DisplayName,
                     Selected = s.Selected
                 });

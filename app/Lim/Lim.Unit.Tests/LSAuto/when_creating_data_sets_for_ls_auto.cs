@@ -27,8 +27,8 @@ namespace Lim.Unit.Tests.LSAuto
         [Observation]
         public void then_aggregate_must_be_created()
         {
-            var id = Guid.NewGuid();
-            _bus.Send(new CreateDataSetExport(FakeDataSetDtoBuilder.ForLsAutoSpecsData(), Guid.NewGuid()));
+            long id = new Random().Next(1000,10000000);
+            _bus.Send(new CreateDataSetExport(FakeDataSetDtoBuilder.ForLsAutoSpecsData(id), Guid.NewGuid()));
             var datasets = _readFacade.GetDataSets();
             datasets.Count().ShouldEqual(1);
 

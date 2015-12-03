@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Dto;
+using Lim.Dtos;
 
 namespace Toolbox.LightstoneAuto.Database.Domain
 {

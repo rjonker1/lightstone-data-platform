@@ -5,11 +5,13 @@ namespace Toolbox.LightstoneAuto.Database.Domain.Events
 {
     public class DataSetDeActivated : LimEvent
     {
-        public readonly Guid Id;
-
-        public DataSetDeActivated(Guid id)
+        public DataSetDeActivated(long aggregateId, long dataSetId, Guid correlationId)
         {
-            Id = id;
+            Id = aggregateId;
+            DataSetId = dataSetId;
+            CorrelationId = correlationId;
         }
+
+        public readonly long DataSetId;
     }
 }

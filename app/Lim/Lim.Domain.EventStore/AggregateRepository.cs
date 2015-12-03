@@ -1,5 +1,4 @@
-﻿using System;
-using Lim.Domain.Base;
+﻿using Lim.Domain.Base;
 
 namespace Lim.Domain.EventStore
 {
@@ -17,7 +16,7 @@ namespace Lim.Domain.EventStore
             _storage.SaveEvents(aggregate.Id, aggregate.GetUncommittedEvents(), expectedVersion);
         }
 
-        public T GetById(Guid id)
+        public T GetById(long id)
         {
             var obj = new T();
             var e = _storage.GetEventsForAggregate(id);

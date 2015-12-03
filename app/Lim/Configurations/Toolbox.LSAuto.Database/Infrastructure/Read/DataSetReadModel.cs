@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lim.Dtos;
 using Toolbox.LightstoneAuto.Database.Domain;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Dto;
 
 namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read
 {

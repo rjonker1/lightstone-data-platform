@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lim.Dtos;
 using Lim.Test.Helper.Fakes.Repository;
 using Toolbox.LightstoneAuto.Database.Domain;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Dto;
 namespace Lim.Unit.Tests.LSAuto.Helpers
 {
     public class FakeDataSetReadModel : IReadModelFacade
@@ -16,17 +16,18 @@ namespace Lim.Unit.Tests.LSAuto.Helpers
                 Version = s.Version,
                 Activated = s.Activated,
                 DateCreated = s.DateCreated,
-                DataFields = FakeDatabase.DataFieldList.Where(w => w.DataSetId == s.Id).Select(f => new DataFieldDto
-                {
-                    Id = f.Id,
-                    Name = f.Name,
-                    Activated = f.Activated,
-                    DateCreated = f.DateCreated,
-                    DataSetId = f.DataSetId,
-                    DisplayName = f.DisplayName,
-                    Selected = f.Selected,
-                    DateModified = f.DateModified
-                }).ToList(),
+                DataFields =  new List<DataFieldDto>(),
+                //DataFields = FakeDatabase.DataFieldList.Where(w => w.DataSet.Id == s.Id).Select(f => new DataFieldDto
+                //{
+                //    Id = f.Id,
+                //    Name = f.Name,
+                //    Activated = f.Activated,
+                //    DateCreated = f.DateCreated,
+                //    DataSetId = f.DataSet.Id,
+                //    DisplayName = f.DisplayName,
+                //    Selected = f.Selected,
+                //    DateModified = f.DateModified
+                //}).ToList(),
                 DateModified = s.DateModified,
                 Description = s.Description
                 

@@ -4,7 +4,8 @@ namespace Toolbox.LSAuto.Entities
 {
     public class DataSet
     {
-        public virtual Guid Id { get; set; }
+        public virtual long Id { get; set; }
+        public virtual long AggregateId { get; set; }
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual long Version { get; set; }

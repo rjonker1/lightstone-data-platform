@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Toolbox.LightstoneAuto.Database.Infrastructure.Dto
+namespace Lim.Dtos
 {
-    public class TableColumnDto
+    public class ViewColumnDto
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public Guid TableId { get; set; }
         public string Name { get; set; }
         public string DisplayName { get; set; }

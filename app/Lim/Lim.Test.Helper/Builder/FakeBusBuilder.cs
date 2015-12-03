@@ -18,18 +18,18 @@ namespace Lim.Test.Helper.Builder
             var repository = new AggregateRepository<DataSetExport>(storage);
             var commands = new DataSetCommandHandler(repository);
             bus.RegisterHandler<CreateDataSetExport>(commands.Handle);
-            bus.RegisterHandler<DeactivateDataSet>(commands.Handle);
-            bus.RegisterHandler<RenameDataSetExport>(commands.Handle);
+            bus.RegisterHandler<DeActivateDataSetExport>(commands.Handle);
+            bus.RegisterHandler<ModifyDataSetExport>(commands.Handle);
 
             var detailHandler = new DataSetDetailDtoHandler(FakeDataBaseBuilder.ForDataSetDtoRepository());
             bus.RegisterHandler<DataSetExportCreated>(detailHandler.Handle);
             bus.RegisterHandler<DataSetDeActivated>(detailHandler.Handle);
-            bus.RegisterHandler<DataSetRenamed>(detailHandler.Handle);
+            bus.RegisterHandler<DataSetModified>(detailHandler.Handle);
 
             var dataSetHandler = new DataSetDtoHandler(FakeDataBaseBuilder.ForDataSetDtoRepository());
             bus.RegisterHandler<DataSetExportCreated>(dataSetHandler.Handle);
             bus.RegisterHandler<DataSetDeActivated>(dataSetHandler.Handle);
-            bus.RegisterHandler<DataSetRenamed>(dataSetHandler.Handle);
+            bus.RegisterHandler<DataSetModified>(dataSetHandler.Handle);
             return bus;
         }
     }

@@ -1,9 +1,10 @@
 ﻿using Lim.Core;
 using Toolbox.LightstoneAuto.Database.Domain.Events;
+using Toolbox.LSAuto.Entities;
 
 namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
 {
-    public class DataSetDetailDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetRenamed>
+    public class DataSetDetailDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetModified>
     {
         private readonly IWriteOnlyRepository _repository;
         public DataSetDetailDtoHandler(IWriteOnlyRepository repository)
@@ -13,7 +14,17 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
 
         public void Handle(DataSetExportCreated message)
         {
-            _repository.Save(message);
+            var ds = new DataSet
+            {
+                Id = message.DataSet.Id,
+                Name = message.DataSet.Name,
+                Activated = message.DataSet.Activated,
+                DateCreated = message.DataSet.DateCreated,
+                Description = message.DataSet.Description,
+                Version = message.Version
+            };
+
+            _repository.Save(ds);
         }
 
         public void Handle(DataSetDeActivated message)
@@ -21,13 +32,13 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
             _repository.Delete(message);
         }
 
-        public void Handle(DataSetRenamed message)
+        public void Handle(DataSetModified message)
         {
            _repository.SaveOrUpdate(message);
         }
     }
 
-    public class DataSetDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetRenamed>
+    public class DataSetDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetModified>
     {
         private readonly IWriteOnlyRepository _repository;
 
@@ -46,7 +57,7 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
             _repository.Delete(message);
         }
 
-        public void Handle(DataSetRenamed message)
+        public void Handle(DataSetModified message)
         {
             _repository.SaveOrUpdate(message);
         }

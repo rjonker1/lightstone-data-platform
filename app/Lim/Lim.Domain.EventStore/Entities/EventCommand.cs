@@ -3,7 +3,8 @@ namespace Lim.Domain.EventStore.Entities
 {
     public class EventCommand
     {
-        public virtual Guid Id { get; set; }
+        public virtual long Id { get; set; }
+        public virtual long AggregateId { get; set; }
         public virtual string EventType { get; set; }
         public virtual int EventTypeId { get; set; }
         public virtual bool AggregateNew { get; set; }

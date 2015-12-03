@@ -1,7 +1,6 @@
 ﻿using Lim.Domain.Base;
 using Toolbox.LightstoneAuto.Database.Domain;
 using Toolbox.LightstoneAuto.Database.Infrastructure.Commands;
-using Toolbox.LSAuto.Entities;
 
 namespace Toolbox.LightstoneAuto.Database.Infrastructure.Handlers
 {
@@ -20,18 +19,18 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Handlers
             _repository.Save(dataSet, -1);
         }
 
-        public void Handle(DeactivateDataSet message)
+        public void Handle(DeActivateDataSetExport message)
         {
-            var dataSet = _repository.GetById(message.Id);
-            dataSet.Deactivate();
+            var dataSet = _repository.GetById(message.DataSetId);
+            dataSet.Deactivate(new DeActivateDataSetExport(message.DataSetId,message.User,message.Version, message.CorrelationId));
             _repository.Save(dataSet, message.Version);
         }
 
-        public void Handle(RenameDataSetExport message)
+        public void Handle(ModifyDataSetExport message)
         {
-            var dataSet = _repository.GetById(message.Id);
-            dataSet.Rename(message.Name);
-            _repository.Save(dataSet,message.OriginalVersion);
+            var dataSet = _repository.GetById(message.DataSet.Id);
+            dataSet.Rename(new ModifyDataSetExport(message.DataSet,message.User, message.Version,message.CorrelationId));
+            _repository.Save(dataSet, message.Version);
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
 using Lim.Domain.EventStore.Entities;
+using Lim.Domain.Extensions;
 
 namespace Lim.Domain.EventStore
 {
@@ -16,7 +18,7 @@ namespace Lim.Domain.EventStore
 
         private struct EventDescriptor
         {
-            public EventDescriptor(Guid id, LimEvent @event, int version)
+            public EventDescriptor(long id, LimEvent @event, int version)
             {
                 Event = @event;
                 Version = version;
@@ -24,11 +26,11 @@ namespace Lim.Domain.EventStore
             }
 
             public readonly LimEvent Event;
-            public readonly Guid Id;
+            public readonly long Id;
             public readonly int Version;
         }
 
-        private readonly Dictionary<Guid, List<EventDescriptor>> _current = new Dictionary<Guid, List<EventDescriptor>>();
+        private readonly Dictionary<long, List<EventDescriptor>> _current = new Dictionary<long, List<EventDescriptor>>();
 
         public EventStore(IPublish publisher, IEventStoreRepository repository)
         {
@@ -36,7 +38,7 @@ namespace Lim.Domain.EventStore
             _repository = repository;
         }
 
-        public void SaveEvents(Guid aggregateId, IEnumerable<LimEvent> events, int version)
+        public void SaveEvents(long aggregateId, IEnumerable<LimEvent> events, int version)
         {
             List<EventDescriptor> eventDescriptors;
             if (!_current.TryGetValue(aggregateId, out eventDescriptors))
@@ -62,7 +64,7 @@ namespace Lim.Domain.EventStore
             }
         }
 
-        public List<LimEvent> GetEventsForAggregate(Guid aggregateId)
+        public List<LimEvent> GetEventsForAggregate(long aggregateId)
         {
             List<EventDescriptor> eventDescriptors;
             if (!_current.TryGetValue(aggregateId, out eventDescriptors))
@@ -78,16 +80,16 @@ namespace Lim.Domain.EventStore
             {
                 var command = new EventCommand
                 {
-                    Id = Guid.NewGuid(),
+                    Id = @event.Id,
                     EventType = @event.Event.EventType,
-                    CorrelationId = @event.Id,
+                    CorrelationId = @event.Event.CorrelationId,
                     EventTypeId = @event.Event.EventTypeId,
-                    Payload = @event.Event.Payload,
                     AggregateNew = @event.Event.AggregateNew,
-                    Type = @event.Event.Type,
+                    Type = @event.Event.Type.FullName,
                     TypeName = @event.Event.TypeName,
                     Version = @event.Version,
-                    User = @event.Event.User
+                    User = @event.Event.User,
+                    Payload = Encoding.UTF8.GetBytes(@event.Event.ObjectToJson())
                 };
 
                 _repository.Save(command);

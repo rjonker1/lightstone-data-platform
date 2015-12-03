@@ -7,7 +7,7 @@ namespace Lim.Domain
     public abstract class Aggregate
     {
         private readonly List<LimEvent> _events = new List<LimEvent>();
-        public abstract Guid Id { get; }
+        public abstract long Id { get; }
 
         public IEnumerable<LimEvent> GetUncommittedEvents()
         {
@@ -36,12 +36,12 @@ namespace Lim.Domain
         }
 
         public int Version { get; protected set; }
-        public string EventType { get; protected set; }
-        public int EventTypeId { get; protected set; }
-        public bool AggregateNew { get; protected set; }
-        public Guid CreatedBy { get; protected set; }
-        public Guid CorrelationId { get; protected set; }
-        public string Type { get; protected set; }
-        public byte[] Payload { get; protected set; }
+        //public string EventType { get; protected set; }
+        //public int EventTypeId { get; protected set; }
+        //public bool AggregateNew { get; protected set; }
+        //public Guid CreatedBy { get; protected set; }
+        //public Guid CorrelationId { get; protected set; }
+        //public string Type { get; protected set; }
+        //public byte[] Payload { get; protected set; }
     }
 }

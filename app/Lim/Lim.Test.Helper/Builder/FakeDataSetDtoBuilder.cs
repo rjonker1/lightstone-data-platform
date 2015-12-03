@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Dto;
+using Lim.Dtos;
 
 namespace Lim.Test.Helper.Builder
 {
     public class FakeDataSetDtoBuilder
     {
-        public static DataSetDto ForLsAutoSpecsData()
+        public static DataSetDto ForLsAutoSpecsData(long id)
         {
-            var id = Guid.NewGuid();
-
             return new DataSetDto
             {
                 Activated = true,
@@ -22,7 +20,7 @@ namespace Lim.Test.Helper.Builder
                 {
                     new DataFieldDto()
                     {
-                        Id = id,
+                        Id = 1000,
                         Activated = true,
                         DateCreated = DateTime.Now.AddDays(-1),
                         Name = "Speed",

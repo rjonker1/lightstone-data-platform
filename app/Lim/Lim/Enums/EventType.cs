@@ -2,8 +2,9 @@
 {
     public enum EventType
     {
-        Create = 1,
-        Delete = 2,
-        Modify = 3
+        Created = 1,
+        Deleted = 2,
+        Modified = 3,
+        Deactivated = 4
     }
 }

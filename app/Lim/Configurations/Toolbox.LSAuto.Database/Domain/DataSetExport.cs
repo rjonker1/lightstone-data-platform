@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Text;
+using Lim;
 using Lim.Domain;
-using Lim.Domain.Extensions;
+using Lim.Dtos;
 using Toolbox.LightstoneAuto.Database.Domain.Events;
 using Toolbox.LightstoneAuto.Database.Infrastructure.Commands;
 
@@ -10,9 +10,9 @@ namespace Toolbox.LightstoneAuto.Database.Domain
     public class DataSetExport : Aggregate
     {
         private bool _activated;
-        private Guid _id;
+        private long _id;
 
-        private void Apply(DataSetExportCreated @event)
+        private void Apply(LimEvent @event)
         {
             _id = @event.Id;
             _activated = true;
@@ -27,31 +27,24 @@ namespace Toolbox.LightstoneAuto.Database.Domain
         {
         }
 
-        public DataSetExport(CreateDataSetExport createCommand)
+        public DataSetExport(CreateDataSetExport command)
         {
-            EventType = createCommand.EventType;
-            EventTypeId = createCommand.EventTypeId;
-            AggregateNew = createCommand.NewAggregate;
-            CreatedBy = createCommand.CreatedBy;
-            Payload = Encoding.UTF8.GetBytes(createCommand.DataSet.ObjectToJson());
-
-
-            ApplyChange(new DataSetExportCreated(createCommand.DataSet, createCommand.EventType, createCommand.EventTypeId, createCommand.Type,
-                createCommand.NewAggregate, createCommand.CreatedBy));
+            ApplyChange(new DataSetExportCreated(command.DataSet, Guid.NewGuid(), command.EventType, command.EventTypeId, command.NewAggregate,
+                command.User, typeof (DataSetDto)));
         }
 
-        public void Deactivate()
+        public void Deactivate(DeActivateDataSetExport command)
         {
             if (!_activated)
-                ApplyChange(new DataSetDeActivated(_id));
+                ApplyChange(new DataSetDeActivated(_id,command.DataSetId, command.CorrelationId));
         }
 
-        public void Rename(string name)
+        public void Rename(ModifyDataSetExport command)
         {
-            ApplyChange(new DataSetRenamed(_id, name));
+            ApplyChange(new DataSetModified(_id, command.DataSet, command.CorrelationId, command.EventType, command.EventTypeId, false, command.User, typeof(DataSetDto)));
         }
 
-        public override Guid Id
+        public override long Id
         {
             get { return _id; }
         }
