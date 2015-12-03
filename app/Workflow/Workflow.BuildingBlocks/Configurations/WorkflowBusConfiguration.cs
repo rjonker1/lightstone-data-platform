@@ -1,4 +1,4 @@
-﻿namespace Workflow.Publisher.Configurations
+﻿namespace Workflow.BuildingBlocks.Configurations
 {
     public class WorkflowBusConfiguration : AbstractConfigurationReader, IDefineBusEnvironment
     {

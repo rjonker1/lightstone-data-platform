@@ -77,14 +77,21 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BusFactory.cs" />
+    <Compile Include="Builders\BusBuilder.cs" />
+    <Compile Include="Builders\BusFactory.cs" />
+    <Compile Include="Configurations\AbstractConfigurationReader.cs" />
+    <Compile Include="Configurations\ConfigurationReader.cs" />
+    <Compile Include="Configurations\EnvironmentConfiguration.cs" />
+    <Compile Include="Configurations\IDefineBusEnvironment.cs" />
+    <Compile Include="Configurations\WorkflowBusConfiguration.cs" />
     <Compile Include="Consumers\ConsumerRegistration.cs" />
     <Compile Include="DependencyInjection\InjectionExtensions.cs" />
     <Compile Include="DependencyInjection\WindsorAdapter.cs" />
     <Compile Include="Dispatcher\NoMagicAutoDispatcher.cs" />
     <Compile Include="Dispatcher\WindsorMessageDispatcher.cs" />
     <Compile Include="IDefineQueue.cs" />
-    <Compile Include="RabbitMQLogger.cs" />
+    <Compile Include="Loggers\WorkflowLogger.cs" />
+    <Compile Include="Loggers\RabbitMQLogger.cs" />
     <Compile Include="Dispatcher\SyncDispatcher.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace Workflow.Publisher.Configurations
+namespace Workflow.BuildingBlocks.Configurations
 {
     public abstract class AbstractConfigurationReader
     {

@@ -78,16 +78,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Installers\BusInstaller.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Subscribers\AdvancedWorkflowSubscriber.cs" />
     <Compile Include="ExceptionPrettyPrinter.cs" />
-    <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Installers\WorkflowBusServiceInstaller.cs" />
     <Compile Include="IWorkflowBusService.cs" />
+    <Compile Include="Subscribers\IWorkflowSubscriber.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindsorMessageDispatcher.cs" />
     <Compile Include="WorkflowBusService.cs" />
+    <Compile Include="Subscribers\WorkflowSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -96,14 +101,6 @@
     <ProjectReference Include="..\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
       <Project>{DFC7DFC8-1C33-4061-90AF-51405D8E8793}</Project>
       <Name>Workflow.BuildingBlocks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Workflow.Publisher.Installers\Workflow.Publisher.Installers.csproj">
-      <Project>{AD24FADC-390E-4D95-854F-4A951DFDBDB6}</Project>
-      <Name>Workflow.Publisher.Installers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Workflow.Publisher\Workflow.Publisher.csproj">
-      <Project>{9ac06f18-fd95-49ba-82db-4abf18f3edb6}</Project>
-      <Name>Workflow.Publisher</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,8 +7,9 @@ using EasyNetQ.AutoSubscribe;
 using Shared.Configuration;
 using Workflow.BuildingBlocks.Consumers;
 using Workflow.BuildingBlocks.Dispatcher;
+using Workflow.BuildingBlocks.Loggers;
 
-namespace Workflow.BuildingBlocks
+namespace Workflow.BuildingBlocks.Builders
 {
     public class BusFactory
     {

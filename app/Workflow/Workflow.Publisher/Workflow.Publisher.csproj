@@ -73,17 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\AbstractConfigurationReader.cs" />
-    <Compile Include="BusBuilder.cs" />
-    <Compile Include="Configurations\ConfigurationReader.cs" />
-    <Compile Include="IWorkflowBus.cs" />
-    <Compile Include="Loggers\WorkflowLogger.cs" />
-    <Compile Include="Configurations\EnvironmentConfiguration.cs" />
-    <Compile Include="Configurations\IDefineBusEnvironment.cs" />
+    <Compile Include="Installers\BusInstaller.cs" />
+    <Compile Include="Installers\WorkflowInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Configurations\WorkflowBusConfiguration.cs" />
-    <Compile Include="WorkflowAdvancedBus.cs" />
-    <Compile Include="WorkflowBus.cs" />
+    <Compile Include="AdvancedWorkflowPublisher.cs" />
+    <Compile Include="WorkflowPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

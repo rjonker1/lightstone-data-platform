@@ -1,4 +1,4 @@
-﻿namespace Workflow.BuildingBlocks.Tests.Fakes
+﻿namespace Workflow.BuildingBlocks.Tests.Mothers
 {
     public class TestMessage
     {

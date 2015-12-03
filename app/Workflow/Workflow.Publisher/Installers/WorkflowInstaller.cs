@@ -8,7 +8,7 @@ namespace Workflow.Publisher.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IWorkflowBus>().ImplementedBy<WorkflowBus>().LifestyleSingleton());
+            container.Register(Component.For<IWorkflowPublisher>().ImplementedBy<WorkflowPublisher>().LifestyleSingleton());
             //container.Register(Component.For<IWorkflowBus>().ImplementedBy<WorkflowAdvancedBus>().LifestyleSingleton());
         }
     }

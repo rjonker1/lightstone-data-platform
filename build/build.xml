@@ -1092,26 +1092,5 @@
       <dependencies>
       </dependencies>
     </nuget>
-
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Workflow.Publisher.Installers</name>
-      <folder>app/Workflow/Workflow.Publisher.Installers</folder>
-      <author>CustomApp</author>
-      <description>Workflow.Publisher.Installers</description>
-      <includes>
-        <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45" />
-        <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45" />
-        <include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.dll" to="lib\net45" />
-        <include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.pdb" to="lib\net45" />
-        <include pattern="Lightstone.DataPlatform.Workflow.*.dll" to="lib\net45" />
-        <include pattern="Lightstone.DataPlatform.Workflow.*.pdb" to="lib\net45" />
-      </includes>
-      <dependencies>
-        <dependency id="Castle.Core" version="3.3.3" />
-        <dependency id="Castle.Windsor" version="3.3.0" />
-        <dependency id="EasyNetQ" version="0.50.1.392" />
-        <dependency id="RabbitMQ.Client" version="3.5.3" />
-      </dependencies>
-    </nuget>
 	</nugets>
 </build>

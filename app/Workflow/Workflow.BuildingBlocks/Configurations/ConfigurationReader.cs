@@ -1,4 +1,4 @@
-﻿namespace Workflow.Publisher.Configurations
+﻿namespace Workflow.BuildingBlocks.Configurations
 {
     public static class ConfigurationReader
     {

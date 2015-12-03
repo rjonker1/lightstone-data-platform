@@ -1,9 +1,9 @@
 ﻿using System;
 using EasyNetQ;
-using Workflow.Publisher.Configurations;
-using Workflow.Publisher.Loggers;
+using Workflow.BuildingBlocks.Configurations;
+using Workflow.BuildingBlocks.Loggers;
 
-namespace Workflow.Publisher
+namespace Workflow.BuildingBlocks.Builders
 {
     public class BusBuilder
     {

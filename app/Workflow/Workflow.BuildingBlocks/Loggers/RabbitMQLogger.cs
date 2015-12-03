@@ -2,7 +2,7 @@
 using Common.Logging;
 using EasyNetQ;
 
-namespace Workflow.BuildingBlocks
+namespace Workflow.BuildingBlocks.Loggers
 {
     public class RabbitMQLogger : IEasyNetQLogger
     {

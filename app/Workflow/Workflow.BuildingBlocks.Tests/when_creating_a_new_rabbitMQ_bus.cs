@@ -1,4 +1,5 @@
 ﻿using EasyNetQ;
+using Workflow.BuildingBlocks.Builders;
 using Xunit.Extensions;
 
 namespace Workflow.BuildingBlocks.Tests

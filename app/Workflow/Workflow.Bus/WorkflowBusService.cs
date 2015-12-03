@@ -1,8 +1,8 @@
 ﻿using Castle.Windsor;
 using Common.Logging;
 using DataPlatform.Shared.Messaging;
-using Workflow.Publisher;
-using Workflow.Publisher.Configurations;
+using Workflow.BuildingBlocks.Configurations;
+using IWorkflowSubscriber = Workflow.Bus.Subscribers.IWorkflowSubscriber;
 
 namespace Workflow.Bus
 {
@@ -10,12 +10,12 @@ namespace Workflow.Bus
     {
         private readonly ILog _log = LogManager.GetLogger<WorkflowBusService>();
         private readonly IWindsorContainer _container;
-        private readonly IWorkflowBus _bus;
+        private readonly IWorkflowSubscriber _subscriber;
 
-        public WorkflowBusService(IWorkflowBus bus, IWindsorContainer container)
+        public WorkflowBusService(IWorkflowSubscriber subscriber, IWindsorContainer container)
         {
             _container = container;
-            _bus = bus;
+            _subscriber = subscriber;
         }
 
         public void Start()
@@ -24,7 +24,7 @@ namespace Workflow.Bus
             var dispatcher = new WindsorMessageDispatcher(_container);
 
             // ReSharper disable once ConvertClosureToMethodGroup
-            _bus.Subscribe<IPublishableMessage>(msg => dispatcher.Dispatch<IPublishableMessage>(msg));
+            _subscriber.Subscribe<IPublishableMessage>(msg => dispatcher.Dispatch<IPublishableMessage>(msg));
 
             _log.InfoFormat("Started {0} service", ConfigurationReader.Bus.DisplayName);
         }

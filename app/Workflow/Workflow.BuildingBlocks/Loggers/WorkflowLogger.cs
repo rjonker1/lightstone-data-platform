@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Logging;
 using EasyNetQ;
 
-namespace Workflow.Publisher.Loggers
+namespace Workflow.BuildingBlocks.Loggers
 {
     public class WorkflowLogger : IEasyNetQLogger
     {

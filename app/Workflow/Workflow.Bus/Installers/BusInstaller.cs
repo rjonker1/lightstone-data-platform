@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using EasyNetQ;
 using Workflow.BuildingBlocks;
-using Workflow.Publisher;
+using Workflow.BuildingBlocks.Builders;
 
 namespace Workflow.Bus.Installers
 {

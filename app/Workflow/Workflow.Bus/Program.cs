@@ -4,8 +4,7 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Common.Logging;
 using Topshelf;
-using Workflow.Publisher.Configurations;
-using Workflow.Publisher.Installers;
+using Workflow.BuildingBlocks.Configurations;
 
 namespace Workflow.Bus
 {
@@ -16,7 +15,6 @@ namespace Workflow.Bus
         public static void Main(string[] args)
         {
             var container = new WindsorContainer().Install(FromAssembly.InDirectory(new AssemblyFilter(AppDomain.CurrentDomain.BaseDirectory)));
-            container.Install(new WorkflowInstaller());
 
             HostFactory.Run(x =>
             {

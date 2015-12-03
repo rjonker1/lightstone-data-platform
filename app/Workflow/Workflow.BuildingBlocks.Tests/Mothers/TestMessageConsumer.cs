@@ -1,5 +1,4 @@
 ﻿using EasyNetQ.AutoSubscribe;
-using Workflow.BuildingBlocks.Tests.Fakes;
 
 namespace Workflow.BuildingBlocks.Tests.Mothers
 {
