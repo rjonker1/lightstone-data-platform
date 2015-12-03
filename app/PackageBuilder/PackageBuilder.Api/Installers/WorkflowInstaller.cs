@@ -9,7 +9,7 @@ namespace PackageBuilder.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IWorkflowBus>().ImplementedBy<WorkflowBus>().LifestyleTransient());
+            container.Register(Component.For<IWorkflowBus>().ImplementedBy<WorkflowBus>().LifestyleSingleton());
         }
     }
 }
