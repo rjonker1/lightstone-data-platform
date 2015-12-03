@@ -24,7 +24,7 @@ namespace Workflow.Bus
             var dispatcher = new WindsorMessageDispatcher(_container);
 
             // ReSharper disable once ConvertClosureToMethodGroup
-            _subscriber.Subscribe<IPublishableMessage>(msg => dispatcher.Dispatch<IPublishableMessage>(msg));
+            _subscriber.Subscribe<IPublishableMessage>(msg => dispatcher.Dispatch(msg));
 
             _log.InfoFormat("Started {0} service", ConfigurationReader.Bus.DisplayName);
         }

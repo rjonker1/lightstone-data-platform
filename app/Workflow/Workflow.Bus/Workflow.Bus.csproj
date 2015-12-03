@@ -81,6 +81,7 @@
     <Compile Include="Installers\BusInstaller.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Installers\SubscriberInstaller.cs" />
     <Compile Include="Subscribers\AdvancedWorkflowSubscriber.cs" />
     <Compile Include="ExceptionPrettyPrinter.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
