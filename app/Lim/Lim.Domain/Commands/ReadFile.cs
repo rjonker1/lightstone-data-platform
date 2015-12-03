@@ -1,14 +1,16 @@
-﻿using Lim.Domain.Dto;
+﻿using System.Runtime.Serialization;
+using Lim.Domain.Dto;
 
 namespace Lim.Domain.Commands
 {
-    public class ReadFile
+    [DataContract]
+    public class ReadFile : Command
     {
         public ReadFile(FileInformationDto file)
         {
             File = file;
         }
 
-        public readonly FileInformationDto File;
+        [DataMember] public readonly FileInformationDto File;
     }
 }

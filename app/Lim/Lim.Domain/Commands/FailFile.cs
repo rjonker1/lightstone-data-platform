@@ -1,8 +1,9 @@
-﻿using Lim.Domain.Dto;
+﻿using System.Runtime.Serialization;
+using Lim.Domain.Dto;
 
 namespace Lim.Domain.Commands
 {
-    public class FailFile
+   [DataContract] public class FailFile : Command
     {
         public FailFile(FileInformationDto file, FileInformationDto fileFail)
         {
@@ -10,7 +11,9 @@ namespace Lim.Domain.Commands
             FileFail = fileFail;
         }
 
+        [DataMember]
         public readonly FileInformationDto File;
+        [DataMember]
         public readonly FileInformationDto FileFail;
     }
 }

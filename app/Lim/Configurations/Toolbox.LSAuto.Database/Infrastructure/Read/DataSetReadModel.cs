@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Toolbox.LightstoneAuto.Database.Domain;
 using Toolbox.LightstoneAuto.Database.Infrastructure.Dto;
 
 namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read
@@ -11,9 +12,9 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read
             throw new NotImplementedException();
         }
 
-        public DataSetDetailsDto GetDataSet(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        //public DataSetDetailsDto GetDataSet(Guid id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

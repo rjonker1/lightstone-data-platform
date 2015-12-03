@@ -100,6 +100,10 @@
       <Project>{503335fd-622f-469a-83bf-c341562f7e45}</Project>
       <Name>Toolbox.LSAuto.Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Entities\Toolbox.LSAuto.Entities.csproj">
+      <Project>{326500cd-3112-4a9c-9539-2f1b22688f8c}</Project>
+      <Name>Toolbox.LSAuto.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>

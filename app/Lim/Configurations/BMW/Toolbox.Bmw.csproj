@@ -71,6 +71,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BmwMarker.cs" />
     <Compile Include="Dtos\BmwFinanceDataDto.cs" />
     <Compile Include="Extensions\DatasetExtensions.cs" />
     <Compile Include="Factories\BackupFinanceDataFileFactory.cs" />

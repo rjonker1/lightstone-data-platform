@@ -1,9 +1,9 @@
 ﻿using System;
-using Toolbox.LightstoneAuto.Database.Domain.Base;
+using Lim;
 
 namespace Toolbox.LightstoneAuto.Database.Domain.Events
 {
-    public class DataSetDeActivated : Event
+    public class DataSetDeActivated : LimEvent
     {
         public readonly Guid Id;
 

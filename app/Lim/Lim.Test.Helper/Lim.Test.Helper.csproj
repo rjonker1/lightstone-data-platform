@@ -70,9 +70,17 @@
       <Project>{503335fd-622f-469a-83bf-c341562f7e45}</Project>
       <Name>Toolbox.LSAuto.Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Entities\Toolbox.LSAuto.Entities.csproj">
+      <Project>{326500cd-3112-4a9c-9539-2f1b22688f8c}</Project>
+      <Name>Toolbox.LSAuto.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
       <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
       <Name>Lim.Domain.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain.EventStore\Lim.Domain.EventStore.csproj">
+      <Project>{470811a1-fa3a-4509-99f8-954d67a317dd}</Project>
+      <Name>Lim.Domain.EventStore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Messaging\Lim.Domain.Messaging.csproj">
       <Project>{6ee18788-1427-4ed7-a5ad-2af7cda4429d}</Project>
@@ -98,12 +106,14 @@
   <ItemGroup>
     <Compile Include="Builder\FakeBusBuilder.cs" />
     <Compile Include="Builder\FakeDataBaseBuilder.cs" />
+    <Compile Include="Builder\FakeDataSetDtoBuilder.cs" />
     <Compile Include="Fakes\FakeBus.cs" />
     <Compile Include="Fakes\FakeResponse.cs" />
     <Compile Include="Fakes\FakeTransactions.cs" />
     <Compile Include="Fakes\Handlers\FakeFetchingApiPushConfigurationHandler.cs" />
     <Compile Include="Fakes\Handlers\FakeHandleExecutingApiConfiguration.cs" />
     <Compile Include="Fakes\Repository\FakeDataSetDetailDtoRepository.cs" />
+    <Compile Include="Fakes\Repository\FakeEventStoreRepository.cs" />
     <Compile Include="Fakes\Repository\FakeLimRepository.cs" />
     <Compile Include="Mothers\LimConfigurations.cs" />
     <Compile Include="Mothers\LimClients.cs" />

@@ -1,8 +1,9 @@
-﻿using Lim.Domain.Dto;
+﻿using System.Runtime.Serialization;
+using Lim.Domain.Dto;
 
 namespace Lim.Domain.Commands
 {
-    public class BackupFile
+   [DataContract] public class BackupFile : Command
     {
         public BackupFile(FileInformationDto file, FileInformationDto fileBackup)
         {
@@ -10,7 +11,9 @@ namespace Lim.Domain.Commands
             FileBackup = fileBackup;
         }
 
+        [DataMember]
         public readonly FileInformationDto File;
+        [DataMember]
         public readonly FileInformationDto FileBackup;
     }
 }

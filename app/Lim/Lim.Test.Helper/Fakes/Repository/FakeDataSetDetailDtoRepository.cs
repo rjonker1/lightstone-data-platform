@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Lim.Core;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Dto;
+using Toolbox.LightstoneAuto.Database.Domain.Events;
+using Toolbox.LSAuto.Entities;
 
 namespace Lim.Test.Helper.Fakes.Repository
 {
     public class FakeDatabase
     {
-        public static Dictionary<Guid, DataSetDetailsDto> Details = new Dictionary<Guid, DataSetDetailsDto>();
-        public static List<DataSetDto> List = new List<DataSetDto>();
+       // public static Dictionary<Guid, DataSetDetailsDto> Details = new Dictionary<Guid, DataSetDetailsDto>();
+        public static List<DataSet> DataSetList = new List<DataSet>();
+        public static List<DataField> DataFieldList = new List<DataField>(); 
     }
 
-    public class FakeDataSetDetailDtoRepository : IWriteOnlyRepository
+    public class FakeDataSetRepository : IWriteOnlyRepository
     {
         public void Save<T>(T entity) where T : class
         {
-            var val = entity as DataSetDetailsDto;
-            FakeDatabase.Details.Add(val.Id, new DataSetDetailsDto(val.Id, val.Name, 0, 0));
+            var ds = entity as DataSet;
+            FakeDatabase.DataSetList.Add(ds);
         }
 
         public void SaveOrUpdate<T>(T entity) where T : class
         {
-            throw new NotImplementedException();
+            var message = entity as DataSetRenamed;
+            var dto = FakeDatabase.DataSetList.FirstOrDefault(w => w.Id == message.Id);
+            dto.Name = message.NewName;
+
+            FakeDatabase.DataSetList.RemoveAll(w => w.Id == message.Id);
+            FakeDatabase.DataSetList.Add(dto);
+
         }
 
         public void Update<T>(T entity) where T : class
@@ -36,38 +45,45 @@ namespace Lim.Test.Helper.Fakes.Repository
 
         public void Delete<T>(T entity) where T : class
         {
-            var message = entity as DataSetDetailsDto;
-            FakeDatabase.Details.Remove(message.Id);
+            var ds = entity as DataSet;
+            FakeDatabase.DataSetList.RemoveAll(w => w.Id == ds.Id);
         }
     }
 
-    public class FakeDataSetDtoRepository : IWriteOnlyRepository
-    {
-        public void Save<T>(T entity) where T : class
-        {
-            var message = entity as DataSetDetailsDto;
-            FakeDatabase.List.Add(new DataSetDto(message.Id, message.Name));
-        }
+    //public class FakeDataSetDetailDtoRepository : IWriteOnlyRepository
+    //{
+    //    public void Save<T>(T entity) where T : class
+    //    {
+    //        var val = entity as DataSetExportCreated;
+    //        FakeDatabase.Details.Add(val.Id, new DataSetDetailsDto(val.Id, val.Name, 0, 0));
+    //    }
 
-        public void SaveOrUpdate<T>(T entity) where T : class
-        {
-            throw new NotImplementedException();
-        }
+    //    public void SaveOrUpdate<T>(T entity) where T : class
+    //    {
+    //        var message = entity as DataSetRenamed;
+    //        var dto = FakeDatabase.Details[message.Id];
+    //        dto.Name = message.NewName;
 
-        public void Update<T>(T entity) where T : class
-        {
-            throw new NotImplementedException();
-        }
+    //        FakeDatabase.Details.Remove(message.Id);
+    //        FakeDatabase.Details.Add(message.Id, dto);
+    //    }
 
-        public void Merge<T>(T entity) where T : class
-        {
-            throw new NotImplementedException();
-        }
+    //    public void Update<T>(T entity) where T : class
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public void Delete<T>(T entity) where T : class
-        {
-            var message = entity as DataSetDetailsDto;
-            FakeDatabase.List.RemoveAll(w => w.Id == message.Id);
-        }
-    }
+    //    public void Merge<T>(T entity) where T : class
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void Delete<T>(T entity) where T : class
+    //    {
+    //        var message = entity as DataSetDeActivated;
+    //        FakeDatabase.Details.Remove(message.Id);
+    //    }
+    //}
+
+    
 }

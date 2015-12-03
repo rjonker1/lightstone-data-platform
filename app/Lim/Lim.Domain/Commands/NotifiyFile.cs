@@ -4,7 +4,7 @@ using Lim.Enums;
 namespace Lim.Domain.Commands
 {
     [DataContract]
-    public class NotifyFile
+    public class NotifyFile : Command
     {
         public NotifyFile(string fileName, string filePath, string notification, Status status)
         {

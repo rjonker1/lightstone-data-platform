@@ -1,10 +1,9 @@
 ﻿using Lim.Core;
-using Toolbox.LightstoneAuto.Database.Domain.Base;
 using Toolbox.LightstoneAuto.Database.Domain.Events;
 
 namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
 {
-    public class DataSetDetailDtoHandler : IHandles<DataSetCreated>, IHandles<DataSetDeActivated>
+    public class DataSetDetailDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetRenamed>
     {
         private readonly IWriteOnlyRepository _repository;
         public DataSetDetailDtoHandler(IWriteOnlyRepository repository)
@@ -12,7 +11,7 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
             _repository = repository;
         }
 
-        public void Handle(DataSetCreated message)
+        public void Handle(DataSetExportCreated message)
         {
             _repository.Save(message);
         }
@@ -21,9 +20,14 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
         {
             _repository.Delete(message);
         }
+
+        public void Handle(DataSetRenamed message)
+        {
+           _repository.SaveOrUpdate(message);
+        }
     }
 
-    public class DataSetDtoHandler : IHandles<DataSetCreated>, IHandles<DataSetDeActivated>
+    public class DataSetDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetRenamed>
     {
         private readonly IWriteOnlyRepository _repository;
 
@@ -32,7 +36,7 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
             _repository = repository;
         }
 
-        public void Handle(DataSetCreated message)
+        public void Handle(DataSetExportCreated message)
         {
             _repository.Save(message);
         }
@@ -40,6 +44,11 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
         public void Handle(DataSetDeActivated message)
         {
             _repository.Delete(message);
+        }
+
+        public void Handle(DataSetRenamed message)
+        {
+            _repository.SaveOrUpdate(message);
         }
     }
 }

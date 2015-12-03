@@ -42,6 +42,7 @@
     <OutputPath>bin\Prod\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -50,12 +51,17 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Command.cs" />
     <Compile Include="Core\IAudit.cs" />
     <Compile Include="Core\IBackup.cs" />
+    <Compile Include="Core\ISendCommands.cs" />
+    <Compile Include="Core\IPublish.cs" />
     <Compile Include="Core\IFail.cs" />
     <Compile Include="Core\IFetch.cs" />
+    <Compile Include="Core\IHandles.cs" />
     <Compile Include="Core\IInitialize.cs" />
     <Compile Include="Core\IIntegrate.cs" />
+    <Compile Include="Core\IMessage.cs" />
     <Compile Include="Core\INotify.cs" />
     <Compile Include="Core\IPull.cs" />
     <Compile Include="Core\IPush.cs" />
@@ -63,6 +69,8 @@
     <Compile Include="Core\IPersist.cs" />
     <Compile Include="Core\IRead.cs" />
     <Compile Include="Core\IWatch.cs" />
+    <Compile Include="Enums\AggregateType.cs" />
+    <Compile Include="Enums\EventType.cs" />
     <Compile Include="Enums\Integrations.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Enums\Times.cs" />
@@ -70,6 +78,9 @@
     <Compile Include="Infrastructure\BmwConfiguration.cs" />
     <Compile Include="Infrastructure\ConfigurationReader.cs" />
     <Compile Include="Infrastructure\LimConfiguration.cs" />
+    <Compile Include="Infrastructure\LimEventStoreConfiguration.cs" />
+    <Compile Include="Infrastructure\LSAutoConfiguration.cs" />
+    <Compile Include="LimEvent.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

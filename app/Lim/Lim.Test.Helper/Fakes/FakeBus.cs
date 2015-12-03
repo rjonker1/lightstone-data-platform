@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using Toolbox.LightstoneAuto.Database.Domain.Base;
+using Lim.Core;
 
 namespace Lim.Test.Helper.Fakes
 {
-    public class FakeBus : ICommandSender, IEventPublisher
+    public class FakeBus : ISendCommands, IPublish
     {
         private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new Dictionary<Type, List<Action<IMessage>>>();
 
@@ -32,11 +32,11 @@ namespace Lim.Test.Helper.Fakes
             }
             else
             {
-                throw new InvalidOperationException("There is no handler registered");
+                throw new InvalidOperationException("There is no handler registered to handle " + command.GetType());
             }
         }
 
-        public void Publish<T>(T @event) where T : Event
+        public void Publish<T>(T @event) where T : LimEvent
         {
             List<Action<IMessage>> handlers;
             if(!_routes.TryGetValue(@event.GetType(), out handlers)) return;
