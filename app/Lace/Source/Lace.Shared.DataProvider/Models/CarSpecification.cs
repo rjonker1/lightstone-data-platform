@@ -39,7 +39,8 @@ namespace Lace.Toolbox.Database.Models
                   max(case when SpID.Spec_Desc = 'Rim Size - Front' then SpL.Spec_Val end) [RimSizeFront],
                   max(case when SpID.Spec_Desc = 'Tyre Size - Front' then SpL.Spec_Val end) [TyreSizeFront],
                   max(case when SpID.Spec_Desc = 'Tyre Size - Rear' then SpL.Spec_Val end) [TyreSizeRear],
-                  max(case when SpID.Spec_Desc = 'Wheel Type' then SpL.Spec_Val end) [WheelType]
+                  max(case when SpID.Spec_Desc = 'Wheel Type' then SpL.Spec_Val end) [WheelType],
+				  max(case when SpID.Spec_Desc = 'Lane Departure Warning System' then SpL.Spec_Val end) [LaneDepartureWarningSystem]
             from SpecificationID SpID
 	             inner join SpecificationLookup SpL on SpL.Spec_ID = SpID.Spec_ID
 	             inner join Car c on c.Car_ID = SpL.Car_ID
@@ -83,7 +84,8 @@ namespace Lace.Toolbox.Database.Models
                   max(case when SpID.Spec_Desc = 'Rim Size - Front' then SpL.Spec_Val end) [RimSizeFront],
                   max(case when SpID.Spec_Desc = 'Tyre Size - Front' then SpL.Spec_Val end) [TyreSizeFront],
                   max(case when SpID.Spec_Desc = 'Tyre Size - Rear' then SpL.Spec_Val end) [TyreSizeRear],
-                  max(case when SpID.Spec_Desc = 'Wheel Type' then SpL.Spec_Val end) [WheelType]
+                  max(case when SpID.Spec_Desc = 'Wheel Type' then SpL.Spec_Val end) [WheelType],
+				  max(case when SpID.Spec_Desc = 'Lane Departure Warning System' then SpL.Spec_Val end) [LaneDepartureWarningSystem]
             from SpecificationID SpID
 	             inner join SpecificationLookup SpL on SpL.Spec_ID = SpID.Spec_ID
 	             inner join Car c on c.Car_ID = SpL.Car_ID
@@ -106,7 +108,7 @@ namespace Lace.Toolbox.Database.Models
             string heatedRearWindow, string rearWiper, string powerSteering, string colourCodedBumpers, string colourCodedDoorHandles,
             string colourCodedMirrors, string maintenancePlanKms, string maintenancePlanYears, string serviceIntervalsKms,
             string servicePlanKms, string servicePlanYears, string warrantyKms, string warrantyYears, string rimSizeFront,
-            string tyreSizeFront, string tyreSizeRear, string wheelType)
+            string tyreSizeFront, string tyreSizeRear, string wheelType, string laneDepartureWarningSystem)
         {
             ManufacturerName = manufacturerName;
             ModelYear = modelYear;
@@ -160,6 +162,7 @@ namespace Lace.Toolbox.Database.Models
             TyreSizeFront = tyreSizeFront;
             TyreSizeRear = tyreSizeRear;
             WheelType = wheelType;
+            LaneDepartureWarningSystem = laneDepartureWarningSystem;
         }
 
         public void AddToCache(ICacheRepository repository)
@@ -220,5 +223,6 @@ namespace Lace.Toolbox.Database.Models
         public string TyreSizeFront { get; set; }
         public string TyreSizeRear { get; set; }
         public string WheelType { get; set; }
+        public string LaneDepartureWarningSystem { get; set; }
     }
 }

@@ -27,5 +27,6 @@ namespace Lace.Domain.Core.Contracts.DataProviders
         string Model { get; }
         string Make { get; }
         string CarType { get; }
+        string LaneDepartureWarningSystem { get; }
     }
 }

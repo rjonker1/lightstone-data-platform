@@ -34,7 +34,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
                 _carSpecification.ColourCodedBumpers, _carSpecification.ColourCodedDoorHandles, _carSpecification.ColourCodedMirrors, _carSpecification.MaintenancePlanKms, 
                 _carSpecification.MaintenancePlanYears, _carSpecification.ServiceIntervalsKms, _carSpecification.ServicePlanKms, _carSpecification.ServicePlanYears, 
                 _carSpecification.WarrantyKms, _carSpecification.WarrantyYears, _carSpecification.RimSizeFront, _carSpecification.TyreSizeFront, _carSpecification.TyreSizeRear,
-                _carSpecification.WheelType);
+                _carSpecification.WheelType, _carSpecification.LaneDepartureWarningSystem);
             Result.AddResponseState(DataProviderResponseState.Successful);
         }
     }

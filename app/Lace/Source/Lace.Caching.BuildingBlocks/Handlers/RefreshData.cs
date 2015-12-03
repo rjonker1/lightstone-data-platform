@@ -9,25 +9,24 @@ namespace Lace.Caching.BuildingBlocks.Handlers
     public class RefreshData : IHandleRefreshingData
     {
         private readonly ICacheRepository _repository;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<RefreshData>();
 
         public RefreshData(ICacheRepository repository)
         {
             _repository = repository;
-            _log = LogManager.GetLogger(GetType());
         }
 
         public void Handle()
         {
-            _log.Info("Adding Items to the Cache");
+            Log.Info("Adding Items to the Cache");
             ItemsToCache.ForEach(f => f.AddToCache(_repository));
-            _log.InfoFormat("{0} Items should have been added to the Cache", ItemsToCache.Count);
+            Log.InfoFormat("{0} Items should have been added to the Cache", ItemsToCache.Count);
         }
 
         private static readonly List<IAmCachable> ItemsToCache = new List<IAmCachable>()
         {
             new CarSpecification(),
-            new Sale(),
+           // new Sale(),
             new CarInformationDto()
         };
     }

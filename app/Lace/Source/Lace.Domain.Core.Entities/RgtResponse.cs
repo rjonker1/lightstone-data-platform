@@ -49,8 +49,8 @@ namespace Lace.Domain.Core.Entities
             string fogLampsFront, string headlightType, string heatedRearWindow, string rearWiper, string powerSteering, 
             string colourCodedBumpers, string colourCodedDoorHandles, string colourCodedMirrors, string maintenancePlanKms, 
             string maintenancePlanYears, string serviceIntervalsKms, string servicePlanKms, string servicePlanYears, 
-            string warrantyKms, string warrantyYears, string rimSizeFront, string tyreSizeFront, string tyreSizeRear, 
-            string wheelType)
+            string warrantyKms, string warrantyYears, string rimSizeFront, string tyreSizeFront, string tyreSizeRear,
+            string wheelType, string laneDepartureWarningSystem)
         {
             Manufacturer = manufacturer;
             ModelYear = modelYear;
@@ -104,6 +104,7 @@ namespace Lace.Domain.Core.Entities
             TyreSizeFront = tyreSizeFront;
             TyreSizeRear = tyreSizeRear;
             WheelType = wheelType;
+            LaneDepartureWarningSystem = laneDepartureWarningSystem;
         }
 
         [DataMember]
@@ -264,6 +265,8 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public string WheelType { get; private set; }
+        [DataMember]
+        public string LaneDepartureWarningSystem { get; private set; }
 
         [DataMember]
         public string TypeName

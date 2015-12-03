@@ -8,7 +8,7 @@ using MemBus.Configurators;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Infrastructure.NEventStore;
-using Workflow.BuildingBlocks;
+using Workflow.BuildingBlocks.Builders;
 
 namespace PackageBuilder.Api.Installers
 {
