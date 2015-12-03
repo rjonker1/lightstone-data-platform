@@ -6,8 +6,7 @@ using MemBus;
 using MemBus.Configurators;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Infrastructure;
-using Workflow.BuildingBlocks;
-using Workflow.Publisher;
+using Workflow.BuildingBlocks.Builders;
 
 namespace UserManagement.Api.Installers
 {
@@ -15,8 +14,6 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<EasyNetQ.IBus>().UsingFactoryMethod(BusBuilder.CreateBus).LifestyleSingleton());
-
             container.Register(Component.For<MemBus.IBus>().Instance(BusSetup.StartWith<Conservative>()
                                                                      .Apply<IoCSupport>(s => s.SetAdapter(new MessageAdapter(container))
                                                                      .SetHandlerInterface(typeof(IHandleMessages<>)))

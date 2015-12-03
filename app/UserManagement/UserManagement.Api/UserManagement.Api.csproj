@@ -110,7 +110,7 @@
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -120,13 +120,13 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1890\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1979, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1989, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Publisher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
     </Reference>
     <Reference Include="LiveAuto.Api.Routes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -676,7 +676,6 @@
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\ServiceLocatorInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
-    <Compile Include="Installers\WorkflowInstaller.cs" />
     <Compile Include="Modules\AuditLogModule.cs" />
     <Compile Include="Modules\AuthModule.cs" />
     <Compile Include="Modules\ClientModule.cs" />

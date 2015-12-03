@@ -11,7 +11,6 @@ namespace UserManagement.Api.Helpers
             new CommandInstaller(),
             new BusInstaller(),
             new ServiceLocatorInstaller(),
-            new WorkflowInstaller(), 
             new NHibernateInstaller(),
             new RepositoryInstaller(),
             new AutoMapperInstaller(),

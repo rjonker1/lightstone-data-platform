@@ -23,7 +23,7 @@ using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using Shared.Logging;
-using Workflow.BuildingBlocks;
+using Workflow.BuildingBlocks.Builders;
 
 namespace Api
 {

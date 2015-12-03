@@ -6,7 +6,7 @@ using Castle.Windsor;
 using DataPlatform.Shared.Enums;
 using Shared.Logging;
 
-namespace Api.Helpers.Installers
+namespace Api.Installers
 {
     public class AutoMapperInstaller : IWindsorInstaller
     {

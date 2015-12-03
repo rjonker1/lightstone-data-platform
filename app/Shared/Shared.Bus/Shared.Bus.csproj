@@ -61,12 +61,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1988\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1989, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Bus, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1988\lib\net45\Lightstone.DataPlatform.Workflow.Bus.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Bus.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Workflow.Bus.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>

@@ -93,7 +93,7 @@
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -103,13 +103,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.Dataplatform.UserManagement.Api.Routes.1.0.0.1785\lib\net45\Lightstone.Dataplatform.UserManagement.Api.Routes.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1979, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.1989, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Publisher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
@@ -170,10 +170,8 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\PackageMetaMap.cs" />
-    <Compile Include="Helpers\Installers\AutoMapperInstaller.cs" />
-    <Compile Include="Helpers\Installers\BusInstaller.cs" />
-    <Compile Include="Helpers\Installers\ServiceLocatorInstaller.cs" />
-    <Compile Include="Helpers\Installers\WorkflowInstaller.cs" />
+    <Compile Include="Installers\AutoMapperInstaller.cs" />
+    <Compile Include="Installers\ServiceLocatorInstaller.cs" />
     <Compile Include="Helpers\Validators\ApiRequestValidator.cs" />
     <Compile Include="Helpers\WindsorInstallerCollection.cs" />
     <Compile Include="Infrastructure\Metadata\DefaultRouteMetadataProvider.cs" />

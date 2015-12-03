@@ -11,7 +11,6 @@ namespace PackageBuilder.Api.Helpers
             new CommandInstaller(),
             new BusInstaller(),
             new ServiceLocatorInstaller(),
-            new WorkflowInstaller(), 
             new RedisInstaller(), 
             new NHibernateInstaller(),
             new RepositoryInstaller(),

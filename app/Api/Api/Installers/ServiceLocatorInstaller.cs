@@ -4,7 +4,7 @@ using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter.Unofficial;
 using Microsoft.Practices.ServiceLocation;
 
-namespace Api.Helpers.Installers
+namespace Api.Installers
 {
     public class ServiceLocatorInstaller : IWindsorInstaller
     {
