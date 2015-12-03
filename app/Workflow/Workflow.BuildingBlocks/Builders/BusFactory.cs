@@ -5,6 +5,7 @@ using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
 using Shared.Configuration;
+using Workflow.BuildingBlocks.Configurations;
 using Workflow.BuildingBlocks.Consumers;
 using Workflow.BuildingBlocks.Dispatcher;
 using Workflow.BuildingBlocks.Loggers;

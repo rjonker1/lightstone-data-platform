@@ -3,6 +3,7 @@ using DataPlatform.Shared.Messaging;
 using EasyNetQ;
 using EasyNetQ.Topology;
 using Workflow.BuildingBlocks;
+using Workflow.BuildingBlocks.Configurations;
 
 namespace Workflow.Publisher
 {

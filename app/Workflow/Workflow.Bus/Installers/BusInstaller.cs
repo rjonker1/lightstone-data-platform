@@ -4,6 +4,7 @@ using Castle.Windsor;
 using EasyNetQ;
 using Workflow.BuildingBlocks;
 using Workflow.BuildingBlocks.Builders;
+using Workflow.BuildingBlocks.Configurations;
 
 namespace Workflow.Bus.Installers
 {

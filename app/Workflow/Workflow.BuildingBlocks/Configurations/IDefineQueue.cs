@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Workflow.BuildingBlocks
+namespace Workflow.BuildingBlocks.Configurations
 {
     public interface IDefineQueue
     {
