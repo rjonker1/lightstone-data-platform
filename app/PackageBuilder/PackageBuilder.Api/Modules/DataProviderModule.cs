@@ -83,12 +83,16 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProviders/{id:guid}"] = _ => 
-                Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id)) } });
-
-            Get["/DataProviders/{id}/{version}"] = _ =>
+            Get["/DataProviders/{id:guid}", true] = async (_, ct) =>
             {
-                var dataProvider = Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(_.id));
+                var dp = (DataProvider) await writeRepo.GetById(_.id);
+                return Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(dp) } });
+            };
+
+            Get["/DataProviders/{id}/{version}", true] = async (_, ct) =>
+            {
+                var dp = (DataProvider)await writeRepo.GetById(_.id);
+                var dataProvider = Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(dp);
                 return Response.AsJson(new { Response = new[] { dataProvider } });
             };
 
