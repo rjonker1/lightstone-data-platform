@@ -60,4 +60,10 @@
         public static readonly string Accesskey = ConfigurationReader.ReadAppSetting("lightstone/conumser/specifications/accesskey");
     }
 
+    public static class XdsConfiguration
+    {
+        public static readonly string Username = ConfigurationReader.ReadAppSetting("xds/api/username");
+        public static readonly string Password = ConfigurationReader.ReadAppSetting("xds/api/password"); 
+    }
+
 }

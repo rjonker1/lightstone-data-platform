@@ -86,6 +86,7 @@
     <Compile Include="RequestFields\IAmUsernameRequestField.cs" />
     <Compile Include="RequestFields\IAmUserTokenRequestField.cs" />
     <Compile Include="RequestFields\IAmVinNumberRequestField.cs" />
+    <Compile Include="RequestFields\IAmVoucherCodeRequestField.cs" />
     <Compile Include="RequestFields\IAmYearRequestField.cs" />
     <Compile Include="RequestFields\IAmScanDataRequestField.cs" />
     <Compile Include="Requests\IAmAnprRequest.cs" />

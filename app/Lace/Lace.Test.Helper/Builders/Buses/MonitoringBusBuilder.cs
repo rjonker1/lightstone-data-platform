@@ -44,6 +44,12 @@ namespace Lace.Test.Helper.Builders.Buses
             return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoSpecs_I_DB);
         }
 
+        public static ISendCommandToBus ForXdsIdentityVerificationCommands(Guid requestId)
+        {
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.XDSVerifyID_E_WS);
+        }
+
         public static ISendCommandToBus ForMmCodeCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
