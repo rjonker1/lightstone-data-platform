@@ -206,7 +206,8 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             if (dataProviders == null) yield break;
 
             this.Info(() => "Map LACE Response started for {0}, TimeStamp: {1}".FormatWith(requestId, DateTime.UtcNow), SystemName.PackageBuilder);
-            foreach (var dataProvider in dataProviders.Where(x => x.Handled))
+            var pointToLaceProviders = dataProviders.Where(x => x.Handled).ToList();
+            foreach (var dataProvider in pointToLaceProviders)
             {
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
                 Mapper.Map(laceResponse, DataProviders.FirstOrDefault(x => x.Name == laceResponse.Name), typeof(IDataProvider), typeof(DataProvider));

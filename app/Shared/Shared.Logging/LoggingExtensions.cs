@@ -31,6 +31,12 @@ namespace Shared.Logging
             return publisher;
         }
 
+        private static void Pub(this IWorkflowPublisher publisher, Func<object> message, DataPlatform.Shared.Enums.LogLevel level, SystemName systemName, Exception exception = null)
+        {
+            //Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), level, systemName, exception)));
+            publisher.Publish(new LogMessage(message().ToString(), level, systemName, exception));
+        }
+
         #region .: Enabled Checks :.
 
         public static bool IsDebugEnabled(this object o)
@@ -139,6 +145,7 @@ namespace Shared.Logging
         {
             Debug(t.FullName, message);
         }
+
         public static void Debug(this Type t, Func<object> message, SystemName systemName)
         {
             Debug(t.FullName, message, systemName);
@@ -158,7 +165,7 @@ namespace Shared.Logging
                 Debug(name, message);
                 return;
             }
-            Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Debug, systemName)));
+            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Debug, systemName);
         }
 
         #endregion
@@ -199,8 +206,9 @@ namespace Shared.Logging
                 Info(name, message);
                 return;
             }
-            Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Info, systemName)));
+            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Info, systemName);
         }
+
         #endregion
 
         #region .: Warn :.
@@ -209,6 +217,7 @@ namespace Shared.Logging
         {
             Warn(o.GetType(), message);
         }
+
         public static void Warn(this object o, Func<object> message, SystemName systemName)
         {
             Warn(o.GetType(), message, systemName);
@@ -218,6 +227,7 @@ namespace Shared.Logging
         {
             Warn(t.FullName, message);
         }
+
         public static void Warn(this Type t, Func<object> message, SystemName systemName)
         {
             Warn(t.FullName, message, systemName);
@@ -228,6 +238,7 @@ namespace Shared.Logging
             if (IsWarnEnabled(name))
                 LogManager.GetLogger(name).Warn(message());
         }
+
         public static void Warn(string name, Func<object> message, SystemName systemName)
         {
             var publisher = Publisher();
@@ -236,7 +247,7 @@ namespace Shared.Logging
                 Warn(name, message);
                 return;
             }
-            Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Warn, systemName)));
+            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Warn, systemName);
         }
 
         #endregion
@@ -307,7 +318,7 @@ namespace Shared.Logging
                 Error(name, message, exception);
                 return;
             }
-            Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Error, systemName, exception)));
+            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Error, systemName, exception);
         }
 
         #endregion
@@ -348,7 +359,7 @@ namespace Shared.Logging
                 Fatal(name, message);
                 return;
             }
-            Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), DataPlatform.Shared.Enums.LogLevel.Fatal, systemName)));
+            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Fatal, systemName);
         }
 
         #endregion
