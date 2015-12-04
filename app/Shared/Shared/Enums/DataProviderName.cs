@@ -19,6 +19,7 @@
         PCubedEZScore_E_WS,
         BMWFSTitle_E_DB,
         MMCode_E_DB,
-        LSAutoVIN12_I_DB
+        LSAutoVIN12_I_DB,
+        XDSVerifyID_E_WS
     }
 }

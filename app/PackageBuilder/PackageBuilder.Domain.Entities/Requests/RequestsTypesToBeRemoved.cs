@@ -137,6 +137,22 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
 
+    public class XdsIdentificationVerificationRequest : IAmXdsIdentificationVerificationRequest
+    {
+        public XdsIdentificationVerificationRequest(ICollection<IAmRequestField> requestFields)
+        {
+            IdNumber = requestFields.GetRequestField<IAmIdentityNumberRequestField>();
+            CellularNumber = requestFields.GetRequestField<IAmCellularNumberRequestField>();
+            AccountNumber = requestFields.GetRequestField<IAmAccountNumberRequestField>();
+        }
+
+        public IAmIdentityNumberRequestField IdNumber { get; private set; }
+
+        public IAmCellularNumberRequestField CellularNumber { get; private set; }
+
+        public IAmAccountNumberRequestField AccountNumber { get; private set; }
+    }
+
     public class LightstoneAutoRequest : IAmLightstoneAutoRequest
     {
         public LightstoneAutoRequest(ICollection<IAmRequestField> requestFields)

@@ -25,7 +25,8 @@ namespace DataPlatform.Shared.Enums
         [EnumMember(Value = "LS Consumer")] LSConsumerRepair_E_WS = 16,
         [EnumMember(Value = "BMW Finance")] BMWFSTitle_E_DB = 17,
         [EnumMember(Value = "LS MM Code")] MMCode_E_DB = 18,
-        [EnumMember(Value = "LS Vin 12")] LSAutoVIN12_I_DB = 19
+        [EnumMember(Value = "LS Vin 12")] LSAutoVIN12_I_DB = 19,
+        [EnumMember(Value = "XDS ID Verification")] XDSVerifyID_E_WS = 20
     }
 
     public static class SharedEnumExtensions

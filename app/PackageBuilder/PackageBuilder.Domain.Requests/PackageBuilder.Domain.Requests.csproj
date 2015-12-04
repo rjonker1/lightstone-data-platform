@@ -53,6 +53,8 @@
     <Compile Include="Fields\AccountNumberRequestField.cs" />
     <Compile Include="Fields\ApplicantNameRequestField.cs" />
     <Compile Include="Fields\CarIdRequestField.cs" />
+    <Compile Include="Fields\CellularNumberField.cs" />
+    <Compile Include="Fields\CellularNumberRequestField.cs" />
     <Compile Include="Fields\ChassisNumberRequestField.cs" />
     <Compile Include="Fields\CompanyNameRequestField.cs" />
     <Compile Include="Fields\CompanyRegistrationNumberRequestField.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="RgtVinRequest.cs" />
     <Compile Include="SignioDriversLicenseRequest.cs" />
     <Compile Include="Vin12Request.cs" />
+    <Compile Include="XdsIdentityVerificationRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PackageBuilder.Domain.Requests.Contracts\PackageBuilder.Domain.Requests.Contracts.csproj">
