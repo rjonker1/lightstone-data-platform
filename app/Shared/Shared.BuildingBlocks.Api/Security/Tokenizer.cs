@@ -30,7 +30,7 @@ namespace Shared.BuildingBlocks.Api.Security
         private Func<DateTime> now = () => DateTime.UtcNow;
         private Func<TimeSpan> tokenExpiration = () => TimeSpan.FromDays(1);
         private Func<TimeSpan> keyExpiration = () => TimeSpan.FromDays(7);
-        private SystemName _systemName;
+        private readonly SystemName _systemName;
 
         private Func<NancyContext, string>[] additionalItems =
         {
@@ -95,7 +95,7 @@ namespace Shared.BuildingBlocks.Api.Security
 
         public IUserIdentity Detokenize(string token, NancyContext context, IUserIdentityResolver userIdentityResolver)
         {
-            return Detokenize(token, context, userIdentityResolver);
+            return Detokenize(token, context, userIdentityResolver, _systemName);
         }
 
         /// <summary>
