@@ -22,8 +22,10 @@ namespace DataProviders.Xds.IdentityVerification.Infrastructure.Dto
         public IdentityVerificationRequest Map()
         {
             IdNumber = _request.IdNumber.GetValue();
-            //CellularNumber = _request.CellularNumber.GetValue();
-            //AccountNumber = _request.AccountNumber.GetValue();
+            FirstName = _request.FirstName.GetValue();
+            Surname = _request.Surname.GetValue();
+            ReferenceNumber = _request.ReferenceNumber.GetValue();
+            VoucherCode = _request.Voucher.GetValue();
             return this;
         }
 

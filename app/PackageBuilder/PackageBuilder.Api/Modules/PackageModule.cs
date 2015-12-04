@@ -29,6 +29,8 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Commands;
+using PackageBuilder.Domain.Entities.Requests;
+using PackageBuilder.Domain.Entities.Requests.RequestTypes;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.NEventStore;
 using Shared.BuildingBlocks.Api.ApiClients;
@@ -45,7 +47,7 @@ namespace PackageBuilder.Api.Modules
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus,
-            IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration) //, IEntryPointAsync entryPointAsync
+            IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration, IBuildRequest requestBuilder) //, IEntryPointAsync entryPointAsync
         {
 
             Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
@@ -114,14 +116,12 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
-                var responses = await new TaskFactory().StartNew(() =>
-                    ((Package)package).Execute(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName,
-                    Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber));
+                var responses = await Task.Run(() =>
+                    ((Package)package).Execute(entryPoint, new ExecuteLaceRequest(apiRequest.UserId, Context.CurrentUser.UserName, Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber,requestBuilder)));
 
                 //var responses = await ((Package)package).ExecuteAsync(entryPointAsync, apiRequest.UserId, Context.CurrentUser.UserName,
                 //   Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion, apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber);
-
-
+                
                 // Filter responses for cleaner api payload
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
                 var filteredResponse = new List<IProvideResponseDataProvider>
@@ -177,9 +177,9 @@ namespace PackageBuilder.Api.Modules
 
                 this.Info(() => StringExtensions.FormatWith("PackageBuilder Auth to UserManagement Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);
 
-                var responses = await Task.Factory.StartNew(() =>
-                    ((Package)package).ExecuteWithCarId(entryPoint, apiRequest.UserId, Context.CurrentUser.UserName, Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
-                    apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber));
+                var responses = await Task.Run(() =>
+                    ((Package)package).ExecuteWithCarId(entryPoint, new ExecuteLaceRequest(apiRequest.UserId, Context.CurrentUser.UserName, Context.CurrentUser.UserName, apiRequest.RequestId, accountNumber, apiRequest.ContractId, apiRequest.ContractVersion,
+                    apiRequest.SystemType, apiRequest.RequestFields, (double)package.CostOfSale, (double)package.RecommendedSalePrice, apiRequest.HasConsent, apiRequest.ContactNumber,requestBuilder)));
 
                 // Filter responses for cleaner api payload
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow), SystemName.PackageBuilder);

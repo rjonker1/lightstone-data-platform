@@ -81,13 +81,10 @@ namespace PackageBuilder.Domain.Entities.Requests
 
     public class LaceDataProvider : IAmDataProvider
     {
-        public LaceDataProvider(DataProviderName name, IEnumerable<IAmRequestField> requestFields, decimal costPrice, decimal recommendedPrice,
-            IHaveUser user, string packageName, IBuildRequestTypes requestTypes, string contactNumber)
+        public LaceDataProvider(DataProviderName name, IAmDataProviderRequest request, decimal costPrice, decimal recommendedPrice)
         {
             Name = name;
-            var requestType = requestTypes.RequestTypes.FirstOrDefault(w => w.Key == name);
-            if (requestType.Value != null)
-                Request = new[] {requestType.Value(new RequestBuilderContext(requestFields.ToList(), user, packageName, contactNumber))};
+            Request = new[] { request };
             CostPrice = costPrice;
             RecommendedPrice = recommendedPrice;
         }
