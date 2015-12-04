@@ -81,6 +81,7 @@
     <Compile Include="Fields\UserIdRequestField.cs" />
     <Compile Include="Fields\UsernameRequestField.cs" />
     <Compile Include="Fields\VinNumberRequestField.cs" />
+    <Compile Include="Fields\VoucherRequestField.cs" />
     <Compile Include="Fields\YearRequestField.cs" />
     <Compile Include="IvidStandardRequest.cs" />
     <Compile Include="IvidTitleholderRequest.cs" />

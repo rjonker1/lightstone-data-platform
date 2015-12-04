@@ -50,24 +50,27 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging">
-      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    <Reference Include="Common.Logging.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging.Log4Net1211">
-      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+    <Reference Include="Common.Logging.Log4Net1211, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1882\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.1.0.0.1993\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Requests.Contracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1942, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1942\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1993, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1993\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1975, Culture=neutral, processorArchitecture=MSIL">
@@ -139,6 +142,7 @@
     <Compile Include="Lace\Chain\when_initalizing_lace_source_chain_for_vin_rgt_vin_rgt_search.cs" />
     <Compile Include="Lace\Chain\when_initializing_car_id_chain_for_carid_and_year_search_for_all_carId_dp.cs" />
     <Compile Include="Lace\Chain\when_initializing_car_id_chain_for_carid_and_year_search_on_ls_auto.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_chain_for_xds_id_verification_search.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_for_pcubed_ez_score.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_with_vin12_vin.cs" />
@@ -161,6 +165,7 @@
     <Compile Include="Lace\Consumers\when_consuming_audatex_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_xds_id_verfication_data_provider.cs" />
     <Compile Include="Lace\EntrypointAsync\when_sending_valid_vehicle_to_async_entry_point_service.cs" />
     <Compile Include="Lace\EntryPoint\when_sending_carid_and_year_only_to_entry_point.cs" />
     <Compile Include="Lace\EntryPoint\when_sending_valid_vehicle_to_entry_point_service.cs" />
@@ -227,6 +232,10 @@
     <ProjectReference Include="..\Source\DataProviders.Vin12\DataProviders.Vin12.csproj">
       <Project>{0eeb07bd-3710-4852-9112-0ca454608d3e}</Project>
       <Name>DataProviders.Vin12</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Source\DataProviders.Xds.IdentityVerification\DataProviders.Xds.IdentityVerification.csproj">
+      <Project>{665e797d-a154-440c-bfdd-5b3ee3d3dfb3}</Project>
+      <Name>DataProviders.Xds.IdentityVerification</Name>
     </ProjectReference>
     <ProjectReference Include="..\Source\Lace.Caching.BuildingBlocks\Lace.Caching.BuildingBlocks.csproj">
       <Project>{cbb5ee23-8ec8-45f7-b173-a268bfe9d23b}</Project>

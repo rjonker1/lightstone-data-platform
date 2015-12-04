@@ -30,6 +30,8 @@
         PhoneNumber = 25,
         EmailAddress = 26,
         AccessKey = 27,
-        AccountNumber = 28
+        AccountNumber = 28, 
+        CellularNumber = 29,
+        VoucherCode = 31
     }
 }
