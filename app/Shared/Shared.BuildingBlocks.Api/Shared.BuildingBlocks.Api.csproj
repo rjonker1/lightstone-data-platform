@@ -78,6 +78,7 @@
     <Compile Include="ExceptionHandling\ErrorStatusCodeHandler.cs" />
     <Compile Include="ApiClients\PackageBuilderApiClient.cs" />
     <Compile Include="Installers\AuthInstaller.cs" />
+    <Compile Include="Security\IDataPlatformTokenizer.cs" />
     <Compile Include="Security\RootPathProvider.cs" />
     <Compile Include="Security\Tokenizer.cs" />
     <Compile Include="Security\SecureModule.cs" />
@@ -106,6 +107,10 @@
     <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.csproj">
       <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
       <Name>BuildingBlocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Logging\Shared.Logging.csproj">
+      <Project>{89791762-ff3c-49e9-be8b-594c9fbd2f30}</Project>
+      <Name>Shared.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
