@@ -3,6 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
+using PackageBuilder.Domain.Entities.Requests.RequestTypes;
 
 namespace PackageBuilder.Api.Installers
 {
@@ -12,6 +13,7 @@ namespace PackageBuilder.Api.Installers
         {
             container.Register(Component.For<IEntryPoint>().ImplementedBy<EntryPointService>().LifestyleTransient());
             //container.Register(Component.For<IEntryPointAsync>().ImplementedBy<EntryPointAsyncService>().LifestyleTransient());
+            container.Register(Component.For<IBuildRequest>().ImplementedBy<RequestTypeBuilderFactory>().LifestyleTransient());
         }
     }
 }
