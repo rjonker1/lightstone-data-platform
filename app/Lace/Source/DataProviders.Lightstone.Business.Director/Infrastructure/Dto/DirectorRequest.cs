@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using PackageBuilder.Domain.Requests.Contracts.RequestFields;
+using Lace.Shared.Extensions;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.Dto
@@ -21,9 +21,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.
 
         public DirectorRequest Map()
         {
-            IdNumber = GetValue(_request.IdNumber);
-            FirstName = GetValue(_request.FirstName);
-            Surname = GetValue(_request.Surname);
+            IdNumber = _request.IdNumber.GetValue();
+            FirstName = _request.FirstName.GetValue();
+            Surname = _request.Surname.GetValue();
             return this;
         }
 
@@ -38,11 +38,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Director.Infrastructure.
             long id;
             long.TryParse(IdNumber, out id);
             return id > 0;
-        }
-
-        private static string GetValue(IAmRequestField field)
-        {
-            return field == null ? string.Empty : string.IsNullOrEmpty(field.Field) ? string.Empty : field.Field;
         }
 
         [DataMember]

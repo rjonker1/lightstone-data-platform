@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://www.web.xds.co.za/uatxdsconnect/XDSConnectWS.asmx?wsdl" docRef="https://www.web.xds.co.za/uatxdsconnect/XDSConnectWS.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://www.web.xds.co.za/uatxdsconnect/XDSConnectWS.asmx" xmlns:q1="http://www.web.xds.co.za/XDSConnectWS" binding="q1:XDSConnectWSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://www.web.xds.co.za/uatxdsconnect/XDSConnectWS.asmx" xmlns:q2="http://www.web.xds.co.za/XDSConnectWS" binding="q2:XDSConnectWSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

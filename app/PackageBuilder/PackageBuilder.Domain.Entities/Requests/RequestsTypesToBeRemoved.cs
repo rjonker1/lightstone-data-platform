@@ -137,20 +137,26 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IAmVinNumberRequestField VinNumber { get; private set; }
     }
 
-    public class XdsIdentificationVerificationRequest : IAmXdsIdentificationVerificationRequest
+    public class XdsIdentityVerificationRequest : IAmXdsIdentificationVerificationRequest
     {
-        public XdsIdentificationVerificationRequest(ICollection<IAmRequestField> requestFields)
+        public XdsIdentityVerificationRequest(ICollection<IAmRequestField> requestFields)
         {
             IdNumber = requestFields.GetRequestField<IAmIdentityNumberRequestField>();
-            CellularNumber = requestFields.GetRequestField<IAmCellularNumberRequestField>();
-            AccountNumber = requestFields.GetRequestField<IAmAccountNumberRequestField>();
+            FirstName = requestFields.GetRequestField<IAmFirstNameRequestField>();
+            Surname = requestFields.GetRequestField<IAmSurnameRequestField>();
+            ReferenceNumber = requestFields.GetRequestField<IAmRequestReferenceRequestField>();
+            Voucher = requestFields.GetRequestField<IAmVoucherCodeRequestField>();
         }
 
         public IAmIdentityNumberRequestField IdNumber { get; private set; }
 
-        public IAmCellularNumberRequestField CellularNumber { get; private set; }
+        public IAmFirstNameRequestField FirstName { get; private set; }
 
-        public IAmAccountNumberRequestField AccountNumber { get; private set; }
+        public IAmSurnameRequestField Surname { get; private set; }
+
+        public IAmRequestReferenceRequestField ReferenceNumber { get; private set; }
+
+        public IAmVoucherCodeRequestField Voucher { get; private set; }
     }
 
     public class LightstoneAutoRequest : IAmLightstoneAutoRequest
