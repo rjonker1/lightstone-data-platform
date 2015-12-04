@@ -4,18 +4,21 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Authentication.Token.Storage;
 using Nancy.ErrorHandling;
 using Nancy.Security;
+using Shared.Logging;
 
 namespace Shared.BuildingBlocks.Api.Security
 {
     /// <summary>
     /// Default implementation of <see cref="ITokenizer"/>
     /// </summary>
-    public class Tokenizer : ITokenizer
+    public class DataPlatformTokenizer : IDataPlatformTokenizer
     {
         private readonly TokenValidator validator;
         private ITokenKeyStore keyStore = new FileSystemTokenKeyStore();
@@ -27,6 +30,7 @@ namespace Shared.BuildingBlocks.Api.Security
         private Func<DateTime> now = () => DateTime.UtcNow;
         private Func<TimeSpan> tokenExpiration = () => TimeSpan.FromDays(1);
         private Func<TimeSpan> keyExpiration = () => TimeSpan.FromDays(7);
+        private SystemName _systemName;
 
         private Func<NancyContext, string>[] additionalItems =
         {
@@ -36,8 +40,8 @@ namespace Shared.BuildingBlocks.Api.Security
         /// <summary>
         /// Initializes a new instance of the <see cref="Tokenizer"/> class.
         /// </summary>
-        public Tokenizer()
-            : this(null)
+        public DataPlatformTokenizer()
+            : this(null, SystemName.Api)
         {
         }
 
@@ -45,7 +49,7 @@ namespace Shared.BuildingBlocks.Api.Security
         /// Initializes a new instance of the <see cref="Tokenizer"/> class.
         /// </summary>
         /// <param name="configuration">The configuration that should be used by the tokenizer.</param>
-        public Tokenizer(Action<TokenizerConfigurator> configuration)
+        public DataPlatformTokenizer(Action<TokenizerConfigurator> configuration, SystemName systemName)
         {
             if (configuration != null)
             {
@@ -54,6 +58,7 @@ namespace Shared.BuildingBlocks.Api.Security
             }
             var keyRing = new TokenKeyRing(this);
             this.validator = new TokenValidator(keyRing);
+            _systemName = systemName;
         }
 
         /// <summary>
@@ -88,6 +93,11 @@ namespace Shared.BuildingBlocks.Api.Security
             return token;
         }
 
+        public IUserIdentity Detokenize(string token, NancyContext context, IUserIdentityResolver userIdentityResolver)
+        {
+            return Detokenize(token, context, userIdentityResolver);
+        }
+
         /// <summary>
         /// Creates a <see cref="IUserIdentity"/> from a token.
         /// </summary>
@@ -95,11 +105,12 @@ namespace Shared.BuildingBlocks.Api.Security
         /// <param name="context">Current <see cref="NancyContext"/>.</param>
         /// <param name="userIdentityResolver">The user identity resolver.</param>
         /// <returns>The detokenized user identity.</returns>
-        public IUserIdentity Detokenize(string token, NancyContext context, IUserIdentityResolver userIdentityResolver)
+        public IUserIdentity Detokenize(string token, NancyContext context, IUserIdentityResolver userIdentityResolver, SystemName systemName)
         {
             var tokenComponents = token.Split(new[] { this.hashDelimiter }, StringSplitOptions.None);
             if (tokenComponents.Length != 2)
             {
+                this.Error(() => "tokenComponents.Length != 2 for token {0}".FormatWith(token), systemName);
                 return null;
             }
 
@@ -108,6 +119,7 @@ namespace Shared.BuildingBlocks.Api.Security
 
             if (!this.validator.IsValid(messagebytes, hash))
             {
+                this.Error(() => "Validator.IsValid = false for token {0}".FormatWith(token), systemName);
                 return null;
             }
 
@@ -123,6 +135,7 @@ namespace Shared.BuildingBlocks.Api.Security
                     if (tokenizedValue != currentValue)
                     {
                         // todo: may need to log here as this probably indicates hacking
+                        this.Error(() => "tokenizedValue != currentValue for token {0}".FormatWith(token), systemName);
                         return null;
                     }
                 }
@@ -132,13 +145,21 @@ namespace Shared.BuildingBlocks.Api.Security
 
             if (tokenStamp() - generatedOn > tokenExpiration())
             {
+                this.Error(() => "tokenizedValue != currentValue for token {0}".FormatWith(token), systemName);
                 return null;
             }
 
             var userName = items[0];
             var claims = items[1].Split(new[] { this.claimsDelimiter }, StringSplitOptions.None);
 
-            return userIdentityResolver.GetUser(userName, claims, context);
+            this.Info(() => "Getting UserIdentity for user {0} for token {1}".FormatWith(userName, token), systemName);
+            var userIdentity = userIdentityResolver.GetUser(userName, claims, context);
+            if (userIdentity != null)
+                this.Info(() => "Found UserIdentity for user {0} for token {1}".FormatWith(userName, token), systemName);
+            else
+                this.Error(() => "Unable to get UserIdentity for user {0} for token {1}".FormatWith(userName, token), systemName);
+
+            return userIdentity;
         }
 
         private string CreateToken(string message)
@@ -153,13 +174,13 @@ namespace Shared.BuildingBlocks.Api.Security
         /// </summary>
         public class TokenizerConfigurator
         {
-            private readonly Tokenizer tokenizer;
+            private readonly DataPlatformTokenizer tokenizer;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="TokenizerConfigurator"/> class.
             /// </summary>
             /// <param name="tokenizer"></param>
-            public TokenizerConfigurator(Tokenizer tokenizer)
+            public TokenizerConfigurator(DataPlatformTokenizer tokenizer)
             {
                 this.tokenizer = tokenizer;
             }
@@ -327,11 +348,11 @@ namespace Shared.BuildingBlocks.Api.Security
 
         private class TokenKeyRing
         {
-            private readonly Tokenizer tokenizer;
+            private readonly DataPlatformTokenizer tokenizer;
 
             private readonly IDictionary<DateTime, byte[]> keys;
 
-            internal TokenKeyRing(Tokenizer tokenizer)
+            internal TokenKeyRing(DataPlatformTokenizer tokenizer)
             {
                 this.tokenizer = tokenizer;
                 keys = this.tokenizer.keyStore.Retrieve();
