@@ -31,10 +31,10 @@ namespace Shared.Logging
             return publisher;
         }
 
-        private static void Pub(this IWorkflowPublisher publisher, Func<object> message, DataPlatform.Shared.Enums.LogLevel level, SystemName systemName, Exception exception = null)
+        private static async void Pub(this IWorkflowPublisher publisher, Func<object> message, DataPlatform.Shared.Enums.LogLevel level, SystemName systemName, Exception exception = null)
         {
             //Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), level, systemName, exception)));
-            publisher.Publish(new LogMessage(message().ToString(), level, systemName, exception));
+            await publisher.PublishAsync(new LogMessage(message().ToString(), level, systemName, exception)).ConfigureAwait(false);
         }
 
         #region .: Enabled Checks :.
