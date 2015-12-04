@@ -56,7 +56,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return lightstoneAutoResponse;
                     case DataProviderName.LSAutoSpecs_I_DB:
                         var rgtResponse = new Lace.Domain.Core.Entities.RgtResponse("TOYOTA", 2008, "Hatch back", "190", "91", "6.2", "10.4", "157", "166", "1598", "Hatch (5-dr)", "Petrol", "Man", "Toyota AURIS", "STANDARD WHITE", "", "", "", "D166", "T05", "Auris", ""
-                                                            , "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                                                            , "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","");
                         rgtResponse.HasBeenHandled();
                         return rgtResponse;
                     case DataProviderName.LSAutoVINMaster_I_DB:

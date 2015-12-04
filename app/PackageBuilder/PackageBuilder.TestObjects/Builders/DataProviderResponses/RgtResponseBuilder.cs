@@ -57,6 +57,7 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses
         public string _tyreSizeFront { get; private set; }
         public string _tyreSizeRear { get; private set; }
         public string _wheelType { get; private set; }
+        public string _laneDepartureWarningSystem { get; private set; }
 
         public IProvideDataFromRgt Build()
         {
@@ -67,8 +68,8 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses
                 _vehicleType, _model, _make, _carType, _airConditioner, _electricMirrors, _foldAwayMirrors, _heatedSideMirrors,
                 _doors,_boreXStroke, _compressionRatio, _cylinders, _valvesPerCylinder, _absBrakes, _brakesFrontDiscs, _brakesRearDiscs,
                 _fogLampsFront, _headlightType, _heatedRearWindow, _rearWiper, _powerSteering, _colourCodedBumpers, _colourCodedDoorHandles,
-                _colourCodedMirrors, _maintenancePlanKms, _maintenancePlanYears, _serviceIntervalsKms, _serviceIntervalsKms, _servicePlanYears, 
-                _warrantyKms, _warrantyYears, _rimSizeFront, _tyreSizeFront, _tyreSizeRear, _wheelType);
+                _colourCodedMirrors, _maintenancePlanKms, _maintenancePlanYears, _serviceIntervalsKms, _serviceIntervalsKms, _servicePlanYears,
+                _warrantyKms, _warrantyYears, _rimSizeFront, _tyreSizeFront, _tyreSizeRear, _wheelType, _laneDepartureWarningSystem);
         }
 
         //public RgtResponseBuilder With(string manufacturer, int modelYear, string modelType, string topSpeed, string kilowatts, string fuelEconomy,
