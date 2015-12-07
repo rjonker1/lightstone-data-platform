@@ -66,8 +66,8 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Caching.1.0.0.1357\lib\net45\Lightstone.DataPlatform.Lace.Caching.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.2010, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.2010\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.2014, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.2014\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
