@@ -6,7 +6,7 @@ namespace UserManagement.Domain.Core.Helpers
 {
     public class ExceptionHelper
     {
-        public static void IgnoreException(Action action)
+        public static void IgnoreException(Action action, bool logException = true)
         {
             try
             {
@@ -14,7 +14,8 @@ namespace UserManagement.Domain.Core.Helpers
             }
             catch (Exception exception)
             {
-                typeof(ExceptionHelper).Error(() => exception, SystemName.UserManagement);
+                if (logException)
+                    typeof(ExceptionHelper).Error(() => exception, SystemName.UserManagement);
             }
         }
 
