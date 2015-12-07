@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Authentication.Token;

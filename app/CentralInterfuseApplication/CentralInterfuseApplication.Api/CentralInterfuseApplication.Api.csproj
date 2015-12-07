@@ -49,31 +49,58 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1890, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1890\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Common.Logging.Log4Net1211">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1890, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1890\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CommonServiceLocator.WindsorAdapter.Unofficial">
+      <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.Unofficial.3.3.0.0\lib\Net40\CommonServiceLocator.WindsorAdapter.Unofficial.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.1890, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.1890\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.2002, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.2002\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.2001, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.2001\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.2001, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.2001\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Logging">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.2001\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messages">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.2002\lib\net45\Lightstone.DataPlatform.Shared.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.UserManagement.Api.Routes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.Dataplatform.UserManagement.Api.Routes.1.0.0.1620\lib\net45\Lightstone.Dataplatform.UserManagement.Api.Routes.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.2001\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Publisher">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.2001\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\packages\Nancy.1.1\lib\net40\Nancy.dll</HintPath>
     </Reference>
@@ -100,6 +127,9 @@
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -278,8 +308,6 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\Installers\ApiClientInstaller.cs" />
-    <Compile Include="Helpers\Installers\UserMapperInstaller.cs" />
-    <Compile Include="Helpers\UserMapper.cs" />
     <Compile Include="Helpers\WindsorInstallerCollection.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\AuthModule.cs" />
