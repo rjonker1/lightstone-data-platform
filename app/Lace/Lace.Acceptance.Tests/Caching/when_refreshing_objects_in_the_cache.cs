@@ -85,8 +85,8 @@ namespace Lace.Acceptance.Tests.Caching
             //var muncip = _readRepository.GetAll<Municipality>(null);
             //muncip.Count().ShouldNotEqual(0);
 
-            var sale = _readRepository.GetAll<Sale>(null);
-            sale.Count().ShouldNotEqual(0);
+            //var sale = _readRepository.GetAll<Sale>(null);
+            //sale.Count().ShouldNotEqual(0);
 
             //var carInfo = _readRepository.GetAll<CarInformationDto>(CarInformationDto.SelectAllWithValidCarIdAndYear);
             //var count = carInfo.Count();
