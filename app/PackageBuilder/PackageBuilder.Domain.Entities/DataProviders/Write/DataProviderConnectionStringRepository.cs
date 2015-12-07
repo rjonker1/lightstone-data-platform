@@ -46,6 +46,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
                         return "lace/source/database/auto-car-stats";
                     case DataProviderName.LSAutoVIN12_I_DB:
                         return "lace/source/database/auto-car-stats";
+                    case DataProviderName.XDSVerifyID_E_WS:
+                        return "";
                     default:
                         return null;
                 }

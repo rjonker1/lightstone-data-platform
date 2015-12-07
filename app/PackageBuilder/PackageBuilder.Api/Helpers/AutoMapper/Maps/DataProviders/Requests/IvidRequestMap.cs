@@ -3,7 +3,6 @@ using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
-using PackageBuilder.Domain.Entities.Requests;
 using PackageBuilder.Domain.Requests;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using PackageBuilder.Domain.Requests.Fields;
@@ -138,7 +137,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IProvideDataFromPCubedEzScore, IEnumerable<IDataField>>().ConvertUsing(s =>
             {
                 var request = s.Request ??
-                              new PCubedEzScoreRequest(new IdentityNumberRequestField(""), new PhoneNumberRequestField(""), 
+                              new PCubedEzScoreRequest(new IdentityNumberRequestField(""), new PhoneNumberRequestField(""),
                                   new EmailAddressRequestField(""));
                 return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
             });
@@ -153,7 +152,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IProvideDataFromBmwFinance, IEnumerable<IDataField>>().ConvertUsing(s =>
             {
                 var request = s.Request ??
-                              new BmwFinanceRequest(new VinNumberRequestField(""), new AccountNumberRequestField(""), new IdentityNumberRequestField(""), new LicenceNumberRequestField(""), new EngineNumberRequestField(""));
+                              new BmwFinanceRequest(new VinNumberRequestField(""), new AccountNumberRequestField(""),
+                                  new IdentityNumberRequestField(""), new LicenceNumberRequestField(""), new EngineNumberRequestField(""));
                 return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
             });
 
@@ -161,6 +161,18 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             {
                 var request = s.Request ?? new PackageBuilder.Domain.Requests.Vin12Request(new VinNumberRequestField(""));
                 return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(request).ToList();
+            });
+
+            Mapper.CreateMap<IProvideDataFromXdsIdentityVerification, IEnumerable<IDataField>>().ConvertUsing(s =>
+            {
+                var requst = s.Request ?? new PackageBuilder.Domain.Requests.XdsIdentityVerificationRequest(
+                    new IdentityNumberRequestField(""),
+                    new FirstNameRequestField(""),
+                    new SurnameRequestField(""),
+                    new RequestReferenceRequestField(""),
+                    new VoucherRequestField(""));
+
+                return Mapper.Map<IAmDataProviderRequest, IEnumerable<IDataField>>(requst).ToList();
             });
         }
     }

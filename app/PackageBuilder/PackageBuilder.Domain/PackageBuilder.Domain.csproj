@@ -74,21 +74,21 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.1991, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.1991\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.2000, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.2000\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.1991, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.1991\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.2000, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.2000\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.1991, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.1991\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.2000, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.2000\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.1979, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.1979\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.2000, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.2000\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Logging">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
@@ -137,24 +137,25 @@
     <Compile Include="CommandHandlers\DataImports\ImportStartupDataHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\AmendDataProviderStructureHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\IvidTitleHolderResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\MMCodeResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\RgtResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\RgtVinResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LSMMCodeResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LSRGTResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LSRGTVinResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\XDSIDVerificationResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Vin12Response.cs" />
     <Compile Include="CommandHandlers\Industries\ImportIndustryHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\AudatexResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\BmwFinanceResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\BMWFinanceResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\DataProviderResponseRepository.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\FakeDataProviderResponseRepository.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\IvidResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneAutoResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneBusinessResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneConsumerSpecificationsResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\LightstoneDirectorResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\LightstonePropertyResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LSAutoResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LSBusinessResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LSConsumerSpecResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LSDirectorResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\LSPropertyResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\PCubedEzScoreResponse.cs" />
     <Compile Include="CommandHandlers\DataProviders\Responses\PCubedFicaVerficationResponse.cs" />
-    <Compile Include="CommandHandlers\DataProviders\Responses\SignioDriversLicenseDecryptionResponse.cs" />
+    <Compile Include="CommandHandlers\DataProviders\Responses\SignioDLDecryptionResponse.cs" />
     <Compile Include="CommandHandlers\PublishStorableCommands.cs" />
     <Compile Include="CommandHandlers\CommandStore\ReplayCommandHandler.cs" />
     <Compile Include="CommandHandlers\CommandStore\StoreCommandHandler.cs" />

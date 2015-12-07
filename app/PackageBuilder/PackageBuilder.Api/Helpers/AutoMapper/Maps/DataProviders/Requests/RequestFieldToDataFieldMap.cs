@@ -100,6 +100,9 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Requests
             Mapper.CreateMap<IAmAccountNumberRequestField, DataField>()
               .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
               .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.AccountNumber));
+            Mapper.CreateMap<IAmVoucherCodeRequestField, DataField>()
+              .ForMember(x => x.Name, opt => opt.MapFrom(x => x.GetType().Name.Replace(oldValue, "").SplitCamelCase()))
+              .ForMember(x => x.Type, opt => opt.MapFrom(x => (int)RequestFieldType.VoucherCode));
 
             Mapper.CreateMap<IDataField, IAmRequestField>()
                 .ConvertUsing<ITypeConverter<IDataField, IAmRequestField>>();

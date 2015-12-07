@@ -6,7 +6,7 @@ using PackageBuilder.Domain.Entities.DataFields.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
 {
-    public class LightstoneDirectorResponseMap : ICreateAutoMapperMaps
+    public class LSDirectorResponseMap : ICreateAutoMapperMaps
     {
         public void CreateMaps()
         {

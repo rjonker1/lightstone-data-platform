@@ -54,6 +54,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return new MMCodeResponse().Default();
                     case DataProviderName.LSAutoVIN12_I_DB:
                         return new Vin12Response().Default();
+                    case DataProviderName.XDSVerifyID_E_WS:
+                        return new XdsIdentityVerificationResponse().Default();
                     default:
                         return null;
                 }
