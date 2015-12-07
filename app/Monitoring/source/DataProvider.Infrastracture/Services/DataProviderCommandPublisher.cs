@@ -4,6 +4,7 @@ using DataProvider.Infrastructure.Base.Services;
 using EasyNetQ;
 using EasyNetQ.Topology;
 using Workflow.BuildingBlocks;
+using Workflow.BuildingBlocks.Configurations;
 
 namespace DataProvider.Infrastructure.Services
 {
@@ -56,6 +57,8 @@ namespace DataProvider.Infrastructure.Services
         {
             get { return "caching/dataprovider/queue"; }
         }
+
+        public string ExchangeName { get; private set; }
 
         public string ErrorExchangeName
         {

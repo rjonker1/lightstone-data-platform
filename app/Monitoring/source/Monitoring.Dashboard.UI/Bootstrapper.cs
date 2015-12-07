@@ -3,6 +3,7 @@ using Api.Infrastructure.Base.Handlers;
 using Api.Infrastructure.Handlers;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataProvider.Infrastructure.Base.Handlers;
 using DataProvider.Infrastructure.Base.Services;
@@ -23,7 +24,9 @@ using Shared.BuildingBlocks.AdoNet.Mapping;
 using Shared.BuildingBlocks.AdoNet.Repository;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Installers;
+using Shared.Logging;
 using Workflow.BuildingBlocks;
+using Workflow.BuildingBlocks.Builders;
 
 namespace Monitoring.Dashboard.UI
 {
@@ -48,7 +51,7 @@ namespace Monitoring.Dashboard.UI
 
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-                this.Info(() => "Monitoring API invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                this.Info(() => "Monitoring API invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.Monitoring);
                 var token = "";
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
@@ -66,14 +69,14 @@ namespace Monitoring.Dashboard.UI
 
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on Monitoring request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                this.Error(() => "Error on Monitoring request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.Monitoring);
                 return ErrorResponse.FromException(exception);
             });
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on Monitoring request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                this.Error(() => "Error on Monitoring request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.Monitoring);
                 return ErrorResponse.FromException(exception);
             });
         }
