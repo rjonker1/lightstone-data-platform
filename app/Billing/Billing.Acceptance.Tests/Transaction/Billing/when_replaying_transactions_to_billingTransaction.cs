@@ -7,6 +7,7 @@ using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Workflow.Billing.Domain.Entities;
 using Workflow.BuildingBlocks;
+using Workflow.BuildingBlocks.Builders;
 using Xunit;
 using Xunit.Extensions;
 

@@ -8,6 +8,8 @@ using Shared.Logging;
 using Workflow.Billing.Consumers;
 using Workflow.Billing.Consumers.Installers;
 using Workflow.Billing.Installers;
+using Workflow.Publisher.Installers;
+using BusInstaller = Workflow.Billing.Installers.BusInstaller;
 
 namespace Workflow.Billing.BillingRun.Consumer
 {
@@ -22,8 +24,8 @@ namespace Workflow.Billing.BillingRun.Consumer
 
             var container = new WindsorContainer().Install(
                 new BusInstaller(),
-                new ServiceLocatorInstaller(),
-                new WorkflowInstaller(),
+                //new ServiceLocatorInstaller(),
+                //new WorkflowInstaller(),
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
                 new CacheProviderInstaller(),

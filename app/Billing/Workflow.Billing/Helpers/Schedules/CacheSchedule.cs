@@ -3,7 +3,7 @@ using DataPlatform.Shared.Messaging.Billing.Helpers;
 using EasyNetQ;
 using Shared.Logging;
 using Workflow.Billing.Messages.Publishable;
-using Workflow.BuildingBlocks;
+using Workflow.BuildingBlocks.Builders;
 
 namespace Workflow.Billing.Helpers.Schedules
 {

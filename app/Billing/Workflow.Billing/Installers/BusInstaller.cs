@@ -3,8 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
-using Workflow.BuildingBlocks;
-using Workflow.Publisher;
+using Workflow.BuildingBlocks.Builders;
 
 namespace Workflow.Billing.Installers
 {

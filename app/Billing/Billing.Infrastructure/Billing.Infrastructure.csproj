@@ -69,9 +69,6 @@
     <Reference Include="Common.Logging.Log4Net1211">
       <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
     </Reference>
-    <Reference Include="CommonServiceLocator.WindsorAdapter.Unofficial">
-      <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.Unofficial.3.3.0.0\lib\Net40\CommonServiceLocator.WindsorAdapter.Unofficial.dll</HintPath>
-    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
@@ -82,26 +79,28 @@
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.1970\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.2004\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Logging">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.1970\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.2004\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.1970\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.2004\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.2003\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Publisher">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1963\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.2003\lib\net45\Lightstone.DataPlatform.Workflow.Publisher.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MemBus">
       <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>

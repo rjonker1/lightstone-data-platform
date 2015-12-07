@@ -5,6 +5,8 @@ using Workflow.Billing.Consumers;
 using Workflow.Billing.Consumers.Installers;
 using Workflow.Billing.Installers;
 using Workflow.Billing.Messages.Publishable;
+using Workflow.Publisher.Installers;
+using BusInstaller = Workflow.Billing.Installers.BusInstaller;
 
 namespace Workflow.Billing.Cache.Consumer
 {
@@ -19,8 +21,8 @@ namespace Workflow.Billing.Cache.Consumer
 
             var container = new WindsorContainer().Install(
                 new BusInstaller(),
-                new ServiceLocatorInstaller(),
-                new WorkflowInstaller(),
+                //new ServiceLocatorInstaller(),
+                //new WorkflowInstaller(),
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
                 new CacheProviderInstaller(),

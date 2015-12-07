@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 ﻿using Lim.Core;
 using Lim.Domain.Dto;
@@ -18,6 +19,7 @@ using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Installers;
+using Shared.Logging;
 
 namespace Lim.Web.UI
 {
@@ -39,7 +41,7 @@ namespace Lim.Web.UI
         {
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-                this.Info(() => "LIM WEB invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                this.Info(() => "LIM WEB invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.LightstoneIntegrationModule);
                 var token = "";
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
@@ -57,14 +59,14 @@ namespace Lim.Web.UI
 
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.LightstoneIntegrationModule);
                 return ErrorResponse.FromException(exception);
             });
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.LightstoneIntegrationModule);
                 return ErrorResponse.FromException(exception);
             });
             base.RequestStartup(container, pipelines, context);

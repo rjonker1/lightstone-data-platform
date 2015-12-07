@@ -5,6 +5,8 @@ using EasyNetQ;
 using Workflow.Billing.Consumers;
 using Workflow.Billing.Consumers.Installers;
 using Workflow.Billing.Installers;
+using Workflow.Publisher.Installers;
+using BusInstaller = Workflow.Billing.Installers.BusInstaller;
 
 namespace Workflow.Billing.Consumer
 {
@@ -19,7 +21,7 @@ namespace Workflow.Billing.Consumer
 
             var container = new WindsorContainer().Install(
                 new BusInstaller(),
-                new ServiceLocatorInstaller(),
+                //new ServiceLocatorInstaller(),
                 new WorkflowInstaller(),
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
