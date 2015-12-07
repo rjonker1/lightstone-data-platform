@@ -80,7 +80,7 @@
     <Compile Include="Installers\AuthInstaller.cs" />
     <Compile Include="Security\IDataPlatformTokenizer.cs" />
     <Compile Include="Security\RootPathProvider.cs" />
-    <Compile Include="Security\Tokenizer.cs" />
+    <Compile Include="Security\DataPlatformTokenizer.cs" />
     <Compile Include="Security\SecureModule.cs" />
     <Compile Include="ApiClients\UserIdentity.cs" />
     <Compile Include="CannedResponses.cs" />
