@@ -1,4 +1,4 @@
-﻿using Castle.Windsor;
+﻿using System.Threading;
 using DataPlatform.Shared.Enums;
 using Shared.Logging;
 using Shared.Messages;
@@ -27,6 +27,7 @@ namespace Shared.Unit.Tests
         public void should_log_by_extension_method()
         {
             this.Error(() => "Test", SystemName.Shared);
+            Thread.Sleep(3000);
         }
     }
 }
