@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -10,7 +9,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
 {
     public class FakeDataProviderResponseRepository : IAmDataProviderResponseRepository
     {
-        public IEnumerable<IPointToLaceProvider> DataProviderResponses = Enumerable.Empty<IPointToLaceProvider>();
+        public readonly IEnumerable<IPointToLaceProvider> DataProviderResponses;
 
         public FakeDataProviderResponseRepository()
         {
@@ -27,7 +26,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                 this[DataProviderName.LSPropertySearch_E_WS],
                 this[DataProviderName.LSBusinessCompany_E_WS],
                 this[DataProviderName.LSBusinessDirector_E_WS],
-                this[DataProviderName.BMWFSTitle_E_DB]
+                this[DataProviderName.BMWFSTitle_E_DB],
+                this[DataProviderName.XDSVerifyID_E_WS]
             };
         }
 
@@ -88,6 +88,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders.Responses
                         return new LightstoneDirectorResponse().Default();
                     case DataProviderName.BMWFSTitle_E_DB:
                         return new BmwFinanceResponse().Default();
+                    case DataProviderName.XDSVerifyID_E_WS:
+                        return new XdsIdentityVerificationResponse().Default();
                     default:
                         return null;
                 }

@@ -55,6 +55,9 @@ namespace PackageBuilder.Domain.Entities.Requests.RequestTypes
                 },
                 {
                     DataProviderName.LSAutoVIN12_I_DB, (context) => new Vin12Request(context.Requests)
+                },
+                {
+                    DataProviderName.XDSVerifyID_E_WS, (context) => new XdsIdentityVerificationRequest(context.Requests)
                 }
             };
     }
