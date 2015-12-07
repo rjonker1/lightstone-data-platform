@@ -22,7 +22,7 @@ namespace UserManagement.Domain.CommandHandlers.Countries
         {
             CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID).EnglishName)
                 .Distinct().ToList()
-                .ForEach(x => ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Country(x), "Create"))));
+                .ForEach(x => ExceptionHelper.IgnoreException(() => _bus.Publish(new CreateUpdateEntity(new Country(x), "Create")), false));
         }
     }
 }

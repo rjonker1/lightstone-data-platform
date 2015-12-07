@@ -4,7 +4,6 @@ using AutoMapper;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
-using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
@@ -33,7 +32,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
                 .Include<IProvideDataFromLightstoneConsumerSpecifications, DataProviderName>()
                 .Include<IProvideDataFromBmwFinance, DataProviderName>()
                 .Include<IProvideDataFromMmCode, DataProviderName>()
-                .Include<IProvideDataFromVin12, DataProviderName>();
+                .Include<IProvideDataFromVin12, DataProviderName>()
+                .Include<IProvideDataFromXdsIdentityVerification, DataProviderName>();
 
             Mapper.CreateMap<IProvideDataFromIvid, DataProviderName>().ConvertUsing(s => DataProviderName.IVIDVerify_E_WS);
             Mapper.CreateMap<IProvideDataFromIvidTitleHolder, DataProviderName>().ConvertUsing(s => DataProviderName.IVIDTitle_E_WS);
@@ -51,6 +51,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
             Mapper.CreateMap<IProvideDataFromBmwFinance, DataProviderName>().ConvertUsing(s => DataProviderName.BMWFSTitle_E_DB);
             Mapper.CreateMap<IProvideDataFromMmCode, DataProviderName>().ConvertUsing(s => DataProviderName.MMCode_E_DB);
             Mapper.CreateMap<IProvideDataFromVin12, DataProviderName>().ConvertUsing(s => DataProviderName.LSAutoVIN12_I_DB);
+            Mapper.CreateMap<IProvideDataFromXdsIdentityVerification, DataProviderName>().ConvertUsing(s => DataProviderName.XDSVerifyID_E_WS);
 
             Mapper.CreateMap<IPointToLaceProvider, DataProvider>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(x => Mapper.Map(x, x.GetType(), typeof(DataProviderName))))

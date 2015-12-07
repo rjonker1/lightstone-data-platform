@@ -38,7 +38,7 @@ namespace Lace.Acceptance.Tests.Lace.EntryPoint
         public void lace_data_providers_for_Vin12_must_be_handled_loaded_correclty()
         {
             _response.ShouldNotBeNull();
-            _response.Count.ShouldEqual(14);
+            _response.Count.ShouldEqual(15);
             _response.Count(c => c.Handled).ShouldEqual(3);
 
             _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();

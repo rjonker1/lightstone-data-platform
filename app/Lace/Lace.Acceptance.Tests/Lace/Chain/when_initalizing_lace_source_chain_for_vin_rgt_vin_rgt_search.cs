@@ -46,7 +46,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public void lace_data_providers_for_must_be_handled_loaded_correclty()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(13);
+            _initialize.DataProviderResponses.Count.ShouldEqual(14);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(2);
 
             _initialize.DataProviderResponses.HasAllRecords().ShouldBeTrue();

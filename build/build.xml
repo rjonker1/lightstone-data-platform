@@ -537,6 +537,8 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.EzScore.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Bmw.Finance.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Bmw.Finance.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.DataProviders.Xds.IdentityVerification.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.DataProviders.Xds.IdentityVerification.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Vin12.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Vin12.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Toolbox.PCubed.dll" to="lib\net45"/>
@@ -581,7 +583,9 @@
 			<description>Lace.Domain.Infrastructure.EntryPoint</description>
 			<includes>
         <inclued pattern="Lightstone.DataPlatform.Lace.Toolbox.Database.dll" to="lib\net45" />
-        <inclued pattern="Lightstone.DataPlatform.Lace.Toolbox.Database.pdb" to="lib\net45" />s
+        <inclued pattern="Lightstone.DataPlatform.Lace.Toolbox.Database.pdb" to="lib\net45" />
+        <inclued pattern="Lightstone.DataPlatform.Lace.Caching.BuildingBlocks.dll" to="lib\net45" />
+        <inclued pattern="Lightstone.DataPlatform.Lace.Caching.BuildingBlocks.pdb" to="lib\net45" />
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll" to="lib\net45"/>
@@ -603,15 +607,25 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.pdb" to="lib\net45"/>        
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.pdb" to="lib\net45"/>       
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Property.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Property.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Company.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Company.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Director.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.Director.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Consumer.Specifications.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.EzScore.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.EzScore.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Bmw.Finance.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Bmw.Finance.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.DataProviders.Xds.IdentityVerification.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.DataProviders.Xds.IdentityVerification.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Vin12.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Vin12.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Toolbox.PCubed.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Toolbox.PCubed.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll" to="lib\net45"/>
@@ -1067,11 +1081,10 @@
          <dependency id="Common.Logging" version="3.2.0" />
          <dependency id="Common.Logging.Core" version="3.2.0" />
          <dependency id="Common.Logging.Log4Net1211" version="3.2.0" />
-         <dependency id="CommonServiceLocator" version="1.3" />
-         <dependency id="CommonServiceLocator.WindsorAdapter.Unofficial" version="3.3.0.0" />
          <dependency id="EasyNetQ" version="0.47.10.380" />
-         <dependency id="Lightstone.DataPlatform.Shared" version="1.0.0.1944" />
-         <dependency id="Lightstone.DataPlatform.Workflow.Publisher" version="1.0.0.1944" />
+         <dependency id="Lightstone.DataPlatform.Shared" />
+         <dependency id="Lightstone.DataPlatform.Workflow.Publisher" />
+         <dependency id="Lightstone.DataPlatform.Shared.Messages" />
          <dependency id="log4net" version="1.2.11" />
          <dependency id="Newtonsoft.Json" version="6.0.8" />
          <dependency id="RabbitMQ.Client" version="3.4.3" />

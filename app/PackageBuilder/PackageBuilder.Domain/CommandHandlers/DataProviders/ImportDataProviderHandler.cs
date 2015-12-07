@@ -35,6 +35,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.BMWFSTitle_E_DB, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.MMCode_E_DB, 0, "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.LSAutoVIN12_I_DB, 0, "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(Guid.NewGuid(), DataProviderName.XDSVerifyID_E_WS, 0, "Owner", DateTime.UtcNow));
 
             this.Info(() => "Successfully imported data providers");
         }

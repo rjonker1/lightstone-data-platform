@@ -37,7 +37,7 @@ namespace Lace.Acceptance.Tests.Lace.EntryPoint
         public void lace_data_providers_handled_loaded_correclty()
         {
             _response.ShouldNotBeNull();
-            _response.Count.ShouldEqual(13);
+            _response.Count.ShouldEqual(14);
             _response.Count(c => c.Handled).ShouldEqual(5);
 
             _response.HasAllRecords().ShouldBeTrue();

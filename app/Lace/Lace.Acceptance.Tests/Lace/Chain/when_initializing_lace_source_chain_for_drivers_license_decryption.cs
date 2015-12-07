@@ -41,7 +41,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public void lace_data_providers_for_drivers_license_decryption_should_loaded_correclty()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(13);
+            _initialize.DataProviderResponses.Count.ShouldEqual(14);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(1);
 
             _initialize.DataProviderResponses.HasAllRecords().ShouldBeTrue();
