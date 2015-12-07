@@ -6,7 +6,7 @@ namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DataSetExportCreated : LimEvent
     {
-        public DataSetExportCreated(DataSetDto dataSet, Guid correlationId,  string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
+        public DataSetExportCreated(DataSetDto dataSet, Guid correlationId,  string eventType, int eventTypeId, bool newAggregate, Guid user, Type type, Guid aggregateId)
         {
             DataSet = dataSet;
             EventType = eventType;
@@ -16,8 +16,9 @@ namespace Toolbox.LightstoneAuto.Domain.Events
             AggregateNew = newAggregate;
             User = user;
             CorrelationId = correlationId;
-          //  Payload = Encoding.UTF8.GetBytes(this.ObjectToJson());
-           
+            AggregateId = aggregateId;
+            //  Payload = Encoding.UTF8.GetBytes(this.ObjectToJson());
+
         }
 
         public readonly DataSetDto DataSet;

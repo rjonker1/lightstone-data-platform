@@ -9,11 +9,11 @@ namespace Toolbox.LightstoneAuto.Domain
 {
     public class DataSetExport : Aggregate
     {
-        private long _id;
+        private Guid _id;
 
         private void Apply(LimEvent @event)
         {
-            _id = @event.Id;
+            _id = @event.AggregateId;
         }
 
         private void Apply(DataSetDeActivated @event)
@@ -27,7 +27,7 @@ namespace Toolbox.LightstoneAuto.Domain
         public DataSetExport(CreateDataSetExport command)
         {
             ApplyChange(new DataSetExportCreated(command.DataSet, Guid.NewGuid(), command.EventType, command.EventTypeId, command.NewAggregate,
-                command.User, typeof (DataSetDto)));
+                command.User, typeof (DataSetDto), command.DataSet.AggregateId));
         }
 
         public void Deactivate(DeActivateDataSetExport command)
@@ -41,7 +41,7 @@ namespace Toolbox.LightstoneAuto.Domain
                 typeof (DataSetDto)));
         }
 
-        public override long Id
+        public override Guid Id
         {
             get { return _id; }
         }

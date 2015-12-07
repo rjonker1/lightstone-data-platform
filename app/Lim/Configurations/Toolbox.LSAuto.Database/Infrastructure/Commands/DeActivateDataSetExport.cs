@@ -5,7 +5,7 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Commands
 {
     public class DeActivateDataSetExport : Command
     {
-        public DeActivateDataSetExport(long dataSetId, Guid modifiedBy, int version, Guid correlationId)
+        public DeActivateDataSetExport(long dataSetId, Guid modifiedBy, int version, Guid correlationId, Guid aggregateId)
         {
             DataSetId = dataSetId;
             EventType = Lim.Enums.EventType.Deactivated.ToString();
@@ -14,9 +14,11 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Commands
             User = modifiedBy;
             Version = version;
             CorrelationId = correlationId;
+            AggregateId = aggregateId;
         }
 
         public readonly long DataSetId;
+        public readonly Guid AggregateId;
         public readonly string EventType;
         public readonly int EventTypeId;
         public readonly bool NewAggregate;

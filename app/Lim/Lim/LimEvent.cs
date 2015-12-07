@@ -6,7 +6,8 @@ namespace Lim
     public class LimEvent : IMessage
     {
         public long Id { get; set; }
-        public int Version { get;  set; }
+        public Guid AggregateId { get; set; }
+        public long Version { get;  set; }
         public string EventType { get; set; }
         public int EventTypeId { get; set; }
         public bool AggregateNew { get; set; }

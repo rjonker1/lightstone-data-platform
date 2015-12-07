@@ -84,6 +84,7 @@
     <Compile Include="Jobs\Api\when_pushing_cusom_api_job.cs" />
     <Compile Include="LSAuto\Helpers\FakeDataSetReadModel.cs" />
     <Compile Include="LSAuto\when_creating_data_sets_for_ls_auto.cs" />
+    <Compile Include="LSAuto\when_modifying_data_sets_for_ls_auto.cs" />
     <Compile Include="when_pushing_integration_to_api.cs" />
   </ItemGroup>
   <ItemGroup>

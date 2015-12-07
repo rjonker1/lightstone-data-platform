@@ -6,7 +6,7 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Commands
 {
     public class ModifyDataSetExport : Command
     {
-        public ModifyDataSetExport(DataSetDto dataSet, Guid modifiedBy, int version, Guid correlationId)
+        public ModifyDataSetExport(DataSetDto dataSet, Guid modifiedBy, long version, Guid correlationId, Guid aggregateId)
         {
             DataSet = dataSet;
             EventType = Lim.Enums.EventType.Modified.ToString();
@@ -15,14 +15,16 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Commands
             User = modifiedBy;
             Version = version;
             CorrelationId = correlationId;
+            AggregateId = aggregateId;
         }
 
+        public readonly Guid AggregateId;
         public readonly DataSetDto DataSet;
         public readonly string EventType;
         public readonly int EventTypeId;
         public readonly bool NewAggregate;
         public readonly Guid User;
         public readonly Guid CorrelationId;
-        public readonly int Version;
+        public readonly long Version;
     }
 }

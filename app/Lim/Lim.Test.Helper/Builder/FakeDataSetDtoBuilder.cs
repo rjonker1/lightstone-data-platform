@@ -29,7 +29,8 @@ namespace Lim.Test.Helper.Builder
                         DateModified = DateTime.Now,
                         Selected = true
                     }
-                }
+                },
+                AggregateId = Guid.NewGuid()
             };
         }
     }

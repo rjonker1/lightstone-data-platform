@@ -6,9 +6,9 @@ namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DataSetModified : LimEvent
     {
-        public DataSetModified(long aggregateId, DataSetDto dataSet, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
+        public DataSetModified(Guid aggregateId, DataSetDto dataSet, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
         {
-            Id = aggregateId;
+            AggregateId = aggregateId;
             DataSet = dataSet;
             EventType = eventType;
             EventTypeId = eventTypeId;

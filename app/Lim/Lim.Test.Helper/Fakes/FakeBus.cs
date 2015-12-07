@@ -43,6 +43,7 @@ namespace Lim.Test.Helper.Fakes
             foreach (var handler in handlers)
             {
                 var handlerCopy = handler;
+               // handlerCopy(@event);
                 ThreadPool.QueueUserWorkItem(q => handlerCopy(@event));
             }
         }

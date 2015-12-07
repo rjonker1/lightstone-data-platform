@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lim.Domain.Base
 {
     public interface IEventStore
     {
-        void SaveEvents(long aggregateId, IEnumerable<LimEvent> events, int version);
-        List<LimEvent> GetEventsForAggregate(long aggregateId);
+        void SaveEvents(Guid aggregateId, IEnumerable<LimEvent> events, long version);
+        List<LimEvent> GetEventsForAggregate(Guid aggregateId);
     }
 }

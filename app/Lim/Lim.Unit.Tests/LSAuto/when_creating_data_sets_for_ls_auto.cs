@@ -13,26 +13,26 @@ namespace Lim.Unit.Tests.LSAuto
     {
         private readonly FakeBus _bus;
         private readonly IReadModelFacade _readFacade;
+        private readonly long _id;
 
         public when_creating_data_sets_for_ls_auto()
         {
             _bus = FakeBusBuilder.Bus();
             _readFacade = new FakeDataSetReadModel();
+            _id = new Random().Next(1000, 10000000);
         }
         public override void Observe()
         {
-           
+            _bus.Send(new CreateDataSetExport(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), Guid.NewGuid()));
         }
 
         [Observation]
         public void then_aggregate_must_be_created()
         {
-            long id = new Random().Next(1000,10000000);
-            _bus.Send(new CreateDataSetExport(FakeDataSetDtoBuilder.ForLsAutoSpecsData(id), Guid.NewGuid()));
             var datasets = _readFacade.GetDataSets();
             datasets.Count().ShouldEqual(1);
 
-            var dto = _readFacade.GetDataSets().FirstOrDefault(f => f.Id == id);
+            var dto = _readFacade.GetDataSets().FirstOrDefault(f => f.Id == _id);
             dto.ShouldNotBeNull();
         }
 
