@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
 using DataProviders.MMCode;
+using DataProviders.Xds.IdentityVerification;
 using EasyNetQ;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -27,6 +28,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
     public class AllDataProviderSpecification : AbstractSpecificationExecutor, IExecuteSpecification
     {
         private readonly ChainType _chainType;
+
         public AllDataProviderSpecification(IExecuteSpecification next, ChainType chainType)
             : base(next)
         {
@@ -54,7 +56,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                                             new PCubedEzScoreDataProvider(request,
                                                                 new ConsumerSpecificationsDataProvider(request,
                                                                     new BmwFinanceDataProvider(request,
-                                                                        new MmCodeDataProvider(request, null, null,
+                                                                        new MmCodeDataProvider(request,
+                                                                            new XdsIdentityVerificationDataProvider(request, null, null,
+                                                                                CommandSender.InitCommandSender(bus, requestId,
+                                                                                    DataProviderCommandSource.XDSVerifyID_E_WS)), null,
                                                                             CommandSender.InitCommandSender(bus, requestId,
                                                                                 DataProviderCommandSource.MMCode_E_DB)), null,
                                                                         CommandSender.InitCommandSender(bus, requestId,
@@ -71,8 +76,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                                 null,
                                                 CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoDecryptDriverLic_I_WS)),
                                             null,
-                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoSpecs_I_DB)), new Vin12DataProvider(request, null, null,
-                                    CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoVIN12_I_DB)),
+                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoSpecs_I_DB)),
+                                        new Vin12DataProvider(request, null, null,
+                                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoVIN12_I_DB)),
                                         CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LSAutoVINMaster_I_DB)), null,
                                     CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IVIDTitle_E_WS)),
                                 new Vin12DataProvider(request, null, null,

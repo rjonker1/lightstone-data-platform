@@ -41,7 +41,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public void lace_data_providers_for_vin12_should_be_executed_only_once()
         {
             _initialize.DataProviderResponses.ShouldNotBeNull();
-            _initialize.DataProviderResponses.Count.ShouldEqual(15);
+            _initialize.DataProviderResponses.Count.ShouldEqual(16);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(3);
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();

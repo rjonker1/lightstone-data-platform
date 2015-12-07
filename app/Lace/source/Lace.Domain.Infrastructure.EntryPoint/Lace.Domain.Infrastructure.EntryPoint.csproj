@@ -135,6 +135,10 @@
       <Project>{0eeb07bd-3710-4852-9112-0ca454608d3e}</Project>
       <Name>DataProviders.Vin12</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataProviders.Xds.IdentityVerification\DataProviders.Xds.IdentityVerification.csproj">
+      <Project>{665e797d-a154-440c-bfdd-5b3ee3d3dfb3}</Project>
+      <Name>DataProviders.Xds.IdentityVerification</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
       <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
       <Name>Lace.Domain.Core.Entities</Name>

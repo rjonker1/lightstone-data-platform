@@ -35,7 +35,7 @@ namespace Lace.Acceptance.Tests.Requests
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_all_sources()
         {
             _responses.ShouldNotBeNull();
-            _responses.Count.ShouldEqual(13);
+            _responses.Count.ShouldEqual(14);
             _responses.Count(c => c.Handled).ShouldEqual(1);
 
             _responses.OfType<IProvideDataFromLightstoneConsumerSpecifications>().First().ShouldNotBeNull();

@@ -16,18 +16,18 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Chain
 {
-    public class when_initalizing_lace_chain_for_company_search : Specification
+    public class when_initializing_lace_chain_for_xds_id_verificaiton : Specification
     {
-        
         private IBootstrap _initialize;
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly IAdvancedBus _command;
         private readonly IBuildSourceChain _buildSourceChain;
 
-        public when_initalizing_lace_chain_for_company_search()
+
+        public when_initializing_lace_chain_for_xds_id_verificaiton()
         {
             _command = BusFactory.WorkflowBus();
-            _request = new CompanyRequestBuilder().ForLightstoneCompany();
+            _request = new XdsRequestBuilder().ForIdVerificaitonWithIdNumber();
             _buildSourceChain = new SpecificationFactory();
         }
 
@@ -35,11 +35,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         {
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command, _buildSourceChain);
             _initialize.Execute(ChainType.All);
-        }
 
-        [Observation]
-        public void lace_data_providers_for_company_search_should_loaded_correctly()
-        {
             _initialize.DataProviderResponses.ShouldNotBeNull();
             _initialize.DataProviderResponses.Count.ShouldEqual(14);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(1);
@@ -47,12 +43,14 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _initialize.DataProviderResponses.HasAllRecords().ShouldBeTrue();
             _initialize.DataProviderResponses.State().ShouldEqual(DataProviderResponseState.Successful);
 
-            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().ShouldNotBeNull();
-            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Handled.ShouldBeTrue();
-            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneBusinessCompany>().First().Companies.Count().ShouldEqual(1);
+            _initialize.DataProviderResponses.OfType<IProvideDataFromXdsIdentityVerification>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromXdsIdentityVerification>().First().Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromXdsIdentityVerification>().First().IdentityVerifications.Count().ShouldEqual(1);
+
+            _initialize.DataProviderResponses.OfType<IProvideDataFromXdsIdentityVerification>().First().IdentityVerifications.First().FirstName.ShouldEqual("RUDI");
+            _initialize.DataProviderResponses.OfType<IProvideDataFromXdsIdentityVerification>().First().IdentityVerifications.First().HomeAffairsId.ShouldEqual("61180391");
 
             _initialize.DataProviderResponses.OfType<IProvideDataFromVin12>().Any().ShouldBeFalse();
-
         }
     }
 }
