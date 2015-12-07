@@ -103,6 +103,7 @@
     </None>
     <None Include="connectionStrings.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="install.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Castle.Windsor;
@@ -15,6 +16,14 @@ namespace Shared.Logging
     {
         private static IWorkflowPublisher Publisher()
         {
+            var logToBus = true;
+            var logToBusSetting = ConfigurationManager.AppSettings["shared/logging/logToBus"];
+            if (!string.IsNullOrEmpty(logToBusSetting))
+                bool.TryParse(logToBusSetting, out logToBus);
+
+            if (!logToBus)
+                return null;
+
             IWorkflowPublisher publisher;
             try
             {
