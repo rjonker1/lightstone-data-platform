@@ -1070,6 +1070,7 @@
          <dependency id="EasyNetQ" version="0.47.10.380" />
          <dependency id="Lightstone.DataPlatform.Shared" />
          <dependency id="Lightstone.DataPlatform.Workflow.Publisher" />
+         <dependency id="Lightstone.DataPlatform.Shared.Messages" />
          <dependency id="log4net" version="1.2.11" />
          <dependency id="Newtonsoft.Json" version="6.0.8" />
          <dependency id="RabbitMQ.Client" version="3.4.3" />
