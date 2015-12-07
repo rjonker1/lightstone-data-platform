@@ -143,7 +143,6 @@
     <Compile Include="Lace\Chain\when_initializing_car_id_chain_for_carid_and_year_search_for_all_carId_dp.cs" />
     <Compile Include="Lace\Chain\when_initializing_car_id_chain_for_carid_and_year_search_on_ls_auto.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_for_xds_id_verificaiton.cs" />
-    <Compile Include="Lace\Chain\when_initializing_lace_chain_for_xds_id_verification_search.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_for_pcubed_ez_score.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_with_vin12_vin.cs" />

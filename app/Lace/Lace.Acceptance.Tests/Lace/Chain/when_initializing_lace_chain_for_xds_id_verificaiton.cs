@@ -35,7 +35,12 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         {
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command, _buildSourceChain);
             _initialize.Execute(ChainType.All);
+          
+        }
 
+        [Observation]
+        public void then_verifcation_result_should_be_valid()
+        {
             _initialize.DataProviderResponses.ShouldNotBeNull();
             _initialize.DataProviderResponses.Count.ShouldEqual(14);
             _initialize.DataProviderResponses.Count(c => c.Handled).ShouldEqual(1);
