@@ -3,8 +3,8 @@ using System.Linq;
 using Lim.Test.Helper.Builder;
 using Lim.Test.Helper.Fakes;
 using Lim.Unit.Tests.LSAuto.Helpers;
-using Toolbox.LightstoneAuto.Database.Domain;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Commands;
+using Toolbox.LightstoneAuto.Domain;
+using Toolbox.LightstoneAuto.Infrastructure.Commands;
 using Xunit.Extensions;
 
 namespace Lim.Unit.Tests.LSAuto

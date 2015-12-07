@@ -7,8 +7,8 @@
     <ProjectGuid>{503335FD-622F-469A-83BF-C341562F7E45}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Toolbox.LightstoneAuto.Database</RootNamespace>
-    <AssemblyName>Toolbox.LSAuto.Database</AssemblyName>
+    <RootNamespace>Toolbox.LightstoneAuto</RootNamespace>
+    <AssemblyName>Toolbox.LSAuto</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>

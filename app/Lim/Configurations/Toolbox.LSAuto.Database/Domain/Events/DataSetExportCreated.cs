@@ -2,7 +2,7 @@
 using Lim;
 using Lim.Dtos;
 
-namespace Toolbox.LightstoneAuto.Database.Domain.Events
+namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DataSetExportCreated : LimEvent
     {

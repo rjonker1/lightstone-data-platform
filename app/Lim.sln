@@ -57,7 +57,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Bmw.Entities", "Lim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Emailing", "Lim\Toolbox.Emailing\Toolbox.Emailing.csproj", "{73F1DC06-BFA6-446B-B77F-296BF526DD16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.LSAuto.Database", "Lim\Configurations\Toolbox.LSAuto.Database\Toolbox.LSAuto.Database.csproj", "{503335FD-622F-469A-83BF-C341562F7E45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.LSAuto", "Lim\Configurations\Toolbox.LSAuto.Database\Toolbox.LSAuto.csproj", "{503335FD-622F-469A-83BF-C341562F7E45}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LSAuto", "LSAuto", "{410199D0-241F-4096-820E-88491CF5CF81}"
 EndProject

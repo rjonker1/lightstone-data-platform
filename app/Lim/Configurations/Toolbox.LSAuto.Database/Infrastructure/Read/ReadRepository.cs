@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Lim.Core;
 
-namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read
+namespace Toolbox.LightstoneAuto.Infrastructure.Read
 {
     public class ReadRepository : IRepository
     {

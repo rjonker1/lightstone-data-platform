@@ -1,8 +1,8 @@
 ﻿using Lim.Domain.Base;
-using Toolbox.LightstoneAuto.Database.Domain;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Commands;
+using Toolbox.LightstoneAuto.Domain;
+using Toolbox.LightstoneAuto.Infrastructure.Commands;
 
-namespace Toolbox.LightstoneAuto.Database.Infrastructure.Handlers
+namespace Toolbox.LightstoneAuto.Infrastructure.Handlers
 {
     public class DataSetCommandHandler
     {
@@ -29,7 +29,7 @@ namespace Toolbox.LightstoneAuto.Database.Infrastructure.Handlers
         public void Handle(ModifyDataSetExport message)
         {
             var dataSet = _repository.GetById(message.DataSet.Id);
-            dataSet.Rename(new ModifyDataSetExport(message.DataSet,message.User, message.Version,message.CorrelationId));
+            dataSet.Modify(new ModifyDataSetExport(message.DataSet,message.User, message.Version,message.CorrelationId));
             _repository.Save(dataSet, message.Version);
         }
     }

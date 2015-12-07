@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lim.Dtos;
-using Toolbox.LightstoneAuto.Database.Domain;
+using Toolbox.LightstoneAuto.Domain;
 
-namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read
+namespace Toolbox.LightstoneAuto.Infrastructure.Read
 {
     public class DataSetReadModel : IReadModelFacade
     {

@@ -2,7 +2,7 @@
 using Lim;
 using Lim.Dtos;
 
-namespace Toolbox.LightstoneAuto.Database.Infrastructure.Commands
+namespace Toolbox.LightstoneAuto.Infrastructure.Commands
 {
     public class CreateDataSetExport : Command
     {

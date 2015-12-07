@@ -6,7 +6,7 @@ namespace DataPlatform.Shared.Enums
     [DataContract]
     public enum DataProviderCommandSource
     {
-        [EnumMember(Value = "Audatex")] Audatex = 20,
+        [EnumMember(Value = "Audatex")] Audatex = 0,
         [EnumMember(Value = "Ivid")] IVIDVerify_E_WS = 1,
         [EnumMember(Value = "Ivid Title Holder")] IVIDTitle_E_WS = 2,
         [EnumMember(Value = "Rgt Vin")] LSAutoVINMaster_I_DB = 3,
@@ -26,7 +26,7 @@ namespace DataPlatform.Shared.Enums
         [EnumMember(Value = "BMW Finance")] BMWFSTitle_E_DB = 17,
         [EnumMember(Value = "LS MM Code")] MMCode_E_DB = 18,
         [EnumMember(Value = "LS Vin 12")] LSAutoVIN12_I_DB = 19,
-        [EnumMember(Value = "XDS ID Verification")] XDSVerifyID_E_WS = 20
+        [EnumMember(Value = "XDS ID Verification")] XDSVerifyID_E_WS = 21
     }
 
     public static class SharedEnumExtensions

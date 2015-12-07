@@ -2,25 +2,22 @@
 using Lim;
 using Lim.Domain;
 using Lim.Dtos;
-using Toolbox.LightstoneAuto.Database.Domain.Events;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Commands;
+using Toolbox.LightstoneAuto.Domain.Events;
+using Toolbox.LightstoneAuto.Infrastructure.Commands;
 
-namespace Toolbox.LightstoneAuto.Database.Domain
+namespace Toolbox.LightstoneAuto.Domain
 {
     public class DataSetExport : Aggregate
     {
-        private bool _activated;
         private long _id;
 
         private void Apply(LimEvent @event)
         {
             _id = @event.Id;
-            _activated = true;
         }
 
         private void Apply(DataSetDeActivated @event)
         {
-            _activated = false;
         }
 
         public DataSetExport()
@@ -35,13 +32,13 @@ namespace Toolbox.LightstoneAuto.Database.Domain
 
         public void Deactivate(DeActivateDataSetExport command)
         {
-            if (!_activated)
-                ApplyChange(new DataSetDeActivated(_id,command.DataSetId, command.CorrelationId));
+            ApplyChange(new DataSetDeActivated(_id, command.DataSetId, command.CorrelationId));
         }
 
-        public void Rename(ModifyDataSetExport command)
+        public void Modify(ModifyDataSetExport command)
         {
-            ApplyChange(new DataSetModified(_id, command.DataSet, command.CorrelationId, command.EventType, command.EventTypeId, false, command.User, typeof(DataSetDto)));
+            ApplyChange(new DataSetModified(_id, command.DataSet, command.CorrelationId, command.EventType, command.EventTypeId, false, command.User,
+                typeof (DataSetDto)));
         }
 
         public override long Id

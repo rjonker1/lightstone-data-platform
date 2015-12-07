@@ -2,7 +2,7 @@
 using System.Linq;
 using Lim.Dtos;
 using Lim.Test.Helper.Fakes.Repository;
-using Toolbox.LightstoneAuto.Database.Domain;
+using Toolbox.LightstoneAuto.Domain;
 namespace Lim.Unit.Tests.LSAuto.Helpers
 {
     public class FakeDataSetReadModel : IReadModelFacade

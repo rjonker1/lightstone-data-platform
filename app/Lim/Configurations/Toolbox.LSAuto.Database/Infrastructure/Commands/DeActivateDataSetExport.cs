@@ -1,7 +1,7 @@
 ﻿using System;
 using Lim;
 
-namespace Toolbox.LightstoneAuto.Database.Infrastructure.Commands
+namespace Toolbox.LightstoneAuto.Infrastructure.Commands
 {
     public class DeActivateDataSetExport : Command
     {

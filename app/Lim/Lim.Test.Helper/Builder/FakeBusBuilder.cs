@@ -1,10 +1,10 @@
 ﻿using Lim.Domain.EventStore;
 using Lim.Test.Helper.Fakes;
-using Toolbox.LightstoneAuto.Database.Domain;
-using Toolbox.LightstoneAuto.Database.Domain.Events;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Commands;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Handlers;
-using Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers;
+using Toolbox.LightstoneAuto.Domain;
+using Toolbox.LightstoneAuto.Domain.Events;
+using Toolbox.LightstoneAuto.Infrastructure.Commands;
+using Toolbox.LightstoneAuto.Infrastructure.Handlers;
+using Toolbox.LightstoneAuto.Infrastructure.Read.Handlers;
 
 namespace Lim.Test.Helper.Builder
 {

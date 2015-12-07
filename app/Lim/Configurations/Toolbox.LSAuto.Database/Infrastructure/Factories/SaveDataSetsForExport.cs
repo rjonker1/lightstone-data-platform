@@ -6,7 +6,7 @@ using Lim.Dtos;
 using Toolbox.LSAuto.Entities;
 using Toolbox.LSAuto.Entities.Factory;
 
-namespace Toolbox.LightstoneAuto.Database.Infrastructure.Factories
+namespace Toolbox.LightstoneAuto.Infrastructure.Factories
 {
     public class SaveDataSetsForExport : AbstractPersistenceRepository<DataSetDto>
     {

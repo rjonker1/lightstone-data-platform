@@ -1,8 +1,8 @@
 ﻿using Lim.Core;
-using Toolbox.LightstoneAuto.Database.Domain.Events;
+using Toolbox.LightstoneAuto.Domain.Events;
 using Toolbox.LSAuto.Entities;
 
-namespace Toolbox.LightstoneAuto.Database.Infrastructure.Read.Handlers
+namespace Toolbox.LightstoneAuto.Infrastructure.Read.Handlers
 {
     public class DataSetDetailDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetModified>
     {

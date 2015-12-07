@@ -66,9 +66,9 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Database\Toolbox.LSAuto.Database.csproj">
+    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Database\Toolbox.LSAuto.csproj">
       <Project>{503335fd-622f-469a-83bf-c341562f7e45}</Project>
-      <Name>Toolbox.LSAuto.Database</Name>
+      <Name>Toolbox.LSAuto</Name>
     </ProjectReference>
     <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Entities\Toolbox.LSAuto.Entities.csproj">
       <Project>{326500cd-3112-4a9c-9539-2f1b22688f8c}</Project>

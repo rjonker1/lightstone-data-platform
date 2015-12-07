@@ -1,4 +1,4 @@
-﻿namespace Toolbox.LightstoneAuto.Database.Domain.Models
+﻿namespace Toolbox.LightstoneAuto.Domain.Models
 {
     public class AutoCarSpecifcations
     {

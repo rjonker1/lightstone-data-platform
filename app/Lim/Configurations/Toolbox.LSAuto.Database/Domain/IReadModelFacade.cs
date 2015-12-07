@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Lim.Dtos;
 
-namespace Toolbox.LightstoneAuto.Database.Domain
+namespace Toolbox.LightstoneAuto.Domain
 {
     public interface IReadModelFacade
     {

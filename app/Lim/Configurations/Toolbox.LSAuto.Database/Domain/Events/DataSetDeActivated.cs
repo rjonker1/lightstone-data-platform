@@ -1,7 +1,7 @@
 ﻿using System;
 using Lim;
 
-namespace Toolbox.LightstoneAuto.Database.Domain.Events
+namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DataSetDeActivated : LimEvent
     {
