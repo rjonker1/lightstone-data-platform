@@ -94,7 +94,6 @@
     <Compile Include="Commands\NotifiyFile.cs" />
     <Compile Include="Commands\ReadFile.cs" />
     <None Include="app.config" />
-    <None Include="Events\DomainEvent.cs.delete" />
     <Compile Include="Events\LimEvent.cs" />
     <Compile Include="Events\PackageReceived.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
