@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 using Monitoring.Domain;
 
@@ -24,7 +25,7 @@ namespace DataProvider.Infrastructure.Dto.DataProvider
             get
             {
                 var name = (DataProviderCommandSource) DataProviderId;
-                return name.Description();
+                return (DataProviderCommandSource.IsDefined(typeof(DataProviderCommandSource), name)) ? name.Description() : string.Empty;
             }
         }
     }

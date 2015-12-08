@@ -30,6 +30,8 @@ namespace Shared.Logging
                 var container = new WindsorContainer();
                 container.Install(FromAssembly.Containing<IWorkflowPublisher>());
                 publisher = container.Resolve<IWorkflowPublisher>();
+
+                //publisher = new WorkflowPublisher(BusBuilder.CreateBus());
             }
             catch (Exception)
             {
@@ -40,10 +42,11 @@ namespace Shared.Logging
             return publisher;
         }
 
-        private static async void Pub(this IWorkflowPublisher publisher, Func<object> message, DataPlatform.Shared.Enums.LogLevel level, SystemName systemName, Exception exception = null)
+        private static void Pub(this IWorkflowPublisher publisher, Func<object> message, DataPlatform.Shared.Enums.LogLevel level, SystemName systemName, Exception exception = null)
         {
             //Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), level, systemName, exception)));
-            await publisher.PublishAsync(new LogMessage(message().ToString(), level, systemName, exception)).ConfigureAwait(false);
+            //await publisher.PublishAsync(new LogMessage(message().ToString(), level, systemName, exception)).ConfigureAwait(false);
+            publisher.Publish(new LogMessage(message().ToString(), level, systemName, exception));
         }
 
         #region .: Enabled Checks :.
@@ -147,7 +150,7 @@ namespace Shared.Logging
 
         public static void Debug(this object o, Func<object> message, SystemName systemName)
         {
-            o.GetType().Debug(message, systemName);
+            Task.Run(() => o.GetType().Debug(message, systemName));
         }
 
         public static void Debug(this Type t, Func<object> message)
@@ -157,7 +160,7 @@ namespace Shared.Logging
 
         public static void Debug(this Type t, Func<object> message, SystemName systemName)
         {
-            Debug(t.FullName, message, systemName);
+            Task.Run(() => Debug(t.FullName, message, systemName));
         }
 
         public static void Debug(string name, Func<object> message)
@@ -188,7 +191,7 @@ namespace Shared.Logging
 
         public static void Info(this object o, Func<object> message, SystemName systemName)
         {
-            Info(o.GetType(), message, systemName);
+            Task.Run(() => Info(o.GetType(), message, systemName));
         }
 
         public static void Info(this Type t, Func<object> message)
@@ -198,7 +201,7 @@ namespace Shared.Logging
 
         public static void Info(this Type t, Func<object> message, SystemName systemName)
         {
-            Info(t.FullName, message, systemName);
+            Task.Run(() => Info(t.FullName, message, systemName));
         }
 
         public static void Info(string name, Func<object> message)
@@ -229,7 +232,7 @@ namespace Shared.Logging
 
         public static void Warn(this object o, Func<object> message, SystemName systemName)
         {
-            Warn(o.GetType(), message, systemName);
+            Task.Run(() => Warn(o.GetType(), message, systemName));
         }
 
         public static void Warn(this Type t, Func<object> message)
@@ -239,7 +242,7 @@ namespace Shared.Logging
 
         public static void Warn(this Type t, Func<object> message, SystemName systemName)
         {
-            Warn(t.FullName, message, systemName);
+            Task.Run(() => Warn(t.FullName, message, systemName));
         }
 
         public static void Warn(string name, Func<object> message)
@@ -270,7 +273,7 @@ namespace Shared.Logging
 
         public static void Error(this object o, Func<object> message, Exception exception, SystemName systemName)
         {
-            Error(o.GetType(), message, exception, systemName);
+            Task.Run(() => Error(o.GetType(), message, exception, systemName));
         }
 
         public static void Error(this object o, Func<object> message)
@@ -280,7 +283,7 @@ namespace Shared.Logging
 
         public static void Error(this object o, Func<object> message, SystemName systemName)
         {
-            Error(o.GetType(), message, systemName);
+            Task.Run(() => Error(o.GetType(), message, systemName));
         }
 
         public static void Error(this Type t, Func<object> message, Exception exception)
@@ -290,7 +293,7 @@ namespace Shared.Logging
 
         public static void Error(this Type t, Func<object> message, Exception exception, SystemName systemName)
         {
-            Error(t.FullName, message, exception, systemName);
+            Task.Run(() => Error(t.FullName, message, exception, systemName));
         }
 
         public static void Error(this Type t, Func<object> message)
@@ -300,7 +303,7 @@ namespace Shared.Logging
 
         public static void Error(this Type t, Func<object> message, SystemName systemName)
         {
-            Error(t.FullName, message, systemName);
+            Task.Run(() => Error(t.FullName, message, systemName));
         }
 
         public static void Error(string name, Func<object> message)
@@ -310,7 +313,7 @@ namespace Shared.Logging
 
         public static void Error(string name, Func<object> message, SystemName systemName)
         {
-            Error(name, message, null, systemName);
+            Task.Run(() => Error(name, message, null, systemName));
         }
 
         public static void Error(string name, Func<object> message, Exception exception)
@@ -341,7 +344,7 @@ namespace Shared.Logging
 
         public static void Fatal(this object o, Func<object> message, SystemName systemName)
         {
-            Fatal(o.GetType(), message, systemName);
+            Task.Run(() => Fatal(o.GetType(), message, systemName));
         }
 
         public static void Fatal(this Type t, Func<object> message)
@@ -351,7 +354,7 @@ namespace Shared.Logging
 
         public static void Fatal(this Type t, Func<object> message, SystemName systemName)
         {
-            Fatal(t.FullName, message, systemName);
+            Task.Run(() => Fatal(t.FullName, message, systemName));
         }
 
         public static void Fatal(string name, Func<object> message)

@@ -10,8 +10,8 @@ namespace Workflow.Bus.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             // Setup publisher either WorkflowSubscriber using IBus or AdvancedWorkflowSubscriber using IAdvancedBus for subscribing to messages
-            container.Register(Component.For<IWorkflowSubscriber>().ImplementedBy<WorkflowSubscriber>());
-            //container.Register(Component.For<IWorkflowSubscriber>().ImplementedBy<AdvancedWorkflowSubscriber>());
+            //container.Register(Component.For<IWorkflowSubscriber>().ImplementedBy<WorkflowSubscriber>());
+            container.Register(Component.For<IWorkflowSubscriber>().ImplementedBy<AdvancedWorkflowSubscriber>());
         }
     }
 }
