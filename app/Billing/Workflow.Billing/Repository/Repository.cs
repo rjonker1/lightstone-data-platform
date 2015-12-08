@@ -185,30 +185,5 @@ namespace Workflow.Billing.Repository
         }
 
         #endregion
-
-        public T StoredProcedure(string query)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T WithParameters(Dictionary<string, string> queryParams)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Execute()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRepository<T> Test()
-        {
-            return this;
-        }
-
-        public IRepository<T> TesterChain()
-        {
-            return this;
-        } 
     }
 }
