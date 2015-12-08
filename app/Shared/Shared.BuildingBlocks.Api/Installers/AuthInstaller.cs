@@ -7,6 +7,7 @@ using DataPlatform.Shared.Enums;
 using Nancy.Authentication.Token;
 using Nancy.Authentication.Token.Storage;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Logging;
 
 namespace Shared.BuildingBlocks.Api.Installers
 {
@@ -18,7 +19,7 @@ namespace Shared.BuildingBlocks.Api.Installers
             var systemNameSetting = ConfigurationManager.AppSettings["tokenizer/logging/systemName/enum"];
             if (!string.IsNullOrEmpty(systemNameSetting))
                 Enum.TryParse(systemNameSetting, out systemName);
-            container.Register(Component.For<ITokenizer>().UsingFactoryMethod(() => new DataPlatformTokenizer(cfg => cfg.WithKeyCache(new FileSystemTokenKeyStore(new RootPathProvider())), systemName)).LifestylePerWebRequest());
+            container.Register(Component.For<ITokenizer>().UsingFactoryMethod(() => new DataPlatformTokenizer(cfg => cfg.WithKeyCache(new FileSystemTokenKeyStore(new RootPathProvider())), systemName, container.Resolve<IDataPlatformLogger>())).LifestylePerWebRequest());
         }
     }
 }
