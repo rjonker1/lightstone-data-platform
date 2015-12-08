@@ -17,7 +17,7 @@ namespace Shared.Bus.Consumers
             var logfile = new System.IO.FileInfo("log4net.config");
             log4net.Config.XmlConfigurator.ConfigureAndWatch(logfile);
 
-            var log = LogManager.GetLogger(GetType());
+            var log = LogManager.GetLogger(message.LoggerType);
 
             if (message.Level == LogLevel.Debug)
                 log.Debug(message.Message);

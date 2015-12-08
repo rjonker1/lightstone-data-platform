@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Castle.Windsor;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
@@ -70,7 +69,7 @@ namespace PackageBuilder.Api
 
             pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
-                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.PackageBuilder);
+                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
                 var token = "";
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
@@ -91,7 +90,7 @@ namespace PackageBuilder.Api
             });
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-                this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.PackageBuilder);
+                this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
 
                 //var ctxObj = new RedisProfiler(container.Resolve<INancyContextWrapper>()).GetContext();
                 //if (ctxObj != null)
@@ -102,7 +101,7 @@ namespace PackageBuilder.Api
             });
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.PackageBuilder);
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
                 var errorResponse = ErrorResponse.FromException(exception);
                 if (exception is LightstoneAutoException)
                     errorResponse.StatusCode = HttpStatusCode.ImATeapot;

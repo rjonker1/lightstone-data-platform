@@ -31,6 +31,7 @@ namespace Shared.BuildingBlocks.Api.Security
         private Func<TimeSpan> tokenExpiration = () => TimeSpan.FromDays(1);
         private Func<TimeSpan> keyExpiration = () => TimeSpan.FromDays(7);
         private readonly SystemName _systemName;
+        private readonly IDataPlatformLogger _logger;
 
         private Func<NancyContext, string>[] additionalItems =
         {
@@ -41,7 +42,7 @@ namespace Shared.BuildingBlocks.Api.Security
         /// Initializes a new instance of the <see cref="Tokenizer"/> class.
         /// </summary>
         public DataPlatformTokenizer()
-            : this(null, SystemName.Api)
+            : this(null, SystemName.Api, null)
         {
         }
 
@@ -49,7 +50,7 @@ namespace Shared.BuildingBlocks.Api.Security
         /// Initializes a new instance of the <see cref="Tokenizer"/> class.
         /// </summary>
         /// <param name="configuration">The configuration that should be used by the tokenizer.</param>
-        public DataPlatformTokenizer(Action<TokenizerConfigurator> configuration, SystemName systemName)
+        public DataPlatformTokenizer(Action<TokenizerConfigurator> configuration, SystemName systemName, IDataPlatformLogger logger)
         {
             if (configuration != null)
             {
@@ -59,6 +60,7 @@ namespace Shared.BuildingBlocks.Api.Security
             var keyRing = new TokenKeyRing(this);
             this.validator = new TokenValidator(keyRing);
             _systemName = systemName;
+            _logger = logger;
         }
 
         /// <summary>
@@ -110,7 +112,7 @@ namespace Shared.BuildingBlocks.Api.Security
             var tokenComponents = token.Split(new[] { this.hashDelimiter }, StringSplitOptions.None);
             if (tokenComponents.Length != 2)
             {
-                this.Error(() => "tokenComponents.Length != 2 for token {0}".FormatWith(token), systemName);
+                _logger.Error(GetType(), "tokenComponents.Length != 2 for token {0}".FormatWith(token));
                 return null;
             }
 
@@ -119,7 +121,7 @@ namespace Shared.BuildingBlocks.Api.Security
 
             if (!this.validator.IsValid(messagebytes, hash))
             {
-                this.Error(() => "Validator.IsValid = false for token {0}".FormatWith(token), systemName);
+                _logger.Error(GetType(), "Validator.IsValid = false for token {0}".FormatWith(token));
                 return null;
             }
 
@@ -135,7 +137,7 @@ namespace Shared.BuildingBlocks.Api.Security
                     if (tokenizedValue != currentValue)
                     {
                         // todo: may need to log here as this probably indicates hacking
-                        this.Error(() => "tokenizedValue != currentValue for token {0}".FormatWith(token), systemName);
+                        _logger.Error(GetType(), "tokenizedValue != currentValue for token {0}".FormatWith(token));
                         return null;
                     }
                 }
@@ -145,19 +147,19 @@ namespace Shared.BuildingBlocks.Api.Security
 
             if (tokenStamp() - generatedOn > tokenExpiration())
             {
-                this.Error(() => "tokenizedValue != currentValue for token {0}".FormatWith(token), systemName);
+                _logger.Error(GetType(), "tokenizedValue != currentValue for token {0}".FormatWith(token));
                 return null;
             }
 
             var userName = items[0];
             var claims = items[1].Split(new[] { this.claimsDelimiter }, StringSplitOptions.None);
 
-            this.Info(() => "Getting UserIdentity for user {0} for token {1}".FormatWith(userName, token), systemName);
+            _logger.Info(GetType(), "Getting UserIdentity for user {0} for token {1}".FormatWith(userName, token));
             var userIdentity = userIdentityResolver.GetUser(userName, claims, context);
             if (userIdentity != null)
-                this.Info(() => "Found UserIdentity for user {0} for token {1}".FormatWith(userName, token), systemName);
+                _logger.Info(GetType(), "Found UserIdentity for user {0} for token {1}".FormatWith(userName, token));
             else
-                this.Error(() => "Unable to get UserIdentity for user {0} for token {1}".FormatWith(userName, token), systemName);
+                _logger.Error(GetType(), "Unable to get UserIdentity for user {0} for token {1}".FormatWith(userName, token));
 
             return userIdentity;
         }

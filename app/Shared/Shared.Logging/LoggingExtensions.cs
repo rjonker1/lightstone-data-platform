@@ -7,6 +7,7 @@ using Castle.Windsor.Installer;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
+using Microsoft.Practices.ServiceLocation;
 using Shared.Messages;
 using Workflow.Publisher;
 
@@ -14,41 +15,7 @@ namespace Shared.Logging
 {
     public static class LoggingExtensions
     {
-        private static IWorkflowPublisher Publisher()
-        {
-            var logToBus = true;
-            var logToBusSetting = ConfigurationManager.AppSettings["shared/logging/logToBus"];
-            if (!string.IsNullOrEmpty(logToBusSetting))
-                bool.TryParse(logToBusSetting, out logToBus);
-
-            if (!logToBus)
-                return null;
-
-            IWorkflowPublisher publisher;
-            try
-            {
-                var container = new WindsorContainer();
-                container.Install(FromAssembly.Containing<IWorkflowPublisher>());
-                publisher = container.Resolve<IWorkflowPublisher>();
-
-                //publisher = new WorkflowPublisher(BusBuilder.CreateBus());
-            }
-            catch (Exception)
-            {
-                typeof(LoggingExtensions).Error(() => "Could not install/resolve IWorkflowPublisher");
-                return null;
-            }
-
-            return publisher;
-        }
-
-        private static void Pub(this IWorkflowPublisher publisher, Func<object> message, DataPlatform.Shared.Enums.LogLevel level, SystemName systemName, Exception exception = null)
-        {
-            //Task.Run(() => publisher.Publish(new LogMessage(message().ToString(), level, systemName, exception)));
-            //await publisher.PublishAsync(new LogMessage(message().ToString(), level, systemName, exception)).ConfigureAwait(false);
-            publisher.Publish(new LogMessage(message().ToString(), level, systemName, exception));
-        }
-
+        private static readonly IDataPlatformLogger Logger = ServiceLocator.Current.GetInstance<IDataPlatformLogger>();
         #region .: Enabled Checks :.
 
         public static bool IsDebugEnabled(this object o)
@@ -138,7 +105,9 @@ namespace Shared.Logging
         {
             var loggerName = "PerformanceTiming." + o.GetType().FullName;
             var logger = LogManager.GetLogger(loggerName);
-            return logger.IsInfoEnabled ? (ITimerLogger) new TimerLogger(message, loggerName) : new NullTimerLogger();
+            if (logger.IsInfoEnabled)
+                return new TimerLogger(message, loggerName);
+            else return new NullTimerLogger();
         }
 
         #region .: Debug :.
@@ -148,36 +117,17 @@ namespace Shared.Logging
             o.GetType().Debug(message);
         }
 
-        public static void Debug(this object o, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => o.GetType().Debug(message, systemName));
-        }
-
         public static void Debug(this Type t, Func<object> message)
         {
             Debug(t.FullName, message);
         }
 
-        public static void Debug(this Type t, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Debug(t.FullName, message, systemName));
-        }
-
         public static void Debug(string name, Func<object> message)
         {
-            if (IsDebugEnabled(name))
+            if (Logger == null)
                 LogManager.GetLogger(name).Debug(message());
-        }
-
-        public static void Debug(string name, Func<object> message, SystemName systemName)
-        {
-            var publisher = Publisher();
-            if (publisher == null)
-            {
-                Debug(name, message);
-                return;
-            }
-            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Debug, systemName);
+            else
+                Logger.Debug(name, message().ToString());
         }
 
         #endregion
@@ -189,38 +139,18 @@ namespace Shared.Logging
             Info(o.GetType(), message);
         }
 
-        public static void Info(this object o, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Info(o.GetType(), message, systemName));
-        }
-
         public static void Info(this Type t, Func<object> message)
         {
             Info(t.FullName, message);
         }
 
-        public static void Info(this Type t, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Info(t.FullName, message, systemName));
-        }
-
         public static void Info(string name, Func<object> message)
         {
-            if (IsInfoEnabled(name))
+            if (Logger == null)
                 LogManager.GetLogger(name).Info(message());
+            else
+                Logger.Info(name, message().ToString());
         }
-
-        public static void Info(string name, Func<object> message, SystemName systemName)
-        {
-            var publisher = Publisher();
-            if (publisher == null)
-            {
-                Info(name, message);
-                return;
-            }
-            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Info, systemName);
-        }
-
         #endregion
 
         #region .: Warn :.
@@ -230,38 +160,18 @@ namespace Shared.Logging
             Warn(o.GetType(), message);
         }
 
-        public static void Warn(this object o, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Warn(o.GetType(), message, systemName));
-        }
-
         public static void Warn(this Type t, Func<object> message)
         {
             Warn(t.FullName, message);
         }
 
-        public static void Warn(this Type t, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Warn(t.FullName, message, systemName));
-        }
-
         public static void Warn(string name, Func<object> message)
         {
-            if (IsWarnEnabled(name))
+            if (Logger == null)
                 LogManager.GetLogger(name).Warn(message());
+            else
+                Logger.Warn(name, message().ToString());
         }
-
-        public static void Warn(string name, Func<object> message, SystemName systemName)
-        {
-            var publisher = Publisher();
-            if (publisher == null)
-            {
-                Warn(name, message);
-                return;
-            }
-            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Warn, systemName);
-        }
-
         #endregion
 
         #region .: Error :.
@@ -271,19 +181,9 @@ namespace Shared.Logging
             Error(o.GetType(), message, exception);
         }
 
-        public static void Error(this object o, Func<object> message, Exception exception, SystemName systemName)
-        {
-            Task.Run(() => Error(o.GetType(), message, exception, systemName));
-        }
-
         public static void Error(this object o, Func<object> message)
         {
             Error(o.GetType(), message);
-        }
-
-        public static void Error(this object o, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Error(o.GetType(), message, systemName));
         }
 
         public static void Error(this Type t, Func<object> message, Exception exception)
@@ -291,19 +191,9 @@ namespace Shared.Logging
             Error(t.FullName, message, exception);
         }
 
-        public static void Error(this Type t, Func<object> message, Exception exception, SystemName systemName)
-        {
-            Task.Run(() => Error(t.FullName, message, exception, systemName));
-        }
-
         public static void Error(this Type t, Func<object> message)
         {
             Error(t.FullName, message);
-        }
-
-        public static void Error(this Type t, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Error(t.FullName, message, systemName));
         }
 
         public static void Error(string name, Func<object> message)
@@ -311,26 +201,12 @@ namespace Shared.Logging
             Error(name, message, null);
         }
 
-        public static void Error(string name, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Error(name, message, null, systemName));
-        }
-
         public static void Error(string name, Func<object> message, Exception exception)
         {
-            if (IsErrorEnabled(name))
+            if (Logger == null)
                 LogManager.GetLogger(name).Error(message(), exception);
-        }
-
-        public static void Error(string name, Func<object> message, Exception exception, SystemName systemName)
-        {
-            var publisher = Publisher();
-            if (publisher == null)
-            {
-                Error(name, message, exception);
-                return;
-            }
-            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Error, systemName, exception);
+            else
+                Logger.Error(name, message().ToString(), exception);
         }
 
         #endregion
@@ -342,36 +218,17 @@ namespace Shared.Logging
             Fatal(o.GetType(), message);
         }
 
-        public static void Fatal(this object o, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Fatal(o.GetType(), message, systemName));
-        }
-
         public static void Fatal(this Type t, Func<object> message)
         {
             Fatal(t.FullName, message);
         }
 
-        public static void Fatal(this Type t, Func<object> message, SystemName systemName)
-        {
-            Task.Run(() => Fatal(t.FullName, message, systemName));
-        }
-
         public static void Fatal(string name, Func<object> message)
         {
-            if (IsFatalEnabled(name))
+            if (Logger == null)
                 LogManager.GetLogger(name).Fatal(message());
-        }
-
-        public static void Fatal(string name, Func<object> message, SystemName systemName)
-        {
-            var publisher = Publisher();
-            if (publisher == null)
-            {
-                Fatal(name, message);
-                return;
-            }
-            publisher.Pub(message, DataPlatform.Shared.Enums.LogLevel.Fatal, systemName);
+            else
+                Logger.Fatal(name, message().ToString());
         }
 
         #endregion
@@ -381,6 +238,7 @@ namespace Shared.Logging
     {
         double ElapsedTime();
     }
+
 
     public class NullTimerLogger : ITimerLogger
     {
@@ -427,6 +285,8 @@ namespace Shared.Logging
             _loggerName = loggerName;
             Init();
         }
+
+
 
         public double ElapsedTime()
         {

@@ -6,6 +6,7 @@ namespace Shared.Messages
 {
     public class LogMessage : IPublishableMessage
     {
+        public string LoggerType { get; set; }
         public string Message { get; set; }
         public Exception Exception { get; set; }
         public LogLevel Level { get; set; }
@@ -13,8 +14,9 @@ namespace Shared.Messages
 
         public LogMessage() { }
 
-        public LogMessage(string message, LogLevel level, SystemName systemName, Exception exception = null)
+        public LogMessage(string loggerType, string message, LogLevel level, SystemName systemName, Exception exception = null)
         {
+            LoggerType = loggerType;
             Message = message;
             Level = level;
             SystemName = systemName;

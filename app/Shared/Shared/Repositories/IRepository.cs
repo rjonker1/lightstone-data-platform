@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DataPlatform.Shared.Repositories
 {
-    public interface IRepository<T> : IQueryable<T>
+    public interface IRepository<T> : IQueryable<T>, IStoredProcedure<T>
     {
         T Get(object id);
         T Load(object id);
