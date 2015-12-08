@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
@@ -39,35 +38,33 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             DebitOrderNotDoneReportList = new List<ReportDto>();
         }
  
-        public async Task Pivot()
+        public void Pivot()
         {
-
-
             this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(_startBillMonth, _endBillMonth));
 
             try
             {
-                //// Archive and clean Final Billing for new month
-                //_archiveBillingRepository.BatchInsert(Mapper.Map<IEnumerable<FinalBilling>, IEnumerable<ArchiveBillingTransaction>>
-                //    (_finalBillingRepository), 0);
+                // Archive and clean Final Billing for new month
+                _archiveBillingRepository.BatchInsert(Mapper.Map<IEnumerable<FinalBilling>, IEnumerable<ArchiveBillingTransaction>>
+                    (_finalBillingRepository), 0);
 
-                //// Clean FinalBilling
-                //_finalBillingRepository.BatchDelete(
-                //    (_finalBillingRepository), 0);
+                // Clean FinalBilling
+                _finalBillingRepository.BatchDelete(
+                    (_finalBillingRepository), 0);
 
-                //// Save final version of StageBilling for the month into FinalBilling
-                //_finalBillingRepository.BatchInsert(Mapper.Map<IEnumerable<StageBilling>, IEnumerable<FinalBilling>>
-                //        (_stageBillingRepository.Where(x => x.Created >= _startBillMonth && x.Created <= _endBillMonth)), 0);
+                // Save final version of StageBilling for the month into FinalBilling
+                _finalBillingRepository.BatchInsert(Mapper.Map<IEnumerable<StageBilling>, IEnumerable<FinalBilling>>
+                    (_stageBillingRepository.Where(x => x.Created >= _startBillMonth && x.Created <= _endBillMonth)), 0);
 
-                //InvoicePdfList = await Task.Factory.StartNew(() => _finalBillingTransactions.PivotToInvoicePdf());
+                //InvoicePdfList = _finalBillingTransactions.PivotToInvoicePdf();
 
                 StatementPdfList = _finalBillingTransactions.PivotToStatementPdf();
 
-                //PastelReportList.Add( await Task.Factory.StartNew(() => _finalBillingTransactions.PivotToPastelCsv()));
+                //PastelReportList.Add( _finalBillingTransactions.PivotToPastelCsv());
 
-                //DebitOrderReportList.Add( await Task.Factory.StartNew(() =>_finalBillingTransactions.PivotToDebitOrderCsv()));
+                //DebitOrderReportList.Add( _finalBillingTransactions.PivotToDebitOrderCsv());
 
-                //DebitOrderNotDoneReportList.Add( await Task.Factory.StartNew(() =>_finalBillingTransactions.PivotToDebitOrderNotDoneCsv()));
+                //DebitOrderNotDoneReportList.Add( _finalBillingTransactions.PivotToDebitOrderNotDoneCsv());
             }
             catch (Exception ex)
             {
@@ -75,7 +72,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
             }
 
             // Publish to Reporting for processing
-            // Note Pdf report types get emailed to relevant mailing contacts
+            // Note: Pdf report types will be emailed to relevant mailing contacts
             //_report.PublishToQueue(InvoicePdfList, "pdf");
             _report.PublishToQueue(StatementPdfList, "pdf");
             //_report.PublishToQueue(PastelReportList, "pastel");
