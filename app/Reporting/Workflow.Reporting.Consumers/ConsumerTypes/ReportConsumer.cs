@@ -45,7 +45,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                             CreateFile(dto, path, fileName);
 
                             //Send Email
-                            _emailPdfNotificationsWithAttachment.Send(dto, fileName);
+                            //_emailPdfNotificationsWithAttachment.Send(dto, fileName);
                         }
                     }
 
