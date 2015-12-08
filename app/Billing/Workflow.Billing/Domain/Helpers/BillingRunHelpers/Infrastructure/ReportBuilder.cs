@@ -47,7 +47,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 
             try
             {
-                var statementDetail = _session.CreateSQLQuery(@"EXEC BillingStatementDetails @CustomerClientId=:CustomerClientId")
+                var statementDetail = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementDetails] @CustomerClientId=:CustomerClientId")
                     .SetGuid("CustomerClientId", customerClientId)
                     .SetResultTransformer(Transformers.AliasToBean(typeof(StatementDetailDto)))
                     .List<StatementDetailDto>();
@@ -59,7 +59,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
                 statement.CustomerClientName = statementDetail[0].CustomerClientName;
                 statement.StatementPeriod = String.Join(" - ", new[] { startBillMonth.ToString("yyyy/MM/dd"), endBillMonth.ToString("yyyy/MM/dd") });
 
-                var ut = _session.CreateSQLQuery(@"EXEC BillingStatementUserTransactions @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")
+                var ut = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementUserTransactions] @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")
                         .SetParameter("CustomerClientId", customerClientId)
                         .SetParameter("StartDate", startBillMonth)
                         .SetParameter("EndDate", endBillMonth)
@@ -98,7 +98,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 
                 statement.UserTransactions = userTransactions;
 
-                var ps = _session.CreateSQLQuery(@"EXEC BillingStatementPricingSummary @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")
+                var ps = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementPricingSummary] @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")
                         .SetParameter("CustomerClientId", customerClientId)
                         .SetParameter("StartDate", startBillMonth)
                         .SetParameter("EndDate", endBillMonth)

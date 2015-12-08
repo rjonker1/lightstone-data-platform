@@ -9,6 +9,7 @@ using DataPlatform.Shared.Repositories;
 using NHibernate;
 using NHibernate.Linq;
 using ServiceStack.Common.Utils;
+using ServiceStack.Logging.Support.Logging;
 using Shared.Logging;
 using Workflow.Billing.Helpers.Extensions;
 
@@ -184,5 +185,30 @@ namespace Workflow.Billing.Repository
         }
 
         #endregion
+
+        public T StoredProcedure(string query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T WithParameters(Dictionary<string, string> queryParams)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Execute()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IRepository<T> Test()
+        {
+            return this;
+        }
+
+        public IRepository<T> TesterChain()
+        {
+            return this;
+        } 
     }
 }

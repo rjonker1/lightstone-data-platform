@@ -11,6 +11,18 @@ using Workflow.Reporting.Dtos;
 
 namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 {
+    public class Repo
+    {
+        public Repo Query()
+        {
+            return this;
+        }
+
+        public Repo WithParameters()
+        {
+            return this;
+        }
+    }
     public class PivotFinalBilling : ReportList, IPivotBilling<PivotFinalBilling>
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
@@ -41,6 +53,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         public void Pivot()
         {
             this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(_startBillMonth, _endBillMonth));
+
+            var test = new Repo().Query().WithParameters();
 
             try
             {
