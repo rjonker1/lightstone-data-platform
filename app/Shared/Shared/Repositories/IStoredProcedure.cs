@@ -6,6 +6,6 @@ namespace DataPlatform.Shared.Repositories
     {
         T StoredProcedure(string query);
         T WithParameters(Dictionary<string, string> queryParams);
-        T Execute();
+        void Execute();
     }
 }
