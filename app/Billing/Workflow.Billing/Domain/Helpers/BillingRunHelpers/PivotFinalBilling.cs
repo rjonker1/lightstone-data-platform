@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Repositories;
+using NHibernate;
 using Shared.Logging;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure;
@@ -11,18 +12,6 @@ using Workflow.Reporting.Dtos;
 
 namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 {
-    public class Repo
-    {
-        public Repo Query()
-        {
-            return this;
-        }
-
-        public Repo WithParameters()
-        {
-            return this;
-        }
-    }
     public class PivotFinalBilling : ReportList, IPivotBilling<PivotFinalBilling>
     {
         private readonly IRepository<StageBilling> _stageBillingRepository;
@@ -31,18 +20,20 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         private readonly IPivotFinalBillingTransactions _finalBillingTransactions;
 
         private readonly IPublishReportQueue<BillingReport> _report;
+        private readonly ISession _session;
 
         readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month - 1, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
         readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 2), 26);
 
         public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, 
                                     IRepository<ArchiveBillingTransaction> archiveBillingRepository, IPublishReportQueue<BillingReport> report, 
-                                    IPivotFinalBillingTransactions finalBillingTransactions)
+                                    IPivotFinalBillingTransactions finalBillingTransactions, ISession session)
         {
             _stageBillingRepository = stageBillingRepository;
             _finalBillingRepository = finalBillingRepository;
             _archiveBillingRepository = archiveBillingRepository;
             _finalBillingTransactions = finalBillingTransactions;
+            _session = session;
             _report = report;
 
             PastelReportList = new List<ReportDto>();
@@ -53,8 +44,6 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         public void Pivot()
         {
             this.Info(() => "FinalBilling process started for : {0} - to - {1}".FormatWith(_startBillMonth, _endBillMonth));
-
-            var test = new Repo().Query().WithParameters();
 
             try
             {
