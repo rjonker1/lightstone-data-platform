@@ -22,12 +22,12 @@ namespace UserManagement.Domain.CommandHandlers.Email
                 }
                 catch (SmtpException exception)
                 {
-                    this.Error(() => "Error sending password reset mail to {0}".FormatWith(string.Join(",", command.ToAddresses), exception), SystemName.UserManagement);
+                    this.Error(() => "Error sending password reset mail to {0}".FormatWith(string.Join(",", command.ToAddresses), exception));
                     throw new LightstoneAutoException("Error sending password reset mail");
                 }
                 catch (Exception exception)
                 {
-                    this.Error(() => "Error sending password reset mail to {0}".FormatWith(string.Join(",", command.ToAddresses), exception), SystemName.UserManagement);
+                    this.Error(() => "Error sending password reset mail to {0}".FormatWith(string.Join(",", command.ToAddresses), exception));
                     throw new LightstoneAutoException("Error sending password reset mail");
                 }
             }

@@ -56,7 +56,7 @@ namespace UserManagement.Api.Modules
                         if (userType != UserType.Internal)
                         {
                             userIdentity = null;
-                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType), SystemName.UserManagement);
+                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType));
                         }
                     }
                 }
@@ -72,7 +72,7 @@ namespace UserManagement.Api.Modules
                 var password = Context.Request.Headers["Password"].FirstOrDefault();
                 var userIdentity = authenticator.GetUserIdentity(username, password);
 
-                this.Info(() => "UserIdentity: {0}, log in attempt".FormatWith(userIdentity), SystemName.UserManagement);
+                this.Info(() => "UserIdentity: {0}, log in attempt".FormatWith(userIdentity));
 
                 if (userIdentity != null)
                 {
@@ -83,7 +83,7 @@ namespace UserManagement.Api.Modules
                         if (userType != UserType.Internal && userType != UserType.External)
                         {
                             userIdentity = null;
-                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType), SystemName.UserManagement);
+                            this.Error(() => "Log in attempt failed: User {0}, ActionedUserType: {1}".FormatWith(username, userType));
                         }
                     }
                 }

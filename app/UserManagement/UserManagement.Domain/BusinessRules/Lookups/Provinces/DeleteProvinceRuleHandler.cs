@@ -28,7 +28,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.Provinces
             if (provinces.Any())
             {
                 var exception = new LightstoneAutoException("Province is associated therefore cannot be deleted".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception, SystemName.UserManagement);
+                this.Warn(() => exception);
                 throw exception;
             }
         }

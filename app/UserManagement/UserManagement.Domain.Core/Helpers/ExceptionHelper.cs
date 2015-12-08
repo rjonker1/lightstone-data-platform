@@ -15,7 +15,7 @@ namespace UserManagement.Domain.Core.Helpers
             catch (Exception exception)
             {
                 if (logException)
-                    typeof(ExceptionHelper).Error(() => exception, SystemName.UserManagement);
+                    typeof(ExceptionHelper).Error(() => exception);
             }
         }
 
@@ -27,7 +27,7 @@ namespace UserManagement.Domain.Core.Helpers
             }
             catch (Exception exception)
             {
-                typeof(ExceptionHelper).Error(() => exception, SystemName.UserManagement);
+                typeof(ExceptionHelper).Error(() => exception);
                 return null;
             }
         }
@@ -40,7 +40,7 @@ namespace UserManagement.Domain.Core.Helpers
             }
             catch (Exception exception)
             {
-                typeof(ExceptionHelper).Error(() => exception, SystemName.UserManagement);
+                typeof(ExceptionHelper).Error(() => exception);
                 return null;
             }
         } 

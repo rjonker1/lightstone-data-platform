@@ -29,7 +29,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.CommercialStates
             if (commercialStates.Any())
             {
                 var exception = new LightstoneAutoException("Create Source is associated therefore cannot be deleted".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception, SystemName.UserManagement);
+                this.Warn(() => exception);
                 throw exception;
             }
         }

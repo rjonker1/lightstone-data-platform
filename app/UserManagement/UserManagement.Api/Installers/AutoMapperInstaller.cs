@@ -17,7 +17,7 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install AutoMapperInstaller", SystemName.UserManagement);
+            this.Info(() => "Attempting to install AutoMapperInstaller");
 
             container.Register(Classes.FromAssemblyContaining<ICreateAutoMapperMaps>().BasedOn(typeof(ITypeConverter<,>)).WithServiceAllInterfaces().LifestyleTransient());
             container.Register(Classes.FromAssemblyContaining<ICreateAutoMapperMaps>().BasedOn<ICreateAutoMapperMaps>().WithServiceAllInterfaces().LifestyleTransient());
@@ -26,7 +26,7 @@ namespace UserManagement.Api.Installers
             foreach (var map in container.ResolveAll<ICreateAutoMapperMaps>())
                 map.CreateMaps();
 
-            this.Info(() => "Successfully installed AutoMapperInstaller", SystemName.UserManagement);
+            this.Info(() => "Successfully installed AutoMapperInstaller");
         }
 
         private static void RegisterIdToEntityConverters(IWindsorContainer container)

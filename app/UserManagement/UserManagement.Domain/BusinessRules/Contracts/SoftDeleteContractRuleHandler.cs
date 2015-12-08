@@ -30,21 +30,21 @@ namespace UserManagement.Domain.BusinessRules.Contracts
             if (hasClients.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Client constraint".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception, SystemName.UserManagement);
+                this.Warn(() => exception);
                 throw exception;
             }
 
             if (hasCustomers.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Customer constraint".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception, SystemName.UserManagement);
+                this.Warn(() => exception);
                 throw exception;
             }
 
             if (hasPackages.Any(x => x.Any()))
             {
                 var exception = new LightstoneAutoException("Contract cannot be deleted due to Package constraint".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception, SystemName.UserManagement);
+                this.Warn(() => exception);
                 throw exception;
             }
 

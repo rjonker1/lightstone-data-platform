@@ -11,13 +11,13 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install AuthenticationInstaller", SystemName.UserManagement);
+            this.Info(() => "Attempting to install AuthenticationInstaller");
 
             //container.Register(Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
             container.Register(Component.For<IUmAuthenticator>().ImplementedBy<UmAuthenticator>().LifestyleTransient());
             //container.Register(Component.For<IAuthenticateUser>().ImplementedBy<RedisAuthenticator>().LifestyleTransient());
 
-            this.Info(() => "Successfully installed AuthenticationInstaller", SystemName.UserManagement);
+            this.Info(() => "Successfully installed AuthenticationInstaller");
         }
     }
 }
