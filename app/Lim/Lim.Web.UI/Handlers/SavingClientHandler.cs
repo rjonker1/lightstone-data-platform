@@ -1,6 +1,6 @@
 ﻿using System;
 using Lim.Core;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 using Lim.Web.UI.Commands;
 
 namespace Lim.Web.UI.Handlers

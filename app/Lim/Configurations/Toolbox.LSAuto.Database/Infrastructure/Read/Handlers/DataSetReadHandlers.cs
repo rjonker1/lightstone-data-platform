@@ -21,8 +21,7 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Read.Handlers
                 Activated = message.DataSet.Activated,
                 DateCreated = message.DataSet.DateCreated,
                 Description = message.DataSet.Description,
-                Version = message.Version,
-                AggregateId = message.AggregateId
+                Version = message.Version
             };
 
             _repository.Save(ds);
@@ -42,8 +41,7 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Read.Handlers
                 Activated = message.DataSet.Activated,
                 DateCreated = message.DataSet.DateCreated,
                 Description = message.DataSet.Description,
-                Version = message.Version,
-                AggregateId = message.AggregateId
+                Version = message.Version
             };
             _repository.SaveOrUpdate(ds);
         }

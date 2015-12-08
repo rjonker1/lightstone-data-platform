@@ -54,8 +54,9 @@
     <Compile Include="Command.cs" />
     <Compile Include="Core\IAudit.cs" />
     <Compile Include="Core\IBackup.cs" />
-    <Compile Include="Core\ISendCommands.cs" />
+    <None Include="Core\IEventPublisher.cs.delete" />
     <Compile Include="Core\IPublish.cs" />
+    <Compile Include="Core\ISendCommand.cs" />
     <Compile Include="Core\IFail.cs" />
     <Compile Include="Core\IFetch.cs" />
     <Compile Include="Core\IHandles.cs" />
@@ -80,7 +81,6 @@
     <Compile Include="Infrastructure\LimConfiguration.cs" />
     <Compile Include="Infrastructure\LimEventStoreConfiguration.cs" />
     <Compile Include="Infrastructure\LSAutoConfiguration.cs" />
-    <Compile Include="LimEvent.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

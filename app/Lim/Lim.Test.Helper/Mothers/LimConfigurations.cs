@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 
 namespace Lim.Test.Helper.Mothers
 {

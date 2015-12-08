@@ -1,12 +1,13 @@
 ﻿using System;
 using Lim;
+using Lim.Domain.Events;
 using Lim.Dtos;
 
 namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DataSetExportCreated : LimEvent
     {
-        public DataSetExportCreated(DataSetDto dataSet, Guid correlationId,  string eventType, int eventTypeId, bool newAggregate, Guid user, Type type, Guid aggregateId)
+        public DataSetExportCreated(DataSetDto dataSet, Guid correlationId,  string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
         {
             DataSet = dataSet;
             EventType = eventType;
@@ -16,7 +17,7 @@ namespace Toolbox.LightstoneAuto.Domain.Events
             AggregateNew = newAggregate;
             User = user;
             CorrelationId = correlationId;
-            AggregateId = aggregateId;
+            AggregateId = dataSet.Id;
             //  Payload = Encoding.UTF8.GetBytes(this.ObjectToJson());
 
         }

@@ -131,6 +131,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Consumer\ConsumerBuilder.cs" />
     <Compile Include="Consumer\DataProviderWorker.cs" />
     <Compile Include="Consumer\IDataProviderWorker.cs" />
     <Compile Include="Consumer\Installers\BusInstaller.cs" />

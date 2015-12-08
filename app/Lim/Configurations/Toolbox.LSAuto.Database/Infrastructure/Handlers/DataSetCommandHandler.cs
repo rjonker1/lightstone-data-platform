@@ -22,14 +22,14 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Handlers
         public void Handle(DeActivateDataSetExport message)
         {
             var dataSet = _repository.GetById(message.AggregateId);
-            dataSet.Deactivate(new DeActivateDataSetExport(message.DataSetId,message.User,message.Version, message.CorrelationId, dataSet.Id));
+            dataSet.Deactivate(new DeActivateDataSetExport(message.DataSetId,message.User,message.Version, message.CorrelationId));
             _repository.Save(dataSet, message.Version);
         }
 
         public void Handle(ModifyDataSetExport message)
         {
             var dataSet = _repository.GetById(message.AggregateId);
-            dataSet.Modify(new ModifyDataSetExport(message.DataSet,message.User, message.Version,message.CorrelationId, dataSet.Id));
+            dataSet.Modify(new ModifyDataSetExport(message.DataSet,message.User, message.Version,message.CorrelationId));
             _repository.Save(dataSet, message.Version);
         }
     }

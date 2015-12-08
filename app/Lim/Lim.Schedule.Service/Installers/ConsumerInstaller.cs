@@ -4,6 +4,8 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Domain.Receiver.Handlers;
 using Lim.Domain.Sender.Handlers;
+using Toolbox.LIVE.Infrastructure.Consumers.Read;
+using Toolbox.LIVE.Infrastructure.Consumers.Write;
 
 namespace Lim.Schedule.Service.Installers
 {
@@ -18,6 +20,9 @@ namespace Lim.Schedule.Service.Installers
 
             container.Register(Component.For<ResponseFromPackageConsumer>().ImplementedBy<ResponseFromPackageConsumer>());
             container.Register(Component.For<AlwaysOnConfigurationConsumer>().ImplementedBy<AlwaysOnConfigurationConsumer>());
+
+            container.Register(Component.For<SendExecutedPackageConsumer>().ImplementedBy<SendExecutedPackageConsumer>());
+            container.Register(Component.For<ExecutedPackageSentConsumer>().ImplementedBy<ExecutedPackageSentConsumer>());
 
             _log.InfoFormat("Consumers Installed");
         }

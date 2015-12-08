@@ -17,7 +17,6 @@ namespace Lim.Unit.Tests.LSAuto.Helpers
                 Activated = s.Activated,
                 DateCreated = s.DateCreated,
                 DataFields =  new List<DataFieldDto>(),
-                AggregateId = s.AggregateId,
                 //DataFields = FakeDatabase.DataFieldList.Where(w => w.DataSet.Id == s.Id).Select(f => new DataFieldDto
                 //{
                 //    Id = f.Id,

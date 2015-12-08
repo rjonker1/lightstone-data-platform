@@ -5,6 +5,7 @@ using System.Text;
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
+using Lim.Domain.Events;
 using Lim.Domain.EventStore.Entities;
 using Lim.Domain.Extensions;
 
@@ -18,15 +19,15 @@ namespace Lim.Domain.EventStore
 
         private struct EventDescriptor
         {
-            public EventDescriptor(LimEvent @event, long version)
+            public EventDescriptor(LimEvent @event, long version, Guid aggregateId)
             {
                 Event = @event;
                 Version = version;
-                //Id = id;
+                Id = aggregateId;
             }
 
             public readonly LimEvent Event;
-           // public readonly Guid Id;
+            public readonly Guid Id;
             public readonly long Version;
         }
 
@@ -56,7 +57,7 @@ namespace Lim.Domain.EventStore
             {
                 i++;
                 @event.Version = i;
-                var descriptor = new EventDescriptor(@event, i);
+                var descriptor = new EventDescriptor(@event, i, aggregateId);
                 eventDescriptors.Add(descriptor);
                 Save(descriptor);
 
@@ -80,7 +81,7 @@ namespace Lim.Domain.EventStore
             {
                 var command = new EventCommand
                 {
-                    AggregateId =  @event.Event.AggregateId,
+                    AggregateId =  @event.Id,
                     EventType = @event.Event.EventType,
                     CorrelationId = @event.Event.CorrelationId,
                     EventTypeId = @event.Event.EventTypeId,
@@ -88,7 +89,7 @@ namespace Lim.Domain.EventStore
                     Type = @event.Event.Type.FullName,
                     TypeName = @event.Event.TypeName,
                     Version = @event.Version,
-                    User = @event.Event.User,
+                    UserId = @event.Event.User,
                     Payload = Encoding.UTF8.GetBytes(@event.Event.ObjectToJson())
                 };
 

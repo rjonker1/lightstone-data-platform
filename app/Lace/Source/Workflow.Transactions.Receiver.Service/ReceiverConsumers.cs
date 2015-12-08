@@ -1,4 +1,6 @@
-﻿using Api.Domain.Core.Messages;
+﻿using System;
+using System.Collections.Generic;
+using Api.Domain.Core.Messages;
 using Castle.Windsor;
 using EasyNetQ;
 using Workflow.Billing.Messages.Publishable;
@@ -12,39 +14,67 @@ namespace Workflow.Transactions.Receiver.Service
     {
         public ReceiverConsumers(IMessage<T> message, IWindsorContainer container)
         {
-            if (message is IMessage<RequestToDataProvider>)
-                container.Resolve<RequestsReceiver>().Consume((IMessage<RequestToDataProvider>) message);
-            if (message is IMessage<EntryPointReceivedRequest>)
-                container.Resolve<RequestsReceiver>().Consume((IMessage<EntryPointReceivedRequest>) message);
-
-            if (message is IMessage<ResponseFromDataProvider>)
-                container.Resolve<ResponsesReceiver>().Consume((IMessage<ResponseFromDataProvider>)message);
-            if (message is IMessage<EntryPointReturnedResponse>)
-                container.Resolve<ResponsesReceiver>().Consume((IMessage<EntryPointReturnedResponse>)message);
-
-            if (message is IMessage<SecurityFlagRaised>)
-                container.Resolve<ContextReceiver>().Consume((IMessage<SecurityFlagRaised>)message);
-            if (message is IMessage<DataProviderConfigured>)
-                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderConfigured>)message);
-            if (message is IMessage<DataProviderCallEnded>)
-                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderCallEnded>)message);
-            if (message is IMessage<DataProviderCallStarted>)
-                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderCallStarted>)message);
-            if (message is IMessage<DataProviderError>)
-                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderError>)message);
-            if (message is IMessage<DataProviderResponseTransformed>)
-                container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderResponseTransformed>)message);
-
-            if (message is IMessage<BillTransactionMessage>)
-                container.Resolve<TransactionReceiver>().Consume((IMessage<BillTransactionMessage>)message);
-
-            if (message is IMessage<RequestMetadataMessage>)
-                container.Resolve<ApiRequestReceiver>().Consume((IMessage<RequestMetadataMessage>)message);
-
-            if(message is IMessage<ExecutionDetailForDataProvider>)
-                container.Resolve<IndicatorReceiver>().Consume((IMessage<ExecutionDetailForDataProvider>)message);
-            if (message is IMessage<RequestFieldsForDataProvider>)
-                container.Resolve<IndicatorReceiver>().Consume((IMessage<RequestFieldsForDataProvider>)message);
+           Action<IWindsorContainer,IMessage<T>> consumer;
+           if (_consumers.TryGetValue(typeof(T), out consumer)) 
+               consumer(container, message);
         }
+
+        private readonly Dictionary<Type, Action<IWindsorContainer, IMessage<T>>> _consumers = new Dictionary
+            <Type, Action<IWindsorContainer, IMessage<T>>>
+        {
+            {
+                typeof (RequestToDataProvider),
+                (container, message) => container.Resolve<RequestsReceiver>().Consume((IMessage<RequestToDataProvider>) message)
+            },
+            {
+                typeof (EntryPointReceivedRequest),
+                (container, message) => container.Resolve<RequestsReceiver>().Consume((IMessage<EntryPointReceivedRequest>) message)
+            },
+            {
+                typeof (ResponseFromDataProvider),
+                (container, message) => container.Resolve<ResponsesReceiver>().Consume((IMessage<ResponseFromDataProvider>) message)
+            },
+            {
+                typeof (EntryPointReturnedResponse),
+                (container, message) => container.Resolve<ResponsesReceiver>().Consume((IMessage<EntryPointReturnedResponse>) message)
+            },
+            {
+                typeof (SecurityFlagRaised), (container, message) => container.Resolve<ContextReceiver>().Consume((IMessage<SecurityFlagRaised>) message)
+            },
+            {
+                typeof (DataProviderConfigured),
+                (container, message) => container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderConfigured>) message)
+            },
+            {
+                typeof (DataProviderCallEnded),
+                (container, message) => container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderCallEnded>) message)
+            },
+            {
+                typeof (DataProviderCallStarted),
+                (container, message) => container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderCallStarted>) message)
+            },
+            {typeof (DataProviderError), (container, message) => container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderError>) message)},
+            {
+                typeof (DataProviderResponseTransformed),
+                (container, message) => container.Resolve<ContextReceiver>().Consume((IMessage<DataProviderResponseTransformed>) message)
+            },
+            {
+                typeof (BillTransactionMessage),
+                (container, message) => container.Resolve<TransactionReceiver>().Consume((IMessage<BillTransactionMessage>) message)
+            }
+            ,
+            {
+                typeof (RequestMetadataMessage),
+                (container, message) => container.Resolve<ApiRequestReceiver>().Consume((IMessage<RequestMetadataMessage>) message)
+            },
+            {
+                typeof (ExecutionDetailForDataProvider),
+                (container, message) => container.Resolve<IndicatorReceiver>().Consume((IMessage<ExecutionDetailForDataProvider>) message)
+            },
+            {
+                typeof (RequestFieldsForDataProvider),
+                (container, message) => container.Resolve<IndicatorReceiver>().Consume((IMessage<RequestFieldsForDataProvider>) message)
+            }
+        };
     }
 }

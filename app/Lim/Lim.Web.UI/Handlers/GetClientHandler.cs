@@ -2,9 +2,8 @@
 using System.Linq;
 using Common.Logging;
 using Lim.Core;
-using Lim.Domain.Dto;
 using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
+using Lim.Dtos;
 using Lim.Web.UI.Commands;
 using Newtonsoft.Json;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using Lim.Test.Helper.Builder;
 using Lim.Test.Helper.Fakes;
 using Lim.Unit.Tests.LSAuto.Helpers;
@@ -13,7 +14,7 @@ namespace Lim.Unit.Tests.LSAuto
     {
         private readonly FakeBus _bus;
         private readonly IReadModelFacade _readFacade;
-        private readonly long _id;
+        private readonly Guid _id;
         private readonly Guid _user;
         private readonly Guid _correlationId;
 
@@ -21,7 +22,8 @@ namespace Lim.Unit.Tests.LSAuto
         {
             _bus = FakeBusBuilder.Bus();
             _readFacade = new FakeDataSetReadModel();
-            _id = new Random().Next(1000, 10000000);
+           // _id = new Random().Next(1000, 10000000);
+            _id = Guid.NewGuid();
             _user = Guid.NewGuid();
             _correlationId = Guid.NewGuid();
         }
@@ -42,7 +44,9 @@ namespace Lim.Unit.Tests.LSAuto
 
             const string modifiedName = "this has been changed name";
             dto.Name = modifiedName;
-            _bus.Send(new ModifyDataSetExport(dto, _user, dto.Version, _correlationId, dto.AggregateId));
+            _bus.Send(new ModifyDataSetExport(dto, _user, dto.Version, _correlationId));
+
+            Thread.Sleep(5000);
 
             dto = _readFacade.GetDataSets().FirstOrDefault(f => f.Id == _id);
             dto.Name.ShouldEqual(modifiedName);

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 using Lim.Schedule.Core;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Identifiers;
-using Lim.Test.Helper.Mothers;
 
 namespace Lim.Test.Helper.Fakes.Handlers
 {

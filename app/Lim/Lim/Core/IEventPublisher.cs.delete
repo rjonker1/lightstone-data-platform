@@ -1,0 +1,9 @@
+﻿using Lim.Domain.Events;
+
+namespace Lim.Domain.Base
+{
+    public interface IEventPublisher
+    {
+        void Publish<T>(T @event) where T : LimDomainEvent;
+    }
+}

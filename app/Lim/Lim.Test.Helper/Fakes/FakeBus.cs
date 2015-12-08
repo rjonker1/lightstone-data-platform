@@ -5,7 +5,7 @@ using Lim.Core;
 
 namespace Lim.Test.Helper.Fakes
 {
-    public class FakeBus : ISendCommands, IPublish
+    public class FakeBus : ISendCommand, IPublish
     {
         private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new Dictionary<Type, List<Action<IMessage>>>();
 
@@ -36,14 +36,14 @@ namespace Lim.Test.Helper.Fakes
             }
         }
 
-        public void Publish<T>(T @event) where T : LimEvent
+        public void Publish<T>(T @event) where T : IMessage
         {
             List<Action<IMessage>> handlers;
             if(!_routes.TryGetValue(@event.GetType(), out handlers)) return;
             foreach (var handler in handlers)
             {
                 var handlerCopy = handler;
-               // handlerCopy(@event);
+                //handlerCopy(@event);
                 ThreadPool.QueueUserWorkItem(q => handlerCopy(@event));
             }
         }

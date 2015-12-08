@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using Lim.Core;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 
 namespace Lim.Schedule.Core.Identifiers
 {

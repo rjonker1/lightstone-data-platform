@@ -32,22 +32,37 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AuditApiIntegrationDto.cs" />
+    <Compile Include="AuthenticationTypeDto.cs" />
     <Compile Include="BmwFinanceDto.cs" />
+    <Compile Include="WeekdayDto.cs" />
+    <None Include="ClientDtoOld.cs.delete" />
     <Compile Include="ClientDto.cs" />
     <Compile Include="ConfigurationApiDto.cs" />
+    <None Include="ConfigurationDtoOld.cs.delete" />
     <Compile Include="ConfigurationDto.cs" />
+    <Compile Include="ConfigurationForApiDto.cs" />
     <Compile Include="DataFieldDto.cs" />
+    <Compile Include="DataPlatformClientDto.cs" />
+    <Compile Include="DataPlatformContractDto.cs" />
     <Compile Include="DataSetDto.cs" />
+    <Compile Include="FileInformationDto.cs" />
+    <Compile Include="FrequencyTypeDto.cs" />
+    <None Include="IntegrationClientDto.cs.delete" />
     <Compile Include="IntegrationClientDto.cs" />
+    <None Include="IntegrationContractDto.cs.delete" />
     <Compile Include="IntegrationContractDto.cs" />
+    <None Include="IntegrationPackageDto.cs.delete" />
     <Compile Include="IntegrationPackageDto.cs" />
     <Compile Include="IntegrationTrackingDto.cs" />
+    <Compile Include="PackageDto.cs" />
+    <Compile Include="PackageTransactionDto.cs" />
     <Compile Include="ViewColumnDto.cs" />
     <Compile Include="ViewDto.cs" />
   </ItemGroup>

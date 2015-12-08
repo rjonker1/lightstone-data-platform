@@ -1,14 +1,14 @@
 ﻿using System;
-using Lim;
+using Lim.Domain.Events;
 using Lim.Dtos;
 
 namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DataSetModified : LimEvent
     {
-        public DataSetModified(Guid aggregateId, DataSetDto dataSet, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
+        public DataSetModified(DataSetDto dataSet, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
         {
-            AggregateId = aggregateId;
+            AggregateId = dataSet.Id;
             DataSet = dataSet;
             EventType = eventType;
             EventTypeId = eventTypeId;

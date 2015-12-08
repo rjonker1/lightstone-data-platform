@@ -13,7 +13,7 @@ namespace Lim.Domain.Sender.Handlers
 {
     public class ResponseFromPackageConsumer
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<ResponseFromPackageConsumer>();
         private readonly IRepository _repository;
         private readonly IPublishConfigurationMessages _publisher;
 
@@ -21,13 +21,12 @@ namespace Lim.Domain.Sender.Handlers
         {
             _repository = repository;
             _publisher = publisher;
-            _log = LogManager.GetLogger(GetType());
         }
 
         public void Consume(IMessage<PackageResponseMessage> message)
         {
-            _log.InfoFormat("Receiving response from package with Package Id {0} on Contract {1}", message.Body == null ? Guid.Empty : message.Body.PackageId, message.Body == null ? Guid.Empty : message.Body.ContractId);
-            _log.Info(message.Body == null ? "Empty Message Body" : message.Body.Payload);
+            Log.InfoFormat("Receiving response from package with Package Id {0} on Contract {1}", message.Body == null ? Guid.Empty : message.Body.PackageId, message.Body == null ? Guid.Empty : message.Body.ContractId);
+            Log.Info(message.Body == null ? "Empty Message Body" : message.Body.Payload);
 
             if(message.Body == null)
                 throw  new Exception("There is no package response available to save.");
@@ -38,7 +37,7 @@ namespace Lim.Domain.Sender.Handlers
                 Userid =  message.Body.UserId,
                 ContractId = message.Body.ContractId,
                 //AccountNumber = !string.IsNullOrEmpty(message.Body.AccountNumber) && HasDigit(message.Body.AccountNumber) ? Check(string.Join("", message.Body.AccountNumber.Where(Char.IsNumber)).TrimStart('0')) : -1,
-                AccountNumber =  message.Body.AccountNumber.HasDigit() ? (string.Join("", message.Body.AccountNumber.Where(Char.IsNumber)).TrimStart('0')).Check() : -1,
+                AccountNumber =  message.Body.AccountNumber.HasDigit() ? (string.Join("", message.Body.AccountNumber.Where(char.IsNumber)).TrimStart('0')).Check() : -1,
                 ResponseDate = message.Body.ResponseDate,
                 RequestId = message.Body.RequestId,
                 Payload = !string.IsNullOrEmpty(message.Body.Payload) ? Encoding.UTF8.GetBytes(message.Body.Payload) : null,
@@ -48,9 +47,7 @@ namespace Lim.Domain.Sender.Handlers
             _repository.Save(package);
            
             _publisher.SendToBus(new PackageConfigurationMessage(message.Body.PackageId, message.Body.UserId, message.Body.ContractId,
-                message.Body.AccountNumber, message.Body.RequestId));
+                package.AccountNumber, message.Body.RequestId));
         }
-
-       
     }
 }

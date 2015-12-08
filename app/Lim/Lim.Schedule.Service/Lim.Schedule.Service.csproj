@@ -57,14 +57,17 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging">
-      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    <Reference Include="Common.Logging.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging.Log4Net1211">
-      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+    <Reference Include="Common.Logging.Log4Net1211, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
@@ -123,14 +126,16 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Consumers\ReceiverConsumers.cs" />
-    <Compile Include="Consumers\SenderConsumers.cs" />
+    <Compile Include="Consumers\ReadConsumers.cs" />
+    <Compile Include="Consumers\ConsumerBuilder.cs" />
+    <Compile Include="Consumers\WriteConsumers.cs" />
     <Compile Include="Installers\AuditInstallers.cs" />
     <Compile Include="Installers\BmwPullInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
     <Compile Include="Installers\DatabaseInstaller.cs" />
     <Compile Include="Installers\EmailInstaller.cs" />
+    <Compile Include="Installers\EventStoreInstaller.cs" />
     <Compile Include="Installers\FactoryInstaller.cs" />
     <Compile Include="Installers\FlatFileInstallers.cs" />
     <Compile Include="Installers\HandlerInstaller.cs" />
@@ -285,9 +290,21 @@
       <Project>{9ce35e56-55a7-4c15-82ad-1ed6ec631945}</Project>
       <Name>Toolbox.Bmw</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Configurations\Toolbox.LIVE.Shared\Toolbox.LIVE.Shared.csproj">
+      <Project>{53eb1f87-df47-44d8-a0aa-ac62d3511ec0}</Project>
+      <Name>Toolbox.LIVE.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Configurations\Toolbox.LIVE\Toolbox.LIVE.csproj">
+      <Project>{f3df2516-8ff1-46c1-9589-06e5b9bc4799}</Project>
+      <Name>Toolbox.LIVE</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
       <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
       <Name>Lim.Domain.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain.EventStore\Lim.Domain.EventStore.csproj">
+      <Project>{470811a1-fa3a-4509-99f8-954d67a317dd}</Project>
+      <Name>Lim.Domain.EventStore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Messaging\Lim.Domain.Messaging.csproj">
       <Project>{6ee18788-1427-4ed7-a5ad-2af7cda4429d}</Project>

@@ -42,6 +42,42 @@ namespace Lace.Test.Helper.Mothers.Requests
         }
     }
 
+    public class LicensePlateNumberAndVinNumberIvidRequest : IPointToLaceRequest
+    {
+        public IHavePackageForRequest Package
+        {
+            get
+            {
+                return LicensePlateNumberIvidSourcePackage.LicenseNumberAndVinNumberPackage("BZ11VPGP", "WAUZZZ8K8DA074674", "VVi+"); //ADMRF80AN5E226402
+            }
+        }
+
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation(); }
+        }
+
+        //public IHaveVehicle Vehicle
+        //{
+        //    get { return RequestVehicleInformation.WithLicensePlate("CL49CTGP"); }
+        //}
+
+        public IHaveRequestContext Request
+        {
+            get { return new RequestContextInformation(); }
+        }
+
+        public DateTime RequestDate
+        {
+            get { return DateTime.Now; }
+        }
+
+        public IHaveContract Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
+    }
+
     public class LicensePlateNumberIvidOnlyRequest : IPointToLaceRequest
     {
         public IHavePackageForRequest Package

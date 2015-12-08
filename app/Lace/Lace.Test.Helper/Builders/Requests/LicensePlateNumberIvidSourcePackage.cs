@@ -32,7 +32,19 @@ namespace Lace.Test.Helper.Builders.Requests
                             "murrayw@lightstone.co.za", "Murray", string.Empty), new BillableState(DataProviderNoRecordState.Billable))
                 }, Guid.NewGuid());
         }
+
+        public static IHavePackageForRequest LicenseNumberAndVinNumberPackage(string licensePlate, string vinNumber, string packageName)
+        {
+            return new LicensePlateNumberPackage(
+                new IAmDataProvider[]
+                {
+                    new DataProvider(DataProviderName.IVIDVerify_E_WS, 7, 14,
+                        new IvidLicenseAndVinRequest(licensePlate, "Murray", packageName,
+                            "murrayw@lightstone.co.za", "Murray", string.Empty, vinNumber), new BillableState(DataProviderNoRecordState.Billable))
+                }, Guid.NewGuid());
+        }
     }
+
 
     public class VinNumberIvidSourcePackage
     {

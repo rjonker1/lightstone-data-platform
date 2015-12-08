@@ -42,14 +42,17 @@
     <OutputPath>bin\Prod\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\..\packages\Common.Logging.3.1.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>..\..\packages\Common.Logging.Core.3.1.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    <Reference Include="Common.Logging.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging.Log4Net1211">
-      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.1.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+    <Reference Include="Common.Logging.Log4Net1211, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
@@ -67,22 +70,30 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Messages\PackageConfigurationMessage.cs" />
-    <Compile Include="Messages\PackageResponseMessage.cs" />
-    <Compile Include="Publishing\IPublishConfigurationMessages.cs" />
-    <Compile Include="Publishing\IPublishIntegrationMessages.cs" />
+    <Compile Include="PublishMessage.cs" />
+    <Compile Include="SendCommand.cs" />
+    <Compile Include="Messages\ObsoletePackageConfigurationMessage.cs" />
+    <Compile Include="Messages\ObsoletePackageResponseMessage.cs" />
+    <Compile Include="Publishing\ObsoleteIPublishConfigurationMessages.cs" />
+    <Compile Include="Publishing\ObsoleteIPublishIntegrationMessages.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
-      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
-      <Name>Lim.Domain</Name>
+    <ProjectReference Include="..\Configurations\Toolbox.LIVE.Shared\Toolbox.LIVE.Shared.csproj">
+      <Project>{53eb1f87-df47-44d8-a0aa-ac62d3511ec0}</Project>
+      <Name>Toolbox.LIVE.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim\Lim.csproj">
+      <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
+      <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ namespace Lim.Test.Helper.Builder
 {
     public class FakeDataSetDtoBuilder
     {
-        public static DataSetDto ForLsAutoSpecsData(long id)
+        public static DataSetDto ForLsAutoSpecsData(Guid id)
         {
             return new DataSetDto
             {
@@ -29,8 +29,7 @@ namespace Lim.Test.Helper.Builder
                         DateModified = DateTime.Now,
                         Selected = true
                     }
-                },
-                AggregateId = Guid.NewGuid()
+                }
             };
         }
     }

@@ -16,7 +16,7 @@ namespace Lim.Domain.Entities.Maps {
 			Map(x => x.AccountNumber).Column("AccountNumber").Length(250).Not.Nullable();
 			Map(x => x.ResponseDate).Column("ResponseDate").Not.Nullable();
 			Map(x => x.RequestId).Column("RequestId").Not.Nullable();
-            Map(x => x.Payload).Column("Payload").Nullable().Length(Int32.MaxValue);
+            Map(x => x.Payload).Column("Payload").Nullable().Length(int.MaxValue);
 			Map(x => x.HasResponse).Column("HasResponse").Not.Nullable();
             Map(x => x.CommitDate).Column("CommitDate").Not.Nullable().Default("GETUTCDATE()").Not.Nullable().Generated.Insert();
             Map(x => x.Username).Column("Username").Not.Nullable().Length(50);

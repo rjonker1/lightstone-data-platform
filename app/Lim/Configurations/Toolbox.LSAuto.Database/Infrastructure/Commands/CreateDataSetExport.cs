@@ -13,12 +13,12 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Commands
             EventTypeId = (int) Lim.Enums.EventType.Created;
             NewAggregate = true;
             User = createdBy;
+            AggregateId = Guid.NewGuid();
         }
 
         public readonly DataSetDto DataSet;
         public readonly string EventType;
         public readonly int EventTypeId;
         public readonly bool NewAggregate;
-        public readonly Guid User;
     }
 }

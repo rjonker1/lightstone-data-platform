@@ -4,8 +4,8 @@ using System.Linq;
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
-using Lim.Domain.Dto;
 using Lim.Domain.Entities;
+using Lim.Dtos;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Identifiers;
 

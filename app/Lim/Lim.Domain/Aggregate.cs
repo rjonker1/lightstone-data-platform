@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lim.Domain.Events;
 using Lim.Domain.Extensions;
 
 namespace Lim.Domain

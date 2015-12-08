@@ -13,13 +13,14 @@ namespace Lim.Unit.Tests.LSAuto
     {
         private readonly FakeBus _bus;
         private readonly IReadModelFacade _readFacade;
-        private readonly long _id;
+        private readonly Guid _id;
 
         public when_creating_data_sets_for_ls_auto()
         {
             _bus = FakeBusBuilder.Bus();
             _readFacade = new FakeDataSetReadModel();
-            _id = new Random().Next(1000, 10000000);
+           // _id = new Random().Next(1000, 10000000);
+            _id = Guid.NewGuid();
         }
         public override void Observe()
         {
