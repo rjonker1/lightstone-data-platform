@@ -187,9 +187,9 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.2015\lib\net45\Lightstone.DataPlatform.Lace.Toolbox.PCubed.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.2026, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.2036, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.2026\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.2036\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.1979, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -201,11 +201,11 @@
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.2032\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.2036\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.2026\lib\net45\Lightstone.DataPlatform.Shared.Messages.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.2036\lib\net45\Lightstone.DataPlatform.Shared.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.Publisher.1.0.0.1989\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>

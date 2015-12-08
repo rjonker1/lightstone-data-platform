@@ -22,7 +22,7 @@
         <job-name>RefreshCache</job-name>
         <job-group>RefreshCacheGroup</job-group>
          <!--To run at 23:00 every day -->
-        <cron-expression>0 0 23 * * ?</cron-expression>
+        <cron-expression>0 46 14 * * ?</cron-expression>
         <!--  Fire at 08:15am every day
         <cron-expression>0 30 9 * * ?</cron-expression>-->
       </cron>
