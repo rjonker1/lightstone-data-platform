@@ -121,6 +121,7 @@
     <Compile Include="Messaging\MessageTopic.cs" />
     <Compile Include="Repositories\INamedEntityRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IStoredProcedure.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RabbitMQ\" />
