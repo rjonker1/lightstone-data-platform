@@ -41,9 +41,9 @@ namespace Shared.Logging
                 Enum.TryParse(systemNameSetting, out _systemName);
         }
 
-        private void Log(string loggerType, string message, LogLevel level, SystemName systemName, Exception exception = null)
+        private async void Log(string loggerType, string message, LogLevel level, SystemName systemName, Exception exception = null)
         {
-            _publisher.Publish(new LogMessage(loggerType, message, level, systemName, exception));
+            await _publisher.PublishAsync(new LogMessage(loggerType, message, level, systemName, exception));
         }
 
         public void Debug(Type loggerType, string message)
