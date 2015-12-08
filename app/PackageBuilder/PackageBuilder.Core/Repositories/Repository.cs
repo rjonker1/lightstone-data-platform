@@ -75,7 +75,7 @@ namespace PackageBuilder.Core.Repositories
         {
             if ((entity is Entity) && (entity as Entity).Id == new Guid())
             {
-                this.Info(() => "Not a valid NHibernate entity {0} - {1}".FormatWith((entity as Entity).Id, entity), SystemName.PackageBuilder);
+                this.Info(() => "Not a valid NHibernate entity {0} - {1}".FormatWith((entity as Entity).Id, entity));
                 throw new InvalidOperationException();
             }
         }

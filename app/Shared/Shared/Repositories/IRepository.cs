@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DataPlatform.Shared.Repositories
 {
-    public interface IRepository<T> : IQueryable<T>, IStoredProcedure<T>
+    public interface IRepository<T> : IQueryable<T>
     {
         T Get(object id);
         T Load(object id);

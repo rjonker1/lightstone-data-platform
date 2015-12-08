@@ -28,7 +28,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             if (existing)
             {
                 var exception = new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception, SystemName.PackageBuilder);
+                this.Warn(() => exception);
                 throw exception;
             }
 

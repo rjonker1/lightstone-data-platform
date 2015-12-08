@@ -78,7 +78,6 @@
     <Compile Include="ExceptionHandling\ErrorStatusCodeHandler.cs" />
     <Compile Include="ApiClients\PackageBuilderApiClient.cs" />
     <Compile Include="Installers\AuthInstaller.cs" />
-    <Compile Include="Security\IDataPlatformTokenizer.cs" />
     <Compile Include="Security\RootPathProvider.cs" />
     <Compile Include="Security\DataPlatformTokenizer.cs" />
     <Compile Include="Security\SecureModule.cs" />

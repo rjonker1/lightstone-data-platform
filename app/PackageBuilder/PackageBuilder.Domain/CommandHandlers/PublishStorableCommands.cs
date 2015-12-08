@@ -24,12 +24,12 @@ namespace PackageBuilder.Domain.CommandHandlers
 
         public void Publish(IDomainCommand command)
         {
-            this.Info(() => "Publishing command {0}".FormatWith(command), SystemName.PackageBuilder);
+            this.Info(() => "Publishing command {0}".FormatWith(command));
             _bus.Publish(command);
-            this.Info(() => "Published command {0}".FormatWith(command), SystemName.PackageBuilder);
-            this.Info(() => "Storing command {0}".FormatWith(command), SystemName.PackageBuilder);
+            this.Info(() => "Published command {0}".FormatWith(command));
+            this.Info(() => "Storing command {0}".FormatWith(command));
             _bus.Publish(new StoreCommand(Guid.NewGuid(), command));
-            this.Info(() => "Stored command {0}".FormatWith(command), SystemName.PackageBuilder);
+            this.Info(() => "Stored command {0}".FormatWith(command));
         }
     }
 }

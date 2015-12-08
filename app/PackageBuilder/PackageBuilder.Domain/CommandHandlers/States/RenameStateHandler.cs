@@ -23,7 +23,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
             if (_repository.Exists(command.Id, command.Name))
             {
                 var exception = new LightstoneAutoException("A state with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception, SystemName.PackageBuilder);
+                this.Warn(() => exception);
                 throw exception;
             }
 
@@ -31,7 +31,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
             if (state == null)
             {
                 var exception = new ArgumentNullException(string.Format("Could not retrieve state with id {0}", command.Id));
-                this.Warn(() => exception, SystemName.PackageBuilder);
+                this.Warn(() => exception);
                 throw exception;
             }
 

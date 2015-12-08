@@ -23,7 +23,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
             if (_repository.Exists(command.Id, command.Name))
             {
                 var exception = new LightstoneAutoException("State {0} already exists".FormatWith(command.Id, command.Name));
-                this.Warn(() => exception, SystemName.PackageBuilder);
+                this.Warn(() => exception);
                 //throw exception;
                 return;
             }

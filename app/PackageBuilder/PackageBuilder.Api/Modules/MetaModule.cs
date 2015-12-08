@@ -36,7 +36,7 @@ namespace PackageBuilder.Api.Modules
 
                 if (package == null)
                 {
-                    this.Error(() => "Package meta data not found for id {0}".FormatWith(apiRequest.PackageId), SystemName.PackageBuilder);
+                    this.Error(() => "Package meta data not found for id {0}".FormatWith(apiRequest.PackageId));
                     throw new LightstoneAutoException("Package could not be found");
                 }
 

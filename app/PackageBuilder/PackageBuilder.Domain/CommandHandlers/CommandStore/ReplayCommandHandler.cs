@@ -30,7 +30,7 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
             {
                 var domainCommand = GetDomainCommandByType(command);
                 if (domainCommand == null)
-                    this.Error(() => "Could not replay command {0}, continuing to replay next command".FormatWith(command.Type), SystemName.PackageBuilder);
+                    this.Error(() => "Could not replay command {0}, continuing to replay next command".FormatWith(command.Type));
                 else
                     _bus.Publish(domainCommand);
             }
@@ -44,7 +44,7 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
             }
             catch (JsonException exception)
             {
-                this.Error(() => "Could not deserialize command by type: {0} attempting to deserialize by type name {1}".FormatWith(command.Type, command.TypeName), exception, SystemName.PackageBuilder);
+                this.Error(() => "Could not deserialize command by type: {0} attempting to deserialize by type name {1}".FormatWith(command.Type, command.TypeName), exception);
                 return GetDomainCommandByTypeName(command);
             }
         }
@@ -57,7 +57,7 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
             }
             catch (JsonException exception)
             {
-                this.Error(() => "Could not deserialize command by type: {0} or type name {1}".FormatWith(command.Type, command.TypeName), exception, SystemName.PackageBuilder);
+                this.Error(() => "Could not deserialize command by type: {0} or type name {1}".FormatWith(command.Type, command.TypeName), exception);
                 return null;
             }
         }
