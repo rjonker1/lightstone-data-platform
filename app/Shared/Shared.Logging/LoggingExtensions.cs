@@ -15,7 +15,7 @@ namespace Shared.Logging
 {
     public static class LoggingExtensions
     {
-        private static readonly IDataPlatformLogger Logger = ServiceLocator.Current.GetInstance<IDataPlatformLogger>();
+        private static readonly IDataPlatformLogger Logger = Logger ?? ServiceLocator.Current.GetInstance<IDataPlatformLogger>();
 
         private static bool LogToBus()
         {
