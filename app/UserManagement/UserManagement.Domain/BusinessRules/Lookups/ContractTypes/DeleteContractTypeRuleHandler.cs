@@ -28,7 +28,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.ContractTypes
             if (contractTypes.Any())
             {
                 var exception = new LightstoneAutoException("ContractType is associated therefore cannot be deleted".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception, SystemName.UserManagement);
+                this.Warn(() => exception);
                 throw exception;
             }
         }

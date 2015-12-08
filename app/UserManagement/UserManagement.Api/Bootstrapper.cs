@@ -33,7 +33,7 @@ namespace UserManagement.Api
         {
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
-            this.Info(() => "Application startup initiated", SystemName.UserManagement);
+            this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
 
             container.Resolve<IBus>().Publish(new ImportStartupData());
@@ -54,7 +54,7 @@ namespace UserManagement.Api
         {
             pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
-                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.UserManagement);
+                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
                 var token = "";
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
@@ -70,10 +70,10 @@ namespace UserManagement.Api
                 return null;
             });
 
-            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.UserManagement));
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.UserManagement);
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
                 var errorResponse = ErrorResponse.FromException(exception);
                 if (exception is LightstoneAutoException)
                     errorResponse.StatusCode = HttpStatusCode.ImATeapot;

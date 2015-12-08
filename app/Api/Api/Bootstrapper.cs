@@ -40,10 +40,10 @@ namespace Api
 
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
-            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.Api));
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.Api);
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
                 var errorResponse = ErrorResponse.FromException(exception);
                 if (exception is LightstoneAutoException)
                     errorResponse.StatusCode = HttpStatusCode.ImATeapot;

@@ -37,7 +37,7 @@ namespace UserManagement.Api.Helpers.Security
             var user = _repository.GetByUserName(username);
             if (user == null)
             {
-                this.Error(() => "User not found: {0}".FormatWith(username), SystemName.UserManagement);
+                this.Error(() => "User not found: {0}".FormatWith(username));
                 return null;                
             }
 

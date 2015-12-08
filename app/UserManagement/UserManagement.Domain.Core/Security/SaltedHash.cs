@@ -133,18 +133,18 @@ namespace UserManagement.Domain.Core.Security
             //  No easy array comparison in C# -- we do the legwork
             if (NewHash.Length != Hash.Length)
             {
-                this.Error(() => "Hash compare failed.", SystemName.UserManagement);
+                this.Error(() => "Hash compare failed.");
                 return false;
             }
 
             for (int Lp = 0; Lp < Hash.Length; Lp++ )
                 if (!Hash[Lp].Equals(NewHash[Lp]))
                 {
-                    this.Error(() => "Hash verfication failed.", SystemName.UserManagement);
+                    this.Error(() => "Hash verfication failed.");
                     return false;
                 }
 
-            this.Info(() => "Hash verified.", SystemName.UserManagement);
+            this.Info(() => "Hash verified.");
             return true;
         }
 

@@ -19,20 +19,20 @@ namespace Api.Modules
             {
                 try
                 {
-                    this.Info(() => "Api action meta started.", SystemName.Api);
+                    this.Info(() => "Api action meta started.");
                     var apiRequest = this.Bind<ApiRequestDto>();
                     var token = Context.Request.Headers.Authorization.Split(' ')[1];
 
                     //new ApiRequestValidator(userManagementApi)
                     //    .AuthenticateRequest(token, apiRequest.UserId, apiRequest.CustomerClientId, apiRequest.ContractId, apiRequest.PackageId);
 
-                    this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token), SystemName.Api);
-                    this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]), SystemName.Api);
+                    this.Info(() => "Api request: ContractId {0} Api token:{1}".FormatWith(apiRequest.ContractId, token));
+                    this.Info(() => "Api PB URI: {0}".FormatWith(ConfigurationManager.AppSettings["pbApi/config/baseUrl"]));
 
                     var responses = packageBuilderApi.Post(token, "/Packages/Execute/Meta", null, apiRequest);
 
-                    this.Info(() => "Api responses: {0}".FormatWith(responses), SystemName.Api);
-                    this.Info(() => "Api action completed.", SystemName.Api);
+                    this.Info(() => "Api responses: {0}".FormatWith(responses));
+                    this.Info(() => "Api action completed.");
 
                     return responses;
                 }

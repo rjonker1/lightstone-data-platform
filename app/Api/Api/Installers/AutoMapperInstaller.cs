@@ -12,7 +12,7 @@ namespace Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install AutoMapperInstaller", SystemName.Api);
+            this.Info(() => "Attempting to install AutoMapperInstaller");
 
             container.Register(Classes.FromAssemblyContaining<ICreateAutoMapperMaps>().BasedOn(typeof(ITypeConverter<,>)).WithServiceAllInterfaces().LifestyleTransient());
             container.Register(Classes.FromAssemblyContaining<ICreateAutoMapperMaps>().BasedOn<ICreateAutoMapperMaps>().WithServiceAllInterfaces().LifestyleTransient());
@@ -20,7 +20,7 @@ namespace Api.Installers
             foreach (var map in container.ResolveAll<ICreateAutoMapperMaps>())
                 map.CreateMaps();
 
-            this.Info(() => "Successfully installed AutoMapperInstaller", SystemName.Api);
+            this.Info(() => "Successfully installed AutoMapperInstaller");
         }
     }
 }

@@ -44,7 +44,7 @@ namespace UserManagement.Api.Helpers.Security
             }
             catch (Exception exception)
             {
-                this.Error(() => "Error getting ApiUser from Redis {0} for token {1}".FormatWith(exception, _redis.Configuration, token), SystemName.UserManagement);
+                this.Error(() => "Error getting ApiUser from Redis {0} for token {1}".FormatWith(exception, _redis.Configuration, token));
                 return null;
             }
 

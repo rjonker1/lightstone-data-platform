@@ -11,9 +11,9 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install HashProviderInstaller", SystemName.UserManagement);
+            this.Info(() => "Attempting to install HashProviderInstaller");
             container.Register(Component.For<IHashProvider>().ImplementedBy<SaltedHash>());
-            this.Info(() => "Successfully installed HashProviderInstaller", SystemName.UserManagement);
+            this.Info(() => "Successfully installed HashProviderInstaller");
         }
     }
 }

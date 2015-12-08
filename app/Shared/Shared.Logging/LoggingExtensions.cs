@@ -16,6 +16,17 @@ namespace Shared.Logging
     public static class LoggingExtensions
     {
         private static readonly IDataPlatformLogger Logger = ServiceLocator.Current.GetInstance<IDataPlatformLogger>();
+
+        private static bool LogToBus()
+        {
+            var logToBus = true;
+            var logToBusSetting = ConfigurationManager.AppSettings["shared/logging/logToBus"];
+            if (!string.IsNullOrEmpty(logToBusSetting))
+                bool.TryParse(logToBusSetting, out logToBus);
+
+            return Logger != null && logToBus;
+        }
+
         #region .: Enabled Checks :.
 
         public static bool IsDebugEnabled(this object o)
@@ -124,7 +135,7 @@ namespace Shared.Logging
 
         public static void Debug(string name, Func<object> message)
         {
-            if (Logger == null)
+            if (LogToBus())
                 LogManager.GetLogger(name).Debug(message());
             else
                 Logger.Debug(name, message().ToString());
@@ -146,7 +157,7 @@ namespace Shared.Logging
 
         public static void Info(string name, Func<object> message)
         {
-            if (Logger == null)
+            if (LogToBus())
                 LogManager.GetLogger(name).Info(message());
             else
                 Logger.Info(name, message().ToString());
@@ -167,7 +178,7 @@ namespace Shared.Logging
 
         public static void Warn(string name, Func<object> message)
         {
-            if (Logger == null)
+            if (LogToBus())
                 LogManager.GetLogger(name).Warn(message());
             else
                 Logger.Warn(name, message().ToString());
@@ -203,7 +214,7 @@ namespace Shared.Logging
 
         public static void Error(string name, Func<object> message, Exception exception)
         {
-            if (Logger == null)
+            if (LogToBus())
                 LogManager.GetLogger(name).Error(message(), exception);
             else
                 Logger.Error(name, message().ToString(), exception);
@@ -225,7 +236,7 @@ namespace Shared.Logging
 
         public static void Fatal(string name, Func<object> message)
         {
-            if (Logger == null)
+            if (LogToBus())
                 LogManager.GetLogger(name).Fatal(message());
             else
                 Logger.Fatal(name, message().ToString());

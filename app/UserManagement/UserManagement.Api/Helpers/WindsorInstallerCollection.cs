@@ -8,6 +8,7 @@ namespace UserManagement.Api.Helpers
     {
         public static IWindsorInstaller[] Installers =
         {
+            new LoggingInstaller(), 
             new CommandInstaller(),
             new BusInstaller(),
             new ServiceLocatorInstaller(),

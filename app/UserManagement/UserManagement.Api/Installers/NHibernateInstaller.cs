@@ -15,7 +15,7 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install NHibernateInstaller", SystemName.UserManagement);
+            this.Info(() => "Attempting to install NHibernateInstaller");
 
             container.Register(Component.For<Configuration>().UsingFactoryMethod(() =>
                 Fluently.Configure(new Configuration().Configure())
@@ -31,7 +31,7 @@ namespace UserManagement.Api.Installers
                      .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
                      .LifeStyle.HybridPerWebRequestPerThread());
 
-            this.Info(() => "Successfully installed NHibernateInstaller", SystemName.UserManagement);
+            this.Info(() => "Successfully installed NHibernateInstaller");
         }
 
         protected virtual void ExportSchemaConfig(Configuration config)

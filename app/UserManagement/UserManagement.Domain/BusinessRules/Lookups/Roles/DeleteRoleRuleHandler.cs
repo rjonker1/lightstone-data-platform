@@ -28,7 +28,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.Roles
             if (roles.Any())
             {
                 var exception = new LightstoneAutoException("Role is associated therefore cannot be deleted".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception, SystemName.UserManagement);
+                this.Warn(() => exception);
                 throw exception;
             }
         }
