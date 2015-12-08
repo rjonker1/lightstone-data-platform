@@ -15,16 +15,22 @@ namespace Shared.Logging
 {
     public static class LoggingExtensions
     {
-        private static readonly IDataPlatformLogger Logger = Logger ?? ServiceLocator.Current.GetInstance<IDataPlatformLogger>();
-
-        private static bool LogToBus()
+        private static IDataPlatformLogger Logger()
         {
-            var logToBus = true;
-            var logToBusSetting = ConfigurationManager.AppSettings["shared/logging/logToBus"];
-            if (!string.IsNullOrEmpty(logToBusSetting))
-                bool.TryParse(logToBusSetting, out logToBus);
+            try
+            {
+                var logToBus = true;
+                var logToBusSetting = ConfigurationManager.AppSettings["shared/logging/logToBus"];
+                if (!string.IsNullOrEmpty(logToBusSetting))
+                    bool.TryParse(logToBusSetting, out logToBus);
 
-            return Logger != null && logToBus;
+                return !logToBus ? null : ServiceLocator.Current.GetInstance<IDataPlatformLogger>();
+            }
+            catch (Exception ex)
+            {
+                LogManager.GetLogger(typeof(LoggingExtensions)).Error("Error while trying to resolve IDataPlatformLogger", ex);
+                return null;
+            }
         }
 
         #region .: Enabled Checks :.
@@ -135,10 +141,12 @@ namespace Shared.Logging
 
         public static void Debug(string name, Func<object> message)
         {
-            if (!LogToBus())
+            if (!IsDebugEnabled(name)) return;
+            var logger = Logger();
+            if (logger == null)
                 LogManager.GetLogger(name).Debug(message());
             else
-                Logger.Debug(name, message().ToString());
+                logger.Debug(name, message().ToString());
         }
 
         #endregion
@@ -157,10 +165,12 @@ namespace Shared.Logging
 
         public static void Info(string name, Func<object> message)
         {
-            if (!LogToBus())
+            if (!IsInfoEnabled(name)) return;
+            var logger = Logger();
+            if (logger == null)
                 LogManager.GetLogger(name).Info(message());
             else
-                Logger.Info(name, message().ToString());
+                logger.Info(name, message().ToString());
         }
         #endregion
 
@@ -178,10 +188,12 @@ namespace Shared.Logging
 
         public static void Warn(string name, Func<object> message)
         {
-            if (!LogToBus())
+            if (!IsWarnEnabled(name)) return;
+            var logger = Logger();
+            if (logger == null)
                 LogManager.GetLogger(name).Warn(message());
             else
-                Logger.Warn(name, message().ToString());
+                logger.Warn(name, message().ToString());
         }
         #endregion
 
@@ -214,10 +226,12 @@ namespace Shared.Logging
 
         public static void Error(string name, Func<object> message, Exception exception)
         {
-            if (!LogToBus())
+            if (!IsErrorEnabled(name)) return;
+            var logger = Logger();
+            if (logger == null)
                 LogManager.GetLogger(name).Error(message(), exception);
             else
-                Logger.Error(name, message().ToString(), exception);
+                logger.Error(name, message().ToString(), exception);
         }
 
         #endregion
@@ -236,10 +250,12 @@ namespace Shared.Logging
 
         public static void Fatal(string name, Func<object> message)
         {
-            if (!LogToBus())
+            if (!IsFatalEnabled(name)) return;
+            var logger = Logger();
+            if (logger == null)
                 LogManager.GetLogger(name).Fatal(message());
             else
-                Logger.Fatal(name, message().ToString());
+                logger.Fatal(name, message().ToString());
         }
 
         #endregion
