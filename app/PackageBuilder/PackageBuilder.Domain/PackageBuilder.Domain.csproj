@@ -87,9 +87,8 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.2018\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.2022\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.Logging">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.2012\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

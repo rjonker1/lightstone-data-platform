@@ -196,9 +196,8 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.1819\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.2022\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.Logging">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Logging.1.0.0.2012\lib\net45\Lightstone.DataPlatform.Shared.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messages">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messages.1.0.0.2012\lib\net45\Lightstone.DataPlatform.Shared.Messages.dll</HintPath>
