@@ -6,6 +6,6 @@ namespace DataPlatform.Shared.Repositories
     {
         T Query(string query);
         T WithParameters(Dictionary<string, string> queryParams);
-        void Execute();
+        IEnumerable<T> RetrieveData();
     }
 }
