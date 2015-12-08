@@ -135,7 +135,7 @@ namespace Shared.Logging
 
         public static void Debug(string name, Func<object> message)
         {
-            if (LogToBus())
+            if (!LogToBus())
                 LogManager.GetLogger(name).Debug(message());
             else
                 Logger.Debug(name, message().ToString());
@@ -157,7 +157,7 @@ namespace Shared.Logging
 
         public static void Info(string name, Func<object> message)
         {
-            if (LogToBus())
+            if (!LogToBus())
                 LogManager.GetLogger(name).Info(message());
             else
                 Logger.Info(name, message().ToString());
@@ -178,7 +178,7 @@ namespace Shared.Logging
 
         public static void Warn(string name, Func<object> message)
         {
-            if (LogToBus())
+            if (!LogToBus())
                 LogManager.GetLogger(name).Warn(message());
             else
                 Logger.Warn(name, message().ToString());
@@ -214,7 +214,7 @@ namespace Shared.Logging
 
         public static void Error(string name, Func<object> message, Exception exception)
         {
-            if (LogToBus())
+            if (!LogToBus())
                 LogManager.GetLogger(name).Error(message(), exception);
             else
                 Logger.Error(name, message().ToString(), exception);
@@ -236,7 +236,7 @@ namespace Shared.Logging
 
         public static void Fatal(string name, Func<object> message)
         {
-            if (LogToBus())
+            if (!LogToBus())
                 LogManager.GetLogger(name).Fatal(message());
             else
                 Logger.Fatal(name, message().ToString());
