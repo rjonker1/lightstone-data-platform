@@ -17,6 +17,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
     public class ResponseToDataFieldConverter : TypeConverter<object, IEnumerable<DataField>>
     {
+        private readonly IDataPlatformLogger _logger;
         private readonly IRepository<Industry> _industryRepository;
         private readonly string[] _blackListedProperties = { "Type", "TypeName", "Handled", "Request" };
 
@@ -33,7 +34,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             }
             catch (InvalidOperationException exception)
             {
-                this.Error(() => "Failed to map {0} to IEnumerable<IDataField>".FormatWith(source), exception, SystemName.PackageBuilder);    
+                _logger.Error(() => "Failed to map {0} to IEnumerable<IDataField>".FormatWith(source), exception, SystemName.PackageBuilder);    
                 throw;
             }
         }

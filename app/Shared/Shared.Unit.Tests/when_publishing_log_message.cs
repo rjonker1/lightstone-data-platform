@@ -23,12 +23,13 @@ namespace Shared.Unit.Tests
             _workflowPublisher.Publish(new LogMessage("", "Test", LogLevel.Error, SystemName.Shared));
         }
 
-        //[Observation]
-        //public void should_log_by_extension_method()
-        //{
-        //    this.Error(() => "Test", SystemName.Shared);
-        //    Thread.Sleep(3000);
-        //}
+        [Observation]
+        public void should_log_by_extension_method()
+        {
+            //this.Error(() => "Test", SystemName.Shared);
+            this.Error(() => "Test");
+            //Thread.Sleep(3000);
+        }
 
         [Observation]
         public void should_log_by_DataPlatformLogger()
