@@ -23,7 +23,7 @@ namespace PackageBuilder.Domain.EventHandlers.Packages
             if (_repository.Exists(command.Id, command.Name))
             {
                 var exception = new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception, SystemName.PackageBuilder);
+                this.Warn(() => exception);
                 throw exception;
             }
 

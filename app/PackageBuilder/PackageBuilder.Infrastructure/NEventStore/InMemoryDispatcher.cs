@@ -28,11 +28,11 @@ namespace PackageBuilder.Infrastructure.NEventStore
             {
                 var tmp = @event;
 
-                this.Info(() => string.Format("Attempting to dispatch event: {0}", tmp), SystemName.PackageBuilder);
+                this.Info(() => string.Format("Attempting to dispatch event: {0}", tmp));
 
                 _bus.Publish(@event.Body);
 
-                this.Info(() => string.Format("Successfully dispatched event: {0}", tmp), SystemName.PackageBuilder);                
+                this.Info(() => string.Format("Successfully dispatched event: {0}", tmp));                
             }
         }
     }

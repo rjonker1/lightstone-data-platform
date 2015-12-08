@@ -31,7 +31,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
             if (exists)
             {
                 throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => "A Package with the name {0} already exists".FormatWith(command.Name), SystemName.PackageBuilder);
+                this.Warn(() => "A Package with the name {0} already exists".FormatWith(command.Name));
                 return;
             }
 

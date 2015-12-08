@@ -20,14 +20,14 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
         {
             if (_repository.HasPublishedVersions(command.Id))
             {
-                this.Warn(() => "Package {0} may not be deleted if the package is or has previously been published".FormatWith(command.Id), SystemName.PackageBuilder);
+                this.Warn(() => "Package {0} may not be deleted if the package is or has previously been published".FormatWith(command.Id));
                 return;
             }
 
             var packages = _repository.GetAllVersions(command.Id);
             if (packages == null)
             {
-                this.Warn(() => "Could not retrieve package {0} rows to delete".FormatWith(command.Id), SystemName.PackageBuilder);
+                this.Warn(() => "Could not retrieve package {0} rows to delete".FormatWith(command.Id));
                 return;                
             }
 

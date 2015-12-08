@@ -18,7 +18,7 @@ namespace Shared.BuildingBlocks.Api.Security
     /// <summary>
     /// Default implementation of <see cref="ITokenizer"/>
     /// </summary>
-    public class DataPlatformTokenizer : IDataPlatformTokenizer
+    public class DataPlatformTokenizer : ITokenizer
     {
         private readonly TokenValidator validator;
         private ITokenKeyStore keyStore = new FileSystemTokenKeyStore();
@@ -30,8 +30,6 @@ namespace Shared.BuildingBlocks.Api.Security
         private Func<DateTime> now = () => DateTime.UtcNow;
         private Func<TimeSpan> tokenExpiration = () => TimeSpan.FromDays(1);
         private Func<TimeSpan> keyExpiration = () => TimeSpan.FromDays(7);
-        private readonly SystemName _systemName;
-        private readonly IDataPlatformLogger _logger;
 
         private Func<NancyContext, string>[] additionalItems =
         {
@@ -42,7 +40,7 @@ namespace Shared.BuildingBlocks.Api.Security
         /// Initializes a new instance of the <see cref="Tokenizer"/> class.
         /// </summary>
         public DataPlatformTokenizer()
-            : this(null, SystemName.Api, null)
+            : this(null)
         {
         }
 
@@ -50,7 +48,7 @@ namespace Shared.BuildingBlocks.Api.Security
         /// Initializes a new instance of the <see cref="Tokenizer"/> class.
         /// </summary>
         /// <param name="configuration">The configuration that should be used by the tokenizer.</param>
-        public DataPlatformTokenizer(Action<TokenizerConfigurator> configuration, SystemName systemName, IDataPlatformLogger logger)
+        public DataPlatformTokenizer(Action<TokenizerConfigurator> configuration)
         {
             if (configuration != null)
             {
@@ -59,8 +57,6 @@ namespace Shared.BuildingBlocks.Api.Security
             }
             var keyRing = new TokenKeyRing(this);
             this.validator = new TokenValidator(keyRing);
-            _systemName = systemName;
-            _logger = logger;
         }
 
         /// <summary>
@@ -95,11 +91,6 @@ namespace Shared.BuildingBlocks.Api.Security
             return token;
         }
 
-        public IUserIdentity Detokenize(string token, NancyContext context, IUserIdentityResolver userIdentityResolver)
-        {
-            return Detokenize(token, context, userIdentityResolver, _systemName);
-        }
-
         /// <summary>
         /// Creates a <see cref="IUserIdentity"/> from a token.
         /// </summary>
@@ -107,12 +98,12 @@ namespace Shared.BuildingBlocks.Api.Security
         /// <param name="context">Current <see cref="NancyContext"/>.</param>
         /// <param name="userIdentityResolver">The user identity resolver.</param>
         /// <returns>The detokenized user identity.</returns>
-        public IUserIdentity Detokenize(string token, NancyContext context, IUserIdentityResolver userIdentityResolver, SystemName systemName)
+        public IUserIdentity Detokenize(string token, NancyContext context, IUserIdentityResolver userIdentityResolver)
         {
             var tokenComponents = token.Split(new[] { this.hashDelimiter }, StringSplitOptions.None);
             if (tokenComponents.Length != 2)
             {
-                _logger.Error(GetType(), "tokenComponents.Length != 2 for token {0}".FormatWith(token));
+                this.Error(() => "tokenComponents.Length != 2 for token {0}".FormatWith(token));
                 return null;
             }
 
@@ -121,7 +112,7 @@ namespace Shared.BuildingBlocks.Api.Security
 
             if (!this.validator.IsValid(messagebytes, hash))
             {
-                _logger.Error(GetType(), "Validator.IsValid = false for token {0}".FormatWith(token));
+                this.Error(() => "Validator.IsValid = false for token {0}".FormatWith(token));
                 return null;
             }
 
@@ -137,7 +128,7 @@ namespace Shared.BuildingBlocks.Api.Security
                     if (tokenizedValue != currentValue)
                     {
                         // todo: may need to log here as this probably indicates hacking
-                        _logger.Error(GetType(), "tokenizedValue != currentValue for token {0}".FormatWith(token));
+                        this.Error(() => "tokenizedValue != currentValue for token {0}".FormatWith(token));
                         return null;
                     }
                 }
@@ -147,19 +138,19 @@ namespace Shared.BuildingBlocks.Api.Security
 
             if (tokenStamp() - generatedOn > tokenExpiration())
             {
-                _logger.Error(GetType(), "tokenizedValue != currentValue for token {0}".FormatWith(token));
+                this.Error(() => "tokenizedValue != currentValue for token {0}".FormatWith(token));
                 return null;
             }
 
             var userName = items[0];
             var claims = items[1].Split(new[] { this.claimsDelimiter }, StringSplitOptions.None);
 
-            _logger.Info(GetType(), "Getting UserIdentity for user {0} for token {1}".FormatWith(userName, token));
+            this.Info(() => "Getting UserIdentity for user {0} for token {1}".FormatWith(userName, token));
             var userIdentity = userIdentityResolver.GetUser(userName, claims, context);
             if (userIdentity != null)
-                _logger.Info(GetType(), "Found UserIdentity for user {0} for token {1}".FormatWith(userName, token));
+                this.Info(() => "Found UserIdentity for user {0} for token {1}".FormatWith(userName, token));
             else
-                _logger.Error(GetType(), "Unable to get UserIdentity for user {0} for token {1}".FormatWith(userName, token));
+                this.Error(() => "Unable to get UserIdentity for user {0} for token {1}".FormatWith(userName, token));
 
             return userIdentity;
         }

@@ -20,9 +20,9 @@ namespace PackageBuilder.Api.Installers
                 AbortOnConnectFail = false
             })));
             var connectionMultiplexer = container.Resolve<ConnectionMultiplexer>();
-            connectionMultiplexer.ConnectionFailed += (sender, args) => this.Error(() => "Redis: ConnectionFailed", args.Exception, SystemName.PackageBuilder);
-            connectionMultiplexer.InternalError += (sender, args) => this.Error(() => "Redis: InternalError ", args.Exception, SystemName.PackageBuilder);
-            connectionMultiplexer.ErrorMessage += (sender, args) => this.Error(() => "Redis: ErrorMessage {0}".FormatWith(args.Message), SystemName.PackageBuilder);
+            connectionMultiplexer.ConnectionFailed += (sender, args) => this.Error(() => "Redis: ConnectionFailed", args.Exception);
+            connectionMultiplexer.InternalError += (sender, args) => this.Error(() => "Redis: InternalError ", args.Exception);
+            connectionMultiplexer.ErrorMessage += (sender, args) => this.Error(() => "Redis: ErrorMessage {0}".FormatWith(args.Message));
             //connectionMultiplexer.RegisterProfiler(new RedisProfiler(container.Resolve<INancyContextWrapper>()));
             container.Register(Component.For<IDatabase>().UsingFactoryMethod(x => connectionMultiplexer.GetDatabase()).LifeStyle.HybridPerWebRequestTransient());
         }

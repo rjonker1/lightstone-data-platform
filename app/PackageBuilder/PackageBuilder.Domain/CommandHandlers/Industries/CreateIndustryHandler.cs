@@ -23,7 +23,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
             if (_repository.Exists(command.Id, command.Name))
             {
                 var exception = new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception, SystemName.PackageBuilder);
+                this.Warn(() => exception);
                 //throw exception;
                 return;
             }

@@ -28,9 +28,9 @@ namespace PackageBuilder.Infrastructure.NEventStore
 
         public async Task<T> GetById(Guid id, bool useCache = false)
         {
-            this.Info(() => string.Format("Attempting to get aggregate: {0}", id), SystemName.PackageBuilder);
+            this.Info(() => string.Format("Attempting to get aggregate: {0}", id));
 
-            this.Info(() => string.Format("Aggregate Cache Read Initialized, TimeStamp: {0}", DateTime.UtcNow), SystemName.PackageBuilder);
+            this.Info(() => string.Format("Aggregate Cache Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
 
             var aggregate = default(T);
 
@@ -38,14 +38,14 @@ namespace PackageBuilder.Infrastructure.NEventStore
 
             if (aggregate == null)
             {
-                this.Info(() => string.Format("Aggregate DB Read Initialized, TimeStamp: {0}", DateTime.UtcNow), SystemName.PackageBuilder);
+                this.Info(() => string.Format("Aggregate DB Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
                 aggregate = GetById<T>(typeof(T).Name, id);
 
                 // Load aggregate into cache, if it was found in the DB and not originally from Cache
                 if (aggregate != null && useCache) _cacheProvider.CacheSave(id, aggregate);
             }
 
-            this.Info(() => string.Format("Successfully got aggregate: {0}", id), SystemName.PackageBuilder);
+            this.Info(() => string.Format("Successfully got aggregate: {0}", id));
 
             return aggregate;
         }
@@ -63,12 +63,12 @@ namespace PackageBuilder.Infrastructure.NEventStore
 
         public void Save(IAggregate aggregate, Guid commitId, bool useCache = false)
         {
-            this.Info(() => string.Format("Attempting to save {0}", aggregate), SystemName.PackageBuilder);
+            this.Info(() => string.Format("Attempting to save {0}", aggregate));
 
             this.Save(typeof(T).Name, aggregate, commitId);
             if (useCache) _cacheProvider.CacheSave(commitId, aggregate as T);
 
-            this.Info(() => string.Format("Successfully to saved {0}", aggregate), SystemName.PackageBuilder);
+            this.Info(() => string.Format("Successfully to saved {0}", aggregate));
         }
     }
 }

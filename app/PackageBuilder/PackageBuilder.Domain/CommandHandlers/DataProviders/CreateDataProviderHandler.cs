@@ -33,7 +33,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             if (existing)
             {
                 var exception = new LightstoneAutoException("A data provider with the name: {0} already exists".FormatWith(command.Name));
-                this.Warn(() => exception, SystemName.PackageBuilder);
+                this.Warn(() => exception);
                 //throw exception;
                 return;
             }
@@ -41,7 +41,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             var response = new DataProviderResponseRepository()[command.Name];
             if (response == null)
             {
-                this.Warn(() => "No data provider response linked to name {0}".FormatWith(command.Name.ToString()), SystemName.PackageBuilder);
+                this.Warn(() => "No data provider response linked to name {0}".FormatWith(command.Name.ToString()));
                 return;
             }
 
