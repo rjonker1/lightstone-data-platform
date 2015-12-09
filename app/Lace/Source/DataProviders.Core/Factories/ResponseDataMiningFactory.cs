@@ -12,7 +12,8 @@ namespace Lace.Domain.DataProviders.Core.Factories
         public IMineDataProviderResponse BuildVinMiners(ICollection<IPointToLaceProvider> response)
         {
             //order to execute
-            return new LightstoneAutoVinMiner(new IvidVinMiner(new RgtVinVinMiner(new NullResponseMiner(), response), response), response);
+           // return new LightstoneAutoVinMiner(new IvidVinMiner(new RgtVinVinMiner(new NullResponseMiner(), response), response), response);
+            return new IvidVinMiner(new LightstoneAutoVinMiner(new RgtVinVinMiner(new NullResponseMiner(), response), response), response);
         }
 
         public IMineDataProviderResponse BuildCarIdMiners(ICollection<IPointToLaceProvider> response)

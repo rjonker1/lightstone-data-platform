@@ -2,6 +2,6 @@
 {
     public interface IPublish
     {
-        void Publish<T>(T @event) where T : LimEvent;
+        void Publish<T>(T @event) where T : IMessage;
     }
 }

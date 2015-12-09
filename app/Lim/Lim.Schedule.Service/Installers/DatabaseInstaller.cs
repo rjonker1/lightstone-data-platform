@@ -4,7 +4,6 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Domain.Entities.Factory;
 using NHibernate.Cfg;
-using Toolbox.Bmw.Entities.Factory;
 
 namespace Lim.Schedule.Service.Installers
 {

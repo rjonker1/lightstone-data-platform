@@ -2,8 +2,6 @@
 using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
-using EasyNetQ.Topology;
-using Lim.Domain.Messaging.Messages;
 using Lim.Schedule.Service.Consumers;
 using Lim.Schedule.Service.Jobs;
 using Quartz;
@@ -48,23 +46,29 @@ namespace Lim.Schedule.Service
 
             var bus = _container.Resolve<IAdvancedBus>();
 
-            var senderQueue = bus.QueueDeclare("DataPlatform.Integration.Sender");
-            var senderExchange = bus.ExchangeDeclare("DataPlatform.Integration.Sender", ExchangeType.Fanout);
-            bus.Bind(senderExchange, senderQueue, string.Empty);
+            bus.BindReadQueue(_container).BindWriteQueue(_container);
 
-            var receiverQueue = bus.QueueDeclare("DataPlatform.Integration.Receiver");
-            var receiverExchange = bus.ExchangeDeclare("DataPlatform.Integration.Receiver", ExchangeType.Fanout);
-            bus.Bind(receiverExchange, receiverQueue, string.Empty);
+            //var senderQueue = bus.QueueDeclare("DataPlatform.Integration.Sender");
+            //var senderExchange = bus.ExchangeDeclare("DataPlatform.Integration.Sender", ExchangeType.Fanout);
+            //bus.Bind(senderExchange, senderQueue, string.Empty);
 
-            bus.Consume(senderQueue,
-                q =>
-                    q.Add<PackageResponseMessage>(
-                        (message, info) => new SenderConsumers<PackageResponseMessage>(message, _container)));
+            //var receiverQueue = bus.QueueDeclare("DataPlatform.Integration.Receiver");
+            //var receiverExchange = bus.ExchangeDeclare("DataPlatform.Integration.Receiver", ExchangeType.Fanout);
+            //bus.Bind(receiverExchange, receiverQueue, string.Empty);
 
-            bus.Consume(receiverQueue,
-                q =>
-                    q.Add<PackageConfigurationMessage>(
-                        (message, info) => new ReceiverConsumers<PackageConfigurationMessage>(message, _container)));
+            //bus.AddWriteConsumers(senderQueue, _container);
+            //bus.AddReadConsumers(receiverQueue, _container);
+
+            //bus.Consume(senderQueue,
+            //    q =>
+            //        q.Add<PackageResponseMessage>(
+            //            (message, info) => new WriteConsumers<PackageResponseMessage>(message, _container)));
+
+          
+            //bus.Consume(receiverQueue,
+            //    q =>
+            //        q.Add<PackageConfigurationMessage>(
+            //            (message, info) => new ReadConsumers<PackageConfigurationMessage>(message, _container)));
 
             _scheduler.Start();
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 using Lim.Enums;
 using Lim.Schedule.Core.Identifiers;
 

@@ -1,17 +1,18 @@
 ﻿using System;
 using Lim;
+using Lim.Domain.Events;
 
 namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DataSetDeActivated : LimEvent
     {
-        public DataSetDeActivated(long aggregateId, long dataSetId, Guid correlationId)
+        public DataSetDeActivated(Guid dataSetId, Guid correlationId)
         {
-            Id = aggregateId;
+            AggregateId = dataSetId;
             DataSetId = dataSetId;
             CorrelationId = correlationId;
         }
 
-        public readonly long DataSetId;
+        public readonly Guid DataSetId;
     }
 }

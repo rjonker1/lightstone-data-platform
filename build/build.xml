@@ -855,8 +855,9 @@
       <author>CustomApp</author>
       <description>Lim Messaging</description>
       <includes>
-        <include pattern="Lightstone.DataPlatform.Lim.Domain.Messaging.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lim.Domain.Messaging.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lim.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lim.Domain.Messaging.dll" to="lib\net45"/>        
+        <include pattern="Lightstone.DataPlatform.Lim.Toolbox.LIVE.Shared.dll" to="lib\net45"/>
       </includes>
       <dependencies>
         <dependency id="EasyNetQ" version="0.47.10.380" />

@@ -11,7 +11,7 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install RepositoryInstaller", SystemName.UserManagement);
+            this.Info(() => "Attempting to install RepositoryInstaller");
 
             container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestyleTransient());
             container.Register(Component.For(typeof(INamedEntityRepository<>)).ImplementedBy(typeof(NamedEntityRepository<>)).LifestyleTransient());
@@ -23,7 +23,7 @@ namespace UserManagement.Api.Installers
             container.Register(Classes.FromAssemblyContaining<ICustomerRepository>().BasedOn(typeof(IValueEntityRepository<>)).WithServiceAllInterfaces().LifestyleTransient());
             container.Register(Classes.FromAssemblyContaining<ICustomerRepository>().BasedOn(typeof(IEntityNoteRepository<>)).WithServiceAllInterfaces().LifestyleTransient());
 
-            this.Info(() => "Successfully installed RepositoryInstaller", SystemName.UserManagement);
+            this.Info(() => "Successfully installed RepositoryInstaller");
         }
     }
 }

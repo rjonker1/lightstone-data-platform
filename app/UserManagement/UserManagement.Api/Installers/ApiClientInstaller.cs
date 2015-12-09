@@ -11,9 +11,9 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            this.Info(() => "Attempting to install ApiClientInstaller", SystemName.UserManagement);
+            this.Info(() => "Attempting to install ApiClientInstaller");
             container.Register(Component.For<IPackageBuilderApiClient>().ImplementedBy<PackageBuilderApiClient>().LifestyleTransient());
-            this.Info(() => "Successfully installed ApiClientInstaller", SystemName.UserManagement);
+            this.Info(() => "Successfully installed ApiClientInstaller");
         }
     }
 }

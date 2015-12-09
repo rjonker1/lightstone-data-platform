@@ -2,8 +2,9 @@
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
-using Lim.Domain.Dto;
 using Lim.Domain.Entities;
+using Lim.Dtos;
+
 namespace Lim.Web.UI.Commits
 {
     public class ClientCommit : AbstractPersistenceRepository<ClientDto>

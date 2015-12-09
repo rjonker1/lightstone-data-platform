@@ -3,6 +3,8 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
+using Lim.Core;
+using Lim.Domain.Messaging;
 using Lim.Domain.Messaging.Publishing;
 using Lim.Schedule.Service.Reader;
 using Workflow.BuildingBlocks;
@@ -19,14 +21,19 @@ namespace Lim.Schedule.Service.Installers
 
             container.Register(
                 Component.For<IAdvancedBus>()
-                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus(ConfigurationReader.LimSender))
-                    .LifestyleSingleton()
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus(ConfigurationReader.LimSender)).LifestyleSingleton()
                 );
-            
+
             container.Register(Component.For<IPublishConfigurationMessages>().UsingFactoryMethod(
                 () =>
                     new ConfigurationMessagePublisher(
                         BusFactory.CreateAdvancedBus(ConfigurationReader.LimReceiver))));
+
+            container.Register(Component.For<IPublish>().UsingFactoryMethod(
+                () => new PublishMessage(BusFactory.CreateAdvancedBus(ConfigurationReader.LimReceiver))));
+
+            container.Register(Component.For<ISendCommand>().UsingFactoryMethod(
+                () => new SendCommand(BusFactory.CreateAdvancedBus(ConfigurationReader.LimSender))));
 
             _log.InfoFormat("Bus Installed");
         }

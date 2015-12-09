@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Lim.Web.UI.Commands

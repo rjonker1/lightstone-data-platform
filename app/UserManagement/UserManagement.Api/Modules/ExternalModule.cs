@@ -19,7 +19,7 @@ namespace UserManagement.Api.Modules
                 Guid.TryParse(param.id, out paramId);
                 var searchId = paramId;
 
-                this.Info(() => "Searching for Customer | Client {0}".FormatWith(searchId), SystemName.UserManagement);
+                this.Info(() => "Searching for Customer | Client {0}".FormatWith(searchId));
 
                 var customerAcc = customers.FirstOrDefault(x => x.Id == searchId);
                 var clientAcc = clients.FirstOrDefault(x => x.Id == searchId);
@@ -28,12 +28,12 @@ namespace UserManagement.Api.Modules
                 if (customerAcc != null)
                 {
                     accountNumber = customerAcc.CustomerAccountNumber.ToString();
-                    this.Info(() => "Found Customer {0}".FormatWith(searchId), SystemName.UserManagement);
+                    this.Info(() => "Found Customer {0}".FormatWith(searchId));
                 }
                 if (clientAcc != null)
                 {
                     accountNumber = clientAcc.ClientAccountNumber.ToString();
-                    this.Info(() => "Found Client {0}".FormatWith(searchId), SystemName.UserManagement);
+                    this.Info(() => "Found Client {0}".FormatWith(searchId));
                 }
 
                 if (accountNumber.Equals("DEFAULT"))

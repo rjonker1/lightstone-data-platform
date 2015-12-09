@@ -5,6 +5,7 @@ using System.Text;
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
+using Lim.Domain.Events;
 using Lim.Domain.EventStore.Entities;
 using Lim.Domain.Extensions;
 
@@ -18,19 +19,19 @@ namespace Lim.Domain.EventStore
 
         private struct EventDescriptor
         {
-            public EventDescriptor(long id, LimEvent @event, int version)
+            public EventDescriptor(LimEvent @event, long version, Guid aggregateId)
             {
                 Event = @event;
                 Version = version;
-                Id = id;
+                Id = aggregateId;
             }
 
             public readonly LimEvent Event;
-            public readonly long Id;
-            public readonly int Version;
+            public readonly Guid Id;
+            public readonly long Version;
         }
 
-        private readonly Dictionary<long, List<EventDescriptor>> _current = new Dictionary<long, List<EventDescriptor>>();
+        private readonly Dictionary<Guid, List<EventDescriptor>> _current = new Dictionary<Guid, List<EventDescriptor>>();
 
         public EventStore(IPublish publisher, IEventStoreRepository repository)
         {
@@ -38,7 +39,7 @@ namespace Lim.Domain.EventStore
             _repository = repository;
         }
 
-        public void SaveEvents(long aggregateId, IEnumerable<LimEvent> events, int version)
+        public void SaveEvents(Guid aggregateId, IEnumerable<LimEvent> events, long version)
         {
             List<EventDescriptor> eventDescriptors;
             if (!_current.TryGetValue(aggregateId, out eventDescriptors))
@@ -56,7 +57,7 @@ namespace Lim.Domain.EventStore
             {
                 i++;
                 @event.Version = i;
-                var descriptor = new EventDescriptor(aggregateId, @event, i);
+                var descriptor = new EventDescriptor(@event, i, aggregateId);
                 eventDescriptors.Add(descriptor);
                 Save(descriptor);
 
@@ -64,7 +65,7 @@ namespace Lim.Domain.EventStore
             }
         }
 
-        public List<LimEvent> GetEventsForAggregate(long aggregateId)
+        public List<LimEvent> GetEventsForAggregate(Guid aggregateId)
         {
             List<EventDescriptor> eventDescriptors;
             if (!_current.TryGetValue(aggregateId, out eventDescriptors))
@@ -80,7 +81,7 @@ namespace Lim.Domain.EventStore
             {
                 var command = new EventCommand
                 {
-                    Id = @event.Id,
+                    AggregateId =  @event.Id,
                     EventType = @event.Event.EventType,
                     CorrelationId = @event.Event.CorrelationId,
                     EventTypeId = @event.Event.EventTypeId,
@@ -88,7 +89,7 @@ namespace Lim.Domain.EventStore
                     Type = @event.Event.Type.FullName,
                     TypeName = @event.Event.TypeName,
                     Version = @event.Version,
-                    User = @event.Event.User,
+                    UserId = @event.Event.User,
                     Payload = Encoding.UTF8.GetBytes(@event.Event.ObjectToJson())
                 };
 

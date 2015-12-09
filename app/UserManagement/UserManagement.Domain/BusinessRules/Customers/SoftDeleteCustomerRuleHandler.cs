@@ -29,7 +29,7 @@ namespace UserManagement.Domain.BusinessRules.Customers
             if (hasCustomerUser.Any(user => user.Any()))
             {
                 var exception = new LightstoneAutoException("Customer cannot be deleted due to Customer - User relationship".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception, SystemName.UserManagement);
+                this.Warn(() => exception);
                 throw exception;
             }
 

@@ -24,7 +24,7 @@ namespace Lim.Domain.EventStore.Factory
             return Fluently.Configure()
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.LimEventStore.ConnectionString))
-               // .Mappings(m => m.FluentMappings.Add<Maps.DataSetMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.EventCommandMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.LimEventStore.UpdateDatabase))
                 .BuildSessionFactory();
         }
@@ -34,7 +34,7 @@ namespace Lim.Domain.EventStore.Factory
             return (LimEventStoreConfiguration)Fluently.Configure()
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.LimEventStore.ConnectionString))
-               // .Mappings(m => m.FluentMappings.Add<Maps.DataSetMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.EventCommandMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.LimEventStore.UpdateDatabase))
                 .BuildConfiguration();
         }

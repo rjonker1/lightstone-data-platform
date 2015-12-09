@@ -1,4 +1,4 @@
-﻿using Lim.Domain.Dto;
+﻿using Lim.Dtos;
 
 namespace Lim.Web.UI.Commands
 {

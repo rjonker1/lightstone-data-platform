@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lim.Domain.Events;
 using Lim.Domain.Extensions;
 
 namespace Lim.Domain
@@ -7,7 +8,7 @@ namespace Lim.Domain
     public abstract class Aggregate
     {
         private readonly List<LimEvent> _events = new List<LimEvent>();
-        public abstract long Id { get; }
+        public abstract Guid Id { get; }
 
         public IEnumerable<LimEvent> GetUncommittedEvents()
         {
@@ -35,7 +36,7 @@ namespace Lim.Domain
             if (isNew) _events.Add(@event);
         }
 
-        public int Version { get; protected set; }
+        public long Version { get; protected set; }
         //public string EventType { get; protected set; }
         //public int EventTypeId { get; protected set; }
         //public bool AggregateNew { get; protected set; }

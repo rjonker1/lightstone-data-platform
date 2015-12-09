@@ -15,6 +15,7 @@ namespace Lim.Test.Helper.Fakes.Repository
         public void Save<T>(T entity) where T : class
         {
             var e = entity as EventCommand;
+            e.Id = e.Id == 0 ? new Random().Next(1000, 10000000) : e.Id;
             FakeEventStoreDatabase.Events.Add(e);
         }
 

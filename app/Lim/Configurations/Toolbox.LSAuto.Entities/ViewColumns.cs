@@ -5,7 +5,6 @@ namespace Toolbox.LSAuto.Entities
     public class ViewColumns
     {
         public virtual long Id { get; set; }
-        public virtual long AggregateId { get; set; }
         public virtual View ViewId { get; set; }
         public virtual string Name { get; set; }
         public virtual string DisplayName { get; set; }

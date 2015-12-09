@@ -1,5 +1,6 @@
 ﻿using System;
 using Lim;
+using Lim.Domain.Events;
 using Lim.Dtos;
 
 namespace Toolbox.LightstoneAuto.Domain.Events
@@ -16,8 +17,9 @@ namespace Toolbox.LightstoneAuto.Domain.Events
             AggregateNew = newAggregate;
             User = user;
             CorrelationId = correlationId;
-          //  Payload = Encoding.UTF8.GetBytes(this.ObjectToJson());
-           
+            AggregateId = dataSet.Id;
+            //  Payload = Encoding.UTF8.GetBytes(this.ObjectToJson());
+
         }
 
         public readonly DataSetDto DataSet;

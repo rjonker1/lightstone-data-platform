@@ -4,7 +4,7 @@ using System.Linq;
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 using Lim.Enums;
 using Lim.Schedule.Core.Commands;
 using Toolbox.Bmw.Factories;

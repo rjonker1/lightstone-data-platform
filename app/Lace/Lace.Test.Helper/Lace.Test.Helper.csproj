@@ -120,6 +120,7 @@
     <Compile Include="Builders\Requests\EzScoreRequestBuilder.cs" />
     <Compile Include="Builders\Requests\FinanceRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
+    <Compile Include="Builders\Requests\LicAndVinIvidLSAutPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Mothers\Requests\Dto\RequestJisInformation.cs" />
     <Compile Include="Mothers\Requests\EzScoreRequests\EzScoreRequest.cs" />
     <Compile Include="Mothers\Requests\FinanceRequests\BmwFinanceRequest.cs" />
+    <Compile Include="Mothers\Requests\LicAndVinNumberIvidAndLsAutoProvidersRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberMmCodeOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\Vin12Requests\Vin12Request.cs" />
     <Compile Include="Mothers\Requests\VinNumberLSAutoRgtAndRgtVinProvidersRequest.cs" />

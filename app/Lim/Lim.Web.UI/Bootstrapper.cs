@@ -4,8 +4,8 @@ using Castle.Windsor;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 ﻿using Lim.Core;
-using Lim.Domain.Dto;
 using Lim.Domain.Entities.Repository;
+using Lim.Dtos;
 using Lim.Web.UI.Commits;
 using Lim.Web.UI.Handlers;
 using Lim.Web.UI.Models.Api;
@@ -41,7 +41,7 @@ namespace Lim.Web.UI
         {
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-                this.Info(() => "LIM WEB invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url), SystemName.LightstoneIntegrationModule);
+                this.Info(() => "LIM WEB invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
                 var token = "";
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
@@ -59,14 +59,14 @@ namespace Lim.Web.UI
 
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.LightstoneIntegrationModule);
+                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
                 return ErrorResponse.FromException(exception);
             });
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception), SystemName.LightstoneIntegrationModule);
+                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
                 return ErrorResponse.FromException(exception);
             });
             base.RequestStartup(container, pipelines, context);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using EasyNetQ;
 using Lim.Core;
 using Lim.Domain.Entities;
@@ -54,6 +55,7 @@ namespace Lim.Acceptance.Tests.Bus
         [Observation]
         public void then_message_needs_to_be_sent_to_queue()
         {
+            Thread.Sleep(5000);
             _exception.ShouldBeNull();
         }
 

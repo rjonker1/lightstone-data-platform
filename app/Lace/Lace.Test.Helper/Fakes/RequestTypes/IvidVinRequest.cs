@@ -4,6 +4,46 @@ using PackageBuilder.Domain.Requests.Contracts.Requests;
 
 namespace Lace.Test.Helper.Fakes.RequestTypes
 {
+    public class IvidLicenseAndVinRequest : IAmIvidStandardRequest
+    {
+
+        public IvidLicenseAndVinRequest(string licensePlateNumber, string applicantName,
+            string packageName, string requestorEmail, string requestorName, string requestorPhone, string vinNUmber)
+        {
+            LicenceNumber = LicenceNumberField.Get(licensePlateNumber);
+            ApplicantName = ApplicatonNameField.Get(applicantName);
+            Label = PackageNameField.Get(packageName);
+            RequesterEmail = EmailField.Get(requestorEmail);
+            RequesterName = RequestorNameField.Get(requestorName);
+            RequesterPhone = RequesterPhoneField.Get(requestorPhone);
+            VinNumber = VinNumberRequestField.Get(vinNUmber);
+        }
+
+        public IAmApplicantNameRequestField ApplicantName { get; private set; }
+
+        public IAmChassisNumberRequestField ChassisNumber { get; private set; }
+
+        public IAmEngineNumberRequestField EngineNumber { get; private set; }
+
+        public IAmLabelRequestField Label { get; private set; }
+
+        public IAmLicenceNumberRequestField LicenceNumber { get; private set; }
+
+        public IAmMakeRequestField Make { get; private set; }
+
+        public IAmReasonForApplicationRequestField ReasonForApplication { get; private set; }
+
+        public IAmRegisterNumberRequestField RegisterNumber { get; private set; }
+        public IAmRequestReferenceRequestField RequestReference { get; private set; }
+
+        public IAmRequesterEmailRequestField RequesterEmail { get; private set; }
+
+        public IAmRequesterNameRequestField RequesterName { get; private set; }
+
+        public IAmRequesterPhoneRequestField RequesterPhone { get; private set; }
+
+        public IAmVinNumberRequestField VinNumber { get; private set; }
+    }
     public class IvidStandardRequest : IAmIvidStandardRequest
     {
 

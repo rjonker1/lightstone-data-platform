@@ -1,4 +1,4 @@
-﻿using Lim.Domain.Dto;
+﻿using Lim.Dtos;
 using Lim.Enums;
 
 namespace Lim.Schedule.Core.Commands

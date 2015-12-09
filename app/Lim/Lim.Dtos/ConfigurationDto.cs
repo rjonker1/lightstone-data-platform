@@ -1,21 +1,44 @@
 ﻿using System;
-using Lim.Enums;
 
 namespace Lim.Dtos
 {
     public class ConfigurationDto
     {
-        public  long Id { get; set; }
-        public ClientDto Client { get; set; }
-        public  System.Guid ConfigurationKey { get; set; }
-        public Frequency FrequencyType { get; set; }
-        public IntegrationAction ActionType { get; set; }
-        public  IntegrationType IntegrationType { get; set; }
-        public  DateTime? DateCreated { get; set; }
-        public  bool IsActive { get; set; }
-        public  DateTime? DateModified { get; set; }
-        public  string ModifiedBy { get; set; }
-        public  TimeSpan? CustomFrequencyTime { get; set; }
-        public  string CustomFrequencyDay { get; set; }
+        public ConfigurationDto()
+        {
+
+        }
+
+        private ConfigurationDto(long id, Guid key, short actionType, short integrationType, short frequencyType, long clientId, bool isActive,
+            string action, string frequency, string type)
+        {
+            ActionType = actionType;
+            IntegrationType = integrationType;
+            Id = id;
+            Key = key;
+            FrequencyType = frequencyType;
+            ClientId = clientId;
+            IsActive = isActive;
+            Action = action;
+            Frequency = frequency;
+            Type = type;
+        }
+
+        public static ConfigurationDto Existing(long id, Guid key, short actionType, short integrationType, short frequencyType, long clientId,
+            bool isActive, string action, string frequency, string type)
+        {
+            return new ConfigurationDto(id, key, actionType, integrationType, frequencyType, clientId, isActive, action, frequency, type);
+        }
+
+        public long Id { get; private set; }
+        public Guid Key { get; private set; }
+        public short FrequencyType { get; set; }
+        public short ActionType { get; set; }
+        public short IntegrationType { get; set; }
+        public long ClientId { get; set; }
+        public bool IsActive { get; set; }
+        public string Action { get; private set; }
+        public string Frequency { get; private set; }
+        public string Type { get; private set; }
     }
 }

@@ -5,7 +5,7 @@ namespace Lim.Dtos
     public class DataFieldDto
     {
         public long Id { get; set; }
-        public long DataSetId { get; set; }
+        public Guid DataSetId { get; set; }
         public string Name { get; set; }
         public string DisplayName { get; set; }
         public bool Selected { get; set; }

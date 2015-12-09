@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 
 namespace Lim.Domain.Commands
 {

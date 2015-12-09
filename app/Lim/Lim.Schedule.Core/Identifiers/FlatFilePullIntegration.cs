@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Lim.Core;
-using Lim.Domain.Dto;
+using Lim.Dtos;
 using Lim.Enums;
 using Lim.Schedule.Core.Commands;
 

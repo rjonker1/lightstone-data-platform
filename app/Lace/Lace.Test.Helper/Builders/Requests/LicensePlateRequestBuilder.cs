@@ -125,6 +125,16 @@ namespace Lace.Test.Helper.Builders.Requests
         }
     }
 
+    public class VinAndLicRequestBuilder
+    {
+        private ICollection<IPointToLaceRequest> _request;
+        public ICollection<IPointToLaceRequest> ForIvidAndLsAuto()
+        {
+            _request = new[] { new LicAndVinNumberIvidAndLsAutoProvidersRequest() };
+            return _request;
+        }
+    }
+
     public class LicensePlateMmCodeRequestBuilder
     {
         private ICollection<IPointToLaceRequest> _request;
