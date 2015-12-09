@@ -4,7 +4,7 @@ using Toolbox.LSAuto.Entities;
 
 namespace Toolbox.LightstoneAuto.Infrastructure.Read.Handlers
 {
-    public class DataSetDetailDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetModified>
+    public class DataSetDetailDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetExportDeActivated>, IHandles<DataSetExportModified>
     {
         private readonly IWriteOnlyRepository _repository;
         public DataSetDetailDtoHandler(IWriteOnlyRepository repository)
@@ -16,7 +16,7 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Read.Handlers
         {
             var ds = new DataSet
             {
-                Id = message.DataSet.Id,
+                AggregateId = message.DataSet.AggregateId,
                 Name = message.DataSet.Name,
                 Activated = message.DataSet.Activated,
                 DateCreated = message.DataSet.DateCreated,
@@ -27,16 +27,16 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Read.Handlers
             _repository.Save(ds);
         }
 
-        public void Handle(DataSetDeActivated message)
+        public void Handle(DataSetExportDeActivated message)
         {
             _repository.Delete(message);
         }
 
-        public void Handle(DataSetModified message)
+        public void Handle(DataSetExportModified message)
         {
             var ds = new DataSet
             {
-                Id = message.DataSet.Id,
+                AggregateId = message.DataSet.AggregateId,
                 Name = message.DataSet.Name,
                 Activated = message.DataSet.Activated,
                 DateCreated = message.DataSet.DateCreated,
@@ -47,7 +47,7 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Read.Handlers
         }
     }
 
-    public class DataSetDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetDeActivated>, IHandles<DataSetModified>
+    public class DataSetDtoHandler : IHandles<DataSetExportCreated>, IHandles<DataSetExportDeActivated>, IHandles<DataSetExportModified>
     {
         private readonly IWriteOnlyRepository _repository;
 
@@ -61,12 +61,12 @@ namespace Toolbox.LightstoneAuto.Infrastructure.Read.Handlers
             _repository.Save(message);
         }
 
-        public void Handle(DataSetDeActivated message)
+        public void Handle(DataSetExportDeActivated message)
         {
             _repository.Delete(message);
         }
 
-        public void Handle(DataSetModified message)
+        public void Handle(DataSetExportModified message)
         {
             _repository.SaveOrUpdate(message);
         }

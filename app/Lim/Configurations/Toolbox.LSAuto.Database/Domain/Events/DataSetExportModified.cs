@@ -4,11 +4,11 @@ using Lim.Dtos;
 
 namespace Toolbox.LightstoneAuto.Domain.Events
 {
-    public class DataSetModified : LimEvent
+    public class DataSetExportModified : LimEvent
     {
-        public DataSetModified(DataSetDto dataSet, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
+        public DataSetExportModified(DataSetDto dataSet, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
         {
-            AggregateId = dataSet.Id;
+            AggregateId = dataSet.AggregateId;
             DataSet = dataSet;
             EventType = eventType;
             EventTypeId = eventTypeId;
@@ -21,6 +21,6 @@ namespace Toolbox.LightstoneAuto.Domain.Events
             
         }
 
-        public readonly DataSetDto DataSet;
+        public DataSetDto DataSet { get; private set; }
     }
 }

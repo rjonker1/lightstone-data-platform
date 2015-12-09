@@ -30,10 +30,10 @@ namespace Lim.Test.Helper.Fakes.Repository
             var ds = entity as DataSet;
             if (ds == null)
                 return;
-            var dsToUpdate = FakeDatabase.DataSetList.FirstOrDefault(w => w.Id == ds.Id);
+            var dsToUpdate = FakeDatabase.DataSetList.FirstOrDefault(w => w.AggregateId == ds.AggregateId);
             dsToUpdate = ds;
 
-            FakeDatabase.DataSetList.RemoveAll(w => w.Id == ds.Id);
+            FakeDatabase.DataSetList.RemoveAll(w => w.AggregateId == ds.AggregateId);
             FakeDatabase.DataSetList.Add(ds);
 
         }
@@ -51,7 +51,7 @@ namespace Lim.Test.Helper.Fakes.Repository
         public void Delete<T>(T entity) where T : class
         {
             var ds = entity as DataSet;
-            FakeDatabase.DataSetList.RemoveAll(w => w.Id == ds.Id);
+            FakeDatabase.DataSetList.RemoveAll(w => w.AggregateId == ds.AggregateId);
         }
     }
 }

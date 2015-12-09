@@ -10,12 +10,11 @@ namespace Lim.Web.UI.Commits
     public class ClientCommit : AbstractPersistenceRepository<ClientDto>
     {
         private readonly IRepository _repository;
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<ClientCommit>();
 
         public ClientCommit(IRepository repository)
         {
             _repository = repository;
-            _log = LogManager.GetLogger(GetType());
         }
 
         public override bool Persist(ClientDto clientDto)
@@ -39,7 +38,7 @@ namespace Lim.Web.UI.Commits
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Failed to save a Client in the LIM database, because {0}", ex, ex.Message);
+                Log.ErrorFormat("Failed to save a Client in the LIM database, because {0}", ex, ex.Message);
             }
             return false;
         }

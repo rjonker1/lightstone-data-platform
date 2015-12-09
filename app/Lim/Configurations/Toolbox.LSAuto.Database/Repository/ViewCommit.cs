@@ -6,55 +6,47 @@ using Lim.Dtos;
 using Toolbox.LSAuto.Entities;
 using Toolbox.LSAuto.Entities.Factory;
 
-namespace Toolbox.LightstoneAuto.Infrastructure.Factories
+namespace Toolbox.LightstoneAuto.Repository
 {
-    public class SaveDataSetsForExport : AbstractPersistenceRepository<DataSetDto>
+    public class ViewCommit : AbstractPersistenceRepository<ViewDto>
     {
-        private static readonly ILog Log = LogManager.GetLogger<SaveDataSetsForExport>();
+        private static readonly ILog Log = LogManager.GetLogger<ViewCommit>();
 
-        public SaveDataSetsForExport()
-        {
-        }
-
-        public override bool Persist(DataSetDto dto)
+        public override bool Persist(ViewDto dto)
         {
             try
             {
                 if (dto == null)
                     return false;
 
-                var dataSetEntity = new DataSet
+                var viewEntitiy = new View
                 {
                     Id = dto.Id,
+                    AggregateId = dto.AggregateId,
                     Activated = dto.Activated,
                     Name = dto.Name,
                     Version = dto.Version,
-                    DateCreated = DateTime.UtcNow,
-                    Description = dto.Description
+                    DisplayName = dto.DisplayName
                 };
 
-                var dataFields = dto.DataFields.Select(s => new DataField
+                var dataFields = dto.ViewColumns.Select(s => new ViewColumn()
                 {
-                    DateCreated = DateTime.UtcNow,
-                    Name = s.Name,
                     Id = s.Id,
-                    Activated = s.Activated,
-                    DataSet = dataSetEntity,
-                    DisplayName = s.DisplayName,
-                    Selected = s.Selected
+                    Name = s.Name,
+                    View = viewEntitiy,
+                    DisplayName = s.DisplayName
                 });
 
-                using (var session = LsAutoFactoryManager.LsAutoInstance.OpenStatelessSession())
+                using (var session = LsAutoFactoryManager.Instance.OpenSession())
                 using (var transaction = session.BeginTransaction())
                 {
+                    session.SaveOrUpdate(viewEntitiy);
                     foreach (var field in dataFields)
                     {
-                        session.Insert(field);
+                        session.SaveOrUpdate(field);
                     }
-                    session.Insert(dataSetEntity);
                     transaction.Commit();
                 }
-
                 return true;
             }
             catch (Exception ex)

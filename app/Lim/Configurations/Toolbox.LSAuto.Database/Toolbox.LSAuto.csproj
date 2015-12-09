@@ -32,6 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Common.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
@@ -40,12 +48,20 @@
       <HintPath>..\..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -60,24 +76,44 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Consumers\Read\DataSetExportEventConsumer.cs" />
+    <Compile Include="Consumers\Read\ViewImportEventConsumer.cs" />
+    <Compile Include="Consumers\Write\DataSetExportCommandConsumer.cs" />
+    <Compile Include="Consumers\Write\ViewImportCommandConsumer.cs" />
+    <Compile Include="Domain\Base\IViewMarker.cs" />
     <Compile Include="Domain\DataSetExport.cs" />
-    <Compile Include="Domain\Events\DataSetModified.cs" />
-    <Compile Include="Infrastructure\Commands\CreateDataSetExport.cs" />
-    <Compile Include="Infrastructure\Commands\DeActivateDataSetExport.cs" />
-    <Compile Include="Infrastructure\Commands\ModifyDataSetExport.cs" />
+    <Compile Include="Domain\Events\DataSetExportModified.cs" />
+    <Compile Include="Domain\Events\ViewImportCreated.cs" />
+    <Compile Include="Domain\Events\ViewImportDeactivated.cs" />
+    <Compile Include="Domain\Events\ViewImportModified.cs" />
+    <Compile Include="Domain\Events\ViewImportReloaded.cs" />
+    <Compile Include="Domain\Mapping\DataSetMapping.cs" />
+    <Compile Include="Domain\Mapping\ViewMapping.cs" />
+    <Compile Include="Domain\ViewImport.cs" />
+    <Compile Include="Domain\Commands\Dataset\CreateDataSetExport.cs" />
+    <Compile Include="Domain\Commands\Dataset\DeActivateDataSetExport.cs" />
+    <Compile Include="Domain\Commands\View\CreateViewImport.cs" />
+    <Compile Include="Domain\Commands\Dataset\ModifyDataSetExport.cs" />
     <Compile Include="Domain\IReadModelFacade.cs" />
-    <Compile Include="Infrastructure\Factories\SaveDataSetsForExport.cs" />
+    <Compile Include="Domain\Commands\View\DeActivateViewImport.cs" />
+    <Compile Include="Domain\Commands\View\ModifyViewImport.cs" />
+    <Compile Include="Domain\Commands\View\ReloadViewImport.cs" />
+    <Compile Include="Repository\DataSetCommit.cs" />
     <Compile Include="Infrastructure\Handlers\DataSetCommandHandler.cs" />
     <Compile Include="Infrastructure\Read\DataSetReadModel.cs" />
     <Compile Include="Infrastructure\Read\Handlers\DataSetReadHandlers.cs" />
     <Compile Include="Infrastructure\Read\ReadRepository.cs" />
-    <Compile Include="Domain\Events\DataSetDeActivated.cs" />
+    <Compile Include="Domain\Events\DataSetExportDeActivated.cs" />
     <Compile Include="Domain\Events\DataSetExportCreated.cs" />
-    <Compile Include="Domain\Models\AutoCarSpecifcations.cs" />
+    <Compile Include="Repository\LSAutoRepository.cs" />
+    <Compile Include="Domain\Views\AutoCarStats\VehicleSpecifcationView.cs" />
+    <Compile Include="LSAutoMarker.cs" />
+    <Compile Include="Repository\ViewCommit.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Domain\Models\" />
     <Folder Include="Infrastructure\Write\" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +142,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

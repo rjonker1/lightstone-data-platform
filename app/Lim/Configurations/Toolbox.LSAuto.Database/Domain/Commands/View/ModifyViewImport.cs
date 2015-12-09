@@ -2,27 +2,29 @@
 using Lim;
 using Lim.Dtos;
 
-namespace Toolbox.LightstoneAuto.Infrastructure.Commands
+namespace Toolbox.LightstoneAuto.Domain.Commands.View
 {
-    public class ModifyDataSetExport : Command
+    public class ModifyViewImport : Command
     {
-        public ModifyDataSetExport(DataSetDto dataSet, Guid modifiedBy, long version, Guid correlationId)
+        public ModifyViewImport(ViewDto view, Guid modifiedBy, long version, Guid correlationId)
         {
-            DataSet = dataSet;
+            View = view;
             EventType = Lim.Enums.EventType.Modified.ToString();
             EventTypeId = (int) Lim.Enums.EventType.Modified;
             NewAggregate = false;
             User = modifiedBy;
             Version = version;
             CorrelationId = correlationId;
-            AggregateId = dataSet.Id;
+            AggregateId = view.AggregateId;
+            Type = GetType();
         }
 
-        public readonly DataSetDto DataSet;
+        public readonly ViewDto View;
         public readonly string EventType;
         public readonly int EventTypeId;
         public readonly bool NewAggregate;
         public readonly Guid CorrelationId;
         public readonly long Version;
+        public readonly Type Type;
     }
 }

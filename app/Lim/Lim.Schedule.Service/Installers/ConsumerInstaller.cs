@@ -4,6 +4,8 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Domain.Receiver.Handlers;
 using Lim.Domain.Sender.Handlers;
+using Toolbox.LightstoneAuto.Consumers.Read;
+using Toolbox.LightstoneAuto.Consumers.Write;
 using Toolbox.LIVE.Infrastructure.Consumers.Read;
 using Toolbox.LIVE.Infrastructure.Consumers.Write;
 
@@ -23,6 +25,12 @@ namespace Lim.Schedule.Service.Installers
 
             container.Register(Component.For<SendExecutedPackageConsumer>().ImplementedBy<SendExecutedPackageConsumer>());
             container.Register(Component.For<ExecutedPackageSentConsumer>().ImplementedBy<ExecutedPackageSentConsumer>());
+
+            container.Register(Component.For<DataSetExportEventConsumer>().ImplementedBy<DataSetExportEventConsumer>());
+            container.Register(Component.For<DataSetExportCommandConsumer>().ImplementedBy<DataSetExportCommandConsumer>());
+
+            container.Register(Component.For<ViewImportCommandConsumer>().ImplementedBy<ViewImportCommandConsumer>());
+            container.Register(Component.For<ViewImportEventConsumer>().ImplementedBy<ViewImportEventConsumer>());
 
             _log.InfoFormat("Consumers Installed");
         }

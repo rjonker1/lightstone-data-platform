@@ -67,13 +67,10 @@ namespace Lace.Toolbox.Database.Dtos
         public int? IntValue { get; set; }
         public double? FloatValue { get; set; }
         public decimal? MoneyValue { get; set; }
-        //public int VinYear { get; set; }
         public string ImageUrl { get; set; }
-        //public string Period { get; set; }
         public string CarFullName { get; set; }
         public string CarModel { get; set; }
         public string CarTypeName { get; set; }
-        //public string Quarter { get; set; }
         public string BodyShape { get; set; }
         public string FuelType { get; set; }
         public string Market { get; set; }
