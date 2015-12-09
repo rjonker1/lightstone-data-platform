@@ -65,7 +65,7 @@ ClientBin
 ~$*
 *.dbmdl
 logs/**
-tools/**
+
 app/packages/**
 DDD/packages/**
 **/**/PackageBuilder/**/node_modules
