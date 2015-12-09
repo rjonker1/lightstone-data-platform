@@ -4,7 +4,6 @@ using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
-using DataPlatform.Shared.Enums;
 using NEventStore;
 using Shared.Logging;
 
@@ -12,8 +11,9 @@ namespace PackageBuilder.Infrastructure.NEventStore
 {
     public interface INEventStoreRepository<T> : IRepository
     {
-        Task<T> GetById(Guid id, bool useCache = false);
-        //T GetById(Guid id, int version, bool useCache = false);
+        T GetById(Guid id);
+        Task<T> GetByIdCached(Guid id);
+        T GetById(Guid id, int version);
         void Save(IAggregate aggregate, Guid commitId, bool useCache = false);
     }
 
@@ -26,40 +26,44 @@ namespace PackageBuilder.Infrastructure.NEventStore
             _cacheProvider = cacheProvider;
         }
 
-        public async Task<T> GetById(Guid id, bool useCache = false)
+        public async Task<T> GetByIdCached(Guid id)
         {
-            this.Info(() => string.Format("Attempting to get aggregate: {0}", id));
+            this.Info(() => string.Format("Aggregate Cache Read Started, TimeStamp: {0}", DateTime.UtcNow));
 
-            this.Info(() => string.Format("Aggregate Cache Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
+            var aggregate = await _cacheProvider.CacheGet(id);
 
-            var aggregate = default(T);
-
-            if (useCache) aggregate = await _cacheProvider.CacheGet(id);
+            this.Info(() => string.Format("Aggregate Cache Read Finished, TimeStamp: {0}", DateTime.UtcNow));
 
             if (aggregate == null)
             {
-                this.Info(() => string.Format("Aggregate DB Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
-                aggregate = GetById<T>(typeof(T).Name, id);
-
-                // Load aggregate into cache, if it was found in the DB and not originally from Cache
-                if (aggregate != null && useCache) _cacheProvider.CacheSave(id, aggregate);
+                aggregate = GetById<T>(id);
+                _cacheProvider.CacheSave(id, aggregate);
             }
-
-            this.Info(() => string.Format("Successfully got aggregate: {0}", id));
 
             return aggregate;
         }
 
-        //public T GetById(Guid id, int version)
-        //{
-        //    this.Info(() => string.Format("Attempting to get aggregate: {0} version: {1}", id, version));
+        public T GetById(Guid id)
+        {
+            this.Info(() => string.Format("Getting aggregate: {0}", id));
 
-        //    var aggregate = GetById<T>(typeof(T).Name, id, version);
+            var aggregate = GetById<T>(typeof(T).Name, id);
 
-        //    this.Info(() => string.Format("Successfully got aggregate: {0} version: {1}", id, version));
+            this.Info(() => string.Format("Got aggregate: {0}", id));
 
-        //    return aggregate;
-        //}
+            return aggregate;
+        }
+
+        public T GetById(Guid id, int version)
+        {
+            this.Info(() => string.Format("Getting aggregate: {0} version: {1}", id, version));
+
+            var aggregate = GetById<T>(typeof(T).Name, id, version);
+
+            this.Info(() => string.Format("Got aggregate: {0} version: {1}", id, version));
+
+            return aggregate;
+        }
 
         public void Save(IAggregate aggregate, Guid commitId, bool useCache = false)
         {

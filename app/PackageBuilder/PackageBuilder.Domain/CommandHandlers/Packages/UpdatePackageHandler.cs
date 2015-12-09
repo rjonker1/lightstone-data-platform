@@ -22,7 +22,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
             _readRepo = readRepo;
         }
 
-        public override async void Handle(UpdatePackage command)
+        public override void Handle(UpdatePackage command)
         {
             if (command.Name == null)
                 throw new LightstoneAutoException("Package name was not specified.");
@@ -35,7 +35,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
                 throw exception;                
             }
 
-            var entity = await _writeRepo.GetById(command.Id);
+            var entity = _writeRepo.GetById(command.Id);
             entity.CreatePackageRevision(command.Id, command.Name, command.Description, command.CostPrice,
                 command.SalePrice, command.Notes, command.PackageEventType, command.Industries, command.State, command.Owner,
                 command.CreatedDate, command.EditedDate, command.DataProviderValueOverrides);

@@ -22,7 +22,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             _readRepo = readRepo;
         }
 
-        public override async void Handle(UpdateDataProvider command)
+        public override void Handle(UpdateDataProvider command)
         {
             var existing = _readRepo.Exists(command.Id, command.Name);
             if (existing)
@@ -32,12 +32,12 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 throw exception;
             }
 
-            var entity = await _writeRepo.GetById(command.Id);
+            var entity = _writeRepo.GetById(command.Id);
             entity.CreateDataProviderRevision(command.Id, command.Name, command.Description, command.CostOfSale,
                command.ResponseType, command.FieldLevelCostPriceOverride, command.RequiresConsent, entity.Version,
                command.Owner, command.CreatedDate, command.EditedDate, command.RequestFields, command.DataFields);
 
-            _writeRepo.Save(entity, Guid.NewGuid(), true);
+            _writeRepo.Save(entity, Guid.NewGuid());
         }
     }
 }

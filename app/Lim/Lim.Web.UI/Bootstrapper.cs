@@ -64,11 +64,6 @@ namespace Lim.Web.UI
             });
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
 
-            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
-            {
-                this.Error(() => "Error on LIM request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                return ErrorResponse.FromException(exception);
-            });
             base.RequestStartup(container, pipelines, context);
         }
 

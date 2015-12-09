@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using PackageBuilder.Core.MessageHandling;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders.Responses;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
@@ -25,9 +24,9 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             _dataProviderResponseRepository = dataProviderResponseRepository;
         }
 
-        public override async void Handle(AmendDataProviderStructure command)
+        public override void Handle(AmendDataProviderStructure command)
         {
-            var existing = await _writeRepo.GetById(command.Id);
+            var existing = _writeRepo.GetById(command.Id);
             var response = _dataProviderResponseRepository.GetDataProvider(existing.Name);
             var requestFields = Mapper.Map(response, response.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
             var dataFields = Mapper.Map(response, response.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>;

@@ -28,9 +28,9 @@ namespace PackageBuilder.Acceptance.Tests.Api.Modules.DataProviders
             });
         }
 
-        public override async void Observe()
+        public override void Observe()
         {
-            DataProvider = await WriteRepo.GetById(Id);
+            DataProvider = WriteRepo.GetById(Id);
         }
 
         [Observation]

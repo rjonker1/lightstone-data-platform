@@ -110,13 +110,13 @@ namespace PackageBuilder.Acceptance.Tests.Handlers.CommandHandlers
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
         }
 
-        public override async void Observe()
+        public override void Observe()
         {
             RefreshDb();
 
             _handler.Handle(new CreateDataProvider(_id, DataProviderName.IVIDVerify_E_WS, 0, "", DateTime.UtcNow));
 
-            var dataProvider = await _writeRepo.GetById(_id);
+            var dataProvider = _writeRepo.GetById(_id);
             _originalFields = dataProvider.DataFields.ToList();
             var field = _originalFields.Filter(x => x.Name == "MakeDescription").FirstOrDefault() as DataField;
             field.Label = "Test Label";

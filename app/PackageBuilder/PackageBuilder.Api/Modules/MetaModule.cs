@@ -32,7 +32,7 @@ namespace PackageBuilder.Api.Modules
             {
                 var apiRequest = this.Bind<ApiRequestDto>();
 
-                var package = await writeRepo.GetById(apiRequest.PackageId);
+                var package = await writeRepo.GetByIdCached(apiRequest.PackageId);
 
                 if (package == null)
                 {

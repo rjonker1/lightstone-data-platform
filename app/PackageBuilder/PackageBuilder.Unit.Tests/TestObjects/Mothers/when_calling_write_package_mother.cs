@@ -7,9 +7,9 @@ namespace PackageBuilder.Unit.Tests.TestObjects.Mothers
     public class when_calling_write_package_mother : Specification
     {
         private Package _package;
-        public override async void Observe()
+        public override void Observe()
         {
-            _package = await WritePackageMother.FullVerificationPackage;
+            _package = WritePackageMother.FullVerificationPackage;
         }
 
         [Observation]

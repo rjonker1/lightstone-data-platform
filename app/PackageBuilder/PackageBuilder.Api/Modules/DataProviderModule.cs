@@ -44,13 +44,13 @@ namespace PackageBuilder.Api.Modules
                     : Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>(readRepo));
             };
 
-            Get["/DataProviders/Latest", true] = async(_, ct) =>
+            Get["/DataProviders/Latest"] = _ =>
             {
                 var list = new List<Domain.Dtos.Write.DataProviderDto>();
                 var repoSource = readRepo.GetUniqueIds();
                 foreach (var id in repoSource)
                 {
-                    var dataProvider = await writeRepo.GetById(id);
+                    var dataProvider = writeRepo.GetById(id);
 
                     list.Add(Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(dataProvider));
                 }
@@ -83,15 +83,15 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProviders/{id:guid}", true] = async (_, ct) =>
+            Get["/DataProviders/{id:guid}"] = _ =>
             {
-                var dp = (DataProvider) await writeRepo.GetById(_.id);
+                var dp = (DataProvider) writeRepo.GetById(_.id);
                 return Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(dp) } });
             };
 
-            Get["/DataProviders/{id}/{version}", true] = async (_, ct) =>
+            Get["/DataProviders/{id}/{version}"] = _ =>
             {
-                var dp = (DataProvider)await writeRepo.GetById(_.id);
+                var dp = (DataProvider) writeRepo.GetById(_.id);
                 var dataProvider = Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(dp);
                 return Response.AsJson(new { Response = new[] { dataProvider } });
             };

@@ -20,7 +20,8 @@ namespace UserManagement.Api.Helpers
             new RedisInstaller(),
             new AuthenticationInstaller(),
             new HashProviderInstaller(),
-            new AuthInstaller()
+            new AuthInstaller(),
+            new CurrentUserIdentityInstaller()
         };
     }
 }
