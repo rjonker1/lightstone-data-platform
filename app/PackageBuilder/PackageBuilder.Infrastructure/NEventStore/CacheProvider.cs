@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using DataPlatform.Shared.Enums;
 using Newtonsoft.Json;
 using PackageBuilder.Domain.Entities.Packages.Write;
 using Shared.Logging;

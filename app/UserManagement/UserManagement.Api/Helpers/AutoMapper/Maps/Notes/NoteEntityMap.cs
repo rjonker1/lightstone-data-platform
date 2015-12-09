@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.Practices.ServiceLocation;
 using Nancy.Security;
 using UserManagement.Api.Helpers.Extensions;
+using UserManagement.Api.Helpers.Security;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 
@@ -27,8 +28,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Notes
                 .ForMember(dest => dest.NoteText, opt => opt.MapFrom(x => x.NoteText.FirstNCharacters(255)))
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(x => string.IsNullOrEmpty(x.Created) ? DateTime.UtcNow : DateTime.Parse(x.Created)))
                 .ForMember(dest => dest.Modified, opt => opt.MapFrom(x => DateTime.UtcNow))
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IUserIdentity>("CurrentUserIdentity").UserName))
-                .ForMember(dest => dest.ModifiedBy, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<IUserIdentity>("CurrentUserIdentity").UserName));
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<ICurrentUserIdentity>().UserIdentity.UserName))
+                .ForMember(dest => dest.ModifiedBy, opt => opt.MapFrom(x => ServiceLocator.Current.GetInstance<ICurrentUserIdentity>().UserIdentity.UserName));
 
             Mapper.CreateMap<NoteDto, EntityNote>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))

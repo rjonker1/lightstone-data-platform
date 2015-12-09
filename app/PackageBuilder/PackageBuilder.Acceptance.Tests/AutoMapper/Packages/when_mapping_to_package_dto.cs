@@ -12,14 +12,14 @@ namespace PackageBuilder.Acceptance.Tests.AutoMapper.Packages
     public class when_mapping_to_package_dto : TestDataBaseHelper
     {
         private PackageDto _packageDto;
-        public override async void Observe()
+        public override void Observe()
         {
             RefreshDb();
 
             var state = StateMother.Published;
             SaveAndFlush(state);
 
-            var package = await WritePackageMother.FullVerificationPackage;
+            var package = WritePackageMother.FullVerificationPackage;
             package.State = state;
 
             _packageDto = Mapper.Map<IPackage, PackageDto>(package);

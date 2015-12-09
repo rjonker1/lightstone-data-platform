@@ -122,7 +122,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, notes, packageEventType, industries, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
-        private async void Apply(PackageCreated @event)
+        private void Apply(PackageCreated @event)
         {
             Id = @event.Id;
             Name = @event.Name;
@@ -140,12 +140,12 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
             this.Info(() => "Attempting to map data provider overrides from PackageCreated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
-            DataProviders = await Mapper.Map<IEnumerable<IDataProviderOverride>, Task<IEnumerable<DataProvider>>>(@event.DataProviderValueOverrides);
+            DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>(@event.DataProviderValueOverrides);
 
             this.Info(() => "Successfully mapped data provider overrides from PackageCreated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
         }
 
-        private async void Apply(PackageUpdated @event)
+        private void Apply(PackageUpdated @event)
         {
             Id = @event.Id;
             Name = @event.Name;
@@ -163,7 +163,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
             this.Info(() => "Attempting to map data provider overrides from PackageUpdated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
 
-            DataProviders = await Mapper.Map<IEnumerable<IDataProviderOverride>, Task<IEnumerable<DataProvider>>>(@event.DataProviderValueOverrides);
+            DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<DataProvider>>(@event.DataProviderValueOverrides);
 
             this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event. TimeStamp: {0}".FormatWith(DateTime.UtcNow));
         }

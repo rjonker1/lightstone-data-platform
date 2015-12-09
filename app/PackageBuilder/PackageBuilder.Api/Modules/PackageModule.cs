@@ -87,10 +87,10 @@ namespace PackageBuilder.Api.Modules
                         });
             };
 
-            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute, true] = async(parameters, ct) => Response.AsJson(
+            Get[PackageBuilderApi.PackageRoutes.RequestUpdate.ApiRoute] = parameters => Response.AsJson(
                 new
                 {
-                    Response = new[] { Mapper.Map<IPackage, PackageDto>(await writeRepo.GetById(parameters.id)) }
+                    Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) }
                 });
 
 
@@ -100,7 +100,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => StringExtensions.FormatWith("Package Execute started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 this.Info(() => StringExtensions.FormatWith("Package Read started for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
-                var package = await writeRepo.GetById(apiRequest.PackageId, true);
+                var package = await writeRepo.GetByIdCached(apiRequest.PackageId);
                 this.Info(() => StringExtensions.FormatWith("Package Read finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
 
@@ -162,7 +162,7 @@ namespace PackageBuilder.Api.Modules
                 this.Info(() => StringExtensions.FormatWith("Package ExecuteWithCarId Initialized for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
                 this.Info(() => StringExtensions.FormatWith("Package Read Initialized, TimeStamp: {0}", DateTime.UtcNow));
-                var package = await writeRepo.GetById(apiRequest.PackageId, true);
+                var package = await writeRepo.GetByIdCached(apiRequest.PackageId);
                 this.Info(() => StringExtensions.FormatWith("Package Read Completed, TimeStamp: {0}", DateTime.UtcNow));
 
                 if (package == null)
@@ -236,9 +236,9 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
 
-            Put["/Packages/Clone/{id}/{cloneName}", true] = async(parameters, ct) =>
+            Put["/Packages/Clone/{id}/{cloneName}"] = parameters =>
             {
-                var packageToClone = Mapper.Map<IPackage, PackageDto>(await writeRepo.GetById(parameters.id));
+                var packageToClone = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
                 var dataProvidersToClone =
                     Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(
                         packageToClone.DataProviders);

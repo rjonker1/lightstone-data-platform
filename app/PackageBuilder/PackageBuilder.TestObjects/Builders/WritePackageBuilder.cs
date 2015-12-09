@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Write;
@@ -22,9 +21,9 @@ namespace PackageBuilder.TestObjects.Builders
         public DateTime _createdDate;
         public DateTime? _editedDate;
         public IEnumerable<IDataProvider> _dataProviders;
-        public Task<Package> Build()
+        public Package Build()
         {
-            return new Task<Package>(() => new Package
+            return new Package
             {
                 Name = _name,
                 Description = _description,
@@ -38,7 +37,7 @@ namespace PackageBuilder.TestObjects.Builders
                 CreatedDate = _createdDate,
                 EditedDate = _editedDate,
                 DataProviders = _dataProviders
-            });
+            };
         }
 
         public WritePackageBuilder With(string name, string description = "", string notes = "", string owner = "")

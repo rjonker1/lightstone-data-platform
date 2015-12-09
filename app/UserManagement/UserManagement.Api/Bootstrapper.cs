@@ -17,6 +17,7 @@ using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.Logging;
 using UserManagement.Api.Helpers;
 using UserManagement.Api.Helpers.Extensions;
+using UserManagement.Api.Helpers.Security;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.DataImports;
 using UserManagement.Infrastructure.Helpers;
@@ -31,7 +32,7 @@ namespace UserManagement.Api
         // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
-            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+            //HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
             this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
@@ -101,8 +102,7 @@ namespace UserManagement.Api
                 if (ctx.CurrentUser != null)
                 {
                     ctx.ViewBag.UserName = ctx.CurrentUser.UserName;
-                    if (!container.Kernel.HasComponent("CurrentUserIdentity"))
-                        container.Register(Component.For<IUserIdentity>().UsingFactoryMethod(x => ctx.CurrentUser).Named("CurrentUserIdentity").LifestylePerWebRequest());
+                    container.Resolve<ICurrentUserIdentity>().UserIdentity = ctx.CurrentUser;
                 }
                 return null;
             });

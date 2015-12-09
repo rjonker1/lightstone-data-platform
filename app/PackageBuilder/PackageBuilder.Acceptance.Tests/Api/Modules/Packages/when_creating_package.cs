@@ -31,9 +31,9 @@ namespace PackageBuilder.Acceptance.Tests.Api.Modules.Packages
             });
         }
 
-        public override async void Observe()
+        public override void Observe()
         {
-            Package = await WriteRepo.GetById(Id);
+            Package = WriteRepo.GetById(Id);
         }
 
         [Observation]

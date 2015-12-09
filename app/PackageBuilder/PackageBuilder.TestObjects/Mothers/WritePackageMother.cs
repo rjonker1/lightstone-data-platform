@@ -7,7 +7,7 @@ namespace PackageBuilder.TestObjects.Mothers
 {
     public class WritePackageMother
     {
-        public static Task<Package> LicensePlateSearchPackage
+        public static Package LicensePlateSearchPackage
         {
             get
             {
@@ -23,7 +23,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Task<Package> FullVerificationPackage
+        public static Package FullVerificationPackage
         {
             get
             {
@@ -38,7 +38,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Task<Package> PartialVerificationPackage
+        public static Package PartialVerificationPackage
         {
             get
             {
@@ -53,7 +53,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Task<Package> LicenseScanPackage
+        public static Package LicenseScanPackage
         {
             get
             {
@@ -68,7 +68,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Task<Package> EzScorePackage
+        public static Package EzScorePackage
         {
             get
             {
@@ -83,7 +83,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Task<Package> FicaVerificationPackage
+        public static Package FicaVerificationPackage
         {
             get
             {
@@ -98,7 +98,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Task<Package> PropertyPackage
+        public static Package PropertyPackage
         {
             get
             {
