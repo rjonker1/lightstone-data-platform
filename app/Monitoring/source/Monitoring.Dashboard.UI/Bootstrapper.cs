@@ -25,7 +25,6 @@ using Shared.BuildingBlocks.AdoNet.Repository;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Installers;
 using Shared.Logging;
-using Workflow.BuildingBlocks;
 using Workflow.BuildingBlocks.Builders;
 
 namespace Monitoring.Dashboard.UI
@@ -73,12 +72,6 @@ namespace Monitoring.Dashboard.UI
                 return ErrorResponse.FromException(exception);
             });
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
-
-            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
-            {
-                this.Error(() => "Error on Monitoring request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                return ErrorResponse.FromException(exception);
-            });
         }
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
