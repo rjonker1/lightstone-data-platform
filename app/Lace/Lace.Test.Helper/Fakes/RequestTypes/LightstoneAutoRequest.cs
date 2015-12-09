@@ -25,6 +25,8 @@ namespace Lace.Test.Helper.Fakes.RequestTypes
             };
         }
 
+        
+
         public static IAmLightstoneAutoRequest WithCarIdAndYear(int carId, int year)
         {
             return new LightstoneAutoRequest()

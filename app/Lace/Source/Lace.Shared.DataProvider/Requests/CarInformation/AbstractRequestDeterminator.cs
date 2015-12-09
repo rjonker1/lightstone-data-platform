@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Factories;
 using Lace.Shared.Extensions;
@@ -58,7 +59,16 @@ namespace Lace.Toolbox.Database.Requests.CarInformation
         {
             if(vinNumber == null)
                 return _factory.BuildVinMiners(_response).MineVin();
-            return !string.IsNullOrEmpty(vinNumber.GetValue()) ? vinNumber.GetValue() : _factory.BuildVinMiners(_response).MineVin();
+
+            //always take vin number from response over request
+            var responseVin = _factory.BuildVinMiners(_response).MineVin();
+            var requestVin = vinNumber.GetValue();
+
+            if (string.IsNullOrEmpty(responseVin))
+                return requestVin;
+
+            return !string.IsNullOrEmpty(requestVin) && requestVin.Equals(responseVin, StringComparison.CurrentCultureIgnoreCase) ? requestVin : responseVin;
+           // return !string.IsNullOrEmpty(vinNumber.GetValue()) && responseVin == vinNumber.g ? vinNumber.GetValue() : _factory.BuildVinMiners(_response).MineVin();
         }
     }
 }

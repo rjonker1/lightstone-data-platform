@@ -147,6 +147,7 @@
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_and_rgt_vin_with_vin12_vin.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ls_auto_with_vin12_vin.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_chain_with_ivid_and_ls_auto_with_vin12_vin.cs" />
+    <Compile Include="Lace\Chain\when_initializing_lace_source_chaing_for_ivid_and_ls_with_lic_and_vin_mismatch.cs" />
     <Compile Include="Lace\Chain\when_initializing_lace_source_chain_for_drivers_license_decryption.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_MisMatchlicensePlate_number_search.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_rgt_vin_vin12.cs" />
