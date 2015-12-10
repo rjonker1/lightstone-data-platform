@@ -14,7 +14,7 @@ namespace Toolbox.LSAuto.Entities.Factory
         {
         }
 
-        public static ISessionFactory LsAutoInstance
+        public static ISessionFactory Instance
         {
             get { return _lsAutoInstance; }
         }
@@ -25,6 +25,9 @@ namespace Toolbox.LSAuto.Entities.Factory
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.LsAuto.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.DataSetMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DataFieldMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.ViewMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.ViewColumnMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.LsAuto.UpdateDatabase))
                 .BuildSessionFactory();
         }
@@ -35,6 +38,9 @@ namespace Toolbox.LSAuto.Entities.Factory
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.LsAuto.ConnectionString))
                 .Mappings(m => m.FluentMappings.Add<Maps.DataSetMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DataFieldMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.ViewMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.ViewColumnMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.LsAuto.UpdateDatabase))
                 .BuildConfiguration();
         }
@@ -45,4 +51,3 @@ namespace Toolbox.LSAuto.Entities.Factory
 
     }
 }
-

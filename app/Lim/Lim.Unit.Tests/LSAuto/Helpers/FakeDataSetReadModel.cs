@@ -11,7 +11,7 @@ namespace Lim.Unit.Tests.LSAuto.Helpers
         {
             return FakeDatabase.DataSetList.Select(s => new DataSetDto
             {
-                Id = s.Id,
+                AggregateId = s.AggregateId,
                 Name = s.Name,
                 Version = s.Version,
                 Activated = s.Activated,

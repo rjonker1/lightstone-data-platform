@@ -1,27 +1,30 @@
 ﻿using System;
 using Lim;
 
-namespace Toolbox.LightstoneAuto.Infrastructure.Commands
+namespace Toolbox.LightstoneAuto.Domain.Commands.View
 {
-    public class DeActivateDataSetExport : Command
+    public class DeActivateViewImport : Command
     {
-        public DeActivateDataSetExport(Guid dataSetId, Guid modifiedBy, long version, Guid correlationId)
+        public DeActivateViewImport(Guid viewId, Guid modifiedBy, long version, Guid correlationId)
         {
-            DataSetId = dataSetId;
+            ViewId = viewId;
             EventType = Lim.Enums.EventType.Deactivated.ToString();
             EventTypeId = (int)Lim.Enums.EventType.Deactivated;
             NewAggregate = false;
             User = modifiedBy;
             Version = version;
             CorrelationId = correlationId;
-            AggregateId = dataSetId;
+            AggregateId = viewId;
+            Type = GetType();
         }
 
-        public readonly Guid DataSetId;
+
+        public readonly Guid ViewId;
         public readonly string EventType;
         public readonly int EventTypeId;
         public readonly bool NewAggregate;
         public readonly long Version;
         public readonly Guid CorrelationId;
+        public readonly Type Type;
     }
 }

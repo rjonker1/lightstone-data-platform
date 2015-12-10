@@ -141,6 +141,7 @@
     <Compile Include="Installers\HandlerInstaller.cs" />
     <Compile Include="Installers\JobInstaller.cs" />
     <Compile Include="Installers\ApiInstallers.cs" />
+    <Compile Include="Installers\LsAutoInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\TrackingInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
@@ -298,6 +299,14 @@
       <Project>{f3df2516-8ff1-46c1-9589-06e5b9bc4799}</Project>
       <Name>Toolbox.LIVE</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Database\Toolbox.LSAuto.csproj">
+      <Project>{503335fd-622f-469a-83bf-c341562f7e45}</Project>
+      <Name>Toolbox.LSAuto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Entities\Toolbox.LSAuto.Entities.csproj">
+      <Project>{326500cd-3112-4a9c-9539-2f1b22688f8c}</Project>
+      <Name>Toolbox.LSAuto.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
       <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
       <Name>Lim.Domain.Entities</Name>
@@ -321,6 +330,10 @@
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Dtos\Lim.Dtos.csproj">
+      <Project>{e75b2d88-9299-47b7-a2a6-bcbe63b8879a}</Project>
+      <Name>Lim.Dtos</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim.Schedule.Core\Lim.Schedule.Core.csproj">
       <Project>{c2001d8a-5cc6-459c-b8fd-3dc87399f1ee}</Project>

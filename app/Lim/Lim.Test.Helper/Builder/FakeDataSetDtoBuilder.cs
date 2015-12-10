@@ -12,15 +12,14 @@ namespace Lim.Test.Helper.Builder
             {
                 Activated = true,
                 Description = "LS Auto Spec Export",
-                Id = id,
+                AggregateId = id,
                 Name = "LS Auto Specs Export",
-                Version = 10000,
-                DateCreated = DateTime.Now.AddDays(-1),
+                Version = -1,
                 DataFields = new List<DataFieldDto>
                 {
                     new DataFieldDto()
                     {
-                        Id = 1000,
+                        Id = 0,
                         Activated = true,
                         DateCreated = DateTime.Now.AddDays(-1),
                         Name = "Speed",

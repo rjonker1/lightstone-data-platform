@@ -4,7 +4,7 @@ namespace Lace.Toolbox.Database.Base
 {
     public interface IGetCarInformation
     {
-        IEnumerable<CarInformationDto> Cars { get; }
+        List<CarInformationDto> Cars { get; }
         void GetCarInformation(IHaveCarInformation request);
     }
 }

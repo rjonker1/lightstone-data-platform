@@ -17,11 +17,12 @@ namespace Toolbox.LightstoneAuto.Domain.Events
             AggregateNew = newAggregate;
             User = user;
             CorrelationId = correlationId;
-            AggregateId = dataSet.Id;
+            AggregateId = dataSet.AggregateId;
+            DataSet.CreatedBy = User;
             //  Payload = Encoding.UTF8.GetBytes(this.ObjectToJson());
 
         }
 
-        public readonly DataSetDto DataSet;
+        public DataSetDto DataSet { get; private set; }
     }
 }

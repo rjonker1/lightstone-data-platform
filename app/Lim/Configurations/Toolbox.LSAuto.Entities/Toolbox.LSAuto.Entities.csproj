@@ -58,10 +58,13 @@
     </Compile>
     <Compile Include="DataField.cs" />
     <Compile Include="Factory\LSAutoFactoryManager.cs" />
+    <Compile Include="Maps\DataFieldMap.cs" />
     <Compile Include="Maps\DataSetMap.cs" />
+    <Compile Include="Maps\ViewColumnMap.cs" />
+    <Compile Include="Maps\ViewMap.cs" />
     <Compile Include="View.cs" />
     <Compile Include="DataSet.cs" />
-    <Compile Include="ViewColumns.cs" />
+    <Compile Include="ViewColumn.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

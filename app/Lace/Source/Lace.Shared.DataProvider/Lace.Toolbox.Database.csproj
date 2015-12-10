@@ -106,16 +106,17 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Base\AbstractCarInformationQuery.cs" />
     <Compile Include="Base\AbstractVin12VehicleFactory.cs" />
     <Compile Include="Base\IGetVin12VehicleData.cs" />
     <Compile Include="Domain\CarInformationRequest.cs" />
-    <Compile Include="Domain\CarInformationQuery.cs" />
     <Compile Include="Domain\GetCarInformation.cs" />
     <Compile Include="Base\IGetCarInformation.cs" />
     <Compile Include="Base\IHaveCarInformation.cs" />
     <Compile Include="Base\IRetrieveCarInformation.cs" />
     <Compile Include="Base\AbstractVehicleFactory.cs" />
     <Compile Include="Dtos\Vin12CarinformationDto.cs" />
+    <Compile Include="Factories\CarInformationQueryFactory.cs" />
     <Compile Include="Factories\DatabaseConnections.cs" />
     <Compile Include="Base\IGetVehicleData.cs" />
     <Compile Include="Factories\CarInformation\RequestTypeFactory.cs" />
@@ -131,6 +132,9 @@
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Dtos\StatisticDto.cs" />
     <Compile Include="Models\Vin.cs" />
+    <Compile Include="Queries\CarIdCarInformationQuery.cs" />
+    <Compile Include="Queries\NullCarInformationQuery.cs" />
+    <Compile Include="Queries\VinCarInformationQuery.cs" />
     <Compile Include="Repositories\FinanceRepository.cs" />
     <Compile Include="Repositories\IReadOnlyRepository.cs" />
     <Compile Include="Repositories\DataProviderRepository.cs" />

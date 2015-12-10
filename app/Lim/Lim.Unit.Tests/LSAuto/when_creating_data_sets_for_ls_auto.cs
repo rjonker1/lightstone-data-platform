@@ -4,7 +4,7 @@ using Lim.Test.Helper.Builder;
 using Lim.Test.Helper.Fakes;
 using Lim.Unit.Tests.LSAuto.Helpers;
 using Toolbox.LightstoneAuto.Domain;
-using Toolbox.LightstoneAuto.Infrastructure.Commands;
+using Toolbox.LightstoneAuto.Domain.Commands.Dataset;
 using Xunit.Extensions;
 
 namespace Lim.Unit.Tests.LSAuto
@@ -33,7 +33,7 @@ namespace Lim.Unit.Tests.LSAuto
             var datasets = _readFacade.GetDataSets();
             datasets.Count().ShouldEqual(1);
 
-            var dto = _readFacade.GetDataSets().FirstOrDefault(f => f.Id == _id);
+            var dto = _readFacade.GetDataSets().FirstOrDefault(f => f.AggregateId == _id);
             dto.ShouldNotBeNull();
         }
 

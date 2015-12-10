@@ -15,11 +15,11 @@ namespace Lim.Domain.Entities.Repository
 
     public class SaveApiConfiguration : ISaveApiConfiguration
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<SaveApiConfiguration>();
 
         public SaveApiConfiguration()
         {
-            _log = LogManager.GetLogger(GetType());
+          
         }
 
         public bool SaveConfiguration(long clientId, short actionId, short frequencyId, short integrationId, short authenticationId, Configuration configuration, ConfigurationApi apiConfiguration, List<IntegrationPackage> packages,
@@ -136,7 +136,7 @@ namespace Lim.Domain.Entities.Repository
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Failed to save information in the LIM database, because {0}", ex, ex.Message);
+                Log.ErrorFormat("Failed to save information in the LIM database, because {0}", ex, ex.Message);
             }
 
             return false;

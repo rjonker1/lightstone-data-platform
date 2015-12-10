@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Dtos;
+using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Toolbox.Database.Domain
@@ -52,13 +53,13 @@ namespace Lace.Toolbox.Database.Domain
 
         public IRetrieveCarInformation SetupDataSources()
         {
-            _getCarInformation = new CarInformationQuery(_repository);
+            _getCarInformation = new CarInformationQueryFactory(_repository).Build(); //new CarInformationQuery(_repository);
             return this;
         }
 
         public IRetrieveCarInformation BuildCarInformation()
         {
-            IsSatisfied = _getCarInformation.Cars.Any() && _getCarInformation.Cars.FirstOrDefault() != null;
+            IsSatisfied = _getCarInformation != null && _getCarInformation.Cars != null && _getCarInformation.Cars.Any() && _getCarInformation.Cars.FirstOrDefault() != null;
             CarInformationDto = IsSatisfied ? _getCarInformation.Cars.FirstOrDefault().SetYear(_year) : new CarInformationDto();
             return this;
         }

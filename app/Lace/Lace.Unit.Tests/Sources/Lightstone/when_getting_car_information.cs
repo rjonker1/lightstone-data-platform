@@ -2,7 +2,7 @@
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Lace.Toolbox.Database.Base;
-using Lace.Toolbox.Database.Domain;
+using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Repositories;
 using Xunit.Extensions;
 
@@ -20,7 +20,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             _request = LaceRequestCarInformationRequestBuilder.ForCarId_107483_ButNoVin();
             _repository = new FakeCarInfoRepository();
             _vin12Repository = new FakeVin12CarInfoRepository(_request.Vin);
-            _getCarInformation = new CarInformationQuery(_repository);
+            _getCarInformation = new CarInformationQueryFactory(_repository).Build(); //new CarInformationQuery(_repository);
         }
 
         public override void Observe()
