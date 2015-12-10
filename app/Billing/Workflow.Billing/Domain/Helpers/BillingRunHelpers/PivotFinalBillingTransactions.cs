@@ -53,7 +53,12 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                 foreach (var customerClientId in customerClientList)
                 {
-                    InvoicePdfList.Add(_reportBuilder.BuildCustomerClientInvoice(customerClientId, _startBillMonth, _endBillMonth));
+                    InvoicePdfList.Add(_reportBuilder.BuildReport(
+                        new ReportTemplate { ShortId = ReportTemplateIdentifier.StatementPdf },
+                            new ReportData
+                            {
+                                CustomerClientInvoice = _reportBuilder.BuildCustomerClientInvoice(customerClientId, _startBillMonth, _endBillMonth)
+                            }));
                 }
             }
             catch (Exception e)
@@ -82,23 +87,11 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
                 foreach (var customerClientId in customerClientList)
                 {
-                    var statement = _reportBuilder.BuildCustomerClientStatement(customerClientId, _startBillMonth, _endBillMonth);
-
-                    var statementReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.StatementPdf },
+                    StatementPdfList.Add(_reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.StatementPdf },
                             new ReportData
                             {
-                                CustomerClientStatement = statement
-                            });
-
-                    var statementReportIndex = StatementPdfList.FindIndex(x =>
-                        x.Data.CustomerClientStatement.CustomerClientName == statement.CustomerClientName &&
-                        x.Data.CustomerClientStatement.ContractName == statement.ContractName);
-
-                    if (statementReportIndex < 0)
-                    {
-                        StatementPdfList.Add(statementReport);
-                        this.Info(() => "Statement added for: {0}".FormatWith(statementReport.Data.CustomerClientStatement.CustomerClientName));
-                    }
+                                CustomerClientStatement = _reportBuilder.BuildCustomerClientStatement(customerClientId, _startBillMonth, _endBillMonth)
+                            }));
                 }
             }
             catch (Exception e)

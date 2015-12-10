@@ -40,7 +40,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
             };
         }
 
-        public ReportDto BuildCustomerClientInvoice(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth)
+        public CustomerClientInvoice BuildCustomerClientInvoice(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth)
         {
             var invoiceDetails = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingInvoiceDetails] @CustomerClientId=:CustomerClientId")
                     .SetGuid("CustomerClientId", customerClientId)
@@ -51,25 +51,23 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
                 .SetParameter("CustomerClientId", customerClientId)
                         .SetParameter("StartDate", startBillMonth)
                         .SetParameter("EndDate", endBillMonth)
-                        .SetResultTransformer(Transformers.AliasToBean(typeof(ReportPackage)))
-                        .List<ReportPackage>();
+                        .SetResultTransformer(Transformers.AliasToBean(typeof(InvoiceTransactionSummary)))
+                        .List<InvoiceTransactionSummary>();
 
-            return BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.InvoicePdf },
-                        new ReportData
-                        {
-                            Customer = new ReportCustomer
-                            {
-                                Name = invoiceDetails[0].Name,
-                                TaxRegistration = invoiceDetails[0].TaxRegistration != null ? invoiceDetails[0].TaxRegistration : 0000,
-                                Packages = reportPackageList.Select(y => new ReportPackage
-                                {
-                                    ItemCode = y.ItemCode,
-                                    ItemDescription = y.ItemDescription,
-                                    QuantityUnit = y.QuantityUnit,
-                                    Price = y.Price
-                                }).ToList()
-                            }
-                        });
+            return new CustomerClientInvoice
+            {
+                CustomerClientName = invoiceDetails[0].Name,
+                TaxRegistration = invoiceDetails[0].TaxRegistration.ToString() != null
+                        ? invoiceDetails[0].TaxRegistration.ToString()
+                        : "0000",
+                InvoiceTransactionSummaries = reportPackageList.Select(y => new InvoiceTransactionSummary
+                {
+                    ItemCode = y.ItemCode,
+                    ItemDescription = y.ItemDescription,
+                    QuantityUnit = y.QuantityUnit,
+                    Price = y.Price
+                }).ToList()
+            };
         }
 
         public CustomerClientStatement BuildCustomerClientStatement(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth)
