@@ -8,6 +8,7 @@ namespace Shared.Logging
 {
     public interface IDataPlatformLogger
     {
+        DateTime InstanceDate { get; set; }
         void Debug(Type loggerType, string message);
         void Debug(string loggerType, string message);
 
@@ -33,8 +34,11 @@ namespace Shared.Logging
         private readonly IWorkflowPublisher _publisher;
         private readonly SystemName _systemName = SystemName.Api;
 
+        public DateTime InstanceDate { get; set; }
+
         public DataPlatformLogger(IWorkflowPublisher publisher)
         {
+            InstanceDate = DateTime.UtcNow;
             _publisher = publisher;
             var systemNameSetting = ConfigurationManager.AppSettings["tokenizer/logging/systemName/enum"];
             if (!string.IsNullOrEmpty(systemNameSetting))

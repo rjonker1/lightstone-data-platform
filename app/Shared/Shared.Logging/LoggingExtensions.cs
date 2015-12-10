@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Configuration;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Threading.Tasks;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Common.Logging;
+using CommonServiceLocator.WindsorAdapter.Unofficial;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Microsoft.Practices.ServiceLocation;
@@ -13,8 +17,12 @@ using Workflow.Publisher;
 
 namespace Shared.Logging
 {
+    
     public static class LoggingExtensions
     {
+        private static readonly DateTime InstanDate = DateTime.UtcNow;
+        private static readonly IDataPlatformLogger Log = Logger(); // Must be single instance
+
         private static IDataPlatformLogger Logger()
         {
             try
@@ -31,6 +39,11 @@ namespace Shared.Logging
                 LogManager.GetLogger(typeof(LoggingExtensions)).Error("Error while trying to resolve IDataPlatformLogger", ex);
                 return null;
             }
+        }
+
+        private static string Message(Func<object> message)
+        {
+            return "LoggingExtensions instance: {0} IDataPlatformLogger instance: {1}".FormatWith(InstanDate, Log.InstanceDate) + message();
         }
 
         #region .: Enabled Checks :.
@@ -142,11 +155,10 @@ namespace Shared.Logging
         public static void Debug(string name, Func<object> message)
         {
             if (!IsDebugEnabled(name)) return;
-            var logger = Logger();
-            if (logger == null)
+            if (Log == null)
                 LogManager.GetLogger(name).Debug(message());
             else
-                logger.Debug(name, message().ToString());
+                Log.Debug(name, Message(message));
         }
 
         #endregion
@@ -166,12 +178,12 @@ namespace Shared.Logging
         public static void Info(string name, Func<object> message)
         {
             if (!IsInfoEnabled(name)) return;
-            var logger = Logger();
-            if (logger == null)
+            if (Log == null)
                 LogManager.GetLogger(name).Info(message());
             else
-                logger.Info(name, message().ToString());
+                Log.Info(name, Message(message));
         }
+
         #endregion
 
         #region .: Warn :.
@@ -189,11 +201,10 @@ namespace Shared.Logging
         public static void Warn(string name, Func<object> message)
         {
             if (!IsWarnEnabled(name)) return;
-            var logger = Logger();
-            if (logger == null)
+            if (Log == null)
                 LogManager.GetLogger(name).Warn(message());
             else
-                logger.Warn(name, message().ToString());
+                Log.Warn(name, Message(message));
         }
         #endregion
 
@@ -227,11 +238,10 @@ namespace Shared.Logging
         public static void Error(string name, Func<object> message, Exception exception)
         {
             if (!IsErrorEnabled(name)) return;
-            var logger = Logger();
-            if (logger == null)
+            if (Log == null)
                 LogManager.GetLogger(name).Error(message(), exception);
             else
-                logger.Error(name, message().ToString(), exception);
+                Log.Error(name, Message(message), exception);
         }
 
         #endregion
@@ -251,11 +261,10 @@ namespace Shared.Logging
         public static void Fatal(string name, Func<object> message)
         {
             if (!IsFatalEnabled(name)) return;
-            var logger = Logger();
-            if (logger == null)
+            if (Log == null)
                 LogManager.GetLogger(name).Fatal(message());
             else
-                logger.Fatal(name, message().ToString());
+                Log.Fatal(name, Message(message));
         }
 
         #endregion
@@ -312,7 +321,6 @@ namespace Shared.Logging
             _loggerName = loggerName;
             Init();
         }
-
 
 
         public double ElapsedTime()
