@@ -43,7 +43,7 @@ namespace Shared.Logging
 
         private async void Log(string loggerType, string message, LogLevel level, SystemName systemName, Exception exception = null)
         {
-            await _publisher.PublishAsync(new LogMessage(loggerType, message, level, systemName, exception));
+            await _publisher.PublishAsync(new LogMessage(loggerType, message, level, systemName, exception != null ? exception.ToString() : ""));
         }
 
         public void Debug(Type loggerType, string message)

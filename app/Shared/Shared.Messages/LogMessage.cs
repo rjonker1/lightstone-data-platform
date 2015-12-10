@@ -1,5 +1,4 @@
-﻿using System;
-using DataPlatform.Shared.Enums;
+﻿using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Messaging;
 
 namespace Shared.Messages
@@ -8,13 +7,13 @@ namespace Shared.Messages
     {
         public string LoggerType { get; set; }
         public string Message { get; set; }
-        public Exception Exception { get; set; }
+        public string Exception { get; set; }
         public LogLevel Level { get; set; }
         public SystemName SystemName { get; set; }
 
         public LogMessage() { }
 
-        public LogMessage(string loggerType, string message, LogLevel level, SystemName systemName, Exception exception = null)
+        public LogMessage(string loggerType, string message, LogLevel level, SystemName systemName, string exception = null)
         {
             LoggerType = loggerType;
             Message = message;
