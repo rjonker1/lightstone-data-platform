@@ -32,7 +32,5 @@ namespace Toolbox.LightstoneAuto.Consumers.Read
         {
             //_persist.Persist(message.Body.DataSet);
         }
-
-
     }
 }

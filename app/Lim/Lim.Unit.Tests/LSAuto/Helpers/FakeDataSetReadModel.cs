@@ -9,7 +9,7 @@ namespace Lim.Unit.Tests.LSAuto.Helpers
     {
         public IEnumerable<DataSetDto> GetDataSets()
         {
-            return FakeDatabase.DataSetList.Select(s => new DataSetDto
+            return FakeLsAutoDatabase.DataSetList.Select(s => new DataSetDto
             {
                 AggregateId = s.AggregateId,
                 Name = s.Name,

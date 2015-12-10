@@ -17,12 +17,12 @@ namespace Toolbox.LightstoneAuto.Domain.Commands.View
             CorrelationId = correlationId;
             Type = GetType();
         }
-
-        public readonly ViewDto View;
+        
         public readonly string EventType;
         public readonly int EventTypeId;
         public readonly Guid CorrelationId;
         public readonly bool NewAggregate;
         public readonly Type Type;
+        public readonly ViewDto View;
     }
 }

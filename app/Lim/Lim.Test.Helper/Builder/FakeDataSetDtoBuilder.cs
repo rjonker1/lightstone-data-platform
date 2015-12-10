@@ -23,7 +23,6 @@ namespace Lim.Test.Helper.Builder
                         Activated = true,
                         DateCreated = DateTime.Now.AddDays(-1),
                         Name = "Speed",
-                        DataSetId = id,
                         DisplayName = "Speed",
                         DateModified = DateTime.Now,
                         Selected = true

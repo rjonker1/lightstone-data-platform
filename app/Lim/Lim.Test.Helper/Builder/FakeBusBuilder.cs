@@ -1,16 +1,18 @@
-﻿using Lim.Domain.EventStore;
+﻿using EasyNetQ;
+using Lim.Domain.EventStore;
 using Lim.Test.Helper.Fakes;
+using Lim.Test.Helper.Fakes.Repository;
+using Toolbox.LightstoneAuto.Consumers.Read;
 using Toolbox.LightstoneAuto.Domain;
 using Toolbox.LightstoneAuto.Domain.Commands.Dataset;
 using Toolbox.LightstoneAuto.Domain.Events;
 using Toolbox.LightstoneAuto.Infrastructure.Handlers;
-using Toolbox.LightstoneAuto.Infrastructure.Read.Handlers;
 
 namespace Lim.Test.Helper.Builder
 {
     public static class FakeBusBuilder
     {
-        public static FakeBus Bus()
+        public static FakeBus LsAutoBus()
         {
             var bus = new FakeBus();
             var eventStoreRepository = FakeDataBaseBuilder.ForEventStore();
@@ -21,15 +23,16 @@ namespace Lim.Test.Helper.Builder
             bus.RegisterHandler<DeActivateDataSetExport>(commands.Handle);
             bus.RegisterHandler<ModifyDataSetExport>(commands.Handle);
 
-            var detailHandler = new DataSetDetailDtoHandler(FakeDataBaseBuilder.ForDataSetDtoRepository());
-            bus.RegisterHandler<DataSetExportCreated>(detailHandler.Handle);
-            bus.RegisterHandler<DataSetExportDeActivated>(detailHandler.Handle);
-            bus.RegisterHandler<DataSetExportModified>(detailHandler.Handle);
+            var detailConsumer = new DataSetExportEventConsumer(bus,new FakeLsAutoDataSetCommit());
+            bus.RegisterConsumer<IMessage<DataSetExportCreated>>(detailConsumer.Consume);
+            bus.RegisterConsumer<IMessage<DataSetExportDeActivated>>(detailConsumer.Consume);
+            bus.RegisterConsumer<IMessage<DataSetExportModified>>(detailConsumer.Consume);
 
-            var dataSetHandler = new DataSetDtoHandler(FakeDataBaseBuilder.ForDataSetDtoRepository());
-            bus.RegisterHandler<DataSetExportCreated>(dataSetHandler.Handle);
-            bus.RegisterHandler<DataSetExportDeActivated>(dataSetHandler.Handle);
-            bus.RegisterHandler<DataSetExportModified>(dataSetHandler.Handle);
+            var viewConsumer = new ViewImportEventConsumer(bus, new FakeLsAutoViewCommit());
+            bus.RegisterConsumer<IMessage<ViewImportCreated>>(viewConsumer.Consume);
+            bus.RegisterConsumer<IMessage<ViewImportModified>>(viewConsumer.Consume);
+            bus.RegisterConsumer<IMessage<ViewImportReloaded>>(viewConsumer.Consume);
+            bus.RegisterConsumer<IMessage<ViewImportDeActivated>>(viewConsumer.Consume);
             return bus;
         }
     }

@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="Bus\LIVE\when_sending_executed_package_to_integration_bus.cs" />
     <Compile Include="Bus\LSAuto\when_sending_data_set_created_to_the_integration_bus.cs" />
+    <Compile Include="Bus\LSAuto\when_sending_view_created_to_the_integration_bus.cs" />
     <Compile Include="Bus\when_sending_package_response_to_integration_queue.cs" />
     <Compile Include="Integrations\ApiIntegrationTestSetup.cs" />
     <Compile Include="Integrations\Push\when_pushing_hourly_integration.cs" />

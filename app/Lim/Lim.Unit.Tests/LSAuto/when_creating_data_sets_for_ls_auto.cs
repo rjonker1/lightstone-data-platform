@@ -17,7 +17,7 @@ namespace Lim.Unit.Tests.LSAuto
 
         public when_creating_data_sets_for_ls_auto()
         {
-            _bus = FakeBusBuilder.Bus();
+            _bus = FakeBusBuilder.LsAutoBus();
             _readFacade = new FakeDataSetReadModel();
            // _id = new Random().Next(1000, 10000000);
             _id = Guid.NewGuid();

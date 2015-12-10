@@ -54,8 +54,16 @@
       <HintPath>..\..\packages\Common.Logging.Log4Net1211.3.2.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -116,9 +124,11 @@
     <Compile Include="Fakes\FakeTransactions.cs" />
     <Compile Include="Fakes\Handlers\FakeFetchingApiPushConfigurationHandler.cs" />
     <Compile Include="Fakes\Handlers\FakeHandleExecutingApiConfiguration.cs" />
-    <Compile Include="Fakes\Repository\FakeDataSetDetailDtoRepository.cs" />
     <Compile Include="Fakes\Repository\FakeEventStoreRepository.cs" />
     <Compile Include="Fakes\Repository\FakeLimRepository.cs" />
+    <Compile Include="Fakes\Repository\FakeLsAutoDatabase.cs" />
+    <Compile Include="Fakes\Repository\FakeLsAutoDataSetCommit.cs" />
+    <Compile Include="Fakes\Repository\FakeLsAutoViewCommit.cs" />
     <Compile Include="Mothers\LimConfigurations.cs" />
     <Compile Include="Mothers\LimClients.cs" />
     <Compile Include="Mothers\LimDatabase.cs" />

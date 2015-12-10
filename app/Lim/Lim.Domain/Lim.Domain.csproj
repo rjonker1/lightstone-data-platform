@@ -78,6 +78,7 @@
     <Compile Include="Aggregate.cs" />
     <Compile Include="Base\AbstractAuditor.cs" />
     <Compile Include="Base\AbstractFailFactory.cs" />
+    <Compile Include="Base\AbstractBuildFactory.cs" />
     <Compile Include="Base\AbstractNotificationFactory.cs" />
     <Compile Include="Base\AbstractWatcherFactory.cs" />
     <Compile Include="Base\AbstractFetchFactory.cs" />

@@ -1,6 +1,6 @@
 ﻿using Toolbox.LightstoneAuto.Domain.Base;
 
-namespace Toolbox.LightstoneAuto.Domain.Views.AutoCarStats
+namespace Toolbox.LightstoneAuto.Import.Views.AutoCarStats
 {
     public class VehicleSpecifcationView : IViewMarker
     {
