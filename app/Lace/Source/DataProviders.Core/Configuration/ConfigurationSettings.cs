@@ -30,6 +30,8 @@
 
     public static class AutoCarstatsConfiguration
     {
+      
+        public static readonly bool IsCached = bool.Parse(ConfigurationReader.ReadAppSetting("lace/souce/database/auto-car-stats/cached", false) ?? "false");
         public static readonly string Database = ConfigurationReader.ReadConnectionString("lace/source/database/auto-car-stats");
     }
 

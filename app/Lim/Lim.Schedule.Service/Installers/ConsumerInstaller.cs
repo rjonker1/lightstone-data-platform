@@ -13,12 +13,11 @@ namespace Lim.Schedule.Service.Installers
 {
     public class ConsumerInstaller : IWindsorInstaller
     {
-        private ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<ConsumerInstaller>();
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            _log = LogManager.GetLogger(GetType());
-            _log.InfoFormat("Installing Consumers");
+            Log.InfoFormat("Installing Consumers");
 
             container.Register(Component.For<ResponseFromPackageConsumer>().ImplementedBy<ResponseFromPackageConsumer>());
             container.Register(Component.For<AlwaysOnConfigurationConsumer>().ImplementedBy<AlwaysOnConfigurationConsumer>());
@@ -32,7 +31,7 @@ namespace Lim.Schedule.Service.Installers
             container.Register(Component.For<ViewImportCommandConsumer>().ImplementedBy<ViewImportCommandConsumer>());
             container.Register(Component.For<ViewImportEventConsumer>().ImplementedBy<ViewImportEventConsumer>());
 
-            _log.InfoFormat("Consumers Installed");
+            Log.InfoFormat("Consumers Installed");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Queries
 {
     public class ValuationViewQuery : IGetValuationView
     {
-        private static readonly ILog Log = LogManager.GetLogger<SaleQuery>();
+        private static readonly ILog Log = LogManager.GetLogger<ValuationViewQuery>();
         private readonly IReadOnlyRepository _repository;
 
         public ValuationViewQuery(IReadOnlyRepository repository)

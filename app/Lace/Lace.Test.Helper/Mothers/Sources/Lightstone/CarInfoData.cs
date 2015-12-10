@@ -13,7 +13,7 @@ namespace Lace.Test.Helper.Mothers.Sources.Lightstone
                 new CarInformationDto(107483, 2008, 862, 59, "TOYOTA Auris 1.6 RT 5-dr", "Auris 1.6 RT 5-dr",
                     "Hatch (5-dr)",
                     "Petrol", "PAS", "Man", 2007, DateTime.Now.ToShortDateString(),
-                    "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg", "Not Available", 98)
+                    "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg", "3rd Quarter", 98)
             };
         }
 
