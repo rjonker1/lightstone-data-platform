@@ -125,10 +125,13 @@
     <Compile Include="Entities\ContractProductDetail.cs" />
     <Compile Include="Entities\ContractStatement.cs" />
     <Compile Include="Entities\ContractUserTransactions.cs" />
+    <Compile Include="Entities\CustomerClientInvoice.cs" />
     <Compile Include="Entities\CustomerClientStatement.cs" />
     <Compile Include="Entities\DataProviderDetail.cs" />
+    <Compile Include="Entities\InvoiceTransactionSummary.cs" />
     <Compile Include="Entities\PackageDetail.cs" />
     <Compile Include="Entities\PreBillingRecord.cs" />
+    <Compile Include="Entities\PricingSummary.cs" />
     <Compile Include="Entities\ReportCustomer.cs" />
     <Compile Include="Entities\ReportData.cs" />
     <Compile Include="Entities\ReportDebitOrder.cs" />
