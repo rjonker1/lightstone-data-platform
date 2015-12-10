@@ -26,7 +26,7 @@ namespace Shared.Bus.Consumers
             if (message.Level == LogLevel.Warn)
                 log.Warn(message.Message);
             if (message.Level == LogLevel.Error)
-                log.Error(message.Message, message.Exception);
+                log.Error(message.Message + " - " + message.Exception);
             if (message.Level == LogLevel.Fatal)
                 log.Fatal(message.Message);
         }

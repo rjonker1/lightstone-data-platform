@@ -2,7 +2,6 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Shared.Logging;
 using StackExchange.Redis;
