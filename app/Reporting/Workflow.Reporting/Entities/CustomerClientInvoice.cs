@@ -2,7 +2,7 @@
 
 namespace Workflow.Reporting.Entities
 {
-    public class CustomerClientStatement
+    public class CustomerClientInvoice
     {
         public string StatementPeriod { get; set; }
         public string CustomerClientName { get; set; }
@@ -12,7 +12,6 @@ namespace Workflow.Reporting.Entities
         public string AccountNumber { get; set; }
         public string ContractName { get; set; }
 
-        public IEnumerable<PricingSummary> PricingSummaries { get; set; }
-        public IEnumerable<ContractUserTransactions> UserTransactions { get; set; } 
+        public IEnumerable<InvoiceTransactionSummary> InvoiceTransactionSummaries { get; set; } 
     }
 }

@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using NHibernate;
+using NHibernate.Transform;
+using Shared.Logging;
+using Workflow.Billing.Domain.Dtos;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
 
@@ -7,6 +12,13 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 {
     public class ReportBuilder : IReportBuilder
     {
+        private readonly ISession _session;
+
+        public ReportBuilder(ISession session)
+        {
+            _session = session;
+        }
+
         public ReportInvoice BuildPastelInvoice(int invoiceNumber, string accountNumber, string productName, double productPrice, int productQuantity)
         {
             return new ReportInvoice
@@ -28,15 +40,116 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
             };
         }
 
-        public ContractStatement BuildStatement(string customerName, string clientName, string contractName, IEnumerable<ContractUserTransactions> userTransactions)
+        public ReportDto BuildCustomerClientInvoice(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth)
         {
-            return new ContractStatement()
+            var invoiceDetails = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingInvoiceDetails] @CustomerClientId=:CustomerClientId")
+                    .SetGuid("CustomerClientId", customerClientId)
+                    .SetResultTransformer(Transformers.AliasToBean(typeof(ReportCustomer)))
+                    .List<ReportCustomer>();
+
+            var reportPackageList = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingInvoiceUserTransactions] @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")
+                .SetParameter("CustomerClientId", customerClientId)
+                        .SetParameter("StartDate", startBillMonth)
+                        .SetParameter("EndDate", endBillMonth)
+                        .SetResultTransformer(Transformers.AliasToBean(typeof(ReportPackage)))
+                        .List<ReportPackage>();
+
+            return BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.InvoicePdf },
+                        new ReportData
+                        {
+                            Customer = new ReportCustomer
+                            {
+                                Name = invoiceDetails[0].Name,
+                                TaxRegistration = invoiceDetails[0].TaxRegistration != null ? invoiceDetails[0].TaxRegistration : 0000,
+                                Packages = reportPackageList.Select(y => new ReportPackage
+                                {
+                                    ItemCode = y.ItemCode,
+                                    ItemDescription = y.ItemDescription,
+                                    QuantityUnit = y.QuantityUnit,
+                                    Price = y.Price
+                                }).ToList()
+                            }
+                        });
+        }
+
+        public CustomerClientStatement BuildCustomerClientStatement(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth)
+        {
+            var statement = new CustomerClientStatement();
+            var userTransactions = new List<ContractUserTransactions>();
+
+            try
             {
-                Customer = customerName,
-                Client = clientName,
-                ContractName = contractName,
-                UserTransactions = userTransactions
-            };
+                var statementDetails = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementDetails] @CustomerClientId=:CustomerClientId")
+                    .SetGuid("CustomerClientId", customerClientId)
+                    .SetResultTransformer(Transformers.AliasToBean(typeof(StatementDetailDto)))
+                    .List<StatementDetailDto>();
+
+                statement.AccountContact = statementDetails[0].AccountContact;
+                statement.AccountNumber = statementDetails[0].AccountNumber;
+                statement.ConsultantName = statementDetails[0].ConsultantName;
+                statement.ContractName = statementDetails[0].ContractName;
+                statement.CustomerClientName = statementDetails[0].CustomerClientName;
+                statement.StatementPeriod = String.Join(" - ", new[] { startBillMonth.ToString("yyyy/MM/dd"), endBillMonth.ToString("yyyy/MM/dd") });
+
+                var ut = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementUserTransactions] @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")
+                        .SetParameter("CustomerClientId", customerClientId)
+                        .SetParameter("StartDate", startBillMonth)
+                        .SetParameter("EndDate", endBillMonth)
+                        .SetResultTransformer(Transformers.AliasToBean(typeof(StatementUserTransactionDto)))
+                        .List<StatementUserTransactionDto>();
+
+                foreach (var userTransactionDto in ut)
+                {
+                    var products = new List<ContractProductDetail>
+                        {
+                            new ContractProductDetail
+                            {
+                                BillableTransactionCount = userTransactionDto.BillableTransactions,
+                                TransactionCount = userTransactionDto.Transactions,
+                                PackageName = userTransactionDto.PackageName
+                            }
+                        };
+
+                    var index = userTransactions.FindIndex(x => x.User == userTransactionDto.Username);
+
+                    if (index < 0)
+                    {
+                        userTransactions.Add(new ContractUserTransactions
+                        {
+                            Products = products,
+                            User = userTransactionDto.Username
+                        });
+
+                        continue;
+                    }
+
+                    var productRange = userTransactions[index].Products.ToList();
+                    productRange.AddRange(products);
+                    userTransactions[index].Products = productRange;
+                }
+
+                statement.UserTransactions = userTransactions;
+
+                var ps = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementPricingSummary] @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")
+                        .SetParameter("CustomerClientId", customerClientId)
+                        .SetParameter("StartDate", startBillMonth)
+                        .SetParameter("EndDate", endBillMonth)
+                        .SetResultTransformer(Transformers.AliasToBean(typeof(StatementPricingSummaryDto)))
+                        .List<StatementPricingSummaryDto>();
+
+                statement.PricingSummaries = ps.Select(pricingSummaryDto => new PricingSummary
+                {
+                    ContractName = pricingSummaryDto.ContractName,
+                    PackageName = pricingSummaryDto.PackageName,
+                    Description = pricingSummaryDto.Description
+                }).ToList();
+            }
+            catch (Exception e)
+            {
+                this.Error(() => e);
+            }
+
+            return statement;
         }
 
         public ReportDebitOrder BuildDebitOrderRecord(string pastelId, string accountName, string accountType, string bankAccountName, string bankAccountNumber, string branchCode, string contractAmount, string batchAmount)

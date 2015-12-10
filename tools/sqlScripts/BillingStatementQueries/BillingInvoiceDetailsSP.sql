@@ -11,9 +11,7 @@ GO
 -- Description:	Billing Invoice Details
 -- =============================================
 CREATE PROCEDURE BillingInvoiceDetails 
-	@CustomerClientId uniqueidentifier,
-	@StartDate DateTime,
-	@EndDate DateTime
+	@CustomerClientId uniqueidentifier
 AS
 BEGIN
 	SET NOCOUNT ON;

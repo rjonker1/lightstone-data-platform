@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Workflow.Reporting.Dtos;
 using Workflow.Reporting.Entities;
 
@@ -7,7 +7,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
     public interface IReportBuilder
     {
         ReportInvoice BuildPastelInvoice(int invoiceNumber, string accountNumber, string productName, double productPrice, int productQuantity);
-        ContractStatement BuildStatement(string customerName, string clientName, string contractName, IEnumerable<ContractUserTransactions> userTransactions);
+        CustomerClientStatement BuildCustomerClientStatement(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth);
+        ReportDto BuildCustomerClientInvoice(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth);
         ReportDebitOrder BuildDebitOrderRecord(string pastelId, string accountName, string accountType, string bankAccountName, string bankAccountNumber, string branchCode, string contractAmount, string batchAmount);
         ReportDto BuildReport(ReportTemplate template, ReportData data);
 

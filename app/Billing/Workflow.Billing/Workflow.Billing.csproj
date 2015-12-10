@@ -91,6 +91,8 @@
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.2034\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.2037\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
@@ -138,8 +140,9 @@
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
@@ -211,6 +214,9 @@
     <Compile Include="Domain\Helpers\BillingRunHelpers\PivotFinalBilling.cs" />
     <Compile Include="Domain\Helpers\BillingRunHelpers\PivotStageBilling.cs" />
     <Compile Include="Domain\Helpers\BillingRunHelpers\Infrastructure\ReportList.cs" />
+    <Compile Include="Domain\Dtos\StatementPricingSummaryDto.cs" />
+    <Compile Include="Domain\Dtos\StatementDetailDto.cs" />
+    <Compile Include="Domain\Dtos\StatementUserTransactionDto.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Domain\NotificationSender\EmailNotification.cs" />
@@ -248,6 +254,7 @@
     <Compile Include="Helpers\Schedules\EmailSchedule.cs" />
     <Compile Include="Helpers\Schedules\MessageSchedule.cs" />
     <Compile Include="Helpers\Schedules\SimpleMailMessage.cs" />
+    <Compile Include="Helpers\StoredProcedures\StoredProcedure.cs" />
     <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\PrimaryKeyConvention.cs" />

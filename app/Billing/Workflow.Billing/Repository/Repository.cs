@@ -9,6 +9,7 @@ using DataPlatform.Shared.Repositories;
 using NHibernate;
 using NHibernate.Linq;
 using ServiceStack.Common.Utils;
+using ServiceStack.Logging.Support.Logging;
 using Shared.Logging;
 using Workflow.Billing.Helpers.Extensions;
 
