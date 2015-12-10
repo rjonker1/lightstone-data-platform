@@ -59,7 +59,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 _finalBillingRepository.BatchInsert(Mapper.Map<IEnumerable<StageBilling>, IEnumerable<FinalBilling>>
                     (_stageBillingRepository.Where(x => x.Created >= _startBillMonth && x.Created <= _endBillMonth)), 0);
 
-                //InvoicePdfList = _finalBillingTransactions.PivotToInvoicePdf();
+                InvoicePdfList = _finalBillingTransactions.PivotToInvoicePdf();
 
                 StatementPdfList = _finalBillingTransactions.PivotToStatementPdf();
 
@@ -76,7 +76,7 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
 
             // Publish to Reporting for processing
             // Note: Pdf report types will be emailed to relevant mailing contacts
-            //_report.PublishToQueue(InvoicePdfList, "pdf");
+            _report.PublishToQueue(InvoicePdfList, "pdf");
             _report.PublishToQueue(StatementPdfList, "pdf");
             //_report.PublishToQueue(PastelReportList, "pastel");
             //_report.PublishToQueue(DebitOrderReportList, "debitOrder");

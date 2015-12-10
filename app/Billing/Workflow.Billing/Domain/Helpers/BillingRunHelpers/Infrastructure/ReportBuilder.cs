@@ -40,6 +40,38 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
             };
         }
 
+        public ReportDto BuildCustomerClientInvoice(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth)
+        {
+            var invoiceDetails = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingInvoiceDetails] @CustomerClientId=:CustomerClientId")
+                    .SetGuid("CustomerClientId", customerClientId)
+                    .SetResultTransformer(Transformers.AliasToBean(typeof(ReportCustomer)))
+                    .List<ReportCustomer>();
+
+            var reportPackageList = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingInvoiceUserTransactions] @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")
+                .SetParameter("CustomerClientId", customerClientId)
+                        .SetParameter("StartDate", startBillMonth)
+                        .SetParameter("EndDate", endBillMonth)
+                        .SetResultTransformer(Transformers.AliasToBean(typeof(ReportPackage)))
+                        .List<ReportPackage>();
+
+            return BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.InvoicePdf },
+                        new ReportData
+                        {
+                            Customer = new ReportCustomer
+                            {
+                                Name = invoiceDetails[0].Name,
+                                TaxRegistration = invoiceDetails[0].TaxRegistration != null ? invoiceDetails[0].TaxRegistration : 0000,
+                                Packages = reportPackageList.Select(y => new ReportPackage
+                                {
+                                    ItemCode = y.ItemCode,
+                                    ItemDescription = y.ItemDescription,
+                                    QuantityUnit = y.QuantityUnit,
+                                    Price = y.Price
+                                }).ToList()
+                            }
+                        });
+        }
+
         public CustomerClientStatement BuildCustomerClientStatement(Guid customerClientId, DateTime startBillMonth, DateTime endBillMonth)
         {
             var statement = new CustomerClientStatement();
@@ -47,16 +79,16 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers.Infrastructure
 
             try
             {
-                var statementDetail = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementDetails] @CustomerClientId=:CustomerClientId")
+                var statementDetails = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementDetails] @CustomerClientId=:CustomerClientId")
                     .SetGuid("CustomerClientId", customerClientId)
                     .SetResultTransformer(Transformers.AliasToBean(typeof(StatementDetailDto)))
                     .List<StatementDetailDto>();
 
-                statement.AccountContact = statementDetail[0].AccountContact;
-                statement.AccountNumber = statementDetail[0].AccountNumber;
-                statement.ConsultantName = statementDetail[0].ConsultantName;
-                statement.ContractName = statementDetail[0].ContractName;
-                statement.CustomerClientName = statementDetail[0].CustomerClientName;
+                statement.AccountContact = statementDetails[0].AccountContact;
+                statement.AccountNumber = statementDetails[0].AccountNumber;
+                statement.ConsultantName = statementDetails[0].ConsultantName;
+                statement.ContractName = statementDetails[0].ContractName;
+                statement.CustomerClientName = statementDetails[0].CustomerClientName;
                 statement.StatementPeriod = String.Join(" - ", new[] { startBillMonth.ToString("yyyy/MM/dd"), endBillMonth.ToString("yyyy/MM/dd") });
 
                 var ut = _session.CreateSQLQuery(@"EXEC [Billing].[dbo].[BillingStatementUserTransactions] @CustomerClientId=:CustomerClientId, @StartDate=:StartDate, @EndDate=:EndDate")

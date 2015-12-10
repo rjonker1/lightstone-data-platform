@@ -46,87 +46,19 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         {
             this.Info(() => "PivotToInvoicePdf process started");
 
-            foreach (var customerClientId in _finalBillingRepository.Select(x => x.CustomerId != null ? x.CustomerId : x.ClientId).Distinct())
+            try
             {
-                var customerClientDetail = _finalBillingRepository.FirstOrDefault(x => x.CustomerId == customerClientId || x.ClientId == customerClientId);
+                var customerClientList = _finalBillingRepository.Select(x => x.CustomerId).Distinct().ToList();
+                customerClientList.AddRange(_finalBillingRepository.Select(x => x.ClientId).Distinct());
 
-                var account = _accountMetaRepository.FirstOrDefault(x => x.AccountNumber == customerClientDetail.AccountNumber);
-
-                var billedTransactionsTotal =
-                    _finalBillingRepository.Where(
-                        x => (x.CustomerId == customerClientId || x.ClientId == customerClientId) && x.UserTransaction.IsBillable
-                             && (x.Created >= _startBillMonth && x.Created <= _endBillMonth))
-                        .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
-
-                var nonBillableTransactionsTotal =
-                _finalBillingRepository.Where(
-                    x => (x.CustomerId == customerClientId || x.ClientId == customerClientId) && !x.UserTransaction.IsBillable
-                         && (x.Created >= _startBillMonth && x.Created <= _endBillMonth))
-                    .Select(x => x.UserTransaction.TransactionId).Distinct().Count();
-
-                try
+                foreach (var customerClientId in customerClientList)
                 {
-                    var reportPackageList = new List<ReportPackage>();
-
-                    if (billedTransactionsTotal > 0)
-                    {
-                        reportPackageList.AddRange(
-                            _finalBillingRepository.Where(x => x.CustomerId == customerClientId || x.ClientId == customerClientId)
-                                .Select(x => new ReportPackage
-                                {
-                                    ItemCode = x.Package.PackageName,
-                                    ItemDescription = x.Package.PackageName,
-                                    QuantityUnit = _finalBillingRepository.Where(
-                                        y => y.CustomerId == customerClientId && y.UserTransaction.IsBillable
-                                             && (y.Created >= _startBillMonth && y.Created <= _endBillMonth)
-                                             && (y.Package.PackageId == x.Package.PackageId))
-                                        .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
-                                    Price = x.Package.PackageRecommendedPrice,
-                                }).Distinct());
-                    }
-
-                    if (nonBillableTransactionsTotal > 0)
-                    {
-                        reportPackageList.AddRange(
-                            _finalBillingRepository.Where(x => x.CustomerId == customerClientId || x.ClientId == customerClientId)
-                                .Select(x => new ReportPackage
-                                {
-                                    ItemCode = x.Package.PackageName,
-                                    ItemDescription = x.Package.PackageName + " - Non-Billable",
-                                    QuantityUnit = _finalBillingRepository.Where(
-                                        y => y.CustomerId == customerClientId && !y.UserTransaction.IsBillable
-                                             && (y.Created >= _startBillMonth && y.Created <= _endBillMonth)
-                                             && (y.Package.PackageId == x.Package.PackageId))
-                                        .Select(y => y.UserTransaction.TransactionId).Distinct().Count(),
-                                    Price = 0,
-                                }).Distinct());
-                    }
-
-                    var report = _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.InvoicePdf },
-                        new ReportData
-                        {
-                            Customer = new ReportCustomer
-                            {
-                                Name = customerClientDetail.CustomerName != null ? customerClientDetail.CustomerName : customerClientDetail.ClientName,
-                                TaxRegistration =
-                                    account.BillingVatNumber != null ? account.BillingVatNumber.ToInt64() : 0000,
-                                Packages = reportPackageList.Select(y => new ReportPackage
-                                {
-                                    ItemCode = y.ItemCode,
-                                    ItemDescription = y.ItemDescription,
-                                    QuantityUnit = y.QuantityUnit,
-                                    Price = y.Price,
-                                    Vat = account.BillingVatNumber != null ? account.BillingVatNumber.ToInt() : 0000
-                                }).ToList()
-                            }
-                        });
-
-                    InvoicePdfList.Add(report);
+                    InvoicePdfList.Add(_reportBuilder.BuildCustomerClientInvoice(customerClientId, _startBillMonth, _endBillMonth));
                 }
-                catch (Exception e)
-                {
-                    this.Error(() => "An Error Occured while creating InvoicePdf record. See below for details." + e);
-                }
+            }
+            catch (Exception e)
+            {
+                this.Error(() => "An Error Occured while creating InvoicePdf record. See below for details." + e);
             }
 
             this.Info(() => "PivotToInvoicePdf process completed");
@@ -148,9 +80,9 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
                 var customerClientList = _finalBillingRepository.Select(x => x.CustomerId).Distinct().ToList();
                 customerClientList.AddRange(_finalBillingRepository.Select(x => x.ClientId).Distinct());
 
-                foreach (var customerId in customerClientList)
+                foreach (var customerClientId in customerClientList)
                 {
-                    var statement = _reportBuilder.BuildCustomerClientStatement(customerId, _startBillMonth, _endBillMonth);
+                    var statement = _reportBuilder.BuildCustomerClientStatement(customerClientId, _startBillMonth, _endBillMonth);
 
                     var statementReport = _reportBuilder.BuildReport(new ReportTemplate { ShortId = ReportTemplateIdentifier.StatementPdf },
                             new ReportData
