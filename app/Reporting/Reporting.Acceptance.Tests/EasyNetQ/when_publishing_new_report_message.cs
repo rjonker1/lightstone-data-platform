@@ -24,26 +24,28 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
         {
             var bus = new TransactionBus(_bus);
 
-            var packagesList = new List<ReportPackage>();
-            packagesList.Add(new ReportPackage
+            var invoiceTransactionList = new List<InvoiceTransactionSummary>
             {
-                ItemCode = "1000/200/002",
-                ItemDescription = "PackageName",
-                QuantityUnit = 1,
-                Price = 16314.67,
-                Vat = 2284
-            });
+                new InvoiceTransactionSummary
+                {
+                    ItemCode = "1000/200/002",
+                    ItemDescription = "PackageName",
+                    QuantityUnit = 1,
+                    Price = 16314.67,
+                    Vat = 2284
+                }
+            };
 
             var data = new ReportDto
             {
                 Template = new ReportTemplate { ShortId = "VJGAd9OM" },
                 Data = new ReportData
                 {
-                    Customer = new ReportCustomer
+                    CustomerClientInvoice = new CustomerClientInvoice
                     {
-                        Name = "Customer 1",
-                        TaxRegistration = 4190195679,
-                        Packages = packagesList
+                        CustomerClientName = "Customer 1",
+                        TaxRegistration = "4190195679",
+                        InvoiceTransactionSummaries = invoiceTransactionList
                     }
                 }
             };

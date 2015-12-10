@@ -36,7 +36,11 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                 {
                     if (message.Body.ReportType.Equals("pdf"))
                     {
-                        if (dto.Data.Customer != null) CreateFile(dto, path, dto.Data.Customer.Name + " - Invoice.pdf");
+                        if (dto.Data.CustomerClientInvoice != null)
+                        {
+                            CreateFile(dto, path, dto.Data.CustomerClientInvoice.CustomerClientName + " - Invoice.pdf");
+                            return;
+                        }
 
                         if (dto.Data.CustomerClientStatement != null)
                         {
@@ -46,14 +50,27 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
 
                             //Send Email
                             //_emailPdfNotificationsWithAttachment.Send(dto, fileName);
+
+                            return;
                         }
                     }
 
-                    if (message.Body.ReportType.Equals("pastel")) CreateFile(dto, path, "Pastel.csv");
+                    if (message.Body.ReportType.Equals("pastel"))
+                    {
+                        CreateFile(dto, path, "Pastel.csv");
+                        return;
+                    }
 
-                    if (message.Body.ReportType.Equals("debitOrder")) CreateFile(dto, path, "DebitOrder.csv");
+                    if (message.Body.ReportType.Equals("debitOrder"))
+                    {
+                        CreateFile(dto, path, "DebitOrder.csv");
+                        return;
+                    }
 
-                    if (message.Body.ReportType.Equals("debitOrderND")) CreateFile(dto, path, "DebitOrderNotDone.csv");
+                    if (message.Body.ReportType.Equals("debitOrderND"))
+                    {
+                        CreateFile(dto, path, "DebitOrderNotDone.csv");
+                    }
                 }
                 catch (Exception e)
                 {

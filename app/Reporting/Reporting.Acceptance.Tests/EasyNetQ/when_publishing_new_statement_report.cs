@@ -24,32 +24,47 @@ namespace Reporting.Acceptance.Tests.EasyNetQ
         {
             var bus = new TransactionBus(_bus);
 
-            var userTransactions = new List<ContractUserTransactions>();
-            var products = new List<ContractProductDetail>();
-            products.Add(new ContractProductDetail { PackageName = "Test Package", TransactionCount = 12 });
-
-            userTransactions.Add(new ContractUserTransactions
+            var products = new List<ContractProductDetail>
             {
-                User = "Test User",
-                Products = products
-            });
+                new ContractProductDetail {PackageName = "Test Package", TransactionCount = 12}
+            };
 
-            var statementList = new List<ContractStatement>();
+            var userTransactions = new List<ContractUserTransactions>
+            {
+                new ContractUserTransactions
+                {
+                    User = "Test User",
+                    Products = products
+                }
+            };
 
-            statementList.Add(new ContractStatement
-             {
-                 Customer = "Test Customer",
-                 Client = "",
-                 ContractName = "Test Contract",
-                 UserTransactions = userTransactions
-             });
+            var pricingSummaries = new List<PricingSummary>
+            {
+                new PricingSummary
+                {
+                    ContractName = "Test Contract",
+                    Description = "Test",
+                    PackageName = "Test Package"
+                }
+            };
 
             var data = new ReportDto
             {
                 Template = new ReportTemplate { ShortId = "VkTYTvzp" },
                 Data = new ReportData
                 {
-                    ContractStatements = statementList
+                    CustomerClientStatement = new CustomerClientStatement
+                     {
+                         StatementPeriod = "9999/99/99",
+                         CustomerClientName = "Customer 1",
+                         TaxRegistration = "4190195679",
+                         ConsultantName = "TC",
+                         AccountContact = "123456",
+                         AccountNumber = "Cus00012",
+                         ContractName = "Test Contract",
+                         UserTransactions = userTransactions,
+                         PricingSummaries = pricingSummaries
+                     }
                 }
             };
 
