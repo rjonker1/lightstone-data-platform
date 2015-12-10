@@ -16,7 +16,7 @@
             get
             {
                 return bool.Parse(GetAppSetting("lim/schedule/lsauto/database/doUpdate",
-                    "false"));
+                    "true"));
             }
         }
     }

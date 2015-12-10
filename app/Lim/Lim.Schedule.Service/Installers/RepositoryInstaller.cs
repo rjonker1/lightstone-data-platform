@@ -4,7 +4,6 @@ using Castle.Windsor;
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Entities.Repository;
-using Lim.Schedule.Service.Resolvers;
 using Toolbox.Bmw.Factories;
 
 namespace Lim.Schedule.Service.Installers

@@ -1,8 +1,8 @@
 ﻿using Lim.Domain.EventStore;
 using Lim.Test.Helper.Fakes;
 using Toolbox.LightstoneAuto.Domain;
+using Toolbox.LightstoneAuto.Domain.Commands.Dataset;
 using Toolbox.LightstoneAuto.Domain.Events;
-using Toolbox.LightstoneAuto.Infrastructure.Commands;
 using Toolbox.LightstoneAuto.Infrastructure.Handlers;
 using Toolbox.LightstoneAuto.Infrastructure.Read.Handlers;
 
@@ -23,13 +23,13 @@ namespace Lim.Test.Helper.Builder
 
             var detailHandler = new DataSetDetailDtoHandler(FakeDataBaseBuilder.ForDataSetDtoRepository());
             bus.RegisterHandler<DataSetExportCreated>(detailHandler.Handle);
-            bus.RegisterHandler<DataSetDeActivated>(detailHandler.Handle);
-            bus.RegisterHandler<DataSetModified>(detailHandler.Handle);
+            bus.RegisterHandler<DataSetExportDeActivated>(detailHandler.Handle);
+            bus.RegisterHandler<DataSetExportModified>(detailHandler.Handle);
 
             var dataSetHandler = new DataSetDtoHandler(FakeDataBaseBuilder.ForDataSetDtoRepository());
             bus.RegisterHandler<DataSetExportCreated>(dataSetHandler.Handle);
-            bus.RegisterHandler<DataSetDeActivated>(dataSetHandler.Handle);
-            bus.RegisterHandler<DataSetModified>(dataSetHandler.Handle);
+            bus.RegisterHandler<DataSetExportDeActivated>(dataSetHandler.Handle);
+            bus.RegisterHandler<DataSetExportModified>(dataSetHandler.Handle);
             return bus;
         }
     }

@@ -36,7 +36,7 @@ namespace PackageBuilder.Infrastructure.NEventStore
 
             if (aggregate == null)
             {
-                aggregate = GetById<T>(id);
+                aggregate = GetById(id);
                 _cacheProvider.CacheSave(id, aggregate);
             }
 

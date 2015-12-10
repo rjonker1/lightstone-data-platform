@@ -1,10 +1,8 @@
 ﻿using System;
-using Lim;
 using Lim.Domain;
 using Lim.Domain.Events;
-using Lim.Dtos;
 using Toolbox.LightstoneAuto.Domain.Events;
-using Toolbox.LightstoneAuto.Infrastructure.Commands;
+using Toolbox.LightstoneAuto.Domain.Commands.Dataset;
 
 namespace Toolbox.LightstoneAuto.Domain
 {
@@ -17,7 +15,7 @@ namespace Toolbox.LightstoneAuto.Domain
             _id = @event.AggregateId;
         }
 
-        private void Apply(DataSetDeActivated @event)
+        private void Apply(DataSetExportDeActivated @event)
         {
         }
 
@@ -28,17 +26,17 @@ namespace Toolbox.LightstoneAuto.Domain
         public DataSetExport(CreateDataSetExport command)
         {
             ApplyChange(new DataSetExportCreated(command.DataSet, Guid.NewGuid(), command.EventType, command.EventTypeId, command.NewAggregate,
-                command.User, typeof(CreateDataSetExport)));
+                command.User, command.Type));
         }
 
         public void Deactivate(DeActivateDataSetExport command)
         {
-            ApplyChange(new DataSetDeActivated(command.DataSetId, command.CorrelationId));
+            ApplyChange(new DataSetExportDeActivated(command.DataSetId, command.CorrelationId));
         }
 
         public void Modify(ModifyDataSetExport command)
         {
-            ApplyChange(new DataSetModified(command.DataSet, command.CorrelationId, command.EventType, command.EventTypeId, false, command.User,
+            ApplyChange(new DataSetExportModified(command.DataSet, command.CorrelationId, command.EventType, command.EventTypeId, false, command.User,
                 typeof(ModifyDataSetExport)));
         }
 
