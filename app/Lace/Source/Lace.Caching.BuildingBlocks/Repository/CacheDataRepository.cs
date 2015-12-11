@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.Logging;
 using Lace.Domain.Core.Contracts.Caching;
-using Lace.Toolbox.Database.Factories;
+using Lace.Toolbox.Database.Factories.CarInformation;
 using ServiceStack.Redis;
 using Shared.BuildingBlocks.AdoNet.Repository;
 

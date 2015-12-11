@@ -4,9 +4,9 @@ using Lace.Toolbox.Database.Dtos;
 
 namespace Lace.Toolbox.Database.Queries
 {
-    public class NullCarInformationQuery : IGetCarInformation
+    public class NullCarInformationQuery : IQueryCarInformation
     {
-        public void GetCarInformation(IHaveCarInformation request)
+        public void Get(IHaveCarInformation request)
         {
             Cars = new List<CarInformationDto>();
         }

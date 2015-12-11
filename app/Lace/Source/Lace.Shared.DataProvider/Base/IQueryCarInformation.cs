@@ -2,9 +2,9 @@
 using Lace.Toolbox.Database.Dtos;
 namespace Lace.Toolbox.Database.Base
 {
-    public interface IGetCarInformation
+    public interface IQueryCarInformation
     {
         List<CarInformationDto> Cars { get; }
-        void GetCarInformation(IHaveCarInformation request);
+        void Get(IHaveCarInformation request);
     }
 }

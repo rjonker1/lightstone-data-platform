@@ -12,6 +12,7 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Base;
+using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;
@@ -43,7 +44,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 _carInformation = new LightstoneVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmLightstoneAutoRequest>(),
-                    _repository);
+                    new CarInformationQueryFactory(_repository).Build());
 
                 GetMetricType.OfBaseRetrievalMetric(_carInformation.CarInformationRequest, _repository, out _metrics);
 

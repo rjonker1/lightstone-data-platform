@@ -11,7 +11,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Vin12.Infrastructure.Management;
 using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Dtos;
-using Lace.Toolbox.Database.Factories;
+using Lace.Toolbox.Database.Factories.CarInformation;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
 using Workflow.Lace.Identifiers;

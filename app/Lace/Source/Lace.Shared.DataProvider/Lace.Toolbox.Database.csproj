@@ -111,7 +111,7 @@
     <Compile Include="Base\IGetVin12VehicleData.cs" />
     <Compile Include="Domain\CarInformationRequest.cs" />
     <Compile Include="Domain\GetCarInformation.cs" />
-    <Compile Include="Base\IGetCarInformation.cs" />
+    <Compile Include="Base\IQueryCarInformation.cs" />
     <Compile Include="Base\IHaveCarInformation.cs" />
     <Compile Include="Base\IRetrieveCarInformation.cs" />
     <Compile Include="Base\AbstractVehicleFactory.cs" />

@@ -7,7 +7,7 @@ namespace Lace.Toolbox.Database.Base
 {
     public abstract class AbstractCarInformationQuery
     {
-        private readonly IGetCarInformation _next;
+        private readonly IQueryCarInformation _next;
         public static readonly bool CacheAvailable = AutoCarstatsConfiguration.IsCached;
 
         protected AbstractCarInformationQuery()
@@ -15,7 +15,7 @@ namespace Lace.Toolbox.Database.Base
             
         }
 
-        protected AbstractCarInformationQuery(IGetCarInformation next)
+        protected AbstractCarInformationQuery(IQueryCarInformation next)
         {
             _next = next;
         }
@@ -29,7 +29,7 @@ namespace Lace.Toolbox.Database.Base
         {
             if(_next == null) return null;
 
-            _next.GetCarInformation(request);
+            _next.Get(request);
             return _next.Cars;
         }
     }

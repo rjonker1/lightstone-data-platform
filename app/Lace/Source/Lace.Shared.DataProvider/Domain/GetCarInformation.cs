@@ -1,24 +1,19 @@
 ﻿using System.Linq;
 using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Dtos;
-using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Toolbox.Database.Domain
 {
     public class GetCarInformation : IRetrieveCarInformation
     {
-        public bool IsSatisfied { get; private set; }
-        public CarInformationDto CarInformationDto { get; private set; }
-        public IHaveCarInformation CarInformationRequest { get; private set; }
-
-        private IGetCarInformation _getCarInformation;
+        private readonly IQueryCarInformation _queryCarInformation;
         private readonly IReadOnlyRepository _repository;
         private readonly int _year;
 
-        public GetCarInformation()
+        private GetCarInformation(IQueryCarInformation queryCarInformation)
         {
-            
+            _queryCarInformation = queryCarInformation;
         }
 
         private GetCarInformation(bool empty)
@@ -32,41 +27,42 @@ namespace Lace.Toolbox.Database.Domain
             return new GetCarInformation(true);
         }
 
-        public GetCarInformation(string vinNumber, IReadOnlyRepository repository)
+        public GetCarInformation(string vinNumber, IQueryCarInformation queryCarInformation) : this(queryCarInformation)
         {
-            _repository = repository;
+           // _repository = repository;
             CarInformationRequest = new CarInformationRequest(vinNumber);
         }
 
-        public GetCarInformation(int carId, int year, IReadOnlyRepository repository)
+        public GetCarInformation(int carId, int year, IQueryCarInformation queryCarInformation) : this(queryCarInformation)
         {
-            _repository = repository;
+          //  _repository = repository;
             _year = year;
             CarInformationRequest = new CarInformationRequest(carId, year);
         }
 
-        public GetCarInformation(int carId, IReadOnlyRepository repository)
+        public GetCarInformation(int carId, IQueryCarInformation queryCarInformation)
+            : this(queryCarInformation)
         {
-            _repository = repository;
+          //  _repository = repository;
             CarInformationRequest = new CarInformationRequest(carId);
         }
 
-        public IRetrieveCarInformation SetupDataSources()
-        {
-            _getCarInformation = new CarInformationQueryFactory(_repository).Build(); //new CarInformationQuery(_repository);
-            return this;
-        }
+        //public IRetrieveCarInformation SetupDataSources()
+        //{
+        //    _getCarInformation = new CarInformationQueryFactory(_repository).Build(); //new CarInformationQuery(_repository);
+        //    return this;
+        //}
 
         public IRetrieveCarInformation BuildCarInformation()
         {
-            IsSatisfied = _getCarInformation != null && _getCarInformation.Cars != null && _getCarInformation.Cars.Any() && _getCarInformation.Cars.FirstOrDefault() != null;
-            CarInformationDto = IsSatisfied ? _getCarInformation.Cars.FirstOrDefault().SetYear(_year) : new CarInformationDto();
+            IsSatisfied = _queryCarInformation != null && _queryCarInformation.Cars != null && _queryCarInformation.Cars.Any() && _queryCarInformation.Cars.FirstOrDefault() != null;
+            CarInformationDto = IsSatisfied ? _queryCarInformation.Cars.FirstOrDefault().SetYear(_year) : new CarInformationDto();
             return this;
         }
 
         public IRetrieveCarInformation GenerateData()
         {
-            _getCarInformation.GetCarInformation(CarInformationRequest);
+            _queryCarInformation.Get(CarInformationRequest);
             return this;
         }
 
@@ -77,5 +73,9 @@ namespace Lace.Toolbox.Database.Domain
             CarInformationRequest.SetCarModelYearMake(CarInformationDto.CarId, CarInformationDto.CarModel, CarInformationDto.Year, CarInformationDto.MakeId);
             return this;
         }
+
+        public bool IsSatisfied { get; private set; }
+        public CarInformationDto CarInformationDto { get; private set; }
+        public IHaveCarInformation CarInformationRequest { get; private set; }
     }
 }

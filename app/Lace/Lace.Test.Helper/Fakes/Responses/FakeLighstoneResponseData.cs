@@ -3,6 +3,7 @@ using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Domain;
+using Lace.Toolbox.Database.Factories;
 
 namespace Lace.Test.Helper.Fakes.Responses
 {
@@ -18,8 +19,7 @@ namespace Lace.Test.Helper.Fakes.Responses
 
         public static IRetrieveCarInformation GetCarInformation(string vinNumber)
         {
-            return new GetCarInformation(vinNumber, new FakeCarInfoRepository())
-                .SetupDataSources()
+            return new GetCarInformation(vinNumber, new CarInformationQueryFactory(new FakeCarInfoRepository()).Build())
                 .GenerateData()
                 .BuildCarInformation()
                 .BuildCarInformationRequest();

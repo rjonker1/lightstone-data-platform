@@ -13,6 +13,7 @@ using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.Queries;
 using Lace.Shared.Extensions;
 using Lace.Toolbox.Database.Base;
+using Lace.Toolbox.Database.Factories;
 using Lace.Toolbox.Database.Models;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.Requests;
@@ -46,7 +47,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     .ForDatabaseType(), new { _dataProvider }, _dataProvider.BillablleState.NoRecordState, string.Empty);
 
                 _carInformation = new RgtVehicleDataFactory().CarInformation(response, _dataProvider.GetRequest<IAmRgtRequest>(),
-                   _repository);
+                   new CarInformationQueryFactory(_repository).Build());
 
                 GetSpecifications.ForCar(new CarSpecificationsQuery(_repository), _carInformation.CarInformationRequest, out _carSpecifications);
 

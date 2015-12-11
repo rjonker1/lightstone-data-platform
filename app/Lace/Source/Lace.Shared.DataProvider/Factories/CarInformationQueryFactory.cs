@@ -6,7 +6,7 @@ namespace Lace.Toolbox.Database.Factories
 {
     public interface ICarInformationQueryFactory
     {
-        IGetCarInformation Build();
+        IQueryCarInformation Build();
     }
 
     public class CarInformationQueryFactory : ICarInformationQueryFactory
@@ -17,7 +17,7 @@ namespace Lace.Toolbox.Database.Factories
             _repository = repository;
         }
 
-        public IGetCarInformation Build()
+        public IQueryCarInformation Build()
         {
             return new VinCarInformationQuery(new CarIdCarInformationQuery(new NullCarInformationQuery(), _repository), _repository);
         }

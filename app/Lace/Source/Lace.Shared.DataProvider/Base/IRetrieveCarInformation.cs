@@ -7,7 +7,7 @@ namespace Lace.Toolbox.Database.Base
         bool IsSatisfied { get; }
         CarInformationDto CarInformationDto { get; }
         IHaveCarInformation CarInformationRequest { get; }
-        IRetrieveCarInformation SetupDataSources();
+       // IRetrieveCarInformation SetupDataSources();
         IRetrieveCarInformation BuildCarInformation();
         IRetrieveCarInformation GenerateData();
         IRetrieveCarInformation BuildCarInformationRequest();

@@ -8,17 +8,17 @@ using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Toolbox.Database.Queries
 {
-    public class CarIdCarInformationQuery : AbstractCarInformationQuery, IGetCarInformation
+    public class CarIdCarInformationQuery : AbstractCarInformationQuery, IQueryCarInformation
     {
         private static readonly ILog Log = LogManager.GetLogger<CarIdCarInformationQuery>();
         private readonly IReadOnlyRepository _repository;
 
-        public CarIdCarInformationQuery(IGetCarInformation next, IReadOnlyRepository repository) : base(next)
+        public CarIdCarInformationQuery(IQueryCarInformation next, IReadOnlyRepository repository) : base(next)
         {
             _repository = repository;
         }
 
-        public void GetCarInformation(IHaveCarInformation request)
+        public void Get(IHaveCarInformation request)
         {
             try
             {

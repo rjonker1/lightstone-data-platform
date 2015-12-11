@@ -7,17 +7,17 @@ using Lace.Toolbox.Database.Repositories;
 
 namespace Lace.Toolbox.Database.Queries
 {
-    public class VinCarInformationQuery : AbstractCarInformationQuery , IGetCarInformation
+    public class VinCarInformationQuery : AbstractCarInformationQuery , IQueryCarInformation
     {
         private static readonly ILog Log = LogManager.GetLogger<VinCarInformationQuery>();
         private readonly IReadOnlyRepository _repository;
 
-        public VinCarInformationQuery(IGetCarInformation next, IReadOnlyRepository repository) : base(next)
+        public VinCarInformationQuery(IQueryCarInformation next, IReadOnlyRepository repository) : base(next)
         {
             _repository = repository;
         }
 
-        public void GetCarInformation(IHaveCarInformation request)
+        public void Get(IHaveCarInformation request)
         {
             try
             {

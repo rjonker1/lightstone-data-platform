@@ -10,7 +10,7 @@ using Lace.Toolbox.Database.Dtos;
 using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 
-namespace Lace.Toolbox.Database.Factories
+namespace Lace.Toolbox.Database.Factories.CarInformation
 {
     public class Vin12VehicleDataFactory : AbstractVin12VehicleFactory<ICollection<IPointToLaceProvider>, IAmRequestField, IReadOnlyRepository, List<Vin12CarinformationDto>>
     {

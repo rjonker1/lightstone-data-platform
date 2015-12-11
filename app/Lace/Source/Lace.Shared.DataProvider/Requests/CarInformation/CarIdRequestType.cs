@@ -3,7 +3,6 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Factories;
 using Lace.Toolbox.Database.Base;
 using Lace.Toolbox.Database.Domain;
-using Lace.Toolbox.Database.Repositories;
 using PackageBuilder.Domain.Requests.Contracts.RequestFields;
 
 namespace Lace.Toolbox.Database.Requests.CarInformation
@@ -12,15 +11,15 @@ namespace Lace.Toolbox.Database.Requests.CarInformation
     {
         private readonly IAmCarIdRequestField _carIdField;
         private readonly IAmYearRequestField _yearField;
-        private readonly IReadOnlyRepository _repository;
+        private readonly IQueryCarInformation _carInformation;
 
         public CarIdRequestType(IDetermineRequestType next, IAmCarIdRequestField carIdField, IAmYearRequestField yearField, ICollection<IPointToLaceProvider> response,
-            IReadOnlyRepository repository, IMineDataProviderResponseFactory factory)
+            IMineDataProviderResponseFactory factory, IQueryCarInformation carInformation)
             : base(response, next, factory)
         {
             _carIdField = carIdField;
             _yearField = yearField;
-            _repository = repository;
+            _carInformation = carInformation;
         }
 
         public IRetrieveCarInformation Retrieve()
@@ -30,10 +29,7 @@ namespace Lace.Toolbox.Database.Requests.CarInformation
 
             return carId == 0
                 ? SearchNext()
-                : new GetCarInformation(carId, year, _repository).SetupDataSources()
-                    .GenerateData()
-                    .BuildCarInformation()
-                    .BuildCarInformationRequest() ?? GetCarInformation.Empty();
+                : new GetCarInformation(carId, year, _carInformation).GenerateData().BuildCarInformation().BuildCarInformationRequest() ?? GetCarInformation.Empty();
         }
     }
 }

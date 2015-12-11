@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using Lace.Domain.DataProviders.Core.Configuration;
 
-namespace Lace.Toolbox.Database.Factories
+namespace Lace.Toolbox.Database.Factories.CarInformation
 {
     public static class DatabaseConnectionFactory
     {
