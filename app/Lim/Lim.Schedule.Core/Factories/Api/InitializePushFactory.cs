@@ -4,8 +4,8 @@ using System.Text;
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
-using Lim.Domain.Entities;
 using Lim.Dtos;
+using Lim.Entities;
 using Lim.Schedule.Core.Commands;
 
 namespace Lim.Schedule.Core.Factories.Api

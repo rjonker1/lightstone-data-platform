@@ -1,8 +1,7 @@
 ﻿using System;
 using Common.Logging;
 using Lim.Core;
-using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
+using Lim.Entities;
 using Lim.Schedule.Core.Commands;
 
 namespace Lim.Schedule.Core.Tracking

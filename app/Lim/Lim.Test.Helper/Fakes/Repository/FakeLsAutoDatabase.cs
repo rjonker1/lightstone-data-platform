@@ -5,10 +5,10 @@ namespace Lim.Test.Helper.Fakes.Repository
 {
     public class FakeLsAutoDatabase
     {
-        public static List<DataSet> DataSetList = new List<DataSet>();
-        public static List<DataField> DataFieldList = new List<DataField>();
+        public static List<DatabaseExtract> DataSetList = new List<DatabaseExtract>();
+        public static List<DatabaseExtractField> DataFieldList = new List<DatabaseExtractField>();
 
-        public static List<View> ViewList = new List<View>();
-        public static List<ViewColumn>ViewColumnList = new List<ViewColumn>(); 
+        public static List<DatabaseView> ViewList = new List<DatabaseView>();
+        public static List<DatabaseViewColumn>ViewColumnList = new List<DatabaseViewColumn>(); 
     }
 }

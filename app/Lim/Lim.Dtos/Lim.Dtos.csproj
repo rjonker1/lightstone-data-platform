@@ -48,10 +48,10 @@
     <None Include="ConfigurationDtoOld.cs.delete" />
     <Compile Include="ConfigurationDto.cs" />
     <Compile Include="ConfigurationForApiDto.cs" />
-    <Compile Include="DataFieldDto.cs" />
+    <Compile Include="DatabaseExtractFieldDto.cs" />
     <Compile Include="DataPlatformClientDto.cs" />
     <Compile Include="DataPlatformContractDto.cs" />
-    <Compile Include="DataSetDto.cs" />
+    <Compile Include="DatabaseExtractDto.cs" />
     <Compile Include="FileInformationDto.cs" />
     <Compile Include="FrequencyTypeDto.cs" />
     <None Include="IntegrationClientDto.cs.delete" />
@@ -63,8 +63,8 @@
     <Compile Include="IntegrationTrackingDto.cs" />
     <Compile Include="PackageDto.cs" />
     <Compile Include="PackageTransactionDto.cs" />
-    <Compile Include="ViewColumnDto.cs" />
-    <Compile Include="ViewDto.cs" />
+    <Compile Include="DatabaseViewColumnDto.cs" />
+    <Compile Include="DatabaseViewDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lim\Lim.csproj">

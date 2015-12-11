@@ -4,7 +4,7 @@ using System.Threading;
 using Lim.Test.Helper.Builder;
 using Lim.Test.Helper.Fakes;
 using Lim.Unit.Tests.LSAuto.Helpers;
-using Toolbox.LightstoneAuto.Domain;
+using Toolbox.LightstoneAuto.Domain.Base;
 using Toolbox.LightstoneAuto.Domain.Commands.Dataset;
 using Xunit.Extensions;
 
@@ -13,7 +13,7 @@ namespace Lim.Unit.Tests.LSAuto
     public class when_modifying_data_sets_for_ls_auto : Specification
     {
         private readonly FakeBus _bus;
-        private readonly IReadModelFacade _readFacade;
+        private readonly IReadDatabaseExtractFacade _readFacade;
         private readonly Guid _id;
         private readonly Guid _user;
         private readonly Guid _correlationId;
@@ -30,25 +30,25 @@ namespace Lim.Unit.Tests.LSAuto
 
         public override void Observe()
         {
-            _bus.Send(new CreateDataSetExport(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), _user));
+            _bus.Send(new CreateDataExtract(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), _user));
         }
 
         [Observation]
         public void then_changes_to_data_set_should_be_visible()
         {
-            var datasets = _readFacade.GetDataSets();
+            var datasets = _readFacade.GetDataExtracts();
             datasets.Count().ShouldEqual(1);
 
-            var dto = _readFacade.GetDataSets().FirstOrDefault(f => f.AggregateId == _id);
+            var dto = _readFacade.GetDataExtracts().FirstOrDefault(f => f.AggregateId == _id);
             dto.ShouldNotBeNull();
 
             const string modifiedName = "this has been changed name";
             dto.Name = modifiedName;
-            _bus.Send(new ModifyDataSetExport(dto, _user, dto.Version, _correlationId));
+            _bus.Send(new ModifyDataExtract(dto, _user, dto.Version, _correlationId));
 
             Thread.Sleep(5000);
 
-            dto = _readFacade.GetDataSets().FirstOrDefault(f => f.AggregateId == _id);
+            dto = _readFacade.GetDataExtracts().FirstOrDefault(f => f.AggregateId == _id);
             dto.Name.ShouldEqual(modifiedName);
 
 

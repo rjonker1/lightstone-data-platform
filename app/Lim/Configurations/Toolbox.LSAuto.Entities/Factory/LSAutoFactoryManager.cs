@@ -6,11 +6,11 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Toolbox.LSAuto.Entities.Factory
 {
-    public sealed class LsAutoFactoryManager
+    public sealed class LightstoneAutoFactoryManager
     {
         private static readonly ISessionFactory _lsAutoInstance = BuildSession();
 
-        static LsAutoFactoryManager()
+        static LightstoneAutoFactoryManager()
         {
         }
 
@@ -24,10 +24,10 @@ namespace Toolbox.LSAuto.Entities.Factory
             return Fluently.Configure()
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.LsAuto.ConnectionString))
-                .Mappings(m => m.FluentMappings.Add<Maps.DataSetMap>())
-                .Mappings(m => m.FluentMappings.Add<Maps.DataFieldMap>())
-                .Mappings(m => m.FluentMappings.Add<Maps.ViewMap>())
-                .Mappings(m => m.FluentMappings.Add<Maps.ViewColumnMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DatabaseExtractMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DatabaseExtractFieldMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DatabaseViewMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DatabaseViewColumnMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.LsAuto.UpdateDatabase))
                 .BuildSessionFactory();
         }
@@ -37,10 +37,10 @@ namespace Toolbox.LSAuto.Entities.Factory
             return (LsAutoConfiguration) Fluently.Configure()
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(ConfigurationReader.LsAuto.ConnectionString))
-                .Mappings(m => m.FluentMappings.Add<Maps.DataSetMap>())
-                .Mappings(m => m.FluentMappings.Add<Maps.DataFieldMap>())
-                .Mappings(m => m.FluentMappings.Add<Maps.ViewMap>())
-                .Mappings(m => m.FluentMappings.Add<Maps.ViewColumnMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DatabaseExtractMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DatabaseExtractFieldMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DatabaseViewMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.DatabaseViewColumnMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.LsAuto.UpdateDatabase))
                 .BuildConfiguration();
         }

@@ -1,4 +1,5 @@
 using FluentNHibernate.Mapping;
+using Lim.Entities;
 
 namespace Lim.Domain.Entities.Maps {
     public class ConfigurationApiMap : ClassMap<ConfigurationApi> {
@@ -15,8 +16,7 @@ namespace Lim.Domain.Entities.Maps {
             Map(x => x.Password).Column("Password").Length(100); ;
 			Map(x => x.HasAuthentication).Column("HasAuthentication").Not.Nullable();
             Map(x => x.AuthenticationToken).Column("AuthenticationToken").Length(500); ;
-            Map(x => x.AuthenticationKey).Column("AuthenticationKey").Length(50); ;
-			//Map(x => x.AuthenticationType).Column("AuthenticationType").Not.Nullable();
+            Map(x => x.AuthenticationKey).Column("AuthenticationKey").Length(50); 
             Map(x => x.DateCreated).Column("DateCreated").Not.Nullable().Default("GETUTCDATE()").Not.Nullable().Generated.Insert();
         }
     }

@@ -6,21 +6,20 @@ namespace Lim.Test.Helper.Builder
 {
     public class FakeDataSetDtoBuilder
     {
-        public static DataSetDto ForLsAutoSpecsData(Guid id)
+        public static DatabaseExtractDto ForLsAutoSpecsData(Guid id)
         {
-            return new DataSetDto
+            return new DatabaseExtractDto
             {
                 Activated = true,
                 Description = "LS Auto Spec Export",
                 AggregateId = id,
                 Name = "LS Auto Specs Export",
                 Version = -1,
-                DataFields = new List<DataFieldDto>
+                Fields = new List<DatabaseExtractFieldDto>
                 {
-                    new DataFieldDto()
+                    new DatabaseExtractFieldDto()
                     {
                         Id = 0,
-                        Activated = true,
                         DateCreated = DateTime.Now.AddDays(-1),
                         Name = "Speed",
                         DisplayName = "Speed",

@@ -1,4 +1,5 @@
 using FluentNHibernate.Mapping;
+using Lim.Entities;
 
 namespace Lim.Domain.Entities.Maps {
     public class ActionTypeMap : ClassMap<ActionType> {

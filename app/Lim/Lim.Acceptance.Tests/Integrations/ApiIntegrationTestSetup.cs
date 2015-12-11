@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Lim.Core;
-using Lim.Domain.Entities;
+using Lim.Entities;
 using NHibernate;
 
 namespace Lim.Acceptance.Tests.Integrations

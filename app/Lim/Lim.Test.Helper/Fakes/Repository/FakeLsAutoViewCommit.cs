@@ -5,11 +5,11 @@ using Toolbox.LSAuto.Entities;
 
 namespace Lim.Test.Helper.Fakes.Repository
 {
-    public class FakeLsAutoViewCommit : AbstractPersistenceRepository<ViewDto>
+    public class FakeLsAutoViewCommit : AbstractPersistenceRepository<DatabaseViewDto>
     {
-        public override bool Persist(ViewDto dto)
+        public override bool Persist(DatabaseViewDto dto)
         {
-            var viewEntitiy = new View
+            var viewEntitiy = new DatabaseView
             {
                 Id = dto.Id,
                 AggregateId = dto.AggregateId,
@@ -19,11 +19,11 @@ namespace Lim.Test.Helper.Fakes.Repository
                 DisplayName = dto.DisplayName
             };
 
-            var dataFields = dto.ViewColumns.Select(s => new ViewColumn()
+            var dataFields = dto.ViewColumns.Select(s => new DatabaseViewColumn()
             {
                 Id = s.Id,
                 Name = s.Name,
-                View = viewEntitiy,
+                DatabaseView = viewEntitiy,
                 DisplayName = s.DisplayName
             });
 

@@ -348,6 +348,10 @@
       <Project>{e75b2d88-9299-47b7-a2a6-bcbe63b8879a}</Project>
       <Name>Lim.Dtos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lim.Entities\Lim.Entities.csproj">
+      <Project>{cfebac30-26e5-497b-83e8-eccad51edf18}</Project>
+      <Name>Lim.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim\Lim.csproj">
       <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
       <Name>Lim</Name>

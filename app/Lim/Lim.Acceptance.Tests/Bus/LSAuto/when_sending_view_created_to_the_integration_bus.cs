@@ -15,10 +15,10 @@ namespace Lim.Acceptance.Tests.Bus.LSAuto
     public class when_sending_view_created_to_the_integration_bus : Specification
     {
         private readonly ISendCommand _sender;
-        private CreateViewImport _command;
+        private LoadView _command;
         private readonly Guid _id;
         private readonly IAdvancedBus _bus;
-        private List<ViewDto> _views;
+        private readonly List<DatabaseViewDto> _views;
 
         public when_sending_view_created_to_the_integration_bus()
         {
@@ -33,7 +33,7 @@ namespace Lim.Acceptance.Tests.Bus.LSAuto
             foreach (var view in _views)
             {
                 view.AggregateId = Guid.NewGuid();
-                _command = new CreateViewImport(view, Guid.NewGuid(), Guid.NewGuid());
+                _command = new LoadView(view, Guid.NewGuid(), Guid.NewGuid());
                 _sender.Send(_command);
 
             }

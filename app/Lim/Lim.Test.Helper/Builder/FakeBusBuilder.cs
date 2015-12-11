@@ -17,22 +17,20 @@ namespace Lim.Test.Helper.Builder
             var bus = new FakeBus();
             var eventStoreRepository = FakeDataBaseBuilder.ForEventStore();
             var storage = new EventStore(bus, eventStoreRepository);
-            var repository = new AggregateRepository<DataSetExport>(storage);
+            var repository = new AggregateRepository<DatabaseExtract>(storage);
             var commands = new DataSetCommandHandler(repository);
-            bus.RegisterHandler<CreateDataSetExport>(commands.Handle);
-            bus.RegisterHandler<DeActivateDataSetExport>(commands.Handle);
-            bus.RegisterHandler<ModifyDataSetExport>(commands.Handle);
+            bus.RegisterHandler<CreateDataExtract>(commands.Handle);
+            bus.RegisterHandler<DeActivateDataExtract>(commands.Handle);
+            bus.RegisterHandler<ModifyDataExtract>(commands.Handle);
 
-            var detailConsumer = new DataSetExportEventConsumer(bus,new FakeLsAutoDataSetCommit());
-            bus.RegisterConsumer<IMessage<DataSetExportCreated>>(detailConsumer.Consume);
-            bus.RegisterConsumer<IMessage<DataSetExportDeActivated>>(detailConsumer.Consume);
-            bus.RegisterConsumer<IMessage<DataSetExportModified>>(detailConsumer.Consume);
+            var detailConsumer = new DatabaseExtractEventConsumer(bus,new FakeLsAutoDataSetCommit());
+            bus.RegisterConsumer<DatabaseExtractCreated>((message) => detailConsumer.Consume((IMessage<DatabaseExtractCreated>) message));
+            bus.RegisterConsumer<DatabaseExtractDeActivated>((message) => detailConsumer.Consume((IMessage<DatabaseExtractDeActivated>)message));
+            bus.RegisterConsumer<DatabaseExtractModified>((message) => detailConsumer.Consume((IMessage<DatabaseExtractModified>)message));
 
-            var viewConsumer = new ViewImportEventConsumer(bus, new FakeLsAutoViewCommit());
-            bus.RegisterConsumer<IMessage<ViewImportCreated>>(viewConsumer.Consume);
-            bus.RegisterConsumer<IMessage<ViewImportModified>>(viewConsumer.Consume);
-            bus.RegisterConsumer<IMessage<ViewImportReloaded>>(viewConsumer.Consume);
-            bus.RegisterConsumer<IMessage<ViewImportDeActivated>>(viewConsumer.Consume);
+            var viewConsumer = new DatabaseViewEventConsumer(bus, new FakeLsAutoViewCommit());
+            bus.RegisterConsumer<DatabaseViewLoaded>((message) => viewConsumer.Consume((IMessage<DatabaseViewLoaded>)message));
+            bus.RegisterConsumer<DatabaseViewModified>((message) => viewConsumer.Consume((IMessage<DatabaseViewModified>)message));
             return bus;
         }
     }

@@ -7,6 +7,7 @@ using Lim.Domain.Entities;
 using Lim.Domain.Entities.Repository;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
+using Lim.Entities;
 using Lim.Test.Helper.Fakes;
 using Workflow.BuildingBlocks;
 using Xunit.Extensions;

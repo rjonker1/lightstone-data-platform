@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,15 +57,16 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DataField.cs" />
+    <Compile Include="DatabaseExtractField.cs" />
     <Compile Include="Factory\LSAutoFactoryManager.cs" />
-    <Compile Include="Maps\DataFieldMap.cs" />
-    <Compile Include="Maps\DataSetMap.cs" />
-    <Compile Include="Maps\ViewColumnMap.cs" />
-    <Compile Include="Maps\ViewMap.cs" />
-    <Compile Include="View.cs" />
-    <Compile Include="DataSet.cs" />
-    <Compile Include="ViewColumn.cs" />
+    <Compile Include="Factory\LSAutoMemoryFactoryManager.cs" />
+    <Compile Include="Maps\DatabaseExtractFieldMap.cs" />
+    <Compile Include="Maps\DatabaseExtractMap.cs" />
+    <Compile Include="Maps\DatabaseViewColumnMap.cs" />
+    <Compile Include="Maps\DatabaseViewMap.cs" />
+    <Compile Include="DatabaseView.cs" />
+    <Compile Include="DatabaseExtract.cs" />
+    <Compile Include="DatabaseViewColumn.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

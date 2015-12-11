@@ -15,7 +15,7 @@ namespace Lim.Dtos
             ActionType = actionType;
             IntegrationType = integrationType;
             Id = id;
-            Key = key;
+            ConfigurationKey = key;
             FrequencyType = frequencyType;
             ClientId = clientId;
             IsActive = isActive;
@@ -31,7 +31,7 @@ namespace Lim.Dtos
         }
 
         public long Id { get; private set; }
-        public Guid Key { get; private set; }
+        public Guid ConfigurationKey { get; private set; }
         public short FrequencyType { get; set; }
         public short ActionType { get; set; }
         public short IntegrationType { get; set; }

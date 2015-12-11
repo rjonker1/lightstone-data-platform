@@ -14,6 +14,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>9905fe22</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,14 @@
     <OutputPath>bin\Prod\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
@@ -97,8 +106,10 @@
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -119,6 +130,10 @@
     <Compile Include="Bus\LSAuto\when_sending_data_set_created_to_the_integration_bus.cs" />
     <Compile Include="Bus\LSAuto\when_sending_view_created_to_the_integration_bus.cs" />
     <Compile Include="Bus\when_sending_package_response_to_integration_queue.cs" />
+    <Compile Include="Configurations\LSAuto\when_de_activating_database_extract.cs" />
+    <Compile Include="Configurations\LSAuto\when_loading_database_views.cs" />
+    <Compile Include="Configurations\LSAuto\when_creating_database_extract.cs" />
+    <Compile Include="Configurations\LSAuto\when_modifying_database_extract.cs" />
     <Compile Include="Integrations\ApiIntegrationTestSetup.cs" />
     <Compile Include="Integrations\Push\when_pushing_hourly_integration.cs" />
   </ItemGroup>
@@ -171,6 +186,10 @@
       <Project>{e75b2d88-9299-47b7-a2a6-bcbe63b8879a}</Project>
       <Name>Lim.Dtos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lim.Entities\Lim.Entities.csproj">
+      <Project>{cfebac30-26e5-497b-83e8-eccad51edf18}</Project>
+      <Name>Lim.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
       <Project>{0d4e5018-6f0d-42a3-8962-0bb05ffc136c}</Project>
       <Name>Lim.Pull</Name>
@@ -192,11 +211,10 @@
       <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

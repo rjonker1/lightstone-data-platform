@@ -13,7 +13,7 @@ namespace Lim.Acceptance.Tests.Bus.LSAuto
     public class when_sending_data_set_created_to_the_integration_bus : Specification
     {
         private readonly ISendCommand _sender;
-        private readonly CreateDataSetExport _command;
+        private readonly CreateDataExtract _command;
         private readonly Guid _id;
         private readonly IAdvancedBus _bus;
 
@@ -21,7 +21,7 @@ namespace Lim.Acceptance.Tests.Bus.LSAuto
         {
             _bus = BusFactory.CreateAdvancedBus("lim/queue");
             _id = Guid.NewGuid();
-            _command = new CreateDataSetExport(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), Guid.NewGuid());
+            _command = new CreateDataExtract(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), Guid.NewGuid());
             _sender = new SendCommand(_bus);
         }
 

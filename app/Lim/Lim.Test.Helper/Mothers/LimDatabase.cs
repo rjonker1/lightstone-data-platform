@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Lim.Domain.Entities;
+using Lim.Entities;
 
 namespace Lim.Test.Helper.Mothers
 {

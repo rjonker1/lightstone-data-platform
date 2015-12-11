@@ -10,7 +10,7 @@ namespace Lim.Unit.Tests.LSAuto.Views
     public class when_creating_views_for_import : Specification
     {
         private readonly BuildViewDtoFactory _buildFactory;
-        private List<ViewDto> _views;
+        private List<DatabaseViewDto> _views;
 
         public when_creating_views_for_import()
         {
@@ -19,7 +19,7 @@ namespace Lim.Unit.Tests.LSAuto.Views
 
         public override void Observe()
         {
-            _views = (List<ViewDto>)_buildFactory.Build(true);
+            _views = (List<DatabaseViewDto>)_buildFactory.Build(true);
         }
 
         [Observation]

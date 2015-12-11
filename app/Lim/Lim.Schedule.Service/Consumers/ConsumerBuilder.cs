@@ -33,35 +33,31 @@ namespace Lim.Schedule.Service.Consumers
         private static IAdvancedBus AddReadConsumers(this IAdvancedBus bus, IQueue queue, IWindsorContainer container)
         {
             bus.Consume(queue, q => q
-                .Add<PackageConfigurationMessage>((message, info) => new ReadConsumers<PackageConfigurationMessage>(message, container))
-                .Add<ExecutedPackageSent>((message, info) => new ReadConsumers<ExecutedPackageSent>(message, container))
-                .Add<PackageReceived>((message, info) => new ReadConsumers<PackageReceived>(message, container))
+                .Add<PackageConfigurationMessage>((message, info) => ReadConsumers<PackageConfigurationMessage>.New(message, container))
+                .Add<ExecutedPackageSent>((message, info) => ReadConsumers<ExecutedPackageSent>.New(message, container))
+                .Add<PackageReceived>((message, info) => ReadConsumers<PackageReceived>.New(message, container))
 
-                .Add<DataSetExportCreated>((message, info) => new ReadConsumers<DataSetExportCreated>(message, container))
-                .Add<DataSetExportModified>((message, info) => new ReadConsumers<DataSetExportModified>(message, container))
-                .Add<DataSetExportDeActivated>((message, info) => new ReadConsumers<DataSetExportDeActivated>(message, container))
+                .Add<DatabaseExtractCreated>((message, info) => ReadConsumers<DatabaseExtractCreated>.New(message, container))
+                .Add<DatabaseExtractModified>((message, info) => ReadConsumers<DatabaseExtractModified>.New(message, container))
+                .Add<DatabaseExtractDeActivated>((message, info) => ReadConsumers<DatabaseExtractDeActivated>.New(message, container))
 
-                .Add<ViewImportCreated>((message, info) => new ReadConsumers<ViewImportCreated>(message, container))
-                .Add<ViewImportModified>((message, info) => new ReadConsumers<ViewImportModified>(message, container))
-                .Add<ViewImportReloaded>((message, info) => new ReadConsumers<ViewImportReloaded>(message, container))
-                .Add<ViewImportDeActivated>((message, info) => new ReadConsumers<ViewImportDeActivated>(message, container)));
+                .Add<DatabaseViewLoaded>((message, info) => ReadConsumers<DatabaseViewLoaded>.New(message, container))
+                .Add<DatabaseViewModified>((message, info) => ReadConsumers<DatabaseViewModified>.New(message, container)));
             return bus;
         }
 
         private static IAdvancedBus AddWriteConsumers(this IAdvancedBus bus, IQueue queue, IWindsorContainer container)
         {
             bus.Consume(queue, q => q
-                .Add<PackageResponseMessage>((message, info) => new WriteConsumers<PackageResponseMessage>(message, container))
-                .Add<SendExecutedPackage>((message, info) => new WriteConsumers<SendExecutedPackage>(message, container))
+                .Add<PackageResponseMessage>((message, info) => WriteConsumers<PackageResponseMessage>.New(message, container))
+                .Add<SendExecutedPackage>((message, info) => WriteConsumers<SendExecutedPackage>.New(message, container))
 
-                .Add<CreateDataSetExport>((message, info) => new WriteConsumers<CreateDataSetExport>(message, container))
-                .Add<ModifyDataSetExport>((message, info) => new WriteConsumers<ModifyDataSetExport>(message, container))
-                .Add<DeActivateDataSetExport>((message, info) => new WriteConsumers<DeActivateDataSetExport>(message, container))
+                .Add<CreateDataExtract>((message, info) => WriteConsumers<CreateDataExtract>.New(message, container))
+                .Add<ModifyDataExtract>((message, info) => WriteConsumers<ModifyDataExtract>.New(message, container))
+                .Add<DeActivateDataExtract>((message, info) => WriteConsumers<DeActivateDataExtract>.New(message, container))
 
-                .Add<CreateViewImport>((message, info) => new WriteConsumers<CreateViewImport>(message, container))
-                .Add<ModifyViewImport>((message, info) => new WriteConsumers<ModifyViewImport>(message, container))
-                .Add<DeActivateViewImport>((message, info) => new WriteConsumers<DeActivateViewImport>(message, container))
-                .Add<ReloadViewImport>((message, info) => new WriteConsumers<ReloadViewImport>(message, container)));
+                .Add<LoadView>((message, info) => WriteConsumers<LoadView>.New(message, container))
+                .Add<ModifyView>((message, info) => WriteConsumers<ModifyView>.New(message, container)));
 
             return bus;
         }

@@ -1,5 +1,5 @@
-using System;
 using FluentNHibernate.Mapping;
+using Lim.Entities;
 
 namespace Lim.Domain.Entities.Maps {
     

@@ -4,10 +4,10 @@ using System.Text;
 using Common.Logging;
 using EasyNetQ;
 using Lim.Core;
-using Lim.Domain.Entities;
 using Lim.Domain.Extensions;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
+using Lim.Entities;
 
 namespace Lim.Domain.Sender.Handlers
 {

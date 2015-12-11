@@ -58,8 +58,20 @@
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentNHibernate, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
@@ -69,6 +81,14 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.bdd, Version=1.9.2.0, Culture=neutral, PublicKeyToken=88431aef3dbd5c5e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xUnit.BDD.1.9.2.0\lib\net45\xunit.bdd.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -102,6 +122,10 @@
       <Project>{e75b2d88-9299-47b7-a2a6-bcbe63b8879a}</Project>
       <Name>Lim.Dtos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lim.Entities\Lim.Entities.csproj">
+      <Project>{cfebac30-26e5-497b-83e8-eccad51edf18}</Project>
+      <Name>Lim.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Push\Lim.Push.csproj">
       <Project>{d7b63a79-2bc8-4bb2-9510-322c8b5d9efa}</Project>
       <Name>Lim.Push</Name>
@@ -119,6 +143,8 @@
     <Compile Include="Builder\FakeBusBuilder.cs" />
     <Compile Include="Builder\FakeDataBaseBuilder.cs" />
     <Compile Include="Builder\FakeDataSetDtoBuilder.cs" />
+    <Compile Include="Database\AbstracLsAutoInMemoryDatabase.cs" />
+    <Compile Include="Database\Repositories\InMemoryLsAutoRepository.cs" />
     <Compile Include="Fakes\FakeBus.cs" />
     <Compile Include="Fakes\FakeResponse.cs" />
     <Compile Include="Fakes\FakeTransactions.cs" />

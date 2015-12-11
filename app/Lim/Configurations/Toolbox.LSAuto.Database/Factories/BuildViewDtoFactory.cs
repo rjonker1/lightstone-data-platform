@@ -8,16 +8,16 @@ using Toolbox.LightstoneAuto.Domain.Base;
 
 namespace Toolbox.LightstoneAuto.Factories
 {
-    public class BuildViewDtoFactory : AbstractBuildFactory<Guid, List<ViewDto>>
+    public class BuildViewDtoFactory : AbstractBuildFactory<Guid, List<DatabaseViewDto>>
     {
         private readonly List<Assembly> _assemblies = new List<Assembly>
         {
             typeof (LsAutoMarker).Assembly
         };
 
-        public override List<ViewDto> Build(Guid id)
+        public override List<DatabaseViewDto> Build(Guid id)
         {
-            var viewDtos = new List<ViewDto>();
+            var viewDtos = new List<DatabaseViewDto>();
 
             var viewMarker = typeof(IViewMarker);
             foreach (var assembly in _assemblies)
@@ -25,16 +25,17 @@ namespace Toolbox.LightstoneAuto.Factories
                 var views = assembly.GetTypes().Where(w => w.IsClass && !w.IsAbstract && viewMarker.IsAssignableFrom(w)).ToList();
                 foreach (var view in views)
                 {
-                    var dto = new ViewDto()
+                    var dto = new DatabaseViewDto()
                     {
                         Name = view.Name,
                         DisplayName = view.Name,
-                        ViewColumns = new List<ViewColumnDto>()
+                        AggregateId = id,
+                        ViewColumns = new List<DatabaseViewColumnDto>()
                     };
                     var properties = view.GetProperties();
                     foreach (var property in properties)
                     {
-                        dto.ViewColumns.Add(new ViewColumnDto
+                        dto.ViewColumns.Add(new DatabaseViewColumnDto
                         {
                             Name = property.Name,
                             DisplayName = property.Name

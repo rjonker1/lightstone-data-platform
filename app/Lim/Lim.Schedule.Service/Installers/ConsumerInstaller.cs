@@ -25,11 +25,11 @@ namespace Lim.Schedule.Service.Installers
             container.Register(Component.For<SendExecutedPackageConsumer>().ImplementedBy<SendExecutedPackageConsumer>());
             container.Register(Component.For<ExecutedPackageSentConsumer>().ImplementedBy<ExecutedPackageSentConsumer>());
 
-            container.Register(Component.For<DataSetExportEventConsumer>().ImplementedBy<DataSetExportEventConsumer>());
-            container.Register(Component.For<DataSetExportCommandConsumer>().ImplementedBy<DataSetExportCommandConsumer>());
+            container.Register(Component.For<DatabaseExtractEventConsumer>().ImplementedBy<DatabaseExtractEventConsumer>());
+            container.Register(Component.For<DatabaseExtractCommandConsumer>().ImplementedBy<DatabaseExtractCommandConsumer>());
 
-            container.Register(Component.For<ViewImportCommandConsumer>().ImplementedBy<ViewImportCommandConsumer>());
-            container.Register(Component.For<ViewImportEventConsumer>().ImplementedBy<ViewImportEventConsumer>());
+            container.Register(Component.For<DatabaseViewCommandConsumer>().ImplementedBy<DatabaseViewCommandConsumer>());
+            container.Register(Component.For<DatabaseViewEventConsumer>().ImplementedBy<DatabaseViewEventConsumer>());
 
             Log.InfoFormat("Consumers Installed");
         }

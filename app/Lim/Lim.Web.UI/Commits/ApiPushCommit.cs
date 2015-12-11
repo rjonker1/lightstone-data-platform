@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Lim.Domain.Base;
-using Lim.Domain.Entities;
 using Lim.Domain.Entities.Repository;
+using Lim.Entities;
 using Lim.Enums;
 using Lim.Web.UI.Models.Api;
 

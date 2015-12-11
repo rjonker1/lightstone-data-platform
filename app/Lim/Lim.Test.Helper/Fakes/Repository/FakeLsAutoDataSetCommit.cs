@@ -5,11 +5,11 @@ using Toolbox.LSAuto.Entities;
 
 namespace Lim.Test.Helper.Fakes.Repository
 {
-    public class FakeLsAutoDataSetCommit : AbstractPersistenceRepository<DataSetDto>
+    public class FakeLsAutoDataSetCommit : AbstractPersistenceRepository<DatabaseExtractDto>
     {
-        public override bool Persist(DataSetDto dto)
+        public override bool Persist(DatabaseExtractDto dto)
         {
-            var dataSetEntity = new DataSet
+            var dataSetEntity = new DatabaseExtract
             {
                 Id = dto.Id,
                 AggregateId = dto.AggregateId,
@@ -21,12 +21,11 @@ namespace Lim.Test.Helper.Fakes.Repository
                 //ModifiedBy = dto.ModifiedBy
             };
 
-            var dataFields = dto.DataFields.Select(s => new DataField
+            var dataFields = dto.Fields.Select(s => new DatabaseExtractField
             {
                 Id = s.Id,
                 Name = s.Name,
-                Activated = s.Activated,
-                DataSet = dataSetEntity,
+                DatabaseExtract = dataSetEntity,
                 DisplayName = s.DisplayName,
                 Selected = s.Selected
             });

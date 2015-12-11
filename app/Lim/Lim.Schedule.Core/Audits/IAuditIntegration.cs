@@ -2,8 +2,7 @@
 using System.Linq;
 using Common.Logging;
 using Lim.Core;
-using Lim.Domain.Base;
-using Lim.Domain.Entities;
+using Lim.Entities;
 using Lim.Schedule.Core.Commands;
 
 namespace Lim.Schedule.Core.Audits

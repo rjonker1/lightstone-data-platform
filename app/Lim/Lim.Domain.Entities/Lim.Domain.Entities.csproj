@@ -80,20 +80,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ActionType.cs" />
-    <Compile Include="AuditApiIntegration.cs" />
-    <Compile Include="AuthenticationType.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="ConfigurationApi.cs" />
-    <Compile Include="CustomFrequency.cs" />
     <Compile Include="Factory\BuildSessionFactory.cs" />
-    <Compile Include="FrequencyType.cs" />
-    <Compile Include="IntegrationClients.cs" />
-    <Compile Include="IntegrationContracts.cs" />
-    <Compile Include="IntegrationPackages.cs" />
-    <Compile Include="IntegrationTracking.cs" />
-    <Compile Include="IntegrationType.cs" />
     <Compile Include="Maps\ActionTypeMap.cs" />
     <Compile Include="Maps\AuditApiIntegrationMap.cs" />
     <Compile Include="Maps\AuthenticationTypeMap.cs" />
@@ -108,12 +95,8 @@
     <Compile Include="Maps\IntegrationTypeMap.cs" />
     <Compile Include="Maps\PackageMetadataMap.cs" />
     <Compile Include="Maps\PackageResponsesMap.cs" />
-    <Compile Include="PackageMetadata.cs" />
-    <Compile Include="PackageResponses.cs" />
     <Compile Include="Repository\LimRepository.cs" />
     <Compile Include="Repository\ISaveApiConfiguration.cs" />
-    <Compile Include="VersionInfo.cs" />
-    <Compile Include="Weekdays.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -128,6 +111,10 @@
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Entities\Lim.Entities.csproj">
+      <Project>{cfebac30-26e5-497b-83e8-eccad51edf18}</Project>
+      <Name>Lim.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim\Lim.csproj">
       <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>

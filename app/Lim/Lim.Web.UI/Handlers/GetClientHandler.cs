@@ -4,6 +4,7 @@ using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Entities;
 using Lim.Dtos;
+using Lim.Entities;
 using Lim.Web.UI.Commands;
 using Newtonsoft.Json;
 

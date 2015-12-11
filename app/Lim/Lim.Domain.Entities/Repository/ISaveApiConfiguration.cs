@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lim.Domain.Entities.Factory;
+using Lim.Entities;
 using NHibernate.Linq;
 
 namespace Lim.Domain.Entities.Repository
