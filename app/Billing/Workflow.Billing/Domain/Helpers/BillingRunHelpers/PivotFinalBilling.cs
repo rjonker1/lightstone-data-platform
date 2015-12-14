@@ -22,8 +22,8 @@ namespace Workflow.Billing.Domain.Helpers.BillingRunHelpers
         private readonly IPublishReportQueue<BillingReport> _report;
         private readonly ISession _session;
 
-        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month - 1, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
-        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 2), 26);
+        readonly DateTime _endBillMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 25).AddHours(23).AddMinutes(59).AddSeconds(59);
+        readonly DateTime _startBillMonth = new DateTime(DateTime.UtcNow.Year, (DateTime.UtcNow.Month - 1), 26);
 
         public PivotFinalBilling(IRepository<StageBilling> stageBillingRepository, IRepository<FinalBilling> finalBillingRepository, 
                                     IRepository<ArchiveBillingTransaction> archiveBillingRepository, IPublishReportQueue<BillingReport> report, 
