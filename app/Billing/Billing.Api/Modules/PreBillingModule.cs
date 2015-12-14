@@ -75,7 +75,7 @@ namespace Billing.Api.Modules
 
                     var customerTransactions = _preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId
                                                                             && (x.Created >= startDateFilter && x.Created <= endDateFilter))
-                                                                            .DistinctBy(x => x.UserTransaction.TransactionId);
+                                                                            .DistinctBy(x => x.UserTransaction.RequestId);
 
                     var customerPackages = customerTransactions.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();
@@ -85,7 +85,7 @@ namespace Billing.Api.Modules
 
                     var clientTransactions = _preBillingRepository.Where(x => x.ClientId == transaction.ClientId
                                                                             && (x.Created >= startDateFilter && x.Created <= endDateFilter))
-                                                                            .DistinctBy(x => x.UserTransaction.TransactionId);
+                                                                            .DistinctBy(x => x.UserTransaction.RequestId);
 
                     var clientPackagesTotal = clientTransactions.Where(x => x.ClientId == transaction.ClientId)
                                                         .Select(x => x.Package.PackageId).Distinct().Count();

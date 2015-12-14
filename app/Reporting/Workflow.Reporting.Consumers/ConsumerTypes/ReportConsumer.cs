@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Messaging.Billing.Messages;
@@ -49,7 +48,7 @@ namespace Workflow.Reporting.Consumers.ConsumerTypes
                             CreateFile(dto, path, fileName);
 
                             //Send Email
-                            //_emailPdfNotificationsWithAttachment.Send(dto, fileName);
+                            _emailPdfNotificationsWithAttachment.Send(dto, fileName);
 
                             return;
                         }
