@@ -42,6 +42,14 @@
     <OutputPath>bin\Prod\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Common.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
@@ -130,10 +138,6 @@
       <Project>{9ce35e56-55a7-4c15-82ad-1ed6ec631945}</Project>
       <Name>Toolbox.Bmw</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
-      <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
-      <Name>Lim.Domain.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>
@@ -141,6 +145,10 @@
     <ProjectReference Include="..\Lim.Dtos\Lim.Dtos.csproj">
       <Project>{e75b2d88-9299-47b7-a2a6-bcbe63b8879a}</Project>
       <Name>Lim.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Entities\Lim.Entities.csproj">
+      <Project>{cfebac30-26e5-497b-83e8-eccad51edf18}</Project>
+      <Name>Lim.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim.Pull\Lim.Pull.csproj">
       <Project>{0d4e5018-6f0d-42a3-8962-0bb05ffc136c}</Project>
@@ -171,6 +179,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

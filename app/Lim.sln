@@ -77,6 +77,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.LIVE.Shared", "Lim\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Dapper", "Lim\Toolbox.Dapper\Toolbox.Dapper.csproj", "{AC847D77-D725-491B-BA25-DC7B3268C1E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Mapping", "Lim\Toolbox.Mapping\Toolbox.Mapping.csproj", "{C23ADA55-2C39-4750-81B6-510E8F609EF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lim.Entities", "Lim\Lim.Entities\Lim.Entities.csproj", "{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -333,6 +337,26 @@ Global
 		{AC847D77-D725-491B-BA25-DC7B3268C1E4}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{AC847D77-D725-491B-BA25-DC7B3268C1E4}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{AC847D77-D725-491B-BA25-DC7B3268C1E4}.Test|Any CPU.Build.0 = Release|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{C23ADA55-2C39-4750-81B6-510E8F609EF4}.Test|Any CPU.Build.0 = Release|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{CFEBAC30-26E5-497B-83E8-ECCAD51EDF18}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

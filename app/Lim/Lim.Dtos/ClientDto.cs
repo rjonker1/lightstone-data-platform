@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Lim.Dtos
@@ -41,6 +42,12 @@ namespace Lim.Dtos
             return new ClientDto(id, isActive, name, email, contactPerson, contactNumber, modifiedBy, dateModified);
         }
 
+        public ClientDto WithConfigurations(List<ConfigurationDto> configurations)
+        {
+            Configurations = configurations;
+            return this;
+        }
+
         public static ClientDto Create()
         {
             return new ClientDto();
@@ -66,5 +73,7 @@ namespace Lim.Dtos
         public DateTime? DateModified { get; private set; }
         [DataMember]
         public string ModifiedBy { get; private set; }
+        [DataMember]
+        public List<ConfigurationDto> Configurations { get; private set; } 
     }
 }

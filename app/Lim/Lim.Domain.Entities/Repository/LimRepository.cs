@@ -9,7 +9,6 @@ using NHibernate.Linq;
 
 namespace Lim.Domain.Entities.Repository
 {
-
     public class LimRepository : IRepository
     {
         public T Get<T>(object id)

@@ -13,7 +13,7 @@ namespace Lim.Schedule.Service.Installers
 {
     public class BusInstaller : IWindsorInstaller
     {
-        private readonly ILog _log = LogManager.GetLogger<BusInstaller>();
+        private static readonly ILog _log = LogManager.GetLogger<BusInstaller>();
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {

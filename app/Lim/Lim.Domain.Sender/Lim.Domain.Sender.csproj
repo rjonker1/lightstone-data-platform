@@ -88,10 +88,6 @@
     <Compile Include="Handlers\ResponsesFromPackages.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
-      <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
-      <Name>Lim.Domain.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Messaging\Lim.Domain.Messaging.csproj">
       <Project>{6ee18788-1427-4ed7-a5ad-2af7cda4429d}</Project>
       <Name>Lim.Domain.Messaging</Name>
@@ -99,6 +95,10 @@
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
       <Name>Lim.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Entities\Lim.Entities.csproj">
+      <Project>{cfebac30-26e5-497b-83e8-eccad51edf18}</Project>
+      <Name>Lim.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim\Lim.csproj">
       <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>

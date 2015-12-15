@@ -14,7 +14,12 @@ namespace Lim.Schedule.Service.Consumers
 {
     public class ReadConsumers<T>
     {
-        public ReadConsumers(IMessage<T> message, IWindsorContainer container)
+        public static ReadConsumers<T> New(IMessage<T> message, IWindsorContainer container)
+        {
+            return new ReadConsumers<T>(message, container);
+        }
+
+        private ReadConsumers(IMessage<T> message, IWindsorContainer container)
         {
             Action<IWindsorContainer, IMessage<T>> consumer;
             if (_consumers.TryGetValue(typeof (T), out consumer))
@@ -38,34 +43,26 @@ namespace Lim.Schedule.Service.Consumers
             },
 
             {
-                typeof (DataSetExportCreated),
-                (container, message) => container.Resolve<DataSetExportEventConsumer>().Consume((IMessage<DataSetExportCreated>) message)
+                typeof (DatabaseExtractCreated),
+                (container, message) => container.Resolve<DatabaseExtractEventConsumer>().Consume((IMessage<DatabaseExtractCreated>) message)
             },
             {
-                typeof (DataSetExportModified),
-                (container, message) => container.Resolve<DataSetExportEventConsumer>().Consume((IMessage<DataSetExportModified>) message)
+                typeof (DatabaseExtractModified),
+                (container, message) => container.Resolve<DatabaseExtractEventConsumer>().Consume((IMessage<DatabaseExtractModified>) message)
             },
             {
-                typeof (DataSetExportDeActivated),
-                (container, message) => container.Resolve<DataSetExportEventConsumer>().Consume((IMessage<DataSetExportDeActivated>) message)
+                typeof (DatabaseExtractDeActivated),
+                (container, message) => container.Resolve<DatabaseExtractEventConsumer>().Consume((IMessage<DatabaseExtractDeActivated>) message)
             },
 
             {
-                typeof (ViewImportCreated),
-                (container, message) => container.Resolve<ViewImportEventConsumer>().Consume((IMessage<ViewImportCreated>) message)
+                typeof (DatabaseViewLoaded),
+                (container, message) => container.Resolve<DatabaseViewEventConsumer>().Consume((IMessage<DatabaseViewLoaded>) message)
             },
             {
-                typeof (ViewImportModified),
-                (container, message) => container.Resolve<ViewImportEventConsumer>().Consume((IMessage<ViewImportModified>) message)
-            },
-            {
-                typeof (ViewImportReloaded),
-                (container, message) => container.Resolve<ViewImportEventConsumer>().Consume((IMessage<ViewImportReloaded>) message)
-            },
-            {
-                typeof (ViewImportDeActivated),
-                (container, message) => container.Resolve<ViewImportEventConsumer>().Consume((IMessage<ViewImportDeActivated>) message)
-            },
+                typeof (DatabaseViewModified),
+                (container, message) => container.Resolve<DatabaseViewEventConsumer>().Consume((IMessage<DatabaseViewModified>) message)
+            }
         };
     }
 }

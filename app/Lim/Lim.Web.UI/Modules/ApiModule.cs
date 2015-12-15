@@ -1,8 +1,16 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DataPlatform.Shared.Enums;
+using Lim.Domain.Client;
+using Lim.Domain.Client.Commands;
+using Lim.Domain.Client.Handlers;
+using Lim.Domain.Lookup.Commands;
+using Lim.Domain.Pull;
+using Lim.Domain.Push;
+using Lim.Domain.Push.Commands;
+using Lim.Dtos;
 using Lim.Web.UI.Commands;
 using Lim.Web.UI.Handlers;
-using Lim.Web.UI.Models.Api;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Security;
@@ -12,6 +20,15 @@ namespace Lim.Web.UI.Modules
 {
     public class ApiModule : NancyModule
     {
+        private static List<DataPlatformClientDto> GetDataPlatformClients(IHandleGettingDataPlatformClient dataPlatform, IUserManagementApiClient api,
+            string token)
+        {
+            var command = new GetDataPlatformClients(api, token);
+            dataPlatform.Handle(command);
+            return command.Clients.Any() ? command.Clients.ToList() : new List<DataPlatformClientDto>();
+        }
+
+
         public ApiModule(IHandleGettingConfiguration setup, IHandleSavingConfiguration save, IHandleGettingIntegrationClient client,
             IUserManagementApiClient api, IHandleGettingDataPlatformClient dataPlatform, IHandleGettingMetadata metadata)
         {
@@ -23,7 +40,9 @@ namespace Lim.Web.UI.Modules
                 var token = Context.Request.Headers.Authorization.Any() ? Context.Request.Headers.Authorization.Split(' ')[1] : string.Empty;
                 model.SetFrequency(setup, new GetFrequencyTypes());
                 model.SetAuthentication(setup, new GetAuthenticationTypes());
-                model.SetDataPlatformClients(dataPlatform, new GetDataPlatformClients(api, token));
+             
+                model.SetDataPlatformClients(GetDataPlatformClients(dataPlatform, api,token));
+
                 model.SetWeekdays(setup, new GetWeekdays());
                 model.SetIntegrationClients(client, new GetIntegrationClients());
                 return View["integrations/api/push", model];
@@ -44,7 +63,7 @@ namespace Lim.Web.UI.Modules
                     var model = PushConfiguration.Existing(setup, new GetApiPushConfiguration(id, clientId));
                     model.SetFrequency(setup, new GetFrequencyTypes());
                     model.SetAuthentication(setup, new GetAuthenticationTypes());
-                    model.SetDataPlatformClients(dataPlatform, new GetDataPlatformClients(api, token));
+                    model.SetDataPlatformClients(GetDataPlatformClients(dataPlatform, api, token));
                     model.SetWeekdays(setup, new GetWeekdays());
                     model.SetIntegrationClients(client, new GetIntegrationClients());
                     return View["integrations/api/push", model];
@@ -54,7 +73,7 @@ namespace Lim.Web.UI.Modules
             {
                 var configuration = this.Bind<PushConfiguration>();
                 var token = Context.Request.Headers.Authorization.Any() ? Context.Request.Headers.Authorization.Split(' ')[1] : string.Empty;
-                configuration.SetDataPlatformClients(dataPlatform, new GetDataPlatformClients(api, token));
+                configuration.SetDataPlatformClients(GetDataPlatformClients(dataPlatform, api, token));
                 var command = new AddApiPushConfiguration(configuration);
                 save.Handle(command);
                 return Response.AsRedirect("/integrations/for/api/configurations");
@@ -70,7 +89,7 @@ namespace Lim.Web.UI.Modules
                 return View["integrations/api/pull", model];
             };
 
-            Get["/integrations/for/api/configurations"] = _ => View["integrations/api/configurations", ApiConfiguration.Get(setup, client)];
+            Get["/integrations/for/api/configurations"] = _ => View["integrations/api/configurations", ApiConfiguration.Get(client)];
 
             Get["/integrations/for/api/metadata/push"] = _ =>
             {

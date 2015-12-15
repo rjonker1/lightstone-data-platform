@@ -1,8 +1,7 @@
 ﻿using System;
 using Common.Logging;
 using Lim.Core;
-using Lim.Domain.Entities;
-using Lim.Domain.Entities.Repository;
+using Lim.Entities;
 using Lim.Schedule.Core.Commands;
 
 namespace Lim.Schedule.Core.Tracking
@@ -15,18 +14,17 @@ namespace Lim.Schedule.Core.Tracking
 
     public class TrackIntegration : ITrackIntegration
     {
-        private readonly ILog _log;
+        private static readonly ILog Log = LogManager.GetLogger<TrackIntegration>();
         private readonly IRepository _repository;
 
         public TrackIntegration(IRepository repository)
         {
-            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
         public void Track(TrackIntegrationCommand command)
         {
-            _log.InfoFormat("Storing Tracking information for Configuration {0}", command.ConfigurationId);
+            Log.InfoFormat("Storing Tracking information for Configuration {0}", command.ConfigurationId);
 
             try
             {
@@ -51,13 +49,13 @@ namespace Lim.Schedule.Core.Tracking
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Failed to track integration information, because {0}", ex, ex.Message);
+                Log.ErrorFormat("Failed to track integration information, because {0}", ex, ex.Message);
             }
         }
 
         public void Get(GetLastTransactionDateCommand command)
         {
-            _log.InfoFormat("Getting Tracking information for Configuration Id {0}", command.ConfigurationId);
+            Log.InfoFormat("Getting Tracking information for Configuration Id {0}", command.ConfigurationId);
 
             try
             {
@@ -68,7 +66,7 @@ namespace Lim.Schedule.Core.Tracking
 
                 if (currentTracking == null)
                 {
-                    _log.InfoFormat("Cannot find tracking information for Configuration with Id {0}", command.ConfigurationId);
+                    Log.InfoFormat("Cannot find tracking information for Configuration with Id {0}", command.ConfigurationId);
                     throw new Exception("Tracking information not found");
                 }
 
@@ -76,7 +74,7 @@ namespace Lim.Schedule.Core.Tracking
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Failed to get track integration information, because {0}", ex, ex.Message);
+                Log.ErrorFormat("Failed to get track integration information, because {0}", ex, ex.Message);
             }
         }
     }

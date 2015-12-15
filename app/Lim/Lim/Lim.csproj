@@ -55,6 +55,7 @@
     <Compile Include="Core\IAudit.cs" />
     <Compile Include="Core\IBackup.cs" />
     <None Include="Core\IEventPublisher.cs.delete" />
+    <Compile Include="Core\IBuild.cs" />
     <Compile Include="Core\IPublish.cs" />
     <Compile Include="Core\ISendCommand.cs" />
     <Compile Include="Core\IFail.cs" />

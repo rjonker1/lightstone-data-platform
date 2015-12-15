@@ -1,10 +1,20 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Net.NetworkInformation;
+using System.Runtime.Serialization;
 
 namespace Lim.Schedule.Core.Identifiers
 {
     [DataContract]
     public class ApiConfigurationIdentifier
     {
+        private ApiConfigurationIdentifier()
+        {
+        }
+
+        public static ApiConfigurationIdentifier Empty()
+        {
+            return new ApiConfigurationIdentifier();
+        }
+
         public ApiConfigurationIdentifier(string baseAddress, string suffix, ApiAuthenticationIdentifier authentication,
             ActionIdentifier action, IntegrationTypeIdentifier type, FrequencyIdentifier frequency)
         {

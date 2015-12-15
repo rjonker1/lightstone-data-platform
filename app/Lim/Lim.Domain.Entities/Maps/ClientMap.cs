@@ -1,8 +1,7 @@
-using System;
 using FluentNHibernate.Mapping;
 
 namespace Lim.Domain.Entities.Maps {
-    public class ClientMap : ClassMap<Client> {
+    public class ClientMap : ClassMap<Lim.Entities.Client> {
         
         public ClientMap() {
 			Table("Client");
@@ -17,6 +16,7 @@ namespace Lim.Domain.Entities.Maps {
             Map(x => x.CreatedBy).Column("CreatedBy").Length(50).Not.Nullable().Insert();
 			Map(x => x.DateModified).Column("DateModified");
             Map(x => x.ModifiedBy).Column("ModifiedBy").Length(50);
+            HasMany(m => m.Configurations).KeyColumn("ClientId").Cascade.AllDeleteOrphan().Inverse().ForeignKeyConstraintName("FK_Client_Configurations").Not.LazyLoad();
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using DataPlatform.Shared.Enums;
+using Lim.Domain.Client;
+using Lim.Domain.Client.Commands;
+using Lim.Domain.Client.Handlers;
 using Lim.Dtos;
-using Lim.Web.UI.Commands;
-using Lim.Web.UI.Handlers;
-using Lim.Web.UI.Models.LimClients;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Security;
@@ -17,7 +17,7 @@ namespace Lim.Web.UI.Modules
 
             Get["/client/new"] = _ => View["client/client", ClientDto.Create()];
 
-            Get["/client/edit/{id}"] = _ => View["client/client", LimClientView.Existing(client, new GetIntegrationClient(_.Id))];
+            Get["/client/edit/{id}"] = _ => View["client/client", LimClient.Existing(client, new GetIntegrationClient(_.Id))];
 
             Post["/client/save"] = _ =>
             {
@@ -26,7 +26,7 @@ namespace Lim.Web.UI.Modules
                 return Response.AsRedirect("/client/view");
             };
 
-            Get["/client/view"] = _ => View["client/clients", LimClientView.Get(client)];
+            Get["/client/view"] = _ => View["client/clients", LimClient.Get(client)];
         }
     }
 }

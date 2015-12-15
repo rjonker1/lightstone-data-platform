@@ -25,18 +25,7 @@ namespace Lim.Schedule.Core.Factories.Api
             try
             {
                 //TODO: No Api Pull Integrations to get
-                //var configurations =
-                //    _repository.Get<ConfigurationApi>(
-                //        w =>
-                //            w.Configuration.FrequencyType.Id == (int)command.Frequency && w.Configuration.ActionType.Id == (int)command.Action &&
-                //            w.Configuration.IntegrationType.Id == (int)command.Type && w.Configuration.IsActive)
-                //        .Select(
-                //            s =>
-                //                ApiPullConfigurationDto.Existing(s.Id, s.Configuration.ConfigurationKey, s.Configuration.FrequencyType.Id,
-                //                    s.Configuration.ActionType.Id, s.Configuration.IntegrationType.Id, s.BaseAddress, s.Suffix, s.Username, s.Password,
-                //                    s.AuthenticationToken, s.AuthenticationKey, s.HasAuthentication, s.AuthenticationType.Id, s.Configuration.Client.Id)).ToList();
-
-                //return Map(configurations);
+              
             }
             catch (Exception ex)
             {

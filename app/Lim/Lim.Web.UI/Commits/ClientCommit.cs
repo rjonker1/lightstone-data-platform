@@ -2,8 +2,8 @@
 using Common.Logging;
 using Lim.Core;
 using Lim.Domain.Base;
-using Lim.Domain.Entities;
 using Lim.Dtos;
+using Lim.Entities;
 
 namespace Lim.Web.UI.Commits
 {

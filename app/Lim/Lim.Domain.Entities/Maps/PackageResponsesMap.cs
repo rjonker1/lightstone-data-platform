@@ -1,10 +1,10 @@
-using System;
 using FluentNHibernate.Mapping;
+using Lim.Entities;
 
 namespace Lim.Domain.Entities.Maps {
     
     
-    public class PackageResponsesMap : ClassMap<PackageResponses> {
+    public class PackageResponsesMap : ClassMap<PackageResponse> {
         
         public PackageResponsesMap() {
 			Table("PackageResponses");

@@ -1,4 +1,5 @@
 using FluentNHibernate.Mapping;
+using Lim.Entities;
 
 namespace Lim.Domain.Entities.Maps{
     public class ConfigurationMap : ClassMap<Configuration>{
@@ -18,6 +19,19 @@ namespace Lim.Domain.Entities.Maps{
             Map(x => x.ModifiedBy).Column("ModifiedBy").Length(50);
             Map(x => x.CustomFrequencyTime).Column("CustomFrequencyTime").Nullable().CustomType("TimeAsTimeSpan");
             Map(x => x.CustomFrequencyDay).Column("CustomFrequencyDay").Nullable().Length(20);
+            HasMany(m => m.IntegrationClients)
+                .KeyColumn("ConfigurationId")
+                .Cascade.AllDeleteOrphan()
+                .Inverse()
+                .ForeignKeyConstraintName("FK_Configuration_IntegrationClient").Not.LazyLoad();
+            HasMany(m => m.IntegrationContracts).KeyColumn("ConfigurationId")
+                .Cascade.AllDeleteOrphan()
+                .Inverse()
+                .ForeignKeyConstraintName("FK_Configuration_IntegrationContracts").Not.LazyLoad();
+            HasMany(m => m.IntegrationPackages).KeyColumn("ConfigurationId")
+                .Cascade.AllDeleteOrphan()
+                .Inverse()
+                .ForeignKeyConstraintName("FK_Configuration_IntegrationPackages").Not.LazyLoad();
         }
     }
 }

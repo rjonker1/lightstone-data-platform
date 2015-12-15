@@ -31,7 +31,7 @@ namespace Lim.Dtos
             IsActive = isActive;
         }
 
-        public IntegrationPackageDto Existing(long id, long configurationId, Guid packageId, bool isActive, DateTime? dateModified,
+        public static IntegrationPackageDto Existing(long id, long configurationId, Guid packageId, bool isActive, DateTime? dateModified,
             string modifiedBy, Guid contractId)
         {
             return new IntegrationPackageDto(id, configurationId, packageId, contractId, isActive, dateModified, modifiedBy);

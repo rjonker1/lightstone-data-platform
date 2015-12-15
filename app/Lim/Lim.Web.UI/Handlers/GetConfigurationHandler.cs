@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lim.Core;
-using Lim.Domain.Entities;
+using Lim.Domain.Client.Commands;
+using Lim.Domain.Client.Handlers;
+using Lim.Domain.Lookup.Commands;
+using Lim.Domain.Pull.Commands;
+using Lim.Domain.Push;
+using Lim.Domain.Push.Commands;
 using Lim.Dtos;
-using Lim.Web.UI.Commands;
-using Lim.Web.UI.Models.Api;
+using Lim.Entities;
 
 namespace Lim.Web.UI.Handlers
 {
@@ -19,8 +24,7 @@ namespace Lim.Web.UI.Handlers
 
         public void Handle(GetFrequencyTypes command)
         {
-            var items = _repository.GetAll<FrequencyType>();
-            var dto = items.Select(s => FrequencyTypeDto.Existing(s.Id, s.Type)).ToList();
+            var dto = AutoMapper.Mapper.Map<IEnumerable<FrequencyType>, IEnumerable<FrequencyTypeDto>>(_repository.GetAll<FrequencyType>());
             command.Set(dto);
         }
 
@@ -31,8 +35,7 @@ namespace Lim.Web.UI.Handlers
 
         public void Handle(GetAuthenticationTypes command)
         {
-            var items = _repository.GetAll<AuthenticationType>();
-            var dto = items.Select(s => AuthenticationTypeDto.Existing(s.Id, s.Type)).ToList();
+            var dto = AutoMapper.Mapper.Map<List<AuthenticationType>, List<AuthenticationTypeDto>>(_repository.GetAll<AuthenticationType>().ToList());
             command.Set(dto);
         }
 
@@ -43,19 +46,16 @@ namespace Lim.Web.UI.Handlers
 
         public void Handle(GetApiPushConfiguration command)
         {
-            var item =
-                _repository.Find<ConfigurationApi>(w => w.Configuration.Id == command.ConfigurationId && w.Configuration.Client.Id == command.ClientId);
+            var dto = AutoMapper.Mapper.Map<Client, ClientDto>(_repository.Find<Client>(w => w.Id == command.ClientId));
+            var configuration = dto.Configurations.FirstOrDefault(w => w.Id == command.ConfigurationId) ?? new ConfigurationDto();
+            var item = _repository.Find<ConfigurationApi>(w => w.Id == command.ConfigurationId);
 
-            var packages = _repository.Get<IntegrationPackage>(w => w.IsActive && w.Configuration.Id == command.ConfigurationId);
-            var clients = _repository.Get<IntegrationClient>(w => w.IsActive && w.Configuration.Id == command.ConfigurationId);
-            var contracts = _repository.Get<IntegrationContract>(w => w.IsActive && w.Configuration.Id == command.ConfigurationId);
-
-            command.Set(PushConfigurationView.Set(item.Configuration.Id, item.Id, item.Configuration.ConfigurationKey, item.Configuration.Client.Id,
-                item.Configuration.Client.Name, item.Configuration.FrequencyType.Id,
-                item.Configuration.ActionType.Id, item.Configuration.IntegrationType.Id, clients.Select(s => s.ClientCustomerId),
-                contracts.Select(s => s.Contract), item.Configuration.DateCreated, item.Configuration.IsActive, item.BaseAddress, item.Suffix,
+            command.Set(PushConfigurationView.Set(configuration.Id, item.Id, configuration.ConfigurationKey, dto.Id,
+                dto.Name, configuration.FrequencyType,
+                configuration.ActionType, configuration.IntegrationType, configuration.IntegrationClients.Select(s => s.ClientCustomerId),
+                configuration.IntegrationContracts.Select(s => s.Contract), dto.DateCreated, dto.IsActive, item.BaseAddress, item.Suffix,
                 item.Username, item.Password, item.HasAuthentication,item.AuthenticationKey, item.AuthenticationToken, item.AuthenticationType.Id,
-                packages.Select(s => s.PackageId), item.Configuration.CustomFrequencyTime, item.Configuration.CustomFrequencyDay));
+                configuration.IntegrationPackages.Select(s => s.PackageId), configuration.CustomFrequencyTime, configuration.CustomFrequencyDay));
         }
 
         public void Handle(GetApiPullConfiguration command)
@@ -65,13 +65,7 @@ namespace Lim.Web.UI.Handlers
 
         public void Handle(GetAllConfigurations command)
         {
-            var items = _repository.GetAll<Configuration>();
-            var dto =
-                items.Select(
-                    s =>
-                        ConfigurationDto.Existing(s.Id, s.ConfigurationKey, s.ActionType.Id, s.IntegrationType.Id, s.FrequencyType.Id, s.Client.Id, s.IsActive,
-                            s.ActionType.Type,s.FrequencyType.Type,s.IntegrationType.Type))
-                    .ToList();
+            var dto = AutoMapper.Mapper.Map<IEnumerable<Configuration>, IEnumerable<ConfigurationDto>>(_repository.GetAll<Configuration>());
             command.Set(dto);
         }
 

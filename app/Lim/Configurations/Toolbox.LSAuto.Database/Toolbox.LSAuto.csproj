@@ -76,44 +76,40 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Consumers\Read\DataSetExportEventConsumer.cs" />
-    <Compile Include="Consumers\Read\ViewImportEventConsumer.cs" />
-    <Compile Include="Consumers\Write\DataSetExportCommandConsumer.cs" />
-    <Compile Include="Consumers\Write\ViewImportCommandConsumer.cs" />
+    <Compile Include="Consumers\Read\DatabaseExtractEvents.cs" />
+    <Compile Include="Consumers\Read\DatabaseViewEvents.cs" />
+    <Compile Include="Consumers\Write\DatabaseExtractCommands.cs" />
+    <Compile Include="Consumers\Write\DatabaseViewCommands.cs" />
+    <Compile Include="Domain\Base\IReadDBViewFacade.cs" />
     <Compile Include="Domain\Base\IViewMarker.cs" />
-    <Compile Include="Domain\DataSetExport.cs" />
-    <Compile Include="Domain\Events\DataSetExportModified.cs" />
-    <Compile Include="Domain\Events\ViewImportCreated.cs" />
-    <Compile Include="Domain\Events\ViewImportDeactivated.cs" />
-    <Compile Include="Domain\Events\ViewImportModified.cs" />
-    <Compile Include="Domain\Events\ViewImportReloaded.cs" />
-    <Compile Include="Domain\Mapping\DataSetMapping.cs" />
-    <Compile Include="Domain\Mapping\ViewMapping.cs" />
-    <Compile Include="Domain\ViewImport.cs" />
-    <Compile Include="Domain\Commands\Dataset\CreateDataSetExport.cs" />
-    <Compile Include="Domain\Commands\Dataset\DeActivateDataSetExport.cs" />
-    <Compile Include="Domain\Commands\View\CreateViewImport.cs" />
-    <Compile Include="Domain\Commands\Dataset\ModifyDataSetExport.cs" />
-    <Compile Include="Domain\IReadModelFacade.cs" />
-    <Compile Include="Domain\Commands\View\DeActivateViewImport.cs" />
-    <Compile Include="Domain\Commands\View\ModifyViewImport.cs" />
-    <Compile Include="Domain\Commands\View\ReloadViewImport.cs" />
-    <Compile Include="Repository\DataSetCommit.cs" />
+    <Compile Include="Domain\DatabaseExtract.cs" />
+    <Compile Include="Domain\Events\DatabaseExtractModified.cs" />
+    <Compile Include="Domain\Events\DatabaseViewLoaded.cs" />
+    <Compile Include="Domain\Events\DatabaseViewModified.cs" />
+    <Compile Include="Domain\Mapping\DatabaseExtractMapping.cs" />
+    <Compile Include="Domain\Mapping\DatabaseViewMapping.cs" />
+    <Compile Include="Domain\DatabaseView.cs" />
+    <Compile Include="Domain\Commands\Dataset\CreateDataExtract.cs" />
+    <Compile Include="Domain\Commands\Dataset\DeActivateDataExtract.cs" />
+    <Compile Include="Domain\Commands\View\LoadView.cs" />
+    <Compile Include="Domain\Commands\Dataset\ModifyDataExtract.cs" />
+    <Compile Include="Domain\Base\IReadDBExtractFacade.cs" />
+    <Compile Include="Domain\Commands\View\ModifyView.cs" />
+    <Compile Include="Factories\BuildViewDtoFactory.cs" />
+    <Compile Include="Infrastructure\ReadModels\DatabaseViewReadModel.cs" />
+    <Compile Include="Repository\DatabaseExtractCommit.cs" />
     <Compile Include="Infrastructure\Handlers\DataSetCommandHandler.cs" />
-    <Compile Include="Infrastructure\Read\DataSetReadModel.cs" />
-    <Compile Include="Infrastructure\Read\Handlers\DataSetReadHandlers.cs" />
-    <Compile Include="Infrastructure\Read\ReadRepository.cs" />
-    <Compile Include="Domain\Events\DataSetExportDeActivated.cs" />
-    <Compile Include="Domain\Events\DataSetExportCreated.cs" />
-    <Compile Include="Repository\LSAutoRepository.cs" />
-    <Compile Include="Domain\Views\AutoCarStats\VehicleSpecifcationView.cs" />
+    <Compile Include="Infrastructure\ReadModels\DatabaseExtractReadModel.cs" />
+    <Compile Include="Domain\Events\DatabaseExtractDeActivated.cs" />
+    <Compile Include="Domain\Events\DatabaseExtractCreated.cs" />
+    <Compile Include="Import\Views\AutoCarStats\VehicleSpecifcationView.cs" />
     <Compile Include="LSAutoMarker.cs" />
-    <Compile Include="Repository\ViewCommit.cs" />
+    <Compile Include="Repository\LSAutoReadRepository.cs" />
+    <Compile Include="Repository\DatabaseViewCommit.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Models\" />
     <Folder Include="Infrastructure\Write\" />
   </ItemGroup>
   <ItemGroup>

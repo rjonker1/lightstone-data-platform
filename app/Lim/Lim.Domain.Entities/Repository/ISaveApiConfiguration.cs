@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lim.Domain.Entities.Factory;
+using Lim.Entities;
 using NHibernate.Linq;
 
 namespace Lim.Domain.Entities.Repository
@@ -31,7 +32,7 @@ namespace Lim.Domain.Entities.Repository
                 {
                     using (var transaction = session.BeginTransaction())
                     {
-                        var client = session.Get<Client>(clientId);
+                        var client = session.Get<Lim.Entities.Client>(clientId);
                         if (client == null || client.Id == 0)
                             throw new Exception("Could not insert LIM configuration because LIM Client is not valid");
 

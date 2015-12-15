@@ -2,11 +2,11 @@
 { 
     public interface IPersist
     {
-        bool Persist(object obj);
+        bool Persist(object @object);
     }
 
     public interface IPersist<in T> : IPersist
     {
-        bool Persist(T obj);
+        bool Persist(T @object);
     }
 }

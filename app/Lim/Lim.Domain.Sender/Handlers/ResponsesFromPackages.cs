@@ -4,10 +4,10 @@ using System.Text;
 using Common.Logging;
 using EasyNetQ;
 using Lim.Core;
-using Lim.Domain.Entities;
 using Lim.Domain.Extensions;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
+using Lim.Entities;
 
 namespace Lim.Domain.Sender.Handlers
 {
@@ -31,7 +31,7 @@ namespace Lim.Domain.Sender.Handlers
             if(message.Body == null)
                 throw  new Exception("There is no package response available to save.");
 
-            var package = new PackageResponses()
+            var package = new PackageResponse()
             {
                 PackageId = message.Body.PackageId,
                 Userid =  message.Body.UserId,

@@ -15,11 +15,11 @@ namespace Lim.Schedule.Service.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<LsAutoConfiguration>().UsingFactoryMethod(c => LsAutoFactoryManager.BuildConfiguration()).LifestyleTransient());
+                Component.For<LsAutoConfiguration>().UsingFactoryMethod(c => LightstoneAutoFactoryManager.BuildConfiguration()).LifestyleTransient());
 
            
-            container.Register(Component.For<IPersist<DataSetDto>, DataSetCommit>());
-            container.Register(Component.For<IPersist<ViewDto>, ViewCommit>());
+            container.Register(Component.For<IPersist<DatabaseExtractDto>, DatabaseExtractCommit>());
+            container.Register(Component.For<IPersist<DatabaseViewDto>, DatabaseViewCommit>());
         }
     }
 }

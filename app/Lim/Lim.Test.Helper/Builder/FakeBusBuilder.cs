@@ -1,35 +1,36 @@
-﻿using Lim.Domain.EventStore;
+﻿using EasyNetQ;
+using Lim.Domain.EventStore;
 using Lim.Test.Helper.Fakes;
+using Lim.Test.Helper.Fakes.Repository;
+using Toolbox.LightstoneAuto.Consumers.Read;
 using Toolbox.LightstoneAuto.Domain;
 using Toolbox.LightstoneAuto.Domain.Commands.Dataset;
 using Toolbox.LightstoneAuto.Domain.Events;
 using Toolbox.LightstoneAuto.Infrastructure.Handlers;
-using Toolbox.LightstoneAuto.Infrastructure.Read.Handlers;
 
 namespace Lim.Test.Helper.Builder
 {
     public static class FakeBusBuilder
     {
-        public static FakeBus Bus()
+        public static FakeBus LsAutoBus()
         {
             var bus = new FakeBus();
             var eventStoreRepository = FakeDataBaseBuilder.ForEventStore();
             var storage = new EventStore(bus, eventStoreRepository);
-            var repository = new AggregateRepository<DataSetExport>(storage);
+            var repository = new AggregateRepository<DatabaseExtract>(storage);
             var commands = new DataSetCommandHandler(repository);
-            bus.RegisterHandler<CreateDataSetExport>(commands.Handle);
-            bus.RegisterHandler<DeActivateDataSetExport>(commands.Handle);
-            bus.RegisterHandler<ModifyDataSetExport>(commands.Handle);
+            bus.RegisterHandler<CreateDataExtract>(commands.Handle);
+            bus.RegisterHandler<DeActivateDataExtract>(commands.Handle);
+            bus.RegisterHandler<ModifyDataExtract>(commands.Handle);
 
-            var detailHandler = new DataSetDetailDtoHandler(FakeDataBaseBuilder.ForDataSetDtoRepository());
-            bus.RegisterHandler<DataSetExportCreated>(detailHandler.Handle);
-            bus.RegisterHandler<DataSetExportDeActivated>(detailHandler.Handle);
-            bus.RegisterHandler<DataSetExportModified>(detailHandler.Handle);
+            var detailConsumer = new DatabaseExtractEventConsumer(bus,new FakeLsAutoDataSetCommit());
+            bus.RegisterConsumer<DatabaseExtractCreated>((message) => detailConsumer.Consume((IMessage<DatabaseExtractCreated>) message));
+            bus.RegisterConsumer<DatabaseExtractDeActivated>((message) => detailConsumer.Consume((IMessage<DatabaseExtractDeActivated>)message));
+            bus.RegisterConsumer<DatabaseExtractModified>((message) => detailConsumer.Consume((IMessage<DatabaseExtractModified>)message));
 
-            var dataSetHandler = new DataSetDtoHandler(FakeDataBaseBuilder.ForDataSetDtoRepository());
-            bus.RegisterHandler<DataSetExportCreated>(dataSetHandler.Handle);
-            bus.RegisterHandler<DataSetExportDeActivated>(dataSetHandler.Handle);
-            bus.RegisterHandler<DataSetExportModified>(dataSetHandler.Handle);
+            var viewConsumer = new DatabaseViewEventConsumer(bus, new FakeLsAutoViewCommit());
+            bus.RegisterConsumer<DatabaseViewLoaded>((message) => viewConsumer.Consume((IMessage<DatabaseViewLoaded>)message));
+            bus.RegisterConsumer<DatabaseViewModified>((message) => viewConsumer.Consume((IMessage<DatabaseViewModified>)message));
             return bus;
         }
     }
