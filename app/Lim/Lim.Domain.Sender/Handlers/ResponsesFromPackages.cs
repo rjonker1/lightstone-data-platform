@@ -31,7 +31,7 @@ namespace Lim.Domain.Sender.Handlers
             if(message.Body == null)
                 throw  new Exception("There is no package response available to save.");
 
-            var package = new PackageResponses()
+            var package = new PackageResponse()
             {
                 PackageId = message.Body.PackageId,
                 Userid =  message.Body.UserId,

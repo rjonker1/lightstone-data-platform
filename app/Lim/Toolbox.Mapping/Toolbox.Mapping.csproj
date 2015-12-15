@@ -47,13 +47,29 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AuditApiIntegrationMapping.cs" />
+    <Compile Include="AuthTypeMapping.cs" />
+    <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="ClientMapping.cs" />
-    <Compile Include="ConfigurationMapping.cs" />
+    <Compile Include="ConfigApiMapping.cs" />
+    <Compile Include="ConfigMapping.cs" />
+    <Compile Include="FrequencyTypeMapping.cs" />
+    <Compile Include="IntegrationClientMapping.cs" />
+    <Compile Include="IntegrationContractMapping.cs" />
+    <Compile Include="IntegrationPackageMapping.cs" />
+    <Compile Include="IntegrationTypeMapping.cs" />
+    <Compile Include="MappingMarker.cs" />
+    <Compile Include="PackageMetadataMapping.cs" />
+    <Compile Include="PackageResponseMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
+      <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>
+      <Name>Lim.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Dtos\Lim.Dtos.csproj">
       <Project>{e75b2d88-9299-47b7-a2a6-bcbe63b8879a}</Project>
       <Name>Lim.Dtos</Name>

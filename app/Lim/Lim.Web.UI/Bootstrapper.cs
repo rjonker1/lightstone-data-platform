@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 ﻿using Lim.Core;
+using Lim.Domain.Client.Handlers;
 using Lim.Domain.Entities.Repository;
+using Lim.Domain.Push;
 using Lim.Dtos;
 using Lim.Web.UI.Commits;
 using Lim.Web.UI.Handlers;
-using Lim.Web.UI.Models.Api;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
@@ -20,6 +20,7 @@ using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Installers;
 using Shared.Logging;
+using Toolbox.Mapping;
 
 namespace Lim.Web.UI
 {
@@ -84,6 +85,7 @@ namespace Lim.Web.UI
             container.Register(Component.For<IPersist<ClientDto>, ClientCommit>());
 
             container.Install(new AuthInstaller());
+            AutoMapperConfiguration.Configure();
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
@@ -107,4 +109,6 @@ namespace Lim.Web.UI
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/chosen"));
         }
     }
+
+    
 }

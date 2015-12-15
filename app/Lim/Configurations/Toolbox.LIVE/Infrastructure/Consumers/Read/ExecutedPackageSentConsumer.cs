@@ -22,7 +22,7 @@ namespace Toolbox.LIVE.Infrastructure.Consumers.Read
 
         public void Consume(IMessage<ExecutedPackageSent> message)
         {
-            var package = new PackageResponses
+            var package = new PackageResponse
             {
                 PackageId = message.Body.PackageId,
                 Userid = message.Body.UserId,

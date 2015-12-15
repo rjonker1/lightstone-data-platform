@@ -1,5 +1,5 @@
 ﻿@using System.Linq
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<Lim.Web.UI.Models.Api.ApiConfiguration>>
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<Lim.Domain.Client.ApiConfiguration>>
 @{
     Layout = "_Layout.cshtml";
 }
@@ -49,11 +49,15 @@
                                             {
                                                 <tr>
                                                     <td>@config.Client.Name</td>
-                                                    <td>@config.Configuration.Action</td>
-                                                    <td>@config.Configuration.Frequency</td>
-                                                    <td>@config.Configuration.Type</td>
-                                                    <td>@config.Configuration.IsActive</td>
-                                                    <td><a class="btn btn-block btn-success" href="/integrations/for/api/@config.Configuration.Action/edit/@config.Configuration.Id/@config.Configuration.ClientId">Edit</a></td>
+                                                    @foreach (var configuration in config.Client.Configurations)
+                                                    {
+                                                    <td>@configuration.Action</td>
+                                                    <td>@configuration.Frequency</td>
+                                                    <td>@configuration.Type</td>
+                                                    <td>@configuration.IsActive</td>
+                                                    <td><a class="btn btn-block btn-success" href="/integrations/for/api/@configuration.Action/edit/@configuration.Id/@configuration.ClientId">Edit</a></td>
+                                                    }
+                                                   
                                                     @*<td><button class="btn btn-block btn-success btn-lg">View</button></td>*@
                                                 </tr>
                                             }

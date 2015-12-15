@@ -50,7 +50,7 @@
     <Compile Include="IntegrationTracking.cs" />
     <Compile Include="IntegrationType.cs" />
     <Compile Include="PackageMetadata.cs" />
-    <Compile Include="PackageResponses.cs" />
+    <Compile Include="PackageResponse.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="Weekdays.cs" />
   </ItemGroup>

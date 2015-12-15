@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting;
 using System.Runtime.Serialization;
 
 namespace Lim.Dtos
@@ -43,7 +42,11 @@ namespace Lim.Dtos
             return new ClientDto(id, isActive, name, email, contactPerson, contactNumber, modifiedBy, dateModified);
         }
 
-       
+        public ClientDto WithConfigurations(List<ConfigurationDto> configurations)
+        {
+            Configurations = configurations;
+            return this;
+        }
 
         public static ClientDto Create()
         {
@@ -71,6 +74,6 @@ namespace Lim.Dtos
         [DataMember]
         public string ModifiedBy { get; private set; }
         [DataMember]
-        public List<ConfigurationDto> Configurations { get; set; } 
+        public List<ConfigurationDto> Configurations { get; private set; } 
     }
 }

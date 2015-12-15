@@ -418,11 +418,11 @@ namespace Lim.Test.Helper.Mothers
             };
         }
 
-        public static List<PackageResponses> PackageResponseses()
+        public static List<PackageResponse> PackageResponseses()
         {
-            return new List<PackageResponses>()
+            return new List<PackageResponse>()
             {
-                new PackageResponses()
+                new PackageResponse()
                 {
                     AccountNumber = 1,
                     CommitDate = DateTime.Now.AddDays(-10),

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lim.Dtos</RootNamespace>
-    <AssemblyName>Lim.Dtos</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lim.Dtos</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,6 +41,10 @@
     <Compile Include="AuditApiIntegrationDto.cs" />
     <Compile Include="AuthenticationTypeDto.cs" />
     <Compile Include="BmwFinanceDto.cs" />
+    <Compile Include="IntegrationTypeDto.cs" />
+    <Compile Include="Metadata.cs" />
+    <Compile Include="PackageMetadataDto.cs" />
+    <Compile Include="PushConfigurationViewDto.cs" />
     <Compile Include="WeekdayDto.cs" />
     <None Include="ClientDtoOld.cs.delete" />
     <Compile Include="ClientDto.cs" />

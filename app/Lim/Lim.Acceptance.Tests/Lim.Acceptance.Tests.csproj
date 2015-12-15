@@ -126,6 +126,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AbstractTest.cs" />
     <Compile Include="Bus\LIVE\when_sending_executed_package_to_integration_bus.cs" />
     <Compile Include="Bus\LSAuto\when_sending_data_set_created_to_the_integration_bus.cs" />
     <Compile Include="Bus\LSAuto\when_sending_view_created_to_the_integration_bus.cs" />
@@ -135,7 +136,15 @@
     <Compile Include="Configurations\LSAuto\when_creating_database_extract.cs" />
     <Compile Include="Configurations\LSAuto\when_modifying_database_extract.cs" />
     <Compile Include="Integrations\ApiIntegrationTestSetup.cs" />
+    <Compile Include="Integrations\Clients\when_fetching_custom_api_push_integrations_for_clients.cs" />
+    <Compile Include="Integrations\Clients\when_fetching_api_push_integrations_for_clients.cs" />
+    <Compile Include="Integrations\Clients\when_getting_api_configuration.cs" />
+    <Compile Include="Integrations\Clients\when_getting_integration_client.cs" />
+    <Compile Include="Integrations\Configurations\when_handling_configurations.cs" />
+    <Compile Include="Integrations\Configurations\when_handling_lookup_types.cs" />
+    <Compile Include="Integrations\Push\when_initializing_api_push_factory_for_package_responses.cs" />
     <Compile Include="Integrations\Push\when_pushing_hourly_integration.cs" />
+    <Compile Include="Push\Api\when_fetching_api_push_integrations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -206,9 +215,17 @@
       <Project>{87a87c68-50ff-4df7-8318-ad793433b80e}</Project>
       <Name>Lim.Test.Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lim.Web.UI\Lim.Web.UI.csproj">
+      <Project>{7db4f323-6fc9-464b-8e72-432fe48d2c72}</Project>
+      <Name>Lim.Web.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim\Lim.csproj">
       <Project>{1d1200e3-2fad-42db-9a34-0e167c010dec}</Project>
       <Name>Lim</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Toolbox.Mapping\Toolbox.Mapping.csproj">
+      <Project>{c23ada55-2c39-4750-81b6-510e8f609ef4}</Project>
+      <Name>Toolbox.Mapping</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

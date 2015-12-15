@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 
 namespace Lim.Entities
@@ -18,5 +19,8 @@ namespace Lim.Entities
         public virtual string ModifiedBy { get; set; }
         public virtual TimeSpan? CustomFrequencyTime { get; set; }
         public virtual string CustomFrequencyDay { get; set; }
+        public virtual IList<IntegrationPackage> IntegrationPackages { get; set; }
+        public virtual IList<IntegrationClient> IntegrationClients { get; set; }
+        public virtual IList<IntegrationContract> IntegrationContracts { get; set; }
     }
 }

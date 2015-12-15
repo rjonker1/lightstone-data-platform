@@ -1,9 +1,7 @@
-using System;
 using FluentNHibernate.Mapping;
-using Lim.Entities;
 
 namespace Lim.Domain.Entities.Maps {
-    public class ClientMap : ClassMap<Client> {
+    public class ClientMap : ClassMap<Lim.Entities.Client> {
         
         public ClientMap() {
 			Table("Client");

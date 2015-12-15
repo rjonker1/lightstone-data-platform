@@ -63,7 +63,7 @@ namespace Lim.Acceptance.Tests.Bus
         [Observation]
         public void then_response_should_exist_in_the_database()
         {
-            var response = _repository.Get<PackageResponses>(w => w.RequestId == _requestId).ToList();
+            var response = _repository.Get<PackageResponse>(w => w.RequestId == _requestId).ToList();
             response.ShouldNotBeNull();
             response.Count.ShouldEqual(1);
             response.FirstOrDefault().RequestId.ShouldEqual(_requestId);

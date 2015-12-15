@@ -66,11 +66,6 @@ namespace Toolbox.LightstoneAuto.Repository
                         }
                     }
 
-                    //session.SaveOrUpdate(entity);
-                    //foreach (var field in dataFields)
-                    //{
-                    //    session.SaveOrUpdate(field);
-                    //}
                     transaction.Commit();
                 }
 

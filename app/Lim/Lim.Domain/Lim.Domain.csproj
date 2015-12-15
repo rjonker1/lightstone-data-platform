@@ -90,11 +90,35 @@
     <Compile Include="Base\AbstractPushFactory.cs" />
     <Compile Include="Base\IAggregateRepository.cs" />
     <Compile Include="Base\IEventStore.cs" />
+    <Compile Include="Client\ApiConfiguration.cs" />
+    <Compile Include="Client\Commands\AddClient.cs" />
+    <Compile Include="Client\Commands\GetAllConfigurations.cs" />
+    <Compile Include="Client\Commands\GetClients.cs" />
+    <Compile Include="Client\Commands\GetMetadata.cs" />
+    <Compile Include="Client\Commands\UpdateClient.cs" />
+    <Compile Include="Client\Handlers\IHandleGettingClient.cs" />
+    <Compile Include="Client\Handlers\IHandleGettingConfiguration.cs" />
+    <Compile Include="Client\Handlers\IHandleGettingMetadata.cs" />
+    <Compile Include="Client\Handlers\IHandleSavingClient.cs" />
+    <Compile Include="Client\Handlers\IHandleSavingConfiguration.cs" />
+    <Compile Include="Client\Handlers\SavingClientHandler.cs" />
+    <Compile Include="Client\Handlers\SavingConfigurationHandler.cs" />
+    <Compile Include="Client\LimClient.cs" />
     <Compile Include="Commands\BackupFile.cs" />
     <Compile Include="Commands\FailFile.cs" />
     <Compile Include="Commands\NotifiyFile.cs" />
     <Compile Include="Commands\ReadFile.cs" />
+    <Compile Include="Lookup\Commands\GettingLookupTypes.cs" />
+    <Compile Include="Pull\Commands\AddApiPullConfiguration.cs" />
+    <Compile Include="Pull\Commands\GetApiPullConfiguration.cs" />
+    <Compile Include="Pull\PullConfiguration.cs" />
+    <Compile Include="Push\Commands\AddApiPushConfiguration.cs" />
+    <Compile Include="Push\Commands\GetApiPushConfiguration.cs" />
+    <Compile Include="Push\Commands\UpdateApiPushConfiguration.cs" />
+    <Compile Include="Push\PushConfiguration.cs" />
+    <Compile Include="Push\PushConfigurationView.cs" />
     <None Include="app.config" />
+    <Compile Include="DomainMarker.cs" />
     <Compile Include="Events\LimEvent.cs" />
     <Compile Include="Events\PackageReceived.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
@@ -130,6 +154,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
