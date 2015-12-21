@@ -2,11 +2,11 @@
 {
     public class AddApiPushConfiguration : Command
     {
-        public readonly PushConfiguration Configuration;
+        public readonly PushApiDataPlatformConfiguration ApiDataPlatformConfiguration;
 
-        public AddApiPushConfiguration(PushConfiguration configuration)
+        public AddApiPushConfiguration(PushApiDataPlatformConfiguration apiDataPlatformConfiguration)
         {
-            Configuration = configuration;
+            ApiDataPlatformConfiguration = apiDataPlatformConfiguration;
         }
     }
 }

@@ -81,7 +81,7 @@ namespace Lim.Web.UI
             container.Register(Component.For<IHandleSavingConfiguration, SavingConfigurationHandler>());
             container.Register(Component.For<IHandleSavingClient, SavingClientHandler>());
             container.Register(Component.For<IHandleGettingMetadata, GetMetadataHandler>());
-            container.Register(Component.For<IPersist<PushConfiguration>, ApiPushCommit>());
+            container.Register(Component.For<IPersist<PushApiDataPlatformConfiguration>, ApiPushCommit>());
             container.Register(Component.For<IPersist<ClientDto>, ClientCommit>());
 
             container.Install(new AuthInstaller());

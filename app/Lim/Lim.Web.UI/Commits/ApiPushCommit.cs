@@ -8,7 +8,7 @@ using Lim.Enums;
 
 namespace Lim.Web.UI.Commits
 {
-    public class ApiPushCommit : AbstractPersistenceRepository<PushConfiguration>
+    public class ApiPushCommit : AbstractPersistenceRepository<PushApiDataPlatformConfiguration>
     {
         private readonly ISaveApiConfiguration _save;
 
@@ -17,69 +17,69 @@ namespace Lim.Web.UI.Commits
             _save = save;
         }
 
-        public override bool Persist(PushConfiguration pushConfig)
+        public override bool Persist(PushApiDataPlatformConfiguration pushApiDataPlatformConfig)
         {
             var configuration = new Configuration()
             {
-                Id = pushConfig.Id,
-                IsActive = pushConfig.IsActive,
+                Id = pushApiDataPlatformConfig.Id,
+                IsActive = pushApiDataPlatformConfig.IsActive,
                 DateModified = DateTime.UtcNow,
-                ModifiedBy = pushConfig.User ?? Environment.MachineName,
+                ModifiedBy = pushApiDataPlatformConfig.User ?? Environment.MachineName,
                 CustomFrequencyTime =
-                    pushConfig.FrequencyType == (int) Frequency.Custom ? pushConfig.CustomFrequency.TimeOfDay : TimeSpan.Parse("00:00"),
-                CustomFrequencyDay = pushConfig.FrequencyType == (int) Frequency.Custom ? pushConfig.CustomDay : null
+                    pushApiDataPlatformConfig.FrequencyType == (int) Frequency.Custom ? pushApiDataPlatformConfig.CustomFrequency.TimeOfDay : TimeSpan.Parse("00:00"),
+                CustomFrequencyDay = pushApiDataPlatformConfig.FrequencyType == (int) Frequency.Custom ? pushApiDataPlatformConfig.CustomDay : null
             };
 
             var apiConfiguration = new ConfigurationApi()
             {
-                Id = pushConfig.ConfigurationApiId,
+                Id = pushApiDataPlatformConfig.ConfigurationApiId,
                 Configuration = configuration,
-                BaseAddress = pushConfig.BaseAddress,
-                Suffix = pushConfig.Suffix,
-                Username = pushConfig.Username,
-                Password = pushConfig.Password,
-                HasAuthentication = pushConfig.HasAuthentication,
-                AuthenticationToken = pushConfig.AuthenticationToken,
-                AuthenticationKey = pushConfig.AuthenticationKey //,
+                BaseAddress = pushApiDataPlatformConfig.BaseAddress,
+                Suffix = pushApiDataPlatformConfig.Suffix,
+                Username = pushApiDataPlatformConfig.Username,
+                Password = pushApiDataPlatformConfig.Password,
+                HasAuthentication = pushApiDataPlatformConfig.HasAuthentication,
+                AuthenticationToken = pushApiDataPlatformConfig.AuthenticationToken,
+                AuthenticationKey = pushApiDataPlatformConfig.AuthenticationKey //,
                 //AuthenticationType = pushConfig.AuthenticationType
             };
 
-            var packages = pushConfig.IntegrationPackages.Select(s => new IntegrationPackage()
+            var packages = pushApiDataPlatformConfig.IntegrationPackages.Select(s => new IntegrationPackage()
             {
                 Id = 0,
                 Configuration = configuration,
                 PackageId = s,
-                ContractId = pushConfig.SelectableDataPlatformClients.SelectMany(c => c.Contracts)
+                ContractId = pushApiDataPlatformConfig.SelectableDataPlatformClients.SelectMany(c => c.Contracts)
                     .FirstOrDefault(c => c.Packages.Select(p => p.PackageId).Contains(s)).ContractId,
                 IsActive = true,
                 DateModified = DateTime.UtcNow,
-                ModifiedBy = pushConfig.User ?? Environment.MachineName
+                ModifiedBy = pushApiDataPlatformConfig.User ?? Environment.MachineName
             }).ToList();
 
-            var contracts = pushConfig.IntegrationContracts.Select(s => new IntegrationContract()
+            var contracts = pushApiDataPlatformConfig.IntegrationContracts.Select(s => new IntegrationContract()
             {
                 Id = 0,
                 Configuration = configuration,
                 Contract = s,
                 ClientCustomerId =
-                    pushConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.Contracts.Select(c => c.ContractId).Contains(s)).ClientCustomerId,
+                    pushApiDataPlatformConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.Contracts.Select(c => c.ContractId).Contains(s)).ClientCustomerId,
                 IsActive = true,
                 DateModified = DateTime.UtcNow,
-                ModifiedBy = pushConfig.User ?? Environment.MachineName
+                ModifiedBy = pushApiDataPlatformConfig.User ?? Environment.MachineName
             }).ToList();
 
-            var clients = pushConfig.IntegrationClients.Select(s => new IntegrationClient()
+            var clients = pushApiDataPlatformConfig.IntegrationClients.Select(s => new IntegrationClient()
             {
                 Id = 0,
                 Configuration = configuration,
                 ClientCustomerId = s,
-                AccountNumber = GetAccountNumber(pushConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.ClientCustomerId == s) != null ? pushConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.ClientCustomerId == s).AccountNumber : string.Empty),
+                AccountNumber = GetAccountNumber(pushApiDataPlatformConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.ClientCustomerId == s) != null ? pushApiDataPlatformConfig.SelectableDataPlatformClients.FirstOrDefault(w => w.ClientCustomerId == s).AccountNumber : string.Empty),
                 IsActive = true,
                 DateModified = DateTime.UtcNow,
-                ModifiedBy = pushConfig.User ?? Environment.MachineName
+                ModifiedBy = pushApiDataPlatformConfig.User ?? Environment.MachineName
             }).ToList();
 
-            return _save.SaveConfiguration(pushConfig.ClientId, pushConfig.ActionType, pushConfig.FrequencyType, pushConfig.IntegrationType, pushConfig.AuthenticationType,
+            return _save.SaveConfiguration(pushApiDataPlatformConfig.ClientId, pushApiDataPlatformConfig.ActionType, pushApiDataPlatformConfig.FrequencyType, pushApiDataPlatformConfig.IntegrationType, pushApiDataPlatformConfig.AuthenticationType,
                 configuration, apiConfiguration, packages, contracts, clients);
         }
 

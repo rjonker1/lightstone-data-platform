@@ -50,7 +50,7 @@ namespace Lim.Web.UI.Handlers
             var configuration = dto.Configurations.FirstOrDefault(w => w.Id == command.ConfigurationId) ?? new ConfigurationDto();
             var item = _repository.Find<ConfigurationApi>(w => w.Id == command.ConfigurationId);
 
-            command.Set(PushConfigurationView.Set(configuration.Id, item.Id, configuration.ConfigurationKey, dto.Id,
+            command.Set(PushApiConfigurationView.Set(configuration.Id, item.Id, configuration.ConfigurationKey, dto.Id,
                 dto.Name, configuration.FrequencyType,
                 configuration.ActionType, configuration.IntegrationType, configuration.IntegrationClients.Select(s => s.ClientCustomerId),
                 configuration.IntegrationContracts.Select(s => s.Contract), dto.DateCreated, dto.IsActive, item.BaseAddress, item.Suffix,

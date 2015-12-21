@@ -41,10 +41,10 @@ namespace Lim.Acceptance.Tests.Integrations.Configurations
             var configOnlyCommand = new GetApiPushConfiguration(command.Configurations.FirstOrDefault().Id,
                 command.Configurations.FirstOrDefault().ClientId);
             _handler.Handle(configOnlyCommand);
-            configOnlyCommand.Configuration.ShouldNotBeNull();
-            configOnlyCommand.Configuration.IntegrationPackages.ShouldNotBeNull();
-            configOnlyCommand.Configuration.IntegrationClients.ShouldNotBeNull();
-            configOnlyCommand.Configuration.IntegrationContracts.ShouldNotBeNull();
+            configOnlyCommand.ApiConfiguration.ShouldNotBeNull();
+            configOnlyCommand.ApiConfiguration.IntegrationPackages.ShouldNotBeNull();
+            configOnlyCommand.ApiConfiguration.IntegrationClients.ShouldNotBeNull();
+            configOnlyCommand.ApiConfiguration.IntegrationContracts.ShouldNotBeNull();
         }
     }
 }

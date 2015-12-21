@@ -22,4 +22,6 @@ INSERT INTO [dbo].[IntegrationType] ([Id], [Type], [IsActive]) VALUES (1, N'API'
 INSERT INTO [dbo].[IntegrationType] ([Id], [Type], [IsActive]) VALUES (2, N'Email', 1)
 INSERT INTO [dbo].[IntegrationType] ([Id], [Type], [IsActive]) VALUES (3, N'FlatFile', 1)
 INSERT INTO [dbo].[IntegrationType] ([Id], [Type], [IsActive]) VALUES (4, N'Notification', 1)
+INSERT INTO [dbo].[IntegrationType] ([Id], [Type], [IsActive]) VALUES (5, N'Ftp', 1)
+INSERT INTO [dbo].[IntegrationType] ([Id], [Type], [IsActive]) VALUES (6, N'Database', 1)
 SET IDENTITY_INSERT [dbo].[IntegrationType] OFF

@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\ang\angular-ui-bootstrap.js" />
+    <Content Include="assets\js\frequency-time.js" />
     <Content Include="assets\plugins\chosen\chosen-sprite%402x.png" />
     <Content Include="assets\plugins\chosen\chosen-sprite.png" />
     <Content Include="assets\plugins\chosen\chosen.jquery.min.js" />
@@ -241,6 +242,9 @@
     </None>
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\integrations\ftp\database\Configurations.cshtml" />
+    <Content Include="Views\integrations\ftp\database\Push.cshtml" />
+    <Content Include="Views\integrations\flatfile\Configurations.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -313,15 +317,14 @@
     <Compile Include="Commits\ApiPushCommit.cs" />
     <Compile Include="Commits\ClientCommit.cs" />
     <Compile Include="Modules\ClientModule.cs" />
-    <Compile Include="Modules\FtpModule.cs" />
+    <Compile Include="Modules\FtpDatabaseModule.cs" />
     <Compile Include="Modules\MessageModule.cs" />
     <Compile Include="Modules\MailModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
-    <Compile Include="Modules\ApiModule.cs" />
+    <Compile Include="Modules\ApiDataPlatformModule.cs" />
     <Compile Include="Modules\PingModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\integrations\ftp\" />
     <Folder Include="Views\integrations\mail\" />
     <Folder Include="Views\integrations\messages\" />
   </ItemGroup>

@@ -10,51 +10,51 @@ using Lim.Enums;
 
 namespace Lim.Domain.Push
 {
-    public class PushConfiguration
+    public class PushApiDataPlatformConfiguration
     {
         public readonly short ActionType;
         public readonly short IntegrationType;
 
-        public PushConfiguration()
+        public PushApiDataPlatformConfiguration()
         {
             ActionType = (int) IntegrationAction.Push;
             IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
-        private PushConfiguration(PushConfigurationView configuration)
+        private PushApiDataPlatformConfiguration(PushApiConfigurationView apiConfiguration)
         {
-            Id = configuration.Id;
-            Key = configuration.Key;
-            ConfigurationApiId = configuration.ApiConfigurationId;
-            ActionType = configuration.ActionType;
-            IntegrationType = configuration.IntegrationType;
-            FrequencyType = configuration.FrequencyType;
-            IntegrationClients = configuration.IntegrationClients;
-            IntegrationContracts = configuration.IntegrationContracts;
-            IsActive = configuration.IsActive;
-            ClientId = configuration.ClientId;
-            IntegrationPackages = configuration.IntegrationPackages;
-            BaseAddress = configuration.BaseAddress;
-            Suffix = configuration.Suffix;
-            Username = configuration.Username;
-            Password = configuration.Password;
-            HasAuthentication = configuration.HasAuthentication;
-            AuthenticationToken = configuration.AuthenticationToken;
-            AuthenticationKey = configuration.AuthenticationKey;
-            AuthenticationType = configuration.AuthenticationType;
-            CustomFrequency = DateTime.Now.Date + (configuration.CustomFrequencyTime.HasValue ? configuration.CustomFrequencyTime.Value : TimeSpan.Parse("00:00"));
-            CustomDay = configuration.CustomFrequencyDay;
+            Id = apiConfiguration.Id;
+            Key = apiConfiguration.Key;
+            ConfigurationApiId = apiConfiguration.ApiConfigurationId;
+            ActionType = apiConfiguration.ActionType;
+            IntegrationType = apiConfiguration.IntegrationType;
+            FrequencyType = apiConfiguration.FrequencyType;
+            IntegrationClients = apiConfiguration.IntegrationClients;
+            IntegrationContracts = apiConfiguration.IntegrationContracts;
+            IsActive = apiConfiguration.IsActive;
+            ClientId = apiConfiguration.ClientId;
+            IntegrationPackages = apiConfiguration.IntegrationPackages;
+            BaseAddress = apiConfiguration.BaseAddress;
+            Suffix = apiConfiguration.Suffix;
+            Username = apiConfiguration.Username;
+            Password = apiConfiguration.Password;
+            HasAuthentication = apiConfiguration.HasAuthentication;
+            AuthenticationToken = apiConfiguration.AuthenticationToken;
+            AuthenticationKey = apiConfiguration.AuthenticationKey;
+            AuthenticationType = apiConfiguration.AuthenticationType;
+            CustomFrequency = DateTime.Now.Date + (apiConfiguration.CustomFrequencyTime.HasValue ? apiConfiguration.CustomFrequencyTime.Value : TimeSpan.Parse("00:00"));
+            CustomDay = apiConfiguration.CustomFrequencyDay;
         }
 
-        public static PushConfiguration Existing(IHandleGettingConfiguration handler, GetApiPushConfiguration command)
+        public static PushApiDataPlatformConfiguration Existing(IHandleGettingConfiguration handler, GetApiPushConfiguration command)
         {
             handler.Handle(command);
-            return new PushConfiguration(command.Configuration);
+            return new PushApiDataPlatformConfiguration(command.ApiConfiguration);
         }
 
-        public static PushConfiguration Create()
+        public static PushApiDataPlatformConfiguration Create()
         {
-            return new PushConfiguration();
+            return new PushApiDataPlatformConfiguration();
         }
 
         public void SetDataPlatformClients(List<DataPlatformClientDto> clients)

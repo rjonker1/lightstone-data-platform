@@ -11,11 +11,11 @@
             ClientId = clientId;
         }
 
-        public void Set(PushConfigurationView configuration)
+        public void Set(PushApiConfigurationView apiConfiguration)
         {
-            Configuration = configuration;
+            ApiConfiguration = apiConfiguration;
         }
 
-        public PushConfigurationView Configuration { get; private set; }
+        public PushApiConfigurationView ApiConfiguration { get; private set; }
     }
 }

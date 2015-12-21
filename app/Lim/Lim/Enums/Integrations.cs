@@ -6,7 +6,8 @@
         Email = 2,
         FlatFile = 3,
         Notificaiton = 4,
-        Ftp = 5
+        Ftp = 5,
+        FtpDatabase = 6
     }
 
     public enum IntegrationAction

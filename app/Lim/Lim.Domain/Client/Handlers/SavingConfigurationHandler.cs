@@ -9,9 +9,9 @@ namespace Lim.Domain.Client.Handlers
     public class SavingConfigurationHandler : IHandleSavingConfiguration
     {
         //private readonly IDbConnection _connection;
-        private readonly IPersist<PushConfiguration> _persistence;
+        private readonly IPersist<PushApiDataPlatformConfiguration> _persistence;
 
-        public SavingConfigurationHandler(IPersist<PushConfiguration> persistence)
+        public SavingConfigurationHandler(IPersist<PushApiDataPlatformConfiguration> persistence)
         {
             _persistence = persistence;
         }
@@ -19,7 +19,7 @@ namespace Lim.Domain.Client.Handlers
         public void Handle(AddApiPushConfiguration command)
         {
             //IsSaved = new ApiPushCommit(_connection, command.Configuration).Save();
-            IsSaved = _persistence.Persist(command.Configuration);
+            IsSaved = _persistence.Persist(command.ApiDataPlatformConfiguration);
         }
 
         public void Handle(UpdateApiPushConfiguration command)
