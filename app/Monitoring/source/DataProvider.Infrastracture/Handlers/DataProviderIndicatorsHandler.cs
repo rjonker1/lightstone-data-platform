@@ -34,7 +34,7 @@ namespace DataProvider.Infrastructure.Handlers
                 var requestField = new RequestField();
                 ((List<RequestPayloadDto>)indicators[3]).ForEach(f =>
                 {
-                    requestField.DetermineRequestField(ExecutionBegan.Deserialize(f.Json));
+                    requestField.DetermineRequestField(f.Json);
                 });
 
                 var requestFieldCounts =
@@ -46,13 +46,13 @@ namespace DataProvider.Infrastructure.Handlers
 
 
                 var dataProviderRequestTimeIndicator = ((List<DataProviderPayloadDto>)indicators[2]).Select(
-                    s => new ElapsedTimeDataProviderDto(ExecutionEnded.Deserialize(s.Json)))
-                    .GroupBy(g => g.DataproviderId, g => g.ElapsedTimeSpan, (key, times) => new
+                    s => new ElapsedTimeDataProviderDto(s.DataProviderName,s.DataProviderId,s.ElapsedTime))
+                    .GroupBy(g => g.DataProviderName, g => g.ElapsedTimeSpan, (key, times) => new
                     {
                         DataProvider = key,
                         Times = times.ToList()
                     })
-                    .Select(sg => new IndicatorRequestTimeDataProviderDto(sg.Times.Average(i => i.TotalSeconds), ((DataProviderCommandSource)sg.DataProvider).Description()))
+                    .Select(sg => new IndicatorRequestTimeDataProviderDto(sg.Times.Average(i => i.TotalSeconds), sg.DataProvider))
                     .ToList();
 
                 Indicators = new DataProviderIndicatorsDto(((List<IndicatorRequestLevelDto>)indicators[0]).FirstOrDefault(), ((List<IndicatorRequestPerDataProviderDto>)indicators[1]), dataProviderRequestTimeIndicator, requestFieldCounts.ToList());

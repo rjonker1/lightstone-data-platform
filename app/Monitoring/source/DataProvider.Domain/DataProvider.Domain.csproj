@@ -60,8 +60,10 @@
     <Compile Include="Models\Payload.cs" />
     <Compile Include="Models\RequestFields\AbstractRequestFieldFinder.cs" />
     <Compile Include="Models\RequestFields\CarIdFinder.cs" />
+    <Compile Include="Models\RequestFields\IDNumberFinder.cs" />
     <Compile Include="Models\RequestFields\LicenseNumberFinder.cs" />
     <Compile Include="Models\RequestFields\RegistrationNumberFinder.cs" />
+    <Compile Include="Models\RequestFields\ScanDataFinder.cs" />
     <Compile Include="Models\RequestFields\UndefinedFinder.cs" />
     <Compile Include="Models\RequestFields\VinNumberFinder.cs" />
     <Compile Include="Models\Results.cs" />

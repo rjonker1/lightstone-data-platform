@@ -11,7 +11,7 @@ namespace DataProvider.Infrastructure.Factory
     {
         public IFindRequestField Create()
         {
-            return new VinNumberFinder(new CarIdFinder(new LicenseNumberFinder(new RegistrationNumberFinder(new UndefinedFinder()))));
+            return new VinNumberFinder(new CarIdFinder(new LicenseNumberFinder(new RegistrationNumberFinder(new IdNumberFinder(new ScanDataFinder(new UndefinedFinder()))))));
         }
     }
 }

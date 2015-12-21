@@ -1,5 +1,4 @@
 ﻿using System;
-using Lim;
 using Lim.Domain.Events;
 using Lim.Dtos;
 

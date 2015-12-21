@@ -11,21 +11,25 @@ namespace DataProvider.Infrastructure.Dto.Payloads
 
         }
 
-        [DataMember]
-        public byte[] Payload { get; set; }
+        //[DataMember]
+        //public byte[] Payload { get; set; }
 
         [DataMember]
         public int DataProviderId { get; set; }
-
         [DataMember]
-        public string Json
-        {
-            get
-            {
-                Deserialize(Payload);
-                return JsonPayload;
-            }
-        }
+        public string DataProviderName { get; set; }
+        [DataMember]
+        public string ElapsedTime { get; set; }
+
+        //[DataMember]
+        //public string Json
+        //{
+        //    get
+        //    {
+        //        Deserialize(Payload);
+        //        return JsonPayload;
+        //    }
+        //}
 
     }
 }

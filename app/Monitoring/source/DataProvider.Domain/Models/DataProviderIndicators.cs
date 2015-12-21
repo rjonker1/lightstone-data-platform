@@ -13,9 +13,9 @@ namespace DataProvider.Domain.Models
   --Total request per DP
   select count(m.Id) as [Count], m.DataProviderId from DataProviderEventLog m where m.CommandTypeId = 6 and DataProviderId <> 6 and m.CommitStamp >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AND m.CommitStamp < DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0) group by m.DataProviderId, m.DataProviderId
     --Avg Response time per DP
-  select m.Payload, m.DataProviderId from [dbo].[DataProviderEventLog] m where m.CommandTypeId = 6 and m.CommitStamp >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AND m.CommitStamp < DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0)
+  select drt.DataProviderId, drt.DataProviderName, drt.ElapsedTime from DataProviderResponseTime drt where drt.CommitStamp >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AND drt.CommitStamp < DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0) 
     --Total VIN Requests, LIC Requests, etc.
-  select distinct m.Id as RequestId, m.payload from [dbo].[DataProviderEventLog] m where m.CommandTypeId = 5 and m.DataProviderId = 6 and m.CommitStamp >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AND m.CommitStamp < DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0)
+  select dpr.DataProviderId, dpr.DataProviderName, dpr.RequestId, dpr.RequestFields as Payload from DataProviderRequestField dpr where  dpr.CommitStamp >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AND dpr.CommitStamp < DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0)
 ";
 
         public DataProviderIndicators()

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using DataProvider.Domain.Enums;
 using DataProvider.Domain.Extensions;
-using DataProvider.Domain.Models.Events;
 using DataProvider.Domain.Models.RequestFields;
 using DataProvider.Infrastructure.Factory;
 using Newtonsoft.Json;
@@ -24,15 +23,10 @@ namespace DataProvider.Infrastructure
             _findRequestField = new RequestFieldFinderFactory().Create();
         }
 
-        public void DetermineRequestField(ExecutionBegan @event)
+        public void DetermineRequestField(string jsonRequestFields)
         {
-            foreach (var dataProvider in @event.Payload.DataProviders)
-            {
-                var obj = !string.IsNullOrEmpty(dataProvider.DataProviderJson) ? JsonConvert.DeserializeObject(dataProvider.DataProviderJson) : null;
-                if (obj != null)
-                    _findRequestField.DetermineRequestField((JObject)obj, _requestFields);
-            }
-
+            var obj = !string.IsNullOrEmpty(jsonRequestFields) ? (JObject)JsonConvert.DeserializeObject(jsonRequestFields) : new JObject();
+            if (obj != null) _findRequestField.DetermineRequestField((JObject)obj, _requestFields);
             RequestFieldCounts.AddRange(_requestFields.GroupBy(g => g).Select(s => new RequestFieldCount(s.Key.Description(), 1)));
             _requestFields.Clear();
         }

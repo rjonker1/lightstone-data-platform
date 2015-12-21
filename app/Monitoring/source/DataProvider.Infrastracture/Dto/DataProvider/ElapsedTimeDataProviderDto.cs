@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Enums;
-using DataProvider.Domain.Models.Events;
 
 namespace DataProvider.Infrastructure.Dto.DataProvider
 {
@@ -13,20 +11,21 @@ namespace DataProvider.Infrastructure.Dto.DataProvider
 
         }
 
-        public ElapsedTimeDataProviderDto(ExecutionEnded @event)
+        public ElapsedTimeDataProviderDto(string dateProviderName, int dataProviderId, string elapsedTime)
         {
-            DataProviderName = @event.Payload.MetadataObject.Results.Name;
-            ElapsedTime = @event.Payload.MetadataObject.Results.ElapsedTime;
+            //DataProviderName = @event.Payload.MetadataObject.Results.Name;
+            //ElapsedTime = @event.Payload.MetadataObject.Results.ElapsedTime;
+
+            DataProviderName = dateProviderName;
+            DataproviderId = dataProviderId;
+            ElapsedTime = elapsedTime;
         }
 
         [DataMember]
         public string DataProviderName { get; set; }
 
         [DataMember]
-        public int DataproviderId
-        {
-            get { return (int) (DataProviderCommandSource) Enum.Parse(typeof (DataProviderCommandSource), DataProviderName); }
-        }
+        public int DataproviderId { get; private set; }
 
         [DataMember]
         public string ElapsedTime { get; private set; }

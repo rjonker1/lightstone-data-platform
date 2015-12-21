@@ -3,7 +3,6 @@ using System.Linq;
 using Common.Logging;
 using Lim.Domain.Base;
 using Lim.Dtos;
-using NHibernate;
 using NHibernate.Linq;
 using Toolbox.LSAuto.Entities;
 using Toolbox.LSAuto.Entities.Factory;

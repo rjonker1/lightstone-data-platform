@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataProvider.Domain.Enums;
 using Newtonsoft.Json.Linq;
 
@@ -29,7 +30,7 @@ namespace DataProvider.Domain.Models.RequestFields
         {
             try
             {
-                var check = !requestFields.Exists(w => w == _requestField) && obj != null && obj.HasValues && obj.GetValue(_requestField.ToString()).HasValues;
+                var check = !requestFields.Exists(w => w == _requestField) && obj != null && obj.HasValues && obj.GetValue(_requestField.ToString(),StringComparison.CurrentCultureIgnoreCase).HasValues;
                 if (check)
                     requestFields.Add(_requestField);
             }
