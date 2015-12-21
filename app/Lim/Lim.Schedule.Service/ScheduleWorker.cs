@@ -48,28 +48,6 @@ namespace Lim.Schedule.Service
 
             bus.BindReadQueue(_container).BindWriteQueue(_container);
 
-            //var senderQueue = bus.QueueDeclare("DataPlatform.Integration.Sender");
-            //var senderExchange = bus.ExchangeDeclare("DataPlatform.Integration.Sender", ExchangeType.Fanout);
-            //bus.Bind(senderExchange, senderQueue, string.Empty);
-
-            //var receiverQueue = bus.QueueDeclare("DataPlatform.Integration.Receiver");
-            //var receiverExchange = bus.ExchangeDeclare("DataPlatform.Integration.Receiver", ExchangeType.Fanout);
-            //bus.Bind(receiverExchange, receiverQueue, string.Empty);
-
-            //bus.AddWriteConsumers(senderQueue, _container);
-            //bus.AddReadConsumers(receiverQueue, _container);
-
-            //bus.Consume(senderQueue,
-            //    q =>
-            //        q.Add<PackageResponseMessage>(
-            //            (message, info) => new WriteConsumers<PackageResponseMessage>(message, _container)));
-
-          
-            //bus.Consume(receiverQueue,
-            //    q =>
-            //        q.Add<PackageConfigurationMessage>(
-            //            (message, info) => new ReadConsumers<PackageConfigurationMessage>(message, _container)));
-
             _scheduler.Start();
 
             Log.Debug("LIM Scheduler has started");

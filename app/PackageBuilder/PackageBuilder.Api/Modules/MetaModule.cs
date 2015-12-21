@@ -8,6 +8,7 @@ using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Metadata.Entrypoint;
 using Lace.Shared.Extensions;
+using Lim.Core;
 using Lim.Domain.Messaging.Messages;
 using Lim.Domain.Messaging.Publishing;
 using Nancy;
@@ -20,13 +21,14 @@ using PackageBuilder.Domain.Entities.Requests.RequestTypes;
 using PackageBuilder.Infrastructure.NEventStore;
 using Shared.BuildingBlocks.Api.Security;
 using Shared.Logging;
+using Toolbox.LIVE.Shared.Commands;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
 {
     public class MetaModule : SecureModule
     {
-        public MetaModule(INEventStoreRepository<Package> writeRepo, IPublishIntegrationMessages integration)
+        public MetaModule(INEventStoreRepository<Package> writeRepo, ISendCommand integration)
         {
             Post["/Packages/Execute/Meta", true] = async(parameters, ct) =>
             {
@@ -57,7 +59,7 @@ namespace PackageBuilder.Api.Modules
                 // Filter responses for cleaner api payload
                 var filteredResponse = Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<ResponseDataProviderDto>>(responses);
 
-                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
+                integration.Send(new SendExecutedPackage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     responses.Any() ? responses.AsJsonString() : string.Empty, requestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
                 return Response.AsJson(filteredResponse);

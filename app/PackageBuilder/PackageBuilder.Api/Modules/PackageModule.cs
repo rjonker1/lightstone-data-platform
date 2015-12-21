@@ -11,8 +11,7 @@ using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Shared.Extensions;
-using Lim.Domain.Messaging.Messages;
-using Lim.Domain.Messaging.Publishing;
+using Lim.Core;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Security;
@@ -36,6 +35,7 @@ using PackageBuilder.Infrastructure.NEventStore;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using Shared.Logging;
+using Toolbox.LIVE.Shared.Commands;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 using StringExtensions = DataPlatform.Shared.Helpers.Extensions.StringExtensions;
@@ -47,7 +47,7 @@ namespace PackageBuilder.Api.Modules
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint, IAdvancedBus eBus,
-            IUserManagementApiClient userManagementApi, IPublishIntegrationMessages integration, IBuildRequest requestBuilder) //, IEntryPointAsync entryPointAsync
+            IUserManagementApiClient userManagementApi, ISendCommand integration, IBuildRequest requestBuilder) //, IEntryPointAsync entryPointAsync
         {
 
             Get[PackageBuilderApi.PackageRoutes.RequestIndex.ApiRoute] = _ =>
@@ -132,7 +132,7 @@ namespace PackageBuilder.Api.Modules
                 filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
-                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
+                integration.Send(new SendExecutedPackage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
                 this.Info(() => StringExtensions.FormatWith("Package Execute finished for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
@@ -191,7 +191,7 @@ namespace PackageBuilder.Api.Modules
                 filteredResponse.AddRange(Mapper.Map<IEnumerable<IDataProvider>, IEnumerable<IProvideResponseDataProvider>>(responses));
                 this.Info(() => StringExtensions.FormatWith("Package Response Filter Cleanup Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
 
-                integration.SendToBus(new PackageResponseMessage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
+                integration.Send(new SendExecutedPackage(package.Id, apiRequest.UserId, apiRequest.ContractId, accountNumber,
                     filteredResponse.Any() ? filteredResponse.AsJsonString() : string.Empty, apiRequest.RequestId, Context != null ? Context.CurrentUser.UserName : "unavailable"));
 
                 this.Info(() => StringExtensions.FormatWith("Package ExecuteWithCarId Completed for {0}, TimeStamp: {1}", apiRequest.RequestId, DateTime.UtcNow));
