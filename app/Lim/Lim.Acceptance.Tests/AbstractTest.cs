@@ -1,4 +1,4 @@
-﻿using Toolbox.Mapping;
+﻿using Lim.Web.UI;
 using Xunit.Extensions;
 
 namespace Lim.Acceptance.Tests

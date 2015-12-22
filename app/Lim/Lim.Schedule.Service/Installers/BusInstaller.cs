@@ -13,11 +13,11 @@ namespace Lim.Schedule.Service.Installers
 {
     public class BusInstaller : IWindsorInstaller
     {
-        private static readonly ILog _log = LogManager.GetLogger<BusInstaller>();
+        private static readonly ILog Log = LogManager.GetLogger<BusInstaller>();
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            _log.InfoFormat("Installing bus");
+            Log.InfoFormat("Installing bus");
 
             container.Register(
                 Component.For<IAdvancedBus>()
@@ -35,7 +35,7 @@ namespace Lim.Schedule.Service.Installers
             container.Register(Component.For<ISendCommand>().UsingFactoryMethod(
                 () => new SendCommand(BusFactory.CreateAdvancedBus(ConfigurationReader.LimSender))));
 
-            _log.InfoFormat("Bus Installed");
+            Log.InfoFormat("Bus Installed");
         }
     }
 }

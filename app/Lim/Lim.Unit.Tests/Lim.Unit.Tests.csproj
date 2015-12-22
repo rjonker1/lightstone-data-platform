@@ -110,7 +110,6 @@
     <Compile Include="Jobs\Api\when_pushing_hourly_api_job.cs" />
     <Compile Include="Jobs\Api\when_pushing_daily_api_job.cs" />
     <Compile Include="Jobs\Api\when_pushing_cusom_api_job.cs" />
-    <Compile Include="LSAuto\Helpers\FakeDataSetReadModel.cs" />
     <Compile Include="LSAuto\Views\when_creating_views_for_import.cs" />
     <Compile Include="LSAuto\when_creating_data_sets_for_ls_auto.cs" />
     <Compile Include="LSAuto\when_deactivating_data_set_for_ls_auto.cs" />
@@ -164,7 +163,9 @@
       <Name>Lim</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="LSAuto\Helpers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>

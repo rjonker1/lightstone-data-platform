@@ -31,13 +31,15 @@ namespace Toolbox.LightstoneAuto.Domain
 
         public void Deactivate(DeActivateDataExtract command)
         {
+            Version = command.Version;
             ApplyChange(new DatabaseExtractDeActivated(command.DataSetId, command.CorrelationId));
         }
 
         public void Modify(ModifyDataExtract command)
         {
+            Version = command.Version;
             ApplyChange(new DatabaseExtractModified(command.DatabaseExtract, command.CorrelationId, command.EventType, command.EventTypeId, false, command.User,
-                typeof(ModifyDataExtract)));
+                 command.Version,typeof(ModifyDataExtract)));
         }
 
         public override Guid Id

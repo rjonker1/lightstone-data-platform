@@ -6,7 +6,7 @@ namespace Toolbox.LightstoneAuto.Domain.Commands.View
 {
     public class ModifyView : Command
     {
-        public ModifyView(DatabaseViewDto databaseView, Guid modifiedBy, long version, Guid correlationId)
+        public ModifyView(DatabaseViewDto databaseView, string modifiedBy, long version, Guid correlationId)
         {
             DatabaseView = databaseView;
             EventType = Lim.Enums.EventType.Modified.ToString();

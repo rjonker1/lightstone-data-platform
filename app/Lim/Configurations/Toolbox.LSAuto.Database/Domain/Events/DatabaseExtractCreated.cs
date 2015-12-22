@@ -6,7 +6,7 @@ namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DatabaseExtractCreated : LimEvent
     {
-        public DatabaseExtractCreated(DatabaseExtractDto databaseExtract, Guid correlationId,  string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
+        public DatabaseExtractCreated(DatabaseExtractDto databaseExtract, Guid correlationId,  string eventType, int eventTypeId, bool newAggregate, string user, Type type)
         {
             DatabaseExtract = databaseExtract;
             EventType = eventType;

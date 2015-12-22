@@ -5,7 +5,7 @@ namespace Toolbox.LightstoneAuto.Domain.Commands.Dataset
 {
     public class DeActivateDataExtract : Command
     {
-        public DeActivateDataExtract(Guid dataSetId, Guid modifiedBy, long version, Guid correlationId)
+        public DeActivateDataExtract(Guid dataSetId, string modifiedBy, long version, Guid correlationId)
         {
             DataSetId = dataSetId;
             EventType = Lim.Enums.EventType.Deactivated.ToString();

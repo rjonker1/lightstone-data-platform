@@ -56,8 +56,7 @@ namespace Lim.Web.UI.Modules
                     int.TryParse(_.Id, out id);
                     int.TryParse(_.clientId, out clientId);
 
-                    if (id == 0 || clientId == 0)
-                        return HttpStatusCode.NoResponse;
+                    if (id == 0 || clientId == 0) return HttpStatusCode.BadRequest;
 
                     var token = Context.Request.Headers.Authorization.Any() ? Context.Request.Headers.Authorization.Split(' ')[1] : string.Empty;
                     var model = PushApiDataPlatformConfiguration.Existing(setup, new GetApiPushConfiguration(id, clientId));

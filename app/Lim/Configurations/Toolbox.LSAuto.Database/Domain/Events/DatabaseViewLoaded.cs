@@ -6,7 +6,7 @@ namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DatabaseViewLoaded : LimEvent
     {
-        public DatabaseViewLoaded(DatabaseViewDto databaseView, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
+        public DatabaseViewLoaded(DatabaseViewDto databaseView, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, string user, Type type)
         {
             DatabaseView = databaseView;
             EventType = eventType;

@@ -33,7 +33,7 @@ namespace Lim.Acceptance.Tests.Bus.LSAuto
             foreach (var view in _views)
             {
                 view.AggregateId = Guid.NewGuid();
-                _command = new LoadView(view, Guid.NewGuid(), Guid.NewGuid());
+                _command = new LoadView(view, "rudi@testing.com", Guid.NewGuid());
                 _sender.Send(_command);
 
             }

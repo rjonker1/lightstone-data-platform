@@ -13,8 +13,8 @@ namespace Toolbox.LSAuto.Entities
         public virtual long Version { get; set; }
         public virtual DateTime DateCreated { get; set; }
         public virtual DateTime? DateModified { get; set; }
-        public virtual Guid? ModifiedBy { get; set; }
-        public virtual Guid CreatedBy { get; set; }
+        public virtual string ModifiedBy { get; set; }
+        public virtual string CreatedBy { get; set; }
         public virtual IList<DatabaseViewColumn> ViewColumns { get; set; } 
     }
 }

@@ -15,7 +15,7 @@ namespace Lim.Domain.EventStore.Maps
             Map(m => m.EventTypeId).Column("EventTypeId").Nullable().Index("IX_Events_EventTypeId");
             Map(m => m.Payload).Column("Payload").Not.Nullable().Length(int.MaxValue);
             Map(m => m.Version).Column("Version").Not.Nullable();
-            Map(m => m.UserId).Column("UserId").Not.Nullable().Index("IX_Events_User");
+            Map(m => m.UserName).Column("UserName").Not.Nullable().Index("IX_Events_User");
             Map(m => m.CorrelationId).Column("CorrelationId").Not.Nullable().Index("IX_Events_CorrelationId");
             Map(m => m.AggregateNew).Column("AggregateNew").Not.Nullable().Default("0");
             Map(m => m.CommitStamp).Column("CommitStamp").Not.Nullable().Default("GETUTCDATE()").Generated.Insert();

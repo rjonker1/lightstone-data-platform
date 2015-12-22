@@ -14,6 +14,6 @@ namespace Lim.Domain.EventStore.Entities
         public virtual string TypeName { get; set; }
         public virtual byte[] Payload { get; set; }
         public virtual long Version { get; set; }
-        public virtual Guid UserId { get; set; }
+        public virtual string UserName { get; set; }
     }
 }

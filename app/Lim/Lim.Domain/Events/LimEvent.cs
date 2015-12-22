@@ -15,6 +15,6 @@ namespace Lim.Domain.Events
         public Type Type { get; set; }
         public string TypeName { get; set; }
        // public byte[] Payload { get; set; }
-        public Guid User { get; set; }
+        public string User { get; set; }
     }
 }

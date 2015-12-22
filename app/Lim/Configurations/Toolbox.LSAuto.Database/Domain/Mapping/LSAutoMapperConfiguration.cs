@@ -2,9 +2,9 @@
 using System.Linq;
 using AutoMapper;
 
-namespace Toolbox.Mapping
+namespace Toolbox.LightstoneAuto.Domain.Mapping
 {
-    //public class AutoMapperConfiguration
+    //public class LightstoneAutoMapperConfiguration
     //{
     //    public static void Configure()
     //    {
@@ -13,7 +13,7 @@ namespace Toolbox.Mapping
 
     //    private static void AddProfiles(IConfiguration configuration)
     //    {
-    //        var mapProfiles = typeof (MappingMarker).Assembly.GetTypes().Where(w => typeof (Profile).IsAssignableFrom(w));
+    //        var mapProfiles = typeof(LsAutoMarker).Assembly.GetTypes().Where(w => typeof(Profile).IsAssignableFrom(w));
     //        foreach (var profile in mapProfiles)
     //        {
     //            configuration.AddProfile(Activator.CreateInstance(profile) as Profile);

@@ -18,8 +18,8 @@ namespace Lim.Dtos
         public long Version { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
-        public Guid? ModifiedBy { get; set; }
-        public Guid CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
+        public string CreatedBy { get; set; }
         public List<DatabaseViewColumnDto> ViewColumns { get; set; } 
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Enums\AggregateType.cs" />
     <Compile Include="Enums\EventType.cs" />
     <Compile Include="Enums\Integrations.cs" />
+    <Compile Include="Enums\Source.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Enums\Times.cs" />
     <Compile Include="Infrastructure\AbstractConfigurationReader.cs" />

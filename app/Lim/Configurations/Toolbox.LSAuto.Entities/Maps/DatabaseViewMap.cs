@@ -18,7 +18,7 @@ namespace Toolbox.LSAuto.Entities.Maps
             Map(m => m.Version).Not.Nullable();
             Map(m => m.ModifiedBy).Nullable();
             Map(m => m.CreatedBy).Nullable();
-            HasMany(m => m.ViewColumns).Cascade.AllDeleteOrphan().KeyColumn("DatabaseViewId").Inverse().ForeignKeyConstraintName("FK_DatabaseView").Not.LazyLoad();
+            HasMany(m => m.ViewColumns).KeyColumn("DatabaseViewId").Inverse().ForeignKeyConstraintName("FK_DatabaseView").Not.LazyLoad();
         }
     }
 }

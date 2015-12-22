@@ -2,7 +2,6 @@
 using System.Linq;
 using Lim.Test.Helper.Builder;
 using Lim.Test.Helper.Fakes;
-using Lim.Unit.Tests.LSAuto.Helpers;
 using Toolbox.LightstoneAuto.Domain.Base;
 using Toolbox.LightstoneAuto.Domain.Commands.Dataset;
 using Xunit.Extensions;
@@ -24,7 +23,7 @@ namespace Lim.Unit.Tests.LSAuto
         }
         public override void Observe()
         {
-            _bus.Send(new CreateDataExtract(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), Guid.NewGuid()));
+            _bus.Send(new CreateDataExtract(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), "rudi@testing.com", Guid.NewGuid()));
         }
 
         [Observation(Skip = "Fake bus not working")]

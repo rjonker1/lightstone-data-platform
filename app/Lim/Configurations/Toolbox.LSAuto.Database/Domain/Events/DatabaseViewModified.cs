@@ -6,7 +6,8 @@ namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DatabaseViewModified : LimEvent
     {
-        public DatabaseViewModified(DatabaseViewDto databaseView, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
+        public DatabaseViewModified(DatabaseViewDto databaseView, Guid correlationId, string eventType, int eventTypeId, bool newAggregate,
+            string user, long version, Type type)
         {
             AggregateId = databaseView.AggregateId;
             DatabaseView = databaseView;
@@ -17,6 +18,8 @@ namespace Toolbox.LightstoneAuto.Domain.Events
             AggregateNew = newAggregate;
             User = user;
             CorrelationId = correlationId;
+            Version = version;
+            DatabaseView.Version = version;
         }
 
         public DatabaseViewDto DatabaseView { get; private set; }

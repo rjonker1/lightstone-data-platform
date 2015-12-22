@@ -21,7 +21,7 @@ namespace Lim.Acceptance.Tests.Bus.LSAuto
         {
             _bus = BusFactory.CreateAdvancedBus("lim/queue");
             _id = Guid.NewGuid();
-            _command = new CreateDataExtract(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), Guid.NewGuid());
+            _command = new CreateDataExtract(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), "rudi@testing.com", Guid.NewGuid());
             _sender = new SendCommand(_bus);
         }
 

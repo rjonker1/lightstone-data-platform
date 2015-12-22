@@ -7,5 +7,6 @@ namespace Toolbox.LightstoneAuto.Domain.Base
     {
         List<DatabaseViewDto> GetDatabaseViews();
         DatabaseViewDto GetDatabaseView(long id);
+        DatabaseViewDto GetDatabaseView(string name);
     }
 }

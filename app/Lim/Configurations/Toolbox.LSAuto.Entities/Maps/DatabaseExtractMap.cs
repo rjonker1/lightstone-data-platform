@@ -9,6 +9,7 @@ namespace Toolbox.LSAuto.Entities.Maps
             Table("DatabaseExtracts");
             Not.LazyLoad();
             Id(m => m.Id).GeneratedBy.Identity().Column("Id");
+            References(m => m.View).Column("ViewId").Not.Nullable().Index("IX_DatabaseExtracts_ViewId");
             Map(m => m.AggregateId).Not.Nullable().Index("IX_DatabaseExtracts_AggregateId");
             Map(m => m.Activated).Not.Nullable().Default("0");
             Map(m => m.CreatedBy).Nullable();
@@ -19,7 +20,6 @@ namespace Toolbox.LSAuto.Entities.Maps
             Map(m => m.Name).Not.Nullable().Length(100);
             Map(m => m.Version).Not.Nullable();
             HasMany(m => m.Fields)
-                .Cascade.AllDeleteOrphan()
                 .KeyColumn("DatabaseExtractId")
                 .Inverse()
                 .ForeignKeyConstraintName("FK_DatabaseExtractsColumns")

@@ -5,7 +5,7 @@ namespace Lim.Entities
     public class PackageResponse {
         public virtual long Id { get; set; }
         public virtual System.Guid PackageId { get; set; }
-        public virtual System.Guid Userid { get; set; }
+        public virtual Guid Userid { get; set; }
         public virtual System.Guid ContractId { get; set; }
         public virtual int AccountNumber { get; set; }
         public virtual DateTime ResponseDate { get; set; }

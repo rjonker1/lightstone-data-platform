@@ -28,7 +28,8 @@ namespace Toolbox.LightstoneAuto.Domain
         
         public void Modify(ModifyView command)
         {
-            ApplyChange(new DatabaseViewModified(command.DatabaseView, command.CorrelationId, command.EventType, command.EventTypeId, command.NewAggregate, command.User, command.Type));
+            Version = command.Version;
+            ApplyChange(new DatabaseViewModified(command.DatabaseView, command.CorrelationId, command.EventType, command.EventTypeId, command.NewAggregate, command.User,command.Version, command.Type));
         }
 
         public override Guid Id

@@ -146,6 +146,7 @@
     <Compile Include="Database\AbstracLsAutoInMemoryDatabase.cs" />
     <Compile Include="Database\Repositories\InMemoryLsAutoRepository.cs" />
     <Compile Include="Fakes\FakeBus.cs" />
+    <Compile Include="Fakes\FakeDataSetReadModel.cs" />
     <Compile Include="Fakes\FakeResponse.cs" />
     <Compile Include="Fakes\FakeTransactions.cs" />
     <Compile Include="Fakes\Handlers\FakeFetchingApiPushConfigurationHandler.cs" />

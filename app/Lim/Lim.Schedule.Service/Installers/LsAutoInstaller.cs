@@ -1,11 +1,11 @@
-﻿using System;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Lim.Core;
 using Lim.Dtos;
+using Toolbox.LightstoneAuto.Domain.Base;
+using Toolbox.LightstoneAuto.Infrastructure.ReadModels;
 using Toolbox.LightstoneAuto.Repository;
-using Toolbox.LSAuto.Entities;
 using Toolbox.LSAuto.Entities.Factory;
 
 namespace Lim.Schedule.Service.Installers
@@ -16,10 +16,10 @@ namespace Lim.Schedule.Service.Installers
         {
             container.Register(
                 Component.For<LsAutoConfiguration>().UsingFactoryMethod(c => LightstoneAutoFactoryManager.BuildConfiguration()).LifestyleTransient());
-
            
             container.Register(Component.For<IPersist<DatabaseExtractDto>, DatabaseExtractCommit>());
             container.Register(Component.For<IPersist<DatabaseViewDto>, DatabaseViewCommit>());
+            container.Register(Component.For<IReadDatabaseExtractFacade, DatabaseExtractReadModel>());
         }
     }
 }

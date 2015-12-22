@@ -25,31 +25,34 @@ namespace Toolbox.LightstoneAuto.Repository
                 if (dto == null)
                     return false;
 
-                var viewEntitiy = new DatabaseView
+                var entity = new DatabaseView
                 {
                     Id = dto.Id,
                     AggregateId = dto.AggregateId,
                     Activated = dto.Activated,
                     Name = dto.Name,
                     Version = dto.Version,
-                    DisplayName = dto.DisplayName
+                    DisplayName = dto.DisplayName, 
+                    //CreatedBy = dto.CreatedBy,
+                    //ModifiedBy = dto.ModifiedBy
+                
                 };
 
                 var dataFields = dto.ViewColumns.Select(s => new DatabaseViewColumn()
                 {
                     Id = s.Id,
                     Name = s.Name,
-                    DatabaseView = viewEntitiy,
+                    DatabaseView = entity,
                     DisplayName = s.DisplayName
                 });
 
                 using (var session = LightstoneAutoFactoryManager.Instance.OpenSession())
                 using (var transaction = session.BeginTransaction())
                 {
-                    var nameExists = session.Query<DatabaseView>().ToList().Where(w => w.Name == viewEntitiy.Name);
-                    if (!nameExists.Any())
+                    var exists = session.Query<DatabaseView>().ToList().Where(w => w.Id == entity.Id);
+                    if (!exists.Any())
                     {
-                        session.Save(viewEntitiy);
+                        session.Save(entity);
                         foreach (var field in dataFields)
                         {
                             session.Save(field);
@@ -57,10 +60,11 @@ namespace Toolbox.LightstoneAuto.Repository
                     }
                     else
                     {
-                        session.Update(viewEntitiy);
+                        //session.Flush();
+                        session.Merge(entity);
                         foreach (var field in dataFields)
                         {
-                            session.Update(field);
+                            session.Merge(field);
                         }
                     }
                    

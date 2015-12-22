@@ -6,7 +6,7 @@ namespace Toolbox.LightstoneAuto.Domain.Events
 {
     public class DatabaseExtractModified : LimEvent
     {
-        public DatabaseExtractModified(DatabaseExtractDto databaseExtract, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, Guid user, Type type)
+        public DatabaseExtractModified(DatabaseExtractDto databaseExtract, Guid correlationId, string eventType, int eventTypeId, bool newAggregate, string user, long version, Type type)
         {
             AggregateId = databaseExtract.AggregateId;
             DatabaseExtract = databaseExtract;
@@ -17,8 +17,10 @@ namespace Toolbox.LightstoneAuto.Domain.Events
             AggregateNew = newAggregate;
             User = user;
             CorrelationId = correlationId;
-          //  Payload = Encoding.UTF8.GetBytes(this.ObjectToJson());
-            
+            Version = version;
+            DatabaseExtract.Version = version;
+            //  Payload = Encoding.UTF8.GetBytes(this.ObjectToJson());
+
         }
 
         public DatabaseExtractDto DatabaseExtract { get; private set; }

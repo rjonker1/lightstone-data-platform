@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lim.Domain.Base;
 using Lim.Dtos;
+using Lim.Enums;
 using NHibernate.Linq;
 using Toolbox.LSAuto.Entities;
 using Toolbox.LSAuto.Entities.Factory;
@@ -12,6 +14,7 @@ namespace Toolbox.LightstoneAuto.Repository
     public class DatabaseExtractCommit : AbstractPersistenceRepository<DatabaseExtractDto>
     {
         private static readonly ILog Log = LogManager.GetLogger<DatabaseExtractCommit>();
+
         public DatabaseExtractCommit()
         {
         }
@@ -47,7 +50,10 @@ namespace Toolbox.LightstoneAuto.Repository
                 using (var session = LightstoneAutoFactoryManager.Instance.OpenSession())
                 using (var transaction = session.BeginTransaction())
                 {
-                    var exists = session.Query<DatabaseView>().ToList().Where(w => w.Id == entity.Id);
+                    var view = session.Query<DatabaseView>().FirstOrDefault(w => w.Id == dto.ViewId);
+                    entity.View = view;
+
+                    var exists = session.Query<DatabaseExtract>().Where(w => w.Id == entity.Id).ToList();
                     if (!exists.Any())
                     {
                         session.Save(entity);
@@ -58,10 +64,20 @@ namespace Toolbox.LightstoneAuto.Repository
                     }
                     else
                     {
-                        session.Update(entity);
+                        var existingFields = (exists.FirstOrDefault() ?? new DatabaseExtract()).Fields ?? new List<DatabaseExtractField>();
+                        session.Merge(entity);
                         foreach (var field in fields)
                         {
-                            session.Update(field);
+                            if (dto.Source != Source.UserIntiated)
+                            {
+                                var existingField = existingFields.FirstOrDefault(w => w.Name == field.Name);
+                                field.DisplayName = existingField != null && existingField.DisplayName != null
+                                    ? existingField.DisplayName
+                                    : field.DisplayName;
+                                field.Selected = existingField != null ? existingField.Selected : field.Selected;
+                            }
+
+                            session.Merge(field);
                         }
                     }
 

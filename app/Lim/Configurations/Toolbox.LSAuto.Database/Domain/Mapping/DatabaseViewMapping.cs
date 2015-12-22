@@ -22,6 +22,7 @@ namespace Toolbox.LightstoneAuto.Domain.Mapping
 
             Mapper.CreateMap<DatabaseViewDto, DatabaseExtractDto>()
               .ForMember(m => m.Id, o => o.Ignore())
+              .ForMember(m => m.ViewId, o => o.MapFrom(s => s.Id))
               .ForMember(m => m.AggregateId, o => o.Ignore())
               .ForMember(m => m.Fields, o => o.MapFrom(s => s.ViewColumns));
         }

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using Lim.Test.Helper.Builder;
 using Lim.Test.Helper.Fakes;
-using Lim.Unit.Tests.LSAuto.Helpers;
 using Toolbox.LightstoneAuto.Domain.Base;
 using Toolbox.LightstoneAuto.Domain.Commands.Dataset;
 using Xunit.Extensions;
@@ -15,7 +14,7 @@ namespace Lim.Unit.Tests.LSAuto
         private readonly FakeBus _bus;
         private readonly IReadDatabaseExtractFacade _readFacade;
         private readonly Guid _id;
-        private readonly Guid _user;
+        private readonly string _user;
         private readonly Guid _correlationId;
 
         public when_modifying_data_sets_for_ls_auto()
@@ -24,13 +23,13 @@ namespace Lim.Unit.Tests.LSAuto
             _readFacade = new FakeDataSetReadModel();
            // _id = new Random().Next(1000, 10000000);
             _id = Guid.NewGuid();
-            _user = Guid.NewGuid();
+            _user ="rudi@testing.co.za";
             _correlationId = Guid.NewGuid();
         }
 
         public override void Observe()
         {
-            _bus.Send(new CreateDataExtract(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), _user));
+            _bus.Send(new CreateDataExtract(FakeDataSetDtoBuilder.ForLsAutoSpecsData(_id), _user, Guid.NewGuid()));
         }
 
         [Observation]

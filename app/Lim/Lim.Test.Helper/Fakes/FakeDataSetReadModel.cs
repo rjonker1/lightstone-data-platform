@@ -4,7 +4,7 @@ using Lim.Dtos;
 using Lim.Test.Helper.Fakes.Repository;
 using Toolbox.LightstoneAuto.Domain.Base;
 
-namespace Lim.Unit.Tests.LSAuto.Helpers
+namespace Lim.Test.Helper.Fakes
 {
     public class FakeDataSetReadModel : IReadDatabaseExtractFacade
     {

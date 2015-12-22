@@ -89,7 +89,7 @@ namespace Lim.Domain.EventStore
                     Type = @event.Event.Type.FullName,
                     TypeName = @event.Event.TypeName,
                     Version = @event.Version,
-                    UserId = @event.Event.User,
+                    UserName = @event.Event.User,
                     Payload = Encoding.UTF8.GetBytes(@event.Event.ObjectToJson())
                 };
 

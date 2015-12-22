@@ -245,6 +245,8 @@
     <Content Include="Views\integrations\ftp\database\Configurations.cshtml" />
     <Content Include="Views\integrations\ftp\database\Push.cshtml" />
     <Content Include="Views\integrations\flatfile\Configurations.cshtml" />
+    <Content Include="Views\database\LSAutoExtracts.cshtml" />
+    <Content Include="Views\database\LSAutoExtract.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -316,7 +318,9 @@
     <Compile Include="Handlers\IHandleGettingDataPlatformClient.cs" />
     <Compile Include="Commits\ApiPushCommit.cs" />
     <Compile Include="Commits\ClientCommit.cs" />
+    <None Include="Helpers\CustomModelBinder.cs.delete" />
     <Compile Include="Modules\ClientModule.cs" />
+    <Compile Include="Modules\DatabaseExtractModule.cs" />
     <Compile Include="Modules\FtpDatabaseModule.cs" />
     <Compile Include="Modules\MessageModule.cs" />
     <Compile Include="Modules\MailModule.cs" />
@@ -329,9 +333,17 @@
     <Folder Include="Views\integrations\messages\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configurations\Toolbox.LSAuto.Database\Toolbox.LSAuto.csproj">
+      <Project>{503335fd-622f-469a-83bf-c341562f7e45}</Project>
+      <Name>Toolbox.LSAuto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lim.Domain.Entities\Lim.Domain.Entities.csproj">
       <Project>{60a3c174-6c1c-4688-a5a3-f88a7845c1e7}</Project>
       <Name>Lim.Domain.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lim.Domain.Messaging\Lim.Domain.Messaging.csproj">
+      <Project>{6ee18788-1427-4ed7-a5ad-2af7cda4429d}</Project>
+      <Name>Lim.Domain.Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lim.Domain\Lim.Domain.csproj">
       <Project>{9dd099d1-9058-489b-81ac-96afeec2e559}</Project>

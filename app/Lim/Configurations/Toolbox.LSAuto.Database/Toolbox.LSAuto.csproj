@@ -66,6 +66,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -95,6 +96,7 @@
     <Compile Include="Domain\Commands\Dataset\ModifyDataExtract.cs" />
     <Compile Include="Domain\Base\IReadDBExtractFacade.cs" />
     <Compile Include="Domain\Commands\View\ModifyView.cs" />
+    <Compile Include="Domain\Mapping\LSAutoMapperConfiguration.cs" />
     <Compile Include="Factories\BuildViewDtoFactory.cs" />
     <Compile Include="Infrastructure\ReadModels\DatabaseViewReadModel.cs" />
     <Compile Include="Repository\DatabaseExtractCommit.cs" />

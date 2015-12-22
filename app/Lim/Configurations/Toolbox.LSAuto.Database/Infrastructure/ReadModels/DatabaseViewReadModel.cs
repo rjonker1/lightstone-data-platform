@@ -33,5 +33,11 @@ namespace Toolbox.LightstoneAuto.Infrastructure.ReadModels
             var result = _repository.Get<DatabaseView>(w => w.Id == id).FirstOrDefault();
             return result == null ? null : AutoMapper.Mapper.Map<DatabaseView,DatabaseViewDto>(result);
         }
+
+        public DatabaseViewDto GetDatabaseView(string name)
+        {
+            var result = _repository.Get<DatabaseView>(w => w.Name == name).FirstOrDefault();
+            return result == null ? null : AutoMapper.Mapper.Map<DatabaseView, DatabaseViewDto>(result);
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Toolbox.LightstoneAuto.Domain.Commands.Dataset
 {
     public class CreateDataExtract : Command
     {
-        public CreateDataExtract(DatabaseExtractDto databaseExtract, Guid createdBy)
+        public CreateDataExtract(DatabaseExtractDto databaseExtract, string createdBy, Guid correlationId)
         {
             DatabaseExtract = databaseExtract;
             EventType = Lim.Enums.EventType.Created.ToString();
@@ -15,12 +15,15 @@ namespace Toolbox.LightstoneAuto.Domain.Commands.Dataset
             User = createdBy;
             AggregateId = Guid.NewGuid();
             Type = GetType();
+            CorrelationId = correlationId;
+            DatabaseExtract.AggregateId = AggregateId;
         }
 
         public readonly DatabaseExtractDto DatabaseExtract;
         public readonly string EventType;
         public readonly int EventTypeId;
         public readonly bool NewAggregate;
+        public readonly Guid CorrelationId;
         public readonly Type Type;
     }
 }

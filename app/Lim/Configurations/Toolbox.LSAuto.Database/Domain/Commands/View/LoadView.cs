@@ -6,7 +6,7 @@ namespace Toolbox.LightstoneAuto.Domain.Commands.View
 {
     public class LoadView : Command
     {
-        public LoadView(DatabaseViewDto databaseView, Guid createdBy, Guid correlationId)
+        public LoadView(DatabaseViewDto databaseView, string createdBy, Guid correlationId)
         {
             DatabaseView = databaseView;
             EventType = Lim.Enums.EventType.Created.ToString();
@@ -16,6 +16,7 @@ namespace Toolbox.LightstoneAuto.Domain.Commands.View
             AggregateId = Guid.NewGuid();
             CorrelationId = correlationId;
             Type = GetType();
+            databaseView.AggregateId = AggregateId;
         }
         
         public readonly string EventType;

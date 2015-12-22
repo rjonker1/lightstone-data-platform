@@ -23,7 +23,7 @@ namespace Toolbox.LIVE.Domain.Events
             TypeName = type.Name;
             AggregateNew = true;
             CorrelationId = correlationId;
-            User = userId;
+            User = userName;
             HasData = hasData;
             Payload = payload.Fix().RemoveWhiteSpace().RemoveNewLine();
             //Payload = !string.IsNullOrEmpty(payload) ? Encoding.UTF8.GetBytes(payload) : null;

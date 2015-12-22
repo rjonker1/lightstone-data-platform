@@ -16,7 +16,7 @@ namespace Toolbox.LIVE.Shared.Commands
             RequestId = requestId;
             HasData = !string.IsNullOrEmpty(payload);
             Username = username;
-            User = userId;
+            User = username;
             AggregateId = requestId;
             EventType = Lim.Enums.EventType.Created.ToString();
             EventTypeId = (int) Lim.Enums.EventType.Created;

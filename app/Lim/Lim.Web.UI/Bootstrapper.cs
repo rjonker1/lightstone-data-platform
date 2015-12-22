@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using AutoMapper;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
-﻿using Lim.Core;
+using Lim.Core;
 using Lim.Domain.Client.Handlers;
 using Lim.Domain.Entities.Repository;
+using Lim.Domain.Messaging;
 using Lim.Domain.Push;
 using Lim.Dtos;
 using Lim.Web.UI.Commits;
@@ -20,7 +23,13 @@ using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Installers;
 using Shared.Logging;
+using Toolbox.LightstoneAuto;
+using Toolbox.LightstoneAuto.Domain.Base;
+using Toolbox.LightstoneAuto.Domain.Mapping;
+using Toolbox.LightstoneAuto.Infrastructure.ReadModels;
 using Toolbox.Mapping;
+using Workflow.BuildingBlocks.Builders;
+using Workflow.BuildingBlocks.Configurations;
 
 namespace Lim.Web.UI
 {
@@ -83,9 +92,13 @@ namespace Lim.Web.UI
             container.Register(Component.For<IHandleGettingMetadata, GetMetadataHandler>());
             container.Register(Component.For<IPersist<PushApiDataPlatformConfiguration>, ApiPushCommit>());
             container.Register(Component.For<IPersist<ClientDto>, ClientCommit>());
+            container.Register(Component.For<IReadDatabaseExtractFacade, DatabaseExtractReadModel>());
+            container.Register(Component.For<IReadDatabaseViewFacade, DatabaseViewReadModel>());
 
+            container.Register(Component.For<ISendCommand>().UsingFactoryMethod(() => new SendCommand(BusFactory.CreateAdvancedBus(new LimSenderQueueConfiguration()))));
             container.Install(new AuthInstaller());
             AutoMapperConfiguration.Configure();
+           // LightstoneAutoMapperConfiguration.Configure();
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
@@ -107,6 +120,68 @@ namespace Lim.Web.UI
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/daterangepicker"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/input-mask"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/chosen"));
+        }
+
+        //protected override IEnumerable<Type> ModelBinders
+        //{
+        //    get
+        //    {
+        //        var binders = new[] {typeof (Helpers.CustomModelBinder)};
+        //        binders.ToList().AddRange(base.ModelBinders);
+        //        return binders;
+        //    }
+        //}
+
+    }
+
+    public class AutoMapperConfiguration
+    {
+        public static void Configure()
+        {
+            Mapper.Initialize(m => AddProfiles(Mapper.Configuration));
+        }
+
+        private static void AddProfiles(IConfiguration configuration)
+        {
+            var mapProfiles = typeof(MappingMarker).Assembly.GetTypes().Where(w => typeof(Profile).IsAssignableFrom(w));
+            foreach (var profile in mapProfiles)
+            {
+                configuration.AddProfile(Activator.CreateInstance(profile) as Profile);
+            }
+
+            var lightstoneProfiles = typeof(LsAutoMarker).Assembly.GetTypes().Where(w => typeof(Profile).IsAssignableFrom(w));
+            foreach (var profile in lightstoneProfiles)
+            {
+                configuration.AddProfile(Activator.CreateInstance(profile) as Profile);
+            }
+        }
+    }
+
+    public class LimSenderQueueConfiguration : IDefineQueue
+    {
+        public string ConnectionStringKey
+        {
+            get { return "lim/schedule/bus"; }
+        }
+
+        public string ErrorExchangeName
+        {
+            get { return "DataPlatform.Integration.Sender.Error"; }
+        }
+
+        public string ErrorQueueName
+        {
+            get { return "DataPlatform.Integration.Sender.Error"; }
+        }
+        public string ExchangeType
+        {
+            get { return RabbitMQ.Client.ExchangeType.Fanout; }
+        }
+
+
+        public string ExchangeName
+        {
+            get { return "DataPlatform.Integration.Sender"; }
         }
     }
 

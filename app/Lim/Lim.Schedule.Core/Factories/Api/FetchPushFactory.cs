@@ -27,10 +27,11 @@ namespace Lim.Schedule.Core.Factories.Api
         {
             try
             {
-                var configurations = AutoMapper.Mapper.Map<IEnumerable<ConfigurationApi>, IEnumerable<ApiPushConfigurationDto>>(
-                    _repository.Get<ConfigurationApi>(
-                        w => w.Configuration.FrequencyType.Id == (int) command.Frequency && w.Configuration.ActionType.Id == (int) command.Action &&
-                             w.Configuration.IntegrationType.Id == (int)command.Type && w.Configuration.IsActive).ToList());
+                var configs = _repository.Get<ConfigurationApi>(
+                    w => w.Configuration.FrequencyType.Id == (int) command.Frequency && w.Configuration.ActionType.Id == (int) command.Action &&
+                         w.Configuration.IntegrationType.Id == (int) command.Type && w.Configuration.IsActive).ToList();
+
+                var configurations = AutoMapper.Mapper.Map<List<ConfigurationApi>, List<ApiPushConfigurationDto>>(configs);
 
                 return Map(configurations);
             }

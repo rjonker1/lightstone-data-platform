@@ -28,7 +28,7 @@ namespace Lim.Test.Helper.Builder
             bus.RegisterConsumer<DatabaseExtractDeActivated>((message) => detailConsumer.Consume((IMessage<DatabaseExtractDeActivated>)message));
             bus.RegisterConsumer<DatabaseExtractModified>((message) => detailConsumer.Consume((IMessage<DatabaseExtractModified>)message));
 
-            var viewConsumer = new DatabaseViewEventConsumer(bus, new FakeLsAutoViewCommit());
+            var viewConsumer = new DatabaseViewEventConsumer(bus, bus, new FakeLsAutoViewCommit(), new FakeDataSetReadModel());
             bus.RegisterConsumer<DatabaseViewLoaded>((message) => viewConsumer.Consume((IMessage<DatabaseViewLoaded>)message));
             bus.RegisterConsumer<DatabaseViewModified>((message) => viewConsumer.Consume((IMessage<DatabaseViewModified>)message));
             return bus;
