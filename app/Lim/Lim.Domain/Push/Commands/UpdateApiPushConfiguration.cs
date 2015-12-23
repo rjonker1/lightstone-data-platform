@@ -1,4 +1,6 @@
-﻿namespace Lim.Domain.Push.Commands
+﻿using Lim.Domain.Push.Api.DataPlatform;
+
+namespace Lim.Domain.Push.Commands
 {
     public class UpdateApiPushConfiguration : Command
     {

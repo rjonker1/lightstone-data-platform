@@ -21,17 +21,17 @@ namespace Lim.Domain.Entities.Maps{
             Map(x => x.CustomFrequencyDay).Column("CustomFrequencyDay").Nullable().Length(20);
             HasMany(m => m.IntegrationClients)
                 .KeyColumn("ConfigurationId")
-                .Cascade.AllDeleteOrphan()
                 .Inverse()
                 .ForeignKeyConstraintName("FK_Configuration_IntegrationClient").Not.LazyLoad();
             HasMany(m => m.IntegrationContracts).KeyColumn("ConfigurationId")
-                .Cascade.AllDeleteOrphan()
                 .Inverse()
                 .ForeignKeyConstraintName("FK_Configuration_IntegrationContracts").Not.LazyLoad();
             HasMany(m => m.IntegrationPackages).KeyColumn("ConfigurationId")
-                .Cascade.AllDeleteOrphan()
                 .Inverse()
                 .ForeignKeyConstraintName("FK_Configuration_IntegrationPackages").Not.LazyLoad();
+            HasMany(m => m.IntegrationDataExtracts).KeyColumn("ConfigurationId")
+              .Inverse()
+              .ForeignKeyConstraintName("FK_Configuration_IntegrationDataExtracts").Not.LazyLoad();
         }
     }
 }

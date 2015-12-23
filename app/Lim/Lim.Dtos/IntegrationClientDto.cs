@@ -11,35 +11,35 @@ namespace Lim.Dtos
 
         }
 
-        private IntegrationClientDto(Guid clientCustomerId, int accountNumber, int configurationId, bool isActive)
+        private IntegrationClientDto(Guid clientCustomerId, int accountNumber, long configuration, bool isActive)
         {
             ClientCustomerId = clientCustomerId;
             AccountNumber = accountNumber;
-            ConfigurationId = configurationId;
+            Configuration = configuration;
             IsActive = isActive;
         }
 
-        private IntegrationClientDto(long id, Guid clientCustomerId, int accountNumber, long configurationId, bool isActive,
+        private IntegrationClientDto(long id, Guid clientCustomerId, int accountNumber, long configuration, bool isActive,
             DateTime? dateModified, string modifiedBy)
         {
             Id = id;
             ClientCustomerId = clientCustomerId;
             AccountNumber = accountNumber;
-            ConfigurationId = configurationId;
+            Configuration = configuration;
             IsActive = isActive;
             DateModified = dateModified;
             ModifiedBy = modifiedBy;
         }
 
-        public static IntegrationClientDto New(Guid clientCustomerId, int accountNumber, int configurationId, bool isActive)
+        public static IntegrationClientDto New(Guid clientCustomerId, int accountNumber, long configuration, bool isActive)
         {
-            return new IntegrationClientDto(clientCustomerId, accountNumber, configurationId, isActive);
+            return new IntegrationClientDto(clientCustomerId, accountNumber, configuration, isActive);
         }
 
-        public static IntegrationClientDto Existing(long id, Guid clientCustomerId, int accountNumber, long configurationId, bool isActive,
+        public static IntegrationClientDto Existing(long id, Guid clientCustomerId, int accountNumber, long configuration, bool isActive,
             DateTime? dateModified, string modifiedBy)
         {
-            return new IntegrationClientDto(id, clientCustomerId, accountNumber, configurationId, isActive, dateModified, modifiedBy);
+            return new IntegrationClientDto(id, clientCustomerId, accountNumber, configuration, isActive, dateModified, modifiedBy);
         }
 
         [DataMember]
@@ -52,7 +52,7 @@ namespace Lim.Dtos
         public int AccountNumber { get; private set; }
 
         [DataMember]
-        public long ConfigurationId { get; private set; }
+        public long Configuration { get; private set; }
 
         [DataMember]
         public bool IsActive { get; private set; }

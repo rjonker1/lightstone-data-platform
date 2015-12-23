@@ -22,5 +22,6 @@ namespace Lim.Entities
         public virtual IList<IntegrationPackage> IntegrationPackages { get; set; }
         public virtual IList<IntegrationClient> IntegrationClients { get; set; }
         public virtual IList<IntegrationContract> IntegrationContracts { get; set; }
+        public virtual IList<IntegrationDataExtract> IntegrationDataExtracts { get; set; }
     }
 }

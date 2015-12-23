@@ -8,7 +8,7 @@ using Lim.Domain.Push.Commands;
 using Lim.Dtos;
 using Lim.Enums;
 
-namespace Lim.Domain.Push
+namespace Lim.Domain.Push.Api.DataPlatform
 {
     public class PushApiDataPlatformConfiguration
     {
@@ -21,29 +21,29 @@ namespace Lim.Domain.Push
             IntegrationType = (int) Enums.IntegrationType.Api;
         }
 
-        private PushApiDataPlatformConfiguration(PushApiConfigurationView apiConfiguration)
+        private PushApiDataPlatformConfiguration(ConfigurationApiDto configuration)
         {
-            Id = apiConfiguration.Id;
-            Key = apiConfiguration.Key;
-            ConfigurationApiId = apiConfiguration.ApiConfigurationId;
-            ActionType = apiConfiguration.ActionType;
-            IntegrationType = apiConfiguration.IntegrationType;
-            FrequencyType = apiConfiguration.FrequencyType;
-            IntegrationClients = apiConfiguration.IntegrationClients;
-            IntegrationContracts = apiConfiguration.IntegrationContracts;
-            IsActive = apiConfiguration.IsActive;
-            ClientId = apiConfiguration.ClientId;
-            IntegrationPackages = apiConfiguration.IntegrationPackages;
-            BaseAddress = apiConfiguration.BaseAddress;
-            Suffix = apiConfiguration.Suffix;
-            Username = apiConfiguration.Username;
-            Password = apiConfiguration.Password;
-            HasAuthentication = apiConfiguration.HasAuthentication;
-            AuthenticationToken = apiConfiguration.AuthenticationToken;
-            AuthenticationKey = apiConfiguration.AuthenticationKey;
-            AuthenticationType = apiConfiguration.AuthenticationType;
-            CustomFrequency = DateTime.Now.Date + (apiConfiguration.CustomFrequencyTime.HasValue ? apiConfiguration.CustomFrequencyTime.Value : TimeSpan.Parse("00:00"));
-            CustomDay = apiConfiguration.CustomFrequencyDay;
+            Id = configuration.Configuration.Id;
+            Key = configuration.Configuration.ConfigurationKey;
+            ConfigurationApiId = configuration.Id;
+            ActionType = configuration.Configuration.ActionType;
+            IntegrationType = configuration.Configuration.IntegrationType;
+            FrequencyType = configuration.Configuration.FrequencyType;
+            IntegrationClients = configuration.Configuration.IntegrationClients != null ? configuration.Configuration.IntegrationClients.Select(s => s.ClientCustomerId) : Enumerable.Empty<Guid>();
+            IntegrationContracts = configuration.Configuration.IntegrationContracts != null ? configuration.Configuration.IntegrationContracts.Select(s => s.Contract) : Enumerable.Empty<Guid>();
+            IsActive = configuration.Configuration.IsActive;
+            ClientId = configuration.Configuration.ClientId;
+            IntegrationPackages = configuration.Configuration.IntegrationPackages != null ? configuration.Configuration.IntegrationPackages.Select(s => s.PackageId) : Enumerable.Empty<Guid>();
+            BaseAddress = configuration.BaseAddress;
+            Suffix = configuration.Suffix;
+            Username = configuration.Username;
+            Password = configuration.Password;
+            HasAuthentication = configuration.HasAuthentication;
+            AuthenticationToken = configuration.AuthenticationToken;
+            AuthenticationKey = configuration.AuthenticationKey;
+            AuthenticationType = configuration.AuthenticationType;
+            CustomFrequency = DateTime.Now.Date + (configuration.Configuration.CustomFrequencyTime ?? TimeSpan.Parse("00:00"));
+            CustomDay = configuration.Configuration.CustomFrequencyDay;
         }
 
         public static PushApiDataPlatformConfiguration Existing(IHandleGettingConfiguration handler, GetApiPushConfiguration command)

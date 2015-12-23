@@ -4,6 +4,7 @@ using System.Linq;
 using Lim.Domain.Client.Commands;
 using Lim.Domain.Client.Handlers;
 using Lim.Domain.Lookup.Commands;
+using Lim.Domain.Push.Ftp.Commands;
 using Lim.Dtos;
 using Lim.Enums;
 
@@ -20,11 +21,27 @@ namespace Lim.Domain.Push.Ftp.Database
             IntegrationType = (int) Enums.IntegrationType.Ftp;
         }
 
-        public static PushFtpDatabaseConfiguration Existing(IHandleGettingConfiguration handler)
+        private PushFtpDatabaseConfiguration(ConfigurationFtpDto configuration)
         {
-            //handler.Handle(command);
-            //return new PushConfiguration(command.Configuration);
-            return new PushFtpDatabaseConfiguration();
+            Id = configuration.Configuration.Id;
+            Key = configuration.Configuration.ConfigurationKey;
+            ClientId = configuration.Configuration.ClientId;
+            FrequencyType = configuration.Configuration.FrequencyType;
+            IsActive = configuration.Configuration.IsActive;
+            ConfigurationFtpId = configuration.Id;
+            CustomFrequency = DateTime.Now.Date + (configuration.Configuration.CustomFrequencyTime ?? TimeSpan.Parse("00:00"));
+            CustomDay = configuration.Configuration.CustomFrequencyDay;
+            DatabaseExtracts = configuration.Configuration.IntegrationDataExtracts != null
+                ? configuration.Configuration.IntegrationDataExtracts.Select(s => s.DataExtractId)
+                : Enumerable.Empty<long>();
+        }
+
+       
+
+        public static PushFtpDatabaseConfiguration Existing(IHandleGettingConfiguration handler, GetFtpPushConfiguration command)
+        {
+            handler.Handle(command);
+            return new PushFtpDatabaseConfiguration(command.FtpConfiguration);
         }
 
         public static PushFtpDatabaseConfiguration Create()
@@ -61,11 +78,9 @@ namespace Lim.Domain.Push.Ftp.Database
         public long ClientId { get; private set; }
         public short FrequencyType { get; set; }
         public bool IsActive { get; set; }
-        public long ConfigurationDatabaseId { get; private set; }
-        public string ConnectionString { get; private set; }
-        public DateTime CustomFrequency { get; set; }
-        public string CustomDay { get; set; }
-        public string User { get; set; }
+        public long ConfigurationFtpId { get; private set; }
+        public DateTime CustomFrequency { get; private set; }
+        public string CustomDay { get; private set; }
         public IEnumerable<long> DatabaseExtracts { get; private set; }
 
         public IReadOnlyCollection<ClientDto> SelectableIntegrationClients;

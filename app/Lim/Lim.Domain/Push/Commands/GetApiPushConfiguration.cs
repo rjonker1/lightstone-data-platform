@@ -1,4 +1,6 @@
-﻿namespace Lim.Domain.Push.Commands
+﻿using Lim.Dtos;
+
+namespace Lim.Domain.Push.Commands
 {
     public class GetApiPushConfiguration : Command
     {
@@ -11,11 +13,11 @@
             ClientId = clientId;
         }
 
-        public void Set(PushApiConfigurationView apiConfiguration)
+        public void Set(ConfigurationApiDto apiConfiguration)
         {
             ApiConfiguration = apiConfiguration;
         }
 
-        public PushApiConfigurationView ApiConfiguration { get; private set; }
+        public ConfigurationApiDto ApiConfiguration { get; private set; }
     }
 }

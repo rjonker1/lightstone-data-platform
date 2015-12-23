@@ -11,11 +11,11 @@ namespace Lim.Dtos
 
         }
 
-        private IntegrationPackageDto(long id, long configurationId, Guid packageId, Guid contractId, bool isActive, DateTime? dateModified,
+        private IntegrationPackageDto(long id, long configuration, Guid packageId, Guid contractId, bool isActive, DateTime? dateModified,
             string modifiedBy)
         {
             Id = id;
-            ConfigurationId = configurationId;
+            Configuration = configuration;
             PackageId = packageId;
             ContractId = contractId;
             IsActive = isActive;
@@ -23,30 +23,30 @@ namespace Lim.Dtos
             ModifiedBy = modifiedBy;
         }
 
-        private IntegrationPackageDto(long configurationId, Guid packageId, Guid contractId, bool isActive)
+        private IntegrationPackageDto(long configuration, Guid packageId, Guid contractId, bool isActive)
         {
-            ConfigurationId = configurationId;
+            Configuration = configuration;
             ContractId = contractId;
             PackageId = packageId;
             IsActive = isActive;
         }
 
-        public static IntegrationPackageDto Existing(long id, long configurationId, Guid packageId, bool isActive, DateTime? dateModified,
+        public static IntegrationPackageDto Existing(long id, long configuration, Guid packageId, bool isActive, DateTime? dateModified,
             string modifiedBy, Guid contractId)
         {
-            return new IntegrationPackageDto(id, configurationId, packageId, contractId, isActive, dateModified, modifiedBy);
+            return new IntegrationPackageDto(id, configuration, packageId, contractId, isActive, dateModified, modifiedBy);
         }
 
-        public IntegrationPackageDto New(long configurationId, Guid packageId, Guid contractId, bool isActive)
+        public IntegrationPackageDto New(long configuration, Guid packageId, Guid contractId, bool isActive)
         {
-            return new IntegrationPackageDto(configurationId, packageId, contractId, isActive);
+            return new IntegrationPackageDto(configuration, packageId, contractId, isActive);
         }
 
         [DataMember]
         public long Id { get; private set; }
 
         [DataMember]
-        public long ConfigurationId { get; private set; }
+        public long Configuration { get; private set; }
 
         [DataMember]
         public Guid PackageId { get; private set; }

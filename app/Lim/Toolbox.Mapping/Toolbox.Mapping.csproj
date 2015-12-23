@@ -52,10 +52,12 @@
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="ClientMapping.cs" />
     <Compile Include="ConfigApiMapping.cs" />
+    <Compile Include="ConfigFtpMapping.cs" />
     <Compile Include="ConfigMapping.cs" />
     <Compile Include="FrequencyTypeMapping.cs" />
     <Compile Include="IntegrationClientMapping.cs" />
     <Compile Include="IntegrationContractMapping.cs" />
+    <Compile Include="IntegrationDataExtractMapping.cs" />
     <Compile Include="IntegrationPackageMapping.cs" />
     <Compile Include="IntegrationTypeMapping.cs" />
     <Compile Include="MappingMarker.cs" />

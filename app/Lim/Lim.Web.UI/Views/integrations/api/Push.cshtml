@@ -1,5 +1,5 @@
 ﻿@using System.Linq
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Lim.Domain.Push.PushApiDataPlatformConfiguration>
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Lim.Domain.Push.Api.DataPlatform.PushApiDataPlatformConfiguration>
 @{
     Layout = "_Layout.cshtml";
     var contracts = Model.SelectableDataPlatformClients.SelectMany(s => s.Contracts);

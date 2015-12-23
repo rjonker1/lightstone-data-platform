@@ -31,15 +31,18 @@
                                 <input type="hidden" name="AggregateId" value="@Model.AggregateId" />
                                 <input type="hidden" name="Version" value="@Model.Version"/>
                                 <input type="hidden" name="FieldCount" value="@Model.FieldCount"/>
-                                <input type="hidden" name="Name" value="@Model.Name"/>
                                 <input type="hidden" name="ViewId" value="@Model.ViewId" />
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input name="Activated" id="Activated" checked="@Model.Activated" value="@Model.Activated" type="checkbox" />
+                                            <input name="Activated" id="Activated" checked="@Model.Activated" value="@Model.Activated" type="checkbox"/>
                                             Is Active
                                         </label>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" name="Name" required maxlength="100" class="form-control" value="@Model.Name" placeholder="..." />
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>

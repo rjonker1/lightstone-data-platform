@@ -11,36 +11,36 @@ namespace Lim.Dtos
 
         }
 
-        private IntegrationContractDto(long id, Guid contractId, long configurationId, bool isActive, DateTime? dateModified,
+        private IntegrationContractDto(long id, Guid contractId, long configuration, bool isActive, DateTime? dateModified,
             string modifiedBy, Guid clientCustomerId)
         {
             Id = id;
             Contract = contractId;
             ClientCustomerId = clientCustomerId;
-            ConfigurationId = configurationId;
+            Configuration = configuration;
             IsActive = isActive;
             DateModified = dateModified;
             ModifiedBy = modifiedBy;
         }
 
-        private IntegrationContractDto(Guid contractId, Guid clientCustomerId, long configurationId, bool isActive)
+        private IntegrationContractDto(Guid contractId, Guid clientCustomerId, long configuration, bool isActive)
         {
             Contract = contractId;
             ClientCustomerId = clientCustomerId;
-            ConfigurationId = configurationId;
+            Configuration = configuration;
             IsActive = isActive;
         }
 
-        public static IntegrationContractDto New(Guid contractId, long configurationId, bool isActive, Guid clientCustomerId)
+        public static IntegrationContractDto New(Guid contractId, long configuration, bool isActive, Guid clientCustomerId)
         {
-            return new IntegrationContractDto(contractId, clientCustomerId, configurationId, isActive);
+            return new IntegrationContractDto(contractId, clientCustomerId, configuration, isActive);
         }
 
-        public static IntegrationContractDto Existing(long id, Guid contractId, long configurationId, bool isActive,
+        public static IntegrationContractDto Existing(long id, Guid contractId, long configuration, bool isActive,
             DateTime? dateModified,
             string modifiedBy, Guid clientCustomerId)
         {
-            return new IntegrationContractDto(id, contractId, configurationId, isActive, dateModified, modifiedBy, clientCustomerId);
+            return new IntegrationContractDto(id, contractId, configuration, isActive, dateModified, modifiedBy, clientCustomerId);
         }
 
         [DataMember]
@@ -53,7 +53,7 @@ namespace Lim.Dtos
         public Guid ClientCustomerId { get; private set; }
 
         [DataMember]
-        public long ConfigurationId { get; private set; }
+        public long Configuration { get; private set; }
 
         [DataMember]
         public bool IsActive { get; private set; }

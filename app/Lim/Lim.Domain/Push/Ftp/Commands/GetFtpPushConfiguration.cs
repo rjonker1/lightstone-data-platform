@@ -1,4 +1,5 @@
-﻿namespace Lim.Domain.Push.Commands
+﻿using Lim.Dtos;
+namespace Lim.Domain.Push.Ftp.Commands
 {
     public class GetFtpPushConfiguration : Command
     {
@@ -10,5 +11,12 @@
             ConfigurationId = configurationId;
             ClientId = clientId;
         }
+
+        public void Set(ConfigurationFtpDto configuration)
+        {
+            FtpConfiguration = configuration;
+        }
+
+        public ConfigurationFtpDto FtpConfiguration { get; private set; }
     }
 }

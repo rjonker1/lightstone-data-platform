@@ -42,9 +42,9 @@ namespace Lim.Acceptance.Tests.Integrations.Configurations
                 command.Configurations.FirstOrDefault().ClientId);
             _handler.Handle(configOnlyCommand);
             configOnlyCommand.ApiConfiguration.ShouldNotBeNull();
-            configOnlyCommand.ApiConfiguration.IntegrationPackages.ShouldNotBeNull();
-            configOnlyCommand.ApiConfiguration.IntegrationClients.ShouldNotBeNull();
-            configOnlyCommand.ApiConfiguration.IntegrationContracts.ShouldNotBeNull();
+            configOnlyCommand.ApiConfiguration.Configuration.IntegrationPackages.ShouldNotBeNull();
+            configOnlyCommand.ApiConfiguration.Configuration.IntegrationClients.ShouldNotBeNull();
+            configOnlyCommand.ApiConfiguration.Configuration.IntegrationContracts.ShouldNotBeNull();
         }
     }
 }

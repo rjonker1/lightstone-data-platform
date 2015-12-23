@@ -53,6 +53,12 @@ namespace Lim.Dtos
             return this;
         }
 
+        public ConfigurationDto WithDataExtracts(List<IntegrationDataExtractDto> dataExtracts)
+        {
+            IntegrationDataExtracts = dataExtracts;
+            return this;
+        }
+
 
         public long Id { get; private set; }
         public Guid ConfigurationKey { get; private set; }
@@ -70,5 +76,6 @@ namespace Lim.Dtos
         public List<IntegrationPackageDto> IntegrationPackages { get; private set; }
         public List<IntegrationClientDto> IntegrationClients { get; private set; }
         public List<IntegrationContractDto> IntegrationContracts { get; private set; }
+        public List<IntegrationDataExtractDto> IntegrationDataExtracts { get; private set; }
     }
 }

@@ -26,9 +26,9 @@
                             <h3 class="box-title">Push Configuration</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
-                            <form role="form" action="/integrations/for/database/push/save" method="post">
+                            <form role="form" action="/integrations/for/ftp/database/push/save" method="post">
                                 <input type="hidden" name="Id" value="@Model.Id" />
-                                <input type="hidden" name="ConfigurationDatabaseId" value="@Model.ConfigurationDatabaseId" />
+                                <input type="hidden" name="ConfigurationFtpId" value="@Model.ConfigurationFtpId" />
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
@@ -50,18 +50,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Database Extracts</label>
-                                    <select id="databaseExtracts" name="DatabaseExtracts" required data-placeholder="Select Database Extracts ..." class="chosen-select form-control" multiple>
-                                        <option value=""></option>
+                                    <select id="databaseExtracts" name="DatabaseExtracts" required data-placeholder="Select Database Extracts ..." class="form-control">
                                         @foreach (var databaseExtract in Model.SelectableDatabaseExtracts)
                                         {
                                             var isSelected = Model.DatabaseExtracts != null && Model.DatabaseExtracts.Contains(databaseExtract.Id);
-                                            <option id="@databaseExtract.Id" name="@databaseExtract.Id" selected="@isSelected" value="@databaseExtract.Id">@databaseExtract.Description</option>
+                                            <option id="@databaseExtract.Id" name="@databaseExtract.Id" selected="@isSelected" value="@databaseExtract.Id">@databaseExtract.Name</option>
                                         }
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Connection String</label>
-                                    <input type="text" name="ConnectionString" required maxlength="1000" class="form-control" value="@Model.ConnectionString" placeholder="Data Source=...." />
                                 </div>
                                 <div class="form-group">
                                     <label>Frequency</label>

@@ -13,6 +13,7 @@ namespace Toolbox.Mapping
                     package =>
                         IntegrationPackageDto.Existing(package.Id, package.Configuration.Id, package.PackageId, package.IsActive, package.DateModified,
                             package.ModifiedBy, package.ContractId)).ForAllMembers(opt => opt.Ignore());
+
             Mapper.CreateMap<IntegrationPackageDto, IntegrationPackage>();
         }
     }

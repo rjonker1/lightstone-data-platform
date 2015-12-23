@@ -9,16 +9,14 @@ namespace Lim.Domain.Entities.Factory
     public sealed class FactoryManager
     {
         private static readonly ISessionFactory _instance = BuildSession();
+
         static FactoryManager()
         {
         }
 
         public static ISessionFactory Instance
         {
-            get
-            {
-                return _instance;
-            }
+            get { return _instance; }
         }
 
         private static ISessionFactory BuildSession()
@@ -39,6 +37,8 @@ namespace Lim.Domain.Entities.Factory
                 .Mappings(m => m.FluentMappings.Add<Maps.AuditApiIntegrationMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.IntegrationTrackingMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.PackageMetadataMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.IntegrationDataExtractMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.ConfigurationFtpMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.Lim.UpdateDatabase))
                 .BuildSessionFactory();
         }
@@ -62,6 +62,8 @@ namespace Lim.Domain.Entities.Factory
                 .Mappings(m => m.FluentMappings.Add<Maps.AuditApiIntegrationMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.IntegrationTrackingMap>())
                 .Mappings(m => m.FluentMappings.Add<Maps.PackageMetadataMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.IntegrationDataExtractMap>())
+                .Mappings(m => m.FluentMappings.Add<Maps.ConfigurationFtpMap>())
                 .ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, ConfigurationReader.Lim.UpdateDatabase))
                 .BuildConfiguration();
         }

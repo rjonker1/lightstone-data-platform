@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Lim.Core;
-using Lim.Domain.Base;
 using Lim.Domain.Entities.Factory;
 using Lim.Domain.Entities.Repository;
 using Lim.Enums;
@@ -13,7 +12,6 @@ using Lim.Schedule.Core.Audits;
 using Lim.Schedule.Core.Commands;
 using Lim.Schedule.Core.Factories.Api;
 using Lim.Schedule.Core.Handlers;
-using Lim.Schedule.Core.Identifiers;
 using Lim.Schedule.Core.Tracking;
 using NHibernate;
 using Xunit.Extensions;
@@ -21,7 +19,7 @@ using IntegrationType = Lim.Enums.IntegrationType;
 
 namespace Lim.Acceptance.Tests.Integrations.Push
 {
-    public class when_pushing_hourly_integration : Specification
+    public class when_pushing_hourly_integration : AbstractTest
     {
         // private readonly IJob _job; 
         private readonly IHandleFetchingApiPushConfiguration _fetch;
@@ -34,7 +32,7 @@ namespace Lim.Acceptance.Tests.Integrations.Push
         private readonly ISession _session;
 
         private readonly FetchConfigurationCommand _fetchCommand = new FetchConfigurationCommand(IntegrationAction.Push, IntegrationType.Api,
-            Frequency.Hourly);
+            Frequency.EveryMinute);
 
         private ExecuteApiPushConfigurationCommand _executeCommand;
 

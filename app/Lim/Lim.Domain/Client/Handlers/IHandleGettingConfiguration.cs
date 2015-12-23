@@ -2,6 +2,7 @@
 using Lim.Domain.Lookup.Commands;
 using Lim.Domain.Pull.Commands;
 using Lim.Domain.Push.Commands;
+using Lim.Domain.Push.Ftp.Commands;
 
 namespace Lim.Domain.Client.Handlers
 {
@@ -15,5 +16,6 @@ namespace Lim.Domain.Client.Handlers
         void Handle(GetApiPullConfiguration command);
         void Handle(GetAllConfigurations command);
         void Handle(GetWeekdays command);
+        void Handle(GetFtpPushConfiguration command);
     }
 }

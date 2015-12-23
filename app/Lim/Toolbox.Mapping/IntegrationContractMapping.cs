@@ -11,7 +11,8 @@ namespace Toolbox.Mapping
             Mapper.CreateMap<IntegrationContract, IntegrationContractDto>()
                 .ConstructUsing(
                     contract =>
-                        IntegrationContractDto.Existing(contract.Id, contract.Contract, contract.Configuration.Id, contract.IsActive,
+                        IntegrationContractDto.Existing(contract.Id, contract.Contract, 
+                        contract.Configuration.Id, contract.IsActive,
                             contract.DateModified, contract.ModifiedBy, contract.ClientCustomerId)).ForAllMembers(opt => opt.Ignore()); ;
             Mapper.CreateMap<IntegrationContractDto, IntegrationContract>();
         }

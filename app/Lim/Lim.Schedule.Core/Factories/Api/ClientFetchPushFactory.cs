@@ -27,7 +27,7 @@ namespace Lim.Schedule.Core.Factories.Api
         {
             try
             {
-                var configurations = AutoMapper.Mapper.Map<List<ConfigurationApi>, List<ApiPushConfigurationDto>>(
+                var configurations = AutoMapper.Mapper.Map<List<ConfigurationApi>, List<ConfigurationApiDto>>(
                     _repository.Get<ConfigurationApi>(
                         w => w.Configuration.FrequencyType.Id == (int) command.Frequency && w.Configuration.ActionType.Id == (int) command.Action &&
                              w.Configuration.IntegrationType.Id == (int) command.Type && w.Configuration.IsActive).ToList());
@@ -42,17 +42,17 @@ namespace Lim.Schedule.Core.Factories.Api
             return Enumerable.Empty<ApiPushIntegration>();
         }
 
-        private IEnumerable<ApiPushIntegration> Map(IEnumerable<ApiPushConfigurationDto> configs, Guid contractId, Guid packageId)
+        private IEnumerable<ApiPushIntegration> Map(IEnumerable<ConfigurationApiDto> configs, Guid contractId, Guid packageId)
         {
             return configs
-                .Select(s => new ApiPushIntegration(s.Key, s.Id, new ApiConfigurationIdentifier(s.BaseAddress, s.Suffix,
+                .Select(s => new ApiPushIntegration(s.Configuration.ConfigurationKey, s.Id, new ApiConfigurationIdentifier(s.BaseAddress, s.Suffix,
                     new ApiAuthenticationIdentifier(s.HasAuthentication,
                         new ApiAuthenticationTypeIdentifier(s.AuthenticationType,
                             (((Enums.AuthenticationType) s.AuthenticationType)).ToString()), s.Username, s.Password,
                         s.AuthenticationKey, s.AuthenticationToken),
-                    new ActionIdentifier(((Enums.IntegrationAction) s.Action).ToString(), s.Action),
-                    new IntegrationTypeIdentifier(s.IntegrationType, ((Enums.IntegrationType) s.IntegrationType).ToString()),
-                    new FrequencyIdentifier(((Enums.Frequency) s.FrequencyType).ToString(), s.FrequencyType)),
+                    new ActionIdentifier(((Enums.IntegrationAction)s.Configuration.ActionType).ToString(), s.Configuration.ActionType),
+                    new IntegrationTypeIdentifier(s.Configuration.IntegrationType, ((Enums.IntegrationType)s.Configuration.IntegrationType).ToString()),
+                    new FrequencyIdentifier(((Enums.Frequency)s.Configuration.FrequencyType).ToString(), s.Configuration.FrequencyType)),
                     new IntegrationClientIdentifier(AutoMapper.Mapper.Map<IEnumerable<IntegrationClient>, IEnumerable<IntegrationClientDto>>(
                             _repository.Get<IntegrationClient>(w => w.Configuration.Id == s.Id && w.IsActive))),
                     new IntegrationContractIdentifier(
@@ -63,7 +63,7 @@ namespace Lim.Schedule.Core.Factories.Api
                         AutoMapper.Mapper.Map<IEnumerable<IntegrationPackage>, IEnumerable<IntegrationPackageDto>>(
                             _repository.Get<IntegrationPackage>(
                                 w => w.Configuration.Id == s.Id && w.PackageId == packageId && w.ContractId == contractId && w.IsActive))),
-                    new ClientIdentifier(s.ClientId), _pusher));
+                    new ClientIdentifier(s.Configuration.ClientId), _pusher));
 
         }
     }

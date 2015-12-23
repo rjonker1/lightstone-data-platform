@@ -26,7 +26,7 @@ namespace Lim.Test.Helper.Fakes.Handlers
 
         }
 
-        private void SetConfigurations(IEnumerable<ApiPushConfigurationDto> configs)
+        private void SetConfigurations(IEnumerable<ConfigurationApiDto> configs)
         {
             
 

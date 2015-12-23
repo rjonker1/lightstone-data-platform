@@ -2,7 +2,7 @@
 using System.Linq;
 using Lim.Domain.Base;
 using Lim.Domain.Entities.Repository;
-using Lim.Domain.Push;
+using Lim.Domain.Push.Api.DataPlatform;
 using Lim.Entities;
 using Lim.Enums;
 

@@ -35,7 +35,7 @@ namespace Lim.Schedule.Core.Factories.Api
             return Enumerable.Empty<ApiPullIntegration>();
         }
 
-        private IEnumerable<ApiPullIntegration> Map(IEnumerable<ApiPushConfigurationDto> configs, Guid contractId, Guid packageId)
+        private IEnumerable<ApiPullIntegration> Map(IEnumerable<ConfigurationApiDto> configs, Guid contractId, Guid packageId)
         {
             return Enumerable.Empty<ApiPullIntegration>();
 

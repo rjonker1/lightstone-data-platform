@@ -318,7 +318,6 @@
     <Compile Include="Handlers\IHandleGettingDataPlatformClient.cs" />
     <Compile Include="Commits\ApiPushCommit.cs" />
     <Compile Include="Commits\ClientCommit.cs" />
-    <None Include="Helpers\CustomModelBinder.cs.delete" />
     <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Modules\DatabaseExtractModule.cs" />
     <Compile Include="Modules\FtpDatabaseModule.cs" />

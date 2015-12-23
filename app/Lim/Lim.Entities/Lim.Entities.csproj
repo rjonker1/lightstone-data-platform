@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -42,10 +43,12 @@
     <Compile Include="Client.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="ConfigurationApi.cs" />
+    <Compile Include="ConfigurationFtp.cs" />
     <Compile Include="Customfrequency.cs" />
     <Compile Include="Frequencytype.cs" />
     <Compile Include="IntegrationClients.cs" />
     <Compile Include="IntegrationContracts.cs" />
+    <Compile Include="IntegrationDataExtract.cs" />
     <Compile Include="IntegrationPackages.cs" />
     <Compile Include="IntegrationTracking.cs" />
     <Compile Include="IntegrationType.cs" />

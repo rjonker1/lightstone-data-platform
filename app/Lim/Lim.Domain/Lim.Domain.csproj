@@ -115,10 +115,11 @@
     <Compile Include="Pull\PullConfiguration.cs" />
     <Compile Include="Push\Commands\AddApiPushConfiguration.cs" />
     <Compile Include="Push\Commands\GetApiPushConfiguration.cs" />
-    <Compile Include="Push\Commands\GetFtpPushConfiguration.cs" />
     <Compile Include="Push\Commands\UpdateApiPushConfiguration.cs" />
-    <Compile Include="Push\PushApiDataPlatformConfiguration.cs" />
-    <Compile Include="Push\PushApiConfigurationView.cs" />
+    <Compile Include="Push\Api\DataPlatform\PushApiDataPlatformConfiguration.cs" />
+    <Compile Include="Push\Ftp\Commands\AddFtpPushConfiguration.cs" />
+    <Compile Include="Push\Ftp\Commands\GetFtpPushConfiguration.cs" />
+    <Compile Include="Push\Ftp\Commands\UpdateFtpPushConfiguration.cs" />
     <Compile Include="Push\Ftp\Database\PushFtpDatabaseConfiguration.cs" />
     <Compile Include="Push\Flatfile\PushFlatFileConfiguration.cs" />
     <None Include="app.config" />

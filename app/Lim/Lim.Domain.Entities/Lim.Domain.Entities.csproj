@@ -86,10 +86,12 @@
     <Compile Include="Maps\AuthenticationTypeMap.cs" />
     <Compile Include="Maps\ClientMap.cs" />
     <Compile Include="Maps\ConfigurationApiMap.cs" />
+    <Compile Include="Maps\ConfigurationFtpMap.cs" />
     <Compile Include="Maps\ConfigurationMap.cs" />
     <Compile Include="Maps\FrequencyTypeMap.cs" />
     <Compile Include="Maps\IntegrationClientsMap.cs" />
     <Compile Include="Maps\IntegrationContractsMap.cs" />
+    <Compile Include="Maps\IntegrationDataExtractMap.cs" />
     <Compile Include="Maps\IntegrationPackagesMap.cs" />
     <Compile Include="Maps\IntegrationTrackingMap.cs" />
     <Compile Include="Maps\IntegrationTypeMap.cs" />

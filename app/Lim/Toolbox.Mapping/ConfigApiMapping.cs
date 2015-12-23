@@ -8,25 +8,17 @@ namespace Toolbox.Mapping
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<ConfigurationApi, ApiPushConfigurationDto>()
+            Mapper.CreateMap<ConfigurationApi, ConfigurationApiDto>()
                 .ConstructUsing(
                     config =>
-                        ApiPushConfigurationDto.Existing(config.Id, config.Configuration.ConfigurationKey, config.Configuration.FrequencyType.Id,
-                            config.Configuration.ActionType.Id, config.Configuration.IntegrationType.Id, config.BaseAddress, config.Suffix,
+                        ConfigurationApiDto.Existing(config.Id, config.BaseAddress, config.Suffix,
                             config.Username, config.Password,
                             config.AuthenticationToken, config.AuthenticationKey, config.HasAuthentication, config.AuthenticationType.Id,
-                            config.Configuration.Client.Id)).ForAllMembers(opt => opt.Ignore());
-            Mapper.CreateMap<ApiPushConfigurationDto, ConfigurationApi>();
+                            Mapper.Map<Configuration, ConfigurationDto>(config.Configuration))).ForAllMembers(opt => opt.Ignore());
 
-            Mapper.CreateMap<ConfigurationApi, ApiPullConfigurationDto>()
-                 .ConstructUsing(
-                    config =>
-                        ApiPullConfigurationDto.Existing(config.Id, config.Configuration.ConfigurationKey, config.Configuration.FrequencyType.Id,
-                            config.Configuration.ActionType.Id, config.Configuration.IntegrationType.Id, config.BaseAddress, config.Suffix,
-                            config.Username, config.Password,
-                            config.AuthenticationToken, config.AuthenticationKey, config.HasAuthentication, config.AuthenticationType.Id,
-                            config.Configuration.Client.Id)).ForAllMembers(opt => opt.Ignore());
-            Mapper.CreateMap<ApiPullConfigurationDto, ConfigurationApi>();
+            Mapper.CreateMap<ConfigurationApiDto, ConfigurationApi>()
+                .ForMember(m => m.Configuration, o => o.MapFrom(s => Mapper.Map<ConfigurationDto, Configuration>(s.Configuration)));
+
         }
     }
 }

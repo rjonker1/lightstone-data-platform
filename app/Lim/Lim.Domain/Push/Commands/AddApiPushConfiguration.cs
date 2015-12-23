@@ -1,12 +1,14 @@
-﻿namespace Lim.Domain.Push.Commands
+﻿using Lim.Domain.Push.Api.DataPlatform;
+
+namespace Lim.Domain.Push.Commands
 {
     public class AddApiPushConfiguration : Command
     {
         public readonly PushApiDataPlatformConfiguration ApiDataPlatformConfiguration;
 
-        public AddApiPushConfiguration(PushApiDataPlatformConfiguration apiDataPlatformConfiguration)
+        public AddApiPushConfiguration(PushApiDataPlatformConfiguration configuration)
         {
-            ApiDataPlatformConfiguration = apiDataPlatformConfiguration;
+            ApiDataPlatformConfiguration = configuration;
         }
     }
 }
