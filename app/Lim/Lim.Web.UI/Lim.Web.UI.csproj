@@ -247,6 +247,7 @@
     <Content Include="Views\integrations\flatfile\Configurations.cshtml" />
     <Content Include="Views\database\LSAutoExtracts.cshtml" />
     <Content Include="Views\database\LSAutoExtract.cshtml" />
+    <Content Include="Views\database\LSAutoCreateExtract.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

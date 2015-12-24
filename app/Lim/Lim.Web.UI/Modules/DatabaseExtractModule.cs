@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using AutoMapper;
 using Lim.Core;
 using Lim.Dtos;
 using Lim.Enums;
@@ -58,6 +60,27 @@ namespace Lim.Web.UI.Modules
                 var model = readDatabaseExtract.GetDataExtract(id);
                 if (model == null) return HttpStatusCode.BadRequest;
                 return View["database/lsautoextract", model];
+            };
+
+            Get["/database/lsauto/create/dataextract"] = _ =>
+            {
+                var views = readDatabaseView.GetDatabaseViews();
+                var model = new DatabaseExtractCreateDto(views.ToList());
+                return View["/database/lsautocreateextract", model];
+            };
+
+            Post["/database/lsauto/extract/create"] = _ =>
+            {
+                var dto = this.Bind<DatabaseExtractCreateDto>();
+                if (dto.ViewId == 0) return HttpStatusCode.BadRequest;
+
+                var view = readDatabaseView.GetDatabaseView(dto.ViewId);
+                if (view == null) return HttpStatusCode.BadRequest;
+
+                var dataExtractDto = Mapper.Map<DatabaseExtractDto>(view);
+                dataExtractDto.Name = dto.Name;
+                commandSender.Send(new CreateDataExtract(dataExtractDto, Context.CurrentUser.UserName, _correlationId));
+                return Response.AsRedirect("/database/lsauto/extracts");
             };
 
             Post["/database/lsauto/extract/save"] = _ =>

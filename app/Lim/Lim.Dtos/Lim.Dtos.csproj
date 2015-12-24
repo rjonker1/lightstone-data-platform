@@ -42,6 +42,7 @@
     <Compile Include="AuthenticationTypeDto.cs" />
     <Compile Include="BmwFinanceDto.cs" />
     <Compile Include="ConfigurationFtpDto.cs" />
+    <Compile Include="DatabaseExtractCreateDto.cs" />
     <Compile Include="IntegrationDataExtractDto.cs" />
     <Compile Include="IntegrationTypeDto.cs" />
     <Compile Include="Metadata.cs" />
